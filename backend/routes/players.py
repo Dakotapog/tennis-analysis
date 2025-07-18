@@ -108,21 +108,24 @@ def scrape_atp_top():
         scraper = get_scraper()
         result = scraper.scrape_and_save_atp_top(limit)
         
-        if result:
+        # 🔧 CORRECCIÓN: Verificar result['success'] en lugar de solo result
+        if result and result.get('success', False):
             # Obtener jugadores actualizados
             players = get_all_players()
             
             return jsonify({
                 "success": True,
                 "message": f"✅ Scraping completado exitosamente",
-                "scraped_count": limit,
+                "scraped_count": result.get('scraped_count', limit),
                 "total_players": len(players),
-                "players": players[:limit]  # Mostrar los primeros
+                "players": players[:limit],  # Mostrar los primeros
+                "scraping_details": result.get('message', 'Scraping exitoso')
             }), 200
         else:
             return jsonify({
                 "success": False,
-                "message": "❌ Error en el scraping"
+                "message": "❌ Error en el scraping",
+                "error_details": result.get('error', 'No hay detalles disponibles') if result else 'Resultado vacío'
             }), 500
             
     except Exception as e:
@@ -145,18 +148,21 @@ def quick_scrape():
         # Ejecutar scraping rápido
         result = quick_scrape_top_10()
         
-        if result:
+        # 🔧 CORRECCIÓN: Verificar result['success'] en lugar de solo result
+        if result and result.get('success', False):
             players = get_all_players()
             return jsonify({
                 "success": True,
                 "message": "⚡ Scraping rápido completado",
                 "players_count": len(players),
-                "top_players": players[:10]
+                "top_players": players[:10],
+                "scraping_details": result.get('message', 'Scraping rápido exitoso')
             }), 200
         else:
             return jsonify({
                 "success": False,
-                "message": "❌ Error en scraping rápido"
+                "message": "❌ Error en scraping rápido",
+                "error_details": result.get('error', 'No hay detalles disponibles') if result else 'Resultado vacío'
             }), 500
             
     except Exception as e:
@@ -337,4 +343,11 @@ curl -X POST http://localhost:5000/api/players/scrape/quick
 curl -X POST http://localhost:5000/api/players/scrape/atp-top \
   -H "Content-Type: application/json" \
   -d '{"limit": 20}'
+
+🔧 CORRECCIONES APLICADAS:
+
+1. ✅ Manejo correcto de respuestas: Verificar result['success'] en lugar de solo result
+2. ✅ Manejo de errores mejorado: Añadir error_details en respuestas de error
+3. ✅ Validación de resultados: Verificar que result no sea None antes de acceder a sus propiedades
+4. ✅ Información adicional: Incluir detalles del scraping en respuestas exitosas
 """
