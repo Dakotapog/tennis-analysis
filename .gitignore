@@ -1,0 +1,11 @@
+# Entornos virtuales
+*/venv
+*/__pycache__
+*.pyc
+# Logs
+*.log
+# DB local (opcional: si la quieres subir, bórrala)
+database.db
+# Variables de entorno
+.env
+EOF
