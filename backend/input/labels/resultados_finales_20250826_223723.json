@@ -1,0 +1,774 @@
+{
+  "metadata": {
+    "verification_date": "2025-08-26 22:37:23",
+    "total_matches_processed": 40,
+    "total_matches_verified": 39
+  },
+  "summary": {
+    "total_hits": 28,
+    "total_misses": 11,
+    "accuracy_percentage": 71.79
+  },
+  "detailed_results": [
+    {
+      "match_info": {
+        "jugador1": "Arnaldi M.",
+        "jugador2": "Cerundolo F.",
+        "match_url": "https://www.flashscore.com/match/tennis/plCfJqQq/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Cerundolo F.",
+        "confidence": 52.7
+      },
+      "actual_result": {
+        "final_score": "2-3",
+        "actual_winner": "Cerundolo F."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Fucsovics M.",
+        "jugador2": "Shapovalov D.",
+        "match_url": "https://www.flashscore.com/match/tennis/KWB6akZA/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Fucsovics M.",
+        "confidence": 50.9
+      },
+      "actual_result": {
+        "final_score": "0-3",
+        "actual_winner": "Shapovalov D."
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Musetti L.",
+        "jugador2": "Mpetshi Perricard G.",
+        "match_url": "https://www.flashscore.com/match/tennis/0MeXpjKH/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Musetti L.",
+        "confidence": 56.6
+      },
+      "actual_result": {
+        "final_score": "3-1",
+        "actual_winner": "Musetti L."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Bublik A.",
+        "jugador2": "Cilic M.",
+        "match_url": "https://www.flashscore.com/match/tennis/KpiuEll4/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Bublik A.",
+        "confidence": 64.4
+      },
+      "actual_result": {
+        "final_score": "3-0",
+        "actual_winner": "Bublik A."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Halys Q.",
+        "jugador2": "Goffin D.",
+        "match_url": "https://www.flashscore.com/match/tennis/Gb5FcT3N/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Goffin D.",
+        "confidence": 55.8
+      },
+      "actual_result": {
+        "final_score": "1-3",
+        "actual_winner": "Goffin D."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Popyrin A.",
+        "jugador2": "Ruusuvuori E.",
+        "match_url": "https://www.flashscore.com/match/tennis/WOAph7Rp/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Popyrin A.",
+        "confidence": 72.5
+      },
+      "actual_result": {
+        "final_score": "3-0",
+        "actual_winner": "Popyrin A."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Riedi L.",
+        "jugador2": "Martinez P.",
+        "match_url": "https://www.flashscore.com/match/tennis/xWlmOKyR/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Martinez P.",
+        "confidence": 52.9
+      },
+      "actual_result": {
+        "final_score": "3-0",
+        "actual_winner": "Riedi L."
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Royer V.",
+        "jugador2": "Bu Y.",
+        "match_url": "https://www.flashscore.com/match/tennis/MyptqUlU/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Royer V.",
+        "confidence": 50.6
+      },
+      "actual_result": {
+        "final_score": "3-0",
+        "actual_winner": "Royer V."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Sinner J.",
+        "jugador2": "Kopriva V.",
+        "match_url": "https://www.flashscore.com/match/tennis/dUbGlYKh/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Sinner J.",
+        "confidence": 59.4
+      },
+      "actual_result": {
+        "final_score": "3-0",
+        "actual_winner": "Sinner J."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Sonego L.",
+        "jugador2": "Schoolkate T.",
+        "match_url": "https://www.flashscore.com/match/tennis/294j1jm1/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Schoolkate T.",
+        "confidence": 54.6
+      },
+      "actual_result": {
+        "final_score": "2-3",
+        "actual_winner": "Schoolkate T."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Gaston H.",
+        "jugador2": "Mochizuki S.",
+        "match_url": "https://www.flashscore.com/match/tennis/2DYRGxU0/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Mochizuki S.",
+        "confidence": 52.9
+      },
+      "actual_result": {
+        "final_score": "0-3",
+        "actual_winner": "Mochizuki S."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Harris B.",
+        "jugador2": "Auger-Aliassime F.",
+        "match_url": "https://www.flashscore.com/match/tennis/Aqup6LFr/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Auger-Aliassime F.",
+        "confidence": 55.5
+      },
+      "actual_result": {
+        "final_score": "0-3",
+        "actual_winner": "Auger-Aliassime F."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Tsitsipas S.",
+        "jugador2": "Muller A.",
+        "match_url": "https://www.flashscore.com/match/tennis/biv7Sm3c/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Tsitsipas S.",
+        "confidence": 55.3
+      },
+      "actual_result": {
+        "final_score": "3-1",
+        "actual_winner": "Tsitsipas S."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Altmaier D.",
+        "jugador2": "Medjedovic H.",
+        "match_url": "https://www.flashscore.com/match/tennis/WpnL4pBj/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Medjedovic H.",
+        "confidence": 54.8
+      },
+      "actual_result": {
+        "final_score": "3-2",
+        "actual_winner": "Altmaier D."
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Bautista-Agut R.",
+        "jugador2": "Fearnley J.",
+        "match_url": "https://www.flashscore.com/match/tennis/CKmXFAJi/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Fearnley J.",
+        "confidence": 58.9
+      },
+      "actual_result": {
+        "final_score": "1-3",
+        "actual_winner": "Fearnley J."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Borges N.",
+        "jugador2": "Holt B.",
+        "match_url": "https://www.flashscore.com/match/tennis/AZ7baUHD/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Borges N.",
+        "confidence": 52.4
+      },
+      "actual_result": {
+        "final_score": "3-0",
+        "actual_winner": "Borges N."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Monfils G.",
+        "jugador2": "Safiullin R.",
+        "match_url": "https://www.flashscore.com/match/tennis/GCplCSIG/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Monfils G.",
+        "confidence": 53.0
+      },
+      "actual_result": {
+        "final_score": "2-3",
+        "actual_winner": "Safiullin R."
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "O'Connell C.",
+        "jugador2": "De Minaur A.",
+        "match_url": "https://www.flashscore.com/match/tennis/SWVNO52M/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "De Minaur A.",
+        "confidence": 60.1
+      },
+      "actual_result": {
+        "final_score": "0-3",
+        "actual_winner": "De Minaur A."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Moller E.",
+        "jugador2": "Paul T.",
+        "match_url": "https://www.flashscore.com/match/tennis/OG08jfjt/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Paul T.",
+        "confidence": 62.2
+      },
+      "actual_result": {
+        "final_score": "0-3",
+        "actual_winner": "Paul T."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Zverev A.",
+        "jugador2": "Tabilo A.",
+        "match_url": "https://www.flashscore.com/match/tennis/jiKk3XZo/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Zverev A.",
+        "confidence": 56.2
+      },
+      "actual_result": {
+        "final_score": null,
+        "actual_winner": null
+      },
+      "verification": {
+        "hit": null,
+        "status": "Not Finished or Error"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Boulter K.",
+        "jugador2": "Kostyuk M.",
+        "match_url": "https://www.flashscore.com/match/tennis/KQIFRMzf/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Boulter K.",
+        "confidence": 54.9
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Kostyuk M."
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Haddad Maia B.",
+        "jugador2": "Kartal S.",
+        "match_url": "https://www.flashscore.com/match/tennis/EanFjU9M/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Haddad Maia B.",
+        "confidence": 51.7
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Haddad Maia B."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Jimenez Kasintseva V.",
+        "jugador2": "Joint M.",
+        "match_url": "https://www.flashscore.com/match/tennis/xfFzpybm/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Joint M.",
+        "confidence": 53.8
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Joint M."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Lamens S.",
+        "jugador2": "Glozman V.",
+        "match_url": "https://www.flashscore.com/match/tennis/6cRgqn2d/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Lamens S.",
+        "confidence": 58.5
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Lamens S."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Arango E.",
+        "jugador2": "Swiatek I.",
+        "match_url": "https://www.flashscore.com/match/tennis/tYY7hjuA/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Swiatek I.",
+        "confidence": 65.2
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Swiatek I."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Dolehide C.",
+        "jugador2": "Wang Xin.",
+        "match_url": "https://www.flashscore.com/match/tennis/MR2LOEL5/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Wang Xin.",
+        "confidence": 58.6
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Wang Xin."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Anisimova A.",
+        "jugador2": "Birrell K.",
+        "match_url": "https://www.flashscore.com/match/tennis/IgvVJVYp/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Anisimova A.",
+        "confidence": 54.6
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Anisimova A."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Boisson L.",
+        "jugador2": "Golubic V.",
+        "match_url": "https://www.flashscore.com/match/tennis/YqToo8Xq/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Boisson L.",
+        "confidence": 51.1
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Golubic V."
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Collins D.",
+        "jugador2": "Cristian J.",
+        "match_url": "https://www.flashscore.com/match/tennis/M59t7kf3/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Collins D.",
+        "confidence": 56.8
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Cristian J."
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Noskova L.",
+        "jugador2": "Galfi D.",
+        "match_url": "https://www.flashscore.com/match/tennis/je81fqIM/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Galfi D.",
+        "confidence": 56.1
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Noskova L."
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Alexandrova E.",
+        "jugador2": "Sevastova A.",
+        "match_url": "https://www.flashscore.com/match/tennis/OWze8gyP/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Alexandrova E.",
+        "confidence": 51.9
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Alexandrova E."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Siegemund L.",
+        "jugador2": "Shnaider D.",
+        "match_url": "https://www.flashscore.com/match/tennis/2HnnAF6C/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Shnaider D.",
+        "confidence": 50.3
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Siegemund L."
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Jones F.",
+        "jugador2": "Lys E.",
+        "match_url": "https://www.flashscore.com/match/tennis/IsAgd5mA/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Jones F.",
+        "confidence": 51.0
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Lys E."
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Krueger A.",
+        "jugador2": "Kenin S.",
+        "match_url": "https://www.flashscore.com/match/tennis/bTusVesn/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Kenin S.",
+        "confidence": 57.0
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Krueger A."
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Cirstea S.",
+        "jugador2": "Sierra S.",
+        "match_url": "https://www.flashscore.com/match/tennis/SSwyZ4rK/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Cirstea S.",
+        "confidence": 52.9
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Cirstea S."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Zakharova A.",
+        "jugador2": "Avanesyan E.",
+        "match_url": "https://www.flashscore.com/match/tennis/YP81L0WA/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Zakharova A.",
+        "confidence": 60.4
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Zakharova A."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Vekic D.",
+        "jugador2": "Bouzas Maneiro J.",
+        "match_url": "https://www.flashscore.com/match/tennis/K0iTcoHk/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Vekic D.",
+        "confidence": 51.3
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Vekic D."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Baptiste H.",
+        "jugador2": "Siniakova K.",
+        "match_url": "https://www.flashscore.com/match/tennis/QcCl1KNs/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Baptiste H.",
+        "confidence": 55.6
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Baptiste H."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Minnen G.",
+        "jugador2": "Osaka N.",
+        "match_url": "https://www.flashscore.com/match/tennis/UXBpPrXo/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Osaka N.",
+        "confidence": 57.8
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Osaka N."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Tomljanovic A.",
+        "jugador2": "Gauff C.",
+        "match_url": "https://www.flashscore.com/match/tennis/fw45cxN6/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Gauff C.",
+        "confidence": 63.4
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Gauff C."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    }
+  ]
+}

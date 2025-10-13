@@ -1,5 +1,4 @@
-# services/selenium_config.py
-# 🔴 ESTE ARCHIVO ES NUEVO Y CRÍTICO
+# services/selenium_config.py # 🔴 ESTE ARCHIVO ES NUEVO Y CRÍTICO
 # Centraliza toda la configuración de Selenium para WSL2.
 
 import os
@@ -30,11 +29,31 @@ def get_configured_driver():
         chrome_options.add_argument("--disable-gpu")
         chrome_options.add_argument("--window-size=1920,1080")
         chrome_options.add_argument("--user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
-
-        logger.info("Intentando configurar con webdriver-manager...")
-        # Instala o actualiza chromedriver automáticamente
-        service = ChromeService(ChromeDriverManager().install())
         
+        logger.info("Intentando configurar con webdriver-manager...")
+        
+        # 1. Instala o actualiza chromedriver y obtén la ruta del ejecutable
+        try:
+            driver_path = ChromeDriverManager().install()
+            logger.info(f"WebDriver Manager instaló/encontró el driver en: {driver_path}")
+        except Exception as e:
+            logger.error(f"Falló la descarga/instalación con WebDriver Manager: {e}")
+            return None
+
+        # 2. Asegúrate de que la ruta sea al ejecutable correcto
+        if not os.path.basename(driver_path) == 'chromedriver':
+            logger.error(f"¡Ruta incorrecta de WebDriver Manager! Apunta a '{os.path.basename(driver_path)}' en lugar de 'chromedriver'.")
+            # Intenta corregir la ruta si es un error común
+            corrected_path = os.path.join(os.path.dirname(driver_path), 'chromedriver')
+            if os.path.exists(corrected_path):
+                logger.info(f"Se encontró el ejecutable en la misma carpeta. Usando ruta corregida: {corrected_path}")
+                driver_path = corrected_path
+            else:
+                logger.error("No se pudo encontrar el ejecutable 'chromedriver' en el directorio. La caché puede estar corrupta.")
+                return None
+
+        # 3. Pasa la ruta explícitamente al servicio
+        service = ChromeService(executable_path=driver_path)
         driver = webdriver.Chrome(service=service, options=chrome_options)
         
         # Prueba rápida para ver si funciona
@@ -42,7 +61,7 @@ def get_configured_driver():
         logger.info(f"✅ WebDriver configurado exitosamente. Título de Google: {driver.title}")
         
         return driver
-
+    
     except Exception as e:
         logger.error(f"❌ Falló la configuración de WebDriver. Error: {e}")
         logger.error(f"Traceback: {traceback.format_exc()}")

@@ -1,0 +1,106 @@
+{
+  "metadata": {
+    "consultation_date": "2025-08-15 16:37:30",
+    "total_matches_processed": 7
+  },
+  "detailed_results": [
+    {
+      "match_info": {
+        "jugador1": "Blockx A.",
+        "jugador2": "Darderi L.",
+        "match_url": "https://www.flashscore.com/match/tennis/UuxknsOj/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": null,
+        "actual_winner": null
+      },
+      "verification": {
+        "status": "Not Finished or Error"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Blockx A.",
+        "jugador2": "Svrcina D.",
+        "match_url": "https://www.flashscore.com/match/tennis/S0LJnK5s/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Svrcina D."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Martin D.",
+        "jugador2": "Munar J.",
+        "match_url": "https://www.flashscore.com/match/tennis/joNq8OpA/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Munar J."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Vukic A.",
+        "jugador2": "Martinez P.",
+        "match_url": "https://www.flashscore.com/match/tennis/GrPuxl4n/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Vukic A."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Watanuki Y.",
+        "jugador2": "Altmaier D.",
+        "match_url": "https://www.flashscore.com/match/tennis/IZgZEWcf/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Watanuki Y."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Boyer T.",
+        "jugador2": "Kovacevic A.",
+        "match_url": "https://www.flashscore.com/match/tennis/hCYyZikQ/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Boyer T."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Comesana F.",
+        "jugador2": "Dzumhur D.",
+        "match_url": "https://www.flashscore.com/match/tennis/ML36Nlkg/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Comesana F."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    }
+  ]
+}

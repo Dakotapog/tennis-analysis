@@ -1,0 +1,148 @@
+{
+  "metadata": {
+    "consultation_date": "2025-08-15 16:47:02",
+    "total_matches_processed": 10
+  },
+  "detailed_results": [
+    {
+      "match_info": {
+        "jugador1": "Arseneault N.",
+        "jugador2": "Popyrin A.",
+        "match_url": "https://www.flashscore.com/match/tennis/fTvTrx56/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Popyrin A."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Griekspoor T.",
+        "jugador2": "Etcheverry T. M.",
+        "match_url": "https://www.flashscore.com/match/tennis/n3yLpbzf/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Etcheverry T. M."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Moutet C.",
+        "jugador2": "Brooksby J.",
+        "match_url": "https://www.flashscore.com/match/tennis/ImcFLSJ5/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Moutet C."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Musetti L.",
+        "jugador2": "Duckworth J.",
+        "match_url": "https://www.flashscore.com/match/tennis/Sf0AQZmn/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Musetti L."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Borges N.",
+        "jugador2": "Bagnis F.",
+        "match_url": "https://www.flashscore.com/match/tennis/xCdJggJO/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Borges N."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Munar J.",
+        "jugador2": "Cerundolo F.",
+        "match_url": "https://www.flashscore.com/match/tennis/bBOknXP1/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Cerundolo F."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Opelka R.",
+        "jugador2": "Machac T.",
+        "match_url": "https://www.flashscore.com/match/tennis/lv8NBc4T/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Opelka R."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Safiullin R.",
+        "jugador2": "Ruud C.",
+        "match_url": "https://www.flashscore.com/match/tennis/GrTysGZI/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Ruud C."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Schoolkate T.",
+        "jugador2": "Arnaldi M.",
+        "match_url": "https://www.flashscore.com/match/tennis/2o0ye52d/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Arnaldi M."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Medvedev D.",
+        "jugador2": "Svrcina D.",
+        "match_url": "https://www.flashscore.com/match/tennis/h4bJsCZ8/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Medvedev D."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    }
+  ]
+}

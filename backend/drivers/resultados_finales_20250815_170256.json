@@ -1,0 +1,134 @@
+{
+  "metadata": {
+    "consultation_date": "2025-08-15 17:02:56",
+    "total_matches_processed": 9
+  },
+  "detailed_results": [
+    {
+      "match_info": {
+        "jugador1": "Rybakina E.",
+        "jugador2": "Baptiste H.",
+        "match_url": "https://www.flashscore.com/match/tennis/AJTqAE35/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Rybakina E."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Gauff C.",
+        "jugador2": "Collins D.",
+        "match_url": "https://www.flashscore.com/match/tennis/061fackm/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Gauff C."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Lamens S.",
+        "jugador2": "Haddad Maia B.",
+        "match_url": "https://www.flashscore.com/match/tennis/xrwmYjG7/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Lamens S."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Kenin S.",
+        "jugador2": "Mboko V.",
+        "match_url": "https://www.flashscore.com/match/tennis/Kjj7wMBT/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Mboko V."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Gerasimov E.",
+        "jugador2": "Singh K.",
+        "match_url": "https://www.flashscore.com/match/tennis/4E4p0ddf/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Singh K."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Sasikumar M.",
+        "jugador2": "Purtseladze S.",
+        "match_url": "https://www.flashscore.com/match/tennis/KSuoGIF8/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Sasikumar M."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Gakhov I.",
+        "jugador2": "Arutiunian E.",
+        "match_url": "https://www.flashscore.com/match/tennis/Cv8hbzR6/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Gakhov I."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Imai S.",
+        "jugador2": "Omarkhanov A.",
+        "match_url": "https://www.flashscore.com/match/tennis/8nBy2IRs/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Imai S."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Bouzige M.",
+        "jugador2": "Winter E.",
+        "match_url": "https://www.flashscore.com/match/tennis/jkJROnbt/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Winter E."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    }
+  ]
+}

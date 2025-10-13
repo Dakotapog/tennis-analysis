@@ -1,0 +1,456 @@
+{
+  "metadata": {
+    "consultation_date": "2025-08-20 14:44:43",
+    "total_matches_processed": 32
+  },
+  "detailed_results": [
+    {
+      "match_info": {
+        "jugador1": "Opelka R.",
+        "jugador2": "Comesana F.",
+        "match_url": "https://www.flashscore.com/match/tennis/zP7ux3jJ/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Comesana F."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Popyrin A.",
+        "jugador2": "Rublev A.",
+        "match_url": "https://www.flashscore.com/match/tennis/Q5lxlO14/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Rublev A."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Medjedovic H.",
+        "jugador2": "Alcaraz C.",
+        "match_url": "https://www.flashscore.com/match/tennis/M5oWqXMi/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Alcaraz C."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Mensik J.",
+        "jugador2": "Nardi L.",
+        "match_url": "https://www.flashscore.com/match/tennis/rJfLNt6k/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "0-1 (Retiro)",
+        "actual_winner": "Nardi L."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Khachanov K.",
+        "jugador2": "Brooksby J.",
+        "match_url": "https://www.flashscore.com/match/tennis/jNvNrc05/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Khachanov K."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Lehecka J.",
+        "jugador2": "Walton A.",
+        "match_url": "https://www.flashscore.com/match/tennis/rab4VX7b/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Lehecka J."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Nakashima B.",
+        "jugador2": "Zverev A.",
+        "match_url": "https://www.flashscore.com/match/tennis/Yumm6ibT/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Zverev A."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Shelton B.",
+        "jugador2": "Bautista-Agut R.",
+        "match_url": "https://www.flashscore.com/match/tennis/Msm6nu1t/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Shelton B."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Jovic I.",
+        "jugador2": "Krejcikova B.",
+        "match_url": "https://www.flashscore.com/match/tennis/APfOtyVH/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Krejcikova B."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Seidel E.",
+        "jugador2": "Kessler M.",
+        "match_url": "https://www.flashscore.com/match/tennis/WvyGqOS8/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Seidel E."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Paolini J.",
+        "jugador2": "Krueger A.",
+        "match_url": "https://www.flashscore.com/match/tennis/rPRd1JJU/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Paolini J."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Gracheva V.",
+        "jugador2": "Muchova K.",
+        "match_url": "https://www.flashscore.com/match/tennis/UBYI0VLj/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Gracheva V."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Yastremska D.",
+        "jugador2": "Gauff C.",
+        "match_url": "https://www.flashscore.com/match/tennis/ADUNHaL8/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": null,
+        "actual_winner": null
+      },
+      "verification": {
+        "status": "Not Finished or Error"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Bronzetti L.",
+        "jugador2": "Ostapenko J.",
+        "match_url": "https://www.flashscore.com/match/tennis/bDyPvKOj/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Bronzetti L."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Linette M.",
+        "jugador2": "Pegula J.",
+        "match_url": "https://www.flashscore.com/match/tennis/IuoUkpXi/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Linette M."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Tauson C.",
+        "jugador2": "Kudermetova V.",
+        "match_url": "https://www.flashscore.com/match/tennis/na1AZOnB/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Kudermetova V."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Andrade A.",
+        "jugador2": "Linde Palacios S. A.",
+        "match_url": "https://www.flashscore.com/match/tennis/82REhKl4/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Andrade A."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Brumm J.",
+        "jugador2": "Gomez J. S.",
+        "match_url": "https://www.flashscore.com/match/tennis/ABDFwHRF/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Gomez J. S."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Kuzuhara B.",
+        "jugador2": "Martin Tiffon P.",
+        "match_url": "https://www.flashscore.com/match/tennis/EqK6uwc3/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Kuzuhara B."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Baadi T.",
+        "jugador2": "Tomic B.",
+        "match_url": "https://www.flashscore.com/match/tennis/nXrCJezp/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Tomic B."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Ficovich J. P.",
+        "jugador2": "Saraiva Dos Santos P. A.",
+        "match_url": "https://www.flashscore.com/match/tennis/KtoKWxSp/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Ficovich J. P."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Rodriguez J. A.",
+        "jugador2": "Schachter N.",
+        "match_url": "https://www.flashscore.com/match/tennis/KMbXQwrA/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Rodriguez J. A."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Fery A.",
+        "jugador2": "King D.",
+        "match_url": "https://www.flashscore.com/match/tennis/Eyzvi7Da/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Fery A."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Miyoshi K.",
+        "jugador2": "Barrios Vera T.",
+        "match_url": "https://www.flashscore.com/match/tennis/faa2qGBj/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Barrios Vera T."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Tobon M.",
+        "jugador2": "Vallejo D.",
+        "match_url": "https://www.flashscore.com/match/tennis/zkT6ftKi/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Tobon M."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Bagnis F.",
+        "jugador2": "Corwin F.",
+        "match_url": "https://www.flashscore.com/match/tennis/GlhtPHCM/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Bagnis F."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Soriano Barrera A.",
+        "jugador2": "Sheehy J.",
+        "match_url": "https://www.flashscore.com/match/tennis/8nXKHZ4d/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Sheehy J."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Mejia N.",
+        "jugador2": "Ganesan A.",
+        "match_url": "https://www.flashscore.com/match/tennis/4UKNjbJG/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "1-0 (Retiro)",
+        "actual_winner": "Mejia N."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Hernandez A.",
+        "jugador2": "Svrcina D.",
+        "match_url": "https://www.flashscore.com/match/tennis/K6G4XRPG/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Svrcina D."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Gigante M.",
+        "jugador2": "Tirante T. A.",
+        "match_url": "https://www.flashscore.com/match/tennis/EROWz1W8/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "0-1 (Retiro)",
+        "actual_winner": "Tirante T. A."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Hanfmann Y.",
+        "jugador2": "Struff J-L.",
+        "match_url": "https://www.flashscore.com/match/tennis/6qAlyAQi/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Hanfmann Y."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Trungelliti M.",
+        "jugador2": "Pacheco Mendez R.",
+        "match_url": "https://www.flashscore.com/match/tennis/MXyoDcv2/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Pacheco Mendez R."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    }
+  ]
+}

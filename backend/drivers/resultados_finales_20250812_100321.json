@@ -1,0 +1,147 @@
+{
+  "metadata": {
+    "verification_date": "2025-08-12 10:03:21",
+    "total_matches_processed": 7,
+    "total_matches_verified": 7
+  },
+  "summary": {
+    "total_hits": 6,
+    "total_misses": 1,
+    "accuracy_percentage": 85.71
+  },
+  "detailed_results": [
+    {
+      "match_info": {
+        "jugador1": "Michelsen A.",
+        "jugador2": "Rune H.",
+        "match_url": "https://www.flashscore.com/match/tennis/80n6vyjK/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Rune H.",
+        "confidence": 56.2
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Rune H."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Rinderknech A.",
+        "jugador2": "Auger-Aliassime F.",
+        "match_url": "https://www.flashscore.com/match/tennis/YkWAFXAE/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Auger-Aliassime F.",
+        "confidence": 65.3
+      },
+      "actual_result": {
+        "final_score": "0-1 (Retiro)",
+        "actual_winner": "Auger-Aliassime F."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Tiafoe F.",
+        "jugador2": "Humbert U.",
+        "match_url": "https://www.flashscore.com/match/tennis/nRkabkLP/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Tiafoe F.",
+        "confidence": 53.4
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Tiafoe F."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Fritz T.",
+        "jugador2": "Sonego L.",
+        "match_url": "https://www.flashscore.com/match/tennis/joq53y3M/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Fritz T.",
+        "confidence": 58.8
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Fritz T."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Tsitsipas S.",
+        "jugador2": "Bonzi B.",
+        "match_url": "https://www.flashscore.com/match/tennis/WhUQEzWI/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Tsitsipas S.",
+        "confidence": 52.8
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Bonzi B."
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Fonseca J.",
+        "jugador2": "Atmane T.",
+        "match_url": "https://www.flashscore.com/match/tennis/IXpc5cY9/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Atmane T.",
+        "confidence": 54.9
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Atmane T."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Sinner J.",
+        "jugador2": "Diallo G.",
+        "match_url": "https://www.flashscore.com/match/tennis/xnykzrbd/#/match-summary"
+      },
+      "prediction": {
+        "predicted_winner": "Sinner J.",
+        "confidence": 66.1
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Sinner J."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    }
+  ]
+}

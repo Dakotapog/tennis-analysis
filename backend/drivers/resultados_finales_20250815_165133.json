@@ -1,0 +1,78 @@
+{
+  "metadata": {
+    "consultation_date": "2025-08-15 16:51:33",
+    "total_matches_processed": 5
+  },
+  "detailed_results": [
+    {
+      "match_info": {
+        "jugador1": "Nava E.",
+        "jugador2": "Humbert U.",
+        "match_url": "https://www.flashscore.com/match/tennis/rkLN4JRP/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": null,
+        "actual_winner": null
+      },
+      "verification": {
+        "status": "Not Finished or Error"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Barrios Vera T.",
+        "jugador2": "Michelsen A.",
+        "match_url": "https://www.flashscore.com/match/tennis/CCqAW7Fq/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Michelsen A."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Khachanov K.",
+        "jugador2": "Ficovich J. P.",
+        "match_url": "https://www.flashscore.com/match/tennis/YuDiqoak/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Khachanov K."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Mpetshi Perricard G.",
+        "jugador2": "Rune H.",
+        "match_url": "https://www.flashscore.com/match/tennis/QicbursH/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Rune H."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Muller A.",
+        "jugador2": "Kecmanovic M.",
+        "match_url": "https://www.flashscore.com/match/tennis/EizyCzZh/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Muller A."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    }
+  ]
+}

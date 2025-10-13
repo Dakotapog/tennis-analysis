@@ -1,0 +1,50 @@
+{
+  "metadata": {
+    "consultation_date": "2025-08-15 17:07:44",
+    "total_matches_processed": 3
+  },
+  "detailed_results": [
+    {
+      "match_info": {
+        "jugador1": "Nakashima B.",
+        "jugador2": "Quinn E.",
+        "match_url": "https://www.flashscore.com/match/tennis/MiGZFmS8/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Nakashima B."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Tiafoe F.",
+        "jugador2": "Watanuki Y.",
+        "match_url": "https://www.flashscore.com/match/tennis/IwCs7dw1/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Tiafoe F."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Davidovich Fokina A.",
+        "jugador2": "Moutet C.",
+        "match_url": "https://www.flashscore.com/match/tennis/CKJ8NFeB/#/match-summary"
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Davidovich Fokina A."
+      },
+      "verification": {
+        "status": "Verified"
+      }
+    }
+  ]
+}
