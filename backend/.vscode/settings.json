@@ -1,5 +1,6 @@
 {
-    "python.analysis.extraPaths": [
-        "${workspaceFolder}"
-    ]
-}
+       "python.analysis.extraPaths": [
+           "${workspaceFolder}"
+       ],
+       "github.copilot.chat.mcpServers": {}
+   }

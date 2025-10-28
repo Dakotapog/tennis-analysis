@@ -1,10 +1,4 @@
 {
-	"servers": {
-		"mcp-server-playwright": {
-			"type": "stdio",
-			"command": "npx",
-			"args": []
-		}
-	},
-	"inputs": []
-}
+       "servers": {},
+       "inputs": []
+   }
