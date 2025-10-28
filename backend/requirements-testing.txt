@@ -1,0 +1,44 @@
+# ============================================
+# DEPENDENCIAS PARA TESTING
+# Tennis Analysis Project
+# ============================================
+
+# Framework de Testing
+pytest==7.4.3
+pytest-cov==4.1.0
+pytest-mock==3.12.0
+pytest-asyncio==0.21.1
+pytest-timeout==2.2.0
+
+# Cobertura de Código
+coverage==7.3.2
+
+# Mocking y Fixtures
+faker==20.1.0
+factory-boy==3.3.0
+responses==0.24.1
+
+# Testing de Performance
+pytest-benchmark==4.0.0
+
+# Linting y Calidad de Código
+pylint==3.0.3
+flake8==6.1.0
+black==23.12.1
+isort==5.13.2
+mypy==1.7.1
+
+# Pre-commit Hooks
+pre-commit==3.6.0
+
+# Dependencias del Proyecto Principal
+# (Asegurar que las versiones coincidan con requirements.txt)
+playwright==1.40.0
+psutil==5.9.6
+pandas==2.1.4
+numpy==1.26.2
+scikit-learn==1.3.2
+
+# Utilidades de Testing
+hypothesis==6.92.1  # Property-based testing
+freezegun==1.4.0    # Mocking de fechas
