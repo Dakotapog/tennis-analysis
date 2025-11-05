@@ -10,87 +10,51 @@ import atexit
 from datetime import datetime
 from pathlib import Path
 import asyncio
-import re
+import sys
+from typing import Optional, Dict, List
 
-from analysis import EloRatingSystem, RankingManager, RivalryAnalyzer
+# ═══════════════════════════════════════════════════════════════════
+# 🔧 CONFIGURACIÓN DE RUTA PARA IMPORTACIONES
+# ═══════════════════════════════════════════════════════════════════
+# Añadir el directorio raíz del proyecto a sys.path
+# Esto permite importaciones absolutas consistentes
+# independientemente de cómo se ejecute el script.
+try:
+    from pathlib import Path
+    # Subir dos niveles para llegar a la raíz del proyecto (backend/)
+    # scraping -> tennis-analysis/backend/
+    project_root = Path(__file__).resolve().parent.parent
+    if str(project_root) not in sys.path:
+        sys.path.insert(0, str(project_root))
+except (NameError, IndexError):
+    # __file__ no está definido en algunos entornos (p.ej. notebooks)
+    # Asumir que el CWD es la raíz del proyecto.
+    project_root = Path.cwd()
+    if str(project_root) not in sys.path:
+        sys.path.insert(0, str(project_root))
+
+
+try:
+    from analysis import EloRatingSystem, RankingManager, RivalryAnalyzer
+except ImportError as e:
+    print(f"❌ Error importando módulos de análisis: {e}")
+    print("Asegúrate de que la carpeta 'analysis/' existe y contiene:")
+    print("  - __init__.py")
+    print("  - elo_system.py")
+    print("  - ranking_manager.py")
+    print("  - rivalry_analyzer.py")
+    sys.exit(1)
+
 from .browser_manager import BrowserManager
 from .data_parser import DataParser
+from .file_utils import select_best_json_file
 
 logger = logging.getLogger(__name__)
 
 
-# ═══════════════════════════════════════════════════════════════
-# 🛠️ FUNCIONES UTILITARIAS
-# ═══════════════════════════════════════════════════════════════
-
-def find_all_json_files():
-    """🔍 Buscar archivos JSON en directorio actual y carpeta 'data'."""
-    logger.info("🔍 Buscando archivos JSON...")
-    data_dir = Path('data')
-    all_json_files = []
-    
-    if data_dir.exists() and data_dir.is_dir():
-        for json_file in data_dir.glob('*.json'):
-            file_stats = json_file.stat()
-            all_json_files.append({
-                'filename': str(json_file),
-                'size_mb': file_stats.st_size / (1024 * 1024),
-                'modified_time': datetime.fromtimestamp(file_stats.st_mtime),
-                'location': 'data'
-            })
-    
-    all_json_files.sort(key=lambda x: x['modified_time'], reverse=True)
-    return all_json_files
-
-
-def analyze_json_structure(filename):
-    """📊 Analizar estructura de un archivo JSON."""
-    try:
-        with open(filename, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-        
-        total_matches = 0
-        has_match_urls = False
-        
-        if isinstance(data, dict):
-            for key, value in data.items():
-                if isinstance(value, list):
-                    for item in value:
-                        if isinstance(item, dict):
-                            total_matches += 1
-                            if item.get('match_url'):
-                                has_match_urls = True
-        elif isinstance(data, list):
-            total_matches = len(data)
-            has_match_urls = any(isinstance(item, dict) and item.get('match_url') for item in data)
-            
-        return {'is_valid': total_matches > 0 and has_match_urls, 'total_matches': total_matches}
-    except Exception as e:
-        logger.error(f"❌ Error analizando {filename}: {e}")
-        return {'is_valid': False}
-
-
-def select_best_json_file():
-    """🎯 Seleccionar el mejor archivo JSON automáticamente."""
-    logger.info("🎯 Seleccionando el mejor archivo JSON...")
-    json_files = find_all_json_files()
-    if not json_files:
-        logger.error("❌ No se encontraron archivos JSON.")
-        return None
-    
-    for file_info in json_files:
-        analysis = analyze_json_structure(file_info['filename'])
-        if analysis['is_valid']:
-            logger.info(f"🏆 Archivo seleccionado: {file_info['filename']}")
-            return file_info['filename']
-            
-    logger.error("❌ No se encontraron archivos JSON válidos.")
-    return None
-
-
-# ═══════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════════
 # 🎾 CLASE PRINCIPAL
-# ═══════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════════
 
 class H2HExtractor:
     """
@@ -103,9 +67,16 @@ class H2HExtractor:
     - Delegación de análisis a módulos especializados
     """
     
-    def __init__(self):
+    def __init__(self, headless: bool = True, slow_mo: int = 250):
+        """
+        Inicializar extractor H2H.
+        
+        Args:
+            headless: Ejecutar navegador en modo headless
+            slow_mo: Retardo entre acciones (ms)
+        """
         # Componentes de scraping
-        self.browser_manager = BrowserManager()
+        self.browser_manager = BrowserManager(headless=headless, slow_mo=slow_mo)
         self.data_parser = DataParser()
         
         # Componentes de análisis (delegados)
@@ -118,28 +89,41 @@ class H2HExtractor:
         self.current_match_index = 0
         self.total_matches_to_process = 80
         self.all_results = []
-        self.page = None
         
         # Manejadores de señales
         signal.signal(signal.SIGINT, self._signal_handler)
         signal.signal(signal.SIGTERM, self._signal_handler)
         atexit.register(self._cleanup_on_exit)
     
-    # ═══════════════════════════════════════════════════════════════
+    # ═══════════════════════════════════════════════════════════════════
     # 🔧 LIFECYCLE MANAGEMENT
-    # ═══════════════════════════════════════════════════════════════
+    # ═══════════════════════════════════════════════════════════════════
     
     def _signal_handler(self, signum, frame):
         """🛑 Manejador de señales de interrupción."""
-        logger.info("🛑 Señal de interrupción recibida - Iniciando limpieza...")
+        logger.info(f"🛑 Señal {signum} recibida - Iniciando limpieza...")
+        
         try:
             loop = asyncio.get_event_loop()
             if loop.is_running():
-                loop.create_task(self.cleanup())
+                # Programar limpieza y detener el loop
+                loop.create_task(self._safe_cleanup())
+                loop.stop()
             else:
                 loop.run_until_complete(self.cleanup())
         except Exception as e:
-            logger.warning(f"⚠️ Error en signal handler: {e}")
+            logger.error(f"❌ Error en signal handler: {e}")
+        finally:
+            sys.exit(0)
+    
+    async def _safe_cleanup(self):
+        """🔒 Limpieza segura con timeout."""
+        try:
+            await asyncio.wait_for(self.cleanup(), timeout=5.0)
+        except asyncio.TimeoutError:
+            logger.warning("⚠️ Timeout en limpieza, forzando salida")
+        except Exception as e:
+            logger.error(f"❌ Error en limpieza segura: {e}")
     
     def _cleanup_on_exit(self):
         """🧹 Limpieza al salir."""
@@ -148,58 +132,103 @@ class H2HExtractor:
             loop = asyncio.get_event_loop()
             if not loop.is_closed():
                 loop.run_until_complete(self.cleanup())
-        except:
-            pass
+        except Exception as e:
+            logger.warning(f"⚠️ Error en cleanup_on_exit: {e}")
+
+    @property
+    def page(self):
+        """Obtener página actual del navegador."""
+        return self.browser_manager.page
 
     async def setup(self):
         """🚀 Configurar navegador."""
-        self.page = await self.browser_manager.setup()
+        await self.browser_manager.setup()
+        logger.info("✅ Extractor H2H configurado correctamente")
 
     async def cleanup(self):
         """🧹 Limpieza de recursos."""
         await self.browser_manager.cleanup()
 
-    # ═══════════════════════════════════════════════════════════════
+    # ═══════════════════════════════════════════════════════════════════
     # 📂 CARGA DE DATOS
-    # ═══════════════════════════════════════════════════════════════
+    # ═══════════════════════════════════════════════════════════════════
 
-    def load_matches(self):
-        """📂 Cargar partidos desde JSON."""
-        json_file = select_best_json_file()
+    def load_matches(self, json_file: Optional[str] = None) -> bool:
+        """
+        📂 Cargar partidos desde JSON.
+        
+        Args:
+            json_file: Ruta al archivo JSON (opcional, se autoselecciona)
+        
+        Returns:
+            bool: True si se cargaron partidos correctamente
+        """
         if not json_file:
+            json_file = select_best_json_file()
+        
+        if not json_file:
+            logger.error("❌ No se pudo seleccionar archivo JSON")
             return False
         
-        with open(json_file, 'r', encoding='utf-8') as f:
-            data = json.load(f)
+        try:
+            with open(json_file, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            
+            logger.info(f"📂 Cargando partidos desde: {json_file}")
+            
+            all_matches = []
+            if isinstance(data, dict):
+                for tournament_name, matches_in_tournament in data.items():
+                    if isinstance(matches_in_tournament, list):
+                        for match in matches_in_tournament:
+                            if isinstance(match, dict):
+                                info = self.data_parser.extract_tournament_info(tournament_name)
+                                match.update({
+                                    'torneo_nombre': info['nombre'],
+                                    'tipo_cancha': info['superficie'],
+                                    'pais': info['pais'],
+                                    'torneo_completo': info['completo']
+                                })
+                                all_matches.append(match)
+            elif isinstance(data, list):
+                all_matches = data
+            
+            # Filtrar partidos válidos
+            valid_matches = [m for m in all_matches if m.get('match_url')]
+            
+            if not valid_matches:
+                logger.error("❌ No se encontraron partidos con match_url válidas")
+                return False
+            
+            self.matches_queue = valid_matches[:self.total_matches_to_process]
+            logger.info(f"✅ Cola de procesamiento creada con {len(self.matches_queue)} partidos.")
+            
+            # Mostrar preview de los primeros 3
+            for i, match in enumerate(self.matches_queue[:3], 1):
+                p1 = match.get('jugador1', 'N/A')
+                p2 = match.get('jugador2', 'N/A')
+                logger.info(f"   {i}. {p1} vs {p2}")
+            
+            if len(self.matches_queue) > 3:
+                logger.info(f"   ... y {len(self.matches_queue) - 3} partidos más")
+            
+            return True
         
-        all_matches = []
-        if isinstance(data, dict):
-            for tournament_name, matches_in_tournament in data.items():
-                if isinstance(matches_in_tournament, list):
-                    for match in matches_in_tournament:
-                        if isinstance(match, dict):
-                            info = self.data_parser.extract_tournament_info(tournament_name)
-                            match.update({
-                                'torneo_nombre': info['nombre'],
-                                'tipo_cancha': info['superficie'],
-                                'pais': info['pais'],
-                                'torneo_completo': info['completo']
-                            })
-                            all_matches.append(match)
-        elif isinstance(data, list):
-            all_matches = data
-        
-        valid_matches = [m for m in all_matches if m.get('match_url')]
-        self.matches_queue = valid_matches[:self.total_matches_to_process]
-        logger.info(f"✅ Cola de procesamiento creada con {len(self.matches_queue)} partidos.")
-        return True
+        except Exception as e:
+            logger.error(f"❌ Error cargando JSON: {e}")
+            return False
 
-    # ═══════════════════════════════════════════════════════════════
+    # ═══════════════════════════════════════════════════════════════════
     # 🔄 PROCESAMIENTO PRINCIPAL
-    # ═══════════════════════════════════════════════════════════════
+    # ═══════════════════════════════════════════════════════════════════
 
-    async def run(self, optimized_weights=None):
-        """🔄 Procesar todos los partidos en la cola."""
+    async def run(self, optimized_weights: Optional[Dict] = None):
+        """
+        🔄 Procesar todos los partidos en la cola.
+        
+        Args:
+            optimized_weights: Pesos optimizados para predicción (opcional)
+        """
         if optimized_weights:
             logger.info(f"🚀 RE-PROCESANDO CON PESOS OPTIMIZADOS")
             self.all_results = []
@@ -207,10 +236,12 @@ class H2HExtractor:
         else:
             logger.info(f"🚀 INICIANDO PROCESAMIENTO DE {len(self.matches_queue)} PARTIDOS")
 
+        logger.info("=" * 80)
+
         successful_matches = 0
         failed_matches = 0
         
-        for match_data in self.matches_queue:
+        for idx, match_data in enumerate(self.matches_queue):
             try:
                 if await self._process_single_match(match_data, optimized_weights=optimized_weights):
                     successful_matches += 1
@@ -218,11 +249,12 @@ class H2HExtractor:
                     failed_matches += 1
                 
                 # Pausa entre partidos
-                if self.matches_queue.index(match_data) < len(self.matches_queue) - 1:
-                    logger.info("⏳ Pausa de 8 segundos...")
+                if idx < len(self.matches_queue) - 1:
+                    logger.info("⏳ Pausa de 8 segundos antes del siguiente partido...")
                     await asyncio.sleep(8)
+            
             except Exception as e:
-                logger.error(f"❌ Error crítico: {e}")
+                logger.error(f"❌ Error crítico procesando partido: {e}", exc_info=True)
                 failed_matches += 1
                 continue
         
@@ -231,12 +263,22 @@ class H2HExtractor:
         logger.info(f"   ✅ Exitosos: {successful_matches}")
         logger.info(f"   ❌ Fallidos: {failed_matches}")
         
-        if successful_matches + failed_matches > 0:
-            success_rate = (successful_matches / (successful_matches + failed_matches)) * 100
+        total = successful_matches + failed_matches
+        if total > 0:
+            success_rate = (successful_matches / total) * 100
             logger.info(f"   📊 Tasa de éxito: {success_rate:.1f}%")
 
-    async def _process_single_match(self, match_data, optimized_weights=None):
-        """⚙️ Procesar un único partido."""
+    async def _process_single_match(self, match_data: Dict, optimized_weights: Optional[Dict] = None) -> bool:
+        """
+        ⚙️ Procesar un único partido.
+        
+        Args:
+            match_data: Datos del partido a procesar
+            optimized_weights: Pesos optimizados (opcional)
+        
+        Returns:
+            bool: True si se procesó correctamente
+        """
         self.current_match_index += 1
         match_number = self.current_match_index
         
@@ -248,7 +290,13 @@ class H2HExtractor:
         
         try:
             # 1. Navegar a la URL
-            await self.page.goto(match_data['match_url'], wait_until='domcontentloaded', timeout=45000)
+            match_url = match_data.get('match_url')
+            if not match_url:
+                logger.error("❌ No se encontró match_url")
+                return False
+            
+            logger.info(f"🌐 Navegando a: {match_url}")
+            await self.page.goto(match_url, wait_until='domcontentloaded', timeout=45000)
             await asyncio.sleep(8)
             
             # 2. Extraer información actual del partido
@@ -265,11 +313,11 @@ class H2HExtractor:
             p1_hist = self._enrich_history(h2h_data['player1_history'], p1)
             p2_hist = self._enrich_history(h2h_data['player2_history'], p2)
             
-            # 6. Análisis de forma (lógica simple, puede quedarse aquí)
+            # 6. Análisis de forma
             p1_form = self._analyze_recent_form(p1_hist, p1)
             p2_form = self._analyze_recent_form(p2_hist, p2)
 
-            # 7. Calcular ELO (delegar a EloSystem vía RivalryAnalyzer)
+            # 7. Calcular ELO (delegar a RivalryAnalyzer)
             p1_elo = self.rivalry_analyzer.calculate_elo_from_history(p1, p1_hist)
             p2_elo = self.rivalry_analyzer.calculate_elo_from_history(p2, p2_hist)
             logger.info(f"   ⚡ ELO: {p1} ({p1_elo}), {p2} ({p2_elo})")
@@ -306,7 +354,9 @@ class H2HExtractor:
             logger.error(f"❌ Error procesando partido {match_number}: {e}", exc_info=True)
             return False
 
-    def _log_match_summary(self, match_number, p1, p2, p1_hist, p2_hist, h2h_data, rivalry):
+    def _log_match_summary(self, match_number: int, p1: str, p2: str, 
+                          p1_hist: List, p2_hist: List, 
+                          h2h_data: Dict, rivalry: Dict):
         """📊 Registrar resumen del partido procesado."""
         logger.info(f"✅ Partido {match_number} procesado exitosamente")
         logger.info(f"   📊 Historial {p1}: {len(p1_hist)} partidos")
@@ -317,11 +367,11 @@ class H2HExtractor:
         logger.info(f"   🎯 Predicción: {rivalry['prediction']['favored_player']} "
                    f"({rivalry['prediction']['confidence']}%)")
 
-    # ═══════════════════════════════════════════════════════════════
+    # ═══════════════════════════════════════════════════════════════════
     # 🌐 NAVEGACIÓN Y EXTRACCIÓN
-    # ═══════════════════════════════════════════════════════════════
+    # ═══════════════════════════════════════════════════════════════════
 
-    async def _extract_current_match_info(self):
+    async def _extract_current_match_info(self) -> Dict:
         """ℹ️ Extraer información del partido actual desde la página."""
         logger.info("ℹ️ Extrayendo información del partido actual...")
         info = {"torneo_nombre": None, "tipo_cancha": None, "cuota1": None, "cuota2": None}
@@ -338,6 +388,8 @@ class H2HExtractor:
                     info["tipo_cancha"] = parsed['superficie']
                     info["torneo_completo"] = parsed['completo']
                     logger.info(f"   ✅ Torneo: {info['torneo_nombre']}, Cancha: {info['tipo_cancha']}")
+                else:
+                    logger.warning(f"   ⚠️ Texto de torneo muy largo ({len(full_text)} chars), descartado")
 
             # Extraer cuotas
             odds_elements = await self.page.locator('.participant__odd').all()
@@ -345,13 +397,15 @@ class H2HExtractor:
                 info["cuota1"] = await odds_elements[0].inner_text()
                 info["cuota2"] = await odds_elements[1].inner_text()
                 logger.info(f"   ✅ Cuotas: {info['cuota1']} - {info['cuota2']}")
+            else:
+                logger.warning("   ⚠️ No se encontraron las cuotas del partido")
 
         except Exception as e:
             logger.warning(f"⚠️ Error extrayendo info del partido: {e}")
         
         return info
 
-    async def _navigate_to_h2h_section(self):
+    async def _navigate_to_h2h_section(self) -> bool:
         """🔄 Navegar a la sección H2H."""
         logger.info("🔄 Navegando a sección H2H...")
         
@@ -369,17 +423,22 @@ class H2HExtractor:
                     await asyncio.sleep(5)
                     logger.info(f"   ✅ Click en H2H con selector: {selector}")
                     return True
-            except:
+            except Exception:
                 continue
         
         # Fallback: modificar URL
         logger.info("   🔄 Navegación directa a H2H...")
-        h2h_url = self.page.url.split('#')[0] + '#/h2h'
-        await self.page.goto(h2h_url, wait_until='domcontentloaded', timeout=30000)
-        await asyncio.sleep(5)
-        return True
+        try:
+            h2h_url = self.page.url.split('#')[0] + '#/h2h'
+            await self.page.goto(h2h_url, wait_until='domcontentloaded', timeout=30000)
+            await asyncio.sleep(5)
+            logger.info(f"   ✅ Navegado a: {h2h_url}")
+            return True
+        except Exception as e:
+            logger.error(f"❌ Error navegando a H2H: {e}")
+            return False
 
-    async def _extract_h2h_sections(self):
+    async def _extract_h2h_sections(self) -> Dict:
         """📊 Extraer las 3 secciones H2H."""
         logger.info("📊 Extrayendo secciones H2H...")
         
@@ -388,22 +447,31 @@ class H2HExtractor:
             
             # Screenshot para debugging
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-            await self.page.screenshot(path=f"h2h_match_{self.current_match_index}_{timestamp}.png")
+            screenshot_path = f"h2h_match_{self.current_match_index}_{timestamp}.png"
+            await self.page.screenshot(path=screenshot_path)
+            logger.info(f"📸 Screenshot guardado: {screenshot_path}")
             
             h2h_sections = await self.page.locator('.h2h__section').all()
             logger.info(f"📊 Encontradas {len(h2h_sections)} secciones H2H")
             
             if len(h2h_sections) < 3:
-                logger.warning("⚠️ No se encontraron las 3 secciones H2H.")
-                return {'player1_history': [], 'player2_history': [], 'head_to_head_matches': []}
+                logger.warning("⚠️ No se encontraron las 3 secciones H2H esperadas")
+                return {
+                    'player1_history': [],
+                    'player2_history': [],
+                    'head_to_head_matches': []
+                }
 
             # Extraer secciones con expansión
+            logger.info("   🔄 Expandiendo sección Jugador 1...")
             await self._click_show_more(h2h_sections[0], max_clicks=8)
             p1_history = await self._parse_player_history(h2h_sections[0])
             
+            logger.info("   🔄 Expandiendo sección Jugador 2...")
             await self._click_show_more(h2h_sections[1], max_clicks=8)
             p2_history = await self._parse_player_history(h2h_sections[1])
             
+            logger.info("   🔄 Expandiendo sección H2H directo...")
             await self._click_show_more(h2h_sections[2], max_clicks=2)
             h2h_matches = await self._parse_direct_h2h(h2h_sections[2])
             
@@ -414,32 +482,53 @@ class H2HExtractor:
             }
             
         except Exception as e:
-            logger.error(f"❌ Error extrayendo H2H: {e}")
-            return {'player1_history': [], 'player2_history': [], 'head_to_head_matches': []}
+            logger.error(f"❌ Error extrayendo H2H: {e}", exc_info=True)
+            return {
+                'player1_history': [],
+                'player2_history': [],
+                'head_to_head_matches': []
+            }
 
-    async def _click_show_more(self, section_locator, max_clicks=8):
+    async def _click_show_more(self, section_locator, max_clicks: int = 8):
         """🔄 Expandir sección haciendo click en 'Mostrar más'."""
         clicks = 0
         
+        show_more_selectors = [
+            'button:has-text("Mostrar más")',
+            'button:has-text("Show more")',
+            'a:has-text("Mostrar más")',
+            '.show-more'
+        ]
+        
         for _ in range(max_clicks):
             try:
-                button = section_locator.locator('button:has-text("Mostrar más")').first
-                if await button.count() > 0 and await button.is_visible():
-                    await button.click()
-                    await asyncio.sleep(3)
-                    clicks += 1
-                else:
+                button_found = False
+                for selector in show_more_selectors:
+                    try:
+                        button = section_locator.locator(selector).first
+                        if await button.count() > 0 and await button.is_visible():
+                            await button.click()
+                            await asyncio.sleep(3)
+                            clicks += 1
+                            button_found = True
+                            break
+                    except Exception:
+                        continue
+                
+                if not button_found:
                     break
-            except:
+            except Exception:
                 break
         
         if clicks > 0:
             logger.info(f"      ✅ {clicks} clicks en 'Mostrar más'")
 
-    async def _parse_player_history(self, section):
+    async def _parse_player_history(self, section) -> List[Dict]:
         """👤 Extraer historial de un jugador."""
         matches = []
         rows = await section.locator('.h2h__row').all()
+        
+        logger.info(f"      📋 Parseando {len(rows)} partidos...")
         
         for row in rows:
             try:
@@ -475,7 +564,7 @@ class H2HExtractor:
                 if await event_elem.count() > 0:
                     try:
                         tournament = await event_elem.inner_text()
-                    except:
+                    except Exception:
                         pass
                     
                     title_attr = await event_elem.get_attribute('title')
@@ -484,6 +573,17 @@ class H2HExtractor:
                         city = location_info['ciudad']
                         country = location_info['pais']
                         surface = location_info['superficie']
+                    
+                    # También extraer de la clase
+                    class_attr = await event_elem.get_attribute('class') or ''
+                    if 'hard' in class_attr or 'dura' in class_attr:
+                        surface = 'Dura'
+                    elif 'clay' in class_attr or 'arcilla' in class_attr:
+                        surface = 'Arcilla'
+                    elif 'grass' in class_attr or 'hierba' in class_attr:
+                        surface = 'Hierba'
+                    elif 'indoor' in class_attr:
+                        surface = 'Indoor'
 
                 matches.append({
                     'fecha': date.strip(),
@@ -503,10 +603,12 @@ class H2HExtractor:
         logger.info(f"   ✅ Extraídos {len(matches)} partidos")
         return matches
 
-    async def _parse_direct_h2h(self, section):
+    async def _parse_direct_h2h(self, section) -> List[Dict]:
         """🥊 Extraer enfrentamientos directos."""
         matches = []
         rows = await section.locator('.h2h__row').all()
+        
+        logger.info(f"      📋 Parseando {len(rows)} enfrentamientos directos...")
         
         for row in rows:
             try:
@@ -536,7 +638,7 @@ class H2HExtractor:
                 if await event_elem.count() > 0:
                     try:
                         tournament = await event_elem.inner_text()
-                    except:
+                    except Exception:
                         pass
                     
                     title_attr = await event_elem.get_attribute('title')
@@ -545,6 +647,17 @@ class H2HExtractor:
                         city = location_info['ciudad']
                         country = location_info['pais']
                         surface = location_info['superficie']
+                    
+                    # También extraer de la clase
+                    class_attr = await event_elem.get_attribute('class') or ''
+                    if 'hard' in class_attr or 'dura' in class_attr:
+                        surface = 'Dura'
+                    elif 'clay' in class_attr or 'arcilla' in class_attr:
+                        surface = 'Arcilla'
+                    elif 'grass' in class_attr or 'hierba' in class_attr:
+                        surface = 'Hierba'
+                    elif 'indoor' in class_attr:
+                        surface = 'Indoor'
 
                 # Ganador
                 winner = self.data_parser.determine_winner_from_result(
@@ -556,7 +669,7 @@ class H2HExtractor:
                 if winner == 'N/A':
                     for j, p in enumerate(participants):
                         class_attr = await p.get_attribute('class') or ''
-                        if 'highlighted' in class_attr:
+                        if 'highlighted' in class_attr or 'winner' in class_attr:
                             winner = p1_name if j == 0 else p2_name
                             break
                 
@@ -580,33 +693,63 @@ class H2HExtractor:
         logger.info(f"   ✅ Extraídos {len(matches)} enfrentamientos directos")
         return matches
 
-    # ═══════════════════════════════════════════════════════════════
+    # ═══════════════════════════════════════════════════════════════════
     # 📊 ENRIQUECIMIENTO Y ANÁLISIS SIMPLE
-    # ═══════════════════════════════════════════════════════════════
+    # ═══════════════════════════════════════════════════════════════════
 
-    def _enrich_history(self, history, player_name):
-        """🏆 Enriquecer historial con rankings (delegar a RankingManager)."""
+    def _enrich_history(self, history: List[Dict], player_name: str) -> List[Dict]:
+        """
+        🏆 Enriquecer historial con rankings (delegar a RankingManager).
+        
+        Args:
+            history: Lista de partidos del historial
+            player_name: Nombre del jugador
+        
+        Returns:
+            list: Nueva lista con datos enriquecidos (sin mutar original)
+        """
+        enriched_history = []
+        
         for match in history:
-            if isinstance(match, dict):
-                opponent = match.get('oponente', '')
-                if opponent and opponent != 'N/A':
-                    # Delegar a RankingManager
-                    opponent_rank = self.ranking_manager.get_player_ranking(opponent)
-                    opponent_info = self.ranking_manager.get_player_info(opponent)
-                    
-                    match['opponent_ranking'] = opponent_rank
-                    if opponent_info:
-                        match['opponent_points'] = opponent_info.get('points', 0)
-                        match['opponent_nationality'] = opponent_info.get('nationality', 'N/A')
+            if not isinstance(match, dict):
+                continue
+            
+            # Crear copia para no mutar el original
+            enriched_match = match.copy()
+            
+            opponent = enriched_match.get('oponente', '')
+            if opponent and opponent != 'N/A':
+                # Delegar a RankingManager
+                opponent_rank = self.ranking_manager.get_player_ranking(opponent)
+                opponent_info = self.ranking_manager.get_player_info(opponent)
                 
+                enriched_match['opponent_ranking'] = opponent_rank
+                if opponent_info:
+                    enriched_match['opponent_points'] = opponent_info.get('points', 0)
+                    enriched_match['opponent_nationality'] = opponent_info.get('nationality', 'N/A')
+            
                 # Delegar peso a RivalryAnalyzer
-                match['opponent_weight'] = self.rivalry_analyzer.calculate_base_opponent_weight(
-                    match.get('opponent_ranking')
+                enriched_match['opponent_weight'] = self.rivalry_analyzer.calculate_base_opponent_weight(
+                    enriched_match.get('opponent_ranking')
                 )
-        return history
+            
+            enriched_history.append(enriched_match)
+        
+        return enriched_history
 
-    def _analyze_recent_form(self, history, player_name, recent_count=20):
-        """📈 Análisis simple de forma reciente (puede quedarse aquí)."""
+    def _analyze_recent_form(self, history: List[Dict], player_name: str, 
+                            recent_count: int = 20) -> Optional[Dict]:
+        """
+        📈 Análisis simple de forma reciente.
+        
+        Args:
+            history: Historial de partidos
+            player_name: Nombre del jugador
+            recent_count: Cantidad de partidos recientes a analizar
+        
+        Returns:
+            dict or None: Estadísticas de forma reciente
+        """
         if not history:
             return None
         
@@ -644,8 +787,16 @@ class H2HExtractor:
             'last_match_date': recent[0].get('fecha', 'N/A') if recent else 'N/A'
         }
 
-    def _classify_form(self, win_percentage):
-        """📊 Clasificar forma del jugador."""
+    def _classify_form(self, win_percentage: float) -> str:
+        """
+        📊 Clasificar forma del jugador.
+        
+        Args:
+            win_percentage: Porcentaje de victorias
+        
+        Returns:
+            str: Clasificación de forma
+        """
         if win_percentage >= 75:
             return 'Excelente'
         elif win_percentage >= 60:
@@ -655,13 +806,28 @@ class H2HExtractor:
         else:
             return 'Mala'
 
-    # ═══════════════════════════════════════════════════════════════
+    # ═══════════════════════════════════════════════════════════════════
     # 📦 CONSOLIDACIÓN DE RESULTADOS
-    # ═══════════════════════════════════════════════════════════════
+    # ═══════════════════════════════════════════════════════════════════
 
-    def _consolidate_result(self, match_data, h2h_data, rivalry_analysis, 
-                           p1_hist, p2_hist, p1_form, p2_form, p1_elo, p2_elo):
-        """📦 Consolidar resultados del partido procesado."""
+    def _consolidate_result(self, match_data: Dict, h2h_data: Dict, 
+                           rivalry_analysis: Dict, p1_hist: List, p2_hist: List, 
+                           p1_form: Optional[Dict], p2_form: Optional[Dict], 
+                           p1_elo: float, p2_elo: float) -> Dict:
+        """
+        📦 Consolidar resultados del partido procesado.
+        
+        Args:
+            match_data: Datos base del partido
+            h2h_data: Datos H2H extraídos
+            rivalry_analysis: Análisis de rivalidad
+            p1_hist, p2_hist: Historiales enriquecidos
+            p1_form, p2_form: Análisis de forma
+            p1_elo, p2_elo: Ratings ELO
+        
+        Returns:
+            dict: Resultado consolidado
+        """
         p1 = match_data['jugador1']
         p2 = match_data['jugador2']
         p1_key = p1.replace(' ', '_').replace('.', '')
@@ -718,12 +884,20 @@ class H2HExtractor:
             'common_opponents_detailed': rivalry_analysis.get('common_opponents_detailed', [])
         }
 
-    # ═══════════════════════════════════════════════════════════════
+    # ═══════════════════════════════════════════════════════════════════
     # 💾 PERSISTENCIA
-    # ═══════════════════════════════════════════════════════════════
+    # ═══════════════════════════════════════════════════════════════════
 
-    def save_results(self, is_optimized=False):
-        """💾 Guardar resultados en archivo JSON."""
+    def save_results(self, is_optimized: bool = False) -> str:
+        """
+        💾 Guardar resultados en archivo JSON.
+        
+        Args:
+            is_optimized: Indica si son resultados con pesos optimizados
+        
+        Returns:
+            str: Ruta al archivo guardado
+        """
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
         reports_dir = Path('reports')
         reports_dir.mkdir(exist_ok=True)
@@ -761,8 +935,13 @@ class H2HExtractor:
         
         return str(filename)
 
-    def _generate_global_statistics(self):
-        """📈 Generar estadísticas globales de todos los partidos."""
+    def _generate_global_statistics(self) -> Dict:
+        """
+        📈 Generar estadísticas globales de todos los partidos.
+        
+        Returns:
+            dict: Estadísticas globales
+        """
         if not self.all_results:
             return {}
         
@@ -888,12 +1067,22 @@ class H2HExtractor:
             
             logger.info("-" * 80)
 
-    # ═══════════════════════════════════════════════════════════════
+    # ═══════════════════════════════════════════════════════════════════
     # 🔄 RECALCULACIÓN CON PESOS OPTIMIZADOS
-    # ═══════════════════════════════════════════════════════════════
+    # ═══════════════════════════════════════════════════════════════════
 
-    async def recalculate_with_optimized_weights(self, initial_file, optimized_weights):
-        """🧠 Recalcular predicciones con pesos optimizados sin re-scrapear."""
+    async def recalculate_with_optimized_weights(self, initial_file: str, 
+                                                 optimized_weights: Dict) -> Optional[str]:
+        """
+        🧠 Recalcular predicciones con pesos optimizados sin re-scrapear.
+        
+        Args:
+            initial_file: Ruta al archivo JSON con resultados iniciales
+            optimized_weights: Nuevos pesos optimizados
+        
+        Returns:
+            str or None: Ruta al archivo con resultados recalculados
+        """
         logger.info("🧠 Recalculando predicciones con pesos optimizados...")
         
         try:

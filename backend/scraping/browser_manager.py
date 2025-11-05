@@ -14,14 +14,23 @@ logger = logging.getLogger(__name__)
 class BrowserManager:
     """Gestor del navegador Playwright optimizado para WSL"""
     
-    def __init__(self):
+    def __init__(self, headless: bool = True, slow_mo: int = 250):
+        """
+        Inicializar gestor del navegador.
+        
+        Args:
+            headless: Ejecutar en modo headless
+            slow_mo: Retardo entre acciones en ms
+        """
         self.playwright = None
         self.browser = None
         self.context = None
         self.page = None
         self.is_wsl = self._check_wsl()
+        self.headless = headless
+        self.slow_mo = slow_mo
     
-    def _check_wsl(self):
+    def _check_wsl(self) -> bool:
         """Verificar si estamos en WSL"""
         if os.path.exists('/proc/version'):
             try:
@@ -30,8 +39,8 @@ class BrowserManager:
                     if 'Microsoft' in version or 'WSL' in version:
                         logger.info("✅ Ejecutándose en WSL - Aplicando optimizaciones")
                         return True
-            except:
-                pass
+            except Exception as e:
+                logger.warning(f"⚠️ Error verificando WSL: {e}")
         return False
     
     def check_system_resources(self):
@@ -40,7 +49,8 @@ class BrowserManager:
         
         # Verificar memoria
         memory = psutil.virtual_memory()
-        logger.info(f"💾 Memoria disponible: {memory.available / (1024**3):.1f}GB")
+        available_gb = memory.available / (1024**3)
+        logger.info(f"💾 Memoria disponible: {available_gb:.1f}GB")
         
         if memory.available < 1024 * 1024 * 1024:  # 1GB
             logger.warning("⚠️ Poca memoria disponible (<1GB)")
@@ -50,7 +60,7 @@ class BrowserManager:
         if killed > 0:
             logger.info(f"🧹 Eliminados {killed} procesos Chrome/Chromium zombies")
     
-    def _kill_zombie_chrome_processes(self):
+    def _kill_zombie_chrome_processes(self) -> int:
         """Limpiar procesos Chrome/Chromium zombies"""
         killed = 0
         for proc in psutil.process_iter(['pid', 'name']):
@@ -90,16 +100,18 @@ class BrowserManager:
                 '--use-mock-keychain'
             ]
             
+            logger.info(f"🔧 Configuración: headless={self.headless}, slow_mo={self.slow_mo}ms")
+            
             self.browser = await self.playwright.chromium.launch(
-                headless=True,
+                headless=self.headless,
                 args=browser_args,
                 timeout=60000,
-                slow_mo=250,
+                slow_mo=self.slow_mo,
             )
             
             self.context = await self.browser.new_context(
                 viewport={'width': 1920, 'height': 1080},
-                user_agent='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36',
+                user_agent='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
                 ignore_https_errors=True,
                 java_script_enabled=True,
             )
