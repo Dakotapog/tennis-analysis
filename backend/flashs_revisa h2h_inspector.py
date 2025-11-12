@@ -1,694 +1,663 @@
 #!/usr/bin/env python3
 """
-FlashScore Inspector Avanzado - Arma Poderosa para Análisis H2H
-Analiza la estructura específica de páginas de partidos para extraer datos H2H
-URL de prueba: https://www.flashscore.co/partido/tenis/IXQP3WfJ/#/resumen-del-partido/resumen-del-partido
+🏀 ZITA NBA SCRAPER V9.0 - MÉTODO DEL TENIS ADAPTADO
+Basado en el método exitoso usado para tenis en FlashScore
+Autor: David Alberto Coronado Tabares + Claude
+
+FILOSOFÍA:
+- Playwright con stealth mode
+- Navegación paso a paso verificando cada elemento
+- Selectores específicos probados manualmente
+- Sin prisas: esperas inteligentes
 """
 
 import asyncio
 import logging
 import json
-from datetime import datetime
-from playwright.async_api import async_playwright
 import re
+from datetime import datetime
+from pathlib import Path
+from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeoutError
 
-# Configurar logging detallado
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+# Configuración de logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.FileHandler("nba_scraper.log"),
+        logging.StreamHandler()
+    ]
+)
 logger = logging.getLogger(__name__)
 
-class FlashScoreAdvancedInspector:
-    def __init__(self):
-        self.browser = None
-        self.page = None
+class NBAFlashScoreScraper:
+    def __init__(self, headless=False, slow_mo=100):
         self.playwright = None
-        self.inspection_data = {}
+        self.browser = None
+        self.context = None
+        self.page = None
+        self.headless = headless
+        self.slow_mo = slow_mo
+        self.base_url = "https://www.flashscore.co"
         
-    async def setup_browser(self):
-        """Configurar navegador optimizado para inspección"""
+    async def init_browser(self):
+        """Inicializar navegador con configuración stealth"""
+        logger.info("🚀 Iniciando navegador...")
+        
         try:
-            logger.info("🚀 Iniciando Inspector Avanzado...")
-            
             self.playwright = await async_playwright().start()
             
-            # Opciones optimizadas para WSL
-            browser_args = [
-                '--no-sandbox',
-                '--disable-setuid-sandbox',
-                '--disable-dev-shm-usage',
-                '--disable-accelerated-2d-canvas',
-                '--no-first-run',
-                '--no-zygote',
-                '--single-process',
-                '--disable-gpu',
-                '--disable-software-rasterizer',
-                '--disable-background-timer-throttling',
-                '--disable-backgrounding-occluded-windows',
-                '--disable-renderer-backgrounding',
-                '--disable-features=TranslateUI,VizDisplayCompositor',
-                '--disable-extensions',
-                '--disable-default-apps',
-                '--disable-sync',
-                '--metrics-recording-only',
-                '--no-default-browser-check',
-                '--allow-running-insecure-content',
-                '--disable-web-security',
-                '--disable-blink-features=AutomationControlled',
-                '--ignore-certificate-errors',
-                '--ignore-ssl-errors',
-                '--ignore-certificate-errors-spki-list',
-                '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-            ]
-            
+            # Lanzar navegador con opciones anti-detección
             self.browser = await self.playwright.chromium.launch(
-                headless=True,   # Headless para WSL
-                args=browser_args,
-                slow_mo=100,     # Optimizado para WSL
-                timeout=60000
-            )
-            
-            context = await self.browser.new_context(
-                viewport={'width': 1920, 'height': 1080},
-                user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-                locale='es-ES'
-            )
-            
-            self.page = await context.new_page()
-            self.page.set_default_timeout(30000)
-            
-            logger.info("✅ Inspector configurado correctamente")
-            return True
-            
-        except Exception as e:
-            logger.error(f"❌ Error configurando inspector: {str(e)}")
-            return False
-    
-    async def navigate_and_analyze(self, url):
-        """Navegar a URL específica y analizar estructura con manejo robusto"""
-        try:
-            logger.info(f"🌐 Navegando a: {url}")
-            
-            # Navegar con múltiples intentos
-            max_retries = 3
-            for attempt in range(max_retries):
-                try:
-                    await self.page.goto(url, wait_until="domcontentloaded", timeout=30000)
-                    await asyncio.sleep(5)  # Esperar carga completa
-                    
-                    # Verificar que la página se cargó
-                    title = await self.page.title()
-                    if title and len(title) > 5:
-                        logger.info(f"✅ Página cargada: {title}")
-                        break
-                    else:
-                        raise Exception("Página no cargada correctamente")
-                        
-                except Exception as e:
-                    logger.warning(f"⚠️ Intento {attempt + 1}/{max_retries} falló: {e}")
-                    if attempt < max_retries - 1:
-                        await asyncio.sleep(3)
-                        continue
-                    else:
-                        raise
-            
-            logger.info("📊 Página cargada, iniciando análisis...")
-            
-            # 1. Analizar estructura general de la página
-            await self.analyze_page_structure()
-            
-            # 2. Buscar y analizar tabs/pestañas
-            await self.analyze_tabs()
-            
-            # 3. Intentar acceder a sección H2H
-            await self.find_h2h_section()
-            
-            # 4. Analizar estructura de datos H2H
-            await self.analyze_h2h_structure()
-            
-            # 5. Tomar screenshots para documentación
-            await self.take_inspection_screenshots()
-            
-            return True
-            
-        except Exception as e:
-            logger.error(f"❌ Error durante análisis: {str(e)}")
-            return False
-    
-    async def analyze_page_structure(self):
-        """Analizar estructura general de la página"""
-        try:
-            logger.info("🔍 Analizando estructura general...")
-            
-            # Obtener título de la página
-            title = await self.page.title()
-            logger.info(f"   📄 Título: {title}")
-            
-            # Buscar elementos principales
-            main_selectors = [
-                'main',
-                '[role="main"]',
-                '.container',
-                '#main',
-                '.content',
-                '.match-container',
-                '.game-container'
-            ]
-            
-            structure_info = {}
-            
-            for selector in main_selectors:
-                try:
-                    elements = await self.page.query_selector_all(selector)
-                    if elements:
-                        structure_info[selector] = len(elements)
-                        logger.info(f"   🎯 {selector}: {len(elements)} elementos")
-                except:
-                    continue
-            
-            # Buscar tabs/navegación
-            tab_selectors = [
-                '.tabs',
-                '.tab',
-                '.navigation',
-                '.nav-tab',
-                '[role="tab"]',
-                '.menu-item',
-                '.tab-item',
-                'a[href*="h2h"]',
-                'a[href*="enfrentamiento"]',
-                'button[data-testid*="tab"]'
-            ]
-            
-            tabs_info = {}
-            for selector in tab_selectors:
-                try:
-                    elements = await self.page.query_selector_all(selector)
-                    if elements:
-                        tabs_info[selector] = len(elements)
-                        # Obtener texto de los primeros 3 elementos
-                        for i, elem in enumerate(elements[:3]):
-                            try:
-                                text = await elem.text_content()
-                                if text and text.strip():
-                                    tabs_info[f"{selector}_text_{i+1}"] = text.strip()
-                            except:
-                                continue
-                except:
-                    continue
-            
-            self.inspection_data['page_structure'] = structure_info
-            self.inspection_data['tabs_structure'] = tabs_info
-            
-            logger.info(f"   ✅ Estructura analizada: {len(structure_info)} contenedores, {len(tabs_info)} elementos de navegación")
-            
-        except Exception as e:
-            logger.error(f"❌ Error analizando estructura: {e}")
-    
-    async def analyze_tabs(self):
-        """Analizar y encontrar pestañas específicamente"""
-        try:
-            logger.info("🗂️ Analizando pestañas/tabs...")
-            
-            # Selectores específicos para tabs
-            specific_tab_selectors = [
-                'a[href*="#/h2h"]',
-                'a[href*="#/enfrentamiento"]',
-                'button:has-text("H2H")',
-                'button:has-text("Enfrentamiento")',
-                'a:has-text("H2H")',
-                'a:has-text("Enfrentamiento")',
-                '.tab:has-text("H2H")',
-                '[data-testid*="h2h"]'
-            ]
-            
-            found_tabs = {}
-            
-            # Buscar todos los enlaces y botones
-            all_links = await self.page.query_selector_all('a, button')
-            logger.info(f"   🔗 Total enlaces/botones encontrados: {len(all_links)}")
-            
-            h2h_candidates = []
-            
-            for i, link in enumerate(all_links):
-                try:
-                    text = await link.text_content()
-                    href = await link.get_attribute('href')
-                    onclick = await link.get_attribute('onclick')
-                    data_testid = await link.get_attribute('data-testid')
-                    class_name = await link.get_attribute('class')
-                    
-                    # Buscar indicadores de H2H
-                    indicators = [
-                        'h2h', 'enfrentamiento', 'historial', 'head', 'cara',
-                        'previous', 'anterior', 'matches', 'partidos'
-                    ]
-                    
-                    text_lower = text.lower() if text else ""
-                    href_lower = href.lower() if href else ""
-                    
-                    for indicator in indicators:
-                        if (indicator in text_lower or 
-                            indicator in href_lower or 
-                            (data_testid and indicator in data_testid.lower()) or
-                            (class_name and indicator in class_name.lower())):
-                            
-                            candidate = {
-                                'index': i,
-                                'text': text.strip() if text else "",
-                                'href': href,
-                                'onclick': onclick,
-                                'data_testid': data_testid,
-                                'class': class_name,
-                                'indicator_found': indicator
-                            }
-                            h2h_candidates.append(candidate)
-                            break
-                            
-                except:
-                    continue
-            
-            self.inspection_data['h2h_candidates'] = h2h_candidates
-            
-            logger.info(f"   🎯 Candidatos H2H encontrados: {len(h2h_candidates)}")
-            for i, candidate in enumerate(h2h_candidates[:5]):  # Mostrar primeros 5
-                logger.info(f"      {i+1}. '{candidate['text']}' -> {candidate['href']} ({candidate['indicator_found']})")
-            
-        except Exception as e:
-            logger.error(f"❌ Error analizando tabs: {e}")
-    
-    async def find_h2h_section(self):
-        """Intentar encontrar y acceder a la sección H2H con mejor manejo de errores"""
-        try:
-            logger.info("🎯 Buscando sección H2H...")
-            
-            # URLs posibles para H2H basadas en la estructura de FlashScore
-            match_id = self.extract_match_id_from_url(self.page.url)
-            if match_id:
-                h2h_urls = [
-                    f"https://www.flashscore.co/partido/tenis/{match_id}/#/h2h/general",
-                    f"https://www.flashscore.co/partido/tenis/{match_id}/#/enfrentamientos-directos", 
-                    f"https://www.flashscore.co/partido/tenis/{match_id}/#/h2h",
-                    f"https://www.flashscore.co/partido/tenis/{match_id}/#/historial",
-                    f"https://www.flashscore.co/partido/tenis/{match_id}/#/head-to-head"
+                headless=self.headless,
+                slow_mo=self.slow_mo,
+                args=[
+                    '--disable-blink-features=AutomationControlled',
+                    '--disable-dev-shm-usage',
+                    '--no-sandbox',
+                    '--disable-setuid-sandbox',
+                    '--disable-web-security',
+                    '--disable-features=IsolateOrigins,site-per-process',
                 ]
-                
-                logger.info(f"   🔗 Match ID detectado: {match_id}")
-                
-                for i, url in enumerate(h2h_urls):
-                    try:
-                        logger.info(f"   🌐 Probando URL {i+1}/{len(h2h_urls)}: {url}")
-                        
-                        # Navegar con timeout más corto
-                        await self.page.goto(url, wait_until="domcontentloaded", timeout=20000)
-                        await asyncio.sleep(4)
-                        
-                        # Verificar si hay contenido H2H
-                        h2h_content = await self.check_h2h_content()
-                        if h2h_content:
-                            logger.info(f"   ✅ Sección H2H encontrada en: {url}")
-                            self.inspection_data['h2h_url'] = url
-                            self.inspection_data['h2h_access_method'] = 'direct_url'
-                            return True
-                        else:
-                            logger.info(f"   ❌ Sin contenido H2H en: {url}")
-                            
-                    except Exception as e:
-                        logger.debug(f"   ❌ Error probando {url}: {e}")
-                        continue
+            )
             
-            # Si no funcionan las URLs directas, buscar clics en tabs
-            logger.info("   🖱️ Intentando acceso por tabs...")
+            # Crear contexto con configuración realista
+            self.context = await self.browser.new_context(
+                viewport={'width': 1920, 'height': 1080},
+                user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                locale='es-CO',
+                timezone_id='America/Bogota',
+                permissions=['geolocation']
+            )
             
-            # Volver a página original primero
-            original_url = self.page.url.split('#')[0]
-            await self.page.goto(original_url, wait_until="domcontentloaded", timeout=20000)
+            # Inyectar script anti-detección
+            await self.context.add_init_script("""
+                // Ocultar webdriver
+                Object.defineProperty(navigator, 'webdriver', {
+                    get: () => undefined
+                });
+                
+                // Ocultar chrome
+                window.chrome = {
+                    runtime: {}
+                };
+                
+                // Permisos
+                const originalQuery = window.navigator.permissions.query;
+                window.navigator.permissions.query = (parameters) => (
+                    parameters.name === 'notifications' ?
+                        Promise.resolve({ state: Notification.permission }) :
+                        originalQuery(parameters)
+                );
+            """)
+            
+            self.page = await self.context.new_page()
+            
+            # Configurar timeouts
+            self.page.set_default_timeout(30000)
+            self.page.set_default_navigation_timeout(60000)
+            
+            logger.info("✅ Navegador iniciado correctamente")
+            return True
+            
+        except Exception as e:
+            logger.error(f"❌ Error al iniciar navegador: {e}")
+            return False
+    
+    async def accept_cookies(self):
+        """Aceptar cookies si aparece el banner"""
+        try:
+            cookie_button = self.page.locator("#onetrust-accept-btn-handler")
+            if await cookie_button.count() > 0:
+                await cookie_button.click()
+                await asyncio.sleep(1)
+                logger.info("🍪 Cookies aceptadas")
+        except:
+            logger.info("ℹ️ No hay banner de cookies")
+    
+    async def navigate_to_basketball(self):
+        """Navegar a la página principal de baloncesto"""
+        logger.info("🌐 Navegando a FlashScore Baloncesto...")
+        
+        try:
+            url = f"{self.base_url}/baloncesto/"
+            await self.page.goto(url, wait_until='domcontentloaded')
             await asyncio.sleep(3)
             
-            if 'h2h_candidates' in self.inspection_data:
-                for i, candidate in enumerate(self.inspection_data['h2h_candidates'][:3]):  # Solo primeros 3
-                    try:
-                        logger.info(f"   🖱️ Intento click {i+1}: '{candidate['text']}'")
-                        
-                        # Intentar diferentes métodos de click
-                        click_methods = []
-                        
-                        if candidate['href']:
-                            click_methods.append(('href', f'a[href="{candidate["href"]}"]'))
-                        
-                        if candidate['text']:
-                            click_methods.append(('text', f'text="{candidate["text"]}"'))
-                            
-                        if candidate['data_testid']:
-                            click_methods.append(('testid', f'[data-testid="{candidate["data_testid"]}"]'))
-                        
-                        for method_name, selector in click_methods:
-                            try:
-                                logger.info(f"      Probando {method_name}: {selector}")
-                                await self.page.click(selector, timeout=10000)
-                                await asyncio.sleep(3)
-                                
-                                # Verificar contenido
-                                h2h_content = await self.check_h2h_content()
-                                if h2h_content:
-                                    logger.info(f"   ✅ H2H accesible via {method_name}: '{candidate['text']}'")
-                                    self.inspection_data['h2h_access_method'] = f'click_{method_name}'
-                                    self.inspection_data['h2h_element'] = candidate
-                                    return True
-                                    
-                            except Exception as e:
-                                logger.debug(f"      Error con {method_name}: {e}")
-                                continue
-                                
-                    except Exception as e:
-                        logger.debug(f"   ❌ Error con candidato {i+1}: {e}")
-                        continue
+            await self.accept_cookies()
             
-            logger.warning("   ⚠️ No se pudo acceder a sección H2H")
-            return False
+            # Esperar a que carguen los partidos
+            await self.page.wait_for_selector(".event__match, [id^='g_1']", timeout=15000)
+            
+            logger.info("✅ Página de baloncesto cargada")
+            
+            # Screenshot de diagnóstico
+            await self.page.screenshot(path="screenshots/basketball_main.png", full_page=True)
+            
+            return True
             
         except Exception as e:
-            logger.error(f"❌ Error buscando H2H: {e}")
+            logger.error(f"❌ Error navegando a baloncesto: {e}")
             return False
     
-    async def check_h2h_content(self):
-        """Verificar si hay contenido H2H en la página actual"""
+    async def find_nba_section(self):
+        """Encontrar la sección de NBA específicamente"""
+        logger.info("🔍 Buscando sección NBA...")
+        
         try:
-            # Selectores para contenido H2H
-            h2h_content_selectors = [
-                '.h2h',
-                '.head2head',
-                '.match-history',
-                '.historial',
-                '.enfrentamiento',
-                '[data-testid*="h2h"]',
-                '.previous-matches',
-                '.player-matches'
-            ]
+            # Buscar el título "USA: NBA"
+            nba_title = self.page.locator("text=/USA.*NBA/i").first
             
-            for selector in h2h_content_selectors:
-                elements = await self.page.query_selector_all(selector)
-                if elements:
-                    logger.info(f"      ✅ Contenido H2H detectado: {selector} ({len(elements)} elementos)")
-                    return True
-            
-            # Buscar por texto indicativo
-            h2h_texts = [
-                'últimos partidos',
-                'historial',
-                'enfrentamientos',
-                'previous matches',
-                'head to head',
-                'vs',
-                'ganó',
-                'perdió'
-            ]
-            
-            page_content = await self.page.content()
-            page_text = await self.page.text_content('body')
-            
-            for text in h2h_texts:
-                if text.lower() in page_text.lower():
-                    logger.info(f"      ✅ Texto H2H detectado: '{text}'")
-                    return True
-            
+            if await nba_title.count() > 0:
+                await nba_title.scroll_into_view_if_needed()
+                await asyncio.sleep(1)
+                logger.info("✅ Sección NBA encontrada")
+                return True
+            else:
+                logger.warning("⚠️ No se encontró sección NBA")
+                return False
+                
+        except Exception as e:
+            logger.error(f"❌ Error buscando sección NBA: {e}")
             return False
+    
+    async def extract_matches_from_page(self):
+        """Extraer partidos de la página actual"""
+        logger.info("📊 Extrayendo partidos...")
+        
+        matches = []
+        
+        try:
+            # Scroll suave para cargar contenido
+            for i in range(3):
+                await self.page.evaluate(f"window.scrollTo(0, {500 * (i + 1)})")
+                await asyncio.sleep(1)
+            
+            # Buscar todos los eventos (partidos)
+            events = await self.page.locator(".event__match").all()
+            logger.info(f"📋 Encontrados {len(events)} eventos en la página")
+            
+            for idx, event in enumerate(events, 1):
+                try:
+                    match_data = await self._extract_match_data(event, idx)
+                    
+                    if match_data and self._is_nba_match(match_data):
+                        matches.append(match_data)
+                        logger.info(f"  ✅ {len(matches)}. {match_data['home_team']} vs {match_data['away_team']}")
+                        
+                except Exception as e:
+                    logger.debug(f"Error en evento {idx}: {e}")
+                    continue
+            
+            logger.info(f"🏀 Total partidos NBA extraídos: {len(matches)}")
+            return matches
             
         except Exception as e:
-            logger.debug(f"Error verificando contenido H2H: {e}")
+            logger.error(f"❌ Error extrayendo partidos: {e}")
+            return matches
+    
+    async def _extract_match_data(self, event, idx):
+        """Extraer datos de un evento individual"""
+        try:
+            match_data = {}
+            
+            # Extraer enlace del partido
+            link = await event.query_selector("a")
+            if link:
+                href = await link.get_attribute("href")
+                if href:
+                    match_data['match_url'] = self.base_url + href if href.startswith('/') else href
+                    
+                    # Extraer ID del partido
+                    match_id = re.search(r'/\?mid=([A-Za-z0-9]+)', href)
+                    if match_id:
+                        match_data['match_id'] = match_id.group(1)
+            
+            # Extraer nombres de equipos
+            home = await event.query_selector(".event__participant--home")
+            away = await event.query_selector(".event__participant--away")
+            
+            if home and away:
+                match_data['home_team'] = (await home.text_content()).strip()
+                match_data['away_team'] = (await away.text_content()).strip()
+            
+            # Extraer resultado
+            score = await event.query_selector(".event__score")
+            if score:
+                score_text = (await score.text_content()).strip()
+                match_data['score'] = score_text
+                
+                # Parsear resultado
+                scores = re.findall(r'\d+', score_text)
+                if len(scores) >= 2:
+                    match_data['home_score'] = int(scores[0])
+                    match_data['away_score'] = int(scores[1])
+            
+            # Extraer estado/tiempo
+            time_el = await event.query_selector(".event__time")
+            if time_el:
+                match_data['status'] = (await time_el.text_content()).strip()
+            
+            # Validar que tengamos datos mínimos
+            if 'home_team' in match_data and 'away_team' in match_data:
+                return match_data
+            
+            return None
+            
+        except Exception as e:
+            logger.debug(f"Error extrayendo datos del evento: {e}")
+            return None
+    
+    def _is_nba_match(self, match):
+        """Verificar si el partido es de la NBA"""
+        nba_teams = [
+            'Celtics', 'Lakers', 'Warriors', 'Heat', 'Knicks', 'Bulls', 'Nets',
+            '76ers', 'Sixers', 'Mavericks', 'Mavs', 'Clippers', 'Bucks', 'Suns', 
+            'Nuggets', 'Raptors', 'Hawks', 'Cavaliers', 'Cavs', 'Pelicans', 'Jazz',
+            'Magic', 'Pacers', 'Hornets', 'Pistons', 'Rockets', 'Kings', 'Spurs',
+            'Thunder', 'Timberwolves', 'Wolves', 'Trail Blazers', 'Blazers', 
+            'Grizzlies', 'Wizards'
+        ]
+        
+        home = match.get('home_team', '').lower()
+        away = match.get('away_team', '').lower()
+        
+        for team in nba_teams:
+            if team.lower() in home or team.lower() in away:
+                return True
+        
+        return False
+    
+    async def navigate_to_match(self, match_url):
+        """Navegar a la página de un partido específico"""
+        logger.info(f"🔗 Navegando al partido: {match_url}")
+        
+        try:
+            await self.page.goto(match_url, wait_until='domcontentloaded')
+            await asyncio.sleep(3)
+            
+            # Esperar a que cargue el contenido
+            await self.page.wait_for_selector(".tabs, [class*='tab']", timeout=10000)
+            
+            logger.info("✅ Página del partido cargada")
+            return True
+            
+        except Exception as e:
+            logger.error(f"❌ Error navegando al partido: {e}")
             return False
     
-    async def analyze_h2h_structure(self):
-        """Analizar estructura específica de datos H2H"""
-        try:
-            logger.info("📊 Analizando estructura de datos H2H...")
-            
-            # Selectores para diferentes tipos de datos H2H
-            h2h_data_selectors = {
-                'match_rows': [
-                    '.match-row', '.partido', '.game-row', 'tr[class*="match"]',
-                    '.h2h-match', '.historial-partido', '[data-testid*="match"]'
-                ],
-                'player_sections': [
-                    '.player-section', '.jugador', '.player-stats',
-                    '.player-matches', '.player-history'
-                ],
-                'load_more_buttons': [
-                    'button:has-text("más")', 'button:has-text("more")',
-                    '.load-more', '.mostrar-mas', '[data-testid*="load"]'
-                ],
-                'results': [
-                    '.result', '.resultado', '.score', '.marcador',
-                    '.win', '.loss', '.ganado', '.perdido'
-                ],
-                'dates': [
-                    '.date', '.fecha', '.time', '.when', '.cuándo'
-                ],
-                'opponents': [
-                    '.opponent', '.rival', '.vs', '.contra'
+    async def click_player_stats_tab(self):
+        """Hacer clic en la pestaña de estadísticas de jugadores"""
+        logger.info("🎯 Buscando pestaña de estadísticas...")
+        
+        possible_texts = [
+            "Estadísticas de jugadores",
+            "Estadísticas",
+            "Player Stats",
+            "Stats",
+            "Jugadores"
+        ]
+        
+        for text in possible_texts:
+            try:
+                # Intentar diferentes selectores
+                selectors = [
+                    f'a:has-text("{text}")',
+                    f'button:has-text("{text}")',
+                    f'[role="tab"]:has-text("{text}")',
+                    f'.tabs__tab:has-text("{text}")',
+                    f'div:has-text("{text}")'
                 ]
-            }
-            
-            structure_analysis = {}
-            
-            for category, selectors in h2h_data_selectors.items():
-                category_data = {}
                 
                 for selector in selectors:
                     try:
-                        elements = await self.page.query_selector_all(selector)
-                        if elements:
-                            category_data[selector] = {
-                                'count': len(elements),
-                                'sample_data': []
-                            }
-                            
-                            # Obtener datos de muestra
-                            for i, elem in enumerate(elements[:3]):
-                                try:
-                                    text = await elem.text_content()
-                                    html = await elem.inner_html()
-                                    
-                                    sample = {
-                                        'text': text.strip() if text else "",
-                                        'html_length': len(html),
-                                        'has_links': 'href=' in html,
-                                        'has_images': '<img' in html
-                                    }
-                                    category_data[selector]['sample_data'].append(sample)
-                                    
-                                except:
-                                    continue
-                                    
-                            logger.info(f"   🎯 {category} - {selector}: {len(elements)} elementos")
-                            
+                        element = await self.page.wait_for_selector(selector, timeout=3000)
+                        if element:
+                            # Verificar que es visible
+                            if await element.is_visible():
+                                await element.scroll_into_view_if_needed()
+                                await asyncio.sleep(0.5)
+                                await element.click()
+                                await asyncio.sleep(3)
+                                
+                                logger.info(f"✅ Click en pestaña: {text}")
+                                
+                                # Verificar que apareció contenido de stats
+                                stats_visible = await self.page.locator("table, .stat, [class*='player']").count()
+                                if stats_visible > 0:
+                                    logger.info("✅ Estadísticas cargadas")
+                                    return True
                     except:
                         continue
-                
-                if category_data:
-                    structure_analysis[category] = category_data
-            
-            self.inspection_data['h2h_structure'] = structure_analysis
-            
-            # Análisis específico de patrones de datos
-            await self.analyze_data_patterns()
-            
-        except Exception as e:
-            logger.error(f"❌ Error analizando estructura H2H: {e}")
+                        
+            except:
+                continue
+        
+        # Si no encontramos nada, listar pestañas disponibles
+        logger.warning("⚠️ No se encontró pestaña de estadísticas")
+        await self._list_available_tabs()
+        return False
     
-    async def analyze_data_patterns(self):
-        """Analizar patrones específicos de datos de partidos"""
+    async def _list_available_tabs(self):
+        """Listar pestañas disponibles para debug"""
+        logger.info("📋 Pestañas disponibles:")
+        
         try:
-            logger.info("🔍 Analizando patrones de datos...")
+            tabs = await self.page.locator("a, button, [role='tab']").all()
             
-            # Buscar patrones de resultados (6-4, 6-2, etc.)
-            page_text = await self.page.text_content('body')
-            
-            # Patrones regex para datos de tenis
-            patterns = {
-                'tennis_scores': r'\d{1,2}-\d{1,2}',
-                'dates': r'\d{1,2}[\./]\d{1,2}[\./]\d{2,4}',
-                'player_names': r'[A-Z][a-z]+ [A-Z][a-z]+',
-                'tournaments': r'[A-Z][a-z]+ \d{4}',
-                'surfaces': r'(Arcilla|Hierba|Dura|Clay|Grass|Hard)'
-            }
-            
-            pattern_analysis = {}
-            
-            for pattern_name, pattern in patterns.items():
-                matches = re.findall(pattern, page_text)
-                if matches:
-                    pattern_analysis[pattern_name] = {
-                        'count': len(matches),
-                        'samples': matches[:5],  # Primeros 5 ejemplos
-                        'unique_count': len(set(matches))
-                    }
-                    logger.info(f"   📈 {pattern_name}: {len(matches)} coincidencias")
-            
-            self.inspection_data['data_patterns'] = pattern_analysis
-            
+            for i, tab in enumerate(tabs[:20], 1):
+                try:
+                    text = await tab.text_content()
+                    if text and text.strip():
+                        logger.info(f"  {i}. {text.strip()}")
+                except:
+                    pass
+                    
         except Exception as e:
-            logger.error(f"❌ Error analizando patrones: {e}")
+            logger.debug(f"Error listando pestañas: {e}")
     
-    def extract_match_id_from_url(self, url):
-        """Extraer match ID de URL"""
-        try:
-            # Patrón para FlashScore: /partido/tenis/IXQP3WfJ/
-            match = re.search(r'/partido/tenis/([^/]+)', url)
-            if match:
-                return match.group(1)
-            
-            # Patrón alternativo
-            match = re.search(r'/match/([^/]+)', url)
-            if match:
-                return match.group(1)
-                
+    async def extract_player_statistics(self, match_info):
+        """Extraer estadísticas de jugadores de un partido"""
+        logger.info(f"\n{'='*60}")
+        logger.info(f"🏀 EXTRAYENDO STATS: {match_info['home_team']} vs {match_info['away_team']}")
+        logger.info(f"{'='*60}")
+        
+        # Navegar al partido
+        if not await self.navigate_to_match(match_info['match_url']):
             return None
-        except:
+        
+        # Screenshot inicial
+        await self.page.screenshot(path=f"screenshots/match_{match_info['match_id']}_main.png")
+        
+        # Click en estadísticas de jugadores
+        if not await self.click_player_stats_tab():
+            logger.warning("⚠️ No se pudo acceder a estadísticas")
+            return None
+        
+        # Screenshot de stats
+        await self.page.screenshot(path=f"screenshots/match_{match_info['match_id']}_stats.png")
+        
+        # Extraer estadísticas de ambos equipos
+        stats_data = {
+            'match_info': match_info,
+            'home_team': {
+                'name': match_info['home_team'],
+                'players': await self._extract_team_players_stats(match_info['home_team'])
+            },
+            'away_team': {
+                'name': match_info['away_team'],
+                'players': await self._extract_team_players_stats(match_info['away_team'])
+            }
+        }
+        
+        total_players = len(stats_data['home_team']['players']) + len(stats_data['away_team']['players'])
+        logger.info(f"✅ Extraídos {total_players} jugadores en total")
+        
+        return stats_data
+    
+    async def _extract_team_players_stats(self, team_name):
+        """Extraer estadísticas de jugadores de un equipo"""
+        logger.info(f"📊 Extrayendo jugadores de: {team_name}")
+        
+        players = []
+        
+        try:
+            # Intentar click en pestaña del equipo
+            team_selectors = [
+                f'button:has-text("{team_name}")',
+                f'[role="tab"]:has-text("{team_name}")',
+                f'a:has-text("{team_name}")'
+            ]
+            
+            for selector in team_selectors:
+                try:
+                    element = await self.page.wait_for_selector(selector, timeout=3000)
+                    if element and await element.is_visible():
+                        await element.click()
+                        await asyncio.sleep(2)
+                        logger.info(f"  ✅ Seleccionado equipo: {team_name}")
+                        break
+                except:
+                    continue
+            
+            # Buscar tabla de estadísticas
+            # FlashScore usa diferentes estructuras, intentar varias
+            
+            # Método 1: Tabla HTML estándar
+            table = await self.page.query_selector("table")
+            if table:
+                players = await self._parse_html_table(table)
+            
+            # Método 2: Divs con clases específicas
+            if not players:
+                players = await self._parse_custom_stats_divs()
+            
+            logger.info(f"  ✅ Extraídos {len(players)} jugadores")
+            return players
+            
+        except Exception as e:
+            logger.error(f"❌ Error extrayendo {team_name}: {e}")
+            return []
+    
+    async def _parse_html_table(self, table):
+        """Parsear tabla HTML de estadísticas"""
+        players = []
+        
+        try:
+            rows = await table.query_selector_all("tr")
+            
+            # Identificar headers
+            header_row = rows[0] if rows else None
+            headers = []
+            
+            if header_row:
+                header_cells = await header_row.query_selector_all("th, td")
+                for cell in header_cells:
+                    text = await cell.text_content()
+                    headers.append(text.strip().lower())
+            
+            # Procesar filas de datos
+            for row in rows[1:]:
+                try:
+                    cells = await row.query_selector_all("td")
+                    
+                    if len(cells) >= 2:
+                        player_name = (await cells[0].text_content()).strip()
+                        
+                        # Verificar que no sea header
+                        if player_name and player_name.lower() not in ['jugador', 'player', 'nombre', 'name']:
+                            # Extraer valores numéricos
+                            stats = {}
+                            
+                            for i, cell in enumerate(cells[1:], 1):
+                                text = await cell.text_content()
+                                # Buscar números
+                                numbers = re.findall(r'\d+', text)
+                                if numbers:
+                                    if i < len(headers):
+                                        stat_name = headers[i]
+                                        stats[stat_name] = int(numbers[0])
+                            
+                            # Construir objeto jugador
+                            player_data = {
+                                'nombre': player_name,
+                                'puntos': stats.get('pts', stats.get('puntos', 0)),
+                                'rebotes': stats.get('reb', stats.get('rebotes', 0)),
+                                'asistencias': stats.get('ast', stats.get('asistencias', 0)),
+                                'minutos': stats.get('min', stats.get('minutos', 0)),
+                                'stats_completas': stats
+                            }
+                            
+                            players.append(player_data)
+                            
+                except Exception as e:
+                    logger.debug(f"Error parseando fila: {e}")
+                    continue
+            
+        except Exception as e:
+            logger.error(f"Error parseando tabla: {e}")
+        
+        return players
+    
+    async def _parse_custom_stats_divs(self):
+        """Parsear estructura custom de FlashScore (divs)"""
+        players = []
+        
+        try:
+            # Buscar contenedores de jugadores
+            player_rows = await self.page.locator("[class*='player'], [class*='participant']").all()
+            
+            for row in player_rows:
+                try:
+                    text = await row.text_content()
+                    
+                    # Extraer nombre (generalmente al inicio)
+                    lines = text.strip().split('\n')
+                    if lines:
+                        player_name = lines[0].strip()
+                        
+                        # Extraer números
+                        numbers = re.findall(r'\d+', text)
+                        
+                        if player_name and len(numbers) >= 3:
+                            player_data = {
+                                'nombre': player_name,
+                                'puntos': int(numbers[0]) if len(numbers) > 0 else 0,
+                                'rebotes': int(numbers[1]) if len(numbers) > 1 else 0,
+                                'asistencias': int(numbers[2]) if len(numbers) > 2 else 0
+                            }
+                            
+                            players.append(player_data)
+                            
+                except:
+                    continue
+                    
+        except Exception as e:
+            logger.error(f"Error parseando divs: {e}")
+        
+        return players
+    
+    async def save_data(self, data, filename):
+        """Guardar datos en JSON"""
+        try:
+            output_dir = Path("data")
+            output_dir.mkdir(exist_ok=True)
+            
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            filepath = output_dir / f"{filename}_{timestamp}.json"
+            
+            with open(filepath, 'w', encoding='utf-8') as f:
+                json.dump(data, f, indent=2, ensure_ascii=False)
+            
+            logger.info(f"💾 Datos guardados: {filepath}")
+            return str(filepath)
+            
+        except Exception as e:
+            logger.error(f"❌ Error guardando datos: {e}")
             return None
     
-    async def take_inspection_screenshots(self):
-        """Tomar screenshots para documentación"""
+    async def close(self):
+        """Cerrar navegador"""
         try:
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            
-            # Screenshot de página completa
-            await self.page.screenshot(
-                path=f"inspection_full_{timestamp}.png",
-                full_page=True
-            )
-            
-            # Screenshot de viewport
-            await self.page.screenshot(
-                path=f"inspection_viewport_{timestamp}.png"
-            )
-            
-            logger.info(f"📸 Screenshots guardados: inspection_*_{timestamp}.png")
-            
-        except Exception as e:
-            logger.error(f"❌ Error tomando screenshots: {e}")
-    
-    async def generate_report(self):
-        """Generar reporte completo de inspección"""
-        try:
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            filename = f"flashscore_inspection_report_{timestamp}.json"
-            
-            report = {
-                'inspection_info': {
-                    'timestamp': datetime.now().isoformat(),
-                    'url_analyzed': self.page.url,
-                    'inspector_version': '2.0_advanced'
-                },
-                'findings': self.inspection_data
-            }
-            
-            with open(filename, 'w', encoding='utf-8') as f:
-                json.dump(report, f, indent=2, ensure_ascii=False)
-            
-            logger.info(f"📋 Reporte guardado: {filename}")
-            
-            # Mostrar resumen en consola
-            self.print_inspection_summary()
-            
-        except Exception as e:
-            logger.error(f"❌ Error generando reporte: {e}")
-    
-    def print_inspection_summary(self):
-        """Imprimir resumen de inspección"""
-        try:
-            print("\n" + "="*80)
-            print("🔍 REPORTE DE INSPECCIÓN AVANZADA")
-            print("="*80)
-            
-            if 'h2h_candidates' in self.inspection_data:
-                candidates = self.inspection_data['h2h_candidates']
-                print(f"🎯 Candidatos H2H encontrados: {len(candidates)}")
-                for i, c in enumerate(candidates[:3]):
-                    print(f"   {i+1}. '{c['text']}' -> {c['href']}")
-            
-            if 'h2h_url' in self.inspection_data:
-                print(f"✅ URL H2H detectada: {self.inspection_data['h2h_url']}")
-            
-            if 'h2h_structure' in self.inspection_data:
-                structure = self.inspection_data['h2h_structure']
-                print(f"📊 Categorías de datos H2H: {len(structure)}")
-                for category, data in structure.items():
-                    total_elements = sum(sel_data['count'] for sel_data in data.values())
-                    print(f"   {category}: {total_elements} elementos")
-            
-            if 'data_patterns' in self.inspection_data:
-                patterns = self.inspection_data['data_patterns']
-                print(f"🔍 Patrones detectados: {len(patterns)}")
-                for pattern, data in patterns.items():
-                    print(f"   {pattern}: {data['count']} coincidencias")
-            
-            print("="*80)
-            
-        except Exception as e:
-            logger.error(f"Error imprimiendo resumen: {e}")
-    
-    async def cleanup(self):
-        """Limpiar recursos"""
-        try:
-            if self.page:
-                await self.page.close()
+            if self.context:
+                await self.context.close()
             if self.browser:
                 await self.browser.close()
             if self.playwright:
                 await self.playwright.stop()
-            logger.info("🧹 Inspector limpiado")
-        except Exception as e:
-            logger.warning(f"⚠️ Error limpiando: {e}")
+            logger.info("👋 Navegador cerrado")
+        except:
+            pass
+
 
 async def main():
-    """Función principal de inspección"""
-    inspector = FlashScoreAdvancedInspector()
+    """Función principal"""
+    print("\n" + "="*70)
+    print("🏀 NBA FLASHSCORE SCRAPER V9.0 - MÉTODO TENIS")
+    print("="*70 + "\n")
     
-    # URL del partido para analizar
-    TEST_URL = "https://www.flashscore.co/partido/tenis/IXQP3WfJ/#/resumen-del-partido/resumen-del-partido"
+    # Crear directorio de screenshots
+    Path("screenshots").mkdir(exist_ok=True)
+    
+    # Inicializar scraper
+    scraper = NBAFlashScoreScraper(
+        headless=False,  # Cambiar a True cuando funcione
+        slow_mo=100
+    )
     
     try:
-        logger.info("🔍 Iniciando Inspección Avanzada de FlashScore")
-        
-        # Configurar navegador
-        if not await inspector.setup_browser():
-            logger.error("❌ No se pudo configurar inspector")
+        # Paso 1: Inicializar navegador
+        if not await scraper.init_browser():
+            logger.error("No se pudo inicializar el navegador")
             return
         
-        # Navegar y analizar
-        if not await inspector.navigate_and_analyze(TEST_URL):
-            logger.error("❌ Error durante análisis")
+        # Paso 2: Navegar a baloncesto
+        if not await scraper.navigate_to_basketball():
+            logger.error("No se pudo cargar la página de baloncesto")
             return
         
-        # Generar reporte
-        await inspector.generate_report()
+        # Paso 3: Buscar sección NBA
+        await scraper.find_nba_section()
         
-        logger.info("✅ Inspección completada exitosamente")
+        # Paso 4: Extraer partidos
+        matches = await scraper.extract_matches_from_page()
         
-        # Mantener navegador abierto para debug (comentado para WSL)
-        # logger.info("🔍 Navegador abierto para inspección manual...")
-        # logger.info("🔍 Presiona Ctrl+C para cerrar")
+        if not matches:
+            logger.warning("⚠️ No se encontraron partidos NBA")
+            return
         
-        # try:
-        #     while True:
-        #         await asyncio.sleep(1)
-        # except KeyboardInterrupt:
-        #     logger.info("🛑 Cerrando inspector...")
+        # Guardar lista de partidos
+        await scraper.save_data(matches, "nba_matches")
+        
+        # Mostrar resumen
+        print("\n" + "="*70)
+        print(f"📊 RESUMEN: {len(matches)} partidos encontrados")
+        print("="*70)
+        
+        for i, match in enumerate(matches[:10], 1):
+            score = match.get('score', 'vs')
+            print(f"{i}. {match['home_team']} {score} {match['away_team']}")
+        
+        # Paso 5: Extraer estadísticas (primeros 3 partidos)
+        print("\n" + "="*70)
+        print("📈 EXTRAYENDO ESTADÍSTICAS (primeros 3 partidos)")
+        print("="*70 + "\n")
+        
+        all_stats = []
+        
+        for i, match in enumerate(matches[:3], 1):
+            logger.info(f"\n[{i}/3] Procesando partido...")
+            stats = await scraper.extract_player_statistics(match)
+            
+            if stats:
+                all_stats.append(stats)
+                await scraper.save_data(stats, f"match_stats_{match['match_id']}")
+            
+            # Pausa entre partidos
+            await asyncio.sleep(2)
+        
+        # Guardar todas las estadísticas
+        if all_stats:
+            await scraper.save_data(all_stats, "nba_all_stats")
+            print(f"\n✅ Estadísticas extraídas de {len(all_stats)} partidos")
+        
+        print("\n" + "="*70)
+        print("🎉 SCRAPING COMPLETADO")
+        print("📁 Revisa la carpeta 'data/' para los archivos JSON")
+        print("📸 Revisa la carpeta 'screenshots/' para las capturas")
+        print("="*70 + "\n")
+        
+    except KeyboardInterrupt:
+        logger.info("\n⚠️ Proceso interrumpido por el usuario")
         
     except Exception as e:
-        logger.error(f"❌ Error durante inspección: {str(e)}")
+        logger.error(f"❌ Error general: {e}")
+        import traceback
+        traceback.print_exc()
         
     finally:
-        await inspector.cleanup()
+        await scraper.close()
+
 
 if __name__ == "__main__":
-    print("🔍" + "="*80)
-    print("🔍 FLASHSCORE INSPECTOR AVANZADO - ARMA PODEROSA")
-    print("🔍 Análisis detallado de estructura H2H")
-    print("🔍" + "="*80)
-    
-    try:
-        asyncio.run(main())
-    except KeyboardInterrupt:
-        print("\n🛑 Inspección interrumpida por el usuario")
-    except Exception as e:
-        print(f"\n❌ Error fatal: {e}")
+    asyncio.run(main())

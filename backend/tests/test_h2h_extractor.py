@@ -59,9 +59,13 @@ class TestH2HExtractor:
         history = [
             {'outcome': 'Ganó'}, {'outcome': 'Ganó'}, {'outcome': 'Perdió'},
             {'outcome': 'Ganó'}, {'outcome': 'Ganó'}
-        ]
-        form = extractor.analyze_recent_form_in_extractor(history, 'Player X', recent_count=5)
-        
+     ]
+    # Cambiar esto:
+    # form = extractor.analyze_recent_form_in_extractor(history, 'Player X', recent_count=5)
+    
+    # Por esto:
+        form = extractor._analyze_recent_form(history, 'Player X', recent_count=5)
+    
         assert form['wins'] == 4
         assert form['losses'] == 1
         assert form['win_percentage'] == 80.0

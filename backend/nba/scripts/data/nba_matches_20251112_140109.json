@@ -1,0 +1,267 @@
+{
+  "extraction_date": "2025-11-12 14:01:09",
+  "total_matches": 29,
+  "matches": [
+    {
+      "home_team": "Charlotte Hornets",
+      "away_team": "Milwaukee Bucks",
+      "score": "-",
+      "status": "19:00",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/charlotte-hornets-xftMikUg/milwaukee-bucks-QTBEW6rC/?mid=6yfBTkif",
+      "match_id": "charlotte-hornets-xftMikUg",
+      "league": ""
+    },
+    {
+      "home_team": "Chicago Bulls",
+      "away_team": "Detroit Pistons",
+      "score": "-",
+      "status": "19:00",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/chicago-bulls-bPjc49q0/detroit-pistons-UcjMRj6J/?mid=23mKRTL6",
+      "match_id": "chicago-bulls-bPjc49q0",
+      "league": ""
+    },
+    {
+      "home_team": "New York Knicks",
+      "away_team": "Orlando Magic",
+      "score": "-",
+      "status": "19:00",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/new-york-knicks-WCNO4nbt/orlando-magic-QZMS36Dn/?mid=zHoSP7jJ",
+      "match_id": "new-york-knicks-WCNO4nbt",
+      "league": ""
+    },
+    {
+      "home_team": "Boston Celtics",
+      "away_team": "Memphis Grizzlies",
+      "score": "-",
+      "status": "19:30",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/boston-celtics-KYD9hVEm/memphis-grizzlies-U1I5YSDa/?mid=CYEWWOcn",
+      "match_id": "boston-celtics-KYD9hVEm",
+      "league": ""
+    },
+    {
+      "home_team": "Cleveland Cavaliers",
+      "away_team": "Miami Heat",
+      "score": "-",
+      "status": "19:30",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/cleveland-cavaliers-xGk13Tb6/miami-heat-CQ7AXnT5/?mid=KbIvV2Sb",
+      "match_id": "cleveland-cavaliers-xGk13Tb6",
+      "league": ""
+    },
+    {
+      "home_team": "Houston Rockets",
+      "away_team": "Washington Wizards",
+      "score": "-",
+      "status": "20:00",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/houston-rockets-Sr9PQALP/washington-wizards-W6vGWPsn/?mid=tE6mTtcB",
+      "match_id": "houston-rockets-Sr9PQALP",
+      "league": ""
+    },
+    {
+      "home_team": "New Orleans Pelicans",
+      "away_team": "Portland Trail Blazers",
+      "score": "-",
+      "status": "20:00",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/new-orleans-pelicans-U3yc9SkP/portland-trail-blazers-4Awl14c5/?mid=lvAeRKRN",
+      "match_id": "new-orleans-pelicans-U3yc9SkP",
+      "league": ""
+    },
+    {
+      "home_team": "Golden State Warriors",
+      "away_team": "San Antonio Spurs",
+      "score": "-",
+      "status": "20:00",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/golden-state-warriors-SxUtXqch/san-antonio-spurs-IwmkErSH/?mid=h65RLbko",
+      "match_id": "golden-state-warriors-SxUtXqch",
+      "league": ""
+    },
+    {
+      "home_team": "Dallas Mavericks",
+      "away_team": "Phoenix Suns",
+      "score": "-",
+      "status": "20:30",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/dallas-mavericks-YouS3mEC/phoenix-suns-M1Gy2pra/?mid=p0hDq2sh",
+      "match_id": "dallas-mavericks-YouS3mEC",
+      "league": ""
+    },
+    {
+      "home_team": "Los Angeles Lakers",
+      "away_team": "Oklahoma City Thunder",
+      "score": "-",
+      "status": "21:30",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/los-angeles-lakers-ngegZ8bg/oklahoma-city-thunder-0fHFHEWD/?mid=tSoMstC4",
+      "match_id": "los-angeles-lakers-ngegZ8bg",
+      "league": ""
+    },
+    {
+      "home_team": "Atlanta Hawks",
+      "away_team": "Sacramento Kings",
+      "score": "-",
+      "status": "22:00",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/atlanta-hawks-xAO4gBas/sacramento-kings-CvwE1OCB/?mid=lhkUuKtH",
+      "match_id": "atlanta-hawks-xAO4gBas",
+      "league": ""
+    },
+    {
+      "home_team": "Denver Nuggets",
+      "away_team": "Los Angeles Clippers",
+      "score": "-",
+      "status": "22:30",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/denver-nuggets-CxvW27TI/los-angeles-clippers-vPeTYlqm/?mid=A7wwvbBT",
+      "match_id": "denver-nuggets-CxvW27TI",
+      "league": ""
+    },
+    {
+      "home_team": "Cleveland Cavaliers",
+      "away_team": "Toronto Raptors",
+      "score": "-",
+      "status": "13.11. 19:00",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/cleveland-cavaliers-xGk13Tb6/toronto-raptors-CxtbCMdU/?mid=xYgsQpLr",
+      "match_id": "cleveland-cavaliers-xGk13Tb6",
+      "league": ""
+    },
+    {
+      "home_team": "Indiana Pacers",
+      "away_team": "Phoenix Suns",
+      "score": "-",
+      "status": "13.11. 21:00",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/indiana-pacers-YPohMUTt/phoenix-suns-M1Gy2pra/?mid=KtP8YyZj",
+      "match_id": "indiana-pacers-YPohMUTt",
+      "league": ""
+    },
+    {
+      "home_team": "Atlanta Hawks",
+      "away_team": "Utah Jazz",
+      "score": "-",
+      "status": "13.11. 21:00",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/atlanta-hawks-xAO4gBas/utah-jazz-hGuCX5Su/?mid=xIggtlhc",
+      "match_id": "atlanta-hawks-xAO4gBas",
+      "league": ""
+    },
+    {
+      "home_team": "Denver Nuggets",
+      "away_team": "Sacramento Kings",
+      "score": "108",
+      "status": "11.11. 23:00",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/denver-nuggets-CxvW27TI/sacramento-kings-CvwE1OCB/?mid=bBj3VBMs",
+      "match_id": "denver-nuggets-CxvW27TI",
+      "league": ""
+    },
+    {
+      "home_team": "Indiana Pacers",
+      "away_team": "Utah Jazz",
+      "score": "152",
+      "status": "11.11. 21:00",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/indiana-pacers-YPohMUTt/utah-jazz-hGuCX5Su/?mid=EwFWzYbK",
+      "match_id": "indiana-pacers-YPohMUTt",
+      "league": ""
+    },
+    {
+      "home_team": "Golden State Warriors",
+      "away_team": "Oklahoma City Thunder",
+      "score": "126",
+      "status": "11.11. 20:00",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/golden-state-warriors-SxUtXqch/oklahoma-city-thunder-0fHFHEWD/?mid=l0NpDU6D",
+      "match_id": "golden-state-warriors-SxUtXqch",
+      "league": ""
+    },
+    {
+      "home_team": "Boston Celtics",
+      "away_team": "Philadelphia 76Ers",
+      "score": "102",
+      "status": "11.11. 20:00",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/boston-celtics-KYD9hVEm/philadelphia-76ers-vwRW2QSh/?mid=hYTyFjx1",
+      "match_id": "boston-celtics-KYD9hVEm",
+      "league": ""
+    },
+    {
+      "home_team": "Brooklyn Nets",
+      "away_team": "Toronto Raptors",
+      "score": "109",
+      "status": "11.11. 19:30",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/brooklyn-nets-bsAMUpDO/toronto-raptors-CxtbCMdU/?mid=ImDAV6cL",
+      "match_id": "brooklyn-nets-bsAMUpDO",
+      "league": ""
+    },
+    {
+      "home_team": "Memphis Grizzlies",
+      "away_team": "New York Knicks",
+      "score": "133",
+      "status": "11.11. 19:30",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/memphis-grizzlies-U1I5YSDa/new-york-knicks-WCNO4nbt/?mid=KKVTGC7l",
+      "match_id": "memphis-grizzlies-U1I5YSDa",
+      "league": ""
+    },
+    {
+      "home_team": "Atlanta Hawks",
+      "away_team": "Los Angeles Clippers",
+      "score": "102",
+      "status": "10.11. 22:30",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/atlanta-hawks-xAO4gBas/los-angeles-clippers-vPeTYlqm/?mid=0zkcMYqR",
+      "match_id": "atlanta-hawks-xAO4gBas",
+      "league": ""
+    },
+    {
+      "home_team": "New Orleans Pelicans",
+      "away_team": "Phoenix Suns",
+      "score": "121",
+      "status": "10.11. 21:00",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/new-orleans-pelicans-U3yc9SkP/phoenix-suns-M1Gy2pra/?mid=nDb30iN7",
+      "match_id": "new-orleans-pelicans-U3yc9SkP",
+      "league": ""
+    },
+    {
+      "home_team": "Minnesota Timberwolves",
+      "away_team": "Utah Jazz",
+      "score": "113",
+      "status": "10.11. 21:00",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/minnesota-timberwolves-KjBIVQcI/utah-jazz-hGuCX5Su/?mid=S8yjOfFE",
+      "match_id": "minnesota-timberwolves-KjBIVQcI",
+      "league": ""
+    },
+    {
+      "home_team": "Dallas Mavericks",
+      "away_team": "Milwaukee Bucks",
+      "score": "114",
+      "status": "10.11. 20:30",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/dallas-mavericks-YouS3mEC/milwaukee-bucks-QTBEW6rC/?mid=vmee2Dhe",
+      "match_id": "dallas-mavericks-YouS3mEC",
+      "league": ""
+    },
+    {
+      "home_team": "Chicago Bulls",
+      "away_team": "San Antonio Spurs",
+      "score": "117",
+      "status": "10.11. 20:00",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/chicago-bulls-bPjc49q0/san-antonio-spurs-IwmkErSH/?mid=rL1n4ZNr",
+      "match_id": "chicago-bulls-bPjc49q0",
+      "league": ""
+    },
+    {
+      "home_team": "Charlotte Hornets",
+      "away_team": "Los Angeles Lakers",
+      "score": "111",
+      "status": "10.11. 19:00",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/charlotte-hornets-xftMikUg/los-angeles-lakers-ngegZ8bg/?mid=4UtDkz9k",
+      "match_id": "charlotte-hornets-xftMikUg",
+      "league": ""
+    },
+    {
+      "home_team": "Detroit Pistons",
+      "away_team": "Washington Wizards",
+      "score": "137",
+      "status": "10.11. 19:00Tras prórr.",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/detroit-pistons-UcjMRj6J/washington-wizards-W6vGWPsn/?mid=QqVLmEw2",
+      "match_id": "detroit-pistons-UcjMRj6J",
+      "league": ""
+    },
+    {
+      "home_team": "Orlando Magic",
+      "away_team": "Portland Trail Blazers",
+      "score": "115",
+      "status": "10.11. 19:00",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/orlando-magic-QZMS36Dn/portland-trail-blazers-4Awl14c5/?mid=hjN7BHV8",
+      "match_id": "orlando-magic-QZMS36Dn",
+      "league": ""
+    }
+  ]
+}

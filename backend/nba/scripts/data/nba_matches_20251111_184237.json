@@ -1,0 +1,61 @@
+{
+  "extraction_date": "2025-11-11 18:42:37",
+  "total_matches": 6,
+  "matches": [
+    {
+      "home_team": "Brooklyn Nets",
+      "away_team": "Toronto Raptors",
+      "score": "-",
+      "status": "19:30",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/brooklyn-nets-bsAMUpDO/toronto-raptors-CxtbCMdU/?mid=ImDAV6cL",
+      "match_id": "brooklyn-nets-bsAMUpDO",
+      "league": ""
+    },
+    {
+      "home_team": "Memphis Grizzlies",
+      "away_team": "New York Knicks",
+      "score": "-",
+      "status": "19:30",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/memphis-grizzlies-U1I5YSDa/new-york-knicks-WCNO4nbt/?mid=KKVTGC7l",
+      "match_id": "memphis-grizzlies-U1I5YSDa",
+      "league": ""
+    },
+    {
+      "home_team": "Golden State Warriors",
+      "away_team": "Oklahoma City Thunder",
+      "score": "-",
+      "status": "20:00",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/golden-state-warriors-SxUtXqch/oklahoma-city-thunder-0fHFHEWD/?mid=l0NpDU6D",
+      "match_id": "golden-state-warriors-SxUtXqch",
+      "league": ""
+    },
+    {
+      "home_team": "Boston Celtics",
+      "away_team": "Philadelphia 76Ers",
+      "score": "-",
+      "status": "20:00",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/boston-celtics-KYD9hVEm/philadelphia-76ers-vwRW2QSh/?mid=hYTyFjx1",
+      "match_id": "boston-celtics-KYD9hVEm",
+      "league": ""
+    },
+    {
+      "home_team": "Indiana Pacers",
+      "away_team": "Utah Jazz",
+      "score": "-",
+      "status": "21:00",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/indiana-pacers-YPohMUTt/utah-jazz-hGuCX5Su/?mid=EwFWzYbK",
+      "match_id": "indiana-pacers-YPohMUTt",
+      "league": ""
+    },
+    {
+      "home_team": "Denver Nuggets",
+      "away_team": "Sacramento Kings",
+      "score": "-",
+      "status": "23:00",
+      "match_url": "https://www.flashscore.co/partido/baloncesto/denver-nuggets-CxvW27TI/sacramento-kings-CvwE1OCB/?mid=bBj3VBMs",
+      "match_id": "denver-nuggets-CxvW27TI",
+      "league": ""
+        
+    }
+  ]
+}

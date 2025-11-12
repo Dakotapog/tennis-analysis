@@ -1,0 +1,1084 @@
+{
+  "analysis_date": "2025-11-12 16:09:52",
+  "total_matches_analyzed": 1,
+  "analyses": [
+    {
+      "match_info": {
+        "home_team": "Charlotte Hornets",
+        "away_team": "Milwaukee Bucks",
+        "score": "-",
+        "status": "19:00",
+        "match_url": "https://www.flashscore.co/partido/baloncesto/charlotte-hornets-xftMikUg/milwaukee-bucks-QTBEW6rC/?mid=6yfBTkif",
+        "match_id": "charlotte-hornets-xftMikUg",
+        "league": ""
+      },
+      "h2h_history": [
+        {
+          "home_team": "Charlotte Hornets",
+          "away_team": "Los Angeles Lakers",
+          "score": "111121 - 111121",
+          "date": "10.11.25",
+          "match_url": "https://www.flashscore.co/partido/baloncesto/charlotte-hornets-xftMikUg/los-angeles-lakers-ngegZ8bg/?mid=4UtDkz9k"
+        },
+        {
+          "home_team": "Miami Heat",
+          "away_team": "Charlotte Hornets",
+          "score": "126108 - 126108",
+          "date": "07.11.25",
+          "match_url": "https://www.flashscore.co/partido/baloncesto/charlotte-hornets-xftMikUg/miami-heat-CQ7AXnT5/?mid=AgnroTK8"
+        },
+        {
+          "home_team": "New Orleans Pelicans",
+          "away_team": "Charlotte Hornets",
+          "score": "116112 - 116112",
+          "date": "04.11.25",
+          "match_url": "https://www.flashscore.co/partido/baloncesto/charlotte-hornets-xftMikUg/new-orleans-pelicans-U3yc9SkP/?mid=vmFINo84"
+        },
+        {
+          "home_team": "Charlotte Hornets",
+          "away_team": "Utah Jazz",
+          "score": "126103 - 126103",
+          "date": "02.11.25",
+          "match_url": "https://www.flashscore.co/partido/baloncesto/charlotte-hornets-xftMikUg/utah-jazz-hGuCX5Su/?mid=CvKo40BE"
+        },
+        {
+          "home_team": "Charlotte Hornets",
+          "away_team": "Minnesota Timberwolves",
+          "score": "105122 - 105122",
+          "date": "01.11.25",
+          "match_url": "https://www.flashscore.co/partido/baloncesto/charlotte-hornets-xftMikUg/minnesota-timberwolves-KjBIVQcI/?mid=pCjPTJZ1"
+        },
+        {
+          "home_team": "Charlotte Hornets",
+          "away_team": "Orlando Magic",
+          "score": "107123 - 107123",
+          "date": "30.10.25",
+          "match_url": "https://www.flashscore.co/partido/baloncesto/charlotte-hornets-xftMikUg/orlando-magic-QZMS36Dn/?mid=OrNsHtjd"
+        },
+        {
+          "home_team": "Miami Heat",
+          "away_team": "Charlotte Hornets",
+          "score": "144117 - 144117",
+          "date": "28.10.25",
+          "match_url": "https://www.flashscore.co/partido/baloncesto/charlotte-hornets-xftMikUg/miami-heat-CQ7AXnT5/?mid=0p2vU7Cm"
+        },
+        {
+          "home_team": "Washington Wizards",
+          "away_team": "Charlotte Hornets",
+          "score": "113139 - 113139",
+          "date": "26.10.25",
+          "match_url": "https://www.flashscore.co/partido/baloncesto/charlotte-hornets-xftMikUg/washington-wizards-W6vGWPsn/?mid=63hllWbe"
+        },
+        {
+          "home_team": "Philadelphia 76ers",
+          "away_team": "Charlotte Hornets",
+          "score": "125121 - 125121",
+          "date": "25.10.25",
+          "match_url": "https://www.flashscore.co/partido/baloncesto/charlotte-hornets-xftMikUg/philadelphia-76ers-vwRW2QSh/?mid=fonYeN04"
+        },
+        {
+          "home_team": "Charlotte Hornets",
+          "away_team": "Brooklyn Nets",
+          "score": "136117 - 136117",
+          "date": "22.10.25",
+          "match_url": "https://www.flashscore.co/partido/baloncesto/brooklyn-nets-bsAMUpDO/charlotte-hornets-xftMikUg/?mid=08GSNxkL"
+        }
+      ],
+      "h2h_with_player_stats": [
+        {
+          "match_info": {
+            "home_team": "Charlotte Hornets",
+            "away_team": "Los Angeles Lakers",
+            "score": "111121 - 111121",
+            "date": "10.11.25",
+            "match_url": "https://www.flashscore.co/partido/baloncesto/charlotte-hornets-xftMikUg/los-angeles-lakers-ngegZ8bg/?mid=4UtDkz9k"
+          },
+          "home_team_stats": [
+            {
+              "player_name": "Doncic L.",
+              "team": "Charlotte Hornets",
+              "minutes": "38:25",
+              "points": 38,
+              "rebounds": 6,
+              "assists": 7
+            },
+            {
+              "player_name": "Bridges M.",
+              "team": "Charlotte Hornets",
+              "minutes": "40:01",
+              "points": 34,
+              "rebounds": 8,
+              "assists": 5
+            },
+            {
+              "player_name": "Reaves A.",
+              "team": "Charlotte Hornets",
+              "minutes": "29:25",
+              "points": 24,
+              "rebounds": 5,
+              "assists": 7
+            },
+            {
+              "player_name": "Hachimura R.",
+              "team": "Charlotte Hornets",
+              "minutes": "35:36",
+              "points": 21,
+              "rebounds": 3,
+              "assists": 1
+            },
+            {
+              "player_name": "Knueppel K.",
+              "team": "Charlotte Hornets",
+              "minutes": "38:04",
+              "points": 19,
+              "rebounds": 10,
+              "assists": 9
+            }
+          ],
+          "away_team_stats": [],
+          "all_player_stats": [
+            {
+              "player_name": "Doncic L.",
+              "team": "Charlotte Hornets",
+              "minutes": "38:25",
+              "points": 38,
+              "rebounds": 6,
+              "assists": 7
+            },
+            {
+              "player_name": "Bridges M.",
+              "team": "Charlotte Hornets",
+              "minutes": "40:01",
+              "points": 34,
+              "rebounds": 8,
+              "assists": 5
+            },
+            {
+              "player_name": "Reaves A.",
+              "team": "Charlotte Hornets",
+              "minutes": "29:25",
+              "points": 24,
+              "rebounds": 5,
+              "assists": 7
+            },
+            {
+              "player_name": "Hachimura R.",
+              "team": "Charlotte Hornets",
+              "minutes": "35:36",
+              "points": 21,
+              "rebounds": 3,
+              "assists": 1
+            },
+            {
+              "player_name": "Knueppel K.",
+              "team": "Charlotte Hornets",
+              "minutes": "38:04",
+              "points": 19,
+              "rebounds": 10,
+              "assists": 9
+            }
+          ],
+          "total_players": 5,
+          "teams_analyzed": {
+            "home": "Charlotte Hornets",
+            "away": null
+          }
+        },
+        {
+          "match_info": {
+            "home_team": "Miami Heat",
+            "away_team": "Charlotte Hornets",
+            "score": "126108 - 126108",
+            "date": "07.11.25",
+            "match_url": "https://www.flashscore.co/partido/baloncesto/charlotte-hornets-xftMikUg/miami-heat-CQ7AXnT5/?mid=AgnroTK8"
+          },
+          "home_team_stats": [],
+          "away_team_stats": [
+            {
+              "player_name": "Powell N.",
+              "team": "Charlotte Hornets",
+              "minutes": "27:25",
+              "points": 25,
+              "rebounds": 4,
+              "assists": 3
+            },
+            {
+              "player_name": "Wiggins A.",
+              "team": "Charlotte Hornets",
+              "minutes": "36:28",
+              "points": 22,
+              "rebounds": 4,
+              "assists": 4
+            },
+            {
+              "player_name": "Mann T.",
+              "team": "Charlotte Hornets",
+              "minutes": "35:23",
+              "points": 20,
+              "rebounds": 9,
+              "assists": 7
+            },
+            {
+              "player_name": "Larsson P.",
+              "team": "Charlotte Hornets",
+              "minutes": "26:48",
+              "points": 19,
+              "rebounds": 4,
+              "assists": 2
+            },
+            {
+              "player_name": "Jaquez Jr. J.",
+              "team": "Charlotte Hornets",
+              "minutes": "32:40",
+              "points": 18,
+              "rebounds": 8,
+              "assists": 9
+            }
+          ],
+          "all_player_stats": [
+            {
+              "player_name": "Powell N.",
+              "team": "Charlotte Hornets",
+              "minutes": "27:25",
+              "points": 25,
+              "rebounds": 4,
+              "assists": 3
+            },
+            {
+              "player_name": "Wiggins A.",
+              "team": "Charlotte Hornets",
+              "minutes": "36:28",
+              "points": 22,
+              "rebounds": 4,
+              "assists": 4
+            },
+            {
+              "player_name": "Mann T.",
+              "team": "Charlotte Hornets",
+              "minutes": "35:23",
+              "points": 20,
+              "rebounds": 9,
+              "assists": 7
+            },
+            {
+              "player_name": "Larsson P.",
+              "team": "Charlotte Hornets",
+              "minutes": "26:48",
+              "points": 19,
+              "rebounds": 4,
+              "assists": 2
+            },
+            {
+              "player_name": "Jaquez Jr. J.",
+              "team": "Charlotte Hornets",
+              "minutes": "32:40",
+              "points": 18,
+              "rebounds": 8,
+              "assists": 9
+            }
+          ],
+          "total_players": 5,
+          "teams_analyzed": {
+            "home": null,
+            "away": "Charlotte Hornets"
+          }
+        },
+        {
+          "match_info": {
+            "home_team": "New Orleans Pelicans",
+            "away_team": "Charlotte Hornets",
+            "score": "116112 - 116112",
+            "date": "04.11.25",
+            "match_url": "https://www.flashscore.co/partido/baloncesto/charlotte-hornets-xftMikUg/new-orleans-pelicans-U3yc9SkP/?mid=vmFINo84"
+          },
+          "home_team_stats": [],
+          "away_team_stats": [
+            {
+              "player_name": "Murphy T.",
+              "team": "Charlotte Hornets",
+              "minutes": "37:14",
+              "points": 21,
+              "rebounds": 3,
+              "assists": 3
+            },
+            {
+              "player_name": "Alvarado J.",
+              "team": "Charlotte Hornets",
+              "minutes": "30:33",
+              "points": 18,
+              "rebounds": 3,
+              "assists": 6
+            },
+            {
+              "player_name": "Bey S.",
+              "team": "Charlotte Hornets",
+              "minutes": "26:47",
+              "points": 17,
+              "rebounds": 4,
+              "assists": 0
+            },
+            {
+              "player_name": "Sexton C.",
+              "team": "Charlotte Hornets",
+              "minutes": "29:39",
+              "points": 17,
+              "rebounds": 0,
+              "assists": 5
+            },
+            {
+              "player_name": "Matkovic K.",
+              "team": "Charlotte Hornets",
+              "minutes": "15:04",
+              "points": 13,
+              "rebounds": 6,
+              "assists": 2
+            }
+          ],
+          "all_player_stats": [
+            {
+              "player_name": "Murphy T.",
+              "team": "Charlotte Hornets",
+              "minutes": "37:14",
+              "points": 21,
+              "rebounds": 3,
+              "assists": 3
+            },
+            {
+              "player_name": "Alvarado J.",
+              "team": "Charlotte Hornets",
+              "minutes": "30:33",
+              "points": 18,
+              "rebounds": 3,
+              "assists": 6
+            },
+            {
+              "player_name": "Bey S.",
+              "team": "Charlotte Hornets",
+              "minutes": "26:47",
+              "points": 17,
+              "rebounds": 4,
+              "assists": 0
+            },
+            {
+              "player_name": "Sexton C.",
+              "team": "Charlotte Hornets",
+              "minutes": "29:39",
+              "points": 17,
+              "rebounds": 0,
+              "assists": 5
+            },
+            {
+              "player_name": "Matkovic K.",
+              "team": "Charlotte Hornets",
+              "minutes": "15:04",
+              "points": 13,
+              "rebounds": 6,
+              "assists": 2
+            }
+          ],
+          "total_players": 5,
+          "teams_analyzed": {
+            "home": null,
+            "away": "Charlotte Hornets"
+          }
+        },
+        {
+          "match_info": {
+            "home_team": "Charlotte Hornets",
+            "away_team": "Utah Jazz",
+            "score": "126103 - 126103",
+            "date": "02.11.25",
+            "match_url": "https://www.flashscore.co/partido/baloncesto/charlotte-hornets-xftMikUg/utah-jazz-hGuCX5Su/?mid=CvKo40BE"
+          },
+          "home_team_stats": [
+            {
+              "player_name": "Markkanen L.",
+              "team": "Charlotte Hornets",
+              "minutes": "32:51",
+              "points": 29,
+              "rebounds": 7,
+              "assists": 3
+            },
+            {
+              "player_name": "George K.",
+              "team": "Charlotte Hornets",
+              "minutes": "33:15",
+              "points": 25,
+              "rebounds": 2,
+              "assists": 7
+            },
+            {
+              "player_name": "Diabate M.",
+              "team": "Charlotte Hornets",
+              "minutes": "22:16",
+              "points": 17,
+              "rebounds": 12,
+              "assists": 0
+            },
+            {
+              "player_name": "James S.",
+              "team": "Charlotte Hornets",
+              "minutes": "28:49",
+              "points": 15,
+              "rebounds": 5,
+              "assists": 3
+            },
+            {
+              "player_name": "Hendricks T.",
+              "team": "Charlotte Hornets",
+              "minutes": "25:08",
+              "points": 14,
+              "rebounds": 7,
+              "assists": 1
+            }
+          ],
+          "away_team_stats": [],
+          "all_player_stats": [
+            {
+              "player_name": "Markkanen L.",
+              "team": "Charlotte Hornets",
+              "minutes": "32:51",
+              "points": 29,
+              "rebounds": 7,
+              "assists": 3
+            },
+            {
+              "player_name": "George K.",
+              "team": "Charlotte Hornets",
+              "minutes": "33:15",
+              "points": 25,
+              "rebounds": 2,
+              "assists": 7
+            },
+            {
+              "player_name": "Diabate M.",
+              "team": "Charlotte Hornets",
+              "minutes": "22:16",
+              "points": 17,
+              "rebounds": 12,
+              "assists": 0
+            },
+            {
+              "player_name": "James S.",
+              "team": "Charlotte Hornets",
+              "minutes": "28:49",
+              "points": 15,
+              "rebounds": 5,
+              "assists": 3
+            },
+            {
+              "player_name": "Hendricks T.",
+              "team": "Charlotte Hornets",
+              "minutes": "25:08",
+              "points": 14,
+              "rebounds": 7,
+              "assists": 1
+            }
+          ],
+          "total_players": 5,
+          "teams_analyzed": {
+            "home": "Charlotte Hornets",
+            "away": null
+          }
+        },
+        {
+          "match_info": {
+            "home_team": "Charlotte Hornets",
+            "away_team": "Minnesota Timberwolves",
+            "score": "105122 - 105122",
+            "date": "01.11.25",
+            "match_url": "https://www.flashscore.co/partido/baloncesto/charlotte-hornets-xftMikUg/minnesota-timberwolves-KjBIVQcI/?mid=pCjPTJZ1"
+          },
+          "home_team_stats": [
+            {
+              "player_name": "Randle J.",
+              "team": "Charlotte Hornets",
+              "minutes": "",
+              "points": 30,
+              "rebounds": 7,
+              "assists": 4
+            },
+            {
+              "player_name": "Ball La.",
+              "team": "Charlotte Hornets",
+              "minutes": "",
+              "points": 18,
+              "rebounds": 7,
+              "assists": 8
+            },
+            {
+              "player_name": "DiVincenzo D.",
+              "team": "Charlotte Hornets",
+              "minutes": "",
+              "points": 18,
+              "rebounds": 3,
+              "assists": 4
+            },
+            {
+              "player_name": "Reid N.",
+              "team": "Charlotte Hornets",
+              "minutes": "",
+              "points": 18,
+              "rebounds": 3,
+              "assists": 1
+            },
+            {
+              "player_name": "Gobert R.",
+              "team": "Charlotte Hornets",
+              "minutes": "",
+              "points": 14,
+              "rebounds": 15,
+              "assists": 5
+            }
+          ],
+          "away_team_stats": [],
+          "all_player_stats": [
+            {
+              "player_name": "Randle J.",
+              "team": "Charlotte Hornets",
+              "minutes": "",
+              "points": 30,
+              "rebounds": 7,
+              "assists": 4
+            },
+            {
+              "player_name": "Ball La.",
+              "team": "Charlotte Hornets",
+              "minutes": "",
+              "points": 18,
+              "rebounds": 7,
+              "assists": 8
+            },
+            {
+              "player_name": "DiVincenzo D.",
+              "team": "Charlotte Hornets",
+              "minutes": "",
+              "points": 18,
+              "rebounds": 3,
+              "assists": 4
+            },
+            {
+              "player_name": "Reid N.",
+              "team": "Charlotte Hornets",
+              "minutes": "",
+              "points": 18,
+              "rebounds": 3,
+              "assists": 1
+            },
+            {
+              "player_name": "Gobert R.",
+              "team": "Charlotte Hornets",
+              "minutes": "",
+              "points": 14,
+              "rebounds": 15,
+              "assists": 5
+            }
+          ],
+          "total_players": 5,
+          "teams_analyzed": {
+            "home": "Charlotte Hornets",
+            "away": null
+          }
+        },
+        {
+          "match_info": {
+            "home_team": "Charlotte Hornets",
+            "away_team": "Orlando Magic",
+            "score": "107123 - 107123",
+            "date": "30.10.25",
+            "match_url": "https://www.flashscore.co/partido/baloncesto/charlotte-hornets-xftMikUg/orlando-magic-QZMS36Dn/?mid=OrNsHtjd"
+          },
+          "home_team_stats": [
+            {
+              "player_name": "Wagner F.",
+              "team": "Charlotte Hornets",
+              "minutes": "34:14",
+              "points": 21,
+              "rebounds": 5,
+              "assists": 3
+            },
+            {
+              "player_name": "Banchero P.",
+              "team": "Charlotte Hornets",
+              "minutes": "32:44",
+              "points": 20,
+              "rebounds": 9,
+              "assists": 9
+            },
+            {
+              "player_name": "Black A.",
+              "team": "Charlotte Hornets",
+              "minutes": "30:38",
+              "points": 20,
+              "rebounds": 1,
+              "assists": 2
+            },
+            {
+              "player_name": "da Silva T.",
+              "team": "Charlotte Hornets",
+              "minutes": "22:24",
+              "points": 19,
+              "rebounds": 3,
+              "assists": 1
+            },
+            {
+              "player_name": "Carter W.",
+              "team": "Charlotte Hornets",
+              "minutes": "26:53",
+              "points": 18,
+              "rebounds": 8,
+              "assists": 3
+            }
+          ],
+          "away_team_stats": [],
+          "all_player_stats": [
+            {
+              "player_name": "Wagner F.",
+              "team": "Charlotte Hornets",
+              "minutes": "34:14",
+              "points": 21,
+              "rebounds": 5,
+              "assists": 3
+            },
+            {
+              "player_name": "Banchero P.",
+              "team": "Charlotte Hornets",
+              "minutes": "32:44",
+              "points": 20,
+              "rebounds": 9,
+              "assists": 9
+            },
+            {
+              "player_name": "Black A.",
+              "team": "Charlotte Hornets",
+              "minutes": "30:38",
+              "points": 20,
+              "rebounds": 1,
+              "assists": 2
+            },
+            {
+              "player_name": "da Silva T.",
+              "team": "Charlotte Hornets",
+              "minutes": "22:24",
+              "points": 19,
+              "rebounds": 3,
+              "assists": 1
+            },
+            {
+              "player_name": "Carter W.",
+              "team": "Charlotte Hornets",
+              "minutes": "26:53",
+              "points": 18,
+              "rebounds": 8,
+              "assists": 3
+            }
+          ],
+          "total_players": 5,
+          "teams_analyzed": {
+            "home": "Charlotte Hornets",
+            "away": null
+          }
+        },
+        {
+          "match_info": {
+            "home_team": "Miami Heat",
+            "away_team": "Charlotte Hornets",
+            "score": "144117 - 144117",
+            "date": "28.10.25",
+            "match_url": "https://www.flashscore.co/partido/baloncesto/charlotte-hornets-xftMikUg/miami-heat-CQ7AXnT5/?mid=0p2vU7Cm"
+          },
+          "home_team_stats": [],
+          "away_team_stats": [
+            {
+              "player_name": "Adebayo B.",
+              "team": "Charlotte Hornets",
+              "minutes": "30:16",
+              "points": 26,
+              "rebounds": 6,
+              "assists": 2
+            },
+            {
+              "player_name": "Ware K.",
+              "team": "Charlotte Hornets",
+              "minutes": "26:43",
+              "points": 14,
+              "rebounds": 9,
+              "assists": 1
+            },
+            {
+              "player_name": "Fontecchio S.",
+              "team": "Charlotte Hornets",
+              "minutes": "18:56",
+              "points": 10,
+              "rebounds": 0,
+              "assists": 3
+            },
+            {
+              "player_name": "Jovic N.",
+              "team": "Charlotte Hornets",
+              "minutes": "21:58",
+              "points": 10,
+              "rebounds": 6,
+              "assists": 2
+            },
+            {
+              "player_name": "Kalkbrenner R.",
+              "team": "Charlotte Hornets",
+              "minutes": "30:54",
+              "points": 10,
+              "rebounds": 6,
+              "assists": 0
+            }
+          ],
+          "all_player_stats": [
+            {
+              "player_name": "Adebayo B.",
+              "team": "Charlotte Hornets",
+              "minutes": "30:16",
+              "points": 26,
+              "rebounds": 6,
+              "assists": 2
+            },
+            {
+              "player_name": "Ware K.",
+              "team": "Charlotte Hornets",
+              "minutes": "26:43",
+              "points": 14,
+              "rebounds": 9,
+              "assists": 1
+            },
+            {
+              "player_name": "Fontecchio S.",
+              "team": "Charlotte Hornets",
+              "minutes": "18:56",
+              "points": 10,
+              "rebounds": 0,
+              "assists": 3
+            },
+            {
+              "player_name": "Jovic N.",
+              "team": "Charlotte Hornets",
+              "minutes": "21:58",
+              "points": 10,
+              "rebounds": 6,
+              "assists": 2
+            },
+            {
+              "player_name": "Kalkbrenner R.",
+              "team": "Charlotte Hornets",
+              "minutes": "30:54",
+              "points": 10,
+              "rebounds": 6,
+              "assists": 0
+            }
+          ],
+          "total_players": 5,
+          "teams_analyzed": {
+            "home": null,
+            "away": "Charlotte Hornets"
+          }
+        },
+        {
+          "match_info": {
+            "home_team": "Washington Wizards",
+            "away_team": "Charlotte Hornets",
+            "score": "113139 - 113139",
+            "date": "26.10.25",
+            "match_url": "https://www.flashscore.co/partido/baloncesto/charlotte-hornets-xftMikUg/washington-wizards-W6vGWPsn/?mid=63hllWbe"
+          },
+          "home_team_stats": [],
+          "away_team_stats": [
+            {
+              "player_name": "McCollum C.",
+              "team": "Charlotte Hornets",
+              "minutes": "29:57",
+              "points": 24,
+              "rebounds": 6,
+              "assists": 5
+            },
+            {
+              "player_name": "Sarr A.",
+              "team": "Charlotte Hornets",
+              "minutes": "25:09",
+              "points": 21,
+              "rebounds": 4,
+              "assists": 5
+            },
+            {
+              "player_name": "Johnson T.",
+              "team": "Charlotte Hornets",
+              "minutes": "29:04",
+              "points": 18,
+              "rebounds": 4,
+              "assists": 2
+            },
+            {
+              "player_name": "Middleton K.",
+              "team": "Charlotte Hornets",
+              "minutes": "20:17",
+              "points": 11,
+              "rebounds": 3,
+              "assists": 1
+            },
+            {
+              "player_name": "Whitmore C.",
+              "team": "Charlotte Hornets",
+              "minutes": "20:32",
+              "points": 10,
+              "rebounds": 4,
+              "assists": 2
+            }
+          ],
+          "all_player_stats": [
+            {
+              "player_name": "McCollum C.",
+              "team": "Charlotte Hornets",
+              "minutes": "29:57",
+              "points": 24,
+              "rebounds": 6,
+              "assists": 5
+            },
+            {
+              "player_name": "Sarr A.",
+              "team": "Charlotte Hornets",
+              "minutes": "25:09",
+              "points": 21,
+              "rebounds": 4,
+              "assists": 5
+            },
+            {
+              "player_name": "Johnson T.",
+              "team": "Charlotte Hornets",
+              "minutes": "29:04",
+              "points": 18,
+              "rebounds": 4,
+              "assists": 2
+            },
+            {
+              "player_name": "Middleton K.",
+              "team": "Charlotte Hornets",
+              "minutes": "20:17",
+              "points": 11,
+              "rebounds": 3,
+              "assists": 1
+            },
+            {
+              "player_name": "Whitmore C.",
+              "team": "Charlotte Hornets",
+              "minutes": "20:32",
+              "points": 10,
+              "rebounds": 4,
+              "assists": 2
+            }
+          ],
+          "total_players": 5,
+          "teams_analyzed": {
+            "home": null,
+            "away": "Charlotte Hornets"
+          }
+        },
+        {
+          "match_info": {
+            "home_team": "Philadelphia 76ers",
+            "away_team": "Charlotte Hornets",
+            "score": "125121 - 125121",
+            "date": "25.10.25",
+            "match_url": "https://www.flashscore.co/partido/baloncesto/charlotte-hornets-xftMikUg/philadelphia-76ers-vwRW2QSh/?mid=fonYeN04"
+          },
+          "home_team_stats": [],
+          "away_team_stats": [
+            {
+              "player_name": "Maxey T.",
+              "team": "Charlotte Hornets",
+              "minutes": "41:45",
+              "points": 28,
+              "rebounds": 6,
+              "assists": 9
+            },
+            {
+              "player_name": "Grimes Q.",
+              "team": "Charlotte Hornets",
+              "minutes": "30:16",
+              "points": 24,
+              "rebounds": 3,
+              "assists": 4
+            },
+            {
+              "player_name": "Embiid J.",
+              "team": "Charlotte Hornets",
+              "minutes": "20:07",
+              "points": 20,
+              "rebounds": 2,
+              "assists": 4
+            },
+            {
+              "player_name": "Oubre K. J.",
+              "team": "Charlotte Hornets",
+              "minutes": "37:26",
+              "points": 19,
+              "rebounds": 1,
+              "assists": 1
+            },
+            {
+              "player_name": "Edgecombe Jr. V.",
+              "team": "Charlotte Hornets",
+              "minutes": "39:36",
+              "points": 15,
+              "rebounds": 6,
+              "assists": 8
+            }
+          ],
+          "all_player_stats": [
+            {
+              "player_name": "Maxey T.",
+              "team": "Charlotte Hornets",
+              "minutes": "41:45",
+              "points": 28,
+              "rebounds": 6,
+              "assists": 9
+            },
+            {
+              "player_name": "Grimes Q.",
+              "team": "Charlotte Hornets",
+              "minutes": "30:16",
+              "points": 24,
+              "rebounds": 3,
+              "assists": 4
+            },
+            {
+              "player_name": "Embiid J.",
+              "team": "Charlotte Hornets",
+              "minutes": "20:07",
+              "points": 20,
+              "rebounds": 2,
+              "assists": 4
+            },
+            {
+              "player_name": "Oubre K. J.",
+              "team": "Charlotte Hornets",
+              "minutes": "37:26",
+              "points": 19,
+              "rebounds": 1,
+              "assists": 1
+            },
+            {
+              "player_name": "Edgecombe Jr. V.",
+              "team": "Charlotte Hornets",
+              "minutes": "39:36",
+              "points": 15,
+              "rebounds": 6,
+              "assists": 8
+            }
+          ],
+          "total_players": 5,
+          "teams_analyzed": {
+            "home": null,
+            "away": "Charlotte Hornets"
+          }
+        },
+        {
+          "match_info": {
+            "home_team": "Charlotte Hornets",
+            "away_team": "Brooklyn Nets",
+            "score": "136117 - 136117",
+            "date": "22.10.25",
+            "match_url": "https://www.flashscore.co/partido/baloncesto/brooklyn-nets-bsAMUpDO/charlotte-hornets-xftMikUg/?mid=08GSNxkL"
+          },
+          "home_team_stats": [
+            {
+              "player_name": "Miller B.",
+              "team": "Charlotte Hornets",
+              "minutes": "30:30",
+              "points": 25,
+              "rebounds": 0,
+              "assists": 7
+            },
+            {
+              "player_name": "Claxton N.",
+              "team": "Charlotte Hornets",
+              "minutes": "22:59",
+              "points": 17,
+              "rebounds": 4,
+              "assists": 2
+            },
+            {
+              "player_name": "Thomas C.",
+              "team": "Charlotte Hornets",
+              "minutes": "24:04",
+              "points": 15,
+              "rebounds": 1,
+              "assists": 2
+            },
+            {
+              "player_name": "Demin E.",
+              "team": "Charlotte Hornets",
+              "minutes": "22:19",
+              "points": 14,
+              "rebounds": 5,
+              "assists": 2
+            },
+            {
+              "player_name": "Sharpe D.",
+              "team": "Charlotte Hornets",
+              "minutes": "14:04",
+              "points": 14,
+              "rebounds": 4,
+              "assists": 0
+            }
+          ],
+          "away_team_stats": [],
+          "all_player_stats": [
+            {
+              "player_name": "Miller B.",
+              "team": "Charlotte Hornets",
+              "minutes": "30:30",
+              "points": 25,
+              "rebounds": 0,
+              "assists": 7
+            },
+            {
+              "player_name": "Claxton N.",
+              "team": "Charlotte Hornets",
+              "minutes": "22:59",
+              "points": 17,
+              "rebounds": 4,
+              "assists": 2
+            },
+            {
+              "player_name": "Thomas C.",
+              "team": "Charlotte Hornets",
+              "minutes": "24:04",
+              "points": 15,
+              "rebounds": 1,
+              "assists": 2
+            },
+            {
+              "player_name": "Demin E.",
+              "team": "Charlotte Hornets",
+              "minutes": "22:19",
+              "points": 14,
+              "rebounds": 5,
+              "assists": 2
+            },
+            {
+              "player_name": "Sharpe D.",
+              "team": "Charlotte Hornets",
+              "minutes": "14:04",
+              "points": 14,
+              "rebounds": 4,
+              "assists": 0
+            }
+          ],
+          "total_players": 5,
+          "teams_analyzed": {
+            "home": "Charlotte Hornets",
+            "away": null
+          }
+        }
+      ],
+      "analysis_date": "2025-11-12 16:07:43",
+      "total_h2h_found": 10,
+      "total_stats_extracted": 10
+    }
+  ]
+}
