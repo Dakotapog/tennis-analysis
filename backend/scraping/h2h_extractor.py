@@ -185,7 +185,7 @@ class H2HExtractor:
                                 info = self.data_parser.extract_tournament_info(tournament_name)
                                 match.update({
                                     'torneo_nombre': info['nombre'],
-                                    'tipo_cancha': info['superficie'],
+                                    'tipo_cancha': match.get('superficie') or info['superficie'],
                                     'pais': info['pais'],
                                     'torneo_completo': info['completo']
                                 })
@@ -195,12 +195,20 @@ class H2HExtractor:
             
             # Filtrar partidos válidos
             valid_matches = [m for m in all_matches if m.get('match_url')]
-            
+
             if not valid_matches:
                 logger.error("❌ No se encontraron partidos con match_url válidas")
                 return False
-            
-            self.matches_queue = valid_matches[:self.total_matches_to_process]
+
+            # Filtrar Roland Garros — Grand Slam arcilla (excluir calificación)
+            roland_garros = [m for m in valid_matches
+                             if 'French Open' in m.get('torneo_completo', '')
+                             and 'Qualification' not in m.get('torneo_completo', '')]
+            target_matches = roland_garros if roland_garros else valid_matches
+            if roland_garros:
+                logger.info(f"   🎾 Modo Roland Garros: {len(roland_garros)} partidos del Grand Slam arcilla")
+
+            self.matches_queue = target_matches[:self.total_matches_to_process]
             logger.info(f"✅ Cola de procesamiento creada con {len(self.matches_queue)} partidos.")
             
             # Mostrar preview de los primeros 3
@@ -325,7 +333,7 @@ class H2HExtractor:
             # 8. Análisis de rivalidad (delegar a RivalryAnalyzer)
             current_context = {
                 'country': match_data.get('pais', 'N/A'),
-                'surface': match_data.get('tipo_cancha', 'N/A')
+                'surface': match_data.get('superficie') or match_data.get('tipo_cancha', 'N/A')
             }
 
             rivalry_analysis = self.rivalry_analyzer.analyze_rivalry(

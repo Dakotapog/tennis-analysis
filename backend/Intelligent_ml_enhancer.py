@@ -25,43 +25,7 @@ warnings.filterwarnings('ignore')
 import sys
 
 # === LOGGER INTELIGENTE ===
-class SmartLogger:
-    """Logger personalizado con niveles y formatos especiales."""
-    def __init__(self, name='SmartLogger', level=logging.INFO):
-        self.logger = logging.getLogger(name)
-        self.logger.setLevel(level)
-        if not self.logger.handlers:
-            handler = logging.StreamHandler(sys.stdout)
-            # Un formato más limpio y visual
-            formatter = logging.Formatter('%(asctime)s - %(name)s - %(message)s', datefmt='%H:%M:%S')
-            handler.setFormatter(formatter)
-            self.logger.addHandler(handler)
-
-    def info(self, msg, *args, **kwargs):
-        self.logger.info(msg, *args, **kwargs)
-
-    def warning(self, msg, *args, **kwargs):
-        self.logger.warning(f"⚠️  {msg}", *args, **kwargs)
-
-    def error(self, msg, *args, **kwargs):
-        self.logger.error(f"❌ {msg}", *args, **kwargs)
-
-    def critical(self, msg, *args, **kwargs):
-        self.logger.critical(f"🚨 {msg}", *args, **kwargs)
-
-    def debug(self, msg, *args, **kwargs):
-        self.logger.debug(msg, *args, **kwargs)
-
-    def success(self, msg):
-        self.info(f"✅ {msg}")
-
-    def section(self, msg):
-        self.info("\n" + "="*60)
-        self.info(f"🚀 {msg.upper()}")
-        self.info("="*60)
-
-    def progress(self, msg):
-        self.info(f"⏳ {msg}...")
+from utils.logger import SmartLogger  # Fuente única de verdad (D-09 resuelto)
 
 # === DEPENDENCIAS DE IA REVOLUCIONARIAS ===
 from sklearn.impute import KNNImputer

@@ -3,6 +3,12 @@ from datetime import datetime
 import logging
 import math
 
+from analysis.erdos_graph import (
+    historial_a_partidos,
+    construir_grafo_victorias,
+    distancia_erdos,
+)
+
 logger = logging.getLogger(__name__)
 
 class RivalryAnalyzer:
@@ -808,19 +814,41 @@ class RivalryAnalyzer:
         }
 
         if not common_opponents:
+            # Erdős graph con solo historial propio (sin oponentes comunes clásicos)
+            try:
+                _p1_pts = historial_a_partidos(player1_history, player1_name)
+                _p2_pts = historial_a_partidos(player2_history, player2_name)
+                _grafo = construir_grafo_victorias(_p1_pts + _p2_pts)
+                _erdos = distancia_erdos(player1_name, player2_name, _grafo)
+            except Exception:
+                _erdos = {'erdos_score': 0.0, 'erdos_score_raw': 0.5, 'paths': [], 'n_paths': 0, 'max_depth_alcanzado': 0}
+
+            # Sin oponentes comunes directos, usar Erdős como señal transitiva única.
+            # erdos_score en [-1, +1]: positivo = P1 tiene ventaja, negativo = P2.
+            # Escala × 2.0: erdos_score 0.5 → 1.0 pts (rango típico rivalry_score ≈ 0-15).
+            _p1_erdos_co = 0.0
+            _p2_erdos_co = 0.0
+            if _erdos['n_paths'] > 0 and _erdos['erdos_score'] != 0.0:
+                _erdos_contrib = abs(_erdos['erdos_score']) * 2.0
+                if _erdos['erdos_score'] > 0:
+                    _p1_erdos_co = _erdos_contrib
+                else:
+                    _p2_erdos_co = _erdos_contrib
+
             return {
                 'player1_rank': player1_rank,
                 'player2_rank': player2_rank,
             'common_opponents_count': 0,
-            'p1_rivalry_score': 0,
-            'p2_rivalry_score': 0,
+            'p1_rivalry_score': _p1_erdos_co,
+            'p2_rivalry_score': _p2_erdos_co,
             'player1_advantages': [],
             'player2_advantages': [],
             'p1_surface_stats': p1_surface_stats,
             'p2_surface_stats': p2_surface_stats,
             'p1_location_stats': p1_location_stats,
             'p2_location_stats': p2_location_stats,
-            'prediction': self.generate_advanced_prediction(player1_info, player2_info, 0, 0, player1_name, player2_name, player1_history, player2_history, 0, 0, player1_form, player2_form, direct_h2h_matches, tournament_name, prediction_context, p1_elo, p2_elo, optimized_weights=optimized_weights)
+            'erdos_analysis': _erdos,
+            'prediction': self.generate_advanced_prediction(player1_info, player2_info, _p1_erdos_co, _p2_erdos_co, player1_name, player2_name, player1_history, player2_history, 0, 0, player1_form, player2_form, direct_h2h_matches, tournament_name, prediction_context, p1_elo, p2_elo, optimized_weights=optimized_weights)
         }
         
         player1_advantages = []
@@ -916,7 +944,28 @@ class RivalryAnalyzer:
             for adv in player2_advantages[:3]: logger.info(f"      • {adv['reason']} (Peso: {adv['weight']:.2f})")
         
         logger.info(f"   ⚖️ Peso de rivalidad P1: {p1_common_opponent_score:.2f}, P2: {p2_common_opponent_score:.2f}")
-        
+
+        # Erdős graph — ventaja transitiva a través del grafo completo de victorias
+        try:
+            _p1_pts = historial_a_partidos(player1_history, player1_name)
+            _p2_pts = historial_a_partidos(player2_history, player2_name)
+            _grafo = construir_grafo_victorias(_p1_pts + _p2_pts)
+            _erdos = distancia_erdos(player1_name, player2_name, _grafo)
+            logger.info(f"   🔢 Erdős score: {_erdos['erdos_score']:+.3f} ({_erdos['n_paths']} caminos, depth={_erdos['max_depth_alcanzado']})")
+        except Exception as _e:
+            logger.warning(f"   ⚠️ Erdős graph error (no crítico): {_e}")
+            _erdos = {'erdos_score': 0.0, 'erdos_score_raw': 0.5, 'paths': [], 'n_paths': 0, 'max_depth_alcanzado': 0}
+
+        # Erdős bonus: solo caminos de profundidad ≥2 aportan información nueva
+        # (los directos ya están capturados en p1/p2_common_opponent_score).
+        # Escala × 1.0: conservador para no sobreponderar sobre los paths directos.
+        if _erdos['n_paths'] > 0 and _erdos['max_depth_alcanzado'] >= 2:
+            _erdos_bonus = abs(_erdos['erdos_score']) * 1.0
+            if _erdos['erdos_score'] > 0:
+                p1_common_opponent_score += _erdos_bonus
+            elif _erdos['erdos_score'] < 0:
+                p2_common_opponent_score += _erdos_bonus
+
         return {
             'player1_rank': player1_rank,
             'player2_rank': player2_rank,
@@ -932,6 +981,7 @@ class RivalryAnalyzer:
             'p2_surface_stats': p2_surface_stats,
             'p1_location_stats': p1_location_stats,
             'p2_location_stats': p2_location_stats,
+            'erdos_analysis': _erdos,
             'prediction': self.generate_advanced_prediction(player1_info, player2_info, p1_common_opponent_score, p2_common_opponent_score, player1_name, player2_name, player1_history, player2_history, len(player1_advantages), len(player2_advantages), player1_form, player2_form, direct_h2h_matches, tournament_name, prediction_context, p1_elo, p2_elo, optimized_weights=optimized_weights)
         }
     
@@ -1009,8 +1059,28 @@ class RivalryAnalyzer:
                     'h2h_direct': 0.15, 'ranking_momentum': 0.20, 'elo_rating': 0.10, 'home_advantage': 0.05, 'strength_of_schedule': 0.0
                 }
             }
-            weights = weights_config.get(tournament_category, weights_config['default'])
+            weights = dict(weights_config.get(tournament_category, weights_config['default']))
             reasoning.append(f"LOG_WEIGHTS_STRATEGY: '{tournament_category}' -> {weights}")
+
+            # T14-03 — Ajuste de pesos por superficie (Nodo-14, Conexión 3)
+            # Alpha validado: ranking es menos predictivo en arcilla lenta (Parry @ 4.50 ganó).
+            # Erdős transitivity más fiable en clay → subir common_opponents.
+            # En grass más varianza → bajar common_opponents, subir form_recent.
+            _surf_adj = prediction_context.get('current_match_surface', '')
+            if _surf_adj == 'clay':
+                weights['common_opponents'] = round(weights['common_opponents'] + 0.08, 2)
+                weights['ranking_momentum']  = round(weights['ranking_momentum']  - 0.08, 2)
+                reasoning.append(
+                    f"LOG_WEIGHTS_SURFACE_CLAY: common_opp→{weights['common_opponents']} "
+                    f"ranking_mom→{weights['ranking_momentum']} (Erdős+clay, Nodo-14)"
+                )
+            elif _surf_adj == 'grass':
+                weights['common_opponents'] = round(weights['common_opponents'] - 0.05, 2)
+                weights['form_recent']       = round(weights['form_recent']       + 0.05, 2)
+                reasoning.append(
+                    f"LOG_WEIGHTS_SURFACE_GRASS: common_opp→{weights['common_opponents']} "
+                    f"form_recent→{weights['form_recent']} (alta varianza césped, Nodo-14)"
+                )
 
         # --- OBTENER MULTIPLICADORES Y SCORES BASE ---
 
@@ -1151,6 +1221,45 @@ class RivalryAnalyzer:
         raw_p1, days_since_p1 = calculate_raw_scores(player1_info, elo1, p1_streak_mult, p1_quality_mult, p1_diversity_mult, p1_rivalry_score, dominance_multiplier_p1, player1_form, p1_h2h_score, p1_schedule_score, p1_context)
         raw_p2, days_since_p2 = calculate_raw_scores(player2_info, elo2, p2_streak_mult, p2_quality_mult, p2_diversity_mult, p2_rivalry_score, dominance_multiplier_p2, player2_form, p2_h2h_score, p2_schedule_score, p2_context)
 
+        # --- MARKOV / PELT CHANGE-POINT (Nodo-02) ---
+        markov_analysis = None
+        try:
+            from analysis.markov_analyzer import (
+                detectar_cambio_regimen, calcular_factor_markov, extraer_resultados_binarios
+            )
+            resultados_p1 = extraer_resultados_binarios(player1_history, player1_name, n=20)
+            resultados_p2 = extraer_resultados_binarios(player2_history, player2_name, n=20)
+
+            markov_p1 = detectar_cambio_regimen(resultados_p1)
+            markov_p2 = detectar_cambio_regimen(resultados_p2)
+
+            # Factor simétrico: P1 y P2 se comparan entre sí
+            factor_p1 = calcular_factor_markov(markov_p1, markov_p2)
+            factor_p2 = calcular_factor_markov(markov_p2, markov_p1)
+
+            # Aplicar al componente form_recent (límite 300 se reaplica)
+            raw_p1['form_recent'] = min(raw_p1['form_recent'] * factor_p1, 300)
+            raw_p2['form_recent'] = min(raw_p2['form_recent'] * factor_p2, 300)
+
+            reasoning.append(
+                f"LOG_MARKOV_P1: estado={markov_p1['estado_actual']} "
+                f"momentum={markov_p1['momentum']} factor={factor_p1} "
+                f"wr_rec={markov_p1['win_rate_reciente']} cp={markov_p1['change_point']}"
+            )
+            reasoning.append(
+                f"LOG_MARKOV_P2: estado={markov_p2['estado_actual']} "
+                f"momentum={markov_p2['momentum']} factor={factor_p2} "
+                f"wr_rec={markov_p2['win_rate_reciente']} cp={markov_p2['change_point']}"
+            )
+
+            markov_analysis = {
+                'jugador1':       markov_p1,
+                'jugador2':       markov_p2,
+                'factor_markov':  factor_p1,  # perspectiva P1 vs P2
+            }
+        except Exception as _markov_err:
+            reasoning.append(f"LOG_MARKOV_ERROR: {_markov_err}")
+
         # --- LÓGICA DE PONDERACIÓN DINÁMICA (H2H Antiguo vs. Rivales Comunes) ---
         try:
             if direct_h2h_matches:
@@ -1278,5 +1387,6 @@ class RivalryAnalyzer:
                 'player1': breakdown_p1,
                 'player2': breakdown_p2
             },
-            'weights_used': weights
+            'weights_used': weights,
+            'markov_analysis': markov_analysis,
         }

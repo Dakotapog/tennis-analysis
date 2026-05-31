@@ -66,37 +66,7 @@ class MLConfig:
     ]
 
 # === SISTEMA DE LOGGING AVANZADO ===
-class SmartLogger:
-    def __init__(self):
-        self.timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        self.log_file = f'logs/intelligent_dataset_{self.timestamp}.log'
-        os.makedirs('logs', exist_ok=True)
-        
-        logging.basicConfig(
-            level=logging.INFO,
-            format='%(asctime)s - %(levelname)s - %(message)s',
-            handlers=[
-                logging.FileHandler(self.log_file, encoding='utf-8'),
-                logging.StreamHandler()
-            ]
-        )
-        self.logger = logging.getLogger(__name__)
-        
-    def critical_alert(self, message):
-        """Alerta crítica que requiere atención inmediata."""
-        self.logger.critical(f"🚨 CRÍTICO: {message}")
-        
-    def ml_warning(self, message):
-        """Advertencia específica de ML."""
-        self.logger.warning(f"🤖 ML: {message}")
-        
-    def success(self, message):
-        """Mensaje de éxito."""
-        self.logger.info(f"✅ {message}")
-        
-    def progress(self, message):
-        """Progreso del proceso."""
-        self.logger.info(f"🔄 {message}")
+from utils.logger import SmartLogger  # Fuente única de verdad (D-09 resuelto)
 
 # === ANALIZADOR INTELIGENTE DE DATOS ===
 class IntelligentDataAnalyzer:
@@ -576,7 +546,7 @@ class IntelligentDatasetGenerator:
     """Orquestador principal del sistema inteligente."""
     
     def __init__(self):
-        self.logger = SmartLogger()
+        self.logger = SmartLogger(log_to_file=True)
         self.analyzer = IntelligentDataAnalyzer(self.logger)
         self.feature_generator = IntelligentFeatureGenerator(self.logger)
         self.ml_validator = IntelligentMLValidator(self.logger)
@@ -586,16 +556,24 @@ class IntelligentDatasetGenerator:
     def _intelligent_imputation(self, df):
         """Imputa valores faltantes usando KNN para preservar relaciones."""
         self.logger.progress("Iniciando imputación inteligente con KNN...")
-        numeric_cols = df.select_dtypes(include=np.number).columns.tolist()
-        
-        if df[numeric_cols].isnull().sum().sum() == 0:
+        # Bug 1 fix: usar df_numeric directamente para evitar shape mismatch
+        # cuando hay columnas duplicadas o dtype edge-cases que hacen que
+        # columns=numeric_cols (lista) y el array transformado difieran en largo.
+        df_numeric = df.select_dtypes(include=np.number)
+
+        if df_numeric.isnull().sum().sum() == 0:
             self.logger.success("No hay datos numéricos faltantes para imputar.")
             return df
-            
+
         imputer = KNNImputer(n_neighbors=5, weights='distance')
-        
-        df_imputed_numeric = pd.DataFrame(imputer.fit_transform(df[numeric_cols]), columns=numeric_cols, index=df.index)
-        
+        imputed_array = imputer.fit_transform(df_numeric)
+
+        df_imputed_numeric = pd.DataFrame(
+            imputed_array,
+            columns=df_numeric.columns,  # siempre en sync con el array
+            index=df.index,
+        )
+
         df_final = df.copy()
         df_final.update(df_imputed_numeric)
 

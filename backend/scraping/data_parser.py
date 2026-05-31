@@ -31,7 +31,30 @@ class DataParser:
         """
         tipo_cancha = "Desconocida"
         pais = "N/A"
-        
+
+        # Guard: string vacío o None
+        if not tournament_string:
+            return {
+                'nombre': '',
+                'pais': pais,
+                'superficie': tipo_cancha,
+                'completo': ''
+            }
+
+        # Guard: string demasiado largo → garbage HTML de la página completa
+        MAX_TOURNAMENT_STRING_LENGTH = 120
+        if len(tournament_string) > MAX_TOURNAMENT_STRING_LENGTH:
+            logger.warning(
+                f"tournament_string sospechoso (len={len(tournament_string)}), "
+                f"posible garbage HTML. Retornando defaults."
+            )
+            return {
+                'nombre': 'Desconocido',
+                'pais': pais,
+                'superficie': tipo_cancha,
+                'completo': tournament_string
+            }
+
         # 1. Extraer país del paréntesis
         country_match = re.search(r'\((.*?)\)', tournament_string)
         if country_match:
@@ -94,7 +117,12 @@ class DataParser:
         }
         
         surface_lower = surface_text.lower().strip()
-        return surface_map.get(surface_lower, surface_text.capitalize())
+        if surface_lower in surface_map:
+            return surface_map[surface_lower]
+        # String demasiado largo para ser una superficie válida → garbage HTML
+        if len(surface_lower) > 30:
+            return "Desconocida"
+        return surface_text.capitalize()
     
     @staticmethod
     def determine_winner_from_result(resultado: str, jugador1: str, jugador2: str) -> str:
@@ -209,7 +237,7 @@ class DataParser:
         
         # Quitar espacios extras y caracteres especiales raros
         cleaned = ' '.join(name.strip().split())
-        return cleaned
+        return cleaned if cleaned else "N/A"
     
     @staticmethod
     def extract_location_from_title(title_attr: str) -> Dict[str, str]:
