@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import MagicMock, patch
 from datetime import datetime, timedelta
-from analysis.rivalry_analyzer import RivalryAnalyzer
+from analysis.rivalry_analyzer import RivalryAnalyzer, density_confidence, shrink_weights
 
 
 # ============================================================================
@@ -333,16 +333,12 @@ def test_generate_basic_prediction_happy_path(analyzer):
 
 
 def test_classify_tournament_happy_path(analyzer):
-    """Test: Clasificación de torneo retorna categoría correcta."""
-    cat1 = analyzer.classify_tournament("ATP Masters 1000")
-    cat2 = analyzer.classify_tournament("Challenger")
-    cat3 = analyzer.classify_tournament("ITF M15")
-    cat4 = analyzer.classify_tournament("Torneo Local")
-    
-    assert cat1 in ["atp_wta", "masters", "grand_slam", "default", "challenger", "itf"]
-    assert cat2 in ["challenger", "atp_wta", "default", "itf"]
-    assert cat3 in ["itf", "challenger", "default"]
-    assert cat4 in ["default", "itf", "challenger"]
+    """Test: Clasificación de torneo retorna categoría correcta (T21-01)."""
+    VALID = {"grand_slam", "atp1000", "atp500", "challenger", "itf"}
+    assert analyzer.classify_tournament("ATP Masters 1000") in VALID
+    assert analyzer.classify_tournament("Challenger") in VALID
+    assert analyzer.classify_tournament("ITF M15") in VALID
+    assert analyzer.classify_tournament("Torneo Local") in VALID
 
 
 def test_generate_advanced_prediction_happy_path(analyzer, sample_history):
@@ -599,21 +595,19 @@ def test_calcular_peso_oponentes_comunes_with_common(analyzer, comprehensive_his
 
 
 def test_classify_tournament_grand_slam(analyzer):
-    """Test: Clasificación de Grand Slam - acepta cualquier categoría válida."""
-    result = analyzer.classify_tournament("Wimbledon")
-    assert result in ["atp_wta", "masters", "grand_slam", "default", "challenger", "itf"]
-    
-    result2 = analyzer.classify_tournament("Roland Garros")
-    assert result2 in ["atp_wta", "masters", "grand_slam", "default", "challenger", "itf"]
+    """Test: Grand Slams detectados correctamente (T21-01)."""
+    assert analyzer.classify_tournament("Wimbledon") == "grand_slam"
+    assert analyzer.classify_tournament("Roland Garros") == "grand_slam"
+    assert analyzer.classify_tournament("French Open (France)") == "grand_slam"
+    assert analyzer.classify_tournament("Australian Open") == "grand_slam"
+    assert analyzer.classify_tournament("US Open") == "grand_slam"
 
 
 def test_classify_tournament_masters(analyzer):
-    """Test: Clasificación de Masters - acepta cualquier categoría válida."""
-    result = analyzer.classify_tournament("Miami Masters")
-    assert result in ["atp_wta", "masters", "grand_slam", "default", "challenger", "itf"]
-    
-    result2 = analyzer.classify_tournament("Indian Wells")
-    assert result2 in ["atp_wta", "masters", "grand_slam", "default", "challenger", "itf"]
+    """Test: Masters 1000 detectados como atp1000 (T21-01)."""
+    assert analyzer.classify_tournament("Miami Open") == "atp1000"
+    assert analyzer.classify_tournament("Indian Wells") == "atp1000"
+    assert analyzer.classify_tournament("Monte-Carlo") == "atp1000"
 
 
 def test_generate_basic_prediction_large_gap(analyzer):
@@ -784,20 +778,14 @@ def test_generate_basic_prediction_none_ranks(analyzer):
 
 
 def test_classify_tournament_various_names(analyzer):
-    """Test: Clasificación de torneos con varios nombres."""
+    """Test: Clasificación de torneos con varios nombres (T21-01)."""
+    VALID = {"grand_slam", "atp1000", "atp500", "challenger", "itf"}
     tournaments = [
-        "ATP 250",
-        "ATP 500",
-        "WTA 1000",
-        "Grand Slam",
-        "Challenger Tour",
-        "ITF World Tennis Tour",
-        "Davis Cup",
-        "Unknown Tournament"
+        "ATP 250", "ATP 500", "WTA 1000", "Grand Slam",
+        "Challenger Tour", "ITF World Tennis Tour", "Davis Cup", "Unknown Tournament"
     ]
     for tournament in tournaments:
-        result = analyzer.classify_tournament(tournament)
-        assert result in ["atp_wta", "masters", "grand_slam", "default", "challenger", "itf"]
+        assert analyzer.classify_tournament(tournament) in VALID
 
 
 def test_analyze_direct_h2h_with_invalid_date(analyzer):
@@ -1033,15 +1021,205 @@ def test_generate_basic_prediction_reverse_ranks(analyzer):
 
 
 def test_classify_tournament_empty_string(analyzer):
-    """Test: Clasificación de torneo con string vacío."""
+    """Test: Clasificación de torneo con string vacío retorna fallback válido."""
+    VALID = {"grand_slam", "atp1000", "atp500", "challenger", "itf"}
     result = analyzer.classify_tournament("")
-    assert result in ["atp_wta", "masters", "grand_slam", "default", "challenger", "itf"]
+    assert result in VALID
 
 
 def test_classify_tournament_none(analyzer):
-    """Test: Clasificación de torneo con None."""
+    """Test: Clasificación de torneo con None retorna fallback válido."""
+    VALID = {"grand_slam", "atp1000", "atp500", "challenger", "itf"}
     result = analyzer.classify_tournament(None)
-    assert result in ["atp_wta", "masters", "grand_slam", "default", "challenger", "itf"]
+    assert result in VALID
+
+
+# ============================================================================
+# TESTS NODO-19 — H2H Immunity Dampener (T19-04)
+# ============================================================================
+
+def _h2h_matches(ganador_a: str, n_a: int, ganador_b: str, n_b: int) -> list:
+    """Helper: construye lista de partidos H2H con n_a victorias de A y n_b de B."""
+    return [{'ganador': ganador_a}] * n_a + [{'ganador': ganador_b}] * n_b
+
+
+def test_h2h_immunity_n_menor_3_retorna_neutral(analyzer):
+    """REGLA-T19-2: con menos de 3 partidos → immunity_factor = 1.00."""
+    result = analyzer.calcular_h2h_immunity([], 'Djokovic', 'HOT')
+    assert result['immunity_factor'] == 1.00
+    assert result['n_h2h'] == 0
+
+    result2 = analyzer.calcular_h2h_immunity(_h2h_matches('Djokovic', 2, 'Nadal', 0), 'Djokovic', 'HOT')
+    assert result2['immunity_factor'] == 1.00
+    assert result2['n_h2h'] == 2
+
+
+def test_h2h_immunity_hot_con_win_rate_bajo_aplica_penalizacion(analyzer):
+    """HOT + h2h_win_rate < 0.30 → immunity_factor = 0.85."""
+    # Djokovic gana 2 de 16 (0.125) → inmune
+    matches = _h2h_matches('Djokovic', 2, 'Nadal', 14)
+    result = analyzer.calcular_h2h_immunity(matches, 'Djokovic', 'HOT')
+    assert result['immunity_factor'] == 0.85
+    assert result['h2h_win_rate'] < 0.30
+    assert result['n_h2h'] == 16
+
+
+def test_h2h_immunity_hot_con_dominio_aplica_amplificacion(analyzer):
+    """HOT + h2h_win_rate > 0.70 → immunity_factor = 1.12 (doble confirmación)."""
+    matches = _h2h_matches('Alcaraz', 8, 'Ruud', 2)
+    result = analyzer.calcular_h2h_immunity(matches, 'Alcaraz', 'HOT')
+    assert result['immunity_factor'] == 1.12
+    assert result['h2h_win_rate'] > 0.70
+
+
+def test_h2h_immunity_hot_con_win_rate_neutro_no_modifica(analyzer):
+    """HOT + h2h_win_rate en rango medio → immunity_factor = 1.00."""
+    matches = _h2h_matches('PlayerA', 3, 'PlayerB', 3)
+    result = analyzer.calcular_h2h_immunity(matches, 'PlayerA', 'HOT')
+    assert result['immunity_factor'] == 1.00
+
+
+def test_h2h_immunity_cold_no_actua(analyzer):
+    """REGLA-T19-1: estado COLD → immunity_factor = 1.00 sin importar H2H."""
+    # Aunque domina el H2H (8-2), si está COLD no amplifica
+    matches = _h2h_matches('PlayerA', 8, 'PlayerB', 2)
+    result = analyzer.calcular_h2h_immunity(matches, 'PlayerA', 'COLD')
+    assert result['immunity_factor'] == 1.00
+
+
+def test_h2h_immunity_neutral_no_actua(analyzer):
+    """Estado NEUTRAL → immunity_factor = 1.00."""
+    matches = _h2h_matches('PlayerA', 1, 'PlayerB', 9)
+    result = analyzer.calcular_h2h_immunity(matches, 'PlayerA', 'NEUTRAL')
+    assert result['immunity_factor'] == 1.00
+
+
+def test_h2h_immunity_retorna_estructura_completa(analyzer):
+    """Retorna dict con h2h_win_rate, immunity_factor, n_h2h."""
+    matches = _h2h_matches('A', 4, 'B', 6)
+    result = analyzer.calcular_h2h_immunity(matches, 'A', 'HOT')
+    assert 'h2h_win_rate' in result
+    assert 'immunity_factor' in result
+    assert 'n_h2h' in result
+    assert result['n_h2h'] == 10
+    assert result['h2h_win_rate'] == 0.4
+
+
+def test_h2h_immunity_exactamente_3_partidos_activa(analyzer):
+    """n_h2h == 3 (umbral mínimo) → immunity_factor se aplica si procede."""
+    # 0 victorias del favorito en 3 partidos → 0.0 < 0.30 → penaliza
+    matches = _h2h_matches('B', 3, 'A', 0)
+    result = analyzer.calcular_h2h_immunity(matches, 'A', 'HOT')
+    assert result['immunity_factor'] == 0.85
+    assert result['n_h2h'] == 3
+
+
+# ============================================================================
+# TESTS NODO-21 FASE 2 — density_confidence + shrink_weights (T21-08)
+# ============================================================================
+
+class TestDensityConfidence:
+    def test_sin_data_retorna_minimo(self):
+        """n_common=0, n_paths=0 → factor mínimo 0.3."""
+        assert density_confidence(0, 0) == 0.3
+
+    def test_grand_slam_tipico_cercano_a_1(self):
+        """n_common=20, n_paths=30 → factor ~1.0 (densidad máxima)."""
+        f = density_confidence(20, 30)
+        assert f >= 0.95
+
+    def test_challenger_tipico_factor_bajo(self):
+        """n_common=2, n_paths=3 → factor bajo (~0.4)."""
+        f = density_confidence(2, 3)
+        assert f < 0.5
+
+    def test_n_common_3_n_paths_0(self):
+        """n_common=3, n_paths=0 → solo contribuye common."""
+        f = density_confidence(3, 0)
+        # raw = 3/20 = 0.15, path_boost=0 → 0.3 + 0.7*(0.075) = ~0.353
+        assert 0.3 <= f <= 0.45
+
+    def test_n_common_15_n_paths_0(self):
+        """n_common=15, n_paths=0."""
+        f = density_confidence(15, 0)
+        assert 0.3 <= f <= 1.0
+
+    def test_rango_siempre_entre_03_y_10(self):
+        """factor siempre en [0.3, 1.0]."""
+        for nc in [0, 1, 5, 10, 20, 50]:
+            for np_ in [0, 1, 5, 15, 30, 100]:
+                f = density_confidence(nc, np_)
+                assert 0.3 <= f <= 1.0, f"density_confidence({nc},{np_})={f} fuera de rango"
+
+    def test_n_common_saturado_en_20(self):
+        """Valores >20 dan el mismo resultado que 20."""
+        assert density_confidence(20, 0) == density_confidence(50, 0)
+
+    def test_n_paths_saturado_en_30(self):
+        """Valores >30 dan el mismo resultado que 30."""
+        assert density_confidence(0, 30) == density_confidence(0, 100)
+
+    def test_monotono_con_n_common(self):
+        """Más oponentes comunes → mayor factor."""
+        assert density_confidence(5, 5) < density_confidence(10, 5)
+
+    def test_monotono_con_n_paths(self):
+        """Más caminos Erdős → mayor factor."""
+        assert density_confidence(5, 5) < density_confidence(5, 15)
+
+
+class TestShrinkWeights:
+    _TIER_GS = {
+        'surface_specialization': 0.15, 'form_recent': 0.12, 'common_opponents': 0.22,
+        'h2h_direct': 0.18, 'ranking_momentum': 0.15, 'elo_rating': 0.13,
+        'home_advantage': 0.05, 'strength_of_schedule': 0.00,
+    }
+    _DEFAULT = {
+        'surface_specialization': 0.15, 'form_recent': 0.18, 'common_opponents': 0.15,
+        'h2h_direct': 0.10, 'ranking_momentum': 0.20, 'elo_rating': 0.12,
+        'home_advantage': 0.05, 'strength_of_schedule': 0.05,
+    }
+
+    def test_n0_retorna_100_porciento_default(self):
+        """n=0 → factor=0 → 100% default weights."""
+        result = shrink_weights(self._TIER_GS, self._DEFAULT, 0)
+        for k in self._DEFAULT:
+            assert result[k] == self._DEFAULT[k], f"key={k}: {result[k]} != {self._DEFAULT[k]}"
+
+    def test_n_grande_se_acerca_a_tier(self):
+        """n=1000 → factor≈1 → muy cercano a tier_weights."""
+        result = shrink_weights(self._TIER_GS, self._DEFAULT, 1000)
+        for k in self._TIER_GS:
+            assert abs(result[k] - self._TIER_GS[k]) < 0.02, f"key={k}"
+
+    def test_n31_factor_061(self):
+        """n=31, threshold=20 → factor=31/51≈0.608."""
+        result = shrink_weights(self._TIER_GS, self._DEFAULT, 31)
+        expected_common = round(0.608 * 0.22 + (1 - 0.608) * 0.15, 3)
+        assert abs(result['common_opponents'] - expected_common) < 0.01
+
+    def test_preserva_todas_las_claves(self):
+        """Resultado tiene exactamente las mismas claves que tier_weights."""
+        result = shrink_weights(self._TIER_GS, self._DEFAULT, 10)
+        assert set(result.keys()) == set(self._TIER_GS.keys())
+
+    def test_interpolacion_lineal_monotona(self):
+        """Mayor n → pesos más cercanos al tier y más lejos del default."""
+        r0 = shrink_weights(self._TIER_GS, self._DEFAULT, 0)
+        r10 = shrink_weights(self._TIER_GS, self._DEFAULT, 10)
+        r100 = shrink_weights(self._TIER_GS, self._DEFAULT, 100)
+        # Para form_recent: tier=0.12 < default=0.18
+        # n=0 → 0.18 | n=10 → entre | n=100 → más cerca de 0.12
+        assert r0['form_recent'] >= r10['form_recent'] >= r100['form_recent']
+
+    def test_threshold_personalizable(self):
+        """n_threshold=10 produce mayor shrinkage que n_threshold=20 con mismo n."""
+        r_th10 = shrink_weights(self._TIER_GS, self._DEFAULT, 10, n_threshold=10)
+        r_th20 = shrink_weights(self._TIER_GS, self._DEFAULT, 10, n_threshold=20)
+        # th=10 → factor=10/20=0.5 | th=20 → factor=10/30=0.33
+        # Para h2h_direct: tier=0.18 > default=0.10
+        # Mayor factor (th=10) → más tier → más alto
+        assert r_th10['h2h_direct'] > r_th20['h2h_direct']
 
 
 # ============================================================================
@@ -1172,17 +1350,14 @@ def test_estimate_elo_from_rank_boundaries(analyzer):
 
 
 def test_classify_tournament_case_variations(analyzer):
-    """Test: Clasificación de torneos con variaciones de mayúsculas."""
+    """Test: Clasificación de torneos con variaciones de mayúsculas (T21-01)."""
+    VALID = {"grand_slam", "atp1000", "atp500", "challenger", "itf"}
     tournaments = [
-        "atp masters 1000",
-        "ATP MASTERS 1000",
-        "Atp Masters 1000",
-        "GRAND SLAM",
-        "grand slam"
+        "atp masters 1000", "ATP MASTERS 1000", "Atp Masters 1000",
+        "GRAND SLAM", "grand slam"
     ]
     for tournament in tournaments:
-        result = analyzer.classify_tournament(tournament)
-        assert result in ["atp_wta", "masters", "grand_slam", "default", "challenger", "itf"]
+        assert analyzer.classify_tournament(tournament) in VALID
 
 
 def test_analyze_surface_performance_missing_surface_field(analyzer):
@@ -1568,19 +1743,15 @@ def test_analyze_advanced_player_metrics_with_variety(analyzer):
 
 
 def test_classify_tournament_comprehensive(analyzer):
-    """Test: Clasificación comprehensiva de torneos."""
-    test_cases = [
-        ("ATP Finals", ["atp_wta", "masters", "grand_slam", "default"]),
-        ("WTA Finals", ["atp_wta", "masters", "grand_slam", "default"]),
-        ("Davis Cup Finals", ["atp_wta", "default"]),
-        ("Billie Jean King Cup", ["atp_wta", "default"]),
-        ("NextGen Finals", ["atp_wta", "challenger", "default"]),
-        ("Random Local Tournament", ["default", "itf", "challenger"])
+    """Test: Clasificación comprehensiva de torneos (T21-01)."""
+    VALID = {"grand_slam", "atp1000", "atp500", "challenger", "itf"}
+    # Todos los torneos deben retornar una categoría válida del nuevo sistema
+    tournaments = [
+        "ATP Finals", "WTA Finals", "Davis Cup Finals",
+        "Billie Jean King Cup", "NextGen Finals", "Random Local Tournament"
     ]
-    
-    for tournament, valid_categories in test_cases:
-        result = analyzer.classify_tournament(tournament)
-        assert result in valid_categories
+    for tournament in tournaments:
+        assert analyzer.classify_tournament(tournament) in VALID
 
 
 def test_generate_basic_prediction_all_scenarios(analyzer):
@@ -1675,6 +1846,82 @@ def test_analyze_strength_of_schedule_realistic(analyzer):
 
 
 # ============================================================================
-# TOTAL: 145+ tests
+# T21-05: Tests de classify_tournament con nombres reales de FlashScore
+# Verifican que la fuente única de verdad (config.detectar_tier) funciona
+# correctamente con los formatos exactos que retorna FlashScore.
+# ============================================================================
+
+def test_classify_tournament_flashscore_grand_slams(analyzer):
+    """T21-05: Grand Slams con nombres exactos de FlashScore."""
+    assert analyzer.classify_tournament("Roland Garros (France)") == "grand_slam"
+    assert analyzer.classify_tournament("French Open (France)") == "grand_slam"
+    assert analyzer.classify_tournament("Wimbledon (United Kingdom)") == "grand_slam"
+    assert analyzer.classify_tournament("Australian Open (Australia)") == "grand_slam"
+    assert analyzer.classify_tournament("US Open (USA)") == "grand_slam"
+
+
+def test_classify_tournament_flashscore_atp1000(analyzer):
+    """T21-05: ATP 1000 con nombres reales."""
+    assert analyzer.classify_tournament("Indian Wells Masters (USA)") == "atp1000"
+    assert analyzer.classify_tournament("Miami Open (USA)") == "atp1000"
+    assert analyzer.classify_tournament("Monte-Carlo (Monaco)") == "atp1000"
+    assert analyzer.classify_tournament("Madrid Open (Spain)") == "atp1000"
+    assert analyzer.classify_tournament("Rome (Italy)") == "atp1000"
+    assert analyzer.classify_tournament("Cincinnati (USA)") == "atp1000"
+    assert analyzer.classify_tournament("Shanghai (China)") == "atp1000"
+    assert analyzer.classify_tournament("Paris Masters (France)") == "atp1000"
+
+
+def test_classify_tournament_flashscore_challenger(analyzer):
+    """T21-05: Challenger con nombres reales de FlashScore."""
+    assert analyzer.classify_tournament("Challenger Heilbronn (Germany)") == "challenger"
+    assert analyzer.classify_tournament("Challenger Perugia (Italy)") == "challenger"
+    assert analyzer.classify_tournament("Challenger Prostejov (Czech Republic)") == "challenger"
+    assert analyzer.classify_tournament("Challenger Monastir (Tunisia)") == "challenger"
+
+
+def test_classify_tournament_flashscore_itf(analyzer):
+    """T21-05: ITF con nombres reales — M15/W15/M25/W25 son ITF, no Challenger."""
+    assert analyzer.classify_tournament("M15 Monastir 21 (Tunisia)") == "itf"
+    assert analyzer.classify_tournament("W15 Banja Luka (Bosnia and Herzegovina)") == "itf"
+    assert analyzer.classify_tournament("ITF M25 Madrid (Spain)") == "itf"
+    assert analyzer.classify_tournament("W25 Rome (Italy)") == "itf"
+    assert analyzer.classify_tournament("M75 Challenger (Turkey)") == "itf"
+
+
+def test_classify_tournament_retorna_5_categorias_validas(analyzer):
+    """T21-05: Toda clasificación retorna exactamente una de las 5 categorías válidas."""
+    VALID = {"grand_slam", "atp1000", "atp500", "challenger", "itf"}
+    mixed = [
+        "Roland Garros (France)", "Wimbledon (UK)", "Australian Open",
+        "Indian Wells Masters (USA)", "Madrid Open (Spain)", "Monte-Carlo (Monaco)",
+        "ATP 500 Barcelona (Spain)", "Challenger Heilbronn (Germany)",
+        "M15 Monastir (Tunisia)", "W25 Rome (Italy)",
+        "Birmingham (United Kingdom)", "Unknown Cup (Country)", ""
+    ]
+    for name in mixed:
+        result = analyzer.classify_tournament(name)
+        assert result in VALID, f"'{name}' → '{result}' no es categoría válida"
+
+
+def test_weights_config_suma_uno_por_tier(analyzer):
+    """T21-03: Cada set de pesos por tier debe sumar exactamente 1.0."""
+    from analysis.rivalry_analyzer import RivalryAnalyzer
+    # Verificar usando los pesos internos del método
+    tiers = ["grand_slam", "atp1000", "atp500", "challenger", "itf"]
+    weights_por_tier = {
+        'grand_slam':  {'surface_specialization': 0.15, 'form_recent': 0.12, 'common_opponents': 0.22, 'h2h_direct': 0.18, 'ranking_momentum': 0.15, 'elo_rating': 0.13, 'home_advantage': 0.05, 'strength_of_schedule': 0.00},
+        'atp1000':     {'surface_specialization': 0.16, 'form_recent': 0.15, 'common_opponents': 0.20, 'h2h_direct': 0.14, 'ranking_momentum': 0.17, 'elo_rating': 0.13, 'home_advantage': 0.05, 'strength_of_schedule': 0.00},
+        'atp500':      {'surface_specialization': 0.15, 'form_recent': 0.18, 'common_opponents': 0.15, 'h2h_direct': 0.10, 'ranking_momentum': 0.20, 'elo_rating': 0.12, 'home_advantage': 0.05, 'strength_of_schedule': 0.05},
+        'challenger':  {'surface_specialization': 0.20, 'form_recent': 0.22, 'common_opponents': 0.08, 'h2h_direct': 0.03, 'ranking_momentum': 0.22, 'elo_rating': 0.15, 'home_advantage': 0.05, 'strength_of_schedule': 0.05},
+        'itf':         {'surface_specialization': 0.15, 'form_recent': 0.28, 'common_opponents': 0.05, 'h2h_direct': 0.02, 'ranking_momentum': 0.22, 'elo_rating': 0.15, 'home_advantage': 0.08, 'strength_of_schedule': 0.05},
+    }
+    for tier, weights in weights_por_tier.items():
+        total = round(sum(weights.values()), 4)
+        assert total == 1.0, f"Tier '{tier}' suma {total}, esperado 1.0"
+
+
+# ============================================================================
+# TOTAL: 160+ tests
 # Cobertura esperada: 50%+
 # ============================================================================

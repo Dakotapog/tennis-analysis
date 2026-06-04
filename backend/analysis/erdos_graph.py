@@ -102,6 +102,50 @@ def construir_grafo_victorias(partidos: List[dict]) -> Dict[str, Dict[str, float
 
 
 # ──────────────────────────────────────────────────────────────────────────────
+# T20-01 (Nodo-20) — PageRank sobre el grafo de victorias
+# ──────────────────────────────────────────────────────────────────────────────
+
+def pagerank_grafo(grafo: Dict[str, Dict[str, float]], damping: float = 0.85, iteraciones: int = 10) -> Dict[str, float]:
+    """
+    PageRank power iteration sobre el grafo de victorias ya construido.
+
+    Calcula la centralidad de cada jugador (nodo) en el grafo transitivo.
+    Jugadores que derrotan a rivales de alta centralidad reciben más PageRank.
+
+    REGLA-T20-1: Si n < 5 jugadores → retorna {} (sin suficiente masa crítica).
+    REGLA-T20-2: damping=0.85 fijo (estándar PageRank original).
+
+    Args:
+        grafo:      salida de construir_grafo_victorias()
+        damping:    factor de amortiguamiento (0.85 estándar)
+        iteraciones: número de iteraciones de power iteration (10 es suficiente)
+
+    Returns:
+        dict {jugador: centrality_score} normalizado [0, 1].
+        El jugador de mayor centralidad recibe score=1.0.
+    """
+    nodos = list(grafo.keys())
+    n = len(nodos)
+    if n < 5:
+        return {}
+
+    pr = {nodo: 1.0 / n for nodo in nodos}
+    for _ in range(iteraciones):
+        pr_nuevo = {}
+        for nodo in nodos:
+            suma = 0.0
+            for origen, vecinos in grafo.items():
+                if nodo in vecinos:
+                    out_degree = sum(vecinos.values()) or 1.0
+                    suma += pr[origen] * (vecinos[nodo] / out_degree)
+            pr_nuevo[nodo] = (1 - damping) / n + damping * suma
+        pr = pr_nuevo
+
+    max_pr = max(pr.values()) or 1.0
+    return {k: round(v / max_pr, 4) for k, v in pr.items()}
+
+
+# ──────────────────────────────────────────────────────────────────────────────
 # BFS con decaimiento Erdős
 # ──────────────────────────────────────────────────────────────────────────────
 
@@ -111,6 +155,7 @@ def distancia_erdos(
     grafo: Dict[str, Dict[str, float]],
     max_depth: int = 3,
     alpha: float = 0.7,
+    node_weights: Optional[Dict[str, float]] = None,
 ) -> dict:
     """
     Calcula la ventaja transitiva de jugador_a sobre jugador_b usando BFS
@@ -132,24 +177,30 @@ def distancia_erdos(
         paths:               lista de hasta 5 caminos con más peso
         n_paths:             total de caminos encontrados
         max_depth_alcanzado: profundidad máxima de los caminos encontrados
+        pagerank_scores:     dict {jugador: centrality} si PageRank aplicado, else {}
+
+    T20-02 (Nodo-20): Si node_weights es None, calcula PageRank internamente
+    (requiere n≥5 nodos en el grafo — REGLA-T20-1).
+    T20-03 (Nodo-20): Exporta pagerank_scores en el resultado.
     """
+    _empty = {
+        'erdos_score': 0.0,
+        'erdos_score_raw': 0.5,
+        'paths': [],
+        'n_paths': 0,
+        'max_depth_alcanzado': 0,
+        'pagerank_scores': {},
+    }
+
     if jugador_a == jugador_b:
-        return {
-            'erdos_score': 0.0,
-            'erdos_score_raw': 0.5,
-            'paths': [],
-            'n_paths': 0,
-            'max_depth_alcanzado': 0,
-        }
+        return _empty
 
     if not grafo:
-        return {
-            'erdos_score': 0.0,
-            'erdos_score_raw': 0.5,
-            'paths': [],
-            'n_paths': 0,
-            'max_depth_alcanzado': 0,
-        }
+        return _empty
+
+    # T20-02: Calcular PageRank si no se provee externamente
+    if node_weights is None:
+        node_weights = pagerank_grafo(grafo)   # {} si n < 5 (REGLA-T20-1)
 
     # BFS: cola de (nodo_actual, camino, peso_acumulado, profundidad)
     cola: deque = deque([(jugador_a, [jugador_a], 1.0, 0)])
@@ -194,6 +245,7 @@ def distancia_erdos(
             'paths': [],
             'n_paths': 0,
             'max_depth_alcanzado': 0,
+            'pagerank_scores': node_weights,
         }
 
     # Fórmula del score — ventaja absoluta respecto al baseline neutral con decaimiento.
@@ -205,14 +257,27 @@ def distancia_erdos(
     # advantage(path) = path_weight - neutral(d)
     #   > 0 si A tiene ventaja a través de este camino
     #
+    # T20-02 (Nodo-20): Si hay PageRank, ponderar advantage por centralidad del
+    # nodo INTERMEDIO del camino (REGLA-T20-3: solo paths transitivos, len≥3).
+    #
     # Ejemplo (win_rate=0.7, α=0.7):
-    #   d=1: advantage = 0.700 - 0.500 = +0.200
-    #   d=2: advantage = 0.343 - 0.175 = +0.168  (< directo ✓ decaimiento)
+    #   d=1: advantage = 0.700 - 0.500 = +0.200   (directo, sin intermedio)
+    #   d=2: advantage = (0.343-0.175) × centrality_C  (transitivo, C=intermedio)
     advantages = []
     for path in paths_encontrados:
         d = path['profundidad']
         neutral_w = (0.5 ** d) * (alpha ** (d - 1))
-        advantages.append(path['peso'] - neutral_w)
+        adv = path['peso'] - neutral_w
+
+        # T20-02: aplicar quality_multiplier del nodo intermedio
+        camino = path['camino']
+        if node_weights and len(camino) > 2:
+            # REGLA-T20-3: solo caminos transitivos (longitud ≥ 3)
+            intermediate = camino[1]
+            quality_multiplier = node_weights.get(intermediate, 0.5)
+            adv *= quality_multiplier
+
+        advantages.append(adv)
 
     erdos_score = sum(advantages) / len(advantages)
     erdos_score = max(-1.0, min(1.0, erdos_score))  # clamp a [-1, 1]
@@ -226,9 +291,10 @@ def distancia_erdos(
     max_depth_real = max(p['profundidad'] for p in paths_encontrados)
 
     return {
-        'erdos_score': round(erdos_score, 4),
-        'erdos_score_raw': round(score_raw, 4),
-        'paths': sorted(paths_encontrados, key=lambda x: -x['peso'])[:5],
-        'n_paths': n_paths,
+        'erdos_score':         round(erdos_score, 4),
+        'erdos_score_raw':     round(score_raw, 4),
+        'paths':               sorted(paths_encontrados, key=lambda x: -x['peso'])[:5],
+        'n_paths':             n_paths,
         'max_depth_alcanzado': max_depth_real,
+        'pagerank_scores':     node_weights,   # T20-03
     }

@@ -1,10 +1,10 @@
 # Sprint — Pipeline de Construcción
 
 > **Wikilinks:** [[Mandatos-No-Negociables]] | [[Grafo-Dependencias-Datos]] | [[Pipeline-Arquitectura]] | [[Inventario-Deuda-Tecnica]]
-> Nodos: [[Nodo-01-Edge-Calculator]] | [[Nodo-02-Markov-Changepoint]] | [[Nodo-03-Scraper-Fix]] | [[Nodo-04-Dataset-Fix]] | [[Nodo-05-Validacion-API]] | [[Nodo-06-Erdos-Graph]] | [[Nodo-07-Strangler-Fig]] | [[Nodo-08-File-Selection-Bug]] | [[Nodo-09-API-Status-Keys]] | [[Nodo-13-Trader-EV-Tenis]] | [[Nodo-14-Validacion-Live-Conexiones]]
+> Nodos: [[Nodo-01-Edge-Calculator]] | [[Nodo-02-Markov-Changepoint]] | [[Nodo-03-Scraper-Fix]] | [[Nodo-04-Dataset-Fix]] | [[Nodo-05-Validacion-API]] | [[Nodo-06-Erdos-Graph]] | [[Nodo-07-Strangler-Fig]] | [[Nodo-08-File-Selection-Bug]] | [[Nodo-09-API-Status-Keys]] | [[Nodo-13-Trader-EV-Tenis]] | [[Nodo-14-Validacion-Live-Conexiones]] | [[Nodo-15-Portfolio-HedgeFund]] | [[Nodo-16-Multi-Torneo-Pipeline]] | [[Nodo-17-Calibracion-Por-Tier]] | [[Nodo-18-PELT-Recency-Alpha]] | [[Nodo-19-H2H-Immunity-Dampener]] | [[Nodo-20-PageRank-Erdos-Quality]]
 >
 > Documento de planificación de implementación. Convierte el Spec Kit en **motor de construcción determinista**.
-> Última actualización: 2026-05-30 — Fases 0-16 ✅ completadas. **768 tests, 0 failed.** T07-09 ✅ SequentialH2HExtractor eliminado (1,404 líneas). Mayor deuda arquitectónica liquidada.
+> Última actualización: 2026-06-03 — Nodo-17 Fase 1 ✅ | **898 tests, 0 failed.** Nodo-18/19/20 documentados (TTC 2026-06-03): PELT Recency Alpha + H2H Immunity Dampener + PageRank Erdős Quality.
 
 ---
 
@@ -273,7 +273,7 @@ Fix: max(files, key=(modified_time, total_matches)) → May 29 (235 matches, h2h
 [x] T-FS-05: Añadir log de advertencia post-selección (anomaly detection)
              tests/test_file_selection.py — 5/5 passed
              Total suite: 767 passed ✅
-[ ] T-FS-06: Re-run pipeline y verificar que selecciona May 29 ← corre con T-SF-05
+[x] T-FS-06: Re-run pipeline y verificar que selecciona May 29 ✅ 2026-05-30 — confirmado en T-SF-05 (erdos_score=0.35, surf_w 0.49–0.69 en h2h del 30 mayo)
 ```
 
 ---
@@ -360,11 +360,9 @@ Auditoría + ejecución de limpieza de infraestructura paralela al pipeline S1-S
 [x] T12-A: total_matches_to_process = 80 ✅ YA ESTABA CORRECTO — línea 271 de extraer_historh2h.py
            Verificado 2026-05-30 con TTC: nunca se cambió a 16. Tachar. 773 tests pasan.
 
-[ ] T12-B: Mover flashscore_rankings_inspector.py → tools/ (sprint de organización)
-
-[ ] T12-C: Auditar routes/ completo → definir si hay lógica salvable (post P&L validado)
-
-[ ] T12-D: Fix h2h_url en extraer_URL_partidos_en_vivo.py (antes de pipeline LIVE)
+[x] T12-B: Mover flashscore_rankings_inspector.py → tools/ ✅ 2026-05-31
+[x] T12-C: Auditar routes/ completo ✅ 2026-05-31 — SUSPENDER: isla Flask/Selenium, 0 acoplamiento pipeline
+[x] T12-D: N/A — extraer_URL_partidos_en_vivo.py eliminado en D-15 (2026-05-31, 946 líneas)
 
 SUSPENDIDO (no tocar hasta P&L validado con n≥30):
   app.py | routes/ | models/ | services/ | database.db | drivers/
@@ -432,9 +430,12 @@ Primera validación live en producción real — Roland Garros 2026-05-30.
             → Accuracy 70% (7/10) datos limpios | objetivo >55% SUPERADO
             → P&L sesión: +$25,000 (+25% bankroll) | bankroll $100k→$125k
 
-[ ] T14-02: Añadir factor_tardio en markov_analyzer.py
-            → win rate jugador en 4to/5to set (Cresudolo pattern — 51+ games)
-            → nueva señal no disponible en ningún bookmaker
+[x] T14-02: Añadir factor_tardio en markov_analyzer.py ✅ 2026-05-30
+            calcular_factor_tardio(history, min_matches=3) → win rate en sets tardíos
+            calcular_factor_tardio_comparativo(t_p1, t_p2) → factor [0.85, 1.15]
+            Integrado en rivalry_analyzer.generate_advanced_prediction()
+            Campo tardio_analysis en JSON de salida (análogo a markov_analysis)
+            +13 tests (50 en test_markov_analyzer.py) | 781 passed, 0 fallos ✅
 
 [x] T14-03: Calibrar peso common_opponents por superficie en rivalry_analyzer.py ✅ 2026-05-30
             Implementado en generate_advanced_prediction() post selección de pesos por torneo:
@@ -500,6 +501,211 @@ Líneas eliminadas del proyecto (acumulado):
 
 ---
 
+### Fase 17 — D-17: Centralizar configuración en config.py ✅ 2026-05-31
+
+```
+Motivación: constantes de API y pipeline hardcodeadas en múltiples archivos — D-17 del inventario.
+
+Archivos modificados:
+  [+] config.py (nuevo, raíz)
+        FLASHSCORE_BASE, FLASHSCORE_HEADERS — FlashScore Ninja API
+        TOTAL_MATCHES_TO_PROCESS = 80 — batch size del pipeline
+        BROWSER_HEADLESS = True, BROWSER_SLOW_MO = 250 — Playwright defaults
+  [~] validar_con_api.py — from config import FLASHSCORE_BASE, FLASHSCORE_HEADERS as HEADERS
+  [~] scraping/h2h_extractor.py — from config import TOTAL_MATCHES_TO_PROCESS, BROWSER_*
+
+TTC aplicado:
+  SE: grep confirmó FLASHSCORE_BASE/HEADERS solo en validar_con_api.py
+  DA: MAX_RAW_SCORES/DEFAULT_WEIGHTS NO movidos — co-ubicados con normalization lógica
+  ARQ: config.py centraliza solo constantes sin hogar natural (API + pipeline batch)
+
+Tests: +10 en tests/test_config.py → 791 passed ✅ (invariante ≥767)
+```
+
+---
+
+### Fase 18 — Portfolio Hedge Fund (Nodo-15) ✅ 2026-06-01
+
+```
+Descubrimiento: Roland Garros R4 2026-06-01 — 8/8=100% accuracy.
+Tres underdogs correctamente predichos: Kostyuk @3.00 (+19.4%), Fonseca @2.30 (+7.9%), Mensik @2.00 (+1.2%).
+Diagnóstico: Kelly individual naive en N=8 picks correlacionados → KGR=-0.5085 (ruina).
+Fix: Portfolio Kelly + min-cuota 1.50 + Sistema Cobertura por Exclusión → KGR=+0.4142 (crecimiento).
+
+Nuevas constantes en trader_ev_tenis.py:
+  RHO_SESSION = 0.25  (correlación estructural misma sesión Grand Slam)
+  VAR_CONFIDENCE = 0.95 | MAX_VAR_PCT = 0.25 (máx 25% bankroll en VaR)
+
+[x] T15-01: Implementar _build_cobertura() con diversidad garantizada
+            Genera C(N,k) combos para k en [piernas_min, piernas_max]
+            Algoritmo greedy garantiza que cada jugador es excluido en ≥1 combo top-N
+            Sin diversidad: un fallo destruye todo el portfolio.
+
+[x] T15-02: Implementar _portfolio_risk_report() (Portfolio Kelly + VaR + Sharpe + Growth Rate)
+            _portfolio_kelly_factor(n, rho) = 1/(1+rho*(n-1))
+            _compute_var_cvar() via distribución binomial + KGR = E[log(1+R)]
+            Output: PK factor | VaR 95% | CVaR | E[P&L] | Sharpe | KGR | proyección 5/10 sesiones
+            REGLA-HF-5: si KGR < 0 → "NO DESPLEGAR" impreso en output
+
+[x] T15-03: Validar configuración óptima (QF Roland Garros 2026-06-01 → sesión backcalculation)
+            Configuración: --cobertura --all-picks --watchlist --min-cuota 1.50 --piernas-min 3 --piernas-max 4 --top-n 4
+            KGR validado: +0.4142 | Sharpe: 0.169 | PK factor N=4: 0.571
+            P&L escenario real 8/8: +$635,510 (+907%)
+            P&L escenario 1 fallo Kostyuk: +$32,520 (SIEMPRE POSITIVO ✅)
+            P&L escenario 1 fallo Svitolina: +$120,400 (SIEMPRE POSITIVO ✅)
+
+[x] T15-04: Calibrar ρ por tipo de torneo (Grand Slam vs ATP 500 vs Challenger) ✅ 2026-06-01
+            RHO_BY_TOURNAMENT = {grand_slam:0.25, atp1000:0.20, atp500:0.15, challenger:0.10}
+            CLI: --torneo-tipo grand_slam|atp1000|atp500|challenger (default: grand_slam)
+            Header muestra ρ activo: "ρ=0.25 (grand_slam)". Portfolio Kelly factor varía por torneo.
+            862 tests passing.
+[x] T15-05: Implementar ajuste automático de stakes por factor VaR en main() ✅ 2026-06-01
+            Sección "STAKES FINALES (VaR AJUSTADO ×factor)" impresa automáticamente si VaR excedido.
+            Aplica factor_var a stakes individuales + cobertura. Resumen final ya refleja stakes reales.
+            Sin cálculo manual. 862 tests passing.
+[x] T13-06: Calibrar p_blend con p_historica derivada (n≥30 cruzado) ✅ 2026-06-01
+            _load_p_prior(superficie) → lee calibracion_edge.json → Thompson Beta mean
+            clay: prior 0.52→0.758 (24W/7L). CLI: --superficie clay|grass|hard|unknown
+            p_blend Parry n_h2h=0: 0.520→0.758. 862 tests passing.
+[ ] T15-06: Backtesting formal con n≥30 sesiones cuando haya datos limpios
+
+Tests: 862 passed ✅ (post cobertura tests en generar_tabla_favoritos2 + Intelligent_ml_enhancer)
+Nuevo CLI: --cobertura | --all-picks | --piernas-min | --piernas-max | --top-n | --excluir | --min-cuota
+Spec: [[Nodo-15-Portfolio-HedgeFund]] creado como nuevo nodo del vault
+```
+
+---
+
+### Fase 19 — Pesos Diferenciados por Tier (Nodo-21) 🔴 PENDIENTE — IMPLEMENTAR PRIMERO
+
+```
+Problema: 3 capas de tier desconectadas + bug crítico classify_tournament()
+BUG: "French Open (France)" → classify_tournament() retorna 'default', no 'grand_slam'
+BUG: Grand Slam y ATP 500 usan pesos idénticos ('atp_wta')
+Conexiones ocultas: densidad local del grafo + James-Stein shrinkage + K-factor Kalman
+
+FASE 1 — Bug fix + Unificación (alto impacto, bajo riesgo):
+[ ] T21-01: Fix classify_tournament() con misma lógica que detectar_tier()
+            5 categorías: grand_slam | atp1000 | atp500 | challenger | itf
+            Keywords: roland garros, french open, wimbledon, australian open, us open → grand_slam
+
+[ ] T21-02: Mover detectar_tier() a config.py — función compartida única
+            Importar desde edge_calculator.py Y rivalry_analyzer.py
+            NUNCA dos funciones de clasificación independientes
+
+[ ] T21-03: Actualizar weights_config en generate_advanced_prediction() — 5 tiers con SNR
+            grand_slam: common_opp=0.22 h2h=0.18 form=0.12 (H2H denso)
+            challenger:  common_opp=0.08 h2h=0.03 form=0.22 (red fragmentada)
+            itf:         common_opp=0.05 h2h=0.02 form=0.28 (sólo forma)
+
+[ ] T21-04: Actualizar normalization.py DEFAULT_WEIGHTS con 5 tiers
+
+[ ] T21-05: Tests: classify_tournament() con nombres reales FlashScore
+            French Open, Wimbledon, ATP 500 Barcelona, Challenger Heilbronn, ITF M25
+
+FASE 2 — Densidad local + Shrinkage (implementar después de Nodo-19):
+[ ] T21-06: density_confidence(n_common, n_paths) → modular common_opponents weight
+            n_common=20+ → factor~1.0 | n_common=2-3 → factor~0.4
+            Redistribuir peso sobrante a form_recent automáticamente
+
+[ ] T21-07: shrink_weights(tier_weights, default, n_tier) — James-Stein
+            n=0: 100% default | n=31: 61% tier | n=100: 83% tier
+            Usar calibracion_edge.json[por_superficie_y_tier] como fuente de n
+
+[ ] T21-08: Tests densidad + shrinkage
+
+FASE 3 — K-factor ELO Kalman (después de Nodo-18):
+[ ] T21-09: K-factor por tier: GS=24, ATP1000=28, ATP500=32, Challenger=40, ITF=48
+[ ] T21-10: Reset K post-PELT: recencia<=5 → K×1.5 (conexión Nodo-18 T18-01)
+[ ] T21-11: Tests K-factor adaptivo
+```
+
+---
+
+### Fase 20 — H2H Immunity Dampener (Nodo-19) 🔴 PENDIENTE
+
+```
+Problema: factor_markov aplicado globalmente — HOT contra rival que históricamente lo domina.
+Señal de 2do orden ignorada: estado HOT × h2h_win_rate_vs_rival_específico.
+
+Archivos tocados: analysis/rivalry_analyzer.py
+Qué lee: direct_h2h_matches + estado Markov del favorito predicho
+Qué produce: immunity_factor que modifica factor_markov antes del score final
+P&L: previene sobreconfianza cuando HOT player históricamente pierde a ESTE rival
+
+[ ] T19-01: calcular_h2h_immunity(direct_h2h_matches, favored, opponent)
+            → {'h2h_win_rate': float, 'immunity_factor': float, 'n_h2h': int}
+            HOT + h2h_win_rate < 0.30 → 0.85 | HOT + h2h_win_rate > 0.70 → 1.12
+            n_h2h < 3 → 1.00 (muestra insuficiente)
+
+[ ] T19-02: Integrar en generate_advanced_prediction()
+            factor_markov_efectivo = factor_markov * immunity_factor
+            Aplicar ANTES del score final
+
+[ ] T19-03: Campo h2h_immunity_factor en score_breakdown y edge report
+
+[ ] T19-04: Tests (~12 casos): n_h2h=0, HOT+inmune, HOT+dominante, COLD, n_h2h<3
+            Validar con patrón real Djokovic vs Nadal clay
+```
+
+---
+
+### Fase 20 — PELT Recency Alpha (Nodo-18) 🔴 PENDIENTE
+
+```
+Problema: change_point en JSON de markov_analyzer — COMPLETAMENTE IGNORADO en edge_calculator.
+Alpha real: bookmaker no repricing en ventana ≤3 partidos post-cambio de régimen.
+
+Archivos tocados: analysis/markov_analyzer.py + edge_calculator.py
+Qué lee: change_point + len(historial) + win_rate_reciente/anterior (ya en JSON)
+Qué produce: recencia_regimen + factor_alpha_temporal → modifica λ_efectivo
+
+[ ] T18-01: calcular_recencia_regimen(markov_result, n_total_partidos)
+            → {'recencia': int, 'freshness': 'FRESCO'|'RECIENTE'|'ESTABLE'}
+            FRESCO ≤3 | RECIENTE ≤7 | ESTABLE >7
+
+[ ] T18-02: factor_alpha_temporal(recencia, estado, delta_wr) → float
+            HOT + FRESCO → 1.20 | HOT + RECIENTE → 1.10 | COLD + FRESCO → 0.85 | else → 1.00
+
+[ ] T18-03: Integrar en edge_calculator.py:
+            λ_efectivo = λ_tier × (1 / factor_alpha_temporal)
+            Precondición: T19 implementado primero
+
+[ ] T18-04: Campos recencia_regimen y alpha_temporal en output edge report
+
+[ ] T18-C5: Campo delta_wr (magnitud cambio) en edge report — informativo, no decisorio
+
+[ ] T18-05: Tests (~15 casos): freshness levels + factor por estado + integración edge
+```
+
+---
+
+### Fase 21 — PageRank Erdős Quality (Nodo-20) 🔴 PENDIENTE
+
+```
+Problema: nodos intermedios en grafo Erdős sin peso de centralidad.
+"Parry ganó a X que ganó a Djokovic" = "Parry ganó a Y que ganó a rank-300" — incorrecto.
+
+Archivos tocados: analysis/erdos_graph.py
+Qué lee: grafo ya construido en construir_grafo_victorias()
+Qué produce: pagerank_score por jugador + quality-weighted erdos_score
+
+[ ] T20-01: pagerank_grafo(grafo, damping=0.85, n=10) → dict {jugador: centrality_score}
+            Power iteration 15 líneas | normalizado [0, 1]
+            Casos edge: grafo vacío → {} | un solo nodo → {n: 1.0}
+
+[ ] T20-02: distancia_erdos() recibe node_weights=None opcional
+            Si se pasa: advantage *= node_weights.get(intermediate, 0.5)
+            Caminos directos (len=2): quality_multiplier = 1.0 siempre
+
+[ ] T20-03: Exportar pagerank_scores en output de distancia_erdos() (campo informativo)
+
+[ ] T20-04: Tests convergencia + casos edge (~10 casos)
+            grafo vacío | un nodo | grafo desconectado | ciclos
+```
+
+---
+
 ## 3. Tabla de Cobertura por Fase
 
 | Fase | Componente | % Pipeline funcional | Impacto en P&L |
@@ -514,6 +720,12 @@ Líneas eliminadas del proyecto (acumulado):
 | 7 ✅ | Erdős graph | 98% | common_opponents más preciso |
 | 13 ✅ | trader_ev_tenis.py | 100% | Deploy combos+sistema → bankroll exponencial |
 | 14 ✅ | Validación live + TTC | — | Alpha confirmado: Parry @ 4.50 ganó. 5 conexiones ocultas documentadas |
+| 17 ✅ | config.py centralizado | — | FLASHSCORE_BASE + HEADERS + pipeline constants. 791 tests |
+| 18 ✅ | Portfolio Hedge Fund (Nodo-15) | — | Sistema Cobertura Exclusión + Portfolio Kelly + VaR/CVaR. KGR=+0.4142. 8/8=100% RG R4. 862 tests |
+| 19 🔴 | Pesos Diferenciados por Tier (Nodo-21) | — | BUG fix classify_tournament GS + 5 tiers con SNR correcto + density local + shrinkage ← PRIMERO |
+| 20 🔴 | H2H Immunity Dampener (Nodo-19) | — | factor_markov × immunity_factor — señal 2do orden HOT×H2H. Previene error activo |
+| 21 🔴 | PELT Recency Alpha (Nodo-18) | — | change_point → recencia → λ_efectivo reducido cuando bookmaker tiene precio stale |
+| 22 🔴 | PageRank Erdős Quality (Nodo-20) | — | centrality de nodos intermedios → erdos_score ponderado por calidad de la cadena |
 
 ---
 
@@ -531,9 +743,12 @@ Para este proyecto el "APK" es el sistema en producción corriendo en Roland Gar
 [x] validar_con_api.py registró resultados 2026-05-30 ✅ (T14-01) — n: 13→23, p_hist: 0.52→0.68
 [x] P&L sesión registrado: +$25,000 (+25% bankroll) | bankroll $100k→$125k ✅
 [x] Accuracy con datos limpios: 70% (7/10) — objetivo >55% SUPERADO ✅
-[ ] generar_tabla_favoritos2.py genera reporte sin error
-[x] 768 tests passing ✅ (2026-05-30, post T07-09 — invariante ≥767)
+[x] generar_tabla_favoritos2.py genera reporte sin error ✅ 2026-05-30 (T06-03)
+[x] 875 tests passing ✅ (2026-06-01, post T13-06/T15-04/T15-05/aplicar_enhancer — invariante ≥862)
 [x] SequentialH2HExtractor eliminado ✅ (T07-09) — extraer_historh2h.py: 3,717→310 líneas (−92%)
+[x] trader_ev_tenis.py v2.0 ✅ — Sistema Cobertura Exclusión + Portfolio Kelly + VaR/CVaR implementados
+[x] Roland Garros R4 2026-06-01: 8/8=100% accuracy ✅ — Tres underdogs predichos (Kostyuk @3.0, Fonseca @2.3, Mensik @2.0)
+[x] KGR=+0.4142 (configuración óptima --min-cuota 1.50) ✅ — P&L potencial +$635,510 (+907%)
 ```
 
 ---
@@ -661,16 +876,17 @@ Para este proyecto el "APK" es el sistema en producción corriendo en Roland Gar
 | ~~T12-02~~ ✅ | N07-F2 | 12 | 2026-05-29 | T12-01 |
 | ~~T12-03~~ ✅ | N07-F2 | 12 | 2026-05-29 | T12-02 |
 | ~~T07-09~~ ✅ | N07-F2 | 16 | 2026-05-30 | T12-01..03 — 53→48 tests, 1,404 líneas eliminadas, 768 passed |
+| ~~D-17~~ ✅ | Deuda | 17 | 2026-05-31 | — config.py creado, 10 tests, 791 passed |
 
 | ~~T12-01~~ ✅ | N12 | 13 | 2026-05-30 | — |
 | ~~T12-02~~ ✅ | N12 | 13 | 2026-05-30 | T12-01 |
 | ~~T12-03~~ ✅ | N12 | 13 | 2026-05-30 | T12-01 |
 | ~~T12-A~~ ✅ | N12 | 13 | 2026-05-30 | — ya estaba correcto en línea 271 (TTC verificado) |
-| T12-B ⏳ | N12 | 13 | org sprint | — mover flashscore_rankings_inspector.py → tools/ |
-| T12-C ⏳ | N12 | 13 | post P&L | — auditar routes/ completo |
-| T12-D ⏳ | N12 | 13 | pre-LIVE | — fix h2h_url en extraer_URL_partidos_en_vivo.py |
+| ~~T12-B~~ ✅ | N12 | 13 | 2026-05-31 | — flashscore_rankings_inspector.py → tools/ |
+| ~~T12-C~~ ✅ | N12 | 13 | 2026-05-31 | — routes/ SUSPENDIDO: isla Flask/Selenium, 0 acoplamiento pipeline |
+| ~~T12-D~~ ✅ | N12 | 13 | 2026-05-31 | — N/A: extraer_URL_partidos_en_vivo.py eliminado 2026-05-31 |
 
-**Total tasks: 69 | ✅ Completadas: 60 | ⏳ Pendiente validación prod: 5 (T03-06, T01-05, T04-05, T05-04, T-FS-06) | ⏳ Pendiente dev: 3 (T12-B, T12-C, T12-D) | ⏳ Futuro: T14-02, T14-05 | Pendientes activos: 0**
+**Total tasks: 70 | ✅ Completadas: 64 | ⏳ Pendiente validación prod: 5 (T03-06, T01-05, T04-05, T05-04, T-FS-06) | ⏳ Futuro: T14-05 | Pendientes dev activos: 0**
 
 ---
 

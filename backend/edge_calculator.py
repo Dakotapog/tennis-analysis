@@ -38,6 +38,8 @@ import argparse
 from datetime import datetime
 from typing import Optional
 import logging
+from config import detectar_tier  # T21-02: fuente única de verdad para tier
+from analysis.markov_analyzer import calcular_recencia_regimen, factor_alpha_temporal  # T18-03 (Nodo-18)
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -70,6 +72,17 @@ CALIBRACION_DEFAULT = {
 EDGE_MIN = 0.05          # 5% mínimo para considerar apuesta
 KELLY_KL_MIN = 0.02      # 2% mínimo de Kelly-KL para confirmar
 BANKROLL_CAP = 0.10      # máximo 10% por apuesta
+
+# T17-03: λ escalado por tier (Nodo-17)
+# Grand Slam: modelo calibrado n=31, señal limpia → λ base 0.5
+# Challenger: H2H escaso + mercado ineficiente → incertidumbre 3.6× mayor
+LAMBDA_TIER_MULTIPLIER = {
+    "grand_slam":  1.0,   # λ efectivo = λ_zona × 1.0 (base)
+    "atp1000":     1.6,
+    "atp500":      2.4,
+    "challenger":  3.6,
+    "itf":         4.5,   # máxima incertidumbre: mercado casi inexistente
+}
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -260,18 +273,31 @@ def thompson_p_historica(wins: int, losses: int) -> float:
     return round(alpha / (alpha + beta_param), 4)
 
 
-def theta_thompson(calibracion: dict, superficie: str) -> float:
+
+def theta_thompson(calibracion: dict, superficie: str, tier: str = 'grand_slam') -> float:
     """
-    Obtiene p_historica desde el estado Bayesiano.
-    Prioriza calibración por superficie si n≥10, si no usa global.
+    Obtiene p_historica estratificada por [tier][superficie] (T17-02/T17-03).
+    Jerarquía: [superficie_tier] n≥10 → fallback_por_tier → por_superficie n≥10 → global.
     """
+    # 1. Intentar calibración estratificada [superficie_tier]
+    key = f"{superficie}_{tier}"
+    tier_state = calibracion.get('por_superficie_y_tier', {}).get(key, {"wins": 0, "losses": 0})
+    n_tier = tier_state['wins'] + tier_state['losses']
+    if n_tier >= 10:
+        return thompson_p_historica(tier_state['wins'], tier_state['losses'])
+
+    # 2. Fallback por tier (valores calibrados offline en Nodo-17)
+    fallback = calibracion.get('fallback_por_tier', {}).get(tier)
+    if fallback is not None:
+        return round(fallback, 4)
+
+    # 3. Fallback por superficie (calibración anterior al Nodo-17)
     sup_state = calibracion.get('por_superficie', {}).get(superficie, {"wins": 0, "losses": 0})
     n_sup = sup_state['wins'] + sup_state['losses']
-
     if n_sup >= 10:
         return thompson_p_historica(sup_state['wins'], sup_state['losses'])
 
-    # Fallback: calibración global
+    # 4. Prior neutro
     glob = calibracion.get('global', {"wins": 0, "losses": 0})
     return thompson_p_historica(glob['wins'], glob['losses'])
 
@@ -459,6 +485,27 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
     zona = zona_cuota(cuota_fav)
     lambda_av = lambda_por_zona(zona)
 
+    # ─── T17-03: Escalar λ por tier (Nodo-17) ───────────────
+    torneo_completo = partido.get('torneo_completo', '') or partido.get('torneo_nombre', '') or ''
+    tier = detectar_tier(torneo_completo)
+    lambda_av = lambda_av * LAMBDA_TIER_MULTIPLIER.get(tier, 1.0)
+
+    # ─── T18-03: PELT Recency Alpha (Nodo-18) ────────────────
+    # HOT fresco (≤3 partidos) → bookmaker stale → λ reducido (÷1.20) → más confiado
+    # COLD fresco               → precaución amplificada → λ aumentado (÷0.85)
+    _markov_key = 'jugador1' if player_key_sb == 'player1' else 'jugador2'
+    _markov_fav = partido.get('markov_analysis', {}).get(_markov_key, {})
+    _recencia_info = calcular_recencia_regimen(_markov_fav)
+    _delta_wr = round(
+        _markov_fav.get('win_rate_reciente', 0.5) - _markov_fav.get('win_rate_anterior', 0.5), 3
+    )
+    _alpha_factor = factor_alpha_temporal(
+        _recencia_info['recencia'],
+        _markov_fav.get('estado_actual', 'NEUTRAL'),
+        _delta_wr,
+    )
+    lambda_av = lambda_av / _alpha_factor
+
     # ─── L3: Factor Decomposition ───────────────────────────
     sb = pred.get('score_breakdown', {})
     phi = phi_idiosincratico(sb, player_key=player_key_sb)
@@ -471,9 +518,11 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
     entropy = bookmaker_entropy(cuota1, cuota2)
     psi = psi_entropy_multiplier(entropy)
 
-    # ─── L5: Thompson Sampling ──────────────────────────────
-    superficie = partido.get('superficie', 'unknown')
-    p_hist = theta_thompson(calibracion, superficie)
+    # ─── L5: Thompson Sampling estratificado (T17-02/T17-03) ─
+    superficie = partido.get('superficie') or partido.get('tipo_cancha') or 'unknown'
+    if superficie in ('N/A', 'Desconocida', None):
+        superficie = 'unknown'
+    p_hist = theta_thompson(calibracion, superficie, tier)
 
     # ─── L1: Kelly-KL Core ──────────────────────────────────
     resultado = calcular_edge(
@@ -495,6 +544,8 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
         'cuota_rival':          cuota_rival,
         'torneo':               torneo,
         'superficie':           superficie,
+        'tier':                 tier,
+        'lambda_efectivo':      round(lambda_av, 4),
         'zona_cuota':           zona,
         'entropy_bookmaker':    round(entropy, 4),
         'p_elo_base':           p_elo_base,
@@ -508,7 +559,12 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
         # Historial H2H directo — alimenta p_blend Bayesiano en trader_ev_tenis.py
         'n_h2h':                len([m for m in partido.get('enfrentamientos_directos', []) if isinstance(m, dict)]),
         # Contexto Markov (si ya está disponible en el partido)
-        'markov_favorito':      partido.get('markov_analysis', {}).get('jugador1' if player_key_sb == 'player1' else 'jugador2', {}).get('estado_actual'),
+        'markov_favorito':      _markov_fav.get('estado_actual'),
+        # T18-04 + T18-C5 (Nodo-18): PELT recency + delta win_rate
+        'recencia_regimen':     _recencia_info['recencia'],
+        'freshness_pelt':       _recencia_info['freshness'],
+        'alpha_temporal':       round(_alpha_factor, 4),
+        'delta_wr_markov':      _delta_wr,
     })
 
     return resultado

@@ -1,10 +1,10 @@
 # Inventario de Deuda Técnica — Tennis Prediction Engine
 
-> **Wikilinks:** [[Mandatos-No-Negociables]] | [[Pipeline-Arquitectura]] | [[Sprint-Pipeline]] | [[Grafo-Dependencias-Datos]] | [[Nodo-07-Strangler-Fig]] | [[Nodo-08-File-Selection-Bug]] | [[Nodo-09-API-Status-Keys]] | [[Nodo-12-Inventario-Infraestructura-Legado]]
-> Estado: 2026-05-30 | Auditoría: completa (raíz + subdirectorios + reports/ + screenshots/)
-> Actualización: 2026-05-30 — D-13 ELIMINADO ✅ | T06-03/04 ✅ | T12-A ✅ | T14-03 ✅ | T07-09 ✅ (1,404 líneas eliminadas, 768 tests)
-> Deuda principal activa: D-14 CERRADO ✅ — extraer_historh2h.py = 310 líneas (entry point puro) | Próximo: T14-02 factor_tardio
-> Metodología: Strangler Fig + Spec-Driven Development + TTC (Marco de Tres Expertos)
+> **Wikilinks:** [[Mandatos-No-Negociables]] | [[Pipeline-Arquitectura]] | [[Sprint-Pipeline]] | [[Grafo-Dependencias-Datos]] | [[Nodo-07-Strangler-Fig]] | [[Nodo-08-File-Selection-Bug]] | [[Nodo-09-API-Status-Keys]] | [[Nodo-12-Inventario-Infraestructura-Legado]] | [[Nodo-15-Portfolio-HedgeFund]] | [[Nodo-16-Multi-Torneo-Pipeline]] | [[Nodo-17-Calibracion-Por-Tier]] | [[Nodo-21-Pesos-Diferenciados-Por-Tier]] | [[Nodo-19-H2H-Immunity-Dampener]] | [[Nodo-18-PELT-Recency-Alpha]] | [[Nodo-20-PageRank-Erdos-Quality]]
+> Estado: 2026-06-03 | Auditoría: completa (raíz + subdirectorios + reports/ + screenshots/)
+> Actualización: 2026-06-03 — Nodo-17 Fase 1 ✅ | Nodo-18/19/20 documentados (TTC)
+> Deuda activa restante: Nodo-19 (H2H Immunity) | Nodo-18 (PELT Recency) | Nodo-20 (PageRank) | T15-06 backtesting
+> Metodología: Strangler Fig + Spec-Driven Development + TTC (Marco de Tres Expertos) + Test-Time Compute (4 Marcos)
 
 ---
 
@@ -68,10 +68,10 @@ extraer_historh2h.py (3,717 líneas)     extraer_historh2h.py (1,707 líneas)
 |---|---|---|---|---|
 | `extraer_historh2h.py` | 310 | 53 migrados → H2HExtractor ✅ | — | CUBIERTO (T07-09) |
 | `SequentialH2HExtractor` | ELIMINADO ✅ | — | — | T07-09 CERRADO 2026-05-30 |
-| `generar_tabla_favoritos2.py` | 1,048 | 0 | ~15 tests | MEDIO |
+| `generar_tabla_favoritos2.py` | 1,048 | 33 ✅ | — | CUBIERTO 2026-05-31 |
 | `generar_dataset_plus.py` | 1,661 | 14 | más tests de integración | MEDIO |
-| `Intelligent_ml_enhancer.py` | 1,350 | 0 | ~20 tests | MEDIO — usada por aplicar_enhancer |
-| `aplicar_enhancer.py` | 1,005 | 0 | ~10 tests | MEDIO |
+| `Intelligent_ml_enhancer.py` | 1,350 | 38 ✅ | — | CUBIERTO 2026-05-31 |
+| `aplicar_enhancer.py` | 1,005 | 13 ✅ | — | CUBIERTO 2026-06-01 |
 | `edge_calculator.py` | 673 | 43 ✅ | — | CUBIERTO |
 | `validar_con_api.py` | ~400 | 39 ✅ | — | CUBIERTO (Nodo-09) |
 | `normalization.py` | ~200 | 111 ✅ | — | CUBIERTO |
@@ -102,23 +102,25 @@ Pendiente T07-09 (sprint futuro):
 
 **Estado:** D-14 ✅ CERRADO 2026-05-30 — entry point migrado ✅ | SequentialH2HExtractor eliminado (T07-09) ✅ | extraer_historh2h.py = 310 líneas.
 
-#### D-15: `extraer_URL_partidos_en_vivo.py` — propósito sin documentar
+#### D-15: `extraer_URL_partidos_en_vivo.py` ✅ ELIMINADO 2026-05-31
 
-Script de 237 líneas con `ZitaScraper` variante "en_vivo". No importado por nadie.
-¿Es la versión para partidos LIVE? ¿Experimental? Debe documentarse o eliminarse.
+237 líneas, clase `ZitaLiveScraper`. 0 importadores activos confirmados con grep.
+Decisión final: ELIMINAR — git preserva el código si se necesita recuperar para modo LIVE futuro.
+(`ml_trainer.py` también eliminado en este sprint — 709 líneas, 0 importadores, supersedido por aplicar_enhancer.py)
 
-#### D-16: `prueba.py` — 1,289 líneas de "trabajo en progreso"
+#### D-16: `prueba.py` ✅ CERRADO 2026-05-30 — NO EXISTE EN DISCO
 
-Archivo de experimentación con código sin estructura. No importado, no testeado.
-Decisión pendiente: extraer lo útil → eliminar.
+Verificado con `ls -la prueba.py` → archivo no encontrado. Deuda eliminada de facto.
 
-#### D-17: Configuración dispersa (sin `config.py`)
+#### D-17: Configuración dispersa ✅ CERRADO 2026-05-31
 
-Constantes críticas dispersas en múltiples archivos:
-- `FLASHSCORE_BASE`, `HEADERS` → `validar_con_api.py`
-- `MAX_RAW_SCORES`, `DEFAULT_WEIGHTS` → `normalization.py`
-- `total_matches_to_process = 80` → `extraer_historh2h.py` línea 262 (hardcoded)
-- `headless=True`, `slow_mo=50` → `extraer_historh2h.py` (hardcoded)
+`config.py` creado en raíz. Constantes migradas:
+- `FLASHSCORE_BASE`, `FLASHSCORE_HEADERS` → `config.py` (importado como `HEADERS` en `validar_con_api.py`)
+- `TOTAL_MATCHES_TO_PROCESS = 80` → `config.py` (importado en `scraping/h2h_extractor.py`)
+- `BROWSER_HEADLESS = True`, `BROWSER_SLOW_MO = 250` → `config.py` (defaults de H2HExtractor.__init__)
+
+TTC: `MAX_RAW_SCORES`/`DEFAULT_WEIGHTS` NO movidos — co-ubicados con lógica de normalización en `normalization.py`, no son "config dispersa" sino dominio de negocio.
+10 tests añadidos en `tests/test_config.py` | 791 passed ✅
 
 ---
 
@@ -200,18 +202,53 @@ MÉTRICA 4 — Archivos obsoletos en disco:
 
 ## Backlog Priorizado
 
-| ID | Tarea | Impacto P&L | Esfuerzo | Precondición |
+| ID | Tarea | Impacto P&L | Esfuerzo | Estado |
 |---|---|---|---|---|
-| **D-01 a D-08** | Eliminar 8 archivos vacíos/backup | Claridad | 30 min | Ninguna |
-| **D-10/D-11/D-12** | Eliminar ranking/URL scrapers v1 | Claridad | 30 min | Verificar imports |
-| **D-09** | Extraer SmartLogger a `utils/logger.py` | Mantenimiento | 1h | Ninguna |
-| **Nodo-07 Fase 2 prep** | Ampliar test_h2h_extractor.py: 5→40 tests | Alto | 4h | Ninguna |
-| **Nodo-07 Fase 2** | Migrar SequentialH2HExtractor → H2HExtractor | Alto | 4-8h | 40 tests |
-| **D-13** | Eliminar generar_tabla_favoritos.py v1 | Claridad | 15 min | Validar v2 en prod |
-| **D-15** | Documentar o eliminar `extraer_URL_partidos_en_vivo.py` | Claridad | 1h | Ninguna |
-| **D-16** | Liquidar `prueba.py` | Claridad | 2h | Ninguna |
-| **D-17** | Centralizar config en `config.py` | Mantenimiento | 2h | Ninguna |
-| **Nodo-10 (futuro)** | Unificar ZitaScraper → `scraping/url_scraper.py` | Medio | 4h | Nodo-03 prod validado |
+| **D-01 a D-08** | Eliminar 8 archivos vacíos/backup | Claridad | 30 min | ✅ ELIMINADOS 2026-05-29 |
+| **D-10/D-11/D-12** | Eliminar ranking/URL scrapers v1 | Claridad | 30 min | ✅ ELIMINADOS 2026-05-29 |
+| **D-09** | Extraer SmartLogger a `utils/logger.py` | Mantenimiento | 1h | ✅ RESUELTO 2026-05-29 |
+| **D-13** | Eliminar generar_tabla_favoritos.py v1 | Claridad | 15 min | ✅ ELIMINADO 2026-05-30 |
+| **D-14** | Migrar SequentialH2HExtractor → H2HExtractor | Alto | 8h | ✅ CERRADO 2026-05-30 — T07-09 |
+| **D-15** | Eliminar extraer_URL_partidos_en_vivo.py + ml_trainer.py | Claridad | 15 min | ✅ ELIMINADOS 2026-05-31 — 946 líneas |
+| **D-16** | Liquidar prueba.py | Claridad | 2h | ✅ CERRADO (no existe en disco) |
+| **D-17** | Centralizar config en `config.py` | Mantenimiento | 2h | ✅ CERRADO 2026-05-31 — 791 tests |
+| **T12-B** | Mover flashscore_rankings_inspector.py → tools/ | Claridad | 30 min | ✅ HECHO 2026-05-31 |
+| **T12-C** | Auditar routes/ completo | Claridad | 1h | ✅ AUDITADO 2026-05-31 — SUSPENDER: isla Flask/Selenium, 0 acoplamiento pipeline. Import roto en app.py (routes.players vs player_routes). Sin acción requerida. |
+| **Nodo-10 (futuro)** | Unificar ZitaScraper → `scraping/url_scraper.py` | Medio | 4h | ⏳ Nodo-03 prod validado |
+| **T14-05/T13-04** | Pipeline completo 80 partidos → sistema 2/N | Alto P&L | 4h | ⏳ bloqueado por decisión usuario |
+| ~~**T15-05**~~ | ~~Implementar ajuste automático de stakes por factor VaR en main()~~ | Medio | — | ✅ 2026-06-01 |
+| ~~**T15-04**~~ | ~~Calibrar ρ por tipo de torneo~~ | Medio | — | ✅ 2026-06-01 |
+| ~~**T13-06**~~ | ~~Calibrar p_blend con p_historica derivada (n≥30)~~ | Alto P&L | — | ✅ 2026-06-01 — _load_p_prior() lee calibracion_edge.json, CLI --superficie |
+| **T15-06** | Backtesting formal n≥30 sesiones limpias | Alto P&L | — | ⏳ bloqueado — requiere más sesiones |
+| **Nodo-21 (T21-01..11)** | Pesos por tier (bug fix classify_tournament GS + 5 tiers SNR + density + shrinkage + K-ELO) | 🔴 CRÍTICO — bug GS activo | `rivalry_analyzer.py` + `config.py` + `normalization.py` + `elo_system.py` | 🔴 PENDIENTE — implementar PRIMERO |
+| **Nodo-19 (T19-01..04)** | H2H Immunity Dampener — señal 2do orden HOT×H2H_específico | 🔴 ALTO — previene error activo | `analysis/rivalry_analyzer.py` | 🔴 PENDIENTE — segundo |
+| **Nodo-18 (T18-01..05)** | PELT Recency Alpha — change_point → λ_efectivo reducido en ventana bookmaker stale | 🟠 ALTO — amplifica alpha temporal | `markov_analyzer.py` + `edge_calculator.py` | 🔴 PENDIENTE — implementar segundo |
+| **Nodo-20 (T20-01..04)** | PageRank Erdős — centralidad de nodos intermedios en grafo transitivo | 🟡 MEDIO — refinamiento Erdős | `analysis/erdos_graph.py` | 🔴 PENDIENTE — implementar tercero |
+
+---
+
+## Nodo-17 — Calibración Estratificada por Tier (🔴 ACTIVO 2026-06-02)
+
+> Ver spec completo: [[Nodo-17-Calibracion-Por-Tier]]
+> Origen: Test-Time Compute post-sesión 3 multi-torneo (61.11%, 22/36 Challengers)
+
+| ID | Descripción | Impacto P&L | Archivo | Estado |
+|---|---|---|---|---|
+| **T17-01** | Fix surface propagation: torneo_completo → superficie en H2H output (multi-torneo) | 🔴 CRÍTICO | `scraping/h2h_extractor.py` | 🔴 PENDIENTE |
+| **T17-02** | Estratificar `calibracion_edge.json` por `[tier][superficie]` — separar GS de Challenger | 🔴 CRÍTICO | `data/calibracion_edge.json` + `validar_con_api.py` | 🔴 PENDIENTE |
+| **T17-03** | `edge_calculator.py`: λ_efectivo = λ_base × tier_multiplier (0.5→1.8 challenger) | 🔴 CRÍTICO | `edge_calculator.py` | 🔴 PENDIENTE |
+| **T17-04** | `rivalry_analyzer.py`: common_opp_weight dict por tier (0.28 GS → 0.12 Challenger) | 🟠 ALTO | `analysis/rivalry_analyzer.py` | 🟡 BLOQUEADO (n<10 por tier) |
+| **T17-05** | `elo_system.py`: K-factor por tier (32 GS / 16 Challenger) | 🟡 MEDIO | `analysis/elo_system.py` | 🟡 BLOQUEADO |
+| **T17-06** | `markov_analyzer.py`: window_size por tier (más corto en Challengers) | 🟡 MEDIO | `analysis/markov_analyzer.py` | 🟡 BLOQUEADO |
+
+**Polmans Principle (REGLA-T17-4):**
+```
+Underdog @5.00 en Challenger con surface desconocida = NO APOSTAR.
+Condición mínima para apostar en Challenger:
+  1. superficie confirmada (T17-01 resuelto)
+  2. λ_challenger aplicado (T17-03 resuelto)
+  3. p_prior[tier][superficie] (T17-02 resuelto)
+```
 
 ---
 

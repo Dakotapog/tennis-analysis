@@ -1,12 +1,17 @@
 """
 Tests para analysis/markov_analyzer.py (Nodo-02)
-Cubre: PELT change-point, estados HOT/COLD/NEUTRAL, factor Markov, extracción binaria.
+Cubre: PELT change-point, estados HOT/COLD/NEUTRAL, factor Markov, extracción binaria,
+       factor_tardio (T14-02 — win rate en partidos de 4to/5to set).
 """
 import pytest
 from analysis.markov_analyzer import (
     detectar_cambio_regimen,
     calcular_factor_markov,
     extraer_resultados_binarios,
+    calcular_factor_tardio,
+    calcular_factor_tardio_comparativo,
+    calcular_recencia_regimen,
+    factor_alpha_temporal,
 )
 
 
@@ -302,3 +307,265 @@ class TestPipelineCompleto:
         assert r['estado_actual'] == 'HOT'
         assert r['momentum'] > 0
         assert r['change_point'] is not None
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# calcular_factor_tardio — T14-02 (win rate en 4to/5to set)
+# ─────────────────────────────────────────────────────────────────────────────
+
+class TestFactorTardio:
+    """
+    factor_tardio: win rate del jugador cuando el partido llega al 4to o 5to set.
+    Un partido es "extendido" cuando sets_ganador + sets_perdedor >= 4
+    (ej: 3-1, 1-3, 3-2, 2-3).
+    Ningún bookmaker modela esta señal — alpha exclusivo del sistema.
+    """
+
+    def _match(self, resultado, outcome):
+        return {'resultado': resultado, 'outcome': outcome}
+
+    def test_3_1_detectado_como_extendido(self):
+        """3-1 → 4 sets en total → partido extendido."""
+        history = [
+            self._match('3-1', 'Ganó'),   # ganó en 4 sets
+            self._match('3-1', 'Ganó'),
+            self._match('3-1', 'Ganó'),
+        ]
+        r = calcular_factor_tardio(history)
+        assert r is not None
+        assert r['n_partidos_extendidos'] == 3
+        assert r['win_rate_tardio'] == 1.0
+
+    def test_3_2_detectado_como_extendido(self):
+        """3-2 → 5 sets en total → partido extendido."""
+        history = [
+            self._match('3-2', 'Ganó'),
+            self._match('2-3', 'Perdió'),
+            self._match('3-2', 'Ganó'),
+        ]
+        r = calcular_factor_tardio(history)
+        assert r is not None
+        assert r['n_partidos_extendidos'] == 3
+        assert round(r['win_rate_tardio'], 2) == 0.67
+
+    def test_2_0_excluido_partido_corto(self):
+        """2-0 → 2 sets → partido corto, no cuenta."""
+        history = [
+            self._match('2-0', 'Ganó'),
+            self._match('2-0', 'Ganó'),
+            self._match('2-0', 'Ganó'),
+        ]
+        r = calcular_factor_tardio(history)
+        assert r is None  # sin partidos extendidos suficientes
+
+    def test_2_1_excluido_partido_corto(self):
+        """2-1 → 3 sets → no llega al 4to set."""
+        history = [
+            self._match('2-1', 'Ganó'),
+            self._match('1-2', 'Perdió'),
+            self._match('2-1', 'Ganó'),
+        ]
+        r = calcular_factor_tardio(history)
+        assert r is None
+
+    def test_pocos_partidos_extendidos_retorna_none(self):
+        """Con menos de min_matches partidos extendidos → None (sin señal fiable)."""
+        history = [
+            self._match('3-1', 'Ganó'),
+            self._match('3-1', 'Ganó'),
+            self._match('2-0', 'Ganó'),   # corto → no cuenta
+        ]
+        r = calcular_factor_tardio(history, min_matches=3)
+        assert r is None  # solo 2 extendidos, necesita 3
+
+    def test_historial_vacio_retorna_none(self):
+        assert calcular_factor_tardio([]) is None
+
+    def test_win_rate_tardio_rango(self):
+        """win_rate_tardio siempre en [0.0, 1.0]."""
+        history = [
+            self._match('3-1', 'Ganó'),
+            self._match('3-2', 'Perdió'),
+            self._match('1-3', 'Perdió'),
+        ]
+        r = calcular_factor_tardio(history, min_matches=2)
+        assert r is not None
+        assert 0.0 <= r['win_rate_tardio'] <= 1.0
+
+    def test_resultado_na_ignorado(self):
+        """Resultado 'N/A' o None se omite sin romper el cálculo."""
+        history = [
+            self._match('N/A', 'Ganó'),
+            self._match(None, 'Ganó'),
+            self._match('3-1', 'Ganó'),
+            self._match('3-2', 'Ganó'),
+            self._match('1-3', 'Perdió'),
+        ]
+        r = calcular_factor_tardio(history, min_matches=2)
+        assert r is not None
+        assert r['n_partidos_extendidos'] == 3
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# calcular_factor_tardio_comparativo
+# ─────────────────────────────────────────────────────────────────────────────
+
+class TestFactorTardioComparativo:
+
+    def _tardio(self, win_rate, n=5):
+        return {'win_rate_tardio': win_rate, 'n_partidos_extendidos': n}
+
+    def test_p1_domina_factor_mayor_que_1(self):
+        """P1 con win_rate_tardio alto vs P2 bajo → factor > 1."""
+        f = calcular_factor_tardio_comparativo(
+            self._tardio(0.80), self._tardio(0.20)
+        )
+        assert f > 1.0
+
+    def test_p1_inferior_factor_menor_que_1(self):
+        """P1 con win_rate_tardio bajo vs P2 alto → factor < 1."""
+        f = calcular_factor_tardio_comparativo(
+            self._tardio(0.20), self._tardio(0.80)
+        )
+        assert f < 1.0
+
+    def test_ambos_iguales_factor_1(self):
+        """Win rates iguales → factor = 1.0."""
+        f = calcular_factor_tardio_comparativo(
+            self._tardio(0.60), self._tardio(0.60)
+        )
+        assert f == 1.0
+
+    def test_sin_datos_retorna_1(self):
+        """Si alguno es None (sin datos) → factor = 1.0 (sin penalizar)."""
+        assert calcular_factor_tardio_comparativo(None, None) == 1.0
+        assert calcular_factor_tardio_comparativo(self._tardio(0.8), None) == 1.0
+        assert calcular_factor_tardio_comparativo(None, self._tardio(0.8)) == 1.0
+
+    def test_factor_en_rango(self):
+        """Factor siempre en [0.85, 1.15]."""
+        casos = [(0.0, 1.0), (1.0, 0.0), (0.5, 0.5), (0.9, 0.1)]
+        for wr1, wr2 in casos:
+            f = calcular_factor_tardio_comparativo(
+                self._tardio(wr1), self._tardio(wr2)
+            )
+            assert 0.84 <= f <= 1.16, f"factor={f} fuera de rango"
+
+
+# =============================================================================
+# TESTS NODO-18 — PELT Recency Alpha (T18-05)
+# =============================================================================
+
+def _markov(estado, change_point, n_partidos, wr_rec=0.8, wr_ant=0.5):
+    """Helper: construye un markov_result simulado."""
+    return {
+        'estado_actual':     estado,
+        'change_point':      change_point,
+        'n_partidos':        n_partidos,
+        'win_rate_reciente': wr_rec,
+        'win_rate_anterior': wr_ant,
+        'momentum':          round(wr_rec - wr_ant, 3),
+        'confianza':         0.8,
+    }
+
+
+class TestDetectarCambioRegimenNPartidos:
+    def test_retorna_n_partidos(self):
+        """detectar_cambio_regimen ahora incluye n_partidos en el resultado."""
+        r = detectar_cambio_regimen([1, 0] * 8)
+        assert 'n_partidos' in r
+        assert r['n_partidos'] == 16
+
+    def test_n_partidos_lista_vacia(self):
+        r = detectar_cambio_regimen([])
+        assert r['n_partidos'] == 0
+
+    def test_n_partidos_datos_insuficientes(self):
+        r = detectar_cambio_regimen([1, 0, 1], min_size=5)
+        assert r['n_partidos'] == 3
+
+
+class TestCalcularRecenciaRegimen:
+    def test_fresco_recencia_3(self):
+        """change_point=17, n=20 → recencia=3 → FRESCO."""
+        r = calcular_recencia_regimen(_markov('HOT', 17, 20))
+        assert r['recencia'] == 3
+        assert r['freshness'] == 'FRESCO'
+
+    def test_reciente_recencia_5(self):
+        """change_point=15, n=20 → recencia=5 → RECIENTE."""
+        r = calcular_recencia_regimen(_markov('HOT', 15, 20))
+        assert r['recencia'] == 5
+        assert r['freshness'] == 'RECIENTE'
+
+    def test_estable_recencia_14(self):
+        """change_point=6, n=20 → recencia=14 → ESTABLE."""
+        r = calcular_recencia_regimen(_markov('HOT', 6, 20))
+        assert r['recencia'] == 14
+        assert r['freshness'] == 'ESTABLE'
+
+    def test_sin_change_point_estable(self):
+        """change_point=None → ESTABLE sin recencia."""
+        r = calcular_recencia_regimen(_markov('NEUTRAL', None, 20))
+        assert r['recencia'] is None
+        assert r['freshness'] == 'ESTABLE'
+
+    def test_n_partidos_cero_estable(self):
+        """n_partidos=0 → ESTABLE aunque haya change_point."""
+        r = calcular_recencia_regimen({'change_point': 5, 'n_partidos': 0})
+        assert r['freshness'] == 'ESTABLE'
+
+    def test_exactamente_umbral_fresco(self):
+        """recencia=3 → FRESCO (umbral inclusivo)."""
+        r = calcular_recencia_regimen(_markov('HOT', 17, 20))
+        assert r['freshness'] == 'FRESCO'
+
+    def test_exactamente_umbral_reciente(self):
+        """recencia=7 → RECIENTE (umbral inclusivo)."""
+        r = calcular_recencia_regimen(_markov('HOT', 13, 20))
+        assert r['freshness'] == 'RECIENTE'
+
+
+class TestFactorAlphaTemporal:
+    def test_hot_fresco_retorna_120(self):
+        """HOT + recencia≤3 → factor 1.20 (máximo alpha)."""
+        assert factor_alpha_temporal(3, 'HOT', 0.3) == 1.20
+
+    def test_hot_reciente_retorna_110(self):
+        """HOT + recencia≤7 → factor 1.10 (alpha parcial)."""
+        assert factor_alpha_temporal(5, 'HOT', 0.2) == 1.10
+
+    def test_cold_fresco_retorna_085(self):
+        """COLD + recencia≤3 → factor 0.85 (precaución amplificada)."""
+        assert factor_alpha_temporal(2, 'COLD', -0.3) == 0.85
+
+    def test_hot_estable_retorna_100(self):
+        """HOT + recencia>7 → sin ajuste (bookmaker ya repriced)."""
+        assert factor_alpha_temporal(14, 'HOT', 0.2) == 1.00
+
+    def test_cold_estable_retorna_100(self):
+        """COLD + recencia>7 → sin ajuste."""
+        assert factor_alpha_temporal(10, 'COLD', -0.2) == 1.00
+
+    def test_neutral_siempre_100(self):
+        """NEUTRAL cualquier recencia → 1.00."""
+        for rec in [1, 3, 7, 20]:
+            assert factor_alpha_temporal(rec, 'NEUTRAL', 0.0) == 1.00
+
+    def test_recencia_none_retorna_100(self):
+        """recencia=None (sin change_point) → 1.00."""
+        assert factor_alpha_temporal(None, 'HOT', 0.3) == 1.00
+
+    def test_lambda_reducido_cuando_hot_fresco(self):
+        """Verificar efecto en λ: HOT fresco → λ ÷ 1.20 < λ original."""
+        lambda_base = 2.4
+        factor = factor_alpha_temporal(2, 'HOT', 0.4)
+        lambda_efectivo = lambda_base / factor
+        assert lambda_efectivo < lambda_base
+
+    def test_lambda_aumentado_cuando_cold_fresco(self):
+        """Verificar efecto en λ: COLD fresco → λ ÷ 0.85 > λ original."""
+        lambda_base = 2.4
+        factor = factor_alpha_temporal(1, 'COLD', -0.4)
+        lambda_efectivo = lambda_base / factor
+        assert lambda_efectivo > lambda_base

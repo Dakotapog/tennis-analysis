@@ -3,6 +3,7 @@ from datetime import datetime
 import logging
 import math
 
+from analysis.elo_system import k_factor_efectivo
 from analysis.erdos_graph import (
     historial_a_partidos,
     construir_grafo_victorias,
@@ -10,6 +11,56 @@ from analysis.erdos_graph import (
 )
 
 logger = logging.getLogger(__name__)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# T21-06 (Nodo-21 Fase 2) — Densidad local del grafo como modulador continuo
+# ─────────────────────────────────────────────────────────────────────────────
+
+def density_confidence(n_common_opponents: int, n_erdos_paths: int) -> float:
+    """
+    Calcula la confianza en señales transitivas según la densidad local del grafo.
+
+    REGLA-T21-3: densidad local > categoría discreta.
+    Los pesos por tier asumen densidad uniforme dentro del tier.
+    Parry vs Seyboth Wild (RG R1, ambos jóvenes) tiene densidad baja aunque sea Grand Slam.
+
+    Rango: [0.3, 1.0]
+      Grand Slam típico: n_common ~15-30, n_paths ~20+ → factor ~1.0
+      Challenger típico: n_common ~2-3,  n_paths ~3-5  → factor ~0.4
+      Sin data:          n_common=0,     n_paths=0     → factor=0.3
+    """
+    raw = min(n_common_opponents, 20) / 20.0
+    path_boost = min(n_erdos_paths, 30) / 30.0
+    return round(0.3 + 0.7 * ((raw + path_boost) / 2), 4)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# T21-07 (Nodo-21 Fase 2) — James-Stein shrinkage para pesos por tier
+# ─────────────────────────────────────────────────────────────────────────────
+
+def shrink_weights(tier_weights: dict, default_weights: dict, n_tier: int, n_threshold: int = 20) -> dict:
+    """
+    Empirical Bayes (James-Stein): shrink tier-specific weights toward default
+    when there is little empirical evidence for the tier.
+
+    REGLA-T21-4: pesos nunca ciegos — shrinkage obligatorio.
+      n=0:   factor=0.00 → 100% default (pesos seguros cuando no hay data)
+      n=31:  factor=0.61 → 61% tier, 39% default
+      n=100: factor=0.83 → 83% tier
+
+    Args:
+        tier_weights:   pesos específicos del tier (e.g. grand_slam)
+        default_weights: pesos de fallback conservador (e.g. atp500)
+        n_tier:         número de partidos observados para este tier
+        n_threshold:    pseudo-count para regularización (default 20)
+    """
+    factor = n_tier / (n_tier + n_threshold)
+    return {
+        k: round(factor * tier_weights[k] + (1 - factor) * default_weights[k], 4)
+        for k in tier_weights
+    }
+
 
 class RivalryAnalyzer:
     """⚔️ Analizador de rivalidades transitivas con análisis de rachas y peso de oponentes."""
@@ -30,9 +81,11 @@ class RivalryAnalyzer:
             return 1600
 
     def calculate_elo_from_history(self, player_name, player_history):
-        """Calcula el rating ELO de un jugador basado en su historial de partidos extraído."""
+        """Calcula el rating ELO de un jugador basado en su historial de partidos extraído.
+        T21-09 (Nodo-21 Fase 3): K-factor adaptivo por tier de torneo de cada partido.
+        """
         current_elo = self.elo_system.default_rating
-        
+
         if not player_history:
             return current_elo
 
@@ -40,16 +93,20 @@ class RivalryAnalyzer:
         for match in reversed(player_history):
             opponent_rank = match.get('opponent_ranking')
             opponent_elo = self.estimate_elo_from_rank(opponent_rank)
-            
+
             expected_score = self.elo_system.expected_score(current_elo, opponent_elo)
-            
-            # Usar determine_match_winner para consistencia
+
             won = self.determine_match_winner(match, player_name)
             actual_score = 1 if won else 0
-            
-            new_elo = current_elo + self.elo_system.k_factor * (actual_score - expected_score)
+
+            # T21-09: K-factor por tier del torneo de cada partido
+            from config import detectar_tier as _dt
+            _torneo = match.get('torneo') or match.get('tournament') or ''
+            _tier = _dt(_torneo)
+            k = k_factor_efectivo(_tier)
+            new_elo = current_elo + k * (actual_score - expected_score)
             current_elo = new_elo
-            
+
         return round(current_elo)
 
     def __init__(self, ranking_manager, elo_system):
@@ -848,9 +905,9 @@ class RivalryAnalyzer:
             'p1_location_stats': p1_location_stats,
             'p2_location_stats': p2_location_stats,
             'erdos_analysis': _erdos,
-            'prediction': self.generate_advanced_prediction(player1_info, player2_info, _p1_erdos_co, _p2_erdos_co, player1_name, player2_name, player1_history, player2_history, 0, 0, player1_form, player2_form, direct_h2h_matches, tournament_name, prediction_context, p1_elo, p2_elo, optimized_weights=optimized_weights)
+            'prediction': self.generate_advanced_prediction(player1_info, player2_info, _p1_erdos_co, _p2_erdos_co, player1_name, player2_name, player1_history, player2_history, 0, 0, player1_form, player2_form, direct_h2h_matches, tournament_name, prediction_context, p1_elo, p2_elo, optimized_weights=optimized_weights, n_common_opponents=0, n_erdos_paths=_erdos.get('n_paths', 0))
         }
-        
+
         player1_advantages = []
         player2_advantages = []
         p1_common_opponent_score = 0
@@ -982,9 +1039,9 @@ class RivalryAnalyzer:
             'p1_location_stats': p1_location_stats,
             'p2_location_stats': p2_location_stats,
             'erdos_analysis': _erdos,
-            'prediction': self.generate_advanced_prediction(player1_info, player2_info, p1_common_opponent_score, p2_common_opponent_score, player1_name, player2_name, player1_history, player2_history, len(player1_advantages), len(player2_advantages), player1_form, player2_form, direct_h2h_matches, tournament_name, prediction_context, p1_elo, p2_elo, optimized_weights=optimized_weights)
+            'prediction': self.generate_advanced_prediction(player1_info, player2_info, p1_common_opponent_score, p2_common_opponent_score, player1_name, player2_name, player1_history, player2_history, len(player1_advantages), len(player2_advantages), player1_form, player2_form, direct_h2h_matches, tournament_name, prediction_context, p1_elo, p2_elo, optimized_weights=optimized_weights, n_common_opponents=len(common_opponents), n_erdos_paths=_erdos.get('n_paths', 0))
         }
-    
+
     def generate_basic_prediction(self, rank1, rank2, player1_name, player2_name):
         """🔮 Generar predicción básica solo con rankings"""
         if rank1 is None and rank2 is None: return {'favored_player': 'Empate', 'confidence': 0, 'reasoning': ['Ambos jugadores sin ranking disponible']}
@@ -999,29 +1056,52 @@ class RivalryAnalyzer:
         else:
             return {'favored_player': 'Empate', 'confidence': 0, 'reasoning': ['Rankings idénticos']}
     
-    def classify_tournament(self, tournament_name):
-        """Categoriza el torneo para ajustar los pesos del análisis."""
-        if not tournament_name:
-            return 'default'
-        
-        name_lower = tournament_name.lower()
-        
-        # Palabras clave para torneos de alto nivel (ATP/WTA)
-        if any(keyword in name_lower for keyword in ['atp', 'wta', 'grand slam', 'masters', 'olympic', 'united cup']):
-            return 'atp_wta'
-            
-        # Palabras clave para Challengers
-        if 'challenger' in name_lower:
-            return 'challenger'
-            
-        # Palabras clave para ITFs
-        if any(keyword in name_lower for keyword in ['itf', 'm15', 'm25', 'w15', 'w25', 'w35', 'w50', 'w75', 'w100']):
-            return 'itf'
-            
-        # Si no coincide, usar un set de pesos por defecto (similar a ATP)
-        return 'default'
+    def calcular_h2h_immunity(self, direct_h2h_matches: list, favored: str, estado_fav: str) -> dict:
+        """
+        T19-01 (Nodo-19): Detecta si el favorito tiene patrón de pérdida histórica
+        contra este rival específico, incluso cuando está en estado HOT.
 
-    def generate_advanced_prediction(self, player1_info, player2_info, p1_rivalry_score, p2_rivalry_score, player1_name, player2_name, player1_history, player2_history, player1_advantages_count, player2_advantages_count, player1_form, player2_form, direct_h2h_matches, tournament_name, prediction_context, p1_elo, p2_elo, optimized_weights=None):
+        REGLA-T19-2: n_h2h < 3 → immunity_factor = 1.00 (muestra insuficiente)
+        REGLA-T19-1: Solo actúa cuando estado_fav == 'HOT'
+          HOT + h2h_win_rate < 0.30 → 0.85 (señal de 2do orden negativa)
+          HOT + h2h_win_rate > 0.70 → 1.12 (doble confirmación)
+          Otros → 1.00
+
+        Retorna: {'h2h_win_rate': float, 'immunity_factor': float, 'n_h2h': int}
+        """
+        total = len(direct_h2h_matches) if direct_h2h_matches else 0
+        if total < 3:
+            return {'h2h_win_rate': 0.5, 'immunity_factor': 1.00, 'n_h2h': total}
+
+        wins_fav = sum(1 for m in direct_h2h_matches if m.get('ganador') == favored)
+        h2h_win_rate = wins_fav / total
+
+        if estado_fav == 'HOT':
+            if h2h_win_rate < 0.30:
+                immunity_factor = 0.85
+            elif h2h_win_rate > 0.70:
+                immunity_factor = 1.12
+            else:
+                immunity_factor = 1.00
+        else:
+            immunity_factor = 1.00
+
+        return {
+            'h2h_win_rate': round(h2h_win_rate, 3),
+            'immunity_factor': immunity_factor,
+            'n_h2h': total,
+        }
+
+    def classify_tournament(self, tournament_name):
+        """
+        Categoriza el torneo para ajustar los pesos del análisis.
+        T21-01: Delega a detectar_tier() — fuente única de verdad en config.py.
+        Retorna: 'grand_slam' | 'atp1000' | 'atp500' | 'challenger' | 'itf'
+        """
+        from config import detectar_tier
+        return detectar_tier(tournament_name or '')
+
+    def generate_advanced_prediction(self, player1_info, player2_info, p1_rivalry_score, p2_rivalry_score, player1_name, player2_name, player1_history, player2_history, player1_advantages_count, player2_advantages_count, player1_form, player2_form, direct_h2h_matches, tournament_name, prediction_context, p1_elo, p2_elo, optimized_weights=None, n_common_opponents=0, n_erdos_paths=0):
         """🎯 Generar predicción avanzada aplicando la fórmula de Peso Final - VERSIÓN REBALANCEADA Y NORMALIZADA."""
         
         reasoning = []
@@ -1040,27 +1120,69 @@ class RivalryAnalyzer:
         else:
             tournament_category = self.classify_tournament(tournament_name)
             
-            # PESOS REBALANCEADOS CON ELO Y MOMENTUM
+            # T21-03: Pesos diferenciados por tier (Nodo-21) — SNR por estructura de mercado
+            # grand_slam: H2H denso + red Erdős densa → h2h/common_opp altos, form bajo
+            # challenger:  red fragmentada, H2H escaso → form/ranking altos, h2h/common_opp bajos
+            # itf:         sin red, sin H2H → form_recent dominante
             weights_config = {
-                'atp_wta': {
-                    'surface_specialization': 0.15, 'form_recent': 0.15, 'common_opponents': 0.20, 
-                    'h2h_direct': 0.15, 'ranking_momentum': 0.20, 'elo_rating': 0.10, 'home_advantage': 0.05, 'strength_of_schedule': 0.0
+                'grand_slam': {
+                    'surface_specialization': 0.15, 'form_recent': 0.12, 'common_opponents': 0.22,
+                    'h2h_direct': 0.18, 'ranking_momentum': 0.15, 'elo_rating': 0.13, 'home_advantage': 0.05, 'strength_of_schedule': 0.00
+                },
+                'atp1000': {
+                    'surface_specialization': 0.16, 'form_recent': 0.15, 'common_opponents': 0.20,
+                    'h2h_direct': 0.14, 'ranking_momentum': 0.17, 'elo_rating': 0.13, 'home_advantage': 0.05, 'strength_of_schedule': 0.00
+                },
+                'atp500': {
+                    'surface_specialization': 0.15, 'form_recent': 0.18, 'common_opponents': 0.15,
+                    'h2h_direct': 0.10, 'ranking_momentum': 0.20, 'elo_rating': 0.12, 'home_advantage': 0.05, 'strength_of_schedule': 0.05
                 },
                 'challenger': {
-                    'surface_specialization': 0.20, 'form_recent': 0.20, 'common_opponents': 0.15, 
-                    'ranking_momentum': 0.20, 'elo_rating': 0.15, 'h2h_direct': 0.05, 'home_advantage': 0.05, 'strength_of_schedule': 0.0
+                    'surface_specialization': 0.20, 'form_recent': 0.22, 'common_opponents': 0.08,
+                    'h2h_direct': 0.03, 'ranking_momentum': 0.22, 'elo_rating': 0.15, 'home_advantage': 0.05, 'strength_of_schedule': 0.05
                 },
                 'itf': {
-                    'surface_specialization': 0.15, 'form_recent': 0.25, 'common_opponents': 0.10, 
-                    'ranking_momentum': 0.20, 'elo_rating': 0.15, 'h2h_direct': 0.05, 'home_advantage': 0.05, 'strength_of_schedule': 0.05
+                    'surface_specialization': 0.15, 'form_recent': 0.28, 'common_opponents': 0.05,
+                    'h2h_direct': 0.02, 'ranking_momentum': 0.22, 'elo_rating': 0.15, 'home_advantage': 0.08, 'strength_of_schedule': 0.05
                 },
-                'default': {
-                    'surface_specialization': 0.15, 'form_recent': 0.15, 'common_opponents': 0.20, 
-                    'h2h_direct': 0.15, 'ranking_momentum': 0.20, 'elo_rating': 0.10, 'home_advantage': 0.05, 'strength_of_schedule': 0.0
-                }
             }
-            weights = dict(weights_config.get(tournament_category, weights_config['default']))
+            weights = dict(weights_config.get(tournament_category, weights_config['atp500']))
             reasoning.append(f"LOG_WEIGHTS_STRATEGY: '{tournament_category}' -> {weights}")
+
+            # T21-07 — James-Stein shrinkage (Nodo-21 Fase 2)
+            # REGLA-T21-4: pesos nunca ciegos — shrink hacia default cuando n_tier < 20.
+            # n_tier leído de calibracion_edge.json por superficie×tier.
+            try:
+                import json, os as _os
+                _cal_path = _os.path.join(_os.path.dirname(__file__), '..', 'data', 'calibracion_edge.json')
+                with open(_cal_path) as _f:
+                    _cal = json.load(_f)
+                _surf_key = prediction_context.get('current_match_surface', 'unknown') or 'unknown'
+                _key = f"{_surf_key}_{tournament_category}"
+                _tier_state = _cal.get('por_superficie_y_tier', {}).get(_key, {'wins': 0, 'losses': 0})
+                _n_tier = _tier_state['wins'] + _tier_state['losses']
+                _default_w = weights_config['atp500']
+                weights = shrink_weights(weights, _default_w, _n_tier)
+                reasoning.append(
+                    f"LOG_SHRINKAGE: key={_key} n={_n_tier} "
+                    f"factor={round(_n_tier/(_n_tier+20), 3)} weights={weights}"
+                )
+            except Exception as _shrink_err:
+                reasoning.append(f"LOG_SHRINKAGE_SKIP: {_shrink_err}")
+
+            # T21-06 — Density confidence (Nodo-21 Fase 2)
+            # REGLA-T21-3: densidad local > categoría discreta.
+            # Modula peso common_opponents según densidad real del grafo.
+            # El peso sobrante se redistribuye a form_recent (no depende de la red).
+            _density = density_confidence(n_common_opponents, n_erdos_paths)
+            _w_co_original = weights['common_opponents']
+            weights['common_opponents'] = round(_w_co_original * _density, 4)
+            weights['form_recent'] = round(weights['form_recent'] + _w_co_original * (1 - _density), 4)
+            reasoning.append(
+                f"LOG_DENSITY: n_common={n_common_opponents} n_paths={n_erdos_paths} "
+                f"density={_density} co_w: {_w_co_original}→{weights['common_opponents']} "
+                f"form_w→{weights['form_recent']}"
+            )
 
             # T14-03 — Ajuste de pesos por superficie (Nodo-14, Conexión 3)
             # Alpha validado: ranking es menos predictivo en arcilla lenta (Parry @ 4.50 ganó).
@@ -1237,6 +1359,19 @@ class RivalryAnalyzer:
             factor_p1 = calcular_factor_markov(markov_p1, markov_p2)
             factor_p2 = calcular_factor_markov(markov_p2, markov_p1)
 
+            # --- H2H IMMUNITY DAMPENER (T19-02, Nodo-19) ---
+            # Cruza el estado HOT con el H2H histórico vs este rival específico.
+            # HOT pero pierde históricamente a ESTE rival → reducir factor_markov.
+            # HOT y domina históricamente → amplificar (doble confirmación).
+            immunity_p1 = self.calcular_h2h_immunity(
+                direct_h2h_matches, player1_name, markov_p1['estado_actual']
+            )
+            immunity_p2 = self.calcular_h2h_immunity(
+                direct_h2h_matches, player2_name, markov_p2['estado_actual']
+            )
+            factor_p1 = round(factor_p1 * immunity_p1['immunity_factor'], 4)
+            factor_p2 = round(factor_p2 * immunity_p2['immunity_factor'], 4)
+
             # Aplicar al componente form_recent (límite 300 se reaplica)
             raw_p1['form_recent'] = min(raw_p1['form_recent'] * factor_p1, 300)
             raw_p2['form_recent'] = min(raw_p2['form_recent'] * factor_p2, 300)
@@ -1244,21 +1379,54 @@ class RivalryAnalyzer:
             reasoning.append(
                 f"LOG_MARKOV_P1: estado={markov_p1['estado_actual']} "
                 f"momentum={markov_p1['momentum']} factor={factor_p1} "
-                f"wr_rec={markov_p1['win_rate_reciente']} cp={markov_p1['change_point']}"
+                f"wr_rec={markov_p1['win_rate_reciente']} cp={markov_p1['change_point']} "
+                f"immunity={immunity_p1['immunity_factor']} h2h_wr={immunity_p1['h2h_win_rate']}"
             )
             reasoning.append(
                 f"LOG_MARKOV_P2: estado={markov_p2['estado_actual']} "
                 f"momentum={markov_p2['momentum']} factor={factor_p2} "
-                f"wr_rec={markov_p2['win_rate_reciente']} cp={markov_p2['change_point']}"
+                f"wr_rec={markov_p2['win_rate_reciente']} cp={markov_p2['change_point']} "
+                f"immunity={immunity_p2['immunity_factor']} h2h_wr={immunity_p2['h2h_win_rate']}"
             )
 
             markov_analysis = {
-                'jugador1':       markov_p1,
-                'jugador2':       markov_p2,
-                'factor_markov':  factor_p1,  # perspectiva P1 vs P2
+                'jugador1':              markov_p1,
+                'jugador2':              markov_p2,
+                'factor_markov':         factor_p1,          # perspectiva P1 vs P2
+                'h2h_immunity_p1':       immunity_p1,        # T19-03
+                'h2h_immunity_p2':       immunity_p2,
             }
         except Exception as _markov_err:
             reasoning.append(f"LOG_MARKOV_ERROR: {_markov_err}")
+
+        # --- FACTOR TARDÍO (T14-02) — win rate en partidos de 4to/5to set ---
+        tardio_analysis = None
+        try:
+            from analysis.markov_analyzer import (
+                calcular_factor_tardio, calcular_factor_tardio_comparativo
+            )
+            tardio_p1 = calcular_factor_tardio(player1_history, min_matches=3)
+            tardio_p2 = calcular_factor_tardio(player2_history, min_matches=3)
+
+            factor_tardio = calcular_factor_tardio_comparativo(tardio_p1, tardio_p2)
+
+            if factor_tardio != 1.0:
+                raw_p1['form_recent'] = min(raw_p1['form_recent'] * factor_tardio, 300)
+                reasoning.append(
+                    f"LOG_TARDIO: factor={factor_tardio} "
+                    f"wr_tardio_p1={tardio_p1['win_rate_tardio'] if tardio_p1 else 'N/A'} "
+                    f"n_p1={tardio_p1['n_partidos_extendidos'] if tardio_p1 else 0} "
+                    f"wr_tardio_p2={tardio_p2['win_rate_tardio'] if tardio_p2 else 'N/A'} "
+                    f"n_p2={tardio_p2['n_partidos_extendidos'] if tardio_p2 else 0}"
+                )
+
+            tardio_analysis = {
+                'jugador1':       tardio_p1,
+                'jugador2':       tardio_p2,
+                'factor_tardio':  factor_tardio,
+            }
+        except Exception as _tardio_err:
+            reasoning.append(f"LOG_TARDIO_ERROR: {_tardio_err}")
 
         # --- LÓGICA DE PONDERACIÓN DINÁMICA (H2H Antiguo vs. Rivales Comunes) ---
         try:
@@ -1389,4 +1557,5 @@ class RivalryAnalyzer:
             },
             'weights_used': weights,
             'markov_analysis': markov_analysis,
+            'tardio_analysis': tardio_analysis,
         }
