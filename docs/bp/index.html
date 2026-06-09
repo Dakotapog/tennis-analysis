@@ -57,7 +57,7 @@
     return;
   }
 
-  var betplayUrl = 'https://betplay.com.co/apuestas#home?coupon=combination|' + ids;
+  var betplayUrl = 'https://betplay.com.co/apuestas?_=' + Date.now() + '#home?coupon=combination|' + ids + '||append';
 
   // Set fallback button
   document.getElementById('manual-link').href = betplayUrl;
