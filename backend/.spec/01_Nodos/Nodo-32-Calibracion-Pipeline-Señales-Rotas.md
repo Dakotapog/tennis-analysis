@@ -870,155 +870,98 @@ T32-33: test_t32_33_markov_infrastructure_intact_post_fase3
 
 ---
 
-## 9. AUDIT FINAL — 2026-06-22 16:10 (Sesión Completa)
+## 9. CIERRE 2026-06-22 — Scope de Cada Fase e Incidentes de Remediación
 
-### 9.1 Hallazgo Crítico Identificado
+### 9.1 Scope Original de Cada Fase
 
-**Archivo contaminado descubierto:** `reports/edge_report_20260622_082554.json` (generado 08:25 hoy con gate viejo)
-- **Niels McDonald:** `apostar=True golden_zone=True p_modelo=0.512 cuota=2.8` → phantom golden bonus en mega-combos
-- **Luciano Ambrogi:** `apostar=True p_modelo=0.51 cuota=3.6` → pure phantom edge
-- **Riesgo:** Si `betplay_combo_builder.py` corría entre 08:25 y la detección, estos picks habrían quedado incluidos en un combo/betslip generado con phantom edge — que de ejecutarse en Betplay habría representado una apuesta real con edge falso.
+| Fase | Scope definido | Archivos modificados | Estado |
+|------|----------------|---------------------|--------|
+| **Fase 1** | Betslip fields propagados sin "?" default; ITF fallback prior = 0.50 | `betplay_combo_builder.py`, `betslip_registrar.py`, `calibracion_edge.json` | ✅ COMPLETO |
+| **Fase 2** | Gate `P_MODELO_MIN_UNDERDOG` bloquea underdogs sin convicción; `golden_zone` redefinida (bbi≥0.60 + 2 ejes + p_modelo≥threshold) | `edge_calculator.py` | ✅ COMPLETO |
+| **Fase 3** | Markov factor aplicado POST-normalizacion (`norm_form = log1p(raw) × factor`, no PRE); confidence delta medido y verificado | `analysis/rivalry_analyzer.py` | ✅ COMPLETO |
 
-### 9.2 Auditoría de Exposición Real
+### 9.2 Incidentes de Remediación Descubiertos Durante el Audit
 
-**Verificación exhaustiva realizada:** 
-- ✅ NO hay `betslip_index_20260622_*.json` posterior a 08:25
-- ✅ NO hay `apuestas_20260622_*.json` (ningún registro de apuesta real)
-- ✅ NO hay `Combo*.bat` o combo HTML en Desktop posteriores a 08:25
-- ✅ database.db solo contiene tablas de ML (isla suspended)
+Descubiertos al ejecutar las fases, **no parte del scope original**. Documentados separadamente para trazabilidad.
 
-**Conclusión:** El archivo contaminado **nunca fue consumido**. El riesgo era latente.
+---
 
-### 9.3 Remediación Inmediata
+**Incidente A — edge_report con gate viejo (post Fase 2)**
 
-**Acción 1 — Regeneración del edge_report (16:10 mismo día)**
-- Ejecutado: `python3 edge_calculator.py --h2h reports/h2h_results_enhanced_20260622_081423.json`
-- Output: `reports/edge_report_20260622_161048.json`
-- Verificación:
-  - Niels McDonald → `apostar=False golden_zone=False` (watchlist)
-  - Luciano Ambrogi → `apostar=False golden_zone=False` (watchlist)
-  - 9 picks en zona phantom (0.50≤p_modelo≤0.549, cuota≥2.10) → **todos** `apostar=False`
-  - Alexandre Reco (p_modelo=0.823) → `apostar=True golden_zone=True` (consistente, sin cambios)
+`reports/edge_report_20260622_082554.json` (generado 08:25 con gate viejo):
+- Niels McDonald: `apostar=True golden_zone=True p_modelo=0.512` → phantom golden bonus
+- Luciano Ambrogi: `apostar=True p_modelo=0.51` → pure phantom edge
+- **Exposición:** Verificación exhaustiva confirmó que el archivo nunca fue consumido (no hay betslip_index, apuestas, ni combos posteriores a 08:25).
 
-**Acción 2 — Versionado del Gate (prevención de repetición)**
+*Remediación:* `GATE_VERSION = "nodo32-fase2"` en `edge_calculator.py` serializado en metadata del edge_report; `_validate_edge_report_gate()` en 4 call sites de `betplay_combo_builder.py`; regeneración del edge_report a las 16:10 → todos los phantom picks a watchlist.
 
-Implementada 3 puntos:
+Archivo viejo preservado en `reports/edge_report_20260622_082554.json` como caso de prueba real.
 
-**(A) Constante GATE_VERSION en edge_calculator.py**
-```python
-# Línea 79
-GATE_VERSION = "nodo32-fase2"  # Incrementar en cada cambio de gate
-```
+---
 
-**(B) Serialización en metadata del edge_report**
-```python
-# Línea 942 en procesar_archivo_h2h()
-'gate_version': GATE_VERSION
-```
+**Incidente B — h2h_results_enhanced con Markov PRE-norm (post Fase 3)**
 
-**(C) Validación en betplay_combo_builder.py**
-```python
-# Línea 49: import
-from edge_calculator import GATE_VERSION as _EXPECTED_GATE_VERSION
+`reports/h2h_results_enhanced_20260622_081423.json` (generado 08:14, PRE-Fase 3):
+- Contiene predicciones calculadas con Markov PRE-norm → confidence delta decorativo (~0.35pp)
+- **Exposición:** No consumido por edge_calculator después de que Fase 3 fuera implementada (16:41).
 
-# Líneas 1295–1323: función _validate_edge_report_gate()
-# Comportamiento: SystemExit NO SILENCIOSO si versión mismatch
-# Mensaje de 7 líneas obliga a regenerar edge_report antes de continuar
+*Remediación:* `RIVALRY_VERSION = "nodo32-fase3-markov-postnorm"` en `analysis/rivalry_analyzer.py` serializado en metadata del h2h; `_validate_h2h_rivalry_version()` en `edge_calculator.py`; rechaza archivos pre-Fase3 con SystemExit y mensaje que obliga a regenerar h2h.
 
-# Call sites (4): líneas 1018, 1426, 1536, 1876
-```
+---
 
-**Efecto:** Cualquier cambio futuro de gate (ej. Fase 3 Markov post-norm) fuerza regeneración de edge_report. Sin fallback silencioso.
+**Incidente C — golden_zone podía ser True con apostar=False**
 
-**Acción 3 — Versionado de h2h_results_enhanced (Fase 3, prevención de desincronización pipeline)**
+`golden_zone` se calculaba sobre `p_modelo >= threshold` sin verificar que el pick hubiera pasado el gate completo. Un pick bloqueado (apostar=False por algún otro criterio) podía recibir el bono golden (1.20×) en mega-combos.
 
-Implementada análogamente al gate:
+*Remediación:* `edge_calculator.py:816` — añadido `resultado.get('apostar', False)` como primer requisito de `_golden_zone`.
 
-**(A) Constante RIVALRY_VERSION en analysis/rivalry_analyzer.py**
-```python
-# Línea 18
-RIVALRY_VERSION = "nodo32-fase3-markov-postnorm"  # Incrementar si cambia punto de aplicación de Markov
-```
+---
 
-**(B) Serialización en metadata del h2h_results_enhanced**
-```python
-# scraping/ninja_h2h_parser.py línea ~XXX, en save_results():
-from analysis.rivalry_analyzer import RIVALRY_VERSION
-output_data = {
-    'metadata': {
-        'fecha_extraccion': ...,
-        'rivalry_version': RIVALRY_VERSION,
-        ...
-    },
-    ...
-}
-```
+### 9.3 Evidencia Cuantitativa — Delta de Confidence Markov POST-norm
 
-**(C) Validación en edge_calculator.py**
-```python
-# Línea 13: import
-from analysis.rivalry_analyzer import RIVALRY_VERSION as _EXPECTED_RIVALRY_VERSION
+Medido con `generate_advanced_prediction()` real, `optimized_weights={form_recent:1.0, otros:0.0}` para aislar el efecto Markov. Control = NEUTRAL vs NEUTRAL → confidence 51.00%.
 
-# Línea ~XXX: función _validate_h2h_rivalry_version(raw, path)
-# Comportamiento: SystemExit NO SILENCIOSO si versión mismatch
-# Llamada en procesar_archivo_h2h(), línea ~XXX
+| Escenario | factor_p1 | factor_p2 | confidence favored | Delta vs control |
+|-----------|-----------|-----------|-------------------|-----------------|
+| HOT vs NEUTRAL | 1.075 | 1.0 | 54.70% | **+3.70 pp** ✅ |
+| COLD vs HOT | 0.85 | 1.15 | 58.40% | **+7.40 pp** ✅ |
+| NEUTRAL vs NEUTRAL | 1.0 | 1.0 | 51.00% | 0.00 pp (control) |
 
-# Caso de prueba: h2h_results_enhanced_20260622_081423.json (generado PRE-Fase3 a las 08:14)
-# se rechaza al intentar cargarlo después de Fase 3 (16:41)
-```
+**Meta: delta ≥ 1.0 pp** — CUMPLIDA en todos los escenarios medidos (factor mínimo 3.7×).
 
-**Efecto:** Si h2h contiene predicciones con Markov PRE-norm (confidence con delta ~0.35pp), edge_calculator lo rechaza. Obliga regeneración:
-```bash
-python3 extraer_historh2h.py --api-mode --all-tournaments
-```
-
-**Hallazgo de Implementación:**
-
-La medición real del delta de confidence reveló:
-- **Escenario A (HOT vs NEUTRAL, factor=1.075):** confidence=54.70%
-- **Escenario B (control, NEUTRAL vs NEUTRAL):** confidence=51.00%
-- **Delta real:** +3.70 pp
-
-Aunque el ratio matemático (5.53x) no alcanza el 10x que el spec citaba erróneamente, el **efecto práctico en confidence es significativo** (+3.70pp >> meta 1.0pp). La amplificación POST-norm **IS SUFFICIENT** para resolver la decoratividad de Markov.
-
-**Razón del "10x" en spec:** Error de mezcla de factores. Spec usó factor=1.075 para delta_pre (0.072, correcto) pero factor=1.15 para delta_post (0.795), produciendo ratio artificial de 11x. Con cualquier factor consistente el ratio es ~5.5-5.7x.
+**Nota sobre ratio 5.53x vs spec "10x":** El ratio matemático POST/PRE con factor=1.075 consistente es 5.53x (no 10x). El spec mezclaba factor=1.075 para delta_pre (0.072) con factor=1.15 para delta_post (0.795), produciendo ratio artificial de ~11x. Con cualquier factor consistente el ratio es ~5.5-5.7x. Este ratio es irrelevante en la práctica: lo que importa es el delta de confidence en el output del pipeline, que es +3.70pp y +7.40pp respectivamente — ambos materiales.
 
 ### 9.4 Casos de Prueba Implementados
 
-**34 tests Nodo-32 (T32-01 a T32-33):**
-- T32-01 a T32-06: Fase 1 (betslip fields, ITF fallback)
-- T32-07 a T32-19: Fase 2 (gate p_modelo, golden_zone conditions)
-- T32-20: Golden zone requires apostar=True
-- T32-21 a T32-29: Fase 3 (Markov POST-norm, orden de aplicación, confidence delta medido)
-- T32-30: Sync test confidence_flag ↔ P_MODELO_MIN_UNDERDOG
-- T32-31: Gate version validation (rechaza archivos viejos, acepta versión actual)
-- T32-32, T32-32b: Rivalry version validation (h2h_results_enhanced versionado, rechaza archivos pre-Fase3)
-- T32-33: Markov infrastructure post-Fase3 (factor range, caps, constants intactos)
+**34 tests Nodo-32 (T32-01 a T32-33) — 1244 passed, 0 failed (baseline 2026-06-22):**
 
-**Baseline pytest:** 1244 passed, 0 failed (sesión cierre Fase 3 2026-06-22)
+| Rango | Scope | Cubre |
+|-------|-------|-------|
+| T32-01 a T32-06 | Fase 1 | betslip fields, ITF fallback |
+| T32-07 a T32-19 | Fase 2 | gate p_modelo, golden_zone conditions |
+| T32-20 | Incidente C | golden_zone requires apostar=True |
+| T32-21 a T32-29 | Fase 3 | Markov POST-norm, orden de aplicación, confidence delta |
+| T32-30 | Fase 2 | confidence_flag sync ↔ P_MODELO_MIN_UNDERDOG |
+| T32-31 | Incidente A | Gate version validation (rechaza edge_reports viejos) |
+| T32-32, T32-32b | Incidente B | Rivalry version validation (rechaza h2h pre-Fase3) |
+| T32-33 | Fase 3 | Markov infrastructure intact post-migración |
 
-### 9.5 Archivo Viejo Preservado para Regresión Futura
+### 9.5 Estado Final (Nodo-32 Fases 1+2+3 — CERRADO)
 
-**No eliminado:** `reports/edge_report_20260622_082554.json`
-- Caso de prueba real de "qué pasa cuando un combo builder carga un edge_report viejo"
-- Si se corre `betplay_combo_builder.py` sin regenerar el edge_report (omisión del usuario), el versionado lo rechaza ruidosamente
-- Prueba que el fix funciona
-
-### 9.6 Estado Actual (Nodo-32 Fases 1+2+3 Completo)
-
-| Métrica | Valor |
-|---------|-------|
-| Phantom edge picks bloqueados | ✅ 100% (9 picks en zona 0.50–0.549) |
-| Golden zone requiere apostar | ✅ Sí |
-| Betslip fields propagados | ✅ superficie, tier |
-| ITF fallback prior | ✅ 0.50 |
-| Markov aplicado POST-normalizacion | ✅ log1p(raw) * factor (no log1p(raw*factor)) |
-| Confidence delta HOT vs NEUTRAL | ✅ +3.70pp (cumple meta >=1.0pp) |
-| Gate version in edge_report metadata | ✅ nodo32-fase2 |
-| Rivalry version in h2h metadata | ✅ nodo32-fase3-markov-postnorm |
-| Validación gate en 4 call sites | ✅ edge_calculator, betplay_combo_builder |
-| Validación rivalry version en edge_calc | ✅ rechaza h2h pre-Fase3 |
-| Tests passing | ✅ 1244/1244 |
+| Ítem | Estado | Evidencia |
+|------|--------|-----------|
+| Betslip fields propagados (superficie, tier) | ✅ | Fase 1 — sin "?" defaults |
+| ITF fallback prior = 0.50 | ✅ | Fase 1 — calibracion_edge.json |
+| Gate P_MODELO_MIN_UNDERDOG = 0.55 | ✅ | Fase 2 — 9 phantom picks → apostar=False |
+| Golden_zone redefinida (apostar=True + bbi + ejes) | ✅ | Fase 2 + Incidente C |
+| Markov aplicado POST-normalizacion | ✅ | Fase 3 — log1p(raw)×factor |
+| Confidence delta HOT vs NEUTRAL | ✅ | +3.70 pp (meta ≥1.0 pp) |
+| Confidence delta COLD vs HOT | ✅ | +7.40 pp (medido directamente) |
+| GATE_VERSION en edge_report metadata | ✅ | Incidente A — "nodo32-fase2" |
+| RIVALRY_VERSION en h2h metadata | ✅ | Incidente B — "nodo32-fase3-markov-postnorm" |
+| Validación gate en 4 call sites | ✅ | Incidente A — betplay_combo_builder |
+| Validación rivalry version en edge_calculator | ✅ | Incidente B — rechaza h2h pre-Fase3 |
+| Tests passing | ✅ | 1244/1244 |
 
 ---
 
