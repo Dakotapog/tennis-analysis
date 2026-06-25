@@ -548,8 +548,11 @@ class RankingManager:
             
             for ranked_name, data in search_dict.items():
                 ranked_parts = ranked_name.split()
-                matches = sum(1 for part in name_parts 
-                            if any(part in ranked_part for ranked_part in ranked_parts))
+                # BUG-34-2 Fix B: excluir iniciales (len≤2) y usar prefix match en vez de substring
+                matches = sum(1 for part in name_parts
+                            if len(part) > 2 and
+                               any(ranked_part.startswith(part) or part.startswith(ranked_part)
+                                   for ranked_part in ranked_parts))
                 
                 # Requerir al menos 2 coincidencias o todas las partes si es nombre corto
                 min_matches = min(2, len(name_parts))
