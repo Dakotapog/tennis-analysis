@@ -2,9 +2,10 @@
 
 > **Wikilinks:** [[Nodo-18-PELT-Recency-Alpha]] | [[Nodo-21-Pesos-Diferenciados-Tier]] | [[Nodo-32-Auditoria-Phantom-Edge]]
 > **Fecha de descubrimiento:** 2026-06-30
-> **Estado:** HALLAZGO DOCUMENTADO — pendiente implementación
+> **Estado:** HALLAZGO DOCUMENTADO — pendiente implementación (acumular más n antes de calibrar constantes)
+> **Atribución revisada:** 2026-06-30 post Nodo-47 — evidencia real: 1/3 fallos (Watanuki), no 2-3
 
-**Prioridad:** ALTA — afecta cada sesión de transición entre temporadas (arcilla→hierba→hard)
+**Prioridad:** MEDIA — el caso Glinka fue causado por Nodo-47 (ranking bug). Nodo-46 necesita más n empírico antes de implementar.
 **Archivos objetivo:**
 - `analysis/markov_analyzer.py` — cálculo de `factor_markov` + output `confianza`
 - `analysis/rivalry_analyzer.py` — integración de estado Markov en análisis final
@@ -13,7 +14,7 @@
 
 ## El Problema — Síntoma Observado
 
-Sesión 2026-06-29, Challenger Cary (USA, hard court). 3 fallos de 5 partidos = 40% accuracy. Los 3 fallos comparten el mismo patrón:
+Sesión 2026-06-29, Challenger Cary (USA, hard court). 3 fallos de 5 partidos = 40% accuracy.
 
 ```
 Glinka   COLD (conf 0.667) → últimos 3 partidos en HIERBA (Wimbledon/Dublin/Stuttgart)
@@ -21,9 +22,17 @@ Watanuki COLD (conf 0.81)  → últimos 5 partidos en ARCILLA europea
 Hussey   NEUTRAL (wr=0.70) → últimos 4 partidos en HIERBA (Eastbourne)
 ```
 
-El modelo penalizó a Glinka y Watanuki por estar COLD, y favoreció a Hussey por win_rate_reciente=0.70. **En todos los casos, la racha reciente fue en una superficie diferente a la del partido.**
+### Atribución post-análisis (ver Nodo-47)
 
-Los 3 jugadores que el modelo predijo como ganadores (Mayo, Ilagan, Hussey) perdieron. Los 3 jugadores con racha reciente en superficie distinta (Glinka, Watanuki, Manning) ganaron.
+Tras identificar el bug en `_inject_kambi_ranking` (Nodo-47), la atribución real es:
+
+| Fallo | Causa principal | Causa Nodo-46 |
+|-------|----------------|---------------|
+| Glinka vs Mayo | **Nodo-47** — ranking bug colapsó ratio 6:1 → 1.25:1, Markov dominó injustamente | Secundaria: sin el bug, el ranking habría anclado la predicción correctamente |
+| Watanuki vs Ilagan | **Nodo-46** — error Kambi fue 1pt (152 vs 153), COLD desde arcilla fue la causa real | Confirmado: 1 caso empírico real |
+| Hussey vs Manning | **Upset genuino** (4.2 cuota) — con ranking correcto, modelo igual predice Hussey | Sin relación |
+
+**Conclusión:** Nodo-46 tiene 1 caso empírico confirmado (Watanuki). El efecto existe pero la evidencia inicial de 2-3 casos era incorrecta por confusión con Nodo-47.
 
 ---
 
@@ -263,13 +272,18 @@ def test_discount_neutral_not_applied():
 
 ## Evidencia Empírica
 
-| Sesión | Fallos relacionados a superficie-contexto | Total fallos | % atribuible |
-|--------|------------------------------------------|--------------|-------------|
-| 2026-06-29 (Cary hard) | 2/3 (Glinka COLD/hierba, Watanuki COLD/arcilla) | 3 | 67% |
+| Sesión | Fallos Nodo-46 confirmados | Total fallos sesión | Nota |
+|--------|---------------------------|---------------------|------|
+| 2026-06-29 (Cary hard) | **1/3** (Watanuki COLD/arcilla→hard) | 3 | Glinka atribuido a Nodo-47; Hussey upset genuino |
 
-Nota: el caso Hussey (Sub-problema B) es una variante adicional — NEUTRAL con win_rate inflado desde otra superficie. Requiere D46-05 para resolverse.
+**Criterio para sumar n:** un fallo es atribuible a Nodo-46 cuando:
+1. El ranking bug (Nodo-47) NO es la causa (diferencia de pts Kambi vs ATP < 20pts)
+2. El estado COLD/HOT fue ganado principalmente en otra superficie (≥60% partidos recientes)
+3. El modelo habría predicho diferente con Markov descontado
 
-La transición hierba→hard americano ocurre típicamente en la primera quincena de agosto (Washington, Montréal/Toronto, Cincinnati). Afecta a todos los jugadores europeos con racha reciente en Wimbledon/Halle/Eastbourne.
+**Prioridad de implementación:** acumular n≥5 casos confirmados antes de calibrar `min_floor` y `THRESHOLD`. Con n=1 cualquier constante es arbitraria.
+
+La transición hierba→hard americano (agosto: Washington, Montréal, Cincinnati) es el próximo momento de riesgo. Monitorear sesiones de esa semana con este criterio.
 
 ---
 
