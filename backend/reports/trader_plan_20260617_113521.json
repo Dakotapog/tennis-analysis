@@ -1,0 +1,378 @@
+{
+  "metadata": {
+    "timestamp": "20260617_113521",
+    "bankroll": 10000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260617_113250.json",
+    "n_partidos_analizados": 91,
+    "calibracion_n": 798,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "itf",
+      "superficie": "clay",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Camille Allegre vs Yilin Chen",
+      "favorito": "Camille Allegre",
+      "cuota": 3.25,
+      "edge_pct": "25.2%",
+      "p_modelo": 0.56,
+      "n_h2h": 0,
+      "p_blend": 0.6292,
+      "kelly_kl": 0.1323,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    },
+    {
+      "partido": "Robert Guna vs Stefan Ilie Bogdan Petre",
+      "favorito": "Stefan Ilie Bogdan Petre",
+      "cuota": 3.85,
+      "edge_pct": "27.0%",
+      "p_modelo": 0.53,
+      "n_h2h": 1,
+      "p_blend": 0.6542000000000001,
+      "kelly_kl": 0.1248,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Paola Lopez vs Bianca Molnar",
+      "favorito": "Paola Lopez",
+      "cuota": 3.55,
+      "edge_pct": "23.8%",
+      "p_modelo": 0.52,
+      "n_h2h": 0,
+      "p_blend": 0.6292,
+      "kelly_kl": 0.1165,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    },
+    {
+      "partido": "Stefan Adrian Andreescu vs David Eichenseher",
+      "favorito": "David Eichenseher",
+      "cuota": 3.5,
+      "edge_pct": "22.4%",
+      "p_modelo": 0.51,
+      "n_h2h": 0,
+      "p_blend": 0.6956000000000001,
+      "kelly_kl": 0.1037,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Ares Teixido Garcia vs Lamija Avdic",
+      "favorito": "Ares Teixido Garcia",
+      "cuota": 1.85,
+      "edge_pct": "6.4%",
+      "p_modelo": 0.605,
+      "n_h2h": 1,
+      "p_blend": 0.67295,
+      "kelly_kl": 0.0524,
+      "kelly_usado": 0.072,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "slight_underdog",
+      "superficie": "clay"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Stefan Ilie Bogdan Petre",
+          "cuota": 3.85
+        },
+        {
+          "jugador": "Paola Lopez",
+          "cuota": 3.55
+        },
+        {
+          "jugador": "David Eichenseher",
+          "cuota": 3.5
+        }
+      ],
+      "cuota_combo": 47.84,
+      "hr_combo": 0.2863,
+      "ev_combo": 12.6967,
+      "excluidos": [
+        "Camille Allegre",
+        "Ares Teixido Garcia",
+        "Simona Ogescu",
+        "Jaesung Choe",
+        "Eva Marie Voracek"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Camille Allegre",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Stefan Ilie Bogdan Petre",
+          "cuota": 3.85
+        },
+        {
+          "jugador": "David Eichenseher",
+          "cuota": 3.5
+        }
+      ],
+      "cuota_combo": 43.79,
+      "hr_combo": 0.2863,
+      "ev_combo": 11.5392,
+      "excluidos": [
+        "Paola Lopez",
+        "Ares Teixido Garcia",
+        "Simona Ogescu",
+        "Jaesung Choe",
+        "Eva Marie Voracek"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Camille Allegre",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Stefan Ilie Bogdan Petre",
+          "cuota": 3.85
+        },
+        {
+          "jugador": "Paola Lopez",
+          "cuota": 3.55
+        }
+      ],
+      "cuota_combo": 44.42,
+      "hr_combo": 0.259,
+      "ev_combo": 10.5043,
+      "excluidos": [
+        "David Eichenseher",
+        "Ares Teixido Garcia",
+        "Simona Ogescu",
+        "Jaesung Choe",
+        "Eva Marie Voracek"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Camille Allegre",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Paola Lopez",
+          "cuota": 3.55
+        },
+        {
+          "jugador": "David Eichenseher",
+          "cuota": 3.5
+        }
+      ],
+      "cuota_combo": 40.38,
+      "hr_combo": 0.2754,
+      "ev_combo": 10.1203,
+      "excluidos": [
+        "Stefan Ilie Bogdan Petre",
+        "Ares Teixido Garcia",
+        "Simona Ogescu",
+        "Jaesung Choe",
+        "Eva Marie Voracek"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Camille Allegre",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Stefan Ilie Bogdan Petre",
+          "cuota": 3.85
+        },
+        {
+          "jugador": "Paola Lopez",
+          "cuota": 3.55
+        },
+        {
+          "jugador": "David Eichenseher",
+          "cuota": 3.5
+        }
+      ],
+      "cuota_combo": 155.47,
+      "hr_combo": 0.1802,
+      "ev_combo": 27.0084,
+      "excluidos": [
+        "Ares Teixido Garcia",
+        "Simona Ogescu",
+        "Jaesung Choe",
+        "Eva Marie Voracek"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Stefan Ilie Bogdan Petre",
+          "cuota": 3.85
+        },
+        {
+          "jugador": "Paola Lopez",
+          "cuota": 3.55
+        },
+        {
+          "jugador": "David Eichenseher",
+          "cuota": 3.5
+        },
+        {
+          "jugador": "Simona Ogescu",
+          "cuota": 2.17
+        }
+      ],
+      "cuota_combo": 103.8,
+      "hr_combo": 0.1858,
+      "ev_combo": 18.288,
+      "excluidos": [
+        "Camille Allegre",
+        "Ares Teixido Garcia",
+        "Jaesung Choe",
+        "Eva Marie Voracek"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Camille Allegre",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Stefan Ilie Bogdan Petre",
+          "cuota": 3.85
+        },
+        {
+          "jugador": "David Eichenseher",
+          "cuota": 3.5
+        },
+        {
+          "jugador": "Simona Ogescu",
+          "cuota": 2.17
+        }
+      ],
+      "cuota_combo": 95.03,
+      "hr_combo": 0.1858,
+      "ev_combo": 16.658,
+      "excluidos": [
+        "Paola Lopez",
+        "Ares Teixido Garcia",
+        "Jaesung Choe",
+        "Eva Marie Voracek"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Camille Allegre",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Stefan Ilie Bogdan Petre",
+          "cuota": 3.85
+        },
+        {
+          "jugador": "Paola Lopez",
+          "cuota": 3.55
+        },
+        {
+          "jugador": "Simona Ogescu",
+          "cuota": 2.17
+        }
+      ],
+      "cuota_combo": 96.39,
+      "hr_combo": 0.1681,
+      "ev_combo": 15.2006,
+      "excluidos": [
+        "David Eichenseher",
+        "Ares Teixido Garcia",
+        "Jaesung Choe",
+        "Eva Marie Voracek"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.7407407407407407,
+    "total_ajustado": 9629.62962962963,
+    "var_95": -9849.464285714286,
+    "cvar_95": -10587.975195378576,
+    "expected_pl": 126564.27188599679,
+    "sharpe_ratio": 0.8896931157754245,
+    "kelly_growth_rate": 1.9553154026381254,
+    "sessions_to_double": 0.35449379656332997,
+    "var_excedido": true,
+    "factor_var": 0.25382091121707123
+  },
+  "resumen": {
+    "gastado_individuales": 0,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 0,
+    "total_en_riesgo": 0.0,
+    "pct_bankroll_en_riesgo": 0.0,
+    "n_senales_apostar": 5,
+    "pool_cobertura": 8,
+    "alerta_riesgo": false
+  }
+}

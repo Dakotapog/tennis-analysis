@@ -1,0 +1,153 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — ITF CLAY
+  2026-06-25 13:39  │  Bankroll: $10,000
+  Señales APOSTAR: 1  │  Watchlist: 10  │  Sin edge: 4
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 9 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.05 (itf)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $4,000 (40% bankroll)
+
+  │  🎾 Manel Lazaro Juncadella vs Julien Penzlin
+  │     Apostar: Manel Lazaro Juncadella
+  │     Cuota 2.02  │  Edge 25.8%  │  p_blend 0.500 (n_h2h=0)
+  │     Kelly-KL 14.8% → stake $1,000  │  Retorno potencial $2,020
+  │     EV real +1.0%  │  Zona: slight_underdog  │  Sup: clay
+
+  │  Total individuales: $1,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 9 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $6,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Kerem Yilmaz         @2.88  p=0.504  zona=underdog [W]
+  │    2. Amandine Hesse       @2.17  p=0.500  zona=underdog [W]
+  │    3. Valentina Ivanov     @2.12  p=0.500  zona=underdog [W]
+  │    4. Charles Bertimon     @2.10  p=0.500  zona=underdog [W]
+  │    5. Thara Gowda          @2.04  p=0.500  zona=slight_underdog [W]
+  │    6. Manel Lazaro Juncadella @2.02  p=0.500  zona=slight_underdog
+  │    7. Duru Soke            @1.97  p=0.500  zona=slight_underdog [W]
+  │    8. Lavinia Luciano      @1.89  p=0.500  zona=slight_underdog [W]
+  │    9. Giulia Safina Popa   @1.80  p=0.500  zona=slight_underdog [W]
+
+  │  ── 3 PIERNAS: TOP 4 combos × $1,000 = $4,000 ──
+  │     (cada combo excluye 6 jugadores)
+  │     [3p-1] Kerem Yilmaz@2.88 + Amandine Hesse@2.17 + Valentina Ivanov@2.12
+  │            @13.25 HR:12.6% EV:+66.9% →$13,250  excluye:[Manel Lazaro Juncadella, Duru Soke, Lavinia Luciano, Giulia Safina Popa, Charles Bertimon, Thara Gowda]
+  │     [3p-2] Kerem Yilmaz@2.88 + Amandine Hesse@2.17 + Charles Bertimon@2.10
+  │            @13.12 HR:12.6% EV:+65.4% →$13,120  excluye:[Manel Lazaro Juncadella, Duru Soke, Lavinia Luciano, Giulia Safina Popa, Valentina Ivanov, Thara Gowda]
+  │     [3p-3] Kerem Yilmaz@2.88 + Valentina Ivanov@2.12 + Charles Bertimon@2.10
+  │            @12.82 HR:12.6% EV:+61.6% →$12,820  excluye:[Manel Lazaro Juncadella, Duru Soke, Lavinia Luciano, Amandine Hesse, Giulia Safina Popa, Thara Gowda]
+  │     [3p-4] Amandine Hesse@2.17 + Valentina Ivanov@2.12 + Charles Bertimon@2.10
+  │            @9.66 HR:12.5% EV:+20.8% →$9,660  excluye:[Manel Lazaro Juncadella, Duru Soke, Kerem Yilmaz, Lavinia Luciano, Giulia Safina Popa, Thara Gowda]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $1,000 = $4,000 ──
+  │     (cada combo excluye 5 jugadores)
+  │     [4p-1] Kerem Yilmaz@2.88 + Amandine Hesse@2.17 + Valentina Ivanov@2.12 + Charles Bertimon@2.10
+  │            @27.82 HR:6.3% EV:+75.3% →$27,820  excluye:[Manel Lazaro Juncadella, Duru Soke, Lavinia Luciano, Giulia Safina Popa, Thara Gowda]
+  │     [4p-2] Kerem Yilmaz@2.88 + Amandine Hesse@2.17 + Valentina Ivanov@2.12 + Thara Gowda@2.04
+  │            @27.03 HR:6.3% EV:+70.3% →$27,030  excluye:[Manel Lazaro Juncadella, Duru Soke, Lavinia Luciano, Giulia Safina Popa, Charles Bertimon]
+  │     [4p-3] Kerem Yilmaz@2.88 + Valentina Ivanov@2.12 + Charles Bertimon@2.10 + Thara Gowda@2.04
+  │            @26.16 HR:6.3% EV:+64.8% →$26,160  excluye:[Manel Lazaro Juncadella, Duru Soke, Lavinia Luciano, Amandine Hesse, Giulia Safina Popa]
+  │     [4p-4] Amandine Hesse@2.17 + Valentina Ivanov@2.12 + Charles Bertimon@2.10 + Thara Gowda@2.04
+  │            @19.71 HR:6.2% EV:+23.2% →$19,710  excluye:[Manel Lazaro Juncadella, Duru Soke, Kerem Yilmaz, Lavinia Luciano, Giulia Safina Popa]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-4 picks?) ──
+  │  Total apostado: $8,000
+
+  │  🏆 0 fallos (9/9 ganan): retorno $149,570 → P&L +$141,570 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Giulia Safina Popa]):
+  │       retorno $149,570 → P&L +$141,570 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Kerem Yilmaz]):
+  │       retorno $29,370 → P&L +$21,370 (2/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Giulia Safina Popa, Lavinia Luciano]):
+  │       retorno $149,570 → P&L +$141,570 (8/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Kerem Yilmaz, Amandine Hesse]):
+  │       retorno $0 → P&L $-8,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Giulia Safina Popa, Lavinia Luciano, Duru Soke]):
+  │       retorno $149,570 → P&L +$141,570 (8/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Kerem Yilmaz, Amandine Hesse, Valentina Ivanov]):
+  │       retorno $0 → P&L $-8,000 (0/8 combos pagan)
+  │  ✅ 4 fallos (mejor caso: fallan favoritos [Giulia Safina Popa, Lavinia Luciano, Duru Soke, Manel Lazaro Juncadella]):
+  │       retorno $149,570 → P&L +$141,570 (8/8 combos pagan)
+  │  ❌ 4 fallos (peor caso: fallan underdogs [Kerem Yilmaz, Amandine Hesse, Valentina Ivanov, Charles Bertimon]):
+  │       retorno $0 → P&L $-8,000 (0/8 combos pagan)
+
+  │  Total cobertura: $8,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     9
+  │  ρ estructural:       0.05 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.714
+  │  Reducción vs naive:  -28.6%
+  │
+  │  Stake naive (sin ajuste):    $       9,000
+  │  Stake ajustado (PK):         $       6,429
+  │  Ahorro por correlación:      $       2,571
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $      -9,000  (90.0% bankroll)
+  │  CVaR 95%:           $      -9,000
+  │  Max VaR permitido:  $       2,500  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.28
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $       4,538
+  │  σ(P&L):             $      17,795
+  │  Sharpe Ratio:              0.255
+  │  Kelly Growth Rate:       -0.1743 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  ❌ Growth rate negativo — NO escalar bankroll
+  │     Sistema en fase de calibración, mantener bankroll actual
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ❌ Sin edge o riesgo excesivo. NO desplegar capital.
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.28) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Manel Lazaro Juncadella   @2.02  →  $       0  (ret. $         0)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @13.25]  $       0  →  Kerem Yilmaz@2.88 + Amandine Hesse@2.17 + Valentina Ivanov@2.12
+  │    [3p @13.12]  $       0  →  Kerem Yilmaz@2.88 + Amandine Hesse@2.17 + Charles Bertimon@2.10
+  │    [3p @12.82]  $       0  →  Kerem Yilmaz@2.88 + Valentina Ivanov@2.12 + Charles Bertimon@2.10
+  │    [3p @9.66]  $       0  →  Amandine Hesse@2.17 + Valentina Ivanov@2.12 + Charles Bertimon@2.10
+  │    [4p @27.82]  $       0  →  Kerem Yilmaz@2.88 + Amandine Hesse@2.17 + Valentina Ivanov@2.12 + Charles Bertimon@2.10
+  │    [4p @27.03]  $       0  →  Kerem Yilmaz@2.88 + Amandine Hesse@2.17 + Valentina Ivanov@2.12 + Thara Gowda@2.04
+  │    [4p @26.16]  $       0  →  Kerem Yilmaz@2.88 + Valentina Ivanov@2.12 + Charles Bertimon@2.10 + Thara Gowda@2.04
+  │    [4p @19.71]  $       0  →  Amandine Hesse@2.17 + Valentina Ivanov@2.12 + Charles Bertimon@2.10 + Thara Gowda@2.04
+  │
+  │  TOTAL EN RIESGO:  $         0  (0.0% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $        10,000                       ║
+  ║  Individuales:        $             0  (0.0% bankroll)      ║
+  ║  Combos:              $             0  (0.0% bankroll)      ║
+  ║  Sistema:             $             0  (0.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $             0  (0.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       1                                       ║
+  ║  Pool cobertura:        9 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260625_12  ║
+  ║  Partidos analizados:  55                                       ║
+  ║  Superficie:          clay (itf)                                  ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  📊 Calibración: n=1955 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.500 (calibrado clay) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260625_133949.json

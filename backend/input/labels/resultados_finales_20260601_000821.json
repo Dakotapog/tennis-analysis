@@ -1,0 +1,166 @@
+{
+  "metadata": {
+    "verification_date": "2026-06-01 00:08:21",
+    "total_matches_processed": 8,
+    "total_matches_verified": 8
+  },
+  "summary": {
+    "total_hits": 8,
+    "total_misses": 0,
+    "accuracy_percentage": 100.0
+  },
+  "detailed_results": [
+    {
+      "match_info": {
+        "jugador1": "Jodar R.",
+        "jugador2": "Carreno-Busta P.",
+        "match_url": "https://www.flashscore.com/match/tennis/carreno-busta-pablo-W8WmcXdq/jodar-rafael-OdngshVK/?mid=O8k6Y2yR"
+      },
+      "prediction": {
+        "predicted_winner": "Jodar R.",
+        "confidence": 54.4
+      },
+      "actual_result": {
+        "final_score": "3-2",
+        "actual_winner": "Jodar R."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "De Jong J.",
+        "jugador2": "Zverev A.",
+        "match_url": "https://www.flashscore.com/match/tennis/de-jong-jesper-8jStUWzB/zverev-alexander-dGbUhw9m/?mid=I7KNZquo"
+      },
+      "prediction": {
+        "predicted_winner": "Zverev A.",
+        "confidence": 61.0
+      },
+      "actual_result": {
+        "final_score": "0-3",
+        "actual_winner": "Zverev A."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Mensik J.",
+        "jugador2": "Rublev A.",
+        "match_url": "https://www.flashscore.com/match/tennis/mensik-jakub-UFj257G8/rublev-andrey-AeAn4gP0/?mid=dGWwzpmC"
+      },
+      "prediction": {
+        "predicted_winner": "Mensik J.",
+        "confidence": 51.2
+      },
+      "actual_result": {
+        "final_score": "3-2",
+        "actual_winner": "Mensik J."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Ruud C.",
+        "jugador2": "Fonseca J.",
+        "match_url": "https://www.flashscore.com/match/tennis/fonseca-joao-tv073LUc/ruud-casper-zN9UpRqp/?mid=0UhXFklC"
+      },
+      "prediction": {
+        "predicted_winner": "Fonseca J.",
+        "confidence": 51.4
+      },
+      "actual_result": {
+        "final_score": "1-3",
+        "actual_winner": "Fonseca J."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Cirstea S.",
+        "jugador2": "Wang Xiy.",
+        "match_url": "https://www.flashscore.com/match/tennis/cirstea-sorana-fBPsm3Iq/wang-xiyu-6XSnpS5h/?mid=lY9BTfwn"
+      },
+      "prediction": {
+        "predicted_winner": "Cirstea S.",
+        "confidence": 60.8
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Cirstea S."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Kostyuk M.",
+        "jugador2": "Swiatek I.",
+        "match_url": "https://www.flashscore.com/match/tennis/kostyuk-marta-8CZqQdSa/swiatek-iga-jNyZsXZe/?mid=vBdPktcE"
+      },
+      "prediction": {
+        "predicted_winner": "Kostyuk M.",
+        "confidence": 52.7
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Kostyuk M."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Svitolina E.",
+        "jugador2": "Bencic B.",
+        "match_url": "https://www.flashscore.com/match/tennis/bencic-belinda-ObGlDvu0/monfils-elina-jyngIesG/?mid=ziou9syS"
+      },
+      "prediction": {
+        "predicted_winner": "Svitolina E.",
+        "confidence": 57.0
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Svitolina E."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Andreeva M.",
+        "jugador2": "Teichmann J.",
+        "match_url": "https://www.flashscore.com/match/tennis/andreeva-mirra-lI6fOOat/teichmann-jil-nTL4I2Xq/?mid=0hwIq7Tq"
+      },
+      "prediction": {
+        "predicted_winner": "Andreeva M.",
+        "confidence": 60.9
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Andreeva M."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    }
+  ]
+}

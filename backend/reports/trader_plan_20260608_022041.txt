@@ -1,0 +1,31 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — DEPLOY ROLAND GARROS
+  2026-06-08 02:20  │  Bankroll: $10,000
+  Señales APOSTAR: 0  │  Watchlist: 1  │  Sin edge: 0
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 1 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.05 (itf)
+═══════════════════════════════════════════════════════════════════
+
+  ⚠️  Solo 1 picks en pool — se necesitan ≥3.
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $        10,000                       ║
+  ║  Individuales:        $             0  (0.0% bankroll)      ║
+  ║  Combos:              $             0  (0.0% bankroll)      ║
+  ║  Sistema:             $             0  (0.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $             0  (0.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       0                                       ║
+  ║  Pool cobertura:        1 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260608_02  ║
+  ║  Partidos analizados:  76                                       ║
+  ║  Superficie:          clay (Roland Garros)                    ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  📊 Calibración: n=150 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.697 (calibrado hard) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260608_022041.json

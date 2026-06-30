@@ -1,0 +1,184 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — ATP500 GRASS
+  2026-06-14 10:41  │  Bankroll: $125,000
+  Señales APOSTAR: 5  │  Watchlist: 2  │  Sin edge: 2
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 9 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.15 (atp500)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $50,000 (40% bankroll)
+
+  │  🎾 Kamil Majchrzak vs Jiri Lehecka
+  │     Apostar: Kamil Majchrzak
+  │     Cuota 2.65  │  Edge 14.0%  │  p_blend 0.547 (n_h2h=2)
+  │     Kelly-KL 8.4% → stake $9,000  │  Retorno potencial $23,850
+  │     EV real +45.1%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Brandon Nakashima vs Marton Fucsovics
+  │     Apostar: Marton Fucsovics
+  │     Cuota 2.45  │  Edge 12.0%  │  p_blend 0.552 (n_h2h=2)
+  │     Kelly-KL 7.4% → stake $8,000  │  Retorno potencial $19,600
+  │     EV real +35.2%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Marie Bouzkova vs Tereza Valentova
+  │     Apostar: Tereza Valentova
+  │     Cuota 2.20  │  Edge 7.4%  │  p_blend 0.558 (n_h2h=1)
+  │     Kelly-KL 5.0% → stake $6,000  │  Retorno potencial $13,200
+  │     EV real +22.8%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Ugo Humbert vs Marin Cilic
+  │     Apostar: Marin Cilic
+  │     Cuota 2.10  │  Edge 6.5%  │  p_blend 0.561 (n_h2h=1)
+  │     Kelly-KL 4.6% → stake $5,000  │  Retorno potencial $10,500
+  │     EV real +17.8%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Arthur Fery vs Toby Samuel
+  │     Apostar: Toby Samuel
+  │     Cuota 2.23  │  Edge 5.5%  │  p_blend 0.551 (n_h2h=1)
+  │     Kelly-KL 3.6% → stake $6,000  │  Retorno potencial $13,380
+  │     EV real +23.0%  │  Zona: underdog  │  Sup: grass
+
+  │  Total individuales: $34,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 9 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $75,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Kamil Majchrzak      @2.65  p=0.547  zona=underdog
+  │    2. Marton Fucsovics     @2.45  p=0.552  zona=underdog
+  │    3. Toby Samuel          @2.23  p=0.551  zona=underdog
+  │    4. Tereza Valentova     @2.20  p=0.558  zona=underdog
+  │    5. Mia Pohankova        @2.14  p=0.568  zona=underdog [W]
+  │    6. Marin Cilic          @2.10  p=0.561  zona=underdog
+  │    7. Hamad Medjedovic     @2.04  p=0.555  zona=slight_underdog [W]
+  │    8. Magdalena Frech      @1.70  p=0.536  zona=slight_underdog
+  │    9. Maria Timofeeva      @1.60  p=0.568  zona=slight_underdog
+
+  │  ── 3 PIERNAS: TOP 4 combos × $12,000 = $48,000 ──
+  │     (cada combo excluye 6 jugadores)
+  │     [3p-1] Kamil Majchrzak@2.65 + Marton Fucsovics@2.45 + Toby Samuel@2.23
+  │            @14.48 HR:16.7% EV:+141.1% →$173,760  excluye:[Tereza Valentova, Marin Cilic, Hamad Medjedovic, Mia Pohankova, Maria Timofeeva, Magdalena Frech]
+  │     [3p-2] Kamil Majchrzak@2.65 + Marton Fucsovics@2.45 + Tereza Valentova@2.20
+  │            @14.28 HR:16.9% EV:+140.7% →$171,360  excluye:[Marin Cilic, Toby Samuel, Hamad Medjedovic, Mia Pohankova, Maria Timofeeva, Magdalena Frech]
+  │     [3p-3] Kamil Majchrzak@2.65 + Tereza Valentova@2.20 + Toby Samuel@2.23
+  │            @13.00 HR:16.8% EV:+119.0% →$156,000  excluye:[Marton Fucsovics, Marin Cilic, Hamad Medjedovic, Mia Pohankova, Maria Timofeeva, Magdalena Frech]
+  │     [3p-4] Marton Fucsovics@2.45 + Tereza Valentova@2.20 + Toby Samuel@2.23
+  │            @12.02 HR:17.0% EV:+104.0% →$144,240  excluye:[Kamil Majchrzak, Marin Cilic, Hamad Medjedovic, Mia Pohankova, Maria Timofeeva, Magdalena Frech]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $6,000 = $24,000 ──
+  │     (cada combo excluye 5 jugadores)
+  │     [4p-1] Kamil Majchrzak@2.65 + Marton Fucsovics@2.45 + Tereza Valentova@2.20 + Toby Samuel@2.23
+  │            @31.85 HR:9.3% EV:+196.0% →$191,100  excluye:[Marin Cilic, Hamad Medjedovic, Mia Pohankova, Maria Timofeeva, Magdalena Frech]
+  │     [4p-2] Kamil Majchrzak@2.65 + Marton Fucsovics@2.45 + Toby Samuel@2.23 + Mia Pohankova@2.14
+  │            @30.98 HR:9.4% EV:+192.9% →$185,880  excluye:[Tereza Valentova, Marin Cilic, Hamad Medjedovic, Maria Timofeeva, Magdalena Frech]
+  │     [4p-3] Kamil Majchrzak@2.65 + Tereza Valentova@2.20 + Toby Samuel@2.23 + Mia Pohankova@2.14
+  │            @27.82 HR:9.6% EV:+165.9% →$166,920  excluye:[Marton Fucsovics, Marin Cilic, Hamad Medjedovic, Maria Timofeeva, Magdalena Frech]
+  │     [4p-4] Marton Fucsovics@2.45 + Tereza Valentova@2.20 + Toby Samuel@2.23 + Mia Pohankova@2.14
+  │            @25.72 HR:9.6% EV:+147.9% →$154,320  excluye:[Kamil Majchrzak, Marin Cilic, Hamad Medjedovic, Maria Timofeeva, Magdalena Frech]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-4 picks?) ──
+  │  Total apostado: $72,000
+
+  │  🏆 0 fallos (9/9 ganan): retorno $1,343,580 → P&L +$1,271,580 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Maria Timofeeva]):
+  │       retorno $1,343,580 → P&L +$1,271,580 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Kamil Majchrzak]):
+  │       retorno $298,560 → P&L +$226,560 (2/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Maria Timofeeva, Magdalena Frech]):
+  │       retorno $1,343,580 → P&L +$1,271,580 (8/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Kamil Majchrzak, Marton Fucsovics]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Maria Timofeeva, Magdalena Frech, Hamad Medjedovic]):
+  │       retorno $1,343,580 → P&L +$1,271,580 (8/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Kamil Majchrzak, Marton Fucsovics, Toby Samuel]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+  │  ✅ 4 fallos (mejor caso: fallan favoritos [Maria Timofeeva, Magdalena Frech, Hamad Medjedovic, Marin Cilic]):
+  │       retorno $1,343,580 → P&L +$1,271,580 (8/8 combos pagan)
+  │  ❌ 4 fallos (peor caso: fallan underdogs [Kamil Majchrzak, Marton Fucsovics, Toby Samuel, Tereza Valentova]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+
+  │  Total cobertura: $72,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     9
+  │  ρ estructural:       0.15 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.455
+  │  Reducción vs naive:  -54.5%
+  │
+  │  Stake naive (sin ajuste):    $     106,000
+  │  Stake ajustado (PK):         $      48,182
+  │  Ahorro por correlación:      $      57,818
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $    -106,000  (84.8% bankroll)
+  │  CVaR 95%:           $    -106,000
+  │  Max VaR permitido:  $      31,250  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.29
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $     108,233
+  │  σ(P&L):             $     210,674
+  │  Sharpe Ratio:              0.514
+  │  Kelly Growth Rate:        0.3005 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $     561,487
+  │  Bankroll en 10 sesiones:  $   2,522,143
+  │  Bankroll en 30 sesiones:  $1,026,807,549
+  │  Sesiones para duplicar:   2.3
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.29 (de $106,000 a $31,250)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.29) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Kamil Majchrzak           @2.65  →  $   3,000  (ret. $     7,950)
+  │    Marton Fucsovics          @2.45  →  $   2,000  (ret. $     4,900)
+  │    Tereza Valentova          @2.20  →  $   2,000  (ret. $     4,400)
+  │    Marin Cilic               @2.10  →  $   1,000  (ret. $     2,100)
+  │    Toby Samuel               @2.23  →  $   2,000  (ret. $     4,460)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @14.48]  $   4,000  →  Kamil Majchrzak@2.65 + Marton Fucsovics@2.45 + Toby Samuel@2.23
+  │    [3p @14.28]  $   4,000  →  Kamil Majchrzak@2.65 + Marton Fucsovics@2.45 + Tereza Valentova@2.20
+  │    [3p @13.00]  $   4,000  →  Kamil Majchrzak@2.65 + Tereza Valentova@2.20 + Toby Samuel@2.23
+  │    [3p @12.02]  $   4,000  →  Marton Fucsovics@2.45 + Tereza Valentova@2.20 + Toby Samuel@2.23
+  │    [4p @31.85]  $   2,000  →  Kamil Majchrzak@2.65 + Marton Fucsovics@2.45 + Tereza Valentova@2.20 + Toby Samuel@2.23
+  │    [4p @30.98]  $   2,000  →  Kamil Majchrzak@2.65 + Marton Fucsovics@2.45 + Toby Samuel@2.23 + Mia Pohankova@2.14
+  │    [4p @27.82]  $   2,000  →  Kamil Majchrzak@2.65 + Tereza Valentova@2.20 + Toby Samuel@2.23 + Mia Pohankova@2.14
+  │    [4p @25.72]  $   2,000  →  Marton Fucsovics@2.45 + Tereza Valentova@2.20 + Toby Samuel@2.23 + Mia Pohankova@2.14
+  │
+  │  TOTAL EN RIESGO:  $    34,000  (27.2% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $       125,000                       ║
+  ║  Individuales:        $        10,000  (8.0% bankroll)      ║
+  ║  Cobertura:           $        24,000  (19.2% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $        34,000  (27.2% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       5                                       ║
+  ║  Pool cobertura:        9 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260614_10  ║
+  ║  Partidos analizados:  39                                       ║
+  ║  Superficie:          grass (atp500)                              ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  📊 Calibración: n=755 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.568 (calibrado grass) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260614_104147.json

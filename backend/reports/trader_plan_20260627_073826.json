@@ -1,0 +1,278 @@
+{
+  "metadata": {
+    "timestamp": "20260627_073826",
+    "bankroll": 10000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260627_073503.json",
+    "n_partidos_analizados": 29,
+    "calibracion_n": 2405,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "itf",
+      "superficie": "clay",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Stefan Seifert",
+          "cuota": 2.33
+        },
+        {
+          "jugador": "Midori Castillo Meza",
+          "cuota": 2.18
+        },
+        {
+          "jugador": "Kacper Szymkowiak",
+          "cuota": 2.08
+        }
+      ],
+      "cuota_combo": 10.57,
+      "hr_combo": 0.125,
+      "ev_combo": 0.3206,
+      "excluidos": [
+        "Ayumi Miyamoto",
+        "Amelia Honer"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Stefan Seifert",
+          "cuota": 2.33
+        },
+        {
+          "jugador": "Midori Castillo Meza",
+          "cuota": 2.18
+        },
+        {
+          "jugador": "Ayumi Miyamoto",
+          "cuota": 2.02
+        }
+      ],
+      "cuota_combo": 10.26,
+      "hr_combo": 0.1258,
+      "ev_combo": 0.2902,
+      "excluidos": [
+        "Kacper Szymkowiak",
+        "Amelia Honer"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Stefan Seifert",
+          "cuota": 2.33
+        },
+        {
+          "jugador": "Kacper Szymkowiak",
+          "cuota": 2.08
+        },
+        {
+          "jugador": "Ayumi Miyamoto",
+          "cuota": 2.02
+        }
+      ],
+      "cuota_combo": 9.79,
+      "hr_combo": 0.1258,
+      "ev_combo": 0.2311,
+      "excluidos": [
+        "Midori Castillo Meza",
+        "Amelia Honer"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Midori Castillo Meza",
+          "cuota": 2.18
+        },
+        {
+          "jugador": "Kacper Szymkowiak",
+          "cuota": 2.08
+        },
+        {
+          "jugador": "Ayumi Miyamoto",
+          "cuota": 2.02
+        }
+      ],
+      "cuota_combo": 9.16,
+      "hr_combo": 0.1258,
+      "ev_combo": 0.1518,
+      "excluidos": [
+        "Stefan Seifert",
+        "Amelia Honer"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Stefan Seifert",
+          "cuota": 2.33
+        },
+        {
+          "jugador": "Midori Castillo Meza",
+          "cuota": 2.18
+        },
+        {
+          "jugador": "Kacper Szymkowiak",
+          "cuota": 2.08
+        },
+        {
+          "jugador": "Ayumi Miyamoto",
+          "cuota": 2.02
+        }
+      ],
+      "cuota_combo": 21.34,
+      "hr_combo": 0.0629,
+      "ev_combo": 0.3419,
+      "excluidos": [
+        "Amelia Honer"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Stefan Seifert",
+          "cuota": 2.33
+        },
+        {
+          "jugador": "Midori Castillo Meza",
+          "cuota": 2.18
+        },
+        {
+          "jugador": "Kacper Szymkowiak",
+          "cuota": 2.08
+        },
+        {
+          "jugador": "Amelia Honer",
+          "cuota": 1.53
+        }
+      ],
+      "cuota_combo": 16.16,
+      "hr_combo": 0.0629,
+      "ev_combo": 0.0174,
+      "excluidos": [
+        "Ayumi Miyamoto"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Stefan Seifert",
+          "cuota": 2.33
+        },
+        {
+          "jugador": "Midori Castillo Meza",
+          "cuota": 2.18
+        },
+        {
+          "jugador": "Ayumi Miyamoto",
+          "cuota": 2.02
+        },
+        {
+          "jugador": "Amelia Honer",
+          "cuota": 1.53
+        }
+      ],
+      "cuota_combo": 15.7,
+      "hr_combo": 0.0633,
+      "ev_combo": -0.0061,
+      "excluidos": [
+        "Kacper Szymkowiak"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Stefan Seifert",
+          "cuota": 2.33
+        },
+        {
+          "jugador": "Kacper Szymkowiak",
+          "cuota": 2.08
+        },
+        {
+          "jugador": "Ayumi Miyamoto",
+          "cuota": 2.02
+        },
+        {
+          "jugador": "Amelia Honer",
+          "cuota": 1.53
+        }
+      ],
+      "cuota_combo": 14.98,
+      "hr_combo": 0.0633,
+      "ev_combo": -0.0516,
+      "excluidos": [
+        "Midori Castillo Meza"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.8333333333333334,
+    "total_ajustado": 6666.666666666667,
+    "var_95": -8000.0,
+    "cvar_95": -8000.0,
+    "expected_pl": 1461.206061933719,
+    "sharpe_ratio": 0.07013817247844602,
+    "kelly_growth_rate": -0.699282016004253,
+    "sessions_to_double": Infinity,
+    "var_excedido": true,
+    "factor_var": 0.3125
+  },
+  "resumen": {
+    "gastado_individuales": 0,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 0,
+    "total_en_riesgo": 0.0,
+    "pct_bankroll_en_riesgo": 0.0,
+    "n_senales_apostar": 0,
+    "pool_cobertura": 5,
+    "alerta_riesgo": false
+  }
+}

@@ -1,0 +1,333 @@
+{
+  "metadata": {
+    "timestamp": "20260620_005355",
+    "bankroll": 10000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260620_004756.json",
+    "n_partidos_analizados": 55,
+    "calibracion_n": 1325,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "itf",
+      "superficie": "clay",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Pablo Martinez Gomez vs Tiago Torres",
+      "favorito": "Pablo Martinez Gomez",
+      "cuota": 2.48,
+      "edge_pct": "13.0%",
+      "p_modelo": 0.533,
+      "n_h2h": 0,
+      "p_blend": 0.6338,
+      "kelly_kl": 0.0753,
+      "kelly_usado": 0.0966,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    },
+    {
+      "partido": "Selena Janicijevic vs Lidia Encheva",
+      "favorito": "Lidia Encheva",
+      "cuota": 2.18,
+      "edge_pct": "7.1%",
+      "p_modelo": 0.53,
+      "n_h2h": 0,
+      "p_blend": 0.6713999999999999,
+      "kelly_kl": 0.0475,
+      "kelly_usado": 0.0982,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Pablo Martinez Gomez",
+          "cuota": 2.48
+        },
+        {
+          "jugador": "Lidia Encheva",
+          "cuota": 2.18
+        },
+        {
+          "jugador": "Joelle Lilly Sophie Steur",
+          "cuota": 2.33
+        }
+      ],
+      "cuota_combo": 12.6,
+      "hr_combo": 0.2684,
+      "ev_combo": 2.3813,
+      "excluidos": [
+        "Victoria Bosio",
+        "Daria Yesypchuk",
+        "Keshav Chopra",
+        "Berfu Cengiz",
+        "Julia Stusek"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Pablo Martinez Gomez",
+          "cuota": 2.48
+        },
+        {
+          "jugador": "Joelle Lilly Sophie Steur",
+          "cuota": 2.33
+        },
+        {
+          "jugador": "Victoria Bosio",
+          "cuota": 2.05
+        }
+      ],
+      "cuota_combo": 11.85,
+      "hr_combo": 0.2684,
+      "ev_combo": 2.1797,
+      "excluidos": [
+        "Lidia Encheva",
+        "Daria Yesypchuk",
+        "Keshav Chopra",
+        "Berfu Cengiz",
+        "Julia Stusek"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Pablo Martinez Gomez",
+          "cuota": 2.48
+        },
+        {
+          "jugador": "Lidia Encheva",
+          "cuota": 2.18
+        },
+        {
+          "jugador": "Victoria Bosio",
+          "cuota": 2.05
+        }
+      ],
+      "cuota_combo": 11.08,
+      "hr_combo": 0.2857,
+      "ev_combo": 2.1665,
+      "excluidos": [
+        "Joelle Lilly Sophie Steur",
+        "Daria Yesypchuk",
+        "Keshav Chopra",
+        "Berfu Cengiz",
+        "Julia Stusek"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Lidia Encheva",
+          "cuota": 2.18
+        },
+        {
+          "jugador": "Joelle Lilly Sophie Steur",
+          "cuota": 2.33
+        },
+        {
+          "jugador": "Victoria Bosio",
+          "cuota": 2.05
+        }
+      ],
+      "cuota_combo": 10.41,
+      "hr_combo": 0.2844,
+      "ev_combo": 1.9609,
+      "excluidos": [
+        "Pablo Martinez Gomez",
+        "Daria Yesypchuk",
+        "Keshav Chopra",
+        "Berfu Cengiz",
+        "Julia Stusek"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Pablo Martinez Gomez",
+          "cuota": 2.48
+        },
+        {
+          "jugador": "Lidia Encheva",
+          "cuota": 2.18
+        },
+        {
+          "jugador": "Joelle Lilly Sophie Steur",
+          "cuota": 2.33
+        },
+        {
+          "jugador": "Victoria Bosio",
+          "cuota": 2.05
+        }
+      ],
+      "cuota_combo": 25.82,
+      "hr_combo": 0.1802,
+      "ev_combo": 3.654,
+      "excluidos": [
+        "Daria Yesypchuk",
+        "Keshav Chopra",
+        "Berfu Cengiz",
+        "Julia Stusek"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Pablo Martinez Gomez",
+          "cuota": 2.48
+        },
+        {
+          "jugador": "Joelle Lilly Sophie Steur",
+          "cuota": 2.33
+        },
+        {
+          "jugador": "Victoria Bosio",
+          "cuota": 2.05
+        },
+        {
+          "jugador": "Berfu Cengiz",
+          "cuota": 1.71
+        }
+      ],
+      "cuota_combo": 20.26,
+      "hr_combo": 0.1688,
+      "ev_combo": 2.419,
+      "excluidos": [
+        "Lidia Encheva",
+        "Daria Yesypchuk",
+        "Keshav Chopra",
+        "Julia Stusek"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Pablo Martinez Gomez",
+          "cuota": 2.48
+        },
+        {
+          "jugador": "Lidia Encheva",
+          "cuota": 2.18
+        },
+        {
+          "jugador": "Victoria Bosio",
+          "cuota": 2.05
+        },
+        {
+          "jugador": "Berfu Cengiz",
+          "cuota": 1.71
+        }
+      ],
+      "cuota_combo": 18.95,
+      "hr_combo": 0.1797,
+      "ev_combo": 2.4048,
+      "excluidos": [
+        "Joelle Lilly Sophie Steur",
+        "Daria Yesypchuk",
+        "Keshav Chopra",
+        "Julia Stusek"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Lidia Encheva",
+          "cuota": 2.18
+        },
+        {
+          "jugador": "Joelle Lilly Sophie Steur",
+          "cuota": 2.33
+        },
+        {
+          "jugador": "Victoria Bosio",
+          "cuota": 2.05
+        },
+        {
+          "jugador": "Berfu Cengiz",
+          "cuota": 1.71
+        }
+      ],
+      "cuota_combo": 17.81,
+      "hr_combo": 0.1788,
+      "ev_combo": 2.1837,
+      "excluidos": [
+        "Pablo Martinez Gomez",
+        "Daria Yesypchuk",
+        "Keshav Chopra",
+        "Julia Stusek"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.7407407407407407,
+    "total_ajustado": 7407.407407407407,
+    "var_95": -9179.642857142857,
+    "cvar_95": -9375.916125494557,
+    "expected_pl": 19779.356233462975,
+    "sharpe_ratio": 0.6851027492455519,
+    "kelly_growth_rate": 0.6027764134523329,
+    "sessions_to_double": 1.1499241926040604,
+    "var_excedido": true,
+    "factor_var": 0.2723417499902735
+  },
+  "resumen": {
+    "gastado_individuales": 0,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 0,
+    "total_en_riesgo": 0.0,
+    "pct_bankroll_en_riesgo": 0.0,
+    "n_senales_apostar": 2,
+    "pool_cobertura": 8,
+    "alerta_riesgo": false
+  }
+}

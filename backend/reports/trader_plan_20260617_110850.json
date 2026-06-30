@@ -1,0 +1,362 @@
+{
+  "metadata": {
+    "timestamp": "20260617_110850",
+    "bankroll": 30000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260617_105842.json",
+    "n_partidos_analizados": 94,
+    "calibracion_n": 798,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "atp500",
+      "superficie": "grass",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Hubert Hurkacz vs Daniel Altmaier",
+      "favorito": "Daniel Altmaier",
+      "cuota": 4.0,
+      "edge_pct": "25.1%",
+      "p_modelo": 0.501,
+      "n_h2h": 3,
+      "p_blend": 0.51645,
+      "kelly_kl": 0.1182,
+      "kelly_usado": 0.0888,
+      "stake": 1000,
+      "retorno_potencial": 4000.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Paula Badosa vs Coco Gauff",
+      "favorito": "Paula Badosa",
+      "cuota": 3.55,
+      "edge_pct": "23.7%",
+      "p_modelo": 0.519,
+      "n_h2h": 8,
+      "p_blend": 0.5225181818181818,
+      "kelly_kl": 0.1174,
+      "kelly_usado": 0.0838,
+      "stake": 1000,
+      "retorno_potencial": 3550.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Brandon Nakashima vs Ignacio Buse",
+      "favorito": "Ignacio Buse",
+      "cuota": 3.4,
+      "edge_pct": "21.6%",
+      "p_modelo": 0.51,
+      "n_h2h": 1,
+      "p_blend": 0.526425,
+      "kelly_kl": 0.1067,
+      "kelly_usado": 0.0823,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Jessica Pegula vs Katerina Siniakova",
+      "favorito": "Katerina Siniakova",
+      "cuota": 2.75,
+      "edge_pct": "14.9%",
+      "p_modelo": 0.513,
+      "n_h2h": 7,
+      "p_blend": 0.51867,
+      "kelly_kl": 0.0851,
+      "kelly_usado": 0.0609,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Jenson Brooksby vs Francisco Cerundolo",
+      "favorito": "Jenson Brooksby",
+      "cuota": 2.63,
+      "edge_pct": "12.6%",
+      "p_modelo": 0.506,
+      "n_h2h": 0,
+      "p_blend": 0.5319,
+      "kelly_kl": 0.0736,
+      "kelly_usado": 0.0612,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Daniel Altmaier",
+          "cuota": 4.0
+        },
+        {
+          "jugador": "Paula Badosa",
+          "cuota": 3.55
+        },
+        {
+          "jugador": "Ignacio Buse",
+          "cuota": 3.4
+        }
+      ],
+      "cuota_combo": 48.28,
+      "hr_combo": 0.1421,
+      "ev_combo": 5.8586,
+      "excluidos": [
+        "Katerina Siniakova",
+        "Jenson Brooksby",
+        "Arthur Fery"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 48280.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Daniel Altmaier",
+          "cuota": 4.0
+        },
+        {
+          "jugador": "Paula Badosa",
+          "cuota": 3.55
+        },
+        {
+          "jugador": "Katerina Siniakova",
+          "cuota": 2.75
+        }
+      ],
+      "cuota_combo": 39.05,
+      "hr_combo": 0.14,
+      "ev_combo": 4.4657,
+      "excluidos": [
+        "Ignacio Buse",
+        "Jenson Brooksby",
+        "Arthur Fery"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 39050.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Daniel Altmaier",
+          "cuota": 4.0
+        },
+        {
+          "jugador": "Ignacio Buse",
+          "cuota": 3.4
+        },
+        {
+          "jugador": "Katerina Siniakova",
+          "cuota": 2.75
+        }
+      ],
+      "cuota_combo": 37.4,
+      "hr_combo": 0.141,
+      "ev_combo": 4.2738,
+      "excluidos": [
+        "Paula Badosa",
+        "Jenson Brooksby",
+        "Arthur Fery"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 37400.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Paula Badosa",
+          "cuota": 3.55
+        },
+        {
+          "jugador": "Ignacio Buse",
+          "cuota": 3.4
+        },
+        {
+          "jugador": "Katerina Siniakova",
+          "cuota": 2.75
+        }
+      ],
+      "cuota_combo": 33.19,
+      "hr_combo": 0.1427,
+      "ev_combo": 3.7355,
+      "excluidos": [
+        "Daniel Altmaier",
+        "Jenson Brooksby",
+        "Arthur Fery"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 33190.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Daniel Altmaier",
+          "cuota": 4.0
+        },
+        {
+          "jugador": "Paula Badosa",
+          "cuota": 3.55
+        },
+        {
+          "jugador": "Ignacio Buse",
+          "cuota": 3.4
+        },
+        {
+          "jugador": "Katerina Siniakova",
+          "cuota": 2.75
+        }
+      ],
+      "cuota_combo": 132.77,
+      "hr_combo": 0.0737,
+      "ev_combo": 8.7827,
+      "excluidos": [
+        "Jenson Brooksby",
+        "Arthur Fery"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Daniel Altmaier",
+          "cuota": 4.0
+        },
+        {
+          "jugador": "Paula Badosa",
+          "cuota": 3.55
+        },
+        {
+          "jugador": "Ignacio Buse",
+          "cuota": 3.4
+        },
+        {
+          "jugador": "Jenson Brooksby",
+          "cuota": 2.63
+        }
+      ],
+      "cuota_combo": 126.98,
+      "hr_combo": 0.0756,
+      "ev_combo": 8.5944,
+      "excluidos": [
+        "Katerina Siniakova",
+        "Arthur Fery"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Daniel Altmaier",
+          "cuota": 4.0
+        },
+        {
+          "jugador": "Paula Badosa",
+          "cuota": 3.55
+        },
+        {
+          "jugador": "Katerina Siniakova",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Jenson Brooksby",
+          "cuota": 2.63
+        }
+      ],
+      "cuota_combo": 102.7,
+      "hr_combo": 0.0744,
+      "ev_combo": 6.6459,
+      "excluidos": [
+        "Ignacio Buse",
+        "Arthur Fery"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Paula Badosa",
+          "cuota": 3.55
+        },
+        {
+          "jugador": "Ignacio Buse",
+          "cuota": 3.4
+        },
+        {
+          "jugador": "Katerina Siniakova",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Jenson Brooksby",
+          "cuota": 2.63
+        }
+      ],
+      "cuota_combo": 87.3,
+      "hr_combo": 0.0759,
+      "ev_combo": 5.6245,
+      "excluidos": [
+        "Daniel Altmaier",
+        "Arthur Fery"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.5714285714285714,
+    "total_ajustado": 18285.714285714286,
+    "var_95": -32000.0,
+    "cvar_95": -32000.0,
+    "expected_pl": 121509.58984411365,
+    "sharpe_ratio": 0.48363762452321346,
+    "kelly_growth_rate": 0.5638129704550853,
+    "sessions_to_double": 1.2293920446712445,
+    "var_excedido": true,
+    "factor_var": 0.234375
+  },
+  "resumen": {
+    "gastado_individuales": 2000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 4000,
+    "total_en_riesgo": 6000.0,
+    "pct_bankroll_en_riesgo": 0.2,
+    "n_senales_apostar": 5,
+    "pool_cobertura": 6,
+    "alerta_riesgo": false
+  }
+}

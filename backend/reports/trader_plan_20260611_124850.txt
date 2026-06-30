@@ -1,0 +1,187 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — DEPLOY ROLAND GARROS
+  2026-06-11 12:48  │  Bankroll: $125,000
+  Señales APOSTAR: 5  │  Watchlist: 1  │  Sin edge: 3
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 9 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.15 (atp500)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $50,000 (40% bankroll)
+
+  │  🎾 Benjamin Bonzi vs Alex De Minaur
+  │     Apostar: Benjamin Bonzi
+  │     Cuota 4.50  │  Edge 31.8%  │  p_blend 0.548 (n_h2h=5)
+  │     Kelly-KL 46.7% → stake $12,000  │  Retorno potencial $54,000
+  │     EV real +146.6%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Elena Rybakina vs Tatjana Maria
+  │     Apostar: Tatjana Maria
+  │     Cuota 4.35  │  Edge 28.7%  │  p_blend 0.544 (n_h2h=2)
+  │     Kelly-KL 42.2% → stake $12,000  │  Retorno potencial $52,200
+  │     EV real +136.5%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Barbora Krejcikova vs Elena-Gabriela Ruse
+  │     Apostar: Elena-Gabriela Ruse
+  │     Cuota 2.75  │  Edge 13.9%  │  p_blend 0.532 (n_h2h=3)
+  │     Kelly-KL 26.0% → stake $8,000  │  Retorno potencial $22,000
+  │     EV real +46.4%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Giovanni Mpetshi Perricard vs Alexander Bublik
+  │     Apostar: Giovanni Mpetshi Perricard
+  │     Cuota 2.60  │  Edge 13.5%  │  p_blend 0.541 (n_h2h=3)
+  │     Kelly-KL 25.9% → stake $8,000  │  Retorno potencial $20,800
+  │     EV real +40.6%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Zhizhen Zhang vs Adrian Mannarino
+  │     Apostar: Zhizhen Zhang
+  │     Cuota 2.28  │  Edge 10.8%  │  p_blend 0.556 (n_h2h=2)
+  │     Kelly-KL 23.5% → stake $7,000  │  Retorno potencial $15,960
+  │     EV real +26.7%  │  Zona: underdog  │  Sup: grass
+
+  │  Total individuales: $47,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 9 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $75,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Benjamin Bonzi       @4.50  p=0.581  zona=underdog
+  │    2. Tatjana Maria        @4.35  p=0.597  zona=underdog
+  │    3. Elena-Gabriela Ruse  @2.75  p=0.577  zona=underdog
+  │    4. Giovanni Mpetshi Perricard @2.60  p=0.585  zona=underdog
+  │    5. Zhizhen Zhang        @2.28  p=0.609  zona=underdog
+  │    6. Magda Linette        @1.89  p=0.622  zona=slight_underdog [W]
+  │    7. Harriet Dart         @1.78  p=0.615  zona=slight_underdog
+  │    8. Amanda Anisimova     @1.73  p=0.650  zona=slight_underdog
+  │    9. Katie Boulter        @1.50  p=0.594  zona=moderate_favorite
+
+  │  ── 3 PIERNAS: TOP 4 combos × $12,000 = $48,000 ──
+  │     (cada combo excluye 6 jugadores)
+  │     [3p-1] Benjamin Bonzi@4.50 + Tatjana Maria@4.35 + Elena-Gabriela Ruse@2.75
+  │            @53.83 HR:20.0% EV:+976.5% →$645,960  excluye:[Giovanni Mpetshi Perricard, Zhizhen Zhang, Magda Linette, Amanda Anisimova, Katie Boulter, Harriet Dart]
+  │     [3p-2] Benjamin Bonzi@4.50 + Tatjana Maria@4.35 + Giovanni Mpetshi Perricard@2.60
+  │            @50.90 HR:20.3% EV:+932.8% →$610,800  excluye:[Elena-Gabriela Ruse, Zhizhen Zhang, Magda Linette, Amanda Anisimova, Katie Boulter, Harriet Dart]
+  │     [3p-3] Benjamin Bonzi@4.50 + Elena-Gabriela Ruse@2.75 + Giovanni Mpetshi Perricard@2.60
+  │            @32.18 HR:19.6% EV:+530.7% →$386,160  excluye:[Tatjana Maria, Zhizhen Zhang, Magda Linette, Amanda Anisimova, Katie Boulter, Harriet Dart]
+  │     [3p-4] Tatjana Maria@4.35 + Elena-Gabriela Ruse@2.75 + Giovanni Mpetshi Perricard@2.60
+  │            @31.10 HR:20.1% EV:+526.0% →$373,200  excluye:[Benjamin Bonzi, Zhizhen Zhang, Magda Linette, Amanda Anisimova, Katie Boulter, Harriet Dart]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $6,000 = $24,000 ──
+  │     (cada combo excluye 5 jugadores)
+  │     [4p-1] Benjamin Bonzi@4.50 + Tatjana Maria@4.35 + Elena-Gabriela Ruse@2.75 + Giovanni Mpetshi Perricard@2.60
+  │            @139.96 HR:11.7% EV:+1537.4% →$839,760  excluye:[Zhizhen Zhang, Magda Linette, Amanda Anisimova, Katie Boulter, Harriet Dart]
+  │     [4p-2] Benjamin Bonzi@4.50 + Tatjana Maria@4.35 + Elena-Gabriela Ruse@2.75 + Zhizhen Zhang@2.28
+  │            @122.74 HR:12.2% EV:+1394.3% →$736,440  excluye:[Giovanni Mpetshi Perricard, Magda Linette, Amanda Anisimova, Katie Boulter, Harriet Dart]
+  │     [4p-3] Benjamin Bonzi@4.50 + Tatjana Maria@4.35 + Giovanni Mpetshi Perricard@2.60 + Zhizhen Zhang@2.28
+  │            @116.04 HR:12.3% EV:+1333.6% →$696,240  excluye:[Elena-Gabriela Ruse, Magda Linette, Amanda Anisimova, Katie Boulter, Harriet Dart]
+  │     [4p-4] Tatjana Maria@4.35 + Elena-Gabriela Ruse@2.75 + Giovanni Mpetshi Perricard@2.60 + Zhizhen Zhang@2.28
+  │            @70.91 HR:12.2% EV:+768.9% →$425,460  excluye:[Benjamin Bonzi, Magda Linette, Amanda Anisimova, Katie Boulter, Harriet Dart]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-4 picks?) ──
+  │  Total apostado: $72,000
+
+  │  🏆 0 fallos (9/9 ganan): retorno $4,714,020 → P&L +$4,642,020 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Katie Boulter]):
+  │       retorno $4,714,020 → P&L +$4,642,020 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Benjamin Bonzi]):
+  │       retorno $798,660 → P&L +$726,660 (2/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Katie Boulter, Amanda Anisimova]):
+  │       retorno $4,714,020 → P&L +$4,642,020 (8/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Benjamin Bonzi, Tatjana Maria]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Katie Boulter, Amanda Anisimova, Harriet Dart]):
+  │       retorno $4,714,020 → P&L +$4,642,020 (8/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Benjamin Bonzi, Tatjana Maria, Elena-Gabriela Ruse]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+  │  ✅ 4 fallos (mejor caso: fallan favoritos [Katie Boulter, Amanda Anisimova, Harriet Dart, Magda Linette]):
+  │       retorno $4,714,020 → P&L +$4,642,020 (8/8 combos pagan)
+  │  ❌ 4 fallos (peor caso: fallan underdogs [Benjamin Bonzi, Tatjana Maria, Elena-Gabriela Ruse, Giovanni Mpetshi Perricard]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+
+  │  Total cobertura: $72,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     9
+  │  ρ estructural:       0.15 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.455
+  │  Reducción vs naive:  -54.5%
+  │
+  │  Stake naive (sin ajuste):    $     119,000
+  │  Stake ajustado (PK):         $      54,091
+  │  Ahorro por correlación:      $      64,909
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $     -47,999  (38.4% bankroll)
+  │  CVaR 95%:           $     -53,977
+  │  Max VaR permitido:  $      31,250  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.65
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $     727,552
+  │  σ(P&L):             $     843,770
+  │  Sharpe Ratio:              0.862
+  │  Kelly Growth Rate:        1.7864 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $ 946,195,022
+  │  Bankroll en 10 sesiones:  $7,162,280,151,118
+  │  Bankroll en 30 sesiones:  $23,514,399,208,562,347,472,209,313,792
+  │  Sesiones para duplicar:   0.4
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.65 (de $119,000 a $77,476)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.65) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Benjamin Bonzi            @4.50  →  $   8,000  (ret. $    36,000)
+  │    Tatjana Maria             @4.35  →  $   8,000  (ret. $    34,800)
+  │    Elena-Gabriela Ruse       @2.75  →  $   5,000  (ret. $    13,750)
+  │    Giovanni Mpetshi Perricard @2.60  →  $   5,000  (ret. $    13,000)
+  │    Zhizhen Zhang             @2.28  →  $   5,000  (ret. $    11,400)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @53.83]  $   8,000  →  Benjamin Bonzi@4.50 + Tatjana Maria@4.35 + Elena-Gabriela Ruse@2.75
+  │    [3p @50.90]  $   8,000  →  Benjamin Bonzi@4.50 + Tatjana Maria@4.35 + Giovanni Mpetshi Perricard@2.60
+  │    [3p @32.18]  $   8,000  →  Benjamin Bonzi@4.50 + Elena-Gabriela Ruse@2.75 + Giovanni Mpetshi Perricard@2.60
+  │    [3p @31.10]  $   8,000  →  Tatjana Maria@4.35 + Elena-Gabriela Ruse@2.75 + Giovanni Mpetshi Perricard@2.60
+  │    [4p @139.96]  $   4,000  →  Benjamin Bonzi@4.50 + Tatjana Maria@4.35 + Elena-Gabriela Ruse@2.75 + Giovanni Mpetshi Perricard@2.60
+  │    [4p @122.74]  $   4,000  →  Benjamin Bonzi@4.50 + Tatjana Maria@4.35 + Elena-Gabriela Ruse@2.75 + Zhizhen Zhang@2.28
+  │    [4p @116.04]  $   4,000  →  Benjamin Bonzi@4.50 + Tatjana Maria@4.35 + Giovanni Mpetshi Perricard@2.60 + Zhizhen Zhang@2.28
+  │    [4p @70.91]  $   4,000  →  Tatjana Maria@4.35 + Elena-Gabriela Ruse@2.75 + Giovanni Mpetshi Perricard@2.60 + Zhizhen Zhang@2.28
+  │
+  │  TOTAL EN RIESGO:  $    79,000  (63.2% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $       125,000                       ║
+  ║  Individuales:        $        31,000  (24.8% bankroll)      ║
+  ║  Cobertura:           $        48,000  (38.4% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $        79,000  (63.2% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       5                                       ║
+  ║  Pool cobertura:        9 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260611_12  ║
+  ║  Partidos analizados:  99                                       ║
+  ║  Superficie:          clay (Roland Garros)                    ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  ⚠️  ALERTA: 63.2% bankroll en riesgo — por encima del 30% recomendado.
+      Reducir combos o sistema hasta n≥30 con datos limpios.
+
+  📊 Calibración: n=695 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.561 (calibrado grass) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260611_124850.json

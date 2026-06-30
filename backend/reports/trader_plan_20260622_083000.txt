@@ -1,0 +1,43 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — ITF HARD
+  2026-06-22 08:30  │  Bankroll: $10,000
+  Señales APOSTAR: 1  │  Watchlist: 0  │  Sin edge: 0
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 1 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.05 (itf)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $4,000 (40% bankroll)
+
+  │  🎾 Diego Dedura-Palomero vs Alexandre Reco
+  │     Apostar: Alexandre Reco
+  │     Cuota 4.00  │  Edge 57.3%  │  p_blend 0.634 (n_h2h=0)
+  │     Kelly-KL 22.9% → stake $1,000  │  Retorno potencial $4,000
+  │     EV real +153.5%  │  Zona: underdog  │  Sup: hard
+
+  │  Total individuales: $1,000
+  └─────────────────────────────────────────────────────────────────
+
+  ⚠️  Solo 1 picks en pool — se necesitan ≥3.
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $        10,000                       ║
+  ║  Individuales:        $         1,000  (10.0% bankroll)      ║
+  ║  Combos:              $             0  (0.0% bankroll)      ║
+  ║  Sistema:             $             0  (0.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $         1,000  (10.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       1                                       ║
+  ║  Pool cobertura:        1 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260622_08  ║
+  ║  Partidos analizados:  89                                       ║
+  ║  Superficie:          hard (itf)                                  ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  📊 Calibración: n=1325 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.634 (calibrado hard) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260622_083000.json

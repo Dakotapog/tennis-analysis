@@ -1,0 +1,73 @@
+{
+  "fecha_validacion": "2026-06-09T12:12:58.066780",
+  "fuente_h2h": "reports/h2h_results_enhanced_20260609_115832.json",
+  "total_partidos": 51,
+  "total_validados": 5,
+  "saltados": 0,
+  "correctas": 3,
+  "accuracy": 0.6,
+  "accuracy_por_superficie": {
+    "clay": {
+      "accuracy": 1.0,
+      "n": 2,
+      "correctas": 2
+    },
+    "grass": {
+      "accuracy": 0.3333,
+      "n": 3,
+      "correctas": 1
+    }
+  },
+  "partidos": [
+    {
+      "partido": "Nico Hipfl vs Oleksii Krutykh",
+      "prediccion": "Oleksii Krutykh",
+      "confianza": 57.9,
+      "resultado_real": "Oleksii Krutykh",
+      "correcto": true,
+      "match_id": "StI9y0H6",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Maria Sakkari vs Tatjana Maria",
+      "prediccion": "Tatjana Maria",
+      "confianza": 50.5,
+      "resultado_real": "Tatjana Maria",
+      "correcto": true,
+      "match_id": "l0QIjza6",
+      "torneo": "Desconocido",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Marie Bouzkova vs Polina Kudermetova",
+      "prediccion": "Polina Kudermetova",
+      "confianza": 50.1,
+      "resultado_real": "Marie Bouzkova",
+      "correcto": false,
+      "match_id": "tzNAhdUg",
+      "torneo": "Desconocido",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Juan Sebastian Gomez vs Luciano Emanuel Ambrogi",
+      "prediccion": "Luciano Emanuel Ambrogi",
+      "confianza": 52.5,
+      "resultado_real": "Luciano Emanuel Ambrogi",
+      "correcto": true,
+      "match_id": "YkTzL4uB",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Giovanni Mpetshi Perricard vs Gauthier Onclin",
+      "prediccion": "Giovanni Mpetshi Perricard",
+      "confianza": 51.3,
+      "resultado_real": "Gauthier Onclin",
+      "correcto": false,
+      "match_id": "YizPqJmp",
+      "torneo": "Desconocido",
+      "superficie": "grass"
+    }
+  ]
+}

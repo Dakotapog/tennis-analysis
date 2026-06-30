@@ -1,0 +1,144 @@
+{
+  "fecha_validacion": "2026-06-28T09:08:59.720609",
+  "fuente_h2h": "reports/h2h_results_enhanced_20260627_084500.json",
+  "total_partidos": 11,
+  "total_validados": 11,
+  "saltados": 0,
+  "correctas": 5,
+  "accuracy": 0.4545,
+  "accuracy_por_superficie": {
+    "clay": {
+      "accuracy": 0.3333,
+      "n": 6,
+      "correctas": 2
+    },
+    "hard": {
+      "accuracy": 0.6,
+      "n": 5,
+      "correctas": 3
+    }
+  },
+  "partidos": [
+    {
+      "partido": "Fausto Tabacco vs Federico Arnaboldi",
+      "prediccion": "Federico Arnaboldi",
+      "confianza": 51.1,
+      "resultado_real": "Federico Arnaboldi",
+      "correcto": true,
+      "match_id": "OzzzOvOa",
+      "torneo": "Desconocido",
+      "superficie": "clay",
+      "resolved_from_feed": false
+    },
+    {
+      "partido": "Filip Jeff Planinsek vs Bor Artnak",
+      "prediccion": "Bor Artnak",
+      "confianza": 52.4,
+      "resultado_real": "Filip Jeff Planinsek",
+      "correcto": false,
+      "match_id": "djeqXuZ9",
+      "torneo": "Desconocido",
+      "superficie": "clay",
+      "resolved_from_feed": false
+    },
+    {
+      "partido": "Stefan Seifert vs Herman Hoeyeraal",
+      "prediccion": "Stefan Seifert",
+      "confianza": 50.1,
+      "resultado_real": "Herman Hoeyeraal",
+      "correcto": false,
+      "match_id": "jkpbPq0D",
+      "torneo": "Desconocido",
+      "superficie": "clay",
+      "resolved_from_feed": false
+    },
+    {
+      "partido": "Kacper Szymkowiak vs Alan Wazny",
+      "prediccion": "Kacper Szymkowiak",
+      "confianza": 51.5,
+      "resultado_real": "Alan Wazny",
+      "correcto": false,
+      "match_id": "IexpmmhK",
+      "torneo": "Desconocido",
+      "superficie": "clay",
+      "resolved_from_feed": false
+    },
+    {
+      "partido": "Inaki Montes-De La Torre vs Sandro Kopp",
+      "prediccion": "Sandro Kopp",
+      "confianza": 51.1,
+      "resultado_real": "Inaki Montes-De La Torre",
+      "correcto": false,
+      "match_id": "6NqPl50C",
+      "torneo": "Desconocido",
+      "superficie": "clay",
+      "resolved_from_feed": false
+    },
+    {
+      "partido": "Thiago Seyboth Wild vs Juan Manuel La Serna",
+      "prediccion": "Thiago Seyboth Wild",
+      "confianza": 51.9,
+      "resultado_real": "Thiago Seyboth Wild",
+      "correcto": true,
+      "match_id": "x2Ceajsp",
+      "torneo": "Desconocido",
+      "superficie": "clay",
+      "resolved_from_feed": false
+    },
+    {
+      "partido": "Paul Inchauspe vs Oscar Weightman",
+      "prediccion": "Paul Inchauspe",
+      "confianza": 52.1,
+      "resultado_real": "Paul Inchauspe",
+      "correcto": true,
+      "match_id": "K4MyGsaB",
+      "torneo": "Desconocido",
+      "superficie": "hard",
+      "resolved_from_feed": false
+    },
+    {
+      "partido": "Eva Vedder vs Amandine Hesse",
+      "prediccion": "Eva Vedder",
+      "confianza": 52.3,
+      "resultado_real": "Eva Vedder",
+      "correcto": true,
+      "match_id": "vcNccLun",
+      "torneo": "Desconocido",
+      "superficie": "hard",
+      "resolved_from_feed": false
+    },
+    {
+      "partido": "Elena Micic vs Ayla Aksu",
+      "prediccion": "Ayla Aksu",
+      "confianza": 54.2,
+      "resultado_real": "Elena Micic",
+      "correcto": false,
+      "match_id": "QuK98fKc",
+      "torneo": "Desconocido",
+      "superficie": "hard",
+      "resolved_from_feed": false
+    },
+    {
+      "partido": "Alexandra Vagramov vs Alexis Nguyen",
+      "prediccion": "Alexandra Vagramov",
+      "confianza": 50.8,
+      "resultado_real": "Alexis Nguyen",
+      "correcto": false,
+      "match_id": "Kzy2U5Hc",
+      "torneo": "Desconocido",
+      "superficie": "hard",
+      "resolved_from_feed": false
+    },
+    {
+      "partido": "Alyssa Ahn vs Midori Castillo Meza",
+      "prediccion": "Alyssa Ahn",
+      "confianza": 50.3,
+      "resultado_real": "Alyssa Ahn",
+      "correcto": true,
+      "match_id": "EwlG62Pj",
+      "torneo": "Desconocido",
+      "superficie": "hard",
+      "resolved_from_feed": false
+    }
+  ]
+}

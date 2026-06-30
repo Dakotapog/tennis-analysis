@@ -1,0 +1,608 @@
+{
+  "metadata": {
+    "timestamp": "20260619_004655",
+    "bankroll": 10000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260619_004336.json",
+    "n_partidos_analizados": 95,
+    "calibracion_n": 1241,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "itf",
+      "superficie": "hard",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Maria Herazo Gonzalez vs Maria Florencia Urrutia",
+      "favorito": "Maria Herazo Gonzalez",
+      "cuota": 4.5,
+      "edge_pct": "35.8%",
+      "p_modelo": 0.58,
+      "n_h2h": 1,
+      "p_blend": 0.652,
+      "kelly_kl": 0.1581,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Oscar Brown vs George Lazarov",
+      "favorito": "Oscar Brown",
+      "cuota": 2.4,
+      "edge_pct": "15.0%",
+      "p_modelo": 0.567,
+      "n_h2h": 0,
+      "p_blend": 0.676,
+      "kelly_kl": 0.0942,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Berfu Cengiz vs Dalila Spiteri",
+      "favorito": "Dalila Spiteri",
+      "cuota": 2.95,
+      "edge_pct": "17.6%",
+      "p_modelo": 0.515,
+      "n_h2h": 0,
+      "p_blend": 0.676,
+      "kelly_kl": 0.0931,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Cezar Gabriel Papoe vs Robert Guna",
+      "favorito": "Cezar Gabriel Papoe",
+      "cuota": 2.75,
+      "edge_pct": "16.5%",
+      "p_modelo": 0.529,
+      "n_h2h": 1,
+      "p_blend": 0.63925,
+      "kelly_kl": 0.093,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Antonia Stoyanov vs Franziska Sziedat",
+      "favorito": "Franziska Sziedat",
+      "cuota": 2.85,
+      "edge_pct": "16.5%",
+      "p_modelo": 0.516,
+      "n_h2h": 0,
+      "p_blend": 0.676,
+      "kelly_kl": 0.088,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Amelie Justine Hejtmanek vs Petja Drame",
+      "favorito": "Petja Drame",
+      "cuota": 2.55,
+      "edge_pct": "14.5%",
+      "p_modelo": 0.537,
+      "n_h2h": 0,
+      "p_blend": 0.676,
+      "kelly_kl": 0.0857,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Vuk Radjenovic vs Andrea De Marchi",
+      "favorito": "Vuk Radjenovic",
+      "cuota": 2.6,
+      "edge_pct": "13.8%",
+      "p_modelo": 0.523,
+      "n_h2h": 0,
+      "p_blend": 0.676,
+      "kelly_kl": 0.0807,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Martina Capurro Taborda vs Alena Kovackova",
+      "favorito": "Martina Capurro Taborda",
+      "cuota": 2.6,
+      "edge_pct": "12.7%",
+      "p_modelo": 0.512,
+      "n_h2h": 0,
+      "p_blend": 0.676,
+      "kelly_kl": 0.0727,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Peter Fajta vs Aleksandr Braynin",
+      "favorito": "Aleksandr Braynin",
+      "cuota": 2.6,
+      "edge_pct": "12.7%",
+      "p_modelo": 0.512,
+      "n_h2h": 0,
+      "p_blend": 0.676,
+      "kelly_kl": 0.0726,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Selena Janicijevic vs Zhibek Kulambayeva",
+      "favorito": "Zhibek Kulambayeva",
+      "cuota": 2.5,
+      "edge_pct": "10.7%",
+      "p_modelo": 0.507,
+      "n_h2h": 0,
+      "p_blend": 0.676,
+      "kelly_kl": 0.0627,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Gianmarco Ferrari vs Fausto Tabacco",
+      "favorito": "Fausto Tabacco",
+      "cuota": 2.28,
+      "edge_pct": "9.5%",
+      "p_modelo": 0.534,
+      "n_h2h": 2,
+      "p_blend": 0.6192,
+      "kelly_kl": 0.0621,
+      "kelly_usado": 0.0804,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Ida Wobker vs Thea Frodin",
+      "favorito": "Ida Wobker",
+      "cuota": 2.35,
+      "edge_pct": "9.4%",
+      "p_modelo": 0.52,
+      "n_h2h": 0,
+      "p_blend": 0.676,
+      "kelly_kl": 0.0581,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Marta Lombardini vs Sofia Rocchetti",
+      "favorito": "Sofia Rocchetti",
+      "cuota": 2.45,
+      "edge_pct": "9.7%",
+      "p_modelo": 0.505,
+      "n_h2h": 0,
+      "p_blend": 0.676,
+      "kelly_kl": 0.0567,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Valentina Ivanov vs Madison Sieg",
+      "favorito": "Valentina Ivanov",
+      "cuota": 2.18,
+      "edge_pct": "6.4%",
+      "p_modelo": 0.523,
+      "n_h2h": 0,
+      "p_blend": 0.676,
+      "kelly_kl": 0.0429,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Thijs Boogaard vs Carl Emil Overbeck",
+      "favorito": "Carl Emil Overbeck",
+      "cuota": 2.25,
+      "edge_pct": "6.6%",
+      "p_modelo": 0.51,
+      "n_h2h": 0,
+      "p_blend": 0.6333,
+      "kelly_kl": 0.0417,
+      "kelly_usado": 0.085,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Maria Herazo Gonzalez",
+          "cuota": 4.5
+        },
+        {
+          "jugador": "Dalila Spiteri",
+          "cuota": 2.95
+        },
+        {
+          "jugador": "Franziska Sziedat",
+          "cuota": 2.85
+        }
+      ],
+      "cuota_combo": 37.83,
+      "hr_combo": 0.2979,
+      "ev_combo": 10.2725,
+      "excluidos": [
+        "Oscar Brown",
+        "Cezar Gabriel Papoe",
+        "Petja Drame",
+        "Vuk Radjenovic",
+        "Martina Capurro Taborda",
+        "Aleksandr Braynin",
+        "Zhibek Kulambayeva",
+        "Fausto Tabacco",
+        "Ida Wobker",
+        "Sofia Rocchetti",
+        "Valentina Ivanov",
+        "Carl Emil Overbeck",
+        "Federica Sacco",
+        "Tiago Torres",
+        "Lan Mi"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Maria Herazo Gonzalez",
+          "cuota": 4.5
+        },
+        {
+          "jugador": "Dalila Spiteri",
+          "cuota": 2.95
+        },
+        {
+          "jugador": "Cezar Gabriel Papoe",
+          "cuota": 2.75
+        }
+      ],
+      "cuota_combo": 36.51,
+      "hr_combo": 0.2818,
+      "ev_combo": 9.2857,
+      "excluidos": [
+        "Oscar Brown",
+        "Franziska Sziedat",
+        "Petja Drame",
+        "Vuk Radjenovic",
+        "Martina Capurro Taborda",
+        "Aleksandr Braynin",
+        "Zhibek Kulambayeva",
+        "Fausto Tabacco",
+        "Ida Wobker",
+        "Sofia Rocchetti",
+        "Valentina Ivanov",
+        "Carl Emil Overbeck",
+        "Federica Sacco",
+        "Tiago Torres",
+        "Lan Mi"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Maria Herazo Gonzalez",
+          "cuota": 4.5
+        },
+        {
+          "jugador": "Cezar Gabriel Papoe",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Franziska Sziedat",
+          "cuota": 2.85
+        }
+      ],
+      "cuota_combo": 35.27,
+      "hr_combo": 0.2818,
+      "ev_combo": 8.937,
+      "excluidos": [
+        "Oscar Brown",
+        "Dalila Spiteri",
+        "Petja Drame",
+        "Vuk Radjenovic",
+        "Martina Capurro Taborda",
+        "Aleksandr Braynin",
+        "Zhibek Kulambayeva",
+        "Fausto Tabacco",
+        "Ida Wobker",
+        "Sofia Rocchetti",
+        "Valentina Ivanov",
+        "Carl Emil Overbeck",
+        "Federica Sacco",
+        "Tiago Torres",
+        "Lan Mi"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Dalila Spiteri",
+          "cuota": 2.95
+        },
+        {
+          "jugador": "Cezar Gabriel Papoe",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Franziska Sziedat",
+          "cuota": 2.85
+        }
+      ],
+      "cuota_combo": 23.12,
+      "hr_combo": 0.2921,
+      "ev_combo": 5.754,
+      "excluidos": [
+        "Maria Herazo Gonzalez",
+        "Oscar Brown",
+        "Petja Drame",
+        "Vuk Radjenovic",
+        "Martina Capurro Taborda",
+        "Aleksandr Braynin",
+        "Zhibek Kulambayeva",
+        "Fausto Tabacco",
+        "Ida Wobker",
+        "Sofia Rocchetti",
+        "Valentina Ivanov",
+        "Carl Emil Overbeck",
+        "Federica Sacco",
+        "Tiago Torres",
+        "Lan Mi"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Maria Herazo Gonzalez",
+          "cuota": 4.5
+        },
+        {
+          "jugador": "Dalila Spiteri",
+          "cuota": 2.95
+        },
+        {
+          "jugador": "Cezar Gabriel Papoe",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Franziska Sziedat",
+          "cuota": 2.85
+        }
+      ],
+      "cuota_combo": 104.04,
+      "hr_combo": 0.1905,
+      "ev_combo": 18.8164,
+      "excluidos": [
+        "Oscar Brown",
+        "Petja Drame",
+        "Vuk Radjenovic",
+        "Martina Capurro Taborda",
+        "Aleksandr Braynin",
+        "Zhibek Kulambayeva",
+        "Fausto Tabacco",
+        "Ida Wobker",
+        "Sofia Rocchetti",
+        "Valentina Ivanov",
+        "Carl Emil Overbeck",
+        "Federica Sacco",
+        "Tiago Torres",
+        "Lan Mi"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Maria Herazo Gonzalez",
+          "cuota": 4.5
+        },
+        {
+          "jugador": "Dalila Spiteri",
+          "cuota": 2.95
+        },
+        {
+          "jugador": "Franziska Sziedat",
+          "cuota": 2.85
+        },
+        {
+          "jugador": "Vuk Radjenovic",
+          "cuota": 2.6
+        }
+      ],
+      "cuota_combo": 98.37,
+      "hr_combo": 0.2014,
+      "ev_combo": 18.8126,
+      "excluidos": [
+        "Oscar Brown",
+        "Cezar Gabriel Papoe",
+        "Petja Drame",
+        "Martina Capurro Taborda",
+        "Aleksandr Braynin",
+        "Zhibek Kulambayeva",
+        "Fausto Tabacco",
+        "Ida Wobker",
+        "Sofia Rocchetti",
+        "Valentina Ivanov",
+        "Carl Emil Overbeck",
+        "Federica Sacco",
+        "Tiago Torres",
+        "Lan Mi"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Maria Herazo Gonzalez",
+          "cuota": 4.5
+        },
+        {
+          "jugador": "Dalila Spiteri",
+          "cuota": 2.95
+        },
+        {
+          "jugador": "Cezar Gabriel Papoe",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Vuk Radjenovic",
+          "cuota": 2.6
+        }
+      ],
+      "cuota_combo": 94.92,
+      "hr_combo": 0.1905,
+      "ev_combo": 17.0781,
+      "excluidos": [
+        "Oscar Brown",
+        "Franziska Sziedat",
+        "Petja Drame",
+        "Martina Capurro Taborda",
+        "Aleksandr Braynin",
+        "Zhibek Kulambayeva",
+        "Fausto Tabacco",
+        "Ida Wobker",
+        "Sofia Rocchetti",
+        "Valentina Ivanov",
+        "Carl Emil Overbeck",
+        "Federica Sacco",
+        "Tiago Torres",
+        "Lan Mi"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Maria Herazo Gonzalez",
+          "cuota": 4.5
+        },
+        {
+          "jugador": "Cezar Gabriel Papoe",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Franziska Sziedat",
+          "cuota": 2.85
+        },
+        {
+          "jugador": "Vuk Radjenovic",
+          "cuota": 2.6
+        }
+      ],
+      "cuota_combo": 91.7,
+      "hr_combo": 0.1905,
+      "ev_combo": 16.4653,
+      "excluidos": [
+        "Oscar Brown",
+        "Dalila Spiteri",
+        "Petja Drame",
+        "Martina Capurro Taborda",
+        "Aleksandr Braynin",
+        "Zhibek Kulambayeva",
+        "Fausto Tabacco",
+        "Ida Wobker",
+        "Sofia Rocchetti",
+        "Valentina Ivanov",
+        "Carl Emil Overbeck",
+        "Federica Sacco",
+        "Tiago Torres",
+        "Lan Mi"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.5405405405405405,
+    "total_ajustado": 12432.43243243243,
+    "var_95": -4991.699346405228,
+    "cvar_95": -8269.362421634032,
+    "expected_pl": 103083.91536523923,
+    "sharpe_ratio": 1.406140440873028,
+    "kelly_growth_rate": 2.199255126980591,
+    "sessions_to_double": 0.3151736113088359,
+    "var_excedido": true,
+    "factor_var": 0.43478260869565216
+  },
+  "resumen": {
+    "gastado_individuales": 0,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 0,
+    "total_en_riesgo": 0.0,
+    "pct_bankroll_en_riesgo": 0.0,
+    "n_senales_apostar": 15,
+    "pool_cobertura": 18,
+    "alerta_riesgo": false
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "metadata": {
+    "timestamp": "20260628_105503",
+    "bankroll": 20000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260628_105242.json",
+    "n_partidos_analizados": 14,
+    "calibracion_n": 2667,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "challenger",
+      "superficie": "hard",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Mitchell Krueger vs Dhakshineswar Suresh",
+      "favorito": "Dhakshineswar Suresh",
+      "cuota": 2.1,
+      "edge_pct": "7.8%",
+      "p_modelo": 0.554,
+      "n_h2h": 1,
+      "p_blend": 0.59675,
+      "kelly_kl": 0.0536,
+      "kelly_usado": 0.0575,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Dhakshineswar Suresh",
+          "cuota": 2.1
+        },
+        {
+          "jugador": "Enzo Aguiard",
+          "cuota": 1.97
+        },
+        {
+          "jugador": "Samir Banerjee",
+          "cuota": 1.82
+        }
+      ],
+      "cuota_combo": 7.53,
+      "hr_combo": 0.2138,
+      "ev_combo": 0.6101,
+      "excluidos": [],
+      "stake": 5000,
+      "retorno_potencial": 37650.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.8333333333333334,
+    "total_ajustado": 10833.333333333334,
+    "var_95": -13000.0,
+    "cvar_95": -13000.0,
+    "expected_pl": 7991.474894141484,
+    "sharpe_ratio": 0.2130665615059589,
+    "kelly_growth_rate": -0.3611505992913349,
+    "sessions_to_double": Infinity,
+    "var_excedido": true,
+    "factor_var": 0.38461538461538464
+  },
+  "resumen": {
+    "gastado_individuales": 0,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 5000,
+    "total_en_riesgo": 5000.0,
+    "pct_bankroll_en_riesgo": 0.25,
+    "n_senales_apostar": 1,
+    "pool_cobertura": 3,
+    "alerta_riesgo": false
+  }
+}

@@ -1,0 +1,515 @@
+{
+  "metadata": {
+    "timestamp": "20260608_032331",
+    "bankroll": 20000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260608_031932.json",
+    "n_partidos_analizados": 74,
+    "calibracion_n": 150,
+    "parametros": {
+      "modo": "cobertura",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Harmony Tan vs Emily Appleton",
+      "favorito": "Emily Appleton",
+      "cuota": 3.2,
+      "edge_pct": "21.8%",
+      "p_modelo": 0.53,
+      "n_h2h": 0,
+      "p_blend": 0.6973684210526315,
+      "kelly_kl": 0.3763,
+      "kelly_usado": 0.1,
+      "stake": 2000,
+      "retorno_potencial": 6400.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Laslo Djere vs Kimmer Coppejans",
+      "favorito": "Kimmer Coppejans",
+      "cuota": 3.25,
+      "edge_pct": "19.4%",
+      "p_modelo": 0.502,
+      "n_h2h": 1,
+      "p_blend": 0.6485263157894736,
+      "kelly_kl": 0.3354,
+      "kelly_usado": 0.1,
+      "stake": 2000,
+      "retorno_potencial": 6500.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Andrea Guerrieri vs Dalibor Svrcina",
+      "favorito": "Andrea Guerrieri",
+      "cuota": 2.7,
+      "edge_pct": "15.8%",
+      "p_modelo": 0.528,
+      "n_h2h": 1,
+      "p_blend": 0.6550263157894737,
+      "kelly_kl": 0.306,
+      "kelly_usado": 0.1,
+      "stake": 2000,
+      "retorno_potencial": 5400.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Akira Santillan vs Abdullah Shelbayh",
+      "favorito": "Akira Santillan",
+      "cuota": 2.25,
+      "edge_pct": "10.0%",
+      "p_modelo": 0.544,
+      "n_h2h": 0,
+      "p_blend": 0.6973684210526315,
+      "kelly_kl": 0.2222,
+      "kelly_usado": 0.1,
+      "stake": 2000,
+      "retorno_potencial": 4500.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Linda Klimovicova vs Sinja Kraus",
+      "favorito": "Linda Klimovicova",
+      "cuota": 2.48,
+      "edge_pct": "10.2%",
+      "p_modelo": 0.505,
+      "n_h2h": 0,
+      "p_blend": 0.6973684210526315,
+      "kelly_kl": 0.2008,
+      "kelly_usado": 0.1,
+      "stake": 1000,
+      "retorno_potencial": 2480.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Samuel Heredia vs Julian Cundom",
+      "favorito": "Julian Cundom",
+      "cuota": 2.3,
+      "edge_pct": "7.7%",
+      "p_modelo": 0.512,
+      "n_h2h": 0,
+      "p_blend": 0.6973684210526315,
+      "kelly_kl": 0.1718,
+      "kelly_usado": 0.1,
+      "stake": 1000,
+      "retorno_potencial": 2300.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Alicia Dudeney vs Himeno Sakatsume",
+      "favorito": "Alicia Dudeney",
+      "cuota": 2.17,
+      "edge_pct": "6.6%",
+      "p_modelo": 0.527,
+      "n_h2h": 0,
+      "p_blend": 0.6973684210526315,
+      "kelly_kl": 0.1462,
+      "kelly_usado": 0.1,
+      "stake": 1000,
+      "retorno_potencial": 2170.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Veronika Podrez vs Tatiana Prozorova",
+      "favorito": "Veronika Podrez",
+      "cuota": 2.25,
+      "edge_pct": "6.6%",
+      "p_modelo": 0.51,
+      "n_h2h": 0,
+      "p_blend": 0.6973684210526315,
+      "kelly_kl": 0.1372,
+      "kelly_usado": 0.1,
+      "stake": 1000,
+      "retorno_potencial": 2250.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Daniel Evans vs Charles Broom",
+      "favorito": "Daniel Evans",
+      "cuota": 2.25,
+      "edge_pct": "5.8%",
+      "p_modelo": 0.502,
+      "n_h2h": 1,
+      "p_blend": 0.6485263157894736,
+      "kelly_kl": 0.1248,
+      "kelly_usado": 0.0918,
+      "stake": 1000,
+      "retorno_potencial": 2250.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "August Holmgren vs Nicolai Budkov Kjaer",
+      "favorito": "August Holmgren",
+      "cuota": 2.23,
+      "edge_pct": "5.6%",
+      "p_modelo": 0.504,
+      "n_h2h": 0,
+      "p_blend": 0.6973684210526315,
+      "kelly_kl": 0.1177,
+      "kelly_usado": 0.1,
+      "stake": 1000,
+      "retorno_potencial": 2230.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Emily Appleton",
+          "cuota": 3.2
+        },
+        {
+          "jugador": "Kimmer Coppejans",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Andrea Guerrieri",
+          "cuota": 2.7
+        }
+      ],
+      "cuota_combo": 28.08,
+      "hr_combo": 0.2075,
+      "ev_combo": 4.8258,
+      "excluidos": [
+        "Akira Santillan",
+        "Linda Klimovicova",
+        "Julian Cundom",
+        "Alicia Dudeney",
+        "Veronika Podrez",
+        "Daniel Evans",
+        "August Holmgren",
+        "Thiago Cigarran",
+        "Darja Vidmanova",
+        "Iryna Shymanovich",
+        "Thanasi Kokkinakis",
+        "Alex Marti Pujolras",
+        "Buvaysar Gadamauri"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 56160.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Emily Appleton",
+          "cuota": 3.2
+        },
+        {
+          "jugador": "Kimmer Coppejans",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Linda Klimovicova",
+          "cuota": 2.48
+        }
+      ],
+      "cuota_combo": 25.79,
+      "hr_combo": 0.2163,
+      "ev_combo": 4.5796,
+      "excluidos": [
+        "Andrea Guerrieri",
+        "Akira Santillan",
+        "Julian Cundom",
+        "Alicia Dudeney",
+        "Veronika Podrez",
+        "Daniel Evans",
+        "August Holmgren",
+        "Thiago Cigarran",
+        "Darja Vidmanova",
+        "Iryna Shymanovich",
+        "Thanasi Kokkinakis",
+        "Alex Marti Pujolras",
+        "Buvaysar Gadamauri"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 51580.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Emily Appleton",
+          "cuota": 3.2
+        },
+        {
+          "jugador": "Andrea Guerrieri",
+          "cuota": 2.7
+        },
+        {
+          "jugador": "Linda Klimovicova",
+          "cuota": 2.48
+        }
+      ],
+      "cuota_combo": 21.43,
+      "hr_combo": 0.2188,
+      "ev_combo": 3.6873,
+      "excluidos": [
+        "Kimmer Coppejans",
+        "Akira Santillan",
+        "Julian Cundom",
+        "Alicia Dudeney",
+        "Veronika Podrez",
+        "Daniel Evans",
+        "August Holmgren",
+        "Thiago Cigarran",
+        "Darja Vidmanova",
+        "Iryna Shymanovich",
+        "Thanasi Kokkinakis",
+        "Alex Marti Pujolras",
+        "Buvaysar Gadamauri"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 42860.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Kimmer Coppejans",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Andrea Guerrieri",
+          "cuota": 2.7
+        },
+        {
+          "jugador": "Linda Klimovicova",
+          "cuota": 2.48
+        }
+      ],
+      "cuota_combo": 21.76,
+      "hr_combo": 0.2075,
+      "ev_combo": 3.515,
+      "excluidos": [
+        "Emily Appleton",
+        "Akira Santillan",
+        "Julian Cundom",
+        "Alicia Dudeney",
+        "Veronika Podrez",
+        "Daniel Evans",
+        "August Holmgren",
+        "Thiago Cigarran",
+        "Darja Vidmanova",
+        "Iryna Shymanovich",
+        "Thanasi Kokkinakis",
+        "Alex Marti Pujolras",
+        "Buvaysar Gadamauri"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 43520.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Emily Appleton",
+          "cuota": 3.2
+        },
+        {
+          "jugador": "Kimmer Coppejans",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Andrea Guerrieri",
+          "cuota": 2.7
+        },
+        {
+          "jugador": "Linda Klimovicova",
+          "cuota": 2.48
+        }
+      ],
+      "cuota_combo": 69.64,
+      "hr_combo": 0.1268,
+      "ev_combo": 7.8276,
+      "excluidos": [
+        "Akira Santillan",
+        "Julian Cundom",
+        "Alicia Dudeney",
+        "Veronika Podrez",
+        "Daniel Evans",
+        "August Holmgren",
+        "Thiago Cigarran",
+        "Darja Vidmanova",
+        "Iryna Shymanovich",
+        "Thanasi Kokkinakis",
+        "Alex Marti Pujolras",
+        "Buvaysar Gadamauri"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 69640.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Emily Appleton",
+          "cuota": 3.2
+        },
+        {
+          "jugador": "Kimmer Coppejans",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Linda Klimovicova",
+          "cuota": 2.48
+        },
+        {
+          "jugador": "Julian Cundom",
+          "cuota": 2.3
+        }
+      ],
+      "cuota_combo": 59.32,
+      "hr_combo": 0.1309,
+      "ev_combo": 6.7678,
+      "excluidos": [
+        "Andrea Guerrieri",
+        "Akira Santillan",
+        "Alicia Dudeney",
+        "Veronika Podrez",
+        "Daniel Evans",
+        "August Holmgren",
+        "Thiago Cigarran",
+        "Darja Vidmanova",
+        "Iryna Shymanovich",
+        "Thanasi Kokkinakis",
+        "Alex Marti Pujolras",
+        "Buvaysar Gadamauri"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 59320.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Emily Appleton",
+          "cuota": 3.2
+        },
+        {
+          "jugador": "Andrea Guerrieri",
+          "cuota": 2.7
+        },
+        {
+          "jugador": "Linda Klimovicova",
+          "cuota": 2.48
+        },
+        {
+          "jugador": "Julian Cundom",
+          "cuota": 2.3
+        }
+      ],
+      "cuota_combo": 49.28,
+      "hr_combo": 0.1324,
+      "ev_combo": 5.5257,
+      "excluidos": [
+        "Kimmer Coppejans",
+        "Akira Santillan",
+        "Alicia Dudeney",
+        "Veronika Podrez",
+        "Daniel Evans",
+        "August Holmgren",
+        "Thiago Cigarran",
+        "Darja Vidmanova",
+        "Iryna Shymanovich",
+        "Thanasi Kokkinakis",
+        "Alex Marti Pujolras",
+        "Buvaysar Gadamauri"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 49280.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Kimmer Coppejans",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Andrea Guerrieri",
+          "cuota": 2.7
+        },
+        {
+          "jugador": "Linda Klimovicova",
+          "cuota": 2.48
+        },
+        {
+          "jugador": "Julian Cundom",
+          "cuota": 2.3
+        }
+      ],
+      "cuota_combo": 50.05,
+      "hr_combo": 0.1256,
+      "ev_combo": 5.2857,
+      "excluidos": [
+        "Emily Appleton",
+        "Akira Santillan",
+        "Alicia Dudeney",
+        "Veronika Podrez",
+        "Daniel Evans",
+        "August Holmgren",
+        "Thiago Cigarran",
+        "Darja Vidmanova",
+        "Iryna Shymanovich",
+        "Thanasi Kokkinakis",
+        "Alex Marti Pujolras",
+        "Buvaysar Gadamauri"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 50050.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.4,
+    "total_ajustado": 10400.0,
+    "var_95": -3185.631868131868,
+    "cvar_95": -4987.921240133307,
+    "expected_pl": 58627.731167408805,
+    "sharpe_ratio": 1.1090026195936227,
+    "kelly_growth_rate": 1.4626793028061136,
+    "sessions_to_double": 0.47388869127371924,
+    "var_excedido": true,
+    "factor_var": 0.7692307692307693
+  },
+  "resumen": {
+    "gastado_individuales": 14000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 12000,
+    "total_en_riesgo": 26000.0,
+    "pct_bankroll_en_riesgo": 1.3,
+    "n_senales_apostar": 10,
+    "pool_cobertura": 16,
+    "alerta_riesgo": true
+  }
+}

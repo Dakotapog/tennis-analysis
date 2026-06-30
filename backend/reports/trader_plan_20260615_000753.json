@@ -1,0 +1,246 @@
+{
+  "metadata": {
+    "timestamp": "20260615_000753",
+    "bankroll": 125000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260615_000640.json",
+    "n_partidos_analizados": 35,
+    "calibracion_n": 755,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "atp500",
+      "superficie": "grass",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Botic van de Zandschulp vs Harry Wendelken",
+      "favorito": "Harry Wendelken",
+      "cuota": 2.85,
+      "edge_pct": "19.2%",
+      "p_modelo": 0.543,
+      "n_h2h": 0,
+      "p_blend": 0.5676,
+      "kelly_kl": 0.1082,
+      "kelly_usado": 0.0835,
+      "stake": 3000,
+      "retorno_potencial": 8550.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Marie Bouzkova vs Tereza Valentova",
+      "favorito": "Tereza Valentova",
+      "cuota": 2.35,
+      "edge_pct": "10.3%",
+      "p_modelo": 0.529,
+      "n_h2h": 1,
+      "p_blend": 0.55795,
+      "kelly_kl": 0.066,
+      "kelly_usado": 0.0576,
+      "stake": 2000,
+      "retorno_potencial": 4700.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Maya Joint vs Yuliia Starodubtseva",
+      "favorito": "Maya Joint",
+      "cuota": 2.43,
+      "edge_pct": "10.5%",
+      "p_modelo": 0.517,
+      "n_h2h": 0,
+      "p_blend": 0.5676,
+      "kelly_kl": 0.0651,
+      "kelly_usado": 0.0663,
+      "stake": 2000,
+      "retorno_potencial": 4860.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Giovanni Mpetshi Perricard vs Corentin Moutet",
+      "favorito": "Corentin Moutet",
+      "cuota": 2.2,
+      "edge_pct": "7.8%",
+      "p_modelo": 0.533,
+      "n_h2h": 2,
+      "p_blend": 0.5537599999999999,
+      "kelly_kl": 0.0536,
+      "kelly_usado": 0.0455,
+      "stake": 2000,
+      "retorno_potencial": 4400.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Harry Wendelken",
+          "cuota": 2.85
+        },
+        {
+          "jugador": "Tereza Valentova",
+          "cuota": 2.35
+        },
+        {
+          "jugador": "Maya Joint",
+          "cuota": 2.43
+        }
+      ],
+      "cuota_combo": 16.27,
+      "hr_combo": 0.1798,
+      "ev_combo": 1.9255,
+      "excluidos": [
+        "Corentin Moutet"
+      ],
+      "stake": 5000,
+      "retorno_potencial": 81350.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Harry Wendelken",
+          "cuota": 2.85
+        },
+        {
+          "jugador": "Maya Joint",
+          "cuota": 2.43
+        },
+        {
+          "jugador": "Corentin Moutet",
+          "cuota": 2.2
+        }
+      ],
+      "cuota_combo": 15.24,
+      "hr_combo": 0.1784,
+      "ev_combo": 1.7182,
+      "excluidos": [
+        "Tereza Valentova"
+      ],
+      "stake": 5000,
+      "retorno_potencial": 76200.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Harry Wendelken",
+          "cuota": 2.85
+        },
+        {
+          "jugador": "Tereza Valentova",
+          "cuota": 2.35
+        },
+        {
+          "jugador": "Corentin Moutet",
+          "cuota": 2.2
+        }
+      ],
+      "cuota_combo": 14.73,
+      "hr_combo": 0.1754,
+      "ev_combo": 1.584,
+      "excluidos": [
+        "Maya Joint"
+      ],
+      "stake": 5000,
+      "retorno_potencial": 73650.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Tereza Valentova",
+          "cuota": 2.35
+        },
+        {
+          "jugador": "Maya Joint",
+          "cuota": 2.43
+        },
+        {
+          "jugador": "Corentin Moutet",
+          "cuota": 2.2
+        }
+      ],
+      "cuota_combo": 12.56,
+      "hr_combo": 0.1754,
+      "ev_combo": 1.2032,
+      "excluidos": [
+        "Harry Wendelken"
+      ],
+      "stake": 5000,
+      "retorno_potencial": 62800.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Harry Wendelken",
+          "cuota": 2.85
+        },
+        {
+          "jugador": "Tereza Valentova",
+          "cuota": 2.35
+        },
+        {
+          "jugador": "Maya Joint",
+          "cuota": 2.43
+        },
+        {
+          "jugador": "Corentin Moutet",
+          "cuota": 2.2
+        }
+      ],
+      "cuota_combo": 35.8,
+      "hr_combo": 0.0995,
+      "ev_combo": 2.564,
+      "excluidos": [],
+      "stake": 2000,
+      "retorno_potencial": 71600.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.6896551724137931,
+    "total_ajustado": 73793.10344827587,
+    "var_95": -107000.0,
+    "cvar_95": -107000.0,
+    "expected_pl": 137986.16652817331,
+    "sharpe_ratio": 0.35778778608699635,
+    "kelly_growth_rate": -0.023320594087881785,
+    "sessions_to_double": Infinity,
+    "var_excedido": true,
+    "factor_var": 0.29205607476635514
+  },
+  "resumen": {
+    "gastado_individuales": 9000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 22000,
+    "total_en_riesgo": 31000.0,
+    "pct_bankroll_en_riesgo": 0.248,
+    "n_senales_apostar": 4,
+    "pool_cobertura": 4,
+    "alerta_riesgo": false
+  }
+}

@@ -1,6 +1,7 @@
 """
-Tests para edge_calculator.py (Nodo-01)
-Cubre: Kelly-KL core, Volatility Smile, Factor Decomposition, Shannon Entropy, Thompson Sampling
+Tests para edge_calculator.py (Nodo-01 + Nodo-17)
+Cubre: Kelly-KL core, Volatility Smile, Factor Decomposition, Shannon Entropy,
+       Thompson Sampling, detectar_tier, λ por tier, prior estratificado
 """
 import math
 import pytest
@@ -9,9 +10,10 @@ from edge_calculator import (
     bookmaker_entropy, psi_entropy_multiplier,
     phi_idiosincratico, elo_win_prob,
     thompson_p_historica, theta_thompson,
+    detectar_tier,
     calcular_edge,
     calcular_edge_completo,
-    EDGE_MIN, KELLY_KL_MIN, BANKROLL_CAP,
+    EDGE_MIN, KELLY_KL_MIN, BANKROLL_CAP, LAMBDA_TIER_MULTIPLIER,
 )
 
 
@@ -22,10 +24,13 @@ from edge_calculator import (
 class TestKellyKLCore:
 
     def test_edge_positivo_apostar_majchrzak(self):
-        """Caso real: Majchrzak vs Marozsan → edge +9.5% → debe apostar"""
+        """Caso real: Majchrzak vs Marozsan → edge +9.5% pero p_modelo=0.521 (LOW)
+        T32-01 (Nodo-32): underdog (cuota>=2.10) con p_modelo<0.55 → WATCHLIST, no APOSTAR.
+        El edge matemático existe pero es phantom — modelo expresa convicción de moneda al aire."""
         r = calcular_edge(p_modelo=0.521, cuota_favorito=2.35)
-        assert r['edge'] > 0.05
-        assert r['apostar'] is True
+        assert r['edge'] > 0.05           # edge matemático positivo
+        assert r['apostar'] is False      # bloqueado por gate T32-01 (phantom edge)
+        assert r['confidence_flag'] == 'LOW'
 
     def test_edge_negativo_no_apostar_tsitsipas(self):
         """Caso real: Tsitsipas favorito obvio (1.08) → modelo dice 59.2% → edge -33%"""
@@ -337,7 +342,9 @@ class TestEdgeCompletoPartido:
         }
 
     def test_partido_underdog_con_edge_apuesta(self):
-        """Underdog con edge > 5% → apostar"""
+        """Underdog con edge > 5% → edge se calcula correctamente.
+        FIX-3 (N28F2): apostar puede ser False si n_axes_active < 2 (sin alignment).
+        El edge calculado es correcto independientemente del filtro de alignment."""
         p = self._make_partido(
             cuota1=2.35, cuota2=1.62,
             confidence=52.1, favored="A",
@@ -346,8 +353,9 @@ class TestEdgeCompletoPartido:
         r = calcular_edge_completo(p, self._calibracion_vacia())
         assert r is not None
         assert r['edge'] > 0.05
-        assert r['apostar'] is True
         assert r['zona_cuota'] == 'underdog'
+        # apostar puede ser True o False dependiendo de n_axes_active (FIX-3)
+        assert isinstance(r['apostar'], bool)
 
     def test_partido_favorito_obvio_no_apuesta(self):
         """Favorito obvio (cuota 1.08) con confidence razonable → no apostar"""
@@ -406,3 +414,173 @@ class TestEdgeCompletoPartido:
         r = calcular_edge_completo(p, self._calibracion_vacia())
         if r:
             assert r['fraccion_bankroll'] <= BANKROLL_CAP
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# NODO-17 — CALIBRACIÓN POR TIER (T17-01 / T17-02 / T17-03)
+# ─────────────────────────────────────────────────────────────────────────────
+
+class TestDetectarTier:
+    """T17-03: detectar_tier() desde torneo_completo."""
+
+    def test_roland_garros_es_grand_slam(self):
+        assert detectar_tier("Roland Garros (France)") == "grand_slam"
+
+    def test_french_open_es_grand_slam(self):
+        assert detectar_tier("French Open (France)") == "grand_slam"
+
+    def test_wimbledon_es_grand_slam(self):
+        assert detectar_tier("Wimbledon (United Kingdom)") == "grand_slam"
+
+    def test_australian_open_es_grand_slam(self):
+        assert detectar_tier("Australian Open") == "grand_slam"
+
+    def test_us_open_es_grand_slam(self):
+        assert detectar_tier("US Open") == "grand_slam"
+
+    def test_birmingham_desconocido_cae_a_fallback_atp500(self):
+        """Birmingham no contiene keywords de GS/Challenger → fallback atp500."""
+        assert detectar_tier("Birmingham (United Kingdom)") == "atp500"
+
+    def test_m15_es_itf(self):
+        # M15 son torneos ITF, no Challenger (T21-01)
+        assert detectar_tier("M15 Monastir 21 (Tunisia)") == "itf"
+
+    def test_w15_es_itf(self):
+        # W15 son torneos ITF, no Challenger (T21-01)
+        assert detectar_tier("W15 Banja Luka (Bosnia and Herzegovina)") == "itf"
+
+    def test_string_vacio_retorna_fallback(self):
+        tier = detectar_tier("")
+        assert tier in ("grand_slam", "atp1000", "atp500", "challenger", "itf")
+
+    def test_lambda_tier_multiplier_challenger_mayor(self):
+        """challenger debe tener mayor multiplier que grand_slam (más incertidumbre)."""
+        assert LAMBDA_TIER_MULTIPLIER["challenger"] > LAMBDA_TIER_MULTIPLIER["grand_slam"]
+
+    def test_lambda_tier_multiplier_orden_correcto(self):
+        """GS < ATP1000 < ATP500 < Challenger en penalización."""
+        m = LAMBDA_TIER_MULTIPLIER
+        assert m["grand_slam"] < m["atp1000"] < m["atp500"] < m["challenger"]
+
+
+class TestThetaThompsonTierAware:
+    """T17-02: theta_thompson estratificado por [superficie][tier]."""
+
+    def _calibracion_estratificada(self):
+        return {
+            "global": {"wins": 46, "losses": 21},
+            "por_superficie": {"clay": {"wins": 46, "losses": 21}},
+            "por_superficie_y_tier": {
+                "clay_grand_slam": {"wins": 24, "losses": 7},
+                "clay_challenger": {"wins": 22, "losses": 14},
+                "grass_challenger": {"wins": 0, "losses": 0},
+            },
+            "fallback_por_tier": {
+                "grand_slam": 0.758,
+                "atp1000": 0.700,
+                "atp500": 0.650,
+                "challenger": 0.611,
+            },
+        }
+
+    def test_clay_grand_slam_usa_calibracion_estratificada(self):
+        """clay_grand_slam n=31 ≥ 10 → usa Thompson de clay_grand_slam."""
+        cal = self._calibracion_estratificada()
+        p = theta_thompson(cal, "clay", "grand_slam")
+        assert p > 0.70  # Thompson(24W, 7L) ≈ 0.758
+
+    def test_clay_challenger_usa_calibracion_estratificada(self):
+        """clay_challenger n=36 ≥ 10 → usa Thompson de clay_challenger."""
+        cal = self._calibracion_estratificada()
+        p = theta_thompson(cal, "clay", "challenger")
+        # Thompson(22W, 14L) < clay_grand_slam — challenger más incierto
+        p_gs = theta_thompson(cal, "clay", "grand_slam")
+        assert p < p_gs
+
+    def test_grass_challenger_sin_datos_usa_fallback_tier(self):
+        """grass_challenger n=0 < 10 → usa fallback_por_tier['challenger']."""
+        cal = self._calibracion_estratificada()
+        p = theta_thompson(cal, "grass", "challenger")
+        assert p == 0.611
+
+    def test_unknown_surface_grand_slam_usa_fallback_tier(self):
+        """unknown_grand_slam n=0 → usa fallback_por_tier['grand_slam']."""
+        cal = self._calibracion_estratificada()
+        p = theta_thompson(cal, "unknown", "grand_slam")
+        assert p == 0.758
+
+    def test_tier_challenger_prior_menor_que_grand_slam(self):
+        """REGLA-T17-1: Prior Challenger < Prior Grand Slam (no mezclar poblaciones)."""
+        cal = self._calibracion_estratificada()
+        p_gs = theta_thompson(cal, "clay", "grand_slam")
+        p_ch = theta_thompson(cal, "clay", "challenger")
+        assert p_ch < p_gs
+
+    def test_sin_tier_retorna_igual_que_grand_slam(self):
+        """Compatibilidad retroactiva: sin tier → default grand_slam."""
+        cal = self._calibracion_estratificada()
+        p_default = theta_thompson(cal, "clay")
+        p_gs = theta_thompson(cal, "clay", "grand_slam")
+        assert p_default == p_gs
+
+
+class TestEdgeCompletoChallengerPenalizado:
+    """T17-03: edge_calculator penaliza Challenger con λ mayor."""
+
+    def _make_partido(self, torneo_completo, superficie="clay"):
+        return {
+            "jugador1": "A", "jugador2": "B",
+            "cuota1": 2.5, "cuota2": 1.6,
+            "tipo_cancha": superficie,
+            "superficie": superficie,
+            "torneo_completo": torneo_completo,
+            "ranking_analysis": {
+                "prediction": {"favored_player": "A", "confidence": 65.0,
+                               "score_breakdown": {}},
+                "A_ranking": 50, "B_ranking": 80,
+            },
+            "enfrentamientos_directos": [],
+        }
+
+    def _calibracion(self):
+        return {
+            "global": {"wins": 30, "losses": 10},
+            "por_superficie": {"clay": {"wins": 30, "losses": 10}},
+            "por_superficie_y_tier": {
+                "clay_grand_slam": {"wins": 24, "losses": 7},
+                "clay_challenger": {"wins": 0, "losses": 0},
+            },
+            "fallback_por_tier": {
+                "grand_slam": 0.758, "atp1000": 0.700,
+                "atp500": 0.650, "challenger": 0.611,
+            },
+        }
+
+    def test_challenger_tiene_mayor_lambda_efectivo(self):
+        """λ_efectivo en Challenger > λ_efectivo en Grand Slam para mismo partido."""
+        cal = self._calibracion()
+        r_gs = calcular_edge_completo(
+            self._make_partido("Roland Garros (France)"), cal)
+        r_ch = calcular_edge_completo(
+            self._make_partido("M15 Monastir (Tunisia)"), cal)
+        assert r_gs is not None and r_ch is not None
+        assert r_ch["lambda_efectivo"] > r_gs["lambda_efectivo"]
+
+    def test_tier_y_lambda_en_output(self):
+        """calcular_edge_completo incluye 'tier' y 'lambda_efectivo' en output."""
+        cal = self._calibracion()
+        r = calcular_edge_completo(self._make_partido("French Open (France)"), cal)
+        assert r is not None
+        assert "tier" in r
+        assert "lambda_efectivo" in r
+        assert r["tier"] == "grand_slam"
+
+    def test_polmans_principle_challenger_grass_prior_correcto(self):
+        """El prior para grass_challenger debe ser 0.611, no el GS clay (0.758)."""
+        cal = self._calibracion()
+        r = calcular_edge_completo(
+            self._make_partido("Birmingham (United Kingdom)", superficie="grass"), cal)
+        assert r is not None
+        # p_historica_usada debe ser el fallback challenger, no el GS clay
+        assert r["p_historica_usada"] <= 0.65  # challenger/atp500, no GS

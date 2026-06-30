@@ -1,0 +1,202 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — DEPLOY ROLAND GARROS
+  2026-06-10 03:07  │  Bankroll: $125,000
+  Señales APOSTAR: 7  │  Watchlist: 3  │  Sin edge: 0
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 10 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.10 (challenger)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $50,000 (40% bankroll)
+
+  │  🎾 Juan Bautista Torres vs Carlos Maria Zarate
+  │     Apostar: Carlos Maria Zarate
+  │     Cuota 4.20  │  Edge 27.3%  │  p_blend 0.661 (n_h2h=0)
+  │     Kelly-KL 42.4% → stake $12,000  │  Retorno potencial $50,400
+  │     EV real +177.6%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Alex Bolt vs Keegan Smith
+  │     Apostar: Keegan Smith
+  │     Cuota 3.45  │  Edge 24.4%  │  p_blend 0.610 (n_h2h=2)
+  │     Kelly-KL 40.3% → stake $12,000  │  Retorno potencial $41,400
+  │     EV real +110.5%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Hamish Stewart vs Leandro Riedi
+  │     Apostar: Hamish Stewart
+  │     Cuota 3.15  │  Edge 19.8%  │  p_blend 0.624 (n_h2h=1)
+  │     Kelly-KL 34.2% → stake $12,000  │  Retorno potencial $37,800
+  │     EV real +96.7%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Tristan Boyer vs Matteo Martineau
+  │     Apostar: Matteo Martineau
+  │     Cuota 2.95  │  Edge 16.4%  │  p_blend 0.661 (n_h2h=0)
+  │     Kelly-KL 29.8% → stake $12,000  │  Retorno potencial $35,400
+  │     EV real +95.0%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Petr Brunclik vs Andrej Martin
+  │     Apostar: Andrej Martin
+  │     Cuota 2.63  │  Edge 14.5%  │  p_blend 0.661 (n_h2h=0)
+  │     Kelly-KL 28.8% → stake $2,000  │  Retorno potencial $5,260
+  │     EV real +73.8%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Lulu Sun vs Mary Stoiana
+  │     Apostar: Mary Stoiana
+  │     Cuota 2.30  │  Edge 8.2%  │  p_blend 0.625 (n_h2h=1)
+  │     Kelly-KL 17.6% → stake $1,000  │  Retorno potencial $2,300
+  │     EV real +43.7%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Noma Noha Akugue vs Katarzyna Kawa
+  │     Apostar: Noma Noha Akugue
+  │     Cuota 2.10  │  Edge 5.4%  │  p_blend 0.661 (n_h2h=0)
+  │     Kelly-KL 13.0% → stake $1,000  │  Retorno potencial $2,100
+  │     EV real +38.8%  │  Zona: underdog  │  Sup: clay
+
+  │  Total individuales: $52,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 10 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $75,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Carlos Maria Zarate  @4.20  p=0.605  zona=underdog
+  │    2. Keegan Smith         @3.45  p=0.580  zona=underdog
+  │    3. Hamish Stewart       @3.15  p=0.587  zona=underdog
+  │    4. Matteo Martineau     @2.95  p=0.605  zona=underdog
+  │    5. Andrej Martin        @2.63  p=0.605  zona=underdog
+  │    6. Mary Stoiana         @2.30  p=0.588  zona=underdog
+  │    7. Emerson Jones        @2.12  p=0.611  zona=underdog [W]
+  │    8. Noma Noha Akugue     @2.10  p=0.605  zona=underdog
+  │    9. Darja Semenistaja    @2.02  p=0.605  zona=slight_underdog [W]
+  │    10. Francesco Forti      @1.98  p=0.574  zona=slight_underdog [W]
+
+  │  ── 3 PIERNAS: TOP 4 combos × $12,000 = $48,000 ──
+  │     (cada combo excluye 7 jugadores)
+  │     [3p-1] Carlos Maria Zarate@4.20 + Keegan Smith@3.45 + Hamish Stewart@3.15
+  │            @45.64 HR:20.6% EV:+840.9% →$547,680  excluye:[Matteo Martineau, Andrej Martin, Mary Stoiana, Noma Noha Akugue, Emerson Jones, Darja Semenistaja, Francesco Forti]
+  │     [3p-2] Carlos Maria Zarate@4.20 + Keegan Smith@3.45 + Matteo Martineau@2.95
+  │            @42.75 HR:21.3% EV:+808.7% →$513,000  excluye:[Hamish Stewart, Andrej Martin, Mary Stoiana, Noma Noha Akugue, Emerson Jones, Darja Semenistaja, Francesco Forti]
+  │     [3p-3] Carlos Maria Zarate@4.20 + Hamish Stewart@3.15 + Matteo Martineau@2.95
+  │            @39.03 HR:21.5% EV:+739.4% →$468,360  excluye:[Keegan Smith, Andrej Martin, Mary Stoiana, Noma Noha Akugue, Emerson Jones, Darja Semenistaja, Francesco Forti]
+  │     [3p-4] Keegan Smith@3.45 + Hamish Stewart@3.15 + Matteo Martineau@2.95
+  │            @32.06 HR:20.6% EV:+560.9% →$384,720  excluye:[Carlos Maria Zarate, Andrej Martin, Mary Stoiana, Noma Noha Akugue, Emerson Jones, Darja Semenistaja, Francesco Forti]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $6,000 = $24,000 ──
+  │     (cada combo excluye 6 jugadores)
+  │     [4p-1] Carlos Maria Zarate@4.20 + Keegan Smith@3.45 + Hamish Stewart@3.15 + Matteo Martineau@2.95
+  │            @134.65 HR:12.5% EV:+1580.2% →$807,900  excluye:[Andrej Martin, Mary Stoiana, Noma Noha Akugue, Emerson Jones, Darja Semenistaja, Francesco Forti]
+  │     [4p-2] Carlos Maria Zarate@4.20 + Keegan Smith@3.45 + Matteo Martineau@2.95 + Andrej Martin@2.63
+  │            @112.42 HR:12.9% EV:+1346.6% →$674,520  excluye:[Hamish Stewart, Mary Stoiana, Noma Noha Akugue, Emerson Jones, Darja Semenistaja, Francesco Forti]
+  │     [4p-3] Carlos Maria Zarate@4.20 + Hamish Stewart@3.15 + Matteo Martineau@2.95 + Andrej Martin@2.63
+  │            @102.64 HR:13.0% EV:+1236.2% →$615,840  excluye:[Keegan Smith, Mary Stoiana, Noma Noha Akugue, Emerson Jones, Darja Semenistaja, Francesco Forti]
+  │     [4p-4] Keegan Smith@3.45 + Hamish Stewart@3.15 + Matteo Martineau@2.95 + Andrej Martin@2.63
+  │            @84.32 HR:12.5% EV:+952.1% →$505,920  excluye:[Carlos Maria Zarate, Mary Stoiana, Noma Noha Akugue, Emerson Jones, Darja Semenistaja, Francesco Forti]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-4 picks?) ──
+  │  Total apostado: $72,000
+
+  │  🏆 0 fallos (10/10 ganan): retorno $4,517,940 → P&L +$4,445,940 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Francesco Forti]):
+  │       retorno $4,517,940 → P&L +$4,445,940 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Carlos Maria Zarate]):
+  │       retorno $890,640 → P&L +$818,640 (2/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Francesco Forti, Darja Semenistaja]):
+  │       retorno $4,517,940 → P&L +$4,445,940 (8/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Carlos Maria Zarate, Keegan Smith]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Francesco Forti, Darja Semenistaja, Noma Noha Akugue]):
+  │       retorno $4,517,940 → P&L +$4,445,940 (8/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Carlos Maria Zarate, Keegan Smith, Hamish Stewart]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+  │  ✅ 4 fallos (mejor caso: fallan favoritos [Francesco Forti, Darja Semenistaja, Noma Noha Akugue, Emerson Jones]):
+  │       retorno $4,517,940 → P&L +$4,445,940 (8/8 combos pagan)
+  │  ❌ 4 fallos (peor caso: fallan underdogs [Carlos Maria Zarate, Keegan Smith, Hamish Stewart, Matteo Martineau]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+
+  │  Total cobertura: $72,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     10
+  │  ρ estructural:       0.10 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.526
+  │  Reducción vs naive:  -47.4%
+  │
+  │  Stake naive (sin ajuste):    $     124,000
+  │  Stake ajustado (PK):         $      65,263
+  │  Ahorro por correlación:      $      58,737
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $     -56,052  (44.8% bankroll)
+  │  CVaR 95%:           $     -59,677
+  │  Max VaR permitido:  $      31,250  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.56
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $     664,378
+  │  σ(P&L):             $     740,021
+  │  Sharpe Ratio:              0.898
+  │  Kelly Growth Rate:        1.7550 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $ 808,959,802
+  │  Bankroll en 10 sesiones:  $5,235,327,685,918
+  │  Bankroll en 30 sesiones:  $9,183,570,910,740,228,400,950,018,048
+  │  Sesiones para duplicar:   0.4
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.56 (de $124,000 a $69,132)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.56) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Carlos Maria Zarate       @4.20  →  $   7,000  (ret. $    29,400)
+  │    Keegan Smith              @3.45  →  $   7,000  (ret. $    24,150)
+  │    Hamish Stewart            @3.15  →  $   7,000  (ret. $    22,050)
+  │    Matteo Martineau          @2.95  →  $   7,000  (ret. $    20,650)
+  │    Andrej Martin             @2.63  →  $   1,000  (ret. $     2,630)
+  │    Mary Stoiana              @2.30  →  $   1,000  (ret. $     2,300)
+  │    Noma Noha Akugue          @2.10  →  $   1,000  (ret. $     2,100)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @45.64]  $   7,000  →  Carlos Maria Zarate@4.20 + Keegan Smith@3.45 + Hamish Stewart@3.15
+  │    [3p @42.75]  $   7,000  →  Carlos Maria Zarate@4.20 + Keegan Smith@3.45 + Matteo Martineau@2.95
+  │    [3p @39.03]  $   7,000  →  Carlos Maria Zarate@4.20 + Hamish Stewart@3.15 + Matteo Martineau@2.95
+  │    [3p @32.06]  $   7,000  →  Keegan Smith@3.45 + Hamish Stewart@3.15 + Matteo Martineau@2.95
+  │    [4p @134.65]  $   3,000  →  Carlos Maria Zarate@4.20 + Keegan Smith@3.45 + Hamish Stewart@3.15 + Matteo Martineau@2.95
+  │    [4p @112.42]  $   3,000  →  Carlos Maria Zarate@4.20 + Keegan Smith@3.45 + Matteo Martineau@2.95 + Andrej Martin@2.63
+  │    [4p @102.64]  $   3,000  →  Carlos Maria Zarate@4.20 + Hamish Stewart@3.15 + Matteo Martineau@2.95 + Andrej Martin@2.63
+  │    [4p @84.32]  $   3,000  →  Keegan Smith@3.45 + Hamish Stewart@3.15 + Matteo Martineau@2.95 + Andrej Martin@2.63
+  │
+  │  TOTAL EN RIESGO:  $    71,000  (56.8% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $       125,000                       ║
+  ║  Individuales:        $        31,000  (24.8% bankroll)      ║
+  ║  Cobertura:           $        40,000  (32.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $        71,000  (56.8% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       7                                       ║
+  ║  Pool cobertura:       10 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260610_03  ║
+  ║  Partidos analizados: 222                                       ║
+  ║  Superficie:          clay (Roland Garros)                    ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  ⚠️  ALERTA: 56.8% bankroll en riesgo — por encima del 30% recomendado.
+      Reducir combos o sistema hasta n≥30 con datos limpios.
+
+  📊 Calibración: n=284 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.661 (calibrado grass) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260610_030719.json

@@ -1,0 +1,29 @@
+{
+  "ts_registro": "2026-06-29T14:38:28.344962",
+  "ts_bookmarklet": "2026-06-29T19:38:27.699Z",
+  "estado": "PENDIENTE",
+  "betslip_index": "reports/betslip_index_20260629_120105.json",
+  "n_picks": 1,
+  "picks": [
+    {
+      "outcome_id": "4239076908",
+      "jugador": "Andre Ilagan",
+      "cuota": 2.05,
+      "cuota_kambi": 2.05,
+      "partido": "",
+      "match_id": "",
+      "match_url": "",
+      "torneo": "",
+      "superficie": "?",
+      "tier": "?",
+      "edge": "0%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0,
+      "stake": 0,
+      "retorno_potencial": 0,
+      "resultado_real": null,
+      "correcto": null,
+      "ganancia": null
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — DEPLOY ROLAND GARROS
+  2026-06-07 13:44  │  Bankroll: $125,000
+  Señales APOSTAR: 8  │  Watchlist: 1  │  Sin edge: 0
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 9 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.10 (challenger)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $50,000 (40% bankroll)
+
+  │  🎾 Mair L. vs Bronzetti L.
+  │     Apostar: Mair L.
+  │     Cuota 10.00  │  Edge 42.5%  │  p_blend 0.697 (n_h2h=0)
+  │     Kelly-KL 51.0% → stake $12,000  │  Retorno potencial $120,000
+  │     EV real +597.4%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Sherif M. vs Pedone G.
+  │     Apostar: Pedone G.
+  │     Cuota 5.50  │  Edge 32.4%  │  p_blend 0.697 (n_h2h=0)
+  │     Kelly-KL 45.0% → stake $12,000  │  Retorno potencial $66,000
+  │     EV real +283.6%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Daniel T. vs Dzumhur D.
+  │     Apostar: Daniel T.
+  │     Cuota 2.60  │  Edge 15.5%  │  p_blend 0.599 (n_h2h=5)
+  │     Kelly-KL 31.4% → stake $11,000  │  Retorno potencial $28,600
+  │     EV real +55.7%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Monnet C. vs Prozorova T.
+  │     Apostar: Monnet C.
+  │     Cuota 2.90  │  Edge 15.9%  │  p_blend 0.649 (n_h2h=1)
+  │     Kelly-KL 29.0% → stake $12,000  │  Retorno potencial $34,800
+  │     EV real +88.2%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Rehberg M. H. vs Moeller M.
+  │     Apostar: Moeller M.
+  │     Cuota 2.50  │  Edge 11.9%  │  p_blend 0.653 (n_h2h=1)
+  │     Kelly-KL 24.5% → stake $3,000  │  Retorno potencial $7,500
+  │     EV real +63.2%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Waltert S. vs Lazaro Garcia A.
+  │     Apostar: Lazaro Garcia A.
+  │     Cuota 2.35  │  Edge 7.8%  │  p_blend 0.620 (n_h2h=2)
+  │     Kelly-KL 16.9% → stake $1,000  │  Retorno potencial $2,350
+  │     EV real +45.7%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Butvilas E. vs Ilagan A.
+  │     Apostar: Ilagan A.
+  │     Cuota 2.25  │  Edge 7.2%  │  p_blend 0.697 (n_h2h=0)
+  │     Kelly-KL 15.4% → stake $1,000  │  Retorno potencial $2,250
+  │     EV real +56.9%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Timofeeva M. vs Andreeva E.
+  │     Apostar: Andreeva E.
+  │     Cuota 2.30  │  Edge 6.6%  │  p_blend 0.697 (n_h2h=0)
+  │     Kelly-KL 14.3% → stake $1,000  │  Retorno potencial $2,300
+  │     EV real +60.4%  │  Zona: underdog  │  Sup: clay
+
+  │  Total individuales: $53,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 9 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $75,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Mair L.              @10.00  p=0.605  zona=underdog
+  │    2. Pedone G.            @5.50  p=0.605  zona=underdog
+  │    3. Monnet C.            @2.90  p=0.580  zona=underdog
+  │    4. Daniel T.            @2.60  p=0.564  zona=underdog
+  │    5. Moeller M.           @2.50  p=0.584  zona=underdog
+  │    6. Lazaro Garcia A.     @2.35  p=0.565  zona=underdog
+  │    7. Andreeva E.          @2.30  p=0.605  zona=underdog
+  │    8. Ilagan A.            @2.25  p=0.611  zona=underdog
+  │    9. Kawa K.              @2.05  p=0.605  zona=slight_underdog [W]
+
+  │  ── 3 PIERNAS: TOP 4 combos × $12,000 = $48,000 ──
+  │     (cada combo excluye 6 jugadores)
+  │     [3p-1] Mair L.@10.00 + Pedone G.@5.50 + Monnet C.@2.90
+  │            @159.50 HR:21.2% EV:+3289.3% →$1,914,000  excluye:[Daniel T., Moeller M., Lazaro Garcia A., Ilagan A., Andreeva E., Kawa K.]
+  │     [3p-2] Mair L.@10.00 + Pedone G.@5.50 + Daniel T.@2.60
+  │            @143.00 HR:20.7% EV:+2857.6% →$1,716,000  excluye:[Monnet C., Moeller M., Lazaro Garcia A., Ilagan A., Andreeva E., Kawa K.]
+  │     [3p-3] Mair L.@10.00 + Daniel T.@2.60 + Monnet C.@2.90
+  │            @75.40 HR:19.8% EV:+1394.2% →$904,800  excluye:[Pedone G., Moeller M., Lazaro Garcia A., Ilagan A., Andreeva E., Kawa K.]
+  │     [3p-4] Pedone G.@5.50 + Daniel T.@2.60 + Monnet C.@2.90
+  │            @41.47 HR:19.8% EV:+721.8% →$497,640  excluye:[Mair L., Moeller M., Lazaro Garcia A., Ilagan A., Andreeva E., Kawa K.]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $6,000 = $24,000 ──
+  │     (cada combo excluye 5 jugadores)
+  │     [4p-1] Mair L.@10.00 + Pedone G.@5.50 + Daniel T.@2.60 + Monnet C.@2.90
+  │            @414.70 HR:12.0% EV:+4874.4% →$2,488,200  excluye:[Moeller M., Lazaro Garcia A., Ilagan A., Andreeva E., Kawa K.]
+  │     [4p-2] Mair L.@10.00 + Pedone G.@5.50 + Monnet C.@2.90 + Moeller M.@2.50
+  │            @398.75 HR:12.4% EV:+4846.1% →$2,392,500  excluye:[Daniel T., Lazaro Garcia A., Ilagan A., Andreeva E., Kawa K.]
+  │     [4p-3] Mair L.@10.00 + Pedone G.@5.50 + Daniel T.@2.60 + Moeller M.@2.50
+  │            @357.50 HR:12.1% EV:+4216.0% →$2,145,000  excluye:[Monnet C., Lazaro Garcia A., Ilagan A., Andreeva E., Kawa K.]
+  │     [4p-4] Pedone G.@5.50 + Daniel T.@2.60 + Monnet C.@2.90 + Moeller M.@2.50
+  │            @103.67 HR:11.6% EV:+1099.3% →$622,020  excluye:[Mair L., Lazaro Garcia A., Ilagan A., Andreeva E., Kawa K.]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-4 picks?) ──
+  │  Total apostado: $72,000
+
+  │  🏆 0 fallos (9/9 ganan): retorno $12,680,160 → P&L +$12,608,160 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Kawa K.]):
+  │       retorno $12,680,160 → P&L +$12,608,160 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Mair L.]):
+  │       retorno $1,119,660 → P&L +$1,047,660 (2/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Kawa K., Ilagan A.]):
+  │       retorno $12,680,160 → P&L +$12,608,160 (8/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Mair L., Pedone G.]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Kawa K., Ilagan A., Andreeva E.]):
+  │       retorno $12,680,160 → P&L +$12,608,160 (8/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Mair L., Pedone G., Monnet C.]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+  │  ✅ 4 fallos (mejor caso: fallan favoritos [Kawa K., Ilagan A., Andreeva E., Lazaro Garcia A.]):
+  │       retorno $12,680,160 → P&L +$12,608,160 (8/8 combos pagan)
+  │  ❌ 4 fallos (peor caso: fallan underdogs [Mair L., Pedone G., Monnet C., Daniel T.]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+
+  │  Total cobertura: $72,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     9
+  │  ρ estructural:       0.10 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.556
+  │  Reducción vs naive:  -44.4%
+  │
+  │  Stake naive (sin ajuste):    $     125,000
+  │  Stake ajustado (PK):         $      69,444
+  │  Ahorro por correlación:      $      55,556
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $     -12,090  (9.7% bankroll)
+  │  CVaR 95%:           $     -27,645
+  │  Max VaR permitido:  $      31,250  (25% bankroll)
+  │  ✅ VaR dentro de límites
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $   1,907,775
+  │  σ(P&L):             $   2,174,954
+  │  Sharpe Ratio:              0.877
+  │  Kelly Growth Rate:        2.6299 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $64,223,393,349
+  │  Bankroll en 10 sesiones:  $32,997,154,026,216,208
+  │  Bankroll en 30 sesiones:  $2,299,372,992,350,890,714,999,100,467,565,557,710,848
+  │  Sesiones para duplicar:   0.3
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ✅ Sistema con edge positivo y riesgo controlado
+  │  → MANTENER bankroll actual. Escalar +20% después de 5 sesiones validadas.
+  │  → Stake por combo ajustado PK: $8,681
+  └─────────────────────────────────────────────────────────────────
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $       125,000                       ║
+  ║  Individuales:        $        53,000  (42.4% bankroll)      ║
+  ║  Cobertura:           $        72,000  (57.6% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $       125,000  (100.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       8                                       ║
+  ║  Pool cobertura:        9 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260604_03  ║
+  ║  Partidos analizados:  80                                       ║
+  ║  Superficie:          clay (Roland Garros)                    ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  ⚠️  ALERTA: 100.0% bankroll en riesgo — por encima del 30% recomendado.
+      Reducir combos o sistema hasta n≥30 con datos limpios.
+
+  📊 Calibración: n=150 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.697 (calibrado clay) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260607_134432.json

@@ -1,0 +1,192 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — DEPLOY ROLAND GARROS
+  2026-06-10 23:23  │  Bankroll: $10,000
+  Señales APOSTAR: 6  │  Watchlist: 1  │  Sin edge: 3
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 7 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.05 (itf)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $4,000 (40% bankroll)
+
+  │  🎾 Nadia Podoroska vs Tahlia Kokkinis
+  │     Apostar: Tahlia Kokkinis
+  │     Cuota 4.40  │  Edge 28.8%  │  p_blend 0.704 (n_h2h=0)
+  │     Kelly-KL 40.1% → stake $1,000  │  Retorno potencial $4,400
+  │     EV real +209.7%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Berfu Cengiz vs Oana Georgeta Simion
+  │     Apostar: Oana Georgeta Simion
+  │     Cuota 3.20  │  Edge 21.9%  │  p_blend 0.704 (n_h2h=0)
+  │     Kelly-KL 35.7% → stake $1,000  │  Retorno potencial $3,200
+  │     EV real +125.2%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Lorena Solar Donoso vs Martina Colmegna
+  │     Apostar: Lorena Solar Donoso
+  │     Cuota 3.25  │  Edge 19.8%  │  p_blend 0.704 (n_h2h=0)
+  │     Kelly-KL 31.2% → stake $1,000  │  Retorno potencial $3,250
+  │     EV real +128.8%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Matilde Jorge vs Anastasia Kulikova
+  │     Apostar: Anastasia Kulikova
+  │     Cuota 2.65  │  Edge 13.3%  │  p_blend 0.593 (n_h2h=4)
+  │     Kelly-KL 25.1% → stake $1,000  │  Retorno potencial $2,650
+  │     EV real +57.2%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Clara Burel vs Deborah Chiesa
+  │     Apostar: Deborah Chiesa
+  │     Cuota 2.55  │  Edge 12.5%  │  p_blend 0.704 (n_h2h=0)
+  │     Kelly-KL 23.1% → stake $1,000  │  Retorno potencial $2,550
+  │     EV real +79.5%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Emma Lene vs Verena Meliss
+  │     Apostar: Verena Meliss
+  │     Cuota 2.35  │  Edge 10.2%  │  p_blend 0.660 (n_h2h=1)
+  │     Kelly-KL 20.7% → stake $1,000  │  Retorno potencial $2,350
+  │     EV real +55.1%  │  Zona: underdog  │  Sup: clay
+
+  │  Total individuales: $6,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 7 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $6,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Tahlia Kokkinis      @4.40  p=0.704  zona=underdog
+  │    2. Lorena Solar Donoso  @3.25  p=0.704  zona=underdog
+  │    3. Oana Georgeta Simion @3.20  p=0.704  zona=underdog
+  │    4. Anastasia Kulikova   @2.65  p=0.544  zona=underdog
+  │    5. Deborah Chiesa       @2.55  p=0.704  zona=underdog
+  │    6. Verena Meliss        @2.35  p=0.660  zona=underdog
+  │    7. Denisa Zoldakova     @1.92  p=0.704  zona=slight_underdog [W]
+
+  │  ── 3 PIERNAS: TOP 4 combos × $1,000 = $4,000 ──
+  │     (cada combo excluye 4 jugadores)
+  │     [3p-1] Tahlia Kokkinis@4.40 + Oana Georgeta Simion@3.20 + Lorena Solar Donoso@3.25
+  │            @45.76 HR:34.9% EV:+1496.0% →$45,760  excluye:[Anastasia Kulikova, Deborah Chiesa, Verena Meliss, Denisa Zoldakova]
+  │     [3p-2] Tahlia Kokkinis@4.40 + Lorena Solar Donoso@3.25 + Deborah Chiesa@2.55
+  │            @36.46 HR:34.9% EV:+1171.8% →$36,460  excluye:[Oana Georgeta Simion, Anastasia Kulikova, Verena Meliss, Denisa Zoldakova]
+  │     [3p-3] Tahlia Kokkinis@4.40 + Oana Georgeta Simion@3.20 + Deborah Chiesa@2.55
+  │            @35.90 HR:34.9% EV:+1152.2% →$35,900  excluye:[Lorena Solar Donoso, Anastasia Kulikova, Verena Meliss, Denisa Zoldakova]
+  │     [3p-4] Oana Georgeta Simion@3.20 + Lorena Solar Donoso@3.25 + Deborah Chiesa@2.55
+  │            @26.52 HR:34.9% EV:+824.9% →$26,520  excluye:[Tahlia Kokkinis, Anastasia Kulikova, Verena Meliss, Denisa Zoldakova]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $1,000 = $4,000 ──
+  │     (cada combo excluye 3 jugadores)
+  │     [4p-1] Tahlia Kokkinis@4.40 + Oana Georgeta Simion@3.20 + Lorena Solar Donoso@3.25 + Deborah Chiesa@2.55
+  │            @116.69 HR:24.6% EV:+2764.6% →$116,690  excluye:[Anastasia Kulikova, Verena Meliss, Denisa Zoldakova]
+  │     [4p-2] Tahlia Kokkinis@4.40 + Oana Georgeta Simion@3.20 + Lorena Solar Donoso@3.25 + Verena Meliss@2.35
+  │            @107.54 HR:23.0% EV:+2375.0% →$107,540  excluye:[Anastasia Kulikova, Deborah Chiesa, Denisa Zoldakova]
+  │     [4p-3] Tahlia Kokkinis@4.40 + Lorena Solar Donoso@3.25 + Deborah Chiesa@2.55 + Verena Meliss@2.35
+  │            @85.69 HR:23.0% EV:+1872.3% →$85,690  excluye:[Oana Georgeta Simion, Anastasia Kulikova, Denisa Zoldakova]
+  │     [4p-4] Tahlia Kokkinis@4.40 + Oana Georgeta Simion@3.20 + Deborah Chiesa@2.55 + Verena Meliss@2.35
+  │            @84.37 HR:23.0% EV:+1841.9% →$84,370  excluye:[Lorena Solar Donoso, Anastasia Kulikova, Denisa Zoldakova]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-4 picks?) ──
+  │  Total apostado: $8,000
+
+  │  🏆 0 fallos (7/7 ganan): retorno $538,930 → P&L +$530,930 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Denisa Zoldakova]):
+  │       retorno $538,930 → P&L +$530,930 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Tahlia Kokkinis]):
+  │       retorno $26,520 → P&L +$18,520 (1/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Denisa Zoldakova, Verena Meliss]):
+  │       retorno $261,330 → P&L +$253,330 (5/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Tahlia Kokkinis, Lorena Solar Donoso]):
+  │       retorno $0 → P&L $-8,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Denisa Zoldakova, Verena Meliss, Deborah Chiesa]):
+  │       retorno $45,760 → P&L +$37,760 (1/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Tahlia Kokkinis, Lorena Solar Donoso, Oana Georgeta Simion]):
+  │       retorno $0 → P&L $-8,000 (0/8 combos pagan)
+  │  ✅ 4 fallos (mejor caso: fallan favoritos [Denisa Zoldakova, Verena Meliss, Deborah Chiesa, Anastasia Kulikova]):
+  │       retorno $45,760 → P&L +$37,760 (1/8 combos pagan)
+  │  ❌ 4 fallos (peor caso: fallan underdogs [Tahlia Kokkinis, Lorena Solar Donoso, Oana Georgeta Simion, Anastasia Kulikova]):
+  │       retorno $0 → P&L $-8,000 (0/8 combos pagan)
+
+  │  Total cobertura: $8,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     7
+  │  ρ estructural:       0.05 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.769
+  │  Reducción vs naive:  -23.1%
+  │
+  │  Stake naive (sin ajuste):    $      14,000
+  │  Stake ajustado (PK):         $      10,769
+  │  Ahorro por correlación:      $       3,231
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $      -3,867  (38.7% bankroll)
+  │  CVaR 95%:           $      -4,913
+  │  Max VaR permitido:  $       2,500  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.65
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $     118,210
+  │  σ(P&L):             $     139,096
+  │  Sharpe Ratio:              0.850
+  │  Kelly Growth Rate:        2.0184 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $ 241,505,375
+  │  Bankroll en 10 sesiones:  $5,832,484,623,691
+  │  Bankroll en 30 sesiones:  $1,984,087,438,658,107,410,093,229,211,648
+  │  Sesiones para duplicar:   0.3
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.65 (de $14,000 a $9,050)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.65) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Tahlia Kokkinis           @4.40  →  $   1,000  (ret. $     4,400)
+  │    Oana Georgeta Simion      @3.20  →  $   1,000  (ret. $     3,200)
+  │    Lorena Solar Donoso       @3.25  →  $   1,000  (ret. $     3,250)
+  │    Anastasia Kulikova        @2.65  →  $   1,000  (ret. $     2,650)
+  │    Deborah Chiesa            @2.55  →  $   1,000  (ret. $     2,550)
+  │    Verena Meliss             @2.35  →  $   1,000  (ret. $     2,350)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @45.76]  $   1,000  →  Tahlia Kokkinis@4.40 + Oana Georgeta Simion@3.20 + Lorena Solar Donoso@3.25
+  │    [3p @36.46]  $   1,000  →  Tahlia Kokkinis@4.40 + Lorena Solar Donoso@3.25 + Deborah Chiesa@2.55
+  │    [3p @35.90]  $   1,000  →  Tahlia Kokkinis@4.40 + Oana Georgeta Simion@3.20 + Deborah Chiesa@2.55
+  │    [3p @26.52]  $   1,000  →  Oana Georgeta Simion@3.20 + Lorena Solar Donoso@3.25 + Deborah Chiesa@2.55
+  │    [4p @116.69]  $   1,000  →  Tahlia Kokkinis@4.40 + Oana Georgeta Simion@3.20 + Lorena Solar Donoso@3.25 + Deborah Chiesa@2.55
+  │    [4p @107.54]  $   1,000  →  Tahlia Kokkinis@4.40 + Oana Georgeta Simion@3.20 + Lorena Solar Donoso@3.25 + Verena Meliss@2.35
+  │    [4p @85.69]  $   1,000  →  Tahlia Kokkinis@4.40 + Lorena Solar Donoso@3.25 + Deborah Chiesa@2.55 + Verena Meliss@2.35
+  │    [4p @84.37]  $   1,000  →  Tahlia Kokkinis@4.40 + Oana Georgeta Simion@3.20 + Deborah Chiesa@2.55 + Verena Meliss@2.35
+  │
+  │  TOTAL EN RIESGO:  $    14,000  (140.0% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $        10,000                       ║
+  ║  Individuales:        $         6,000  (60.0% bankroll)      ║
+  ║  Cobertura:           $         8,000  (80.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $        14,000  (140.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       6                                       ║
+  ║  Pool cobertura:        7 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260610_23  ║
+  ║  Partidos analizados:  82                                       ║
+  ║  Superficie:          clay (Roland Garros)                    ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  ⚠️  ALERTA: 140.0% bankroll en riesgo — por encima del 30% recomendado.
+      Reducir combos o sistema hasta n≥30 con datos limpios.
+
+  📊 Calibración: n=695 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.704 (calibrado clay) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260610_232316.json

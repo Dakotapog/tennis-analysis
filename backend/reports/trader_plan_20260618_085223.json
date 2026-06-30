@@ -1,0 +1,393 @@
+{
+  "metadata": {
+    "timestamp": "20260618_085223",
+    "bankroll": 125000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260618_083956.json",
+    "n_partidos_analizados": 69,
+    "calibracion_n": 801,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "atp500",
+      "superficie": "grass",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Aryna Sabalenka vs Nikola Bartunkova",
+      "favorito": "Nikola Bartunkova",
+      "cuota": 6.1,
+      "edge_pct": "35.8%",
+      "p_modelo": 0.522,
+      "n_h2h": 0,
+      "p_blend": 0.5319,
+      "kelly_kl": 0.1453,
+      "kelly_usado": 0.1,
+      "stake": 3000,
+      "retorno_potencial": 18300.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Alexander Zverev vs Yannick Hanfmann",
+      "favorito": "Yannick Hanfmann",
+      "cuota": 6.5,
+      "edge_pct": "36.4%",
+      "p_modelo": 0.518,
+      "n_h2h": 1,
+      "p_blend": 0.528425,
+      "kelly_kl": 0.1445,
+      "kelly_usado": 0.1,
+      "stake": 3000,
+      "retorno_potencial": 19500.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Alexandra Eala vs Elena Rybakina",
+      "favorito": "Alexandra Eala",
+      "cuota": 5.2,
+      "edge_pct": "33.7%",
+      "p_modelo": 0.529,
+      "n_h2h": 1,
+      "p_blend": 0.5311750000000001,
+      "kelly_kl": 0.1439,
+      "kelly_usado": 0.1,
+      "stake": 3000,
+      "retorno_potencial": 15600.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Ann Li vs Taylah Preston",
+      "favorito": "Taylah Preston",
+      "cuota": 2.65,
+      "edge_pct": "15.9%",
+      "p_modelo": 0.536,
+      "n_h2h": 0,
+      "p_blend": 0.5319,
+      "kelly_kl": 0.0937,
+      "kelly_usado": 0.0621,
+      "stake": 2000,
+      "retorno_potencial": 5300.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Arthur Fery vs Francisco Cerundolo",
+      "favorito": "Arthur Fery",
+      "cuota": 2.6,
+      "edge_pct": "14.9%",
+      "p_modelo": 0.534,
+      "n_h2h": 0,
+      "p_blend": 0.5319,
+      "kelly_kl": 0.0901,
+      "kelly_usado": 0.0598,
+      "stake": 2000,
+      "retorno_potencial": 5200.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Hamad Medjedovic vs Ugo Humbert",
+      "favorito": "Hamad Medjedovic",
+      "cuota": 2.4,
+      "edge_pct": "8.8%",
+      "p_modelo": 0.505,
+      "n_h2h": 1,
+      "p_blend": 0.5251750000000001,
+      "kelly_kl": 0.0565,
+      "kelly_usado": 0.0465,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Nikola Bartunkova",
+          "cuota": 6.1
+        },
+        {
+          "jugador": "Yannick Hanfmann",
+          "cuota": 6.5
+        },
+        {
+          "jugador": "Alexandra Eala",
+          "cuota": 5.2
+        }
+      ],
+      "cuota_combo": 206.18,
+      "hr_combo": 0.1493,
+      "ev_combo": 29.782,
+      "excluidos": [
+        "Taylah Preston",
+        "Arthur Fery",
+        "Hamad Medjedovic",
+        "Madison Keys",
+        "Raphael Collignon"
+      ],
+      "stake": 3000,
+      "retorno_potencial": 618540.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Nikola Bartunkova",
+          "cuota": 6.1
+        },
+        {
+          "jugador": "Yannick Hanfmann",
+          "cuota": 6.5
+        },
+        {
+          "jugador": "Taylah Preston",
+          "cuota": 2.65
+        }
+      ],
+      "cuota_combo": 105.07,
+      "hr_combo": 0.1495,
+      "ev_combo": 14.7084,
+      "excluidos": [
+        "Alexandra Eala",
+        "Arthur Fery",
+        "Hamad Medjedovic",
+        "Madison Keys",
+        "Raphael Collignon"
+      ],
+      "stake": 3000,
+      "retorno_potencial": 315210.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Yannick Hanfmann",
+          "cuota": 6.5
+        },
+        {
+          "jugador": "Alexandra Eala",
+          "cuota": 5.2
+        },
+        {
+          "jugador": "Taylah Preston",
+          "cuota": 2.65
+        }
+      ],
+      "cuota_combo": 89.57,
+      "hr_combo": 0.1493,
+      "ev_combo": 12.3725,
+      "excluidos": [
+        "Nikola Bartunkova",
+        "Arthur Fery",
+        "Hamad Medjedovic",
+        "Madison Keys",
+        "Raphael Collignon"
+      ],
+      "stake": 3000,
+      "retorno_potencial": 268710.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Nikola Bartunkova",
+          "cuota": 6.1
+        },
+        {
+          "jugador": "Alexandra Eala",
+          "cuota": 5.2
+        },
+        {
+          "jugador": "Taylah Preston",
+          "cuota": 2.65
+        }
+      ],
+      "cuota_combo": 84.06,
+      "hr_combo": 0.1503,
+      "ev_combo": 11.6321,
+      "excluidos": [
+        "Yannick Hanfmann",
+        "Arthur Fery",
+        "Hamad Medjedovic",
+        "Madison Keys",
+        "Raphael Collignon"
+      ],
+      "stake": 3000,
+      "retorno_potencial": 252180.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Nikola Bartunkova",
+          "cuota": 6.1
+        },
+        {
+          "jugador": "Yannick Hanfmann",
+          "cuota": 6.5
+        },
+        {
+          "jugador": "Alexandra Eala",
+          "cuota": 5.2
+        },
+        {
+          "jugador": "Taylah Preston",
+          "cuota": 2.65
+        }
+      ],
+      "cuota_combo": 546.38,
+      "hr_combo": 0.0794,
+      "ev_combo": 42.3884,
+      "excluidos": [
+        "Arthur Fery",
+        "Hamad Medjedovic",
+        "Madison Keys",
+        "Raphael Collignon"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 1092760.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Nikola Bartunkova",
+          "cuota": 6.1
+        },
+        {
+          "jugador": "Yannick Hanfmann",
+          "cuota": 6.5
+        },
+        {
+          "jugador": "Alexandra Eala",
+          "cuota": 5.2
+        },
+        {
+          "jugador": "Arthur Fery",
+          "cuota": 2.6
+        }
+      ],
+      "cuota_combo": 536.07,
+      "hr_combo": 0.0794,
+      "ev_combo": 41.5697,
+      "excluidos": [
+        "Taylah Preston",
+        "Hamad Medjedovic",
+        "Madison Keys",
+        "Raphael Collignon"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 1072140.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Nikola Bartunkova",
+          "cuota": 6.1
+        },
+        {
+          "jugador": "Yannick Hanfmann",
+          "cuota": 6.5
+        },
+        {
+          "jugador": "Taylah Preston",
+          "cuota": 2.65
+        },
+        {
+          "jugador": "Arthur Fery",
+          "cuota": 2.6
+        }
+      ],
+      "cuota_combo": 273.19,
+      "hr_combo": 0.0795,
+      "ev_combo": 20.7238,
+      "excluidos": [
+        "Alexandra Eala",
+        "Hamad Medjedovic",
+        "Madison Keys",
+        "Raphael Collignon"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 546380.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Yannick Hanfmann",
+          "cuota": 6.5
+        },
+        {
+          "jugador": "Alexandra Eala",
+          "cuota": 5.2
+        },
+        {
+          "jugador": "Taylah Preston",
+          "cuota": 2.65
+        },
+        {
+          "jugador": "Arthur Fery",
+          "cuota": 2.6
+        }
+      ],
+      "cuota_combo": 232.88,
+      "hr_combo": 0.0794,
+      "ev_combo": 17.4934,
+      "excluidos": [
+        "Nikola Bartunkova",
+        "Hamad Medjedovic",
+        "Madison Keys",
+        "Raphael Collignon"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 465760.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.48780487804878053,
+    "total_ajustado": 60000.00000000001,
+    "var_95": -123000.0,
+    "cvar_95": -123000.0,
+    "expected_pl": 1579348.2236490315,
+    "sharpe_ratio": 0.6832349464118759,
+    "kelly_growth_rate": 1.709942515168521,
+    "sessions_to_double": 0.4053628554241972,
+    "var_excedido": true,
+    "factor_var": 0.2540650406504065
+  },
+  "resumen": {
+    "gastado_individuales": 13000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 20000,
+    "total_en_riesgo": 33000.0,
+    "pct_bankroll_en_riesgo": 0.264,
+    "n_senales_apostar": 6,
+    "pool_cobertura": 8,
+    "alerta_riesgo": false
+  }
+}

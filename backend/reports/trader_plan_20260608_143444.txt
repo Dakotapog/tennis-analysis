@@ -1,0 +1,144 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — DEPLOY ROLAND GARROS
+  2026-06-08 14:34  │  Bankroll: $20,000
+  Señales APOSTAR: 1  │  Watchlist: 1  │  Sin edge: 4
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 5 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.10 (challenger)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $8,000 (40% bankroll)
+
+  │  🎾 Samuel Heredia vs Julian Cundom
+  │     Apostar: Julian Cundom
+  │     Cuota 2.60  │  Edge 12.7%  │  p_blend 0.697 (n_h2h=0)
+  │     Kelly-KL 25.8% → stake $2,000  │  Retorno potencial $5,200
+  │     EV real +81.3%  │  Zona: underdog  │  Sup: clay
+
+  │  Total individuales: $2,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 5 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $12,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Julian Cundom        @2.60  p=0.605  zona=underdog
+  │    2. Thiago Cigarran      @2.06  p=0.605  zona=slight_underdog [W]
+  │    3. David Jorda Sanchis  @1.86  p=0.587  zona=slight_underdog
+  │    4. Max Alcala Gurri     @1.66  p=0.572  zona=slight_underdog
+  │    5. Nicolas Villalon Valdes @1.50  p=0.605  zona=moderate_favorite
+
+  │  ── 3 PIERNAS: TOP 4 combos × $2,000 = $8,000 ──
+  │     (cada combo excluye 2 jugadores)
+  │     [3p-1] Julian Cundom@2.60 + Thiago Cigarran@2.06 + David Jorda Sanchis@1.86
+  │            @9.96 HR:21.5% EV:+114.2% →$19,920  excluye:[Nicolas Villalon Valdes, Max Alcala Gurri]
+  │     [3p-2] Julian Cundom@2.60 + Thiago Cigarran@2.06 + Max Alcala Gurri@1.66
+  │            @8.89 HR:20.9% EV:+86.2% →$17,780  excluye:[Nicolas Villalon Valdes, David Jorda Sanchis]
+  │     [3p-3] Julian Cundom@2.60 + Max Alcala Gurri@1.66 + David Jorda Sanchis@1.86
+  │            @8.03 HR:20.3% EV:+63.0% →$16,060  excluye:[Thiago Cigarran, Nicolas Villalon Valdes]
+  │     [3p-4] Thiago Cigarran@2.06 + Max Alcala Gurri@1.66 + David Jorda Sanchis@1.86
+  │            @6.36 HR:20.3% EV:+29.2% →$12,720  excluye:[Julian Cundom, Nicolas Villalon Valdes]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $1,000 = $4,000 ──
+  │     (cada combo excluye 1 jugador)
+  │     [4p-1] Julian Cundom@2.60 + Thiago Cigarran@2.06 + Max Alcala Gurri@1.66 + David Jorda Sanchis@1.86
+  │            @16.54 HR:12.3% EV:+103.3% →$16,540  excluye:[Nicolas Villalon Valdes]
+  │     [4p-2] Julian Cundom@2.60 + Thiago Cigarran@2.06 + Nicolas Villalon Valdes@1.50 + David Jorda Sanchis@1.86
+  │            @14.94 HR:13.0% EV:+94.5% →$14,940  excluye:[Max Alcala Gurri]
+  │     [4p-3] Julian Cundom@2.60 + Thiago Cigarran@2.06 + Nicolas Villalon Valdes@1.50 + Max Alcala Gurri@1.66
+  │            @13.34 HR:12.7% EV:+69.1% →$13,340  excluye:[David Jorda Sanchis]
+  │     [4p-4] Thiago Cigarran@2.06 + Nicolas Villalon Valdes@1.50 + Max Alcala Gurri@1.66 + David Jorda Sanchis@1.86
+  │            @9.54 HR:12.3% EV:+17.3% →$9,540  excluye:[Julian Cundom]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-2 picks?) ──
+  │  Total apostado: $12,000
+
+  │  🏆 0 fallos (5/5 ganan): retorno $120,840 → P&L +$108,840 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Nicolas Villalon Valdes]):
+  │       retorno $83,020 → P&L +$71,020 (5/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Julian Cundom]):
+  │       retorno $22,260 → P&L +$10,260 (2/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Nicolas Villalon Valdes, Max Alcala Gurri]):
+  │       retorno $19,920 → P&L +$7,920 (1/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Julian Cundom, Thiago Cigarran]):
+  │       retorno $0 → P&L $-12,000 (0/8 combos pagan)
+
+  │  Total cobertura: $12,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     5
+  │  ρ estructural:       0.10 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.714
+  │  Reducción vs naive:  -28.6%
+  │
+  │  Stake naive (sin ajuste):    $      14,000
+  │  Stake ajustado (PK):         $      10,000
+  │  Ahorro por correlación:      $       4,000
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $     -12,000  (60.0% bankroll)
+  │  CVaR 95%:           $     -12,000
+  │  Max VaR permitido:  $       5,000  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.42
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $       8,804
+  │  σ(P&L):             $      32,038
+  │  Sharpe Ratio:              0.275
+  │  Kelly Growth Rate:        0.2568 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $      72,233
+  │  Bankroll en 10 sesiones:  $     260,881
+  │  Bankroll en 30 sesiones:  $  44,388,181
+  │  Sesiones para duplicar:   2.7
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.42 (de $14,000 a $5,833)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.42) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Julian Cundom             @2.60  →  $   1,000  (ret. $     2,600)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @9.96]  $   1,000  →  Julian Cundom@2.60 + Thiago Cigarran@2.06 + David Jorda Sanchis@1.86
+  │    [3p @8.89]  $   1,000  →  Julian Cundom@2.60 + Thiago Cigarran@2.06 + Max Alcala Gurri@1.66
+  │    [3p @8.03]  $   1,000  →  Julian Cundom@2.60 + Max Alcala Gurri@1.66 + David Jorda Sanchis@1.86
+  │    [3p @6.36]  $   1,000  →  Thiago Cigarran@2.06 + Max Alcala Gurri@1.66 + David Jorda Sanchis@1.86
+  │    [4p @16.54]  $       0  →  Julian Cundom@2.60 + Thiago Cigarran@2.06 + Max Alcala Gurri@1.66 + David Jorda Sanchis@1.86
+  │    [4p @14.94]  $       0  →  Julian Cundom@2.60 + Thiago Cigarran@2.06 + Nicolas Villalon Valdes@1.50 + David Jorda Sanchis@1.86
+  │    [4p @13.34]  $       0  →  Julian Cundom@2.60 + Thiago Cigarran@2.06 + Nicolas Villalon Valdes@1.50 + Max Alcala Gurri@1.66
+  │    [4p @9.54]  $       0  →  Thiago Cigarran@2.06 + Nicolas Villalon Valdes@1.50 + Max Alcala Gurri@1.66 + David Jorda Sanchis@1.86
+  │
+  │  TOTAL EN RIESGO:  $     5,000  (25.0% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $        20,000                       ║
+  ║  Individuales:        $         1,000  (5.0% bankroll)      ║
+  ║  Cobertura:           $         4,000  (20.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $         5,000  (25.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       1                                       ║
+  ║  Pool cobertura:        5 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260608_14  ║
+  ║  Partidos analizados:   7                                       ║
+  ║  Superficie:          clay (Roland Garros)                    ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  📊 Calibración: n=150 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.697 (calibrado clay) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260608_143444.json

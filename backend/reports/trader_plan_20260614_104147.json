@@ -1,0 +1,386 @@
+{
+  "metadata": {
+    "timestamp": "20260614_104147",
+    "bankroll": 125000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260614_104024.json",
+    "n_partidos_analizados": 39,
+    "calibracion_n": 755,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "atp500",
+      "superficie": "grass",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Kamil Majchrzak vs Jiri Lehecka",
+      "favorito": "Kamil Majchrzak",
+      "cuota": 2.65,
+      "edge_pct": "14.0%",
+      "p_modelo": 0.517,
+      "n_h2h": 2,
+      "p_blend": 0.54736,
+      "kelly_kl": 0.0837,
+      "kelly_usado": 0.0683,
+      "stake": 3000,
+      "retorno_potencial": 7950.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Brandon Nakashima vs Marton Fucsovics",
+      "favorito": "Marton Fucsovics",
+      "cuota": 2.45,
+      "edge_pct": "12.0%",
+      "p_modelo": 0.528,
+      "n_h2h": 2,
+      "p_blend": 0.55176,
+      "kelly_kl": 0.0738,
+      "kelly_usado": 0.0607,
+      "stake": 2000,
+      "retorno_potencial": 4900.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Marie Bouzkova vs Tereza Valentova",
+      "favorito": "Tereza Valentova",
+      "cuota": 2.2,
+      "edge_pct": "7.4%",
+      "p_modelo": 0.529,
+      "n_h2h": 1,
+      "p_blend": 0.55795,
+      "kelly_kl": 0.0502,
+      "kelly_usado": 0.0474,
+      "stake": 2000,
+      "retorno_potencial": 4400.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Ugo Humbert vs Marin Cilic",
+      "favorito": "Marin Cilic",
+      "cuota": 2.1,
+      "edge_pct": "6.5%",
+      "p_modelo": 0.541,
+      "n_h2h": 1,
+      "p_blend": 0.56095,
+      "kelly_kl": 0.0459,
+      "kelly_usado": 0.0405,
+      "stake": 1000,
+      "retorno_potencial": 2100.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Arthur Fery vs Toby Samuel",
+      "favorito": "Toby Samuel",
+      "cuota": 2.23,
+      "edge_pct": "5.5%",
+      "p_modelo": 0.503,
+      "n_h2h": 1,
+      "p_blend": 0.55145,
+      "kelly_kl": 0.0365,
+      "kelly_usado": 0.0467,
+      "stake": 2000,
+      "retorno_potencial": 4460.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Kamil Majchrzak",
+          "cuota": 2.65
+        },
+        {
+          "jugador": "Marton Fucsovics",
+          "cuota": 2.45
+        },
+        {
+          "jugador": "Toby Samuel",
+          "cuota": 2.23
+        }
+      ],
+      "cuota_combo": 14.48,
+      "hr_combo": 0.1665,
+      "ev_combo": 1.4113,
+      "excluidos": [
+        "Tereza Valentova",
+        "Marin Cilic",
+        "Hamad Medjedovic",
+        "Mia Pohankova",
+        "Maria Timofeeva",
+        "Magdalena Frech"
+      ],
+      "stake": 4000,
+      "retorno_potencial": 57920.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Kamil Majchrzak",
+          "cuota": 2.65
+        },
+        {
+          "jugador": "Marton Fucsovics",
+          "cuota": 2.45
+        },
+        {
+          "jugador": "Tereza Valentova",
+          "cuota": 2.2
+        }
+      ],
+      "cuota_combo": 14.28,
+      "hr_combo": 0.1685,
+      "ev_combo": 1.4069,
+      "excluidos": [
+        "Marin Cilic",
+        "Toby Samuel",
+        "Hamad Medjedovic",
+        "Mia Pohankova",
+        "Maria Timofeeva",
+        "Magdalena Frech"
+      ],
+      "stake": 4000,
+      "retorno_potencial": 57120.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Kamil Majchrzak",
+          "cuota": 2.65
+        },
+        {
+          "jugador": "Tereza Valentova",
+          "cuota": 2.2
+        },
+        {
+          "jugador": "Toby Samuel",
+          "cuota": 2.23
+        }
+      ],
+      "cuota_combo": 13.0,
+      "hr_combo": 0.1684,
+      "ev_combo": 1.1895,
+      "excluidos": [
+        "Marton Fucsovics",
+        "Marin Cilic",
+        "Hamad Medjedovic",
+        "Mia Pohankova",
+        "Maria Timofeeva",
+        "Magdalena Frech"
+      ],
+      "stake": 4000,
+      "retorno_potencial": 52000.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Marton Fucsovics",
+          "cuota": 2.45
+        },
+        {
+          "jugador": "Tereza Valentova",
+          "cuota": 2.2
+        },
+        {
+          "jugador": "Toby Samuel",
+          "cuota": 2.23
+        }
+      ],
+      "cuota_combo": 12.02,
+      "hr_combo": 0.1698,
+      "ev_combo": 1.0405,
+      "excluidos": [
+        "Kamil Majchrzak",
+        "Marin Cilic",
+        "Hamad Medjedovic",
+        "Mia Pohankova",
+        "Maria Timofeeva",
+        "Magdalena Frech"
+      ],
+      "stake": 4000,
+      "retorno_potencial": 48080.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Kamil Majchrzak",
+          "cuota": 2.65
+        },
+        {
+          "jugador": "Marton Fucsovics",
+          "cuota": 2.45
+        },
+        {
+          "jugador": "Tereza Valentova",
+          "cuota": 2.2
+        },
+        {
+          "jugador": "Toby Samuel",
+          "cuota": 2.23
+        }
+      ],
+      "cuota_combo": 31.85,
+      "hr_combo": 0.0929,
+      "ev_combo": 1.9598,
+      "excluidos": [
+        "Marin Cilic",
+        "Hamad Medjedovic",
+        "Mia Pohankova",
+        "Maria Timofeeva",
+        "Magdalena Frech"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 63700.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Kamil Majchrzak",
+          "cuota": 2.65
+        },
+        {
+          "jugador": "Marton Fucsovics",
+          "cuota": 2.45
+        },
+        {
+          "jugador": "Toby Samuel",
+          "cuota": 2.23
+        },
+        {
+          "jugador": "Mia Pohankova",
+          "cuota": 2.14
+        }
+      ],
+      "cuota_combo": 30.98,
+      "hr_combo": 0.0945,
+      "ev_combo": 1.9289,
+      "excluidos": [
+        "Tereza Valentova",
+        "Marin Cilic",
+        "Hamad Medjedovic",
+        "Maria Timofeeva",
+        "Magdalena Frech"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 61960.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Kamil Majchrzak",
+          "cuota": 2.65
+        },
+        {
+          "jugador": "Tereza Valentova",
+          "cuota": 2.2
+        },
+        {
+          "jugador": "Toby Samuel",
+          "cuota": 2.23
+        },
+        {
+          "jugador": "Mia Pohankova",
+          "cuota": 2.14
+        }
+      ],
+      "cuota_combo": 27.82,
+      "hr_combo": 0.0956,
+      "ev_combo": 1.6595,
+      "excluidos": [
+        "Marton Fucsovics",
+        "Marin Cilic",
+        "Hamad Medjedovic",
+        "Maria Timofeeva",
+        "Magdalena Frech"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 55640.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Marton Fucsovics",
+          "cuota": 2.45
+        },
+        {
+          "jugador": "Tereza Valentova",
+          "cuota": 2.2
+        },
+        {
+          "jugador": "Toby Samuel",
+          "cuota": 2.23
+        },
+        {
+          "jugador": "Mia Pohankova",
+          "cuota": 2.14
+        }
+      ],
+      "cuota_combo": 25.72,
+      "hr_combo": 0.0964,
+      "ev_combo": 1.4786,
+      "excluidos": [
+        "Kamil Majchrzak",
+        "Marin Cilic",
+        "Hamad Medjedovic",
+        "Maria Timofeeva",
+        "Magdalena Frech"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 51440.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.45454545454545453,
+    "total_ajustado": 48181.818181818184,
+    "var_95": -106000.0,
+    "cvar_95": -106000.0,
+    "expected_pl": 108233.49577738951,
+    "sharpe_ratio": 0.5137482724642166,
+    "kelly_growth_rate": 0.3004550447691826,
+    "sessions_to_double": 2.3069913207562847,
+    "var_excedido": true,
+    "factor_var": 0.294811320754717
+  },
+  "resumen": {
+    "gastado_individuales": 10000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 24000,
+    "total_en_riesgo": 34000.0,
+    "pct_bankroll_en_riesgo": 0.272,
+    "n_senales_apostar": 5,
+    "pool_cobertura": 9,
+    "alerta_riesgo": false
+  }
+}

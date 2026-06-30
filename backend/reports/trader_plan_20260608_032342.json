@@ -1,0 +1,360 @@
+{
+  "metadata": {
+    "timestamp": "20260608_032342",
+    "bankroll": 50000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260608_031932.json",
+    "n_partidos_analizados": 74,
+    "calibracion_n": 150,
+    "parametros": {
+      "modo": "cobertura",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Ugo Humbert vs Elias Ymer",
+      "favorito": "Elias Ymer",
+      "cuota": 4.6,
+      "edge_pct": "32.0%",
+      "p_modelo": 0.537,
+      "n_h2h": 0,
+      "p_blend": 0.6973684210526315,
+      "kelly_kl": 0.4631,
+      "kelly_usado": 0.1,
+      "stake": 2000,
+      "retorno_potencial": 9200.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Benjamin Bonzi vs Mees Rottgering",
+      "favorito": "Mees Rottgering",
+      "cuota": 3.55,
+      "edge_pct": "27.7%",
+      "p_modelo": 0.559,
+      "n_h2h": 0,
+      "p_blend": 0.6973684210526315,
+      "kelly_kl": 0.4621,
+      "kelly_usado": 0.1,
+      "stake": 2000,
+      "retorno_potencial": 7100.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Ekaterina Alexandrova vs Panna Udvardy",
+      "favorito": "Panna Udvardy",
+      "cuota": 4.75,
+      "edge_pct": "30.4%",
+      "p_modelo": 0.515,
+      "n_h2h": 0,
+      "p_blend": 0.6973684210526315,
+      "kelly_kl": 0.415,
+      "kelly_usado": 0.1,
+      "stake": 2000,
+      "retorno_potencial": 9500.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Mia Pohankova vs Clara Tauson",
+      "favorito": "Mia Pohankova",
+      "cuota": 2.8,
+      "edge_pct": "14.8%",
+      "p_modelo": 0.505,
+      "n_h2h": 0,
+      "p_blend": 0.6973684210526315,
+      "kelly_kl": 0.2713,
+      "kelly_usado": 0.1,
+      "stake": 2000,
+      "retorno_potencial": 5600.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Pierre-Hugues Herbert vs Martin Landaluce",
+      "favorito": "Pierre-Hugues Herbert",
+      "cuota": 2.28,
+      "edge_pct": "8.0%",
+      "p_modelo": 0.519,
+      "n_h2h": 0,
+      "p_blend": 0.6973684210526315,
+      "kelly_kl": 0.1721,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Elias Ymer",
+          "cuota": 4.6
+        },
+        {
+          "jugador": "Mees Rottgering",
+          "cuota": 3.55
+        },
+        {
+          "jugador": "Panna Udvardy",
+          "cuota": 4.75
+        }
+      ],
+      "cuota_combo": 77.57,
+      "hr_combo": 0.2746,
+      "ev_combo": 20.302,
+      "excluidos": [
+        "Mia Pohankova",
+        "Pierre-Hugues Herbert",
+        "Katie Boulter"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 155140.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Elias Ymer",
+          "cuota": 4.6
+        },
+        {
+          "jugador": "Panna Udvardy",
+          "cuota": 4.75
+        },
+        {
+          "jugador": "Mia Pohankova",
+          "cuota": 2.8
+        }
+      ],
+      "cuota_combo": 61.18,
+      "hr_combo": 0.2746,
+      "ev_combo": 15.8016,
+      "excluidos": [
+        "Mees Rottgering",
+        "Pierre-Hugues Herbert",
+        "Katie Boulter"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 122360.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Mees Rottgering",
+          "cuota": 3.55
+        },
+        {
+          "jugador": "Panna Udvardy",
+          "cuota": 4.75
+        },
+        {
+          "jugador": "Mia Pohankova",
+          "cuota": 2.8
+        }
+      ],
+      "cuota_combo": 47.21,
+      "hr_combo": 0.2746,
+      "ev_combo": 11.9664,
+      "excluidos": [
+        "Elias Ymer",
+        "Pierre-Hugues Herbert",
+        "Katie Boulter"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 94420.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Elias Ymer",
+          "cuota": 4.6
+        },
+        {
+          "jugador": "Mees Rottgering",
+          "cuota": 3.55
+        },
+        {
+          "jugador": "Mia Pohankova",
+          "cuota": 2.8
+        }
+      ],
+      "cuota_combo": 45.72,
+      "hr_combo": 0.2746,
+      "ev_combo": 11.557,
+      "excluidos": [
+        "Panna Udvardy",
+        "Pierre-Hugues Herbert",
+        "Katie Boulter"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 91440.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Elias Ymer",
+          "cuota": 4.6
+        },
+        {
+          "jugador": "Mees Rottgering",
+          "cuota": 3.55
+        },
+        {
+          "jugador": "Panna Udvardy",
+          "cuota": 4.75
+        },
+        {
+          "jugador": "Pierre-Hugues Herbert",
+          "cuota": 2.28
+        }
+      ],
+      "cuota_combo": 176.85,
+      "hr_combo": 0.1785,
+      "ev_combo": 30.5695,
+      "excluidos": [
+        "Mia Pohankova",
+        "Katie Boulter"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 176850.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Elias Ymer",
+          "cuota": 4.6
+        },
+        {
+          "jugador": "Panna Udvardy",
+          "cuota": 4.75
+        },
+        {
+          "jugador": "Mia Pohankova",
+          "cuota": 2.8
+        },
+        {
+          "jugador": "Pierre-Hugues Herbert",
+          "cuota": 2.28
+        }
+      ],
+      "cuota_combo": 139.49,
+      "hr_combo": 0.1785,
+      "ev_combo": 23.8999,
+      "excluidos": [
+        "Mees Rottgering",
+        "Katie Boulter"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 139490.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Mees Rottgering",
+          "cuota": 3.55
+        },
+        {
+          "jugador": "Panna Udvardy",
+          "cuota": 4.75
+        },
+        {
+          "jugador": "Mia Pohankova",
+          "cuota": 2.8
+        },
+        {
+          "jugador": "Pierre-Hugues Herbert",
+          "cuota": 2.28
+        }
+      ],
+      "cuota_combo": 107.65,
+      "hr_combo": 0.1785,
+      "ev_combo": 18.2162,
+      "excluidos": [
+        "Elias Ymer",
+        "Katie Boulter"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 107650.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Elias Ymer",
+          "cuota": 4.6
+        },
+        {
+          "jugador": "Mees Rottgering",
+          "cuota": 3.55
+        },
+        {
+          "jugador": "Mia Pohankova",
+          "cuota": 2.8
+        },
+        {
+          "jugador": "Pierre-Hugues Herbert",
+          "cuota": 2.28
+        }
+      ],
+      "cuota_combo": 104.25,
+      "hr_combo": 0.1785,
+      "ev_combo": 17.6094,
+      "excluidos": [
+        "Panna Udvardy",
+        "Katie Boulter"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 104250.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.5714285714285714,
+    "total_ajustado": 28000.0,
+    "var_95": -28000.0,
+    "cvar_95": -28000.0,
+    "expected_pl": 455663.381824607,
+    "sharpe_ratio": 0.782017612676501,
+    "kelly_growth_rate": 2.074076044820729,
+    "sessions_to_double": 0.33419564450919487,
+    "var_excedido": true,
+    "factor_var": 0.44642857142857145
+  },
+  "resumen": {
+    "gastado_individuales": 8000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 12000,
+    "total_en_riesgo": 20000.0,
+    "pct_bankroll_en_riesgo": 0.4,
+    "n_senales_apostar": 5,
+    "pool_cobertura": 6,
+    "alerta_riesgo": true
+  }
+}

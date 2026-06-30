@@ -1,0 +1,50 @@
+======================================================================
+COMBO PLAN (Nodo-38) — 2026-06-29  |  Fase 4  |  Conf min: 53.0%
+Fuente: h2h_results_enhanced_20260629_120026.json
+Budget diario: $15,000  |  Picks seleccionados: 6
+======================================================================
+
+MULTIPLICADORES (1.15-1.59): 3 picks
+   1. Giles Hussey                  @1.21  conf:64.9%  CHALLENGER MASCULINO - INDIVIDUALES: Car
+   2. Diane Parry                   @1.32  conf:54.0%  WTA - INDIVIDUALES: Wimbledon (Reino Uni
+   3. Jack Kennedy                  @1.52  conf:53.9%  CHALLENGER MASCULINO - INDIVIDUALES: Car
+
+VALOR (1.60-2.20): 2 picks
+   1. Andre Ilagan                  @2.05  conf:54.2%  CHALLENGER MASCULINO - INDIVIDUALES: Car
+   2. Anastasia Gasanova            @1.89  conf:53.0%  WTA - INDIVIDUALES: Wimbledon (Reino Uni
+
+ALTO VALOR MOONSHOT (>3.50 o conf<60%): 1 picks
+   1. Lucie Pawlak                  @3.10  conf:55.9%  ITF FEMENINO - INDIVIDUALES: W35 Aix-les
+
+----------------------------------------------------------------------
+
+CORE — 4 piernas (solo Cat-A + Cat-B)
+  Picks: Giles Hussey @1.21, Andre Ilagan @2.05, Diane Parry @1.32, Anastasia Gasanova @1.89
+  Odds: 6.19x  |  P(win): 16.2%  |  EV: $+0
+  STAKE: $7,000  →  Retorno: $43,318  |  Esperado: $7,000
+
+----------------------------------------------------------------------
+
+COBERTURA EXPANDIDA (sin Cat-C → budget SAT+MOON redistribuido) — 4 combos
+  [COB1_excl_Hussey]  Excluye: Giles Hussey
+    Odds: 7.77x  P(win): 12.9%  STAKE: $2,000
+  [COB2_excl_Ilagan]  Excluye: Andre Ilagan
+    Odds: 4.59x  P(win): 21.8%  STAKE: $2,000
+  [COB3_excl_Parry]  Excluye: Diane Parry
+    Odds: 7.13x  P(win): 14.0%  STAKE: $2,000
+  [COB4_excl_Gasanova]  Excluye: Anastasia Gasanova
+    Odds: 4.98x  P(win): 20.1%  STAKE: $2,000
+
+======================================================================
+RESUMEN PORTFOLIO — Fase 4
+  Total combos:           5
+  Total invertido:        $15,000  (de $15,000 budget)
+  Retorno esperado:       $15,000
+  EV total:               $+0
+
+NOTAS:
+  - Cat-C NUNCA entra al CORE (REGLA-ISO-1)
+  - Max 1 Cat-C por satellite, max 2 picks mismo torneo por combo
+  - P(win) calculado con P_mercado (1/cuota) — conservador
+  - VaR guard: stakes escalados si total > budget diario
+======================================================================

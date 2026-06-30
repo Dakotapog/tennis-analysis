@@ -1,0 +1,138 @@
+{
+  "metadata": {
+    "verification_date": "2026-06-18 10:49:43",
+    "source_file": "reports/h2h_results_enhanced_20260618_083956.json",
+    "tier_filter": null,
+    "total_matches_processed": 69,
+    "total_matches_verified": 6,
+    "total_not_finished": 49,
+    "total_errors": 14
+  },
+  "summary": {
+    "total_hits": 3,
+    "total_misses": 3,
+    "accuracy_percentage": 50.0
+  },
+  "detailed_results": [
+    {
+      "match_info": {
+        "jugador1": "Madison Keys",
+        "jugador2": "Karolina Muchova",
+        "match_url": "https://www.flashscore.co/match/tennis/keys-madison-muchova-karolina/OjzbhGpS/#/h2h",
+        "torneo": "Berlín (Alemania)"
+      },
+      "prediction": {
+        "predicted_winner": "Madison Keys",
+        "confidence": 53.5
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Madison Keys"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Alexander Zverev",
+        "jugador2": "Yannick Hanfmann",
+        "match_url": "https://www.flashscore.co/match/tennis/zverev-alexander-hanfmann-yannick/WEGyCKWI/#/h2h",
+        "torneo": "Halle (Alemania)"
+      },
+      "prediction": {
+        "predicted_winner": "Yannick Hanfmann",
+        "confidence": 51.8
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Alexander Zverev"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Kilian Feldbausch",
+        "jugador2": "Leo Raquillet",
+        "match_url": "https://www.flashscore.co/match/tennis/feldbausch-kilian-raquillet-leo/Kd8OuDWq/#/h2h",
+        "torneo": "Royan (Francia)"
+      },
+      "prediction": {
+        "predicted_winner": "Kilian Feldbausch",
+        "confidence": 55.3
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Kilian Feldbausch"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Selena Janicijevic",
+        "jugador2": "Denislava Glushkova",
+        "match_url": "https://www.flashscore.co/match/tennis/janicijevic-selena-glushkova-denislava/UFZCdV6F/#/h2h",
+        "torneo": "W50 Haskovo (Bulgaria)"
+      },
+      "prediction": {
+        "predicted_winner": "Denislava Glushkova",
+        "confidence": 51
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Selena Janicijevic"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Jiaqi Wang",
+        "jugador2": "Han Shi",
+        "match_url": "https://www.flashscore.co/match/tennis/wang-jiaqi-shi-han/Kb7PUrsm/#/h2h",
+        "torneo": "W35 Zhengzhou (China)"
+      },
+      "prediction": {
+        "predicted_winner": "Jiaqi Wang",
+        "confidence": 50.5
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Han Shi"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Renta Tokuda",
+        "jugador2": "Naoki Nakagawa",
+        "match_url": "https://www.flashscore.co/match/tennis/tokuda-renta-nakagawa-naoki/xrrGLsyI/#/h2h",
+        "torneo": "M15 Tokyo 2 (Japón)"
+      },
+      "prediction": {
+        "predicted_winner": "Renta Tokuda",
+        "confidence": 52.1
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Renta Tokuda"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    }
+  ]
+}

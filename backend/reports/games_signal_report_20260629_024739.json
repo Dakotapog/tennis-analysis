@@ -1,0 +1,5922 @@
+{
+  "metadata": {
+    "fecha": "2026-06-29 02:47:39",
+    "fuente": "reports/h2h_results_enhanced_20260629_182938.json",
+    "n_partidos": 69,
+    "n_apostar": 45,
+    "nodo": "Nodo-40-Games-Sets-Signal-Layer",
+    "calibracion_n": 0
+  },
+  "apostar": [
+    {
+      "partido": "Denis Shapovalov vs Pablo Carreno Busta",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.13,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.68,
+          "outcome_id": 4238253421,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Rafael Jodar vs Felix Gill",
+      "zona_diff": "dominante",
+      "diff_abs": 0.51,
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 37.5,
+          "direccion": "UNDER",
+          "cuota": 1.64,
+          "outcome_id": 4237753792,
+          "gap_juegos": 18.5,
+          "razon": "modelo dice 16-19 games, línea 37.5 tiene gap +18.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 3.5,
+          "direccion": "UNDER",
+          "cuota": 1.9,
+          "outcome_id": 4237287086,
+          "gap_juegos": null,
+          "razon": "modelo predice 2 sets, UNDER 3.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Shintaro Mochizuki vs Max Basing",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.12,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.85,
+          "outcome_id": 4238280467,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Emilio Nava vs Ignacio Buse",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.04,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.55,
+          "outcome_id": 4237302560,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Aleksandar Vukic vs Jenson Brooksby",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.02,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.68,
+          "outcome_id": 4237226954,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Aleksandar Kovacevic vs Botic van de Zandschulp",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.14,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 2.32,
+          "outcome_id": 4238258893,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Andrey Rublev vs Roman Safiullin",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.05,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 2.4,
+          "outcome_id": 4237977435,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Casper Ruud vs Hubert Hurkacz",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.02,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 2.35,
+          "outcome_id": 4237738899,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Hamad Medjedovic vs Sebastian Ofner",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.06,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 2.23,
+          "outcome_id": 4238245039,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Nuno Borges vs Tristan Boyer",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.07,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 2.65,
+          "outcome_id": 4238291708,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Camilo Ugo Carabelli vs Daniel Merida Aguilar",
+      "zona_diff": "coinflip",
+      "diff_abs": 0,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.72,
+          "outcome_id": 4238274728,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Hugo Gaston vs Stefanos Tsitsipas",
+      "zona_diff": "coinflip",
+      "diff_abs": 0,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.58,
+          "outcome_id": 4238262894,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Soonwoo Kwon vs Martin Landaluce",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.09,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.64,
+          "outcome_id": 4237778388,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Felix Auger-Aliassime vs Alexander Shevchenko",
+      "zona_diff": "dominante",
+      "diff_abs": 0.45,
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 33.5,
+          "direccion": "UNDER",
+          "cuota": 1.56,
+          "outcome_id": 4236967163,
+          "gap_juegos": 14.5,
+          "razon": "modelo dice 16-19 games, línea 33.5 tiene gap +14.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Roberto Bautista Agut vs Joao Fonseca",
+      "zona_diff": "dominante",
+      "diff_abs": 0.37,
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 37.5,
+          "direccion": "UNDER",
+          "cuota": 1.84,
+          "outcome_id": 4237026984,
+          "gap_juegos": 18.5,
+          "razon": "modelo dice 16-19 games, línea 37.5 tiene gap +18.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 3.5,
+          "direccion": "UNDER",
+          "cuota": 2.07,
+          "outcome_id": 4236993970,
+          "gap_juegos": null,
+          "razon": "modelo predice 2 sets, UNDER 3.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Adolfo Daniel Vallejo vs Nicolas Mejia",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.18,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.72,
+          "outcome_id": 4238259159,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Thiago Agustin Tirante vs Fabian Marozsan",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.16,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.61,
+          "outcome_id": 4238263150,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Marin Cilic vs Daniil Medvedev",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.11,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 2.6,
+          "outcome_id": 4238300898,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Jan-Lennard Struff vs Sebastian Baez",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.09,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.64,
+          "outcome_id": 4238286425,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Alejandro Davidovich Fokina vs Juan Manuel Cerundolo",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.15,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de sets",
+          "linea": 3.5,
+          "direccion": "OVER",
+          "cuota": 1.71,
+          "outcome_id": 4238275590,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 3.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Jesper De Jong vs Rinky Hijikata",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.1,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.65,
+          "outcome_id": 4238286533,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Yibing Wu vs Novak Djokovic",
+      "zona_diff": "dominante",
+      "diff_abs": 0.54,
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 34.5,
+          "direccion": "UNDER",
+          "cuota": 1.56,
+          "outcome_id": 4238291879,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 16-19 games, línea 34.5 tiene gap +15.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Henri Squire vs Gilles Arnaud Bailly",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.04,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.8,
+          "outcome_id": 4239643877,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.25,
+          "outcome_id": 4239623649,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Max Alcala Gurri vs Sascha Gueymard Wayenburg",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.17,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.91,
+          "outcome_id": 4239105489,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.43,
+          "outcome_id": 4239073502,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Maks Kasnikowski vs Andres Andrade",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.15,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.9,
+          "outcome_id": 4239656317,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.38,
+          "outcome_id": 4239650480,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Andres Santamarta Roig vs Federico Cina",
+      "zona_diff": "dominante",
+      "diff_abs": 0.4,
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "UNDER",
+          "cuota": 1.85,
+          "outcome_id": 4239063886,
+          "gap_juegos": 2.5,
+          "razon": "modelo dice 16-19 games, línea 21.5 tiene gap +2.5 sobre el máximo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Mananchaya Sawangkaew vs Maja Chwalinska",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.06,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 2.02,
+          "outcome_id": 4237888979,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.6,
+          "outcome_id": 4236965334,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Jaqueline Cristian vs Iva Jovic",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.16,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 2.23,
+          "outcome_id": 4237884939,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 3.15,
+          "outcome_id": 4236934826,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Sara Sorribes Tormo vs Victoria Jimenez Kasintseva",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.12,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 2.0,
+          "outcome_id": 4237894923,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.48,
+          "outcome_id": 4236956493,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Jessica Pegula vs Darja Vidmanova",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.04,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 8.5,
+          "direccion": "OVER",
+          "cuota": 1.68,
+          "outcome_id": 4237689366,
+          "gap_juegos": 17.5,
+          "razon": "modelo dice 26-32+ games, línea 8.5 tiene gap -17.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 4.7,
+          "outcome_id": 4237151081,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Xinyu Wang vs Elisabetta Cocciaretto",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.1,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.94,
+          "outcome_id": 4237913845,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.35,
+          "outcome_id": 4237127947,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Alycia Parks vs Alicia Dudeney",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.04,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.98,
+          "outcome_id": 4237878077,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.38,
+          "outcome_id": 4236864700,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Bianca Andreescu vs Shuai Zhang",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.13,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.9,
+          "outcome_id": 4237903824,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.35,
+          "outcome_id": 4237141565,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Yulia Putintseva vs Tatjana Maria",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.1,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 2.04,
+          "outcome_id": 4237878015,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.4,
+          "outcome_id": 4237027363,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Oleksandra Oliynykova vs Mccartney Kessler",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.02,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 8.5,
+          "direccion": "OVER",
+          "cuota": 1.58,
+          "outcome_id": 4237898007,
+          "gap_juegos": 17.5,
+          "razon": "modelo dice 26-32+ games, línea 8.5 tiene gap -17.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 3.4,
+          "outcome_id": 4236815062,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Peyton Stearns vs Nikola Bartunkova",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.11,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.91,
+          "outcome_id": 4237903702,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.48,
+          "outcome_id": 4237092416,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Lanlana Tararudee vs Lilli Tagger",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.07,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.85,
+          "outcome_id": 4237890882,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.38,
+          "outcome_id": 4237001732,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Ekaterina Alexandrova vs Panna Udvardy",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.16,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 2.12,
+          "outcome_id": 4237879595,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.9,
+          "outcome_id": 4237022098,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Jessica Bouzas Maneiro vs Anastasia Potapova",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.13,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.94,
+          "outcome_id": 4237684910,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.35,
+          "outcome_id": 4237024699,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Katerina Siniakova vs Qinwen Zheng",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.01,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.77,
+          "outcome_id": 4237894448,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.35,
+          "outcome_id": 4236952633,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Magda Linette vs Mirra Andreeva",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.13,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 8.5,
+          "direccion": "OVER",
+          "cuota": 1.5,
+          "outcome_id": 4237894488,
+          "gap_juegos": 17.5,
+          "razon": "modelo dice 26-32+ games, línea 8.5 tiene gap -17.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.95,
+          "outcome_id": 4236889445,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Francesca Jones vs Diane Parry",
+      "zona_diff": "dominante",
+      "diff_abs": 0.36,
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "UNDER",
+          "cuota": 1.8,
+          "outcome_id": 4237029015,
+          "gap_juegos": 2.5,
+          "razon": "modelo dice 16-19 games, línea 21.5 tiene gap +2.5 sobre el máximo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Daniel Rincon vs Jacopo Vasami",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.01,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.85,
+          "outcome_id": 4239621252,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.23,
+          "outcome_id": 4239617809,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Alex Barrena vs Hugo Dellien",
+      "zona_diff": "dominante",
+      "diff_abs": 0.83,
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "UNDER",
+          "cuota": 1.86,
+          "outcome_id": 4239627224,
+          "gap_juegos": 2.5,
+          "razon": "modelo dice 16-19 games, línea 21.5 tiene gap +2.5 sobre el máximo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Yosuke Watanuki vs Andre Ilagan",
+      "zona_diff": "dominante",
+      "diff_abs": 0.37,
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 23.5,
+          "direccion": "UNDER",
+          "cuota": 1.72,
+          "outcome_id": 4239109082,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 16-19 games, línea 23.5 tiene gap +4.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "UNDER",
+          "cuota": 1.63,
+          "outcome_id": 4239109086,
+          "gap_juegos": null,
+          "razon": "modelo predice 2 sets, UNDER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    }
+  ],
+  "detalle_completo": [
+    {
+      "partido": "Denis Shapovalov vs Pablo Carreno Busta",
+      "jugador1": "Denis Shapovalov",
+      "jugador2": "Pablo Carreno Busta",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "rDjZxiMb",
+      "score_difference": -0.13,
+      "diff_abs": 0.13,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de sets",
+          "linea": 3.5,
+          "direccion": "OVER",
+          "cuota": 1.52,
+          "outcome_id": 4236930393,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 3.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": false
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 2.9,
+          "outcome_id": 4238276611,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 3.9,
+          "outcome_id": 4238253419,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.68,
+          "outcome_id": 4238253421,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.68,
+          "outcome_id": 4238253421,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155465
+    },
+    {
+      "partido": "Rafael Jodar vs Felix Gill",
+      "jugador1": "Rafael Jodar",
+      "jugador2": "Felix Gill",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "OpqcK0Sh",
+      "score_difference": 0.51,
+      "diff_abs": 0.51,
+      "zona_diff": "dominante",
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "señales": [
+        {
+          "mercado": "Total de sets",
+          "linea": 3.5,
+          "direccion": "UNDER",
+          "cuota": 1.9,
+          "outcome_id": 4237287086,
+          "gap_juegos": null,
+          "razon": "modelo predice 2 sets, UNDER 3.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 33.5,
+          "direccion": "UNDER",
+          "cuota": 2.0,
+          "outcome_id": 4237287088,
+          "gap_juegos": 14.5,
+          "razon": "modelo dice 16-19 games, línea 33.5 tiene gap +14.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 37.5,
+          "direccion": "UNDER",
+          "cuota": 1.64,
+          "outcome_id": 4237753792,
+          "gap_juegos": 18.5,
+          "razon": "modelo dice 16-19 games, línea 37.5 tiene gap +18.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 36.5,
+          "direccion": "UNDER",
+          "cuota": 1.73,
+          "outcome_id": 4237720072,
+          "gap_juegos": 17.5,
+          "razon": "modelo dice 16-19 games, línea 36.5 tiene gap +17.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 35.5,
+          "direccion": "UNDER",
+          "cuota": 1.8,
+          "outcome_id": 4237769391,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 16-19 games, línea 35.5 tiene gap +16.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 34.5,
+          "direccion": "UNDER",
+          "cuota": 1.93,
+          "outcome_id": 4238285584,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 16-19 games, línea 34.5 tiene gap +15.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 37.5,
+          "direccion": "UNDER",
+          "cuota": 1.64,
+          "outcome_id": 4237753792,
+          "gap_juegos": 18.5,
+          "razon": "modelo dice 16-19 games, línea 37.5 tiene gap +18.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 3.5,
+          "direccion": "UNDER",
+          "cuota": 1.9,
+          "outcome_id": 4237287086,
+          "gap_juegos": null,
+          "razon": "modelo predice 2 sets, UNDER 3.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155469
+    },
+    {
+      "partido": "Shintaro Mochizuki vs Max Basing",
+      "jugador1": "Shintaro Mochizuki",
+      "jugador2": "Max Basing",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "xdcmA1ne",
+      "score_difference": 0.12,
+      "diff_abs": 0.12,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de sets",
+          "linea": 3.5,
+          "direccion": "OVER",
+          "cuota": 1.57,
+          "outcome_id": 4236915249,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 3.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": false
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 5.4,
+          "outcome_id": 4238274413,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.85,
+          "outcome_id": 4238280467,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 3.55,
+          "outcome_id": 4238280471,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.85,
+          "outcome_id": 4238280467,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155461
+    },
+    {
+      "partido": "Emilio Nava vs Ignacio Buse",
+      "jugador1": "Emilio Nava",
+      "jugador2": "Ignacio Buse",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "S48qHDg2",
+      "score_difference": 0.04,
+      "diff_abs": 0.04,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 3.55,
+          "outcome_id": 4237281252,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 2.7,
+          "outcome_id": 4237281254,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.55,
+          "outcome_id": 4237302560,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.55,
+          "outcome_id": 4237302560,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155433
+    },
+    {
+      "partido": "Aleksandar Vukic vs Jenson Brooksby",
+      "jugador1": "Aleksandar Vukic",
+      "jugador2": "Jenson Brooksby",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "hQYEkU54",
+      "score_difference": 0.02,
+      "diff_abs": 0.02,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de sets",
+          "linea": 3.5,
+          "direccion": "OVER",
+          "cuota": 1.57,
+          "outcome_id": 4236989035,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 3.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": false
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 4.0,
+          "outcome_id": 4237280713,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 2.95,
+          "outcome_id": 4237280717,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.68,
+          "outcome_id": 4237226954,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.68,
+          "outcome_id": 4237226954,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155434
+    },
+    {
+      "partido": "Aleksandar Kovacevic vs Botic van de Zandschulp",
+      "jugador1": "Aleksandar Kovacevic",
+      "jugador2": "Botic van de Zandschulp",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "lAgsyVjB",
+      "score_difference": -0.14,
+      "diff_abs": 0.14,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 2.32,
+          "outcome_id": 4238258893,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 2.9,
+          "outcome_id": 4238267875,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 2.32,
+          "outcome_id": 4238258893,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155453
+    },
+    {
+      "partido": "Andrey Rublev vs Roman Safiullin",
+      "jugador1": "Andrey Rublev",
+      "jugador2": "Roman Safiullin",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "t4dZsw4e",
+      "score_difference": -0.05,
+      "diff_abs": 0.05,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 3.05,
+          "outcome_id": 4238007074,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 2.4,
+          "outcome_id": 4237977435,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 2.4,
+          "outcome_id": 4237977435,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155455
+    },
+    {
+      "partido": "Dalibor Svrcina vs Learner Tien",
+      "jugador1": "Dalibor Svrcina",
+      "jugador2": "Learner Tien",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "IT9hi2b6",
+      "score_difference": -0.21,
+      "diff_abs": 0.21,
+      "zona_diff": "ajustada",
+      "predicted_sets": 2,
+      "games_range": "20-23",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": false
+    },
+    {
+      "partido": "Marco Trungelliti vs Martin Damm",
+      "jugador1": "Marco Trungelliti",
+      "jugador2": "Martin Damm",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "EHEJrK3s",
+      "score_difference": -0.27,
+      "diff_abs": 0.27,
+      "zona_diff": "ajustada",
+      "predicted_sets": 2,
+      "games_range": "18-21",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": false
+    },
+    {
+      "partido": "Luca Van Assche vs Marton Fucsovics",
+      "jugador1": "Luca Van Assche",
+      "jugador2": "Marton Fucsovics",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "A36pgOTg",
+      "score_difference": 0.27,
+      "diff_abs": 0.27,
+      "zona_diff": "ajustada",
+      "predicted_sets": 2,
+      "games_range": "18-21",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": false
+    },
+    {
+      "partido": "Arthur Rinderknech vs Oliver Tarvet",
+      "jugador1": "Arthur Rinderknech",
+      "jugador2": "Oliver Tarvet",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "vsXMm8zH",
+      "score_difference": -0.21,
+      "diff_abs": 0.21,
+      "zona_diff": "ajustada",
+      "predicted_sets": 2,
+      "games_range": "20-23",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": false
+    },
+    {
+      "partido": "Michael Zheng vs Cameron Norrie",
+      "jugador1": "Michael Zheng",
+      "jugador2": "Cameron Norrie",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "Svoy2beR",
+      "score_difference": 0.21,
+      "diff_abs": 0.21,
+      "zona_diff": "ajustada",
+      "predicted_sets": 2,
+      "games_range": "20-23",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": false
+    },
+    {
+      "partido": "Casper Ruud vs Hubert Hurkacz",
+      "jugador1": "Casper Ruud",
+      "jugador2": "Hubert Hurkacz",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "EX0H7Nrm",
+      "score_difference": -0.02,
+      "diff_abs": 0.02,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de sets",
+          "linea": 3.5,
+          "direccion": "OVER",
+          "cuota": 1.6,
+          "outcome_id": 4236966911,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 3.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": false
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 2.35,
+          "outcome_id": 4237738899,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 2.9,
+          "outcome_id": 4237778785,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 2.35,
+          "outcome_id": 4237738899,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155456
+    },
+    {
+      "partido": "Hamad Medjedovic vs Sebastian Ofner",
+      "jugador1": "Hamad Medjedovic",
+      "jugador2": "Sebastian Ofner",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "8tFx8WMO",
+      "score_difference": -0.06,
+      "diff_abs": 0.06,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 2.75,
+          "outcome_id": 4238245033,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 2.23,
+          "outcome_id": 4238245039,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 2.23,
+          "outcome_id": 4238245039,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155472
+    },
+    {
+      "partido": "Nuno Borges vs Tristan Boyer",
+      "jugador1": "Nuno Borges",
+      "jugador2": "Tristan Boyer",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "M5AEDzgm",
+      "score_difference": -0.07,
+      "diff_abs": 0.07,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de sets",
+          "linea": 3.5,
+          "direccion": "OVER",
+          "cuota": 1.62,
+          "outcome_id": 4236953298,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 3.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": false
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 3.45,
+          "outcome_id": 4238268222,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 2.65,
+          "outcome_id": 4238291708,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 2.65,
+          "outcome_id": 4238291708,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155435
+    },
+    {
+      "partido": "Camilo Ugo Carabelli vs Daniel Merida Aguilar",
+      "jugador1": "Camilo Ugo Carabelli",
+      "jugador2": "Daniel Merida Aguilar",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "bNy7dxJl",
+      "score_difference": 0,
+      "diff_abs": 0,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de sets",
+          "linea": 3.5,
+          "direccion": "OVER",
+          "cuota": 1.5,
+          "outcome_id": 4236916316,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 3.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": false
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.72,
+          "outcome_id": 4238274728,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 4.5,
+          "outcome_id": 4238289015,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 3.1,
+          "outcome_id": 4238280777,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.72,
+          "outcome_id": 4238274728,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155452
+    },
+    {
+      "partido": "Hugo Gaston vs Stefanos Tsitsipas",
+      "jugador1": "Hugo Gaston",
+      "jugador2": "Stefanos Tsitsipas",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "CA99MVyI",
+      "score_difference": 0,
+      "diff_abs": 0,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de sets",
+          "linea": 3.5,
+          "direccion": "OVER",
+          "cuota": 1.5,
+          "outcome_id": 4236996533,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 3.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": false
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.58,
+          "outcome_id": 4238262894,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 2.65,
+          "outcome_id": 4238262896,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 3.5,
+          "outcome_id": 4238262898,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.58,
+          "outcome_id": 4238262894,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155445
+    },
+    {
+      "partido": "Soonwoo Kwon vs Martin Landaluce",
+      "jugador1": "Soonwoo Kwon",
+      "jugador2": "Martin Landaluce",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "6VcfQDxg",
+      "score_difference": 0.09,
+      "diff_abs": 0.09,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de sets",
+          "linea": 3.5,
+          "direccion": "OVER",
+          "cuota": 1.56,
+          "outcome_id": 4236966682,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 3.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": false
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 3.9,
+          "outcome_id": 4237738499,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 2.88,
+          "outcome_id": 4237746987,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.64,
+          "outcome_id": 4237778388,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.64,
+          "outcome_id": 4237778388,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155447
+    },
+    {
+      "partido": "Adam Walton vs Dino Prizmic",
+      "jugador1": "Adam Walton",
+      "jugador2": "Dino Prizmic",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "noaP51Da",
+      "score_difference": 0.23,
+      "diff_abs": 0.23,
+      "zona_diff": "ajustada",
+      "predicted_sets": 2,
+      "games_range": "20-23",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": false
+    },
+    {
+      "partido": "Felix Auger-Aliassime vs Alexander Shevchenko",
+      "jugador1": "Felix Auger-Aliassime",
+      "jugador2": "Alexander Shevchenko",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "KbeVvHo9",
+      "score_difference": 0.45,
+      "diff_abs": 0.45,
+      "zona_diff": "dominante",
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 32.5,
+          "direccion": "UNDER",
+          "cuota": 1.66,
+          "outcome_id": 4236987110,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 16-19 games, línea 32.5 tiene gap +13.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 31.5,
+          "direccion": "UNDER",
+          "cuota": 1.84,
+          "outcome_id": 4236967162,
+          "gap_juegos": 12.5,
+          "razon": "modelo dice 16-19 games, línea 31.5 tiene gap +12.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 33.5,
+          "direccion": "UNDER",
+          "cuota": 1.56,
+          "outcome_id": 4236967163,
+          "gap_juegos": 14.5,
+          "razon": "modelo dice 16-19 games, línea 33.5 tiene gap +14.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 30.5,
+          "direccion": "UNDER",
+          "cuota": 2.08,
+          "outcome_id": 4236975532,
+          "gap_juegos": 11.5,
+          "razon": "modelo dice 16-19 games, línea 30.5 tiene gap +11.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 29.5,
+          "direccion": "UNDER",
+          "cuota": 2.43,
+          "outcome_id": 4238289286,
+          "gap_juegos": 10.5,
+          "razon": "modelo dice 16-19 games, línea 29.5 tiene gap +10.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 28.5,
+          "direccion": "UNDER",
+          "cuota": 2.95,
+          "outcome_id": 4239864392,
+          "gap_juegos": 9.5,
+          "razon": "modelo dice 16-19 games, línea 28.5 tiene gap +9.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 33.5,
+          "direccion": "UNDER",
+          "cuota": 1.56,
+          "outcome_id": 4236967163,
+          "gap_juegos": 14.5,
+          "razon": "modelo dice 16-19 games, línea 33.5 tiene gap +14.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155466
+    },
+    {
+      "partido": "Roberto Bautista Agut vs Joao Fonseca",
+      "jugador1": "Roberto Bautista Agut",
+      "jugador2": "Joao Fonseca",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "js80ktTI",
+      "score_difference": -0.37,
+      "diff_abs": 0.37,
+      "zona_diff": "dominante",
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 34.5,
+          "direccion": "UNDER",
+          "cuota": 2.18,
+          "outcome_id": 4236996961,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 16-19 games, línea 34.5 tiene gap +15.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 35.5,
+          "direccion": "UNDER",
+          "cuota": 2.04,
+          "outcome_id": 4236996963,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 16-19 games, línea 35.5 tiene gap +16.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 33.5,
+          "direccion": "UNDER",
+          "cuota": 2.32,
+          "outcome_id": 4236996979,
+          "gap_juegos": 14.5,
+          "razon": "modelo dice 16-19 games, línea 33.5 tiene gap +14.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 36.5,
+          "direccion": "UNDER",
+          "cuota": 1.9,
+          "outcome_id": 4237026978,
+          "gap_juegos": 17.5,
+          "razon": "modelo dice 16-19 games, línea 36.5 tiene gap +17.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 37.5,
+          "direccion": "UNDER",
+          "cuota": 1.84,
+          "outcome_id": 4237026984,
+          "gap_juegos": 18.5,
+          "razon": "modelo dice 16-19 games, línea 37.5 tiene gap +18.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 3.5,
+          "direccion": "UNDER",
+          "cuota": 2.07,
+          "outcome_id": 4236993970,
+          "gap_juegos": null,
+          "razon": "modelo predice 2 sets, UNDER 3.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 37.5,
+          "direccion": "UNDER",
+          "cuota": 1.84,
+          "outcome_id": 4237026984,
+          "gap_juegos": 18.5,
+          "razon": "modelo dice 16-19 games, línea 37.5 tiene gap +18.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 3.5,
+          "direccion": "UNDER",
+          "cuota": 2.07,
+          "outcome_id": 4236993970,
+          "gap_juegos": null,
+          "razon": "modelo predice 2 sets, UNDER 3.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155467
+    },
+    {
+      "partido": "Adolfo Daniel Vallejo vs Nicolas Mejia",
+      "jugador1": "Adolfo Daniel Vallejo",
+      "jugador2": "Nicolas Mejia",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "IynPTjw8",
+      "score_difference": -0.18,
+      "diff_abs": 0.18,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de sets",
+          "linea": 3.5,
+          "direccion": "OVER",
+          "cuota": 1.52,
+          "outcome_id": 4237014583,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 3.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": false
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 3.1,
+          "outcome_id": 4238259155,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.72,
+          "outcome_id": 4238259159,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 4.5,
+          "outcome_id": 4238291757,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.72,
+          "outcome_id": 4238259159,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155459
+    },
+    {
+      "partido": "Thiago Agustin Tirante vs Fabian Marozsan",
+      "jugador1": "Thiago Agustin Tirante",
+      "jugador2": "Fabian Marozsan",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "rwM0tQSj",
+      "score_difference": 0.16,
+      "diff_abs": 0.16,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de sets",
+          "linea": 3.5,
+          "direccion": "OVER",
+          "cuota": 1.56,
+          "outcome_id": 4237277773,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 3.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": false
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 2.63,
+          "outcome_id": 4238263148,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.61,
+          "outcome_id": 4238263150,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 3.4,
+          "outcome_id": 4238263154,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.61,
+          "outcome_id": 4238263150,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155448
+    },
+    {
+      "partido": "Marin Cilic vs Daniil Medvedev",
+      "jugador1": "Marin Cilic",
+      "jugador2": "Daniil Medvedev",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "WKmHVC8e",
+      "score_difference": -0.11,
+      "diff_abs": 0.11,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de sets",
+          "linea": 3.5,
+          "direccion": "OVER",
+          "cuota": 1.55,
+          "outcome_id": 4236945999,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 3.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": false
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 3.35,
+          "outcome_id": 4238256426,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 2.6,
+          "outcome_id": 4238300898,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 2.6,
+          "outcome_id": 4238300898,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155470
+    },
+    {
+      "partido": "Jan-Lennard Struff vs Sebastian Baez",
+      "jugador1": "Jan-Lennard Struff",
+      "jugador2": "Sebastian Baez",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "MNikZ8LN",
+      "score_difference": 0.09,
+      "diff_abs": 0.09,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de sets",
+          "linea": 3.5,
+          "direccion": "OVER",
+          "cuota": 1.58,
+          "outcome_id": 4236992574,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 3.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": false
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.64,
+          "outcome_id": 4238286425,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 2.85,
+          "outcome_id": 4238263167,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 3.9,
+          "outcome_id": 4238303873,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.64,
+          "outcome_id": 4238286425,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155437
+    },
+    {
+      "partido": "Ethan Quinn vs Luciano Darderi",
+      "jugador1": "Ethan Quinn",
+      "jugador2": "Luciano Darderi",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "b5fnSZ7t",
+      "score_difference": 0.26,
+      "diff_abs": 0.26,
+      "zona_diff": "ajustada",
+      "predicted_sets": 2,
+      "games_range": "18-21",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": false
+    },
+    {
+      "partido": "Alejandro Davidovich Fokina vs Juan Manuel Cerundolo",
+      "jugador1": "Alejandro Davidovich Fokina",
+      "jugador2": "Juan Manuel Cerundolo",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "KCz7ijyh",
+      "score_difference": 0.15,
+      "diff_abs": 0.15,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de sets",
+          "linea": 3.5,
+          "direccion": "OVER",
+          "cuota": 1.71,
+          "outcome_id": 4238275590,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 3.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de sets",
+          "linea": 3.5,
+          "direccion": "OVER",
+          "cuota": 1.71,
+          "outcome_id": 4238275590,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 3.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155473
+    },
+    {
+      "partido": "Jesper De Jong vs Rinky Hijikata",
+      "jugador1": "Jesper De Jong",
+      "jugador2": "Rinky Hijikata",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "KzDHK96U",
+      "score_difference": 0.1,
+      "diff_abs": 0.1,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de sets",
+          "linea": 3.5,
+          "direccion": "OVER",
+          "cuota": 1.61,
+          "outcome_id": 4237069200,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 3.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": false
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.65,
+          "outcome_id": 4238286533,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 3.0,
+          "outcome_id": 4238303984,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 4.1,
+          "outcome_id": 4238303986,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.65,
+          "outcome_id": 4238286533,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155471
+    },
+    {
+      "partido": "Brandon Nakashima vs Jack Pinnington Jones",
+      "jugador1": "Brandon Nakashima",
+      "jugador2": "Jack Pinnington Jones",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "YwgRqaZr",
+      "score_difference": 0.21,
+      "diff_abs": 0.21,
+      "zona_diff": "ajustada",
+      "predicted_sets": 2,
+      "games_range": "20-23",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": false
+    },
+    {
+      "partido": "Yibing Wu vs Novak Djokovic",
+      "jugador1": "Yibing Wu",
+      "jugador2": "Novak Djokovic",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "rFXgSbJ0",
+      "score_difference": -0.54,
+      "diff_abs": 0.54,
+      "zona_diff": "dominante",
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "señales": [
+        {
+          "mercado": "Total de sets",
+          "linea": 3.5,
+          "direccion": "UNDER",
+          "cuota": 1.54,
+          "outcome_id": 4237014076,
+          "gap_juegos": null,
+          "razon": "modelo predice 2 sets, UNDER 3.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": false
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 31.5,
+          "direccion": "UNDER",
+          "cuota": 1.86,
+          "outcome_id": 4237868087,
+          "gap_juegos": 12.5,
+          "razon": "modelo dice 16-19 games, línea 31.5 tiene gap +12.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 30.5,
+          "direccion": "UNDER",
+          "cuota": 2.06,
+          "outcome_id": 4237894287,
+          "gap_juegos": 11.5,
+          "razon": "modelo dice 16-19 games, línea 30.5 tiene gap +11.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 33.5,
+          "direccion": "UNDER",
+          "cuota": 1.62,
+          "outcome_id": 4238259291,
+          "gap_juegos": 14.5,
+          "razon": "modelo dice 16-19 games, línea 33.5 tiene gap +14.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 32.5,
+          "direccion": "UNDER",
+          "cuota": 1.72,
+          "outcome_id": 4238259293,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 16-19 games, línea 32.5 tiene gap +13.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 34.5,
+          "direccion": "UNDER",
+          "cuota": 1.56,
+          "outcome_id": 4238291879,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 16-19 games, línea 34.5 tiene gap +15.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 29.5,
+          "direccion": "UNDER",
+          "cuota": 2.32,
+          "outcome_id": 4239892684,
+          "gap_juegos": 10.5,
+          "razon": "modelo dice 16-19 games, línea 29.5 tiene gap +10.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 34.5,
+          "direccion": "UNDER",
+          "cuota": 1.56,
+          "outcome_id": 4238291879,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 16-19 games, línea 34.5 tiene gap +15.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155449
+    },
+    {
+      "partido": "Henri Squire vs Gilles Arnaud Bailly",
+      "jugador1": "Henri Squire",
+      "jugador2": "Gilles Arnaud Bailly",
+      "torneo": "Brasov (Rumanía)",
+      "superficie": "clay",
+      "tier": "",
+      "match_id": "xCk6v2Vi",
+      "score_difference": -0.04,
+      "diff_abs": 0.04,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 22.5,
+          "direccion": "OVER",
+          "cuota": 1.88,
+          "outcome_id": 4239643873,
+          "gap_juegos": 3.5,
+          "razon": "modelo dice 26-32+ games, línea 22.5 tiene gap -3.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "OVER",
+          "cuota": 1.65,
+          "outcome_id": 4239643875,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 26-32+ games, línea 21.5 tiene gap -4.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.8,
+          "outcome_id": 4239643877,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.25,
+          "outcome_id": 4239623649,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 3.3,
+          "outcome_id": 4239623653,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 23.5,
+          "direccion": "OVER",
+          "cuota": 2.08,
+          "outcome_id": 4239824960,
+          "gap_juegos": 2.5,
+          "razon": "modelo dice 26-32+ games, línea 23.5 tiene gap -2.5 bajo el mínimo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.8,
+          "outcome_id": 4239643877,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.25,
+          "outcome_id": 4239623649,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028177617
+    },
+    {
+      "partido": "Max Alcala Gurri vs Sascha Gueymard Wayenburg",
+      "jugador1": "Max Alcala Gurri",
+      "jugador2": "Sascha Gueymard Wayenburg",
+      "torneo": "Brasov (Rumanía)",
+      "superficie": "clay",
+      "tier": "",
+      "match_id": "OnfUYcaT",
+      "score_difference": 0.17,
+      "diff_abs": 0.17,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 22.5,
+          "direccion": "OVER",
+          "cuota": 2.08,
+          "outcome_id": 4239090740,
+          "gap_juegos": 3.5,
+          "razon": "modelo dice 26-32+ games, línea 22.5 tiene gap -3.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.91,
+          "outcome_id": 4239105489,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 3.65,
+          "outcome_id": 4239105491,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "OVER",
+          "cuota": 1.83,
+          "outcome_id": 4239105495,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 26-32+ games, línea 21.5 tiene gap -4.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 20.5,
+          "direccion": "OVER",
+          "cuota": 1.68,
+          "outcome_id": 4239105496,
+          "gap_juegos": 5.5,
+          "razon": "modelo dice 26-32+ games, línea 20.5 tiene gap -5.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.43,
+          "outcome_id": 4239073502,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.91,
+          "outcome_id": 4239105489,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.43,
+          "outcome_id": 4239073502,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028177616
+    },
+    {
+      "partido": "Maks Kasnikowski vs Andres Andrade",
+      "jugador1": "Maks Kasnikowski",
+      "jugador2": "Andres Andrade",
+      "torneo": "Brasov (Rumanía)",
+      "superficie": "clay",
+      "tier": "",
+      "match_id": "A5cKGbwo",
+      "score_difference": 0.15,
+      "diff_abs": 0.15,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 20.5,
+          "direccion": "OVER",
+          "cuota": 1.64,
+          "outcome_id": 4239630313,
+          "gap_juegos": 5.5,
+          "razon": "modelo dice 26-32+ games, línea 20.5 tiene gap -5.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 3.55,
+          "outcome_id": 4239650470,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.38,
+          "outcome_id": 4239650480,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "OVER",
+          "cuota": 1.79,
+          "outcome_id": 4239650483,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 26-32+ games, línea 21.5 tiene gap -4.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 22.5,
+          "direccion": "OVER",
+          "cuota": 2.04,
+          "outcome_id": 4239656315,
+          "gap_juegos": 3.5,
+          "razon": "modelo dice 26-32+ games, línea 22.5 tiene gap -3.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.9,
+          "outcome_id": 4239656317,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.9,
+          "outcome_id": 4239656317,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.38,
+          "outcome_id": 4239650480,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028177622
+    },
+    {
+      "partido": "Andres Santamarta Roig vs Federico Cina",
+      "jugador1": "Andres Santamarta Roig",
+      "jugador2": "Federico Cina",
+      "torneo": "Brasov (Rumanía)",
+      "superficie": "clay",
+      "tier": "",
+      "match_id": "APmExt04",
+      "score_difference": -0.4,
+      "diff_abs": 0.4,
+      "zona_diff": "dominante",
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "UNDER",
+          "cuota": 1.85,
+          "outcome_id": 4239063886,
+          "gap_juegos": 2.5,
+          "razon": "modelo dice 16-19 games, línea 21.5 tiene gap +2.5 sobre el máximo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 22.5,
+          "direccion": "UNDER",
+          "cuota": 1.65,
+          "outcome_id": 4239824963,
+          "gap_juegos": 3.5,
+          "razon": "modelo dice 16-19 games, línea 22.5 tiene gap +3.5 sobre el máximo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": false
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "UNDER",
+          "cuota": 1.85,
+          "outcome_id": 4239063886,
+          "gap_juegos": 2.5,
+          "razon": "modelo dice 16-19 games, línea 21.5 tiene gap +2.5 sobre el máximo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028177619
+    },
+    {
+      "partido": "Mananchaya Sawangkaew vs Maja Chwalinska",
+      "jugador1": "Mananchaya Sawangkaew",
+      "jugador2": "Maja Chwalinska",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "vuUtfkdc",
+      "score_difference": -0.06,
+      "diff_abs": 0.06,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 20.5,
+          "direccion": "OVER",
+          "cuota": 1.79,
+          "outcome_id": 4236914814,
+          "gap_juegos": 5.5,
+          "razon": "modelo dice 26-32+ games, línea 20.5 tiene gap -5.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "OVER",
+          "cuota": 1.98,
+          "outcome_id": 4236914820,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 26-32+ games, línea 21.5 tiene gap -4.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 19.5,
+          "direccion": "OVER",
+          "cuota": 1.58,
+          "outcome_id": 4236914822,
+          "gap_juegos": 6.5,
+          "razon": "modelo dice 26-32+ games, línea 19.5 tiene gap -6.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 22.5,
+          "direccion": "OVER",
+          "cuota": 2.25,
+          "outcome_id": 4236917484,
+          "gap_juegos": 3.5,
+          "razon": "modelo dice 26-32+ games, línea 22.5 tiene gap -3.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.6,
+          "outcome_id": 4236965334,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 2.02,
+          "outcome_id": 4237888979,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 3.8,
+          "outcome_id": 4237888985,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 6.5,
+          "outcome_id": 4237888989,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 2.02,
+          "outcome_id": 4237888979,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.6,
+          "outcome_id": 4236965334,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155291
+    },
+    {
+      "partido": "Jaqueline Cristian vs Iva Jovic",
+      "jugador1": "Jaqueline Cristian",
+      "jugador2": "Iva Jovic",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "80T43yDk",
+      "score_difference": -0.16,
+      "diff_abs": 0.16,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 19.5,
+          "direccion": "OVER",
+          "cuota": 1.82,
+          "outcome_id": 4236892823,
+          "gap_juegos": 6.5,
+          "razon": "modelo dice 26-32+ games, línea 19.5 tiene gap -6.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 3.15,
+          "outcome_id": 4236934826,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 18.5,
+          "direccion": "OVER",
+          "cuota": 1.58,
+          "outcome_id": 4236934828,
+          "gap_juegos": 7.5,
+          "razon": "modelo dice 26-32+ games, línea 18.5 tiene gap -7.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 20.5,
+          "direccion": "OVER",
+          "cuota": 2.1,
+          "outcome_id": 4236934834,
+          "gap_juegos": 5.5,
+          "razon": "modelo dice 26-32+ games, línea 20.5 tiene gap -5.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "OVER",
+          "cuota": 2.35,
+          "outcome_id": 4236934836,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 26-32+ games, línea 21.5 tiene gap -4.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 4.2,
+          "outcome_id": 4237910063,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 6.5,
+          "outcome_id": 4237910065,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 2.23,
+          "outcome_id": 4237884939,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 2.23,
+          "outcome_id": 4237884939,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 3.15,
+          "outcome_id": 4236934826,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155296
+    },
+    {
+      "partido": "Belinda Bencic vs Mika Stojsavljevic",
+      "jugador1": "Belinda Bencic",
+      "jugador2": "Mika Stojsavljevic",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "MFsL9MH6",
+      "score_difference": 0.36,
+      "diff_abs": 0.36,
+      "zona_diff": "dominante",
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155298
+    },
+    {
+      "partido": "Sara Sorribes Tormo vs Victoria Jimenez Kasintseva",
+      "jugador1": "Sara Sorribes Tormo",
+      "jugador2": "Victoria Jimenez Kasintseva",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "GpN6Nd4L",
+      "score_difference": 0.12,
+      "diff_abs": 0.12,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.48,
+          "outcome_id": 4236956493,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 22.5,
+          "direccion": "OVER",
+          "cuota": 2.16,
+          "outcome_id": 4236953846,
+          "gap_juegos": 3.5,
+          "razon": "modelo dice 26-32+ games, línea 22.5 tiene gap -3.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "OVER",
+          "cuota": 1.91,
+          "outcome_id": 4236953848,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 26-32+ games, línea 21.5 tiene gap -4.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 3.8,
+          "outcome_id": 4237868780,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 6.25,
+          "outcome_id": 4237903947,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 20.5,
+          "direccion": "OVER",
+          "cuota": 1.73,
+          "outcome_id": 4237903949,
+          "gap_juegos": 5.5,
+          "razon": "modelo dice 26-32+ games, línea 20.5 tiene gap -5.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 2.0,
+          "outcome_id": 4237894923,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 19.5,
+          "direccion": "OVER",
+          "cuota": 1.54,
+          "outcome_id": 4237894927,
+          "gap_juegos": 6.5,
+          "razon": "modelo dice 26-32+ games, línea 19.5 tiene gap -6.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 2.0,
+          "outcome_id": 4237894923,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.48,
+          "outcome_id": 4236956493,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155322
+    },
+    {
+      "partido": "Jessica Pegula vs Darja Vidmanova",
+      "jugador1": "Jessica Pegula",
+      "jugador2": "Darja Vidmanova",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "6uV0Ma1C",
+      "score_difference": -0.04,
+      "diff_abs": 0.04,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 4.7,
+          "outcome_id": 4237151081,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 17.5,
+          "direccion": "OVER",
+          "cuota": 1.58,
+          "outcome_id": 4237126977,
+          "gap_juegos": 8.5,
+          "razon": "modelo dice 26-32+ games, línea 17.5 tiene gap -8.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 8.0,
+          "outcome_id": 4237720900,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 19.5,
+          "direccion": "OVER",
+          "cuota": 2.33,
+          "outcome_id": 4237720902,
+          "gap_juegos": 6.5,
+          "razon": "modelo dice 26-32+ games, línea 19.5 tiene gap -6.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 2.5,
+          "outcome_id": 4237720904,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 5.2,
+          "outcome_id": 4237720906,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 20.5,
+          "direccion": "OVER",
+          "cuota": 2.85,
+          "outcome_id": 4237689364,
+          "gap_juegos": 5.5,
+          "razon": "modelo dice 26-32+ games, línea 20.5 tiene gap -5.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 8.5,
+          "direccion": "OVER",
+          "cuota": 1.68,
+          "outcome_id": 4237689366,
+          "gap_juegos": 17.5,
+          "razon": "modelo dice 26-32+ games, línea 8.5 tiene gap -17.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 18.5,
+          "direccion": "OVER",
+          "cuota": 1.98,
+          "outcome_id": 4237694992,
+          "gap_juegos": 7.5,
+          "razon": "modelo dice 26-32+ games, línea 18.5 tiene gap -7.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "OVER",
+          "cuota": 3.25,
+          "outcome_id": 4239864722,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 26-32+ games, línea 21.5 tiene gap -4.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 8.5,
+          "direccion": "OVER",
+          "cuota": 1.68,
+          "outcome_id": 4237689366,
+          "gap_juegos": 17.5,
+          "razon": "modelo dice 26-32+ games, línea 8.5 tiene gap -17.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 4.7,
+          "outcome_id": 4237151081,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155314
+    },
+    {
+      "partido": "Xinyu Wang vs Elisabetta Cocciaretto",
+      "jugador1": "Xinyu Wang",
+      "jugador2": "Elisabetta Cocciaretto",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "Ak9x3puS",
+      "score_difference": 0.1,
+      "diff_abs": 0.1,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 22.5,
+          "direccion": "OVER",
+          "cuota": 2.02,
+          "outcome_id": 4237151960,
+          "gap_juegos": 3.5,
+          "razon": "modelo dice 26-32+ games, línea 22.5 tiene gap -3.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.35,
+          "outcome_id": 4237127947,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "OVER",
+          "cuota": 1.78,
+          "outcome_id": 4237127949,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 26-32+ games, línea 21.5 tiene gap -4.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 20.5,
+          "direccion": "OVER",
+          "cuota": 1.63,
+          "outcome_id": 4237889034,
+          "gap_juegos": 5.5,
+          "razon": "modelo dice 26-32+ games, línea 20.5 tiene gap -5.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 3.55,
+          "outcome_id": 4237889040,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 23.5,
+          "direccion": "OVER",
+          "cuota": 2.23,
+          "outcome_id": 4237913843,
+          "gap_juegos": 2.5,
+          "razon": "modelo dice 26-32+ games, línea 23.5 tiene gap -2.5 bajo el mínimo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.94,
+          "outcome_id": 4237913845,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 5.6,
+          "outcome_id": 4237913847,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.94,
+          "outcome_id": 4237913845,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.35,
+          "outcome_id": 4237127947,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155302
+    },
+    {
+      "partido": "Ann Li vs Zeynep Sonmez",
+      "jugador1": "Ann Li",
+      "jugador2": "Zeynep Sonmez",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "l2qDBrmf",
+      "score_difference": -0.25,
+      "diff_abs": 0.25,
+      "zona_diff": "ajustada",
+      "predicted_sets": 2,
+      "games_range": "20-23",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": false
+    },
+    {
+      "partido": "Jelena Ostapenko vs Harriet Dart",
+      "jugador1": "Jelena Ostapenko",
+      "jugador2": "Harriet Dart",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "UuoT70nJ",
+      "score_difference": 0.32,
+      "diff_abs": 0.32,
+      "zona_diff": "ajustada",
+      "predicted_sets": 2,
+      "games_range": "18-21",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": false
+    },
+    {
+      "partido": "Alycia Parks vs Alicia Dudeney",
+      "jugador1": "Alycia Parks",
+      "jugador2": "Alicia Dudeney",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "MRRxfUv0",
+      "score_difference": -0.04,
+      "diff_abs": 0.04,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 22.5,
+          "direccion": "OVER",
+          "cuota": 2.07,
+          "outcome_id": 4236864694,
+          "gap_juegos": 3.5,
+          "razon": "modelo dice 26-32+ games, línea 22.5 tiene gap -3.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.38,
+          "outcome_id": 4236864700,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "OVER",
+          "cuota": 1.83,
+          "outcome_id": 4236844879,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 26-32+ games, línea 21.5 tiene gap -4.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 20.5,
+          "direccion": "OVER",
+          "cuota": 1.67,
+          "outcome_id": 4236873807,
+          "gap_juegos": 5.5,
+          "razon": "modelo dice 26-32+ games, línea 20.5 tiene gap -5.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 3.7,
+          "outcome_id": 4237865771,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 23.5,
+          "direccion": "OVER",
+          "cuota": 2.28,
+          "outcome_id": 4237900933,
+          "gap_juegos": 2.5,
+          "razon": "modelo dice 26-32+ games, línea 23.5 tiene gap -2.5 bajo el mínimo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 6.0,
+          "outcome_id": 4237900939,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.98,
+          "outcome_id": 4237878077,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.98,
+          "outcome_id": 4237878077,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.38,
+          "outcome_id": 4236864700,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155277
+    },
+    {
+      "partido": "Bianca Andreescu vs Shuai Zhang",
+      "jugador1": "Bianca Andreescu",
+      "jugador2": "Shuai Zhang",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "Ya89HqfL",
+      "score_difference": 0.13,
+      "diff_abs": 0.13,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 20.5,
+          "direccion": "OVER",
+          "cuota": 1.62,
+          "outcome_id": 4237092954,
+          "gap_juegos": 5.5,
+          "razon": "modelo dice 26-32+ games, línea 20.5 tiene gap -5.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 22.5,
+          "direccion": "OVER",
+          "cuota": 2.02,
+          "outcome_id": 4237092956,
+          "gap_juegos": 3.5,
+          "razon": "modelo dice 26-32+ games, línea 22.5 tiene gap -3.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.35,
+          "outcome_id": 4237141565,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "OVER",
+          "cuota": 1.77,
+          "outcome_id": 4237141571,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 26-32+ games, línea 21.5 tiene gap -4.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.9,
+          "outcome_id": 4237903824,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 23.5,
+          "direccion": "OVER",
+          "cuota": 2.23,
+          "outcome_id": 4237894754,
+          "gap_juegos": 2.5,
+          "razon": "modelo dice 26-32+ games, línea 23.5 tiene gap -2.5 bajo el mínimo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 5.3,
+          "outcome_id": 4237894761,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 3.5,
+          "outcome_id": 4237894763,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.9,
+          "outcome_id": 4237903824,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.35,
+          "outcome_id": 4237141565,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155278
+    },
+    {
+      "partido": "Yulia Putintseva vs Tatjana Maria",
+      "jugador1": "Yulia Putintseva",
+      "jugador2": "Tatjana Maria",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "6cAhEhR7",
+      "score_difference": -0.1,
+      "diff_abs": 0.1,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "OVER",
+          "cuota": 1.87,
+          "outcome_id": 4236997407,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 26-32+ games, línea 21.5 tiene gap -4.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 22.5,
+          "direccion": "OVER",
+          "cuota": 2.12,
+          "outcome_id": 4236997409,
+          "gap_juegos": 3.5,
+          "razon": "modelo dice 26-32+ games, línea 22.5 tiene gap -3.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.4,
+          "outcome_id": 4237027363,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 20.5,
+          "direccion": "OVER",
+          "cuota": 1.71,
+          "outcome_id": 4236994369,
+          "gap_juegos": 5.5,
+          "razon": "modelo dice 26-32+ games, línea 20.5 tiene gap -5.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 19.5,
+          "direccion": "OVER",
+          "cuota": 1.53,
+          "outcome_id": 4237865697,
+          "gap_juegos": 6.5,
+          "razon": "modelo dice 26-32+ games, línea 19.5 tiene gap -6.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 23.5,
+          "direccion": "OVER",
+          "cuota": 2.32,
+          "outcome_id": 4237900809,
+          "gap_juegos": 2.5,
+          "razon": "modelo dice 26-32+ games, línea 23.5 tiene gap -2.5 bajo el mínimo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 3.85,
+          "outcome_id": 4237900813,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 2.04,
+          "outcome_id": 4237878015,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 6.25,
+          "outcome_id": 4237878017,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 2.04,
+          "outcome_id": 4237878015,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.4,
+          "outcome_id": 4237027363,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155295
+    },
+    {
+      "partido": "Oleksandra Oliynykova vs Mccartney Kessler",
+      "jugador1": "Oleksandra Oliynykova",
+      "jugador2": "Mccartney Kessler",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "Sn9h96qB",
+      "score_difference": -0.02,
+      "diff_abs": 0.02,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 3.4,
+          "outcome_id": 4236815062,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 18.5,
+          "direccion": "OVER",
+          "cuota": 1.71,
+          "outcome_id": 4236815066,
+          "gap_juegos": 7.5,
+          "razon": "modelo dice 26-32+ games, línea 18.5 tiene gap -7.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 19.5,
+          "direccion": "OVER",
+          "cuota": 1.98,
+          "outcome_id": 4236780024,
+          "gap_juegos": 6.5,
+          "razon": "modelo dice 26-32+ games, línea 19.5 tiene gap -6.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 20.5,
+          "direccion": "OVER",
+          "cuota": 2.28,
+          "outcome_id": 4236809255,
+          "gap_juegos": 5.5,
+          "razon": "modelo dice 26-32+ games, línea 20.5 tiene gap -5.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "OVER",
+          "cuota": 2.55,
+          "outcome_id": 4236809257,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 26-32+ games, línea 21.5 tiene gap -4.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 8.5,
+          "direccion": "OVER",
+          "cuota": 1.58,
+          "outcome_id": 4237898007,
+          "gap_juegos": 17.5,
+          "razon": "modelo dice 26-32+ games, línea 8.5 tiene gap -17.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 4.5,
+          "outcome_id": 4237898011,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 2.4,
+          "outcome_id": 4237898013,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 7.5,
+          "outcome_id": 4237913572,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 8.5,
+          "direccion": "OVER",
+          "cuota": 1.58,
+          "outcome_id": 4237898007,
+          "gap_juegos": 17.5,
+          "razon": "modelo dice 26-32+ games, línea 8.5 tiene gap -17.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 3.4,
+          "outcome_id": 4236815062,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155243
+    },
+    {
+      "partido": "Mingge Xu vs Daria Kasatkina",
+      "jugador1": "Mingge Xu",
+      "jugador2": "Daria Kasatkina",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "KM5pBSEb",
+      "score_difference": -0.44,
+      "diff_abs": 0.44,
+      "zona_diff": "dominante",
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155261
+    },
+    {
+      "partido": "Elsa Jacquemot vs Naomi Osaka",
+      "jugador1": "Elsa Jacquemot",
+      "jugador2": "Naomi Osaka",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "SnF14RuR",
+      "score_difference": -0.59,
+      "diff_abs": 0.59,
+      "zona_diff": "dominante",
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155270
+    },
+    {
+      "partido": "Peyton Stearns vs Nikola Bartunkova",
+      "jugador1": "Peyton Stearns",
+      "jugador2": "Nikola Bartunkova",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "Oj0HPRTi",
+      "score_difference": -0.11,
+      "diff_abs": 0.11,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.48,
+          "outcome_id": 4237092416,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "OVER",
+          "cuota": 1.85,
+          "outcome_id": 4237083305,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 26-32+ games, línea 21.5 tiene gap -4.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 20.5,
+          "direccion": "OVER",
+          "cuota": 1.68,
+          "outcome_id": 4237131800,
+          "gap_juegos": 5.5,
+          "razon": "modelo dice 26-32+ games, línea 20.5 tiene gap -5.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 22.5,
+          "direccion": "OVER",
+          "cuota": 2.12,
+          "outcome_id": 4237131802,
+          "gap_juegos": 3.5,
+          "razon": "modelo dice 26-32+ games, línea 22.5 tiene gap -3.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 3.65,
+          "outcome_id": 4237868541,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 23.5,
+          "direccion": "OVER",
+          "cuota": 2.33,
+          "outcome_id": 4237903700,
+          "gap_juegos": 2.5,
+          "razon": "modelo dice 26-32+ games, línea 23.5 tiene gap -2.5 bajo el mínimo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.91,
+          "outcome_id": 4237903702,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 5.6,
+          "outcome_id": 4237903704,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.91,
+          "outcome_id": 4237903702,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.48,
+          "outcome_id": 4237092416,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155293
+    },
+    {
+      "partido": "Lanlana Tararudee vs Lilli Tagger",
+      "jugador1": "Lanlana Tararudee",
+      "jugador2": "Lilli Tagger",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "tERC1Fs2",
+      "score_difference": 0.07,
+      "diff_abs": 0.07,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 22.5,
+          "direccion": "OVER",
+          "cuota": 2.02,
+          "outcome_id": 4236984631,
+          "gap_juegos": 3.5,
+          "razon": "modelo dice 26-32+ games, línea 22.5 tiene gap -3.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "OVER",
+          "cuota": 1.77,
+          "outcome_id": 4236981580,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 26-32+ games, línea 21.5 tiene gap -4.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 20.5,
+          "direccion": "OVER",
+          "cuota": 1.62,
+          "outcome_id": 4236981582,
+          "gap_juegos": 5.5,
+          "razon": "modelo dice 26-32+ games, línea 20.5 tiene gap -5.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.38,
+          "outcome_id": 4237001732,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 5.3,
+          "outcome_id": 4237859434,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 3.45,
+          "outcome_id": 4237890880,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.85,
+          "outcome_id": 4237890882,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 23.5,
+          "direccion": "OVER",
+          "cuota": 2.23,
+          "outcome_id": 4237871235,
+          "gap_juegos": 2.5,
+          "razon": "modelo dice 26-32+ games, línea 23.5 tiene gap -2.5 bajo el mínimo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.85,
+          "outcome_id": 4237890882,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.38,
+          "outcome_id": 4237001732,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155294
+    },
+    {
+      "partido": "Claire Liu vs Hanne Vandewinkel",
+      "jugador1": "Claire Liu",
+      "jugador2": "Hanne Vandewinkel",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "OI0Xb53l",
+      "score_difference": 0.21,
+      "diff_abs": 0.21,
+      "zona_diff": "ajustada",
+      "predicted_sets": 2,
+      "games_range": "20-23",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": false
+    },
+    {
+      "partido": "Karolina Muchova vs Anastasia Zakharova",
+      "jugador1": "Karolina Muchova",
+      "jugador2": "Anastasia Zakharova",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "8KJbPIZ8",
+      "score_difference": 0.3,
+      "diff_abs": 0.3,
+      "zona_diff": "ajustada",
+      "predicted_sets": 2,
+      "games_range": "18-21",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": false
+    },
+    {
+      "partido": "Aryna Sabalenka vs Teodora Kostovic",
+      "jugador1": "Aryna Sabalenka",
+      "jugador2": "Teodora Kostovic",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "fJxFV3vQ",
+      "score_difference": 0.2,
+      "diff_abs": 0.2,
+      "zona_diff": "ajustada",
+      "predicted_sets": 2,
+      "games_range": "20-23",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": false
+    },
+    {
+      "partido": "Anastasia Gasanova vs Emiliana Arango",
+      "jugador1": "Anastasia Gasanova",
+      "jugador2": "Emiliana Arango",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "W2fZIQfK",
+      "score_difference": 0.26,
+      "diff_abs": 0.26,
+      "zona_diff": "ajustada",
+      "predicted_sets": 2,
+      "games_range": "18-21",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": false
+    },
+    {
+      "partido": "Leylah Annie Fernandez vs Janice Tjen",
+      "jugador1": "Leylah Annie Fernandez",
+      "jugador2": "Janice Tjen",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "dpSShoaU",
+      "score_difference": 0.22,
+      "diff_abs": 0.22,
+      "zona_diff": "ajustada",
+      "predicted_sets": 2,
+      "games_range": "20-23",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": false
+    },
+    {
+      "partido": "Solana Sierra vs Anna Bondar",
+      "jugador1": "Solana Sierra",
+      "jugador2": "Anna Bondar",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "bFRhOLWa",
+      "score_difference": 0.21,
+      "diff_abs": 0.21,
+      "zona_diff": "ajustada",
+      "predicted_sets": 2,
+      "games_range": "20-23",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": false
+    },
+    {
+      "partido": "Ekaterina Alexandrova vs Panna Udvardy",
+      "jugador1": "Ekaterina Alexandrova",
+      "jugador2": "Panna Udvardy",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "ChSlhTQ9",
+      "score_difference": 0.16,
+      "diff_abs": 0.16,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.9,
+          "outcome_id": 4237022098,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 20.5,
+          "direccion": "OVER",
+          "cuota": 1.95,
+          "outcome_id": 4237022100,
+          "gap_juegos": 5.5,
+          "razon": "modelo dice 26-32+ games, línea 20.5 tiene gap -5.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "OVER",
+          "cuota": 2.17,
+          "outcome_id": 4237042691,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 26-32+ games, línea 21.5 tiene gap -4.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 19.5,
+          "direccion": "OVER",
+          "cuota": 1.71,
+          "outcome_id": 4237042697,
+          "gap_juegos": 6.5,
+          "razon": "modelo dice 26-32+ games, línea 19.5 tiene gap -6.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 4.0,
+          "outcome_id": 4237906347,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 6.25,
+          "outcome_id": 4237849762,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 22.5,
+          "direccion": "OVER",
+          "cuota": 2.48,
+          "outcome_id": 4237879589,
+          "gap_juegos": 3.5,
+          "razon": "modelo dice 26-32+ games, línea 22.5 tiene gap -3.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 18.5,
+          "direccion": "OVER",
+          "cuota": 1.5,
+          "outcome_id": 4237879590,
+          "gap_juegos": 7.5,
+          "razon": "modelo dice 26-32+ games, línea 18.5 tiene gap -7.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 2.12,
+          "outcome_id": 4237879595,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 2.12,
+          "outcome_id": 4237879595,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.9,
+          "outcome_id": 4237022098,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155331
+    },
+    {
+      "partido": "Dayana Yastremska vs Aoi Ito",
+      "jugador1": "Dayana Yastremska",
+      "jugador2": "Aoi Ito",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "YuIFe2X1",
+      "score_difference": 0.33,
+      "diff_abs": 0.33,
+      "zona_diff": "ajustada",
+      "predicted_sets": 2,
+      "games_range": "18-21",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": false
+    },
+    {
+      "partido": "Jessica Bouzas Maneiro vs Anastasia Potapova",
+      "jugador1": "Jessica Bouzas Maneiro",
+      "jugador2": "Anastasia Potapova",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "xSiY3ioo",
+      "score_difference": -0.13,
+      "diff_abs": 0.13,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 20.5,
+          "direccion": "OVER",
+          "cuota": 1.64,
+          "outcome_id": 4237016053,
+          "gap_juegos": 5.5,
+          "razon": "modelo dice 26-32+ games, línea 20.5 tiene gap -5.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 22.5,
+          "direccion": "OVER",
+          "cuota": 2.04,
+          "outcome_id": 4237016055,
+          "gap_juegos": 3.5,
+          "razon": "modelo dice 26-32+ games, línea 22.5 tiene gap -3.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.35,
+          "outcome_id": 4237024699,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "OVER",
+          "cuota": 1.8,
+          "outcome_id": 4237024709,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 26-32+ games, línea 21.5 tiene gap -4.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 3.6,
+          "outcome_id": 4237667358,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 5.75,
+          "outcome_id": 4237667360,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 23.5,
+          "direccion": "OVER",
+          "cuota": 2.23,
+          "outcome_id": 4237684896,
+          "gap_juegos": 2.5,
+          "razon": "modelo dice 26-32+ games, línea 23.5 tiene gap -2.5 bajo el mínimo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.94,
+          "outcome_id": 4237684910,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.94,
+          "outcome_id": 4237684910,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.35,
+          "outcome_id": 4237024699,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155327
+    },
+    {
+      "partido": "Katerina Siniakova vs Qinwen Zheng",
+      "jugador1": "Katerina Siniakova",
+      "jugador2": "Qinwen Zheng",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "tYa8cO2k",
+      "score_difference": 0.01,
+      "diff_abs": 0.01,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 20.5,
+          "direccion": "OVER",
+          "cuota": 1.54,
+          "outcome_id": 4236955506,
+          "gap_juegos": 5.5,
+          "razon": "modelo dice 26-32+ games, línea 20.5 tiene gap -5.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 22.5,
+          "direccion": "OVER",
+          "cuota": 1.94,
+          "outcome_id": 4236949790,
+          "gap_juegos": 3.5,
+          "razon": "modelo dice 26-32+ games, línea 22.5 tiene gap -3.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 23.5,
+          "direccion": "OVER",
+          "cuota": 2.17,
+          "outcome_id": 4236949792,
+          "gap_juegos": 2.5,
+          "razon": "modelo dice 26-32+ games, línea 23.5 tiene gap -2.5 bajo el mínimo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "OVER",
+          "cuota": 1.68,
+          "outcome_id": 4236952631,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 26-32+ games, línea 21.5 tiene gap -4.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.35,
+          "outcome_id": 4236952633,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 4.7,
+          "outcome_id": 4237903574,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 3.25,
+          "outcome_id": 4237894444,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.77,
+          "outcome_id": 4237894448,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.77,
+          "outcome_id": 4237894448,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.35,
+          "outcome_id": 4236952633,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155292
+    },
+    {
+      "partido": "Magda Linette vs Mirra Andreeva",
+      "jugador1": "Magda Linette",
+      "jugador2": "Mirra Andreeva",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "Wr4ucqY0",
+      "score_difference": -0.13,
+      "diff_abs": 0.13,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.95,
+          "outcome_id": 4236889445,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 20.5,
+          "direccion": "OVER",
+          "cuota": 2.02,
+          "outcome_id": 4236883480,
+          "gap_juegos": 5.5,
+          "razon": "modelo dice 26-32+ games, línea 20.5 tiene gap -5.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "OVER",
+          "cuota": 2.23,
+          "outcome_id": 4236883482,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 26-32+ games, línea 21.5 tiene gap -4.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 19.5,
+          "direccion": "OVER",
+          "cuota": 1.77,
+          "outcome_id": 4237265829,
+          "gap_juegos": 6.5,
+          "razon": "modelo dice 26-32+ games, línea 19.5 tiene gap -6.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 2.23,
+          "outcome_id": 4237868269,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 4.3,
+          "outcome_id": 4237868271,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 8.5,
+          "direccion": "OVER",
+          "cuota": 1.5,
+          "outcome_id": 4237894488,
+          "gap_juegos": 17.5,
+          "razon": "modelo dice 26-32+ games, línea 8.5 tiene gap -17.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 12.5,
+          "direccion": "OVER",
+          "cuota": 6.75,
+          "outcome_id": 4237894489,
+          "gap_juegos": 13.5,
+          "razon": "modelo dice 26-32+ games, línea 12.5 tiene gap -13.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 18.5,
+          "direccion": "OVER",
+          "cuota": 1.55,
+          "outcome_id": 4237894492,
+          "gap_juegos": 7.5,
+          "razon": "modelo dice 26-32+ games, línea 18.5 tiene gap -7.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 22.5,
+          "direccion": "OVER",
+          "cuota": 2.55,
+          "outcome_id": 4237894494,
+          "gap_juegos": 3.5,
+          "razon": "modelo dice 26-32+ games, línea 22.5 tiene gap -3.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 23.5,
+          "direccion": "OVER",
+          "cuota": 2.8,
+          "outcome_id": 4239893155,
+          "gap_juegos": 2.5,
+          "razon": "modelo dice 26-32+ games, línea 23.5 tiene gap -2.5 bajo el mínimo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 8.5,
+          "direccion": "OVER",
+          "cuota": 1.5,
+          "outcome_id": 4237894488,
+          "gap_juegos": 17.5,
+          "razon": "modelo dice 26-32+ games, línea 8.5 tiene gap -17.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.95,
+          "outcome_id": 4236889445,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155305
+    },
+    {
+      "partido": "Francesca Jones vs Diane Parry",
+      "jugador1": "Francesca Jones",
+      "jugador2": "Diane Parry",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "jkOpQs2m",
+      "score_difference": -0.36,
+      "diff_abs": 0.36,
+      "zona_diff": "dominante",
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 22.5,
+          "direccion": "UNDER",
+          "cuota": 1.62,
+          "outcome_id": 4237029014,
+          "gap_juegos": 3.5,
+          "razon": "modelo dice 16-19 games, línea 22.5 tiene gap +3.5 sobre el máximo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": false
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "UNDER",
+          "cuota": 1.8,
+          "outcome_id": 4237029015,
+          "gap_juegos": 2.5,
+          "razon": "modelo dice 16-19 games, línea 21.5 tiene gap +2.5 sobre el máximo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "UNDER",
+          "cuota": 1.8,
+          "outcome_id": 4237029015,
+          "gap_juegos": 2.5,
+          "razon": "modelo dice 16-19 games, línea 21.5 tiene gap +2.5 sobre el máximo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155313
+    },
+    {
+      "partido": "Magdalena Frech vs Anna Kalinskaya",
+      "jugador1": "Magdalena Frech",
+      "jugador2": "Anna Kalinskaya",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "UZgJRfwh",
+      "score_difference": -0.31,
+      "diff_abs": 0.31,
+      "zona_diff": "ajustada",
+      "predicted_sets": 2,
+      "games_range": "18-21",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": false
+    },
+    {
+      "partido": "Barbora Krejcikova vs Hannah Klugman",
+      "jugador1": "Barbora Krejcikova",
+      "jugador2": "Hannah Klugman",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "bicvxdJE",
+      "score_difference": 0.26,
+      "diff_abs": 0.26,
+      "zona_diff": "ajustada",
+      "predicted_sets": 2,
+      "games_range": "18-21",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": false
+    },
+    {
+      "partido": "Tamara Korpatsch vs Coco Gauff",
+      "jugador1": "Tamara Korpatsch",
+      "jugador2": "Coco Gauff",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "",
+      "match_id": "txt5D4Is",
+      "score_difference": -0.39,
+      "diff_abs": 0.39,
+      "zona_diff": "dominante",
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028155303
+    },
+    {
+      "partido": "Daniel Rincon vs Jacopo Vasami",
+      "jugador1": "Daniel Rincon",
+      "jugador2": "Jacopo Vasami",
+      "torneo": "Milan (Italia)",
+      "superficie": "clay",
+      "tier": "",
+      "match_id": "6XlUmlnp",
+      "score_difference": 0.01,
+      "diff_abs": 0.01,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 23.5,
+          "direccion": "OVER",
+          "cuota": 2.1,
+          "outcome_id": 4239621250,
+          "gap_juegos": 2.5,
+          "razon": "modelo dice 26-32+ games, línea 23.5 tiene gap -2.5 bajo el mínimo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.85,
+          "outcome_id": 4239621252,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 10.5,
+          "direccion": "OVER",
+          "cuota": 3.4,
+          "outcome_id": 4239621256,
+          "gap_juegos": 15.5,
+          "razon": "modelo dice 26-32+ games, línea 10.5 tiene gap -15.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 22.5,
+          "direccion": "OVER",
+          "cuota": 1.92,
+          "outcome_id": 4239635642,
+          "gap_juegos": 3.5,
+          "razon": "modelo dice 26-32+ games, línea 22.5 tiene gap -3.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "OVER",
+          "cuota": 1.7,
+          "outcome_id": 4239617803,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 26-32+ games, línea 21.5 tiene gap -4.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.23,
+          "outcome_id": 4239617809,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 9.5,
+          "direccion": "OVER",
+          "cuota": 1.85,
+          "outcome_id": 4239621252,
+          "gap_juegos": 16.5,
+          "razon": "modelo dice 26-32+ games, línea 9.5 tiene gap -16.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.23,
+          "outcome_id": 4239617809,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028177626
+    },
+    {
+      "partido": "Alex Barrena vs Hugo Dellien",
+      "jugador1": "Alex Barrena",
+      "jugador2": "Hugo Dellien",
+      "torneo": "Milan (Italia)",
+      "superficie": "clay",
+      "tier": "",
+      "match_id": "U9nqchPc",
+      "score_difference": -0.83,
+      "diff_abs": 0.83,
+      "zona_diff": "dominante",
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "UNDER",
+          "cuota": 1.86,
+          "outcome_id": 4239627224,
+          "gap_juegos": 2.5,
+          "razon": "modelo dice 16-19 games, línea 21.5 tiene gap +2.5 sobre el máximo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 22.5,
+          "direccion": "UNDER",
+          "cuota": 1.66,
+          "outcome_id": 4239627223,
+          "gap_juegos": 3.5,
+          "razon": "modelo dice 16-19 games, línea 22.5 tiene gap +3.5 sobre el máximo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": false
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "UNDER",
+          "cuota": 1.5,
+          "outcome_id": 4239638862,
+          "gap_juegos": null,
+          "razon": "modelo predice 2 sets, UNDER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": false
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "UNDER",
+          "cuota": 1.86,
+          "outcome_id": 4239627224,
+          "gap_juegos": 2.5,
+          "razon": "modelo dice 16-19 games, línea 21.5 tiene gap +2.5 sobre el máximo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028177627
+    },
+    {
+      "partido": "Daniil Glinka vs Aidan Mayo",
+      "jugador1": "Daniil Glinka",
+      "jugador2": "Aidan Mayo",
+      "torneo": "Cary (Estados Unidos)",
+      "superficie": "hard",
+      "tier": "",
+      "match_id": "SStlSyzh",
+      "score_difference": -0.21,
+      "diff_abs": 0.21,
+      "zona_diff": "ajustada",
+      "predicted_sets": 2,
+      "games_range": "20-23",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": false
+    },
+    {
+      "partido": "Yosuke Watanuki vs Andre Ilagan",
+      "jugador1": "Yosuke Watanuki",
+      "jugador2": "Andre Ilagan",
+      "torneo": "Cary (Estados Unidos)",
+      "superficie": "hard",
+      "tier": "",
+      "match_id": "dp6OG2X7",
+      "score_difference": -0.37,
+      "diff_abs": 0.37,
+      "zona_diff": "dominante",
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 22.5,
+          "direccion": "UNDER",
+          "cuota": 1.9,
+          "outcome_id": 4239129382,
+          "gap_juegos": 3.5,
+          "razon": "modelo dice 16-19 games, línea 22.5 tiene gap +3.5 sobre el máximo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "UNDER",
+          "cuota": 2.23,
+          "outcome_id": 4239129384,
+          "gap_juegos": 2.5,
+          "razon": "modelo dice 16-19 games, línea 21.5 tiene gap +2.5 sobre el máximo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 23.5,
+          "direccion": "UNDER",
+          "cuota": 1.72,
+          "outcome_id": 4239109082,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 16-19 games, línea 23.5 tiene gap +4.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "UNDER",
+          "cuota": 1.63,
+          "outcome_id": 4239109086,
+          "gap_juegos": null,
+          "razon": "modelo predice 2 sets, UNDER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 23.5,
+          "direccion": "UNDER",
+          "cuota": 1.72,
+          "outcome_id": 4239109082,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 16-19 games, línea 23.5 tiene gap +4.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "UNDER",
+          "cuota": 1.63,
+          "outcome_id": 4239109086,
+          "gap_juegos": null,
+          "razon": "modelo predice 2 sets, UNDER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028179920
+    }
+  ]
+}

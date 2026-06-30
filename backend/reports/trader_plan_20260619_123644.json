@@ -1,0 +1,411 @@
+{
+  "metadata": {
+    "timestamp": "20260619_123644",
+    "bankroll": 125000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260619_123354.json",
+    "n_partidos_analizados": 47,
+    "calibracion_n": 1325,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "itf",
+      "superficie": "clay",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Selena Janicijevic vs Lidia Encheva",
+      "favorito": "Lidia Encheva",
+      "cuota": 3.25,
+      "edge_pct": "22.2%",
+      "p_modelo": 0.53,
+      "n_h2h": 0,
+      "p_blend": 0.6713999999999999,
+      "kelly_kl": 0.1145,
+      "kelly_usado": 0.1,
+      "stake": 8000,
+      "retorno_potencial": 26000.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Emily Seibold vs Berta Passola",
+      "favorito": "Berta Passola",
+      "cuota": 2.75,
+      "edge_pct": "14.0%",
+      "p_modelo": 0.504,
+      "n_h2h": 0,
+      "p_blend": 0.6713999999999999,
+      "kelly_kl": 0.0755,
+      "kelly_usado": 0.1,
+      "stake": 8000,
+      "retorno_potencial": 22000.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Pablo Martinez Gomez vs Tiago Torres",
+      "favorito": "Pablo Martinez Gomez",
+      "cuota": 2.48,
+      "edge_pct": "12.4%",
+      "p_modelo": 0.527,
+      "n_h2h": 0,
+      "p_blend": 0.6338,
+      "kelly_kl": 0.0748,
+      "kelly_usado": 0.0966,
+      "stake": 8000,
+      "retorno_potencial": 19840.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    },
+    {
+      "partido": "Dayeon Back vs Hiromi Abe",
+      "favorito": "Hiromi Abe",
+      "cuota": 2.43,
+      "edge_pct": "9.1%",
+      "p_modelo": 0.503,
+      "n_h2h": 0,
+      "p_blend": 0.6338,
+      "kelly_kl": 0.055,
+      "kelly_usado": 0.0944,
+      "stake": 8000,
+      "retorno_potencial": 19440.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Lidia Encheva",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Berta Passola",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Hoyoung Roh",
+          "cuota": 2.55
+        }
+      ],
+      "cuota_combo": 22.79,
+      "hr_combo": 0.2857,
+      "ev_combo": 5.5114,
+      "excluidos": [
+        "Pablo Martinez Gomez",
+        "Hiromi Abe",
+        "Ronit Karki",
+        "Joelle Lilly Sophie Steur",
+        "Noah Zamora",
+        "Aleksandr Braynin",
+        "Luna Vujovic",
+        "Anna Kubareva",
+        "Victoria Bosio",
+        "Martha Matoula",
+        "Aishi Das"
+      ],
+      "stake": 8000,
+      "retorno_potencial": 182320.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Lidia Encheva",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Berta Passola",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Pablo Martinez Gomez",
+          "cuota": 2.48
+        }
+      ],
+      "cuota_combo": 22.16,
+      "hr_combo": 0.2857,
+      "ev_combo": 5.3326,
+      "excluidos": [
+        "Hiromi Abe",
+        "Hoyoung Roh",
+        "Ronit Karki",
+        "Joelle Lilly Sophie Steur",
+        "Noah Zamora",
+        "Aleksandr Braynin",
+        "Luna Vujovic",
+        "Anna Kubareva",
+        "Victoria Bosio",
+        "Martha Matoula",
+        "Aishi Das"
+      ],
+      "stake": 8000,
+      "retorno_potencial": 177280.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Lidia Encheva",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Pablo Martinez Gomez",
+          "cuota": 2.48
+        },
+        {
+          "jugador": "Hoyoung Roh",
+          "cuota": 2.55
+        }
+      ],
+      "cuota_combo": 20.55,
+      "hr_combo": 0.2697,
+      "ev_combo": 4.5432,
+      "excluidos": [
+        "Berta Passola",
+        "Hiromi Abe",
+        "Ronit Karki",
+        "Joelle Lilly Sophie Steur",
+        "Noah Zamora",
+        "Aleksandr Braynin",
+        "Luna Vujovic",
+        "Anna Kubareva",
+        "Victoria Bosio",
+        "Martha Matoula",
+        "Aishi Das"
+      ],
+      "stake": 8000,
+      "retorno_potencial": 164400.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Berta Passola",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Pablo Martinez Gomez",
+          "cuota": 2.48
+        },
+        {
+          "jugador": "Hoyoung Roh",
+          "cuota": 2.55
+        }
+      ],
+      "cuota_combo": 17.39,
+      "hr_combo": 0.2697,
+      "ev_combo": 3.6904,
+      "excluidos": [
+        "Lidia Encheva",
+        "Hiromi Abe",
+        "Ronit Karki",
+        "Joelle Lilly Sophie Steur",
+        "Noah Zamora",
+        "Aleksandr Braynin",
+        "Luna Vujovic",
+        "Anna Kubareva",
+        "Victoria Bosio",
+        "Martha Matoula",
+        "Aishi Das"
+      ],
+      "stake": 8000,
+      "retorno_potencial": 139120.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Lidia Encheva",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Berta Passola",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Pablo Martinez Gomez",
+          "cuota": 2.48
+        },
+        {
+          "jugador": "Hoyoung Roh",
+          "cuota": 2.55
+        }
+      ],
+      "cuota_combo": 56.52,
+      "hr_combo": 0.1811,
+      "ev_combo": 9.2347,
+      "excluidos": [
+        "Hiromi Abe",
+        "Ronit Karki",
+        "Joelle Lilly Sophie Steur",
+        "Noah Zamora",
+        "Aleksandr Braynin",
+        "Luna Vujovic",
+        "Anna Kubareva",
+        "Victoria Bosio",
+        "Martha Matoula",
+        "Aishi Das"
+      ],
+      "stake": 4000,
+      "retorno_potencial": 226080.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Lidia Encheva",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Berta Passola",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Pablo Martinez Gomez",
+          "cuota": 2.48
+        },
+        {
+          "jugador": "Ronit Karki",
+          "cuota": 2.45
+        }
+      ],
+      "cuota_combo": 54.3,
+      "hr_combo": 0.1811,
+      "ev_combo": 8.8333,
+      "excluidos": [
+        "Hiromi Abe",
+        "Hoyoung Roh",
+        "Joelle Lilly Sophie Steur",
+        "Noah Zamora",
+        "Aleksandr Braynin",
+        "Luna Vujovic",
+        "Anna Kubareva",
+        "Victoria Bosio",
+        "Martha Matoula",
+        "Aishi Das"
+      ],
+      "stake": 4000,
+      "retorno_potencial": 217200.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Lidia Encheva",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Pablo Martinez Gomez",
+          "cuota": 2.48
+        },
+        {
+          "jugador": "Hoyoung Roh",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "Ronit Karki",
+          "cuota": 2.45
+        }
+      ],
+      "cuota_combo": 50.35,
+      "hr_combo": 0.1709,
+      "ev_combo": 7.6075,
+      "excluidos": [
+        "Berta Passola",
+        "Hiromi Abe",
+        "Joelle Lilly Sophie Steur",
+        "Noah Zamora",
+        "Aleksandr Braynin",
+        "Luna Vujovic",
+        "Anna Kubareva",
+        "Victoria Bosio",
+        "Martha Matoula",
+        "Aishi Das"
+      ],
+      "stake": 4000,
+      "retorno_potencial": 201400.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Berta Passola",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Pablo Martinez Gomez",
+          "cuota": 2.48
+        },
+        {
+          "jugador": "Hoyoung Roh",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "Ronit Karki",
+          "cuota": 2.45
+        }
+      ],
+      "cuota_combo": 42.61,
+      "hr_combo": 0.1709,
+      "ev_combo": 6.2833,
+      "excluidos": [
+        "Lidia Encheva",
+        "Hiromi Abe",
+        "Joelle Lilly Sophie Steur",
+        "Noah Zamora",
+        "Aleksandr Braynin",
+        "Luna Vujovic",
+        "Anna Kubareva",
+        "Victoria Bosio",
+        "Martha Matoula",
+        "Aishi Das"
+      ],
+      "stake": 4000,
+      "retorno_potencial": 170440.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.6060606060606061,
+    "total_ajustado": 72727.27272727274,
+    "var_95": -47025.37462537462,
+    "cvar_95": -62249.87338100787,
+    "expected_pl": 400895.8208475816,
+    "sharpe_ratio": 1.1504261882875502,
+    "kelly_growth_rate": 1.2158363798645366,
+    "sessions_to_double": 0.5700990627021482,
+    "var_excedido": true,
+    "factor_var": 0.6645348441974491
+  },
+  "resumen": {
+    "gastado_individuales": 32000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 48000,
+    "total_en_riesgo": 80000.0,
+    "pct_bankroll_en_riesgo": 0.64,
+    "n_senales_apostar": 4,
+    "pool_cobertura": 14,
+    "alerta_riesgo": true
+  }
+}

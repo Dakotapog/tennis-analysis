@@ -1,0 +1,185 @@
+{
+  "metadata": {
+    "timestamp": "20260624_015410",
+    "bankroll": 125000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260624_012147.json",
+    "n_partidos_analizados": 252,
+    "calibracion_n": 1704,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "grand_slam",
+      "superficie": "grass",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Caroline Werner",
+          "cuota": 4.9
+        },
+        {
+          "jugador": "Justina Mikulskyte",
+          "cuota": 4.6
+        },
+        {
+          "jugador": "Anastasia Gasanova",
+          "cuota": 2.9
+        }
+      ],
+      "cuota_combo": 65.37,
+      "hr_combo": 0.2282,
+      "ev_combo": 13.9182,
+      "excluidos": [
+        "Maria Lourdes Carle"
+      ],
+      "stake": 7000,
+      "retorno_potencial": 457590.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Caroline Werner",
+          "cuota": 4.9
+        },
+        {
+          "jugador": "Justina Mikulskyte",
+          "cuota": 4.6
+        },
+        {
+          "jugador": "Maria Lourdes Carle",
+          "cuota": 2.65
+        }
+      ],
+      "cuota_combo": 59.73,
+      "hr_combo": 0.2282,
+      "ev_combo": 12.6322,
+      "excluidos": [
+        "Anastasia Gasanova"
+      ],
+      "stake": 7000,
+      "retorno_potencial": 418110.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Caroline Werner",
+          "cuota": 4.9
+        },
+        {
+          "jugador": "Anastasia Gasanova",
+          "cuota": 2.9
+        },
+        {
+          "jugador": "Maria Lourdes Carle",
+          "cuota": 2.65
+        }
+      ],
+      "cuota_combo": 37.66,
+      "hr_combo": 0.2282,
+      "ev_combo": 7.5942,
+      "excluidos": [
+        "Justina Mikulskyte"
+      ],
+      "stake": 7000,
+      "retorno_potencial": 263620.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Justina Mikulskyte",
+          "cuota": 4.6
+        },
+        {
+          "jugador": "Anastasia Gasanova",
+          "cuota": 2.9
+        },
+        {
+          "jugador": "Maria Lourdes Carle",
+          "cuota": 2.65
+        }
+      ],
+      "cuota_combo": 35.35,
+      "hr_combo": 0.2117,
+      "ev_combo": 6.4841,
+      "excluidos": [
+        "Caroline Werner"
+      ],
+      "stake": 7000,
+      "retorno_potencial": 247450.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Caroline Werner",
+          "cuota": 4.9
+        },
+        {
+          "jugador": "Justina Mikulskyte",
+          "cuota": 4.6
+        },
+        {
+          "jugador": "Anastasia Gasanova",
+          "cuota": 2.9
+        },
+        {
+          "jugador": "Maria Lourdes Carle",
+          "cuota": 2.65
+        }
+      ],
+      "cuota_combo": 173.22,
+      "hr_combo": 0.136,
+      "ev_combo": 22.5619,
+      "excluidos": [],
+      "stake": 3000,
+      "retorno_potencial": 519660.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.5714285714285714,
+    "total_ajustado": 43428.57142857143,
+    "var_95": -76000.0,
+    "cvar_95": -76000.00000000001,
+    "expected_pl": 911786.8866449423,
+    "sharpe_ratio": 0.5667396784359577,
+    "kelly_growth_rate": 0.7337597443414521,
+    "sessions_to_double": 0.9446514147243708,
+    "var_excedido": true,
+    "factor_var": 0.41118421052631576
+  },
+  "resumen": {
+    "gastado_individuales": 0,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 31000,
+    "total_en_riesgo": 31000.0,
+    "pct_bankroll_en_riesgo": 0.248,
+    "n_senales_apostar": 0,
+    "pool_cobertura": 4,
+    "alerta_riesgo": false
+  }
+}

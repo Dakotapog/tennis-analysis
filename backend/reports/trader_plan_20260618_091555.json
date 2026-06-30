@@ -1,0 +1,395 @@
+{
+  "metadata": {
+    "timestamp": "20260618_091555",
+    "bankroll": 20000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260618_083956.json",
+    "n_partidos_analizados": 69,
+    "calibracion_n": 801,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "itf",
+      "superficie": "clay",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Carla Grignac vs Zoe Ulrich",
+      "favorito": "Carla Grignac",
+      "cuota": 3.8,
+      "edge_pct": "28.1%",
+      "p_modelo": 0.544,
+      "n_h2h": 0,
+      "p_blend": 0.6974,
+      "kelly_kl": 0.1346,
+      "kelly_usado": 0.1,
+      "stake": 1000,
+      "retorno_potencial": 3800.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Jiaqi Wang vs Han Shi",
+      "favorito": "Jiaqi Wang",
+      "cuota": 3.3,
+      "edge_pct": "20.2%",
+      "p_modelo": 0.505,
+      "n_h2h": 2,
+      "p_blend": 0.5795199999999999,
+      "kelly_kl": 0.0996,
+      "kelly_usado": 0.0992,
+      "stake": 1000,
+      "retorno_potencial": 3300.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    },
+    {
+      "partido": "Nicolas Arseneault vs Christian Langmo",
+      "favorito": "Nicolas Arseneault",
+      "cuota": 2.43,
+      "edge_pct": "10.1%",
+      "p_modelo": 0.513,
+      "n_h2h": 0,
+      "p_blend": 0.6292,
+      "kelly_kl": 0.0612,
+      "kelly_usado": 0.0925,
+      "stake": 1000,
+      "retorno_potencial": 2430.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    },
+    {
+      "partido": "Andrés Martín vs Luca Pow",
+      "favorito": "Luca Pow",
+      "cuota": 2.3,
+      "edge_pct": "7.7%",
+      "p_modelo": 0.512,
+      "n_h2h": 0,
+      "p_blend": 0.6292,
+      "kelly_kl": 0.0481,
+      "kelly_usado": 0.086,
+      "stake": 1000,
+      "retorno_potencial": 2300.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Carla Grignac",
+          "cuota": 3.8
+        },
+        {
+          "jugador": "Jiaqi Wang",
+          "cuota": 3.3
+        },
+        {
+          "jugador": "Nicolas Arseneault",
+          "cuota": 2.43
+        }
+      ],
+      "cuota_combo": 30.47,
+      "hr_combo": 0.2543,
+      "ev_combo": 6.749,
+      "excluidos": [
+        "Luca Pow",
+        "Nathan Cox",
+        "Ying Zhang",
+        "Lucie Nguyen Tan",
+        "Ronit Karki",
+        "Denislava Glushkova",
+        "Enzo Aguiard",
+        "Anna Kubareva",
+        "Patrick Schoen"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 30470.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Carla Grignac",
+          "cuota": 3.8
+        },
+        {
+          "jugador": "Jiaqi Wang",
+          "cuota": 3.3
+        },
+        {
+          "jugador": "Lucie Nguyen Tan",
+          "cuota": 2.08
+        }
+      ],
+      "cuota_combo": 26.08,
+      "hr_combo": 0.2819,
+      "ev_combo": 6.3518,
+      "excluidos": [
+        "Nicolas Arseneault",
+        "Luca Pow",
+        "Nathan Cox",
+        "Ying Zhang",
+        "Ronit Karki",
+        "Denislava Glushkova",
+        "Enzo Aguiard",
+        "Anna Kubareva",
+        "Patrick Schoen"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 26080.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Carla Grignac",
+          "cuota": 3.8
+        },
+        {
+          "jugador": "Nicolas Arseneault",
+          "cuota": 2.43
+        },
+        {
+          "jugador": "Lucie Nguyen Tan",
+          "cuota": 2.08
+        }
+      ],
+      "cuota_combo": 19.21,
+      "hr_combo": 0.306,
+      "ev_combo": 4.8777,
+      "excluidos": [
+        "Jiaqi Wang",
+        "Luca Pow",
+        "Nathan Cox",
+        "Ying Zhang",
+        "Ronit Karki",
+        "Denislava Glushkova",
+        "Enzo Aguiard",
+        "Anna Kubareva",
+        "Patrick Schoen"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 19210.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Jiaqi Wang",
+          "cuota": 3.3
+        },
+        {
+          "jugador": "Nicolas Arseneault",
+          "cuota": 2.43
+        },
+        {
+          "jugador": "Lucie Nguyen Tan",
+          "cuota": 2.08
+        }
+      ],
+      "cuota_combo": 16.68,
+      "hr_combo": 0.2543,
+      "ev_combo": 3.2415,
+      "excluidos": [
+        "Carla Grignac",
+        "Luca Pow",
+        "Nathan Cox",
+        "Ying Zhang",
+        "Ronit Karki",
+        "Denislava Glushkova",
+        "Enzo Aguiard",
+        "Anna Kubareva",
+        "Patrick Schoen"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 16680.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Carla Grignac",
+          "cuota": 3.8
+        },
+        {
+          "jugador": "Jiaqi Wang",
+          "cuota": 3.3
+        },
+        {
+          "jugador": "Nicolas Arseneault",
+          "cuota": 2.43
+        },
+        {
+          "jugador": "Lucie Nguyen Tan",
+          "cuota": 2.08
+        }
+      ],
+      "cuota_combo": 63.38,
+      "hr_combo": 0.1773,
+      "ev_combo": 10.2406,
+      "excluidos": [
+        "Luca Pow",
+        "Nathan Cox",
+        "Ying Zhang",
+        "Ronit Karki",
+        "Denislava Glushkova",
+        "Enzo Aguiard",
+        "Anna Kubareva",
+        "Patrick Schoen"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 63380.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Carla Grignac",
+          "cuota": 3.8
+        },
+        {
+          "jugador": "Jiaqi Wang",
+          "cuota": 3.3
+        },
+        {
+          "jugador": "Nicolas Arseneault",
+          "cuota": 2.43
+        },
+        {
+          "jugador": "Luca Pow",
+          "cuota": 2.3
+        }
+      ],
+      "cuota_combo": 70.09,
+      "hr_combo": 0.16,
+      "ev_combo": 10.214,
+      "excluidos": [
+        "Nathan Cox",
+        "Ying Zhang",
+        "Lucie Nguyen Tan",
+        "Ronit Karki",
+        "Denislava Glushkova",
+        "Enzo Aguiard",
+        "Anna Kubareva",
+        "Patrick Schoen"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 70090.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Carla Grignac",
+          "cuota": 3.8
+        },
+        {
+          "jugador": "Nicolas Arseneault",
+          "cuota": 2.43
+        },
+        {
+          "jugador": "Luca Pow",
+          "cuota": 2.3
+        },
+        {
+          "jugador": "Lucie Nguyen Tan",
+          "cuota": 2.08
+        }
+      ],
+      "cuota_combo": 44.18,
+      "hr_combo": 0.1925,
+      "ev_combo": 7.5059,
+      "excluidos": [
+        "Jiaqi Wang",
+        "Nathan Cox",
+        "Ying Zhang",
+        "Ronit Karki",
+        "Denislava Glushkova",
+        "Enzo Aguiard",
+        "Anna Kubareva",
+        "Patrick Schoen"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 44180.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Jiaqi Wang",
+          "cuota": 3.3
+        },
+        {
+          "jugador": "Nicolas Arseneault",
+          "cuota": 2.43
+        },
+        {
+          "jugador": "Luca Pow",
+          "cuota": 2.3
+        },
+        {
+          "jugador": "Lucie Nguyen Tan",
+          "cuota": 2.08
+        }
+      ],
+      "cuota_combo": 38.36,
+      "hr_combo": 0.16,
+      "ev_combo": 5.1382,
+      "excluidos": [
+        "Carla Grignac",
+        "Nathan Cox",
+        "Ying Zhang",
+        "Ronit Karki",
+        "Denislava Glushkova",
+        "Enzo Aguiard",
+        "Anna Kubareva",
+        "Patrick Schoen"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 38360.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.6451612903225806,
+    "total_ajustado": 12903.225806451612,
+    "var_95": -9414.444444444443,
+    "cvar_95": -11757.164004726992,
+    "expected_pl": 73879.7789874074,
+    "sharpe_ratio": 1.0733434580663965,
+    "kelly_growth_rate": 1.2721102801379165,
+    "sessions_to_double": 0.5448797886334174,
+    "var_excedido": true,
+    "factor_var": 0.5310987843738936
+  },
+  "resumen": {
+    "gastado_individuales": 4000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 8000,
+    "total_en_riesgo": 12000.0,
+    "pct_bankroll_en_riesgo": 0.6,
+    "n_senales_apostar": 4,
+    "pool_cobertura": 12,
+    "alerta_riesgo": true
+  }
+}

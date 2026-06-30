@@ -1,0 +1,29 @@
+{
+  "ts_registro": "2026-06-29T02:58:17.747634",
+  "ts_bookmarklet": "2026-06-29T07:58:17.627Z",
+  "estado": "PENDIENTE",
+  "betslip_index": "reports/betslip_index_20260629_025010.json",
+  "n_picks": 1,
+  "picks": [
+    {
+      "outcome_id": "4237037138",
+      "jugador": "Luca Van Assche",
+      "cuota": 2.95,
+      "cuota_kambi": 2.65,
+      "partido": "Luca Van Assche vs Marton Fucsovics",
+      "match_id": "A36pgOTg",
+      "match_url": "https://www.flashscore.co/match/tennis/van-assche-luca-fucsovics-marton/A36pgOTg/#/h2h",
+      "torneo": "Wimbledon (Reino Unido)",
+      "superficie": "grass",
+      "tier": "grand_slam",
+      "edge": "19.2%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0,
+      "stake": 0,
+      "retorno_potencial": 0,
+      "resultado_real": null,
+      "correcto": null,
+      "ganancia": null
+    }
+  ]
+}

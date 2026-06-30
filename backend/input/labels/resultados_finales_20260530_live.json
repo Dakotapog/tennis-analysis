@@ -1,0 +1,118 @@
+{
+  "fecha_validacion": "2026-05-30T13:06:33.646618",
+  "fuente_h2h": "reports/h2h_results_enhanced_20260530_053518.json",
+  "total_partidos": 16,
+  "total_validados": 10,
+  "saltados": 0,
+  "correctas": 7,
+  "accuracy": 0.7,
+  "accuracy_por_superficie": {
+    "clay": {
+      "accuracy": 0.7,
+      "n": 10,
+      "correctas": 7
+    }
+  },
+  "partidos": [
+    {
+      "partido": "Cerundolo F. vs Svajda Z.",
+      "prediccion": "Cerundolo F.",
+      "confianza": 57.4,
+      "resultado_real": "Svajda Z.",
+      "correcto": false,
+      "match_id": "QFAD1bV9",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Cobolli F. vs Tien L.",
+      "prediccion": "Tien L.",
+      "confianza": 58.2,
+      "resultado_real": "Cobolli F.",
+      "correcto": false,
+      "match_id": "n7IrJlXG",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Berrettini M. vs Comesana F.",
+      "prediccion": "Berrettini M.",
+      "confianza": 57.0,
+      "resultado_real": "Berrettini M.",
+      "correcto": true,
+      "match_id": "dtjt9iEU",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Kouame M. vs Tabilo A.",
+      "prediccion": "Tabilo A.",
+      "confianza": 54.0,
+      "resultado_real": "Tabilo A.",
+      "correcto": true,
+      "match_id": "4ppo3iSs",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Jovic I. vs Osaka N.",
+      "prediccion": "Osaka N.",
+      "confianza": 53.2,
+      "resultado_real": "Osaka N.",
+      "correcto": true,
+      "match_id": "MkW2B0up",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Sakkari M. vs Chwalinska M.",
+      "prediccion": "Chwalinska M.",
+      "confianza": 52.2,
+      "resultado_real": "Chwalinska M.",
+      "correcto": true,
+      "match_id": "hhsieFKj",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Shnaider D. vs Oliynykova O.",
+      "prediccion": "Shnaider D.",
+      "confianza": 53.3,
+      "resultado_real": "Shnaider D.",
+      "correcto": true,
+      "match_id": "I9a8Z9Hc",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Sabalenka A. vs Kasatkina D.",
+      "prediccion": "Sabalenka A.",
+      "confianza": 58.6,
+      "resultado_real": "Sabalenka A.",
+      "correcto": true,
+      "match_id": "phqWZGON",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Kalinskaya A. vs Osorio C.",
+      "prediccion": "Osorio C.",
+      "confianza": 54.3,
+      "resultado_real": "Kalinskaya A.",
+      "correcto": false,
+      "match_id": "4YTCQ3Fa",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Parry D. vs Anisimova A.",
+      "prediccion": "Parry D.",
+      "confianza": 51.5,
+      "resultado_real": "Parry D.",
+      "correcto": true,
+      "match_id": "WKV4SPpm",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    }
+  ]
+}

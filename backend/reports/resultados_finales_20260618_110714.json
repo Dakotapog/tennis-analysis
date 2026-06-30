@@ -1,0 +1,93 @@
+{
+  "fecha_validacion": "2026-06-18T11:07:59.979879",
+  "fuente_h2h": "reports/h2h_results_enhanced_20260618_083956.json",
+  "total_partidos": 69,
+  "total_validados": 7,
+  "saltados": 0,
+  "correctas": 3,
+  "accuracy": 0.4286,
+  "accuracy_por_superficie": {
+    "grass": {
+      "accuracy": 0.3333,
+      "n": 3,
+      "correctas": 1
+    },
+    "clay": {
+      "accuracy": 0.5,
+      "n": 4,
+      "correctas": 2
+    }
+  },
+  "partidos": [
+    {
+      "partido": "Madison Keys vs Karolina Muchova",
+      "prediccion": "Madison Keys",
+      "confianza": 53.5,
+      "resultado_real": "Madison Keys",
+      "correcto": true,
+      "match_id": "OjzbhGpS",
+      "torneo": "Desconocido",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Alexander Zverev vs Yannick Hanfmann",
+      "prediccion": "Yannick Hanfmann",
+      "confianza": 51.8,
+      "resultado_real": "Alexander Zverev",
+      "correcto": false,
+      "match_id": "WEGyCKWI",
+      "torneo": "Desconocido",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Kilian Feldbausch vs Leo Raquillet",
+      "prediccion": "Kilian Feldbausch",
+      "confianza": 55.3,
+      "resultado_real": "Kilian Feldbausch",
+      "correcto": true,
+      "match_id": "Kd8OuDWq",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Selena Janicijevic vs Denislava Glushkova",
+      "prediccion": "Denislava Glushkova",
+      "confianza": 51,
+      "resultado_real": "Selena Janicijevic",
+      "correcto": false,
+      "match_id": "UFZCdV6F",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Antonia Vergara Rivera vs Alisa Danilova",
+      "prediccion": "Antonia Vergara Rivera",
+      "confianza": 60.8,
+      "resultado_real": "Antonia Vergara Rivera",
+      "correcto": true,
+      "match_id": "ANAQ8vbn",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Christopher O'Connell vs Benjamin Bonzi",
+      "prediccion": "Benjamin Bonzi",
+      "confianza": 52.4,
+      "resultado_real": "Christopher O'Connell",
+      "correcto": false,
+      "match_id": "6wp5KAyf",
+      "torneo": "Desconocido",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Ares Teixido Garcia vs Juliet Jia Wen Zhang",
+      "prediccion": "Ares Teixido Garcia",
+      "confianza": 52.2,
+      "resultado_real": "Juliet Jia Wen Zhang",
+      "correcto": false,
+      "match_id": "C8G4ZKne",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    }
+  ]
+}

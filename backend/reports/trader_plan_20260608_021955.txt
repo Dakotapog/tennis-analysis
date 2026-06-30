@@ -1,0 +1,240 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — DEPLOY ROLAND GARROS
+  2026-06-08 02:19  │  Bankroll: $20,000
+  Señales APOSTAR: 11  │  Watchlist: 7  │  Sin edge: 5
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 20 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.10 (challenger)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $8,000 (40% bankroll)
+
+  │  🎾 Hugo Grenier vs Luca Van Assche
+  │     Apostar: Luca Van Assche
+  │     Cuota 6.75  │  Edge 42.8%  │  p_blend 0.637 (n_h2h=3)
+  │     Kelly-KL 56.4% → stake $2,000  │  Retorno potencial $13,500
+  │     EV real +329.8%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Harmony Tan vs Emily Appleton
+  │     Apostar: Emily Appleton
+  │     Cuota 3.20  │  Edge 21.8%  │  p_blend 0.697 (n_h2h=0)
+  │     Kelly-KL 37.6% → stake $2,000  │  Retorno potencial $6,400
+  │     EV real +123.2%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Andrea Guerrieri vs Dalibor Svrcina
+  │     Apostar: Andrea Guerrieri
+  │     Cuota 2.70  │  Edge 15.8%  │  p_blend 0.655 (n_h2h=1)
+  │     Kelly-KL 30.6% → stake $2,000  │  Retorno potencial $5,400
+  │     EV real +76.9%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Akira Santillan vs Abdullah Shelbayh
+  │     Apostar: Akira Santillan
+  │     Cuota 2.25  │  Edge 10.0%  │  p_blend 0.697 (n_h2h=0)
+  │     Kelly-KL 22.2% → stake $2,000  │  Retorno potencial $4,500
+  │     EV real +56.9%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Facundo Mena vs Lorenzo Joaquin Rodriguez
+  │     Apostar: Facundo Mena
+  │     Cuota 2.20  │  Edge 9.0%  │  p_blend 0.697 (n_h2h=0)
+  │     Kelly-KL 20.9% → stake $1,000  │  Retorno potencial $2,200
+  │     EV real +53.4%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Linda Klimovicova vs Sinja Kraus
+  │     Apostar: Linda Klimovicova
+  │     Cuota 2.48  │  Edge 10.2%  │  p_blend 0.697 (n_h2h=0)
+  │     Kelly-KL 20.1% → stake $1,000  │  Retorno potencial $2,480
+  │     EV real +73.0%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Samuel Heredia vs Julian Cundom
+  │     Apostar: Julian Cundom
+  │     Cuota 2.30  │  Edge 7.7%  │  p_blend 0.697 (n_h2h=0)
+  │     Kelly-KL 17.2% → stake $1,000  │  Retorno potencial $2,300
+  │     EV real +60.4%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Alicia Dudeney vs Himeno Sakatsume
+  │     Apostar: Alicia Dudeney
+  │     Cuota 2.17  │  Edge 6.6%  │  p_blend 0.697 (n_h2h=0)
+  │     Kelly-KL 14.6% → stake $1,000  │  Retorno potencial $2,170
+  │     EV real +51.3%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Veronika Podrez vs Tatiana Prozorova
+  │     Apostar: Veronika Podrez
+  │     Cuota 2.25  │  Edge 6.6%  │  p_blend 0.697 (n_h2h=0)
+  │     Kelly-KL 13.7% → stake $1,000  │  Retorno potencial $2,250
+  │     EV real +56.9%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Daniel Evans vs Charles Broom
+  │     Apostar: Daniel Evans
+  │     Cuota 2.25  │  Edge 5.8%  │  p_blend 0.649 (n_h2h=1)
+  │     Kelly-KL 12.5% → stake $1,000  │  Retorno potencial $2,250
+  │     EV real +45.9%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 August Holmgren vs Nicolai Budkov Kjaer
+  │     Apostar: August Holmgren
+  │     Cuota 2.23  │  Edge 5.6%  │  p_blend 0.697 (n_h2h=0)
+  │     Kelly-KL 11.8% → stake $1,000  │  Retorno potencial $2,230
+  │     EV real +55.5%  │  Zona: underdog  │  Sup: grass
+
+  │  Total individuales: $15,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 20 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $12,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Luca Van Assche      @6.75  p=0.591  zona=underdog
+  │    2. Emily Appleton       @3.20  p=0.611  zona=underdog
+  │    3. Andrea Guerrieri     @2.70  p=0.586  zona=underdog
+  │    4. Linda Klimovicova    @2.48  p=0.611  zona=underdog
+  │    5. Julian Cundom        @2.30  p=0.605  zona=underdog
+  │    6. Akira Santillan      @2.25  p=0.605  zona=underdog
+  │    7. Veronika Podrez      @2.25  p=0.611  zona=underdog
+  │    8. Daniel Evans         @2.25  p=0.584  zona=underdog
+  │    9. August Holmgren      @2.23  p=0.611  zona=underdog
+  │    10. Facundo Mena         @2.20  p=0.605  zona=underdog
+  │    11. Alicia Dudeney       @2.17  p=0.611  zona=underdog
+  │    12. Darja Vidmanova      @2.17  p=0.611  zona=underdog [W]
+  │    13. Iryna Shymanovich    @2.14  p=0.568  zona=underdog [W]
+  │    14. Luka Pavlovic        @2.08  p=0.605  zona=slight_underdog [W]
+  │    15. Thiago Cigarran      @2.06  p=0.605  zona=slight_underdog [W]
+  │    16. Buvaysar Gadamauri   @2.02  p=0.581  zona=slight_underdog [W]
+  │    17. Petr Nesterov        @2.02  p=0.605  zona=slight_underdog [W]
+  │    18. Thanasi Kokkinakis   @1.94  p=0.605  zona=slight_underdog [W]
+  │    19. Raphael Perot        @1.79  p=0.605  zona=slight_underdog
+  │    20. Alejo Sanchez Quilez @1.62  p=0.581  zona=slight_underdog
+
+  │  ── 3 PIERNAS: TOP 4 combos × $2,000 = $8,000 ──
+  │     (cada combo excluye 17 jugadores)
+  │     [3p-1] Luca Van Assche@6.75 + Emily Appleton@3.20 + Andrea Guerrieri@2.70
+  │            @58.32 HR:21.1% EV:+1133.3% →$116,640  excluye:[Akira Santillan, Facundo Mena, Linda Klimovicova, Julian Cundom, Alicia Dudeney, Veronika Podrez, Daniel Evans, August Holmgren, Thiago Cigarran, Darja Vidmanova, Luka Pavlovic, Iryna Shymanovich, Thanasi Kokkinakis, Buvaysar Gadamauri, Petr Nesterov, Raphael Perot, Alejo Sanchez Quilez]
+  │     [3p-2] Luca Van Assche@6.75 + Emily Appleton@3.20 + Linda Klimovicova@2.48
+  │            @53.57 HR:22.1% EV:+1081.2% →$107,140  excluye:[Andrea Guerrieri, Akira Santillan, Facundo Mena, Julian Cundom, Alicia Dudeney, Veronika Podrez, Daniel Evans, August Holmgren, Thiago Cigarran, Darja Vidmanova, Luka Pavlovic, Iryna Shymanovich, Thanasi Kokkinakis, Buvaysar Gadamauri, Petr Nesterov, Raphael Perot, Alejo Sanchez Quilez]
+  │     [3p-3] Luca Van Assche@6.75 + Andrea Guerrieri@2.70 + Linda Klimovicova@2.48
+  │            @45.20 HR:21.1% EV:+855.8% →$90,400  excluye:[Emily Appleton, Akira Santillan, Facundo Mena, Julian Cundom, Alicia Dudeney, Veronika Podrez, Daniel Evans, August Holmgren, Thiago Cigarran, Darja Vidmanova, Luka Pavlovic, Iryna Shymanovich, Thanasi Kokkinakis, Buvaysar Gadamauri, Petr Nesterov, Raphael Perot, Alejo Sanchez Quilez]
+  │     [3p-4] Emily Appleton@3.20 + Andrea Guerrieri@2.70 + Linda Klimovicova@2.48
+  │            @21.43 HR:21.9% EV:+368.7% →$42,860  excluye:[Luca Van Assche, Akira Santillan, Facundo Mena, Julian Cundom, Alicia Dudeney, Veronika Podrez, Daniel Evans, August Holmgren, Thiago Cigarran, Darja Vidmanova, Luka Pavlovic, Iryna Shymanovich, Thanasi Kokkinakis, Buvaysar Gadamauri, Petr Nesterov, Raphael Perot, Alejo Sanchez Quilez]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $1,000 = $4,000 ──
+  │     (cada combo excluye 16 jugadores)
+  │     [4p-1] Luca Van Assche@6.75 + Emily Appleton@3.20 + Andrea Guerrieri@2.70 + Linda Klimovicova@2.48
+  │            @144.63 HR:12.9% EV:+1768.8% →$144,630  excluye:[Akira Santillan, Facundo Mena, Julian Cundom, Alicia Dudeney, Veronika Podrez, Daniel Evans, August Holmgren, Thiago Cigarran, Darja Vidmanova, Luka Pavlovic, Iryna Shymanovich, Thanasi Kokkinakis, Buvaysar Gadamauri, Petr Nesterov, Raphael Perot, Alejo Sanchez Quilez]
+  │     [4p-2] Luca Van Assche@6.75 + Emily Appleton@3.20 + Andrea Guerrieri@2.70 + Julian Cundom@2.30
+  │            @134.14 HR:12.8% EV:+1617.0% →$134,140  excluye:[Akira Santillan, Facundo Mena, Linda Klimovicova, Alicia Dudeney, Veronika Podrez, Daniel Evans, August Holmgren, Thiago Cigarran, Darja Vidmanova, Luka Pavlovic, Iryna Shymanovich, Thanasi Kokkinakis, Buvaysar Gadamauri, Petr Nesterov, Raphael Perot, Alejo Sanchez Quilez]
+  │     [4p-3] Luca Van Assche@6.75 + Emily Appleton@3.20 + Linda Klimovicova@2.48 + Julian Cundom@2.30
+  │            @123.21 HR:13.4% EV:+1544.4% →$123,210  excluye:[Andrea Guerrieri, Akira Santillan, Facundo Mena, Alicia Dudeney, Veronika Podrez, Daniel Evans, August Holmgren, Thiago Cigarran, Darja Vidmanova, Luka Pavlovic, Iryna Shymanovich, Thanasi Kokkinakis, Buvaysar Gadamauri, Petr Nesterov, Raphael Perot, Alejo Sanchez Quilez]
+  │     [4p-4] Luca Van Assche@6.75 + Andrea Guerrieri@2.70 + Linda Klimovicova@2.48 + Julian Cundom@2.30
+  │            @103.96 HR:12.8% EV:+1230.7% →$103,960  excluye:[Emily Appleton, Akira Santillan, Facundo Mena, Alicia Dudeney, Veronika Podrez, Daniel Evans, August Holmgren, Thiago Cigarran, Darja Vidmanova, Luka Pavlovic, Iryna Shymanovich, Thanasi Kokkinakis, Buvaysar Gadamauri, Petr Nesterov, Raphael Perot, Alejo Sanchez Quilez]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-4 picks?) ──
+  │  Total apostado: $12,000
+
+  │  🏆 0 fallos (20/20 ganan): retorno $862,980 → P&L +$850,980 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Alejo Sanchez Quilez]):
+  │       retorno $862,980 → P&L +$850,980 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Luca Van Assche]):
+  │       retorno $42,860 → P&L +$30,860 (1/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Alejo Sanchez Quilez, Raphael Perot]):
+  │       retorno $862,980 → P&L +$850,980 (8/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Luca Van Assche, Emily Appleton]):
+  │       retorno $0 → P&L $-12,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Alejo Sanchez Quilez, Raphael Perot, Thanasi Kokkinakis]):
+  │       retorno $862,980 → P&L +$850,980 (8/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Luca Van Assche, Emily Appleton, Andrea Guerrieri]):
+  │       retorno $0 → P&L $-12,000 (0/8 combos pagan)
+  │  ✅ 4 fallos (mejor caso: fallan favoritos [Alejo Sanchez Quilez, Raphael Perot, Thanasi Kokkinakis, Buvaysar Gadamauri]):
+  │       retorno $862,980 → P&L +$850,980 (8/8 combos pagan)
+  │  ❌ 4 fallos (peor caso: fallan underdogs [Luca Van Assche, Emily Appleton, Andrea Guerrieri, Linda Klimovicova]):
+  │       retorno $0 → P&L $-12,000 (0/8 combos pagan)
+
+  │  Total cobertura: $12,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     20
+  │  ρ estructural:       0.10 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.345
+  │  Reducción vs naive:  -65.5%
+  │
+  │  Stake naive (sin ajuste):    $      27,000
+  │  Stake ajustado (PK):         $       9,310
+  │  Ahorro por correlación:      $      17,690
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $      12,849  (64.2% bankroll)
+  │  CVaR 95%:           $       8,131
+  │  Max VaR permitido:  $       5,000  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.74
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $     130,620
+  │  σ(P&L):             $      95,186
+  │  Sharpe Ratio:              1.372
+  │  Kelly Growth Rate:        2.2356 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $1,430,898,523
+  │  Bankroll en 10 sesiones:  $102,373,529,169,361
+  │  Bankroll en 30 sesiones:  $2,682,273,347,266,819,782,465,762,082,422,784
+  │  Sesiones para duplicar:   0.3
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.74 (de $27,000 a $20,000)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.74) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Luca Van Assche           @6.75  →  $   1,000  (ret. $     6,750)
+  │    Emily Appleton            @3.20  →  $   1,000  (ret. $     3,200)
+  │    Andrea Guerrieri          @2.70  →  $   1,000  (ret. $     2,700)
+  │    Akira Santillan           @2.25  →  $   1,000  (ret. $     2,250)
+  │    Facundo Mena              @2.20  →  $   1,000  (ret. $     2,200)
+  │    Linda Klimovicova         @2.48  →  $   1,000  (ret. $     2,480)
+  │    Julian Cundom             @2.30  →  $   1,000  (ret. $     2,300)
+  │    Alicia Dudeney            @2.17  →  $   1,000  (ret. $     2,170)
+  │    Veronika Podrez           @2.25  →  $   1,000  (ret. $     2,250)
+  │    Daniel Evans              @2.25  →  $   1,000  (ret. $     2,250)
+  │    August Holmgren           @2.23  →  $   1,000  (ret. $     2,230)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @58.32]  $   1,000  →  Luca Van Assche@6.75 + Emily Appleton@3.20 + Andrea Guerrieri@2.70
+  │    [3p @53.57]  $   1,000  →  Luca Van Assche@6.75 + Emily Appleton@3.20 + Linda Klimovicova@2.48
+  │    [3p @45.20]  $   1,000  →  Luca Van Assche@6.75 + Andrea Guerrieri@2.70 + Linda Klimovicova@2.48
+  │    [3p @21.43]  $   1,000  →  Emily Appleton@3.20 + Andrea Guerrieri@2.70 + Linda Klimovicova@2.48
+  │    [4p @144.63]  $   1,000  →  Luca Van Assche@6.75 + Emily Appleton@3.20 + Andrea Guerrieri@2.70 + Linda Klimovicova@2.48
+  │    [4p @134.14]  $   1,000  →  Luca Van Assche@6.75 + Emily Appleton@3.20 + Andrea Guerrieri@2.70 + Julian Cundom@2.30
+  │    [4p @123.21]  $   1,000  →  Luca Van Assche@6.75 + Emily Appleton@3.20 + Linda Klimovicova@2.48 + Julian Cundom@2.30
+  │    [4p @103.96]  $   1,000  →  Luca Van Assche@6.75 + Andrea Guerrieri@2.70 + Linda Klimovicova@2.48 + Julian Cundom@2.30
+  │
+  │  TOTAL EN RIESGO:  $    19,000  (95.0% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $        20,000                       ║
+  ║  Individuales:        $        11,000  (55.0% bankroll)      ║
+  ║  Cobertura:           $         8,000  (40.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $        19,000  (95.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:      11                                       ║
+  ║  Pool cobertura:       20 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260608_02  ║
+  ║  Partidos analizados:  76                                       ║
+  ║  Superficie:          clay (Roland Garros)                    ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  ⚠️  ALERTA: 95.0% bankroll en riesgo — por encima del 30% recomendado.
+      Reducir combos o sistema hasta n≥30 con datos limpios.
+
+  📊 Calibración: n=150 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.697 (calibrado clay) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260608_021955.json

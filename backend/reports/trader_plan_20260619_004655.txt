@@ -1,0 +1,264 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — ITF HARD
+  2026-06-19 00:46  │  Bankroll: $10,000
+  Señales APOSTAR: 15  │  Watchlist: 2  │  Sin edge: 5
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 18 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.05 (itf)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $4,000 (40% bankroll)
+
+  │  🎾 Maria Herazo Gonzalez vs Maria Florencia Urrutia
+  │     Apostar: Maria Herazo Gonzalez
+  │     Cuota 4.50  │  Edge 35.8%  │  p_blend 0.652 (n_h2h=1)
+  │     Kelly-KL 15.8% → stake $1,000  │  Retorno potencial $4,500
+  │     EV real +193.4%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Oscar Brown vs George Lazarov
+  │     Apostar: Oscar Brown
+  │     Cuota 2.40  │  Edge 15.0%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 9.4% → stake $1,000  │  Retorno potencial $2,400
+  │     EV real +62.2%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Berfu Cengiz vs Dalila Spiteri
+  │     Apostar: Dalila Spiteri
+  │     Cuota 2.95  │  Edge 17.6%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 9.3% → stake $1,000  │  Retorno potencial $2,950
+  │     EV real +99.4%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Cezar Gabriel Papoe vs Robert Guna
+  │     Apostar: Cezar Gabriel Papoe
+  │     Cuota 2.75  │  Edge 16.5%  │  p_blend 0.639 (n_h2h=1)
+  │     Kelly-KL 9.3% → stake $1,000  │  Retorno potencial $2,750
+  │     EV real +75.8%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Antonia Stoyanov vs Franziska Sziedat
+  │     Apostar: Franziska Sziedat
+  │     Cuota 2.85  │  Edge 16.5%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 8.8% → stake $1,000  │  Retorno potencial $2,850
+  │     EV real +92.7%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Amelie Justine Hejtmanek vs Petja Drame
+  │     Apostar: Petja Drame
+  │     Cuota 2.55  │  Edge 14.5%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 8.6% → stake $1,000  │  Retorno potencial $2,550
+  │     EV real +72.4%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Vuk Radjenovic vs Andrea De Marchi
+  │     Apostar: Vuk Radjenovic
+  │     Cuota 2.60  │  Edge 13.8%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 8.1% → stake $1,000  │  Retorno potencial $2,600
+  │     EV real +75.8%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Martina Capurro Taborda vs Alena Kovackova
+  │     Apostar: Martina Capurro Taborda
+  │     Cuota 2.60  │  Edge 12.7%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 7.3% → stake $1,000  │  Retorno potencial $2,600
+  │     EV real +75.8%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Peter Fajta vs Aleksandr Braynin
+  │     Apostar: Aleksandr Braynin
+  │     Cuota 2.60  │  Edge 12.7%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 7.3% → stake $1,000  │  Retorno potencial $2,600
+  │     EV real +75.8%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Selena Janicijevic vs Zhibek Kulambayeva
+  │     Apostar: Zhibek Kulambayeva
+  │     Cuota 2.50  │  Edge 10.7%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 6.3% → stake $1,000  │  Retorno potencial $2,500
+  │     EV real +69.0%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Gianmarco Ferrari vs Fausto Tabacco
+  │     Apostar: Fausto Tabacco
+  │     Cuota 2.28  │  Edge 9.5%  │  p_blend 0.619 (n_h2h=2)
+  │     Kelly-KL 6.2% → stake $1,000  │  Retorno potencial $2,280
+  │     EV real +41.2%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Ida Wobker vs Thea Frodin
+  │     Apostar: Ida Wobker
+  │     Cuota 2.35  │  Edge 9.4%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 5.8% → stake $1,000  │  Retorno potencial $2,350
+  │     EV real +58.9%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Marta Lombardini vs Sofia Rocchetti
+  │     Apostar: Sofia Rocchetti
+  │     Cuota 2.45  │  Edge 9.7%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 5.7% → stake $1,000  │  Retorno potencial $2,450
+  │     EV real +65.6%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Valentina Ivanov vs Madison Sieg
+  │     Apostar: Valentina Ivanov
+  │     Cuota 2.18  │  Edge 6.4%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 4.3% → stake $1,000  │  Retorno potencial $2,180
+  │     EV real +47.4%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Thijs Boogaard vs Carl Emil Overbeck
+  │     Apostar: Carl Emil Overbeck
+  │     Cuota 2.25  │  Edge 6.6%  │  p_blend 0.633 (n_h2h=0)
+  │     Kelly-KL 4.2% → stake $1,000  │  Retorno potencial $2,250
+  │     EV real +42.5%  │  Zona: underdog  │  Sup: hard
+
+  │  Total individuales: $15,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 18 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $6,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Maria Herazo Gonzalez @4.50  p=0.652  zona=underdog
+  │    2. Dalila Spiteri       @2.95  p=0.676  zona=underdog
+  │    3. Franziska Sziedat    @2.85  p=0.676  zona=underdog
+  │    4. Cezar Gabriel Papoe  @2.75  p=0.639  zona=underdog
+  │    5. Vuk Radjenovic       @2.60  p=0.676  zona=underdog
+  │    6. Martina Capurro Taborda @2.60  p=0.676  zona=underdog
+  │    7. Aleksandr Braynin    @2.60  p=0.676  zona=underdog
+  │    8. Petja Drame          @2.55  p=0.676  zona=underdog
+  │    9. Zhibek Kulambayeva   @2.50  p=0.676  zona=underdog
+  │    10. Sofia Rocchetti      @2.45  p=0.676  zona=underdog
+  │    11. Oscar Brown          @2.40  p=0.676  zona=underdog
+  │    12. Ida Wobker           @2.35  p=0.676  zona=underdog
+  │    13. Fausto Tabacco       @2.28  p=0.619  zona=underdog
+  │    14. Carl Emil Overbeck   @2.25  p=0.633  zona=underdog
+  │    15. Valentina Ivanov     @2.18  p=0.676  zona=underdog
+  │    16. Federica Sacco       @2.08  p=0.676  zona=slight_underdog [W]
+  │    17. Tiago Torres         @1.97  p=0.583  zona=slight_underdog [W]
+  │    18. Lan Mi               @1.50  p=0.610  zona=moderate_favorite
+
+  │  ── 3 PIERNAS: TOP 4 combos × $1,000 = $4,000 ──
+  │     (cada combo excluye 15 jugadores)
+  │     [3p-1] Maria Herazo Gonzalez@4.50 + Dalila Spiteri@2.95 + Franziska Sziedat@2.85
+  │            @37.83 HR:29.8% EV:+1027.2% →$37,830  excluye:[Oscar Brown, Cezar Gabriel Papoe, Petja Drame, Vuk Radjenovic, Martina Capurro Taborda, Aleksandr Braynin, Zhibek Kulambayeva, Fausto Tabacco, Ida Wobker, Sofia Rocchetti, Valentina Ivanov, Carl Emil Overbeck, Federica Sacco, Tiago Torres, Lan Mi]
+  │     [3p-2] Maria Herazo Gonzalez@4.50 + Dalila Spiteri@2.95 + Cezar Gabriel Papoe@2.75
+  │            @36.51 HR:28.2% EV:+928.6% →$36,510  excluye:[Oscar Brown, Franziska Sziedat, Petja Drame, Vuk Radjenovic, Martina Capurro Taborda, Aleksandr Braynin, Zhibek Kulambayeva, Fausto Tabacco, Ida Wobker, Sofia Rocchetti, Valentina Ivanov, Carl Emil Overbeck, Federica Sacco, Tiago Torres, Lan Mi]
+  │     [3p-3] Maria Herazo Gonzalez@4.50 + Cezar Gabriel Papoe@2.75 + Franziska Sziedat@2.85
+  │            @35.27 HR:28.2% EV:+893.7% →$35,270  excluye:[Oscar Brown, Dalila Spiteri, Petja Drame, Vuk Radjenovic, Martina Capurro Taborda, Aleksandr Braynin, Zhibek Kulambayeva, Fausto Tabacco, Ida Wobker, Sofia Rocchetti, Valentina Ivanov, Carl Emil Overbeck, Federica Sacco, Tiago Torres, Lan Mi]
+  │     [3p-4] Dalila Spiteri@2.95 + Cezar Gabriel Papoe@2.75 + Franziska Sziedat@2.85
+  │            @23.12 HR:29.2% EV:+575.4% →$23,120  excluye:[Maria Herazo Gonzalez, Oscar Brown, Petja Drame, Vuk Radjenovic, Martina Capurro Taborda, Aleksandr Braynin, Zhibek Kulambayeva, Fausto Tabacco, Ida Wobker, Sofia Rocchetti, Valentina Ivanov, Carl Emil Overbeck, Federica Sacco, Tiago Torres, Lan Mi]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $1,000 = $4,000 ──
+  │     (cada combo excluye 14 jugadores)
+  │     [4p-1] Maria Herazo Gonzalez@4.50 + Dalila Spiteri@2.95 + Cezar Gabriel Papoe@2.75 + Franziska Sziedat@2.85
+  │            @104.04 HR:19.1% EV:+1881.6% →$104,040  excluye:[Oscar Brown, Petja Drame, Vuk Radjenovic, Martina Capurro Taborda, Aleksandr Braynin, Zhibek Kulambayeva, Fausto Tabacco, Ida Wobker, Sofia Rocchetti, Valentina Ivanov, Carl Emil Overbeck, Federica Sacco, Tiago Torres, Lan Mi]
+  │     [4p-2] Maria Herazo Gonzalez@4.50 + Dalila Spiteri@2.95 + Franziska Sziedat@2.85 + Vuk Radjenovic@2.60
+  │            @98.37 HR:20.1% EV:+1881.3% →$98,370  excluye:[Oscar Brown, Cezar Gabriel Papoe, Petja Drame, Martina Capurro Taborda, Aleksandr Braynin, Zhibek Kulambayeva, Fausto Tabacco, Ida Wobker, Sofia Rocchetti, Valentina Ivanov, Carl Emil Overbeck, Federica Sacco, Tiago Torres, Lan Mi]
+  │     [4p-3] Maria Herazo Gonzalez@4.50 + Dalila Spiteri@2.95 + Cezar Gabriel Papoe@2.75 + Vuk Radjenovic@2.60
+  │            @94.92 HR:19.1% EV:+1707.8% →$94,920  excluye:[Oscar Brown, Franziska Sziedat, Petja Drame, Martina Capurro Taborda, Aleksandr Braynin, Zhibek Kulambayeva, Fausto Tabacco, Ida Wobker, Sofia Rocchetti, Valentina Ivanov, Carl Emil Overbeck, Federica Sacco, Tiago Torres, Lan Mi]
+  │     [4p-4] Maria Herazo Gonzalez@4.50 + Cezar Gabriel Papoe@2.75 + Franziska Sziedat@2.85 + Vuk Radjenovic@2.60
+  │            @91.70 HR:19.1% EV:+1646.5% →$91,700  excluye:[Oscar Brown, Dalila Spiteri, Petja Drame, Martina Capurro Taborda, Aleksandr Braynin, Zhibek Kulambayeva, Fausto Tabacco, Ida Wobker, Sofia Rocchetti, Valentina Ivanov, Carl Emil Overbeck, Federica Sacco, Tiago Torres, Lan Mi]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-4 picks?) ──
+  │  Total apostado: $8,000
+
+  │  🏆 0 fallos (18/18 ganan): retorno $521,760 → P&L +$513,760 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Lan Mi]):
+  │       retorno $521,760 → P&L +$513,760 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Maria Herazo Gonzalez]):
+  │       retorno $23,120 → P&L +$15,120 (1/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Lan Mi, Tiago Torres]):
+  │       retorno $521,760 → P&L +$513,760 (8/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Maria Herazo Gonzalez, Dalila Spiteri]):
+  │       retorno $0 → P&L $-8,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Lan Mi, Tiago Torres, Federica Sacco]):
+  │       retorno $521,760 → P&L +$513,760 (8/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Maria Herazo Gonzalez, Dalila Spiteri, Franziska Sziedat]):
+  │       retorno $0 → P&L $-8,000 (0/8 combos pagan)
+  │  ✅ 4 fallos (mejor caso: fallan favoritos [Lan Mi, Tiago Torres, Federica Sacco, Valentina Ivanov]):
+  │       retorno $521,760 → P&L +$513,760 (8/8 combos pagan)
+  │  ❌ 4 fallos (peor caso: fallan underdogs [Maria Herazo Gonzalez, Dalila Spiteri, Franziska Sziedat, Cezar Gabriel Papoe]):
+  │       retorno $0 → P&L $-8,000 (0/8 combos pagan)
+
+  │  Total cobertura: $8,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     18
+  │  ρ estructural:       0.05 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.541
+  │  Reducción vs naive:  -45.9%
+  │
+  │  Stake naive (sin ajuste):    $      23,000
+  │  Stake ajustado (PK):         $      12,432
+  │  Ahorro por correlación:      $      10,568
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $      -4,992  (49.9% bankroll)
+  │  CVaR 95%:           $      -8,269
+  │  Max VaR permitido:  $       2,500  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.43
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $     103,084
+  │  σ(P&L):             $      73,310
+  │  Sharpe Ratio:              1.406
+  │  Kelly Growth Rate:        2.1993 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $ 596,515,633
+  │  Bankroll en 10 sesiones:  $35,583,090,030,025
+  │  Bankroll en 30 sesiones:  $450,537,534,756,703,364,350,789,770,280,960
+  │  Sesiones para duplicar:   0.3
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.43 (de $23,000 a $10,000)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.43) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Maria Herazo Gonzalez     @4.50  →  $       0  (ret. $         0)
+  │    Oscar Brown               @2.40  →  $       0  (ret. $         0)
+  │    Dalila Spiteri            @2.95  →  $       0  (ret. $         0)
+  │    Cezar Gabriel Papoe       @2.75  →  $       0  (ret. $         0)
+  │    Franziska Sziedat         @2.85  →  $       0  (ret. $         0)
+  │    Petja Drame               @2.55  →  $       0  (ret. $         0)
+  │    Vuk Radjenovic            @2.60  →  $       0  (ret. $         0)
+  │    Martina Capurro Taborda   @2.60  →  $       0  (ret. $         0)
+  │    Aleksandr Braynin         @2.60  →  $       0  (ret. $         0)
+  │    Zhibek Kulambayeva        @2.50  →  $       0  (ret. $         0)
+  │    Fausto Tabacco            @2.28  →  $       0  (ret. $         0)
+  │    Ida Wobker                @2.35  →  $       0  (ret. $         0)
+  │    Sofia Rocchetti           @2.45  →  $       0  (ret. $         0)
+  │    Valentina Ivanov          @2.18  →  $       0  (ret. $         0)
+  │    Carl Emil Overbeck        @2.25  →  $       0  (ret. $         0)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @37.83]  $       0  →  Maria Herazo Gonzalez@4.50 + Dalila Spiteri@2.95 + Franziska Sziedat@2.85
+  │    [3p @36.51]  $       0  →  Maria Herazo Gonzalez@4.50 + Dalila Spiteri@2.95 + Cezar Gabriel Papoe@2.75
+  │    [3p @35.27]  $       0  →  Maria Herazo Gonzalez@4.50 + Cezar Gabriel Papoe@2.75 + Franziska Sziedat@2.85
+  │    [3p @23.12]  $       0  →  Dalila Spiteri@2.95 + Cezar Gabriel Papoe@2.75 + Franziska Sziedat@2.85
+  │    [4p @104.04]  $       0  →  Maria Herazo Gonzalez@4.50 + Dalila Spiteri@2.95 + Cezar Gabriel Papoe@2.75 + Franziska Sziedat@2.85
+  │    [4p @98.37]  $       0  →  Maria Herazo Gonzalez@4.50 + Dalila Spiteri@2.95 + Franziska Sziedat@2.85 + Vuk Radjenovic@2.60
+  │    [4p @94.92]  $       0  →  Maria Herazo Gonzalez@4.50 + Dalila Spiteri@2.95 + Cezar Gabriel Papoe@2.75 + Vuk Radjenovic@2.60
+  │    [4p @91.70]  $       0  →  Maria Herazo Gonzalez@4.50 + Cezar Gabriel Papoe@2.75 + Franziska Sziedat@2.85 + Vuk Radjenovic@2.60
+  │
+  │  TOTAL EN RIESGO:  $         0  (0.0% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $        10,000                       ║
+  ║  Individuales:        $             0  (0.0% bankroll)      ║
+  ║  Combos:              $             0  (0.0% bankroll)      ║
+  ║  Sistema:             $             0  (0.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $             0  (0.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:      15                                       ║
+  ║  Pool cobertura:       18 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260619_00  ║
+  ║  Partidos analizados:  95                                       ║
+  ║  Superficie:          hard (itf)                                  ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  📊 Calibración: n=1241 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.633 (calibrado hard) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260619_004655.json

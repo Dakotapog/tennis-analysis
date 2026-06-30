@@ -161,7 +161,7 @@ Kelly-KL ajustado:      stakes mayores en underdogs clay → P&L crece exponenci
 | ID | Tarea | Estado |
 |---|---|---|
 | T14-01 | Registrar resultados Roland Garros 2026-05-30 en `validar_con_api.py` | ✅ 2026-05-30 — n: 13→23, p_hist: 0.52→0.68 |
-| T14-02 | Añadir `factor_tardio` en `markov_analyzer.py` — win rate jugador en 4to/5to set | ⏳ sprint futuro |
+| T14-02 | Añadir `factor_tardio` en `markov_analyzer.py` — win rate jugador en 4to/5to set | ✅ 2026-05-30 — calcular_factor_tardio + comparativo, integrado en rivalry_analyzer, 781 tests |
 | T14-03 | Calibrar peso `common_opponents` por superficie (clay 28-30%, hard 20%, grass 15%) | ✅ 2026-05-30 — clay 0.20→0.28, grass 0.20→0.15. 773 tests ✅ |
 | T14-04 | ADR documentado: buscar activamente odds 3.5–6.0 con señal superficie | ✅ 2026-05-30 (en MOC) |
 | T14-05 | Correr pipeline completo 80 partidos → sistema 2/N activo (≥3 señales) | ⏳ pendiente (T13-04) |

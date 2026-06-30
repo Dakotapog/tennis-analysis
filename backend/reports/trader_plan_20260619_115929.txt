@@ -1,0 +1,174 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — ITF HARD
+  2026-06-19 11:59  │  Bankroll: $125,000
+  Señales APOSTAR: 3  │  Watchlist: 7  │  Sin edge: 2
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 10 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.05 (itf)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $50,000 (40% bankroll)
+
+  │  🎾 Selena Janicijevic vs Lidia Encheva
+  │     Apostar: Lidia Encheva
+  │     Cuota 3.25  │  Edge 22.2%  │  p_blend 0.671 (n_h2h=0)
+  │     Kelly-KL 11.5% → stake $12,000  │  Retorno potencial $39,000
+  │     EV real +118.2%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Martha Matoula vs Berfu Cengiz
+  │     Apostar: Martha Matoula
+  │     Cuota 2.55  │  Edge 11.9%  │  p_blend 0.631 (n_h2h=1)
+  │     Kelly-KL 6.8% → stake $12,000  │  Retorno potencial $30,600
+  │     EV real +61.0%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Dayeon Back vs Hiromi Abe
+  │     Apostar: Hiromi Abe
+  │     Cuota 2.43  │  Edge 9.1%  │  p_blend 0.634 (n_h2h=0)
+  │     Kelly-KL 5.5% → stake $12,000  │  Retorno potencial $29,160
+  │     EV real +54.0%  │  Zona: underdog  │  Sup: hard
+
+  │  Total individuales: $36,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 10 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $75,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Lidia Encheva        @3.25  p=0.671  zona=underdog
+  │    2. Martha Matoula       @2.55  p=0.631  zona=underdog
+  │    3. Hoyoung Roh          @2.55  p=0.634  zona=underdog [W]
+  │    4. Ronit Karki          @2.45  p=0.634  zona=underdog [W]
+  │    5. Hiromi Abe           @2.43  p=0.634  zona=underdog
+  │    6. Aleksandr Braynin    @2.23  p=0.671  zona=underdog [W]
+  │    7. Noah Zamora          @2.18  p=0.604  zona=underdog [W]
+  │    8. Anna Kubareva        @2.18  p=0.601  zona=underdog [W]
+  │    9. Aishi Das            @2.00  p=0.634  zona=slight_underdog [W]
+  │    10. Lucciana Perez Alarcon @1.91  p=0.671  zona=slight_underdog [W]
+
+  │  ── 3 PIERNAS: TOP 4 combos × $12,000 = $48,000 ──
+  │     (cada combo excluye 7 jugadores)
+  │     [3p-1] Lidia Encheva@3.25 + Martha Matoula@2.55 + Hoyoung Roh@2.55
+  │            @21.13 HR:26.9% EV:+467.7% →$253,560  excluye:[Hiromi Abe, Ronit Karki, Noah Zamora, Aleksandr Braynin, Anna Kubareva, Lucciana Perez Alarcon, Aishi Das]
+  │     [3p-2] Lidia Encheva@3.25 + Hoyoung Roh@2.55 + Ronit Karki@2.45
+  │            @20.30 HR:27.0% EV:+447.6% →$243,600  excluye:[Martha Matoula, Hiromi Abe, Noah Zamora, Aleksandr Braynin, Anna Kubareva, Lucciana Perez Alarcon, Aishi Das]
+  │     [3p-3] Lidia Encheva@3.25 + Martha Matoula@2.55 + Ronit Karki@2.45
+  │            @20.30 HR:26.9% EV:+445.5% →$243,600  excluye:[Hiromi Abe, Hoyoung Roh, Noah Zamora, Aleksandr Braynin, Anna Kubareva, Lucciana Perez Alarcon, Aishi Das]
+  │     [3p-4] Martha Matoula@2.55 + Hoyoung Roh@2.55 + Ronit Karki@2.45
+  │            @15.93 HR:25.4% EV:+304.0% →$191,160  excluye:[Lidia Encheva, Hiromi Abe, Noah Zamora, Aleksandr Braynin, Anna Kubareva, Lucciana Perez Alarcon, Aishi Das]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $6,000 = $24,000 ──
+  │     (cada combo excluye 6 jugadores)
+  │     [4p-1] Lidia Encheva@3.25 + Martha Matoula@2.55 + Hoyoung Roh@2.55 + Ronit Karki@2.45
+  │            @51.78 HR:17.0% EV:+781.6% →$310,680  excluye:[Hiromi Abe, Noah Zamora, Aleksandr Braynin, Anna Kubareva, Lucciana Perez Alarcon, Aishi Das]
+  │     [4p-2] Lidia Encheva@3.25 + Hiromi Abe@2.43 + Hoyoung Roh@2.55 + Ronit Karki@2.45
+  │            @49.34 HR:17.1% EV:+743.4% →$296,040  excluye:[Martha Matoula, Noah Zamora, Aleksandr Braynin, Anna Kubareva, Lucciana Perez Alarcon, Aishi Das]
+  │     [4p-3] Lidia Encheva@3.25 + Martha Matoula@2.55 + Hiromi Abe@2.43 + Ronit Karki@2.45
+  │            @49.34 HR:17.0% EV:+740.1% →$296,040  excluye:[Hoyoung Roh, Noah Zamora, Aleksandr Braynin, Anna Kubareva, Lucciana Perez Alarcon, Aishi Das]
+  │     [4p-4] Martha Matoula@2.55 + Hiromi Abe@2.43 + Hoyoung Roh@2.55 + Ronit Karki@2.45
+  │            @38.71 HR:16.1% EV:+522.2% →$232,260  excluye:[Lidia Encheva, Noah Zamora, Aleksandr Braynin, Anna Kubareva, Lucciana Perez Alarcon, Aishi Das]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-4 picks?) ──
+  │  Total apostado: $72,000
+
+  │  🏆 0 fallos (10/10 ganan): retorno $2,066,940 → P&L +$1,994,940 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Lucciana Perez Alarcon]):
+  │       retorno $2,066,940 → P&L +$1,994,940 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Lidia Encheva]):
+  │       retorno $423,420 → P&L +$351,420 (2/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Lucciana Perez Alarcon, Aishi Das]):
+  │       retorno $2,066,940 → P&L +$1,994,940 (8/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Lidia Encheva, Martha Matoula]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Lucciana Perez Alarcon, Aishi Das, Noah Zamora]):
+  │       retorno $2,066,940 → P&L +$1,994,940 (8/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Lidia Encheva, Martha Matoula, Hoyoung Roh]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+  │  ✅ 4 fallos (mejor caso: fallan favoritos [Lucciana Perez Alarcon, Aishi Das, Noah Zamora, Anna Kubareva]):
+  │       retorno $2,066,940 → P&L +$1,994,940 (8/8 combos pagan)
+  │  ❌ 4 fallos (peor caso: fallan underdogs [Lidia Encheva, Martha Matoula, Hoyoung Roh, Ronit Karki]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+
+  │  Total cobertura: $72,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     10
+  │  ρ estructural:       0.05 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.690
+  │  Reducción vs naive:  -31.0%
+  │
+  │  Stake naive (sin ajuste):    $     108,000
+  │  Stake ajustado (PK):         $      74,483
+  │  Ahorro por correlación:      $      33,517
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $     -71,531  (57.2% bankroll)
+  │  CVaR 95%:           $     -80,247
+  │  Max VaR permitido:  $      31,250  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.44
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $     360,938
+  │  σ(P&L):             $     390,887
+  │  Sharpe Ratio:              0.923
+  │  Kelly Growth Rate:        1.0394 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $  22,592,403
+  │  Bankroll en 10 sesiones:  $4,083,333,516
+  │  Bankroll en 30 sesiones:  $4,357,370,956,449,794,048
+  │  Sesiones para duplicar:   0.7
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.44 (de $108,000 a $47,182)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.44) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Lidia Encheva             @3.25  →  $   5,000  (ret. $    16,250)
+  │    Martha Matoula            @2.55  →  $   5,000  (ret. $    12,750)
+  │    Hiromi Abe                @2.43  →  $   5,000  (ret. $    12,150)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @21.13]  $   5,000  →  Lidia Encheva@3.25 + Martha Matoula@2.55 + Hoyoung Roh@2.55
+  │    [3p @20.30]  $   5,000  →  Lidia Encheva@3.25 + Hoyoung Roh@2.55 + Ronit Karki@2.45
+  │    [3p @20.30]  $   5,000  →  Lidia Encheva@3.25 + Martha Matoula@2.55 + Ronit Karki@2.45
+  │    [3p @15.93]  $   5,000  →  Martha Matoula@2.55 + Hoyoung Roh@2.55 + Ronit Karki@2.45
+  │    [4p @51.78]  $   3,000  →  Lidia Encheva@3.25 + Martha Matoula@2.55 + Hoyoung Roh@2.55 + Ronit Karki@2.45
+  │    [4p @49.34]  $   3,000  →  Lidia Encheva@3.25 + Hiromi Abe@2.43 + Hoyoung Roh@2.55 + Ronit Karki@2.45
+  │    [4p @49.34]  $   3,000  →  Lidia Encheva@3.25 + Martha Matoula@2.55 + Hiromi Abe@2.43 + Ronit Karki@2.45
+  │    [4p @38.71]  $   3,000  →  Martha Matoula@2.55 + Hiromi Abe@2.43 + Hoyoung Roh@2.55 + Ronit Karki@2.45
+  │
+  │  TOTAL EN RIESGO:  $    47,000  (37.6% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $       125,000                       ║
+  ║  Individuales:        $        15,000  (12.0% bankroll)      ║
+  ║  Cobertura:           $        32,000  (25.6% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $        47,000  (37.6% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       3                                       ║
+  ║  Pool cobertura:       10 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260619_11  ║
+  ║  Partidos analizados:  40                                       ║
+  ║  Superficie:          hard (itf)                                  ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  ⚠️  ALERTA: 37.6% bankroll en riesgo — por encima del 30% recomendado.
+      Reducir combos o sistema hasta n≥30 con datos limpios.
+
+  📊 Calibración: n=1325 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.634 (calibrado hard) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260619_115929.json

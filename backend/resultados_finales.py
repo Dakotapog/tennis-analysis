@@ -1,16 +1,33 @@
 """
 🔬 SCRIPT DE VERIFICACIÓN DE RESULTADOS FINALES
-Este script carga los resultados de un análisis H2H previo, navega a las URLs de los partidos
-y extrae el resultado final para compararlo con la predicción generada.
+Carga los resultados de un análisis H2H previo, consulta la API FlashScore Ninja
+para obtener el resultado real y lo compara con la predicción generada.
+
+Migrado de Playwright (~40 min) a API Ninja (<2 seg para 80 partidos).
+
+Fix 2026-06-09: cuando event_id = None (bug conocido), busca el partido
+en el feed de FlashScore por nombre de jugadores (name matching 3-tier).
 """
 
 import json
-import asyncio
+import argparse
 import logging
-from datetime import datetime
-from playwright.async_api import async_playwright
-from pathlib import Path
 import re
+import time
+import unicodedata
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, Optional, Tuple
+
+import requests
+
+from config import FLASHSCORE_BASE, FLASHSCORE_HEADERS as HEADERS
+
+try:
+    from config import detectar_tier
+    TIER_AVAILABLE = True
+except ImportError:
+    TIER_AVAILABLE = False
 
 # Configuración de logging
 logging.basicConfig(
@@ -19,322 +36,419 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-def find_latest_h2h_results_file():
-    """🔍 Encontrar el archivo de resultados H2H más reciente en la carpeta 'reports'."""
-    logger.info("🔍 Buscando el archivo de resultados H2H más reciente en 'reports/'...")
-    
-    reports_dir = Path('reports')
-    if not reports_dir.exists() or not reports_dir.is_dir():
-        logger.error(f"❌ El directorio '{reports_dir}' no existe.")
-        return None
+DELAY_ENTRE_REQUESTS = 0.3  # segundos — no martillar la API
 
-    # Buscar archivos que sigan el patrón 'h2h_results_enhanced_*.json'
-    results_files = list(reports_dir.glob('h2h_results_enhanced_*.json'))
-    
-    if not results_files:
-        logger.error("❌ No se encontraron archivos 'h2h_results_enhanced_*.json' en la carpeta 'reports'.")
-        return None
-    
-    # Encontrar el más reciente por fecha de modificación
-    latest_file = max(results_files, key=lambda p: p.stat().st_mtime)
-    
-    logger.info(f"📂 Archivo de resultados seleccionado: {latest_file}")
-    return str(latest_file)
 
-class ResultVerifier:
-    def __init__(self):
-        self.playwright = None
-        self.browser = None
-        self.page = None
-        self.matches_to_verify = []
-        self.verification_results = []
+# ──────────────────────────────────────────────────────────────────────────────
+# Parser del formato propietario FlashScore
+# ──────────────────────────────────────────────────────────────────────────────
 
-    async def setup_browser(self):
-        """🚀 Configurar el navegador Playwright."""
-        logger.info("🚀 Configurando el navegador...")
-        self.playwright = await async_playwright().start()
-        self.browser = await self.playwright.chromium.launch(
-            headless=True,
-            args=['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
-        )
-        context = await self.browser.new_context(
-            user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-        )
-        self.page = await context.new_page()
-        logger.info("✅ Navegador configurado.")
+def parsear_respuesta_flashscore(raw: str) -> dict:
+    """Convierte KEY÷VALUE¬KEY÷VALUE en dict."""
+    datos = {}
+    for par in raw.split('¬'):
+        if '÷' in par:
+            k, v = par.split('÷', 1)
+            datos[k] = v
+    return datos
 
-    def load_matches_to_verify(self):
-        """📂 Cargar los partidos desde el archivo JSON de resultados H2H."""
-        logger.info("📂 Cargando partidos para verificación...")
-        
-        h2h_results_file = find_latest_h2h_results_file()
-        if not h2h_results_file:
-            return False
-            
+
+def extraer_event_id(match_url: str) -> Optional[str]:
+    """Extrae el event_id del parámetro mid= en la URL del partido."""
+    m = re.search(r'mid=([^&]+)', match_url or '')
+    return m.group(1) if m else None
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Name matching — reutiliza patrón de kambi_tennis.py
+# ──────────────────────────────────────────────────────────────────────────────
+
+def _normalize_name(name: str) -> str:
+    """Normaliza nombre: lowercase, sin acentos, sin puntuación."""
+    name = unicodedata.normalize("NFD", name.lower())
+    name = "".join(c for c in name if unicodedata.category(c) != "Mn")
+    name = re.sub(r"[^a-z\s]", "", name)
+    return name.strip()
+
+
+_SUFFIXES = frozenset({"jr", "sr", "ii", "iii", "iv"})
+
+
+def _parse_nombre(nombre: str) -> Tuple[str, str]:
+    """Extrae (apellido, inicial) de cualquier formato de nombre."""
+    normalized = _normalize_name(nombre)
+    raw = normalized.split()
+    if not raw:
+        return ("", "")
+    while raw and raw[-1] in _SUFFIXES:
+        raw.pop()
+    if not raw:
+        return ("", "")
+    iniciales = []
+    apellido_parts = []
+    for token in raw:
+        if len(token) <= 1:
+            iniciales.append(token)
+        else:
+            apellido_parts.append(token)
+    if not apellido_parts:
+        return (raw[-1], raw[0][0])
+    apellido = apellido_parts[-1]
+    inicial = iniciales[0][0] if iniciales else apellido_parts[0][0]
+    return (apellido, inicial)
+
+
+def _build_match_key(name1: str, name2: str) -> Tuple[str, str, str, str]:
+    """Clave de matching: (apellido1, ini1, apellido2, ini2) ordenados."""
+    a1, i1 = _parse_nombre(name1)
+    a2, i2 = _parse_nombre(name2)
+    if a1 <= a2:
+        return (a1, i1, a2, i2)
+    return (a2, i2, a1, i1)
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# FlashScore feed — obtener partidos terminados con match_id
+# ──────────────────────────────────────────────────────────────────────────────
+
+def _fetch_finished_matches_feed() -> Dict[Tuple, Dict]:
+    """
+    Consulta el feed de FlashScore de hoy y ayer para obtener
+    partidos terminados con su match_id.
+
+    Returns:
+        Dict mapeando match_key → {match_id, jugador1_fs, jugador2_fs, ...}
+    """
+    lookup = {}
+
+    for day_offset in [0, -1, -2]:
+        ep = f"f_2_{day_offset}_2_es_1"
+        url = f"{FLASHSCORE_BASE}/{ep}"
+
         try:
-            with open(h2h_results_file, 'r', encoding='utf-8') as f:
-                data = json.load(f)
-            
-            self.matches_to_verify = data.get('partidos', [])
-            if not self.matches_to_verify:
-                logger.error("❌ El archivo JSON no contiene una lista de 'partidos'.")
-                return False
+            resp = requests.get(url, headers=HEADERS, timeout=15)
+            if resp.status_code != 200:
+                continue
+        except Exception:
+            continue
 
-            logger.info(f"✅ Cargados {len(self.matches_to_verify)} partidos para verificar.")
-            return True
-        except Exception as e:
-            logger.error(f"❌ Error cargando el archivo JSON de resultados: {e}")
-            return False
+        sections = resp.text.split("~")
+        current_tournament = ""
 
-    async def get_final_result(self, match_url):
-        """📊 Extraer el resultado final de la página del partido con lógica de ganador mejorada."""
-        try:
-            logger.info(f"  -> Navegando a {match_url} para obtener resultado final.")
-            await self.page.goto(match_url, wait_until='domcontentloaded', timeout=40000)
+        for sec in sections:
+            fields = {}
+            for pair in sec.split("¬"):
+                if "÷" in pair:
+                    k, v = pair.split("÷", 1)
+                    fields[k] = v
 
-            # --- PASO 1: Manejar el banner de consentimiento de cookies ---
-            try:
-                consent_button = self.page.locator("#onetrust-accept-btn-handler")
-                if await consent_button.is_visible(timeout=5000):
-                    await consent_button.click()
-                    logger.info("  ✅ Banner de consentimiento de cookies aceptado.")
-                    await self.page.wait_for_timeout(2000)
-            except Exception:
-                logger.info("  ℹ️ No se encontró o no fue necesario hacer clic en el banner de consentimiento.")
-
-            await self.page.wait_for_timeout(5000)
-
-            # --- PASO 2: Verificar si el partido ha finalizado ---
-            status_selector = ".detailScore__status"
-            status_text = (await self.page.locator(status_selector).inner_text()).strip()
-            
-            is_finished = any(s in status_text.lower() for s in ["finalizado", "finished", "terminado", "retired"])
-            if not is_finished:
-                logger.warning(f"  ⚠️ El partido en {match_url} no ha finalizado. Estado: {status_text}")
-                return None, None
-
-            # --- PASO 3: Extraer nombres de jugadores y marcador ---
-            home_player_element = self.page.locator(".duelParticipant__home").first
-            away_player_element = self.page.locator(".duelParticipant__away").first
-            
-            home_player_name = (await home_player_element.locator(".participant__participantName").first.text_content() or "").strip()
-            away_player_name = (await away_player_element.locator(".participant__participantName").first.text_content() or "").strip()
-
-            home_score_selector = ".detailScore__wrapper span:nth-child(1)"
-            away_score_selector = ".detailScore__wrapper span:nth-child(3)"
-            home_score_str = await self.page.locator(home_score_selector).inner_text()
-            away_score_str = await self.page.locator(away_score_selector).inner_text()
-            
-            winner = None
-            final_score_suffix = ""
-
-            # --- PASO 4: Lógica de Detección de Ganador Jerárquica ---
-
-            # 1. MÉTODO PRINCIPAL: Determinar ganador por el marcador de sets.
-            try:
-                home_sets = int(home_score_str)
-                away_sets = int(away_score_str)
-                if home_sets > away_sets:
-                    winner = home_player_name
-                    logger.info(f"  ℹ️ Ganador detectado por marcador: {winner} ({home_sets}-{away_sets})")
-                elif away_sets > home_sets:
-                    winner = away_player_name
-                    logger.info(f"  ℹ️ Ganador detectado por marcador: {winner} ({home_sets}-{away_sets})")
-            except (ValueError, TypeError):
-                logger.warning(f"  ⚠️ No se pudo convertir el marcador '{home_score_str}-{away_score_str}' a números. Usando métodos de respaldo.")
-
-            # 2. RESPALDO: Buscar por clase de ganador en el contenedor del participante.
-            if not winner:
-                try:
-                    if await home_player_element.locator(".duelParticipant--winner, .participant__participantName--winner").count() > 0:
-                        winner = home_player_name
-                        logger.info(f"  ℹ️ Ganador detectado por clase CSS en jugador local: {winner}")
-                    elif await away_player_element.locator(".duelParticipant--winner, .participant__participantName--winner").count() > 0:
-                        winner = away_player_name
-                        logger.info(f"  ℹ️ Ganador detectado por clase CSS en jugador visitante: {winner}")
-                except Exception as e:
-                    logger.warning(f"  ⚠️ Error buscando ganador con clase CSS: {e}")
-
-            # 3. RESPALDO: Buscar por negrita (<strong>).
-            if not winner:
-                try:
-                    if await home_player_element.locator(".participant__participantName strong").count() > 0:
-                        winner = home_player_name
-                        logger.info(f"  ℹ️ Ganador detectado por etiqueta <strong> en jugador local: {winner}")
-                    elif await away_player_element.locator(".participant__participantName strong").count() > 0:
-                        winner = away_player_name
-                        logger.info(f"  ℹ️ Ganador detectado por etiqueta <strong> en jugador visitante: {winner}")
-                except Exception as e:
-                    logger.warning(f"  ⚠️ Error buscando ganador con etiqueta <strong>: {e}")
-
-            # 4. MANEJO ESPECIAL: Partido por retiro.
-            if "retired" in status_text.lower():
-                final_score_suffix = " (Retiro)"
-                if not winner:
-                    logger.info("  ℹ️ Partido por retiro, intentando extraer ganador del texto de estado.")
-                    try:
-                        # Estrategia: Extraer el nombre del jugador retirado del texto de estado.
-                        # El formato suele ser "STATUS / RETIRED - PLAYER NAME".
-                        match = re.search(r'retired\s*-\s*(.*)', status_text, re.IGNORECASE)
-                        if match:
-                            retired_player_name = match.group(1).strip()
-                            logger.info(f"  ℹ️ Jugador retirado detectado en estado: '{retired_player_name}'")
-
-                            # Normalizar nombres para una comparación robusta.
-                            retired_norm = retired_player_name.lower().replace('.', '').strip()
-                            home_norm = home_player_name.lower().replace('.', '').strip()
-                            away_norm = away_player_name.lower().replace('.', '').strip()
-
-                            # El ganador es el oponente del jugador retirado.
-                            if retired_norm in home_norm or home_norm in retired_norm:
-                                winner = away_player_name
-                                logger.info(f"  ✅ Ganador por retiro: {winner}")
-                            elif retired_norm in away_norm or away_norm in retired_norm:
-                                winner = home_player_name
-                                logger.info(f"  ✅ Ganador por retiro: {winner}")
-                            else:
-                                logger.warning(f"  ⚠️ Nombre retirado ('{retired_norm}') no coincide con jugadores ('{home_norm}', '{away_norm}').")
-                        
-                        if not winner:
-                            logger.warning("  ⚠️ No se pudo confirmar el ganador en un partido por retiro por los métodos primarios o de estado.")
-
-                    except Exception as e:
-                        logger.error(f"  ❌ Error procesando estado de retiro: {e}")
-
-
-            if not winner:
-                logger.error(f"  ❌ No se pudo determinar un ganador para el partido en {match_url}. Estado: {status_text}")
-
-            final_score = f"{home_score_str}-{away_score_str}{final_score_suffix}"
-
-            logger.info(f"  ✅ Resultado final: {final_score}. Ganador: {winner}")
-            return final_score, winner
-
-        except Exception as e:
-            logger.error(f"  ❌ Error extrayendo el resultado final de {match_url}: {e}")
-            error_path = f"error_screenshot_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png"
-            await self.page.screenshot(path=error_path)
-            logger.error(f"  📸 Screenshot de error guardado en: {error_path}")
-            return None, None
-
-    async def verify_all_matches(self):
-        """🔄 Procesar todos los partidos y verificar las predicciones."""
-        logger.info("🚀 Iniciando la verificación de predicciones...")
-        
-        for i, match_data in enumerate(self.matches_to_verify):
-            logger.info("-" * 60)
-            logger.info(f"🔎 Verificando Partido {i+1}/{len(self.matches_to_verify)}: {match_data['jugador1']} vs {match_data['jugador2']}")
-
-            prediction_info = match_data.get('ranking_analysis', {}).get('prediction', {})
-            predicted_winner = prediction_info.get('favored_player')
-            prediction_confidence = prediction_info.get('confidence')
-
-            if not predicted_winner:
-                logger.warning("  ⚠️ No se encontró predicción para este partido. Saltando.")
+            if "ZA" in fields:
+                current_tournament = fields["ZA"]
                 continue
 
-            final_score, actual_winner = await self.get_final_result(match_data['match_url'])
-            
-            hit = None
-            if actual_winner:
-                # Lógica de comparación de nombres mejorada
-                # Toma la primera palabra del nombre predicho (ej: "Rublev" de "Rublev A.")
-                predicted_name_part = predicted_winner.split(' ')[0]
-                # Comprueba si esa parte está en el nombre completo del ganador real
-                hit = predicted_name_part.lower() in actual_winner.lower()
+            if "AA" not in fields:
+                continue
 
-            result = {
+            if "DOBLES" in current_tournament or "DOUBLES" in current_tournament:
+                continue
+
+            j1 = fields.get("AE", "")
+            j2 = fields.get("AF", "")
+            match_id = fields.get("AA", "")
+
+            if not j1 or not j2 or not match_id:
+                continue
+
+            key = _build_match_key(j1, j2)
+            lookup[key] = {
+                "match_id": match_id,
+                "jugador1_fs": j1,
+                "jugador2_fs": j2,
+                "torneo_fs": current_tournament,
+            }
+
+            # También indexar por apellidos solos (fallback tier 2)
+            a1, _ = _parse_nombre(j1)
+            a2, _ = _parse_nombre(j2)
+            key_apellido = (min(a1, a2), "", max(a1, a2), "")
+            if key_apellido not in lookup:
+                lookup[key_apellido] = lookup[key]
+
+    logger.info(f"📡 FlashScore feed: {len(lookup)} partidos indexados (hoy + ayer + anteayer)")
+    return lookup
+
+
+def _buscar_match_id(p1: str, p2: str, feed_lookup: Dict) -> Optional[str]:
+    """
+    Busca el match_id en el feed de FlashScore por nombre.
+    Tier 1: match_key exacto (apellido + inicial).
+    Tier 2: solo apellidos (sin inicial).
+    Tier 3: substring overlap en apellidos ≥4 chars.
+    """
+    # Tier 1: clave exacta
+    key = _build_match_key(p1, p2)
+    if key in feed_lookup:
+        return feed_lookup[key]["match_id"]
+
+    # Tier 2: solo apellidos
+    a1, _ = _parse_nombre(p1)
+    a2, _ = _parse_nombre(p2)
+    key_apellido = (min(a1, a2), "", max(a1, a2), "")
+    if key_apellido in feed_lookup:
+        return feed_lookup[key_apellido]["match_id"]
+
+    # Tier 3: substring overlap
+    for fkey, fval in feed_lookup.items():
+        fa1, _, fa2, _ = fkey
+        if not fa1 or not fa2:
+            continue
+        a1_match = (a1 and fa1 and (a1 in fa1 or fa1 in a1) and len(min(a1, fa1, key=len)) >= 4)
+        a2_match = (a2 and fa2 and (a2 in fa2 or fa2 in a2) and len(min(a2, fa2, key=len)) >= 4)
+        if a1_match and a2_match:
+            return fval["match_id"]
+        # Intentar cruzado (home/away invertido)
+        a1_match_cross = (a1 and fa2 and (a1 in fa2 or fa2 in a1) and len(min(a1, fa2, key=len)) >= 4)
+        a2_match_cross = (a2 and fa1 and (a2 in fa1 or fa1 in a2) and len(min(a2, fa1, key=len)) >= 4)
+        if a1_match_cross and a2_match_cross:
+            return fval["match_id"]
+
+    return None
+
+
+def obtener_resultado_api(event_id: str) -> dict:
+    """
+    Consulta dc_1_{event_id} y retorna status + ganador.
+
+    DJ = 'H' (local ganó) | 'A' (visitante ganó) | '' (no terminado)
+    DE = sets local | DF = sets visitante
+    """
+    if not event_id:
+        return {'status': 'INVALID_ID'}
+
+    url = f"{FLASHSCORE_BASE}/dc_1_{event_id}"
+    try:
+        r = requests.get(url, headers=HEADERS, timeout=10)
+        r.raise_for_status()
+    except Exception as e:
+        return {'status': 'ERROR', 'error': str(e)}
+
+    datos = parsear_respuesta_flashscore(r.text)
+    dj = datos.get('DJ', '')
+
+    if dj in ('H', 'A'):
+        return {
+            'status': 'FT',
+            'ganador_lado': 'jugador1' if dj == 'H' else 'jugador2',
+            'sets_local': datos.get('DE', '0'),
+            'sets_visitante': datos.get('DF', '0'),
+        }
+
+    # No terminado — distinguir NS vs LIVE
+    try:
+        dc_ts = int(datos.get('DC', '0'))
+        if dc_ts and datetime.fromtimestamp(dc_ts) > datetime.now():
+            return {'status': 'NS'}
+    except (ValueError, TypeError):
+        pass
+
+    return {'status': 'LIVE'}
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Búsqueda de archivo H2H
+# ──────────────────────────────────────────────────────────────────────────────
+
+def find_latest_h2h_results_file():
+    """Encontrar el archivo h2h_results_enhanced más reciente en reports/."""
+    reports_dir = Path('reports')
+    if not reports_dir.exists():
+        logger.error("❌ El directorio 'reports' no existe.")
+        return None
+
+    results_files = list(reports_dir.glob('h2h_results_enhanced_*.json'))
+    if not results_files:
+        logger.error("❌ No se encontraron archivos h2h_results_enhanced_*.json.")
+        return None
+
+    latest_file = max(results_files, key=lambda p: p.stat().st_mtime)
+    return str(latest_file)
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Verificación principal
+# ──────────────────────────────────────────────────────────────────────────────
+
+def verificar_partidos(h2h_file: str, tier_filter: str = None):
+    """Verifica resultados de todos los partidos vía API Ninja."""
+
+    with open(h2h_file, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+
+    matches = data.get('partidos', [])
+    logger.info(f"📂 Cargados {len(matches)} partidos desde {h2h_file}")
+
+    # Filtrar por tier si se especifica
+    if tier_filter and TIER_AVAILABLE:
+        matches = [m for m in matches if detectar_tier(m.get('torneo_nombre', '')) == tier_filter]
+        logger.info(f"Filtro tier '{tier_filter}': {len(matches)} partidos")
+
+    if not matches:
+        logger.warning("⚠️ Sin partidos para verificar.")
+        return
+
+    # Pre-fetch feed de FlashScore para resolver match_ids faltantes
+    feed_lookup = _fetch_finished_matches_feed()
+
+    verification_results = []
+    verified = 0
+    hits = 0
+    not_finished = 0
+    errors = 0
+    resolved_by_name = 0
+
+    for i, match in enumerate(matches):
+        p1 = match.get('jugador1', '?')
+        p2 = match.get('jugador2', '?')
+        match_url = match.get('match_url', '')
+
+        # Obtener predicción
+        prediction_info = match.get('ranking_analysis', {}).get('prediction', {})
+        predicted_winner = prediction_info.get('favored_player')
+        prediction_confidence = prediction_info.get('confidence')
+
+        if not predicted_winner:
+            logger.warning(f"  ⚠️ [{i+1}/{len(matches)}] {p1} vs {p2} — Sin predicción. Saltando.")
+            continue
+
+        # Extraer event_id de la URL
+        event_id = extraer_event_id(match_url)
+
+        # Fallback: buscar por nombre en el feed de FlashScore
+        if not event_id:
+            event_id = _buscar_match_id(p1, p2, feed_lookup)
+            if event_id:
+                resolved_by_name += 1
+            else:
+                logger.warning(f"  ⚠️ [{i+1}/{len(matches)}] {p1} vs {p2} — No encontrado en feed.")
+                errors += 1
+                continue
+
+        # Consultar API
+        resultado = obtener_resultado_api(event_id)
+        status = resultado.get('status')
+
+        if status == 'FT':
+            ganador_lado = resultado['ganador_lado']
+            actual_winner = match.get(ganador_lado, '?')
+            sets_score = f"{resultado['sets_local']}-{resultado['sets_visitante']}"
+
+            # Comparar predicción con resultado
+            predicted_part = predicted_winner.split(' ')[0].lower()
+            hit = predicted_part in actual_winner.lower()
+
+            verified += 1
+            if hit:
+                hits += 1
+
+            logger.info(f"  {'✅' if hit else '❌'} [{i+1}/{len(matches)}] {p1} vs {p2} → {actual_winner} ({sets_score}) | Pred: {predicted_winner} {'ACIERTO' if hit else 'FALLO'}")
+
+            verification_results.append({
                 'match_info': {
-                    'jugador1': match_data['jugador1'],
-                    'jugador2': match_data['jugador2'],
-                    'match_url': match_data['match_url']
+                    'jugador1': p1,
+                    'jugador2': p2,
+                    'match_url': match_url,
+                    'torneo': match.get('torneo_nombre', ''),
                 },
                 'prediction': {
                     'predicted_winner': predicted_winner,
-                    'confidence': prediction_confidence
+                    'confidence': prediction_confidence,
                 },
                 'actual_result': {
-                    'final_score': final_score,
-                    'actual_winner': actual_winner
+                    'final_score': sets_score,
+                    'actual_winner': actual_winner,
                 },
                 'verification': {
                     'hit': hit,
-                    'status': 'Verified' if actual_winner else 'Not Finished or Error'
-                }
-            }
-            self.verification_results.append(result)
-            
-            if hit is not None:
-                logger.info(f"  🎯 Predicción: {predicted_winner} | Ganador Real: {actual_winner} -> {'✅ ACIERTO' if hit else '❌ FALLO'}")
-            
-            await self.page.wait_for_timeout(3000) # Pausa para no sobrecargar
+                    'status': 'Verified',
+                },
+            })
 
-    def save_verification_results(self):
-        """💾 Guardar los resultados de la verificación en un archivo JSON."""
-        if not self.verification_results:
-            logger.warning("⚠️ No hay resultados de verificación para guardar.")
-            return
+        elif status in ('NS', 'LIVE'):
+            not_finished += 1
+            logger.info(f"  ⏳ [{i+1}/{len(matches)}] {p1} vs {p2} — {status}")
 
-        output_dir = Path('reports')
-        output_dir.mkdir(exist_ok=True)
-        
-        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        filename = output_dir / f"resultados_finales_{timestamp}.json"
+        else:
+            errors += 1
+            logger.warning(f"  ⚠️ [{i+1}/{len(matches)}] {p1} vs {p2} — Error: {resultado.get('error', status)}")
 
-        # Calcular estadísticas de aciertos
-        total_verified = sum(1 for r in self.verification_results if r['verification']['hit'] is not None)
-        total_hits = sum(1 for r in self.verification_results if r['verification']['hit'] is True)
-        accuracy = (total_hits / total_verified * 100) if total_verified > 0 else 0
+        time.sleep(DELAY_ENTRE_REQUESTS)
 
-        output_data = {
-            'metadata': {
-                'verification_date': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-                'total_matches_processed': len(self.verification_results),
-                'total_matches_verified': total_verified,
-            },
-            'summary': {
-                'total_hits': total_hits,
-                'total_misses': total_verified - total_hits,
-                'accuracy_percentage': round(accuracy, 2)
-            },
-            'detailed_results': self.verification_results
-        }
+    # Guardar resultados
+    accuracy = (hits / verified * 100) if verified > 0 else 0
 
-        try:
-            with open(filename, 'w', encoding='utf-8') as f:
-                json.dump(output_data, f, ensure_ascii=False, indent=2)
-            
-            logger.info("=" * 60)
-            logger.info("🏁 VERIFICACIÓN COMPLETADA 🏁")
-            logger.info(f"💾 Resultados guardados en: {filename}")
-            logger.info(f"📊 Tasa de Aciertos: {accuracy:.2f}% ({total_hits}/{total_verified})")
-            logger.info("=" * 60)
+    logger.info("=" * 60)
+    logger.info("🏁 VERIFICACIÓN COMPLETADA 🏁")
+    logger.info(f"📊 Verificados: {verified} | Aciertos: {hits} | Fallos: {verified - hits}")
+    logger.info(f"📊 Accuracy: {accuracy:.1f}%")
+    logger.info(f"⏳ No finalizados: {not_finished} | Errores: {errors}")
+    if resolved_by_name:
+        logger.info(f"🔗 Resueltos por name matching: {resolved_by_name}")
+    logger.info("=" * 60)
 
-        except Exception as e:
-            logger.error(f"❌ Error guardando los resultados de la verificación: {e}")
+    if not verification_results:
+        logger.warning("⚠️ Ningún partido verificado — nada que guardar.")
+        return
 
-    async def cleanup(self):
-        """🧹 Limpieza de recursos de Playwright."""
-        if self.browser:
-            await self.browser.close()
-        if self.playwright:
-            await self.playwright.stop()
-        logger.info("🧹 Recursos del navegador liberados.")
+    output_dir = Path('reports')
+    output_dir.mkdir(exist_ok=True)
+    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+    filename = output_dir / f"resultados_finales_{timestamp}.json"
 
-async def main():
-    verifier = ResultVerifier()
-    try:
-        if not verifier.load_matches_to_verify():
-            return
-        
-        await verifier.setup_browser()
-        await verifier.verify_all_matches()
-        verifier.save_verification_results()
+    output_data = {
+        'metadata': {
+            'verification_date': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'source_file': h2h_file,
+            'tier_filter': tier_filter,
+            'total_matches_processed': len(matches),
+            'total_matches_verified': verified,
+            'total_not_finished': not_finished,
+            'total_errors': errors,
+        },
+        'summary': {
+            'total_hits': hits,
+            'total_misses': verified - hits,
+            'accuracy_percentage': round(accuracy, 2),
+        },
+        'detailed_results': verification_results,
+    }
 
-    except Exception as e:
-        logger.error(f"❌ Ocurrió un error inesperado en la ejecución principal: {e}")
-    finally:
-        await verifier.cleanup()
+    with open(filename, 'w', encoding='utf-8') as f:
+        json.dump(output_data, f, ensure_ascii=False, indent=2)
+
+    logger.info(f"💾 Resultados guardados en: {filename}")
+    return str(filename)
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# CLI
+# ──────────────────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    parser = argparse.ArgumentParser(description='Verificación de resultados finales vía API Ninja')
+    parser.add_argument('file', nargs='?', default=None,
+                        help='Archivo H2H JSON (default: más reciente en reports/)')
+    parser.add_argument('--torneo-tipo', type=str, default=None,
+                        choices=['grand_slam', 'atp1000', 'atp500', 'challenger', 'itf'],
+                        help='Filtrar por tier de torneo (default: todos)')
+    args = parser.parse_args()
+
+    if args.file:
+        h2h_file = args.file
+    else:
+        h2h_file = find_latest_h2h_results_file()
+
+    if h2h_file:
+        logger.info(f"📂 Archivo seleccionado: {h2h_file}")
+        verificar_partidos(h2h_file, tier_filter=args.torneo_tipo)
+    else:
+        logger.error("❌ No se encontró archivo H2H para verificar.")

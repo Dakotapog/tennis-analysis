@@ -1,0 +1,422 @@
+{
+  "metadata": {
+    "timestamp": "20260611_164208",
+    "bankroll": 20000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260611_123946.json",
+    "n_partidos_analizados": 99,
+    "calibracion_n": 697,
+    "parametros": {
+      "modo": "cobertura",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Federico Coria vs Andrea Collarini",
+      "favorito": "Federico Coria",
+      "cuota": 2.8,
+      "edge_pct": "17.4%",
+      "p_modelo": 0.531,
+      "n_h2h": 6,
+      "p_blend": 0.5436551724137931,
+      "kelly_kl": 0.333,
+      "kelly_usado": 0.0725,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Elizabeth Mandlik vs Dalma Galfi",
+      "favorito": "Elizabeth Mandlik",
+      "cuota": 3.35,
+      "edge_pct": "20.3%",
+      "p_modelo": 0.502,
+      "n_h2h": 0,
+      "p_blend": 0.5689655172413793,
+      "kelly_kl": 0.3247,
+      "kelly_usado": 0.0964,
+      "stake": 1000,
+      "retorno_potencial": 3350.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Viktorija Golubic vs Katie Swan",
+      "favorito": "Katie Swan",
+      "cuota": 2.6,
+      "edge_pct": "15.5%",
+      "p_modelo": 0.54,
+      "n_h2h": 0,
+      "p_blend": 0.5689655172413793,
+      "kelly_kl": 0.3062,
+      "kelly_usado": 0.0749,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Filippo Romano vs Jack Pinnington Jones",
+      "favorito": "Filippo Romano",
+      "cuota": 2.88,
+      "edge_pct": "16.3%",
+      "p_modelo": 0.51,
+      "n_h2h": 0,
+      "p_blend": 0.5689655172413793,
+      "kelly_kl": 0.2964,
+      "kelly_usado": 0.0849,
+      "stake": 1000,
+      "retorno_potencial": 2880.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Toby Samuel vs August Holmgren",
+      "favorito": "August Holmgren",
+      "cuota": 2.45,
+      "edge_pct": "11.5%",
+      "p_modelo": 0.523,
+      "n_h2h": 0,
+      "p_blend": 0.5689655172413793,
+      "kelly_kl": 0.2338,
+      "kelly_usado": 0.0679,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Darja Vidmanova vs Lucrezia Stefanini",
+      "favorito": "Lucrezia Stefanini",
+      "cuota": 2.12,
+      "edge_pct": "7.0%",
+      "p_modelo": 0.542,
+      "n_h2h": 1,
+      "p_blend": 0.5622241379310344,
+      "kelly_kl": 0.1637,
+      "kelly_usado": 0.0428,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Tristan Schoolkate vs Oliver Tarvet",
+      "favorito": "Oliver Tarvet",
+      "cuota": 2.05,
+      "edge_pct": "5.1%",
+      "p_modelo": 0.539,
+      "n_h2h": 0,
+      "p_blend": 0.5689655172413793,
+      "kelly_kl": 0.1214,
+      "kelly_usado": 0.0396,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "slight_underdog",
+      "superficie": "grass"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Elizabeth Mandlik",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Katie Swan",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Filippo Romano",
+          "cuota": 2.88
+        }
+      ],
+      "cuota_combo": 25.08,
+      "hr_combo": 0.2281,
+      "ev_combo": 4.7218,
+      "excluidos": [
+        "Federico Coria",
+        "August Holmgren",
+        "Lucrezia Stefanini",
+        "Oliver Tarvet",
+        "Harmony Tan",
+        "David Jorda Sanchis",
+        "Nikolas Sanchez Izquierdo"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 25080.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Federico Coria",
+          "cuota": 2.8
+        },
+        {
+          "jugador": "Elizabeth Mandlik",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Filippo Romano",
+          "cuota": 2.88
+        }
+      ],
+      "cuota_combo": 27.01,
+      "hr_combo": 0.2055,
+      "ev_combo": 4.5525,
+      "excluidos": [
+        "Katie Swan",
+        "August Holmgren",
+        "Lucrezia Stefanini",
+        "Oliver Tarvet",
+        "Harmony Tan",
+        "David Jorda Sanchis",
+        "Nikolas Sanchez Izquierdo"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 27010.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Federico Coria",
+          "cuota": 2.8
+        },
+        {
+          "jugador": "Elizabeth Mandlik",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Katie Swan",
+          "cuota": 2.6
+        }
+      ],
+      "cuota_combo": 24.39,
+      "hr_combo": 0.2055,
+      "ev_combo": 4.0127,
+      "excluidos": [
+        "Filippo Romano",
+        "August Holmgren",
+        "Lucrezia Stefanini",
+        "Oliver Tarvet",
+        "Harmony Tan",
+        "David Jorda Sanchis",
+        "Nikolas Sanchez Izquierdo"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 24390.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Federico Coria",
+          "cuota": 2.8
+        },
+        {
+          "jugador": "Katie Swan",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Filippo Romano",
+          "cuota": 2.88
+        }
+      ],
+      "cuota_combo": 20.97,
+      "hr_combo": 0.2055,
+      "ev_combo": 3.3094,
+      "excluidos": [
+        "Elizabeth Mandlik",
+        "August Holmgren",
+        "Lucrezia Stefanini",
+        "Oliver Tarvet",
+        "Harmony Tan",
+        "David Jorda Sanchis",
+        "Nikolas Sanchez Izquierdo"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 20970.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Federico Coria",
+          "cuota": 2.8
+        },
+        {
+          "jugador": "Elizabeth Mandlik",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Katie Swan",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Filippo Romano",
+          "cuota": 2.88
+        }
+      ],
+      "cuota_combo": 70.24,
+      "hr_combo": 0.1256,
+      "ev_combo": 7.8207,
+      "excluidos": [
+        "August Holmgren",
+        "Lucrezia Stefanini",
+        "Oliver Tarvet",
+        "Harmony Tan",
+        "David Jorda Sanchis",
+        "Nikolas Sanchez Izquierdo"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Elizabeth Mandlik",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Katie Swan",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Filippo Romano",
+          "cuota": 2.88
+        },
+        {
+          "jugador": "August Holmgren",
+          "cuota": 2.45
+        }
+      ],
+      "cuota_combo": 61.46,
+      "hr_combo": 0.1394,
+      "ev_combo": 7.5653,
+      "excluidos": [
+        "Federico Coria",
+        "Lucrezia Stefanini",
+        "Oliver Tarvet",
+        "Harmony Tan",
+        "David Jorda Sanchis",
+        "Nikolas Sanchez Izquierdo"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Federico Coria",
+          "cuota": 2.8
+        },
+        {
+          "jugador": "Elizabeth Mandlik",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Katie Swan",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "August Holmgren",
+          "cuota": 2.45
+        }
+      ],
+      "cuota_combo": 59.75,
+      "hr_combo": 0.1256,
+      "ev_combo": 6.5037,
+      "excluidos": [
+        "Filippo Romano",
+        "Lucrezia Stefanini",
+        "Oliver Tarvet",
+        "Harmony Tan",
+        "David Jorda Sanchis",
+        "Nikolas Sanchez Izquierdo"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Federico Coria",
+          "cuota": 2.8
+        },
+        {
+          "jugador": "Katie Swan",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Filippo Romano",
+          "cuota": 2.88
+        },
+        {
+          "jugador": "August Holmgren",
+          "cuota": 2.45
+        }
+      ],
+      "cuota_combo": 51.37,
+      "hr_combo": 0.1256,
+      "ev_combo": 5.4509,
+      "excluidos": [
+        "Elizabeth Mandlik",
+        "Lucrezia Stefanini",
+        "Oliver Tarvet",
+        "Harmony Tan",
+        "David Jorda Sanchis",
+        "Nikolas Sanchez Izquierdo"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.5263157894736842,
+    "total_ajustado": 11052.631578947368,
+    "var_95": -10375.833333333334,
+    "cvar_95": -10744.393664111192,
+    "expected_pl": 60358.10797120017,
+    "sharpe_ratio": 0.8379161624074493,
+    "kelly_growth_rate": 1.243090811088549,
+    "sessions_to_double": 0.5575997943006035,
+    "var_excedido": true,
+    "factor_var": 0.48188900489920483
+  },
+  "resumen": {
+    "gastado_individuales": 2000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 4000,
+    "total_en_riesgo": 6000.0,
+    "pct_bankroll_en_riesgo": 0.3,
+    "n_senales_apostar": 7,
+    "pool_cobertura": 10,
+    "alerta_riesgo": false
+  }
+}

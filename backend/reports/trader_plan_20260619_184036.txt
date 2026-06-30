@@ -1,0 +1,191 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — ITF CLAY
+  2026-06-19 18:40  │  Bankroll: $10,000
+  Señales APOSTAR: 5  │  Watchlist: 8  │  Sin edge: 3
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 13 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.05 (itf)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $4,000 (40% bankroll)
+
+  │  🎾 Selena Janicijevic vs Lidia Encheva
+  │     Apostar: Lidia Encheva
+  │     Cuota 3.25  │  Edge 27.5%  │  p_blend 0.671 (n_h2h=0)
+  │     Kelly-KL 14.2% → stake $1,000  │  Retorno potencial $3,250
+  │     EV real +118.2%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Madison Sieg vs Lucie Petruzelova
+  │     Apostar: Lucie Petruzelova
+  │     Cuota 3.70  │  Edge 24.0%  │  p_blend 0.671 (n_h2h=0)
+  │     Kelly-KL 10.3% → stake $1,000  │  Retorno potencial $3,700
+  │     EV real +148.4%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Gabriela Ce vs Sofia Rocchetti
+  │     Apostar: Sofia Rocchetti
+  │     Cuota 3.05  │  Edge 19.2%  │  p_blend 0.671 (n_h2h=0)
+  │     Kelly-KL 9.3% → stake $1,000  │  Retorno potencial $3,050
+  │     EV real +104.8%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Martha Matoula vs Berfu Cengiz
+  │     Apostar: Martha Matoula
+  │     Cuota 2.55  │  Edge 13.1%  │  p_blend 0.634 (n_h2h=1)
+  │     Kelly-KL 7.0% → stake $1,000  │  Retorno potencial $2,550
+  │     EV real +61.8%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Julia Adams vs Adelina Lachinova
+  │     Apostar: Julia Adams
+  │     Cuota 2.50  │  Edge 10.9%  │  p_blend 0.634 (n_h2h=0)
+  │     Kelly-KL 5.8% → stake $1,000  │  Retorno potencial $2,500
+  │     EV real +58.5%  │  Zona: underdog  │  Sup: hard
+
+  │  Total individuales: $5,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 13 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $6,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Yuno Kitahara        @4.30  p=0.634  zona=underdog [W]
+  │    2. Lucie Petruzelova    @3.70  p=0.671  zona=underdog
+  │    3. Lidia Encheva        @3.25  p=0.671  zona=underdog
+  │    4. Sofia Rocchetti      @3.05  p=0.671  zona=underdog
+  │    5. Martha Matoula       @2.55  p=0.634  zona=underdog
+  │    6. Hoyoung Roh          @2.55  p=0.634  zona=underdog [W]
+  │    7. Julia Adams          @2.50  p=0.634  zona=underdog
+  │    8. Ronit Karki          @2.45  p=0.634  zona=underdog [W]
+  │    9. Noah Zamora          @2.18  p=0.590  zona=underdog [W]
+  │    10. Anna Kubareva        @2.18  p=0.583  zona=underdog [W]
+  │    11. Aishi Das            @2.00  p=0.634  zona=slight_underdog [W]
+  │    12. Lucciana Perez Alarcon @1.91  p=0.671  zona=slight_underdog [W]
+  │    13. Andrea De Marchi     @1.85  p=0.671  zona=slight_underdog [W]
+
+  │  ── 3 PIERNAS: TOP 4 combos × $1,000 = $4,000 ──
+  │     (cada combo excluye 10 jugadores)
+  │     [3p-1] Lidia Encheva@3.25 + Lucie Petruzelova@3.70 + Yuno Kitahara@4.30
+  │            @51.71 HR:28.6% EV:+1377.3% →$51,710  excluye:[Sofia Rocchetti, Martha Matoula, Julia Adams, Hoyoung Roh, Ronit Karki, Noah Zamora, Lucciana Perez Alarcon, Anna Kubareva, Andrea De Marchi, Aishi Das]
+  │     [3p-2] Lucie Petruzelova@3.70 + Sofia Rocchetti@3.05 + Yuno Kitahara@4.30
+  │            @48.53 HR:28.6% EV:+1286.4% →$48,530  excluye:[Lidia Encheva, Martha Matoula, Julia Adams, Hoyoung Roh, Ronit Karki, Noah Zamora, Lucciana Perez Alarcon, Anna Kubareva, Andrea De Marchi, Aishi Das]
+  │     [3p-3] Lidia Encheva@3.25 + Sofia Rocchetti@3.05 + Yuno Kitahara@4.30
+  │            @42.62 HR:28.6% EV:+1117.8% →$42,620  excluye:[Lucie Petruzelova, Martha Matoula, Julia Adams, Hoyoung Roh, Ronit Karki, Noah Zamora, Lucciana Perez Alarcon, Anna Kubareva, Andrea De Marchi, Aishi Das]
+  │     [3p-4] Lidia Encheva@3.25 + Lucie Petruzelova@3.70 + Sofia Rocchetti@3.05
+  │            @36.68 HR:30.3% EV:+1010.0% →$36,680  excluye:[Martha Matoula, Julia Adams, Yuno Kitahara, Hoyoung Roh, Ronit Karki, Noah Zamora, Lucciana Perez Alarcon, Anna Kubareva, Andrea De Marchi, Aishi Das]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $1,000 = $4,000 ──
+  │     (cada combo excluye 9 jugadores)
+  │     [4p-1] Lidia Encheva@3.25 + Lucie Petruzelova@3.70 + Sofia Rocchetti@3.05 + Yuno Kitahara@4.30
+  │            @157.71 HR:19.2% EV:+2925.2% →$157,710  excluye:[Martha Matoula, Julia Adams, Hoyoung Roh, Ronit Karki, Noah Zamora, Lucciana Perez Alarcon, Anna Kubareva, Andrea De Marchi, Aishi Das]
+  │     [4p-2] Lidia Encheva@3.25 + Lucie Petruzelova@3.70 + Martha Matoula@2.55 + Yuno Kitahara@4.30
+  │            @131.85 HR:18.1% EV:+2289.5% →$131,850  excluye:[Sofia Rocchetti, Julia Adams, Hoyoung Roh, Ronit Karki, Noah Zamora, Lucciana Perez Alarcon, Anna Kubareva, Andrea De Marchi, Aishi Das]
+  │     [4p-3] Lucie Petruzelova@3.70 + Sofia Rocchetti@3.05 + Martha Matoula@2.55 + Yuno Kitahara@4.30
+  │            @123.74 HR:18.1% EV:+2142.4% →$123,740  excluye:[Lidia Encheva, Julia Adams, Hoyoung Roh, Ronit Karki, Noah Zamora, Lucciana Perez Alarcon, Anna Kubareva, Andrea De Marchi, Aishi Das]
+  │     [4p-4] Lidia Encheva@3.25 + Sofia Rocchetti@3.05 + Martha Matoula@2.55 + Yuno Kitahara@4.30
+  │            @108.69 HR:18.1% EV:+1869.7% →$108,690  excluye:[Lucie Petruzelova, Julia Adams, Hoyoung Roh, Ronit Karki, Noah Zamora, Lucciana Perez Alarcon, Anna Kubareva, Andrea De Marchi, Aishi Das]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-4 picks?) ──
+  │  Total apostado: $8,000
+
+  │  🏆 0 fallos (13/13 ganan): retorno $701,530 → P&L +$693,530 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Andrea De Marchi]):
+  │       retorno $701,530 → P&L +$693,530 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Yuno Kitahara]):
+  │       retorno $36,680 → P&L +$28,680 (1/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Andrea De Marchi, Lucciana Perez Alarcon]):
+  │       retorno $701,530 → P&L +$693,530 (8/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Yuno Kitahara, Lucie Petruzelova]):
+  │       retorno $0 → P&L $-8,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Andrea De Marchi, Lucciana Perez Alarcon, Aishi Das]):
+  │       retorno $701,530 → P&L +$693,530 (8/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Yuno Kitahara, Lucie Petruzelova, Lidia Encheva]):
+  │       retorno $0 → P&L $-8,000 (0/8 combos pagan)
+  │  ✅ 4 fallos (mejor caso: fallan favoritos [Andrea De Marchi, Lucciana Perez Alarcon, Aishi Das, Noah Zamora]):
+  │       retorno $701,530 → P&L +$693,530 (8/8 combos pagan)
+  │  ❌ 4 fallos (peor caso: fallan underdogs [Yuno Kitahara, Lucie Petruzelova, Lidia Encheva, Sofia Rocchetti]):
+  │       retorno $0 → P&L $-8,000 (0/8 combos pagan)
+
+  │  Total cobertura: $8,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     13
+  │  ρ estructural:       0.05 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.625
+  │  Reducción vs naive:  -37.5%
+  │
+  │  Stake naive (sin ajuste):    $      13,000
+  │  Stake ajustado (PK):         $       8,125
+  │  Ahorro por correlación:      $       4,875
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $      -3,072  (30.7% bankroll)
+  │  CVaR 95%:           $      -5,127
+  │  Max VaR permitido:  $       2,500  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.77
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $     127,850
+  │  σ(P&L):             $     112,316
+  │  Sharpe Ratio:              1.138
+  │  Kelly Growth Rate:        2.2545 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $ 786,342,002
+  │  Bankroll en 10 sesiones:  $61,833,374,350,024
+  │  Bankroll en 30 sesiones:  $2,364,116,325,022,082,209,213,997,637,435,392
+  │  Sesiones para duplicar:   0.3
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.77 (de $13,000 a $10,000)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.77) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Lidia Encheva             @3.25  →  $   1,000  (ret. $     3,250)
+  │    Lucie Petruzelova         @3.70  →  $   1,000  (ret. $     3,700)
+  │    Sofia Rocchetti           @3.05  →  $   1,000  (ret. $     3,050)
+  │    Martha Matoula            @2.55  →  $   1,000  (ret. $     2,550)
+  │    Julia Adams               @2.50  →  $   1,000  (ret. $     2,500)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @51.71]  $   1,000  →  Lidia Encheva@3.25 + Lucie Petruzelova@3.70 + Yuno Kitahara@4.30
+  │    [3p @48.53]  $   1,000  →  Lucie Petruzelova@3.70 + Sofia Rocchetti@3.05 + Yuno Kitahara@4.30
+  │    [3p @42.62]  $   1,000  →  Lidia Encheva@3.25 + Sofia Rocchetti@3.05 + Yuno Kitahara@4.30
+  │    [3p @36.68]  $   1,000  →  Lidia Encheva@3.25 + Lucie Petruzelova@3.70 + Sofia Rocchetti@3.05
+  │    [4p @157.71]  $   1,000  →  Lidia Encheva@3.25 + Lucie Petruzelova@3.70 + Sofia Rocchetti@3.05 + Yuno Kitahara@4.30
+  │    [4p @131.85]  $   1,000  →  Lidia Encheva@3.25 + Lucie Petruzelova@3.70 + Martha Matoula@2.55 + Yuno Kitahara@4.30
+  │    [4p @123.74]  $   1,000  →  Lucie Petruzelova@3.70 + Sofia Rocchetti@3.05 + Martha Matoula@2.55 + Yuno Kitahara@4.30
+  │    [4p @108.69]  $   1,000  →  Lidia Encheva@3.25 + Sofia Rocchetti@3.05 + Martha Matoula@2.55 + Yuno Kitahara@4.30
+  │
+  │  TOTAL EN RIESGO:  $    13,000  (130.0% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $        10,000                       ║
+  ║  Individuales:        $         5,000  (50.0% bankroll)      ║
+  ║  Cobertura:           $         8,000  (80.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $        13,000  (130.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       5                                       ║
+  ║  Pool cobertura:       13 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260619_18  ║
+  ║  Partidos analizados:  40                                       ║
+  ║  Superficie:          clay (itf)                                  ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  ⚠️  ALERTA: 130.0% bankroll en riesgo — por encima del 30% recomendado.
+      Reducir combos o sistema hasta n≥30 con datos limpios.
+
+  📊 Calibración: n=1325 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.671 (calibrado clay) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260619_184036.json

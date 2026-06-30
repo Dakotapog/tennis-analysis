@@ -1,0 +1,324 @@
+{
+  "metadata": {
+    "timestamp": "20260622_082936",
+    "bankroll": 20000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260622_081423.json",
+    "n_partidos_analizados": 89,
+    "calibracion_n": 1325,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "challenger",
+      "superficie": "clay",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Matheus Pucinelli De Almeida vs Luciano Emanuel Ambrogi",
+      "favorito": "Luciano Emanuel Ambrogi",
+      "cuota": 3.6,
+      "edge_pct": "23.2%",
+      "p_modelo": 0.51,
+      "n_h2h": 2,
+      "p_blend": 0.55782,
+      "kelly_kl": 0.2419,
+      "kelly_usado": 0.0969,
+      "stake": 1000,
+      "retorno_potencial": 3600.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Michele Ribecai vs Niels McDonald",
+      "favorito": "Niels McDonald",
+      "cuota": 2.8,
+      "edge_pct": "15.5%",
+      "p_modelo": 0.512,
+      "n_h2h": 0,
+      "p_blend": 0.5897,
+      "kelly_kl": 0.1812,
+      "kelly_usado": 0.0904,
+      "stake": 1000,
+      "retorno_potencial": 2800.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Sascha Gueymard Wayenburg vs Gabriel Ghetu",
+      "favorito": "Gabriel Ghetu",
+      "cuota": 2.28,
+      "edge_pct": "8.5%",
+      "p_modelo": 0.524,
+      "n_h2h": 0,
+      "p_blend": 0.5897,
+      "kelly_kl": 0.1183,
+      "kelly_usado": 0.0673,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Luciano Emanuel Ambrogi",
+          "cuota": 3.6
+        },
+        {
+          "jugador": "Niels McDonald",
+          "cuota": 2.8
+        },
+        {
+          "jugador": "Gijs Brouwer",
+          "cuota": 3.35
+        }
+      ],
+      "cuota_combo": 33.77,
+      "hr_combo": 0.1893,
+      "ev_combo": 5.3929,
+      "excluidos": [
+        "Gabriel Ghetu",
+        "Tomás Martinez"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 33770.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Luciano Emanuel Ambrogi",
+          "cuota": 3.6
+        },
+        {
+          "jugador": "Gijs Brouwer",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Tomás Martinez",
+          "cuota": 2.45
+        }
+      ],
+      "cuota_combo": 29.55,
+      "hr_combo": 0.1893,
+      "ev_combo": 4.5937,
+      "excluidos": [
+        "Niels McDonald",
+        "Gabriel Ghetu"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 29550.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Luciano Emanuel Ambrogi",
+          "cuota": 3.6
+        },
+        {
+          "jugador": "Niels McDonald",
+          "cuota": 2.8
+        },
+        {
+          "jugador": "Tomás Martinez",
+          "cuota": 2.45
+        }
+      ],
+      "cuota_combo": 24.7,
+      "hr_combo": 0.194,
+      "ev_combo": 3.7905,
+      "excluidos": [
+        "Gabriel Ghetu",
+        "Gijs Brouwer"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 24700.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Niels McDonald",
+          "cuota": 2.8
+        },
+        {
+          "jugador": "Gijs Brouwer",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Tomás Martinez",
+          "cuota": 2.45
+        }
+      ],
+      "cuota_combo": 22.98,
+      "hr_combo": 0.2001,
+      "ev_combo": 3.5993,
+      "excluidos": [
+        "Luciano Emanuel Ambrogi",
+        "Gabriel Ghetu"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 22980.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Luciano Emanuel Ambrogi",
+          "cuota": 3.6
+        },
+        {
+          "jugador": "Niels McDonald",
+          "cuota": 2.8
+        },
+        {
+          "jugador": "Gijs Brouwer",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Tomás Martinez",
+          "cuota": 2.45
+        }
+      ],
+      "cuota_combo": 82.73,
+      "hr_combo": 0.1116,
+      "ev_combo": 8.2362,
+      "excluidos": [
+        "Gabriel Ghetu"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Luciano Emanuel Ambrogi",
+          "cuota": 3.6
+        },
+        {
+          "jugador": "Gabriel Ghetu",
+          "cuota": 2.28
+        },
+        {
+          "jugador": "Gijs Brouwer",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Tomás Martinez",
+          "cuota": 2.45
+        }
+      ],
+      "cuota_combo": 67.37,
+      "hr_combo": 0.1116,
+      "ev_combo": 6.5209,
+      "excluidos": [
+        "Niels McDonald"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Luciano Emanuel Ambrogi",
+          "cuota": 3.6
+        },
+        {
+          "jugador": "Niels McDonald",
+          "cuota": 2.8
+        },
+        {
+          "jugador": "Gabriel Ghetu",
+          "cuota": 2.28
+        },
+        {
+          "jugador": "Tomás Martinez",
+          "cuota": 2.45
+        }
+      ],
+      "cuota_combo": 56.31,
+      "hr_combo": 0.1144,
+      "ev_combo": 5.4409,
+      "excluidos": [
+        "Gijs Brouwer"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Niels McDonald",
+          "cuota": 2.8
+        },
+        {
+          "jugador": "Gabriel Ghetu",
+          "cuota": 2.28
+        },
+        {
+          "jugador": "Gijs Brouwer",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Tomás Martinez",
+          "cuota": 2.45
+        }
+      ],
+      "cuota_combo": 52.4,
+      "hr_combo": 0.118,
+      "ev_combo": 5.1839,
+      "excluidos": [
+        "Luciano Emanuel Ambrogi"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.7142857142857143,
+    "total_ajustado": 12142.857142857143,
+    "var_95": -17000.0,
+    "cvar_95": -17000.0,
+    "expected_pl": 62689.519481124305,
+    "sharpe_ratio": 0.5053603939882034,
+    "kelly_growth_rate": 0.5141687349037182,
+    "sessions_to_double": 1.3480928214932053,
+    "var_excedido": true,
+    "factor_var": 0.29411764705882354
+  },
+  "resumen": {
+    "gastado_individuales": 2000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 4000,
+    "total_en_riesgo": 6000.0,
+    "pct_bankroll_en_riesgo": 0.3,
+    "n_senales_apostar": 3,
+    "pool_cobertura": 5,
+    "alerta_riesgo": false
+  }
+}

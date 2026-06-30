@@ -1,0 +1,384 @@
+{
+  "metadata": {
+    "timestamp": "20260611_124850",
+    "bankroll": 125000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260611_123946.json",
+    "n_partidos_analizados": 99,
+    "calibracion_n": 695,
+    "parametros": {
+      "modo": "cobertura",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Benjamin Bonzi vs Alex De Minaur",
+      "favorito": "Benjamin Bonzi",
+      "cuota": 4.5,
+      "edge_pct": "31.8%",
+      "p_modelo": 0.54,
+      "n_h2h": 5,
+      "p_blend": 0.5480263157894737,
+      "kelly_kl": 0.4674,
+      "kelly_usado": 0.1,
+      "stake": 8000,
+      "retorno_potencial": 36000.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Elena Rybakina vs Tatjana Maria",
+      "favorito": "Tatjana Maria",
+      "cuota": 4.35,
+      "edge_pct": "28.7%",
+      "p_modelo": 0.517,
+      "n_h2h": 2,
+      "p_blend": 0.5436421052631578,
+      "kelly_kl": 0.4224,
+      "kelly_usado": 0.1,
+      "stake": 8000,
+      "retorno_potencial": 34800.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Barbora Krejcikova vs Elena-Gabriela Ruse",
+      "favorito": "Elena-Gabriela Ruse",
+      "cuota": 2.75,
+      "edge_pct": "13.9%",
+      "p_modelo": 0.503,
+      "n_h2h": 3,
+      "p_blend": 0.5322017543859648,
+      "kelly_kl": 0.2599,
+      "kelly_usado": 0.0662,
+      "stake": 5000,
+      "retorno_potencial": 13750.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Giovanni Mpetshi Perricard vs Alexander Bublik",
+      "favorito": "Giovanni Mpetshi Perricard",
+      "cuota": 2.6,
+      "edge_pct": "13.5%",
+      "p_modelo": 0.52,
+      "n_h2h": 3,
+      "p_blend": 0.5407017543859649,
+      "kelly_kl": 0.2588,
+      "kelly_usado": 0.0634,
+      "stake": 5000,
+      "retorno_potencial": 13000.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Zhizhen Zhang vs Adrian Mannarino",
+      "favorito": "Zhizhen Zhang",
+      "cuota": 2.28,
+      "edge_pct": "10.8%",
+      "p_modelo": 0.547,
+      "n_h2h": 2,
+      "p_blend": 0.5556421052631579,
+      "kelly_kl": 0.2352,
+      "kelly_usado": 0.0521,
+      "stake": 5000,
+      "retorno_potencial": 11400.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Benjamin Bonzi",
+          "cuota": 4.5
+        },
+        {
+          "jugador": "Tatjana Maria",
+          "cuota": 4.35
+        },
+        {
+          "jugador": "Elena-Gabriela Ruse",
+          "cuota": 2.75
+        }
+      ],
+      "cuota_combo": 53.83,
+      "hr_combo": 0.2,
+      "ev_combo": 9.7653,
+      "excluidos": [
+        "Giovanni Mpetshi Perricard",
+        "Zhizhen Zhang",
+        "Magda Linette",
+        "Amanda Anisimova",
+        "Katie Boulter",
+        "Harriet Dart"
+      ],
+      "stake": 8000,
+      "retorno_potencial": 430640.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Benjamin Bonzi",
+          "cuota": 4.5
+        },
+        {
+          "jugador": "Tatjana Maria",
+          "cuota": 4.35
+        },
+        {
+          "jugador": "Giovanni Mpetshi Perricard",
+          "cuota": 2.6
+        }
+      ],
+      "cuota_combo": 50.9,
+      "hr_combo": 0.2029,
+      "ev_combo": 9.3282,
+      "excluidos": [
+        "Elena-Gabriela Ruse",
+        "Zhizhen Zhang",
+        "Magda Linette",
+        "Amanda Anisimova",
+        "Katie Boulter",
+        "Harriet Dart"
+      ],
+      "stake": 8000,
+      "retorno_potencial": 407200.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Benjamin Bonzi",
+          "cuota": 4.5
+        },
+        {
+          "jugador": "Elena-Gabriela Ruse",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Giovanni Mpetshi Perricard",
+          "cuota": 2.6
+        }
+      ],
+      "cuota_combo": 32.18,
+      "hr_combo": 0.196,
+      "ev_combo": 5.3072,
+      "excluidos": [
+        "Tatjana Maria",
+        "Zhizhen Zhang",
+        "Magda Linette",
+        "Amanda Anisimova",
+        "Katie Boulter",
+        "Harriet Dart"
+      ],
+      "stake": 8000,
+      "retorno_potencial": 257440.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Tatjana Maria",
+          "cuota": 4.35
+        },
+        {
+          "jugador": "Elena-Gabriela Ruse",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Giovanni Mpetshi Perricard",
+          "cuota": 2.6
+        }
+      ],
+      "cuota_combo": 31.1,
+      "hr_combo": 0.2013,
+      "ev_combo": 5.2601,
+      "excluidos": [
+        "Benjamin Bonzi",
+        "Zhizhen Zhang",
+        "Magda Linette",
+        "Amanda Anisimova",
+        "Katie Boulter",
+        "Harriet Dart"
+      ],
+      "stake": 8000,
+      "retorno_potencial": 248800.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Benjamin Bonzi",
+          "cuota": 4.5
+        },
+        {
+          "jugador": "Tatjana Maria",
+          "cuota": 4.35
+        },
+        {
+          "jugador": "Elena-Gabriela Ruse",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Giovanni Mpetshi Perricard",
+          "cuota": 2.6
+        }
+      ],
+      "cuota_combo": 139.96,
+      "hr_combo": 0.117,
+      "ev_combo": 15.374,
+      "excluidos": [
+        "Zhizhen Zhang",
+        "Magda Linette",
+        "Amanda Anisimova",
+        "Katie Boulter",
+        "Harriet Dart"
+      ],
+      "stake": 4000,
+      "retorno_potencial": 559840.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Benjamin Bonzi",
+          "cuota": 4.5
+        },
+        {
+          "jugador": "Tatjana Maria",
+          "cuota": 4.35
+        },
+        {
+          "jugador": "Elena-Gabriela Ruse",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Zhizhen Zhang",
+          "cuota": 2.28
+        }
+      ],
+      "cuota_combo": 122.74,
+      "hr_combo": 0.1217,
+      "ev_combo": 13.9429,
+      "excluidos": [
+        "Giovanni Mpetshi Perricard",
+        "Magda Linette",
+        "Amanda Anisimova",
+        "Katie Boulter",
+        "Harriet Dart"
+      ],
+      "stake": 4000,
+      "retorno_potencial": 490960.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Benjamin Bonzi",
+          "cuota": 4.5
+        },
+        {
+          "jugador": "Tatjana Maria",
+          "cuota": 4.35
+        },
+        {
+          "jugador": "Giovanni Mpetshi Perricard",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Zhizhen Zhang",
+          "cuota": 2.28
+        }
+      ],
+      "cuota_combo": 116.04,
+      "hr_combo": 0.1235,
+      "ev_combo": 13.3361,
+      "excluidos": [
+        "Elena-Gabriela Ruse",
+        "Magda Linette",
+        "Amanda Anisimova",
+        "Katie Boulter",
+        "Harriet Dart"
+      ],
+      "stake": 4000,
+      "retorno_potencial": 464160.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Tatjana Maria",
+          "cuota": 4.35
+        },
+        {
+          "jugador": "Elena-Gabriela Ruse",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Giovanni Mpetshi Perricard",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Zhizhen Zhang",
+          "cuota": 2.28
+        }
+      ],
+      "cuota_combo": 70.91,
+      "hr_combo": 0.1225,
+      "ev_combo": 7.6894,
+      "excluidos": [
+        "Benjamin Bonzi",
+        "Magda Linette",
+        "Amanda Anisimova",
+        "Katie Boulter",
+        "Harriet Dart"
+      ],
+      "stake": 4000,
+      "retorno_potencial": 283640.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.45454545454545453,
+    "total_ajustado": 54090.90909090909,
+    "var_95": -47998.571428571435,
+    "cvar_95": -53977.0378674095,
+    "expected_pl": 727552.2049378784,
+    "sharpe_ratio": 0.8622639856536083,
+    "kelly_growth_rate": 1.7863780486780128,
+    "sessions_to_double": 0.3880181919347365,
+    "var_excedido": true,
+    "factor_var": 0.651061043483437
+  },
+  "resumen": {
+    "gastado_individuales": 31000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 48000,
+    "total_en_riesgo": 79000.0,
+    "pct_bankroll_en_riesgo": 0.632,
+    "n_senales_apostar": 5,
+    "pool_cobertura": 9,
+    "alerta_riesgo": true
+  }
+}

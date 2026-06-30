@@ -1,0 +1,383 @@
+{
+  "metadata": {
+    "timestamp": "20260610_232316",
+    "bankroll": 10000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260610_232039.json",
+    "n_partidos_analizados": 82,
+    "calibracion_n": 695,
+    "parametros": {
+      "modo": "cobertura",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Nadia Podoroska vs Tahlia Kokkinis",
+      "favorito": "Tahlia Kokkinis",
+      "cuota": 4.4,
+      "edge_pct": "28.8%",
+      "p_modelo": 0.515,
+      "n_h2h": 0,
+      "p_blend": 0.703862660944206,
+      "kelly_kl": 0.4009,
+      "kelly_usado": 0.1,
+      "stake": 1000,
+      "retorno_potencial": 4400.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Berfu Cengiz vs Oana Georgeta Simion",
+      "favorito": "Oana Georgeta Simion",
+      "cuota": 3.2,
+      "edge_pct": "21.9%",
+      "p_modelo": 0.531,
+      "n_h2h": 0,
+      "p_blend": 0.703862660944206,
+      "kelly_kl": 0.3569,
+      "kelly_usado": 0.1,
+      "stake": 1000,
+      "retorno_potencial": 3200.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Lorena Solar Donoso vs Martina Colmegna",
+      "favorito": "Lorena Solar Donoso",
+      "cuota": 3.25,
+      "edge_pct": "19.8%",
+      "p_modelo": 0.506,
+      "n_h2h": 0,
+      "p_blend": 0.703862660944206,
+      "kelly_kl": 0.3119,
+      "kelly_usado": 0.1,
+      "stake": 1000,
+      "retorno_potencial": 3250.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Matilde Jorge vs Anastasia Kulikova",
+      "favorito": "Anastasia Kulikova",
+      "cuota": 2.65,
+      "edge_pct": "13.3%",
+      "p_modelo": 0.51,
+      "n_h2h": 4,
+      "p_blend": 0.5930839975475168,
+      "kelly_kl": 0.2507,
+      "kelly_usado": 0.0866,
+      "stake": 1000,
+      "retorno_potencial": 2650.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    },
+    {
+      "partido": "Clara Burel vs Deborah Chiesa",
+      "favorito": "Deborah Chiesa",
+      "cuota": 2.55,
+      "edge_pct": "12.5%",
+      "p_modelo": 0.517,
+      "n_h2h": 0,
+      "p_blend": 0.703862660944206,
+      "kelly_kl": 0.2306,
+      "kelly_usado": 0.1,
+      "stake": 1000,
+      "retorno_potencial": 2550.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Emma Lene vs Verena Meliss",
+      "favorito": "Verena Meliss",
+      "cuota": 2.35,
+      "edge_pct": "10.2%",
+      "p_modelo": 0.528,
+      "n_h2h": 1,
+      "p_blend": 0.6598969957081545,
+      "kelly_kl": 0.2073,
+      "kelly_usado": 0.1,
+      "stake": 1000,
+      "retorno_potencial": 2350.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Tahlia Kokkinis",
+          "cuota": 4.4
+        },
+        {
+          "jugador": "Oana Georgeta Simion",
+          "cuota": 3.2
+        },
+        {
+          "jugador": "Lorena Solar Donoso",
+          "cuota": 3.25
+        }
+      ],
+      "cuota_combo": 45.76,
+      "hr_combo": 0.3488,
+      "ev_combo": 14.9595,
+      "excluidos": [
+        "Anastasia Kulikova",
+        "Deborah Chiesa",
+        "Verena Meliss",
+        "Denisa Zoldakova"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 45760.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Tahlia Kokkinis",
+          "cuota": 4.4
+        },
+        {
+          "jugador": "Lorena Solar Donoso",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Deborah Chiesa",
+          "cuota": 2.55
+        }
+      ],
+      "cuota_combo": 36.46,
+      "hr_combo": 0.3488,
+      "ev_combo": 11.7177,
+      "excluidos": [
+        "Oana Georgeta Simion",
+        "Anastasia Kulikova",
+        "Verena Meliss",
+        "Denisa Zoldakova"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 36460.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Tahlia Kokkinis",
+          "cuota": 4.4
+        },
+        {
+          "jugador": "Oana Georgeta Simion",
+          "cuota": 3.2
+        },
+        {
+          "jugador": "Deborah Chiesa",
+          "cuota": 2.55
+        }
+      ],
+      "cuota_combo": 35.9,
+      "hr_combo": 0.3488,
+      "ev_combo": 11.5221,
+      "excluidos": [
+        "Lorena Solar Donoso",
+        "Anastasia Kulikova",
+        "Verena Meliss",
+        "Denisa Zoldakova"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 35900.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Oana Georgeta Simion",
+          "cuota": 3.2
+        },
+        {
+          "jugador": "Lorena Solar Donoso",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Deborah Chiesa",
+          "cuota": 2.55
+        }
+      ],
+      "cuota_combo": 26.52,
+      "hr_combo": 0.3488,
+      "ev_combo": 8.2492,
+      "excluidos": [
+        "Tahlia Kokkinis",
+        "Anastasia Kulikova",
+        "Verena Meliss",
+        "Denisa Zoldakova"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 26520.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Tahlia Kokkinis",
+          "cuota": 4.4
+        },
+        {
+          "jugador": "Oana Georgeta Simion",
+          "cuota": 3.2
+        },
+        {
+          "jugador": "Lorena Solar Donoso",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Deborah Chiesa",
+          "cuota": 2.55
+        }
+      ],
+      "cuota_combo": 116.69,
+      "hr_combo": 0.2455,
+      "ev_combo": 27.6464,
+      "excluidos": [
+        "Anastasia Kulikova",
+        "Verena Meliss",
+        "Denisa Zoldakova"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 116690.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Tahlia Kokkinis",
+          "cuota": 4.4
+        },
+        {
+          "jugador": "Oana Georgeta Simion",
+          "cuota": 3.2
+        },
+        {
+          "jugador": "Lorena Solar Donoso",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Verena Meliss",
+          "cuota": 2.35
+        }
+      ],
+      "cuota_combo": 107.54,
+      "hr_combo": 0.2302,
+      "ev_combo": 23.7504,
+      "excluidos": [
+        "Anastasia Kulikova",
+        "Deborah Chiesa",
+        "Denisa Zoldakova"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 107540.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Tahlia Kokkinis",
+          "cuota": 4.4
+        },
+        {
+          "jugador": "Lorena Solar Donoso",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Deborah Chiesa",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "Verena Meliss",
+          "cuota": 2.35
+        }
+      ],
+      "cuota_combo": 85.69,
+      "hr_combo": 0.2302,
+      "ev_combo": 18.7229,
+      "excluidos": [
+        "Oana Georgeta Simion",
+        "Anastasia Kulikova",
+        "Denisa Zoldakova"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 85690.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Tahlia Kokkinis",
+          "cuota": 4.4
+        },
+        {
+          "jugador": "Oana Georgeta Simion",
+          "cuota": 3.2
+        },
+        {
+          "jugador": "Deborah Chiesa",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "Verena Meliss",
+          "cuota": 2.35
+        }
+      ],
+      "cuota_combo": 84.37,
+      "hr_combo": 0.2302,
+      "ev_combo": 18.4195,
+      "excluidos": [
+        "Lorena Solar Donoso",
+        "Anastasia Kulikova",
+        "Denisa Zoldakova"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 84370.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.7692307692307692,
+    "total_ajustado": 10769.230769230768,
+    "var_95": -3867.4285714285716,
+    "cvar_95": -4913.161378659308,
+    "expected_pl": 118210.16779845349,
+    "sharpe_ratio": 0.8498451716674444,
+    "kelly_growth_rate": 2.0184123832547005,
+    "sessions_to_double": 0.34341207292943865,
+    "var_excedido": true,
+    "factor_var": 0.6464243498817966
+  },
+  "resumen": {
+    "gastado_individuales": 6000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 8000,
+    "total_en_riesgo": 14000.0,
+    "pct_bankroll_en_riesgo": 1.4,
+    "n_senales_apostar": 6,
+    "pool_cobertura": 7,
+    "alerta_riesgo": true
+  }
+}

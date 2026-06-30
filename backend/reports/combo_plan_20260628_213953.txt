@@ -1,0 +1,81 @@
+======================================================================
+COMBO PLAN (Nodo-38) — 2026-06-28  |  Fase 4  |  Conf min: 53.0%
+Fuente: h2h_results_enhanced_20260628_204305.json
+Budget diario: $15,000  |  Picks seleccionados: 26
+======================================================================
+
+MULTIPLICADORES (1.15-1.59): 18 picks
+   1. Hussey G.                     @1.17  conf:69.4%  Cary (USA)
+   2. Davidovich Fokina A.          @1.25  conf:61.6%  Wimbledon (United Kingdom)
+   3. Dellien H.                    @1.30  conf:61.4%  Milan (Italy)
+   4. Marozsan F.                   @1.40  conf:57.8%  Wimbledon (United Kingdom)
+   5. Kennedy J.                    @1.40  conf:57.6%  Cary (USA)
+   6. Dedura D.                     @1.53  conf:56.2%  Milan (Italy)
+   7. Jodar R.                      @1.17  conf:56.0%  Wimbledon (United Kingdom)
+   8. Fonseca J.                    @1.18  conf:55.2%  Wimbledon (United Kingdom)
+   9. Parry D.                      @1.30  conf:54.2%  Wimbledon (United Kingdom)
+  10. Cina F.                       @1.40  conf:54.2%  Brasov (Romania)
+  11. Nakashima B.                  @1.22  conf:54.0%  Wimbledon (United Kingdom)
+  12. Yastremska D.                 @1.17  conf:54.0%  Wimbledon (United Kingdom)
+  13. Ostapenko J.                  @1.25  conf:53.9%  Wimbledon (United Kingdom)
+  14. Raducanu E.                   @1.53  conf:53.7%  Wimbledon (United Kingdom)
+  15. Damm M.                       @1.25  conf:53.3%  Wimbledon (United Kingdom)
+  16. Bartunkova N.                 @1.40  conf:53.3%  Wimbledon (United Kingdom)
+  17. Maria T.                      @1.42  conf:53.0%  Wimbledon (United Kingdom)
+  18. Kasnikowski M.                @1.50  conf:53.0%  Brasov (Romania)
+
+VALOR (1.60-2.20): 5 picks
+   1. Nagal S.                      @2.00  conf:56.8%  Milan (Italy)
+   2. Squire H.                     @1.83  conf:55.4%  Brasov (Romania)
+   3. Ilagan A.                     @1.95  conf:54.7%  Cary (USA)
+   4. Sonmez Z.                     @1.75  conf:53.5%  Wimbledon (United Kingdom)
+   5. Gasanova A.                   @2.05  conf:53.3%  Wimbledon (United Kingdom)
+
+ALTO VALOR SATELLITE (2.21-3.50, conf>=60%): 1 picks
+   1. Baez S.                       @3.00  conf:60.9%  Wimbledon (United Kingdom)
+
+ALTO VALOR MOONSHOT (>3.50 o conf<60%): 2 picks
+   1. van Assche L.                 @2.80  conf:54.7%  Wimbledon (United Kingdom)
+   2. Safiullin R.                  @2.55  conf:53.6%  Wimbledon (United Kingdom)
+
+----------------------------------------------------------------------
+
+CORE — 5 piernas (solo Cat-A + Cat-B)
+  Picks: Hussey G. @1.17, Davidovich Fokina A. @1.25, Dellien H. @1.30, Marozsan F. @1.40, Kennedy J. @1.40
+  Odds: 3.73x  |  P(win): 26.8%  |  EV: $+0
+  STAKE: $7,000  →  Retorno: $26,085  |  Esperado: $7,000
+
+----------------------------------------------------------------------
+
+SATELLITES — 1 combos aislados (Cat-A/B + 1 Cat-C)
+
+  [SAT_1]  Cat-C: Baez S.
+  Picks: Hussey G. @1.17, Davidovich Fokina A. @1.25, Dellien H. @1.30, Baez S. @3.00, Marozsan F. @1.40
+  Odds: 7.99x  |  P(win): 12.5%  |  EV: $+0
+  STAKE: $2,000  →  Retorno: $15,970
+
+  Si el Cat-C falla, solo ESE satellite muere. CORE sobrevive.
+
+----------------------------------------------------------------------
+
+COBERTURA CORE — 3 combos
+  [COB_excl_H.]  Excluye: Dellien H.
+    Odds: 5.73x  P(win): 17.4%  STAKE: $500
+  [COB_excl_F.]  Excluye: Marozsan F.
+    Odds: 5.32x  P(win): 18.8%  STAKE: $500
+  [COB_excl_J.]  Excluye: Kennedy J.
+    Odds: 5.32x  P(win): 18.8%  STAKE: $500
+
+======================================================================
+RESUMEN PORTFOLIO — Fase 4
+  Total combos:           5
+  Total invertido:        $10,500  (de $15,000 budget)
+  Retorno esperado:       $10,500
+  EV total:               $+0
+
+NOTAS:
+  - Cat-C NUNCA entra al CORE (REGLA-ISO-1)
+  - Max 1 Cat-C por satellite, max 2 picks mismo torneo por combo
+  - P(win) calculado con P_mercado (1/cuota) — conservador
+  - VaR guard: stakes escalados si total > budget diario
+======================================================================

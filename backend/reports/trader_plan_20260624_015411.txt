@@ -1,0 +1,30 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — ATP1000 GRASS
+  2026-06-24 01:54  │  Bankroll: $50,000
+  Señales APOSTAR: 0  │  Watchlist: 0  │  Sin edge: 0
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 0 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.20 (atp1000)
+═══════════════════════════════════════════════════════════════════
+
+  ⚠️  Solo 0 picks en pool — se necesitan ≥3.
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $        50,000                       ║
+  ║  Individuales:        $             0  (0.0% bankroll)      ║
+  ║  Combos:              $             0  (0.0% bankroll)      ║
+  ║  Sistema:             $             0  (0.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $             0  (0.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       0                                       ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260624_01  ║
+  ║  Partidos analizados: 252                                       ║
+  ║  Superficie:          grass (atp1000)                             ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  📊 Calibración: n=1704 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.596 (calibrado grass) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260624_015411.json

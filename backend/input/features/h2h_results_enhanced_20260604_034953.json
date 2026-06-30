@@ -1,0 +1,690 @@
+{
+  "metadata": {
+    "fecha_extraccion": "2026-06-04 03:49:53",
+    "total_partidos_procesados": 2,
+    "version": "3.0_refactorizado",
+    "funcionalidades": [
+      "Extracción H2H con Playwright",
+      "Análisis de rankings ATP",
+      "Sistema ELO calculado",
+      "Rivalidad transitiva",
+      "Predicciones avanzadas",
+      "Análisis de superficie",
+      "Ventaja de localización"
+    ]
+  },
+  "partidos": [
+    {
+      "match_number": 1,
+      "jugador1": "Kostyuk M.",
+      "jugador1_nacionalidad": "N/A",
+      "jugador2": "Andreeva M.",
+      "jugador2_nacionalidad": "N/A",
+      "torneo_nombre": "French Open (France)",
+      "tipo_cancha": "clay",
+      "torneo_completo": "French Open (France)",
+      "cuota1": 1.7,
+      "cuota2": 2.15,
+      "match_url": "https://www.flashscore.com/match/tennis/andreeva-mirra-lI6fOOat/kostyuk-marta-8CZqQdSa/?mid=tMeHmEwK",
+      "historial_Kostyuk_M": [],
+      "historial_Andreeva_M": [],
+      "enfrentamientos_directos": [],
+      "estadisticas": {
+        "partidos_Kostyuk_M": 0,
+        "partidos_Andreeva_M": 0,
+        "enfrentamientos_totales": 0
+      },
+      "ranking_analysis": {
+        "Kostyuk_M_ranking": 14,
+        "Andreeva_M_ranking": 8,
+        "common_opponents_count": 0,
+        "p1_rivalry_score": 0.0,
+        "p2_rivalry_score": 0.0,
+        "prediction": {
+          "favored_player": "Andreeva M.",
+          "confidence": 51,
+          "reasoning": [
+            "LOG_ELO_RATINGS: Kostyuk M.=1500, Andreeva M.=1500",
+            "LOG_WEIGHTS_STRATEGY: 'grand_slam' -> {'surface_specialization': 0.15, 'form_recent': 0.12, 'common_opponents': 0.22, 'h2h_direct': 0.18, 'ranking_momentum': 0.15, 'elo_rating': 0.13, 'home_advantage': 0.05, 'strength_of_schedule': 0.0}",
+            "LOG_SHRINKAGE: key=clay_grand_slam n=31 factor=0.608 weights={'surface_specialization': 0.15, 'form_recent': 0.1435, 'common_opponents': 0.1925, 'h2h_direct': 0.1486, 'ranking_momentum': 0.1696, 'elo_rating': 0.1261, 'home_advantage': 0.05, 'strength_of_schedule': 0.0196}",
+            "LOG_DENSITY: n_common=0 n_paths=0 density=0.3 co_w: 0.1925→0.0577 form_w→0.2782",
+            "LOG_WEIGHTS_SURFACE_CLAY: common_opp→0.14 ranking_mom→0.09 (Erdős+clay, Nodo-14)",
+            "LOG_RANKING_P1: Base(2507): 156.54, Momentum(110): 70.64, Potencial(1870): 75.34, Presión(-110): 23.55",
+            "LOG_RANKING_P2: Base(3881): 165.28, Momentum(110): 70.64, Potencial(1870): 75.34, Presión(-110): 23.55",
+            "LOG_MARKOV_P1: estado=NEUTRAL momentum=0.0 factor=1.0 wr_rec=0.0 cp=None immunity=1.0 h2h_wr=0.5",
+            "LOG_MARKOV_P2: estado=NEUTRAL momentum=0.0 factor=1.0 wr_rec=0.0 cp=None immunity=1.0 h2h_wr=0.5",
+            "LOG_RAW_SCORES_P1: {'home_advantage': 0, 'surface_specialization': 0, 'ranking_momentum': 326.08, 'form_recent': 0.0, 'common_opponents': 0.0, 'h2h_direct': 0.0, 'elo_rating': 0, 'strength_of_schedule': 0.0}",
+            "LOG_RAW_SCORES_P2: {'home_advantage': 0, 'surface_specialization': 0, 'ranking_momentum': 334.82, 'form_recent': 0.0, 'common_opponents': 0.0, 'h2h_direct': 0.0, 'elo_rating': 0, 'strength_of_schedule': 0.0}",
+            "LOG_NORM_SCORES_P1: {'home_advantage': 0.0, 'surface_specialization': 0.0, 'ranking_momentum': 5.79, 'form_recent': 0.0, 'common_opponents': 0.0, 'h2h_direct': 0.0, 'elo_rating': 0.0, 'strength_of_schedule': 0.0}",
+            "LOG_NORM_SCORES_P2: {'home_advantage': 0.0, 'surface_specialization': 0.0, 'ranking_momentum': 5.82, 'form_recent': 0.0, 'common_opponents': 0.0, 'h2h_direct': 0.0, 'elo_rating': 0.0, 'strength_of_schedule': 0.0}"
+          ],
+          "scores": {
+            "p1_final_weight": 0.36,
+            "p2_final_weight": 0.37,
+            "score_difference": -0.0
+          },
+          "score_breakdown": {
+            "player1": {
+              "surface_specialization": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "15%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "form_recent": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "28%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "common_opponents": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "14%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "h2h_direct": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "15%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "ranking_momentum": {
+                "raw_score": "326.1",
+                "normalized_score": "5.79",
+                "weight": "9%",
+                "weighted_score": "0.52",
+                "contribution": "100.0%"
+              },
+              "elo_rating": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "13%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "home_advantage": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "5%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "strength_of_schedule": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "2%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "Penalizacion_Inactividad": "-0.16 pts",
+              "Puntaje_Final": "0.36"
+            },
+            "player2": {
+              "surface_specialization": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "15%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "form_recent": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "28%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "common_opponents": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "14%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "h2h_direct": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "15%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "ranking_momentum": {
+                "raw_score": "334.8",
+                "normalized_score": "5.82",
+                "weight": "9%",
+                "weighted_score": "0.52",
+                "contribution": "100.0%"
+              },
+              "elo_rating": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "13%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "home_advantage": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "5%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "strength_of_schedule": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "2%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "Penalizacion_Inactividad": "-0.16 pts",
+              "Puntaje_Final": "0.37"
+            }
+          },
+          "weights_used": {
+            "surface_specialization": 0.15,
+            "form_recent": 0.2782,
+            "common_opponents": 0.14,
+            "h2h_direct": 0.1486,
+            "ranking_momentum": 0.09,
+            "elo_rating": 0.1261,
+            "home_advantage": 0.05,
+            "strength_of_schedule": 0.0196
+          },
+          "markov_analysis": {
+            "jugador1": {
+              "estado_actual": "NEUTRAL",
+              "momentum": 0.0,
+              "change_point": null,
+              "confianza": 0.0,
+              "win_rate_reciente": 0.0,
+              "win_rate_anterior": 0.0,
+              "n_partidos": 0
+            },
+            "jugador2": {
+              "estado_actual": "NEUTRAL",
+              "momentum": 0.0,
+              "change_point": null,
+              "confianza": 0.0,
+              "win_rate_reciente": 0.0,
+              "win_rate_anterior": 0.0,
+              "n_partidos": 0
+            },
+            "factor_markov": 1.0,
+            "h2h_immunity_p1": {
+              "h2h_win_rate": 0.5,
+              "immunity_factor": 1.0,
+              "n_h2h": 0
+            },
+            "h2h_immunity_p2": {
+              "h2h_win_rate": 0.5,
+              "immunity_factor": 1.0,
+              "n_h2h": 0
+            }
+          },
+          "tardio_analysis": {
+            "jugador1": null,
+            "jugador2": null,
+            "factor_tardio": 1.0
+          }
+        },
+        "Kostyuk_M_metrics": {
+          "pts": 2507,
+          "prox_pts": 2617,
+          "pts_max": 4377,
+          "defense_points": 0,
+          "already_secured": 110,
+          "improvement_potential": 1870,
+          "pressure_index": -110
+        },
+        "Andreeva_M_metrics": {
+          "pts": 3881,
+          "prox_pts": 3991,
+          "pts_max": 5751,
+          "defense_points": 0,
+          "already_secured": 110,
+          "improvement_potential": 1870,
+          "pressure_index": -110
+        },
+        "Kostyuk_M_elo": 1500,
+        "Andreeva_M_elo": 1500
+      },
+      "form_analysis": {
+        "Kostyuk_M_form": null,
+        "Andreeva_M_form": null
+      },
+      "surface_analysis": {
+        "Kostyuk_M_surface_stats": {
+          "Dura": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "Arcilla": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "Hierba": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "Indoor": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "Desconocida": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          }
+        },
+        "Andreeva_M_surface_stats": {
+          "Dura": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "Arcilla": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "Hierba": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "Indoor": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "Desconocida": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          }
+        }
+      },
+      "location_analysis": {
+        "Kostyuk_M_location_stats": {
+          "home_advantage": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "regional_comfort": {}
+        },
+        "Andreeva_M_location_stats": {
+          "home_advantage": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "regional_comfort": {}
+        }
+      },
+      "common_opponents_detailed": []
+    },
+    {
+      "match_number": 2,
+      "jugador1": "Shnaider D.",
+      "jugador1_nacionalidad": "N/A",
+      "jugador2": "Chwalinska M.",
+      "jugador2_nacionalidad": "N/A",
+      "torneo_nombre": "French Open (France)",
+      "tipo_cancha": "clay",
+      "torneo_completo": "French Open (France)",
+      "cuota1": 1.5,
+      "cuota2": 2.55,
+      "match_url": "https://www.flashscore.com/match/tennis/chwalinska-maja-OIxOD54s/shnaider-diana-028BdVOj/?mid=6J1JWr7N",
+      "historial_Shnaider_D": [],
+      "historial_Chwalinska_M": [],
+      "enfrentamientos_directos": [],
+      "estadisticas": {
+        "partidos_Shnaider_D": 0,
+        "partidos_Chwalinska_M": 0,
+        "enfrentamientos_totales": 0
+      },
+      "ranking_analysis": {
+        "Shnaider_D_ranking": 21,
+        "Chwalinska_M_ranking": 89,
+        "common_opponents_count": 0,
+        "p1_rivalry_score": 0.0,
+        "p2_rivalry_score": 0.0,
+        "prediction": {
+          "favored_player": "Shnaider D.",
+          "confidence": 51,
+          "reasoning": [
+            "LOG_ELO_RATINGS: Shnaider D.=1500, Chwalinska M.=1500",
+            "LOG_WEIGHTS_STRATEGY: 'grand_slam' -> {'surface_specialization': 0.15, 'form_recent': 0.12, 'common_opponents': 0.22, 'h2h_direct': 0.18, 'ranking_momentum': 0.15, 'elo_rating': 0.13, 'home_advantage': 0.05, 'strength_of_schedule': 0.0}",
+            "LOG_SHRINKAGE: key=clay_grand_slam n=31 factor=0.608 weights={'surface_specialization': 0.15, 'form_recent': 0.1435, 'common_opponents': 0.1925, 'h2h_direct': 0.1486, 'ranking_momentum': 0.1696, 'elo_rating': 0.1261, 'home_advantage': 0.05, 'strength_of_schedule': 0.0196}",
+            "LOG_DENSITY: n_common=0 n_paths=0 density=0.3 co_w: 0.1925→0.0577 form_w→0.2782",
+            "LOG_WEIGHTS_SURFACE_CLAY: common_opp→0.14 ranking_mom→0.09 (Erdős+clay, Nodo-14)",
+            "LOG_RANKING_P1: Base(1856): 150.53, Momentum(110): 70.64, Potencial(1870): 75.34, Presión(-110): 23.55",
+            "LOG_RANKING_P2: Base(840): 134.69, Momentum(110): 70.64, Potencial(1870): 75.34, Presión(-110): 23.55",
+            "LOG_MARKOV_P1: estado=NEUTRAL momentum=0.0 factor=1.0 wr_rec=0.0 cp=None immunity=1.0 h2h_wr=0.5",
+            "LOG_MARKOV_P2: estado=NEUTRAL momentum=0.0 factor=1.0 wr_rec=0.0 cp=None immunity=1.0 h2h_wr=0.5",
+            "LOG_RAW_SCORES_P1: {'home_advantage': 0, 'surface_specialization': 0, 'ranking_momentum': 320.07, 'form_recent': 0.0, 'common_opponents': 0.0, 'h2h_direct': 0.0, 'elo_rating': 0, 'strength_of_schedule': 0.0}",
+            "LOG_RAW_SCORES_P2: {'home_advantage': 0, 'surface_specialization': 0, 'ranking_momentum': 304.22, 'form_recent': 0.0, 'common_opponents': 0.0, 'h2h_direct': 0.0, 'elo_rating': 0, 'strength_of_schedule': 0.0}",
+            "LOG_NORM_SCORES_P1: {'home_advantage': 0.0, 'surface_specialization': 0.0, 'ranking_momentum': 5.77, 'form_recent': 0.0, 'common_opponents': 0.0, 'h2h_direct': 0.0, 'elo_rating': 0.0, 'strength_of_schedule': 0.0}",
+            "LOG_NORM_SCORES_P2: {'home_advantage': 0.0, 'surface_specialization': 0.0, 'ranking_momentum': 5.72, 'form_recent': 0.0, 'common_opponents': 0.0, 'h2h_direct': 0.0, 'elo_rating': 0.0, 'strength_of_schedule': 0.0}"
+          ],
+          "scores": {
+            "p1_final_weight": 0.36,
+            "p2_final_weight": 0.36,
+            "score_difference": 0.0
+          },
+          "score_breakdown": {
+            "player1": {
+              "surface_specialization": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "15%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "form_recent": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "28%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "common_opponents": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "14%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "h2h_direct": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "15%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "ranking_momentum": {
+                "raw_score": "320.1",
+                "normalized_score": "5.77",
+                "weight": "9%",
+                "weighted_score": "0.52",
+                "contribution": "100.0%"
+              },
+              "elo_rating": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "13%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "home_advantage": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "5%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "strength_of_schedule": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "2%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "Penalizacion_Inactividad": "-0.16 pts",
+              "Puntaje_Final": "0.36"
+            },
+            "player2": {
+              "surface_specialization": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "15%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "form_recent": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "28%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "common_opponents": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "14%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "h2h_direct": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "15%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "ranking_momentum": {
+                "raw_score": "304.2",
+                "normalized_score": "5.72",
+                "weight": "9%",
+                "weighted_score": "0.51",
+                "contribution": "100.0%"
+              },
+              "elo_rating": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "13%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "home_advantage": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "5%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "strength_of_schedule": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "2%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "Penalizacion_Inactividad": "-0.15 pts",
+              "Puntaje_Final": "0.36"
+            }
+          },
+          "weights_used": {
+            "surface_specialization": 0.15,
+            "form_recent": 0.2782,
+            "common_opponents": 0.14,
+            "h2h_direct": 0.1486,
+            "ranking_momentum": 0.09,
+            "elo_rating": 0.1261,
+            "home_advantage": 0.05,
+            "strength_of_schedule": 0.0196
+          },
+          "markov_analysis": {
+            "jugador1": {
+              "estado_actual": "NEUTRAL",
+              "momentum": 0.0,
+              "change_point": null,
+              "confianza": 0.0,
+              "win_rate_reciente": 0.0,
+              "win_rate_anterior": 0.0,
+              "n_partidos": 0
+            },
+            "jugador2": {
+              "estado_actual": "NEUTRAL",
+              "momentum": 0.0,
+              "change_point": null,
+              "confianza": 0.0,
+              "win_rate_reciente": 0.0,
+              "win_rate_anterior": 0.0,
+              "n_partidos": 0
+            },
+            "factor_markov": 1.0,
+            "h2h_immunity_p1": {
+              "h2h_win_rate": 0.5,
+              "immunity_factor": 1.0,
+              "n_h2h": 0
+            },
+            "h2h_immunity_p2": {
+              "h2h_win_rate": 0.5,
+              "immunity_factor": 1.0,
+              "n_h2h": 0
+            }
+          },
+          "tardio_analysis": {
+            "jugador1": null,
+            "jugador2": null,
+            "factor_tardio": 1.0
+          }
+        },
+        "Shnaider_D_metrics": {
+          "pts": 1856,
+          "prox_pts": 1966,
+          "pts_max": 3726,
+          "defense_points": 0,
+          "already_secured": 110,
+          "improvement_potential": 1870,
+          "pressure_index": -110
+        },
+        "Chwalinska_M_metrics": {
+          "pts": 840,
+          "prox_pts": 950,
+          "pts_max": 2710,
+          "defense_points": 0,
+          "already_secured": 110,
+          "improvement_potential": 1870,
+          "pressure_index": -110
+        },
+        "Shnaider_D_elo": 1500,
+        "Chwalinska_M_elo": 1500
+      },
+      "form_analysis": {
+        "Shnaider_D_form": null,
+        "Chwalinska_M_form": null
+      },
+      "surface_analysis": {
+        "Shnaider_D_surface_stats": {
+          "Dura": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "Arcilla": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "Hierba": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "Indoor": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "Desconocida": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          }
+        },
+        "Chwalinska_M_surface_stats": {
+          "Dura": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "Arcilla": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "Hierba": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "Indoor": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "Desconocida": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          }
+        }
+      },
+      "location_analysis": {
+        "Shnaider_D_location_stats": {
+          "home_advantage": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "regional_comfort": {}
+        },
+        "Chwalinska_M_location_stats": {
+          "home_advantage": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "regional_comfort": {}
+        }
+      },
+      "common_opponents_detailed": []
+    }
+  ],
+  "estadisticas_globales": {
+    "total_partidos": 2,
+    "jugadores_unicos": 4,
+    "total_historiales_extraidos": 0,
+    "total_enfrentamientos_directos": 0,
+    "rankings_encontrados": 4,
+    "predicciones_generadas": 2,
+    "oponentes_comunes_total": 0,
+    "analisis_rivalidad_exitosos": 0
+  }
+}

@@ -1,0 +1,199 @@
+{
+  "metadata": {
+    "timestamp": "20260612_223047",
+    "bankroll": 125000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260612_214755.json",
+    "n_partidos_analizados": 40,
+    "calibracion_n": 706,
+    "parametros": {
+      "modo": "cobertura",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Oliver Tarvet vs Filippo Romano",
+      "favorito": "Filippo Romano",
+      "cuota": 2.75,
+      "edge_pct": "14.0%",
+      "p_modelo": 0.504,
+      "n_h2h": 0,
+      "p_blend": 0.569,
+      "kelly_kl": 0.0805,
+      "kelly_usado": 0.0807,
+      "stake": 4000,
+      "retorno_potencial": 11000.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Filippo Romano",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Taro Daniel",
+          "cuota": 2.02
+        },
+        {
+          "jugador": "Jacob Fearnley",
+          "cuota": 1.68
+        }
+      ],
+      "cuota_combo": 9.33,
+      "hr_combo": 0.1909,
+      "ev_combo": 0.7818,
+      "excluidos": [
+        "Yunchaokete Bu"
+      ],
+      "stake": 6000,
+      "retorno_potencial": 55980.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Filippo Romano",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Taro Daniel",
+          "cuota": 2.02
+        },
+        {
+          "jugador": "Yunchaokete Bu",
+          "cuota": 1.65
+        }
+      ],
+      "cuota_combo": 9.17,
+      "hr_combo": 0.1843,
+      "ev_combo": 0.6897,
+      "excluidos": [
+        "Jacob Fearnley"
+      ],
+      "stake": 6000,
+      "retorno_potencial": 55020.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Filippo Romano",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Jacob Fearnley",
+          "cuota": 1.68
+        },
+        {
+          "jugador": "Yunchaokete Bu",
+          "cuota": 1.65
+        }
+      ],
+      "cuota_combo": 7.62,
+      "hr_combo": 0.1779,
+      "ev_combo": 0.3559,
+      "excluidos": [
+        "Taro Daniel"
+      ],
+      "stake": 6000,
+      "retorno_potencial": 45720.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Taro Daniel",
+          "cuota": 2.02
+        },
+        {
+          "jugador": "Jacob Fearnley",
+          "cuota": 1.68
+        },
+        {
+          "jugador": "Yunchaokete Bu",
+          "cuota": 1.65
+        }
+      ],
+      "cuota_combo": 5.6,
+      "hr_combo": 0.1843,
+      "ev_combo": 0.0322,
+      "excluidos": [
+        "Filippo Romano"
+      ],
+      "stake": 6000,
+      "retorno_potencial": 33600.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Filippo Romano",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Taro Daniel",
+          "cuota": 2.02
+        },
+        {
+          "jugador": "Jacob Fearnley",
+          "cuota": 1.68
+        },
+        {
+          "jugador": "Yunchaokete Bu",
+          "cuota": 1.65
+        }
+      ],
+      "cuota_combo": 15.4,
+      "hr_combo": 0.1049,
+      "ev_combo": 0.6152,
+      "excluidos": [],
+      "stake": 3000,
+      "retorno_potencial": 46200.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.7692307692307692,
+    "total_ajustado": 66153.84615384614,
+    "var_95": -86000.0,
+    "cvar_95": -86000.00000000001,
+    "expected_pl": 39329.786661423925,
+    "sharpe_ratio": 0.19543033392723078,
+    "kelly_growth_rate": -0.22365384530341462,
+    "sessions_to_double": Infinity,
+    "var_excedido": true,
+    "factor_var": 0.3633720930232558
+  },
+  "resumen": {
+    "gastado_individuales": 4000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 27000,
+    "total_en_riesgo": 31000.0,
+    "pct_bankroll_en_riesgo": 0.248,
+    "n_senales_apostar": 1,
+    "pool_cobertura": 4,
+    "alerta_riesgo": false
+  }
+}

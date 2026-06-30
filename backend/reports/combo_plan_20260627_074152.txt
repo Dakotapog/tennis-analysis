@@ -1,0 +1,48 @@
+======================================================================
+COMBO PLAN (Nodo-38) — 2026-06-27  |  Fase 4  |  Conf min: 53.0%
+Fuente: h2h_results_enhanced_20260627_073503.json
+Budget diario: $15,000  |  Picks seleccionados: 8
+======================================================================
+
+MULTIPLICADORES (1.15-1.59): 7 picks
+   1. Tatjana Maria                 @1.44  conf:77.6%  WTA - INDIVIDUALES: Eastbourne (Reino Un
+   2. Flavio Cobolli                @1.25  conf:77.4%  EXHIBICIÓN - MASCULINO: Hurlingham (Rein
+   3. Stefanos Tsitsipas            @1.42  conf:74.4%  EXHIBICIÓN - MASCULINO: Hurlingham (Rein
+   4. Ayana Akli                    @1.20  conf:57.3%  ITF FEMENINO - INDIVIDUALES: W35 Rome, G
+   5. Roger Pascual Ferra           @1.28  conf:56.4%  ITF MASCULINO - INDIVIDUALES: M15 Monast
+   6. Giovanni Oradini              @1.25  conf:55.8%  ITF MASCULINO - INDIVIDUALES: M15 Bergam
+   7. Ayla Aksu                     @1.25  conf:54.4%  ITF FEMENINO - INDIVIDUALES: W50 Palma d
+
+VALOR (1.60-2.20): 1 picks
+   1. Tomas Martin Etcheverry       @2.02  conf:76.1%  EXHIBICIÓN - MASCULINO: Hurlingham (Rein
+
+----------------------------------------------------------------------
+
+CORE — 4 piernas (solo Cat-A + Cat-B)
+  Picks: Tatjana Maria @1.44, Flavio Cobolli @1.25, Tomas Martin Etcheverry @2.02, Ayana Akli @1.20
+  Odds: 4.36x  |  P(win): 22.9%  |  EV: $-0
+  STAKE: $7,000  →  Retorno: $30,542  |  Esperado: $7,000
+
+----------------------------------------------------------------------
+
+COBERTURA CORE — 3 combos
+  [COB_excl_Cobolli]  Excluye: Flavio Cobolli
+    Odds: 4.96x  P(win): 20.2%  STAKE: $500
+  [COB_excl_Etcheverry]  Excluye: Tomas Martin Etcheverry
+    Odds: 3.07x  P(win): 32.6%  STAKE: $500
+  [COB_excl_Akli]  Excluye: Ayana Akli
+    Odds: 5.16x  P(win): 19.4%  STAKE: $500
+
+======================================================================
+RESUMEN PORTFOLIO — Fase 4
+  Total combos:           4
+  Total invertido:        $8,500  (de $15,000 budget)
+  Retorno esperado:       $8,500
+  EV total:               $+0
+
+NOTAS:
+  - Cat-C NUNCA entra al CORE (REGLA-ISO-1)
+  - Max 1 Cat-C por satellite, max 2 picks mismo torneo por combo
+  - P(win) calculado con P_mercado (1/cuota) — conservador
+  - VaR guard: stakes escalados si total > budget diario
+======================================================================

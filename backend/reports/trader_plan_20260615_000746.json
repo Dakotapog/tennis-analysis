@@ -1,0 +1,348 @@
+{
+  "metadata": {
+    "timestamp": "20260615_000746",
+    "bankroll": 125000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260615_000640.json",
+    "n_partidos_analizados": 35,
+    "calibracion_n": 755,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "challenger",
+      "superficie": "clay",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Daniel De Jonge vs Michael Zhu",
+      "favorito": "Michael Zhu",
+      "cuota": 3.45,
+      "edge_pct": "23.4%",
+      "p_modelo": 0.524,
+      "n_h2h": 0,
+      "p_blend": 0.5897,
+      "kelly_kl": 0.2564,
+      "kelly_usado": 0.1,
+      "stake": 4000,
+      "retorno_potencial": 13800.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Lorenzo Bocchi vs Alexander Weis",
+      "favorito": "Lorenzo Bocchi",
+      "cuota": 2.6,
+      "edge_pct": "12.5%",
+      "p_modelo": 0.51,
+      "n_h2h": 0,
+      "p_blend": 0.5897,
+      "kelly_kl": 0.1618,
+      "kelly_usado": 0.0833,
+      "stake": 3000,
+      "retorno_potencial": 7800.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Oliver Crawford vs Niels Visker",
+      "favorito": "Niels Visker",
+      "cuota": 2.6,
+      "edge_pct": "11.7%",
+      "p_modelo": 0.502,
+      "n_h2h": 2,
+      "p_blend": 0.54136,
+      "kelly_kl": 0.069,
+      "kelly_usado": 0.0637,
+      "stake": 2000,
+      "retorno_potencial": 5200.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Michael Zhu",
+          "cuota": 3.45
+        },
+        {
+          "jugador": "Lorenzo Bocchi",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Niels Visker",
+          "cuota": 2.6
+        }
+      ],
+      "cuota_combo": 23.32,
+      "hr_combo": 0.1883,
+      "ev_combo": 3.3905,
+      "excluidos": [
+        "Amarissa Kiara Toth",
+        "Alastair Gray",
+        "Tommaso Compagnucci",
+        "Miguel Tobon",
+        "Jennifer Ruggeri"
+      ],
+      "stake": 4000,
+      "retorno_potencial": 93280.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Michael Zhu",
+          "cuota": 3.45
+        },
+        {
+          "jugador": "Lorenzo Bocchi",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Amarissa Kiara Toth",
+          "cuota": 2.18
+        }
+      ],
+      "cuota_combo": 19.55,
+      "hr_combo": 0.2051,
+      "ev_combo": 3.01,
+      "excluidos": [
+        "Niels Visker",
+        "Alastair Gray",
+        "Tommaso Compagnucci",
+        "Miguel Tobon",
+        "Jennifer Ruggeri"
+      ],
+      "stake": 4000,
+      "retorno_potencial": 78200.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Michael Zhu",
+          "cuota": 3.45
+        },
+        {
+          "jugador": "Niels Visker",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Amarissa Kiara Toth",
+          "cuota": 2.18
+        }
+      ],
+      "cuota_combo": 19.55,
+      "hr_combo": 0.1883,
+      "ev_combo": 2.6813,
+      "excluidos": [
+        "Lorenzo Bocchi",
+        "Alastair Gray",
+        "Tommaso Compagnucci",
+        "Miguel Tobon",
+        "Jennifer Ruggeri"
+      ],
+      "stake": 4000,
+      "retorno_potencial": 78200.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Lorenzo Bocchi",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Niels Visker",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Amarissa Kiara Toth",
+          "cuota": 2.18
+        }
+      ],
+      "cuota_combo": 14.74,
+      "hr_combo": 0.1883,
+      "ev_combo": 1.7743,
+      "excluidos": [
+        "Michael Zhu",
+        "Alastair Gray",
+        "Tommaso Compagnucci",
+        "Miguel Tobon",
+        "Jennifer Ruggeri"
+      ],
+      "stake": 4000,
+      "retorno_potencial": 58960.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Michael Zhu",
+          "cuota": 3.45
+        },
+        {
+          "jugador": "Lorenzo Bocchi",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Niels Visker",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Amarissa Kiara Toth",
+          "cuota": 2.18
+        }
+      ],
+      "cuota_combo": 50.84,
+      "hr_combo": 0.111,
+      "ev_combo": 4.6442,
+      "excluidos": [
+        "Alastair Gray",
+        "Tommaso Compagnucci",
+        "Miguel Tobon",
+        "Jennifer Ruggeri"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 101680.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Michael Zhu",
+          "cuota": 3.45
+        },
+        {
+          "jugador": "Lorenzo Bocchi",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Niels Visker",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Alastair Gray",
+          "cuota": 2.04
+        }
+      ],
+      "cuota_combo": 47.58,
+      "hr_combo": 0.1069,
+      "ev_combo": 4.0838,
+      "excluidos": [
+        "Amarissa Kiara Toth",
+        "Tommaso Compagnucci",
+        "Miguel Tobon",
+        "Jennifer Ruggeri"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 95160.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Michael Zhu",
+          "cuota": 3.45
+        },
+        {
+          "jugador": "Niels Visker",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Amarissa Kiara Toth",
+          "cuota": 2.18
+        },
+        {
+          "jugador": "Alastair Gray",
+          "cuota": 2.04
+        }
+      ],
+      "cuota_combo": 39.89,
+      "hr_combo": 0.1069,
+      "ev_combo": 3.2626,
+      "excluidos": [
+        "Lorenzo Bocchi",
+        "Tommaso Compagnucci",
+        "Miguel Tobon",
+        "Jennifer Ruggeri"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 79780.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Lorenzo Bocchi",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Niels Visker",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Amarissa Kiara Toth",
+          "cuota": 2.18
+        },
+        {
+          "jugador": "Alastair Gray",
+          "cuota": 2.04
+        }
+      ],
+      "cuota_combo": 30.06,
+      "hr_combo": 0.1069,
+      "ev_combo": 2.2124,
+      "excluidos": [
+        "Michael Zhu",
+        "Tommaso Compagnucci",
+        "Miguel Tobon",
+        "Jennifer Ruggeri"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 60120.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.588235294117647,
+    "total_ajustado": 59999.99999999999,
+    "var_95": -102000.0,
+    "cvar_95": -102000.0,
+    "expected_pl": 214157.27768477565,
+    "sharpe_ratio": 0.6198544458115335,
+    "kelly_growth_rate": 0.5659308470774672,
+    "sessions_to_double": 1.2247913046963919,
+    "var_excedido": true,
+    "factor_var": 0.30637254901960786
+  },
+  "resumen": {
+    "gastado_individuales": 9000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 24000,
+    "total_en_riesgo": 33000.0,
+    "pct_bankroll_en_riesgo": 0.264,
+    "n_senales_apostar": 3,
+    "pool_cobertura": 8,
+    "alerta_riesgo": false
+  }
+}

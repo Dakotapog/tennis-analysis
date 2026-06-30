@@ -1,0 +1,302 @@
+{
+  "metadata": {
+    "timestamp": "20260622_082912",
+    "bankroll": 30000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260622_081423.json",
+    "n_partidos_analizados": 89,
+    "calibracion_n": 1325,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "atp500",
+      "superficie": "grass",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Thiago Agustin Tirante vs Jacob Fearnley",
+      "favorito": "Thiago Agustin Tirante",
+      "cuota": 2.75,
+      "edge_pct": "14.5%",
+      "p_modelo": 0.509,
+      "n_h2h": 0,
+      "p_blend": 0.5411,
+      "kelly_kl": 0.0809,
+      "kelly_usado": 0.0697,
+      "stake": 1000,
+      "retorno_potencial": 2750.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Thiago Agustin Tirante",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Roman Andres Burruchaga",
+          "cuota": 3.7
+        },
+        {
+          "jugador": "Jan Choinski",
+          "cuota": 2.7
+        }
+      ],
+      "cuota_combo": 27.47,
+      "hr_combo": 0.1533,
+      "ev_combo": 3.2104,
+      "excluidos": [
+        "Elisabetta Cocciaretto",
+        "Aleksandar Vukic",
+        "Ignacio Buse"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 27470.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Thiago Agustin Tirante",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Elisabetta Cocciaretto",
+          "cuota": 2.5
+        },
+        {
+          "jugador": "Roman Andres Burruchaga",
+          "cuota": 3.7
+        }
+      ],
+      "cuota_combo": 25.44,
+      "hr_combo": 0.1556,
+      "ev_combo": 2.9591,
+      "excluidos": [
+        "Jan Choinski",
+        "Aleksandar Vukic",
+        "Ignacio Buse"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 25440.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Elisabetta Cocciaretto",
+          "cuota": 2.5
+        },
+        {
+          "jugador": "Roman Andres Burruchaga",
+          "cuota": 3.7
+        },
+        {
+          "jugador": "Jan Choinski",
+          "cuota": 2.7
+        }
+      ],
+      "cuota_combo": 24.98,
+      "hr_combo": 0.1533,
+      "ev_combo": 2.8276,
+      "excluidos": [
+        "Thiago Agustin Tirante",
+        "Aleksandar Vukic",
+        "Ignacio Buse"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 24980.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Thiago Agustin Tirante",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Elisabetta Cocciaretto",
+          "cuota": 2.5
+        },
+        {
+          "jugador": "Jan Choinski",
+          "cuota": 2.7
+        }
+      ],
+      "cuota_combo": 18.56,
+      "hr_combo": 0.156,
+      "ev_combo": 1.8959,
+      "excluidos": [
+        "Roman Andres Burruchaga",
+        "Aleksandar Vukic",
+        "Ignacio Buse"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 18560.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Thiago Agustin Tirante",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Elisabetta Cocciaretto",
+          "cuota": 2.5
+        },
+        {
+          "jugador": "Roman Andres Burruchaga",
+          "cuota": 3.7
+        },
+        {
+          "jugador": "Jan Choinski",
+          "cuota": 2.7
+        }
+      ],
+      "cuota_combo": 68.68,
+      "hr_combo": 0.0829,
+      "ev_combo": 4.6956,
+      "excluidos": [
+        "Aleksandar Vukic",
+        "Ignacio Buse"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 68680.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Thiago Agustin Tirante",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Roman Andres Burruchaga",
+          "cuota": 3.7
+        },
+        {
+          "jugador": "Jan Choinski",
+          "cuota": 2.7
+        },
+        {
+          "jugador": "Aleksandar Vukic",
+          "cuota": 2.38
+        }
+      ],
+      "cuota_combo": 65.38,
+      "hr_combo": 0.0805,
+      "ev_combo": 4.2614,
+      "excluidos": [
+        "Elisabetta Cocciaretto",
+        "Ignacio Buse"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 65380.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Thiago Agustin Tirante",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Elisabetta Cocciaretto",
+          "cuota": 2.5
+        },
+        {
+          "jugador": "Roman Andres Burruchaga",
+          "cuota": 3.7
+        },
+        {
+          "jugador": "Aleksandar Vukic",
+          "cuota": 2.38
+        }
+      ],
+      "cuota_combo": 60.54,
+      "hr_combo": 0.0817,
+      "ev_combo": 3.9473,
+      "excluidos": [
+        "Jan Choinski",
+        "Ignacio Buse"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 60540.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Thiago Agustin Tirante",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Elisabetta Cocciaretto",
+          "cuota": 2.5
+        },
+        {
+          "jugador": "Jan Choinski",
+          "cuota": 2.7
+        },
+        {
+          "jugador": "Aleksandar Vukic",
+          "cuota": 2.38
+        }
+      ],
+      "cuota_combo": 44.18,
+      "hr_combo": 0.0819,
+      "ev_combo": 2.6187,
+      "excluidos": [
+        "Roman Andres Burruchaga",
+        "Ignacio Buse"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 44180.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.5714285714285714,
+    "total_ajustado": 12571.42857142857,
+    "var_95": -22000.0,
+    "cvar_95": -22000.0,
+    "expected_pl": 66539.07171225679,
+    "sharpe_ratio": 0.4532760080292642,
+    "kelly_growth_rate": 0.32538175363928273,
+    "sessions_to_double": 2.1302582975453697,
+    "var_excedido": true,
+    "factor_var": 0.3409090909090909
+  },
+  "resumen": {
+    "gastado_individuales": 1000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 8000,
+    "total_en_riesgo": 9000.0,
+    "pct_bankroll_en_riesgo": 0.3,
+    "n_senales_apostar": 1,
+    "pool_cobertura": 6,
+    "alerta_riesgo": false
+  }
+}

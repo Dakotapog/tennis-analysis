@@ -1,0 +1,364 @@
+{
+  "metadata": {
+    "timestamp": "20260619_115759",
+    "bankroll": 125000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260619_111304.json",
+    "n_partidos_analizados": 40,
+    "calibracion_n": 1325,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "itf",
+      "superficie": "clay",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Selena Janicijevic vs Lidia Encheva",
+      "favorito": "Lidia Encheva",
+      "cuota": 3.25,
+      "edge_pct": "22.2%",
+      "p_modelo": 0.53,
+      "n_h2h": 0,
+      "p_blend": 0.6713999999999999,
+      "kelly_kl": 0.1145,
+      "kelly_usado": 0.1,
+      "stake": 5000,
+      "retorno_potencial": 16250.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Martha Matoula vs Berfu Cengiz",
+      "favorito": "Martha Matoula",
+      "cuota": 2.55,
+      "edge_pct": "11.9%",
+      "p_modelo": 0.511,
+      "n_h2h": 1,
+      "p_blend": 0.6313,
+      "kelly_kl": 0.0683,
+      "kelly_usado": 0.0984,
+      "stake": 5000,
+      "retorno_potencial": 12750.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Dayeon Back vs Hiromi Abe",
+      "favorito": "Hiromi Abe",
+      "cuota": 2.43,
+      "edge_pct": "9.1%",
+      "p_modelo": 0.503,
+      "n_h2h": 0,
+      "p_blend": 0.6338,
+      "kelly_kl": 0.055,
+      "kelly_usado": 0.0944,
+      "stake": 5000,
+      "retorno_potencial": 12150.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Lidia Encheva",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Martha Matoula",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "Hoyoung Roh",
+          "cuota": 2.55
+        }
+      ],
+      "cuota_combo": 21.13,
+      "hr_combo": 0.2686,
+      "ev_combo": 4.6772,
+      "excluidos": [
+        "Hiromi Abe",
+        "Ronit Karki",
+        "Noah Zamora",
+        "Aleksandr Braynin",
+        "Anna Kubareva",
+        "Lucciana Perez Alarcon",
+        "Aishi Das"
+      ],
+      "stake": 5000,
+      "retorno_potencial": 105650.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Lidia Encheva",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Hoyoung Roh",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "Ronit Karki",
+          "cuota": 2.45
+        }
+      ],
+      "cuota_combo": 20.3,
+      "hr_combo": 0.2697,
+      "ev_combo": 4.4762,
+      "excluidos": [
+        "Martha Matoula",
+        "Hiromi Abe",
+        "Noah Zamora",
+        "Aleksandr Braynin",
+        "Anna Kubareva",
+        "Lucciana Perez Alarcon",
+        "Aishi Das"
+      ],
+      "stake": 5000,
+      "retorno_potencial": 101500.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Lidia Encheva",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Martha Matoula",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "Ronit Karki",
+          "cuota": 2.45
+        }
+      ],
+      "cuota_combo": 20.3,
+      "hr_combo": 0.2686,
+      "ev_combo": 4.4546,
+      "excluidos": [
+        "Hiromi Abe",
+        "Hoyoung Roh",
+        "Noah Zamora",
+        "Aleksandr Braynin",
+        "Anna Kubareva",
+        "Lucciana Perez Alarcon",
+        "Aishi Das"
+      ],
+      "stake": 5000,
+      "retorno_potencial": 101500.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Martha Matoula",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "Hoyoung Roh",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "Ronit Karki",
+          "cuota": 2.45
+        }
+      ],
+      "cuota_combo": 15.93,
+      "hr_combo": 0.2536,
+      "ev_combo": 3.04,
+      "excluidos": [
+        "Lidia Encheva",
+        "Hiromi Abe",
+        "Noah Zamora",
+        "Aleksandr Braynin",
+        "Anna Kubareva",
+        "Lucciana Perez Alarcon",
+        "Aishi Das"
+      ],
+      "stake": 5000,
+      "retorno_potencial": 79650.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Lidia Encheva",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Martha Matoula",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "Hoyoung Roh",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "Ronit Karki",
+          "cuota": 2.45
+        }
+      ],
+      "cuota_combo": 51.78,
+      "hr_combo": 0.1703,
+      "ev_combo": 7.8156,
+      "excluidos": [
+        "Hiromi Abe",
+        "Noah Zamora",
+        "Aleksandr Braynin",
+        "Anna Kubareva",
+        "Lucciana Perez Alarcon",
+        "Aishi Das"
+      ],
+      "stake": 3000,
+      "retorno_potencial": 155340.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Lidia Encheva",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Hiromi Abe",
+          "cuota": 2.43
+        },
+        {
+          "jugador": "Hoyoung Roh",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "Ronit Karki",
+          "cuota": 2.45
+        }
+      ],
+      "cuota_combo": 49.34,
+      "hr_combo": 0.1709,
+      "ev_combo": 7.434,
+      "excluidos": [
+        "Martha Matoula",
+        "Noah Zamora",
+        "Aleksandr Braynin",
+        "Anna Kubareva",
+        "Lucciana Perez Alarcon",
+        "Aishi Das"
+      ],
+      "stake": 3000,
+      "retorno_potencial": 148020.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Lidia Encheva",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Martha Matoula",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "Hiromi Abe",
+          "cuota": 2.43
+        },
+        {
+          "jugador": "Ronit Karki",
+          "cuota": 2.45
+        }
+      ],
+      "cuota_combo": 49.34,
+      "hr_combo": 0.1703,
+      "ev_combo": 7.4007,
+      "excluidos": [
+        "Hoyoung Roh",
+        "Noah Zamora",
+        "Aleksandr Braynin",
+        "Anna Kubareva",
+        "Lucciana Perez Alarcon",
+        "Aishi Das"
+      ],
+      "stake": 3000,
+      "retorno_potencial": 148020.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Martha Matoula",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "Hiromi Abe",
+          "cuota": 2.43
+        },
+        {
+          "jugador": "Hoyoung Roh",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "Ronit Karki",
+          "cuota": 2.45
+        }
+      ],
+      "cuota_combo": 38.71,
+      "hr_combo": 0.1607,
+      "ev_combo": 5.2222,
+      "excluidos": [
+        "Lidia Encheva",
+        "Noah Zamora",
+        "Aleksandr Braynin",
+        "Anna Kubareva",
+        "Lucciana Perez Alarcon",
+        "Aishi Das"
+      ],
+      "stake": 3000,
+      "retorno_potencial": 116130.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.6896551724137931,
+    "total_ajustado": 74482.75862068967,
+    "var_95": -71531.14285714287,
+    "cvar_95": -80246.88635758805,
+    "expected_pl": 360938.2467828949,
+    "sharpe_ratio": 0.9233822441058148,
+    "kelly_growth_rate": 1.0394110513818933,
+    "sessions_to_double": 0.6668653172759791,
+    "var_excedido": true,
+    "factor_var": 0.4368726508733458
+  },
+  "resumen": {
+    "gastado_individuales": 15000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 32000,
+    "total_en_riesgo": 47000.0,
+    "pct_bankroll_en_riesgo": 0.376,
+    "n_senales_apostar": 3,
+    "pool_cobertura": 10,
+    "alerta_riesgo": true
+  }
+}

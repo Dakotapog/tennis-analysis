@@ -1,0 +1,333 @@
+{
+  "metadata": {
+    "timestamp": "20260623_002722",
+    "bankroll": 10000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260623_001450.json",
+    "n_partidos_analizados": 127,
+    "calibracion_n": 1353,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "itf",
+      "superficie": "clay",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Astrid Wanja Brune Olsen vs Simona Cucu",
+      "favorito": "Simona Cucu",
+      "cuota": 4.7,
+      "edge_pct": "61.4%",
+      "p_modelo": 0.827,
+      "n_h2h": 0,
+      "p_blend": 0.5,
+      "kelly_kl": 0.1969,
+      "kelly_usado": 0.0912,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Nazar Oliynykov vs Dorian Tremblay",
+      "favorito": "Dorian Tremblay",
+      "cuota": 1.81,
+      "edge_pct": "22.0%",
+      "p_modelo": 0.772,
+      "n_h2h": 0,
+      "p_blend": 0.5,
+      "kelly_kl": 0.1353,
+      "kelly_usado": 0.0,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "slight_underdog",
+      "superficie": "clay"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Simona Cucu",
+          "cuota": 4.7
+        },
+        {
+          "jugador": "Gabriela Kawano Cho",
+          "cuota": 5.5
+        },
+        {
+          "jugador": "Dev Javia",
+          "cuota": 3.45
+        }
+      ],
+      "cuota_combo": 89.18,
+      "hr_combo": 0.125,
+      "ev_combo": 10.1478,
+      "excluidos": [
+        "Dorian Tremblay",
+        "Matilde Paoletti",
+        "Darya Velikova",
+        "Sina Herrmann",
+        "Hibah Shaikh"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Simona Cucu",
+          "cuota": 4.7
+        },
+        {
+          "jugador": "Gabriela Kawano Cho",
+          "cuota": 5.5
+        },
+        {
+          "jugador": "Darya Velikova",
+          "cuota": 3.2
+        }
+      ],
+      "cuota_combo": 82.72,
+      "hr_combo": 0.125,
+      "ev_combo": 9.34,
+      "excluidos": [
+        "Dorian Tremblay",
+        "Matilde Paoletti",
+        "Dev Javia",
+        "Sina Herrmann",
+        "Hibah Shaikh"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Gabriela Kawano Cho",
+          "cuota": 5.5
+        },
+        {
+          "jugador": "Dev Javia",
+          "cuota": 3.45
+        },
+        {
+          "jugador": "Darya Velikova",
+          "cuota": 3.2
+        }
+      ],
+      "cuota_combo": 60.72,
+      "hr_combo": 0.125,
+      "ev_combo": 6.59,
+      "excluidos": [
+        "Simona Cucu",
+        "Dorian Tremblay",
+        "Matilde Paoletti",
+        "Sina Herrmann",
+        "Hibah Shaikh"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Simona Cucu",
+          "cuota": 4.7
+        },
+        {
+          "jugador": "Dev Javia",
+          "cuota": 3.45
+        },
+        {
+          "jugador": "Darya Velikova",
+          "cuota": 3.2
+        }
+      ],
+      "cuota_combo": 51.89,
+      "hr_combo": 0.125,
+      "ev_combo": 5.486,
+      "excluidos": [
+        "Dorian Tremblay",
+        "Gabriela Kawano Cho",
+        "Matilde Paoletti",
+        "Sina Herrmann",
+        "Hibah Shaikh"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Simona Cucu",
+          "cuota": 4.7
+        },
+        {
+          "jugador": "Gabriela Kawano Cho",
+          "cuota": 5.5
+        },
+        {
+          "jugador": "Dev Javia",
+          "cuota": 3.45
+        },
+        {
+          "jugador": "Sina Herrmann",
+          "cuota": 2.35
+        }
+      ],
+      "cuota_combo": 209.58,
+      "hr_combo": 0.0625,
+      "ev_combo": 12.0987,
+      "excluidos": [
+        "Dorian Tremblay",
+        "Matilde Paoletti",
+        "Darya Velikova",
+        "Hibah Shaikh"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Simona Cucu",
+          "cuota": 4.7
+        },
+        {
+          "jugador": "Gabriela Kawano Cho",
+          "cuota": 5.5
+        },
+        {
+          "jugador": "Darya Velikova",
+          "cuota": 3.2
+        },
+        {
+          "jugador": "Sina Herrmann",
+          "cuota": 2.35
+        }
+      ],
+      "cuota_combo": 194.39,
+      "hr_combo": 0.0625,
+      "ev_combo": 11.1495,
+      "excluidos": [
+        "Dorian Tremblay",
+        "Matilde Paoletti",
+        "Dev Javia",
+        "Hibah Shaikh"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Gabriela Kawano Cho",
+          "cuota": 5.5
+        },
+        {
+          "jugador": "Dev Javia",
+          "cuota": 3.45
+        },
+        {
+          "jugador": "Darya Velikova",
+          "cuota": 3.2
+        },
+        {
+          "jugador": "Sina Herrmann",
+          "cuota": 2.35
+        }
+      ],
+      "cuota_combo": 142.69,
+      "hr_combo": 0.0625,
+      "ev_combo": 7.9183,
+      "excluidos": [
+        "Simona Cucu",
+        "Dorian Tremblay",
+        "Matilde Paoletti",
+        "Hibah Shaikh"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Simona Cucu",
+          "cuota": 4.7
+        },
+        {
+          "jugador": "Dev Javia",
+          "cuota": 3.45
+        },
+        {
+          "jugador": "Darya Velikova",
+          "cuota": 3.2
+        },
+        {
+          "jugador": "Sina Herrmann",
+          "cuota": 2.35
+        }
+      ],
+      "cuota_combo": 121.94,
+      "hr_combo": 0.0625,
+      "ev_combo": 6.6211,
+      "excluidos": [
+        "Dorian Tremblay",
+        "Gabriela Kawano Cho",
+        "Matilde Paoletti",
+        "Hibah Shaikh"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.7407407407407407,
+    "total_ajustado": 7407.407407407407,
+    "var_95": -10000.0,
+    "cvar_95": -10000.0,
+    "expected_pl": 70324.08368999288,
+    "sharpe_ratio": 0.5732907039973024,
+    "kelly_growth_rate": 1.0036630276268026,
+    "sessions_to_double": 0.6906174298349086,
+    "var_excedido": true,
+    "factor_var": 0.25
+  },
+  "resumen": {
+    "gastado_individuales": 0,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 0,
+    "total_en_riesgo": 0.0,
+    "pct_bankroll_en_riesgo": 0.0,
+    "n_senales_apostar": 2,
+    "pool_cobertura": 8,
+    "alerta_riesgo": false
+  }
+}

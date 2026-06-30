@@ -1,0 +1,15 @@
+{
+  "metadata": {
+    "fecha_extraccion": "2026-05-29 02:01:58",
+    "total_partidos_procesados": 0,
+    "version": "3.0_con_rivalidad_transitiva",
+    "funcionalidades": [
+      "Extracción H2H básica",
+      "Análisis de rankings",
+      "Rivalidad transitiva",
+      "Predicciones avanzadas"
+    ]
+  },
+  "partidos": [],
+  "estadisticas_globales": {}
+}

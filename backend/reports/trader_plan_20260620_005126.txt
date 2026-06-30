@@ -1,0 +1,106 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — ATP500 GRASS
+  2026-06-20 00:51  │  Bankroll: $125,000
+  Señales APOSTAR: 1  │  Watchlist: 2  │  Sin edge: 0
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 3 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.15 (atp500)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $50,000 (40% bankroll)
+
+  │  🎾 Emma Navarro vs Viktorija Golubic
+  │     Apostar: Viktorija Golubic
+  │     Cuota 2.88  │  Edge 15.9%  │  p_blend 0.532 (n_h2h=1)
+  │     Kelly-KL 8.8% → stake $9,000  │  Retorno potencial $25,920
+  │     EV real +53.3%  │  Zona: underdog  │  Sup: grass
+
+  │  Total individuales: $9,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 3 picks  │  Combos: 3 a 3 piernas
+  │  Budget: $75,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Viktorija Golubic    @2.88  p=0.532  zona=underdog
+  │    2. Toby Samuel          @2.04  p=0.541  zona=slight_underdog [W]
+  │    3. Harry Wendelken      @2.02  p=0.532  zona=slight_underdog [W]
+
+  │  ── 3 PIERNAS: TOP 1 combos × $75,000 = $75,000 ──
+  │     (cada combo excluye 0 jugador)
+  │     [3p-1] Viktorija Golubic@2.88 + Toby Samuel@2.04 + Harry Wendelken@2.02
+  │            @11.87 HR:15.3% EV:+81.9% →$890,250  excluye:[ninguno]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-0 picks?) ──
+  │  Total apostado: $75,000
+
+  │  🏆 0 fallos (3/3 ganan): retorno $890,250 → P&L +$815,250 (TODOS 1 combos pagan)
+
+  │  Total cobertura: $75,000  │  1 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     3
+  │  ρ estructural:       0.15 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.769
+  │  Reducción vs naive:  -23.1%
+  │
+  │  Stake naive (sin ajuste):    $      84,000
+  │  Stake ajustado (PK):         $      64,615
+  │  Ahorro por correlación:      $      19,385
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $     -84,000  (67.2% bankroll)
+  │  CVaR 95%:           $     -84,000
+  │  Max VaR permitido:  $      31,250  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.37
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $      68,723
+  │  σ(P&L):             $     327,556
+  │  Sharpe Ratio:              0.210
+  │  Kelly Growth Rate:       -0.4426 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  ❌ Growth rate negativo — NO escalar bankroll
+  │     Sistema en fase de calibración, mantener bankroll actual
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ❌ Sin edge o riesgo excesivo. NO desplegar capital.
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.37) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Viktorija Golubic         @2.88  →  $   3,000  (ret. $     8,640)
+  │
+  │  COBERTURA (1 combos):
+  │    [3p @11.87]  $  28,000  →  Viktorija Golubic@2.88 + Toby Samuel@2.04 + Harry Wendelken@2.02
+  │
+  │  TOTAL EN RIESGO:  $    31,000  (24.8% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $       125,000                       ║
+  ║  Individuales:        $         3,000  (2.4% bankroll)      ║
+  ║  Cobertura:           $        28,000  (22.4% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $        31,000  (24.8% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       1                                       ║
+  ║  Pool cobertura:        3 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260620_00  ║
+  ║  Partidos analizados:  55                                       ║
+  ║  Superficie:          grass (atp500)                              ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  📊 Calibración: n=1325 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.541 (calibrado grass) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260620_005126.json

@@ -1,0 +1,353 @@
+{
+  "metadata": {
+    "timestamp": "20260606_121155",
+    "bankroll": 125000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260604_034619.json",
+    "n_partidos_analizados": 80,
+    "calibracion_n": 69,
+    "parametros": {
+      "modo": "cobertura",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Wong C. vs Romano F.",
+      "favorito": "Romano F.",
+      "cuota": 4.0,
+      "edge_pct": "28.4%",
+      "p_modelo": 0.534,
+      "n_h2h": 0,
+      "p_blend": 0.676056338028169,
+      "kelly_kl": 0.4383,
+      "kelly_usado": 0.1,
+      "stake": 5000,
+      "retorno_potencial": 20000.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Bartunkova N. vs Knutson G.",
+      "favorito": "Knutson G.",
+      "cuota": 3.1,
+      "edge_pct": "19.0%",
+      "p_modelo": 0.513,
+      "n_h2h": 1,
+      "p_blend": 0.6352922535211267,
+      "kelly_kl": 0.3264,
+      "kelly_usado": 0.1,
+      "stake": 5000,
+      "retorno_potencial": 15500.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Preston T. vs Dudeney A.",
+      "favorito": "Dudeney A.",
+      "cuota": 2.3,
+      "edge_pct": "7.0%",
+      "p_modelo": 0.505,
+      "n_h2h": 0,
+      "p_blend": 0.676056338028169,
+      "kelly_kl": 0.1463,
+      "kelly_usado": 0.1,
+      "stake": 5000,
+      "retorno_potencial": 11500.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Stojsavljevic M. vs Kalieva E.",
+      "favorito": "Stojsavljevic M.",
+      "cuota": 2.25,
+      "edge_pct": "6.8%",
+      "p_modelo": 0.512,
+      "n_h2h": 0,
+      "p_blend": 0.676056338028169,
+      "kelly_kl": 0.1436,
+      "kelly_usado": 0.1,
+      "stake": 5000,
+      "retorno_potencial": 11250.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Romano F.",
+          "cuota": 4.0
+        },
+        {
+          "jugador": "Knutson G.",
+          "cuota": 3.1
+        },
+        {
+          "jugador": "Dudeney A.",
+          "cuota": 2.3
+        }
+      ],
+      "cuota_combo": 28.52,
+      "hr_combo": 0.2602,
+      "ev_combo": 6.4196,
+      "excluidos": [
+        "Stojsavljevic M.",
+        "Ymer E.",
+        "Bu Y.",
+        "Hijikata R."
+      ],
+      "stake": 5000,
+      "retorno_potencial": 142600.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Romano F.",
+          "cuota": 4.0
+        },
+        {
+          "jugador": "Knutson G.",
+          "cuota": 3.1
+        },
+        {
+          "jugador": "Stojsavljevic M.",
+          "cuota": 2.25
+        }
+      ],
+      "cuota_combo": 27.9,
+      "hr_combo": 0.2602,
+      "ev_combo": 6.2583,
+      "excluidos": [
+        "Dudeney A.",
+        "Ymer E.",
+        "Bu Y.",
+        "Hijikata R."
+      ],
+      "stake": 5000,
+      "retorno_potencial": 139500.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Romano F.",
+          "cuota": 4.0
+        },
+        {
+          "jugador": "Dudeney A.",
+          "cuota": 2.3
+        },
+        {
+          "jugador": "Stojsavljevic M.",
+          "cuota": 2.25
+        }
+      ],
+      "cuota_combo": 20.7,
+      "hr_combo": 0.2746,
+      "ev_combo": 4.6847,
+      "excluidos": [
+        "Knutson G.",
+        "Ymer E.",
+        "Bu Y.",
+        "Hijikata R."
+      ],
+      "stake": 5000,
+      "retorno_potencial": 103500.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Knutson G.",
+          "cuota": 3.1
+        },
+        {
+          "jugador": "Dudeney A.",
+          "cuota": 2.3
+        },
+        {
+          "jugador": "Stojsavljevic M.",
+          "cuota": 2.25
+        }
+      ],
+      "cuota_combo": 16.04,
+      "hr_combo": 0.2602,
+      "ev_combo": 3.1735,
+      "excluidos": [
+        "Romano F.",
+        "Ymer E.",
+        "Bu Y.",
+        "Hijikata R."
+      ],
+      "stake": 5000,
+      "retorno_potencial": 80200.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Romano F.",
+          "cuota": 4.0
+        },
+        {
+          "jugador": "Knutson G.",
+          "cuota": 3.1
+        },
+        {
+          "jugador": "Dudeney A.",
+          "cuota": 2.3
+        },
+        {
+          "jugador": "Stojsavljevic M.",
+          "cuota": 2.25
+        }
+      ],
+      "cuota_combo": 64.17,
+      "hr_combo": 0.1691,
+      "ev_combo": 9.8512,
+      "excluidos": [
+        "Ymer E.",
+        "Bu Y.",
+        "Hijikata R."
+      ],
+      "stake": 3000,
+      "retorno_potencial": 192510.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Romano F.",
+          "cuota": 4.0
+        },
+        {
+          "jugador": "Knutson G.",
+          "cuota": 3.1
+        },
+        {
+          "jugador": "Stojsavljevic M.",
+          "cuota": 2.25
+        },
+        {
+          "jugador": "Ymer E.",
+          "cuota": 1.95
+        }
+      ],
+      "cuota_combo": 54.41,
+      "hr_combo": 0.1575,
+      "ev_combo": 7.5715,
+      "excluidos": [
+        "Dudeney A.",
+        "Bu Y.",
+        "Hijikata R."
+      ],
+      "stake": 3000,
+      "retorno_potencial": 163230.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Romano F.",
+          "cuota": 4.0
+        },
+        {
+          "jugador": "Dudeney A.",
+          "cuota": 2.3
+        },
+        {
+          "jugador": "Stojsavljevic M.",
+          "cuota": 2.25
+        },
+        {
+          "jugador": "Ymer E.",
+          "cuota": 1.95
+        }
+      ],
+      "cuota_combo": 40.36,
+      "hr_combo": 0.1663,
+      "ev_combo": 5.7132,
+      "excluidos": [
+        "Knutson G.",
+        "Bu Y.",
+        "Hijikata R."
+      ],
+      "stake": 3000,
+      "retorno_potencial": 121080.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Knutson G.",
+          "cuota": 3.1
+        },
+        {
+          "jugador": "Dudeney A.",
+          "cuota": 2.3
+        },
+        {
+          "jugador": "Stojsavljevic M.",
+          "cuota": 2.25
+        },
+        {
+          "jugador": "Ymer E.",
+          "cuota": 1.95
+        }
+      ],
+      "cuota_combo": 31.28,
+      "hr_combo": 0.1575,
+      "ev_combo": 3.9286,
+      "excluidos": [
+        "Romano F.",
+        "Bu Y.",
+        "Hijikata R."
+      ],
+      "stake": 3000,
+      "retorno_potencial": 93840.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.5263157894736842,
+    "total_ajustado": 63157.8947368421,
+    "var_95": -72000.0,
+    "cvar_95": -71999.99999999999,
+    "expected_pl": 385507.6919549762,
+    "sharpe_ratio": 0.7436468852486011,
+    "kelly_growth_rate": 1.209718881539616,
+    "sessions_to_double": 0.5729820300711294,
+    "var_excedido": true,
+    "factor_var": 0.4340277777777778
+  },
+  "resumen": {
+    "gastado_individuales": 20000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 32000,
+    "total_en_riesgo": 52000.0,
+    "pct_bankroll_en_riesgo": 0.416,
+    "n_senales_apostar": 4,
+    "pool_cobertura": 7,
+    "alerta_riesgo": true
+  }
+}

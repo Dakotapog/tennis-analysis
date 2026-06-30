@@ -1,0 +1,32 @@
+{
+  "timestamp": "2026-06-28T23:22:15.537154",
+  "dataset_summary": {
+    "total_samples": 386,
+    "total_features": 35,
+    "class_distribution": {
+      "player2": 0.5647668393782384,
+      "player1": 0.43523316062176165
+    },
+    "missing_data_percentage": 0.21
+  },
+  "ml_readiness": {
+    "status": "APROBADO ✅",
+    "is_ready": true,
+    "critical_issues": [],
+    "confidence_score": 100
+  },
+  "key_improvements": {
+    "features_engineered": 29,
+    "balancing_applied": true,
+    "diversity_validated": true
+  },
+  "recommendations": [
+    "✅ Dataset preparado para ML - No se detectaron problemas críticos"
+  ],
+  "next_steps": [
+    "1. Proceder con entrenamiento de modelos ML",
+    "2. Implementar validación cruzada estratificada",
+    "3. Monitorear performance en datos de prueba",
+    "4. Configurar pipeline de predicción en producción"
+  ]
+}

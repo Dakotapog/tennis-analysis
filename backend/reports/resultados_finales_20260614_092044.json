@@ -1,0 +1,518 @@
+{
+  "fecha_validacion": "2026-06-14T09:21:38.442558",
+  "fuente_h2h": "reports/h2h_results_enhanced_20260614_012628.json",
+  "total_partidos": 64,
+  "total_validados": 49,
+  "saltados": 0,
+  "correctas": 27,
+  "accuracy": 0.551,
+  "accuracy_por_superficie": {
+    "hard": {
+      "accuracy": 0.5,
+      "n": 6,
+      "correctas": 3
+    },
+    "clay": {
+      "accuracy": 0.5556,
+      "n": 27,
+      "correctas": 15
+    },
+    "grass": {
+      "accuracy": 0.5625,
+      "n": 16,
+      "correctas": 9
+    }
+  },
+  "partidos": [
+    {
+      "partido": "Ilay Yoruk vs Lan Mi",
+      "prediccion": "Lan Mi",
+      "confianza": 52.4,
+      "resultado_real": "Ilay Yoruk",
+      "correcto": false,
+      "match_id": "vVAovzL6",
+      "torneo": "Desconocido",
+      "superficie": "hard"
+    },
+    {
+      "partido": "Ivan Marrero Curbelo vs Maxwell Mckennon",
+      "prediccion": "Maxwell Mckennon",
+      "confianza": 51.0,
+      "resultado_real": "Ivan Marrero Curbelo",
+      "correcto": false,
+      "match_id": "6HCwtdjf",
+      "torneo": "Desconocido",
+      "superficie": "hard"
+    },
+    {
+      "partido": "Niels McDonald vs Sandro Kopp",
+      "prediccion": "Sandro Kopp",
+      "confianza": 51.3,
+      "resultado_real": "Niels McDonald",
+      "correcto": false,
+      "match_id": "zFVDPz6D",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Ksenia Zaytseva vs Marie Mettraux",
+      "prediccion": "Marie Mettraux",
+      "confianza": 51.1,
+      "resultado_real": "Ksenia Zaytseva",
+      "correcto": false,
+      "match_id": "l4vU9AGk",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Tommaso Compagnucci vs Tobia Costanzo Baragiola Mordini",
+      "prediccion": "Tommaso Compagnucci",
+      "confianza": 58.2,
+      "resultado_real": "Tommaso Compagnucci",
+      "correcto": true,
+      "match_id": "rP2O1Wjm",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Matyas Cerny vs Alexander Weis",
+      "prediccion": "Matyas Cerny",
+      "confianza": 50.7,
+      "resultado_real": "Alexander Weis",
+      "correcto": false,
+      "match_id": "E3y51Nd4",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Sergio Callejon Hernando vs Lorenzo Bocchi",
+      "prediccion": "Lorenzo Bocchi",
+      "confianza": 51.6,
+      "resultado_real": "Lorenzo Bocchi",
+      "correcto": true,
+      "match_id": "U1WButzo",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Yanaki Milev vs Miguel Tobon",
+      "prediccion": "Yanaki Milev",
+      "confianza": 50.2,
+      "resultado_real": "Miguel Tobon",
+      "correcto": false,
+      "match_id": "O24vbljC",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Marko Topo vs Ryan Seggerman",
+      "prediccion": "Ryan Seggerman",
+      "confianza": 50.9,
+      "resultado_real": "Ryan Seggerman",
+      "correcto": true,
+      "match_id": "tjwc3qSi",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Michele Mecarelli vs Jakub Paul",
+      "prediccion": "Jakub Paul",
+      "confianza": 51.5,
+      "resultado_real": "Jakub Paul",
+      "correcto": true,
+      "match_id": "YVQboB66",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Samuel Vincent Ruggeri vs Alejo Sanchez Quilez",
+      "prediccion": "Alejo Sanchez Quilez",
+      "confianza": 53.5,
+      "resultado_real": "Alejo Sanchez Quilez",
+      "correcto": true,
+      "match_id": "Q5NjmXyf",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Victoria Milovanova vs Aspen Schuman",
+      "prediccion": "Victoria Milovanova",
+      "confianza": 51.3,
+      "resultado_real": "Victoria Milovanova",
+      "correcto": true,
+      "match_id": "UmiS2YFc",
+      "torneo": "Desconocido",
+      "superficie": "hard"
+    },
+    {
+      "partido": "Jennifer Ruggeri vs Yelyzaveta Kotliar",
+      "prediccion": "Jennifer Ruggeri",
+      "confianza": 51.9,
+      "resultado_real": "Jennifer Ruggeri",
+      "correcto": true,
+      "match_id": "0rG0P8Sk",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Tatiana Pieri vs Diletta Cherubini",
+      "prediccion": "Diletta Cherubini",
+      "confianza": 51.6,
+      "resultado_real": "Tatiana Pieri",
+      "correcto": false,
+      "match_id": "Aed0TxoL",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Dominick Mosejczuk vs Cesar Bouchelaghem",
+      "prediccion": "Cesar Bouchelaghem",
+      "confianza": 50.9,
+      "resultado_real": "Cesar Bouchelaghem",
+      "correcto": true,
+      "match_id": "6cbBpi0T",
+      "torneo": "Desconocido",
+      "superficie": "hard"
+    },
+    {
+      "partido": "Tamila Gadamauri vs Valentina Steiner",
+      "prediccion": "Valentina Steiner",
+      "confianza": 50.6,
+      "resultado_real": "Valentina Steiner",
+      "correcto": true,
+      "match_id": "j336xICE",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Julia Avdeeva vs Eva Vedder",
+      "prediccion": "Eva Vedder",
+      "confianza": 53.9,
+      "resultado_real": "Julia Avdeeva",
+      "correcto": false,
+      "match_id": "KIXJLqvS",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Aliona Falei vs Savannah Broadus",
+      "prediccion": "Aliona Falei",
+      "confianza": 51.2,
+      "resultado_real": "Savannah Broadus",
+      "correcto": false,
+      "match_id": "0dTsIAK8",
+      "torneo": "Desconocido",
+      "superficie": "hard"
+    },
+    {
+      "partido": "Sean Cuenin vs Stefano D'Agostino",
+      "prediccion": "Sean Cuenin",
+      "confianza": 53.7,
+      "resultado_real": "Sean Cuenin",
+      "correcto": true,
+      "match_id": "0xsAtwS7",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Ruth Roura Llaverias vs Briyana Ivanova",
+      "prediccion": "Briyana Ivanova",
+      "confianza": 51.1,
+      "resultado_real": "Ruth Roura Llaverias",
+      "correcto": false,
+      "match_id": "hQMJDqbs",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Yannik Kelm vs Attila Boros",
+      "prediccion": "Yannik Kelm",
+      "confianza": 51.4,
+      "resultado_real": "Yannik Kelm",
+      "correcto": true,
+      "match_id": "MkQwK9dm",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Florian Broska vs Michael Bassem Sobhy",
+      "prediccion": "Florian Broska",
+      "confianza": 52.6,
+      "resultado_real": "Florian Broska",
+      "correcto": true,
+      "match_id": "pvn32KlR",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Jonas Forejtek vs Karol Filar",
+      "prediccion": "Jonas Forejtek",
+      "confianza": 53.0,
+      "resultado_real": "Karol Filar",
+      "correcto": false,
+      "match_id": "Ontsexs1",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Naoki Tajima vs Nitin Kumar Sinha",
+      "prediccion": "Naoki Tajima",
+      "confianza": 57.8,
+      "resultado_real": "Nitin Kumar Sinha",
+      "correcto": false,
+      "match_id": "lQBrLazB",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Raphael Collignon vs Roberto Bautista Agut",
+      "prediccion": "Roberto Bautista Agut",
+      "confianza": 50.8,
+      "resultado_real": "Raphael Collignon",
+      "correcto": false,
+      "match_id": "2kVakbid",
+      "torneo": "Desconocido",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Alexander Shevchenko vs Taro Daniel",
+      "prediccion": "Alexander Shevchenko",
+      "confianza": 50.3,
+      "resultado_real": "Taro Daniel",
+      "correcto": false,
+      "match_id": "zVwBA2Oc",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Joao Domingues vs Pablo Martinez Gomez",
+      "prediccion": "Pablo Martinez Gomez",
+      "confianza": 51.3,
+      "resultado_real": "Pablo Martinez Gomez",
+      "correcto": true,
+      "match_id": "Y3OZ91c6",
+      "torneo": "Desconocido",
+      "superficie": "hard"
+    },
+    {
+      "partido": "James Watt vs Alastair Gray",
+      "prediccion": "Alastair Gray",
+      "confianza": 50.4,
+      "resultado_real": "Alastair Gray",
+      "correcto": true,
+      "match_id": "GG7OWwN9",
+      "torneo": "Desconocido",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Luca Nardi vs Giles Hussey",
+      "prediccion": "Luca Nardi",
+      "confianza": 51.1,
+      "resultado_real": "Luca Nardi",
+      "correcto": true,
+      "match_id": "4ULQUQA5",
+      "torneo": "Desconocido",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Zhizhen Zhang vs Oliver Okonkwo",
+      "prediccion": "Zhizhen Zhang",
+      "confianza": 52.3,
+      "resultado_real": "Zhizhen Zhang",
+      "correcto": true,
+      "match_id": "bmw476WN",
+      "torneo": "Desconocido",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Soonwoo Kwon vs Anton Matusevich",
+      "prediccion": "Soonwoo Kwon",
+      "confianza": 51,
+      "resultado_real": "Anton Matusevich",
+      "correcto": false,
+      "match_id": "S4A6njx8",
+      "torneo": "Desconocido",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Katie Volynets vs Kimberly Birrell",
+      "prediccion": "Katie Volynets",
+      "confianza": 54.1,
+      "resultado_real": "Katie Volynets",
+      "correcto": true,
+      "match_id": "WGNIWntg",
+      "torneo": "Desconocido",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Anna Blinkova vs Anna Bondar",
+      "prediccion": "Anna Blinkova",
+      "confianza": 52.9,
+      "resultado_real": "Anna Blinkova",
+      "correcto": true,
+      "match_id": "KO2Uo4T6",
+      "torneo": "Desconocido",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Robin Montgomery vs Barbora Krejcikova",
+      "prediccion": "Barbora Krejcikova",
+      "confianza": 50.7,
+      "resultado_real": "Robin Montgomery",
+      "correcto": false,
+      "match_id": "hx1xprbJ",
+      "torneo": "Desconocido",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Niels Visker vs Dan Added",
+      "prediccion": "Niels Visker",
+      "confianza": 50.9,
+      "resultado_real": "Niels Visker",
+      "correcto": true,
+      "match_id": "OjWKpgYo",
+      "torneo": "Desconocido",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Ammar Elamin vs Andres Andrade",
+      "prediccion": "Andres Andrade",
+      "confianza": 52.7,
+      "resultado_real": "Ammar Elamin",
+      "correcto": false,
+      "match_id": "d4USrX2b",
+      "torneo": "Desconocido",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Oliver Crawford vs Edward Winter",
+      "prediccion": "Edward Winter",
+      "confianza": 52.3,
+      "resultado_real": "Oliver Crawford",
+      "correcto": false,
+      "match_id": "OzhtA91c",
+      "torneo": "Desconocido",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Edas Butvilas vs Cruz Hewitt",
+      "prediccion": "Cruz Hewitt",
+      "confianza": 52.3,
+      "resultado_real": "Cruz Hewitt",
+      "correcto": true,
+      "match_id": "nHHEZSPp",
+      "torneo": "Desconocido",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Quinn Vandecasteele vs Kaichi Uchida",
+      "prediccion": "Quinn Vandecasteele",
+      "confianza": 50.6,
+      "resultado_real": "Quinn Vandecasteele",
+      "correcto": true,
+      "match_id": "0bEOiSoT",
+      "torneo": "Desconocido",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Ashlyn Krueger vs Celine Naef",
+      "prediccion": "Celine Naef",
+      "confianza": 50.2,
+      "resultado_real": "Ashlyn Krueger",
+      "correcto": false,
+      "match_id": "rsE11J2s",
+      "torneo": "Desconocido",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Zachary Svajda vs Martin Damm",
+      "prediccion": "Martin Damm",
+      "confianza": 54.0,
+      "resultado_real": "Martin Damm",
+      "correcto": true,
+      "match_id": "r39GYahc",
+      "torneo": "Desconocido",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Aleksandar Vukic vs Harry Wendelken",
+      "prediccion": "Aleksandar Vukic",
+      "confianza": 50.3,
+      "resultado_real": "Harry Wendelken",
+      "correcto": false,
+      "match_id": "vRnnfsvH",
+      "torneo": "Desconocido",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Oleksii Krutykh vs Georgii Kravchenko",
+      "prediccion": "Oleksii Krutykh",
+      "confianza": 50.9,
+      "resultado_real": "Oleksii Krutykh",
+      "correcto": true,
+      "match_id": "GWRgGReC",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Aran Teixido Garcia vs Luna Vujovic",
+      "prediccion": "Aran Teixido Garcia",
+      "confianza": 50.5,
+      "resultado_real": "Luna Vujovic",
+      "correcto": false,
+      "match_id": "t4bdDFn1",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Andrey Chepelev vs Sergi Perez Contri",
+      "prediccion": "Andrey Chepelev",
+      "confianza": 56.6,
+      "resultado_real": "Andrey Chepelev",
+      "correcto": true,
+      "match_id": "vun6GTV9",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Elina Avanesyan vs Kajsa Rinaldo Persson",
+      "prediccion": "Elina Avanesyan",
+      "confianza": 51.2,
+      "resultado_real": "Elina Avanesyan",
+      "correcto": true,
+      "match_id": "02hXh42D",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Felix Balshaw vs David Jorda Sanchis",
+      "prediccion": "Felix Balshaw",
+      "confianza": 51.1,
+      "resultado_real": "Felix Balshaw",
+      "correcto": true,
+      "match_id": "4jLb9qRQ",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Nadia Podoroska vs Lucciana Perez Alarcon",
+      "prediccion": "Lucciana Perez Alarcon",
+      "confianza": 53.2,
+      "resultado_real": "Lucciana Perez Alarcon",
+      "correcto": true,
+      "match_id": "rauSTPQ0",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Antonia Vergara Rivera vs Carolina Alves",
+      "prediccion": "Antonia Vergara Rivera",
+      "confianza": 51.7,
+      "resultado_real": "Carolina Alves",
+      "correcto": false,
+      "match_id": "j3N9PWBj",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    }
+  ]
+}

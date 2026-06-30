@@ -1,0 +1,46 @@
+{
+  "metadata": {
+    "timestamp": "20260625_094331",
+    "bankroll": 125000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260625_094027.json",
+    "n_partidos_analizados": 49,
+    "calibracion_n": 1955,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "atp500",
+      "superficie": "grass",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 2,
+      "piernas_max": 2,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [],
+  "risk_management": {},
+  "resumen": {
+    "gastado_individuales": 0.0,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 0.0,
+    "total_en_riesgo": 0.0,
+    "pct_bankroll_en_riesgo": 0.0,
+    "n_senales_apostar": 0,
+    "pool_cobertura": 1,
+    "alerta_riesgo": false
+  }
+}

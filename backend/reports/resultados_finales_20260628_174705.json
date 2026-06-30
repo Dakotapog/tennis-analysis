@@ -1,0 +1,177 @@
+{
+  "fecha_validacion": "2026-06-28T17:47:21.419010",
+  "fuente_h2h": "reports/h2h_results_enhanced_20260628_105242.json",
+  "total_partidos": 14,
+  "total_validados": 14,
+  "saltados": 0,
+  "correctas": 11,
+  "accuracy": 0.7857,
+  "accuracy_por_superficie": {
+    "hard": {
+      "accuracy": 0.7778,
+      "n": 9,
+      "correctas": 7
+    },
+    "clay": {
+      "accuracy": 0.8,
+      "n": 5,
+      "correctas": 4
+    }
+  },
+  "partidos": [
+    {
+      "partido": "Charlie Camus vs Jay Dylan Hara Friend",
+      "prediccion": "Jay Dylan Hara Friend",
+      "confianza": 61.2,
+      "resultado_real": "Jay Dylan Hara Friend",
+      "correcto": true,
+      "match_id": "4j3W9fKN",
+      "torneo": "Desconocido",
+      "superficie": "hard",
+      "resolved_from_feed": false
+    },
+    {
+      "partido": "Justin Boulais vs Enzo Aguiard",
+      "prediccion": "Enzo Aguiard",
+      "confianza": 50.4,
+      "resultado_real": "Justin Boulais",
+      "correcto": false,
+      "match_id": "j9QJrILO",
+      "torneo": "Desconocido",
+      "superficie": "hard",
+      "resolved_from_feed": false
+    },
+    {
+      "partido": "Ian Mayew vs Edward Winter",
+      "prediccion": "Edward Winter",
+      "confianza": 63.2,
+      "resultado_real": "Edward Winter",
+      "correcto": true,
+      "match_id": "A91GDxLb",
+      "torneo": "Desconocido",
+      "superficie": "hard",
+      "resolved_from_feed": false
+    },
+    {
+      "partido": "Christian Langmo vs Samir Banerjee",
+      "prediccion": "Samir Banerjee",
+      "confianza": 51.3,
+      "resultado_real": "Samir Banerjee",
+      "correcto": true,
+      "match_id": "nXNbee5U",
+      "torneo": "Desconocido",
+      "superficie": "hard",
+      "resolved_from_feed": false
+    },
+    {
+      "partido": "Mitchell Krueger vs Dhakshineswar Suresh",
+      "prediccion": "Dhakshineswar Suresh",
+      "confianza": 55.4,
+      "resultado_real": "Dhakshineswar Suresh",
+      "correcto": true,
+      "match_id": "6L0T2L6t",
+      "torneo": "Desconocido",
+      "superficie": "hard",
+      "resolved_from_feed": false
+    },
+    {
+      "partido": "Ronit Karki vs James Kent Trotter",
+      "prediccion": "James Kent Trotter",
+      "confianza": 51,
+      "resultado_real": "James Kent Trotter",
+      "correcto": true,
+      "match_id": "xd38Fbjn",
+      "torneo": "Desconocido",
+      "superficie": "hard",
+      "resolved_from_feed": false
+    },
+    {
+      "partido": "Daniel Milavsky vs Ozan Baris",
+      "prediccion": "Ozan Baris",
+      "confianza": 52.7,
+      "resultado_real": "Ozan Baris",
+      "correcto": true,
+      "match_id": "6gMraw65",
+      "torneo": "Desconocido",
+      "superficie": "hard",
+      "resolved_from_feed": false
+    },
+    {
+      "partido": "Giuseppe La Vela vs Petr Nesterov",
+      "prediccion": "Petr Nesterov",
+      "confianza": 55.4,
+      "resultado_real": "Petr Nesterov",
+      "correcto": true,
+      "match_id": "0C5lHYXQ",
+      "torneo": "Desconocido",
+      "superficie": "clay",
+      "resolved_from_feed": false
+    },
+    {
+      "partido": "Salvador Price vs Martin Maldonado",
+      "prediccion": "Salvador Price",
+      "confianza": 59.5,
+      "resultado_real": "Martin Maldonado",
+      "correcto": false,
+      "match_id": "zXMAzuvm",
+      "torneo": "Desconocido",
+      "superficie": "clay",
+      "resolved_from_feed": false
+    },
+    {
+      "partido": "Tsz Fu Wong vs Segundo Goity Zapico",
+      "prediccion": "Segundo Goity Zapico",
+      "confianza": 64.2,
+      "resultado_real": "Segundo Goity Zapico",
+      "correcto": true,
+      "match_id": "GAOQWdwC",
+      "torneo": "Desconocido",
+      "superficie": "clay",
+      "resolved_from_feed": false
+    },
+    {
+      "partido": "Lucas Andrade Da Silva vs Jorge Ruiz",
+      "prediccion": "Lucas Andrade Da Silva",
+      "confianza": 80.8,
+      "resultado_real": "Lucas Andrade Da Silva",
+      "correcto": true,
+      "match_id": "rcQIYI8a",
+      "torneo": "Desconocido",
+      "superficie": "clay",
+      "resolved_from_feed": false
+    },
+    {
+      "partido": "Herman Hoeyeraal vs Alan Wazny",
+      "prediccion": "Herman Hoeyeraal",
+      "confianza": 50.8,
+      "resultado_real": "Herman Hoeyeraal",
+      "correcto": true,
+      "match_id": "MNcAv6PE",
+      "torneo": "Desconocido",
+      "superficie": "clay",
+      "resolved_from_feed": false
+    },
+    {
+      "partido": "Alexis Nguyen vs Alyssa Ahn",
+      "prediccion": "Alyssa Ahn",
+      "confianza": 51,
+      "resultado_real": "Alexis Nguyen",
+      "correcto": false,
+      "match_id": "UBaxLgug",
+      "torneo": "Desconocido",
+      "superficie": "hard",
+      "resolved_from_feed": false
+    },
+    {
+      "partido": "Eva Vedder vs Elena Micic",
+      "prediccion": "Eva Vedder",
+      "confianza": 52.3,
+      "resultado_real": "Eva Vedder",
+      "correcto": true,
+      "match_id": "r73aAoho",
+      "torneo": "Desconocido",
+      "superficie": "hard",
+      "resolved_from_feed": false
+    }
+  ]
+}

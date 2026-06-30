@@ -1,0 +1,326 @@
+{
+  "metadata": {
+    "timestamp": "20260629_001908",
+    "bankroll": 125000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260629_182938.json",
+    "n_partidos_analizados": 69,
+    "calibracion_n": 2681,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "grand_slam",
+      "superficie": "grass",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Darja Vidmanova",
+          "cuota": 9.0
+        },
+        {
+          "jugador": "Tristan Boyer",
+          "cuota": 3.4
+        },
+        {
+          "jugador": "Jesper De Jong",
+          "cuota": 3.25
+        }
+      ],
+      "cuota_combo": 99.45,
+      "hr_combo": 0.2035,
+      "ev_combo": 19.2386,
+      "excluidos": [
+        "Pablo Carreno Busta",
+        "Luca Van Assche",
+        "Thiago Agustin Tirante",
+        "Hugo Gaston",
+        "Sebastian Ofner",
+        "Aleksandar Vukic",
+        "Roman Safiullin",
+        "Botic van de Zandschulp"
+      ],
+      "stake": 12000,
+      "retorno_potencial": 1193400.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Darja Vidmanova",
+          "cuota": 9.0
+        },
+        {
+          "jugador": "Tristan Boyer",
+          "cuota": 3.4
+        },
+        {
+          "jugador": "Pablo Carreno Busta",
+          "cuota": 3.3
+        }
+      ],
+      "cuota_combo": 100.98,
+      "hr_combo": 0.1848,
+      "ev_combo": 17.6646,
+      "excluidos": [
+        "Jesper De Jong",
+        "Luca Van Assche",
+        "Thiago Agustin Tirante",
+        "Hugo Gaston",
+        "Sebastian Ofner",
+        "Aleksandar Vukic",
+        "Roman Safiullin",
+        "Botic van de Zandschulp"
+      ],
+      "stake": 12000,
+      "retorno_potencial": 1211760.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Darja Vidmanova",
+          "cuota": 9.0
+        },
+        {
+          "jugador": "Pablo Carreno Busta",
+          "cuota": 3.3
+        },
+        {
+          "jugador": "Jesper De Jong",
+          "cuota": 3.25
+        }
+      ],
+      "cuota_combo": 96.52,
+      "hr_combo": 0.1848,
+      "ev_combo": 16.8412,
+      "excluidos": [
+        "Tristan Boyer",
+        "Luca Van Assche",
+        "Thiago Agustin Tirante",
+        "Hugo Gaston",
+        "Sebastian Ofner",
+        "Aleksandar Vukic",
+        "Roman Safiullin",
+        "Botic van de Zandschulp"
+      ],
+      "stake": 12000,
+      "retorno_potencial": 1158240.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Tristan Boyer",
+          "cuota": 3.4
+        },
+        {
+          "jugador": "Pablo Carreno Busta",
+          "cuota": 3.3
+        },
+        {
+          "jugador": "Jesper De Jong",
+          "cuota": 3.25
+        }
+      ],
+      "cuota_combo": 36.46,
+      "hr_combo": 0.1848,
+      "ev_combo": 5.74,
+      "excluidos": [
+        "Darja Vidmanova",
+        "Luca Van Assche",
+        "Thiago Agustin Tirante",
+        "Hugo Gaston",
+        "Sebastian Ofner",
+        "Aleksandar Vukic",
+        "Roman Safiullin",
+        "Botic van de Zandschulp"
+      ],
+      "stake": 12000,
+      "retorno_potencial": 437520.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Darja Vidmanova",
+          "cuota": 9.0
+        },
+        {
+          "jugador": "Tristan Boyer",
+          "cuota": 3.4
+        },
+        {
+          "jugador": "Pablo Carreno Busta",
+          "cuota": 3.3
+        },
+        {
+          "jugador": "Jesper De Jong",
+          "cuota": 3.25
+        }
+      ],
+      "cuota_combo": 328.18,
+      "hr_combo": 0.1087,
+      "ev_combo": 34.6802,
+      "excluidos": [
+        "Luca Van Assche",
+        "Thiago Agustin Tirante",
+        "Hugo Gaston",
+        "Sebastian Ofner",
+        "Aleksandar Vukic",
+        "Roman Safiullin",
+        "Botic van de Zandschulp"
+      ],
+      "stake": 6000,
+      "retorno_potencial": 1969080.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Darja Vidmanova",
+          "cuota": 9.0
+        },
+        {
+          "jugador": "Tristan Boyer",
+          "cuota": 3.4
+        },
+        {
+          "jugador": "Jesper De Jong",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Luca Van Assche",
+          "cuota": 2.95
+        }
+      ],
+      "cuota_combo": 293.38,
+      "hr_combo": 0.1197,
+      "ev_combo": 34.1178,
+      "excluidos": [
+        "Pablo Carreno Busta",
+        "Thiago Agustin Tirante",
+        "Hugo Gaston",
+        "Sebastian Ofner",
+        "Aleksandar Vukic",
+        "Roman Safiullin",
+        "Botic van de Zandschulp"
+      ],
+      "stake": 6000,
+      "retorno_potencial": 1760280.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Darja Vidmanova",
+          "cuota": 9.0
+        },
+        {
+          "jugador": "Tristan Boyer",
+          "cuota": 3.4
+        },
+        {
+          "jugador": "Pablo Carreno Busta",
+          "cuota": 3.3
+        },
+        {
+          "jugador": "Luca Van Assche",
+          "cuota": 2.95
+        }
+      ],
+      "cuota_combo": 297.89,
+      "hr_combo": 0.1087,
+      "ev_combo": 31.3866,
+      "excluidos": [
+        "Jesper De Jong",
+        "Thiago Agustin Tirante",
+        "Hugo Gaston",
+        "Sebastian Ofner",
+        "Aleksandar Vukic",
+        "Roman Safiullin",
+        "Botic van de Zandschulp"
+      ],
+      "stake": 6000,
+      "retorno_potencial": 1787340.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Tristan Boyer",
+          "cuota": 3.4
+        },
+        {
+          "jugador": "Pablo Carreno Busta",
+          "cuota": 3.3
+        },
+        {
+          "jugador": "Jesper De Jong",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Luca Van Assche",
+          "cuota": 2.95
+        }
+      ],
+      "cuota_combo": 107.57,
+      "hr_combo": 0.1087,
+      "ev_combo": 10.6952,
+      "excluidos": [
+        "Darja Vidmanova",
+        "Thiago Agustin Tirante",
+        "Hugo Gaston",
+        "Sebastian Ofner",
+        "Aleksandar Vukic",
+        "Roman Safiullin",
+        "Botic van de Zandschulp"
+      ],
+      "stake": 6000,
+      "retorno_potencial": 645420.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.2857142857142857,
+    "total_ajustado": 20571.42857142857,
+    "var_95": 43665.09090909091,
+    "cvar_95": 11343.336507735148,
+    "expected_pl": 1377710.1105752357,
+    "sharpe_ratio": 0.9264028291470692,
+    "kelly_growth_rate": 1.9724942929912352,
+    "sessions_to_double": 0.351406431452233,
+    "var_excedido": true,
+    "factor_var": 1.0
+  },
+  "resumen": {
+    "gastado_individuales": 0.0,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 72000.0,
+    "total_en_riesgo": 72000.0,
+    "pct_bankroll_en_riesgo": 0.576,
+    "n_senales_apostar": 0,
+    "pool_cobertura": 11,
+    "alerta_riesgo": true
+  }
+}

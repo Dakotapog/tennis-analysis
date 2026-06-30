@@ -1,0 +1,11 @@
+{
+  "fecha_validacion": "2026-06-19T12:09:34.352310",
+  "fuente_h2h": "reports/h2h_results_enhanced_20260619_111304.json",
+  "total_partidos": 40,
+  "total_validados": 0,
+  "saltados": 0,
+  "correctas": 0,
+  "accuracy": 0.0,
+  "accuracy_por_superficie": {},
+  "partidos": []
+}

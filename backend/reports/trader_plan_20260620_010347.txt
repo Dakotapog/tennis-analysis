@@ -1,0 +1,30 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — GRAND_SLAM GRASS
+  2026-06-20 01:03  │  Bankroll: $125,000
+  Señales APOSTAR: 0  │  Watchlist: 0  │  Sin edge: 0
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 0 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.25 (grand_slam)
+═══════════════════════════════════════════════════════════════════
+
+  ⚠️  Solo 0 picks en pool — se necesitan ≥3.
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $       125,000                       ║
+  ║  Individuales:        $             0  (0.0% bankroll)      ║
+  ║  Combos:              $             0  (0.0% bankroll)      ║
+  ║  Sistema:             $             0  (0.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $             0  (0.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       0                                       ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260620_00  ║
+  ║  Partidos analizados:  55                                       ║
+  ║  Superficie:          grass (grand_slam)                          ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  📊 Calibración: n=1325 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.541 (calibrado grass) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260620_010347.json

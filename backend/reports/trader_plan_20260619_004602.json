@@ -1,0 +1,97 @@
+{
+  "metadata": {
+    "timestamp": "20260619_004602",
+    "bankroll": 30000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260619_004336.json",
+    "n_partidos_analizados": 95,
+    "calibracion_n": 1241,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "atp500",
+      "superficie": "grass",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Jessica Pegula vs Madison Keys",
+      "favorito": "Madison Keys",
+      "cuota": 2.1,
+      "edge_pct": "6.5%",
+      "p_modelo": 0.541,
+      "n_h2h": 4,
+      "p_blend": 0.5465714285714286,
+      "kelly_kl": 0.0466,
+      "kelly_usado": 0.0336,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Madison Keys",
+          "cuota": 2.1
+        },
+        {
+          "jugador": "Tatjana Maria",
+          "cuota": 2.12
+        },
+        {
+          "jugador": "Ben Shelton",
+          "cuota": 2.02
+        }
+      ],
+      "cuota_combo": 8.99,
+      "hr_combo": 0.1521,
+      "ev_combo": 0.3678,
+      "excluidos": [],
+      "stake": 7000,
+      "retorno_potencial": 62930.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.7692307692307692,
+    "total_ajustado": 14615.384615384613,
+    "var_95": -19000.0,
+    "cvar_95": -19000.0,
+    "expected_pl": 7939.419979977288,
+    "sharpe_ratio": 0.1337303402186721,
+    "kelly_growth_rate": -0.48779600233236925,
+    "sessions_to_double": Infinity,
+    "var_excedido": true,
+    "factor_var": 0.39473684210526316
+  },
+  "resumen": {
+    "gastado_individuales": 0,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 7000,
+    "total_en_riesgo": 7000.0,
+    "pct_bankroll_en_riesgo": 0.2333,
+    "n_senales_apostar": 1,
+    "pool_cobertura": 3,
+    "alerta_riesgo": false
+  }
+}

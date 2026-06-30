@@ -1,0 +1,48 @@
+{
+  "fecha_validacion": "2026-06-17T13:08:17.343577",
+  "fuente_h2h": "reports/h2h_results_enhanced_20260617_113250.json",
+  "total_partidos": 91,
+  "total_validados": 3,
+  "saltados": 0,
+  "correctas": 3,
+  "accuracy": 1.0,
+  "accuracy_por_superficie": {
+    "clay": {
+      "accuracy": 1.0,
+      "n": 3,
+      "correctas": 3
+    }
+  },
+  "partidos": [
+    {
+      "partido": "Ares Teixido Garcia vs Lamija Avdic",
+      "prediccion": "Ares Teixido Garcia",
+      "confianza": 60.5,
+      "resultado_real": "Ares Teixido Garcia",
+      "correcto": true,
+      "match_id": "fww5oCRP",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Sergi Perez Contri vs Joaquin Guilleme",
+      "prediccion": "Sergi Perez Contri",
+      "confianza": 63.4,
+      "resultado_real": "Sergi Perez Contri",
+      "correcto": true,
+      "match_id": "t0fTjtEl",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Noah Lopez Cherubino vs Michiel De Krom",
+      "prediccion": "Michiel De Krom",
+      "confianza": 56.4,
+      "resultado_real": "Michiel De Krom",
+      "correcto": true,
+      "match_id": "MwdqmbDD",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    }
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "metadata": {
+    "consultation_date": "2026-06-28 09:26:27",
+    "total_matches_processed": 11
+  },
+  "detailed_results": [
+    {
+      "match_info": {
+        "jugador1": "Fausto Tabacco",
+        "jugador2": "Federico Arnaboldi",
+        "match_url": "match_id:OzzzOvOa"
+      },
+      "actual_result": {
+        "final_score": "Federico Arnaboldi",
+        "actual_winner": "Federico Arnaboldi"
+      },
+      "verification": {
+        "status": "Already Resolved",
+        "correcto": true
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Filip Jeff Planinsek",
+        "jugador2": "Bor Artnak",
+        "match_url": "match_id:djeqXuZ9"
+      },
+      "actual_result": {
+        "final_score": "Filip Jeff Planinsek",
+        "actual_winner": "Filip Jeff Planinsek"
+      },
+      "verification": {
+        "status": "Already Resolved",
+        "correcto": false
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Stefan Seifert",
+        "jugador2": "Herman Hoeyeraal",
+        "match_url": "match_id:jkpbPq0D"
+      },
+      "actual_result": {
+        "final_score": "Herman Hoeyeraal",
+        "actual_winner": "Herman Hoeyeraal"
+      },
+      "verification": {
+        "status": "Already Resolved",
+        "correcto": false
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Kacper Szymkowiak",
+        "jugador2": "Alan Wazny",
+        "match_url": "match_id:IexpmmhK"
+      },
+      "actual_result": {
+        "final_score": "Alan Wazny",
+        "actual_winner": "Alan Wazny"
+      },
+      "verification": {
+        "status": "Already Resolved",
+        "correcto": false
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Inaki Montes-De La Torre",
+        "jugador2": "Sandro Kopp",
+        "match_url": "match_id:6NqPl50C"
+      },
+      "actual_result": {
+        "final_score": "Inaki Montes-De La Torre",
+        "actual_winner": "Inaki Montes-De La Torre"
+      },
+      "verification": {
+        "status": "Already Resolved",
+        "correcto": false
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Thiago Seyboth Wild",
+        "jugador2": "Juan Manuel La Serna",
+        "match_url": "match_id:x2Ceajsp"
+      },
+      "actual_result": {
+        "final_score": "Thiago Seyboth Wild",
+        "actual_winner": "Thiago Seyboth Wild"
+      },
+      "verification": {
+        "status": "Already Resolved",
+        "correcto": true
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Paul Inchauspe",
+        "jugador2": "Oscar Weightman",
+        "match_url": "match_id:K4MyGsaB"
+      },
+      "actual_result": {
+        "final_score": "Paul Inchauspe",
+        "actual_winner": "Paul Inchauspe"
+      },
+      "verification": {
+        "status": "Already Resolved",
+        "correcto": true
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Eva Vedder",
+        "jugador2": "Amandine Hesse",
+        "match_url": "match_id:vcNccLun"
+      },
+      "actual_result": {
+        "final_score": "Eva Vedder",
+        "actual_winner": "Eva Vedder"
+      },
+      "verification": {
+        "status": "Already Resolved",
+        "correcto": true
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Elena Micic",
+        "jugador2": "Ayla Aksu",
+        "match_url": "match_id:QuK98fKc"
+      },
+      "actual_result": {
+        "final_score": "Elena Micic",
+        "actual_winner": "Elena Micic"
+      },
+      "verification": {
+        "status": "Already Resolved",
+        "correcto": false
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Alexandra Vagramov",
+        "jugador2": "Alexis Nguyen",
+        "match_url": "match_id:Kzy2U5Hc"
+      },
+      "actual_result": {
+        "final_score": "Alexis Nguyen",
+        "actual_winner": "Alexis Nguyen"
+      },
+      "verification": {
+        "status": "Already Resolved",
+        "correcto": false
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Alyssa Ahn",
+        "jugador2": "Midori Castillo Meza",
+        "match_url": "match_id:EwlG62Pj"
+      },
+      "actual_result": {
+        "final_score": "Alyssa Ahn",
+        "actual_winner": "Alyssa Ahn"
+      },
+      "verification": {
+        "status": "Already Resolved",
+        "correcto": true
+      }
+    }
+  ]
+}

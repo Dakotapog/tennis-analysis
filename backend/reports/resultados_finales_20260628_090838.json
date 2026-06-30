@@ -1,0 +1,238 @@
+{
+  "metadata": {
+    "verification_date": "2026-06-28 09:08:38",
+    "source_file": "reports/h2h_results_enhanced_20260627_084500.json",
+    "tier_filter": null,
+    "total_matches_processed": 11,
+    "total_matches_verified": 11,
+    "total_not_finished": 0,
+    "total_errors": 0
+  },
+  "summary": {
+    "total_hits": 5,
+    "total_misses": 6,
+    "accuracy_percentage": 45.45
+  },
+  "detailed_results": [
+    {
+      "match_info": {
+        "jugador1": "Fausto Tabacco",
+        "jugador2": "Federico Arnaboldi",
+        "match_url": "https://www.flashscore.co/match/tennis/tabacco-fausto-arnaboldi-federico/OzzzOvOa/#/h2h",
+        "torneo": "M15 Bergamo (Italia)"
+      },
+      "prediction": {
+        "predicted_winner": "Federico Arnaboldi",
+        "confidence": 51.1
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Federico Arnaboldi"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Filip Jeff Planinsek",
+        "jugador2": "Bor Artnak",
+        "match_url": "https://www.flashscore.co/match/tennis/filip-jeff-planinsek-artnak-bor/djeqXuZ9/#/h2h",
+        "torneo": "M15 Slovenska Bistrica (Eslovenia)"
+      },
+      "prediction": {
+        "predicted_winner": "Bor Artnak",
+        "confidence": 52.4
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Filip Jeff Planinsek"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Stefan Seifert",
+        "jugador2": "Herman Hoeyeraal",
+        "match_url": "https://www.flashscore.co/match/tennis/seifert-stefan-hoeyeraal-herman/jkpbPq0D/#/h2h",
+        "torneo": "M15 Rzeszow (Polonia)"
+      },
+      "prediction": {
+        "predicted_winner": "Stefan Seifert",
+        "confidence": 50.1
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Herman Hoeyeraal"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Kacper Szymkowiak",
+        "jugador2": "Alan Wazny",
+        "match_url": "https://www.flashscore.co/match/tennis/szymkowiak-kacper-wazny-alan/IexpmmhK/#/h2h",
+        "torneo": "M15 Rzeszow (Polonia)"
+      },
+      "prediction": {
+        "predicted_winner": "Kacper Szymkowiak",
+        "confidence": 51.5
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Alan Wazny"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Inaki Montes-De La Torre",
+        "jugador2": "Sandro Kopp",
+        "match_url": "https://www.flashscore.co/match/tennis/montes-de-la-torre-inaki-kopp-sandro/6NqPl50C/#/h2h",
+        "torneo": "Plovdiv (Bulgaria)"
+      },
+      "prediction": {
+        "predicted_winner": "Sandro Kopp",
+        "confidence": 51.1
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Inaki Montes-De La Torre"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Thiago Seyboth Wild",
+        "jugador2": "Juan Manuel La Serna",
+        "match_url": "https://www.flashscore.co/match/tennis/seyboth-wild-thiago-la-serna-juan-manuel/x2Ceajsp/#/h2h",
+        "torneo": "Piracicaba (Brasil)"
+      },
+      "prediction": {
+        "predicted_winner": "Thiago Seyboth Wild",
+        "confidence": 51.9
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Thiago Seyboth Wild"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Paul Inchauspe",
+        "jugador2": "Oscar Weightman",
+        "match_url": "https://www.flashscore.co/match/tennis/inchauspe-paul-weightman-oscar/K4MyGsaB/#/h2h",
+        "torneo": "M25 Bakio (España)"
+      },
+      "prediction": {
+        "predicted_winner": "Paul Inchauspe",
+        "confidence": 52.1
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Paul Inchauspe"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Eva Vedder",
+        "jugador2": "Amandine Hesse",
+        "match_url": "https://www.flashscore.co/match/tennis/vedder-eva-hesse-amandine/vcNccLun/#/h2h",
+        "torneo": "W50 Palma del Rio (España)"
+      },
+      "prediction": {
+        "predicted_winner": "Eva Vedder",
+        "confidence": 52.3
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Eva Vedder"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Elena Micic",
+        "jugador2": "Ayla Aksu",
+        "match_url": "https://www.flashscore.co/match/tennis/micic-elena-aksu-ayla/QuK98fKc/#/h2h",
+        "torneo": "W50 Palma del Rio (España)"
+      },
+      "prediction": {
+        "predicted_winner": "Ayla Aksu",
+        "confidence": 54.2
+      },
+      "actual_result": {
+        "final_score": "1-1",
+        "actual_winner": "Elena Micic"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Alexandra Vagramov",
+        "jugador2": "Alexis Nguyen",
+        "match_url": "https://www.flashscore.co/match/tennis/vagramov-alexandra-nguyen-alexis/Kzy2U5Hc/#/h2h",
+        "torneo": "W15 Claremont, CA (Estados Unidos)"
+      },
+      "prediction": {
+        "predicted_winner": "Alexandra Vagramov",
+        "confidence": 50.8
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Alexis Nguyen"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Alyssa Ahn",
+        "jugador2": "Midori Castillo Meza",
+        "match_url": "https://www.flashscore.co/match/tennis/ahn-alyssa-castillo-meza-midori/EwlG62Pj/#/h2h",
+        "torneo": "W15 Claremont, CA (Estados Unidos)"
+      },
+      "prediction": {
+        "predicted_winner": "Alyssa Ahn",
+        "confidence": 50.3
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Alyssa Ahn"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    }
+  ]
+}

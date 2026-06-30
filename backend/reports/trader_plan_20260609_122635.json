@@ -1,0 +1,229 @@
+{
+  "metadata": {
+    "timestamp": "20260609_122635",
+    "bankroll": 30000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260609_115832.json",
+    "n_partidos_analizados": 51,
+    "calibracion_n": 284,
+    "parametros": {
+      "modo": "cobertura",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Thijs Boogaard vs Yibing Wu",
+      "favorito": "Thijs Boogaard",
+      "cuota": 4.2,
+      "edge_pct": "27.3%",
+      "p_modelo": 0.511,
+      "n_h2h": 0,
+      "p_blend": 0.6608391608391608,
+      "kelly_kl": 0.4077,
+      "kelly_usado": 0.1,
+      "stake": 1000,
+      "retorno_potencial": 4200.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "James McCabe vs Zizou Bergs",
+      "favorito": "James McCabe",
+      "cuota": 2.75,
+      "edge_pct": "17.7%",
+      "p_modelo": 0.541,
+      "n_h2h": 0,
+      "p_blend": 0.6608391608391608,
+      "kelly_kl": 0.3347,
+      "kelly_usado": 0.1,
+      "stake": 1000,
+      "retorno_potencial": 2750.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Marie Bouzkova vs Polina Kudermetova",
+      "favorito": "Polina Kudermetova",
+      "cuota": 2.65,
+      "edge_pct": "12.4%",
+      "p_modelo": 0.501,
+      "n_h2h": 0,
+      "p_blend": 0.6608391608391608,
+      "kelly_kl": 0.2277,
+      "kelly_usado": 0.1,
+      "stake": 1000,
+      "retorno_potencial": 2650.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Thijs Boogaard",
+          "cuota": 4.2
+        },
+        {
+          "jugador": "James McCabe",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Polina Kudermetova",
+          "cuota": 2.65
+        }
+      ],
+      "cuota_combo": 30.61,
+      "hr_combo": 0.2746,
+      "ev_combo": 7.4056,
+      "excluidos": [
+        "Jessica Bouzas Maneiro"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 61220.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Thijs Boogaard",
+          "cuota": 4.2
+        },
+        {
+          "jugador": "James McCabe",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Jessica Bouzas Maneiro",
+          "cuota": 1.75
+        }
+      ],
+      "cuota_combo": 20.21,
+      "hr_combo": 0.2683,
+      "ev_combo": 4.4228,
+      "excluidos": [
+        "Polina Kudermetova"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 40420.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Thijs Boogaard",
+          "cuota": 4.2
+        },
+        {
+          "jugador": "Polina Kudermetova",
+          "cuota": 2.65
+        },
+        {
+          "jugador": "Jessica Bouzas Maneiro",
+          "cuota": 1.75
+        }
+      ],
+      "cuota_combo": 19.48,
+      "hr_combo": 0.2683,
+      "ev_combo": 4.2256,
+      "excluidos": [
+        "James McCabe"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 38960.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "James McCabe",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Polina Kudermetova",
+          "cuota": 2.65
+        },
+        {
+          "jugador": "Jessica Bouzas Maneiro",
+          "cuota": 1.75
+        }
+      ],
+      "cuota_combo": 12.75,
+      "hr_combo": 0.2683,
+      "ev_combo": 2.4215,
+      "excluidos": [
+        "Thijs Boogaard"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 25500.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Thijs Boogaard",
+          "cuota": 4.2
+        },
+        {
+          "jugador": "James McCabe",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Polina Kudermetova",
+          "cuota": 2.65
+        },
+        {
+          "jugador": "Jessica Bouzas Maneiro",
+          "cuota": 1.75
+        }
+      ],
+      "cuota_combo": 53.56,
+      "hr_combo": 0.1744,
+      "ev_combo": 8.3407,
+      "excluidos": [],
+      "stake": 1000,
+      "retorno_potencial": 53560.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.6896551724137931,
+    "total_ajustado": 18620.689655172417,
+    "var_95": -18000.0,
+    "cvar_95": -18000.0,
+    "expected_pl": 90344.65494816778,
+    "sharpe_ratio": 0.5764918479454131,
+    "kelly_growth_rate": 1.1412180702218806,
+    "sessions_to_double": 0.60737487308204,
+    "var_excedido": true,
+    "factor_var": 0.4166666666666667
+  },
+  "resumen": {
+    "gastado_individuales": 3000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 9000,
+    "total_en_riesgo": 12000.0,
+    "pct_bankroll_en_riesgo": 0.4,
+    "n_senales_apostar": 3,
+    "pool_cobertura": 4,
+    "alerta_riesgo": true
+  }
+}

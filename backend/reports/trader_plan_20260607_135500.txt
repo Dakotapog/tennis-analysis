@@ -1,0 +1,43 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — DEPLOY ROLAND GARROS
+  2026-06-07 13:55  │  Bankroll: $125,000
+  Señales APOSTAR: 1  │  Watchlist: 0  │  Sin edge: 1
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 2 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.25 (grand_slam)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $50,000 (40% bankroll)
+
+  │  🎾 Shnaider D. vs Chwalinska M.
+  │     Apostar: Chwalinska M.
+  │     Cuota 2.55  │  Edge 13.3%  │  p_blend 0.654 (n_h2h=1)
+  │     Kelly-KL 27.3% → stake $12,000  │  Retorno potencial $30,600
+  │     EV real +66.8%  │  Zona: underdog  │  Sup: clay
+
+  │  Total individuales: $12,000
+  └─────────────────────────────────────────────────────────────────
+
+  ⚠️  Solo 2 picks en pool — se necesitan ≥3.
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $       125,000                       ║
+  ║  Individuales:        $        12,000  (9.6% bankroll)      ║
+  ║  Combos:              $             0  (0.0% bankroll)      ║
+  ║  Sistema:             $             0  (0.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $        12,000  (9.6% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       1                                       ║
+  ║  Pool cobertura:        2 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260604_03  ║
+  ║  Partidos analizados:  80                                       ║
+  ║  Superficie:          clay (Roland Garros)                    ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  📊 Calibración: n=150 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.697 (calibrado clay) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260607_135500.json

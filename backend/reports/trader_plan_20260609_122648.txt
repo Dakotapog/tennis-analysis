@@ -1,0 +1,117 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — DEPLOY ROLAND GARROS
+  2026-06-09 12:26  │  Bankroll: $10,000
+  Señales APOSTAR: 2  │  Watchlist: 3  │  Sin edge: 0
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 3 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.05 (itf)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $4,000 (40% bankroll)
+
+  │  🎾 Giannicola Misasi vs Giorgio Tabacco
+  │     Apostar: Giannicola Misasi
+  │     Cuota 3.60  │  Edge 22.7%  │  p_blend 0.678 (n_h2h=0)
+  │     Kelly-KL 35.1% → stake $1,000  │  Retorno potencial $3,600
+  │     EV real +144.0%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Londyn McCord vs Elena-Teodora Cadar
+  │     Apostar: Elena-Teodora Cadar
+  │     Cuota 1.16  │  Edge 8.8%  │  p_blend 0.678 (n_h2h=0)
+  │     Kelly-KL 8.0% → stake $1,000  │  Retorno potencial $1,160
+  │     EV real -21.4%  │  Zona: heavy_favorite  │  Sup: hard
+
+  │  Total individuales: $2,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 3 picks  │  Combos: 3 a 3 piernas
+  │  Budget: $6,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Giannicola Misasi    @3.60  p=0.678  zona=underdog
+  │    2. Ryan Colby           @2.10  p=0.661  zona=underdog [W]
+  │    3. Karl Poling          @2.00  p=0.661  zona=slight_underdog [W]
+
+  │  ── 3 PIERNAS: TOP 1 combos × $6,000 = $6,000 ──
+  │     (cada combo excluye 0 jugador)
+  │     [3p-1] Giannicola Misasi@3.60 + Ryan Colby@2.10 + Karl Poling@2.00
+  │            @15.12 HR:29.6% EV:+347.6% →$90,720  excluye:[ninguno]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-0 picks?) ──
+  │  Total apostado: $6,000
+
+  │  🏆 0 fallos (3/3 ganan): retorno $90,720 → P&L +$84,720 (TODOS 1 combos pagan)
+
+  │  Total cobertura: $6,000  │  1 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     3
+  │  ρ estructural:       0.05 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.909
+  │  Reducción vs naive:  -9.1%
+  │
+  │  Stake naive (sin ajuste):    $       8,000
+  │  Stake ajustado (PK):         $       7,273
+  │  Ahorro por correlación:      $         727
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $      -6,000  (60.0% bankroll)
+  │  CVaR 95%:           $      -6,000
+  │  Max VaR permitido:  $       2,500  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.42
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $      20,860
+  │  σ(P&L):             $      41,416
+  │  Sharpe Ratio:              0.504
+  │  Kelly Growth Rate:        0.8041 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $     557,409
+  │  Bankroll en 10 sesiones:  $  31,070,461
+  │  Bankroll en 30 sesiones:  $299,946,015,766,721
+  │  Sesiones para duplicar:   0.9
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.42 (de $8,000 a $3,333)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.42) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Giannicola Misasi         @3.60  →  $       0  (ret. $         0)
+  │    Elena-Teodora Cadar       @1.16  →  $       0  (ret. $         0)
+  │
+  │  COBERTURA (1 combos):
+  │    [3p @15.12]  $   2,000  →  Giannicola Misasi@3.60 + Ryan Colby@2.10 + Karl Poling@2.00
+  │
+  │  TOTAL EN RIESGO:  $     2,000  (20.0% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $        10,000                       ║
+  ║  Individuales:        $             0  (0.0% bankroll)      ║
+  ║  Cobertura:           $         2,000  (20.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $         2,000  (20.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       2                                       ║
+  ║  Pool cobertura:        3 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260609_11  ║
+  ║  Partidos analizados:  51                                       ║
+  ║  Superficie:          clay (Roland Garros)                    ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  📊 Calibración: n=284 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.678 (calibrado clay) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260609_122648.json

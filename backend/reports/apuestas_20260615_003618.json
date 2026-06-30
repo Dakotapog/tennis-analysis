@@ -1,0 +1,31 @@
+{
+  "ts_registro": "2026-06-15T00:36:18.815077",
+  "ts_bookmarklet": "2026-06-15T05:36:18.204Z",
+  "estado": "PENDIENTE",
+  "betslip_index": "reports/betslip_index_20260615_000853.json",
+  "n_picks": 1,
+  "picks": [
+    {
+      "outcome_id": "4222575505",
+      "jugador": "Alastair Gray",
+      "cuota": 2.04,
+      "cuota_kambi": 2.04,
+      "partido": "Alastair Gray vs Tristan Schoolkate",
+      "match_id": "OAAPmORr",
+      "match_url": "https://www.flashscore.co/match/tennis/gray-alastair-schoolkate-tristan/OAAPmORr/#/h2h",
+      "torneo": "Nottingham (Reino Unido)",
+      "superficie": "?",
+      "tier": "?",
+      "edge": "1.8%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0,
+      "stake": 0,
+      "retorno_potencial": 0,
+      "resultado_real": null,
+      "correcto": null,
+      "ganancia": null
+    }
+  ],
+  "pl_sesion": 0,
+  "ts_cierre": null
+}

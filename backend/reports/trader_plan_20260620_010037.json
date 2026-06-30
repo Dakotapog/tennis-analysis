@@ -1,0 +1,97 @@
+{
+  "metadata": {
+    "timestamp": "20260620_010037",
+    "bankroll": 125000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260620_004756.json",
+    "n_partidos_analizados": 55,
+    "calibracion_n": 1325,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "atp500",
+      "superficie": "grass",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Emma Navarro vs Viktorija Golubic",
+      "favorito": "Viktorija Golubic",
+      "cuota": 2.88,
+      "edge_pct": "15.9%",
+      "p_modelo": 0.506,
+      "n_h2h": 1,
+      "p_blend": 0.5323249999999999,
+      "kelly_kl": 0.0875,
+      "kelly_usado": 0.0709,
+      "stake": 3000,
+      "retorno_potencial": 8640.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Viktorija Golubic",
+          "cuota": 2.88
+        },
+        {
+          "jugador": "Toby Samuel",
+          "cuota": 2.04
+        },
+        {
+          "jugador": "Harry Wendelken",
+          "cuota": 2.02
+        }
+      ],
+      "cuota_combo": 11.87,
+      "hr_combo": 0.1533,
+      "ev_combo": 0.8189,
+      "excluidos": [],
+      "stake": 28000,
+      "retorno_potencial": 332360.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.7692307692307692,
+    "total_ajustado": 64615.38461538461,
+    "var_95": -84000.0,
+    "cvar_95": -84000.0,
+    "expected_pl": 68723.04235293657,
+    "sharpe_ratio": 0.20980528743246785,
+    "kelly_growth_rate": -0.44260238108261885,
+    "sessions_to_double": Infinity,
+    "var_excedido": true,
+    "factor_var": 0.37202380952380953
+  },
+  "resumen": {
+    "gastado_individuales": 3000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 28000,
+    "total_en_riesgo": 31000.0,
+    "pct_bankroll_en_riesgo": 0.248,
+    "n_senales_apostar": 1,
+    "pool_cobertura": 3,
+    "alerta_riesgo": false
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "metadata": {
+    "timestamp": "20260623_002746",
+    "bankroll": 30000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260623_001450.json",
+    "n_partidos_analizados": 127,
+    "calibracion_n": 1353,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "atp500",
+      "superficie": "grass",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Naomi Osaka vs Elise Mertens",
+      "favorito": "Naomi Osaka",
+      "cuota": 1.79,
+      "edge_pct": "23.2%",
+      "p_modelo": 0.791,
+      "n_h2h": 0,
+      "p_blend": 0.5569,
+      "kelly_kl": 0.1661,
+      "kelly_usado": 0.0,
+      "stake": 1000,
+      "retorno_potencial": 1790.0,
+      "zona_cuota": "slight_underdog",
+      "superficie": "grass"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [],
+  "risk_management": {},
+  "resumen": {
+    "gastado_individuales": 1000.0,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 0.0,
+    "total_en_riesgo": 1000.0,
+    "pct_bankroll_en_riesgo": 0.0333,
+    "n_senales_apostar": 1,
+    "pool_cobertura": 2,
+    "alerta_riesgo": false
+  }
+}

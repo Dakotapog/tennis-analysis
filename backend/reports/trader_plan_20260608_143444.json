@@ -1,0 +1,292 @@
+{
+  "metadata": {
+    "timestamp": "20260608_143444",
+    "bankroll": 20000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260608_143257.json",
+    "n_partidos_analizados": 7,
+    "calibracion_n": 150,
+    "parametros": {
+      "modo": "cobertura",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Samuel Heredia vs Julian Cundom",
+      "favorito": "Julian Cundom",
+      "cuota": 2.6,
+      "edge_pct": "12.7%",
+      "p_modelo": 0.512,
+      "n_h2h": 0,
+      "p_blend": 0.6973684210526315,
+      "kelly_kl": 0.2581,
+      "kelly_usado": 0.1,
+      "stake": 1000,
+      "retorno_potencial": 2600.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Julian Cundom",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Thiago Cigarran",
+          "cuota": 2.06
+        },
+        {
+          "jugador": "David Jorda Sanchis",
+          "cuota": 1.86
+        }
+      ],
+      "cuota_combo": 9.96,
+      "hr_combo": 0.2151,
+      "ev_combo": 1.1425,
+      "excluidos": [
+        "Nicolas Villalon Valdes",
+        "Max Alcala Gurri"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 9960.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Julian Cundom",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Thiago Cigarran",
+          "cuota": 2.06
+        },
+        {
+          "jugador": "Max Alcala Gurri",
+          "cuota": 1.66
+        }
+      ],
+      "cuota_combo": 8.89,
+      "hr_combo": 0.2094,
+      "ev_combo": 0.8619,
+      "excluidos": [
+        "Nicolas Villalon Valdes",
+        "David Jorda Sanchis"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 8890.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Julian Cundom",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Max Alcala Gurri",
+          "cuota": 1.66
+        },
+        {
+          "jugador": "David Jorda Sanchis",
+          "cuota": 1.86
+        }
+      ],
+      "cuota_combo": 8.03,
+      "hr_combo": 0.2031,
+      "ev_combo": 0.6303,
+      "excluidos": [
+        "Thiago Cigarran",
+        "Nicolas Villalon Valdes"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 8030.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Thiago Cigarran",
+          "cuota": 2.06
+        },
+        {
+          "jugador": "Max Alcala Gurri",
+          "cuota": 1.66
+        },
+        {
+          "jugador": "David Jorda Sanchis",
+          "cuota": 1.86
+        }
+      ],
+      "cuota_combo": 6.36,
+      "hr_combo": 0.2031,
+      "ev_combo": 0.2917,
+      "excluidos": [
+        "Julian Cundom",
+        "Nicolas Villalon Valdes"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 6360.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Julian Cundom",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Thiago Cigarran",
+          "cuota": 2.06
+        },
+        {
+          "jugador": "Max Alcala Gurri",
+          "cuota": 1.66
+        },
+        {
+          "jugador": "David Jorda Sanchis",
+          "cuota": 1.86
+        }
+      ],
+      "cuota_combo": 16.54,
+      "hr_combo": 0.1229,
+      "ev_combo": 1.0328,
+      "excluidos": [
+        "Nicolas Villalon Valdes"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Julian Cundom",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Thiago Cigarran",
+          "cuota": 2.06
+        },
+        {
+          "jugador": "Nicolas Villalon Valdes",
+          "cuota": 1.5
+        },
+        {
+          "jugador": "David Jorda Sanchis",
+          "cuota": 1.86
+        }
+      ],
+      "cuota_combo": 14.94,
+      "hr_combo": 0.1302,
+      "ev_combo": 0.9453,
+      "excluidos": [
+        "Max Alcala Gurri"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Julian Cundom",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Thiago Cigarran",
+          "cuota": 2.06
+        },
+        {
+          "jugador": "Nicolas Villalon Valdes",
+          "cuota": 1.5
+        },
+        {
+          "jugador": "Max Alcala Gurri",
+          "cuota": 1.66
+        }
+      ],
+      "cuota_combo": 13.34,
+      "hr_combo": 0.1268,
+      "ev_combo": 0.6906,
+      "excluidos": [
+        "David Jorda Sanchis"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Thiago Cigarran",
+          "cuota": 2.06
+        },
+        {
+          "jugador": "Nicolas Villalon Valdes",
+          "cuota": 1.5
+        },
+        {
+          "jugador": "Max Alcala Gurri",
+          "cuota": 1.66
+        },
+        {
+          "jugador": "David Jorda Sanchis",
+          "cuota": 1.86
+        }
+      ],
+      "cuota_combo": 9.54,
+      "hr_combo": 0.1229,
+      "ev_combo": 0.1728,
+      "excluidos": [
+        "Julian Cundom"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.7142857142857143,
+    "total_ajustado": 10000.0,
+    "var_95": -12000.0,
+    "cvar_95": -12000.0,
+    "expected_pl": 8804.125416415773,
+    "sharpe_ratio": 0.2747984665208727,
+    "kelly_growth_rate": 0.2568332078909298,
+    "sessions_to_double": 2.698822267774292,
+    "var_excedido": true,
+    "factor_var": 0.4166666666666667
+  },
+  "resumen": {
+    "gastado_individuales": 1000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 4000,
+    "total_en_riesgo": 5000.0,
+    "pct_bankroll_en_riesgo": 0.25,
+    "n_senales_apostar": 1,
+    "pool_cobertura": 5,
+    "alerta_riesgo": false
+  }
+}

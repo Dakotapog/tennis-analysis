@@ -1,0 +1,326 @@
+{
+  "metadata": {
+    "timestamp": "20260625_133949",
+    "bankroll": 10000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260625_122304.json",
+    "n_partidos_analizados": 55,
+    "calibracion_n": 1955,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "itf",
+      "superficie": "clay",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Manel Lazaro Juncadella vs Julien Penzlin",
+      "favorito": "Manel Lazaro Juncadella",
+      "cuota": 2.02,
+      "edge_pct": "25.8%",
+      "p_modelo": 0.753,
+      "n_h2h": 0,
+      "p_blend": 0.5,
+      "kelly_kl": 0.1478,
+      "kelly_usado": 0.0025,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "slight_underdog",
+      "superficie": "clay"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Kerem Yilmaz",
+          "cuota": 2.88
+        },
+        {
+          "jugador": "Amandine Hesse",
+          "cuota": 2.17
+        },
+        {
+          "jugador": "Valentina Ivanov",
+          "cuota": 2.12
+        }
+      ],
+      "cuota_combo": 13.25,
+      "hr_combo": 0.126,
+      "ev_combo": 0.6694,
+      "excluidos": [
+        "Manel Lazaro Juncadella",
+        "Duru Soke",
+        "Lavinia Luciano",
+        "Giulia Safina Popa",
+        "Charles Bertimon",
+        "Thara Gowda"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Kerem Yilmaz",
+          "cuota": 2.88
+        },
+        {
+          "jugador": "Amandine Hesse",
+          "cuota": 2.17
+        },
+        {
+          "jugador": "Charles Bertimon",
+          "cuota": 2.1
+        }
+      ],
+      "cuota_combo": 13.12,
+      "hr_combo": 0.126,
+      "ev_combo": 0.6536,
+      "excluidos": [
+        "Manel Lazaro Juncadella",
+        "Duru Soke",
+        "Lavinia Luciano",
+        "Giulia Safina Popa",
+        "Valentina Ivanov",
+        "Thara Gowda"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Kerem Yilmaz",
+          "cuota": 2.88
+        },
+        {
+          "jugador": "Valentina Ivanov",
+          "cuota": 2.12
+        },
+        {
+          "jugador": "Charles Bertimon",
+          "cuota": 2.1
+        }
+      ],
+      "cuota_combo": 12.82,
+      "hr_combo": 0.126,
+      "ev_combo": 0.6155,
+      "excluidos": [
+        "Manel Lazaro Juncadella",
+        "Duru Soke",
+        "Lavinia Luciano",
+        "Amandine Hesse",
+        "Giulia Safina Popa",
+        "Thara Gowda"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Amandine Hesse",
+          "cuota": 2.17
+        },
+        {
+          "jugador": "Valentina Ivanov",
+          "cuota": 2.12
+        },
+        {
+          "jugador": "Charles Bertimon",
+          "cuota": 2.1
+        }
+      ],
+      "cuota_combo": 9.66,
+      "hr_combo": 0.125,
+      "ev_combo": 0.2076,
+      "excluidos": [
+        "Manel Lazaro Juncadella",
+        "Duru Soke",
+        "Kerem Yilmaz",
+        "Lavinia Luciano",
+        "Giulia Safina Popa",
+        "Thara Gowda"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Kerem Yilmaz",
+          "cuota": 2.88
+        },
+        {
+          "jugador": "Amandine Hesse",
+          "cuota": 2.17
+        },
+        {
+          "jugador": "Valentina Ivanov",
+          "cuota": 2.12
+        },
+        {
+          "jugador": "Charles Bertimon",
+          "cuota": 2.1
+        }
+      ],
+      "cuota_combo": 27.82,
+      "hr_combo": 0.063,
+      "ev_combo": 0.7529,
+      "excluidos": [
+        "Manel Lazaro Juncadella",
+        "Duru Soke",
+        "Lavinia Luciano",
+        "Giulia Safina Popa",
+        "Thara Gowda"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Kerem Yilmaz",
+          "cuota": 2.88
+        },
+        {
+          "jugador": "Amandine Hesse",
+          "cuota": 2.17
+        },
+        {
+          "jugador": "Valentina Ivanov",
+          "cuota": 2.12
+        },
+        {
+          "jugador": "Thara Gowda",
+          "cuota": 2.04
+        }
+      ],
+      "cuota_combo": 27.03,
+      "hr_combo": 0.063,
+      "ev_combo": 0.7028,
+      "excluidos": [
+        "Manel Lazaro Juncadella",
+        "Duru Soke",
+        "Lavinia Luciano",
+        "Giulia Safina Popa",
+        "Charles Bertimon"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Kerem Yilmaz",
+          "cuota": 2.88
+        },
+        {
+          "jugador": "Valentina Ivanov",
+          "cuota": 2.12
+        },
+        {
+          "jugador": "Charles Bertimon",
+          "cuota": 2.1
+        },
+        {
+          "jugador": "Thara Gowda",
+          "cuota": 2.04
+        }
+      ],
+      "cuota_combo": 26.16,
+      "hr_combo": 0.063,
+      "ev_combo": 0.6479,
+      "excluidos": [
+        "Manel Lazaro Juncadella",
+        "Duru Soke",
+        "Lavinia Luciano",
+        "Amandine Hesse",
+        "Giulia Safina Popa"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Amandine Hesse",
+          "cuota": 2.17
+        },
+        {
+          "jugador": "Valentina Ivanov",
+          "cuota": 2.12
+        },
+        {
+          "jugador": "Charles Bertimon",
+          "cuota": 2.1
+        },
+        {
+          "jugador": "Thara Gowda",
+          "cuota": 2.04
+        }
+      ],
+      "cuota_combo": 19.71,
+      "hr_combo": 0.0625,
+      "ev_combo": 0.2318,
+      "excluidos": [
+        "Manel Lazaro Juncadella",
+        "Duru Soke",
+        "Kerem Yilmaz",
+        "Lavinia Luciano",
+        "Giulia Safina Popa"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.7142857142857143,
+    "total_ajustado": 6428.571428571428,
+    "var_95": -9000.0,
+    "cvar_95": -9000.0,
+    "expected_pl": 4538.071931432637,
+    "sharpe_ratio": 0.2550221319500029,
+    "kelly_growth_rate": -0.1742540317092989,
+    "sessions_to_double": Infinity,
+    "var_excedido": true,
+    "factor_var": 0.2777777777777778
+  },
+  "resumen": {
+    "gastado_individuales": 0,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 0,
+    "total_en_riesgo": 0.0,
+    "pct_bankroll_en_riesgo": 0.0,
+    "n_senales_apostar": 1,
+    "pool_cobertura": 9,
+    "alerta_riesgo": false
+  }
+}

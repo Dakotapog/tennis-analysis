@@ -1,0 +1,62 @@
+{
+  "metadata": {
+    "timestamp": "20260620_010325",
+    "bankroll": 20000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260620_004756.json",
+    "n_partidos_analizados": 55,
+    "calibracion_n": 1325,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "challenger",
+      "superficie": "hard",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Yeon Woo Ku vs Darja Vidmanova",
+      "favorito": "Yeon Woo Ku",
+      "cuota": 2.33,
+      "edge_pct": "8.9%",
+      "p_modelo": 0.518,
+      "n_h2h": 0,
+      "p_blend": 0.611,
+      "kelly_kl": 0.0539,
+      "kelly_usado": 0.0796,
+      "stake": 2000,
+      "retorno_potencial": 4660.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [],
+  "risk_management": {},
+  "resumen": {
+    "gastado_individuales": 2000.0,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 0.0,
+    "total_en_riesgo": 2000.0,
+    "pct_bankroll_en_riesgo": 0.1,
+    "n_senales_apostar": 1,
+    "pool_cobertura": 1,
+    "alerta_riesgo": false
+  }
+}

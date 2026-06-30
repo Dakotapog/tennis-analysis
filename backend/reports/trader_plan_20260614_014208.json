@@ -1,0 +1,384 @@
+{
+  "metadata": {
+    "timestamp": "20260614_014208",
+    "bankroll": 20000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260614_012628.json",
+    "n_partidos_analizados": 64,
+    "calibracion_n": 706,
+    "parametros": {
+      "modo": "cobertura",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Mia Ristic vs Verena Meliss",
+      "favorito": "Verena Meliss",
+      "cuota": 4.3,
+      "edge_pct": "27.4%",
+      "p_modelo": 0.507,
+      "n_h2h": 0,
+      "p_blend": 0.5897,
+      "kelly_kl": 0.2673,
+      "kelly_usado": 0.1,
+      "stake": 1000,
+      "retorno_potencial": 4300.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Sergio Callejon Hernando vs Lorenzo Bocchi",
+      "favorito": "Lorenzo Bocchi",
+      "cuota": 3.35,
+      "edge_pct": "21.7%",
+      "p_modelo": 0.516,
+      "n_h2h": 0,
+      "p_blend": 0.5897,
+      "kelly_kl": 0.2417,
+      "kelly_usado": 0.1,
+      "stake": 1000,
+      "retorno_potencial": 3350.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Yanaki Milev vs Miguel Tobon",
+      "favorito": "Yanaki Milev",
+      "cuota": 2.75,
+      "edge_pct": "13.8%",
+      "p_modelo": 0.502,
+      "n_h2h": 0,
+      "p_blend": 0.5897,
+      "kelly_kl": 0.1707,
+      "kelly_usado": 0.0888,
+      "stake": 1000,
+      "retorno_potencial": 2750.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Marko Topo vs Ryan Seggerman",
+      "favorito": "Ryan Seggerman",
+      "cuota": 2.55,
+      "edge_pct": "11.7%",
+      "p_modelo": 0.509,
+      "n_h2h": 0,
+      "p_blend": 0.5897,
+      "kelly_kl": 0.1518,
+      "kelly_usado": 0.0812,
+      "stake": 1000,
+      "retorno_potencial": 2550.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Edas Butvilas vs Cruz Hewitt",
+      "favorito": "Cruz Hewitt",
+      "cuota": 3.55,
+      "edge_pct": "24.1%",
+      "p_modelo": 0.523,
+      "n_h2h": 0,
+      "p_blend": 0.569,
+      "kelly_kl": 0.1183,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Verena Meliss",
+          "cuota": 4.3
+        },
+        {
+          "jugador": "Lorenzo Bocchi",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Cruz Hewitt",
+          "cuota": 3.55
+        }
+      ],
+      "cuota_combo": 51.14,
+      "hr_combo": 0.1979,
+      "ev_combo": 9.1185,
+      "excluidos": [
+        "Yanaki Milev",
+        "Ryan Seggerman",
+        "Celine Naef",
+        "Diletta Cherubini",
+        "Franco Ribero",
+        "Matyas Cerny"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 51140.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Verena Meliss",
+          "cuota": 4.3
+        },
+        {
+          "jugador": "Yanaki Milev",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Cruz Hewitt",
+          "cuota": 3.55
+        }
+      ],
+      "cuota_combo": 41.98,
+      "hr_combo": 0.1979,
+      "ev_combo": 7.3062,
+      "excluidos": [
+        "Lorenzo Bocchi",
+        "Ryan Seggerman",
+        "Celine Naef",
+        "Diletta Cherubini",
+        "Franco Ribero",
+        "Matyas Cerny"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 41980.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Verena Meliss",
+          "cuota": 4.3
+        },
+        {
+          "jugador": "Lorenzo Bocchi",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Yanaki Milev",
+          "cuota": 2.75
+        }
+      ],
+      "cuota_combo": 39.61,
+      "hr_combo": 0.2051,
+      "ev_combo": 7.1234,
+      "excluidos": [
+        "Ryan Seggerman",
+        "Cruz Hewitt",
+        "Celine Naef",
+        "Diletta Cherubini",
+        "Franco Ribero",
+        "Matyas Cerny"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 39610.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Lorenzo Bocchi",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Yanaki Milev",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Cruz Hewitt",
+          "cuota": 3.55
+        }
+      ],
+      "cuota_combo": 32.7,
+      "hr_combo": 0.1979,
+      "ev_combo": 5.4711,
+      "excluidos": [
+        "Verena Meliss",
+        "Ryan Seggerman",
+        "Celine Naef",
+        "Diletta Cherubini",
+        "Franco Ribero",
+        "Matyas Cerny"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 32700.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Verena Meliss",
+          "cuota": 4.3
+        },
+        {
+          "jugador": "Lorenzo Bocchi",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Yanaki Milev",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Cruz Hewitt",
+          "cuota": 3.55
+        }
+      ],
+      "cuota_combo": 140.63,
+      "hr_combo": 0.1167,
+      "ev_combo": 15.4089,
+      "excluidos": [
+        "Ryan Seggerman",
+        "Celine Naef",
+        "Diletta Cherubini",
+        "Franco Ribero",
+        "Matyas Cerny"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Verena Meliss",
+          "cuota": 4.3
+        },
+        {
+          "jugador": "Yanaki Milev",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Ryan Seggerman",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "Cruz Hewitt",
+          "cuota": 3.55
+        }
+      ],
+      "cuota_combo": 107.05,
+      "hr_combo": 0.1167,
+      "ev_combo": 11.4904,
+      "excluidos": [
+        "Lorenzo Bocchi",
+        "Celine Naef",
+        "Diletta Cherubini",
+        "Franco Ribero",
+        "Matyas Cerny"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Verena Meliss",
+          "cuota": 4.3
+        },
+        {
+          "jugador": "Lorenzo Bocchi",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Yanaki Milev",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Ryan Seggerman",
+          "cuota": 2.55
+        }
+      ],
+      "cuota_combo": 101.02,
+      "hr_combo": 0.1209,
+      "ev_combo": 11.2155,
+      "excluidos": [
+        "Cruz Hewitt",
+        "Celine Naef",
+        "Diletta Cherubini",
+        "Franco Ribero",
+        "Matyas Cerny"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Lorenzo Bocchi",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Yanaki Milev",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Ryan Seggerman",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "Cruz Hewitt",
+          "cuota": 3.55
+        }
+      ],
+      "cuota_combo": 83.4,
+      "hr_combo": 0.1167,
+      "ev_combo": 8.7309,
+      "excluidos": [
+        "Verena Meliss",
+        "Celine Naef",
+        "Diletta Cherubini",
+        "Franco Ribero",
+        "Matyas Cerny"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.5555555555555556,
+    "total_ajustado": 11666.666666666668,
+    "var_95": -17061.190476190477,
+    "cvar_95": -18143.693164643882,
+    "expected_pl": 102678.29241693609,
+    "sharpe_ratio": 0.8001727944819618,
+    "kelly_growth_rate": 1.2804626184395975,
+    "sessions_to_double": 0.541325588563164,
+    "var_excedido": true,
+    "factor_var": 0.29306278521288914
+  },
+  "resumen": {
+    "gastado_individuales": 4000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 4000,
+    "total_en_riesgo": 8000.0,
+    "pct_bankroll_en_riesgo": 0.4,
+    "n_senales_apostar": 5,
+    "pool_cobertura": 9,
+    "alerta_riesgo": true
+  }
+}

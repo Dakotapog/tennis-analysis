@@ -1,0 +1,150 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — ITF CLAY
+  2026-06-20 00:54  │  Bankroll: $10,000
+  Señales APOSTAR: 2  │  Watchlist: 2  │  Sin edge: 5
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 8 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.05 (itf)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $4,000 (40% bankroll)
+
+  │  🎾 Pablo Martinez Gomez vs Tiago Torres
+  │     Apostar: Pablo Martinez Gomez
+  │     Cuota 2.48  │  Edge 13.0%  │  p_blend 0.634 (n_h2h=0)
+  │     Kelly-KL 7.5% → stake $1,000  │  Retorno potencial $2,480
+  │     EV real +57.2%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Selena Janicijevic vs Lidia Encheva
+  │     Apostar: Lidia Encheva
+  │     Cuota 2.18  │  Edge 7.1%  │  p_blend 0.671 (n_h2h=0)
+  │     Kelly-KL 4.8% → stake $1,000  │  Retorno potencial $2,180
+  │     EV real +46.4%  │  Zona: underdog  │  Sup: clay
+
+  │  Total individuales: $2,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 8 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $6,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Pablo Martinez Gomez @2.48  p=0.634  zona=underdog
+  │    2. Joelle Lilly Sophie Steur @2.33  p=0.631  zona=underdog [W]
+  │    3. Lidia Encheva        @2.18  p=0.671  zona=underdog
+  │    4. Victoria Bosio       @2.05  p=0.671  zona=slight_underdog [W]
+  │    5. Berfu Cengiz         @1.71  p=0.629  zona=slight_underdog
+  │    6. Julia Stusek         @1.58  p=0.671  zona=moderate_favorite
+  │    7. Keshav Chopra        @1.54  p=0.634  zona=moderate_favorite
+  │    8. Daria Yesypchuk      @1.52  p=0.671  zona=moderate_favorite
+
+  │  ── 3 PIERNAS: TOP 2 combos × $2,000 = $4,000 ──
+  │     (cada combo excluye 5 jugadores)
+  │     [3p-1] Pablo Martinez Gomez@2.48 + Lidia Encheva@2.18 + Joelle Lilly Sophie Steur@2.33
+  │            @12.60 HR:26.8% EV:+238.1% →$25,200  excluye:[Victoria Bosio, Daria Yesypchuk, Keshav Chopra, Berfu Cengiz, Julia Stusek]
+  │     [3p-2] Pablo Martinez Gomez@2.48 + Lidia Encheva@2.18 + Victoria Bosio@2.05
+  │            @11.08 HR:28.6% EV:+216.7% →$22,160  excluye:[Joelle Lilly Sophie Steur, Daria Yesypchuk, Keshav Chopra, Berfu Cengiz, Julia Stusek]
+
+  │  ── 4 PIERNAS: TOP 2 combos × $1,000 = $2,000 ──
+  │     (cada combo excluye 4 jugadores)
+  │     [4p-1] Pablo Martinez Gomez@2.48 + Lidia Encheva@2.18 + Joelle Lilly Sophie Steur@2.33 + Victoria Bosio@2.05
+  │            @25.82 HR:18.0% EV:+365.4% →$25,820  excluye:[Daria Yesypchuk, Keshav Chopra, Berfu Cengiz, Julia Stusek]
+  │     [4p-2] Pablo Martinez Gomez@2.48 + Lidia Encheva@2.18 + Victoria Bosio@2.05 + Berfu Cengiz@1.71
+  │            @18.95 HR:18.0% EV:+240.5% →$18,950  excluye:[Joelle Lilly Sophie Steur, Daria Yesypchuk, Keshav Chopra, Julia Stusek]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-4 picks?) ──
+  │  Total apostado: $6,000
+
+  │  🏆 0 fallos (8/8 ganan): retorno $92,130 → P&L +$86,130 (TODOS 4 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Daria Yesypchuk]):
+  │       retorno $92,130 → P&L +$86,130 (4/4 combos pagan)
+  │  ❌ 1 fallo (peor caso: fallan underdogs [Pablo Martinez Gomez]):
+  │       retorno $0 → P&L $-6,000 (0/4 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Daria Yesypchuk, Keshav Chopra]):
+  │       retorno $92,130 → P&L +$86,130 (4/4 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Pablo Martinez Gomez, Joelle Lilly Sophie Steur]):
+  │       retorno $0 → P&L $-6,000 (0/4 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Daria Yesypchuk, Keshav Chopra, Julia Stusek]):
+  │       retorno $92,130 → P&L +$86,130 (4/4 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Pablo Martinez Gomez, Joelle Lilly Sophie Steur, Lidia Encheva]):
+  │       retorno $0 → P&L $-6,000 (0/4 combos pagan)
+  │  ✅ 4 fallos (mejor caso: fallan favoritos [Daria Yesypchuk, Keshav Chopra, Julia Stusek, Berfu Cengiz]):
+  │       retorno $73,180 → P&L +$67,180 (3/4 combos pagan)
+  │  ❌ 4 fallos (peor caso: fallan underdogs [Pablo Martinez Gomez, Joelle Lilly Sophie Steur, Lidia Encheva, Victoria Bosio]):
+  │       retorno $0 → P&L $-6,000 (0/4 combos pagan)
+
+  │  Total cobertura: $6,000  │  4 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     8
+  │  ρ estructural:       0.05 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.741
+  │  Reducción vs naive:  -25.9%
+  │
+  │  Stake naive (sin ajuste):    $       8,000
+  │  Stake ajustado (PK):         $       5,926
+  │  Ahorro por correlación:      $       2,074
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $      -7,154  (71.5% bankroll)
+  │  CVaR 95%:           $      -7,357
+  │  Max VaR permitido:  $       2,500  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.35
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $      15,266
+  │  σ(P&L):             $      20,811
+  │  Sharpe Ratio:              0.734
+  │  Kelly Growth Rate:        0.6065 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $     207,526
+  │  Bankroll en 10 sesiones:  $   4,306,704
+  │  Bankroll en 30 sesiones:  $798,794,493,030
+  │  Sesiones para duplicar:   1.1
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.35 (de $8,000 a $2,796)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.35) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Pablo Martinez Gomez      @2.48  →  $       0  (ret. $         0)
+  │    Lidia Encheva             @2.18  →  $       0  (ret. $         0)
+  │
+  │  COBERTURA (4 combos):
+  │    [3p @12.60]  $   1,000  →  Pablo Martinez Gomez@2.48 + Lidia Encheva@2.18 + Joelle Lilly Sophie Steur@2.33
+  │    [3p @11.08]  $   1,000  →  Pablo Martinez Gomez@2.48 + Lidia Encheva@2.18 + Victoria Bosio@2.05
+  │    [4p @25.82]  $       0  →  Pablo Martinez Gomez@2.48 + Lidia Encheva@2.18 + Joelle Lilly Sophie Steur@2.33 + Victoria Bosio@2.05
+  │    [4p @18.95]  $       0  →  Pablo Martinez Gomez@2.48 + Lidia Encheva@2.18 + Victoria Bosio@2.05 + Berfu Cengiz@1.71
+  │
+  │  TOTAL EN RIESGO:  $     2,000  (20.0% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $        10,000                       ║
+  ║  Individuales:        $             0  (0.0% bankroll)      ║
+  ║  Cobertura:           $         2,000  (20.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $         2,000  (20.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       2                                       ║
+  ║  Pool cobertura:        8 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260620_00  ║
+  ║  Partidos analizados:  55                                       ║
+  ║  Superficie:          clay (itf)                                  ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  📊 Calibración: n=1325 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.671 (calibrado clay) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260620_005409.json

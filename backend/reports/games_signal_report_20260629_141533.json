@@ -1,0 +1,344 @@
+{
+  "metadata": {
+    "fecha": "2026-06-29 14:15:33",
+    "fuente": "reports/h2h_results_enhanced_20260629_141425.json",
+    "n_partidos": 5,
+    "n_apostar": 3,
+    "nodo": "Nodo-40-Games-Sets-Signal-Layer",
+    "calibracion_n": 0
+  },
+  "apostar": [
+    {
+      "partido": "Yosuke Watanuki vs Andre Ilagan",
+      "zona_diff": "dominante",
+      "diff_abs": 0.37,
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 23.5,
+          "direccion": "UNDER",
+          "cuota": 1.72,
+          "outcome_id": 4239109082,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 16-19 games, línea 23.5 tiene gap +4.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "UNDER",
+          "cuota": 1.63,
+          "outcome_id": 4239109086,
+          "gap_juegos": null,
+          "razon": "modelo predice 2 sets, UNDER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Liam Broady vs Hayato Matsuoka",
+      "zona_diff": "coinflip",
+      "diff_abs": 0.11,
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 20.5,
+          "direccion": "OVER",
+          "cuota": 1.7,
+          "outcome_id": 4239806648,
+          "gap_juegos": 5.5,
+          "razon": "modelo dice 26-32+ games, línea 20.5 tiene gap -5.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.6,
+          "outcome_id": 4239792276,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    },
+    {
+      "partido": "Giles Hussey vs William Manning",
+      "zona_diff": "dominante",
+      "diff_abs": 1.02,
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "UNDER",
+          "cuota": 1.74,
+          "outcome_id": 4239792258,
+          "gap_juegos": 2.5,
+          "razon": "modelo dice 16-19 games, línea 21.5 tiene gap +2.5 sobre el máximo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ]
+    }
+  ],
+  "detalle_completo": [
+    {
+      "partido": "Daniil Glinka vs Aidan Mayo",
+      "jugador1": "Daniil Glinka",
+      "jugador2": "Aidan Mayo",
+      "torneo": "Cary (Estados Unidos)",
+      "superficie": "hard",
+      "tier": "",
+      "match_id": "SStlSyzh",
+      "score_difference": -0.21,
+      "diff_abs": 0.21,
+      "zona_diff": "ajustada",
+      "predicted_sets": 2,
+      "games_range": "20-23",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": false
+    },
+    {
+      "partido": "Yosuke Watanuki vs Andre Ilagan",
+      "jugador1": "Yosuke Watanuki",
+      "jugador2": "Andre Ilagan",
+      "torneo": "Cary (Estados Unidos)",
+      "superficie": "hard",
+      "tier": "",
+      "match_id": "dp6OG2X7",
+      "score_difference": -0.37,
+      "diff_abs": 0.37,
+      "zona_diff": "dominante",
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 22.5,
+          "direccion": "UNDER",
+          "cuota": 1.9,
+          "outcome_id": 4239129382,
+          "gap_juegos": 3.5,
+          "razon": "modelo dice 16-19 games, línea 22.5 tiene gap +3.5 sobre el máximo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "UNDER",
+          "cuota": 2.23,
+          "outcome_id": 4239129384,
+          "gap_juegos": 2.5,
+          "razon": "modelo dice 16-19 games, línea 21.5 tiene gap +2.5 sobre el máximo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 23.5,
+          "direccion": "UNDER",
+          "cuota": 1.72,
+          "outcome_id": 4239109082,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 16-19 games, línea 23.5 tiene gap +4.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "UNDER",
+          "cuota": 1.63,
+          "outcome_id": 4239109086,
+          "gap_juegos": null,
+          "razon": "modelo predice 2 sets, UNDER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 23.5,
+          "direccion": "UNDER",
+          "cuota": 1.72,
+          "outcome_id": 4239109082,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 16-19 games, línea 23.5 tiene gap +4.5 sobre el máximo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "UNDER",
+          "cuota": 1.63,
+          "outcome_id": 4239109086,
+          "gap_juegos": null,
+          "razon": "modelo predice 2 sets, UNDER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028179920
+    },
+    {
+      "partido": "Jack Kennedy vs Kaichi Uchida",
+      "jugador1": "Jack Kennedy",
+      "jugador2": "Kaichi Uchida",
+      "torneo": "Cary (Estados Unidos)",
+      "superficie": "hard",
+      "tier": "",
+      "match_id": "lK2GIO2e",
+      "score_difference": 0.32,
+      "diff_abs": 0.32,
+      "zona_diff": "ajustada",
+      "predicted_sets": 2,
+      "games_range": "18-21",
+      "señales": [],
+      "señales_optimas": [],
+      "tiene_mercados_kambi": false
+    },
+    {
+      "partido": "Liam Broady vs Hayato Matsuoka",
+      "jugador1": "Liam Broady",
+      "jugador2": "Hayato Matsuoka",
+      "torneo": "Cary (Estados Unidos)",
+      "superficie": "hard",
+      "tier": "",
+      "match_id": "E3oCMX3T",
+      "score_difference": 0.11,
+      "diff_abs": 0.11,
+      "zona_diff": "coinflip",
+      "predicted_sets": 3,
+      "games_range": "26-32+",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "OVER",
+          "cuota": 1.89,
+          "outcome_id": 4239811931,
+          "gap_juegos": 4.5,
+          "razon": "modelo dice 26-32+ games, línea 21.5 tiene gap -4.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 20.5,
+          "direccion": "OVER",
+          "cuota": 1.7,
+          "outcome_id": 4239806648,
+          "gap_juegos": 5.5,
+          "razon": "modelo dice 26-32+ games, línea 20.5 tiene gap -5.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de juegos",
+          "linea": 22.5,
+          "direccion": "OVER",
+          "cuota": 2.16,
+          "outcome_id": 4239792278,
+          "gap_juegos": 3.5,
+          "razon": "modelo dice 26-32+ games, línea 22.5 tiene gap -3.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.6,
+          "outcome_id": 4239792276,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 20.5,
+          "direccion": "OVER",
+          "cuota": 1.7,
+          "outcome_id": 4239806648,
+          "gap_juegos": 5.5,
+          "razon": "modelo dice 26-32+ games, línea 20.5 tiene gap -5.5 bajo el mínimo del rango",
+          "confianza_señal": "ALTA",
+          "apostar": true
+        },
+        {
+          "mercado": "Total de sets",
+          "linea": 2.5,
+          "direccion": "OVER",
+          "cuota": 2.6,
+          "outcome_id": 4239792276,
+          "gap_juegos": null,
+          "razon": "modelo predice 3 sets, OVER 2.5 sets",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028179921
+    },
+    {
+      "partido": "Giles Hussey vs William Manning",
+      "jugador1": "Giles Hussey",
+      "jugador2": "William Manning",
+      "torneo": "Cary (Estados Unidos)",
+      "superficie": "hard",
+      "tier": "",
+      "match_id": "YPqdQF44",
+      "score_difference": 1.02,
+      "diff_abs": 1.02,
+      "zona_diff": "dominante",
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "señales": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "UNDER",
+          "cuota": 1.74,
+          "outcome_id": 4239792258,
+          "gap_juegos": 2.5,
+          "razon": "modelo dice 16-19 games, línea 21.5 tiene gap +2.5 sobre el máximo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "señales_optimas": [
+        {
+          "mercado": "Total de juegos",
+          "linea": 21.5,
+          "direccion": "UNDER",
+          "cuota": 1.74,
+          "outcome_id": 4239792258,
+          "gap_juegos": 2.5,
+          "razon": "modelo dice 16-19 games, línea 21.5 tiene gap +2.5 sobre el máximo del rango",
+          "confianza_señal": "MEDIA",
+          "apostar": true
+        }
+      ],
+      "tiene_mercados_kambi": true,
+      "kambi_event_id": 1028179923
+    }
+  ]
+}

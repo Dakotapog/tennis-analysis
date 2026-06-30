@@ -1,0 +1,21 @@
+{
+  "ts": "2026-06-17T11:24:18.508373",
+  "modo": "LIVE",
+  "n_picks": 1,
+  "index": {
+    "4224917191": {
+      "jugador": "Corentin Denolly",
+      "cuota": 2.48,
+      "cuota_kambi": 2.25,
+      "partido": "Jan Kumstat vs Corentin Denolly",
+      "match_id": "rLzDbtqg",
+      "match_url": "https://www.flashscore.co/match/tennis/kumstat-jan-denolly-corentin/rLzDbtqg/#/h2h",
+      "torneo": "M25 Klosters (Suiza)",
+      "superficie": "?",
+      "tier": "?",
+      "edge": "10.2%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0
+    }
+  }
+}

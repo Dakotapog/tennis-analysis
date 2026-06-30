@@ -1,0 +1,429 @@
+{
+  "metadata": {
+    "timestamp": "20260606_121127",
+    "bankroll": 125000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260604_034619.json",
+    "n_partidos_analizados": 80,
+    "calibracion_n": 69,
+    "parametros": {
+      "modo": "cobertura",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Mair L. vs Bronzetti L.",
+      "favorito": "Mair L.",
+      "cuota": 10.0,
+      "edge_pct": "42.5%",
+      "p_modelo": 0.525,
+      "n_h2h": 0,
+      "p_blend": 0.676056338028169,
+      "kelly_kl": 0.5098,
+      "kelly_usado": 0.1,
+      "stake": 12000,
+      "retorno_potencial": 120000.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Sherif M. vs Pedone G.",
+      "favorito": "Pedone G.",
+      "cuota": 5.5,
+      "edge_pct": "32.4%",
+      "p_modelo": 0.506,
+      "n_h2h": 0,
+      "p_blend": 0.676056338028169,
+      "kelly_kl": 0.4497,
+      "kelly_usado": 0.1,
+      "stake": 12000,
+      "retorno_potencial": 66000.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Daniel T. vs Dzumhur D.",
+      "favorito": "Daniel T.",
+      "cuota": 2.6,
+      "edge_pct": "15.5%",
+      "p_modelo": 0.54,
+      "n_h2h": 5,
+      "p_blend": 0.5910211267605634,
+      "kelly_kl": 0.3143,
+      "kelly_usado": 0.0839,
+      "stake": 10000,
+      "retorno_potencial": 26000.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Monnet C. vs Prozorova T.",
+      "favorito": "Monnet C.",
+      "cuota": 2.9,
+      "edge_pct": "15.9%",
+      "p_modelo": 0.504,
+      "n_h2h": 1,
+      "p_blend": 0.6330422535211268,
+      "kelly_kl": 0.2902,
+      "kelly_usado": 0.1,
+      "stake": 12000,
+      "retorno_potencial": 34800.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Rehberg M. H. vs Moeller M.",
+      "favorito": "Moeller M.",
+      "cuota": 2.5,
+      "edge_pct": "11.9%",
+      "p_modelo": 0.519,
+      "n_h2h": 1,
+      "p_blend": 0.6367922535211268,
+      "kelly_kl": 0.2447,
+      "kelly_usado": 0.0987,
+      "stake": 4000,
+      "retorno_potencial": 10000.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Waltert S. vs Lazaro Garcia A.",
+      "favorito": "Lazaro Garcia A.",
+      "cuota": 2.35,
+      "edge_pct": "7.8%",
+      "p_modelo": 0.504,
+      "n_h2h": 2,
+      "p_blend": 0.6072338028169014,
+      "kelly_kl": 0.1693,
+      "kelly_usado": 0.0791,
+      "stake": 1000,
+      "retorno_potencial": 2350.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Butvilas E. vs Ilagan A.",
+      "favorito": "Ilagan A.",
+      "cuota": 2.25,
+      "edge_pct": "7.2%",
+      "p_modelo": 0.516,
+      "n_h2h": 0,
+      "p_blend": 0.676056338028169,
+      "kelly_kl": 0.1537,
+      "kelly_usado": 0.1,
+      "stake": 1000,
+      "retorno_potencial": 2250.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    },
+    {
+      "partido": "Timofeeva M. vs Andreeva E.",
+      "favorito": "Andreeva E.",
+      "cuota": 2.3,
+      "edge_pct": "6.6%",
+      "p_modelo": 0.501,
+      "n_h2h": 0,
+      "p_blend": 0.676056338028169,
+      "kelly_kl": 0.1428,
+      "kelly_usado": 0.1,
+      "stake": 1000,
+      "retorno_potencial": 2300.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Mair L.",
+          "cuota": 10.0
+        },
+        {
+          "jugador": "Pedone G.",
+          "cuota": 5.5
+        },
+        {
+          "jugador": "Monnet C.",
+          "cuota": 2.9
+        }
+      ],
+      "cuota_combo": 159.5,
+      "hr_combo": 0.2125,
+      "ev_combo": 32.8931,
+      "excluidos": [
+        "Daniel T.",
+        "Moeller M.",
+        "Lazaro Garcia A.",
+        "Ilagan A.",
+        "Andreeva E.",
+        "Kawa K."
+      ],
+      "stake": 12000,
+      "retorno_potencial": 1914000.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Mair L.",
+          "cuota": 10.0
+        },
+        {
+          "jugador": "Pedone G.",
+          "cuota": 5.5
+        },
+        {
+          "jugador": "Daniel T.",
+          "cuota": 2.6
+        }
+      ],
+      "cuota_combo": 143.0,
+      "hr_combo": 0.2068,
+      "ev_combo": 28.5755,
+      "excluidos": [
+        "Monnet C.",
+        "Moeller M.",
+        "Lazaro Garcia A.",
+        "Ilagan A.",
+        "Andreeva E.",
+        "Kawa K."
+      ],
+      "stake": 12000,
+      "retorno_potencial": 1716000.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Mair L.",
+          "cuota": 10.0
+        },
+        {
+          "jugador": "Daniel T.",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Monnet C.",
+          "cuota": 2.9
+        }
+      ],
+      "cuota_combo": 75.4,
+      "hr_combo": 0.1982,
+      "ev_combo": 13.9419,
+      "excluidos": [
+        "Pedone G.",
+        "Moeller M.",
+        "Lazaro Garcia A.",
+        "Ilagan A.",
+        "Andreeva E.",
+        "Kawa K."
+      ],
+      "stake": 12000,
+      "retorno_potencial": 904800.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Pedone G.",
+          "cuota": 5.5
+        },
+        {
+          "jugador": "Daniel T.",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Monnet C.",
+          "cuota": 2.9
+        }
+      ],
+      "cuota_combo": 41.47,
+      "hr_combo": 0.1982,
+      "ev_combo": 7.218,
+      "excluidos": [
+        "Mair L.",
+        "Moeller M.",
+        "Lazaro Garcia A.",
+        "Ilagan A.",
+        "Andreeva E.",
+        "Kawa K."
+      ],
+      "stake": 12000,
+      "retorno_potencial": 497640.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Mair L.",
+          "cuota": 10.0
+        },
+        {
+          "jugador": "Pedone G.",
+          "cuota": 5.5
+        },
+        {
+          "jugador": "Daniel T.",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Monnet C.",
+          "cuota": 2.9
+        }
+      ],
+      "cuota_combo": 414.7,
+      "hr_combo": 0.12,
+      "ev_combo": 48.7438,
+      "excluidos": [
+        "Moeller M.",
+        "Lazaro Garcia A.",
+        "Ilagan A.",
+        "Andreeva E.",
+        "Kawa K."
+      ],
+      "stake": 6000,
+      "retorno_potencial": 2488200.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Mair L.",
+          "cuota": 10.0
+        },
+        {
+          "jugador": "Pedone G.",
+          "cuota": 5.5
+        },
+        {
+          "jugador": "Monnet C.",
+          "cuota": 2.9
+        },
+        {
+          "jugador": "Moeller M.",
+          "cuota": 2.5
+        }
+      ],
+      "cuota_combo": 398.75,
+      "hr_combo": 0.124,
+      "ev_combo": 48.4606,
+      "excluidos": [
+        "Daniel T.",
+        "Lazaro Garcia A.",
+        "Ilagan A.",
+        "Andreeva E.",
+        "Kawa K."
+      ],
+      "stake": 6000,
+      "retorno_potencial": 2392500.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Mair L.",
+          "cuota": 10.0
+        },
+        {
+          "jugador": "Pedone G.",
+          "cuota": 5.5
+        },
+        {
+          "jugador": "Daniel T.",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Moeller M.",
+          "cuota": 2.5
+        }
+      ],
+      "cuota_combo": 357.5,
+      "hr_combo": 0.1207,
+      "ev_combo": 42.1599,
+      "excluidos": [
+        "Monnet C.",
+        "Lazaro Garcia A.",
+        "Ilagan A.",
+        "Andreeva E.",
+        "Kawa K."
+      ],
+      "stake": 6000,
+      "retorno_potencial": 2145000.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Pedone G.",
+          "cuota": 5.5
+        },
+        {
+          "jugador": "Daniel T.",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Monnet C.",
+          "cuota": 2.9
+        },
+        {
+          "jugador": "Moeller M.",
+          "cuota": 2.5
+        }
+      ],
+      "cuota_combo": 103.67,
+      "hr_combo": 0.1157,
+      "ev_combo": 10.9927,
+      "excluidos": [
+        "Mair L.",
+        "Lazaro Garcia A.",
+        "Ilagan A.",
+        "Andreeva E.",
+        "Kawa K."
+      ],
+      "stake": 6000,
+      "retorno_potencial": 622020.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.5555555555555556,
+    "total_ajustado": 69444.44444444445,
+    "var_95": -12090.0,
+    "cvar_95": -27644.82220932511,
+    "expected_pl": 1907775.016393823,
+    "sharpe_ratio": 0.8771563375538216,
+    "kelly_growth_rate": 2.6299128694743894,
+    "sessions_to_double": 0.2635627927469995,
+    "var_excedido": false,
+    "factor_var": 1.0
+  },
+  "resumen": {
+    "gastado_individuales": 53000.0,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 72000.0,
+    "total_en_riesgo": 125000.0,
+    "pct_bankroll_en_riesgo": 1.0,
+    "n_senales_apostar": 8,
+    "pool_cobertura": 9,
+    "alerta_riesgo": true
+  }
+}

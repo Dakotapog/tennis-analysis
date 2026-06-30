@@ -1,0 +1,32 @@
+{
+  "ts_registro": "2026-06-15T00:33:32.207917",
+  "ts_bookmarklet": "2026-06-15T05:33:31.552Z",
+  "estado": "CERRADO",
+  "betslip_index": "reports/betslip_index_20260615_000853.json",
+  "n_picks": 1,
+  "picks": [
+    {
+      "outcome_id": "4222556063",
+      "jugador": "Amarissa Kiara Toth",
+      "cuota": 2.18,
+      "cuota_kambi": 2.18,
+      "partido": "Chloe Paquet vs Amarissa Kiara Toth",
+      "match_id": "z9vMvokS",
+      "match_url": "https://www.flashscore.co/match/tennis/paquet-chloe-toth-amarissa-kiara/z9vMvokS/#/h2h",
+      "torneo": "Brescia (Italia) - Fase previa",
+      "superficie": "?",
+      "tier": "?",
+      "edge": "4.8%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0,
+      "stake": 0,
+      "retorno_potencial": 0,
+      "resultado_real": "Chloe Paquet",
+      "correcto": false,
+      "ganancia": 0,
+      "sets": "2-0"
+    }
+  ],
+  "pl_sesion": 0,
+  "ts_cierre": "2026-06-28T09:55:36.310510"
+}

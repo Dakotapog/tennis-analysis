@@ -1,0 +1,246 @@
+{
+  "metadata": {
+    "timestamp": "20260617_113505",
+    "bankroll": 30000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260617_113250.json",
+    "n_partidos_analizados": 91,
+    "calibracion_n": 798,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "atp500",
+      "superficie": "grass",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Linda Noskova vs Diane Parry",
+      "favorito": "Diane Parry",
+      "cuota": 3.2,
+      "edge_pct": "23.3%",
+      "p_modelo": 0.545,
+      "n_h2h": 4,
+      "p_blend": 0.5393857142857144,
+      "kelly_kl": 0.1245,
+      "kelly_usado": 0.0825,
+      "stake": 1000,
+      "retorno_potencial": 3200.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Elina Svitolina vs Eva Lys",
+      "favorito": "Eva Lys",
+      "cuota": 4.2,
+      "edge_pct": "26.7%",
+      "p_modelo": 0.505,
+      "n_h2h": 1,
+      "p_blend": 0.5251750000000001,
+      "kelly_kl": 0.1219,
+      "kelly_usado": 0.0942,
+      "stake": 1000,
+      "retorno_potencial": 4200.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Ann Li vs Taylah Preston",
+      "favorito": "Taylah Preston",
+      "cuota": 2.65,
+      "edge_pct": "15.9%",
+      "p_modelo": 0.536,
+      "n_h2h": 0,
+      "p_blend": 0.5319,
+      "kelly_kl": 0.0937,
+      "kelly_usado": 0.0621,
+      "stake": 1000,
+      "retorno_potencial": 2650.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Hamad Medjedovic vs Ugo Humbert",
+      "favorito": "Hamad Medjedovic",
+      "cuota": 2.38,
+      "edge_pct": "8.5%",
+      "p_modelo": 0.505,
+      "n_h2h": 1,
+      "p_blend": 0.5251750000000001,
+      "kelly_kl": 0.0546,
+      "kelly_usado": 0.0453,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Diane Parry",
+          "cuota": 3.2
+        },
+        {
+          "jugador": "Eva Lys",
+          "cuota": 4.2
+        },
+        {
+          "jugador": "Taylah Preston",
+          "cuota": 2.65
+        }
+      ],
+      "cuota_combo": 35.62,
+      "hr_combo": 0.1507,
+      "ev_combo": 4.3663,
+      "excluidos": [
+        "Hamad Medjedovic"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 35620.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Diane Parry",
+          "cuota": 3.2
+        },
+        {
+          "jugador": "Eva Lys",
+          "cuota": 4.2
+        },
+        {
+          "jugador": "Hamad Medjedovic",
+          "cuota": 2.38
+        }
+      ],
+      "cuota_combo": 31.99,
+      "hr_combo": 0.1488,
+      "ev_combo": 3.7586,
+      "excluidos": [
+        "Taylah Preston"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 31990.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Eva Lys",
+          "cuota": 4.2
+        },
+        {
+          "jugador": "Taylah Preston",
+          "cuota": 2.65
+        },
+        {
+          "jugador": "Hamad Medjedovic",
+          "cuota": 2.38
+        }
+      ],
+      "cuota_combo": 26.49,
+      "hr_combo": 0.1467,
+      "ev_combo": 2.8861,
+      "excluidos": [
+        "Diane Parry"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 26490.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Diane Parry",
+          "cuota": 3.2
+        },
+        {
+          "jugador": "Taylah Preston",
+          "cuota": 2.65
+        },
+        {
+          "jugador": "Hamad Medjedovic",
+          "cuota": 2.38
+        }
+      ],
+      "cuota_combo": 20.18,
+      "hr_combo": 0.1507,
+      "ev_combo": 2.0409,
+      "excluidos": [
+        "Eva Lys"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 20180.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Diane Parry",
+          "cuota": 3.2
+        },
+        {
+          "jugador": "Eva Lys",
+          "cuota": 4.2
+        },
+        {
+          "jugador": "Taylah Preston",
+          "cuota": 2.65
+        },
+        {
+          "jugador": "Hamad Medjedovic",
+          "cuota": 2.38
+        }
+      ],
+      "cuota_combo": 84.77,
+      "hr_combo": 0.0791,
+      "ev_combo": 5.7075,
+      "excluidos": [],
+      "stake": 1000,
+      "retorno_potencial": 84770.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.6896551724137931,
+    "total_ajustado": 17931.034482758623,
+    "var_95": -26000.0,
+    "cvar_95": -25999.999999999996,
+    "expected_pl": 67957.92860196067,
+    "sharpe_ratio": 0.3938442647830316,
+    "kelly_growth_rate": 0.09353034825469475,
+    "sessions_to_double": 7.410933386802105,
+    "var_excedido": true,
+    "factor_var": 0.28846153846153844
+  },
+  "resumen": {
+    "gastado_individuales": 3000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 5000,
+    "total_en_riesgo": 8000.0,
+    "pct_bankroll_en_riesgo": 0.2667,
+    "n_senales_apostar": 4,
+    "pool_cobertura": 4,
+    "alerta_riesgo": false
+  }
+}

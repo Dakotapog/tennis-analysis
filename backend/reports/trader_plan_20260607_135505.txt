@@ -1,0 +1,178 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — DEPLOY ROLAND GARROS
+  2026-06-07 13:55  │  Bankroll: $30,000
+  Señales APOSTAR: 4  │  Watchlist: 1  │  Sin edge: 4
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 7 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.15 (atp500)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $12,000 (40% bankroll)
+
+  │  🎾 Wong C. vs Romano F.
+  │     Apostar: Romano F.
+  │     Cuota 4.00  │  Edge 28.4%  │  p_blend 0.697 (n_h2h=0)
+  │     Kelly-KL 43.8% → stake $3,000  │  Retorno potencial $12,000
+  │     EV real +179.0%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Bartunkova N. vs Knutson G.
+  │     Apostar: Knutson G.
+  │     Cuota 3.10  │  Edge 19.0%  │  p_blend 0.651 (n_h2h=1)
+  │     Kelly-KL 32.6% → stake $3,000  │  Retorno potencial $9,300
+  │     EV real +101.9%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Preston T. vs Dudeney A.
+  │     Apostar: Dudeney A.
+  │     Cuota 2.30  │  Edge 7.0%  │  p_blend 0.697 (n_h2h=0)
+  │     Kelly-KL 14.6% → stake $3,000  │  Retorno potencial $6,900
+  │     EV real +60.4%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Stojsavljevic M. vs Kalieva E.
+  │     Apostar: Stojsavljevic M.
+  │     Cuota 2.25  │  Edge 6.8%  │  p_blend 0.697 (n_h2h=0)
+  │     Kelly-KL 14.4% → stake $3,000  │  Retorno potencial $6,750
+  │     EV real +56.9%  │  Zona: underdog  │  Sup: grass
+
+  │  Total individuales: $12,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 7 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $18,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Romano F.            @4.00  p=0.650  zona=underdog
+  │    2. Knutson G.           @3.10  p=0.616  zona=underdog
+  │    3. Dudeney A.           @2.30  p=0.650  zona=underdog
+  │    4. Stojsavljevic M.     @2.25  p=0.650  zona=underdog
+  │    5. Ymer E.              @1.95  p=0.606  zona=slight_underdog [W]
+  │    6. Bu Y.                @1.70  p=0.650  zona=slight_underdog
+  │    7. Hijikata R.          @1.60  p=0.584  zona=slight_underdog
+
+  │  ── 3 PIERNAS: TOP 4 combos × $3,000 = $12,000 ──
+  │     (cada combo excluye 4 jugadores)
+  │     [3p-1] Romano F.@4.00 + Knutson G.@3.10 + Dudeney A.@2.30
+  │            @28.52 HR:26.0% EV:+642.0% →$85,560  excluye:[Stojsavljevic M., Ymer E., Bu Y., Hijikata R.]
+  │     [3p-2] Romano F.@4.00 + Knutson G.@3.10 + Stojsavljevic M.@2.25
+  │            @27.90 HR:26.0% EV:+625.8% →$83,700  excluye:[Dudeney A., Ymer E., Bu Y., Hijikata R.]
+  │     [3p-3] Romano F.@4.00 + Dudeney A.@2.30 + Stojsavljevic M.@2.25
+  │            @20.70 HR:27.5% EV:+468.5% →$62,100  excluye:[Knutson G., Ymer E., Bu Y., Hijikata R.]
+  │     [3p-4] Knutson G.@3.10 + Dudeney A.@2.30 + Stojsavljevic M.@2.25
+  │            @16.04 HR:26.0% EV:+317.4% →$48,120  excluye:[Romano F., Ymer E., Bu Y., Hijikata R.]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $2,000 = $8,000 ──
+  │     (cada combo excluye 3 jugadores)
+  │     [4p-1] Romano F.@4.00 + Knutson G.@3.10 + Dudeney A.@2.30 + Stojsavljevic M.@2.25
+  │            @64.17 HR:16.9% EV:+985.1% →$128,340  excluye:[Ymer E., Bu Y., Hijikata R.]
+  │     [4p-2] Romano F.@4.00 + Knutson G.@3.10 + Stojsavljevic M.@2.25 + Ymer E.@1.95
+  │            @54.41 HR:15.8% EV:+757.2% →$108,820  excluye:[Dudeney A., Bu Y., Hijikata R.]
+  │     [4p-3] Romano F.@4.00 + Dudeney A.@2.30 + Stojsavljevic M.@2.25 + Ymer E.@1.95
+  │            @40.36 HR:16.6% EV:+571.3% →$80,720  excluye:[Knutson G., Bu Y., Hijikata R.]
+  │     [4p-4] Knutson G.@3.10 + Dudeney A.@2.30 + Stojsavljevic M.@2.25 + Ymer E.@1.95
+  │            @31.28 HR:15.8% EV:+392.9% →$62,560  excluye:[Romano F., Bu Y., Hijikata R.]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-4 picks?) ──
+  │  Total apostado: $20,000
+
+  │  🏆 0 fallos (7/7 ganan): retorno $659,920 → P&L +$639,920 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Hijikata R.]):
+  │       retorno $659,920 → P&L +$639,920 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Romano F.]):
+  │       retorno $110,680 → P&L +$90,680 (2/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Hijikata R., Bu Y.]):
+  │       retorno $659,920 → P&L +$639,920 (8/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Romano F., Knutson G.]):
+  │       retorno $0 → P&L $-20,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Hijikata R., Bu Y., Ymer E.]):
+  │       retorno $407,820 → P&L +$387,820 (5/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Romano F., Knutson G., Dudeney A.]):
+  │       retorno $0 → P&L $-20,000 (0/8 combos pagan)
+  │  ✅ 4 fallos (mejor caso: fallan favoritos [Hijikata R., Bu Y., Ymer E., Stojsavljevic M.]):
+  │       retorno $85,560 → P&L +$65,560 (1/8 combos pagan)
+  │  ❌ 4 fallos (peor caso: fallan underdogs [Romano F., Knutson G., Dudeney A., Stojsavljevic M.]):
+  │       retorno $0 → P&L $-20,000 (0/8 combos pagan)
+
+  │  Total cobertura: $20,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     7
+  │  ρ estructural:       0.15 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.526
+  │  Reducción vs naive:  -47.4%
+  │
+  │  Stake naive (sin ajuste):    $      32,000
+  │  Stake ajustado (PK):         $      16,842
+  │  Ahorro por correlación:      $      15,158
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $     -20,000  (66.7% bankroll)
+  │  CVaR 95%:           $     -20,000
+  │  Max VaR permitido:  $       7,500  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.38
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $     109,290
+  │  σ(P&L):             $     150,778
+  │  Sharpe Ratio:              0.725
+  │  Kelly Growth Rate:        1.1884 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $  11,419,305
+  │  Bankroll en 10 sesiones:  $4,346,683,997
+  │  Bankroll en 30 sesiones:  $91,249,752,515,660,414,976
+  │  Sesiones para duplicar:   0.6
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.38 (de $32,000 a $12,000)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.38) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Romano F.                 @4.00  →  $   1,000  (ret. $     4,000)
+  │    Knutson G.                @3.10  →  $   1,000  (ret. $     3,100)
+  │    Dudeney A.                @2.30  →  $   1,000  (ret. $     2,300)
+  │    Stojsavljevic M.          @2.25  →  $   1,000  (ret. $     2,250)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @28.52]  $   1,000  →  Romano F.@4.00 + Knutson G.@3.10 + Dudeney A.@2.30
+  │    [3p @27.90]  $   1,000  →  Romano F.@4.00 + Knutson G.@3.10 + Stojsavljevic M.@2.25
+  │    [3p @20.70]  $   1,000  →  Romano F.@4.00 + Dudeney A.@2.30 + Stojsavljevic M.@2.25
+  │    [3p @16.04]  $   1,000  →  Knutson G.@3.10 + Dudeney A.@2.30 + Stojsavljevic M.@2.25
+  │    [4p @64.17]  $   1,000  →  Romano F.@4.00 + Knutson G.@3.10 + Dudeney A.@2.30 + Stojsavljevic M.@2.25
+  │    [4p @54.41]  $   1,000  →  Romano F.@4.00 + Knutson G.@3.10 + Stojsavljevic M.@2.25 + Ymer E.@1.95
+  │    [4p @40.36]  $   1,000  →  Romano F.@4.00 + Dudeney A.@2.30 + Stojsavljevic M.@2.25 + Ymer E.@1.95
+  │    [4p @31.28]  $   1,000  →  Knutson G.@3.10 + Dudeney A.@2.30 + Stojsavljevic M.@2.25 + Ymer E.@1.95
+  │
+  │  TOTAL EN RIESGO:  $    12,000  (40.0% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $        30,000                       ║
+  ║  Individuales:        $         4,000  (13.3% bankroll)      ║
+  ║  Cobertura:           $         8,000  (26.7% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $        12,000  (40.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       4                                       ║
+  ║  Pool cobertura:        7 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260604_03  ║
+  ║  Partidos analizados:  80                                       ║
+  ║  Superficie:          clay (Roland Garros)                    ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  ⚠️  ALERTA: 40.0% bankroll en riesgo — por encima del 30% recomendado.
+      Reducir combos o sistema hasta n≥30 con datos limpios.
+
+  📊 Calibración: n=150 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.697 (calibrado grass) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260607_135505.json

@@ -1,0 +1,3009 @@
+{
+  "metadata": {
+    "fecha_extraccion": "2026-06-04 01:11:10",
+    "total_partidos_procesados": 2,
+    "version": "3.0_refactorizado",
+    "funcionalidades": [
+      "Extracción H2H con Playwright",
+      "Análisis de rankings ATP",
+      "Sistema ELO calculado",
+      "Rivalidad transitiva",
+      "Predicciones avanzadas",
+      "Análisis de superficie",
+      "Ventaja de localización"
+    ]
+  },
+  "partidos": [
+    {
+      "match_number": 1,
+      "jugador1": "Kostyuk M.",
+      "jugador1_nacionalidad": "Ucrania",
+      "jugador2": "Andreeva M.",
+      "jugador2_nacionalidad": "Mundial",
+      "torneo_nombre": "French Open (France)",
+      "tipo_cancha": "clay",
+      "torneo_completo": "French Open (France)",
+      "cuota1": 1.7,
+      "cuota2": 2.15,
+      "match_url": "https://www.flashscore.com/match/tennis/andreeva-mirra-lI6fOOat/kostyuk-marta-8CZqQdSa/?mid=tMeHmEwK",
+      "historial_Kostyuk_M": [
+        {
+          "fecha": "02.06.26",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Ganó",
+          "torneo": "FO",
+          "ciudad": "French Open",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "31.05.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "FO",
+          "ciudad": "French Open",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "29.05.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "FO",
+          "ciudad": "French Open",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "27.05.26",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Ganó",
+          "torneo": "FO",
+          "ciudad": "French Open",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "24.05.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "FO",
+          "ciudad": "French Open",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "02.05.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "MAD",
+          "ciudad": "Madrid",
+          "pais": "Spain",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "30.04.26",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Ganó",
+          "torneo": "MAD",
+          "ciudad": "Madrid",
+          "pais": "Spain",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "29.04.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "MAD",
+          "ciudad": "Madrid",
+          "pais": "Spain",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "27.04.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "MAD",
+          "ciudad": "Madrid",
+          "pais": "Spain",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "26.04.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "MAD",
+          "ciudad": "Madrid",
+          "pais": "Spain",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "24.04.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "MAD",
+          "ciudad": "Madrid",
+          "pais": "Spain",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "19.04.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "ROU",
+          "ciudad": "Rouen",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "18.04.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "ROU",
+          "ciudad": "Rouen",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "17.04.26",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Ganó",
+          "torneo": "ROU",
+          "ciudad": "Rouen",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "15.04.26",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Ganó",
+          "torneo": "ROU",
+          "ciudad": "Rouen",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "14.04.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "ROU",
+          "ciudad": "Rouen",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "10.04.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "BJK",
+          "ciudad": "Billie Jean King Cup - World Group",
+          "pais": "World",
+          "superficie": "N/A"
+        },
+        {
+          "fecha": "22.03.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Perdió",
+          "torneo": "MIA",
+          "ciudad": "Miami",
+          "pais": "USA",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "20.03.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "MIA",
+          "ciudad": "Miami",
+          "pais": "USA",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "09.03.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Perdió",
+          "torneo": "IND",
+          "ciudad": "Indian Wells",
+          "pais": "USA",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "07.03.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "IND",
+          "ciudad": "Indian Wells",
+          "pais": "USA",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "17.01.26",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Perdió",
+          "torneo": "AO",
+          "ciudad": "Australian Open",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "11.01.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Perdió",
+          "torneo": "BRI",
+          "ciudad": "Brisbane",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "10.01.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "BRI",
+          "ciudad": "Brisbane",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "09.01.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "BRI",
+          "ciudad": "Brisbane",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "08.01.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "BRI",
+          "ciudad": "Brisbane",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "07.01.26",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Ganó",
+          "torneo": "BRI",
+          "ciudad": "Brisbane",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "20.12.25",
+          "oponente": "N/A",
+          "resultado": "0-1",
+          "outcome": "Ganó",
+          "torneo": "WTL",
+          "ciudad": "World Tennis League",
+          "pais": "World",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "19.12.25",
+          "oponente": "N/A",
+          "resultado": "0-1",
+          "outcome": "Ganó",
+          "torneo": "WTL",
+          "ciudad": "World Tennis League",
+          "pais": "World",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "18.12.25",
+          "oponente": "N/A",
+          "resultado": "0-1",
+          "outcome": "Perdió",
+          "torneo": "WTL",
+          "ciudad": "World Tennis League",
+          "pais": "World",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "17.12.25",
+          "oponente": "N/A",
+          "resultado": "1-0",
+          "outcome": "Perdió",
+          "torneo": "WTL",
+          "ciudad": "World Tennis League",
+          "pais": "World",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "07.10.25",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Perdió",
+          "torneo": "WUH",
+          "ciudad": "Wuhan",
+          "pais": "China",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "01.10.25",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Perdió",
+          "torneo": "BEI",
+          "ciudad": "Beijing",
+          "pais": "China",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "28.09.25",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "BEI",
+          "ciudad": "Beijing",
+          "pais": "China",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "27.09.25",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "BEI",
+          "ciudad": "Beijing",
+          "pais": "China",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "19.09.25",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "BJK",
+          "ciudad": "Billie Jean King Cup - World Group",
+          "pais": "World",
+          "superficie": "N/A"
+        },
+        {
+          "fecha": "17.09.25",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "BJK",
+          "ciudad": "Billie Jean King Cup - World Group",
+          "pais": "World",
+          "superficie": "N/A"
+        },
+        {
+          "fecha": "01.09.25",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Perdió",
+          "torneo": "USO",
+          "ciudad": "US Open",
+          "pais": "USA",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "30.08.25",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Ganó",
+          "torneo": "USO",
+          "ciudad": "US Open",
+          "pais": "USA",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "28.08.25",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Ganó",
+          "torneo": "USO",
+          "ciudad": "US Open",
+          "pais": "USA",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "26.08.25",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "USO",
+          "ciudad": "US Open",
+          "pais": "USA",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "11.08.25",
+          "oponente": "N/A",
+          "resultado": "-",
+          "outcome": "Perdió",
+          "torneo": "CIN",
+          "ciudad": "Cincinnati",
+          "pais": "USA",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "09.08.25",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "CIN",
+          "ciudad": "Cincinnati",
+          "pais": "USA",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "04.08.25",
+          "oponente": "N/A",
+          "resultado": "0-1",
+          "outcome": "Perdió",
+          "torneo": "MON",
+          "ciudad": "Montreal",
+          "pais": "Canada",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "02.08.25",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Ganó",
+          "torneo": "MON",
+          "ciudad": "Montreal",
+          "pais": "Canada",
+          "superficie": "Dura"
+        }
+      ],
+      "historial_Andreeva_M": [
+        {
+          "fecha": "02.06.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "FO",
+          "ciudad": "French Open",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "31.05.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "FO",
+          "ciudad": "French Open",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "29.05.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "FO",
+          "ciudad": "French Open",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "27.05.26",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Ganó",
+          "torneo": "FO",
+          "ciudad": "French Open",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "24.05.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "FO",
+          "ciudad": "French Open",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "12.05.26",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Perdió",
+          "torneo": "ROM",
+          "ciudad": "Rome",
+          "pais": "Italy",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "11.05.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "ROM",
+          "ciudad": "Rome",
+          "pais": "Italy",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "09.05.26",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Ganó",
+          "torneo": "ROM",
+          "ciudad": "Rome",
+          "pais": "Italy",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "07.05.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "ROM",
+          "ciudad": "Rome",
+          "pais": "Italy",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "02.05.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Perdió",
+          "torneo": "MAD",
+          "ciudad": "Madrid",
+          "pais": "Spain",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "30.04.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "MAD",
+          "ciudad": "Madrid",
+          "pais": "Spain",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "28.04.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "MAD",
+          "ciudad": "Madrid",
+          "pais": "Spain",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "27.04.26",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Ganó",
+          "torneo": "MAD",
+          "ciudad": "Madrid",
+          "pais": "Spain",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "25.04.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "MAD",
+          "ciudad": "Madrid",
+          "pais": "Spain",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "23.04.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "MAD",
+          "ciudad": "Madrid",
+          "pais": "Spain",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "18.04.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Perdió",
+          "torneo": "STU",
+          "ciudad": "Stuttgart",
+          "pais": "Germany",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "17.04.26",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Ganó",
+          "torneo": "STU",
+          "ciudad": "Stuttgart",
+          "pais": "Germany",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "16.04.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "STU",
+          "ciudad": "Stuttgart",
+          "pais": "Germany",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "15.04.26",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Ganó",
+          "torneo": "STU",
+          "ciudad": "Stuttgart",
+          "pais": "Germany",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "12.04.26",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Ganó",
+          "torneo": "LIN",
+          "ciudad": "Linz",
+          "pais": "Austria",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "11.04.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "LIN",
+          "ciudad": "Linz",
+          "pais": "Austria",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "10.04.26",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Ganó",
+          "torneo": "LIN",
+          "ciudad": "Linz",
+          "pais": "Austria",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "08.04.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "LIN",
+          "ciudad": "Linz",
+          "pais": "Austria",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "23.03.26",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Perdió",
+          "torneo": "MIA",
+          "ciudad": "Miami",
+          "pais": "USA",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "21.03.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "MIA",
+          "ciudad": "Miami",
+          "pais": "USA",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "19.03.26",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Ganó",
+          "torneo": "MIA",
+          "ciudad": "Miami",
+          "pais": "USA",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "09.03.26",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Perdió",
+          "torneo": "IND",
+          "ciudad": "Indian Wells",
+          "pais": "USA",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "07.03.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "IND",
+          "ciudad": "Indian Wells",
+          "pais": "USA",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "19.02.26",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Perdió",
+          "torneo": "DUB",
+          "ciudad": "Dubai",
+          "pais": "United Arab Emirates",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "18.02.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "DUB",
+          "ciudad": "Dubai",
+          "pais": "United Arab Emirates",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "17.02.26",
+          "oponente": "N/A",
+          "resultado": "-",
+          "outcome": "Ganó",
+          "torneo": "DUB",
+          "ciudad": "Dubai",
+          "pais": "United Arab Emirates",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "11.02.26",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Perdió",
+          "torneo": "DOH",
+          "ciudad": "Doha",
+          "pais": "Qatar",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "09.02.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "DOH",
+          "ciudad": "Doha",
+          "pais": "Qatar",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "25.01.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Perdió",
+          "torneo": "AO",
+          "ciudad": "Australian Open",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "23.01.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "AO",
+          "ciudad": "Australian Open",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "21.01.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "AO",
+          "ciudad": "Australian Open",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "19.01.26",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Ganó",
+          "torneo": "AO",
+          "ciudad": "Australian Open",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "16.01.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "ADE",
+          "ciudad": "Adelaide",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "15.01.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "ADE",
+          "ciudad": "Adelaide",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "15.01.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "ADE",
+          "ciudad": "Adelaide",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "13.01.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "ADE",
+          "ciudad": "Adelaide",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "09.01.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Perdió",
+          "torneo": "BRI",
+          "ciudad": "Brisbane",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "08.01.26",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Ganó",
+          "torneo": "BRI",
+          "ciudad": "Brisbane",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "07.01.26",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Ganó",
+          "torneo": "BRI",
+          "ciudad": "Brisbane",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "28.12.25",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "OM",
+          "ciudad": "Others matches",
+          "pais": "World",
+          "superficie": "N/A"
+        }
+      ],
+      "enfrentamientos_directos": [
+        {
+          "fecha": "02.05.26",
+          "jugador1": "N/A",
+          "jugador2": "N/A",
+          "resultado": "0-2",
+          "ganador": "N/A",
+          "torneo": "MAD",
+          "ciudad": "Madrid",
+          "pais": "Spain",
+          "superficie": "Arcilla",
+          "ganador_sets": "N/A"
+        },
+        {
+          "fecha": "09.01.26",
+          "jugador1": "N/A",
+          "jugador2": "N/A",
+          "resultado": "0-2",
+          "ganador": "N/A",
+          "torneo": "BRI",
+          "ciudad": "Brisbane",
+          "pais": "Australia",
+          "superficie": "Dura",
+          "ganador_sets": "N/A"
+        }
+      ],
+      "estadisticas": {
+        "partidos_Kostyuk_M": 45,
+        "partidos_Andreeva_M": 45,
+        "enfrentamientos_totales": 2
+      },
+      "ranking_analysis": {
+        "Kostyuk_M_ranking": 14,
+        "Andreeva_M_ranking": 8,
+        "common_opponents_count": 1,
+        "p1_rivalry_score": 0,
+        "p2_rivalry_score": 5.1692,
+        "prediction": {
+          "favored_player": "Andreeva M.",
+          "confidence": 51.7,
+          "reasoning": [
+            "LOG_ELO_RATINGS: Kostyuk M.=1716, Andreeva M.=1704",
+            "LOG_WEIGHTS_STRATEGY: 'grand_slam' -> {'surface_specialization': 0.15, 'form_recent': 0.12, 'common_opponents': 0.22, 'h2h_direct': 0.18, 'ranking_momentum': 0.15, 'elo_rating': 0.13, 'home_advantage': 0.05, 'strength_of_schedule': 0.0}",
+            "LOG_SHRINKAGE: key=clay_grand_slam n=31 factor=0.608 weights={'surface_specialization': 0.15, 'form_recent': 0.1435, 'common_opponents': 0.1925, 'h2h_direct': 0.1486, 'ranking_momentum': 0.1696, 'elo_rating': 0.1261, 'home_advantage': 0.05, 'strength_of_schedule': 0.0196}",
+            "LOG_DENSITY: n_common=1 n_paths=1 density=0.3292 co_w: 0.1925→0.0634 form_w→0.2726",
+            "LOG_WEIGHTS_SURFACE_CLAY: common_opp→0.14 ranking_mom→0.09 (Erdős+clay, Nodo-14)",
+            "P1_LOG_SURF: Puntuación de Calidad en Arcilla: 284.4 (Base: 910.0, Partidos: 16, Tasa Vic: 100.0%)",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +50.0 pts",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +50.0 pts",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +50.0 pts",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +50.0 pts",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +50.0 pts",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Puntuación de Calidad en Arcilla: 230.6 (Base: 1135.0, Partidos: 23, Tasa Vic: 87.0%)",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +50.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Derrota competitiva vs Rank 6 (N/A) en Arcilla -> +5.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +50.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +50.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +50.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +50.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +50.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +50.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P1_LOG_MOM: 🔥 Racha de 17 (con 17 vs Top 50) -> +50%",
+            "P1_LOG_MOM: ⚡ Racha de 17 (con 17 vs Top 30) -> +30%",
+            "P1_LOG_MOM: 🚀 Momentum reciente 100% en últimos 10 partidos (+20%)",
+            "P1_LOG_MOM: 🏆 18 victorias recientes vs Top 20 (+15%)",
+            "P1_LOG_MOM: ⚠️ Multiplicador de racha limitado a x1.5 (calculado: 2.69)",
+            "P2_LOG_MOM: 🔥 Racha de 5 (con 5 vs Top 50) -> +50%",
+            "P2_LOG_MOM: ⚡ Racha de 5 (con 5 vs Top 30) -> +30%",
+            "P2_LOG_MOM: 🚀 Momentum reciente 80% en últimos 10 partidos (+20%)",
+            "P2_LOG_MOM: 🏆 17 victorias recientes vs Top 20 (+15%)",
+            "P2_LOG_MOM: ⚠️ Multiplicador de racha limitado a x1.5 (calculado: 2.69)",
+            "P1_LOG_DIV: 🏆 Calidad Historial: >60% victorias vs Top 30 (75.6%) -> x1.5",
+            "P1_LOG_DIV: 🌍 Diversidad (Enfrentados): 1 Top 50 -> +1.2%",
+            "P1_LOG_DIV: 💪 Diversidad (Vencidos): 1 Top 30 -> +4.0%",
+            "P2_LOG_DIV: 🏆 Calidad Historial: >60% victorias vs Top 30 (80.0%) -> x1.5",
+            "P2_LOG_DIV: 🌍 Diversidad (Enfrentados): 1 Top 50 -> +1.2%",
+            "P2_LOG_DIV: 💪 Diversidad (Vencidos): 1 Top 30 -> +4.0%",
+            "P1_LOG_SoS: 📊 Puntuación total de 'Strength of Schedule': 2400.0",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 📊 Puntuación total de 'Strength of Schedule': 2475.0",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "LOG_RANKING_P1: Base(2507): 156.54, Momentum(110): 70.64, Potencial(1870): 75.34, Presión(-110): 23.55",
+            "LOG_RANKING_P2: Base(3881): 165.28, Momentum(110): 70.64, Potencial(1870): 75.34, Presión(-110): 23.55",
+            "LOG_MARKOV_P1: estado=HOT momentum=0.2 factor=1.0 wr_rec=1.0 cp=5 immunity=1.0 h2h_wr=0.5",
+            "LOG_MARKOV_P2: estado=HOT momentum=-0.1 factor=1.0 wr_rec=0.8 cp=None immunity=1.0 h2h_wr=0.5",
+            "LOG_RAW_SCORES_P1: {'home_advantage': 0, 'surface_specialization': 284.38, 'ranking_momentum': 326.08, 'form_recent': 300.0, 'common_opponents': 0.0, 'h2h_direct': 0.0, 'elo_rating': 216, 'strength_of_schedule': 200}",
+            "LOG_RAW_SCORES_P2: {'home_advantage': 0, 'surface_specialization': 230.65, 'ranking_momentum': 334.82, 'form_recent': 300.0, 'common_opponents': 7.75, 'h2h_direct': 0.0, 'elo_rating': 204, 'strength_of_schedule': 200}",
+            "LOG_NORM_SCORES_P1: {'home_advantage': 0.0, 'surface_specialization': 5.65, 'ranking_momentum': 5.79, 'form_recent': 5.71, 'common_opponents': 0.0, 'h2h_direct': 0.0, 'elo_rating': 5.38, 'strength_of_schedule': 5.3}",
+            "LOG_NORM_SCORES_P2: {'home_advantage': 0.0, 'surface_specialization': 5.45, 'ranking_momentum': 5.82, 'form_recent': 5.71, 'common_opponents': 2.17, 'h2h_direct': 0.0, 'elo_rating': 5.32, 'strength_of_schedule': 5.3}"
+          ],
+          "scores": {
+            "p1_final_weight": 3.71,
+            "p2_final_weight": 3.97,
+            "score_difference": -0.27
+          },
+          "score_breakdown": {
+            "player1": {
+              "surface_specialization": {
+                "raw_score": "284.4",
+                "normalized_score": "5.65",
+                "weight": "15%",
+                "weighted_score": "0.85",
+                "contribution": "22.9%"
+              },
+              "form_recent": {
+                "raw_score": "300.0",
+                "normalized_score": "5.71",
+                "weight": "27%",
+                "weighted_score": "1.56",
+                "contribution": "42.0%"
+              },
+              "common_opponents": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "14%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "h2h_direct": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "15%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "ranking_momentum": {
+                "raw_score": "326.1",
+                "normalized_score": "5.79",
+                "weight": "9%",
+                "weighted_score": "0.52",
+                "contribution": "14.1%"
+              },
+              "elo_rating": {
+                "raw_score": "216.0",
+                "normalized_score": "5.38",
+                "weight": "13%",
+                "weighted_score": "0.68",
+                "contribution": "18.3%"
+              },
+              "home_advantage": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "5%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "strength_of_schedule": {
+                "raw_score": "200.0",
+                "normalized_score": "5.30",
+                "weight": "2%",
+                "weighted_score": "0.10",
+                "contribution": "2.8%"
+              },
+              "Penalizacion_Inactividad": "0.00 pts",
+              "Puntaje_Final": "3.71"
+            },
+            "player2": {
+              "surface_specialization": {
+                "raw_score": "230.6",
+                "normalized_score": "5.45",
+                "weight": "15%",
+                "weighted_score": "0.82",
+                "contribution": "20.5%"
+              },
+              "form_recent": {
+                "raw_score": "300.0",
+                "normalized_score": "5.71",
+                "weight": "27%",
+                "weighted_score": "1.56",
+                "contribution": "39.1%"
+              },
+              "common_opponents": {
+                "raw_score": "7.8",
+                "normalized_score": "2.17",
+                "weight": "14%",
+                "weighted_score": "0.30",
+                "contribution": "7.6%"
+              },
+              "h2h_direct": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "15%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "ranking_momentum": {
+                "raw_score": "334.8",
+                "normalized_score": "5.82",
+                "weight": "9%",
+                "weighted_score": "0.52",
+                "contribution": "13.2%"
+              },
+              "elo_rating": {
+                "raw_score": "204.0",
+                "normalized_score": "5.32",
+                "weight": "13%",
+                "weighted_score": "0.67",
+                "contribution": "16.9%"
+              },
+              "home_advantage": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "5%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "strength_of_schedule": {
+                "raw_score": "200.0",
+                "normalized_score": "5.30",
+                "weight": "2%",
+                "weighted_score": "0.10",
+                "contribution": "2.6%"
+              },
+              "Penalizacion_Inactividad": "0.00 pts",
+              "Puntaje_Final": "3.97"
+            }
+          },
+          "weights_used": {
+            "surface_specialization": 0.15,
+            "form_recent": 0.2726,
+            "common_opponents": 0.14,
+            "h2h_direct": 0.1486,
+            "ranking_momentum": 0.09,
+            "elo_rating": 0.1261,
+            "home_advantage": 0.05,
+            "strength_of_schedule": 0.0196
+          },
+          "markov_analysis": {
+            "jugador1": {
+              "estado_actual": "HOT",
+              "momentum": 0.2,
+              "change_point": 5,
+              "confianza": 0.8,
+              "win_rate_reciente": 1.0,
+              "win_rate_anterior": 0.8,
+              "n_partidos": 20
+            },
+            "jugador2": {
+              "estado_actual": "HOT",
+              "momentum": -0.1,
+              "change_point": null,
+              "confianza": 0.2,
+              "win_rate_reciente": 0.8,
+              "win_rate_anterior": 0.9,
+              "n_partidos": 20
+            },
+            "factor_markov": 1.0,
+            "h2h_immunity_p1": {
+              "h2h_win_rate": 0.5,
+              "immunity_factor": 1.0,
+              "n_h2h": 2
+            },
+            "h2h_immunity_p2": {
+              "h2h_win_rate": 0.5,
+              "immunity_factor": 1.0,
+              "n_h2h": 2
+            }
+          },
+          "tardio_analysis": {
+            "jugador1": null,
+            "jugador2": null,
+            "factor_tardio": 1.0
+          }
+        },
+        "Kostyuk_M_metrics": {
+          "pts": 2507,
+          "prox_pts": 2617,
+          "pts_max": 4377,
+          "defense_points": 0,
+          "already_secured": 110,
+          "improvement_potential": 1870,
+          "pressure_index": -110
+        },
+        "Andreeva_M_metrics": {
+          "pts": 3881,
+          "prox_pts": 3991,
+          "pts_max": 5751,
+          "defense_points": 0,
+          "already_secured": 110,
+          "improvement_potential": 1870,
+          "pressure_index": -110
+        },
+        "Kostyuk_M_elo": 1716,
+        "Andreeva_M_elo": 1704
+      },
+      "form_analysis": {
+        "Kostyuk_M_form": {
+          "player_name": "Kostyuk M.",
+          "recent_matches_count": 20,
+          "wins": 18,
+          "losses": 2,
+          "win_percentage": 90.0,
+          "current_streak_count": 17,
+          "current_streak_type": "victorias",
+          "form_status": "Excelente",
+          "last_match_date": "02.06.26"
+        },
+        "Andreeva_M_form": {
+          "player_name": "Andreeva M.",
+          "recent_matches_count": 20,
+          "wins": 17,
+          "losses": 3,
+          "win_percentage": 85.0,
+          "current_streak_count": 5,
+          "current_streak_type": "victorias",
+          "form_status": "Excelente",
+          "last_match_date": "02.06.26"
+        }
+      },
+      "surface_analysis": {
+        "Kostyuk_M_surface_stats": {
+          "Dura": {
+            "wins": 15,
+            "losses": 11,
+            "matches": 26,
+            "win_rate": 57.7
+          },
+          "Arcilla": {
+            "wins": 16,
+            "losses": 0,
+            "matches": 16,
+            "win_rate": 100.0
+          },
+          "Hierba": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "Indoor": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "Desconocida": {
+            "wins": 3,
+            "losses": 0,
+            "matches": 3,
+            "win_rate": 100.0
+          }
+        },
+        "Andreeva_M_surface_stats": {
+          "Dura": {
+            "wins": 15,
+            "losses": 6,
+            "matches": 21,
+            "win_rate": 71.4
+          },
+          "Arcilla": {
+            "wins": 20,
+            "losses": 3,
+            "matches": 23,
+            "win_rate": 87.0
+          },
+          "Hierba": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "Indoor": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "Desconocida": {
+            "wins": 1,
+            "losses": 0,
+            "matches": 1,
+            "win_rate": 100.0
+          }
+        }
+      },
+      "location_analysis": {
+        "Kostyuk_M_location_stats": {
+          "home_advantage": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "regional_comfort": {
+            "Europa": {
+              "wins": 16,
+              "losses": 0,
+              "matches": 16,
+              "win_rate": 100.0
+            },
+            "Otros": {
+              "wins": 5,
+              "losses": 2,
+              "matches": 7,
+              "win_rate": 71.4
+            },
+            "Norteamérica": {
+              "wins": 7,
+              "losses": 5,
+              "matches": 12,
+              "win_rate": 58.3
+            },
+            "Oceanía": {
+              "wins": 4,
+              "losses": 2,
+              "matches": 6,
+              "win_rate": 66.7
+            },
+            "Asia": {
+              "wins": 2,
+              "losses": 2,
+              "matches": 4,
+              "win_rate": 50.0
+            }
+          }
+        },
+        "Andreeva_M_location_stats": {
+          "home_advantage": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "regional_comfort": {
+            "Europa": {
+              "wins": 20,
+              "losses": 3,
+              "matches": 23,
+              "win_rate": 87.0
+            },
+            "Norteamérica": {
+              "wins": 3,
+              "losses": 2,
+              "matches": 5,
+              "win_rate": 60.0
+            },
+            "Otros": {
+              "wins": 4,
+              "losses": 2,
+              "matches": 6,
+              "win_rate": 66.7
+            },
+            "Oceanía": {
+              "wins": 9,
+              "losses": 2,
+              "matches": 11,
+              "win_rate": 81.8
+            }
+          }
+        }
+      },
+      "common_opponents_detailed": [
+        {
+          "opponent_name": "N/A",
+          "opponent_ranking": 6,
+          "advantage_for": "Andreeva M.",
+          "reason": "Ambos vencieron a N/A (rank 6), pero Andreeva M. fue más contundente (Factor: 1.2 vs 1.0)",
+          "weight": 5.1,
+          "player1_result": {
+            "outcome": "Perdió",
+            "score": "1-2"
+          },
+          "player2_result": {
+            "outcome": "Ganó",
+            "score": "2-0"
+          }
+        }
+      ]
+    },
+    {
+      "match_number": 2,
+      "jugador1": "Shnaider D.",
+      "jugador1_nacionalidad": "Mundial",
+      "jugador2": "Chwalinska M.",
+      "jugador2_nacionalidad": "Polonia",
+      "torneo_nombre": "French Open (France)",
+      "tipo_cancha": "clay",
+      "torneo_completo": "French Open (France)",
+      "cuota1": 1.5,
+      "cuota2": 2.55,
+      "match_url": "https://www.flashscore.com/match/tennis/chwalinska-maja-OIxOD54s/shnaider-diana-028BdVOj/?mid=6J1JWr7N",
+      "historial_Shnaider_D": [
+        {
+          "fecha": "03.06.26",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Ganó",
+          "torneo": "FO",
+          "ciudad": "French Open",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "01.06.26",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Ganó",
+          "torneo": "FO",
+          "ciudad": "French Open",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "30.05.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "FO",
+          "ciudad": "French Open",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "28.05.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "FO",
+          "ciudad": "French Open",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "25.05.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "FO",
+          "ciudad": "French Open",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "10.05.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Perdió",
+          "torneo": "ROM",
+          "ciudad": "Rome",
+          "pais": "Italy",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "08.05.26",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Ganó",
+          "torneo": "ROM",
+          "ciudad": "Rome",
+          "pais": "Italy",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "25.04.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Perdió",
+          "torneo": "MAD",
+          "ciudad": "Madrid",
+          "pais": "Spain",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "23.04.26",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Ganó",
+          "torneo": "MAD",
+          "ciudad": "Madrid",
+          "pais": "Spain",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "16.04.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Perdió",
+          "torneo": "STU",
+          "ciudad": "Stuttgart",
+          "pais": "Germany",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "14.04.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "STU",
+          "ciudad": "Stuttgart",
+          "pais": "Germany",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "03.04.26",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Perdió",
+          "torneo": "CHA",
+          "ciudad": "Charleston",
+          "pais": "USA",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "02.04.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "CHA",
+          "ciudad": "Charleston",
+          "pais": "USA",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "31.03.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "CHA",
+          "ciudad": "Charleston",
+          "pais": "USA",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "21.03.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Perdió",
+          "torneo": "MIA",
+          "ciudad": "Miami",
+          "pais": "USA",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "20.03.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "MIA",
+          "ciudad": "Miami",
+          "pais": "USA",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "06.03.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Perdió",
+          "torneo": "IND",
+          "ciudad": "Indian Wells",
+          "pais": "USA",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "17.02.26",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Perdió",
+          "torneo": "DUB",
+          "ciudad": "Dubai",
+          "pais": "United Arab Emirates",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "15.02.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "DUB",
+          "ciudad": "Dubai",
+          "pais": "United Arab Emirates",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "08.02.26",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Perdió",
+          "torneo": "DOH",
+          "ciudad": "Doha",
+          "pais": "Qatar",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "23.01.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Perdió",
+          "torneo": "AO",
+          "ciudad": "Australian Open",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "20.01.26",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Ganó",
+          "torneo": "AO",
+          "ciudad": "Australian Open",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "19.01.26",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Ganó",
+          "torneo": "AO",
+          "ciudad": "Australian Open",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "15.01.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Perdió",
+          "torneo": "ADE",
+          "ciudad": "Adelaide",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "14.01.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "ADE",
+          "ciudad": "Adelaide",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "13.01.26",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Ganó",
+          "torneo": "ADE",
+          "ciudad": "Adelaide",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "12.01.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "ADE",
+          "ciudad": "Adelaide",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "08.01.26",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Perdió",
+          "torneo": "BRI",
+          "ciudad": "Brisbane",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "05.01.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "BRI",
+          "ciudad": "Brisbane",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "22.10.25",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Perdió",
+          "torneo": "TOK",
+          "ciudad": "Tokyo",
+          "pais": "Japan",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "20.10.25",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "TOK",
+          "ciudad": "Tokyo",
+          "pais": "Japan",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "18.10.25",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Perdió",
+          "torneo": "NIN",
+          "ciudad": "Ningbo",
+          "pais": "China",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "17.10.25",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Ganó",
+          "torneo": "NIN",
+          "ciudad": "Ningbo",
+          "pais": "China",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "15.10.25",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Ganó",
+          "torneo": "NIN",
+          "ciudad": "Ningbo",
+          "pais": "China",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "13.10.25",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "NIN",
+          "ciudad": "Ningbo",
+          "pais": "China",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "06.10.25",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Perdió",
+          "torneo": "WUH",
+          "ciudad": "Wuhan",
+          "pais": "China",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "27.09.25",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Perdió",
+          "torneo": "BEI",
+          "ciudad": "Beijing",
+          "pais": "China",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "18.09.25",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Perdió",
+          "torneo": "SEO",
+          "ciudad": "Seoul",
+          "pais": "South Korea",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "17.09.25",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Ganó",
+          "torneo": "SEO",
+          "ciudad": "Seoul",
+          "pais": "South Korea",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "26.08.25",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Perdió",
+          "torneo": "USO",
+          "ciudad": "US Open",
+          "pais": "USA",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "23.08.25",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Ganó",
+          "torneo": "MON",
+          "ciudad": "Monterrey",
+          "pais": "Mexico",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "22.08.25",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "MON",
+          "ciudad": "Monterrey",
+          "pais": "Mexico",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "21.08.25",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Ganó",
+          "torneo": "MON",
+          "ciudad": "Monterrey",
+          "pais": "Mexico",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "20.08.25",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "MON",
+          "ciudad": "Monterrey",
+          "pais": "Mexico",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "09.08.25",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Perdió",
+          "torneo": "CIN",
+          "ciudad": "Cincinnati",
+          "pais": "USA",
+          "superficie": "Dura"
+        }
+      ],
+      "historial_Chwalinska_M": [
+        {
+          "fecha": "03.06.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "FO",
+          "ciudad": "French Open",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "01.06.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "FO",
+          "ciudad": "French Open",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "30.05.26",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Ganó",
+          "torneo": "FO",
+          "ciudad": "French Open",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "28.05.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "FO",
+          "ciudad": "French Open",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "25.05.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "FO",
+          "ciudad": "French Open",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "21.05.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "FO",
+          "ciudad": "French Open",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "20.05.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "FO",
+          "ciudad": "French Open",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "18.05.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "FO",
+          "ciudad": "French Open",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "11.05.26",
+          "oponente": "N/A",
+          "resultado": "1-0",
+          "outcome": "Perdió",
+          "torneo": "PAR",
+          "ciudad": "Parma",
+          "pais": "Italy",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "08.05.26",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Perdió",
+          "torneo": "SAI",
+          "ciudad": "W75 Saint-Gaudens",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "07.05.26",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Ganó",
+          "torneo": "SAI",
+          "ciudad": "W75 Saint-Gaudens",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "06.05.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "SAI",
+          "ciudad": "W75 Saint-Gaudens",
+          "pais": "France",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "19.04.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "OEI",
+          "ciudad": "Oeiras",
+          "pais": "Portugal",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "18.04.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "OEI",
+          "ciudad": "Oeiras",
+          "pais": "Portugal",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "17.04.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "OEI",
+          "ciudad": "Oeiras",
+          "pais": "Portugal",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "16.04.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "OEI",
+          "ciudad": "Oeiras",
+          "pais": "Portugal",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "14.04.26",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Ganó",
+          "torneo": "OEI",
+          "ciudad": "Oeiras",
+          "pais": "Portugal",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "23.03.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Perdió",
+          "torneo": "DUB",
+          "ciudad": "Dubrovnik",
+          "pais": "Croatia",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "12.03.26",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Perdió",
+          "torneo": "ANT",
+          "ciudad": "Antalya 3",
+          "pais": "Turkey",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "11.03.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "ANT",
+          "ciudad": "Antalya 3",
+          "pais": "Turkey",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "06.03.26",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Perdió",
+          "torneo": "ANT",
+          "ciudad": "Antalya 2",
+          "pais": "Turkey",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "05.03.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "ANT",
+          "ciudad": "Antalya 2",
+          "pais": "Turkey",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "03.03.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "ANT",
+          "ciudad": "Antalya 2",
+          "pais": "Turkey",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "14.02.26",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Perdió",
+          "torneo": "OEI",
+          "ciudad": "Oeiras 2",
+          "pais": "Portugal",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "13.02.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "OEI",
+          "ciudad": "Oeiras 2",
+          "pais": "Portugal",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "11.02.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "OEI",
+          "ciudad": "Oeiras 2",
+          "pais": "Portugal",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "10.02.26",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Ganó",
+          "torneo": "OEI",
+          "ciudad": "Oeiras 2",
+          "pais": "Portugal",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "05.02.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Perdió",
+          "torneo": "CLU",
+          "ciudad": "Cluj-Napoca",
+          "pais": "Romania",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "04.02.26",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Ganó",
+          "torneo": "CLU",
+          "ciudad": "Cluj-Napoca",
+          "pais": "Romania",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "02.02.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "CLU",
+          "ciudad": "Cluj-Napoca",
+          "pais": "Romania",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "01.02.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "CLU",
+          "ciudad": "Cluj-Napoca",
+          "pais": "Romania",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "31.01.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "CLU",
+          "ciudad": "Cluj-Napoca",
+          "pais": "Romania",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "14.01.26",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Perdió",
+          "torneo": "AO",
+          "ciudad": "Australian Open",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "13.01.26",
+          "oponente": "N/A",
+          "resultado": "1-2",
+          "outcome": "Ganó",
+          "torneo": "AO",
+          "ciudad": "Australian Open",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "11.01.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "AO",
+          "ciudad": "Australian Open",
+          "pais": "Australia",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "03.01.26",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Perdió",
+          "torneo": "AUC",
+          "ciudad": "Auckland",
+          "pais": "New Zealand",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "02.01.26",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "AUC",
+          "ciudad": "Auckland",
+          "pais": "New Zealand",
+          "superficie": "Dura"
+        },
+        {
+          "fecha": "03.12.25",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Perdió",
+          "torneo": "QUI",
+          "ciudad": "Quito",
+          "pais": "Ecuador",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "02.12.25",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "QUI",
+          "ciudad": "Quito",
+          "pais": "Ecuador",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "26.11.25",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Perdió",
+          "torneo": "BUE",
+          "ciudad": "Buenos Aires",
+          "pais": "Argentina",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "24.11.25",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Ganó",
+          "torneo": "BUE",
+          "ciudad": "Buenos Aires",
+          "pais": "Argentina",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "21.11.25",
+          "oponente": "N/A",
+          "resultado": "0-2",
+          "outcome": "Perdió",
+          "torneo": "COL",
+          "ciudad": "Colina",
+          "pais": "Chile",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "19.11.25",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Ganó",
+          "torneo": "COL",
+          "ciudad": "Colina",
+          "pais": "Chile",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "18.11.25",
+          "oponente": "N/A",
+          "resultado": "2-1",
+          "outcome": "Ganó",
+          "torneo": "COL",
+          "ciudad": "Colina",
+          "pais": "Chile",
+          "superficie": "Arcilla"
+        },
+        {
+          "fecha": "04.10.25",
+          "oponente": "N/A",
+          "resultado": "2-0",
+          "outcome": "Perdió",
+          "torneo": "REN",
+          "ciudad": "Rende",
+          "pais": "Italy",
+          "superficie": "Arcilla"
+        }
+      ],
+      "enfrentamientos_directos": [
+        {
+          "fecha": "30.04.22",
+          "jugador1": "N/A",
+          "jugador2": "N/A",
+          "resultado": "2-0",
+          "ganador": "N/A",
+          "torneo": "IST",
+          "ciudad": "W60 Istanbul",
+          "pais": "Turkey",
+          "superficie": "Arcilla",
+          "ganador_sets": "N/A"
+        }
+      ],
+      "estadisticas": {
+        "partidos_Shnaider_D": 45,
+        "partidos_Chwalinska_M": 45,
+        "enfrentamientos_totales": 1
+      },
+      "ranking_analysis": {
+        "Shnaider_D_ranking": 21,
+        "Chwalinska_M_ranking": 89,
+        "common_opponents_count": 1,
+        "p1_rivalry_score": 0,
+        "p2_rivalry_score": 5.1537,
+        "prediction": {
+          "favored_player": "Chwalinska M.",
+          "confidence": 52.7,
+          "reasoning": [
+            "LOG_ELO_RATINGS: Shnaider D.=1584, Chwalinska M.=1673",
+            "LOG_WEIGHTS_STRATEGY: 'grand_slam' -> {'surface_specialization': 0.15, 'form_recent': 0.12, 'common_opponents': 0.22, 'h2h_direct': 0.18, 'ranking_momentum': 0.15, 'elo_rating': 0.13, 'home_advantage': 0.05, 'strength_of_schedule': 0.0}",
+            "LOG_SHRINKAGE: key=clay_grand_slam n=31 factor=0.608 weights={'surface_specialization': 0.15, 'form_recent': 0.1435, 'common_opponents': 0.1925, 'h2h_direct': 0.1486, 'ranking_momentum': 0.1696, 'elo_rating': 0.1261, 'home_advantage': 0.05, 'strength_of_schedule': 0.0196}",
+            "LOG_DENSITY: n_common=1 n_paths=1 density=0.3292 co_w: 0.1925→0.0634 form_w→0.2726",
+            "LOG_WEIGHTS_SURFACE_CLAY: common_opp→0.14 ranking_mom→0.09 (Erdős+clay, Nodo-14)",
+            "P1_LOG_SURF: Puntuación de Calidad en Arcilla: 173.0 (Base: 565.0, Partidos: 14, Tasa Vic: 71.4%)",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +50.0 pts",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +50.0 pts",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +50.0 pts",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +50.0 pts",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P1_LOG_SURF: Derrota competitiva vs Rank 6 (N/A) en Arcilla -> +5.0 pts",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P1_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Puntuación de Calidad en Arcilla: 179.2 (Base: 1300.0, Partidos: 31, Tasa Vic: 71.0%)",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +50.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Derrota competitiva vs Rank 6 (N/A) en Arcilla -> +5.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +50.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +50.0 pts",
+            "P2_LOG_SURF: Derrota competitiva vs Rank 6 (N/A) en Arcilla -> +5.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Derrota competitiva vs Rank 6 (N/A) en Arcilla -> +5.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Derrota competitiva vs Rank 6 (N/A) en Arcilla -> +5.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +60.0 pts",
+            "P2_LOG_SURF: Victoria vs Rank 6 (N/A) en Arcilla -> +50.0 pts",
+            "P1_LOG_MOM: 🔥 Racha de 5 (con 5 vs Top 50) -> +50%",
+            "P1_LOG_MOM: ⚡ Racha de 5 (con 5 vs Top 30) -> +30%",
+            "P1_LOG_MOM: 🏆 12 victorias recientes vs Top 20 (+15%)",
+            "P1_LOG_MOM: ⚠️ Multiplicador de racha limitado a x1.5 (calculado: 2.24)",
+            "P2_LOG_MOM: 🔥 Racha de 8 (con 8 vs Top 50) -> +50%",
+            "P2_LOG_MOM: ⚡ Racha de 8 (con 8 vs Top 30) -> +30%",
+            "P2_LOG_MOM: 🚀 Momentum reciente 80% en últimos 10 partidos (+20%)",
+            "P2_LOG_MOM: 🏆 16 victorias recientes vs Top 20 (+15%)",
+            "P2_LOG_MOM: ⚠️ Multiplicador de racha limitado a x1.5 (calculado: 2.69)",
+            "P1_LOG_DIV: 🏆 Calidad Historial: <20% victorias vs Top 30 (60.0%) -> x1.0",
+            "P1_LOG_DIV: 🌍 Diversidad (Enfrentados): 1 Top 50 -> +1.2%",
+            "P1_LOG_DIV: 💪 Diversidad (Vencidos): 1 Top 30 -> +4.0%",
+            "P2_LOG_DIV: 🏆 Calidad Historial: >60% victorias vs Top 30 (71.1%) -> x1.5",
+            "P2_LOG_DIV: 🌍 Diversidad (Enfrentados): 1 Top 50 -> +1.2%",
+            "P2_LOG_DIV: 💪 Diversidad (Vencidos): 1 Top 30 -> +4.0%",
+            "P1_LOG_SoS: 📊 Puntuación total de 'Strength of Schedule': 2137.5",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P1_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P2_LOG_SoS: 📊 Puntuación total de 'Strength of Schedule': 2325.0",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P2_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P2_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 💪 Victoria vs Rank 6 (N/A) -> +62.5 pts",
+            "P2_LOG_SoS: 🛡️ Derrota vs Rank 6 (N/A) -> +25.0 pts",
+            "LOG_RANKING_P1: Base(1856): 150.53, Momentum(110): 70.64, Potencial(1870): 75.34, Presión(-110): 23.55",
+            "LOG_RANKING_P2: Base(840): 134.69, Momentum(110): 70.64, Potencial(1870): 75.34, Presión(-110): 23.55",
+            "LOG_MARKOV_P1: estado=HOT momentum=0.2 factor=1.0 wr_rec=0.7 cp=13 immunity=1.0 h2h_wr=0.5",
+            "LOG_MARKOV_P2: estado=HOT momentum=0.0 factor=1.0 wr_rec=0.8 cp=12 immunity=1.0 h2h_wr=0.5",
+            "LOG_RAW_SCORES_P1: {'home_advantage': 0, 'surface_specialization': 172.96, 'ranking_momentum': 320.07, 'form_recent': 292.5, 'common_opponents': 0.0, 'h2h_direct': 0.0, 'elo_rating': 84, 'strength_of_schedule': 200}",
+            "LOG_RAW_SCORES_P2: {'home_advantage': 0, 'surface_specialization': 179.24, 'ranking_momentum': 304.22, 'form_recent': 300.0, 'common_opponents': 7.73, 'h2h_direct': 0.0, 'elo_rating': 173, 'strength_of_schedule': 200}",
+            "LOG_NORM_SCORES_P1: {'home_advantage': 0.0, 'surface_specialization': 5.16, 'ranking_momentum': 5.77, 'form_recent': 5.68, 'common_opponents': 0.0, 'h2h_direct': 0.0, 'elo_rating': 4.44, 'strength_of_schedule': 5.3}",
+            "LOG_NORM_SCORES_P2: {'home_advantage': 0.0, 'surface_specialization': 5.19, 'ranking_momentum': 5.72, 'form_recent': 5.71, 'common_opponents': 2.17, 'h2h_direct': 0.0, 'elo_rating': 5.16, 'strength_of_schedule': 5.3}"
+          ],
+          "scores": {
+            "p1_final_weight": 3.51,
+            "p2_final_weight": 3.91,
+            "score_difference": -0.4
+          },
+          "score_breakdown": {
+            "player1": {
+              "surface_specialization": {
+                "raw_score": "173.0",
+                "normalized_score": "5.16",
+                "weight": "15%",
+                "weighted_score": "0.77",
+                "contribution": "22.1%"
+              },
+              "form_recent": {
+                "raw_score": "292.5",
+                "normalized_score": "5.68",
+                "weight": "27%",
+                "weighted_score": "1.55",
+                "contribution": "44.2%"
+              },
+              "common_opponents": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "14%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "h2h_direct": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "15%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "ranking_momentum": {
+                "raw_score": "320.1",
+                "normalized_score": "5.77",
+                "weight": "9%",
+                "weighted_score": "0.52",
+                "contribution": "14.8%"
+              },
+              "elo_rating": {
+                "raw_score": "84.0",
+                "normalized_score": "4.44",
+                "weight": "13%",
+                "weighted_score": "0.56",
+                "contribution": "16.0%"
+              },
+              "home_advantage": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "5%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "strength_of_schedule": {
+                "raw_score": "200.0",
+                "normalized_score": "5.30",
+                "weight": "2%",
+                "weighted_score": "0.10",
+                "contribution": "3.0%"
+              },
+              "Penalizacion_Inactividad": "0.00 pts",
+              "Puntaje_Final": "3.51"
+            },
+            "player2": {
+              "surface_specialization": {
+                "raw_score": "179.2",
+                "normalized_score": "5.19",
+                "weight": "15%",
+                "weighted_score": "0.78",
+                "contribution": "19.9%"
+              },
+              "form_recent": {
+                "raw_score": "300.0",
+                "normalized_score": "5.71",
+                "weight": "27%",
+                "weighted_score": "1.56",
+                "contribution": "39.8%"
+              },
+              "common_opponents": {
+                "raw_score": "7.7",
+                "normalized_score": "2.17",
+                "weight": "14%",
+                "weighted_score": "0.30",
+                "contribution": "7.8%"
+              },
+              "h2h_direct": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "15%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "ranking_momentum": {
+                "raw_score": "304.2",
+                "normalized_score": "5.72",
+                "weight": "9%",
+                "weighted_score": "0.51",
+                "contribution": "13.2%"
+              },
+              "elo_rating": {
+                "raw_score": "173.0",
+                "normalized_score": "5.16",
+                "weight": "13%",
+                "weighted_score": "0.65",
+                "contribution": "16.6%"
+              },
+              "home_advantage": {
+                "raw_score": "0.0",
+                "normalized_score": "0.00",
+                "weight": "5%",
+                "weighted_score": "0.00",
+                "contribution": "0.0%"
+              },
+              "strength_of_schedule": {
+                "raw_score": "200.0",
+                "normalized_score": "5.30",
+                "weight": "2%",
+                "weighted_score": "0.10",
+                "contribution": "2.7%"
+              },
+              "Penalizacion_Inactividad": "0.00 pts",
+              "Puntaje_Final": "3.91"
+            }
+          },
+          "weights_used": {
+            "surface_specialization": 0.15,
+            "form_recent": 0.2726,
+            "common_opponents": 0.14,
+            "h2h_direct": 0.1486,
+            "ranking_momentum": 0.09,
+            "elo_rating": 0.1261,
+            "home_advantage": 0.05,
+            "strength_of_schedule": 0.0196
+          },
+          "markov_analysis": {
+            "jugador1": {
+              "estado_actual": "HOT",
+              "momentum": 0.2,
+              "change_point": 13,
+              "confianza": 0.791,
+              "win_rate_reciente": 0.7,
+              "win_rate_anterior": 0.5,
+              "n_partidos": 20
+            },
+            "jugador2": {
+              "estado_actual": "HOT",
+              "momentum": 0.0,
+              "change_point": 12,
+              "confianza": 0.667,
+              "win_rate_reciente": 0.8,
+              "win_rate_anterior": 0.8,
+              "n_partidos": 20
+            },
+            "factor_markov": 1.0,
+            "h2h_immunity_p1": {
+              "h2h_win_rate": 0.5,
+              "immunity_factor": 1.0,
+              "n_h2h": 1
+            },
+            "h2h_immunity_p2": {
+              "h2h_win_rate": 0.5,
+              "immunity_factor": 1.0,
+              "n_h2h": 1
+            }
+          },
+          "tardio_analysis": {
+            "jugador1": null,
+            "jugador2": null,
+            "factor_tardio": 1.0
+          }
+        },
+        "Shnaider_D_metrics": {
+          "pts": 1856,
+          "prox_pts": 1966,
+          "pts_max": 3726,
+          "defense_points": 0,
+          "already_secured": 110,
+          "improvement_potential": 1870,
+          "pressure_index": -110
+        },
+        "Chwalinska_M_metrics": {
+          "pts": 840,
+          "prox_pts": 950,
+          "pts_max": 2710,
+          "defense_points": 0,
+          "already_secured": 110,
+          "improvement_potential": 1870,
+          "pressure_index": -110
+        },
+        "Shnaider_D_elo": 1584,
+        "Chwalinska_M_elo": 1673
+      },
+      "form_analysis": {
+        "Shnaider_D_form": {
+          "player_name": "Shnaider D.",
+          "recent_matches_count": 20,
+          "wins": 12,
+          "losses": 8,
+          "win_percentage": 60.0,
+          "current_streak_count": 5,
+          "current_streak_type": "victorias",
+          "form_status": "Buena",
+          "last_match_date": "03.06.26"
+        },
+        "Chwalinska_M_form": {
+          "player_name": "Chwalinska M.",
+          "recent_matches_count": 20,
+          "wins": 16,
+          "losses": 4,
+          "win_percentage": 80.0,
+          "current_streak_count": 8,
+          "current_streak_type": "victorias",
+          "form_status": "Excelente",
+          "last_match_date": "03.06.26"
+        }
+      },
+      "surface_analysis": {
+        "Shnaider_D_surface_stats": {
+          "Dura": {
+            "wins": 17,
+            "losses": 14,
+            "matches": 31,
+            "win_rate": 54.8
+          },
+          "Arcilla": {
+            "wins": 10,
+            "losses": 4,
+            "matches": 14,
+            "win_rate": 71.4
+          },
+          "Hierba": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "Indoor": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "Desconocida": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          }
+        },
+        "Chwalinska_M_surface_stats": {
+          "Dura": {
+            "wins": 10,
+            "losses": 4,
+            "matches": 14,
+            "win_rate": 71.4
+          },
+          "Arcilla": {
+            "wins": 22,
+            "losses": 9,
+            "matches": 31,
+            "win_rate": 71.0
+          },
+          "Hierba": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "Indoor": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "Desconocida": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          }
+        }
+      },
+      "location_analysis": {
+        "Shnaider_D_location_stats": {
+          "home_advantage": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "regional_comfort": {
+            "Europa": {
+              "wins": 8,
+              "losses": 3,
+              "matches": 11,
+              "win_rate": 72.7
+            },
+            "Norteamérica": {
+              "wins": 7,
+              "losses": 5,
+              "matches": 12,
+              "win_rate": 58.3
+            },
+            "Otros": {
+              "wins": 1,
+              "losses": 2,
+              "matches": 3,
+              "win_rate": 33.3
+            },
+            "Oceanía": {
+              "wins": 6,
+              "losses": 3,
+              "matches": 9,
+              "win_rate": 66.7
+            },
+            "Asia": {
+              "wins": 5,
+              "losses": 5,
+              "matches": 10,
+              "win_rate": 50.0
+            }
+          }
+        },
+        "Chwalinska_M_location_stats": {
+          "home_advantage": {
+            "wins": 0,
+            "losses": 0,
+            "matches": 0,
+            "win_rate": 0.0
+          },
+          "regional_comfort": {
+            "Europa": {
+              "wins": 22,
+              "losses": 6,
+              "matches": 28,
+              "win_rate": 78.6
+            },
+            "Otros": {
+              "wins": 3,
+              "losses": 2,
+              "matches": 5,
+              "win_rate": 60.0
+            },
+            "Oceanía": {
+              "wins": 3,
+              "losses": 2,
+              "matches": 5,
+              "win_rate": 60.0
+            },
+            "Sudamérica": {
+              "wins": 4,
+              "losses": 3,
+              "matches": 7,
+              "win_rate": 57.1
+            }
+          }
+        }
+      },
+      "common_opponents_detailed": [
+        {
+          "opponent_name": "N/A",
+          "opponent_ranking": 6,
+          "advantage_for": "Chwalinska M.",
+          "reason": "Ambos vencieron a N/A (rank 6), pero Chwalinska M. fue más contundente (Factor: 1.2 vs 1.0)",
+          "weight": 5.1,
+          "player1_result": {
+            "outcome": "Perdió",
+            "score": "1-2"
+          },
+          "player2_result": {
+            "outcome": "Perdió",
+            "score": "0-2"
+          }
+        }
+      ]
+    }
+  ],
+  "estadisticas_globales": {
+    "total_partidos": 2,
+    "jugadores_unicos": 4,
+    "total_historiales_extraidos": 180,
+    "total_enfrentamientos_directos": 3,
+    "rankings_encontrados": 4,
+    "predicciones_generadas": 2,
+    "oponentes_comunes_total": 2,
+    "analisis_rivalidad_exitosos": 2
+  }
+}

@@ -1,0 +1,309 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — DEPLOY ROLAND GARROS
+  2026-06-05 14:14  │  Bankroll: $125,000
+  Señales APOSTAR: 20  │  Watchlist: 5  │  Sin edge: 5
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 26 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.11 (grand_slam)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $50,000 (40% bankroll)
+
+  │  🎾 Mair L. vs Bronzetti L.
+  │     Apostar: Mair L.
+  │     Cuota 10.00  │  Edge 42.5%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 51.0% → stake $12,000  │  Retorno potencial $120,000
+  │     EV real +576.1%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Sherif M. vs Pedone G.
+  │     Apostar: Pedone G.
+  │     Cuota 5.50  │  Edge 32.4%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 45.0% → stake $12,000  │  Retorno potencial $66,000
+  │     EV real +271.8%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Wong C. vs Romano F.
+  │     Apostar: Romano F.
+  │     Cuota 4.00  │  Edge 28.4%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 43.8% → stake $12,000  │  Retorno potencial $48,000
+  │     EV real +170.4%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Sengul B. vs Karra T.
+  │     Apostar: Sengul B.
+  │     Cuota 1.53  │  Edge 10.0%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 34.8% → stake $2,000  │  Retorno potencial $3,060
+  │     EV real +3.4%  │  Zona: moderate_favorite  │  Sup: hard
+
+  │  🎾 Bartunkova N. vs Knutson G.
+  │     Apostar: Knutson G.
+  │     Cuota 3.10  │  Edge 19.0%  │  p_blend 0.635 (n_h2h=1)
+  │     Kelly-KL 32.6% → stake $12,000  │  Retorno potencial $37,200
+  │     EV real +96.9%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Daniel T. vs Dzumhur D.
+  │     Apostar: Daniel T.
+  │     Cuota 2.60  │  Edge 15.5%  │  p_blend 0.591 (n_h2h=5)
+  │     Kelly-KL 31.4% → stake $1,000  │  Retorno potencial $2,600
+  │     EV real +53.7%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Mujakic A. vs Mirarchi W.
+  │     Apostar: Mirarchi W.
+  │     Cuota 2.85  │  Edge 16.8%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 31.0% → stake $1,000  │  Retorno potencial $2,850
+  │     EV real +92.7%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 De Alba R. vs Azoidis D.
+  │     Apostar: De Alba R.
+  │     Cuota 2.90  │  Edge 17.4%  │  p_blend 0.637 (n_h2h=1)
+  │     Kelly-KL 30.2% → stake $1,000  │  Retorno potencial $2,900
+  │     EV real +84.7%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Monnet C. vs Prozorova T.
+  │     Apostar: Monnet C.
+  │     Cuota 2.90  │  Edge 15.9%  │  p_blend 0.633 (n_h2h=1)
+  │     Kelly-KL 29.0% → stake $1,000  │  Retorno potencial $2,900
+  │     EV real +83.6%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Shnaider D. vs Chwalinska M.
+  │     Apostar: Chwalinska M.
+  │     Cuota 2.55  │  Edge 13.3%  │  p_blend 0.638 (n_h2h=1)
+  │     Kelly-KL 27.3% → stake $1,000  │  Retorno potencial $2,550
+  │     EV real +62.8%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Rehberg M. H. vs Moeller M.
+  │     Apostar: Moeller M.
+  │     Cuota 2.50  │  Edge 11.9%  │  p_blend 0.637 (n_h2h=1)
+  │     Kelly-KL 24.5% → stake $1,000  │  Retorno potencial $2,500
+  │     EV real +59.2%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Makhlouf N. vs Rankin M.
+  │     Apostar: Makhlouf N.
+  │     Cuota 2.55  │  Edge 11.2%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 20.8% → stake $1,000  │  Retorno potencial $2,550
+  │     EV real +72.4%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Waltert S. vs Lazaro Garcia A.
+  │     Apostar: Lazaro Garcia A.
+  │     Cuota 2.35  │  Edge 7.8%  │  p_blend 0.607 (n_h2h=2)
+  │     Kelly-KL 16.9% → stake $1,000  │  Retorno potencial $2,350
+  │     EV real +42.7%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Dlimi Y. vs Dougaz A.
+  │     Apostar: Dlimi Y.
+  │     Cuota 2.22  │  Edge 7.8%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 16.5% → stake $1,000  │  Retorno potencial $2,220
+  │     EV real +50.1%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Arzhankin A. vs D'Agostino S.
+  │     Apostar: D'Agostino S.
+  │     Cuota 2.30  │  Edge 7.4%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 15.5% → stake $1,000  │  Retorno potencial $2,300
+  │     EV real +55.5%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Butvilas E. vs Ilagan A.
+  │     Apostar: Ilagan A.
+  │     Cuota 2.25  │  Edge 7.2%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 15.4% → stake $1,000  │  Retorno potencial $2,250
+  │     EV real +52.1%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Preston T. vs Dudeney A.
+  │     Apostar: Dudeney A.
+  │     Cuota 2.30  │  Edge 7.0%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 14.6% → stake $1,000  │  Retorno potencial $2,300
+  │     EV real +55.5%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Stojsavljevic M. vs Kalieva E.
+  │     Apostar: Stojsavljevic M.
+  │     Cuota 2.25  │  Edge 6.8%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 14.4% → stake $1,000  │  Retorno potencial $2,250
+  │     EV real +52.1%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Timofeeva M. vs Andreeva E.
+  │     Apostar: Andreeva E.
+  │     Cuota 2.30  │  Edge 6.6%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 14.3% → stake $1,000  │  Retorno potencial $2,300
+  │     EV real +55.5%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Casanova A. vs Retelj M.
+  │     Apostar: Casanova A.
+  │     Cuota 1.28  │  Edge 16.9%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 12.7% → stake $1,000  │  Retorno potencial $1,280
+  │     EV real -13.5%  │  Zona: heavy_favorite  │  Sup: clay
+
+  │  Total individuales: $65,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 26 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $75,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Mair L.              @10.00  p=0.605  zona=underdog
+  │    2. Pedone G.            @5.50  p=0.605  zona=underdog
+  │    3. Romano F.            @4.00  p=0.650  zona=underdog
+  │    4. Knutson G.           @3.10  p=0.616  zona=underdog
+  │    5. De Alba R.           @2.90  p=0.637  zona=underdog
+  │    6. Monnet C.            @2.90  p=0.580  zona=underdog
+  │    7. Mirarchi W.          @2.85  p=0.676  zona=underdog
+  │    8. Daniel T.            @2.60  p=0.564  zona=underdog
+  │    9. Chwalinska M.        @2.55  p=0.688  zona=underdog
+  │    10. Makhlouf N.          @2.55  p=0.676  zona=underdog
+  │    11. Moeller M.           @2.50  p=0.584  zona=underdog
+  │    12. Lazaro Garcia A.     @2.35  p=0.565  zona=underdog
+  │    13. D'Agostino S.        @2.30  p=0.676  zona=underdog
+  │    14. Dudeney A.           @2.30  p=0.650  zona=underdog
+  │    15. Andreeva E.          @2.30  p=0.605  zona=underdog
+  │    16. Ilagan A.            @2.25  p=0.611  zona=underdog
+  │    17. Stojsavljevic M.     @2.25  p=0.650  zona=underdog
+  │    18. Dlimi Y.             @2.22  p=0.676  zona=underdog
+  │    19. Kawa K.              @2.05  p=0.605  zona=slight_underdog [W]
+  │    20. Gagliardo L.         @2.05  p=0.676  zona=slight_underdog [W]
+  │    21. Talan Lopatic L.     @1.98  p=0.676  zona=slight_underdog [W]
+  │    22. Ymer E.              @1.95  p=0.606  zona=slight_underdog [W]
+  │    23. Kostyuk M.           @1.70  p=0.667  zona=slight_underdog
+  │    24. Bu Y.                @1.70  p=0.650  zona=slight_underdog
+  │    25. Hijikata R.          @1.60  p=0.584  zona=slight_underdog
+  │    26. Sengul B.            @1.53  p=0.676  zona=moderate_favorite
+
+  │  ── 3 PIERNAS: TOP 4 combos × $12,000 = $48,000 ──
+  │     (cada combo excluye 23 jugadores)
+  │     [3p-1] Mair L.@10.00 + Pedone G.@5.50 + Romano F.@4.00
+  │            @220.00 HR:23.8% EV:+5139.4% →$2,640,000  excluye:[Sengul B., Knutson G., Daniel T., Mirarchi W., De Alba R., Monnet C., Chwalinska M., Moeller M., Makhlouf N., Lazaro Garcia A., Dlimi Y., D'Agostino S., Ilagan A., Dudeney A., Stojsavljevic M., Andreeva E., Kawa K., Gagliardo L., Talan Lopatic L., Ymer E., Kostyuk M., Bu Y., Hijikata R.]
+  │     [3p-2] Mair L.@10.00 + Pedone G.@5.50 + Mirarchi W.@2.85
+  │            @156.75 HR:24.8% EV:+3782.9% →$1,881,000  excluye:[Romano F., Sengul B., Knutson G., Daniel T., De Alba R., Monnet C., Chwalinska M., Moeller M., Makhlouf N., Lazaro Garcia A., Dlimi Y., D'Agostino S., Ilagan A., Dudeney A., Stojsavljevic M., Andreeva E., Kawa K., Gagliardo L., Talan Lopatic L., Ymer E., Kostyuk M., Bu Y., Hijikata R.]
+  │     [3p-3] Mair L.@10.00 + Romano F.@4.00 + Mirarchi W.@2.85
+  │            @114.00 HR:26.6% EV:+2932.5% →$1,368,000  excluye:[Pedone G., Sengul B., Knutson G., Daniel T., De Alba R., Monnet C., Chwalinska M., Moeller M., Makhlouf N., Lazaro Garcia A., Dlimi Y., D'Agostino S., Ilagan A., Dudeney A., Stojsavljevic M., Andreeva E., Kawa K., Gagliardo L., Talan Lopatic L., Ymer E., Kostyuk M., Bu Y., Hijikata R.]
+  │     [3p-4] Pedone G.@5.50 + Romano F.@4.00 + Mirarchi W.@2.85
+  │            @62.70 HR:26.6% EV:+1567.9% →$752,400  excluye:[Mair L., Sengul B., Knutson G., Daniel T., De Alba R., Monnet C., Chwalinska M., Moeller M., Makhlouf N., Lazaro Garcia A., Dlimi Y., D'Agostino S., Ilagan A., Dudeney A., Stojsavljevic M., Andreeva E., Kawa K., Gagliardo L., Talan Lopatic L., Ymer E., Kostyuk M., Bu Y., Hijikata R.]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $6,000 = $24,000 ──
+  │     (cada combo excluye 22 jugadores)
+  │     [4p-1] Mair L.@10.00 + Pedone G.@5.50 + Romano F.@4.00 + Mirarchi W.@2.85
+  │            @627.00 HR:16.1% EV:+9995.6% →$3,762,000  excluye:[Sengul B., Knutson G., Daniel T., De Alba R., Monnet C., Chwalinska M., Moeller M., Makhlouf N., Lazaro Garcia A., Dlimi Y., D'Agostino S., Ilagan A., Dudeney A., Stojsavljevic M., Andreeva E., Kawa K., Gagliardo L., Talan Lopatic L., Ymer E., Kostyuk M., Bu Y., Hijikata R.]
+  │     [4p-2] Mair L.@10.00 + Pedone G.@5.50 + Romano F.@4.00 + Knutson G.@3.10
+  │            @682.00 HR:14.7% EV:+9901.0% →$4,092,000  excluye:[Sengul B., Daniel T., Mirarchi W., De Alba R., Monnet C., Chwalinska M., Moeller M., Makhlouf N., Lazaro Garcia A., Dlimi Y., D'Agostino S., Ilagan A., Dudeney A., Stojsavljevic M., Andreeva E., Kawa K., Gagliardo L., Talan Lopatic L., Ymer E., Kostyuk M., Bu Y., Hijikata R.]
+  │     [4p-3] Mair L.@10.00 + Romano F.@4.00 + Knutson G.@3.10 + Mirarchi W.@2.85
+  │            @353.40 HR:16.4% EV:+5688.5% →$2,120,400  excluye:[Pedone G., Sengul B., Daniel T., De Alba R., Monnet C., Chwalinska M., Moeller M., Makhlouf N., Lazaro Garcia A., Dlimi Y., D'Agostino S., Ilagan A., Dudeney A., Stojsavljevic M., Andreeva E., Kawa K., Gagliardo L., Talan Lopatic L., Ymer E., Kostyuk M., Bu Y., Hijikata R.]
+  │     [4p-4] Pedone G.@5.50 + Romano F.@4.00 + Knutson G.@3.10 + Mirarchi W.@2.85
+  │            @194.37 HR:16.4% EV:+3083.7% →$1,166,220  excluye:[Mair L., Sengul B., Daniel T., De Alba R., Monnet C., Chwalinska M., Moeller M., Makhlouf N., Lazaro Garcia A., Dlimi Y., D'Agostino S., Ilagan A., Dudeney A., Stojsavljevic M., Andreeva E., Kawa K., Gagliardo L., Talan Lopatic L., Ymer E., Kostyuk M., Bu Y., Hijikata R.]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-4 picks?) ──
+  │  Total apostado: $72,000
+
+  │  🏆 0 fallos (26/26 ganan): retorno $17,782,020 → P&L +$17,710,020 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Sengul B.]):
+  │       retorno $17,782,020 → P&L +$17,710,020 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Mair L.]):
+  │       retorno $1,918,620 → P&L +$1,846,620 (2/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Sengul B., Hijikata R.]):
+  │       retorno $17,782,020 → P&L +$17,710,020 (8/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Mair L., Pedone G.]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Sengul B., Hijikata R., Kostyuk M.]):
+  │       retorno $17,782,020 → P&L +$17,710,020 (8/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Mair L., Pedone G., Romano F.]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+  │  ✅ 4 fallos (mejor caso: fallan favoritos [Sengul B., Hijikata R., Kostyuk M., Bu Y.]):
+  │       retorno $17,782,020 → P&L +$17,710,020 (8/8 combos pagan)
+  │  ❌ 4 fallos (peor caso: fallan underdogs [Mair L., Pedone G., Romano F., Knutson G.]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+
+  │  Total cobertura: $72,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     26
+  │  ρ estructural:       0.11 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.267
+  │  Reducción vs naive:  -73.3%
+  │
+  │  Stake naive (sin ajuste):    $     137,000
+  │  Stake ajustado (PK):         $      36,631
+  │  Ahorro por correlación:      $     100,369
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $     858,835  (687.1% bankroll)
+  │  CVaR 95%:           $     705,505
+  │  Max VaR permitido:  $      31,250  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.91
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $   3,398,851
+  │  σ(P&L):             $   1,893,183
+  │  Sharpe Ratio:              1.795
+  │  Kelly Growth Rate:        3.7182 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $14,819,667,298,718
+  │  Bankroll en 10 sesiones:  $1,756,980,310,757,454,381,056
+  │  Bankroll en 30 sesiones:  $347,120,816,004,728,597,158,631,519,017,203,738,003,045,707,872,731,136
+  │  Sesiones para duplicar:   0.2
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.91 (de $137,000 a $125,000)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.91) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Mair L.                   @10.00  →  $  11,000  (ret. $   110,000)
+  │    Pedone G.                 @5.50  →  $  11,000  (ret. $    60,500)
+  │    Romano F.                 @4.00  →  $  11,000  (ret. $    44,000)
+  │    Sengul B.                 @1.53  →  $   2,000  (ret. $     3,060)
+  │    Knutson G.                @3.10  →  $  11,000  (ret. $    34,100)
+  │    Daniel T.                 @2.60  →  $   1,000  (ret. $     2,600)
+  │    Mirarchi W.               @2.85  →  $   1,000  (ret. $     2,850)
+  │    De Alba R.                @2.90  →  $   1,000  (ret. $     2,900)
+  │    Monnet C.                 @2.90  →  $   1,000  (ret. $     2,900)
+  │    Chwalinska M.             @2.55  →  $   1,000  (ret. $     2,550)
+  │    Moeller M.                @2.50  →  $   1,000  (ret. $     2,500)
+  │    Makhlouf N.               @2.55  →  $   1,000  (ret. $     2,550)
+  │    Lazaro Garcia A.          @2.35  →  $   1,000  (ret. $     2,350)
+  │    Dlimi Y.                  @2.22  →  $   1,000  (ret. $     2,220)
+  │    D'Agostino S.             @2.30  →  $   1,000  (ret. $     2,300)
+  │    Ilagan A.                 @2.25  →  $   1,000  (ret. $     2,250)
+  │    Dudeney A.                @2.30  →  $   1,000  (ret. $     2,300)
+  │    Stojsavljevic M.          @2.25  →  $   1,000  (ret. $     2,250)
+  │    Andreeva E.               @2.30  →  $   1,000  (ret. $     2,300)
+  │    Casanova A.               @1.28  →  $   1,000  (ret. $     1,280)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @220.00]  $  11,000  →  Mair L.@10.00 + Pedone G.@5.50 + Romano F.@4.00
+  │    [3p @156.75]  $  11,000  →  Mair L.@10.00 + Pedone G.@5.50 + Mirarchi W.@2.85
+  │    [3p @114.00]  $  11,000  →  Mair L.@10.00 + Romano F.@4.00 + Mirarchi W.@2.85
+  │    [3p @62.70]  $  11,000  →  Pedone G.@5.50 + Romano F.@4.00 + Mirarchi W.@2.85
+  │    [4p @627.00]  $   5,000  →  Mair L.@10.00 + Pedone G.@5.50 + Romano F.@4.00 + Mirarchi W.@2.85
+  │    [4p @682.00]  $   5,000  →  Mair L.@10.00 + Pedone G.@5.50 + Romano F.@4.00 + Knutson G.@3.10
+  │    [4p @353.40]  $   5,000  →  Mair L.@10.00 + Romano F.@4.00 + Knutson G.@3.10 + Mirarchi W.@2.85
+  │    [4p @194.37]  $   5,000  →  Pedone G.@5.50 + Romano F.@4.00 + Knutson G.@3.10 + Mirarchi W.@2.85
+  │
+  │  TOTAL EN RIESGO:  $   125,000  (100.0% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $       125,000                       ║
+  ║  Individuales:        $        61,000  (48.8% bankroll)      ║
+  ║  Cobertura:           $        64,000  (51.2% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $       125,000  (100.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:      20                                       ║
+  ║  Pool cobertura:       26 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260604_03  ║
+  ║  Partidos analizados:  80                                       ║
+  ║  Superficie:          clay (Roland Garros)                    ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  ⚠️  ALERTA: 100.0% bankroll en riesgo — por encima del 30% recomendado.
+      Reducir combos o sistema hasta n≥30 con datos limpios.
+
+  📊 Calibración: n=69 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.676 (calibrado clay) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260605_141450.json

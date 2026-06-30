@@ -56,12 +56,38 @@ class ResultVerifier:
         try:
             with open(input_file, 'r', encoding='utf-8') as f:
                 data = json.load(f)
-            
-            self.matches_to_verify = data.get('partidos', [])
-            if not self.matches_to_verify:
+
+            partidos = data.get('partidos', [])
+            if not partidos:
                 logger.error("❌ El archivo JSON no contiene una lista de 'partidos'.")
                 return False
 
+            # Normalizar ambos formatos:
+            # Formato A (h2h_results_enhanced): tiene jugador1, jugador2, match_url
+            # Formato B (resultados_finales):   tiene partido="J1 vs J2", match_id, resultado_real
+            normalized = []
+            for p in partidos:
+                if 'jugador1' in p:
+                    # Formato A — usar tal cual
+                    normalized.append(p)
+                elif 'partido' in p:
+                    # Formato B — ya tiene resultado resuelto
+                    partes = p['partido'].split(' vs ', 1)
+                    jugador1 = partes[0].strip() if len(partes) == 2 else p['partido']
+                    jugador2 = partes[1].strip() if len(partes) == 2 else ''
+                    normalized.append({
+                        'jugador1': jugador1,
+                        'jugador2': jugador2,
+                        'match_url': None,
+                        '_already_resolved': True,
+                        '_resultado_real': p.get('resultado_real'),
+                        '_correcto': p.get('correcto'),
+                        '_match_id': p.get('match_id'),
+                    })
+                else:
+                    logger.warning(f"⚠️ Partido sin campos reconocidos, ignorado: {list(p.keys())}")
+
+            self.matches_to_verify = normalized
             logger.info(f"✅ Cargados {len(self.matches_to_verify)} partidos para verificar.")
             return True
         except Exception as e:
@@ -143,26 +169,48 @@ class ResultVerifier:
         
         for i, match_data in enumerate(self.matches_to_verify):
             logger.info("-" * 60)
-            logger.info(f"🔎 Consultando Partido {i+1}/{len(self.matches_to_verify)}: {match_data['jugador1']} vs {match_data['jugador2']}")
+            logger.info(f"🔎 Partido {i+1}/{len(self.matches_to_verify)}: {match_data['jugador1']} vs {match_data['jugador2']}")
 
-            final_score, actual_winner = await self.get_final_result(match_data['match_url'])
-            
-            result = {
-                'match_info': {
-                    'jugador1': match_data['jugador1'],
-                    'jugador2': match_data['jugador2'],
-                    'match_url': match_data['match_url']
-                },
-                'actual_result': {
-                    'final_score': final_score,
-                    'actual_winner': actual_winner
-                },
-                'verification': {
-                    'status': 'Verified' if actual_winner else 'Not Finished or Error'
+            if match_data.get('_already_resolved'):
+                # Formato resultados_finales — resultado ya conocido, sin scraping
+                actual_winner = match_data.get('_resultado_real')
+                correcto = match_data.get('_correcto')
+                estado = 'ACIERTO' if correcto else 'FALLO'
+                logger.info(f"  ✅ Ya resuelto: ganador={actual_winner} | {estado}")
+                result = {
+                    'match_info': {
+                        'jugador1': match_data['jugador1'],
+                        'jugador2': match_data['jugador2'],
+                        'match_url': f"match_id:{match_data.get('_match_id', 'N/A')}",
+                    },
+                    'actual_result': {
+                        'final_score': actual_winner,
+                        'actual_winner': actual_winner,
+                    },
+                    'verification': {
+                        'status': 'Already Resolved',
+                        'correcto': correcto,
+                    },
                 }
-            }
+            else:
+                final_score, actual_winner = await self.get_final_result(match_data['match_url'])
+                result = {
+                    'match_info': {
+                        'jugador1': match_data['jugador1'],
+                        'jugador2': match_data['jugador2'],
+                        'match_url': match_data['match_url'],
+                    },
+                    'actual_result': {
+                        'final_score': final_score,
+                        'actual_winner': actual_winner,
+                    },
+                    'verification': {
+                        'status': 'Verified' if actual_winner else 'Not Finished or Error',
+                    },
+                }
+                await self.page.wait_for_timeout(3000)
+
             self.verification_results.append(result)
-            await self.page.wait_for_timeout(3000)
 
     def save_verification_results(self):
         """💾 Guardar los resultados de la consulta en un archivo JSON."""

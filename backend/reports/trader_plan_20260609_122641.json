@@ -1,0 +1,400 @@
+{
+  "metadata": {
+    "timestamp": "20260609_122641",
+    "bankroll": 20000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260609_115832.json",
+    "n_partidos_analizados": 51,
+    "calibracion_n": 284,
+    "parametros": {
+      "modo": "cobertura",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Alex Bolt vs Keegan Smith",
+      "favorito": "Keegan Smith",
+      "cuota": 3.3,
+      "edge_pct": "23.1%",
+      "p_modelo": 0.534,
+      "n_h2h": 2,
+      "p_blend": 0.6101034965034965,
+      "kelly_kl": 0.3897,
+      "kelly_usado": 0.1,
+      "stake": 2000,
+      "retorno_potencial": 6600.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Victoria Jimenez Kasintseva vs Jessica Pieri",
+      "favorito": "Jessica Pieri",
+      "cuota": 3.85,
+      "edge_pct": "24.4%",
+      "p_modelo": 0.504,
+      "n_h2h": 1,
+      "p_blend": 0.6216293706293706,
+      "kelly_kl": 0.3861,
+      "kelly_usado": 0.1,
+      "stake": 2000,
+      "retorno_potencial": 7700.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Hamish Stewart vs Leandro Riedi",
+      "favorito": "Hamish Stewart",
+      "cuota": 3.15,
+      "edge_pct": "19.8%",
+      "p_modelo": 0.515,
+      "n_h2h": 1,
+      "p_blend": 0.6243793706293707,
+      "kelly_kl": 0.3419,
+      "kelly_usado": 0.1,
+      "stake": 2000,
+      "retorno_potencial": 6300.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Tristan Schoolkate vs Paul Jubb",
+      "favorito": "Paul Jubb",
+      "cuota": 2.3,
+      "edge_pct": "9.1%",
+      "p_modelo": 0.526,
+      "n_h2h": 0,
+      "p_blend": 0.6608391608391608,
+      "kelly_kl": 0.1913,
+      "kelly_usado": 0.1,
+      "stake": 2000,
+      "retorno_potencial": 4600.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Thomas Faurel vs Florent Bax",
+      "favorito": "Florent Bax",
+      "cuota": 2.2,
+      "edge_pct": "7.2%",
+      "p_modelo": 0.527,
+      "n_h2h": 0,
+      "p_blend": 0.6608391608391608,
+      "kelly_kl": 0.1655,
+      "kelly_usado": 0.0946,
+      "stake": 1000,
+      "retorno_potencial": 2200.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Keegan Smith",
+          "cuota": 3.3
+        },
+        {
+          "jugador": "Jessica Pieri",
+          "cuota": 3.85
+        },
+        {
+          "jugador": "Hamish Stewart",
+          "cuota": 3.15
+        }
+      ],
+      "cuota_combo": 40.02,
+      "hr_combo": 0.1975,
+      "ev_combo": 6.9052,
+      "excluidos": [
+        "Paul Jubb",
+        "Florent Bax",
+        "Thiago Cigarran",
+        "Emerson Jones",
+        "Juan Estevez",
+        "Filippo Romano",
+        "Charles Broom",
+        "Mark Lajal"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 80040.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Keegan Smith",
+          "cuota": 3.3
+        },
+        {
+          "jugador": "Jessica Pieri",
+          "cuota": 3.85
+        },
+        {
+          "jugador": "Paul Jubb",
+          "cuota": 2.3
+        }
+      ],
+      "cuota_combo": 29.22,
+      "hr_combo": 0.2056,
+      "ev_combo": 5.008,
+      "excluidos": [
+        "Hamish Stewart",
+        "Florent Bax",
+        "Thiago Cigarran",
+        "Emerson Jones",
+        "Juan Estevez",
+        "Filippo Romano",
+        "Charles Broom",
+        "Mark Lajal"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 58440.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Jessica Pieri",
+          "cuota": 3.85
+        },
+        {
+          "jugador": "Hamish Stewart",
+          "cuota": 3.15
+        },
+        {
+          "jugador": "Paul Jubb",
+          "cuota": 2.3
+        }
+      ],
+      "cuota_combo": 27.89,
+      "hr_combo": 0.208,
+      "ev_combo": 4.8021,
+      "excluidos": [
+        "Keegan Smith",
+        "Florent Bax",
+        "Thiago Cigarran",
+        "Emerson Jones",
+        "Juan Estevez",
+        "Filippo Romano",
+        "Charles Broom",
+        "Mark Lajal"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 55780.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Keegan Smith",
+          "cuota": 3.3
+        },
+        {
+          "jugador": "Hamish Stewart",
+          "cuota": 3.15
+        },
+        {
+          "jugador": "Paul Jubb",
+          "cuota": 2.3
+        }
+      ],
+      "cuota_combo": 23.91,
+      "hr_combo": 0.2081,
+      "ev_combo": 3.9752,
+      "excluidos": [
+        "Jessica Pieri",
+        "Florent Bax",
+        "Thiago Cigarran",
+        "Emerson Jones",
+        "Juan Estevez",
+        "Filippo Romano",
+        "Charles Broom",
+        "Mark Lajal"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 47820.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Keegan Smith",
+          "cuota": 3.3
+        },
+        {
+          "jugador": "Jessica Pieri",
+          "cuota": 3.85
+        },
+        {
+          "jugador": "Hamish Stewart",
+          "cuota": 3.15
+        },
+        {
+          "jugador": "Paul Jubb",
+          "cuota": 2.3
+        }
+      ],
+      "cuota_combo": 92.05,
+      "hr_combo": 0.1207,
+      "ev_combo": 10.1091,
+      "excluidos": [
+        "Florent Bax",
+        "Thiago Cigarran",
+        "Emerson Jones",
+        "Juan Estevez",
+        "Filippo Romano",
+        "Charles Broom",
+        "Mark Lajal"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 92050.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Keegan Smith",
+          "cuota": 3.3
+        },
+        {
+          "jugador": "Jessica Pieri",
+          "cuota": 3.85
+        },
+        {
+          "jugador": "Paul Jubb",
+          "cuota": 2.3
+        },
+        {
+          "jugador": "Florent Bax",
+          "cuota": 2.2
+        }
+      ],
+      "cuota_combo": 64.29,
+      "hr_combo": 0.1245,
+      "ev_combo": 7.0006,
+      "excluidos": [
+        "Hamish Stewart",
+        "Thiago Cigarran",
+        "Emerson Jones",
+        "Juan Estevez",
+        "Filippo Romano",
+        "Charles Broom",
+        "Mark Lajal"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 64290.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Jessica Pieri",
+          "cuota": 3.85
+        },
+        {
+          "jugador": "Hamish Stewart",
+          "cuota": 3.15
+        },
+        {
+          "jugador": "Paul Jubb",
+          "cuota": 2.3
+        },
+        {
+          "jugador": "Florent Bax",
+          "cuota": 2.2
+        }
+      ],
+      "cuota_combo": 61.37,
+      "hr_combo": 0.1259,
+      "ev_combo": 6.7265,
+      "excluidos": [
+        "Keegan Smith",
+        "Thiago Cigarran",
+        "Emerson Jones",
+        "Juan Estevez",
+        "Filippo Romano",
+        "Charles Broom",
+        "Mark Lajal"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 61370.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Keegan Smith",
+          "cuota": 3.3
+        },
+        {
+          "jugador": "Hamish Stewart",
+          "cuota": 3.15
+        },
+        {
+          "jugador": "Paul Jubb",
+          "cuota": 2.3
+        },
+        {
+          "jugador": "Florent Bax",
+          "cuota": 2.2
+        }
+      ],
+      "cuota_combo": 52.6,
+      "hr_combo": 0.126,
+      "ev_combo": 5.6253,
+      "excluidos": [
+        "Jessica Pieri",
+        "Thiago Cigarran",
+        "Emerson Jones",
+        "Juan Estevez",
+        "Filippo Romano",
+        "Charles Broom",
+        "Mark Lajal"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 52600.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.5,
+    "total_ajustado": 10500.0,
+    "var_95": -5312.272727272728,
+    "cvar_95": -6928.214725153312,
+    "expected_pl": 76137.57849365243,
+    "sharpe_ratio": 0.9390748900280359,
+    "kelly_growth_rate": 1.5101162290307304,
+    "sessions_to_double": 0.4590025371787723,
+    "var_excedido": true,
+    "factor_var": 0.9412167365448788
+  },
+  "resumen": {
+    "gastado_individuales": 9000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 12000,
+    "total_en_riesgo": 21000.0,
+    "pct_bankroll_en_riesgo": 1.05,
+    "n_senales_apostar": 5,
+    "pool_cobertura": 11,
+    "alerta_riesgo": true
+  }
+}

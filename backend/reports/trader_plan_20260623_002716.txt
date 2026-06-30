@@ -1,0 +1,49 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — CHALLENGER CLAY
+  2026-06-23 00:27  │  Bankroll: $20,000
+  Señales APOSTAR: 2  │  Watchlist: 0  │  Sin edge: 0
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 2 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.10 (challenger)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $8,000 (40% bankroll)
+
+  │  🎾 Nick Hardt vs Nicolas Oliveira
+  │     Apostar: Nicolas Oliveira
+  │     Cuota 4.00  │  Edge 58.0%  │  p_blend 0.590 (n_h2h=0)
+  │     Kelly-KL 50.5% → stake $2,000  │  Retorno potencial $8,000
+  │     EV real +135.9%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Maximo Zeitune vs Nicolas Zanellato
+  │     Apostar: Nicolas Zanellato
+  │     Cuota 1.90  │  Edge 30.2%  │  p_blend 0.590 (n_h2h=0)
+  │     Kelly-KL 39.8% → stake $1,000  │  Retorno potencial $1,900
+  │     EV real +12.0%  │  Zona: slight_underdog  │  Sup: clay
+
+  │  Total individuales: $3,000
+  └─────────────────────────────────────────────────────────────────
+
+  ⚠️  Solo 2 picks en pool — se necesitan ≥3.
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $        20,000                       ║
+  ║  Individuales:        $         3,000  (15.0% bankroll)      ║
+  ║  Combos:              $             0  (0.0% bankroll)      ║
+  ║  Sistema:             $             0  (0.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $         3,000  (15.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       2                                       ║
+  ║  Pool cobertura:        2 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260623_00  ║
+  ║  Partidos analizados: 127                                       ║
+  ║  Superficie:          clay (challenger)                           ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  📊 Calibración: n=1353 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.590 (calibrado clay) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260623_002716.json

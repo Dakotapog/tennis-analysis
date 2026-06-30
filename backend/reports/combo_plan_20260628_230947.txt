@@ -1,0 +1,58 @@
+======================================================================
+COMBO PLAN (Nodo-38) — 2026-06-28  |  Fase 4  |  Conf min: 53.0%
+Fuente: h2h_results_enhanced_20260629_182938.json
+Budget diario: $15,000  |  Picks seleccionados: 10
+======================================================================
+
+MULTIPLICADORES (1.15-1.59): 8 picks
+   1. Hugo Dellien                  @1.33  conf:61.4%  CHALLENGER MASCULINO - INDIVIDUALES: Mil
+   2. Rafael Jodar                  @1.19  conf:55.7%  ATP - INDIVIDUALES: Wimbledon (Reino Uni
+   3. Federico Cina                 @1.40  conf:54.8%  CHALLENGER MASCULINO - INDIVIDUALES: Bra
+   4. Joao Fonseca                  @1.21  conf:54.1%  ATP - INDIVIDUALES: Wimbledon (Reino Uni
+   5. Diane Parry                   @1.33  conf:54.0%  WTA - INDIVIDUALES: Wimbledon (Reino Uni
+   6. Dayana Yastremska             @1.19  conf:53.8%  WTA - INDIVIDUALES: Wimbledon (Reino Uni
+   7. Anna Kalinskaya               @1.38  conf:53.5%  WTA - INDIVIDUALES: Wimbledon (Reino Uni
+   8. Jelena Ostapenko              @1.27  conf:53.4%  WTA - INDIVIDUALES: Wimbledon (Reino Uni
+
+VALOR (1.60-2.20): 1 picks
+   1. Andre Ilagan                  @2.04  conf:54.2%  CHALLENGER MASCULINO - INDIVIDUALES: Car
+
+ALTO VALOR MOONSHOT (>3.50 o conf<60%): 1 picks
+   1. Luca Van Assche               @2.95  conf:53.1%  ATP - INDIVIDUALES: Wimbledon (Reino Uni
+
+----------------------------------------------------------------------
+
+CORE — 4 piernas (solo Cat-A + Cat-B)
+  Picks: Hugo Dellien @1.33, Rafael Jodar @1.19, Federico Cina @1.40, Andre Ilagan @2.04
+  Odds: 4.52x  |  P(win): 22.1%  |  EV: $-0
+  STAKE: $6,500  →  Retorno: $29,380  |  Esperado: $6,500
+
+----------------------------------------------------------------------
+
+COBERTURA EXPANDIDA (sin Cat-C → budget SAT+MOON redistribuido) — 6 combos
+  [COB1_excl_Dellien]  Excluye: Hugo Dellien
+    Odds: 4.11x  P(win): 24.3%  STAKE: $1,500
+  [COB2_excl_Dellien]  Excluye: Hugo Dellien
+    Odds: 4.52x  P(win): 22.1%  STAKE: $1,500
+  [COB3_excl_Dellien]  Excluye: Hugo Dellien
+    Odds: 4.04x  P(win): 24.7%  STAKE: $1,500
+  [COB4_excl_Dellien]  Excluye: Hugo Dellien
+    Odds: 4.69x  P(win): 21.3%  STAKE: $1,500
+  [COB5_excl_Dellien]  Excluye: Hugo Dellien
+    Odds: 4.32x  P(win): 23.2%  STAKE: $1,500
+  [COB6_excl_Jodar]  Excluye: Rafael Jodar
+    Odds: 4.60x  P(win): 21.8%  STAKE: $1,500
+
+======================================================================
+RESUMEN PORTFOLIO — Fase 4
+  Total combos:           7
+  Total invertido:        $15,500  (de $15,000 budget)
+  Retorno esperado:       $15,499
+  EV total:               $-1
+
+NOTAS:
+  - Cat-C NUNCA entra al CORE (REGLA-ISO-1)
+  - Max 1 Cat-C por satellite, max 2 picks mismo torneo por combo
+  - P(win) calculado con P_mercado (1/cuota) — conservador
+  - VaR guard: stakes escalados si total > budget diario
+======================================================================

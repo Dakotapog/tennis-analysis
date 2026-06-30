@@ -1,0 +1,189 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — DEPLOY ROLAND GARROS
+  2026-06-09 12:26  │  Bankroll: $20,000
+  Señales APOSTAR: 5  │  Watchlist: 3  │  Sin edge: 5
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 11 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.10 (challenger)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $8,000 (40% bankroll)
+
+  │  🎾 Alex Bolt vs Keegan Smith
+  │     Apostar: Keegan Smith
+  │     Cuota 3.30  │  Edge 23.1%  │  p_blend 0.610 (n_h2h=2)
+  │     Kelly-KL 39.0% → stake $2,000  │  Retorno potencial $6,600
+  │     EV real +101.3%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Victoria Jimenez Kasintseva vs Jessica Pieri
+  │     Apostar: Jessica Pieri
+  │     Cuota 3.85  │  Edge 24.4%  │  p_blend 0.622 (n_h2h=1)
+  │     Kelly-KL 38.6% → stake $2,000  │  Retorno potencial $7,700
+  │     EV real +139.3%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Hamish Stewart vs Leandro Riedi
+  │     Apostar: Hamish Stewart
+  │     Cuota 3.15  │  Edge 19.8%  │  p_blend 0.624 (n_h2h=1)
+  │     Kelly-KL 34.2% → stake $2,000  │  Retorno potencial $6,300
+  │     EV real +96.7%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Tristan Schoolkate vs Paul Jubb
+  │     Apostar: Paul Jubb
+  │     Cuota 2.30  │  Edge 9.1%  │  p_blend 0.661 (n_h2h=0)
+  │     Kelly-KL 19.1% → stake $2,000  │  Retorno potencial $4,600
+  │     EV real +52.0%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Thomas Faurel vs Florent Bax
+  │     Apostar: Florent Bax
+  │     Cuota 2.20  │  Edge 7.2%  │  p_blend 0.661 (n_h2h=0)
+  │     Kelly-KL 16.6% → stake $1,000  │  Retorno potencial $2,200
+  │     EV real +45.4%  │  Zona: underdog  │  Sup: clay
+
+  │  Total individuales: $9,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 11 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $12,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Jessica Pieri        @3.85  p=0.580  zona=underdog
+  │    2. Keegan Smith         @3.30  p=0.580  zona=underdog
+  │    3. Hamish Stewart       @3.15  p=0.587  zona=underdog
+  │    4. Paul Jubb            @2.30  p=0.611  zona=underdog
+  │    5. Florent Bax          @2.20  p=0.605  zona=underdog
+  │    6. Thiago Cigarran      @2.06  p=0.605  zona=slight_underdog [W]
+  │    7. Emerson Jones        @2.02  p=0.611  zona=slight_underdog [W]
+  │    8. Juan Estevez         @2.02  p=0.605  zona=slight_underdog [W]
+  │    9. Filippo Romano       @1.74  p=0.611  zona=slight_underdog
+  │    10. Mark Lajal           @1.61  p=0.611  zona=slight_underdog
+  │    11. Charles Broom        @1.58  p=0.611  zona=moderate_favorite
+
+  │  ── 3 PIERNAS: TOP 4 combos × $2,000 = $8,000 ──
+  │     (cada combo excluye 8 jugadores)
+  │     [3p-1] Keegan Smith@3.30 + Jessica Pieri@3.85 + Hamish Stewart@3.15
+  │            @40.02 HR:19.8% EV:+690.5% →$80,040  excluye:[Paul Jubb, Florent Bax, Thiago Cigarran, Emerson Jones, Juan Estevez, Filippo Romano, Charles Broom, Mark Lajal]
+  │     [3p-2] Keegan Smith@3.30 + Jessica Pieri@3.85 + Paul Jubb@2.30
+  │            @29.22 HR:20.6% EV:+500.8% →$58,440  excluye:[Hamish Stewart, Florent Bax, Thiago Cigarran, Emerson Jones, Juan Estevez, Filippo Romano, Charles Broom, Mark Lajal]
+  │     [3p-3] Jessica Pieri@3.85 + Hamish Stewart@3.15 + Paul Jubb@2.30
+  │            @27.89 HR:20.8% EV:+480.2% →$55,780  excluye:[Keegan Smith, Florent Bax, Thiago Cigarran, Emerson Jones, Juan Estevez, Filippo Romano, Charles Broom, Mark Lajal]
+  │     [3p-4] Keegan Smith@3.30 + Hamish Stewart@3.15 + Paul Jubb@2.30
+  │            @23.91 HR:20.8% EV:+397.5% →$47,820  excluye:[Jessica Pieri, Florent Bax, Thiago Cigarran, Emerson Jones, Juan Estevez, Filippo Romano, Charles Broom, Mark Lajal]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $1,000 = $4,000 ──
+  │     (cada combo excluye 7 jugadores)
+  │     [4p-1] Keegan Smith@3.30 + Jessica Pieri@3.85 + Hamish Stewart@3.15 + Paul Jubb@2.30
+  │            @92.05 HR:12.1% EV:+1010.9% →$92,050  excluye:[Florent Bax, Thiago Cigarran, Emerson Jones, Juan Estevez, Filippo Romano, Charles Broom, Mark Lajal]
+  │     [4p-2] Keegan Smith@3.30 + Jessica Pieri@3.85 + Paul Jubb@2.30 + Florent Bax@2.20
+  │            @64.29 HR:12.4% EV:+700.1% →$64,290  excluye:[Hamish Stewart, Thiago Cigarran, Emerson Jones, Juan Estevez, Filippo Romano, Charles Broom, Mark Lajal]
+  │     [4p-3] Jessica Pieri@3.85 + Hamish Stewart@3.15 + Paul Jubb@2.30 + Florent Bax@2.20
+  │            @61.37 HR:12.6% EV:+672.6% →$61,370  excluye:[Keegan Smith, Thiago Cigarran, Emerson Jones, Juan Estevez, Filippo Romano, Charles Broom, Mark Lajal]
+  │     [4p-4] Keegan Smith@3.30 + Hamish Stewart@3.15 + Paul Jubb@2.30 + Florent Bax@2.20
+  │            @52.60 HR:12.6% EV:+562.5% →$52,600  excluye:[Jessica Pieri, Thiago Cigarran, Emerson Jones, Juan Estevez, Filippo Romano, Charles Broom, Mark Lajal]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-4 picks?) ──
+  │  Total apostado: $12,000
+
+  │  🏆 0 fallos (11/11 ganan): retorno $512,390 → P&L +$500,390 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Charles Broom]):
+  │       retorno $512,390 → P&L +$500,390 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Jessica Pieri]):
+  │       retorno $100,420 → P&L +$88,420 (2/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Charles Broom, Mark Lajal]):
+  │       retorno $512,390 → P&L +$500,390 (8/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Jessica Pieri, Keegan Smith]):
+  │       retorno $0 → P&L $-12,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Charles Broom, Mark Lajal, Filippo Romano]):
+  │       retorno $512,390 → P&L +$500,390 (8/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Jessica Pieri, Keegan Smith, Hamish Stewart]):
+  │       retorno $0 → P&L $-12,000 (0/8 combos pagan)
+  │  ✅ 4 fallos (mejor caso: fallan favoritos [Charles Broom, Mark Lajal, Filippo Romano, Emerson Jones]):
+  │       retorno $512,390 → P&L +$500,390 (8/8 combos pagan)
+  │  ❌ 4 fallos (peor caso: fallan underdogs [Jessica Pieri, Keegan Smith, Hamish Stewart, Paul Jubb]):
+  │       retorno $0 → P&L $-12,000 (0/8 combos pagan)
+
+  │  Total cobertura: $12,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     11
+  │  ρ estructural:       0.10 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.500
+  │  Reducción vs naive:  -50.0%
+  │
+  │  Stake naive (sin ajuste):    $      21,000
+  │  Stake ajustado (PK):         $      10,500
+  │  Ahorro por correlación:      $      10,500
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $      -5,312  (26.6% bankroll)
+  │  CVaR 95%:           $      -6,928
+  │  Max VaR permitido:  $       5,000  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.94
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $      76,138
+  │  σ(P&L):             $      81,077
+  │  Sharpe Ratio:              0.939
+  │  Kelly Growth Rate:        1.5101 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $  38,036,953
+  │  Bankroll en 10 sesiones:  $72,340,490,422
+  │  Bankroll en 30 sesiones:  $946,420,970,486,784,019,398,656
+  │  Sesiones para duplicar:   0.5
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.94 (de $21,000 a $19,766)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.94) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Keegan Smith              @3.30  →  $   2,000  (ret. $     6,600)
+  │    Jessica Pieri             @3.85  →  $   2,000  (ret. $     7,700)
+  │    Hamish Stewart            @3.15  →  $   2,000  (ret. $     6,300)
+  │    Paul Jubb                 @2.30  →  $   2,000  (ret. $     4,600)
+  │    Florent Bax               @2.20  →  $   1,000  (ret. $     2,200)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @40.02]  $   2,000  →  Keegan Smith@3.30 + Jessica Pieri@3.85 + Hamish Stewart@3.15
+  │    [3p @29.22]  $   2,000  →  Keegan Smith@3.30 + Jessica Pieri@3.85 + Paul Jubb@2.30
+  │    [3p @27.89]  $   2,000  →  Jessica Pieri@3.85 + Hamish Stewart@3.15 + Paul Jubb@2.30
+  │    [3p @23.91]  $   2,000  →  Keegan Smith@3.30 + Hamish Stewart@3.15 + Paul Jubb@2.30
+  │    [4p @92.05]  $   1,000  →  Keegan Smith@3.30 + Jessica Pieri@3.85 + Hamish Stewart@3.15 + Paul Jubb@2.30
+  │    [4p @64.29]  $   1,000  →  Keegan Smith@3.30 + Jessica Pieri@3.85 + Paul Jubb@2.30 + Florent Bax@2.20
+  │    [4p @61.37]  $   1,000  →  Jessica Pieri@3.85 + Hamish Stewart@3.15 + Paul Jubb@2.30 + Florent Bax@2.20
+  │    [4p @52.60]  $   1,000  →  Keegan Smith@3.30 + Hamish Stewart@3.15 + Paul Jubb@2.30 + Florent Bax@2.20
+  │
+  │  TOTAL EN RIESGO:  $    21,000  (105.0% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $        20,000                       ║
+  ║  Individuales:        $         9,000  (45.0% bankroll)      ║
+  ║  Cobertura:           $        12,000  (60.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $        21,000  (105.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       5                                       ║
+  ║  Pool cobertura:       11 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260609_11  ║
+  ║  Partidos analizados:  51                                       ║
+  ║  Superficie:          clay (Roland Garros)                    ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  ⚠️  ALERTA: 105.0% bankroll en riesgo — por encima del 30% recomendado.
+      Reducir combos o sistema hasta n≥30 con datos limpios.
+
+  📊 Calibración: n=284 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.661 (calibrado grass) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260609_122641.json

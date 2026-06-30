@@ -1,0 +1,180 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — DEPLOY ROLAND GARROS
+  2026-06-08 03:39  │  Bankroll: $50,000
+  Señales APOSTAR: 5  │  Watchlist: 1  │  Sin edge: 0
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 6 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.15 (atp500)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $20,000 (40% bankroll)
+
+  │  🎾 Ugo Humbert vs Elias Ymer
+  │     Apostar: Elias Ymer
+  │     Cuota 4.60  │  Edge 32.0%  │  p_blend 0.697 (n_h2h=0)
+  │     Kelly-KL 46.3% → stake $5,000  │  Retorno potencial $23,000
+  │     EV real +220.8%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Benjamin Bonzi vs Mees Rottgering
+  │     Apostar: Mees Rottgering
+  │     Cuota 3.55  │  Edge 27.7%  │  p_blend 0.697 (n_h2h=0)
+  │     Kelly-KL 46.2% → stake $5,000  │  Retorno potencial $17,750
+  │     EV real +147.6%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Ekaterina Alexandrova vs Panna Udvardy
+  │     Apostar: Panna Udvardy
+  │     Cuota 4.75  │  Edge 30.4%  │  p_blend 0.697 (n_h2h=0)
+  │     Kelly-KL 41.5% → stake $5,000  │  Retorno potencial $23,750
+  │     EV real +231.2%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Mia Pohankova vs Clara Tauson
+  │     Apostar: Mia Pohankova
+  │     Cuota 2.80  │  Edge 14.8%  │  p_blend 0.697 (n_h2h=0)
+  │     Kelly-KL 27.1% → stake $5,000  │  Retorno potencial $14,000
+  │     EV real +95.3%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Pierre-Hugues Herbert vs Martin Landaluce
+  │     Apostar: Pierre-Hugues Herbert
+  │     Cuota 2.28  │  Edge 8.0%  │  p_blend 0.697 (n_h2h=0)
+  │     Kelly-KL 17.2% → stake $1,000  │  Retorno potencial $2,280
+  │     EV real +59.0%  │  Zona: underdog  │  Sup: grass
+
+  │  Total individuales: $21,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 6 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $30,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Panna Udvardy        @4.75  p=0.650  zona=underdog
+  │    2. Elias Ymer           @4.60  p=0.650  zona=underdog
+  │    3. Mees Rottgering      @3.55  p=0.650  zona=underdog
+  │    4. Mia Pohankova        @2.80  p=0.650  zona=underdog
+  │    5. Pierre-Hugues Herbert @2.28  p=0.650  zona=underdog
+  │    6. Katie Boulter        @1.91  p=0.597  zona=slight_underdog [W]
+
+  │  ── 3 PIERNAS: TOP 4 combos × $5,000 = $20,000 ──
+  │     (cada combo excluye 3 jugadores)
+  │     [3p-1] Elias Ymer@4.60 + Mees Rottgering@3.55 + Panna Udvardy@4.75
+  │            @77.57 HR:27.5% EV:+2030.2% →$387,850  excluye:[Mia Pohankova, Pierre-Hugues Herbert, Katie Boulter]
+  │     [3p-2] Elias Ymer@4.60 + Panna Udvardy@4.75 + Mia Pohankova@2.80
+  │            @61.18 HR:27.5% EV:+1580.2% →$305,900  excluye:[Mees Rottgering, Pierre-Hugues Herbert, Katie Boulter]
+  │     [3p-3] Mees Rottgering@3.55 + Panna Udvardy@4.75 + Mia Pohankova@2.80
+  │            @47.21 HR:27.5% EV:+1196.6% →$236,050  excluye:[Elias Ymer, Pierre-Hugues Herbert, Katie Boulter]
+  │     [3p-4] Elias Ymer@4.60 + Mees Rottgering@3.55 + Mia Pohankova@2.80
+  │            @45.72 HR:27.5% EV:+1155.7% →$228,600  excluye:[Panna Udvardy, Pierre-Hugues Herbert, Katie Boulter]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $2,000 = $8,000 ──
+  │     (cada combo excluye 2 jugadores)
+  │     [4p-1] Elias Ymer@4.60 + Mees Rottgering@3.55 + Panna Udvardy@4.75 + Pierre-Hugues Herbert@2.28
+  │            @176.85 HR:17.8% EV:+3057.0% →$353,700  excluye:[Mia Pohankova, Katie Boulter]
+  │     [4p-2] Elias Ymer@4.60 + Panna Udvardy@4.75 + Mia Pohankova@2.80 + Pierre-Hugues Herbert@2.28
+  │            @139.49 HR:17.8% EV:+2390.0% →$278,980  excluye:[Mees Rottgering, Katie Boulter]
+  │     [4p-3] Mees Rottgering@3.55 + Panna Udvardy@4.75 + Mia Pohankova@2.80 + Pierre-Hugues Herbert@2.28
+  │            @107.65 HR:17.8% EV:+1821.6% →$215,300  excluye:[Elias Ymer, Katie Boulter]
+  │     [4p-4] Elias Ymer@4.60 + Mees Rottgering@3.55 + Mia Pohankova@2.80 + Pierre-Hugues Herbert@2.28
+  │            @104.25 HR:17.8% EV:+1760.9% →$208,500  excluye:[Panna Udvardy, Katie Boulter]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-3 picks?) ──
+  │  Total apostado: $28,000
+
+  │  🏆 0 fallos (6/6 ganan): retorno $2,214,880 → P&L +$2,186,880 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Katie Boulter]):
+  │       retorno $2,214,880 → P&L +$2,186,880 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Panna Udvardy]):
+  │       retorno $437,100 → P&L +$409,100 (2/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Katie Boulter, Pierre-Hugues Herbert]):
+  │       retorno $1,158,400 → P&L +$1,130,400 (4/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Panna Udvardy, Elias Ymer]):
+  │       retorno $0 → P&L $-28,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Katie Boulter, Pierre-Hugues Herbert, Mia Pohankova]):
+  │       retorno $387,850 → P&L +$359,850 (1/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Panna Udvardy, Elias Ymer, Mees Rottgering]):
+  │       retorno $0 → P&L $-28,000 (0/8 combos pagan)
+
+  │  Total cobertura: $28,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     6
+  │  ρ estructural:       0.15 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.571
+  │  Reducción vs naive:  -42.9%
+  │
+  │  Stake naive (sin ajuste):    $      49,000
+  │  Stake ajustado (PK):         $      28,000
+  │  Ahorro por correlación:      $      21,000
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $     -28,000  (56.0% bankroll)
+  │  CVaR 95%:           $     -28,000
+  │  Max VaR permitido:  $      12,500  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.45
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $     455,663
+  │  σ(P&L):             $     582,677
+  │  Sharpe Ratio:              0.782
+  │  Kelly Growth Rate:        2.0741 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $1,595,030,202
+  │  Bankroll en 10 sesiones:  $50,882,426,914,675
+  │  Bankroll en 30 sesiones:  $52,694,276,229,918,096,683,227,490,025,472
+  │  Sesiones para duplicar:   0.3
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.45 (de $49,000 a $21,875)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.45) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Elias Ymer                @4.60  →  $   2,000  (ret. $     9,200)
+  │    Mees Rottgering           @3.55  →  $   2,000  (ret. $     7,100)
+  │    Panna Udvardy             @4.75  →  $   2,000  (ret. $     9,500)
+  │    Mia Pohankova             @2.80  →  $   2,000  (ret. $     5,600)
+  │    Pierre-Hugues Herbert     @2.28  →  $       0  (ret. $         0)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @77.57]  $   2,000  →  Elias Ymer@4.60 + Mees Rottgering@3.55 + Panna Udvardy@4.75
+  │    [3p @61.18]  $   2,000  →  Elias Ymer@4.60 + Panna Udvardy@4.75 + Mia Pohankova@2.80
+  │    [3p @47.21]  $   2,000  →  Mees Rottgering@3.55 + Panna Udvardy@4.75 + Mia Pohankova@2.80
+  │    [3p @45.72]  $   2,000  →  Elias Ymer@4.60 + Mees Rottgering@3.55 + Mia Pohankova@2.80
+  │    [4p @176.85]  $   1,000  →  Elias Ymer@4.60 + Mees Rottgering@3.55 + Panna Udvardy@4.75 + Pierre-Hugues Herbert@2.28
+  │    [4p @139.49]  $   1,000  →  Elias Ymer@4.60 + Panna Udvardy@4.75 + Mia Pohankova@2.80 + Pierre-Hugues Herbert@2.28
+  │    [4p @107.65]  $   1,000  →  Mees Rottgering@3.55 + Panna Udvardy@4.75 + Mia Pohankova@2.80 + Pierre-Hugues Herbert@2.28
+  │    [4p @104.25]  $   1,000  →  Elias Ymer@4.60 + Mees Rottgering@3.55 + Mia Pohankova@2.80 + Pierre-Hugues Herbert@2.28
+  │
+  │  TOTAL EN RIESGO:  $    20,000  (40.0% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $        50,000                       ║
+  ║  Individuales:        $         8,000  (16.0% bankroll)      ║
+  ║  Cobertura:           $        12,000  (24.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $        20,000  (40.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       5                                       ║
+  ║  Pool cobertura:        6 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260608_03  ║
+  ║  Partidos analizados:  74                                       ║
+  ║  Superficie:          clay (Roland Garros)                    ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  ⚠️  ALERTA: 40.0% bankroll en riesgo — por encima del 30% recomendado.
+      Reducir combos o sistema hasta n≥30 con datos limpios.
+
+  📊 Calibración: n=150 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.697 (calibrado grass) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260608_033923.json

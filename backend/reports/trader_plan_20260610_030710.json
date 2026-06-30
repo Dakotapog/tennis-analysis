@@ -1,0 +1,475 @@
+{
+  "metadata": {
+    "timestamp": "20260610_030710",
+    "bankroll": 125000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260610_030037.json",
+    "n_partidos_analizados": 222,
+    "calibracion_n": 284,
+    "parametros": {
+      "modo": "cobertura",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Martin Damm vs Alex De Minaur",
+      "favorito": "Martin Damm",
+      "cuota": 4.2,
+      "edge_pct": "28.8%",
+      "p_modelo": 0.526,
+      "n_h2h": 0,
+      "p_blend": 0.6608391608391608,
+      "kelly_kl": 0.4318,
+      "kelly_usado": 0.1,
+      "stake": 12000,
+      "retorno_potencial": 50400.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Thijs Boogaard vs Yibing Wu",
+      "favorito": "Thijs Boogaard",
+      "cuota": 4.5,
+      "edge_pct": "28.9%",
+      "p_modelo": 0.511,
+      "n_h2h": 0,
+      "p_blend": 0.6608391608391608,
+      "kelly_kl": 0.4198,
+      "kelly_usado": 0.1,
+      "stake": 12000,
+      "retorno_potencial": 54000.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "James McCabe vs Zizou Bergs",
+      "favorito": "James McCabe",
+      "cuota": 2.8,
+      "edge_pct": "18.4%",
+      "p_modelo": 0.541,
+      "n_h2h": 0,
+      "p_blend": 0.6608391608391608,
+      "kelly_kl": 0.3432,
+      "kelly_usado": 0.1,
+      "stake": 12000,
+      "retorno_potencial": 33600.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Ugo Humbert vs Benjamin Bonzi",
+      "favorito": "Benjamin Bonzi",
+      "cuota": 2.7,
+      "edge_pct": "16.8%",
+      "p_modelo": 0.538,
+      "n_h2h": 2,
+      "p_blend": 0.6117034965034965,
+      "kelly_kl": 0.3186,
+      "kelly_usado": 0.0958,
+      "stake": 12000,
+      "retorno_potencial": 32400.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Iva Jovic vs Alexandra Eala",
+      "favorito": "Alexandra Eala",
+      "cuota": 2.43,
+      "edge_pct": "13.3%",
+      "p_modelo": 0.545,
+      "n_h2h": 1,
+      "p_blend": 0.6318793706293706,
+      "kelly_kl": 0.2758,
+      "kelly_usado": 0.0936,
+      "stake": 2000,
+      "retorno_potencial": 4860.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Victoria Mboko vs Karolina Pliskova",
+      "favorito": "Karolina Pliskova",
+      "cuota": 2.6,
+      "edge_pct": "13.7%",
+      "p_modelo": 0.522,
+      "n_h2h": 0,
+      "p_blend": 0.6608391608391608,
+      "kelly_kl": 0.2671,
+      "kelly_usado": 0.1,
+      "stake": 1000,
+      "retorno_potencial": 2600.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Giovanni Mpetshi Perricard vs Gauthier Onclin",
+      "favorito": "Gauthier Onclin",
+      "cuota": 2.48,
+      "edge_pct": "12.8%",
+      "p_modelo": 0.531,
+      "n_h2h": 2,
+      "p_blend": 0.6089034965034965,
+      "kelly_kl": 0.261,
+      "kelly_usado": 0.0862,
+      "stake": 1000,
+      "retorno_potencial": 2480.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Martin Landaluce vs Taylor Fritz",
+      "favorito": "Martin Landaluce",
+      "cuota": 2.8,
+      "edge_pct": "14.6%",
+      "p_modelo": 0.503,
+      "n_h2h": 0,
+      "p_blend": 0.6608391608391608,
+      "kelly_kl": 0.254,
+      "kelly_usado": 0.1,
+      "stake": 1000,
+      "retorno_potencial": 2800.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Jan-Lennard Struff vs Alexander Bublik",
+      "favorito": "Jan-Lennard Struff",
+      "cuota": 2.8,
+      "edge_pct": "14.5%",
+      "p_modelo": 0.502,
+      "n_h2h": 8,
+      "p_blend": 0.5453197711379529,
+      "kelly_kl": 0.2532,
+      "kelly_usado": 0.0732,
+      "stake": 1000,
+      "retorno_potencial": 2800.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Marie Bouzkova vs Donna Vekic",
+      "favorito": "Donna Vekic",
+      "cuota": 2.4,
+      "edge_pct": "10.4%",
+      "p_modelo": 0.521,
+      "n_h2h": 1,
+      "p_blend": 0.6258793706293706,
+      "kelly_kl": 0.2133,
+      "kelly_usado": 0.0897,
+      "stake": 1000,
+      "retorno_potencial": 2400.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Martin Damm",
+          "cuota": 4.2
+        },
+        {
+          "jugador": "Thijs Boogaard",
+          "cuota": 4.5
+        },
+        {
+          "jugador": "James McCabe",
+          "cuota": 2.8
+        }
+      ],
+      "cuota_combo": 52.92,
+      "hr_combo": 0.2746,
+      "ev_combo": 13.5332,
+      "excluidos": [
+        "Benjamin Bonzi",
+        "Alexandra Eala",
+        "Karolina Pliskova",
+        "Gauthier Onclin",
+        "Martin Landaluce",
+        "Jan-Lennard Struff",
+        "Donna Vekic",
+        "Jessica Bouzas Maneiro"
+      ],
+      "stake": 12000,
+      "retorno_potencial": 635040.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Martin Damm",
+          "cuota": 4.2
+        },
+        {
+          "jugador": "Thijs Boogaard",
+          "cuota": 4.5
+        },
+        {
+          "jugador": "Martin Landaluce",
+          "cuota": 2.8
+        }
+      ],
+      "cuota_combo": 52.92,
+      "hr_combo": 0.2746,
+      "ev_combo": 13.5332,
+      "excluidos": [
+        "James McCabe",
+        "Benjamin Bonzi",
+        "Alexandra Eala",
+        "Karolina Pliskova",
+        "Gauthier Onclin",
+        "Jan-Lennard Struff",
+        "Donna Vekic",
+        "Jessica Bouzas Maneiro"
+      ],
+      "stake": 12000,
+      "retorno_potencial": 635040.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Thijs Boogaard",
+          "cuota": 4.5
+        },
+        {
+          "jugador": "James McCabe",
+          "cuota": 2.8
+        },
+        {
+          "jugador": "Martin Landaluce",
+          "cuota": 2.8
+        }
+      ],
+      "cuota_combo": 35.28,
+      "hr_combo": 0.2746,
+      "ev_combo": 8.6888,
+      "excluidos": [
+        "Martin Damm",
+        "Benjamin Bonzi",
+        "Alexandra Eala",
+        "Karolina Pliskova",
+        "Gauthier Onclin",
+        "Jan-Lennard Struff",
+        "Donna Vekic",
+        "Jessica Bouzas Maneiro"
+      ],
+      "stake": 12000,
+      "retorno_potencial": 423360.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Martin Damm",
+          "cuota": 4.2
+        },
+        {
+          "jugador": "James McCabe",
+          "cuota": 2.8
+        },
+        {
+          "jugador": "Martin Landaluce",
+          "cuota": 2.8
+        }
+      ],
+      "cuota_combo": 32.93,
+      "hr_combo": 0.2746,
+      "ev_combo": 8.0429,
+      "excluidos": [
+        "Thijs Boogaard",
+        "Benjamin Bonzi",
+        "Alexandra Eala",
+        "Karolina Pliskova",
+        "Gauthier Onclin",
+        "Jan-Lennard Struff",
+        "Donna Vekic",
+        "Jessica Bouzas Maneiro"
+      ],
+      "stake": 12000,
+      "retorno_potencial": 395160.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Martin Damm",
+          "cuota": 4.2
+        },
+        {
+          "jugador": "Thijs Boogaard",
+          "cuota": 4.5
+        },
+        {
+          "jugador": "James McCabe",
+          "cuota": 2.8
+        },
+        {
+          "jugador": "Martin Landaluce",
+          "cuota": 2.8
+        }
+      ],
+      "cuota_combo": 148.18,
+      "hr_combo": 0.1785,
+      "ev_combo": 25.4503,
+      "excluidos": [
+        "Benjamin Bonzi",
+        "Alexandra Eala",
+        "Karolina Pliskova",
+        "Gauthier Onclin",
+        "Jan-Lennard Struff",
+        "Donna Vekic",
+        "Jessica Bouzas Maneiro"
+      ],
+      "stake": 6000,
+      "retorno_potencial": 889080.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Martin Damm",
+          "cuota": 4.2
+        },
+        {
+          "jugador": "Thijs Boogaard",
+          "cuota": 4.5
+        },
+        {
+          "jugador": "Karolina Pliskova",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Martin Landaluce",
+          "cuota": 2.8
+        }
+      ],
+      "cuota_combo": 137.59,
+      "hr_combo": 0.1785,
+      "ev_combo": 23.561,
+      "excluidos": [
+        "James McCabe",
+        "Benjamin Bonzi",
+        "Alexandra Eala",
+        "Gauthier Onclin",
+        "Jan-Lennard Struff",
+        "Donna Vekic",
+        "Jessica Bouzas Maneiro"
+      ],
+      "stake": 6000,
+      "retorno_potencial": 825540.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Martin Damm",
+          "cuota": 4.2
+        },
+        {
+          "jugador": "Thijs Boogaard",
+          "cuota": 4.5
+        },
+        {
+          "jugador": "James McCabe",
+          "cuota": 2.8
+        },
+        {
+          "jugador": "Karolina Pliskova",
+          "cuota": 2.6
+        }
+      ],
+      "cuota_combo": 137.59,
+      "hr_combo": 0.1785,
+      "ev_combo": 23.561,
+      "excluidos": [
+        "Benjamin Bonzi",
+        "Alexandra Eala",
+        "Gauthier Onclin",
+        "Martin Landaluce",
+        "Jan-Lennard Struff",
+        "Donna Vekic",
+        "Jessica Bouzas Maneiro"
+      ],
+      "stake": 6000,
+      "retorno_potencial": 825540.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Thijs Boogaard",
+          "cuota": 4.5
+        },
+        {
+          "jugador": "James McCabe",
+          "cuota": 2.8
+        },
+        {
+          "jugador": "Karolina Pliskova",
+          "cuota": 2.6
+        },
+        {
+          "jugador": "Martin Landaluce",
+          "cuota": 2.8
+        }
+      ],
+      "cuota_combo": 91.73,
+      "hr_combo": 0.1785,
+      "ev_combo": 15.374,
+      "excluidos": [
+        "Martin Damm",
+        "Benjamin Bonzi",
+        "Alexandra Eala",
+        "Gauthier Onclin",
+        "Jan-Lennard Struff",
+        "Donna Vekic",
+        "Jessica Bouzas Maneiro"
+      ],
+      "stake": 6000,
+      "retorno_potencial": 550380.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.4,
+    "total_ajustado": 50800.0,
+    "var_95": -12002.0,
+    "cvar_95": -25345.003795664343,
+    "expected_pl": 910218.5385783935,
+    "sharpe_ratio": 1.0378621917577926,
+    "kelly_growth_rate": 2.1479046983214167,
+    "sessions_to_double": 0.3227085359521018,
+    "var_excedido": true,
+    "factor_var": 0.984251968503937
+  },
+  "resumen": {
+    "gastado_individuales": 55000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 72000,
+    "total_en_riesgo": 127000.0,
+    "pct_bankroll_en_riesgo": 1.016,
+    "n_senales_apostar": 10,
+    "pool_cobertura": 11,
+    "alerta_riesgo": true
+  }
+}

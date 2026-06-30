@@ -297,8 +297,9 @@ def test_get_ranking_metrics_happy_path(analyzer):
 
 def test_analyze_surface_specialization_happy_path(analyzer, sample_history):
     """Test: Especialización en superficie retorna score y log."""
-    score, log = analyzer.analyze_surface_specialization(sample_history, "Dura", "PlayerA")
-    assert isinstance(score, (int, float))
+    result, log = analyzer.analyze_surface_specialization(sample_history, "Dura", "PlayerA")
+    assert isinstance(result, dict)
+    assert isinstance(result['score'], (int, float))
     assert isinstance(log, list)
 
 
@@ -454,17 +455,19 @@ def test_analyze_strength_of_schedule_wrong_type(analyzer):
 
 def test_analyze_surface_specialization_none_history(analyzer):
     """Test: analyze_surface_specialization debe manejar None como historial."""
-    score, log = analyzer.analyze_surface_specialization(None, "Dura", "PlayerA")
-    assert isinstance(score, (int, float))
-    assert score >= 0
+    result, log = analyzer.analyze_surface_specialization(None, "Dura", "PlayerA")
+    assert isinstance(result, dict)
+    assert isinstance(result['score'], (int, float))
+    assert result['score'] >= 0
     assert isinstance(log, list)
 
 
 def test_analyze_surface_specialization_minimal_entry(analyzer):
     """Test: Manejo de historial con solo los campos obligatorios."""
     minimal_history = [{"oponente": "PlayerX", "resultado": "2-0"}]
-    score, log = analyzer.analyze_surface_specialization(minimal_history, "Dura", "PlayerA")
-    assert isinstance(score, (int, float))
+    result, log = analyzer.analyze_surface_specialization(minimal_history, "Dura", "PlayerA")
+    assert isinstance(result, dict)
+    assert isinstance(result['score'], (int, float))
     assert isinstance(log, list)
 
 
@@ -486,10 +489,10 @@ def test_find_common_opponents_repeated(analyzer):
 
 
 def test_calculate_elo_from_history_none(analyzer):
-    """Test: calculate_elo_from_history debe retornar int base si historial es None."""
+    """Test: calculate_elo_from_history retorna default_rating (1500) cuando no hay historial.
+    B-11 fix: retornar 1500 (no None) — con floor=1500, raw=0 y contribution=0% igualmente."""
     elo = analyzer.calculate_elo_from_history("PlayerA", None)
-    assert isinstance(elo, (int, float))
-    assert elo >= 0
+    assert elo == 1500
 
 
 def test_calculate_elo_from_history_minimal(analyzer):
@@ -529,9 +532,10 @@ def test_analyze_surface_specialization_no_surface_matches(analyzer):
         {"oponente": "PlayerA", "resultado": "2-0", "surface": "Arcilla"},
         {"oponente": "PlayerB", "resultado": "2-1", "surface": "Hierba"}
     ]
-    score, log = analyzer.analyze_surface_specialization(history, "Dura", "TestPlayer")
-    assert isinstance(score, (int, float))
-    assert score >= 0
+    result, log = analyzer.analyze_surface_specialization(history, "Dura", "TestPlayer")
+    assert isinstance(result, dict)
+    assert isinstance(result['score'], (int, float))
+    assert result['score'] >= 0
     assert isinstance(log, list)
 
 
@@ -656,8 +660,9 @@ def test_calculate_elo_from_history_with_outcomes(analyzer, comprehensive_histor
 
 def test_analyze_surface_specialization_with_surface(analyzer, comprehensive_history):
     """Test: Especialización en superficie con partidos en esa superficie."""
-    score, log = analyzer.analyze_surface_specialization(comprehensive_history, "Dura", "PlayerA")
-    assert isinstance(score, (int, float))
+    result, log = analyzer.analyze_surface_specialization(comprehensive_history, "Dura", "PlayerA")
+    assert isinstance(result, dict)
+    assert isinstance(result['score'], (int, float))
     assert isinstance(log, list)
 
 
@@ -889,8 +894,9 @@ def test_analyze_surface_specialization_all_surfaces(analyzer):
         {"surface": "Hierba", "outcome": "Ganó"}
     ]
     for surface in ["Dura", "Arcilla", "Hierba"]:
-        score, log = analyzer.analyze_surface_specialization(history, surface, "PlayerA")
-        assert isinstance(score, (int, float))
+        result, log = analyzer.analyze_surface_specialization(history, surface, "PlayerA")
+        assert isinstance(result, dict)
+        assert isinstance(result['score'], (int, float))
         assert isinstance(log, list)
 
 
@@ -1261,8 +1267,9 @@ def test_analyze_surface_specialization_mixed_outcomes(analyzer):
         {"oponente": "PlayerB", "resultado": "0-2", "surface": "Dura", "outcome": "Perdió"},
         {"oponente": "PlayerC", "resultado": "2-1", "surface": "Dura", "outcome": "Ganó"}
     ]
-    score, log = analyzer.analyze_surface_specialization(history, "Dura", "PlayerA")
-    assert isinstance(score, (int, float))
+    result, log = analyzer.analyze_surface_specialization(history, "Dura", "PlayerA")
+    assert isinstance(result, dict)
+    assert isinstance(result['score'], (int, float))
     assert len(log) > 0
 
 
@@ -1494,8 +1501,9 @@ def test_analyze_surface_specialization_unknown_surface(analyzer):
     history = [
         {"oponente": "PlayerA", "resultado": "2-0", "surface": "Unknown"}
     ]
-    score, log = analyzer.analyze_surface_specialization(history, "Unknown", "PlayerA")
-    assert isinstance(score, (int, float))
+    result, log = analyzer.analyze_surface_specialization(history, "Unknown", "PlayerA")
+    assert isinstance(result, dict)
+    assert isinstance(result['score'], (int, float))
 
 
 def test_generate_basic_prediction_extreme_ranks(analyzer):
@@ -1605,9 +1613,10 @@ def test_analyze_surface_specialization_with_context(analyzer):
         {"oponente": "PlayerC", "resultado": "1-2", "surface": "Dura", "outcome": "Perdió", "opponent_ranking": 5},
         {"oponente": "PlayerD", "resultado": "2-0", "surface": "Arcilla", "outcome": "Ganó", "opponent_ranking": 30}
     ]
-    score, log = analyzer.analyze_surface_specialization(history, "Dura", "TestPlayer")
-    assert isinstance(score, (int, float))
-    assert score > 0
+    result, log = analyzer.analyze_surface_specialization(history, "Dura", "TestPlayer")
+    assert isinstance(result, dict)
+    assert isinstance(result['score'], (int, float))
+    assert result['score'] > 0
     assert len(log) > 0
 
 

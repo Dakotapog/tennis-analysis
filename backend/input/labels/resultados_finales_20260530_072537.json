@@ -1,0 +1,68 @@
+{
+  "fecha_validacion": "2026-05-30T07:25:48.457661",
+  "fuente_h2h": "reports/h2h_results_enhanced_20260530_053518.json",
+  "total_partidos": 16,
+  "total_validados": 5,
+  "saltados": 0,
+  "correctas": 3,
+  "accuracy": 0.6,
+  "accuracy_por_superficie": {
+    "clay": {
+      "accuracy": 0.6,
+      "n": 5,
+      "correctas": 3
+    }
+  },
+  "partidos": [
+    {
+      "partido": "Cerundolo F. vs Svajda Z.",
+      "prediccion": "Cerundolo F.",
+      "confianza": 57.4,
+      "resultado_real": "Svajda Z.",
+      "correcto": false,
+      "match_id": "QFAD1bV9",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Cobolli F. vs Tien L.",
+      "prediccion": "Tien L.",
+      "confianza": 58.2,
+      "resultado_real": "Cobolli F.",
+      "correcto": false,
+      "match_id": "n7IrJlXG",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Jovic I. vs Osaka N.",
+      "prediccion": "Osaka N.",
+      "confianza": 53.2,
+      "resultado_real": "Osaka N.",
+      "correcto": true,
+      "match_id": "MkW2B0up",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Sakkari M. vs Chwalinska M.",
+      "prediccion": "Chwalinska M.",
+      "confianza": 52.2,
+      "resultado_real": "Chwalinska M.",
+      "correcto": true,
+      "match_id": "hhsieFKj",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Shnaider D. vs Oliynykova O.",
+      "prediccion": "Shnaider D.",
+      "confianza": 53.3,
+      "resultado_real": "Shnaider D.",
+      "correcto": true,
+      "match_id": "I9a8Z9Hc",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    }
+  ]
+}

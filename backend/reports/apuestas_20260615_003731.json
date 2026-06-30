@@ -1,0 +1,52 @@
+{
+  "ts_registro": "2026-06-15T00:37:31.541850",
+  "ts_bookmarklet": "2026-06-15T05:37:31.122Z",
+  "estado": "PENDIENTE",
+  "betslip_index": "reports/betslip_index_20260615_000853.json",
+  "n_picks": 2,
+  "picks": [
+    {
+      "outcome_id": "4222556063",
+      "jugador": "Amarissa Kiara Toth",
+      "cuota": 2.18,
+      "cuota_kambi": 2.18,
+      "partido": "Chloe Paquet vs Amarissa Kiara Toth",
+      "match_id": "z9vMvokS",
+      "match_url": "https://www.flashscore.co/match/tennis/paquet-chloe-toth-amarissa-kiara/z9vMvokS/#/h2h",
+      "torneo": "Brescia (Italia) - Fase previa",
+      "superficie": "?",
+      "tier": "?",
+      "edge": "4.8%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0,
+      "stake": 0,
+      "retorno_potencial": 0,
+      "resultado_real": "Chloe Paquet",
+      "correcto": false,
+      "ganancia": 0,
+      "sets": "2-0"
+    },
+    {
+      "outcome_id": "4222575505",
+      "jugador": "Alastair Gray",
+      "cuota": 2.04,
+      "cuota_kambi": 2.04,
+      "partido": "Alastair Gray vs Tristan Schoolkate",
+      "match_id": "OAAPmORr",
+      "match_url": "https://www.flashscore.co/match/tennis/gray-alastair-schoolkate-tristan/OAAPmORr/#/h2h",
+      "torneo": "Nottingham (Reino Unido)",
+      "superficie": "?",
+      "tier": "?",
+      "edge": "1.8%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0,
+      "stake": 0,
+      "retorno_potencial": 0,
+      "resultado_real": null,
+      "correcto": null,
+      "ganancia": null
+    }
+  ],
+  "pl_sesion": 0,
+  "ts_cierre": null
+}

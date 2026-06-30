@@ -1,0 +1,406 @@
+{
+  "metadata": {
+    "timestamp": "20260606_121208",
+    "bankroll": 125000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260604_034619.json",
+    "n_partidos_analizados": 80,
+    "calibracion_n": 69,
+    "parametros": {
+      "modo": "cobertura",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Sengul B. vs Karra T.",
+      "favorito": "Sengul B.",
+      "cuota": 1.53,
+      "edge_pct": "10.0%",
+      "p_modelo": 0.754,
+      "n_h2h": 0,
+      "p_blend": 0.676056338028169,
+      "kelly_kl": 0.3481,
+      "kelly_usado": 0.0162,
+      "stake": 1000,
+      "retorno_potencial": 1530.0,
+      "zona_cuota": "moderate_favorite",
+      "superficie": "hard"
+    },
+    {
+      "partido": "Mujakic A. vs Mirarchi W.",
+      "favorito": "Mirarchi W.",
+      "cuota": 2.85,
+      "edge_pct": "16.8%",
+      "p_modelo": 0.519,
+      "n_h2h": 0,
+      "p_blend": 0.676056338028169,
+      "kelly_kl": 0.31,
+      "kelly_usado": 0.1,
+      "stake": 7000,
+      "retorno_potencial": 19950.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "De Alba R. vs Azoidis D.",
+      "favorito": "De Alba R.",
+      "cuota": 2.9,
+      "edge_pct": "17.4%",
+      "p_modelo": 0.519,
+      "n_h2h": 1,
+      "p_blend": 0.6367922535211268,
+      "kelly_kl": 0.3025,
+      "kelly_usado": 0.1,
+      "stake": 7000,
+      "retorno_potencial": 20300.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    },
+    {
+      "partido": "Makhlouf N. vs Rankin M.",
+      "favorito": "Makhlouf N.",
+      "cuota": 2.55,
+      "edge_pct": "11.2%",
+      "p_modelo": 0.504,
+      "n_h2h": 0,
+      "p_blend": 0.676056338028169,
+      "kelly_kl": 0.2084,
+      "kelly_usado": 0.1,
+      "stake": 7000,
+      "retorno_potencial": 17850.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    },
+    {
+      "partido": "Dlimi Y. vs Dougaz A.",
+      "favorito": "Dlimi Y.",
+      "cuota": 2.22,
+      "edge_pct": "7.8%",
+      "p_modelo": 0.528,
+      "n_h2h": 0,
+      "p_blend": 0.676056338028169,
+      "kelly_kl": 0.1647,
+      "kelly_usado": 0.1,
+      "stake": 7000,
+      "retorno_potencial": 15540.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    },
+    {
+      "partido": "Arzhankin A. vs D'Agostino S.",
+      "favorito": "D'Agostino S.",
+      "cuota": 2.3,
+      "edge_pct": "7.4%",
+      "p_modelo": 0.509,
+      "n_h2h": 0,
+      "p_blend": 0.676056338028169,
+      "kelly_kl": 0.1551,
+      "kelly_usado": 0.1,
+      "stake": 1000,
+      "retorno_potencial": 2300.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Casanova A. vs Retelj M.",
+      "favorito": "Casanova A.",
+      "cuota": 1.28,
+      "edge_pct": "16.9%",
+      "p_modelo": 0.95,
+      "n_h2h": 0,
+      "p_blend": 0.676056338028169,
+      "kelly_kl": 0.1274,
+      "kelly_usado": 0.0,
+      "stake": 1000,
+      "retorno_potencial": 1280.0,
+      "zona_cuota": "heavy_favorite",
+      "superficie": "clay"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Mirarchi W.",
+          "cuota": 2.85
+        },
+        {
+          "jugador": "De Alba R.",
+          "cuota": 2.9
+        },
+        {
+          "jugador": "Makhlouf N.",
+          "cuota": 2.55
+        }
+      ],
+      "cuota_combo": 21.08,
+      "hr_combo": 0.2911,
+      "ev_combo": 5.1351,
+      "excluidos": [
+        "Sengul B.",
+        "Dlimi Y.",
+        "D'Agostino S.",
+        "Gagliardo L.",
+        "Talan Lopatic L."
+      ],
+      "stake": 7000,
+      "retorno_potencial": 147560.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Mirarchi W.",
+          "cuota": 2.85
+        },
+        {
+          "jugador": "De Alba R.",
+          "cuota": 2.9
+        },
+        {
+          "jugador": "D'Agostino S.",
+          "cuota": 2.3
+        }
+      ],
+      "cuota_combo": 19.01,
+      "hr_combo": 0.2911,
+      "ev_combo": 4.5337,
+      "excluidos": [
+        "Sengul B.",
+        "Makhlouf N.",
+        "Dlimi Y.",
+        "Gagliardo L.",
+        "Talan Lopatic L."
+      ],
+      "stake": 7000,
+      "retorno_potencial": 133070.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Mirarchi W.",
+          "cuota": 2.85
+        },
+        {
+          "jugador": "Makhlouf N.",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "D'Agostino S.",
+          "cuota": 2.3
+        }
+      ],
+      "cuota_combo": 16.72,
+      "hr_combo": 0.3091,
+      "ev_combo": 4.1659,
+      "excluidos": [
+        "Sengul B.",
+        "De Alba R.",
+        "Dlimi Y.",
+        "Gagliardo L.",
+        "Talan Lopatic L."
+      ],
+      "stake": 7000,
+      "retorno_potencial": 117040.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "De Alba R.",
+          "cuota": 2.9
+        },
+        {
+          "jugador": "Makhlouf N.",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "D'Agostino S.",
+          "cuota": 2.3
+        }
+      ],
+      "cuota_combo": 17.01,
+      "hr_combo": 0.2911,
+      "ev_combo": 3.9512,
+      "excluidos": [
+        "Sengul B.",
+        "Mirarchi W.",
+        "Dlimi Y.",
+        "Gagliardo L.",
+        "Talan Lopatic L."
+      ],
+      "stake": 7000,
+      "retorno_potencial": 119070.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Mirarchi W.",
+          "cuota": 2.85
+        },
+        {
+          "jugador": "De Alba R.",
+          "cuota": 2.9
+        },
+        {
+          "jugador": "Makhlouf N.",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "D'Agostino S.",
+          "cuota": 2.3
+        }
+      ],
+      "cuota_combo": 48.47,
+      "hr_combo": 0.1968,
+      "ev_combo": 8.5403,
+      "excluidos": [
+        "Sengul B.",
+        "Dlimi Y.",
+        "Gagliardo L.",
+        "Talan Lopatic L."
+      ],
+      "stake": 3000,
+      "retorno_potencial": 145410.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Mirarchi W.",
+          "cuota": 2.85
+        },
+        {
+          "jugador": "De Alba R.",
+          "cuota": 2.9
+        },
+        {
+          "jugador": "Makhlouf N.",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "Dlimi Y.",
+          "cuota": 2.22
+        }
+      ],
+      "cuota_combo": 46.79,
+      "hr_combo": 0.1968,
+      "ev_combo": 8.2085,
+      "excluidos": [
+        "Sengul B.",
+        "D'Agostino S.",
+        "Gagliardo L.",
+        "Talan Lopatic L."
+      ],
+      "stake": 3000,
+      "retorno_potencial": 140370.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Mirarchi W.",
+          "cuota": 2.85
+        },
+        {
+          "jugador": "De Alba R.",
+          "cuota": 2.9
+        },
+        {
+          "jugador": "Dlimi Y.",
+          "cuota": 2.22
+        },
+        {
+          "jugador": "D'Agostino S.",
+          "cuota": 2.3
+        }
+      ],
+      "cuota_combo": 42.2,
+      "hr_combo": 0.1968,
+      "ev_combo": 7.3057,
+      "excluidos": [
+        "Sengul B.",
+        "Makhlouf N.",
+        "Gagliardo L.",
+        "Talan Lopatic L."
+      ],
+      "stake": 3000,
+      "retorno_potencial": 126600.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Mirarchi W.",
+          "cuota": 2.85
+        },
+        {
+          "jugador": "Makhlouf N.",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "Dlimi Y.",
+          "cuota": 2.22
+        },
+        {
+          "jugador": "D'Agostino S.",
+          "cuota": 2.3
+        }
+      ],
+      "cuota_combo": 37.11,
+      "hr_combo": 0.209,
+      "ev_combo": 6.7537,
+      "excluidos": [
+        "Sengul B.",
+        "De Alba R.",
+        "Gagliardo L.",
+        "Talan Lopatic L."
+      ],
+      "stake": 3000,
+      "retorno_potencial": 111330.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.7407407407407407,
+    "total_ajustado": 91851.85185185185,
+    "var_95": -56181.42857142857,
+    "cvar_95": -59654.55783335409,
+    "expected_pl": 408421.97328344244,
+    "sharpe_ratio": 0.8972522813036398,
+    "kelly_growth_rate": 1.363974811559504,
+    "sessions_to_double": 0.508181804154751,
+    "var_excedido": true,
+    "factor_var": 0.5562336308388639
+  },
+  "resumen": {
+    "gastado_individuales": 31000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 40000,
+    "total_en_riesgo": 71000.0,
+    "pct_bankroll_en_riesgo": 0.568,
+    "n_senales_apostar": 7,
+    "pool_cobertura": 8,
+    "alerta_riesgo": true
+  }
+}

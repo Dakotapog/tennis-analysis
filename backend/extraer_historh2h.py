@@ -259,18 +259,66 @@ def select_best_json_file():
     
 async def main():
     """🎯 Función principal — usa H2HExtractor modular (Nodo-07 Fase 2)"""
+    import argparse
     from scraping.h2h_extractor import H2HExtractor
 
+    parser = argparse.ArgumentParser(description="H2H Extractor — análisis de rivalidades")
+    parser.add_argument(
+        '--all-tournaments', action='store_true',
+        help="Procesar TODOS los torneos del archivo (sin filtro Roland Garros). Usar con scraper --tomorrow."
+    )
+    parser.add_argument(
+        '--file', type=str, default=None,
+        help="Ruta al archivo zita_tennis_matches_*.json (default: más reciente en data/)"
+    )
+    parser.add_argument(
+        '--api-mode', action='store_true',
+        help="Usar API Ninja en vez de Playwright (~0.5s/partido vs 2-3 min). No requiere navegador."
+    )
+    args = parser.parse_args()
+
+    # ── API MODE: rápido, sin Playwright ──────────────────────────────────────
+    if args.api_mode:
+        from scraping.ninja_h2h_parser import NinjaH2HExtractor
+
+        logger.info("🎾 H2H EXTRACTOR — MODO API NINJA (rápido)")
+        logger.info("=" * 80)
+        logger.info("⚡ ~0.5s/partido vs 2-3 min con Playwright")
+        if args.all_tournaments:
+            logger.info("🌍 MODO: multi-torneo (--all-tournaments)")
+        logger.info("=" * 80)
+
+        ninja = NinjaH2HExtractor()
+        ninja.all_tournaments = args.all_tournaments
+
+        if not ninja.load_matches(json_file=args.file):
+            logger.error("❌ No se pudieron cargar los partidos desde JSON")
+            return
+
+        ninja.run()
+        output_file = ninja.save_results()
+
+        if output_file:
+            logger.info("🎉 PROCESAMIENTO COMPLETADO EXITOSAMENTE")
+            logger.info(f"📁 Archivo de resultados: {output_file}")
+        else:
+            logger.error("❌ Error guardando los resultados.")
+        return
+
+    # ── MODO PLAYWRIGHT (original) ─────────────────────────────────────────────
     logger.info("🎾 H2H EXTRACTOR MODULAR CON ANÁLISIS DE RIVALIDAD TRANSITIVA")
     logger.info("=" * 80)
     logger.info("🚀 Versión 5.0 - H2HExtractor modular (Strangler Fig Fase 2)")
+    if args.all_tournaments:
+        logger.info("🌍 MODO: multi-torneo (--all-tournaments) — Roland Garros filter desactivado")
     logger.info("=" * 80)
 
     extractor = H2HExtractor()
+    extractor.all_tournaments = args.all_tournaments
 
     try:
-        # 1. Cargar partidos (incluye filtro Roland Garros + superficie)
-        if not extractor.load_matches():
+        # 1. Cargar partidos (filtro según modo)
+        if not extractor.load_matches(json_file=args.file):
             logger.error("❌ No se pudieron cargar los partidos desde JSON")
             return
 

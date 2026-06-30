@@ -48,6 +48,7 @@ except ImportError as e:
 from .browser_manager import BrowserManager
 from .data_parser import DataParser
 from .file_utils import select_best_json_file
+from config import TOTAL_MATCHES_TO_PROCESS, BROWSER_HEADLESS, BROWSER_SLOW_MO  # D-17
 
 logger = logging.getLogger(__name__)
 
@@ -67,7 +68,7 @@ class H2HExtractor:
     - Delegación de análisis a módulos especializados
     """
     
-    def __init__(self, headless: bool = True, slow_mo: int = 250):
+    def __init__(self, headless: bool = BROWSER_HEADLESS, slow_mo: int = BROWSER_SLOW_MO):
         """
         Inicializar extractor H2H.
         
@@ -87,7 +88,7 @@ class H2HExtractor:
         # Estado interno
         self.matches_queue = []
         self.current_match_index = 0
-        self.total_matches_to_process = 80
+        self.total_matches_to_process = TOTAL_MATCHES_TO_PROCESS
         self.all_results = []
         
         # Manejadores de señales
@@ -164,7 +165,10 @@ class H2HExtractor:
             bool: True si se cargaron partidos correctamente
         """
         if not json_file:
-            json_file = select_best_json_file()
+            json_file = select_best_json_file(
+                directory="data",
+                pattern="zita_tennis_matches_*.json"
+            )
         
         if not json_file:
             logger.error("❌ No se pudo seleccionar archivo JSON")
@@ -200,13 +204,33 @@ class H2HExtractor:
                 logger.error("❌ No se encontraron partidos con match_url válidas")
                 return False
 
-            # Filtrar Roland Garros — Grand Slam arcilla (excluir calificación)
-            roland_garros = [m for m in valid_matches
-                             if 'French Open' in m.get('torneo_completo', '')
-                             and 'Qualification' not in m.get('torneo_completo', '')]
-            target_matches = roland_garros if roland_garros else valid_matches
-            if roland_garros:
-                logger.info(f"   🎾 Modo Roland Garros: {len(roland_garros)} partidos del Grand Slam arcilla")
+            # Filtrar solo individuales (singles) con cuotas — excluir dobles, juniors y calificación
+            # Heurística singles: URL tiene nombres de jugadores (>20 chars tras /match/tennis/)
+            # Heurística cuadro principal: cuota1 no es None (juniors/calificación no tienen odds)
+            def es_singles_cuadro_principal(match: dict) -> bool:
+                url = match.get('match_url', '')
+                part = url.split('/match/tennis/')[-1].rstrip('/') if '/match/tennis/' in url else ''
+                es_singles = '-' in part and len(part) > 20
+                tiene_cuotas = match.get('cuota1') is not None
+                return es_singles and tiene_cuotas
+
+            # Modo multi-torneo vs Roland Garros
+            # Si self.all_tournaments=True (--all-tournaments) → procesa todo sin filtro de torneo.
+            # Si no, aplica filtro Roland Garros cuando hay French Open en el archivo (dev mode).
+            if getattr(self, 'all_tournaments', False):
+                target_matches = [m for m in valid_matches if es_singles_cuadro_principal(m)]
+                logger.info(f"   🌍 Modo multi-torneo: {len(valid_matches)} válidos → {len(target_matches)} individuales con cuotas")
+            else:
+                roland_garros = [m for m in valid_matches
+                                 if 'French Open' in m.get('torneo_completo', '')
+                                 and 'Qualification' not in m.get('torneo_completo', '')]
+                if roland_garros:
+                    singles = [m for m in roland_garros if es_singles_cuadro_principal(m)]
+                    logger.info(f"   🎾 Modo Roland Garros: {len(roland_garros)} partidos → {len(singles)} individuales cuadro principal")
+                    target_matches = singles if singles else roland_garros
+                else:
+                    target_matches = valid_matches
+                    logger.info(f"   🌍 Sin Roland Garros → procesando {len(target_matches)} partidos válidos")
 
             self.matches_queue = target_matches[:self.total_matches_to_process]
             logger.info(f"✅ Cola de procesamiento creada con {len(self.matches_queue)} partidos.")
@@ -309,6 +333,10 @@ class H2HExtractor:
             
             # 2. Extraer información actual del partido
             current_info = await self._extract_current_match_info()
+            # Preservar valores originales si Playwright no los encontró
+            for key in ('cuota1', 'cuota2', 'torneo_nombre', 'tipo_cancha', 'torneo_completo'):
+                if current_info.get(key) is None and match_data.get(key) is not None:
+                    current_info[key] = match_data[key]
             match_data.update(current_info)
 
             # 3. Navegar a H2H
@@ -535,79 +563,89 @@ class H2HExtractor:
         """👤 Extraer historial de un jugador."""
         matches = []
         rows = await section.locator('.h2h__row').all()
-        
+
         logger.info(f"      📋 Parseando {len(rows)} partidos...")
-        
+
         for row in rows:
             try:
-                date = await row.locator('.h2h__date').inner_text()
-                result = await row.locator('.h2h__result').inner_text()
-                
-                # Oponente (no highlighted)
-                participants = await row.locator('.h2h__participant').all()
-                opponent = "N/A"
-                for p in participants:
-                    class_attr = await p.get_attribute('class') or ''
-                    if 'highlighted' not in class_attr:
-                        opp_elem = p.locator('.h2h__participantInner')
-                        if await opp_elem.count() > 0:
-                            opponent = await opp_elem.inner_text()
-                        break
-                
-                # Outcome
-                outcome_elem = row.locator('.h2h__icon > div')
-                outcome = "Perdió"
-                if await outcome_elem.count() > 0:
-                    outcome_class = await outcome_elem.get_attribute('class') or ''
-                    if 'win' in outcome_class.lower():
-                        outcome = "Ganó"
+                # Extraer todos los campos via JS evaluate (textContent evita problemas CSS)
+                row_data = await row.evaluate('''el => {
+                    // Fecha: ahora data-testid="wcl-stageTime" (antes h2h__date)
+                    const date_el = el.querySelector('[data-testid="wcl-stageTime"]');
+                    // Resultado: unir scores individuales con "-" (wcl-tableScore)
+                    const score_spans = el.querySelectorAll('[data-testid="wcl-tableScore"]');
+                    const result = score_spans.length > 0
+                        ? Array.from(score_spans).map(s => s.textContent.trim()).join('-')
+                        : (el.querySelector('.h2h__result') ? el.querySelector('.h2h__result').textContent.trim() : null);
+                    // Oponente: participante SIN wcl-hasBackground (= el no-destacado)
+                    const participants = el.querySelectorAll('[class*="h2h__participant"]:not([class*="participantInner"])');
+                    let opponent = null;
+                    for (const p of participants) {
+                        const nameSpan = p.querySelector('[data-testid="wcl-scores-simple-text-01"]');
+                        if (nameSpan && !nameSpan.className.includes('wcl-hasBackground')) {
+                            opponent = nameSpan.textContent.trim();
+                            break;
+                        }
+                    }
+                    // Outcome: .h2h__icon > div con "win" en clase
+                    const icon_div = el.querySelector('.h2h__icon > div');
+                    const outcome = icon_div && icon_div.className.toLowerCase().includes('win') ? 'Ganó' : 'Perdió';
+                    // Torneo: .h2h__event
+                    const event_el = el.querySelector('.h2h__event');
+                    return {
+                        date: date_el ? date_el.textContent.trim() : null,
+                        result: result,
+                        opponent: opponent,
+                        outcome: outcome,
+                        tournament: event_el ? event_el.textContent.trim() : 'N/A',
+                        event_title: event_el ? (event_el.getAttribute('title') || '') : '',
+                        event_class: event_el ? (event_el.getAttribute('class') || '') : '',
+                    };
+                }''')
 
-                # Torneo y ubicación
-                tournament = "N/A"
-                city = "N/A"
-                country = "N/A"
-                surface = "N/A"
+                if row_data.get('date') is None or row_data.get('result') is None:
+                    continue
 
-                event_elem = row.locator('.h2h__event').first
-                if await event_elem.count() > 0:
-                    try:
-                        tournament = await event_elem.inner_text()
-                    except Exception:
-                        pass
-                    
-                    title_attr = await event_elem.get_attribute('title')
-                    if title_attr:
-                        location_info = self.data_parser.extract_location_from_title(title_attr)
-                        city = location_info['ciudad']
-                        country = location_info['pais']
-                        surface = location_info['superficie']
-                    
-                    # También extraer de la clase
-                    class_attr = await event_elem.get_attribute('class') or ''
-                    if 'hard' in class_attr or 'dura' in class_attr:
-                        surface = 'Dura'
-                    elif 'clay' in class_attr or 'arcilla' in class_attr:
-                        surface = 'Arcilla'
-                    elif 'grass' in class_attr or 'hierba' in class_attr:
-                        surface = 'Hierba'
-                    elif 'indoor' in class_attr:
-                        surface = 'Indoor'
+                date = row_data['date']
+                result = row_data['result'].replace('\n', '-')
+                opponent = row_data.get('opponent') or 'N/A'
+                outcome = row_data['outcome']
+                tournament = row_data['tournament'].replace('\n', ' ')
+
+                # Superficie desde título o clase del evento
+                city = 'N/A'
+                country = 'N/A'
+                surface = 'N/A'
+                if row_data['event_title']:
+                    location_info = self.data_parser.extract_location_from_title(row_data['event_title'])
+                    city = location_info['ciudad']
+                    country = location_info['pais']
+                    surface = location_info['superficie']
+                ec = row_data['event_class']
+                if 'hard' in ec or 'dura' in ec:
+                    surface = 'Dura'
+                elif 'clay' in ec or 'arcilla' in ec:
+                    surface = 'Arcilla'
+                elif 'grass' in ec or 'hierba' in ec:
+                    surface = 'Hierba'
+                elif 'indoor' in ec:
+                    surface = 'Indoor'
 
                 matches.append({
-                    'fecha': date.strip(),
+                    'fecha': date,
                     'oponente': self.data_parser.clean_player_name(opponent),
-                    'resultado': result.strip().replace('\n', '-'),
+                    'resultado': result,
                     'outcome': outcome,
-                    'torneo': tournament.strip().replace('\n', ' '),
+                    'torneo': tournament,
                     'ciudad': city,
                     'pais': country,
                     'superficie': surface
                 })
-            
+
             except Exception as e:
                 logger.warning(f"      ⚠️ Error parseando fila: {e}")
                 continue
-        
+
         logger.info(f"   ✅ Extraídos {len(matches)} partidos")
         return matches
 
@@ -620,78 +658,85 @@ class H2HExtractor:
         
         for row in rows:
             try:
-                date = await row.locator('.h2h__date').inner_text()
-                result = await row.locator('.h2h__result').inner_text()
-                
-                participants = await row.locator('.h2h__participant').all()
-                p1_name = "N/A"
-                p2_name = "N/A"
-                
-                if len(participants) >= 2:
-                    p1_elem = participants[0].locator('.h2h__participantInner')
-                    p2_elem = participants[1].locator('.h2h__participantInner')
-                    
-                    if await p1_elem.count() > 0:
-                        p1_name = await p1_elem.inner_text()
-                    if await p2_elem.count() > 0:
-                        p2_name = await p2_elem.inner_text()
+                # Extraer todos los campos via JS evaluate (textContent evita problemas CSS)
+                row_data = await row.evaluate('''el => {
+                    const date_el = el.querySelector('[data-testid="wcl-stageTime"]');
+                    // Resultado: unir scores individuales con "-"
+                    const score_spans = el.querySelectorAll('[data-testid="wcl-tableScore"]');
+                    const result = score_spans.length > 0
+                        ? Array.from(score_spans).map(s => s.textContent.trim()).join('-')
+                        : (el.querySelector('.h2h__result') ? el.querySelector('.h2h__result').textContent.trim() : null);
+                    // Participantes: excluir Inner, solo los contenedores principales
+                    const parts = el.querySelectorAll('[class*="h2h__participant"]:not([class*="participantInner"])');
+                    const names = [];
+                    for (const p of parts) {
+                        const ns = p.querySelector('[data-testid="wcl-scores-simple-text-01"]');
+                        names.push(ns ? ns.textContent.trim() : 'N/A');
+                    }
+                    // Ganador: nameSpan con wcl-hasBackground = destacado = ganador
+                    let winner = 'N/A';
+                    for (const p of parts) {
+                        const allSpans = p.querySelectorAll('[data-testid="wcl-scores-simple-text-01"]');
+                        for (const ns of allSpans) {
+                            if (ns.className.includes('wcl-hasBackground')) {
+                                winner = ns.textContent.trim();
+                                break;
+                            }
+                        }
+                        if (winner !== 'N/A') break;
+                    }
+                    const event_el = el.querySelector('.h2h__event');
+                    return {
+                        date: date_el ? date_el.textContent.trim() : null,
+                        result: result,
+                        p1: names[0] || 'N/A',
+                        p2: names[1] || 'N/A',
+                        winner: winner,
+                        tournament: event_el ? event_el.textContent.trim() : 'N/A',
+                        event_title: event_el ? (event_el.getAttribute('title') || '') : '',
+                        event_class: event_el ? (event_el.getAttribute('class') || '') : '',
+                    };
+                }''')
 
-                # Torneo y ubicación
-                tournament = "N/A"
-                city = "N/A"
-                country = "N/A"
-                surface = "N/A"
+                if row_data.get('date') is None or row_data.get('result') is None:
+                    continue
 
-                event_elem = row.locator('.h2h__event').first
-                if await event_elem.count() > 0:
-                    try:
-                        tournament = await event_elem.inner_text()
-                    except Exception:
-                        pass
-                    
-                    title_attr = await event_elem.get_attribute('title')
-                    if title_attr:
-                        location_info = self.data_parser.extract_location_from_title(title_attr)
-                        city = location_info['ciudad']
-                        country = location_info['pais']
-                        surface = location_info['superficie']
-                    
-                    # También extraer de la clase
-                    class_attr = await event_elem.get_attribute('class') or ''
-                    if 'hard' in class_attr or 'dura' in class_attr:
-                        surface = 'Dura'
-                    elif 'clay' in class_attr or 'arcilla' in class_attr:
-                        surface = 'Arcilla'
-                    elif 'grass' in class_attr or 'hierba' in class_attr:
-                        surface = 'Hierba'
-                    elif 'indoor' in class_attr:
-                        surface = 'Indoor'
+                date = row_data['date']
+                result = row_data['result'].replace('\n', '-')
+                p1_name = row_data['p1']
+                p2_name = row_data['p2']
+                winner = row_data['winner']
+                tournament = row_data['tournament'].replace('\n', ' ')
 
-                # Ganador
-                winner = self.data_parser.determine_winner_from_result(
-                    result.strip().replace('\n', '-'),
-                    p1_name, p2_name
-                )
-                
-                # Fallback: buscar highlighted
-                if winner == 'N/A':
-                    for j, p in enumerate(participants):
-                        class_attr = await p.get_attribute('class') or ''
-                        if 'highlighted' in class_attr or 'winner' in class_attr:
-                            winner = p1_name if j == 0 else p2_name
-                            break
-                
+                city = 'N/A'
+                country = 'N/A'
+                surface = 'N/A'
+                if row_data['event_title']:
+                    location_info = self.data_parser.extract_location_from_title(row_data['event_title'])
+                    city = location_info['ciudad']
+                    country = location_info['pais']
+                    surface = location_info['superficie']
+                ec = row_data['event_class']
+                if 'hard' in ec or 'dura' in ec:
+                    surface = 'Dura'
+                elif 'clay' in ec or 'arcilla' in ec:
+                    surface = 'Arcilla'
+                elif 'grass' in ec or 'hierba' in ec:
+                    surface = 'Hierba'
+                elif 'indoor' in ec:
+                    surface = 'Indoor'
+
                 matches.append({
-                    'fecha': date.strip(),
+                    'fecha': date,
                     'jugador1': self.data_parser.clean_player_name(p1_name),
                     'jugador2': self.data_parser.clean_player_name(p2_name),
-                    'resultado': result.strip().replace('\n', '-'),
-                    'ganador': winner,
-                    'torneo': tournament.strip().replace('\n', ' '),
+                    'resultado': result,
+                    'ganador': self.data_parser.clean_player_name(winner),
+                    'torneo': tournament,
                     'ciudad': city,
                     'pais': country,
                     'superficie': surface,
-                    'ganador_sets': self.data_parser.extract_winner_sets(result.strip())
+                    'ganador_sets': self.data_parser.extract_winner_sets(result)
                 })
             
             except Exception as e:
@@ -889,8 +934,63 @@ class H2HExtractor:
                 f'{p1_key}_location_stats': rivalry_analysis.get('p1_location_stats'),
                 f'{p2_key}_location_stats': rivalry_analysis.get('p2_location_stats'),
             },
-            'common_opponents_detailed': rivalry_analysis.get('common_opponents_detailed', [])
+            'common_opponents_detailed': self._build_common_opponents_detailed(
+                rivalry_analysis.get('player1_advantages', []),
+                rivalry_analysis.get('player2_advantages', []),
+                p1, p2
+            ),
+            'markov_analysis': rivalry_analysis.get('markov_analysis'),
         }
+
+    def _build_common_opponents_detailed(self, p1_advantages, p2_advantages, p1_name, p2_name):
+        """Transforma player1/2_advantages al formato que espera generar_tabla_favoritos2."""
+        def normalize_score_for_player(score_str, player_won):
+            """Devuelve el marcador desde la perspectiva del jugador (mis_sets-oponente_sets).
+            Solo invierte si el score almacenado no coincide con el resultado:
+            ganador debe tener más sets, perdedor menos."""
+            if not score_str or '-' not in str(score_str):
+                return score_str
+            parts = str(score_str).split('-')
+            try:
+                left, right = int(parts[0]), int(parts[1])
+            except (ValueError, IndexError):
+                return score_str
+            player_has_more = left > right
+            if player_won == player_has_more:
+                return score_str  # ya está en perspectiva del jugador
+            return f"{parts[1]}-{parts[0]}"  # invertir para corregir perspectiva
+
+        def build_player_result(score_str, won, date_str, surface_str=''):
+            outcome = 'Ganó' if won else 'Perdió'
+            score = normalize_score_for_player(score_str, won)
+            return {'outcome': outcome, 'score': score, 'date': date_str or 'N/A', 'surface': surface_str or ''}
+
+        result = []
+        for adv in p1_advantages:
+            p1_won = adv.get('p1_won', True)
+            p2_won = adv.get('p2_won', False)
+            result.append({
+                'opponent_name': adv.get('opponent', 'N/A'),
+                'opponent_ranking': adv.get('opponent_rank'),
+                'advantage_for': p1_name,
+                'reason': adv.get('reason', ''),
+                'weight': adv.get('weight', 0),
+                'player1_result': build_player_result(adv.get('player1_result', ''), p1_won, adv.get('player1_date', ''), adv.get('player1_surface', '')),
+                'player2_result': build_player_result(adv.get('player2_result', ''), p2_won, adv.get('player2_date', ''), adv.get('player2_surface', '')),
+            })
+        for adv in p2_advantages:
+            p1_won = adv.get('p1_won', False)
+            p2_won = adv.get('p2_won', True)
+            result.append({
+                'opponent_name': adv.get('opponent', 'N/A'),
+                'opponent_ranking': adv.get('opponent_rank'),
+                'advantage_for': p2_name,
+                'reason': adv.get('reason', ''),
+                'weight': adv.get('weight', 0),
+                'player1_result': build_player_result(adv.get('player1_result', ''), p1_won, adv.get('player1_date', ''), adv.get('player1_surface', '')),
+                'player2_result': build_player_result(adv.get('player2_result', ''), p2_won, adv.get('player2_date', ''), adv.get('player2_surface', '')),
+            })
+        return result
 
     # ═══════════════════════════════════════════════════════════════════
     # 💾 PERSISTENCIA
@@ -913,11 +1013,13 @@ class H2HExtractor:
         suffix = "OPTIMIZED" if is_optimized else "enhanced"
         filename = reports_dir / f"h2h_results_{suffix}_{timestamp}.json"
         
+        from analysis.rivalry_analyzer import RIVALRY_VERSION  # Nodo-32 Fase 3
         output_data = {
             'metadata': {
                 'fecha_extraccion': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
                 'total_partidos_procesados': len(self.all_results),
                 'version': '3.0_refactorizado',
+                'rivalry_version': RIVALRY_VERSION,  # Nodo-32 Fase 3: validado por edge_calculator
                 'funcionalidades': [
                     'Extracción H2H con Playwright',
                     'Análisis de rankings ATP',

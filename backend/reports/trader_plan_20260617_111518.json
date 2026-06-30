@@ -1,0 +1,385 @@
+{
+  "metadata": {
+    "timestamp": "20260617_111518",
+    "bankroll": 20000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260617_105842.json",
+    "n_partidos_analizados": 94,
+    "calibracion_n": 798,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "challenger",
+      "superficie": "clay",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Julia Grabher vs Anastasiia Sobolieva",
+      "favorito": "Anastasiia Sobolieva",
+      "cuota": 3.35,
+      "edge_pct": "21.6%",
+      "p_modelo": 0.515,
+      "n_h2h": 1,
+      "p_blend": 0.571025,
+      "kelly_kl": 0.244,
+      "kelly_usado": 0.0971,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Gerard Campana Lee vs Thomas Faurel",
+      "favorito": "Gerard Campana Lee",
+      "cuota": 3.5,
+      "edge_pct": "21.6%",
+      "p_modelo": 0.502,
+      "n_h2h": 0,
+      "p_blend": 0.5897,
+      "kelly_kl": 0.2353,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Mees Rottgering vs Kyrian Jacquet",
+      "favorito": "Mees Rottgering",
+      "cuota": 2.75,
+      "edge_pct": "17.3%",
+      "p_modelo": 0.537,
+      "n_h2h": 1,
+      "p_blend": 0.5331750000000001,
+      "kelly_kl": 0.1004,
+      "kelly_usado": 0.0666,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Jacopo Vasami vs Buvaysar Gadamauri",
+      "favorito": "Buvaysar Gadamauri",
+      "cuota": 2.16,
+      "edge_pct": "5.5%",
+      "p_modelo": 0.518,
+      "n_h2h": 1,
+      "p_blend": 0.5717749999999999,
+      "kelly_kl": 0.0833,
+      "kelly_usado": 0.0507,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Yu Hsiou Hsu vs Henry Searle",
+      "favorito": "Yu Hsiou Hsu",
+      "cuota": 2.55,
+      "edge_pct": "11.5%",
+      "p_modelo": 0.507,
+      "n_h2h": 1,
+      "p_blend": 0.525675,
+      "kelly_kl": 0.069,
+      "kelly_usado": 0.0549,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Christopher O'Connell vs Jay Clarke",
+      "favorito": "Jay Clarke",
+      "cuota": 2.45,
+      "edge_pct": "9.8%",
+      "p_modelo": 0.506,
+      "n_h2h": 1,
+      "p_blend": 0.525425,
+      "kelly_kl": 0.061,
+      "kelly_usado": 0.0495,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Anastasiia Sobolieva",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Gerard Campana Lee",
+          "cuota": 3.5
+        },
+        {
+          "jugador": "Mees Rottgering",
+          "cuota": 2.75
+        }
+      ],
+      "cuota_combo": 32.24,
+      "hr_combo": 0.1795,
+      "ev_combo": 4.789,
+      "excluidos": [
+        "Buvaysar Gadamauri",
+        "Yu Hsiou Hsu",
+        "Jay Clarke",
+        "Mia Ristic"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Anastasiia Sobolieva",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Gerard Campana Lee",
+          "cuota": 3.5
+        },
+        {
+          "jugador": "Yu Hsiou Hsu",
+          "cuota": 2.55
+        }
+      ],
+      "cuota_combo": 29.9,
+      "hr_combo": 0.177,
+      "ev_combo": 4.2924,
+      "excluidos": [
+        "Mees Rottgering",
+        "Buvaysar Gadamauri",
+        "Jay Clarke",
+        "Mia Ristic"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Gerard Campana Lee",
+          "cuota": 3.5
+        },
+        {
+          "jugador": "Mees Rottgering",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Yu Hsiou Hsu",
+          "cuota": 2.55
+        }
+      ],
+      "cuota_combo": 24.54,
+      "hr_combo": 0.1653,
+      "ev_combo": 3.0566,
+      "excluidos": [
+        "Anastasiia Sobolieva",
+        "Buvaysar Gadamauri",
+        "Jay Clarke",
+        "Mia Ristic"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Anastasiia Sobolieva",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Mees Rottgering",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Yu Hsiou Hsu",
+          "cuota": 2.55
+        }
+      ],
+      "cuota_combo": 23.49,
+      "hr_combo": 0.16,
+      "ev_combo": 2.7598,
+      "excluidos": [
+        "Gerard Campana Lee",
+        "Buvaysar Gadamauri",
+        "Jay Clarke",
+        "Mia Ristic"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Anastasiia Sobolieva",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Gerard Campana Lee",
+          "cuota": 3.5
+        },
+        {
+          "jugador": "Mees Rottgering",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Yu Hsiou Hsu",
+          "cuota": 2.55
+        }
+      ],
+      "cuota_combo": 82.22,
+      "hr_combo": 0.0944,
+      "ev_combo": 6.76,
+      "excluidos": [
+        "Buvaysar Gadamauri",
+        "Jay Clarke",
+        "Mia Ristic"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Anastasiia Sobolieva",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Gerard Campana Lee",
+          "cuota": 3.5
+        },
+        {
+          "jugador": "Yu Hsiou Hsu",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "Jay Clarke",
+          "cuota": 2.45
+        }
+      ],
+      "cuota_combo": 73.25,
+      "hr_combo": 0.093,
+      "ev_combo": 5.8129,
+      "excluidos": [
+        "Mees Rottgering",
+        "Buvaysar Gadamauri",
+        "Mia Ristic"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Gerard Campana Lee",
+          "cuota": 3.5
+        },
+        {
+          "jugador": "Mees Rottgering",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Yu Hsiou Hsu",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "Jay Clarke",
+          "cuota": 2.45
+        }
+      ],
+      "cuota_combo": 60.13,
+      "hr_combo": 0.0868,
+      "ev_combo": 4.222,
+      "excluidos": [
+        "Anastasiia Sobolieva",
+        "Buvaysar Gadamauri",
+        "Mia Ristic"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Anastasiia Sobolieva",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Mees Rottgering",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Yu Hsiou Hsu",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "Jay Clarke",
+          "cuota": 2.45
+        }
+      ],
+      "cuota_combo": 57.56,
+      "hr_combo": 0.0841,
+      "ev_combo": 3.8399,
+      "excluidos": [
+        "Gerard Campana Lee",
+        "Buvaysar Gadamauri",
+        "Mia Ristic"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.625,
+    "total_ajustado": 12500.0,
+    "var_95": -20000.0,
+    "cvar_95": -20000.0,
+    "expected_pl": 53934.04285813721,
+    "sharpe_ratio": 0.5894727049882496,
+    "kelly_growth_rate": 0.6720291931161818,
+    "sessions_to_double": 1.0314242114183163,
+    "var_excedido": true,
+    "factor_var": 0.25
+  },
+  "resumen": {
+    "gastado_individuales": 0,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 0,
+    "total_en_riesgo": 0.0,
+    "pct_bankroll_en_riesgo": 0.0,
+    "n_senales_apostar": 6,
+    "pool_cobertura": 7,
+    "alerta_riesgo": false
+  }
+}

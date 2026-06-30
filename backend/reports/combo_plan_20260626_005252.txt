@@ -1,0 +1,251 @@
+==============================================================
+COMBO PLAN — 2026-06-26  |  Confianza minima: 53.0%
+Fuente: h2h_results_enhanced_20260626_002416.json
+Picks seleccionados: 55
+==============================================================
+
+PICKS SELECCIONADOS (ordenados por confianza):
+   1. [DIAMOND 83.8%]  Lucas Andrade Da Silva          @3.60  CHALLENGER MASCULINO - INDIVIDUALES: Piracica
+   2. [DIAMOND 83.5%]  Max Hans Rehberg                @1.52  ITF MASCULINO - INDIVIDUALES: M25 Brussels (B
+   3. [DIAMOND 82.7%]  Sandro Kopp                     @1.62  CHALLENGER MASCULINO - INDIVIDUALES: Plovdiv 
+   4. [DIAMOND 82.1%]  Alan Wazny                      @2.02  ITF MASCULINO - INDIVIDUALES: M15 Rzeszow (Po
+   5. [DIAMOND 82.1%]  Nicolas Kicker                  @1.16  CHALLENGER MASCULINO - INDIVIDUALES: Piracica
+   6. [DIAMOND 81.2%]  Joaquin Aguilar Cardozo         @2.55  CHALLENGER MASCULINO - INDIVIDUALES: Piracica
+   7. [DIAMOND 80.6%]  Gina Feistel                    @1.23  ITF FEMENINO - INDIVIDUALES: W50 Gdansk (Polo
+   8. [DIAMOND 80.0%]  Olle Wallin                     @1.43  ITF MASCULINO - INDIVIDUALES: M25 Brussels (B
+   9. [DIAMOND 79.7%]  Jack Draper                     @1.61  ATP - INDIVIDUALES: Eastbourne (Reino Unido),
+  10. [DIAMOND 79.3%]  Zizou Bergs                     @1.54  ATP - INDIVIDUALES: Eastbourne (Reino Unido),
+  11. [DIAMOND 79.2%]  Madison Brengle                 @1.65  ITF FEMENINO - INDIVIDUALES: W35 Rome, GA (Es
+  12. [DIAMOND 78.6%]  Anne-Christine Lutkemeyer       @1.47  ITF FEMENINO - INDIVIDUALES: W15 Claremont, C
+  13. [DIAMOND 78.5%]  Eva Vedder                      @1.68  ITF FEMENINO - INDIVIDUALES: W50 Palma del Ri
+  14. [DIAMOND 78.4%]  Sahaja Yamalapalli              @2.75  ITF FEMENINO - INDIVIDUALES: W35 Rome, GA (Es
+  15. [DIAMOND 77.8%]  Ayla Aksu                       @1.18  ITF FEMENINO - INDIVIDUALES: W50 Palma del Ri
+  16. [DIAMOND 77.5%]  Ena Koike                       @1.76  ITF FEMENINO - INDIVIDUALES: W35 Rome, GA (Es
+  17. [DIAMOND 77.4%]  Ariana Arseneault               @1.28  ITF FEMENINO - INDIVIDUALES: W35 Rome, GA (Es
+  18. [DIAMOND 77.3%]  Bor Artnak                      @1.16  ITF MASCULINO - INDIVIDUALES: M15 Slovenska B
+  19. [DIAMOND 77.2%]  Fangran Tian                    @1.37  ITF FEMENINO - INDIVIDUALES: W50 Palma del Ri
+  20. [DIAMOND 76.8%]  Naomi Osaka                     @1.30  WTA - INDIVIDUALES: Bad Homburg (Alemania), h
+  21. [DIAMOND 76.8%]  Elena Micic                     @2.38  ITF FEMENINO - INDIVIDUALES: W50 Palma del Ri
+  22. [DIAMOND 76.3%]  Karolina Muchova                @1.47  WTA - INDIVIDUALES: Bad Homburg (Alemania), h
+  23. [DIAMOND 75.7%]  Midori Castillo Meza            @1.73  ITF FEMENINO - INDIVIDUALES: W15 Claremont, C
+  24. [DIAMOND 75.4%]  Nuno Borges                     @1.71  ATP - INDIVIDUALES: Mallorca (España), hierba
+  25. [GOLD    72.9%]  Oscar Weightman                 @1.85  ITF MASCULINO - INDIVIDUALES: M25 Bakio (Espa
+  26. [GOLD    71.9%]  Fabian Marozsan                 @3.05  ATP - INDIVIDUALES: Mallorca (España), hierba
+  27. [SILVER  64.1%]  Federico Arnaboldi              @1.10  ITF MASCULINO - INDIVIDUALES: M15 Bergamo (It
+  28. [SILVER  62.5%]  Branko Djuric                   @1.11  ITF MASCULINO - INDIVIDUALES: M15 Kursumlijsk
+  29. [SILVER  61.4%]  Andrey Chepelev                 @1.14  ITF MASCULINO - INDIVIDUALES: M25 Zagreb (Cro
+  30. [SILVER  60.8%]  Sander Jong                     @1.12  ITF MASCULINO - INDIVIDUALES: M15 Alkmaar (Pa
+  31. [SILVER  60.7%]  Massimo Giunta                  @1.25  ITF MASCULINO - INDIVIDUALES: M25 Tanger (Mar
+  32. [SILVER  59.2%]  Stefan Seifert                  @1.44  ITF MASCULINO - INDIVIDUALES: M15 Rzeszow (Po
+  33. [SILVER  59.0%]  Matilde Mariani                 @1.79  ITF FEMENINO - INDIVIDUALES: W15 Monastir 19 
+  34. [SILVER  58.3%]  Roger Pascual Ferra             @1.26  ITF MASCULINO - INDIVIDUALES: M15 Monastir 24
+  35. [SILVER  57.9%]  Dune Vaissaud                   @2.10  ITF FEMENINO - INDIVIDUALES: W15 Alkmaar (Paí
+  36. [SILVER  57.3%]  Karla Bartel                    @1.27  ITF FEMENINO - INDIVIDUALES: W15 Monastir 19 
+  37. [SILVER  57.2%]  Dominick Mosejczuk              @1.30  ITF MASCULINO - INDIVIDUALES: M15 Monastir 24
+  38. [SILVER  57.0%]  Oleg Prihodko                   @1.20  ITF MASCULINO - INDIVIDUALES: M25 Zagreb (Cro
+  39. [BRONZE  56.6%]  Oleksii Krutykh                 @1.14  ITF MASCULINO - INDIVIDUALES: M15 Kamen (Alem
+  40. [BRONZE  56.6%]  Rethin Pranav Senthil Kumar     @1.38  ITF MASCULINO - INDIVIDUALES: M15 Kayseri 6 (
+  41. [BRONZE  56.2%]  Kailey Evans                    @1.43  ITF FEMENINO - INDIVIDUALES: W15 Kamen (Alema
+  42. [BRONZE  55.9%]  Kateryna Lazarenko              @1.40  ITF FEMENINO - INDIVIDUALES: W15 Kayseri 6 (T
+  43. [BRONZE  55.9%]  Roman Sancilio                  @2.63  ITF MASCULINO - INDIVIDUALES: M15 Kayseri 6 (
+  44. [BRONZE  55.7%]  Giulia Safina Popa              @1.80  ITF FEMENINO - INDIVIDUALES: W15 Galati (Ruma
+  45. [BRONZE  55.2%]  Eva Marie Voracek               @1.44  ITF FEMENINO - INDIVIDUALES: W15 Kamen (Alema
+  46. [BRONZE  54.5%]  Giovanni Oradini                @1.22  ITF MASCULINO - INDIVIDUALES: M15 Bergamo (It
+  47. [BRONZE  54.2%]  Lukas Pokorny                   @1.20  ITF MASCULINO - INDIVIDUALES: M15 Monastir 24
+  48. [BRONZE  53.9%]  George Lazarov                  @1.34  ITF MASCULINO - INDIVIDUALES: M15 Kursumlijsk
+  49. [BRONZE  53.8%]  Madison Keys                    @1.14  WTA - INDIVIDUALES: Eastbourne (Reino Unido),
+  50. [BRONZE  53.6%]  Deniz Dilek                     @1.41  ITF FEMENINO - INDIVIDUALES: W15 Kayseri 6 (T
+  51. [BRONZE  53.4%]  Hibah Shaikh                    @2.40  ITF FEMENINO - INDIVIDUALES: W50 Gdansk (Polo
+  52. [BRONZE  53.3%]  Pieter de Lange                 @1.78  ITF MASCULINO - INDIVIDUALES: M15 Alkmaar (Pa
+  53. [BRONZE  53.2%]  Herman Hoeyeraal                @2.17  ITF MASCULINO - INDIVIDUALES: M15 Rzeszow (Po
+  54. [BRONZE  53.0%]  Margaux Maquet                  @2.00  ITF FEMENINO - INDIVIDUALES: W15 Alkmaar (Paí
+  55. [BRONZE  53.0%]  Kerem Yilmaz                    @2.23  ITF MASCULINO - INDIVIDUALES: M15 Kayseri 6 (
+
+PORTFOLIO DE COMBOS:
+--------------------------------------------------------------
+
+C5 — PRINCIPAL
+  Picks (5): Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker
+  Cuotas: 3.60 x 1.52 x 1.62 x 2.02 x 1.16
+  Odds total: 20.77  |  P(win): 78.2%  |  EV: $+304,852
+  STAKE: $20,000  ->  Retorno si gana: $415,432  |  Retorno esperado: $324,852
+
+  COBERTURA C5 (5 combos, excluyen picks de menor confianza):
+    [COB_excl_Kopp]  Excluye: Sandro Kopp
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo
+      Odds: 32.70  P(win): 78.2%  EV: $+24,567  STAKE: $1,000
+    [COB_excl_Wazny]  Excluye: Alan Wazny
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Nicolas Kicker, Joaquin Aguilar Cardozo
+      Odds: 26.22  P(win): 78.2%  EV: $+19,504  STAKE: $1,000
+    [COB_excl_Kicker]  Excluye: Nicolas Kicker
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Joaquin Aguilar Cardozo
+      Odds: 45.66  P(win): 78.2%  EV: $+34,706  STAKE: $1,000
+    [COB_excl_Kopp_Wazny]  Excluye: Sandro Kopp, Alan Wazny
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel
+      Odds: 19.91  P(win): 78.2%  EV: $+14,568  STAKE: $1,000
+    [COB_excl_Kopp_Kicker]  Excluye: Sandro Kopp, Nicolas Kicker
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Alan Wazny, Joaquin Aguilar Cardozo, Gina Feistel
+      Odds: 34.67  P(win): 78.2%  EV: $+26,110  STAKE: $1,000
+--------------------------------------------------------------
+
+C7 — PRINCIPAL
+  Picks (7): Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel
+  Cuotas: 3.60 x 1.52 x 1.62 x 2.02 x 1.16 x 2.55 x 1.23
+  Odds total: 65.15  |  P(win): 70.9%  |  EV: $+677,573
+  STAKE: $15,000  ->  Retorno si gana: $977,253  |  Retorno esperado: $692,573
+
+  COBERTURA C7 (5 combos, excluyen picks de menor confianza):
+    [COB_excl_Kicker]  Excluye: Nicolas Kicker
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin
+      Odds: 80.31  P(win): 70.9%  EV: $+55,918  STAKE: $1,000
+    [COB_excl_Cardozo]  Excluye: Joaquin Aguilar Cardozo
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Gina Feistel, Olle Wallin
+      Odds: 36.54  P(win): 70.9%  EV: $+24,892  STAKE: $1,000
+    [COB_excl_Feistel]  Excluye: Gina Feistel
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Olle Wallin
+      Odds: 75.74  P(win): 70.9%  EV: $+52,679  STAKE: $1,000
+    [COB_excl_Kicker_Cardozo]  Excluye: Nicolas Kicker, Joaquin Aguilar Cardozo
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Gina Feistel, Olle Wallin, Jack Draper
+      Odds: 50.71  P(win): 70.9%  EV: $+34,937  STAKE: $1,000
+    [COB_excl_Kicker_Feistel]  Excluye: Nicolas Kicker, Gina Feistel
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Joaquin Aguilar Cardozo, Olle Wallin, Jack Draper
+      Odds: 105.13  P(win): 70.9%  EV: $+73,503  STAKE: $1,000
+--------------------------------------------------------------
+
+C9 — PRINCIPAL
+  Picks (9): Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Jack Draper
+  Cuotas: 3.60 x 1.52 x 1.62 x 2.02 x 1.16 x 2.55 x 1.23 x 1.43 x 1.61
+  Odds total: 150.00  |  P(win): 64.2%  |  EV: $+953,408
+  STAKE: $10,000  ->  Retorno si gana: $1,499,953  |  Retorno esperado: $963,408
+
+  COBERTURA C9 (5 combos, excluyen picks de menor confianza):
+    [COB_excl_Feistel]  Excluye: Gina Feistel
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Olle Wallin, Jack Draper, Zizou Bergs
+      Odds: 187.80  P(win): 64.2%  EV: $+59,811  STAKE: $500
+    [COB_excl_Wallin]  Excluye: Olle Wallin
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Jack Draper, Zizou Bergs
+      Odds: 161.53  P(win): 64.2%  EV: $+51,376  STAKE: $500
+    [COB_excl_Draper]  Excluye: Jack Draper
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Zizou Bergs
+      Odds: 143.47  P(win): 64.2%  EV: $+45,576  STAKE: $500
+    [COB_excl_Feistel_Wallin]  Excluye: Gina Feistel, Olle Wallin
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Jack Draper, Zizou Bergs, Madison Brengle
+      Odds: 216.69  P(win): 64.2%  EV: $+69,090  STAKE: $500
+    [COB_excl_Feistel_Draper]  Excluye: Gina Feistel, Jack Draper
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Olle Wallin, Zizou Bergs, Madison Brengle
+      Odds: 192.46  P(win): 64.2%  EV: $+61,309  STAKE: $500
+--------------------------------------------------------------
+
+C11 — PRINCIPAL
+  Picks (11): Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Jack Draper, Zizou Bergs, Madison Brengle
+  Cuotas: 3.60 x 1.52 x 1.62 x 2.02 x 1.16 x 2.55 x 1.23 x 1.43 x 1.61 x 1.54 x 1.65
+  Odds total: 381.14  |  P(win): 58.2%  |  EV: $+1,546,055
+  STAKE: $7,000  ->  Retorno si gana: $2,667,967  |  Retorno esperado: $1,553,055
+
+  COBERTURA C11 (5 combos, excluyen picks de menor confianza):
+    [COB_excl_Draper]  Excluye: Jack Draper
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Zizou Bergs, Madison Brengle, Anne-Christine Lutkemeyer
+      Odds: 348.00  P(win): 58.2%  EV: $+100,786  STAKE: $500
+    [COB_excl_Bergs]  Excluye: Zizou Bergs
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Jack Draper, Madison Brengle, Anne-Christine Lutkemeyer
+      Odds: 363.81  P(win): 58.2%  EV: $+105,390  STAKE: $500
+    [COB_excl_Brengle]  Excluye: Madison Brengle
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Jack Draper, Zizou Bergs, Anne-Christine Lutkemeyer
+      Odds: 339.56  P(win): 58.2%  EV: $+98,331  STAKE: $500
+    [COB_excl_Draper_Bergs]  Excluye: Jack Draper, Zizou Bergs
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Madison Brengle, Anne-Christine Lutkemeyer, Eva Vedder
+      Odds: 379.63  P(win): 58.2%  EV: $+109,994  STAKE: $500
+    [COB_excl_Draper_Brengle]  Excluye: Jack Draper, Madison Brengle
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Zizou Bergs, Anne-Christine Lutkemeyer, Eva Vedder
+      Odds: 354.32  P(win): 58.2%  EV: $+102,628  STAKE: $500
+--------------------------------------------------------------
+
+C13 — PRINCIPAL
+  Picks (13): Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Jack Draper, Zizou Bergs, Madison Brengle, Anne-Christine Lutkemeyer, Eva Vedder
+  Cuotas: 3.60 x 1.52 x 1.62 x 2.02 x 1.16 x 2.55 x 1.23 x 1.43 x 1.61 x 1.54 x 1.65 x 1.47 x 1.68
+  Odds total: 941.26  |  P(win): 52.8%  |  EV: $+2,477,900
+  STAKE: $5,000  ->  Retorno si gana: $4,706,293  |  Retorno esperado: $2,482,900
+
+  COBERTURA C13 (5 combos, excluyen picks de menor confianza):
+    [COB_excl_Brengle]  Excluye: Madison Brengle
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Jack Draper, Zizou Bergs, Anne-Christine Lutkemeyer, Eva Vedder, Sahaja Yamalapalli
+      Odds: 1568.76  P(win): 52.8%  EV: $+413,317  STAKE: $500
+    [COB_excl_Lutkemeyer]  Excluye: Anne-Christine Lutkemeyer
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Jack Draper, Zizou Bergs, Madison Brengle, Eva Vedder, Sahaja Yamalapalli
+      Odds: 1760.86  P(win): 52.8%  EV: $+463,988  STAKE: $500
+    [COB_excl_Vedder]  Excluye: Eva Vedder
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Jack Draper, Zizou Bergs, Madison Brengle, Anne-Christine Lutkemeyer, Sahaja Yamalapalli
+      Odds: 1540.75  P(win): 52.8%  EV: $+405,927  STAKE: $500
+    [COB_excl_Brengle_Lutkemeyer]  Excluye: Madison Brengle, Anne-Christine Lutkemeyer
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Jack Draper, Zizou Bergs, Eva Vedder, Sahaja Yamalapalli, Ayla Aksu
+      Odds: 1259.28  P(win): 52.8%  EV: $+331,679  STAKE: $500
+    [COB_excl_Brengle_Vedder]  Excluye: Madison Brengle, Eva Vedder
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Jack Draper, Zizou Bergs, Anne-Christine Lutkemeyer, Sahaja Yamalapalli, Ayla Aksu
+      Odds: 1101.87  P(win): 52.8%  EV: $+290,157  STAKE: $500
+--------------------------------------------------------------
+
+C15 — PRINCIPAL
+  Picks (15): Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Jack Draper, Zizou Bergs, Madison Brengle, Anne-Christine Lutkemeyer, Eva Vedder, Sahaja Yamalapalli, Ayla Aksu
+  Cuotas: 3.60 x 1.52 x 1.62 x 2.02 x 1.16 x 2.55 x 1.23 x 1.43 x 1.61 x 1.54 x 1.65 x 1.47 x 1.68 x 2.75 x 1.18
+  Odds total: 3054.38  |  P(win): 47.8%  |  EV: $+4,378,261
+  STAKE: $3,000  ->  Retorno si gana: $9,163,152  |  Retorno esperado: $4,381,261
+
+  COBERTURA C15 (5 combos, excluyen picks de menor confianza):
+    [COB_excl_Vedder]  Excluye: Eva Vedder
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Jack Draper, Zizou Bergs, Madison Brengle, Anne-Christine Lutkemeyer, Sahaja Yamalapalli, Ayla Aksu, Ena Koike
+      Odds: 3199.83  P(win): 47.8%  EV: $+764,482  STAKE: $500
+    [COB_excl_Yamalapalli]  Excluye: Sahaja Yamalapalli
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Jack Draper, Zizou Bergs, Madison Brengle, Anne-Christine Lutkemeyer, Eva Vedder, Ayla Aksu, Ena Koike
+      Odds: 1954.81  P(win): 47.8%  EV: $+466,835  STAKE: $500
+    [COB_excl_Aksu]  Excluye: Ayla Aksu
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Jack Draper, Zizou Bergs, Madison Brengle, Anne-Christine Lutkemeyer, Eva Vedder, Sahaja Yamalapalli, Ena Koike
+      Odds: 4555.69  P(win): 47.8%  EV: $+1,088,627  STAKE: $500
+    [COB_excl_Vedder_Yamalapalli]  Excluye: Eva Vedder, Sahaja Yamalapalli
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Jack Draper, Zizou Bergs, Madison Brengle, Anne-Christine Lutkemeyer, Ayla Aksu, Ena Koike, Ariana Arseneault
+      Odds: 1489.38  P(win): 47.8%  EV: $+355,564  STAKE: $500
+    [COB_excl_Vedder_Aksu]  Excluye: Eva Vedder, Ayla Aksu
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Jack Draper, Zizou Bergs, Madison Brengle, Anne-Christine Lutkemeyer, Sahaja Yamalapalli, Ena Koike, Ariana Arseneault
+      Odds: 3471.00  P(win): 47.8%  EV: $+829,311  STAKE: $500
+--------------------------------------------------------------
+
+C20 — PRINCIPAL
+  Picks (20): Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Jack Draper, Zizou Bergs, Madison Brengle, Anne-Christine Lutkemeyer, Eva Vedder, Sahaja Yamalapalli, Ayla Aksu, Ena Koike, Ariana Arseneault, Bor Artnak, Fangran Tian, Naomi Osaka
+  Cuotas: 3.60 x 1.52 x 1.62 x 2.02 x 1.16 x 2.55 x 1.23 x 1.43 x 1.61 x 1.54 x 1.65 x 1.47 x 1.68 x 2.75 x 1.18 x 1.76 x 1.28 x 1.16 x 1.37 x 1.30
+  Odds total: 14215.70  |  P(win): 37.4%  |  EV: $+5,314,048
+  STAKE: $1,000  ->  Retorno si gana: $14,215,698  |  Retorno esperado: $5,315,048
+
+  COBERTURA C20 (5 combos, excluyen picks de menor confianza):
+    [COB_excl_Artnak]  Excluye: Bor Artnak
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Jack Draper, Zizou Bergs, Madison Brengle, Anne-Christine Lutkemeyer, Eva Vedder, Sahaja Yamalapalli, Ayla Aksu, Ena Koike, Ariana Arseneault, Fangran Tian, Naomi Osaka, Elena Micic
+      Odds: 29166.69  P(win): 37.4%  EV: $+5,452,006  STAKE: $500
+    [COB_excl_Tian]  Excluye: Fangran Tian
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Jack Draper, Zizou Bergs, Madison Brengle, Anne-Christine Lutkemeyer, Eva Vedder, Sahaja Yamalapalli, Ayla Aksu, Ena Koike, Ariana Arseneault, Bor Artnak, Naomi Osaka, Elena Micic
+      Odds: 24695.88  P(win): 37.4%  EV: $+4,616,220  STAKE: $500
+    [COB_excl_Osaka]  Excluye: Naomi Osaka
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Jack Draper, Zizou Bergs, Madison Brengle, Anne-Christine Lutkemeyer, Eva Vedder, Sahaja Yamalapalli, Ayla Aksu, Ena Koike, Ariana Arseneault, Bor Artnak, Fangran Tian, Elena Micic
+      Odds: 26025.66  P(win): 37.4%  EV: $+4,864,813  STAKE: $500
+    [COB_excl_Artnak_Tian]  Excluye: Bor Artnak, Fangran Tian
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Jack Draper, Zizou Bergs, Madison Brengle, Anne-Christine Lutkemeyer, Eva Vedder, Sahaja Yamalapalli, Ayla Aksu, Ena Koike, Ariana Arseneault, Naomi Osaka, Elena Micic, Karolina Muchova
+      Odds: 31295.65  P(win): 37.4%  EV: $+5,849,999  STAKE: $500
+    [COB_excl_Artnak_Osaka]  Excluye: Bor Artnak, Naomi Osaka
+      Picks: Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin, Jack Draper, Zizou Bergs, Madison Brengle, Anne-Christine Lutkemeyer, Eva Vedder, Sahaja Yamalapalli, Ayla Aksu, Ena Koike, Ariana Arseneault, Fangran Tian, Elena Micic, Karolina Muchova
+      Odds: 32980.80  P(win): 37.4%  EV: $+6,165,026  STAKE: $500
+--------------------------------------------------------------
+
+RESUMEN PORTFOLIO:
+  Total combos:             42
+  Total invertido:          $83,500
+  Retorno esperado total:   $49,259,223
+  EV total:                 $+49,175,723
+  Combos con toler. 1 fallo: 21
+  Combos con toler. 2 fallos:14
+
+NOTAS:
+  - DIAMOND (>=75%) y GOLD (>=65%) entran desde C5.
+  - SILVER (57-65%) entra desde C7.
+  - BRONZE (53-57%) entra desde C9 y son prioritarios en exclusion.
+  - Combos de cobertura sobreviven si el pick excluido falla.
+  - EV calculado como: stake*(odds_total*P_modelo - 1).
+  - P_modelo = producto de confianzas individuales (no calibradas Kelly-KL).
+  - NO desplegar si EV total < 0 o si los combos C5/C7 tienen P(win)<20%.
+==============================================================

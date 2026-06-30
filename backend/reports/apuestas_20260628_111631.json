@@ -1,0 +1,29 @@
+{
+  "ts_registro": "2026-06-28T11:16:31.948481",
+  "ts_bookmarklet": "2026-06-28T16:16:31.292Z",
+  "estado": "PENDIENTE",
+  "betslip_index": "reports/betslip_index_20260628_105711.json",
+  "n_picks": 1,
+  "picks": [
+    {
+      "outcome_id": "4238815557",
+      "jugador": "Dhakshineswar Suresh",
+      "cuota": 2.1,
+      "cuota_kambi": 2.1,
+      "partido": "Mitchell Krueger vs Dhakshineswar Suresh",
+      "match_id": "6L0T2L6t",
+      "match_url": "https://www.flashscore.co/match/tennis/krueger-mitchell-suresh-dhakshineswar/6L0T2L6t/#/h2h",
+      "torneo": "Cary (Estados Unidos) - Fase previa",
+      "superficie": "hard",
+      "tier": "challenger",
+      "edge": "7.8%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "resultado_real": null,
+      "correcto": null,
+      "ganancia": null
+    }
+  ]
+}

@@ -175,9 +175,10 @@ def select_best_json_file(directory: str = ".",
         logger.error("❌ No se encontraron archivos JSON válidos")
         return None
     
-    # Ordenar por número de partidos con URLs (descendente)
+    # Ordenar por fecha de modificación primero (más reciente = mejor), luego por partidos
+    # REGLA-5 (Nodo-08): recency first — datos nuevos tienen menos partidos pero h2h_url válidas
     valid_files.sort(
-        key=lambda x: x['analysis'].get('matches_with_urls', 0),
+        key=lambda x: (x['path'].stat().st_mtime, x['analysis'].get('matches_with_urls', 0)),
         reverse=True
     )
     

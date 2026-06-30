@@ -1,0 +1,198 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — DEPLOY ROLAND GARROS
+  2026-06-06 13:47  │  Bankroll: $10,000
+  Señales APOSTAR: 7  │  Watchlist: 3  │  Sin edge: 0
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 8 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.05 (itf)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $4,000 (40% bankroll)
+
+  │  🎾 Sengul B. vs Karra T.
+  │     Apostar: Sengul B.
+  │     Cuota 1.53  │  Edge 10.0%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 34.8% → stake $1,000  │  Retorno potencial $1,530
+  │     EV real +3.4%  │  Zona: moderate_favorite  │  Sup: hard
+
+  │  🎾 Mujakic A. vs Mirarchi W.
+  │     Apostar: Mirarchi W.
+  │     Cuota 2.85  │  Edge 16.8%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 31.0% → stake $1,000  │  Retorno potencial $2,850
+  │     EV real +92.7%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 De Alba R. vs Azoidis D.
+  │     Apostar: De Alba R.
+  │     Cuota 2.90  │  Edge 17.4%  │  p_blend 0.637 (n_h2h=1)
+  │     Kelly-KL 30.2% → stake $1,000  │  Retorno potencial $2,900
+  │     EV real +84.7%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Makhlouf N. vs Rankin M.
+  │     Apostar: Makhlouf N.
+  │     Cuota 2.55  │  Edge 11.2%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 20.8% → stake $1,000  │  Retorno potencial $2,550
+  │     EV real +72.4%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Dlimi Y. vs Dougaz A.
+  │     Apostar: Dlimi Y.
+  │     Cuota 2.22  │  Edge 7.8%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 16.5% → stake $1,000  │  Retorno potencial $2,220
+  │     EV real +50.1%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Arzhankin A. vs D'Agostino S.
+  │     Apostar: D'Agostino S.
+  │     Cuota 2.30  │  Edge 7.4%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 15.5% → stake $1,000  │  Retorno potencial $2,300
+  │     EV real +55.5%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Casanova A. vs Retelj M.
+  │     Apostar: Casanova A.
+  │     Cuota 1.28  │  Edge 16.9%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 12.7% → stake $1,000  │  Retorno potencial $1,280
+  │     EV real -13.5%  │  Zona: heavy_favorite  │  Sup: clay
+
+  │  Total individuales: $7,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 8 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $6,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. De Alba R.           @2.90  p=0.637  zona=underdog
+  │    2. Mirarchi W.          @2.85  p=0.676  zona=underdog
+  │    3. Makhlouf N.          @2.55  p=0.676  zona=underdog
+  │    4. D'Agostino S.        @2.30  p=0.676  zona=underdog
+  │    5. Dlimi Y.             @2.22  p=0.676  zona=underdog
+  │    6. Gagliardo L.         @2.05  p=0.676  zona=slight_underdog [W]
+  │    7. Talan Lopatic L.     @1.98  p=0.676  zona=slight_underdog [W]
+  │    8. Sengul B.            @1.53  p=0.676  zona=moderate_favorite
+
+  │  ── 3 PIERNAS: TOP 4 combos × $1,000 = $4,000 ──
+  │     (cada combo excluye 5 jugadores)
+  │     [3p-1] Mirarchi W.@2.85 + De Alba R.@2.90 + Makhlouf N.@2.55
+  │            @21.08 HR:29.1% EV:+513.5% →$21,080  excluye:[Sengul B., Dlimi Y., D'Agostino S., Gagliardo L., Talan Lopatic L.]
+  │     [3p-2] Mirarchi W.@2.85 + De Alba R.@2.90 + D'Agostino S.@2.30
+  │            @19.01 HR:29.1% EV:+453.4% →$19,010  excluye:[Sengul B., Makhlouf N., Dlimi Y., Gagliardo L., Talan Lopatic L.]
+  │     [3p-3] Mirarchi W.@2.85 + Makhlouf N.@2.55 + D'Agostino S.@2.30
+  │            @16.72 HR:30.9% EV:+416.6% →$16,720  excluye:[Sengul B., De Alba R., Dlimi Y., Gagliardo L., Talan Lopatic L.]
+  │     [3p-4] De Alba R.@2.90 + Makhlouf N.@2.55 + D'Agostino S.@2.30
+  │            @17.01 HR:29.1% EV:+395.1% →$17,010  excluye:[Sengul B., Mirarchi W., Dlimi Y., Gagliardo L., Talan Lopatic L.]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $1,000 = $4,000 ──
+  │     (cada combo excluye 4 jugadores)
+  │     [4p-1] Mirarchi W.@2.85 + De Alba R.@2.90 + Makhlouf N.@2.55 + D'Agostino S.@2.30
+  │            @48.47 HR:19.7% EV:+854.0% →$48,470  excluye:[Sengul B., Dlimi Y., Gagliardo L., Talan Lopatic L.]
+  │     [4p-2] Mirarchi W.@2.85 + De Alba R.@2.90 + Makhlouf N.@2.55 + Dlimi Y.@2.22
+  │            @46.79 HR:19.7% EV:+820.9% →$46,790  excluye:[Sengul B., D'Agostino S., Gagliardo L., Talan Lopatic L.]
+  │     [4p-3] Mirarchi W.@2.85 + De Alba R.@2.90 + Dlimi Y.@2.22 + D'Agostino S.@2.30
+  │            @42.20 HR:19.7% EV:+730.6% →$42,200  excluye:[Sengul B., Makhlouf N., Gagliardo L., Talan Lopatic L.]
+  │     [4p-4] Mirarchi W.@2.85 + Makhlouf N.@2.55 + Dlimi Y.@2.22 + D'Agostino S.@2.30
+  │            @37.11 HR:20.9% EV:+675.4% →$37,110  excluye:[Sengul B., De Alba R., Gagliardo L., Talan Lopatic L.]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-4 picks?) ──
+  │  Total apostado: $8,000
+
+  │  🏆 0 fallos (8/8 ganan): retorno $248,390 → P&L +$240,390 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Sengul B.]):
+  │       retorno $248,390 → P&L +$240,390 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [De Alba R.]):
+  │       retorno $53,830 → P&L +$45,830 (2/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Sengul B., Talan Lopatic L.]):
+  │       retorno $248,390 → P&L +$240,390 (8/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [De Alba R., Mirarchi W.]):
+  │       retorno $0 → P&L $-8,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Sengul B., Talan Lopatic L., Gagliardo L.]):
+  │       retorno $248,390 → P&L +$240,390 (8/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [De Alba R., Mirarchi W., Makhlouf N.]):
+  │       retorno $0 → P&L $-8,000 (0/8 combos pagan)
+  │  ✅ 4 fallos (mejor caso: fallan favoritos [Sengul B., Talan Lopatic L., Gagliardo L., Dlimi Y.]):
+  │       retorno $122,290 → P&L +$114,290 (5/8 combos pagan)
+  │  ❌ 4 fallos (peor caso: fallan underdogs [De Alba R., Mirarchi W., Makhlouf N., D'Agostino S.]):
+  │       retorno $0 → P&L $-8,000 (0/8 combos pagan)
+
+  │  Total cobertura: $8,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     8
+  │  ρ estructural:       0.05 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.741
+  │  Reducción vs naive:  -25.9%
+  │
+  │  Stake naive (sin ajuste):    $      15,000
+  │  Stake ajustado (PK):         $      11,111
+  │  Ahorro por correlación:      $       3,889
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $      -6,682  (66.8% bankroll)
+  │  CVaR 95%:           $      -6,971
+  │  Max VaR permitido:  $       2,500  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.37
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $      49,749
+  │  σ(P&L):             $      58,257
+  │  Sharpe Ratio:              0.854
+  │  Kelly Growth Rate:        1.3640 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $   9,159,418
+  │  Bankroll en 10 sesiones:  $8,389,493,343
+  │  Bankroll en 30 sesiones:  $5,904,827,315,669,369,356,288
+  │  Sesiones para duplicar:   0.5
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.37 (de $15,000 a $5,612)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.37) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Sengul B.                 @1.53  →  $       0  (ret. $         0)
+  │    Mirarchi W.               @2.85  →  $       0  (ret. $         0)
+  │    De Alba R.                @2.90  →  $       0  (ret. $         0)
+  │    Makhlouf N.               @2.55  →  $       0  (ret. $         0)
+  │    Dlimi Y.                  @2.22  →  $       0  (ret. $         0)
+  │    D'Agostino S.             @2.30  →  $       0  (ret. $         0)
+  │    Casanova A.               @1.28  →  $       0  (ret. $         0)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @21.08]  $       0  →  Mirarchi W.@2.85 + De Alba R.@2.90 + Makhlouf N.@2.55
+  │    [3p @19.01]  $       0  →  Mirarchi W.@2.85 + De Alba R.@2.90 + D'Agostino S.@2.30
+  │    [3p @16.72]  $       0  →  Mirarchi W.@2.85 + Makhlouf N.@2.55 + D'Agostino S.@2.30
+  │    [3p @17.01]  $       0  →  De Alba R.@2.90 + Makhlouf N.@2.55 + D'Agostino S.@2.30
+  │    [4p @48.47]  $       0  →  Mirarchi W.@2.85 + De Alba R.@2.90 + Makhlouf N.@2.55 + D'Agostino S.@2.30
+  │    [4p @46.79]  $       0  →  Mirarchi W.@2.85 + De Alba R.@2.90 + Makhlouf N.@2.55 + Dlimi Y.@2.22
+  │    [4p @42.20]  $       0  →  Mirarchi W.@2.85 + De Alba R.@2.90 + Dlimi Y.@2.22 + D'Agostino S.@2.30
+  │    [4p @37.11]  $       0  →  Mirarchi W.@2.85 + Makhlouf N.@2.55 + Dlimi Y.@2.22 + D'Agostino S.@2.30
+  │
+  │  TOTAL EN RIESGO:  $         0  (0.0% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $        10,000                       ║
+  ║  Individuales:        $             0  (0.0% bankroll)      ║
+  ║  Combos:              $             0  (0.0% bankroll)      ║
+  ║  Sistema:             $             0  (0.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $             0  (0.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       7                                       ║
+  ║  Pool cobertura:        8 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260604_03  ║
+  ║  Partidos analizados:  80                                       ║
+  ║  Superficie:          clay (Roland Garros)                    ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  📊 Calibración: n=69 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.676 (calibrado hard) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260606_134712.json

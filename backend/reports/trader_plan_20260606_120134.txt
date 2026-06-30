@@ -1,0 +1,160 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — DEPLOY ROLAND GARROS
+  2026-06-06 12:01  │  Bankroll: $125,000
+  Señales APOSTAR: 20  │  Watchlist: 5  │  Sin edge: 5
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 2 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.25 (grand_slam)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $50,000 (40% bankroll)
+
+  │  🎾 Mair L. vs Bronzetti L.
+  │     Apostar: Mair L.
+  │     Cuota 10.00  │  Edge 42.5%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 51.0% → stake $12,000  │  Retorno potencial $120,000
+  │     EV real +576.1%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Sherif M. vs Pedone G.
+  │     Apostar: Pedone G.
+  │     Cuota 5.50  │  Edge 32.4%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 45.0% → stake $12,000  │  Retorno potencial $66,000
+  │     EV real +271.8%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Wong C. vs Romano F.
+  │     Apostar: Romano F.
+  │     Cuota 4.00  │  Edge 28.4%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 43.8% → stake $12,000  │  Retorno potencial $48,000
+  │     EV real +170.4%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Sengul B. vs Karra T.
+  │     Apostar: Sengul B.
+  │     Cuota 1.53  │  Edge 10.0%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 34.8% → stake $2,000  │  Retorno potencial $3,060
+  │     EV real +3.4%  │  Zona: moderate_favorite  │  Sup: hard
+
+  │  🎾 Bartunkova N. vs Knutson G.
+  │     Apostar: Knutson G.
+  │     Cuota 3.10  │  Edge 19.0%  │  p_blend 0.635 (n_h2h=1)
+  │     Kelly-KL 32.6% → stake $12,000  │  Retorno potencial $37,200
+  │     EV real +96.9%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Daniel T. vs Dzumhur D.
+  │     Apostar: Daniel T.
+  │     Cuota 2.60  │  Edge 15.5%  │  p_blend 0.591 (n_h2h=5)
+  │     Kelly-KL 31.4% → stake $1,000  │  Retorno potencial $2,600
+  │     EV real +53.7%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Mujakic A. vs Mirarchi W.
+  │     Apostar: Mirarchi W.
+  │     Cuota 2.85  │  Edge 16.8%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 31.0% → stake $1,000  │  Retorno potencial $2,850
+  │     EV real +92.7%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 De Alba R. vs Azoidis D.
+  │     Apostar: De Alba R.
+  │     Cuota 2.90  │  Edge 17.4%  │  p_blend 0.637 (n_h2h=1)
+  │     Kelly-KL 30.2% → stake $1,000  │  Retorno potencial $2,900
+  │     EV real +84.7%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Monnet C. vs Prozorova T.
+  │     Apostar: Monnet C.
+  │     Cuota 2.90  │  Edge 15.9%  │  p_blend 0.633 (n_h2h=1)
+  │     Kelly-KL 29.0% → stake $1,000  │  Retorno potencial $2,900
+  │     EV real +83.6%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Shnaider D. vs Chwalinska M.
+  │     Apostar: Chwalinska M.
+  │     Cuota 2.55  │  Edge 13.3%  │  p_blend 0.638 (n_h2h=1)
+  │     Kelly-KL 27.3% → stake $1,000  │  Retorno potencial $2,550
+  │     EV real +62.8%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Rehberg M. H. vs Moeller M.
+  │     Apostar: Moeller M.
+  │     Cuota 2.50  │  Edge 11.9%  │  p_blend 0.637 (n_h2h=1)
+  │     Kelly-KL 24.5% → stake $1,000  │  Retorno potencial $2,500
+  │     EV real +59.2%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Makhlouf N. vs Rankin M.
+  │     Apostar: Makhlouf N.
+  │     Cuota 2.55  │  Edge 11.2%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 20.8% → stake $1,000  │  Retorno potencial $2,550
+  │     EV real +72.4%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Waltert S. vs Lazaro Garcia A.
+  │     Apostar: Lazaro Garcia A.
+  │     Cuota 2.35  │  Edge 7.8%  │  p_blend 0.607 (n_h2h=2)
+  │     Kelly-KL 16.9% → stake $1,000  │  Retorno potencial $2,350
+  │     EV real +42.7%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Dlimi Y. vs Dougaz A.
+  │     Apostar: Dlimi Y.
+  │     Cuota 2.22  │  Edge 7.8%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 16.5% → stake $1,000  │  Retorno potencial $2,220
+  │     EV real +50.1%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Arzhankin A. vs D'Agostino S.
+  │     Apostar: D'Agostino S.
+  │     Cuota 2.30  │  Edge 7.4%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 15.5% → stake $1,000  │  Retorno potencial $2,300
+  │     EV real +55.5%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Butvilas E. vs Ilagan A.
+  │     Apostar: Ilagan A.
+  │     Cuota 2.25  │  Edge 7.2%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 15.4% → stake $1,000  │  Retorno potencial $2,250
+  │     EV real +52.1%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Preston T. vs Dudeney A.
+  │     Apostar: Dudeney A.
+  │     Cuota 2.30  │  Edge 7.0%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 14.6% → stake $1,000  │  Retorno potencial $2,300
+  │     EV real +55.5%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Stojsavljevic M. vs Kalieva E.
+  │     Apostar: Stojsavljevic M.
+  │     Cuota 2.25  │  Edge 6.8%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 14.4% → stake $1,000  │  Retorno potencial $2,250
+  │     EV real +52.1%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Timofeeva M. vs Andreeva E.
+  │     Apostar: Andreeva E.
+  │     Cuota 2.30  │  Edge 6.6%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 14.3% → stake $1,000  │  Retorno potencial $2,300
+  │     EV real +55.5%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Casanova A. vs Retelj M.
+  │     Apostar: Casanova A.
+  │     Cuota 1.28  │  Edge 16.9%  │  p_blend 0.676 (n_h2h=0)
+  │     Kelly-KL 12.7% → stake $1,000  │  Retorno potencial $1,280
+  │     EV real -13.5%  │  Zona: heavy_favorite  │  Sup: clay
+
+  │  Total individuales: $65,000
+  └─────────────────────────────────────────────────────────────────
+
+  ⚠️  Solo 2 picks en pool — se necesitan ≥3.
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $       125,000                       ║
+  ║  Individuales:        $        65,000  (52.0% bankroll)      ║
+  ║  Combos:              $             0  (0.0% bankroll)      ║
+  ║  Sistema:             $             0  (0.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $        65,000  (52.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:      20                                       ║
+  ║  Pool cobertura:        2 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260604_03  ║
+  ║  Partidos analizados:  80                                       ║
+  ║  Superficie:          clay (Roland Garros)                    ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  ⚠️  ALERTA: 52.0% bankroll en riesgo — por encima del 30% recomendado.
+      Reducir combos o sistema hasta n≥30 con datos limpios.
+
+  📊 Calibración: n=69 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.676 (calibrado clay) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260606_120134.json

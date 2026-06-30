@@ -1,0 +1,77 @@
+{
+  "ts": "2026-06-29T12:01:05.216847",
+  "modo": "COMBO_CONFIANZA_CC",
+  "n_picks": 5,
+  "index": {
+    "4239806642": {
+      "jugador": "Giles Hussey",
+      "cuota": 1.21,
+      "cuota_kambi": 1.21,
+      "partido": "",
+      "match_id": "",
+      "match_url": "",
+      "torneo": "",
+      "superficie": "?",
+      "tier": "?",
+      "edge": "0%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0
+    },
+    "4239076908": {
+      "jugador": "Andre Ilagan",
+      "cuota": 2.05,
+      "cuota_kambi": 2.05,
+      "partido": "",
+      "match_id": "",
+      "match_url": "",
+      "torneo": "",
+      "superficie": "?",
+      "tier": "?",
+      "edge": "0%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0
+    },
+    "4237064252": {
+      "jugador": "Diane Parry",
+      "cuota": 1.32,
+      "cuota_kambi": 1.32,
+      "partido": "",
+      "match_id": "",
+      "match_url": "",
+      "torneo": "",
+      "superficie": "?",
+      "tier": "?",
+      "edge": "0%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0
+    },
+    "4236992738": {
+      "jugador": "Anastasia Gasanova",
+      "cuota": 1.89,
+      "cuota_kambi": 1.89,
+      "partido": "",
+      "match_id": "",
+      "match_url": "",
+      "torneo": "",
+      "superficie": "?",
+      "tier": "?",
+      "edge": "0%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0
+    },
+    "4239823253": {
+      "jugador": "Jack Kennedy",
+      "cuota": 1.52,
+      "cuota_kambi": 1.52,
+      "partido": "",
+      "match_id": "",
+      "match_url": "",
+      "torneo": "",
+      "superficie": "?",
+      "tier": "?",
+      "edge": "0%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0
+    }
+  }
+}

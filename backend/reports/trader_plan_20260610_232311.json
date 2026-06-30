@@ -1,0 +1,445 @@
+{
+  "metadata": {
+    "timestamp": "20260610_232311",
+    "bankroll": 30000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260610_232039.json",
+    "n_partidos_analizados": 82,
+    "calibracion_n": 695,
+    "parametros": {
+      "modo": "cobertura",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Daniil Medvedev vs Thijs Boogaard",
+      "favorito": "Thijs Boogaard",
+      "cuota": 7.5,
+      "edge_pct": "38.2%",
+      "p_modelo": 0.515,
+      "n_h2h": 0,
+      "p_blend": 0.5614035087719298,
+      "kelly_kl": 0.4687,
+      "kelly_usado": 0.1,
+      "stake": 3000,
+      "retorno_potencial": 22500.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Elena Rybakina vs Tatjana Maria",
+      "favorito": "Tatjana Maria",
+      "cuota": 4.35,
+      "edge_pct": "28.7%",
+      "p_modelo": 0.517,
+      "n_h2h": 2,
+      "p_blend": 0.5436421052631578,
+      "kelly_kl": 0.4224,
+      "kelly_usado": 0.1,
+      "stake": 3000,
+      "retorno_potencial": 13050.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Barbora Krejcikova vs Hanne Vandewinkel",
+      "favorito": "Hanne Vandewinkel",
+      "cuota": 4.1,
+      "edge_pct": "26.6%",
+      "p_modelo": 0.51,
+      "n_h2h": 0,
+      "p_blend": 0.5614035087719298,
+      "kelly_kl": 0.4008,
+      "kelly_usado": 0.1,
+      "stake": 3000,
+      "retorno_potencial": 12300.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Ben Shelton vs Marcos Giron",
+      "favorito": "Marcos Giron",
+      "cuota": 3.1,
+      "edge_pct": "20.2%",
+      "p_modelo": 0.525,
+      "n_h2h": 3,
+      "p_blend": 0.543201754385965,
+      "kelly_kl": 0.3506,
+      "kelly_usado": 0.0814,
+      "stake": 2000,
+      "retorno_potencial": 6200.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Felix Auger-Aliassime vs Marton Fucsovics",
+      "favorito": "Marton Fucsovics",
+      "cuota": 3.1,
+      "edge_pct": "19.3%",
+      "p_modelo": 0.516,
+      "n_h2h": 6,
+      "p_blend": 0.5311345029239766,
+      "kelly_kl": 0.3325,
+      "kelly_usado": 0.077,
+      "stake": 1000,
+      "retorno_potencial": 3100.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Kamil Majchrzak vs James McCabe",
+      "favorito": "James McCabe",
+      "cuota": 3.0,
+      "edge_pct": "17.4%",
+      "p_modelo": 0.507,
+      "n_h2h": 1,
+      "p_blend": 0.5478026315789474,
+      "kelly_kl": 0.3066,
+      "kelly_usado": 0.0804,
+      "stake": 1000,
+      "retorno_potencial": 3000.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Caty Mcnally vs Solana Sierra",
+      "favorito": "Solana Sierra",
+      "cuota": 2.7,
+      "edge_pct": "13.4%",
+      "p_modelo": 0.504,
+      "n_h2h": 1,
+      "p_blend": 0.5470526315789473,
+      "kelly_kl": 0.2421,
+      "kelly_usado": 0.0702,
+      "stake": 1000,
+      "retorno_potencial": 2700.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Sho Shimabukuro vs Nick Kyrgios",
+      "favorito": "Sho Shimabukuro",
+      "cuota": 2.33,
+      "edge_pct": "8.2%",
+      "p_modelo": 0.511,
+      "n_h2h": 0,
+      "p_blend": 0.5614035087719298,
+      "kelly_kl": 0.1728,
+      "kelly_usado": 0.0579,
+      "stake": 1000,
+      "retorno_potencial": 2330.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Thijs Boogaard",
+          "cuota": 7.5
+        },
+        {
+          "jugador": "Tatjana Maria",
+          "cuota": 4.35
+        },
+        {
+          "jugador": "Hanne Vandewinkel",
+          "cuota": 4.1
+        }
+      ],
+      "cuota_combo": 133.76,
+      "hr_combo": 0.2521,
+      "ev_combo": 32.7279,
+      "excluidos": [
+        "Marcos Giron",
+        "Marton Fucsovics",
+        "James McCabe",
+        "Solana Sierra",
+        "Sho Shimabukuro",
+        "Mia Pohankova",
+        "Emma Raducanu",
+        "Harriet Dart"
+      ],
+      "stake": 3000,
+      "retorno_potencial": 401280.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Thijs Boogaard",
+          "cuota": 7.5
+        },
+        {
+          "jugador": "Hanne Vandewinkel",
+          "cuota": 4.1
+        },
+        {
+          "jugador": "James McCabe",
+          "cuota": 3.0
+        }
+      ],
+      "cuota_combo": 92.25,
+      "hr_combo": 0.2595,
+      "ev_combo": 22.9408,
+      "excluidos": [
+        "Tatjana Maria",
+        "Marcos Giron",
+        "Marton Fucsovics",
+        "Solana Sierra",
+        "Sho Shimabukuro",
+        "Mia Pohankova",
+        "Emma Raducanu",
+        "Harriet Dart"
+      ],
+      "stake": 3000,
+      "retorno_potencial": 276750.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Thijs Boogaard",
+          "cuota": 7.5
+        },
+        {
+          "jugador": "Tatjana Maria",
+          "cuota": 4.35
+        },
+        {
+          "jugador": "James McCabe",
+          "cuota": 3.0
+        }
+      ],
+      "cuota_combo": 97.88,
+      "hr_combo": 0.2383,
+      "ev_combo": 22.3216,
+      "excluidos": [
+        "Hanne Vandewinkel",
+        "Marcos Giron",
+        "Marton Fucsovics",
+        "Solana Sierra",
+        "Sho Shimabukuro",
+        "Mia Pohankova",
+        "Emma Raducanu",
+        "Harriet Dart"
+      ],
+      "stake": 3000,
+      "retorno_potencial": 293640.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Tatjana Maria",
+          "cuota": 4.35
+        },
+        {
+          "jugador": "Hanne Vandewinkel",
+          "cuota": 4.1
+        },
+        {
+          "jugador": "James McCabe",
+          "cuota": 3.0
+        }
+      ],
+      "cuota_combo": 53.5,
+      "hr_combo": 0.2383,
+      "ev_combo": 11.7492,
+      "excluidos": [
+        "Thijs Boogaard",
+        "Marcos Giron",
+        "Marton Fucsovics",
+        "Solana Sierra",
+        "Sho Shimabukuro",
+        "Mia Pohankova",
+        "Emma Raducanu",
+        "Harriet Dart"
+      ],
+      "stake": 3000,
+      "retorno_potencial": 160500.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Thijs Boogaard",
+          "cuota": 7.5
+        },
+        {
+          "jugador": "Tatjana Maria",
+          "cuota": 4.35
+        },
+        {
+          "jugador": "Hanne Vandewinkel",
+          "cuota": 4.1
+        },
+        {
+          "jugador": "James McCabe",
+          "cuota": 3.0
+        }
+      ],
+      "cuota_combo": 401.29,
+      "hr_combo": 0.1549,
+      "ev_combo": 61.1522,
+      "excluidos": [
+        "Marcos Giron",
+        "Marton Fucsovics",
+        "Solana Sierra",
+        "Sho Shimabukuro",
+        "Mia Pohankova",
+        "Emma Raducanu",
+        "Harriet Dart"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 802580.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Thijs Boogaard",
+          "cuota": 7.5
+        },
+        {
+          "jugador": "Tatjana Maria",
+          "cuota": 4.35
+        },
+        {
+          "jugador": "Hanne Vandewinkel",
+          "cuota": 4.1
+        },
+        {
+          "jugador": "Marcos Giron",
+          "cuota": 3.1
+        }
+      ],
+      "cuota_combo": 414.66,
+      "hr_combo": 0.1481,
+      "ev_combo": 60.427,
+      "excluidos": [
+        "Marton Fucsovics",
+        "James McCabe",
+        "Solana Sierra",
+        "Sho Shimabukuro",
+        "Mia Pohankova",
+        "Emma Raducanu",
+        "Harriet Dart"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 829320.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Thijs Boogaard",
+          "cuota": 7.5
+        },
+        {
+          "jugador": "Hanne Vandewinkel",
+          "cuota": 4.1
+        },
+        {
+          "jugador": "Marcos Giron",
+          "cuota": 3.1
+        },
+        {
+          "jugador": "James McCabe",
+          "cuota": 3.0
+        }
+      ],
+      "cuota_combo": 285.97,
+      "hr_combo": 0.1525,
+      "ev_combo": 42.6021,
+      "excluidos": [
+        "Tatjana Maria",
+        "Marton Fucsovics",
+        "Solana Sierra",
+        "Sho Shimabukuro",
+        "Mia Pohankova",
+        "Emma Raducanu",
+        "Harriet Dart"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 571940.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Thijs Boogaard",
+          "cuota": 7.5
+        },
+        {
+          "jugador": "Tatjana Maria",
+          "cuota": 4.35
+        },
+        {
+          "jugador": "Marcos Giron",
+          "cuota": 3.1
+        },
+        {
+          "jugador": "James McCabe",
+          "cuota": 3.0
+        }
+      ],
+      "cuota_combo": 303.41,
+      "hr_combo": 0.14,
+      "ev_combo": 41.4745,
+      "excluidos": [
+        "Hanne Vandewinkel",
+        "Marton Fucsovics",
+        "Solana Sierra",
+        "Sho Shimabukuro",
+        "Mia Pohankova",
+        "Emma Raducanu",
+        "Harriet Dart"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 606820.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.4,
+    "total_ajustado": 14000.0,
+    "var_95": 15963.696969696975,
+    "cvar_95": 7531.5595254013515,
+    "expected_pl": 651803.2106915389,
+    "sharpe_ratio": 1.017580986435095,
+    "kelly_growth_rate": 2.9834581944619734,
+    "sessions_to_double": 0.2323301133719908,
+    "var_excedido": true,
+    "factor_var": 0.8571428571428571
+  },
+  "resumen": {
+    "gastado_individuales": 15000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 20000,
+    "total_en_riesgo": 35000.0,
+    "pct_bankroll_en_riesgo": 1.1667,
+    "n_senales_apostar": 8,
+    "pool_cobertura": 11,
+    "alerta_riesgo": true
+  }
+}

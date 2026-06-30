@@ -1,0 +1,210 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — DEPLOY ROLAND GARROS
+  2026-06-10 23:23  │  Bankroll: $30,000
+  Señales APOSTAR: 8  │  Watchlist: 2  │  Sin edge: 2
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 11 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.15 (atp500)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $12,000 (40% bankroll)
+
+  │  🎾 Daniil Medvedev vs Thijs Boogaard
+  │     Apostar: Thijs Boogaard
+  │     Cuota 7.50  │  Edge 38.2%  │  p_blend 0.561 (n_h2h=0)
+  │     Kelly-KL 46.9% → stake $3,000  │  Retorno potencial $22,500
+  │     EV real +321.1%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Elena Rybakina vs Tatjana Maria
+  │     Apostar: Tatjana Maria
+  │     Cuota 4.35  │  Edge 28.7%  │  p_blend 0.544 (n_h2h=2)
+  │     Kelly-KL 42.2% → stake $3,000  │  Retorno potencial $13,050
+  │     EV real +136.5%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Barbora Krejcikova vs Hanne Vandewinkel
+  │     Apostar: Hanne Vandewinkel
+  │     Cuota 4.10  │  Edge 26.6%  │  p_blend 0.561 (n_h2h=0)
+  │     Kelly-KL 40.1% → stake $3,000  │  Retorno potencial $12,300
+  │     EV real +130.2%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Ben Shelton vs Marcos Giron
+  │     Apostar: Marcos Giron
+  │     Cuota 3.10  │  Edge 20.2%  │  p_blend 0.543 (n_h2h=3)
+  │     Kelly-KL 35.1% → stake $2,000  │  Retorno potencial $6,200
+  │     EV real +68.4%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Felix Auger-Aliassime vs Marton Fucsovics
+  │     Apostar: Marton Fucsovics
+  │     Cuota 3.10  │  Edge 19.3%  │  p_blend 0.531 (n_h2h=6)
+  │     Kelly-KL 33.2% → stake $1,000  │  Retorno potencial $3,100
+  │     EV real +64.6%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Kamil Majchrzak vs James McCabe
+  │     Apostar: James McCabe
+  │     Cuota 3.00  │  Edge 17.4%  │  p_blend 0.548 (n_h2h=1)
+  │     Kelly-KL 30.7% → stake $1,000  │  Retorno potencial $3,000
+  │     EV real +64.3%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Caty Mcnally vs Solana Sierra
+  │     Apostar: Solana Sierra
+  │     Cuota 2.70  │  Edge 13.4%  │  p_blend 0.547 (n_h2h=1)
+  │     Kelly-KL 24.2% → stake $1,000  │  Retorno potencial $2,700
+  │     EV real +47.7%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Sho Shimabukuro vs Nick Kyrgios
+  │     Apostar: Sho Shimabukuro
+  │     Cuota 2.33  │  Edge 8.2%  │  p_blend 0.561 (n_h2h=0)
+  │     Kelly-KL 17.3% → stake $1,000  │  Retorno potencial $2,330
+  │     EV real +30.8%  │  Zona: underdog  │  Sup: grass
+
+  │  Total individuales: $15,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 11 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $18,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Thijs Boogaard       @7.50  p=0.650  zona=underdog
+  │    2. Tatjana Maria        @4.35  p=0.597  zona=underdog
+  │    3. Hanne Vandewinkel    @4.10  p=0.650  zona=underdog
+  │    4. Marcos Giron         @3.10  p=0.588  zona=underdog
+  │    5. Marton Fucsovics     @3.10  p=0.561  zona=underdog
+  │    6. James McCabe         @3.00  p=0.614  zona=underdog
+  │    7. Solana Sierra        @2.70  p=0.614  zona=underdog
+  │    8. Sho Shimabukuro      @2.33  p=0.650  zona=underdog
+  │    9. Mia Pohankova        @2.07  p=0.650  zona=slight_underdog [W]
+  │    10. Emma Raducanu        @2.02  p=0.595  zona=slight_underdog [W]
+  │    11. Harriet Dart         @1.80  p=0.615  zona=slight_underdog
+
+  │  ── 3 PIERNAS: TOP 4 combos × $3,000 = $12,000 ──
+  │     (cada combo excluye 8 jugadores)
+  │     [3p-1] Thijs Boogaard@7.50 + Tatjana Maria@4.35 + Hanne Vandewinkel@4.10
+  │            @133.76 HR:25.2% EV:+3272.8% →$401,280  excluye:[Marcos Giron, Marton Fucsovics, James McCabe, Solana Sierra, Sho Shimabukuro, Mia Pohankova, Emma Raducanu, Harriet Dart]
+  │     [3p-2] Thijs Boogaard@7.50 + Hanne Vandewinkel@4.10 + James McCabe@3.00
+  │            @92.25 HR:25.9% EV:+2294.1% →$276,750  excluye:[Tatjana Maria, Marcos Giron, Marton Fucsovics, Solana Sierra, Sho Shimabukuro, Mia Pohankova, Emma Raducanu, Harriet Dart]
+  │     [3p-3] Thijs Boogaard@7.50 + Tatjana Maria@4.35 + James McCabe@3.00
+  │            @97.88 HR:23.8% EV:+2232.2% →$293,640  excluye:[Hanne Vandewinkel, Marcos Giron, Marton Fucsovics, Solana Sierra, Sho Shimabukuro, Mia Pohankova, Emma Raducanu, Harriet Dart]
+  │     [3p-4] Tatjana Maria@4.35 + Hanne Vandewinkel@4.10 + James McCabe@3.00
+  │            @53.50 HR:23.8% EV:+1174.9% →$160,500  excluye:[Thijs Boogaard, Marcos Giron, Marton Fucsovics, Solana Sierra, Sho Shimabukuro, Mia Pohankova, Emma Raducanu, Harriet Dart]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $2,000 = $8,000 ──
+  │     (cada combo excluye 7 jugadores)
+  │     [4p-1] Thijs Boogaard@7.50 + Tatjana Maria@4.35 + Hanne Vandewinkel@4.10 + James McCabe@3.00
+  │            @401.29 HR:15.5% EV:+6115.2% →$802,580  excluye:[Marcos Giron, Marton Fucsovics, Solana Sierra, Sho Shimabukuro, Mia Pohankova, Emma Raducanu, Harriet Dart]
+  │     [4p-2] Thijs Boogaard@7.50 + Tatjana Maria@4.35 + Hanne Vandewinkel@4.10 + Marcos Giron@3.10
+  │            @414.66 HR:14.8% EV:+6042.7% →$829,320  excluye:[Marton Fucsovics, James McCabe, Solana Sierra, Sho Shimabukuro, Mia Pohankova, Emma Raducanu, Harriet Dart]
+  │     [4p-3] Thijs Boogaard@7.50 + Hanne Vandewinkel@4.10 + Marcos Giron@3.10 + James McCabe@3.00
+  │            @285.97 HR:15.2% EV:+4260.2% →$571,940  excluye:[Tatjana Maria, Marton Fucsovics, Solana Sierra, Sho Shimabukuro, Mia Pohankova, Emma Raducanu, Harriet Dart]
+  │     [4p-4] Thijs Boogaard@7.50 + Tatjana Maria@4.35 + Marcos Giron@3.10 + James McCabe@3.00
+  │            @303.41 HR:14.0% EV:+4147.4% →$606,820  excluye:[Hanne Vandewinkel, Marton Fucsovics, Solana Sierra, Sho Shimabukuro, Mia Pohankova, Emma Raducanu, Harriet Dart]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-4 picks?) ──
+  │  Total apostado: $20,000
+
+  │  🏆 0 fallos (11/11 ganan): retorno $3,942,830 → P&L +$3,922,830 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Harriet Dart]):
+  │       retorno $3,942,830 → P&L +$3,922,830 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Thijs Boogaard]):
+  │       retorno $160,500 → P&L +$140,500 (1/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Harriet Dart, Emma Raducanu]):
+  │       retorno $3,942,830 → P&L +$3,922,830 (8/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Thijs Boogaard, Tatjana Maria]):
+  │       retorno $0 → P&L $-20,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Harriet Dart, Emma Raducanu, Mia Pohankova]):
+  │       retorno $3,942,830 → P&L +$3,922,830 (8/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Thijs Boogaard, Tatjana Maria, Hanne Vandewinkel]):
+  │       retorno $0 → P&L $-20,000 (0/8 combos pagan)
+  │  ✅ 4 fallos (mejor caso: fallan favoritos [Harriet Dart, Emma Raducanu, Mia Pohankova, Sho Shimabukuro]):
+  │       retorno $3,942,830 → P&L +$3,922,830 (8/8 combos pagan)
+  │  ❌ 4 fallos (peor caso: fallan underdogs [Thijs Boogaard, Tatjana Maria, Hanne Vandewinkel, Marcos Giron]):
+  │       retorno $0 → P&L $-20,000 (0/8 combos pagan)
+
+  │  Total cobertura: $20,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     11
+  │  ρ estructural:       0.15 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.400
+  │  Reducción vs naive:  -60.0%
+  │
+  │  Stake naive (sin ajuste):    $      35,000
+  │  Stake ajustado (PK):         $      14,000
+  │  Ahorro por correlación:      $      21,000
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $      15,964  (53.2% bankroll)
+  │  CVaR 95%:           $       7,532
+  │  Max VaR permitido:  $       7,500  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.86
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $     651,803
+  │  σ(P&L):             $     640,542
+  │  Sharpe Ratio:              1.018
+  │  Kelly Growth Rate:        2.9835 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $90,285,583,454
+  │  Bankroll en 10 sesiones:  $271,716,219,322,439,360
+  │  Bankroll en 30 sesiones:  $22,289,697,779,869,524,706,911,718,983,641,051,550,449,664
+  │  Sesiones para duplicar:   0.2
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.86 (de $35,000 a $30,000)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.86) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Thijs Boogaard            @7.50  →  $   3,000  (ret. $    22,500)
+  │    Tatjana Maria             @4.35  →  $   3,000  (ret. $    13,050)
+  │    Hanne Vandewinkel         @4.10  →  $   3,000  (ret. $    12,300)
+  │    Marcos Giron              @3.10  →  $   2,000  (ret. $     6,200)
+  │    Marton Fucsovics          @3.10  →  $   1,000  (ret. $     3,100)
+  │    James McCabe              @3.00  →  $   1,000  (ret. $     3,000)
+  │    Solana Sierra             @2.70  →  $   1,000  (ret. $     2,700)
+  │    Sho Shimabukuro           @2.33  →  $   1,000  (ret. $     2,330)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @133.76]  $   3,000  →  Thijs Boogaard@7.50 + Tatjana Maria@4.35 + Hanne Vandewinkel@4.10
+  │    [3p @92.25]  $   3,000  →  Thijs Boogaard@7.50 + Hanne Vandewinkel@4.10 + James McCabe@3.00
+  │    [3p @97.88]  $   3,000  →  Thijs Boogaard@7.50 + Tatjana Maria@4.35 + James McCabe@3.00
+  │    [3p @53.50]  $   3,000  →  Tatjana Maria@4.35 + Hanne Vandewinkel@4.10 + James McCabe@3.00
+  │    [4p @401.29]  $   2,000  →  Thijs Boogaard@7.50 + Tatjana Maria@4.35 + Hanne Vandewinkel@4.10 + James McCabe@3.00
+  │    [4p @414.66]  $   2,000  →  Thijs Boogaard@7.50 + Tatjana Maria@4.35 + Hanne Vandewinkel@4.10 + Marcos Giron@3.10
+  │    [4p @285.97]  $   2,000  →  Thijs Boogaard@7.50 + Hanne Vandewinkel@4.10 + Marcos Giron@3.10 + James McCabe@3.00
+  │    [4p @303.41]  $   2,000  →  Thijs Boogaard@7.50 + Tatjana Maria@4.35 + Marcos Giron@3.10 + James McCabe@3.00
+  │
+  │  TOTAL EN RIESGO:  $    35,000  (116.7% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $        30,000                       ║
+  ║  Individuales:        $        15,000  (50.0% bankroll)      ║
+  ║  Cobertura:           $        20,000  (66.7% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $        35,000  (116.7% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       8                                       ║
+  ║  Pool cobertura:       11 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260610_23  ║
+  ║  Partidos analizados:  82                                       ║
+  ║  Superficie:          clay (Roland Garros)                    ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  ⚠️  ALERTA: 116.7% bankroll en riesgo — por encima del 30% recomendado.
+      Reducir combos o sistema hasta n≥30 con datos limpios.
+
+  📊 Calibración: n=695 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.561 (calibrado grass) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260610_232311.json

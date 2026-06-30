@@ -19,6 +19,7 @@ import json
 import logging
 import re
 import time
+import unicodedata
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
@@ -30,6 +31,35 @@ from config import FLASHSCORE_BASE, FLASHSCORE_HEADERS
 logger = logging.getLogger(__name__)
 
 DELAY_ENTRE_REQUESTS = 0.5  # No martillar la API
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# HELPERS DE MATCHING DE NOMBRE (Nodo-36)
+# ══════════════════════════════════════════════════════════════════════════════
+
+def _strip_accents(s: str) -> str:
+    """Fix B (Nodo-36): strip Unicode accents for accent-insensitive matching.
+    'fernández' → 'fernandez', 'é' → 'e' via NFD decomposition.
+    """
+    return ''.join(c for c in unicodedata.normalize('NFD', s)
+                   if unicodedata.category(c) != 'Mn')
+
+
+def _name_tokens(name: str) -> List[str]:
+    """Fix C (Nodo-36): len > 1 (was > 2) to include 2-char surnames like 'Lu', 'Mi'.
+    Fix B (Nodo-36): strip accents so 'fernandez' matches 'fernández'.
+    """
+    return [_strip_accents(t.lower()) for t in name.split() if len(t) > 1] if name != 'N/A' else []
+
+
+def _token_in_kb(tok: str, kb: str) -> bool:
+    """Fix B+C (Nodo-36): accent-insensitive comparison with word-boundary guard for short tokens.
+    Short tokens (len ≤ 2) use .split() to avoid 'mi' matching 'michelsen'.
+    """
+    kb_norm = _strip_accents(kb.lower())
+    if len(tok) <= 2:
+        return tok in kb_norm.split()
+    return tok in kb_norm
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -484,6 +514,106 @@ def extract_match_id_from_url(url: str) -> Optional[str]:
 
 
 # ══════════════════════════════════════════════════════════════════════════════
+# NODO-45: TEMPORAL HISTORY FALLBACK
+# ══════════════════════════════════════════════════════════════════════════════
+
+def _lookup_player_history_temporal(
+    player_name: str,
+    days_back: int = 7,
+) -> List[Dict]:
+    """
+    Nodo-45 THF: busca el historial de un jugador en h2h_results_enhanced
+    de los últimos N días cuando match_id = None o la API retorna vacío.
+
+    Principio: el jugador apareció en una sesión anterior → su historial
+    fue extraído correctamente entonces. Usarlo como baseline evita que el
+    modelo opere ciego por un fallo de cruce Kambi↔FlashScore hoy.
+
+    Estrategia de matching: reutiliza _name_tokens + _token_in_kb (Nodo-36)
+    para matching fuzzy tolerante a acentos y apellidos compuestos.
+    Desambiguación por overlap de tokens cuando un token corto aparece en
+    ambos jugadores del partido.
+
+    Args:
+        player_name : nombre completo del jugador (ej. "Martin Maldonado")
+        days_back   : ventana de búsqueda hacia atrás en días (default 7)
+
+    Returns:
+        Lista de partidos del historial (mismo formato que _parse_player_history),
+        o [] si ningún archivo reciente contiene datos para este jugador.
+    """
+    reports = Path("reports")
+    if not reports.exists():
+        return []
+
+    cutoff = datetime.now() - timedelta(days=days_back)
+
+    h2h_files = sorted(
+        reports.glob("h2h_results_enhanced_*.json"),
+        reverse=True,  # más reciente primero
+    )
+    recent_files = [
+        f for f in h2h_files
+        if f.stat().st_mtime >= cutoff.timestamp()
+    ]
+
+    if not recent_files:
+        return []
+
+    player_tokens = _name_tokens(player_name)
+    if not player_tokens:
+        return []
+
+    for h2h_file in recent_files:
+        try:
+            data = json.loads(h2h_file.read_text(encoding="utf-8"))
+            matches = data if isinstance(data, list) else data.get("partidos", [])
+
+            for match in matches:
+                j1 = match.get("jugador1", "")
+                j2 = match.get("jugador2", "")
+                j1_lower = j1.lower()
+                j2_lower = j2.lower()
+
+                p1_match = any(_token_in_kb(tok, j1_lower) for tok in player_tokens)
+                p2_match = any(_token_in_kb(tok, j2_lower) for tok in player_tokens)
+
+                # Desambiguar cuando un token corto aparece en ambos nombres
+                if p1_match and p2_match:
+                    j1_tokens = _name_tokens(j1)
+                    j2_tokens = _name_tokens(j2)
+                    overlap1 = sum(1 for t in player_tokens if t in j1_tokens)
+                    overlap2 = sum(1 for t in player_tokens if t in j2_tokens)
+                    if overlap1 >= overlap2:
+                        p2_match = False
+                    else:
+                        p1_match = False
+
+                if p1_match:
+                    key = j1.replace(" ", "_").replace(".", "")
+                    hist = match.get(f"historial_{key}", [])
+                    if hist:
+                        logger.info(
+                            f"   📚 THF {h2h_file.name}: "
+                            f"{len(hist)} partidos para {player_name}"
+                        )
+                        return hist
+                elif p2_match:
+                    key = j2.replace(" ", "_").replace(".", "")
+                    hist = match.get(f"historial_{key}", [])
+                    if hist:
+                        logger.info(
+                            f"   📚 THF {h2h_file.name}: "
+                            f"{len(hist)} partidos para {player_name}"
+                        )
+                        return hist
+        except Exception:
+            continue
+
+    return []
+
+
+# ══════════════════════════════════════════════════════════════════════════════
 # PROCESADOR PRINCIPAL
 # ══════════════════════════════════════════════════════════════════════════════
 
@@ -529,6 +659,7 @@ class NinjaH2HExtractor:
             with open(json_file, 'r', encoding='utf-8') as f:
                 data = json.load(f)
 
+            self.input_file = str(json_file)
             logger.info(f"📂 Cargando partidos desde: {json_file}")
 
             all_matches = []
@@ -625,10 +756,19 @@ class NinjaH2HExtractor:
 
         match_url = match_data.get('match_url', '')
         match_id = extract_match_id_from_url(match_url)
+        p1 = match_data.get('jugador1', 'N/A')
+        p2 = match_data.get('jugador2', 'N/A')
 
         if not match_id:
             logger.warning(f"   ⚠️ No se pudo extraer match_id de: {match_url}")
-            return False
+            # D45-04 (Nodo-45): Temporal History Fallback — buscar en archivos h2h recientes
+            p1_history = _lookup_player_history_temporal(p1)
+            p2_history = _lookup_player_history_temporal(p2)
+            if not p1_history and not p2_history:
+                logger.warning(f"   ⚠️ Sin match_id y sin historial temporal — omitido")
+                return False
+            logger.info(f"   📚 THF activo: {p1}={len(p1_history)} | {p2}={len(p2_history)}")
+            return self._analyze_and_consolidate(match_data, p1, p2, p1_history, p2_history, [])
 
         # Fetch H2H data from API
         raw = fetch_h2h_from_api(match_id)
@@ -641,9 +781,6 @@ class NinjaH2HExtractor:
             logger.warning(f"   ⚠️ Respuesta vacía para match {match_id}")
             return False
 
-        p1 = match_data.get('jugador1', 'N/A')
-        p2 = match_data.get('jugador2', 'N/A')
-
         # Split into 3 blocks
         block1_records, block2_records, h2h_records = _split_into_h2h_blocks(records)
 
@@ -651,16 +788,18 @@ class NinjaH2HExtractor:
         # Cuando el match_id es proxy (Tier4: URL dice Miroshnichenko-Carnicella
         # pero el partido real es Carnicella-Ekstrand), Block1 ≠ jugador1.
         # Usar KB headers para identificar qué bloque pertenece a quién.
-        p1_surname = p1.split()[-1].lower() if p1 != 'N/A' else ''
-        p2_surname = p2.split()[-1].lower() if p2 != 'N/A' else ''
+        # Para nombres compuestos (ej: "Davidovich Fokina") FlashScore usa solo el
+        # primer apellido en el KB header → probar todos los tokens del nombre.
+        p1_tokens = _name_tokens(p1)
+        p2_tokens = _name_tokens(p2)
 
         main_kbs = [rec.get('KB', '') for rec in records
                     if 'KB' in rec and _is_main_section_kb(rec)]
 
-        p1_in_block1 = p1_surname and any(p1_surname in kb.lower() for kb in main_kbs[:1])
-        p1_in_block2 = p1_surname and any(p1_surname in kb.lower() for kb in main_kbs[1:2])
-        p2_in_block1 = p2_surname and any(p2_surname in kb.lower() for kb in main_kbs[:1])
-        p2_in_block2 = p2_surname and any(p2_surname in kb.lower() for kb in main_kbs[1:2])
+        p1_in_block1 = bool(p1_tokens) and any(_token_in_kb(tok, kb) for tok in p1_tokens for kb in main_kbs[:1])
+        p1_in_block2 = bool(p1_tokens) and any(_token_in_kb(tok, kb) for tok in p1_tokens for kb in main_kbs[1:2])
+        p2_in_block1 = bool(p2_tokens) and any(_token_in_kb(tok, kb) for tok in p2_tokens for kb in main_kbs[:1])
+        p2_in_block2 = bool(p2_tokens) and any(_token_in_kb(tok, kb) for tok in p2_tokens for kb in main_kbs[1:2])
 
         p1_found = p1_in_block1 or p1_in_block2
         p2_found = p2_in_block1 or p2_in_block2
@@ -726,6 +865,17 @@ class NinjaH2HExtractor:
 
         logger.info(f"   📊 {p1}: {len(p1_history)} partidos | {p2}: {len(p2_history)} | H2H: {len(h2h_matches)}")
 
+        return self._analyze_and_consolidate(match_data, p1, p2, p1_history, p2_history, h2h_matches)
+
+    def _analyze_and_consolidate(self, match_data: Dict, p1: str, p2: str,
+                                  p1_history: List[Dict], p2_history: List[Dict],
+                                  h2h_matches: List[Dict]) -> bool:
+        """
+        D45-03 (Nodo-45): Enriquece historiales, calcula ELO/form/rivalry y
+        consolida el resultado.  Extraído de _process_match() para poder ser
+        llamado también desde el Temporal History Fallback (Point A) y desde
+        el bloque de suplemento de historial vacío (Point B).
+        """
         # Enrich with rankings
         p1_hist = self._enrich_history(p1_history)
         p2_hist = self._enrich_history(p2_history)
@@ -1028,6 +1178,12 @@ class NinjaH2HExtractor:
                 f'partidos_{p2_key}': len(p2_hist),
                 'enfrentamientos_totales': len(h2h_matches)
             },
+            'data_quality': {
+                'historial_extraido_p1': len(p1_hist) > 0,
+                'historial_extraido_p2': len(p2_hist) > 0,
+                'n_partidos_p1': len(p1_hist),
+                'n_partidos_p2': len(p2_hist),
+            },
             'ranking_analysis': {
                 f'{p1_key}_ranking': rivalry['player1_rank'],
                 f'{p2_key}_ranking': rivalry['player2_rank'],
@@ -1112,7 +1268,11 @@ class NinjaH2HExtractor:
 
     def save_results(self) -> str:
         """Guardar resultados en el mismo formato que H2HExtractor."""
-        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        # Usar fecha del archivo de entrada para que --tomorrow genere 20260626_*
+        _m = re.search(r'(\d{8})_\d{6}', getattr(self, 'input_file', ''))
+        match_date = _m.group(1) if _m else datetime.now().strftime('%Y%m%d')
+        run_time = datetime.now().strftime('%H%M%S')
+        timestamp = f"{match_date}_{run_time}"
         reports_dir = Path('reports')
         reports_dir.mkdir(exist_ok=True)
 

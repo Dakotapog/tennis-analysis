@@ -1,0 +1,187 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — CHALLENGER CLAY
+  2026-06-14 01:42  │  Bankroll: $20,000
+  Señales APOSTAR: 5  │  Watchlist: 3  │  Sin edge: 2
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 9 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.10 (challenger)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $8,000 (40% bankroll)
+
+  │  🎾 Mia Ristic vs Verena Meliss
+  │     Apostar: Verena Meliss
+  │     Cuota 4.30  │  Edge 27.4%  │  p_blend 0.590 (n_h2h=0)
+  │     Kelly-KL 26.7% → stake $2,000  │  Retorno potencial $8,600
+  │     EV real +153.6%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Sergio Callejon Hernando vs Lorenzo Bocchi
+  │     Apostar: Lorenzo Bocchi
+  │     Cuota 3.35  │  Edge 21.7%  │  p_blend 0.590 (n_h2h=0)
+  │     Kelly-KL 24.2% → stake $2,000  │  Retorno potencial $6,700
+  │     EV real +97.5%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Yanaki Milev vs Miguel Tobon
+  │     Apostar: Yanaki Milev
+  │     Cuota 2.75  │  Edge 13.8%  │  p_blend 0.590 (n_h2h=0)
+  │     Kelly-KL 17.1% → stake $2,000  │  Retorno potencial $5,500
+  │     EV real +62.2%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Marko Topo vs Ryan Seggerman
+  │     Apostar: Ryan Seggerman
+  │     Cuota 2.55  │  Edge 11.7%  │  p_blend 0.590 (n_h2h=0)
+  │     Kelly-KL 15.2% → stake $2,000  │  Retorno potencial $5,100
+  │     EV real +50.4%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Edas Butvilas vs Cruz Hewitt
+  │     Apostar: Cruz Hewitt
+  │     Cuota 3.55  │  Edge 24.1%  │  p_blend 0.569 (n_h2h=0)
+  │     Kelly-KL 11.8% → stake $1,000  │  Retorno potencial $3,550
+  │     EV real +102.0%  │  Zona: underdog  │  Sup: grass
+
+  │  Total individuales: $9,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 9 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $12,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Verena Meliss        @4.30  p=0.590  zona=underdog
+  │    2. Cruz Hewitt          @3.55  p=0.569  zona=underdog
+  │    3. Lorenzo Bocchi       @3.35  p=0.590  zona=underdog
+  │    4. Yanaki Milev         @2.75  p=0.590  zona=underdog
+  │    5. Ryan Seggerman       @2.55  p=0.590  zona=underdog
+  │    6. Celine Naef          @2.20  p=0.552  zona=underdog [W]
+  │    7. Diletta Cherubini    @2.04  p=0.560  zona=slight_underdog [W]
+  │    8. Franco Ribero        @2.04  p=0.590  zona=slight_underdog [W]
+  │    9. Matyas Cerny         @1.92  p=0.590  zona=slight_underdog
+
+  │  ── 3 PIERNAS: TOP 4 combos × $2,000 = $8,000 ──
+  │     (cada combo excluye 6 jugadores)
+  │     [3p-1] Verena Meliss@4.30 + Lorenzo Bocchi@3.35 + Cruz Hewitt@3.55
+  │            @51.14 HR:19.8% EV:+911.8% →$102,280  excluye:[Yanaki Milev, Ryan Seggerman, Celine Naef, Diletta Cherubini, Franco Ribero, Matyas Cerny]
+  │     [3p-2] Verena Meliss@4.30 + Yanaki Milev@2.75 + Cruz Hewitt@3.55
+  │            @41.98 HR:19.8% EV:+730.6% →$83,960  excluye:[Lorenzo Bocchi, Ryan Seggerman, Celine Naef, Diletta Cherubini, Franco Ribero, Matyas Cerny]
+  │     [3p-3] Verena Meliss@4.30 + Lorenzo Bocchi@3.35 + Yanaki Milev@2.75
+  │            @39.61 HR:20.5% EV:+712.3% →$79,220  excluye:[Ryan Seggerman, Cruz Hewitt, Celine Naef, Diletta Cherubini, Franco Ribero, Matyas Cerny]
+  │     [3p-4] Lorenzo Bocchi@3.35 + Yanaki Milev@2.75 + Cruz Hewitt@3.55
+  │            @32.70 HR:19.8% EV:+547.1% →$65,400  excluye:[Verena Meliss, Ryan Seggerman, Celine Naef, Diletta Cherubini, Franco Ribero, Matyas Cerny]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $1,000 = $4,000 ──
+  │     (cada combo excluye 5 jugadores)
+  │     [4p-1] Verena Meliss@4.30 + Lorenzo Bocchi@3.35 + Yanaki Milev@2.75 + Cruz Hewitt@3.55
+  │            @140.63 HR:11.7% EV:+1540.9% →$140,630  excluye:[Ryan Seggerman, Celine Naef, Diletta Cherubini, Franco Ribero, Matyas Cerny]
+  │     [4p-2] Verena Meliss@4.30 + Yanaki Milev@2.75 + Ryan Seggerman@2.55 + Cruz Hewitt@3.55
+  │            @107.05 HR:11.7% EV:+1149.0% →$107,050  excluye:[Lorenzo Bocchi, Celine Naef, Diletta Cherubini, Franco Ribero, Matyas Cerny]
+  │     [4p-3] Verena Meliss@4.30 + Lorenzo Bocchi@3.35 + Yanaki Milev@2.75 + Ryan Seggerman@2.55
+  │            @101.02 HR:12.1% EV:+1121.5% →$101,020  excluye:[Cruz Hewitt, Celine Naef, Diletta Cherubini, Franco Ribero, Matyas Cerny]
+  │     [4p-4] Lorenzo Bocchi@3.35 + Yanaki Milev@2.75 + Ryan Seggerman@2.55 + Cruz Hewitt@3.55
+  │            @83.40 HR:11.7% EV:+873.1% →$83,400  excluye:[Verena Meliss, Celine Naef, Diletta Cherubini, Franco Ribero, Matyas Cerny]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-4 picks?) ──
+  │  Total apostado: $12,000
+
+  │  🏆 0 fallos (9/9 ganan): retorno $762,960 → P&L +$750,960 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Matyas Cerny]):
+  │       retorno $762,960 → P&L +$750,960 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Verena Meliss]):
+  │       retorno $148,800 → P&L +$136,800 (2/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Matyas Cerny, Diletta Cherubini]):
+  │       retorno $762,960 → P&L +$750,960 (8/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Verena Meliss, Cruz Hewitt]):
+  │       retorno $0 → P&L $-12,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Matyas Cerny, Diletta Cherubini, Franco Ribero]):
+  │       retorno $762,960 → P&L +$750,960 (8/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Verena Meliss, Cruz Hewitt, Lorenzo Bocchi]):
+  │       retorno $0 → P&L $-12,000 (0/8 combos pagan)
+  │  ✅ 4 fallos (mejor caso: fallan favoritos [Matyas Cerny, Diletta Cherubini, Franco Ribero, Celine Naef]):
+  │       retorno $762,960 → P&L +$750,960 (8/8 combos pagan)
+  │  ❌ 4 fallos (peor caso: fallan underdogs [Verena Meliss, Cruz Hewitt, Lorenzo Bocchi, Yanaki Milev]):
+  │       retorno $0 → P&L $-12,000 (0/8 combos pagan)
+
+  │  Total cobertura: $12,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     9
+  │  ρ estructural:       0.10 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.556
+  │  Reducción vs naive:  -44.4%
+  │
+  │  Stake naive (sin ajuste):    $      21,000
+  │  Stake ajustado (PK):         $      11,667
+  │  Ahorro por correlación:      $       9,333
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $     -17,061  (85.3% bankroll)
+  │  CVaR 95%:           $     -18,144
+  │  Max VaR permitido:  $       5,000  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.29
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $     102,678
+  │  σ(P&L):             $     128,320
+  │  Sharpe Ratio:              0.800
+  │  Kelly Growth Rate:        1.2805 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $  12,064,775
+  │  Bankroll en 10 sesiones:  $7,277,940,326
+  │  Bankroll en 30 sesiones:  $963,752,416,079,651,536,896
+  │  Sesiones para duplicar:   0.5
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.29 (de $21,000 a $6,154)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.29) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Verena Meliss             @4.30  →  $   1,000  (ret. $     4,300)
+  │    Lorenzo Bocchi            @3.35  →  $   1,000  (ret. $     3,350)
+  │    Yanaki Milev              @2.75  →  $   1,000  (ret. $     2,750)
+  │    Ryan Seggerman            @2.55  →  $   1,000  (ret. $     2,550)
+  │    Cruz Hewitt               @3.55  →  $       0  (ret. $         0)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @51.14]  $   1,000  →  Verena Meliss@4.30 + Lorenzo Bocchi@3.35 + Cruz Hewitt@3.55
+  │    [3p @41.98]  $   1,000  →  Verena Meliss@4.30 + Yanaki Milev@2.75 + Cruz Hewitt@3.55
+  │    [3p @39.61]  $   1,000  →  Verena Meliss@4.30 + Lorenzo Bocchi@3.35 + Yanaki Milev@2.75
+  │    [3p @32.70]  $   1,000  →  Lorenzo Bocchi@3.35 + Yanaki Milev@2.75 + Cruz Hewitt@3.55
+  │    [4p @140.63]  $       0  →  Verena Meliss@4.30 + Lorenzo Bocchi@3.35 + Yanaki Milev@2.75 + Cruz Hewitt@3.55
+  │    [4p @107.05]  $       0  →  Verena Meliss@4.30 + Yanaki Milev@2.75 + Ryan Seggerman@2.55 + Cruz Hewitt@3.55
+  │    [4p @101.02]  $       0  →  Verena Meliss@4.30 + Lorenzo Bocchi@3.35 + Yanaki Milev@2.75 + Ryan Seggerman@2.55
+  │    [4p @83.40]  $       0  →  Lorenzo Bocchi@3.35 + Yanaki Milev@2.75 + Ryan Seggerman@2.55 + Cruz Hewitt@3.55
+  │
+  │  TOTAL EN RIESGO:  $     8,000  (40.0% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $        20,000                       ║
+  ║  Individuales:        $         4,000  (20.0% bankroll)      ║
+  ║  Cobertura:           $         4,000  (20.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $         8,000  (40.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       5                                       ║
+  ║  Pool cobertura:        9 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260614_01  ║
+  ║  Partidos analizados:  64                                       ║
+  ║  Superficie:          clay (challenger)                           ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  ⚠️  ALERTA: 40.0% bankroll en riesgo — por encima del 30% recomendado.
+      Reducir combos o sistema hasta n≥30 con datos limpios.
+
+  📊 Calibración: n=706 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.590 (calibrado clay) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260614_014208.json

@@ -621,6 +621,8 @@ Los siguientes ítems se identificaron durante la investigación pero quedan fue
 
 ## 9. WIKILINKS
 
+- [[Nodo-36-Unicode-Acento-Apellidos-Cortos]] — Fix B (acento Unicode) + Fix C (apellidos 2-char) en ninja_h2h_parser — continuación directa de Nodo-34
+- [[Nodo-35-Historial-Vacio-Flag-Pipeline]] — propagación de flag historial vacío: gate en edge_calculator que bloquea señales sin historial
 - [[Nodo-33-Filtro-Coinflip-Sin-H2H]] — coin-flip gate que expuso el problema ITF y motivó la investigación
 - [[Nodo-31-Future-Match-Data-Leakage]] — anti-leakage en ninja_h2h_parser (mismo archivo)
 - [[Nodo-21-Pesos-Diferenciados-Por-Tier]] — pesos por tier y ranking_manager

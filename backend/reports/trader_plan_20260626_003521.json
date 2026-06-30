@@ -1,0 +1,326 @@
+{
+  "metadata": {
+    "timestamp": "20260626_003521",
+    "bankroll": 10000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260626_002416.json",
+    "n_partidos_analizados": 90,
+    "calibracion_n": 1955,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "itf",
+      "superficie": "clay",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Lian Tran vs Dune Vaissaud",
+      "favorito": "Dune Vaissaud",
+      "cuota": 2.1,
+      "edge_pct": "10.3%",
+      "p_modelo": 0.579,
+      "n_h2h": 0,
+      "p_blend": 0.5,
+      "kelly_kl": 0.0698,
+      "kelly_usado": 0.0114,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Dune Vaissaud",
+          "cuota": 2.1
+        },
+        {
+          "jugador": "Sahaja Yamalapalli",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Elena Micic",
+          "cuota": 2.38
+        }
+      ],
+      "cuota_combo": 13.74,
+      "hr_combo": 0.125,
+      "ev_combo": 0.7181,
+      "excluidos": [
+        "Alan Wazny",
+        "Ena Koike",
+        "Eva Vedder",
+        "Oscar Weightman",
+        "Anastasia Safta",
+        "Sara Victoria Balan"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Sahaja Yamalapalli",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Elena Micic",
+          "cuota": 2.38
+        },
+        {
+          "jugador": "Alan Wazny",
+          "cuota": 2.02
+        }
+      ],
+      "cuota_combo": 13.22,
+      "hr_combo": 0.125,
+      "ev_combo": 0.6526,
+      "excluidos": [
+        "Dune Vaissaud",
+        "Ena Koike",
+        "Eva Vedder",
+        "Oscar Weightman",
+        "Anastasia Safta",
+        "Sara Victoria Balan"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Dune Vaissaud",
+          "cuota": 2.1
+        },
+        {
+          "jugador": "Sahaja Yamalapalli",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Alan Wazny",
+          "cuota": 2.02
+        }
+      ],
+      "cuota_combo": 11.67,
+      "hr_combo": 0.125,
+      "ev_combo": 0.4582,
+      "excluidos": [
+        "Elena Micic",
+        "Ena Koike",
+        "Eva Vedder",
+        "Oscar Weightman",
+        "Anastasia Safta",
+        "Sara Victoria Balan"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Dune Vaissaud",
+          "cuota": 2.1
+        },
+        {
+          "jugador": "Elena Micic",
+          "cuota": 2.38
+        },
+        {
+          "jugador": "Alan Wazny",
+          "cuota": 2.02
+        }
+      ],
+      "cuota_combo": 10.1,
+      "hr_combo": 0.125,
+      "ev_combo": 0.262,
+      "excluidos": [
+        "Sahaja Yamalapalli",
+        "Ena Koike",
+        "Eva Vedder",
+        "Oscar Weightman",
+        "Anastasia Safta",
+        "Sara Victoria Balan"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Dune Vaissaud",
+          "cuota": 2.1
+        },
+        {
+          "jugador": "Sahaja Yamalapalli",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Elena Micic",
+          "cuota": 2.38
+        },
+        {
+          "jugador": "Alan Wazny",
+          "cuota": 2.02
+        }
+      ],
+      "cuota_combo": 27.76,
+      "hr_combo": 0.0625,
+      "ev_combo": 0.7352,
+      "excluidos": [
+        "Ena Koike",
+        "Eva Vedder",
+        "Oscar Weightman",
+        "Anastasia Safta",
+        "Sara Victoria Balan"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Dune Vaissaud",
+          "cuota": 2.1
+        },
+        {
+          "jugador": "Sahaja Yamalapalli",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Elena Micic",
+          "cuota": 2.38
+        },
+        {
+          "jugador": "Oscar Weightman",
+          "cuota": 1.85
+        }
+      ],
+      "cuota_combo": 25.43,
+      "hr_combo": 0.0625,
+      "ev_combo": 0.5892,
+      "excluidos": [
+        "Alan Wazny",
+        "Ena Koike",
+        "Eva Vedder",
+        "Anastasia Safta",
+        "Sara Victoria Balan"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Sahaja Yamalapalli",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Elena Micic",
+          "cuota": 2.38
+        },
+        {
+          "jugador": "Alan Wazny",
+          "cuota": 2.02
+        },
+        {
+          "jugador": "Oscar Weightman",
+          "cuota": 1.85
+        }
+      ],
+      "cuota_combo": 24.46,
+      "hr_combo": 0.0625,
+      "ev_combo": 0.5287,
+      "excluidos": [
+        "Dune Vaissaud",
+        "Ena Koike",
+        "Eva Vedder",
+        "Anastasia Safta",
+        "Sara Victoria Balan"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Dune Vaissaud",
+          "cuota": 2.1
+        },
+        {
+          "jugador": "Sahaja Yamalapalli",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Alan Wazny",
+          "cuota": 2.02
+        },
+        {
+          "jugador": "Oscar Weightman",
+          "cuota": 1.85
+        }
+      ],
+      "cuota_combo": 21.58,
+      "hr_combo": 0.0625,
+      "ev_combo": 0.3488,
+      "excluidos": [
+        "Elena Micic",
+        "Ena Koike",
+        "Eva Vedder",
+        "Anastasia Safta",
+        "Sara Victoria Balan"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.7142857142857143,
+    "total_ajustado": 6428.571428571428,
+    "var_95": -9000.0,
+    "cvar_95": -9000.0,
+    "expected_pl": 4390.099948564313,
+    "sharpe_ratio": 0.24970719918867468,
+    "kelly_growth_rate": -0.18155878261582178,
+    "sessions_to_double": Infinity,
+    "var_excedido": true,
+    "factor_var": 0.2777777777777778
+  },
+  "resumen": {
+    "gastado_individuales": 0,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 0,
+    "total_en_riesgo": 0.0,
+    "pct_bankroll_en_riesgo": 0.0,
+    "n_senales_apostar": 1,
+    "pool_cobertura": 9,
+    "alerta_riesgo": false
+  }
+}

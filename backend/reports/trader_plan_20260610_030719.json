@@ -1,0 +1,422 @@
+{
+  "metadata": {
+    "timestamp": "20260610_030719",
+    "bankroll": 125000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260610_030037.json",
+    "n_partidos_analizados": 222,
+    "calibracion_n": 284,
+    "parametros": {
+      "modo": "cobertura",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Juan Bautista Torres vs Carlos Maria Zarate",
+      "favorito": "Carlos Maria Zarate",
+      "cuota": 4.2,
+      "edge_pct": "27.3%",
+      "p_modelo": 0.511,
+      "n_h2h": 0,
+      "p_blend": 0.6608391608391608,
+      "kelly_kl": 0.4235,
+      "kelly_usado": 0.1,
+      "stake": 7000,
+      "retorno_potencial": 29400.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Alex Bolt vs Keegan Smith",
+      "favorito": "Keegan Smith",
+      "cuota": 3.45,
+      "edge_pct": "24.4%",
+      "p_modelo": 0.534,
+      "n_h2h": 2,
+      "p_blend": 0.6101034965034965,
+      "kelly_kl": 0.403,
+      "kelly_usado": 0.1,
+      "stake": 7000,
+      "retorno_potencial": 24150.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Hamish Stewart vs Leandro Riedi",
+      "favorito": "Hamish Stewart",
+      "cuota": 3.15,
+      "edge_pct": "19.8%",
+      "p_modelo": 0.515,
+      "n_h2h": 1,
+      "p_blend": 0.6243793706293707,
+      "kelly_kl": 0.3422,
+      "kelly_usado": 0.1,
+      "stake": 7000,
+      "retorno_potencial": 22050.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Tristan Boyer vs Matteo Martineau",
+      "favorito": "Matteo Martineau",
+      "cuota": 2.95,
+      "edge_pct": "16.4%",
+      "p_modelo": 0.503,
+      "n_h2h": 0,
+      "p_blend": 0.6608391608391608,
+      "kelly_kl": 0.2983,
+      "kelly_usado": 0.1,
+      "stake": 7000,
+      "retorno_potencial": 20650.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Petr Brunclik vs Andrej Martin",
+      "favorito": "Andrej Martin",
+      "cuota": 2.63,
+      "edge_pct": "14.5%",
+      "p_modelo": 0.525,
+      "n_h2h": 0,
+      "p_blend": 0.6608391608391608,
+      "kelly_kl": 0.2878,
+      "kelly_usado": 0.1,
+      "stake": 1000,
+      "retorno_potencial": 2630.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Lulu Sun vs Mary Stoiana",
+      "favorito": "Mary Stoiana",
+      "cuota": 2.3,
+      "edge_pct": "8.2%",
+      "p_modelo": 0.517,
+      "n_h2h": 1,
+      "p_blend": 0.6248793706293706,
+      "kelly_kl": 0.1759,
+      "kelly_usado": 0.0841,
+      "stake": 1000,
+      "retorno_potencial": 2300.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Noma Noha Akugue vs Katarzyna Kawa",
+      "favorito": "Noma Noha Akugue",
+      "cuota": 2.1,
+      "edge_pct": "5.4%",
+      "p_modelo": 0.53,
+      "n_h2h": 0,
+      "p_blend": 0.6608391608391608,
+      "kelly_kl": 0.1299,
+      "kelly_usado": 0.0881,
+      "stake": 1000,
+      "retorno_potencial": 2100.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Carlos Maria Zarate",
+          "cuota": 4.2
+        },
+        {
+          "jugador": "Keegan Smith",
+          "cuota": 3.45
+        },
+        {
+          "jugador": "Hamish Stewart",
+          "cuota": 3.15
+        }
+      ],
+      "cuota_combo": 45.64,
+      "hr_combo": 0.2062,
+      "ev_combo": 8.4095,
+      "excluidos": [
+        "Matteo Martineau",
+        "Andrej Martin",
+        "Mary Stoiana",
+        "Noma Noha Akugue",
+        "Emerson Jones",
+        "Darja Semenistaja",
+        "Francesco Forti"
+      ],
+      "stake": 7000,
+      "retorno_potencial": 319480.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Carlos Maria Zarate",
+          "cuota": 4.2
+        },
+        {
+          "jugador": "Keegan Smith",
+          "cuota": 3.45
+        },
+        {
+          "jugador": "Matteo Martineau",
+          "cuota": 2.95
+        }
+      ],
+      "cuota_combo": 42.75,
+      "hr_combo": 0.2126,
+      "ev_combo": 8.0868,
+      "excluidos": [
+        "Hamish Stewart",
+        "Andrej Martin",
+        "Mary Stoiana",
+        "Noma Noha Akugue",
+        "Emerson Jones",
+        "Darja Semenistaja",
+        "Francesco Forti"
+      ],
+      "stake": 7000,
+      "retorno_potencial": 299250.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Carlos Maria Zarate",
+          "cuota": 4.2
+        },
+        {
+          "jugador": "Hamish Stewart",
+          "cuota": 3.15
+        },
+        {
+          "jugador": "Matteo Martineau",
+          "cuota": 2.95
+        }
+      ],
+      "cuota_combo": 39.03,
+      "hr_combo": 0.2151,
+      "ev_combo": 7.3939,
+      "excluidos": [
+        "Keegan Smith",
+        "Andrej Martin",
+        "Mary Stoiana",
+        "Noma Noha Akugue",
+        "Emerson Jones",
+        "Darja Semenistaja",
+        "Francesco Forti"
+      ],
+      "stake": 7000,
+      "retorno_potencial": 273210.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Keegan Smith",
+          "cuota": 3.45
+        },
+        {
+          "jugador": "Hamish Stewart",
+          "cuota": 3.15
+        },
+        {
+          "jugador": "Matteo Martineau",
+          "cuota": 2.95
+        }
+      ],
+      "cuota_combo": 32.06,
+      "hr_combo": 0.2062,
+      "ev_combo": 5.609,
+      "excluidos": [
+        "Carlos Maria Zarate",
+        "Andrej Martin",
+        "Mary Stoiana",
+        "Noma Noha Akugue",
+        "Emerson Jones",
+        "Darja Semenistaja",
+        "Francesco Forti"
+      ],
+      "stake": 7000,
+      "retorno_potencial": 224420.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Carlos Maria Zarate",
+          "cuota": 4.2
+        },
+        {
+          "jugador": "Keegan Smith",
+          "cuota": 3.45
+        },
+        {
+          "jugador": "Hamish Stewart",
+          "cuota": 3.15
+        },
+        {
+          "jugador": "Matteo Martineau",
+          "cuota": 2.95
+        }
+      ],
+      "cuota_combo": 134.65,
+      "hr_combo": 0.1248,
+      "ev_combo": 15.8019,
+      "excluidos": [
+        "Andrej Martin",
+        "Mary Stoiana",
+        "Noma Noha Akugue",
+        "Emerson Jones",
+        "Darja Semenistaja",
+        "Francesco Forti"
+      ],
+      "stake": 3000,
+      "retorno_potencial": 403950.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Carlos Maria Zarate",
+          "cuota": 4.2
+        },
+        {
+          "jugador": "Keegan Smith",
+          "cuota": 3.45
+        },
+        {
+          "jugador": "Matteo Martineau",
+          "cuota": 2.95
+        },
+        {
+          "jugador": "Andrej Martin",
+          "cuota": 2.63
+        }
+      ],
+      "cuota_combo": 112.42,
+      "hr_combo": 0.1287,
+      "ev_combo": 13.4656,
+      "excluidos": [
+        "Hamish Stewart",
+        "Mary Stoiana",
+        "Noma Noha Akugue",
+        "Emerson Jones",
+        "Darja Semenistaja",
+        "Francesco Forti"
+      ],
+      "stake": 3000,
+      "retorno_potencial": 337260.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Carlos Maria Zarate",
+          "cuota": 4.2
+        },
+        {
+          "jugador": "Hamish Stewart",
+          "cuota": 3.15
+        },
+        {
+          "jugador": "Matteo Martineau",
+          "cuota": 2.95
+        },
+        {
+          "jugador": "Andrej Martin",
+          "cuota": 2.63
+        }
+      ],
+      "cuota_combo": 102.64,
+      "hr_combo": 0.1302,
+      "ev_combo": 12.3625,
+      "excluidos": [
+        "Keegan Smith",
+        "Mary Stoiana",
+        "Noma Noha Akugue",
+        "Emerson Jones",
+        "Darja Semenistaja",
+        "Francesco Forti"
+      ],
+      "stake": 3000,
+      "retorno_potencial": 307920.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Keegan Smith",
+          "cuota": 3.45
+        },
+        {
+          "jugador": "Hamish Stewart",
+          "cuota": 3.15
+        },
+        {
+          "jugador": "Matteo Martineau",
+          "cuota": 2.95
+        },
+        {
+          "jugador": "Andrej Martin",
+          "cuota": 2.63
+        }
+      ],
+      "cuota_combo": 84.32,
+      "hr_combo": 0.1248,
+      "ev_combo": 9.5212,
+      "excluidos": [
+        "Carlos Maria Zarate",
+        "Mary Stoiana",
+        "Noma Noha Akugue",
+        "Emerson Jones",
+        "Darja Semenistaja",
+        "Francesco Forti"
+      ],
+      "stake": 3000,
+      "retorno_potencial": 252960.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.5263157894736842,
+    "total_ajustado": 65263.15789473684,
+    "var_95": -56052.0,
+    "cvar_95": -59677.45065192212,
+    "expected_pl": 664377.6500005012,
+    "sharpe_ratio": 0.8977827455858919,
+    "kelly_growth_rate": 1.7550381537216333,
+    "sessions_to_double": 0.39494707228449544,
+    "var_excedido": true,
+    "factor_var": 0.5575180189823735
+  },
+  "resumen": {
+    "gastado_individuales": 31000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 40000,
+    "total_en_riesgo": 71000.0,
+    "pct_bankroll_en_riesgo": 0.568,
+    "n_senales_apostar": 7,
+    "pool_cobertura": 10,
+    "alerta_riesgo": true
+  }
+}

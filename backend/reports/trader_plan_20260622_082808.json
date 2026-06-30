@@ -1,0 +1,364 @@
+{
+  "metadata": {
+    "timestamp": "20260622_082808",
+    "bankroll": 125000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260622_081423.json",
+    "n_partidos_analizados": 89,
+    "calibracion_n": 1325,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "grand_slam",
+      "superficie": "grass",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Facundo Diaz Acosta vs Alexis Galarneau",
+      "favorito": "Facundo Diaz Acosta",
+      "cuota": 3.35,
+      "edge_pct": "21.9%",
+      "p_modelo": 0.518,
+      "n_h2h": 1,
+      "p_blend": 0.535325,
+      "kelly_kl": 0.1099,
+      "kelly_usado": 0.0844,
+      "stake": 7000,
+      "retorno_potencial": 23450.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Jay Clarke vs Andrea Pellegrino",
+      "favorito": "Andrea Pellegrino",
+      "cuota": 3.0,
+      "edge_pct": "17.0%",
+      "p_modelo": 0.503,
+      "n_h2h": 1,
+      "p_blend": 0.531575,
+      "kelly_kl": 0.089,
+      "kelly_usado": 0.0743,
+      "stake": 6000,
+      "retorno_potencial": 18000.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Francesco Maestrelli vs Max Basing",
+      "favorito": "Max Basing",
+      "cuota": 2.43,
+      "edge_pct": "10.5%",
+      "p_modelo": 0.517,
+      "n_h2h": 0,
+      "p_blend": 0.5411,
+      "kelly_kl": 0.0632,
+      "kelly_usado": 0.055,
+      "stake": 5000,
+      "retorno_potencial": 12150.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Franco Roncadelli",
+          "cuota": 9.0
+        },
+        {
+          "jugador": "Marco Cecchinato",
+          "cuota": 5.6
+        },
+        {
+          "jugador": "Federico Coria",
+          "cuota": 3.65
+        }
+      ],
+      "cuota_combo": 183.96,
+      "hr_combo": 0.1584,
+      "ev_combo": 28.1445,
+      "excluidos": [
+        "Facundo Diaz Acosta",
+        "Andrea Pellegrino",
+        "Max Basing",
+        "Stefano Travaglia",
+        "August Holmgren",
+        "Yi Zhou",
+        "Pol Martin Tiffon"
+      ],
+      "stake": 8000,
+      "retorno_potencial": 1471680.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Facundo Diaz Acosta",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Franco Roncadelli",
+          "cuota": 9.0
+        },
+        {
+          "jugador": "Marco Cecchinato",
+          "cuota": 5.6
+        }
+      ],
+      "cuota_combo": 168.84,
+      "hr_combo": 0.1567,
+      "ev_combo": 25.4635,
+      "excluidos": [
+        "Andrea Pellegrino",
+        "Max Basing",
+        "Federico Coria",
+        "Stefano Travaglia",
+        "August Holmgren",
+        "Yi Zhou",
+        "Pol Martin Tiffon"
+      ],
+      "stake": 8000,
+      "retorno_potencial": 1350720.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Facundo Diaz Acosta",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Franco Roncadelli",
+          "cuota": 9.0
+        },
+        {
+          "jugador": "Federico Coria",
+          "cuota": 3.65
+        }
+      ],
+      "cuota_combo": 110.05,
+      "hr_combo": 0.1567,
+      "ev_combo": 16.2486,
+      "excluidos": [
+        "Andrea Pellegrino",
+        "Max Basing",
+        "Marco Cecchinato",
+        "Stefano Travaglia",
+        "August Holmgren",
+        "Yi Zhou",
+        "Pol Martin Tiffon"
+      ],
+      "stake": 8000,
+      "retorno_potencial": 880400.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Facundo Diaz Acosta",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Marco Cecchinato",
+          "cuota": 5.6
+        },
+        {
+          "jugador": "Federico Coria",
+          "cuota": 3.65
+        }
+      ],
+      "cuota_combo": 68.47,
+      "hr_combo": 0.1567,
+      "ev_combo": 9.7324,
+      "excluidos": [
+        "Andrea Pellegrino",
+        "Max Basing",
+        "Franco Roncadelli",
+        "Stefano Travaglia",
+        "August Holmgren",
+        "Yi Zhou",
+        "Pol Martin Tiffon"
+      ],
+      "stake": 8000,
+      "retorno_potencial": 547760.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Facundo Diaz Acosta",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Franco Roncadelli",
+          "cuota": 9.0
+        },
+        {
+          "jugador": "Marco Cecchinato",
+          "cuota": 5.6
+        },
+        {
+          "jugador": "Federico Coria",
+          "cuota": 3.65
+        }
+      ],
+      "cuota_combo": 616.27,
+      "hr_combo": 0.0848,
+      "ev_combo": 51.2659,
+      "excluidos": [
+        "Andrea Pellegrino",
+        "Max Basing",
+        "Stefano Travaglia",
+        "August Holmgren",
+        "Yi Zhou",
+        "Pol Martin Tiffon"
+      ],
+      "stake": 4000,
+      "retorno_potencial": 2465080.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Andrea Pellegrino",
+          "cuota": 3.0
+        },
+        {
+          "jugador": "Franco Roncadelli",
+          "cuota": 9.0
+        },
+        {
+          "jugador": "Marco Cecchinato",
+          "cuota": 5.6
+        },
+        {
+          "jugador": "Federico Coria",
+          "cuota": 3.65
+        }
+      ],
+      "cuota_combo": 551.88,
+      "hr_combo": 0.0842,
+      "ev_combo": 45.4774,
+      "excluidos": [
+        "Facundo Diaz Acosta",
+        "Max Basing",
+        "Stefano Travaglia",
+        "August Holmgren",
+        "Yi Zhou",
+        "Pol Martin Tiffon"
+      ],
+      "stake": 4000,
+      "retorno_potencial": 2207520.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Facundo Diaz Acosta",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Andrea Pellegrino",
+          "cuota": 3.0
+        },
+        {
+          "jugador": "Franco Roncadelli",
+          "cuota": 9.0
+        },
+        {
+          "jugador": "Marco Cecchinato",
+          "cuota": 5.6
+        }
+      ],
+      "cuota_combo": 506.52,
+      "hr_combo": 0.0833,
+      "ev_combo": 41.2021,
+      "excluidos": [
+        "Max Basing",
+        "Federico Coria",
+        "Stefano Travaglia",
+        "August Holmgren",
+        "Yi Zhou",
+        "Pol Martin Tiffon"
+      ],
+      "stake": 4000,
+      "retorno_potencial": 2026080.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Facundo Diaz Acosta",
+          "cuota": 3.35
+        },
+        {
+          "jugador": "Andrea Pellegrino",
+          "cuota": 3.0
+        },
+        {
+          "jugador": "Marco Cecchinato",
+          "cuota": 5.6
+        },
+        {
+          "jugador": "Federico Coria",
+          "cuota": 3.65
+        }
+      ],
+      "cuota_combo": 205.42,
+      "hr_combo": 0.0833,
+      "ev_combo": 16.1153,
+      "excluidos": [
+        "Max Basing",
+        "Franco Roncadelli",
+        "Stefano Travaglia",
+        "August Holmgren",
+        "Yi Zhou",
+        "Pol Martin Tiffon"
+      ],
+      "stake": 4000,
+      "retorno_potencial": 821680.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.3076923076923077,
+    "total_ajustado": 30461.538461538465,
+    "var_95": -45868.0,
+    "cvar_95": -61221.072981839214,
+    "expected_pl": 1912145.7668325128,
+    "sharpe_ratio": 0.8045822979266664,
+    "kelly_growth_rate": 2.085542672581796,
+    "sessions_to_double": 0.3323581865154858,
+    "var_excedido": true,
+    "factor_var": 0.6813028691026424
+  },
+  "resumen": {
+    "gastado_individuales": 18000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 48000,
+    "total_en_riesgo": 66000.0,
+    "pct_bankroll_en_riesgo": 0.528,
+    "n_senales_apostar": 3,
+    "pool_cobertura": 10,
+    "alerta_riesgo": true
+  }
+}

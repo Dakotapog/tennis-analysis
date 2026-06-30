@@ -1,0 +1,345 @@
+{
+  "metadata": {
+    "timestamp": "20260612_223048",
+    "bankroll": 125000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260612_214755.json",
+    "n_partidos_analizados": 40,
+    "calibracion_n": 706,
+    "parametros": {
+      "modo": "cobertura",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Lea Ma vs Zuzanna Pawlikowska",
+      "favorito": "Zuzanna Pawlikowska",
+      "cuota": 2.95,
+      "edge_pct": "16.5%",
+      "p_modelo": 0.504,
+      "n_h2h": 0,
+      "p_blend": 0.59,
+      "kelly_kl": 0.0877,
+      "kelly_usado": 0.0949,
+      "stake": 3000,
+      "retorno_potencial": 8850.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    },
+    {
+      "partido": "Kaitlyn Carnicella vs Monika Ekstrand",
+      "favorito": "Kaitlyn Carnicella",
+      "cuota": 2.7,
+      "edge_pct": "14.0%",
+      "p_modelo": 0.51,
+      "n_h2h": 0,
+      "p_blend": 0.59,
+      "kelly_kl": 0.0794,
+      "kelly_usado": 0.0872,
+      "stake": 3000,
+      "retorno_potencial": 8100.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    },
+    {
+      "partido": "Luis Felipe Miguel vs Alex Hernandez",
+      "favorito": "Luis Felipe Miguel",
+      "cuota": 2.35,
+      "edge_pct": "8.5%",
+      "p_modelo": 0.511,
+      "n_h2h": 1,
+      "p_blend": 0.6545500000000001,
+      "kelly_kl": 0.0509,
+      "kelly_usado": 0.0997,
+      "stake": 3000,
+      "retorno_potencial": 7050.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Alina Granwehr vs Jenny Lim",
+      "favorito": "Jenny Lim",
+      "cuota": 2.18,
+      "edge_pct": "7.2%",
+      "p_modelo": 0.531,
+      "n_h2h": 1,
+      "p_blend": 0.6595500000000001,
+      "kelly_kl": 0.0472,
+      "kelly_usado": 0.0928,
+      "stake": 3000,
+      "retorno_potencial": 6540.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Zuzanna Pawlikowska",
+          "cuota": 2.95
+        },
+        {
+          "jugador": "Kaitlyn Carnicella",
+          "cuota": 2.7
+        },
+        {
+          "jugador": "Luis Felipe Miguel",
+          "cuota": 2.35
+        }
+      ],
+      "cuota_combo": 18.72,
+      "hr_combo": 0.2278,
+      "ev_combo": 3.2648,
+      "excluidos": [
+        "Jenny Lim",
+        "Stefano D'Agostino",
+        "Pablo Martinez Gomez"
+      ],
+      "stake": 3000,
+      "retorno_potencial": 56160.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Zuzanna Pawlikowska",
+          "cuota": 2.95
+        },
+        {
+          "jugador": "Kaitlyn Carnicella",
+          "cuota": 2.7
+        },
+        {
+          "jugador": "Jenny Lim",
+          "cuota": 2.18
+        }
+      ],
+      "cuota_combo": 17.36,
+      "hr_combo": 0.2296,
+      "ev_combo": 2.9865,
+      "excluidos": [
+        "Luis Felipe Miguel",
+        "Stefano D'Agostino",
+        "Pablo Martinez Gomez"
+      ],
+      "stake": 3000,
+      "retorno_potencial": 52080.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Zuzanna Pawlikowska",
+          "cuota": 2.95
+        },
+        {
+          "jugador": "Luis Felipe Miguel",
+          "cuota": 2.35
+        },
+        {
+          "jugador": "Jenny Lim",
+          "cuota": 2.18
+        }
+      ],
+      "cuota_combo": 15.11,
+      "hr_combo": 0.2547,
+      "ev_combo": 2.8494,
+      "excluidos": [
+        "Kaitlyn Carnicella",
+        "Stefano D'Agostino",
+        "Pablo Martinez Gomez"
+      ],
+      "stake": 3000,
+      "retorno_potencial": 45330.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Kaitlyn Carnicella",
+          "cuota": 2.7
+        },
+        {
+          "jugador": "Luis Felipe Miguel",
+          "cuota": 2.35
+        },
+        {
+          "jugador": "Jenny Lim",
+          "cuota": 2.18
+        }
+      ],
+      "cuota_combo": 13.83,
+      "hr_combo": 0.2547,
+      "ev_combo": 2.5231,
+      "excluidos": [
+        "Zuzanna Pawlikowska",
+        "Stefano D'Agostino",
+        "Pablo Martinez Gomez"
+      ],
+      "stake": 3000,
+      "retorno_potencial": 41490.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Zuzanna Pawlikowska",
+          "cuota": 2.95
+        },
+        {
+          "jugador": "Kaitlyn Carnicella",
+          "cuota": 2.7
+        },
+        {
+          "jugador": "Luis Felipe Miguel",
+          "cuota": 2.35
+        },
+        {
+          "jugador": "Jenny Lim",
+          "cuota": 2.18
+        }
+      ],
+      "cuota_combo": 40.8,
+      "hr_combo": 0.1503,
+      "ev_combo": 5.132,
+      "excluidos": [
+        "Stefano D'Agostino",
+        "Pablo Martinez Gomez"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 81600.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Zuzanna Pawlikowska",
+          "cuota": 2.95
+        },
+        {
+          "jugador": "Kaitlyn Carnicella",
+          "cuota": 2.7
+        },
+        {
+          "jugador": "Luis Felipe Miguel",
+          "cuota": 2.35
+        },
+        {
+          "jugador": "Stefano D'Agostino",
+          "cuota": 1.98
+        }
+      ],
+      "cuota_combo": 37.06,
+      "hr_combo": 0.16,
+      "ev_combo": 4.9313,
+      "excluidos": [
+        "Jenny Lim",
+        "Pablo Martinez Gomez"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 74120.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Zuzanna Pawlikowska",
+          "cuota": 2.95
+        },
+        {
+          "jugador": "Kaitlyn Carnicella",
+          "cuota": 2.7
+        },
+        {
+          "jugador": "Jenny Lim",
+          "cuota": 2.18
+        },
+        {
+          "jugador": "Stefano D'Agostino",
+          "cuota": 1.98
+        }
+      ],
+      "cuota_combo": 34.38,
+      "hr_combo": 0.1613,
+      "ev_combo": 4.5443,
+      "excluidos": [
+        "Luis Felipe Miguel",
+        "Pablo Martinez Gomez"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 68760.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Zuzanna Pawlikowska",
+          "cuota": 2.95
+        },
+        {
+          "jugador": "Luis Felipe Miguel",
+          "cuota": 2.35
+        },
+        {
+          "jugador": "Jenny Lim",
+          "cuota": 2.18
+        },
+        {
+          "jugador": "Stefano D'Agostino",
+          "cuota": 1.98
+        }
+      ],
+      "cuota_combo": 29.92,
+      "hr_combo": 0.1789,
+      "ev_combo": 4.3535,
+      "excluidos": [
+        "Kaitlyn Carnicella",
+        "Pablo Martinez Gomez"
+      ],
+      "stake": 2000,
+      "retorno_potencial": 59840.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.8,
+    "total_ajustado": 95200.0,
+    "var_95": -119000.0,
+    "cvar_95": -119000.0,
+    "expected_pl": 261679.26250565896,
+    "sharpe_ratio": 0.6213433599206318,
+    "kelly_growth_rate": 0.602545538162012,
+    "sessions_to_double": 1.1503648050806285,
+    "var_excedido": true,
+    "factor_var": 0.26260504201680673
+  },
+  "resumen": {
+    "gastado_individuales": 12000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 20000,
+    "total_en_riesgo": 32000.0,
+    "pct_bankroll_en_riesgo": 0.256,
+    "n_senales_apostar": 4,
+    "pool_cobertura": 6,
+    "alerta_riesgo": false
+  }
+}

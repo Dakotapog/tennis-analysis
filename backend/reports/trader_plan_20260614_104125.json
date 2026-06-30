@@ -1,0 +1,81 @@
+{
+  "metadata": {
+    "timestamp": "20260614_104125",
+    "bankroll": 125000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260614_104024.json",
+    "n_partidos_analizados": 39,
+    "calibracion_n": 755,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "challenger",
+      "superficie": "grass",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Johan Alexander Rodriguez Rodriguez",
+          "cuota": 2.18
+        },
+        {
+          "jugador": "Katarzyna Kawa",
+          "cuota": 2.1
+        },
+        {
+          "jugador": "Lorenzo Angelini",
+          "cuota": 1.52
+        }
+      ],
+      "cuota_combo": 6.96,
+      "hr_combo": 0.1988,
+      "ev_combo": 0.3836,
+      "excluidos": [],
+      "stake": 31000,
+      "retorno_potencial": 215760.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.8333333333333334,
+    "total_ajustado": 62500.0,
+    "var_95": -75000.0,
+    "cvar_95": -74999.99999999999,
+    "expected_pl": 32387.616475155482,
+    "sharpe_ratio": 0.15349023521780933,
+    "kelly_growth_rate": -0.41491893722885526,
+    "sessions_to_double": Infinity,
+    "var_excedido": true,
+    "factor_var": 0.4166666666666667
+  },
+  "resumen": {
+    "gastado_individuales": 0,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 31000,
+    "total_en_riesgo": 31000.0,
+    "pct_bankroll_en_riesgo": 0.248,
+    "n_senales_apostar": 0,
+    "pool_cobertura": 3,
+    "alerta_riesgo": false
+  }
+}

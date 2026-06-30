@@ -1,0 +1,224 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — DEPLOY ROLAND GARROS
+  2026-06-10 03:07  │  Bankroll: $125,000
+  Señales APOSTAR: 10  │  Watchlist: 1  │  Sin edge: 0
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 11 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.15 (atp500)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $50,000 (40% bankroll)
+
+  │  🎾 Martin Damm vs Alex De Minaur
+  │     Apostar: Martin Damm
+  │     Cuota 4.20  │  Edge 28.8%  │  p_blend 0.661 (n_h2h=0)
+  │     Kelly-KL 43.2% → stake $12,000  │  Retorno potencial $50,400
+  │     EV real +177.6%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Thijs Boogaard vs Yibing Wu
+  │     Apostar: Thijs Boogaard
+  │     Cuota 4.50  │  Edge 28.9%  │  p_blend 0.661 (n_h2h=0)
+  │     Kelly-KL 42.0% → stake $12,000  │  Retorno potencial $54,000
+  │     EV real +197.4%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 James McCabe vs Zizou Bergs
+  │     Apostar: James McCabe
+  │     Cuota 2.80  │  Edge 18.4%  │  p_blend 0.661 (n_h2h=0)
+  │     Kelly-KL 34.3% → stake $12,000  │  Retorno potencial $33,600
+  │     EV real +85.0%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Ugo Humbert vs Benjamin Bonzi
+  │     Apostar: Benjamin Bonzi
+  │     Cuota 2.70  │  Edge 16.8%  │  p_blend 0.612 (n_h2h=2)
+  │     Kelly-KL 31.9% → stake $12,000  │  Retorno potencial $32,400
+  │     EV real +65.2%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Iva Jovic vs Alexandra Eala
+  │     Apostar: Alexandra Eala
+  │     Cuota 2.43  │  Edge 13.3%  │  p_blend 0.632 (n_h2h=1)
+  │     Kelly-KL 27.6% → stake $2,000  │  Retorno potencial $4,860
+  │     EV real +53.5%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Victoria Mboko vs Karolina Pliskova
+  │     Apostar: Karolina Pliskova
+  │     Cuota 2.60  │  Edge 13.7%  │  p_blend 0.661 (n_h2h=0)
+  │     Kelly-KL 26.7% → stake $1,000  │  Retorno potencial $2,600
+  │     EV real +71.8%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Giovanni Mpetshi Perricard vs Gauthier Onclin
+  │     Apostar: Gauthier Onclin
+  │     Cuota 2.48  │  Edge 12.8%  │  p_blend 0.609 (n_h2h=2)
+  │     Kelly-KL 26.1% → stake $1,000  │  Retorno potencial $2,480
+  │     EV real +51.0%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Martin Landaluce vs Taylor Fritz
+  │     Apostar: Martin Landaluce
+  │     Cuota 2.80  │  Edge 14.6%  │  p_blend 0.661 (n_h2h=0)
+  │     Kelly-KL 25.4% → stake $1,000  │  Retorno potencial $2,800
+  │     EV real +85.0%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Jan-Lennard Struff vs Alexander Bublik
+  │     Apostar: Jan-Lennard Struff
+  │     Cuota 2.80  │  Edge 14.5%  │  p_blend 0.545 (n_h2h=8)
+  │     Kelly-KL 25.3% → stake $1,000  │  Retorno potencial $2,800
+  │     EV real +52.7%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Marie Bouzkova vs Donna Vekic
+  │     Apostar: Donna Vekic
+  │     Cuota 2.40  │  Edge 10.4%  │  p_blend 0.626 (n_h2h=1)
+  │     Kelly-KL 21.3% → stake $1,000  │  Retorno potencial $2,400
+  │     EV real +50.2%  │  Zona: underdog  │  Sup: grass
+
+  │  Total individuales: $55,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 11 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $75,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Thijs Boogaard       @4.50  p=0.650  zona=underdog
+  │    2. Martin Damm          @4.20  p=0.650  zona=underdog
+  │    3. James McCabe         @2.80  p=0.650  zona=underdog
+  │    4. Martin Landaluce     @2.80  p=0.650  zona=underdog
+  │    5. Jan-Lennard Struff   @2.80  p=0.542  zona=underdog
+  │    6. Benjamin Bonzi       @2.70  p=0.605  zona=underdog
+  │    7. Karolina Pliskova    @2.60  p=0.650  zona=underdog
+  │    8. Gauthier Onclin      @2.48  p=0.602  zona=underdog
+  │    9. Alexandra Eala       @2.43  p=0.624  zona=underdog
+  │    10. Donna Vekic          @2.40  p=0.618  zona=underdog
+  │    11. Jessica Bouzas Maneiro @1.78  p=0.635  zona=slight_underdog [W]
+
+  │  ── 3 PIERNAS: TOP 4 combos × $12,000 = $48,000 ──
+  │     (cada combo excluye 8 jugadores)
+  │     [3p-1] Martin Damm@4.20 + Thijs Boogaard@4.50 + James McCabe@2.80
+  │            @52.92 HR:27.5% EV:+1353.3% →$635,040  excluye:[Benjamin Bonzi, Alexandra Eala, Karolina Pliskova, Gauthier Onclin, Martin Landaluce, Jan-Lennard Struff, Donna Vekic, Jessica Bouzas Maneiro]
+  │     [3p-2] Martin Damm@4.20 + Thijs Boogaard@4.50 + Martin Landaluce@2.80
+  │            @52.92 HR:27.5% EV:+1353.3% →$635,040  excluye:[James McCabe, Benjamin Bonzi, Alexandra Eala, Karolina Pliskova, Gauthier Onclin, Jan-Lennard Struff, Donna Vekic, Jessica Bouzas Maneiro]
+  │     [3p-3] Thijs Boogaard@4.50 + James McCabe@2.80 + Martin Landaluce@2.80
+  │            @35.28 HR:27.5% EV:+868.9% →$423,360  excluye:[Martin Damm, Benjamin Bonzi, Alexandra Eala, Karolina Pliskova, Gauthier Onclin, Jan-Lennard Struff, Donna Vekic, Jessica Bouzas Maneiro]
+  │     [3p-4] Martin Damm@4.20 + James McCabe@2.80 + Martin Landaluce@2.80
+  │            @32.93 HR:27.5% EV:+804.3% →$395,160  excluye:[Thijs Boogaard, Benjamin Bonzi, Alexandra Eala, Karolina Pliskova, Gauthier Onclin, Jan-Lennard Struff, Donna Vekic, Jessica Bouzas Maneiro]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $6,000 = $24,000 ──
+  │     (cada combo excluye 7 jugadores)
+  │     [4p-1] Martin Damm@4.20 + Thijs Boogaard@4.50 + James McCabe@2.80 + Martin Landaluce@2.80
+  │            @148.18 HR:17.8% EV:+2545.0% →$889,080  excluye:[Benjamin Bonzi, Alexandra Eala, Karolina Pliskova, Gauthier Onclin, Jan-Lennard Struff, Donna Vekic, Jessica Bouzas Maneiro]
+  │     [4p-2] Martin Damm@4.20 + Thijs Boogaard@4.50 + Karolina Pliskova@2.60 + Martin Landaluce@2.80
+  │            @137.59 HR:17.8% EV:+2356.1% →$825,540  excluye:[James McCabe, Benjamin Bonzi, Alexandra Eala, Gauthier Onclin, Jan-Lennard Struff, Donna Vekic, Jessica Bouzas Maneiro]
+  │     [4p-3] Martin Damm@4.20 + Thijs Boogaard@4.50 + James McCabe@2.80 + Karolina Pliskova@2.60
+  │            @137.59 HR:17.8% EV:+2356.1% →$825,540  excluye:[Benjamin Bonzi, Alexandra Eala, Gauthier Onclin, Martin Landaluce, Jan-Lennard Struff, Donna Vekic, Jessica Bouzas Maneiro]
+  │     [4p-4] Thijs Boogaard@4.50 + James McCabe@2.80 + Karolina Pliskova@2.60 + Martin Landaluce@2.80
+  │            @91.73 HR:17.8% EV:+1537.4% →$550,380  excluye:[Martin Damm, Benjamin Bonzi, Alexandra Eala, Gauthier Onclin, Jan-Lennard Struff, Donna Vekic, Jessica Bouzas Maneiro]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-4 picks?) ──
+  │  Total apostado: $72,000
+
+  │  🏆 0 fallos (11/11 ganan): retorno $5,179,140 → P&L +$5,107,140 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Jessica Bouzas Maneiro]):
+  │       retorno $5,179,140 → P&L +$5,107,140 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Thijs Boogaard]):
+  │       retorno $395,160 → P&L +$323,160 (1/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Jessica Bouzas Maneiro, Donna Vekic]):
+  │       retorno $5,179,140 → P&L +$5,107,140 (8/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Thijs Boogaard, Martin Damm]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Jessica Bouzas Maneiro, Donna Vekic, Alexandra Eala]):
+  │       retorno $5,179,140 → P&L +$5,107,140 (8/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Thijs Boogaard, Martin Damm, James McCabe]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+  │  ✅ 4 fallos (mejor caso: fallan favoritos [Jessica Bouzas Maneiro, Donna Vekic, Alexandra Eala, Gauthier Onclin]):
+  │       retorno $5,179,140 → P&L +$5,107,140 (8/8 combos pagan)
+  │  ❌ 4 fallos (peor caso: fallan underdogs [Thijs Boogaard, Martin Damm, James McCabe, Martin Landaluce]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+
+  │  Total cobertura: $72,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     11
+  │  ρ estructural:       0.15 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.400
+  │  Reducción vs naive:  -60.0%
+  │
+  │  Stake naive (sin ajuste):    $     127,000
+  │  Stake ajustado (PK):         $      50,800
+  │  Ahorro por correlación:      $      76,200
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $     -12,002  (9.6% bankroll)
+  │  CVaR 95%:           $     -25,345
+  │  Max VaR permitido:  $      31,250  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.98
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $     910,219
+  │  σ(P&L):             $     877,013
+  │  Sharpe Ratio:              1.038
+  │  Kelly Growth Rate:        2.1479 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $5,768,007,331
+  │  Bankroll en 10 sesiones:  $266,159,268,556,019
+  │  Bankroll en 30 sesiones:  $1,206,715,127,317,404,206,282,601,253,568,512
+  │  Sesiones para duplicar:   0.3
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.98 (de $127,000 a $125,000)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.98) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Martin Damm               @4.20  →  $  12,000  (ret. $    50,400)
+  │    Thijs Boogaard            @4.50  →  $  12,000  (ret. $    54,000)
+  │    James McCabe              @2.80  →  $  12,000  (ret. $    33,600)
+  │    Benjamin Bonzi            @2.70  →  $  12,000  (ret. $    32,400)
+  │    Alexandra Eala            @2.43  →  $   2,000  (ret. $     4,860)
+  │    Karolina Pliskova         @2.60  →  $   1,000  (ret. $     2,600)
+  │    Gauthier Onclin           @2.48  →  $   1,000  (ret. $     2,480)
+  │    Martin Landaluce          @2.80  →  $   1,000  (ret. $     2,800)
+  │    Jan-Lennard Struff        @2.80  →  $   1,000  (ret. $     2,800)
+  │    Donna Vekic               @2.40  →  $   1,000  (ret. $     2,400)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @52.92]  $  12,000  →  Martin Damm@4.20 + Thijs Boogaard@4.50 + James McCabe@2.80
+  │    [3p @52.92]  $  12,000  →  Martin Damm@4.20 + Thijs Boogaard@4.50 + Martin Landaluce@2.80
+  │    [3p @35.28]  $  12,000  →  Thijs Boogaard@4.50 + James McCabe@2.80 + Martin Landaluce@2.80
+  │    [3p @32.93]  $  12,000  →  Martin Damm@4.20 + James McCabe@2.80 + Martin Landaluce@2.80
+  │    [4p @148.18]  $   6,000  →  Martin Damm@4.20 + Thijs Boogaard@4.50 + James McCabe@2.80 + Martin Landaluce@2.80
+  │    [4p @137.59]  $   6,000  →  Martin Damm@4.20 + Thijs Boogaard@4.50 + Karolina Pliskova@2.60 + Martin Landaluce@2.80
+  │    [4p @137.59]  $   6,000  →  Martin Damm@4.20 + Thijs Boogaard@4.50 + James McCabe@2.80 + Karolina Pliskova@2.60
+  │    [4p @91.73]  $   6,000  →  Thijs Boogaard@4.50 + James McCabe@2.80 + Karolina Pliskova@2.60 + Martin Landaluce@2.80
+  │
+  │  TOTAL EN RIESGO:  $   127,000  (101.6% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $       125,000                       ║
+  ║  Individuales:        $        55,000  (44.0% bankroll)      ║
+  ║  Cobertura:           $        72,000  (57.6% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $       127,000  (101.6% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:      10                                       ║
+  ║  Pool cobertura:       11 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260610_03  ║
+  ║  Partidos analizados: 222                                       ║
+  ║  Superficie:          clay (Roland Garros)                    ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  ⚠️  ALERTA: 101.6% bankroll en riesgo — por encima del 30% recomendado.
+      Reducir combos o sistema hasta n≥30 con datos limpios.
+
+  📊 Calibración: n=284 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.661 (calibrado grass) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260610_030710.json

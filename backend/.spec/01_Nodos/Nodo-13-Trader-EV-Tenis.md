@@ -1,7 +1,7 @@
 # Nodo-13: Trader EV Tenis — Capa de Deploy (análogo NBA trader_ev.py)
 
-> **Wikilinks:** [[Mandatos-No-Negociables]] | [[Pipeline-Arquitectura]] | [[Sprint-Pipeline]] | [[Nodo-01-Edge-Calculator]] | [[Nodo-07-Strangler-Fig]]
-> **Estado:** 2026-05-30 — P&L REGISTRADO ✅ | Primera sesión: +$25,000 (+25% bankroll) | bankroll $100,000 → $125,000
+> **Wikilinks:** [[Mandatos-No-Negociables]] | [[Pipeline-Arquitectura]] | [[Sprint-Pipeline]] | [[Nodo-01-Edge-Calculator]] | [[Nodo-07-Strangler-Fig]] | [[Nodo-15-Portfolio-HedgeFund]]
+> **Estado:** 2026-06-01 — v2.0 HEDGE FUND LAYER ✅ | Sesión 1: +$25,000 (+25% bankroll) | Sesión 2: 8/8=100% RG R4 | bankroll $100,000 → $125,000
 > **Inspiración:** NBA trader_ev.py (proyecto NBA — bankroll crecimiento exponencial sin ML)
 
 ---
@@ -66,20 +66,24 @@ p_blend = (n_h2h × p_modelo + 3 × 0.52) / (n_h2h + 3)
 ## Uso
 
 ```bash
-# Básico — lee el edge_report más reciente
+# Modo v1 — clásico (individuales + combos simples + sistema 2/N)
 python trader_ev_tenis.py --bankroll 100000
-
-# Con parámetros explícitos
 python trader_ev_tenis.py --bankroll 100000 --combos 3 --sistema 4 --ncombos 3
-
-# Incluir watchlist en combos (edge positivo pero bajo umbral 5%)
 python trader_ev_tenis.py --bankroll 100000 --watchlist
 
-# Archivo específico
-python trader_ev_tenis.py --bankroll 100000 --file reports/edge_report_20260530_072115.json
+# Modo v2.0 — Hedge Fund Layer (CONFIGURACIÓN ÓPTIMA VALIDADA 2026-06-01)
+python trader_ev_tenis.py --bankroll TU_BANKROLL \
+  --cobertura --all-picks --watchlist \
+  --min-cuota 1.50 --piernas-min 3 --piernas-max 4 --top-n 4
+
+# Con exclusiones manuales
+python trader_ev_tenis.py --bankroll TU_BANKROLL \
+  --cobertura --all-picks --watchlist \
+  --min-cuota 1.50 --piernas-min 3 --piernas-max 4 --top-n 4 \
+  --excluir "Jugador A,Jugador B"
 ```
 
-### Parámetros
+### Parámetros v1 (clásicos)
 
 | Parámetro | Default | Descripción |
 |---|---|---|
@@ -89,6 +93,56 @@ python trader_ev_tenis.py --bankroll 100000 --file reports/edge_report_20260530_
 | `--ncombos` | 3 | Cuántos combos mostrar (top por EV) |
 | `--watchlist` | False | Incluir señales watchlist en pool de combos |
 | `--file` | None | Archivo edge_report específico |
+
+### Parámetros v2.0 (Hedge Fund Layer — Nodo-15)
+
+| Parámetro | Default | Descripción |
+|---|---|---|
+| `--cobertura` | False | Activa sistema exclusión (C(N,K) combos por tier) |
+| `--all-picks` | False | Incluye sin_edge en pool (usar con `--min-cuota 1.50`) |
+| `--piernas-min` | 3 | Piernas mínimas en sistema cobertura |
+| `--piernas-max` | 6 | Piernas máximas (hasta 8) |
+| `--top-n` | 5 | Top N combos por tier (diversidad garantizada) |
+| `--excluir` | '' | Jugadores excluidos del pool (comma-separated) |
+| `--min-cuota` | 1.0 | Cuota mínima para combo pool (usar 1.50 = solo underdogs) |
+
+---
+
+## Run de Producción — 2026-06-01 (Roland Garros R4, 8 partidos) — v2.0 Hedge Fund Layer
+
+```
+Pool de cobertura (--min-cuota 1.50): 4 picks
+  Kostyuk M.  @3.00  edge +19.4%  zona=underdog      ← GANÓ ✅
+  Fonseca J.  @2.30  edge  +7.9%  zona=underdog      ← GANÓ ✅
+  Mensik J.   @2.00  edge  +1.2%  zona=slight_under  ← GANÓ ✅ (watchlist)
+  Svitolina E.@1.53  edge  -8.4%  zona=moderate_fav  ← GANÓ ✅ (sin_edge vía --all-picks)
+
+Excluidos del pool (heavy favorites, zona heavy_favorite):
+  Zverev A. @1.04 | Cirstea S. @1.18 | Jodar R. @1.20 | Andreeva M. @1.08
+
+Sistema cobertura (C(4,3)=4 combos + C(4,4)=1 combo = 5 combos):
+  [3p-1] Kostyuk+Fonseca+Mensik   @13.80  excluye: Svitolina → si Svitolina falla, paga ✅
+  [3p-2] Kostyuk+Fonseca+Svitolina@10.56  excluye: Mensik
+  [3p-3] Kostyuk+Mensik+Svitolina  @9.18  excluye: Fonseca
+  [3p-4] Fonseca+Mensik+Svitolina  @7.04  excluye: Kostyuk → si Kostyuk falla, paga ✅
+  [4p-1] Todos 4                  @21.11  excluye: nadie
+
+Risk Metrics (Portfolio Kelly ρ=0.25, N=4):
+  Portfolio Kelly factor:  0.571 (reducción 42.9% por correlación)
+  VaR 95%:                -$59,000 (59% bankroll)
+  E[P&L]:                 +$30,420
+  Sharpe Ratio:            0.169
+  Kelly Growth Rate:      +0.4142 (g>0 → DEPLOY ✅)
+  Sesiones para 2× bankroll: 1.7 sesiones
+
+Resultado real (8/8 = 100% accuracy):
+  P&L cobertura:   +$616,310 (sobre $59,000 invertidos)
+  P&L individuales:+$19,200  (sobre $11,000 invertidos)
+  TOTAL:           +$635,510 (+907% sobre lo apostado)
+
+Patrón descubierto: underdogs con edge >5% y cuota ≥2.00 = alpha estructural del sistema.
+Heavy favorites (cuota <1.50) = veneno para KGR del portfolio.
+```
 
 ---
 
@@ -186,7 +240,9 @@ Alerta automática: si total_riesgo > 30% bankroll → warning en output
 | T13-03 | Añadir campo `n_h2h` en `edge_calculator.py` → leer desde `enfrentamientos_directos` | ✅ 2026-05-30 |
 | T13-04 | Correr pipeline completo (80 partidos) → sistema 2/N activo con ≥3 señales | ⏳ pendiente |
 | T13-05 | Añadir output JSON `reports/trader_plan_FECHA.json` para auditoría | ✅ 2026-05-30 |
-| T13-06 | Calibrar `p_blend` con datos reales cuando n≥30 validaciones | ⏳ pendiente (post n≥30) |
+| T13-06 | Calibrar `p_blend` con datos reales cuando n≥30 validaciones | ⏳ pendiente — n=23, ejecutar validar_con_api.py para cruzar n=31 |
+| T13-07 | Validar configuración óptima --min-cuota 1.50 --piernas-min 3 --piernas-max 4 en QF Roland Garros 2026-06-02 | ⏳ pendiente |
+| T13-08 | Implementar ajuste automático de stakes por factor VaR en main() (ver T15-05 en Nodo-15) | ⏳ pendiente |
 
 ---
 
@@ -197,3 +253,4 @@ Alerta automática: si total_riesgo > 30% bankroll → warning en output
 - [[Pipeline-Arquitectura]] — PASO 3.5 en el pipeline diario
 - [[Sprint-Pipeline]] — Fase 14 en backlog
 - [[Nodo-07-Strangler-Fig]] — Nodo-07 Fase 2 habilitó H2HExtractor que produce datos más limpios para este nodo
+- [[Nodo-15-Portfolio-HedgeFund]] — Hedge Fund Layer: Sistema Cobertura por Exclusión + Portfolio Kelly + VaR/CVaR (implementado en este nodo como v2.0)

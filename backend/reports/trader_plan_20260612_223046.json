@@ -1,0 +1,75 @@
+{
+  "metadata": {
+    "timestamp": "20260612_223046",
+    "bankroll": 125000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260612_214755.json",
+    "n_partidos_analizados": 40,
+    "calibracion_n": 706,
+    "parametros": {
+      "modo": "cobertura",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Adrian Mannarino vs Alex De Minaur",
+      "favorito": "Adrian Mannarino",
+      "cuota": 4.3,
+      "edge_pct": "28.9%",
+      "p_modelo": 0.522,
+      "n_h2h": 6,
+      "p_blend": 0.5376666666666667,
+      "kelly_kl": 0.1309,
+      "kelly_usado": 0.0994,
+      "stake": 12000,
+      "retorno_potencial": 51600.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Aleksandar Kovacevic vs Michael Mmoh",
+      "favorito": "Michael Mmoh",
+      "cuota": 2.35,
+      "edge_pct": "8.8%",
+      "p_modelo": 0.514,
+      "n_h2h": 5,
+      "p_blend": 0.534625,
+      "kelly_kl": 0.055,
+      "kelly_usado": 0.0475,
+      "stake": 6000,
+      "retorno_potencial": 14100.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [],
+  "risk_management": {},
+  "resumen": {
+    "gastado_individuales": 18000.0,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 0.0,
+    "total_en_riesgo": 18000.0,
+    "pct_bankroll_en_riesgo": 0.144,
+    "n_senales_apostar": 2,
+    "pool_cobertura": 2,
+    "alerta_riesgo": false
+  }
+}

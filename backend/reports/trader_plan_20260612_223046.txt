@@ -1,0 +1,49 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — ATP500 GRASS
+  2026-06-12 22:30  │  Bankroll: $125,000
+  Señales APOSTAR: 2  │  Watchlist: 0  │  Sin edge: 0
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 2 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.15 (atp500)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $50,000 (40% bankroll)
+
+  │  🎾 Adrian Mannarino vs Alex De Minaur
+  │     Apostar: Adrian Mannarino
+  │     Cuota 4.30  │  Edge 28.9%  │  p_blend 0.538 (n_h2h=6)
+  │     Kelly-KL 13.1% → stake $12,000  │  Retorno potencial $51,600
+  │     EV real +131.2%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Aleksandar Kovacevic vs Michael Mmoh
+  │     Apostar: Michael Mmoh
+  │     Cuota 2.35  │  Edge 8.8%  │  p_blend 0.535 (n_h2h=5)
+  │     Kelly-KL 5.5% → stake $6,000  │  Retorno potencial $14,100
+  │     EV real +25.6%  │  Zona: underdog  │  Sup: grass
+
+  │  Total individuales: $18,000
+  └─────────────────────────────────────────────────────────────────
+
+  ⚠️  Solo 2 picks en pool — se necesitan ≥3.
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $       125,000                       ║
+  ║  Individuales:        $        18,000  (14.4% bankroll)      ║
+  ║  Combos:              $             0  (0.0% bankroll)      ║
+  ║  Sistema:             $             0  (0.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $        18,000  (14.4% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       2                                       ║
+  ║  Pool cobertura:        2 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260612_21  ║
+  ║  Partidos analizados:  40                                       ║
+  ║  Superficie:          grass (atp500)                              ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  📊 Calibración: n=706 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.569 (calibrado grass) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260612_223046.json

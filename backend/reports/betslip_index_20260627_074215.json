@@ -1,0 +1,91 @@
+{
+  "ts": "2026-06-27T07:42:15.677445",
+  "modo": "LIVE",
+  "n_picks": 6,
+  "index": {
+    "4237034706": {
+      "jugador": "Tomas Martin Etcheverry",
+      "cuota": 2.02,
+      "cuota_kambi": 2.02,
+      "partido": "Lorenzo Sonego vs Tomas Martin Etcheverry",
+      "match_id": "hp3ifXd3",
+      "match_url": "https://www.flashscore.co/match/tennis/cobolli-flavio-etcheverry-tomas-martin/hp3ifXd3/#/h2h",
+      "torneo": "Hurlingham (Reino Unido)",
+      "superficie": "grass",
+      "tier": "atp500",
+      "edge": "26.6%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0
+    },
+    "4237563914": {
+      "jugador": "Sandro Kopp",
+      "cuota": 2.95,
+      "cuota_kambi": 2.95,
+      "partido": "Inaki Montes-De La Torre vs Sandro Kopp",
+      "match_id": "6NqPl50C",
+      "match_url": "https://www.flashscore.co/match/tennis/montes-de-la-torre-inaki-kopp-sandro/6NqPl50C/#/h2h",
+      "torneo": "Plovdiv (Bulgaria)",
+      "superficie": "clay",
+      "tier": "challenger",
+      "edge": "17.2%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0
+    },
+    "4237282955": {
+      "jugador": "Stefan Seifert",
+      "cuota": 2.33,
+      "cuota_kambi": 2.33,
+      "partido": "Stefan Seifert vs Herman Hoeyeraal",
+      "match_id": "jkpbPq0D",
+      "match_url": "https://www.flashscore.co/match/tennis/seifert-stefan-hoeyeraal-herman/jkpbPq0D/#/h2h",
+      "torneo": "M15 Rzeszow (Polonia)",
+      "superficie": "clay",
+      "tier": "itf",
+      "edge": "7.6%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0
+    },
+    "4237700854": {
+      "jugador": "Midori Castillo Meza",
+      "cuota": 2.18,
+      "cuota_kambi": 2.18,
+      "partido": "Alyssa Ahn vs Midori Castillo Meza",
+      "match_id": "EwlG62Pj",
+      "match_url": "https://www.flashscore.co/match/tennis/ahn-alyssa-castillo-meza-midori/EwlG62Pj/#/h2h",
+      "torneo": "W15 Claremont, CA (Estados Unidos)",
+      "superficie": "hard",
+      "tier": "itf",
+      "edge": "5.1%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0
+    },
+    "4237273133": {
+      "jugador": "Kacper Szymkowiak",
+      "cuota": 2.08,
+      "cuota_kambi": 2.08,
+      "partido": "Kacper Szymkowiak vs Alan Wazny",
+      "match_id": "IexpmmhK",
+      "match_url": "https://www.flashscore.co/match/tennis/szymkowiak-kacper-wazny-alan/IexpmmhK/#/h2h",
+      "torneo": "M15 Rzeszow (Polonia)",
+      "superficie": "clay",
+      "tier": "itf",
+      "edge": "3.4%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0
+    },
+    "4237658339": {
+      "jugador": "Ayumi Miyamoto",
+      "cuota": 2.02,
+      "cuota_kambi": 2.02,
+      "partido": "Miho Kuramochi vs Ayumi Miyamoto",
+      "match_id": "IHgNiPIE",
+      "match_url": "https://www.flashscore.co/match/tennis/kuramochi-miho-miyamoto-ayumi/IHgNiPIE/#/h2h",
+      "torneo": "W15 Sapporo 2 (Japón)",
+      "superficie": "hard",
+      "tier": "itf",
+      "edge": "1.7%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0
+    }
+  }
+}

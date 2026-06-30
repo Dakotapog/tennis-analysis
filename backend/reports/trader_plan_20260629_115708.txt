@@ -1,0 +1,96 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — GRAND_SLAM GRASS
+  2026-06-29 11:57  │  Bankroll: $125,000
+  Señales APOSTAR: 0  │  Watchlist: 3  │  Sin edge: 0
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 3 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.25 (grand_slam)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 3 picks  │  Combos: 3 a 3 piernas
+  │  Budget: $75,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Darja Vidmanova      @10.00  p=0.588  zona=underdog [W]
+  │    2. Pablo Carreno Busta  @3.10  p=0.534  zona=underdog [W]
+  │    3. Luca Van Assche      @2.95  p=0.588  zona=underdog [W]
+
+  │  ── 3 PIERNAS: TOP 1 combos × $75,000 = $75,000 ──
+  │     (cada combo excluye 0 jugador)
+  │     [3p-1] Darja Vidmanova@10.00 + Luca Van Assche@2.95 + Pablo Carreno Busta@3.10
+  │            @91.45 HR:18.5% EV:+1590.3% →$6,858,750  excluye:[ninguno]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-0 picks?) ──
+  │  Total apostado: $75,000
+
+  │  🏆 0 fallos (3/3 ganan): retorno $6,858,750 → P&L +$6,783,750 (TODOS 1 combos pagan)
+
+  │  Total cobertura: $75,000  │  1 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     3
+  │  ρ estructural:       0.25 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.667
+  │  Reducción vs naive:  -33.3%
+  │
+  │  Stake naive (sin ajuste):    $      75,000
+  │  Stake ajustado (PK):         $      50,000
+  │  Ahorro por correlación:      $      25,000
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $     -75,000  (60.0% bankroll)
+  │  CVaR 95%:           $     -75,000
+  │  Max VaR permitido:  $      31,250  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.42
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $   1,294,657
+  │  σ(P&L):             $   2,741,929
+  │  Sharpe Ratio:              0.472
+  │  Kelly Growth Rate:        0.0679 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $     175,539
+  │  Bankroll en 10 sesiones:  $     246,512
+  │  Bankroll en 30 sesiones:  $     958,726
+  │  Sesiones para duplicar:   10.2
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.42 (de $75,000 a $31,250)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.42) ───────────────────────────
+  │
+  │
+  │  COBERTURA (1 combos):
+  │    [3p @91.45]  $  31,000  →  Darja Vidmanova@10.00 + Luca Van Assche@2.95 + Pablo Carreno Busta@3.10
+  │
+  │  TOTAL EN RIESGO:  $    31,000  (24.8% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $       125,000                       ║
+  ║  Individuales:        $             0  (0.0% bankroll)      ║
+  ║  Cobertura:           $        31,000  (24.8% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $        31,000  (24.8% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       0                                       ║
+  ║  Pool cobertura:        3 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260629_02  ║
+  ║  Partidos analizados:  51                                       ║
+  ║  Superficie / Tier:   grass / Grand Slam                          ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  📊 Calibración: n=2681 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.588 (calibrado grass) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260629_115708.json

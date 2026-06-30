@@ -124,34 +124,94 @@ class ZitaScraper:
             # Si no se encuentra el botón después del timeout, se asume que no hay banner
             logger.info("ℹ️ No se encontró banner de cookies o ya fue aceptado.")
     
-    async def extract_tennis_matches(self):
-        """Extraer partidos de tenis con datos estructurados"""
+    async def navigate_to_tomorrow(self):
+        """
+        Hace click en la flecha 'Día siguiente' de FlashScore para ver los partidos de mañana.
+        Usa el botón de navegación por fecha (day-picker-arrow) del DOM actual.
+        """
+        try:
+            logger.info("📅 Navegando a los partidos de MAÑANA...")
+
+            # Selectores ordenados por prioridad — el DOM de FlashScore cambia periódicamente
+            tomorrow_selectors = [
+                # 2026-06-06: botón flecha "Día siguiente" con data-testid
+                'button[data-day-picker-arrow="next"]',
+                'button.wcl-arrow_YpdN4[aria-label="Día siguiente"]',
+                # Fallbacks históricos
+                "a[href*='tomorrow']",
+                ".calendar__navigation--tomorrow",
+                "[data-testid='calendar-tab-tomorrow']",
+                "button.tabs__tab:nth-child(3)",
+            ]
+
+            clicked = False
+            for sel in tomorrow_selectors:
+                try:
+                    el = await self.page.query_selector(sel)
+                    if el:
+                        await el.click()
+                        await asyncio.sleep(3)
+                        logger.info(f"✅ Click en 'Día siguiente' con selector: {sel}")
+                        clicked = True
+                        break
+                except Exception:
+                    continue
+
+            if not clicked:
+                # Fallback: buscar por aria-label o texto visible
+                buttons = await self.page.query_selector_all("button[aria-label]")
+                for btn in buttons:
+                    label = await btn.get_attribute('aria-label') or ''
+                    if any(kw in label.lower() for kw in ['siguiente', 'next', 'tomorrow', 'mañana']):
+                        await btn.click()
+                        await asyncio.sleep(3)
+                        logger.info(f"✅ Click en botón por aria-label: '{label}'")
+                        clicked = True
+                        break
+
+            if not clicked:
+                logger.warning("⚠️  No se encontró botón 'Día siguiente' — usando partidos del día actual")
+
+            return clicked
+
+        except Exception as e:
+            logger.error(f"❌ Error navegando a mañana: {str(e)}")
+            return False
+
+    async def extract_tennis_matches(self, max_matches: int = 0):
+        """
+        Extraer partidos de tenis con datos estructurados.
+        max_matches: límite de partidos individuales a extraer (0 = sin límite).
+        Dobles filtrados automáticamente via extract_matches_from_dom().
+        """
         logger.info("🎾 Extrayendo partidos de tenis...")
-        
+        if max_matches:
+            logger.info(f"   Límite: {max_matches} partidos individuales (dobles excluidos automáticamente)")
+
         matches_data = []
-        
+
         try:
             # Hacer scroll para cargar contenido dinámico
             await self.page.evaluate("window.scrollTo(0, 0)")
             await asyncio.sleep(2)
-            
+
             # Scroll único para cargar todo el contenido
             logger.info("🔄 Realizando scroll para cargar todos los partidos...")
             await self.page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
             await asyncio.sleep(3)  # Espera para que cargue el contenido
 
             # Extraer todos los partidos de una vez
-            current_matches = await self.extract_matches_from_dom()
+            current_matches = await self.extract_matches_from_dom(max_matches=max_matches)
             if current_matches:
                 matches_data.extend(current_matches)
                 logger.info(f"   ✅ Extraídos {len(current_matches)} partidos.")
-            
+
             # Eliminar duplicados
             unique_matches = self.remove_duplicates(matches_data)
             logger.info(f"🎯 Total partidos únicos extraídos: {len(unique_matches)}")
-            
+
             return unique_matches
-            
+
         except Exception as e:
             logger.error(f"❌ Error extrayendo partidos: {str(e)}")
             return matches_data
@@ -188,44 +248,89 @@ class ZitaScraper:
 
         return clean_name if clean_name else "Torneo Sin Nombre"
 
-    async def extract_matches_from_dom(self):
+    @staticmethod
+    def extraer_superficie(torneo_texto: str) -> str:
+        """
+        Deriva la superficie de juego desde el nombre del torneo.
+        Bug 3 fix: Roland Garros → clay | Wimbledon → grass | Australian/US Open → hard
+        """
+        t = torneo_texto.lower()
+        if 'roland garros' in t or 'french open' in t:
+            return 'clay'
+        if 'wimbledon' in t:
+            return 'grass'
+        if 'australian open' in t or 'us open' in t or 'united states' in t:
+            return 'hard'
+        if 'clay' in t or 'arcilla' in t or 'tierra' in t:
+            return 'clay'
+        if 'grass' in t or 'hierba' in t or 'cesped' in t:
+            return 'grass'
+        if 'hard' in t or 'dura' in t or 'hardcourt' in t:
+            return 'hard'
+        if 'indoor' in t:
+            return 'hard'
+        return 'unknown'
+
+    async def extract_matches_from_dom(self, max_matches: int = 0):
         """
         MÉTODO REESTRUCTURADO: Extrae torneos y partidos en el orden en que aparecen en el DOM.
         Filtra los torneos de dobles.
+        Bug 3 fix (v2 2026-05-29): FlashScore usa .headerLeague__title (no .event__header ni .event__title).
+        El texto incluye superficie: "Abierto de Francia (Francia), arcilla".
+        max_matches: detener al llegar a este número de partidos individuales (0 = sin límite).
         """
         matches = []
         current_tournament = "Sin Torneo Asignado"
+        current_superficie = "unknown"
         is_doubles_tournament = False
-        
+
         try:
             logger.info("🔍 Procesando elementos de la página en orden...")
-            
-            # Selector unificado para obtener torneos y partidos en el orden del DOM
-            all_elements = await self.page.query_selector_all('.event__title, .event__match')
+
+            # Bug 3 fix v2: FlashScore usa headerLeague__title para encabezados de torneo.
+            # Las clases event__header y event__title ya no existen en el DOM actual.
+            all_elements = await self.page.query_selector_all('.headerLeague__title, .event__match')
             logger.info(f"   Encontrados {len(all_elements)} elementos totales (torneos y partidos).")
 
             for element in all_elements:
                 element_class = await element.get_attribute('class') or ''
 
-                # Si es un título de torneo, actualizar el torneo actual y verificar si es de dobles
-                if 'event__title' in element_class:
-                    tournament_text = await element.text_content()
-                    if tournament_text:
-                        current_tournament = self.clean_tournament_name(tournament_text)
+                # Detectar header de torneo (clase actual de FlashScore)
+                if 'headerLeague__title' in element_class:
+                    # inner_text() → "Abierto de Francia (Francia), arcilla"
+                    tournament_text = await element.inner_text()
+                    if tournament_text and tournament_text.strip():
+                        raw = tournament_text.strip()
+                        # La superficie viene al final tras la última coma: "..., arcilla"
+                        # Separar nombre del torneo de la superficie embebida
+                        if ', ' in raw:
+                            parts = raw.rsplit(', ', 1)
+                            torneo_nombre = self.clean_tournament_name(parts[0])
+                            superficie_hint = parts[1].strip()
+                        else:
+                            torneo_nombre = self.clean_tournament_name(raw)
+                            superficie_hint = raw
+                        current_tournament = torneo_nombre
+                        current_superficie = self.extraer_superficie(superficie_hint)
                         # Comprobar si el torneo es de dobles para omitir sus partidos
-                        if 'dobles' in current_tournament.lower() or 'doubles' in current_tournament.lower():
+                        if 'dobles' in raw.lower() or 'doubles' in raw.lower():
                             is_doubles_tournament = True
                             logger.info(f"🚫 Omitiendo torneo de dobles: {current_tournament}")
                         else:
                             is_doubles_tournament = False
-                            logger.info(f"🏆 Nuevo torneo detectado: {current_tournament}")
-                
+                            logger.info(f"🏆 Torneo: {current_tournament} | Superficie: {current_superficie}")
+
                 # Si es un partido, extraer sus datos si no es de un torneo de dobles
                 elif 'event__match' in element_class:
                     if not is_doubles_tournament:
+                        # Detener si se alcanzó el límite de partidos individuales
+                        if max_matches and len(matches) >= max_matches:
+                            logger.info(f"🛑 Límite de {max_matches} partidos individuales alcanzado — deteniendo extracción.")
+                            break
                         match_data = await self.extract_single_match(element)
                         if match_data and match_data.get('jugador1') and match_data.get('jugador2'):
                             match_data['torneo'] = current_tournament
+                            match_data['superficie'] = current_superficie
                             matches.append(match_data)
                             logger.debug(f"   🎾 Partido añadido a '{current_tournament}': {match_data['jugador1']} vs {match_data['jugador2']}")
 
@@ -241,6 +346,7 @@ class ZitaScraper:
         try:
             match_data = {
                 'torneo': '',
+                'superficie': 'unknown',
                 'jugador1': '',
                 'jugador2': '',
                 'resultado': '',
@@ -282,23 +388,23 @@ class ZitaScraper:
                             href = 'https://www.flashscore.com' + href
                         elif not href.startswith('http'):
                             href = 'https://www.flashscore.com/' + href
-                        
+
                         match_data['match_url'] = href
-                        
-                        match_id_patterns = [
-                            r'/partido/tenis/([^/#]+)',
-                            r'/match/([^/#]+)',
-                            r'/tenis/([^/#]+)',
-                            r'/([A-Za-z0-9]{8,})/?'
-                        ]
-                        
-                        for pattern in match_id_patterns:
-                            match_id_search = re.search(pattern, href)
-                            if match_id_search:
-                                match_data['match_id'] = match_id_search.group(1)
-                                if '/partido/tenis/' in href:
-                                    match_data['h2h_url'] = f"https://www.flashscore.co/partido/tenis/{match_data['match_id']}/#/h2h/general"
-                                break
+
+                        # Bug 1 fix: construir h2h_url desde match_url (sin params ?mid=)
+                        match_url_limpia = href.split('?')[0].rstrip('/')
+                        match_data['h2h_url'] = match_url_limpia + '/#/h2h/overall/'
+
+                        # Bug 2 fix: extraer event_id del parámetro ?mid= (no del path)
+                        mid_match = re.search(r'[?&]mid=([^&]+)', href)
+                        if mid_match:
+                            match_data['match_id'] = mid_match.group(1)
+                        else:
+                            # Fallback: último segmento significativo antes del ?
+                            url_path = href.split('?')[0].rstrip('/')
+                            last_seg = url_path.split('/')[-1]
+                            if last_seg and last_seg not in ('tennis', 'tenis', ''):
+                                match_data['match_id'] = last_seg
                 
             except Exception as e:
                 logger.debug(f"Error extrayendo URL/ID: {str(e)}")
@@ -548,49 +654,68 @@ class ZitaScraper:
 
 async def main():
     """Función principal"""
+    import argparse
+    parser = argparse.ArgumentParser(description="Zita Scraper — FlashScore Tennis")
+    parser.add_argument(
+        '--tomorrow', action='store_true',
+        help="Extraer partidos de MAÑANA en lugar de hoy"
+    )
+    parser.add_argument(
+        '--max-matches', type=int, default=0,
+        help="Límite de partidos individuales (dobles excluidos siempre). 0 = sin límite. Ej: --max-matches 80"
+    )
+    args = parser.parse_args()
+
     scraper = ZitaScraper()
-    
+
     try:
         logger.info("🎾 === ZITA SCRAPER V3 - VERSIÓN MEJORADA ===")
         logger.info("🚀 Iniciando extracción de datos de FlashScore...")
-        
+        if args.tomorrow:
+            logger.info("📅 MODO: partidos de MAÑANA")
+        if args.max_matches:
+            logger.info(f"🛑 LÍMITE: {args.max_matches} partidos individuales (dobles siempre excluidos)")
+
         # Inicializar navegador
         await scraper.init_browser()
-        
+
         # Navegar a FlashScore
         success = await scraper.navigate_to_flashscore()
         if not success:
             logger.error("❌ Falló la navegación inicial")
             return
-        
+
+        # Navegar a mañana si se solicitó
+        if args.tomorrow:
+            await scraper.navigate_to_tomorrow()
+
         # Tomar captura inicial
         await scraper.take_screenshot("flashscore_inicial")
-        
-        # Extraer partidos de tenis
-        matches_data = await scraper.extract_tennis_matches()
-        
+
+        # Extraer partidos de tenis (solo individuales, dobles filtrados automáticamente)
+        matches_data = await scraper.extract_tennis_matches(max_matches=args.max_matches)
+
         if not matches_data:
             logger.error("❌ No se extrajeron datos de partidos")
             return
-        
+
         # Tomar captura final
         await scraper.take_screenshot("flashscore_final")
-        
-        
+
         # Guardar datos
         filename, grouped_data = await scraper.save_matches_data(matches_data)
-        
+
         if filename:
             logger.info("✅ === EXTRACCIÓN COMPLETADA EXITOSAMENTE ===")
             logger.info(f"📁 Archivo generado: {filename}")
-            logger.info(f"🎾 Total partidos: {len(matches_data)}")
+            logger.info(f"🎾 Total partidos individuales: {len(matches_data)}")
             logger.info(f"🏆 Total torneos: {len(grouped_data)}")
         else:
             logger.error("❌ Error guardando los datos")
-    
+
     except Exception as e:
         logger.error(f"❌ Error en ejecución principal: {str(e)}")
-    
+
     finally:
         await scraper.close()
 

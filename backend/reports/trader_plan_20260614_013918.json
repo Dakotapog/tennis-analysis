@@ -1,0 +1,110 @@
+{
+  "metadata": {
+    "timestamp": "20260614_013918",
+    "bankroll": 30000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260614_012628.json",
+    "n_partidos_analizados": 64,
+    "calibracion_n": 706,
+    "parametros": {
+      "modo": "cobertura",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Raphael Collignon vs Roberto Bautista Agut",
+      "favorito": "Roberto Bautista Agut",
+      "cuota": 2.55,
+      "edge_pct": "11.6%",
+      "p_modelo": 0.508,
+      "n_h2h": 0,
+      "p_blend": 0.569,
+      "kelly_kl": 0.069,
+      "kelly_usado": 0.0727,
+      "stake": 1000,
+      "retorno_potencial": 2550.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Lulu Sun vs Anhelina Kalinina",
+      "favorito": "Lulu Sun",
+      "cuota": 2.5,
+      "edge_pct": "10.3%",
+      "p_modelo": 0.503,
+      "n_h2h": 0,
+      "p_blend": 0.569,
+      "kelly_kl": 0.0613,
+      "kelly_usado": 0.0704,
+      "stake": 1000,
+      "retorno_potencial": 2500.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Roberto Bautista Agut",
+          "cuota": 2.55
+        },
+        {
+          "jugador": "Lulu Sun",
+          "cuota": 2.5
+        },
+        {
+          "jugador": "Martin Damm",
+          "cuota": 1.98
+        }
+      ],
+      "cuota_combo": 12.62,
+      "hr_combo": 0.1819,
+      "ev_combo": 1.2957,
+      "excluidos": [],
+      "stake": 6000,
+      "retorno_potencial": 75720.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.7692307692307692,
+    "total_ajustado": 16923.076923076922,
+    "var_95": -22000.0,
+    "cvar_95": -21999.999999999996,
+    "expected_pl": 25393.49813474752,
+    "sharpe_ratio": 0.28436557962596604,
+    "kelly_growth_rate": -0.34469732117587,
+    "sessions_to_double": Infinity,
+    "var_excedido": true,
+    "factor_var": 0.3409090909090909
+  },
+  "resumen": {
+    "gastado_individuales": 2000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 6000,
+    "total_en_riesgo": 8000.0,
+    "pct_bankroll_en_riesgo": 0.2667,
+    "n_senales_apostar": 2,
+    "pool_cobertura": 3,
+    "alerta_riesgo": false
+  }
+}

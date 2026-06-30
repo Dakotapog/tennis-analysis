@@ -1,0 +1,169 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — CHALLENGER CLAY
+  2026-06-15 00:07  │  Bankroll: $125,000
+  Señales APOSTAR: 3  │  Watchlist: 2  │  Sin edge: 5
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 8 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.10 (challenger)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $50,000 (40% bankroll)
+
+  │  🎾 Daniel De Jonge vs Michael Zhu
+  │     Apostar: Michael Zhu
+  │     Cuota 3.45  │  Edge 23.4%  │  p_blend 0.590 (n_h2h=0)
+  │     Kelly-KL 25.6% → stake $12,000  │  Retorno potencial $41,400
+  │     EV real +103.5%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Lorenzo Bocchi vs Alexander Weis
+  │     Apostar: Lorenzo Bocchi
+  │     Cuota 2.60  │  Edge 12.5%  │  p_blend 0.590 (n_h2h=0)
+  │     Kelly-KL 16.2% → stake $10,000  │  Retorno potencial $26,000
+  │     EV real +53.3%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Oliver Crawford vs Niels Visker
+  │     Apostar: Niels Visker
+  │     Cuota 2.60  │  Edge 11.7%  │  p_blend 0.541 (n_h2h=2)
+  │     Kelly-KL 6.9% → stake $8,000  │  Retorno potencial $20,800
+  │     EV real +40.8%  │  Zona: underdog  │  Sup: grass
+
+  │  Total individuales: $30,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 8 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $75,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Michael Zhu          @3.45  p=0.590  zona=underdog
+  │    2. Lorenzo Bocchi       @2.60  p=0.590  zona=underdog
+  │    3. Niels Visker         @2.60  p=0.541  zona=underdog
+  │    4. Amarissa Kiara Toth  @2.18  p=0.590  zona=underdog [W]
+  │    5. Alastair Gray        @2.04  p=0.568  zona=slight_underdog [W]
+  │    6. Miguel Tobon         @1.61  p=0.590  zona=slight_underdog
+  │    7. Tommaso Compagnucci  @1.58  p=0.559  zona=moderate_favorite
+  │    8. Jennifer Ruggeri     @1.50  p=0.557  zona=moderate_favorite
+
+  │  ── 3 PIERNAS: TOP 4 combos × $12,000 = $48,000 ──
+  │     (cada combo excluye 5 jugadores)
+  │     [3p-1] Michael Zhu@3.45 + Lorenzo Bocchi@2.60 + Niels Visker@2.60
+  │            @23.32 HR:18.8% EV:+339.1% →$279,840  excluye:[Amarissa Kiara Toth, Alastair Gray, Tommaso Compagnucci, Miguel Tobon, Jennifer Ruggeri]
+  │     [3p-2] Michael Zhu@3.45 + Lorenzo Bocchi@2.60 + Amarissa Kiara Toth@2.18
+  │            @19.55 HR:20.5% EV:+301.0% →$234,600  excluye:[Niels Visker, Alastair Gray, Tommaso Compagnucci, Miguel Tobon, Jennifer Ruggeri]
+  │     [3p-3] Michael Zhu@3.45 + Niels Visker@2.60 + Amarissa Kiara Toth@2.18
+  │            @19.55 HR:18.8% EV:+268.1% →$234,600  excluye:[Lorenzo Bocchi, Alastair Gray, Tommaso Compagnucci, Miguel Tobon, Jennifer Ruggeri]
+  │     [3p-4] Lorenzo Bocchi@2.60 + Niels Visker@2.60 + Amarissa Kiara Toth@2.18
+  │            @14.74 HR:18.8% EV:+177.4% →$176,880  excluye:[Michael Zhu, Alastair Gray, Tommaso Compagnucci, Miguel Tobon, Jennifer Ruggeri]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $6,000 = $24,000 ──
+  │     (cada combo excluye 4 jugadores)
+  │     [4p-1] Michael Zhu@3.45 + Lorenzo Bocchi@2.60 + Niels Visker@2.60 + Amarissa Kiara Toth@2.18
+  │            @50.84 HR:11.1% EV:+464.4% →$305,040  excluye:[Alastair Gray, Tommaso Compagnucci, Miguel Tobon, Jennifer Ruggeri]
+  │     [4p-2] Michael Zhu@3.45 + Lorenzo Bocchi@2.60 + Niels Visker@2.60 + Alastair Gray@2.04
+  │            @47.58 HR:10.7% EV:+408.4% →$285,480  excluye:[Amarissa Kiara Toth, Tommaso Compagnucci, Miguel Tobon, Jennifer Ruggeri]
+  │     [4p-3] Michael Zhu@3.45 + Niels Visker@2.60 + Amarissa Kiara Toth@2.18 + Alastair Gray@2.04
+  │            @39.89 HR:10.7% EV:+326.3% →$239,340  excluye:[Lorenzo Bocchi, Tommaso Compagnucci, Miguel Tobon, Jennifer Ruggeri]
+  │     [4p-4] Lorenzo Bocchi@2.60 + Niels Visker@2.60 + Amarissa Kiara Toth@2.18 + Alastair Gray@2.04
+  │            @30.06 HR:10.7% EV:+221.2% →$180,360  excluye:[Michael Zhu, Tommaso Compagnucci, Miguel Tobon, Jennifer Ruggeri]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-4 picks?) ──
+  │  Total apostado: $72,000
+
+  │  🏆 0 fallos (8/8 ganan): retorno $1,936,140 → P&L +$1,864,140 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Jennifer Ruggeri]):
+  │       retorno $1,936,140 → P&L +$1,864,140 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Michael Zhu]):
+  │       retorno $357,240 → P&L +$285,240 (2/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Jennifer Ruggeri, Tommaso Compagnucci]):
+  │       retorno $1,936,140 → P&L +$1,864,140 (8/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Michael Zhu, Lorenzo Bocchi]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Jennifer Ruggeri, Tommaso Compagnucci, Miguel Tobon]):
+  │       retorno $1,936,140 → P&L +$1,864,140 (8/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Michael Zhu, Lorenzo Bocchi, Niels Visker]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+  │  ✅ 4 fallos (mejor caso: fallan favoritos [Jennifer Ruggeri, Tommaso Compagnucci, Miguel Tobon, Alastair Gray]):
+  │       retorno $1,230,960 → P&L +$1,158,960 (5/8 combos pagan)
+  │  ❌ 4 fallos (peor caso: fallan underdogs [Michael Zhu, Lorenzo Bocchi, Niels Visker, Amarissa Kiara Toth]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+
+  │  Total cobertura: $72,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     8
+  │  ρ estructural:       0.10 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.588
+  │  Reducción vs naive:  -41.2%
+  │
+  │  Stake naive (sin ajuste):    $     102,000
+  │  Stake ajustado (PK):         $      60,000
+  │  Ahorro por correlación:      $      42,000
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $    -102,000  (81.6% bankroll)
+  │  CVaR 95%:           $    -102,000
+  │  Max VaR permitido:  $      31,250  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.31
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $     214,157
+  │  σ(P&L):             $     345,496
+  │  Sharpe Ratio:              0.620
+  │  Kelly Growth Rate:        0.5659 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $   2,117,450
+  │  Bankroll en 10 sesiones:  $  35,868,767
+  │  Bankroll en 30 sesiones:  $2,953,448,033,373
+  │  Sesiones para duplicar:   1.2
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.31 (de $102,000 a $31,250)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.31) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Michael Zhu               @3.45  →  $   4,000  (ret. $    13,800)
+  │    Lorenzo Bocchi            @2.60  →  $   3,000  (ret. $     7,800)
+  │    Niels Visker              @2.60  →  $   2,000  (ret. $     5,200)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @23.32]  $   4,000  →  Michael Zhu@3.45 + Lorenzo Bocchi@2.60 + Niels Visker@2.60
+  │    [3p @19.55]  $   4,000  →  Michael Zhu@3.45 + Lorenzo Bocchi@2.60 + Amarissa Kiara Toth@2.18
+  │    [3p @19.55]  $   4,000  →  Michael Zhu@3.45 + Niels Visker@2.60 + Amarissa Kiara Toth@2.18
+  │    [3p @14.74]  $   4,000  →  Lorenzo Bocchi@2.60 + Niels Visker@2.60 + Amarissa Kiara Toth@2.18
+  │    [4p @50.84]  $   2,000  →  Michael Zhu@3.45 + Lorenzo Bocchi@2.60 + Niels Visker@2.60 + Amarissa Kiara Toth@2.18
+  │    [4p @47.58]  $   2,000  →  Michael Zhu@3.45 + Lorenzo Bocchi@2.60 + Niels Visker@2.60 + Alastair Gray@2.04
+  │    [4p @39.89]  $   2,000  →  Michael Zhu@3.45 + Niels Visker@2.60 + Amarissa Kiara Toth@2.18 + Alastair Gray@2.04
+  │    [4p @30.06]  $   2,000  →  Lorenzo Bocchi@2.60 + Niels Visker@2.60 + Amarissa Kiara Toth@2.18 + Alastair Gray@2.04
+  │
+  │  TOTAL EN RIESGO:  $    33,000  (26.4% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $       125,000                       ║
+  ║  Individuales:        $         9,000  (7.2% bankroll)      ║
+  ║  Cobertura:           $        24,000  (19.2% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $        33,000  (26.4% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       3                                       ║
+  ║  Pool cobertura:        8 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260615_00  ║
+  ║  Partidos analizados:  35                                       ║
+  ║  Superficie:          clay (challenger)                           ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  📊 Calibración: n=755 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.590 (calibrado clay) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260615_000746.json

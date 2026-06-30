@@ -1,0 +1,370 @@
+{
+  "metadata": {
+    "timestamp": "20260617_111527",
+    "bankroll": 10000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260617_105842.json",
+    "n_partidos_analizados": 94,
+    "calibracion_n": 798,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "itf",
+      "superficie": "clay",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Simeon Stankovic vs Nikola Djosic",
+      "favorito": "Nikola Djosic",
+      "cuota": 3.25,
+      "edge_pct": "20.0%",
+      "p_modelo": 0.508,
+      "n_h2h": 0,
+      "p_blend": 0.6956000000000001,
+      "kelly_kl": 0.0969,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Lola Radivojevic vs Francesca Curmi",
+      "favorito": "Francesca Curmi",
+      "cuota": 2.75,
+      "edge_pct": "14.2%",
+      "p_modelo": 0.506,
+      "n_h2h": 1,
+      "p_blend": 0.6482000000000001,
+      "kelly_kl": 0.0757,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Ivan Biletic vs Piotr Galus",
+      "favorito": "Piotr Galus",
+      "cuota": 2.35,
+      "edge_pct": "10.1%",
+      "p_modelo": 0.527,
+      "n_h2h": 1,
+      "p_blend": 0.6534500000000001,
+      "kelly_kl": 0.0621,
+      "kelly_usado": 0.0992,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Jan Kumstat vs Corentin Denolly",
+      "favorito": "Corentin Denolly",
+      "cuota": 2.48,
+      "edge_pct": "10.2%",
+      "p_modelo": 0.505,
+      "n_h2h": 1,
+      "p_blend": 0.64795,
+      "kelly_kl": 0.0576,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Matas Vasiliauskas vs Haydar Cem Gokpinar",
+      "favorito": "Matas Vasiliauskas",
+      "cuota": 2.43,
+      "edge_pct": "9.1%",
+      "p_modelo": 0.503,
+      "n_h2h": 1,
+      "p_blend": 0.59765,
+      "kelly_kl": 0.0558,
+      "kelly_usado": 0.0791,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Nikola Djosic",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Francesca Curmi",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Corentin Denolly",
+          "cuota": 2.48
+        }
+      ],
+      "cuota_combo": 22.16,
+      "hr_combo": 0.2922,
+      "ev_combo": 5.4756,
+      "excluidos": [
+        "Piotr Galus",
+        "Matas Vasiliauskas",
+        "Pieter de Lange",
+        "Nikolai Barsukov"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Nikola Djosic",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Francesca Curmi",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Piotr Galus",
+          "cuota": 2.35
+        }
+      ],
+      "cuota_combo": 21.0,
+      "hr_combo": 0.2946,
+      "ev_combo": 5.1882,
+      "excluidos": [
+        "Corentin Denolly",
+        "Matas Vasiliauskas",
+        "Pieter de Lange",
+        "Nikolai Barsukov"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Nikola Djosic",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Piotr Galus",
+          "cuota": 2.35
+        },
+        {
+          "jugador": "Corentin Denolly",
+          "cuota": 2.48
+        }
+      ],
+      "cuota_combo": 18.94,
+      "hr_combo": 0.2945,
+      "ev_combo": 4.5785,
+      "excluidos": [
+        "Francesca Curmi",
+        "Matas Vasiliauskas",
+        "Pieter de Lange",
+        "Nikolai Barsukov"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Francesca Curmi",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Piotr Galus",
+          "cuota": 2.35
+        },
+        {
+          "jugador": "Corentin Denolly",
+          "cuota": 2.48
+        }
+      ],
+      "cuota_combo": 16.03,
+      "hr_combo": 0.2744,
+      "ev_combo": 3.3986,
+      "excluidos": [
+        "Nikola Djosic",
+        "Matas Vasiliauskas",
+        "Pieter de Lange",
+        "Nikolai Barsukov"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Nikola Djosic",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Francesca Curmi",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Piotr Galus",
+          "cuota": 2.35
+        },
+        {
+          "jugador": "Corentin Denolly",
+          "cuota": 2.48
+        }
+      ],
+      "cuota_combo": 52.09,
+      "hr_combo": 0.1909,
+      "ev_combo": 8.9439,
+      "excluidos": [
+        "Matas Vasiliauskas",
+        "Pieter de Lange",
+        "Nikolai Barsukov"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Nikola Djosic",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Francesca Curmi",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Piotr Galus",
+          "cuota": 2.35
+        },
+        {
+          "jugador": "Matas Vasiliauskas",
+          "cuota": 2.43
+        }
+      ],
+      "cuota_combo": 51.04,
+      "hr_combo": 0.1761,
+      "ev_combo": 7.9871,
+      "excluidos": [
+        "Corentin Denolly",
+        "Pieter de Lange",
+        "Nikolai Barsukov"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Nikola Djosic",
+          "cuota": 3.25
+        },
+        {
+          "jugador": "Piotr Galus",
+          "cuota": 2.35
+        },
+        {
+          "jugador": "Corentin Denolly",
+          "cuota": 2.48
+        },
+        {
+          "jugador": "Matas Vasiliauskas",
+          "cuota": 2.43
+        }
+      ],
+      "cuota_combo": 46.03,
+      "hr_combo": 0.176,
+      "ev_combo": 7.1016,
+      "excluidos": [
+        "Francesca Curmi",
+        "Pieter de Lange",
+        "Nikolai Barsukov"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Francesca Curmi",
+          "cuota": 2.75
+        },
+        {
+          "jugador": "Piotr Galus",
+          "cuota": 2.35
+        },
+        {
+          "jugador": "Corentin Denolly",
+          "cuota": 2.48
+        },
+        {
+          "jugador": "Matas Vasiliauskas",
+          "cuota": 2.43
+        }
+      ],
+      "cuota_combo": 38.95,
+      "hr_combo": 0.164,
+      "ev_combo": 5.3881,
+      "excluidos": [
+        "Nikola Djosic",
+        "Pieter de Lange",
+        "Nikolai Barsukov"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.7692307692307692,
+    "total_ajustado": 10000.0,
+    "var_95": -13000.0,
+    "cvar_95": -13000.0,
+    "expected_pl": 48515.96968555934,
+    "sharpe_ratio": 0.7420076729527371,
+    "kelly_growth_rate": 1.0617948717096577,
+    "sessions_to_double": 0.6528070524995743,
+    "var_excedido": true,
+    "factor_var": 0.19230769230769232
+  },
+  "resumen": {
+    "gastado_individuales": 0,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 0,
+    "total_en_riesgo": 0.0,
+    "pct_bankroll_en_riesgo": 0.0,
+    "n_senales_apostar": 5,
+    "pool_cobertura": 7,
+    "alerta_riesgo": false
+  }
+}

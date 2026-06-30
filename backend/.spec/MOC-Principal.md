@@ -1,6 +1,17 @@
 # MOC Principal — Tennis Prediction Engine
 
-> **Última actualización:** 2026-06-03 | **Tests:** 898 passed ✅ | **Pipeline:** 100% operativo | **Nodo-17 Fase 1:** ✅ | **Nodo-18/19/20:** 🔴 PENDIENTE
+> **Última actualización:** 2026-06-30 (Nodo-45 ✅ IMPLEMENTADO — D45-01/02/03/04 completados, 1438 tests) | Nodo-44 ✅ IMPLEMENTADO — WAS framework activo (D44-01 combos + D44-02 campos Markov) | **Tests:** 1438 passed ✅ | **Pipeline:** Data limpia ✅ | Cobertura expandida sin Cat-C ✅ | Games/Sets Signal Layer activo | THF (Temporal History Fallback) activo para match_id=None
+> **Calibración global:** n=1353 | 850W/503L hit=62.8% | clay GS: 25W/8L p=75.8% | grass: 92W/73L=55.7%
+> **ALERTA Nodo-32 (Jun 19-22):** APOSTAR hit%=26.7% (8W/22L) | Markov HOT=8.3% | Golden Zone=12.5% | 86% picks LOW | ROI=-21.1% | Phantom Edge + Markov decorativo + Golden Zone ciega → 5 fixes spec
+> **Hallazgo Nodo-28 (18-jun):** 80.8% INFLADO por data leakage (H2H post-partido). Backtest limpio: **36/52=69.2%** (clay 76% | grass 67% | hard 64%). 6 predicciones cambiaron al quitar leak. 16 fallos → análisis post-mortem reveló Circuit Asymmetry → Nodo-29.
+> **Fixes 2026-06-09 sesión 1:** ninja_h2h_parser.py (import re + match_id) ✅ | validar_con_api.py (superficie) ✅ | betplay_combo_builder.py (--live + combos parciales) ✅
+> **Fixes 2026-06-11 sesión 3:** FlashScore feed tipo=13 (23→146 singles mañana, +6×) ✅ | combo builder multi-plan merge (stakes reales por tier, fallback legacy) ✅ | REGLA-FS-1/2 + REGLA-CB-1/2 documentadas
+> **Fixes 2026-06-11 sesión 4:** markov_analysis path bug (edge_calculator:535 partido→pred) — Nodo-18/19 silenciados desde siempre ✅ | B-02 _load_p_prior(superficie,tier) jerarquía tier+superficie ✅ | B-03 header dinámico ✅ | _print_individuales usa p_historica_usada per-pick ✅
+> **Fixes 2026-06-09 sesión 2:** Smart Combo Scoring (_score_combo) ✅ | Cobertura Exclusión (_select_with_cobertura + max_app) ✅ | Kambi `||replace` descubierto ✅ | GitHub Pages redirect botón + target=_blank ✅
+> **Fixes 2026-06-10 sesión 1:** betslip_registrar.py ✅ (loop+stake+P&L) | ML pipeline desbloqueado ✅ (386 registros, leakage fix) | LR=71.7% no supera heurístico — conectar cuando >78%
+> **Fixes 2026-06-10 sesión 3:** betslip_registrar --listen ✅ | bookmarklet v2 POST automático ✅ | cero copy-paste | pipeline completo ejecutado (228 matches, 43 picks APOSTAR, 8 combos)
+> **Validación prod 2026-06-07:** 72.2% accuracy (57/79) multi-torneo | ITF 82.8% | ATP500 70.6% | Challenger 64.5%
+> **MODO API 2026-06-07:** Kambi + FlashScore Ninja API → pipeline completo en ~45s (vs 40+ min Playwright) | cuota_es_real=True
 > Este es el documento de entrada del vault. Todo lo demás cuelga de aquí.
 
 ---
@@ -9,7 +20,17 @@
 
 **Misión:** Apostar únicamente donde `P_modelo > P_implícita_bookmaker + 5%`, con Kelly-KL.
 **Métrica de éxito:** P&L positivo acumulado — no accuracy del modelo.
-**Estado hoy:** Pipeline 100% operativo ✅ | **P&L acumulado: +$25,000 sesión 1 | sesión 2: 8/8=100% RG R4 | sesión 3 (multi-torneo): 61.11% (22/36)** | p_clay_gs=0.758 / p_clay_ch=0.611 (estratificado ✅ Nodo-17 Fase 1) | Bankroll $200k | Hedge Fund Layer activo | **Multi-torneo activo: --max-matches 80 + --all-tournaments** | **Nodo-17 Fase 1 ✅: surface fix + prior estratificado + λ por tier** (2026-06-03) | **Nodo-18/19/20/21 documentados (TTC 2026-06-03): pesos 5-tier + density + shrinkage + H2H Immunity + PELT Recency + PageRank Erdős**
+**Estado hoy:** Pipeline 100% operativo ✅ | **P&L acumulado: +$25,000** | Bankroll $125k | Hedge Fund Layer activo
+- **Calibración global:** n=1241 | 784W/457L hit=63.2% | clay GS: 25W/8L p=75.8%
+- **Validación prod 2026-06-18:** 52 partidos, **69.2% accuracy limpia** (36/52) — clay 76% | grass 67% | hard 64% (80.8% era inflado por data leakage)
+- **Validación prod 2026-06-07:** 80 partidos, 72.2% accuracy (57/79) — ITF 82.8% | ATP500 70.6% | Challenger 64.5%
+- **Señales validadas:** HOT Markov=84.6% (55W/10L) | COLD=0% (0W/10L) | cuota 4+=100% ROI+420% | cuota 1.50-2=100%
+- **Features activas:** API Ninja + Kambi API (cuotas reales Betplay) + --all-tournaments + --torneo-tipo filtra + VaR auto-ajuste + shrinkage + density
+- **Fixes 2026-06-09 sesión 1:** import re + match_id en ninja_h2h_parser.py ✅ | superficie en validar_con_api.py ✅ | betplay_combo_builder.py --live ✅
+- **Fixes 2026-06-09 sesión 2:** _score_combo (combo_EV×diversity×regime×alpha) ✅ | _select_with_cobertura (max_app) ✅ | `||replace` vs `||append` Kambi ✅ | docs/bp/index.html target=_blank ✅
+- **Fixes 2026-06-10:** betslip_registrar --listen ✅ | bookmarklet v2 POST automático a localhost:5001 ✅ | ML leakage fix ✅ | pipeline run completo ✅ | PASO 3.5 (tabla) movido antes de PASO 4 — revisión humana antes de apostar ✅
+- **B-02 ✅ RESUELTO 2026-06-11:** _load_p_prior(superficie, tier) — jerarquía por_superficie_y_tier → fallback_por_tier → por_superficie → global. clay+challenger 0.697→0.590 | grass+atp500 0.569→0.650
+- **Nodo-17/18/19/20/21 ✅** — pesos 5-tier + density + shrinkage + H2H Immunity + PELT Recency + PageRank Erdős
 
 ---
 
@@ -39,14 +60,32 @@
 │   ├── [[Nodo-14-Validacion-Live-Conexiones]] ✅ PRIMERA VALIDACIÓN LIVE — Parry @ 4.50 ganó | 5 conexiones ocultas TTC (2026-05-30)
 │   ├── [[Nodo-15-Portfolio-HedgeFund]]        ✅ IMPLEMENTADO — Sistema Cobertura Exclusión + Portfolio Kelly + VaR/CVaR (2026-06-01)
 │   ├── [[Nodo-16-Multi-Torneo-Pipeline]]      ✅ IMPLEMENTADO — --max-matches 80 + --all-tournaments + Roland Garros filter fix (2026-06-02)
-│   ├── [[Nodo-17-Calibracion-Por-Tier]]       🟡 FASE 1 ✅ — surface fix + prior estratificado + λ por tier (2026-06-03) | Fase 2 bloqueada (n<10 por tier)
-│   ├── [[Nodo-18-PELT-Recency-Alpha]]         🔴 PENDIENTE — change_point ignorado en edge_calculator | alpha temporal bookmaker stale (TTC 2026-06-03)
-│   ├── [[Nodo-19-H2H-Immunity-Dampener]]      🔴 PENDIENTE — HOT vs rival inmune sobreestimado | señal 2do orden HOT×H2H (TTC 2026-06-03)
-│   ├── [[Nodo-20-PageRank-Erdos-Quality]]     🔴 PENDIENTE — nodos intermedios sin peso calidad | PageRank sobre grafo existente (TTC 2026-06-03)
-│   └── [[Nodo-21-Pesos-Diferenciados-Por-Tier]] 🔴 PENDIENTE — 3 capas tier desconectadas | bug classify_tournament GS | densidad local + shrinkage (TTC 2026-06-03) ← PRIMERO
+│   ├── [[Nodo-17-Calibracion-Por-Tier]]       ✅ FASE 1 — surface fix + prior estratificado + λ por tier (2026-06-03)
+│   ├── [[Nodo-18-PELT-Recency-Alpha]]         ✅ COMPLETADO — calcular_recencia_regimen + factor_alpha_temporal → λ_efectivo (2026-06-03)
+│   ├── [[Nodo-19-H2H-Immunity-Dampener]]      ✅ COMPLETADO — calcular_h2h_immunity: HOT×h2h_wr<0.30→0.85 | >0.70→1.12 (2026-06-03)
+│   ├── [[Nodo-20-PageRank-Erdos-Quality]]     ✅ COMPLETADO — pagerank_grafo + quality_multiplier en caminos transitivos (2026-06-03)
+│   ├── [[Nodo-21-Pesos-Diferenciados-Por-Tier]] ✅ COMPLETADO — 5 tiers SNR + density_confidence + shrinkage + K-factor ELO (2026-06-03)
+│   ├── Nodo-22-API-Integration-Kambi-Ninja       ✅ COMPLETADO — Kambi+FlashScore API reemplaza Playwright (~45s vs 40+min) (2026-06-07) — sin spec standalone, documentado en Sprint-Pipeline Fase 24
+│   ├── [[Nodo-23-Cross-Tier-Mega-Combos]]      🔧 IMPLEMENTADO — build_mega_combos() + --mega flag + ancla/satélite (2026-06-14)
+│   ├── [[Nodo-24-Bookmaker-Blindness-Scoring]]  🔧 IMPLEMENTADO — BBI + gap_flag + MPQ + golden_zone en edge_calculator + mega scoring (2026-06-14)
+│   ├── [[Nodo-25-Dispersion-Guard-Safe-Combos]] 🔧 IMPLEMENTADO — 4 Guards + Safe Combos Beta Book (2026-06-14)
+│   ├── [[Nodo-26-Cross-Sectional-Signals]]     🔧 IMPLEMENTADO — Circuit Breaker + Line Movement + Ranking Preservation + Meta-Markov + CV Guard (2026-06-14)
+│   ├── [[Nodo-27-Pipeline-Tracker-Observabilidad]] 🔧 IMPLEMENTADO — pipeline_tracker.py: 7 secciones READ-ONLY | Hallazgos: STRONG=100%, HOT Markov=64%, NEUTRAL=6.7% (ruido), cuota 3-4=75%, ATP500 grass=18% ⚠️ (2026-06-17)
+│   ├── [[Nodo-28-Conditional-Decomposition-Metamodel]] ✅ COMPLETO — Fase 1: common_opponents filtrado por superficie | Fase 1.5: SkillFactor + Surface Alpha + Volume Confidence | Fase 2: Triple Alignment Score (STRUCTURAL_ALPHA + CONTESTED_ALPHA + net_alignment) — 1113 tests ✅ (2026-06-19)
+│   ├── [[Nodo-29-Circuit-Asymmetry-Deflator]]    ✅ COMPLETO — CAD: deflactor form/ELO por asimetría de circuito competitivo + SoS dinámico. Backtest 38/52=73.1% (14 fallos, ninguno de tipo circuito). Schoen/Boogaard: predicción correcta 55.3%. circuit_warning activo 7/80 picks en prod (2026-06-28)
+│   ├── [[Nodo-30-Tournament-Momentum-Output-Signals]] 🔧 IMPLEMENTADO — 30 tests T30-01/30 ✅ | F6 player_profitability.py ✅ | F7 JUGADOR RENTABLE ✅ | 1143 tests. Origen: Sprint-Normalizacion-19jun + caso Carnicella (2026-06-20)
+│   ├── [[Nodo-32-Calibracion-Pipeline-Señales-Rotas]] 🚨 CRITICO — Phantom Edge (p_modelo~0.51 → "22% edge"), Markov decorativo (log1p comprime factor), Golden Zone ciega, ?_? calibracion, ITF sin fallback. 5 fixes, 29 tests. Origen: pipeline_tracker W25-26 hit%=26.7% (2026-06-22)
+│   ├── [[Nodo-37-Combo-Confianza-Builder]] ⛔ SUPERSEDED — Progresión C5→C20 sin aislamiento de riesgo. Reemplazado por Nodo-38 (CORE/SAT/MOON). Ver Nodo-38 §1.1: Da Silva + Cardozo (2 Cat-C) en C11 destruyeron 9 picks ganadores.
+│   ├── [[Nodo-38-Portfolio-Aislamiento-Riesgo]] ✅ COMPLETO — CORE/Satellite/Moonshot con aislamiento Cat-C. 28 tests T38-01/28 ✅. Evidencia fundacional verificada 26-jun: 15/15 picks genuinos. Mutación T38-26/27/28 confirma arquitectura. (2026-06-28)
+│   ├── [[Nodo-38B-Cobertura-Expandida-Sin-CatC]] ✅ COMPLETO — Cuando no hay picks Cat-C, redistribuye SAT+MOON budget → 6 combos de cobertura con .bat. Opus análisis + Sonnet implementación. 25/25 tests pass (2026-06-27)
+│   ├── [[Nodo-39-Kambi-Filtro-Fecha]] ✅ COMPLETO — Kambi devuelve eventos futuros sin filtro → PASO 1 ahora filtra por UTC date. 199→40 partidos reales. Data pipeline contaminada resuelta (2026-06-27)
+│   ├── [[Nodo-40-Games-Sets-Signal-Layer]] ✅ COMPLETO — Alpha ortogonal al ganador: diff→sets/games, 5 fases. games_signal_calculator.py + --games flag + betslip ground truth + pipeline_tracker S-40 + auto-calibración. 37 tests ✅. calibracion_n dinámico. (2026-06-28)
+│   ├── [[Nodo-43-PELT-Cold-Rival-Promo-Filter]] HALLAZGO — rival COLD conf≥0.60 = alpha para promo combos bloqueados por T33-01/FIX-3. n=2 descubrimiento 2026-06-29. Caso: Ilagan @2.05 + Mayo @2.18 = 4.47x promo.
+│   ├── [[Nodo-44-Watchlist-Alpha-Signal]] HALLAZGO — framework unificado: watchlist edge≥10% + cuota≥2.0 + señal Markov. Bookmaker sobrevalora marca, modelo captura estado actual. Validado 2026-06-29: Carreno @3.30 (edge=21.1%) + Safiullin @2.65 (edge=12.8%) ambos GANARON. PCRS (Nodo-43) es subconjunto de WAS.
+│   └── [[Nodo-45-Temporal-History-Fallback]] ✅ IMPLEMENTADO — match_id=None → busca en h2h_results previos (7 días). D45-01 tests ✓ | D45-02 función ✓ | D45-03 refactor ✓ | D45-04 routing ✓
 │
 ├── 02_Sources/
-│   └── Fuentes-Datos.md              ← contrato con FlashScore (Playwright + API)
+│   └── Fuentes-Datos.md              ← contrato con FlashScore (Playwright + Ninja API) + Kambi API (Betplay)
 │
 ├── 03_Atlas/
 │   ├── Pipeline-Arquitectura.md      ← mapa de módulos y dependencias
@@ -70,41 +109,65 @@
 
 | Señal | Productor | Estado | Bloqueada por |
 |---|---|---|---|
-| S1_MATCH_LIST | extraer_URL_partidos_v2 | ✅ 80% | --max-matches 80 activo | multi-torneo validado 80 partidos 2026-06-02 |
-| S2_H2H_DATA | extraer_historh2h.py | ⚠️ 85% | superficie: unknown en modo multi-torneo — bug propagación activo (ver [[Nodo-17-Calibracion-Por-Tier]] T17-01) |
+| S1_MATCH_LIST | extraer_partidos_api.py (API) / extraer_URL_partidos_v2 (Playwright) | ✅ 95% | **MODO API:** Kambi+FlashScore ~1.3s 111 partidos | cuota_es_real=True | **Playwright:** --max-matches 80, 8min |
+| S2_H2H_DATA | extraer_historh2h.py --api-mode (Ninja) / default (Playwright) | ✅ 95% | **MODO API:** ~0.5s/partido Ninja API | **Playwright:** ~2-3 min/partido | --all-tournaments activo |
 | S3_RANKINGS | extraer_ranking_atp/wta_v2 | ✅ 100% | — |
-| S4_PREDICTION | rivalry_analyzer.py | ✅ 90% | leer SIEMPRE `ranking_analysis.prediction.favored_player` |
-| S5_EDGE | edge_calculator.py | ✅ 90% | p_historica clay=0.758 Thompson (n=31 ✅ umbral cruzado) |
-| S6_RESULTADO_REAL | validar_con_api.py | ✅ 80% | match_id real necesario (S1 en prod) |
-| S7_MARKOV | markov_analyzer.py | ✅ ACTIVO | integrado en rivalry_analyzer |
+| S4_PREDICTION | rivalry_analyzer.py | ✅ 95% | 72.2% accuracy validado prod (57/79) | shrinkage + density activos |
+| S5_EDGE | edge_calculator.py | ✅ 98% | λ por tier + PELT recency (path bug resuelto 2026-06-11) + p_historica por tier+superficie (B-02 resuelto) | — |
+| S6_RESULTADO_REAL | resultados_finales.py | ✅ 95% | API Ninja funcional | 80 partidos verificados en ~73s |
+| S7_MARKOV | markov_analyzer.py | ✅ ACTIVO | immunity + PELT recency integrados |
 | S8_DATASET_ML | generar_dataset_plus.py | ⚠️ 40% | datos limpios de S1 en prod |
 
 ### Tests
 ```
-875 passed, 0 fallos — 2026-06-01 (post T13-06/T15-04/T15-05 + aplicar_enhancer 13 tests)
-Baseline mínimo: nunca bajar de 862
+1429 passed, 0 fallos — 2026-06-29 (Nodo-42: Grass Bootstrap | 9 tests T42-01→T42-07 | fix: superficie_filter)
+Baseline mínimo: nunca bajar de 1429
 ```
 
 ### Archivos clave del pipeline diario
-```
-── MODO ROLAND GARROS (Grand Slam, cuadro principal) ─────────────────────────
-PASO 0: python3 extraer_ranking_atp_version2.py
-PASO 1: python3 extraer_URL_partidos_version2.py
-PASO 2: python3 extraer_historh2h.py
-PASO 3: python3 edge_calculator.py
-PASO 4: python3 trader_ev_tenis.py --bankroll 125000
-PASO 5: python3 generar_tabla_favoritos2.py
-PASO 6: python3 validar_con_api.py  (post-partido)
 
-── MODO MULTI-TORNEO (Challenger + ATP + Grand Slam, hasta 80 individuales) ──
+```
+── MODO API (RECOMENDADO — ~45 segundos total) ────────────────────────────────
+🚀 Reemplaza Playwright (40+ min) con APIs puras. Cuotas REALES de Betplay.
+   Kambi API → jugadores + cuotas reales | FlashScore Ninja API → match_ids + rankings + superficie
+
 PASO 0: python3 extraer_ranking_atp_version2.py
-PASO 1: python3 extraer_URL_partidos_version2.py --max-matches 80
-PASO 2: python3 extraer_historh2h.py --all-tournaments         ← sin filtro RG
+PASO 1: python3 extraer_partidos_api.py                    # partidos de hoy (~1.3s, 111+ partidos)
+        python3 extraer_partidos_api.py --tomorrow          # partidos de mañana
+        python3 extraer_partidos_api.py --tier atp wta      # solo ATP + WTA
+PASO 2: python3 extraer_historh2h.py --api-mode --all-tournaments  # Ninja API (~0.5s/partido)
 PASO 3: python3 edge_calculator.py
-PASO 4: python3 trader_ev_tenis.py --bankroll 125000 --torneo-tipo atp500 --superficie clay
-         → reports/trader_plan_FECHA.json + .txt  (stakes VaR-ajustados automáticamente)
+PASO 4: python3 trader_ev_tenis.py --bankroll 125000       # por tier (ver abajo)
+PASO 4.5: python3 betplay_combo_builder.py                 # combos clásicos
+          python3 betplay_combo_builder.py --live          # combos solo jugadores disponibles AHORA en Kambi
 PASO 5: python3 generar_tabla_favoritos2.py
-PASO 6: python3 validar_con_api.py  (post-partido)
+
+── MODO PLAYWRIGHT (fallback — ~40 minutos total) ─────────────────────────────
+⏰ Usar si APIs están caídas. Ejecutar ~22:00 del día anterior.
+
+PASO 0: python3 extraer_ranking_atp_version2.py
+PASO 1: python3 extraer_URL_partidos_version2.py --tomorrow --max-matches 80   # Playwright 8min
+PASO 2: python3 extraer_historh2h.py --all-tournaments                         # Playwright ~30min
+PASO 3-5: iguales.
+
+── POST-PARTIDO (después de que terminen los partidos) ────────────────────────
+PASO 6: python3 resultados_finales.py reports/h2h_results_enhanced_FECHA.json
+PASO 7: python3 validar_con_api.py --h2h reports/h2h_results_enhanced_FECHA.json
+        (o workaround manual si match_id=None — ver CLAUDE.md PASO 7)
+
+── MODO MULTI-TORNEO ──────────────────────────────────────────────────────────
+Pasos 0-2 (API): extraer_partidos_api.py + extraer_historh2h.py --api-mode --all-tournaments
+Pasos 0-2 (Playwright): --tomorrow + --max-matches 80 + --all-tournaments
+PASO 3 (edge_calculator.py) estratifica per-match automáticamente (tier+superficie).
+
+PASO 4: Correr UNA VEZ por tier que interese — --torneo-tipo FILTRA los picks:
+  python3 trader_ev_tenis.py --bankroll 125000                                     # Grand Slam
+  python3 trader_ev_tenis.py --bankroll 50000 --torneo-tipo atp1000 --superficie clay  # ATP 1000
+  python3 trader_ev_tenis.py --bankroll 30000 --torneo-tipo atp500  --superficie grass # ATP 500
+  python3 trader_ev_tenis.py --bankroll 20000 --torneo-tipo challenger --superficie clay # Challenger
+  python3 trader_ev_tenis.py --bankroll 10000 --torneo-tipo itf --superficie hard       # ITF
+
+PASO 5-6: iguales.
 ```
 
 ---
@@ -156,38 +219,96 @@ REGLA-HF-3: VaR constraint
 
 REGLA-HF-4: Portfolio Kelly obligatorio + ρ calibrado por torneo (T15-04 ✅)
   factor = 1/(1 + ρ×(N-1))
-  ρ: grand_slam=0.25 | atp1000=0.20 | atp500=0.15 | challenger=0.10
+  ρ: grand_slam=0.25 | atp1000=0.20 | atp500=0.15 | challenger=0.10 | itf=0.05
   N=4 grand_slam: reducir 42.9% | N=8 grand_slam: reducir 63.6%
+  --torneo-tipo FILTRA picks por tier (2026-06-06) — no mezclar tiers en un pool
 
 REGLA-HF-5: Growth Rate negativo = NO DESPLEGAR
   Si Kelly Growth Rate < 0 → el sistema está en régimen de ruina.
   Causas: demasiados picks, cuotas bajas, correlación alta.
   Solución: aumentar --min-cuota, reducir --piernas-max, reducir --top-n.
+
+REGLA-8: FlashScore Ninja API — integración de resultados
+  Endpoint: dc_1_{event_id} via config.FLASHSCORE_BASE
+  Auth: X-Fsign: SW9D1eZo | Referer: flashscore.co
+  Script: resultados_finales.py (PASO 6) — consulta resultado real post-partido
+  Velocidad: ~1s/partido (vs 2-5min con Playwright)
+  ⚠️ validar_con_api.py = PASO 7 (calibración), NO verificación de resultados
+
+REGLA-9: Multi-torneo pipeline
+  PASO 1 (API): python3 extraer_partidos_api.py --tomorrow --tier atp wta challenger
+  PASO 1 (Playwright): python3 extraer_URL_partidos_version2.py --tomorrow --max-matches 80
+  PASO 2 (API): python3 extraer_historh2h.py --api-mode --all-tournaments
+  PASO 2 (Playwright): python3 extraer_historh2h.py --all-tournaments
+  PASO 4: Correr trader UNA VEZ POR TIER (--torneo-tipo filtra)
+  PASO 6: python3 resultados_finales.py archivo.json (verifica todos los tiers)
+  ⚠️ NO mezclar tiers en un solo pool de trader
+  ⚠️ API mode: Kambi + FlashScore Ninja (~45s) | Playwright mode: ~40 min (fallback)
+
+REGLA-10: Kambi API (Betplay) — cuotas reales
+  Base: https://us.offering-api.kambicdn.com/offering/v2018/betplay
+  Endpoint: /listView/tennis.json (todos los eventos, sin auth, solo headers)
+  Headers: Referer: https://www.betplay.com.co
+  Cuotas: outcomes[].odds / 1000 → cuota decimal real
+  Campo: cuota_es_real = True en JSON output (vs FlashScore cuotas promediadas)
+  Módulo: scraping/kambi_tennis.py — extract_matches(day_offset, tiers)
+  Name matching: 3-tier (exact surname+initial → surnames only → substring ≥5 chars)
+  ⚠️ Kambi nombres completos ("Davidovich Fokina A.") vs FlashScore abreviados ("Davidovich A.")
+
+REGLA-11: FlashScore Ninja H2H API — modo API para PASO 2
+  Endpoint: df_hh_1_{match_id} via config.FLASHSCORE_BASE
+  Auth: X-Fsign: SW9D1eZo | Referer: flashscore.co
+  Formato: KC=timestamp, KD=surface, KF=tournament, KJ/KK=players, KL=score, CA/CB=rankings
+  Ganador: prefijo * en KJ o KK (e.g., *Sinner J. → Sinner ganó)
+  Módulo: scraping/ninja_h2h_parser.py — NinjaH2HExtractor.extract_all()
+  Velocidad: ~0.5s/partido (vs 2-3 min con Playwright H2HExtractor)
+  Output: MISMO formato JSON que H2HExtractor → downstream pipeline sin cambios (Strangler Fig)
 ```
 
 ---
 
-## Próximos 3 Pasos (ordenados por impacto en P&L)
+## Histórico de Hitos (resumen)
 
-1. ~~**Eliminar D-01 a D-13 + Nodo-12 infra**~~ ✅ HECHO — 7,996+ líneas eliminadas, infra limpia, 773 tests
-2. ~~**Re-run con Erdős + surface activos**~~ ✅ CONFIRMADO 2026-05-30 — erdos_score=0.35, surf_w 0.49–0.69
-3. ~~**Correr edge_calculator + trader_ev_tenis**~~ ✅ CONFIRMADO 2026-05-30 — 2 señales APOSTAR, $20,000 en riesgo (20% bankroll), combo 10.80x
-4. ~~**Primera validación live + P&L registrado**~~ ✅ 2026-05-30 — +$25,000 (+25% bankroll). Accuracy 70%. p_hist 0.52→0.68. Ver [[Nodo-14-Validacion-Live-Conexiones]]
-5. ~~**T14-03: Calibrar Erdős por superficie**~~ ✅ 2026-05-30 — clay common_opp 0.20→0.28, ranking_mom 0.20→0.12. 773 tests.
-6. ~~**T07-09:**~~ ✅ 2026-05-30 — `SequentialH2HExtractor` eliminado (1,404 líneas), 53 tests migrados a H2HExtractor/DataParser. 768 tests.
-7. ~~**D-17: config.py centralizado**~~ ✅ 2026-05-31 — FLASHSCORE_BASE/HEADERS/TOTAL_MATCHES_TO_PROCESS/BROWSER_* centralizados. 791 tests.
-8. ~~**T13-04: Pipeline completo (80 partidos)**~~ → sesión 2 (Roland Garros R4 2026-06-01): 8 partidos 8/8=100%. Tres underdogs predichos (Kostyuk @3.0 +19.4%, Fonseca @2.3 +7.9%, Mensik @2.0 +1.2%). Ver [[Nodo-15-Portfolio-HedgeFund]].
-9. ~~**T15-03**: Validar configuración óptima QF Roland Garros~~ ✅ 2026-06-01 — KGR=+0.2291, VaR auto-ajustado ×0.41
-10. ~~**Ejecutar validar_con_api.py**~~ ✅ 2026-06-01 — n=31, p_historica clay=0.758 (umbral n≥30 cruzado)
-11. ~~**T15-05**: Ajuste automático de stakes por VaR~~ ✅ 2026-06-01 — sección "STAKES FINALES" en output
-12. ~~**T15-04**: Calibrar ρ por torneo~~ ✅ 2026-06-01 — grand_slam/atp1000/atp500/challenger + --torneo-tipo CLI
-13. ~~**T13-06**: Calibrar p_blend con p_historica derivada~~ ✅ 2026-06-01 — _load_p_prior() + --superficie CLI
-14. ~~**aplicar_enhancer.py tests**~~ ✅ 2026-06-01 — 13 tests. Suite total: 875 passed
-15. ~~**T14-05**: Pipeline multi-torneo 80 partidos~~ ✅ 2026-06-02 — --max-matches 80 + --all-tournaments. Roland Garros filter fix. 875 tests. Ver [[Nodo-16-Multi-Torneo-Pipeline]]
-16. ~~**T14-05**: Pipeline multi-torneo 80 partidos~~ ✅ 2026-06-02 — sesión 3: 61.11% (22/36) Challengers | prior contaminado detectado. Ver [[Nodo-16-Multi-Torneo-Pipeline]]
-17. ~~**Nodo-17 Fase 1**~~ ✅ 2026-06-03 — T17-01 surface fix | T17-02 calibración estratificada | T17-03 λ por tier. 898 tests.
-18. ~~**Nodo-17 Fase 1**~~ ✅ 2026-06-03 — T17-01 surface fix | T17-02 calibración estratificada | T17-03 λ por tier. 898 tests.
-19. **Documentados TTC 2026-06-03:** [[Nodo-21-Pesos-Diferenciados-Por-Tier]] (primero — bug fix + infraestructura) → [[Nodo-19-H2H-Immunity-Dampener]] → [[Nodo-18-PELT-Recency-Alpha]] → [[Nodo-20-PageRank-Erdos-Quality]]
+```
+2026-05-28: Fase 0-5 completadas (scraper fix + edge + markov + dataset + API)
+2026-05-29: Fase 7-12 (Erdős + Strangler Fig + limpieza 9,400 líneas)
+2026-05-30: Fase 13-16 (trader + validación live + P&L +$25k + T07-09)
+2026-06-01: Fase 18 (Portfolio Hedge Fund, 8/8=100% RG R4, KGR=+0.4142)
+2026-06-02: Nodo-16 multi-torneo (80 partidos, --all-tournaments)
+2026-06-03: Sprint TTC — Nodo-17/18/19/20/21 (980 tests)
+2026-06-05/06: Fixes operacionales (FlashScore DOM + markov persist + trader)
+2026-06-07: Validación prod completa — 72.2% (57/79), 7 bugs documentados
+2026-06-07: MODO API — Kambi + FlashScore Ninja (PASO 1: ~1.3s, PASO 2: ~0.5s/partido)
+            Nuevos: kambi_tennis.py + ninja_h2h_parser.py + extraer_partidos_api.py
+            Cross-domain bridge NBA→Tennis: name matching 3-tier, Kambi API idéntica
+2026-06-09: Fixes ninja_h2h_parser.py (import re + match_id) + validar_con_api.py (superficie)
+            betplay_combo_builder.py: --live mode + combos parciales (min 2 piernas) + started_map + find_outcome reasons
+            Calibración actualizada: n=284 | validado Jun 7-8: 45/73=61.6%
+2026-06-11: FlashScore feed tipo=13 → 1/201 match_url → 82/198 match_id (+6× cobertura mañana)
+            combo builder multi-plan merge: build_live_combos lee cobertura de todos los trader_plans (24h)
+            Stakes reales por tier: $1k ITF | $3k ATP500 grass | $2k Challenger — de $0 a stakes Kelly reales
+            17 combos disponibles de 32 totales | Telegram enviado ✅
+2026-06-18: Nodo-28 Conditional Decomposition (Fase 1 + Fase 1.5): common_opponents filtrado por superficie
+            SkillFactor (wr/0.5)^1.5 + Surface Alpha + Volume Confidence — fix fórmula surface_specialization
+            80.8% accuracy (42/52) — grass 88.9% | clay 85.7% | hard 72.7%
+            Hallazgo: 10/10 fallos sin Markov resuelto — señal más potente del modelo (HOT=84.6%)
+            Wikilinks vault: 0 huérfanos. Tests: 1050 passed. Calibración: n=1241
+```
+
+---
+
+## Próximos Pasos (ordenados por impacto en P&L)
+
+| # | Task | Impacto | Bloqueado por |
+|---|---|---|---|
+| 1 | **Markov "?" → INSUFFICIENT flag:** 10/10 fallos del 18-jun tienen Markov sin resolver. Regla: `Markov=? AND n_CO≤2 AND tier∈{itf,challenger}` → no predecir. HOT=84.6% vs ?=~65% | 🔴 CRÍTICO | Definir spec (candidato Nodo-29) |
+| 2 | **Nodo-27 calibración real:** acumular n≥30 picks con correcto!=None para validar V-27-1→V-27-5 | 🔴 CRÍTICO | `betslip_registrar --cerrar` poblando apuestas_*.json con stake>0 |
+| 3 | **Filtrar picks COLD Markov:** COLD=0W/10L=0% — nunca apostar en COLD. NEUTRAL=75% (mejoró vs 6.7% previo con n mayor) | 🔴 CRÍTICO | Confirmar con n≥20 |
+| 4 | **B-01: Cap bankroll total** — VaR ajuste debe garantizar TOTAL ≤ 30% bankroll, no solo individual | 🟠 ALTO | — |
+| 5 | **T17-06: window_size Markov por tier** — Challengers más corto | 🟡 MEDIO | Datos n≥10/tier |
+| 6 | **T15-06: Backtesting formal n≥30 sesiones** | 🟠 ALTO | Más sesiones |
+| 7 | **Nodo-10: Unificar ZitaScraper** → `scraping/url_scraper.py` | 🟡 MEDIO | Validación prod |
+| 8 | **B-04: generar_tabla_favoritos2.py** — seleccionar archivo grande sobre pequeño | 🟡 MEDIO | — |
 
 ---
 
@@ -210,3 +331,8 @@ REGLA-HF-5: Growth Rate negativo = NO DESPLEGAR
 | 2026-06-02 | --max-matches N en scraper para controlar volumen de partidos | procesar todos los disponibles | Con >150 partidos disponibles, el filtro Kelly-KL es el guardián real — no el volumen. 80 es el balance óptimo velocidad/cobertura |
 | 2026-06-02 | Calibración estratificada [tier][superficie] en lugar de prior global | prior único contaminado | Polmans @5.00 perdió por prior GS aplicado a Challenger en grass — el edge era espejismo de superficie incorrecta. Ver [[Nodo-17-Calibracion-Por-Tier]] |
 | 2026-06-02 | λ_KL escalado por tier (0.5→1.8) en lugar de λ fijo | λ=0.5 para todos | Challenger tiene H2H escaso + mercado ineficiente → incertidumbre real es 3.6× mayor que GS. λ fijo subestima el riesgo real |
+| 2026-06-07 | Kambi API (Betplay) para cuotas reales en lugar de FlashScore odds | FlashScore cuotas (no expuestas en API) | Kambi = fuente directa donde se apuesta. FlashScore no expone odds en Ninja API (verificado exhaustivamente). Cross-domain bridge NBA→Tennis. Ver Sprint-Pipeline Fase 24 (Nodo-22) |
+| 2026-06-07 | FlashScore Ninja H2H API para PASO 2 (--api-mode) | Playwright H2HExtractor (30+ min) | ~0.5s/partido vs 2-3 min. Mismo output JSON → Strangler Fig sin cambios downstream. Playwright preservado como fallback |
+| 2026-06-07 | Name matching 3-tier (NBA pattern) para cross-referencia Kambi↔FlashScore | match por nombre exacto | Kambi nombres completos vs FlashScore abreviados. 3-tier: exact surname+initial → surnames only → substring ≥5 chars. 71/111 matched (ATP+WTA 100%) |
+| 2026-06-11 | FlashScore feed tipo=13 en vez de tipo=2 | tipo=2 (original) | tipo=13 es acumulativo: incluye todos los niveles de torneos. 23→146 singles mañana (+6×). Hoy: 378→582 matches. tipo=14+ cae. Verificado empíricamente tipos 1-14. |
+| 2026-06-11 | combo builder lee cobertura de trader_plans (24h) en vez de recalcular | calcular stakes desde individuales con min() heurístico | El trader ya hizo Kelly/VaR/Cobertura Exclusión por tier. El combo builder es un mapper, no un calculador. Separación correcta de responsabilidades: trader=calcula, combo builder=mapea y filtra STARTED. Fallback legacy preservado cuando no hay planes. |

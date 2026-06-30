@@ -1,0 +1,244 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — DEPLOY ROLAND GARROS
+  2026-06-11 12:51  │  Bankroll: $10,000
+  Señales APOSTAR: 12  │  Watchlist: 6  │  Sin edge: 2
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 19 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.05 (itf)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $4,000 (40% bankroll)
+
+  │  🎾 Neus Torner Sensano vs Carmen Gallardo Guevara
+  │     Apostar: Carmen Gallardo Guevara
+  │     Cuota 3.60  │  Edge 26.0%  │  p_blend 0.662 (n_h2h=1)
+  │     Kelly-KL 41.0% → stake $1,000  │  Retorno potencial $3,600
+  │     EV real +138.5%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Marie Mettraux vs Anja Stankovic
+  │     Apostar: Marie Mettraux
+  │     Cuota 2.85  │  Edge 20.0%  │  p_blend 0.666 (n_h2h=1)
+  │     Kelly-KL 36.4% → stake $1,000  │  Retorno potencial $2,850
+  │     EV real +89.7%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Eva Bennemann vs Pia Lovric
+  │     Apostar: Pia Lovric
+  │     Cuota 3.95  │  Edge 25.2%  │  p_blend 0.704 (n_h2h=0)
+  │     Kelly-KL 35.9% → stake $1,000  │  Retorno potencial $3,950
+  │     EV real +178.0%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Kaitlyn Carnicella vs Rachel Gailis
+  │     Apostar: Kaitlyn Carnicella
+  │     Cuota 3.40  │  Edge 21.2%  │  p_blend 0.704 (n_h2h=0)
+  │     Kelly-KL 34.8% → stake $1,000  │  Retorno potencial $3,400
+  │     EV real +139.3%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Anastasia Tikhonova vs Sandra Samir
+  │     Apostar: Sandra Samir
+  │     Cuota 3.20  │  Edge 20.2%  │  p_blend 0.704 (n_h2h=0)
+  │     Kelly-KL 34.3% → stake $1,000  │  Retorno potencial $3,200
+  │     EV real +125.2%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Hikaru Sato vs Yuno Kitahara
+  │     Apostar: Yuno Kitahara
+  │     Cuota 3.25  │  Edge 19.5%  │  p_blend 0.704 (n_h2h=0)
+  │     Kelly-KL 32.7% → stake $1,000  │  Retorno potencial $3,250
+  │     EV real +128.8%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Alexis Nguyen vs Lily Taylor
+  │     Apostar: Lily Taylor
+  │     Cuota 2.90  │  Edge 15.9%  │  p_blend 0.704 (n_h2h=0)
+  │     Kelly-KL 28.1% → stake $1,000  │  Retorno potencial $2,900
+  │     EV real +104.1%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Max Wiskandt vs Sandro Kopp
+  │     Apostar: Max Wiskandt
+  │     Cuota 2.60  │  Edge 13.1%  │  p_blend 0.704 (n_h2h=0)
+  │     Kelly-KL 24.1% → stake $1,000  │  Retorno potencial $2,600
+  │     EV real +83.0%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Naoya Honda vs Taisei Ichikawa
+  │     Apostar: Taisei Ichikawa
+  │     Cuota 2.50  │  Edge 11.6%  │  p_blend 0.704 (n_h2h=0)
+  │     Kelly-KL 23.2% → stake $1,000  │  Retorno potencial $2,500
+  │     EV real +76.0%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Benjamin O'Connell vs Matic Kriznik
+  │     Apostar: Benjamin O'Connell
+  │     Cuota 2.48  │  Edge 10.6%  │  p_blend 0.704 (n_h2h=0)
+  │     Kelly-KL 20.8% → stake $1,000  │  Retorno potencial $2,480
+  │     EV real +74.6%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Hanyi Liu vs Kokoro Isomura
+  │     Apostar: Hanyi Liu
+  │     Cuota 2.32  │  Edge 7.3%  │  p_blend 0.704 (n_h2h=0)
+  │     Kelly-KL 15.3% → stake $1,000  │  Retorno potencial $2,320
+  │     EV real +63.3%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Sahaja Yamalapalli vs Dasha Plekhanova
+  │     Apostar: Dasha Plekhanova
+  │     Cuota 2.25  │  Edge 6.6%  │  p_blend 0.704 (n_h2h=0)
+  │     Kelly-KL 14.2% → stake $1,000  │  Retorno potencial $2,250
+  │     EV real +58.4%  │  Zona: underdog  │  Sup: hard
+
+  │  Total individuales: $12,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 19 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $6,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Pia Lovric           @3.95  p=0.704  zona=underdog
+  │    2. Carmen Gallardo Guevara @3.60  p=0.662  zona=underdog
+  │    3. Kaitlyn Carnicella   @3.40  p=0.590  zona=underdog
+  │    4. Yuno Kitahara        @3.25  p=0.590  zona=underdog
+  │    5. Sandra Samir         @3.20  p=0.561  zona=underdog
+  │    6. Lily Taylor          @2.90  p=0.590  zona=underdog
+  │    7. Marie Mettraux       @2.85  p=0.666  zona=underdog
+  │    8. Max Wiskandt         @2.60  p=0.704  zona=underdog
+  │    9. Taisei Ichikawa      @2.50  p=0.590  zona=underdog
+  │    10. Benjamin O'Connell   @2.48  p=0.590  zona=underdog
+  │    11. Hanyi Liu            @2.32  p=0.590  zona=underdog
+  │    12. Dasha Plekhanova     @2.25  p=0.590  zona=underdog
+  │    13. Blake Ellis          @2.17  p=0.590  zona=underdog [W]
+  │    14. Guillaume Dalmasso   @2.07  p=0.590  zona=slight_underdog [W]
+  │    15. Sofiia Bielinska     @2.06  p=0.590  zona=slight_underdog [W]
+  │    16. Matt Ponchet         @2.04  p=0.590  zona=slight_underdog [W]
+  │    17. Theodore Dean        @2.00  p=0.590  zona=slight_underdog [W]
+  │    18. Maileen Nuudi        @1.98  p=0.704  zona=slight_underdog [W]
+  │    19. Salma Ewing          @1.54  p=0.590  zona=moderate_favorite
+
+  │  ── 3 PIERNAS: TOP 4 combos × $1,000 = $4,000 ──
+  │     (cada combo excluye 16 jugadores)
+  │     [3p-1] Carmen Gallardo Guevara@3.60 + Pia Lovric@3.95 + Kaitlyn Carnicella@3.40
+  │            @48.35 HR:27.5% EV:+1230.1% →$48,350  excluye:[Marie Mettraux, Sandra Samir, Yuno Kitahara, Lily Taylor, Max Wiskandt, Taisei Ichikawa, Benjamin O'Connell, Hanyi Liu, Dasha Plekhanova, Blake Ellis, Guillaume Dalmasso, Sofiia Bielinska, Matt Ponchet, Maileen Nuudi, Theodore Dean, Salma Ewing]
+  │     [3p-2] Carmen Gallardo Guevara@3.60 + Pia Lovric@3.95 + Yuno Kitahara@3.25
+  │            @46.22 HR:27.5% EV:+1171.4% →$46,220  excluye:[Marie Mettraux, Kaitlyn Carnicella, Sandra Samir, Lily Taylor, Max Wiskandt, Taisei Ichikawa, Benjamin O'Connell, Hanyi Liu, Dasha Plekhanova, Blake Ellis, Guillaume Dalmasso, Sofiia Bielinska, Matt Ponchet, Maileen Nuudi, Theodore Dean, Salma Ewing]
+  │     [3p-3] Pia Lovric@3.95 + Kaitlyn Carnicella@3.40 + Yuno Kitahara@3.25
+  │            @43.65 HR:24.5% EV:+969.5% →$43,650  excluye:[Carmen Gallardo Guevara, Marie Mettraux, Sandra Samir, Lily Taylor, Max Wiskandt, Taisei Ichikawa, Benjamin O'Connell, Hanyi Liu, Dasha Plekhanova, Blake Ellis, Guillaume Dalmasso, Sofiia Bielinska, Matt Ponchet, Maileen Nuudi, Theodore Dean, Salma Ewing]
+  │     [3p-4] Carmen Gallardo Guevara@3.60 + Kaitlyn Carnicella@3.40 + Yuno Kitahara@3.25
+  │            @39.78 HR:23.1% EV:+817.3% →$39,780  excluye:[Marie Mettraux, Pia Lovric, Sandra Samir, Lily Taylor, Max Wiskandt, Taisei Ichikawa, Benjamin O'Connell, Hanyi Liu, Dasha Plekhanova, Blake Ellis, Guillaume Dalmasso, Sofiia Bielinska, Matt Ponchet, Maileen Nuudi, Theodore Dean, Salma Ewing]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $1,000 = $4,000 ──
+  │     (cada combo excluye 15 jugadores)
+  │     [4p-1] Carmen Gallardo Guevara@3.60 + Pia Lovric@3.95 + Kaitlyn Carnicella@3.40 + Yuno Kitahara@3.25
+  │            @157.13 HR:16.2% EV:+2450.4% →$157,130  excluye:[Marie Mettraux, Sandra Samir, Lily Taylor, Max Wiskandt, Taisei Ichikawa, Benjamin O'Connell, Hanyi Liu, Dasha Plekhanova, Blake Ellis, Guillaume Dalmasso, Sofiia Bielinska, Matt Ponchet, Maileen Nuudi, Theodore Dean, Salma Ewing]
+  │     [4p-2] Carmen Gallardo Guevara@3.60 + Marie Mettraux@2.85 + Pia Lovric@3.95 + Yuno Kitahara@3.25
+  │            @131.71 HR:18.3% EV:+2312.1% →$131,710  excluye:[Kaitlyn Carnicella, Sandra Samir, Lily Taylor, Max Wiskandt, Taisei Ichikawa, Benjamin O'Connell, Hanyi Liu, Dasha Plekhanova, Blake Ellis, Guillaume Dalmasso, Sofiia Bielinska, Matt Ponchet, Maileen Nuudi, Theodore Dean, Salma Ewing]
+  │     [4p-3] Marie Mettraux@2.85 + Pia Lovric@3.95 + Kaitlyn Carnicella@3.40 + Yuno Kitahara@3.25
+  │            @124.40 HR:16.3% EV:+1929.0% →$124,400  excluye:[Carmen Gallardo Guevara, Sandra Samir, Lily Taylor, Max Wiskandt, Taisei Ichikawa, Benjamin O'Connell, Hanyi Liu, Dasha Plekhanova, Blake Ellis, Guillaume Dalmasso, Sofiia Bielinska, Matt Ponchet, Maileen Nuudi, Theodore Dean, Salma Ewing]
+  │     [4p-4] Carmen Gallardo Guevara@3.60 + Marie Mettraux@2.85 + Kaitlyn Carnicella@3.40 + Yuno Kitahara@3.25
+  │            @113.37 HR:15.3% EV:+1640.2% →$113,370  excluye:[Pia Lovric, Sandra Samir, Lily Taylor, Max Wiskandt, Taisei Ichikawa, Benjamin O'Connell, Hanyi Liu, Dasha Plekhanova, Blake Ellis, Guillaume Dalmasso, Sofiia Bielinska, Matt Ponchet, Maileen Nuudi, Theodore Dean, Salma Ewing]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-4 picks?) ──
+  │  Total apostado: $8,000
+
+  │  🏆 0 fallos (19/19 ganan): retorno $704,610 → P&L +$696,610 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Salma Ewing]):
+  │       retorno $704,610 → P&L +$696,610 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Pia Lovric]):
+  │       retorno $153,150 → P&L +$145,150 (2/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Salma Ewing, Maileen Nuudi]):
+  │       retorno $704,610 → P&L +$696,610 (8/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Pia Lovric, Carmen Gallardo Guevara]):
+  │       retorno $0 → P&L $-8,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Salma Ewing, Maileen Nuudi, Theodore Dean]):
+  │       retorno $704,610 → P&L +$696,610 (8/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Pia Lovric, Carmen Gallardo Guevara, Kaitlyn Carnicella]):
+  │       retorno $0 → P&L $-8,000 (0/8 combos pagan)
+  │  ✅ 4 fallos (mejor caso: fallan favoritos [Salma Ewing, Maileen Nuudi, Theodore Dean, Matt Ponchet]):
+  │       retorno $704,610 → P&L +$696,610 (8/8 combos pagan)
+  │  ❌ 4 fallos (peor caso: fallan underdogs [Pia Lovric, Carmen Gallardo Guevara, Kaitlyn Carnicella, Yuno Kitahara]):
+  │       retorno $0 → P&L $-8,000 (0/8 combos pagan)
+
+  │  Total cobertura: $8,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     19
+  │  ρ estructural:       0.05 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.526
+  │  Reducción vs naive:  -47.4%
+  │
+  │  Stake naive (sin ajuste):    $      20,000
+  │  Stake ajustado (PK):         $      10,526
+  │  Ahorro por correlación:      $       9,474
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $      11,797  (118.0% bankroll)
+  │  CVaR 95%:           $       7,794
+  │  Max VaR permitido:  $       2,500  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.50
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $     108,236
+  │  σ(P&L):             $      81,985
+  │  Sharpe Ratio:              1.320
+  │  Kelly Growth Rate:        2.4073 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $1,687,932,097
+  │  Bankroll en 10 sesiones:  $284,911,476,316,896
+  │  Bankroll en 30 sesiones:  $231,275,606,909,841,781,213,021,888,262,963,200
+  │  Sesiones para duplicar:   0.3
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.50 (de $20,000 a $10,000)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.50) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Carmen Gallardo Guevara   @3.60  →  $       0  (ret. $         0)
+  │    Marie Mettraux            @2.85  →  $       0  (ret. $         0)
+  │    Pia Lovric                @3.95  →  $       0  (ret. $         0)
+  │    Kaitlyn Carnicella        @3.40  →  $       0  (ret. $         0)
+  │    Sandra Samir              @3.20  →  $       0  (ret. $         0)
+  │    Yuno Kitahara             @3.25  →  $       0  (ret. $         0)
+  │    Lily Taylor               @2.90  →  $       0  (ret. $         0)
+  │    Max Wiskandt              @2.60  →  $       0  (ret. $         0)
+  │    Taisei Ichikawa           @2.50  →  $       0  (ret. $         0)
+  │    Benjamin O'Connell        @2.48  →  $       0  (ret. $         0)
+  │    Hanyi Liu                 @2.32  →  $       0  (ret. $         0)
+  │    Dasha Plekhanova          @2.25  →  $       0  (ret. $         0)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @48.35]  $       0  →  Carmen Gallardo Guevara@3.60 + Pia Lovric@3.95 + Kaitlyn Carnicella@3.40
+  │    [3p @46.22]  $       0  →  Carmen Gallardo Guevara@3.60 + Pia Lovric@3.95 + Yuno Kitahara@3.25
+  │    [3p @43.65]  $       0  →  Pia Lovric@3.95 + Kaitlyn Carnicella@3.40 + Yuno Kitahara@3.25
+  │    [3p @39.78]  $       0  →  Carmen Gallardo Guevara@3.60 + Kaitlyn Carnicella@3.40 + Yuno Kitahara@3.25
+  │    [4p @157.13]  $       0  →  Carmen Gallardo Guevara@3.60 + Pia Lovric@3.95 + Kaitlyn Carnicella@3.40 + Yuno Kitahara@3.25
+  │    [4p @131.71]  $       0  →  Carmen Gallardo Guevara@3.60 + Marie Mettraux@2.85 + Pia Lovric@3.95 + Yuno Kitahara@3.25
+  │    [4p @124.40]  $       0  →  Marie Mettraux@2.85 + Pia Lovric@3.95 + Kaitlyn Carnicella@3.40 + Yuno Kitahara@3.25
+  │    [4p @113.37]  $       0  →  Carmen Gallardo Guevara@3.60 + Marie Mettraux@2.85 + Kaitlyn Carnicella@3.40 + Yuno Kitahara@3.25
+  │
+  │  TOTAL EN RIESGO:  $         0  (0.0% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $        10,000                       ║
+  ║  Individuales:        $             0  (0.0% bankroll)      ║
+  ║  Combos:              $             0  (0.0% bankroll)      ║
+  ║  Sistema:             $             0  (0.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $             0  (0.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:      12                                       ║
+  ║  Pool cobertura:       19 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260611_12  ║
+  ║  Partidos analizados:  99                                       ║
+  ║  Superficie:          clay (Roland Garros)                    ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  📊 Calibración: n=695 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.704 (calibrado clay) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260611_125142.json

@@ -1,0 +1,183 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — ITF CLAY
+  2026-06-18 09:15  │  Bankroll: $20,000
+  Señales APOSTAR: 4  │  Watchlist: 7  │  Sin edge: 1
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 12 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.05 (itf)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $8,000 (40% bankroll)
+
+  │  🎾 Carla Grignac vs Zoe Ulrich
+  │     Apostar: Carla Grignac
+  │     Cuota 3.80  │  Edge 28.1%  │  p_blend 0.697 (n_h2h=0)
+  │     Kelly-KL 13.5% → stake $2,000  │  Retorno potencial $7,600
+  │     EV real +165.0%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Jiaqi Wang vs Han Shi
+  │     Apostar: Jiaqi Wang
+  │     Cuota 3.30  │  Edge 20.2%  │  p_blend 0.580 (n_h2h=2)
+  │     Kelly-KL 10.0% → stake $2,000  │  Retorno potencial $6,600
+  │     EV real +91.2%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Nicolas Arseneault vs Christian Langmo
+  │     Apostar: Nicolas Arseneault
+  │     Cuota 2.43  │  Edge 10.1%  │  p_blend 0.629 (n_h2h=0)
+  │     Kelly-KL 6.1% → stake $2,000  │  Retorno potencial $4,860
+  │     EV real +52.9%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Andrés Martín vs Luca Pow
+  │     Apostar: Luca Pow
+  │     Cuota 2.30  │  Edge 7.7%  │  p_blend 0.629 (n_h2h=0)
+  │     Kelly-KL 4.8% → stake $2,000  │  Retorno potencial $4,600
+  │     EV real +44.7%  │  Zona: underdog  │  Sup: hard
+
+  │  Total individuales: $8,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 12 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $12,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Carla Grignac        @3.80  p=0.697  zona=underdog
+  │    2. Jiaqi Wang           @3.30  p=0.580  zona=underdog
+  │    3. Nicolas Arseneault   @2.43  p=0.629  zona=underdog
+  │    4. Luca Pow             @2.30  p=0.629  zona=underdog
+  │    5. Nathan Cox           @2.18  p=0.629  zona=underdog [W]
+  │    6. Ying Zhang           @2.12  p=0.629  zona=underdog [W]
+  │    7. Lucie Nguyen Tan     @2.08  p=0.697  zona=slight_underdog [W]
+  │    8. Denislava Glushkova  @2.02  p=0.697  zona=slight_underdog [W]
+  │    9. Enzo Aguiard         @2.02  p=0.629  zona=slight_underdog [W]
+  │    10. Ronit Karki          @1.96  p=0.629  zona=slight_underdog [W]
+  │    11. Anna Kubareva        @1.96  p=0.629  zona=slight_underdog [W]
+  │    12. Patrick Schoen       @1.81  p=0.629  zona=slight_underdog
+
+  │  ── 3 PIERNAS: TOP 4 combos × $2,000 = $8,000 ──
+  │     (cada combo excluye 9 jugadores)
+  │     [3p-1] Carla Grignac@3.80 + Jiaqi Wang@3.30 + Nicolas Arseneault@2.43
+  │            @30.47 HR:25.4% EV:+674.9% →$60,940  excluye:[Luca Pow, Nathan Cox, Ying Zhang, Lucie Nguyen Tan, Ronit Karki, Denislava Glushkova, Enzo Aguiard, Anna Kubareva, Patrick Schoen]
+  │     [3p-2] Carla Grignac@3.80 + Jiaqi Wang@3.30 + Lucie Nguyen Tan@2.08
+  │            @26.08 HR:28.2% EV:+635.2% →$52,160  excluye:[Nicolas Arseneault, Luca Pow, Nathan Cox, Ying Zhang, Ronit Karki, Denislava Glushkova, Enzo Aguiard, Anna Kubareva, Patrick Schoen]
+  │     [3p-3] Carla Grignac@3.80 + Nicolas Arseneault@2.43 + Lucie Nguyen Tan@2.08
+  │            @19.21 HR:30.6% EV:+487.8% →$38,420  excluye:[Jiaqi Wang, Luca Pow, Nathan Cox, Ying Zhang, Ronit Karki, Denislava Glushkova, Enzo Aguiard, Anna Kubareva, Patrick Schoen]
+  │     [3p-4] Jiaqi Wang@3.30 + Nicolas Arseneault@2.43 + Lucie Nguyen Tan@2.08
+  │            @16.68 HR:25.4% EV:+324.1% →$33,360  excluye:[Carla Grignac, Luca Pow, Nathan Cox, Ying Zhang, Ronit Karki, Denislava Glushkova, Enzo Aguiard, Anna Kubareva, Patrick Schoen]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $1,000 = $4,000 ──
+  │     (cada combo excluye 8 jugadores)
+  │     [4p-1] Carla Grignac@3.80 + Jiaqi Wang@3.30 + Nicolas Arseneault@2.43 + Lucie Nguyen Tan@2.08
+  │            @63.38 HR:17.7% EV:+1024.1% →$63,380  excluye:[Luca Pow, Nathan Cox, Ying Zhang, Ronit Karki, Denislava Glushkova, Enzo Aguiard, Anna Kubareva, Patrick Schoen]
+  │     [4p-2] Carla Grignac@3.80 + Jiaqi Wang@3.30 + Nicolas Arseneault@2.43 + Luca Pow@2.30
+  │            @70.09 HR:16.0% EV:+1021.4% →$70,090  excluye:[Nathan Cox, Ying Zhang, Lucie Nguyen Tan, Ronit Karki, Denislava Glushkova, Enzo Aguiard, Anna Kubareva, Patrick Schoen]
+  │     [4p-3] Carla Grignac@3.80 + Nicolas Arseneault@2.43 + Luca Pow@2.30 + Lucie Nguyen Tan@2.08
+  │            @44.18 HR:19.2% EV:+750.6% →$44,180  excluye:[Jiaqi Wang, Nathan Cox, Ying Zhang, Ronit Karki, Denislava Glushkova, Enzo Aguiard, Anna Kubareva, Patrick Schoen]
+  │     [4p-4] Jiaqi Wang@3.30 + Nicolas Arseneault@2.43 + Luca Pow@2.30 + Lucie Nguyen Tan@2.08
+  │            @38.36 HR:16.0% EV:+513.8% →$38,360  excluye:[Carla Grignac, Nathan Cox, Ying Zhang, Ronit Karki, Denislava Glushkova, Enzo Aguiard, Anna Kubareva, Patrick Schoen]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-4 picks?) ──
+  │  Total apostado: $12,000
+
+  │  🏆 0 fallos (12/12 ganan): retorno $400,890 → P&L +$388,890 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Patrick Schoen]):
+  │       retorno $400,890 → P&L +$388,890 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Carla Grignac]):
+  │       retorno $71,720 → P&L +$59,720 (2/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Patrick Schoen, Ronit Karki]):
+  │       retorno $400,890 → P&L +$388,890 (8/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Carla Grignac, Jiaqi Wang]):
+  │       retorno $0 → P&L $-12,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Patrick Schoen, Ronit Karki, Anna Kubareva]):
+  │       retorno $400,890 → P&L +$388,890 (8/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Carla Grignac, Jiaqi Wang, Nicolas Arseneault]):
+  │       retorno $0 → P&L $-12,000 (0/8 combos pagan)
+  │  ✅ 4 fallos (mejor caso: fallan favoritos [Patrick Schoen, Ronit Karki, Anna Kubareva, Denislava Glushkova]):
+  │       retorno $400,890 → P&L +$388,890 (8/8 combos pagan)
+  │  ❌ 4 fallos (peor caso: fallan underdogs [Carla Grignac, Jiaqi Wang, Nicolas Arseneault, Luca Pow]):
+  │       retorno $0 → P&L $-12,000 (0/8 combos pagan)
+
+  │  Total cobertura: $12,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     12
+  │  ρ estructural:       0.05 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.645
+  │  Reducción vs naive:  -35.5%
+  │
+  │  Stake naive (sin ajuste):    $      20,000
+  │  Stake ajustado (PK):         $      12,903
+  │  Ahorro por correlación:      $       7,097
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $      -9,414  (47.1% bankroll)
+  │  CVaR 95%:           $     -11,757
+  │  Max VaR permitido:  $       5,000  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.53
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $      73,880
+  │  σ(P&L):             $      68,831
+  │  Sharpe Ratio:              1.073
+  │  Kelly Growth Rate:        1.2721 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $  11,571,306
+  │  Bankroll en 10 sesiones:  $6,694,755,890
+  │  Bankroll en 30 sesiones:  $750,143,320,880,006,037,504
+  │  Sesiones para duplicar:   0.5
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.53 (de $20,000 a $10,622)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.53) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Carla Grignac             @3.80  →  $   1,000  (ret. $     3,800)
+  │    Jiaqi Wang                @3.30  →  $   1,000  (ret. $     3,300)
+  │    Nicolas Arseneault        @2.43  →  $   1,000  (ret. $     2,430)
+  │    Luca Pow                  @2.30  →  $   1,000  (ret. $     2,300)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @30.47]  $   1,000  →  Carla Grignac@3.80 + Jiaqi Wang@3.30 + Nicolas Arseneault@2.43
+  │    [3p @26.08]  $   1,000  →  Carla Grignac@3.80 + Jiaqi Wang@3.30 + Lucie Nguyen Tan@2.08
+  │    [3p @19.21]  $   1,000  →  Carla Grignac@3.80 + Nicolas Arseneault@2.43 + Lucie Nguyen Tan@2.08
+  │    [3p @16.68]  $   1,000  →  Jiaqi Wang@3.30 + Nicolas Arseneault@2.43 + Lucie Nguyen Tan@2.08
+  │    [4p @63.38]  $   1,000  →  Carla Grignac@3.80 + Jiaqi Wang@3.30 + Nicolas Arseneault@2.43 + Lucie Nguyen Tan@2.08
+  │    [4p @70.09]  $   1,000  →  Carla Grignac@3.80 + Jiaqi Wang@3.30 + Nicolas Arseneault@2.43 + Luca Pow@2.30
+  │    [4p @44.18]  $   1,000  →  Carla Grignac@3.80 + Nicolas Arseneault@2.43 + Luca Pow@2.30 + Lucie Nguyen Tan@2.08
+  │    [4p @38.36]  $   1,000  →  Jiaqi Wang@3.30 + Nicolas Arseneault@2.43 + Luca Pow@2.30 + Lucie Nguyen Tan@2.08
+  │
+  │  TOTAL EN RIESGO:  $    12,000  (60.0% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $        20,000                       ║
+  ║  Individuales:        $         4,000  (20.0% bankroll)      ║
+  ║  Cobertura:           $         8,000  (40.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $        12,000  (60.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       4                                       ║
+  ║  Pool cobertura:       12 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260618_08  ║
+  ║  Partidos analizados:  69                                       ║
+  ║  Superficie:          clay (itf)                                  ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  ⚠️  ALERTA: 60.0% bankroll en riesgo — por encima del 30% recomendado.
+      Reducir combos o sistema hasta n≥30 con datos limpios.
+
+  📊 Calibración: n=801 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.697 (calibrado clay) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260618_091555.json

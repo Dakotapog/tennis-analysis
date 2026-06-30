@@ -1,0 +1,2635 @@
+{
+  "French Open (France)": [
+    {
+      "superficie": "clay",
+      "jugador1": "Cerundolo F.",
+      "jugador2": "Svajda Z.",
+      "resultado": "0",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 1.07,
+      "cuota2": 7.0,
+      "confianza_promedio": {
+        "jugador1": 0.867,
+        "jugador2": 0.133
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/cerundolo-francisco-lWQ3G6gB/svajda-zachary-vynGYhMa/?mid=QFAD1bV9",
+      "match_id": "QFAD1bV9",
+      "h2h_url": "https://www.flashscore.com/match/tennis/cerundolo-francisco-lWQ3G6gB/svajda-zachary-vynGYhMa/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Cobolli F.",
+      "jugador2": "Tien L.",
+      "resultado": "",
+      "estado": "Programado 05:05",
+      "hora_partido": "05:05",
+      "cuota1": 1.53,
+      "cuota2": 2.4,
+      "confianza_promedio": {
+        "jugador1": 0.611,
+        "jugador2": 0.389
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/cobolli-flavio-zDtaCcPe/tien-learner-xUHOBJK6/?mid=n7IrJlXG",
+      "match_id": "n7IrJlXG",
+      "h2h_url": "https://www.flashscore.com/match/tennis/cobolli-flavio-zDtaCcPe/tien-learner-xUHOBJK6/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Berrettini M.",
+      "jugador2": "Comesana F.",
+      "resultado": "",
+      "estado": "Programado 06:00",
+      "hora_partido": "06:00",
+      "cuota1": 1.42,
+      "cuota2": 2.7,
+      "confianza_promedio": {
+        "jugador1": 0.655,
+        "jugador2": 0.345
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/berrettini-matteo-OhwtM7N8/comesana-francisco-SxKK0RUD/?mid=dtjt9iEU",
+      "match_id": "dtjt9iEU",
+      "h2h_url": "https://www.flashscore.com/match/tennis/berrettini-matteo-OhwtM7N8/comesana-francisco-SxKK0RUD/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Cerundolo J. M.",
+      "jugador2": "Landaluce M.",
+      "resultado": "",
+      "estado": "Programado 06:30",
+      "hora_partido": "06:30",
+      "cuota1": 1.65,
+      "cuota2": 2.15,
+      "confianza_promedio": {
+        "jugador1": 0.566,
+        "jugador2": 0.434
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/cerundolo-juan-manuel-A93TM7BR/landaluce-martin-AoOnGZEp/?mid=QuAXkKrB",
+      "match_id": "QuAXkKrB",
+      "h2h_url": "https://www.flashscore.com/match/tennis/cerundolo-juan-manuel-A93TM7BR/landaluce-martin-AoOnGZEp/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Kouame M.",
+      "jugador2": "Tabilo A.",
+      "resultado": "",
+      "estado": "Programado 07:00",
+      "hora_partido": "07:00",
+      "cuota1": 4.33,
+      "cuota2": 1.2,
+      "confianza_promedio": {
+        "jugador1": 0.217,
+        "jugador2": 0.783
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/kouame-moise-zylrzjzh/tabilo-alejandro-YgVnM5vO/?mid=4ppo3iSs",
+      "match_id": "4ppo3iSs",
+      "h2h_url": "https://www.flashscore.com/match/tennis/kouame-moise-zylrzjzh/tabilo-alejandro-YgVnM5vO/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Arnaldi M.",
+      "jugador2": "Collignon R.",
+      "resultado": "",
+      "estado": "Programado 07:30",
+      "hora_partido": "07:30",
+      "cuota1": 2.65,
+      "cuota2": 1.44,
+      "confianza_promedio": {
+        "jugador1": 0.352,
+        "jugador2": 0.648
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/arnaldi-matteo-hlVLAfZK/collignon-raphael-xzJGXJ6t/?mid=pteVllqK",
+      "match_id": "pteVllqK",
+      "h2h_url": "https://www.flashscore.com/match/tennis/arnaldi-matteo-hlVLAfZK/collignon-raphael-xzJGXJ6t/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Faria J.",
+      "jugador2": "Tiafoe F.",
+      "resultado": "",
+      "estado": "Programado 09:00",
+      "hora_partido": "09:00",
+      "cuota1": 2.4,
+      "cuota2": 1.53,
+      "confianza_promedio": {
+        "jugador1": 0.389,
+        "jugador2": 0.611
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/faria-jaime-ETojuYQP/tiafoe-frances-AHDLJaph/?mid=KOGoNU87",
+      "match_id": "KOGoNU87",
+      "h2h_url": "https://www.flashscore.com/match/tennis/faria-jaime-ETojuYQP/tiafoe-frances-AHDLJaph/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Auger-Aliassime F.",
+      "jugador2": "Nakashima B.",
+      "resultado": "",
+      "estado": "Programado 13:15",
+      "hora_partido": "13:15",
+      "cuota1": 1.33,
+      "cuota2": 3.2,
+      "confianza_promedio": {
+        "jugador1": 0.706,
+        "jugador2": 0.294
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/auger-aliassime-felix-CzXh4LAb/nakashima-brandon-ETGnbrpH/?mid=prMqIUjo",
+      "match_id": "prMqIUjo",
+      "h2h_url": "https://www.flashscore.com/match/tennis/auger-aliassime-felix-CzXh4LAb/nakashima-brandon-ETGnbrpH/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Jovic I.",
+      "jugador2": "Osaka N.",
+      "resultado": "0",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 1.95,
+      "cuota2": 1.8,
+      "confianza_promedio": {
+        "jugador1": 0.48,
+        "jugador2": 0.52
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/jovic-iva-bmWvBlnL/osaka-naomi-MDM4BKiA/?mid=MkW2B0up",
+      "match_id": "MkW2B0up",
+      "h2h_url": "https://www.flashscore.com/match/tennis/jovic-iva-bmWvBlnL/osaka-naomi-MDM4BKiA/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Sakkari M.",
+      "jugador2": "Chwalinska M.",
+      "resultado": "1",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 2.1,
+      "cuota2": 1.7,
+      "confianza_promedio": {
+        "jugador1": 0.447,
+        "jugador2": 0.553
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/chwalinska-maja-OIxOD54s/sakkari-maria-KjsokFUj/?mid=hhsieFKj",
+      "match_id": "hhsieFKj",
+      "h2h_url": "https://www.flashscore.com/match/tennis/chwalinska-maja-OIxOD54s/sakkari-maria-KjsokFUj/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Shnaider D.",
+      "jugador2": "Oliynykova O.",
+      "resultado": "",
+      "estado": "Programado 05:05",
+      "hora_partido": "05:05",
+      "cuota1": 1.33,
+      "cuota2": 3.2,
+      "confianza_promedio": {
+        "jugador1": 0.706,
+        "jugador2": 0.294
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/oliynykova-oleksandra-WSu6zx5t/shnaider-diana-028BdVOj/?mid=I9a8Z9Hc",
+      "match_id": "I9a8Z9Hc",
+      "h2h_url": "https://www.flashscore.com/match/tennis/oliynykova-oleksandra-WSu6zx5t/shnaider-diana-028BdVOj/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Sabalenka A.",
+      "jugador2": "Kasatkina D.",
+      "resultado": "",
+      "estado": "Programado 05:30",
+      "hora_partido": "05:30",
+      "cuota1": 1.06,
+      "cuota2": 8.0,
+      "confianza_promedio": {
+        "jugador1": 0.883,
+        "jugador2": 0.117
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/kasatkina-daria-GU42elks/sabalenka-aryna-vyhksgUB/?mid=phqWZGON",
+      "match_id": "phqWZGON",
+      "h2h_url": "https://www.flashscore.com/match/tennis/kasatkina-daria-GU42elks/sabalenka-aryna-vyhksgUB/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Kalinskaya A.",
+      "jugador2": "Osorio C.",
+      "resultado": "",
+      "estado": "Programado 06:00",
+      "hora_partido": "06:00",
+      "cuota1": 1.83,
+      "cuota2": 1.9,
+      "confianza_promedio": {
+        "jugador1": 0.509,
+        "jugador2": 0.491
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/kalinskaya-anna-KGdcQnEf/osorio-serrano-maria-camila-rysUUciD/?mid=4YTCQ3Fa",
+      "match_id": "4YTCQ3Fa",
+      "h2h_url": "https://www.flashscore.com/match/tennis/kalinskaya-anna-KGdcQnEf/osorio-serrano-maria-camila-rysUUciD/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Parry D.",
+      "jugador2": "Anisimova A.",
+      "resultado": "",
+      "estado": "Programado 07:00",
+      "hora_partido": "07:00",
+      "cuota1": 4.5,
+      "cuota2": 1.18,
+      "confianza_promedio": {
+        "jugador1": 0.208,
+        "jugador2": 0.792
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/anisimova-amanda-nwkutKbi/parry-diane-hQQLzcNT/?mid=WKV4SPpm",
+      "match_id": "WKV4SPpm",
+      "h2h_url": "https://www.flashscore.com/match/tennis/anisimova-amanda-nwkutKbi/parry-diane-hQQLzcNT/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Mboko V.",
+      "jugador2": "Keys M.",
+      "resultado": "",
+      "estado": "Programado 08:00",
+      "hora_partido": "08:00",
+      "cuota1": 1.8,
+      "cuota2": 1.95,
+      "confianza_promedio": {
+        "jugador1": 0.52,
+        "jugador2": 0.48
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/keys-madison-QwU996PK/mboko-victoria-AqVez8TJ/?mid=OSiYADqI",
+      "match_id": "OSiYADqI",
+      "h2h_url": "https://www.flashscore.com/match/tennis/keys-madison-QwU996PK/mboko-victoria-AqVez8TJ/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Gauff C.",
+      "jugador2": "Potapova A.",
+      "resultado": "",
+      "estado": "Programado 09:00",
+      "hora_partido": "09:00",
+      "cuota1": 1.25,
+      "cuota2": 3.75,
+      "confianza_promedio": {
+        "jugador1": 0.75,
+        "jugador2": 0.25
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/gauff-coco-f5BXmEH6/potapova-anastasia-x81l09qG/?mid=GjbaX6ed",
+      "match_id": "GjbaX6ed",
+      "h2h_url": "https://www.flashscore.com/match/tennis/gauff-coco-f5BXmEH6/potapova-anastasia-x81l09qG/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Kittay B.",
+      "jugador2": "Ram R.",
+      "resultado": "-",
+      "estado": "Programado 05:30",
+      "hora_partido": "05:30",
+      "cuota1": 2.8,
+      "cuota2": 1.4,
+      "confianza_promedio": {
+        "jugador1": 0.333,
+        "jugador2": 0.667
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/08mWqJtp/",
+      "match_id": "08mWqJtp",
+      "h2h_url": "https://www.flashscore.com/match/tennis/08mWqJtp/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Arevalo M.",
+      "jugador2": "Pavic M.",
+      "resultado": "-",
+      "estado": "Programado 06:30",
+      "hora_partido": "06:30",
+      "cuota1": 1.25,
+      "cuota2": 3.75,
+      "confianza_promedio": {
+        "jugador1": 0.75,
+        "jugador2": 0.25
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/jVPrrgkm/",
+      "match_id": "jVPrrgkm",
+      "h2h_url": "https://www.flashscore.com/match/tennis/jVPrrgkm/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Goransson A.",
+      "jugador2": "King E.",
+      "resultado": "-",
+      "estado": "Programado 06:30",
+      "hora_partido": "06:30",
+      "cuota1": 1.67,
+      "cuota2": 2.15,
+      "confianza_promedio": {
+        "jugador1": 0.563,
+        "jugador2": 0.437
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/dEVCTOdL/",
+      "match_id": "dEVCTOdL",
+      "h2h_url": "https://www.flashscore.com/match/tennis/dEVCTOdL/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Halys Q.",
+      "jugador2": "Herbert P.",
+      "resultado": "-",
+      "estado": "Programado 09:30",
+      "hora_partido": "09:30",
+      "cuota1": 2.15,
+      "cuota2": 1.65,
+      "confianza_promedio": {
+        "jugador1": 0.434,
+        "jugador2": 0.566
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/OftFy963/",
+      "match_id": "OftFy963",
+      "h2h_url": "https://www.flashscore.com/match/tennis/OftFy963/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Bouzkova M.",
+      "jugador2": "Sorribes Tormo S.",
+      "resultado": "0",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 1.95,
+      "cuota2": 1.8,
+      "confianza_promedio": {
+        "jugador1": 0.48,
+        "jugador2": 0.52
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/rHhLZp94/",
+      "match_id": "rHhLZp94",
+      "h2h_url": "https://www.flashscore.com/match/tennis/rHhLZp94/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Martins I.",
+      "jugador2": "Sierra S.",
+      "resultado": "0",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 2.63,
+      "cuota2": 1.45,
+      "confianza_promedio": {
+        "jugador1": 0.355,
+        "jugador2": 0.645
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/6m7sxnlf/",
+      "match_id": "6m7sxnlf",
+      "h2h_url": "https://www.flashscore.com/match/tennis/6m7sxnlf/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Detiuc A.",
+      "jugador2": "Khromacheva I.",
+      "resultado": "-",
+      "estado": "Programado 05:05",
+      "hora_partido": "05:05",
+      "cuota1": 2.2,
+      "cuota2": 1.65,
+      "confianza_promedio": {
+        "jugador1": 0.429,
+        "jugador2": 0.571
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/2P9JNPcJ/",
+      "match_id": "2P9JNPcJ",
+      "h2h_url": "https://www.flashscore.com/match/tennis/2P9JNPcJ/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Fossa Huergo N.",
+      "jugador2": "Korpatsch T.",
+      "resultado": "-",
+      "estado": "Programado 05:05",
+      "hora_partido": "05:05",
+      "cuota1": 9.0,
+      "cuota2": 1.04,
+      "confianza_promedio": {
+        "jugador1": 0.104,
+        "jugador2": 0.896
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/zJ5isT6U/",
+      "match_id": "zJ5isT6U",
+      "h2h_url": "https://www.flashscore.com/match/tennis/zJ5isT6U/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Mihalikova T.",
+      "jugador2": "Nicholls O.",
+      "resultado": "-",
+      "estado": "Programado 05:30",
+      "hora_partido": "05:30",
+      "cuota1": 1.65,
+      "cuota2": 2.15,
+      "confianza_promedio": {
+        "jugador1": 0.566,
+        "jugador2": 0.434
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/StCbH41S/",
+      "match_id": "StCbH41S",
+      "h2h_url": "https://www.flashscore.com/match/tennis/StCbH41S/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Chong E.",
+      "jugador2": "Erjavec V.",
+      "resultado": "-",
+      "estado": "Programado 07:00",
+      "hora_partido": "07:00",
+      "cuota1": 3.75,
+      "cuota2": 1.25,
+      "confianza_promedio": {
+        "jugador1": 0.25,
+        "jugador2": 0.75
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/OjvcCoiK/",
+      "match_id": "OjvcCoiK",
+      "h2h_url": "https://www.flashscore.com/match/tennis/OjvcCoiK/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Kichenok N.",
+      "jugador2": "Ninomiya M.",
+      "resultado": "-",
+      "estado": "Programado 07:00",
+      "hora_partido": "07:00",
+      "cuota1": 1.75,
+      "cuota2": 2.0,
+      "confianza_promedio": {
+        "jugador1": 0.533,
+        "jugador2": 0.467
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/j5KH6l7T/",
+      "match_id": "j5KH6l7T",
+      "h2h_url": "https://www.flashscore.com/match/tennis/j5KH6l7T/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Siegemund L.",
+      "jugador2": "Zvonareva V.",
+      "resultado": "-",
+      "estado": "Programado 09:30",
+      "hora_partido": "09:30",
+      "cuota1": 1.22,
+      "cuota2": 4.0,
+      "confianza_promedio": {
+        "jugador1": 0.766,
+        "jugador2": 0.234
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/QaEJFsUg/",
+      "match_id": "QaEJFsUg",
+      "h2h_url": "https://www.flashscore.com/match/tennis/QaEJFsUg/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Eikeri U.",
+      "jugador2": "Miedler L.",
+      "resultado": "-",
+      "estado": "Programado 08:00",
+      "hora_partido": "08:00",
+      "cuota1": 2.0,
+      "cuota2": 1.73,
+      "confianza_promedio": {
+        "jugador1": 0.464,
+        "jugador2": 0.536
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/IezTMLEO/",
+      "match_id": "IezTMLEO",
+      "h2h_url": "https://www.flashscore.com/match/tennis/IezTMLEO/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Olmos G.",
+      "jugador2": "Krajicek A.",
+      "resultado": "-",
+      "estado": "Programado 08:00",
+      "hora_partido": "08:00",
+      "cuota1": 1.67,
+      "cuota2": 2.1,
+      "confianza_promedio": {
+        "jugador1": 0.557,
+        "jugador2": 0.443
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/Yq0qjfYP/",
+      "match_id": "Yq0qjfYP",
+      "h2h_url": "https://www.flashscore.com/match/tennis/Yq0qjfYP/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Bucsa C.",
+      "jugador2": "Matos R.",
+      "resultado": "-",
+      "estado": "Programado 08:30",
+      "hora_partido": "08:30",
+      "cuota1": 1.9,
+      "cuota2": 1.8,
+      "confianza_promedio": {
+        "jugador1": 0.486,
+        "jugador2": 0.514
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/nLLLKZDc/",
+      "match_id": "nLLLKZDc",
+      "h2h_url": "https://www.flashscore.com/match/tennis/nLLLKZDc/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Jeanjean L.",
+      "jugador2": "Blancaneaux G.",
+      "resultado": "-",
+      "estado": "Programado 08:30",
+      "hora_partido": "08:30",
+      "cuota1": 3.0,
+      "cuota2": 1.33,
+      "confianza_promedio": {
+        "jugador1": 0.307,
+        "jugador2": 0.693
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/8GBwnTGP/",
+      "match_id": "8GBwnTGP",
+      "h2h_url": "https://www.flashscore.com/match/tennis/8GBwnTGP/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Nicholls O.",
+      "jugador2": "Patten H.",
+      "resultado": "-",
+      "estado": "Programado 08:30",
+      "hora_partido": "08:30",
+      "cuota1": 1.75,
+      "cuota2": 1.95,
+      "confianza_promedio": {
+        "jugador1": 0.527,
+        "jugador2": 0.473
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/2iv8kAU8/",
+      "match_id": "2iv8kAU8",
+      "h2h_url": "https://www.flashscore.com/match/tennis/2iv8kAU8/#/h2h/overall/"
+    }
+  ],
+  "Centurion (South Africa)": [
+    {
+      "superficie": "hard",
+      "jugador1": "Coulibaly E.",
+      "jugador2": "Hussey G.",
+      "resultado": "1",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 1.57,
+      "cuota2": 2.25,
+      "confianza_promedio": {
+        "jugador1": 0.589,
+        "jugador2": 0.411
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/coulibaly-eliakim-fDyAJ1Qn/hussey-giles-8AO4DtCh/?mid=2al0MDSh",
+      "match_id": "2al0MDSh",
+      "h2h_url": "https://www.flashscore.com/match/tennis/coulibaly-eliakim-fDyAJ1Qn/hussey-giles-8AO4DtCh/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Winter E.",
+      "jugador2": "Napolitano S.",
+      "resultado": "-",
+      "estado": "Programado 05:00",
+      "hora_partido": "05:00",
+      "cuota1": 2.38,
+      "cuota2": 1.53,
+      "confianza_promedio": {
+        "jugador1": 0.391,
+        "jugador2": 0.609
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/napolitano-stefano-pKG0p9mP/winter-edward-fXlEz2LO/?mid=2BjE8Epo",
+      "match_id": "2BjE8Epo",
+      "h2h_url": "https://www.flashscore.com/match/tennis/napolitano-stefano-pKG0p9mP/winter-edward-fXlEz2LO/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Bittoun C.",
+      "jugador2": "Strombachs R.",
+      "resultado": "-",
+      "estado": "Programado 06:30",
+      "hora_partido": "06:30",
+      "cuota1": 1.53,
+      "cuota2": 2.38,
+      "confianza_promedio": {
+        "jugador1": 0.609,
+        "jugador2": 0.391
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/U90xAMg2/",
+      "match_id": "U90xAMg2",
+      "h2h_url": "https://www.flashscore.com/match/tennis/U90xAMg2/#/h2h/overall/"
+    }
+  ],
+  "Chisinau (Moldova)": [
+    {
+      "superficie": "clay",
+      "jugador1": "Albot R.",
+      "jugador2": "Cretu C.",
+      "resultado": "0",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 2.75,
+      "cuota2": 1.4,
+      "confianza_promedio": {
+        "jugador1": 0.337,
+        "jugador2": 0.663
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/albot-radu-OnoPKE7m/cretu-cezar-0xqR9dG1/?mid=j1G2Z0T0",
+      "match_id": "j1G2Z0T0",
+      "h2h_url": "https://www.flashscore.com/match/tennis/albot-radu-OnoPKE7m/cretu-cezar-0xqR9dG1/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Olivieri G. A.",
+      "jugador2": "Sakellaridis S.",
+      "resultado": "-",
+      "estado": "Programado 05:15",
+      "hora_partido": "05:15",
+      "cuota1": 2.6,
+      "cuota2": 1.44,
+      "confianza_promedio": {
+        "jugador1": 0.356,
+        "jugador2": 0.644
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/olivieri-genaro-alberto-lnHtsdAT/sakellaridis-stefanos-2Dmhcv8C/?mid=Eaqh671l",
+      "match_id": "Eaqh671l",
+      "h2h_url": "https://www.flashscore.com/match/tennis/olivieri-genaro-alberto-lnHtsdAT/sakellaridis-stefanos-2Dmhcv8C/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Lammons N.",
+      "jugador2": "Withrow J.",
+      "resultado": "-",
+      "estado": "Programado 06:45",
+      "hora_partido": "06:45",
+      "cuota1": 2.1,
+      "cuota2": 1.67,
+      "confianza_promedio": {
+        "jugador1": 0.443,
+        "jugador2": 0.557
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/pS5n1Iil/",
+      "match_id": "pS5n1Iil",
+      "h2h_url": "https://www.flashscore.com/match/tennis/pS5n1Iil/#/h2h/overall/"
+    }
+  ],
+  "Kosice (Slovakia)": [
+    {
+      "superficie": "clay",
+      "jugador1": "Blanch D.",
+      "jugador2": "Feldbausch K.",
+      "resultado": "-",
+      "estado": "Programado 06:45",
+      "hora_partido": "06:45",
+      "cuota1": 2.1,
+      "cuota2": 1.67,
+      "confianza_promedio": {
+        "jugador1": 0.443,
+        "jugador2": 0.557
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/blanch-dali-tEewFwuI/feldbausch-kilian-MgiX0Yi5/?mid=YqtnaXAt",
+      "match_id": "YqtnaXAt",
+      "h2h_url": "https://www.flashscore.com/match/tennis/blanch-dali-tEewFwuI/feldbausch-kilian-MgiX0Yi5/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Krumich M.",
+      "jugador2": "Erhard M.",
+      "resultado": "-",
+      "estado": "Programado 08:15",
+      "hora_partido": "08:15",
+      "cuota1": 1.36,
+      "cuota2": 2.88,
+      "confianza_promedio": {
+        "jugador1": 0.679,
+        "jugador2": 0.321
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/erhard-mathys-ngZLM7eO/krumich-martin-WKaCDElC/?mid=jyJYmcg4",
+      "match_id": "jyJYmcg4",
+      "h2h_url": "https://www.flashscore.com/match/tennis/erhard-mathys-ngZLM7eO/krumich-martin-WKaCDElC/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Karol M.",
+      "jugador2": "Serdarusic N.",
+      "resultado": "-",
+      "estado": "Programado 05:00",
+      "hora_partido": "05:00",
+      "cuota1": 1.48,
+      "cuota2": 2.5,
+      "confianza_promedio": {
+        "jugador1": 0.628,
+        "jugador2": 0.372
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/Yoe6eg4S/",
+      "match_id": "Yoe6eg4S",
+      "h2h_url": "https://www.flashscore.com/match/tennis/Yoe6eg4S/#/h2h/overall/"
+    }
+  ],
+  "Little Rock (USA)": [
+    {
+      "superficie": "hard",
+      "jugador1": "Ilagan A.",
+      "jugador2": "Mayo A.",
+      "resultado": "-",
+      "estado": "Programado 11:00",
+      "hora_partido": "11:00",
+      "cuota1": 2.15,
+      "cuota2": 1.65,
+      "confianza_promedio": {
+        "jugador1": 0.434,
+        "jugador2": 0.566
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/ilagan-andre-GbjJTs06/mayo-aidan-2mEGNcVp/?mid=pEC9cmXi",
+      "match_id": "pEC9cmXi",
+      "h2h_url": "https://www.flashscore.com/match/tennis/ilagan-andre-GbjJTs06/mayo-aidan-2mEGNcVp/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Smith C.",
+      "jugador2": "Zink T.",
+      "resultado": "1",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 1.3,
+      "cuota2": 3.25,
+      "confianza_promedio": {
+        "jugador1": 0.714,
+        "jugador2": 0.286
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/colton-smith-IHCZRRUJ/zink-tyler-prfZnfX1/?mid=OGuOoT8b",
+      "match_id": "OGuOoT8b",
+      "h2h_url": "https://www.flashscore.com/match/tennis/colton-smith-IHCZRRUJ/zink-tyler-prfZnfX1/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Mmoh M.",
+      "jugador2": "Boulais J.",
+      "resultado": "-",
+      "estado": "Programado 13:00",
+      "hora_partido": "13:00",
+      "cuota1": 1.29,
+      "cuota2": 3.4,
+      "confianza_promedio": {
+        "jugador1": 0.725,
+        "jugador2": 0.275
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/boulais-justin-Mm7V72Xn/mmoh-michael-dCvHbO15/?mid=42FPbiED",
+      "match_id": "42FPbiED",
+      "h2h_url": "https://www.flashscore.com/match/tennis/boulais-justin-Mm7V72Xn/mmoh-michael-dCvHbO15/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Maginley J.",
+      "jugador2": "Shick B.",
+      "resultado": "-",
+      "estado": "Programado 11:30",
+      "hora_partido": "11:30",
+      "cuota1": null,
+      "cuota2": null,
+      "confianza_promedio": null,
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/YydkFCbf/",
+      "match_id": "YydkFCbf",
+      "h2h_url": "https://www.flashscore.com/match/tennis/YydkFCbf/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Kumar P.",
+      "jugador2": "Poling K.",
+      "resultado": "-",
+      "estado": "Programado 12:30",
+      "hora_partido": "12:30",
+      "cuota1": 1.65,
+      "cuota2": 2.15,
+      "confianza_promedio": {
+        "jugador1": 0.566,
+        "jugador2": 0.434
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/bDCRDLb6/",
+      "match_id": "bDCRDLb6",
+      "h2h_url": "https://www.flashscore.com/match/tennis/bDCRDLb6/#/h2h/overall/"
+    }
+  ],
+  "Vicenza (Italy)": [
+    {
+      "superficie": "clay",
+      "jugador1": "Tseng C. H.",
+      "jugador2": "Neumayer L.",
+      "resultado": "-",
+      "estado": "Programado 07:00",
+      "hora_partido": "07:00",
+      "cuota1": 2.72,
+      "cuota2": 1.44,
+      "confianza_promedio": {
+        "jugador1": 0.346,
+        "jugador2": 0.654
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/neumayer-lukas-4ffrgw5a/tseng-chun-hsin-SlYNMbDS/?mid=8ItQsobd",
+      "match_id": "8ItQsobd",
+      "h2h_url": "https://www.flashscore.com/match/tennis/neumayer-lukas-4ffrgw5a/tseng-chun-hsin-SlYNMbDS/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Travaglia S.",
+      "jugador2": "Vasami J.",
+      "resultado": "-",
+      "estado": "Programado 08:30",
+      "hora_partido": "08:30",
+      "cuota1": 1.57,
+      "cuota2": 2.25,
+      "confianza_promedio": {
+        "jugador1": 0.589,
+        "jugador2": 0.411
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/travaglia-stefano-KAYoXgme/vasami-jacopo-MaKQfer1/?mid=jXroTyzS",
+      "match_id": "jXroTyzS",
+      "h2h_url": "https://www.flashscore.com/match/tennis/travaglia-stefano-KAYoXgme/vasami-jacopo-MaKQfer1/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Bertola R.",
+      "jugador2": "Forti F.",
+      "resultado": "-",
+      "estado": "Programado 05:00",
+      "hora_partido": "05:00",
+      "cuota1": 2.3,
+      "cuota2": 1.55,
+      "confianza_promedio": {
+        "jugador1": 0.403,
+        "jugador2": 0.597
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/nRU1vpM7/",
+      "match_id": "nRU1vpM7",
+      "h2h_url": "https://www.flashscore.com/match/tennis/nRU1vpM7/#/h2h/overall/"
+    }
+  ],
+  "Birmingham (United Kingdom) - Qualification": [
+    {
+      "superficie": "grass",
+      "jugador1": "Krueger A.",
+      "jugador2": "Klugman H.",
+      "resultado": "0",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 1.21,
+      "cuota2": 4.1,
+      "confianza_promedio": {
+        "jugador1": 0.772,
+        "jugador2": 0.228
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/klugman-hannah-UBK4SRuM/krueger-ashlyn-O81eud9p/?mid=CM38WkPM",
+      "match_id": "CM38WkPM",
+      "h2h_url": "https://www.flashscore.com/match/tennis/klugman-hannah-UBK4SRuM/krueger-ashlyn-O81eud9p/#/h2h/overall/"
+    },
+    {
+      "superficie": "grass",
+      "jugador1": "Ishii S.",
+      "jugador2": "Valdmannova V.",
+      "resultado": "-",
+      "estado": "Programado 05:00",
+      "hora_partido": "05:00",
+      "cuota1": 3.3,
+      "cuota2": 1.3,
+      "confianza_promedio": {
+        "jugador1": 0.283,
+        "jugador2": 0.717
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/ishii-sayaka-GKr3Pq9i/valdmannova-vendula-tG1BWV4b/?mid=bachzYPc",
+      "match_id": "bachzYPc",
+      "h2h_url": "https://www.flashscore.com/match/tennis/ishii-sayaka-GKr3Pq9i/valdmannova-vendula-tG1BWV4b/#/h2h/overall/"
+    },
+    {
+      "superficie": "grass",
+      "jugador1": "Masarova R.",
+      "jugador2": "Appleton E.",
+      "resultado": "-",
+      "estado": "Programado 05:05",
+      "hora_partido": "05:05",
+      "cuota1": 1.2,
+      "cuota2": 4.2,
+      "confianza_promedio": {
+        "jugador1": 0.778,
+        "jugador2": 0.222
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/appleton-emily-UTOJG35K/masarova-rebeka-KGQ2bDHb/?mid=GIhnP7Hd",
+      "match_id": "GIhnP7Hd",
+      "h2h_url": "https://www.flashscore.com/match/tennis/appleton-emily-UTOJG35K/masarova-rebeka-KGQ2bDHb/#/h2h/overall/"
+    },
+    {
+      "superficie": "grass",
+      "jugador1": "Vrancken Peeters A.",
+      "jugador2": "Knutson G.",
+      "resultado": "-",
+      "estado": "Programado 05:05",
+      "hora_partido": "05:05",
+      "cuota1": 2.65,
+      "cuota2": 1.44,
+      "confianza_promedio": {
+        "jugador1": 0.352,
+        "jugador2": 0.648
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/knutson-gabriela-bscuUrLj/vrancken-peeters-anouck-n56of0fd/?mid=l6LSJCuH",
+      "match_id": "l6LSJCuH",
+      "h2h_url": "https://www.flashscore.com/match/tennis/knutson-gabriela-bscuUrLj/vrancken-peeters-anouck-n56of0fd/#/h2h/overall/"
+    },
+    {
+      "superficie": "grass",
+      "jugador1": "Xu M.",
+      "jugador2": "Cross K.",
+      "resultado": "-",
+      "estado": "Programado 05:05",
+      "hora_partido": "05:05",
+      "cuota1": 1.9,
+      "cuota2": 1.85,
+      "confianza_promedio": {
+        "jugador1": 0.493,
+        "jugador2": 0.507
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/cross-kayla-bNv93cUs/xu-mingge-bPomvGIu/?mid=6P00YBfA",
+      "match_id": "6P00YBfA",
+      "h2h_url": "https://www.flashscore.com/match/tennis/cross-kayla-bNv93cUs/xu-mingge-bPomvGIu/#/h2h/overall/"
+    },
+    {
+      "superficie": "grass",
+      "jugador1": "Hibino N.",
+      "jugador2": "Bolkvadze M.",
+      "resultado": "-",
+      "estado": "Programado 06:00",
+      "hora_partido": "06:00",
+      "cuota1": 1.6,
+      "cuota2": 2.25,
+      "confianza_promedio": {
+        "jugador1": 0.584,
+        "jugador2": 0.416
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/bolkvadze-mariam-vySLbjQG/hibino-nao-n5XviZ0t/?mid=tMRQailo",
+      "match_id": "tMRQailo",
+      "h2h_url": "https://www.flashscore.com/match/tennis/bolkvadze-mariam-vySLbjQG/hibino-nao-n5XviZ0t/#/h2h/overall/"
+    },
+    {
+      "superficie": "grass",
+      "jugador1": "Klimovicova L.",
+      "jugador2": "Martincova T.",
+      "resultado": "-",
+      "estado": "Programado 06:00",
+      "hora_partido": "06:00",
+      "cuota1": 2.25,
+      "cuota2": 1.6,
+      "confianza_promedio": {
+        "jugador1": 0.416,
+        "jugador2": 0.584
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/klimovicova-linda-E5pWnRLG/martincova-tereza-6L5yEis0/?mid=8SJCNfth",
+      "match_id": "8SJCNfth",
+      "h2h_url": "https://www.flashscore.com/match/tennis/klimovicova-linda-E5pWnRLG/martincova-tereza-6L5yEis0/#/h2h/overall/"
+    },
+    {
+      "superficie": "grass",
+      "jugador1": "Minnen G.",
+      "jugador2": "Burrage J.",
+      "resultado": "-",
+      "estado": "Programado 06:00",
+      "hora_partido": "06:00",
+      "cuota1": 1.17,
+      "cuota2": 4.6,
+      "confianza_promedio": {
+        "jugador1": 0.797,
+        "jugador2": 0.203
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/burrage-jodie-U5Ot7i32/minnen-greetje-QoLeDQFG/?mid=65A6CUXj",
+      "match_id": "65A6CUXj",
+      "h2h_url": "https://www.flashscore.com/match/tennis/burrage-jodie-U5Ot7i32/minnen-greetje-QoLeDQFG/#/h2h/overall/"
+    },
+    {
+      "superficie": "grass",
+      "jugador1": "Sawangkaew M.",
+      "jugador2": "Miyazaki L.",
+      "resultado": "-",
+      "estado": "Programado 06:00",
+      "hora_partido": "06:00",
+      "cuota1": 1.62,
+      "cuota2": 2.2,
+      "confianza_promedio": {
+        "jugador1": 0.576,
+        "jugador2": 0.424
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/miyazaki-yuriko-lily-QPwVs83E/sawangkaew-mananchaya-AFSnl5ye/?mid=phXVWJz3",
+      "match_id": "phXVWJz3",
+      "h2h_url": "https://www.flashscore.com/match/tennis/miyazaki-yuriko-lily-QPwVs83E/sawangkaew-mananchaya-AFSnl5ye/#/h2h/overall/"
+    },
+    {
+      "superficie": "grass",
+      "jugador1": "Watson H.",
+      "jugador2": "Hruncakova V.",
+      "resultado": "-",
+      "estado": "Programado 06:00",
+      "hora_partido": "06:00",
+      "cuota1": 1.44,
+      "cuota2": 2.65,
+      "confianza_promedio": {
+        "jugador1": 0.648,
+        "jugador2": 0.352
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/hruncakova-viktoria-kuzmova-2ZK8XbpE/watson-heather-OMXPbN89/?mid=zNJzIjAT",
+      "match_id": "zNJzIjAT",
+      "h2h_url": "https://www.flashscore.com/match/tennis/hruncakova-viktoria-kuzmova-2ZK8XbpE/watson-heather-OMXPbN89/#/h2h/overall/"
+    },
+    {
+      "superficie": "grass",
+      "jugador1": "Rajecki A.",
+      "jugador2": "Ito A.",
+      "resultado": "-",
+      "estado": "Programado 07:30",
+      "hora_partido": "07:30",
+      "cuota1": 2.3,
+      "cuota2": 1.57,
+      "confianza_promedio": {
+        "jugador1": 0.406,
+        "jugador2": 0.594
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/ito-aoi-fg8WB6JC/rajecki-amelia-UkERyGft/?mid=8hkvRTnp",
+      "match_id": "8hkvRTnp",
+      "h2h_url": "https://www.flashscore.com/match/tennis/ito-aoi-fg8WB6JC/rajecki-amelia-UkERyGft/#/h2h/overall/"
+    },
+    {
+      "superficie": "grass",
+      "jugador1": "Zhao C.",
+      "jugador2": "Naef C.",
+      "resultado": "-",
+      "estado": "Programado 08:00",
+      "hora_partido": "08:00",
+      "cuota1": 7.0,
+      "cuota2": 1.08,
+      "confianza_promedio": {
+        "jugador1": 0.134,
+        "jugador2": 0.866
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/naef-celine-0pESKoy5/zhao-carol-Qk09uuRk/?mid=GhNKLYA4",
+      "match_id": "GhNKLYA4",
+      "h2h_url": "https://www.flashscore.com/match/tennis/naef-celine-0pESKoy5/zhao-carol-Qk09uuRk/#/h2h/overall/"
+    }
+  ],
+  "M15 Brcko (Bosnia and Herzegovina)": [
+    {
+      "superficie": "clay",
+      "jugador1": "Fuele M.",
+      "jugador2": "Djosic N.",
+      "resultado": "1",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 1.26,
+      "cuota2": 3.4,
+      "confianza_promedio": {
+        "jugador1": 0.73,
+        "jugador2": 0.27
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/djosic-nikola-pKKn1MDg/fuele-matyas-lz7cCFvD/?mid=xz6w4aVQ",
+      "match_id": "xz6w4aVQ",
+      "h2h_url": "https://www.flashscore.com/match/tennis/djosic-nikola-pKKn1MDg/fuele-matyas-lz7cCFvD/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Obradovic D.",
+      "jugador2": "Simundza J.",
+      "resultado": "-",
+      "estado": "07:00FRO",
+      "hora_partido": null,
+      "cuota1": 1.3,
+      "cuota2": 3.1,
+      "confianza_promedio": {
+        "jugador1": 0.705,
+        "jugador2": 0.295
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/obradovic-dusan-WK1R8GsO/simundza-josip-rNdizKtN/?mid=EPOMpc77",
+      "match_id": "EPOMpc77",
+      "h2h_url": "https://www.flashscore.com/match/tennis/obradovic-dusan-WK1R8GsO/simundza-josip-rNdizKtN/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Djokic F.",
+      "jugador2": "Milanovic D.",
+      "resultado": "-",
+      "estado": "05:30FRO",
+      "hora_partido": null,
+      "cuota1": 5.5,
+      "cuota2": 1.09,
+      "confianza_promedio": {
+        "jugador1": 0.165,
+        "jugador2": 0.835
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/tCQEnJxe/",
+      "match_id": "tCQEnJxe",
+      "h2h_url": "https://www.flashscore.com/match/tennis/tCQEnJxe/#/h2h/overall/"
+    }
+  ],
+  "M15 Gimcheon 2 (South Korea)": [
+    {
+      "superficie": "hard",
+      "jugador1": "Kim D. J.",
+      "jugador2": "Dellavedova M.",
+      "resultado": "-",
+      "estado": "21:00FRO",
+      "hora_partido": null,
+      "cuota1": null,
+      "cuota2": null,
+      "confianza_promedio": null,
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/dellavedova-matthew-0AnInLXj/kim-dong-ju-IsiGy610/?mid=rNNwji6M",
+      "match_id": "rNNwji6M",
+      "h2h_url": "https://www.flashscore.com/match/tennis/dellavedova-matthew-0AnInLXj/kim-dong-ju-IsiGy610/#/h2h/overall/"
+    }
+  ],
+  "M15 Karuizawa (Japan)": [
+    {
+      "superficie": "clay",
+      "jugador1": "Delaney Ja.",
+      "jugador2": "Zhu E.",
+      "resultado": "-",
+      "estado": "21:00FRO",
+      "hora_partido": null,
+      "cuota1": null,
+      "cuota2": null,
+      "confianza_promedio": null,
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/delaney-jake-QLcrkhjd/zhu-evan-6NJge0Iq/?mid=E5E9pVTq",
+      "match_id": "E5E9pVTq",
+      "h2h_url": "https://www.flashscore.com/match/tennis/delaney-jake-QLcrkhjd/zhu-evan-6NJge0Iq/#/h2h/overall/"
+    }
+  ],
+  "M15 Kayseri 2 (Turkey)": [
+    {
+      "superficie": "hard",
+      "jugador1": "Jefferson H.",
+      "jugador2": "Manukyan V.",
+      "resultado": "1",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": null,
+      "cuota2": null,
+      "confianza_promedio": null,
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/jefferson-henry-GxA5nbeL/manukyan-vardan-6u0YaCAg/?mid=AFCqowjT",
+      "match_id": "AFCqowjT",
+      "h2h_url": "https://www.flashscore.com/match/tennis/jefferson-henry-GxA5nbeL/manukyan-vardan-6u0YaCAg/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Turker M. N.",
+      "jugador2": "Alhogbani A. F.",
+      "resultado": "1",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 1.26,
+      "cuota2": 3.4,
+      "confianza_promedio": {
+        "jugador1": 0.73,
+        "jugador2": 0.27
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/alhogbani-anmar-faleh-dEdGNP6F/turker-mert-naci-viA40Ce4/?mid=EoWezMyB",
+      "match_id": "EoWezMyB",
+      "h2h_url": "https://www.flashscore.com/match/tennis/alhogbani-anmar-faleh-dEdGNP6F/turker-mert-naci-viA40Ce4/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Verwerft L. G.",
+      "jugador2": "Faucon R.",
+      "resultado": "1",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 3.5,
+      "cuota2": 1.24,
+      "confianza_promedio": {
+        "jugador1": 0.262,
+        "jugador2": 0.738
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/romain-faucon-EBx84gHc/verwerft-lars-goran-6RjNgISi/?mid=CpdEroSs",
+      "match_id": "CpdEroSs",
+      "h2h_url": "https://www.flashscore.com/match/tennis/romain-faucon-EBx84gHc/verwerft-lars-goran-6RjNgISi/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Alhogbani A. F.",
+      "jugador2": "Schoen P.",
+      "resultado": "0",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": null,
+      "cuota2": null,
+      "confianza_promedio": null,
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/alhogbani-anmar-faleh-dEdGNP6F/schoen-patrick-AHhDE5C5/?mid=Eo0skQwJ",
+      "match_id": "Eo0skQwJ",
+      "h2h_url": "https://www.flashscore.com/match/tennis/alhogbani-anmar-faleh-dEdGNP6F/schoen-patrick-AHhDE5C5/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Manukyan V.",
+      "jugador2": "Dinev D.",
+      "resultado": "2",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": null,
+      "cuota2": null,
+      "confianza_promedio": null,
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/dinko-dinev-zNdtoUgO/manukyan-vardan-6u0YaCAg/?mid=thhTCTVP",
+      "match_id": "thhTCTVP",
+      "h2h_url": "https://www.flashscore.com/match/tennis/dinko-dinev-zNdtoUgO/manukyan-vardan-6u0YaCAg/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Phillips D.",
+      "jugador2": "Seleznev B.",
+      "resultado": "1",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 3.6,
+      "cuota2": 1.22,
+      "confianza_promedio": {
+        "jugador1": 0.253,
+        "jugador2": 0.747
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/tb3FuHDj/",
+      "match_id": "tb3FuHDj",
+      "h2h_url": "https://www.flashscore.com/match/tennis/tb3FuHDj/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Gokpinar H. C.",
+      "jugador2": "Oktay R. K.",
+      "resultado": "-",
+      "estado": "04:45FRO",
+      "hora_partido": null,
+      "cuota1": 3.4,
+      "cuota2": 1.24,
+      "confianza_promedio": {
+        "jugador1": 0.267,
+        "jugador2": 0.733
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/6LSmxr7b/",
+      "match_id": "6LSmxr7b",
+      "h2h_url": "https://www.flashscore.com/match/tennis/6LSmxr7b/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Schaertlin C. C.",
+      "jugador2": "Wright M.",
+      "resultado": "-",
+      "estado": "04:45FRO",
+      "hora_partido": null,
+      "cuota1": null,
+      "cuota2": null,
+      "confianza_promedio": null,
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/joGTlLj4/",
+      "match_id": "joGTlLj4",
+      "h2h_url": "https://www.flashscore.com/match/tennis/joGTlLj4/#/h2h/overall/"
+    }
+  ],
+  "M15 Kranjska Gora (Slovenia)": [
+    {
+      "superficie": "clay",
+      "jugador1": "Chavez T.",
+      "jugador2": "Mueller C.",
+      "resultado": "2",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 2.9,
+      "cuota2": 1.34,
+      "confianza_promedio": {
+        "jugador1": 0.316,
+        "jugador2": 0.684
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/chavez-tito-QBNVuoPH/mueller-calvin-ppBcDchc/?mid=z5xGmlaL",
+      "match_id": "z5xGmlaL",
+      "h2h_url": "https://www.flashscore.com/match/tennis/chavez-tito-QBNVuoPH/mueller-calvin-ppBcDchc/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Homberg M.",
+      "jugador2": "Sultanov K.",
+      "resultado": "0",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 2.6,
+      "cuota2": 1.42,
+      "confianza_promedio": {
+        "jugador1": 0.353,
+        "jugador2": 0.647
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/maximilian-homberg-f54w66h2/sultanov-khumoyun-QTHn3MYj/?mid=EDWgt6ie",
+      "match_id": "EDWgt6ie",
+      "h2h_url": "https://www.flashscore.com/match/tennis/maximilian-homberg-f54w66h2/sultanov-khumoyun-QTHn3MYj/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Bellifemine A.",
+      "jugador2": "Kovac T.",
+      "resultado": "-",
+      "estado": "06:00FRO",
+      "hora_partido": null,
+      "cuota1": null,
+      "cuota2": null,
+      "confianza_promedio": null,
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/6mTorSMr/",
+      "match_id": "6mTorSMr",
+      "h2h_url": "https://www.flashscore.com/match/tennis/6mTorSMr/#/h2h/overall/"
+    }
+  ],
+  "M15 Kutaisi (Georgia)": [
+    {
+      "superficie": "hard",
+      "jugador1": "Erel Y.",
+      "jugador2": "Ostapenkov D.",
+      "resultado": "-",
+      "estado": "04:30FRO",
+      "hora_partido": null,
+      "cuota1": 1.45,
+      "cuota2": 2.5,
+      "confianza_promedio": {
+        "jugador1": 0.633,
+        "jugador2": 0.367
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/erel-yanki-zX8kGOPK/ostapenkov-daniil-pYy2KTgA/?mid=AD32AW74",
+      "match_id": "AD32AW74",
+      "h2h_url": "https://www.flashscore.com/match/tennis/erel-yanki-zX8kGOPK/ostapenkov-daniil-pYy2KTgA/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Rossi L.",
+      "jugador2": "Ursu V.",
+      "resultado": "-",
+      "estado": "04:30FRO",
+      "hora_partido": null,
+      "cuota1": null,
+      "cuota2": null,
+      "confianza_promedio": null,
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/rossi-leonardo-zqf7fP42/ursu-vadym-ENsOeB1H/?mid=ruH98AxH",
+      "match_id": "ruH98AxH",
+      "h2h_url": "https://www.flashscore.com/match/tennis/rossi-leonardo-zqf7fP42/ursu-vadym-ENsOeB1H/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Mishkin K.",
+      "jugador2": "Ostapenkov D.",
+      "resultado": "-",
+      "estado": "07:30FRO",
+      "hora_partido": null,
+      "cuota1": null,
+      "cuota2": null,
+      "confianza_promedio": null,
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/S8bBrxyo/",
+      "match_id": "S8bBrxyo",
+      "h2h_url": "https://www.flashscore.com/match/tennis/S8bBrxyo/#/h2h/overall/"
+    }
+  ],
+  "M15 Lakewood, CA (USA)": [
+    {
+      "superficie": "hard",
+      "jugador1": "Bigun K.",
+      "jugador2": "Marionneau L.",
+      "resultado": "-",
+      "estado": "12:00FRO",
+      "hora_partido": null,
+      "cuota1": 1.65,
+      "cuota2": 2.05,
+      "confianza_promedio": {
+        "jugador1": 0.554,
+        "jugador2": 0.446
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/bigun-kaylan-hrwb4sUS/marionneau-lucas-vJuFYvmQ/?mid=IRAHeR14",
+      "match_id": "IRAHeR14",
+      "h2h_url": "https://www.flashscore.com/match/tennis/bigun-kaylan-hrwb4sUS/marionneau-lucas-vJuFYvmQ/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Vales A.",
+      "jugador2": "Johnson S.",
+      "resultado": "-",
+      "estado": "12:00FRO",
+      "hora_partido": null,
+      "cuota1": 2.3,
+      "cuota2": 1.53,
+      "confianza_promedio": {
+        "jugador1": 0.399,
+        "jugador2": 0.601
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/johnson-spencer-ltoLvu1a/vales-amit-Y75GebJP/?mid=AsycycGk",
+      "match_id": "AsycycGk",
+      "h2h_url": "https://www.flashscore.com/match/tennis/johnson-spencer-ltoLvu1a/vales-amit-Y75GebJP/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Gorzny S.",
+      "jugador2": "Marionneau L.",
+      "resultado": "-",
+      "estado": "14:00FRO",
+      "hora_partido": null,
+      "cuota1": 1.7,
+      "cuota2": 1.95,
+      "confianza_promedio": {
+        "jugador1": 0.534,
+        "jugador2": 0.466
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/4r9Pg5WG/",
+      "match_id": "4r9Pg5WG",
+      "h2h_url": "https://www.flashscore.com/match/tennis/4r9Pg5WG/#/h2h/overall/"
+    }
+  ],
+  "M15 Luan 2 (China)": [
+    {
+      "superficie": "hard",
+      "jugador1": "Zhang T.",
+      "jugador2": "Chen Y. C.",
+      "resultado": "-",
+      "estado": "21:00FRO",
+      "hora_partido": null,
+      "cuota1": null,
+      "cuota2": null,
+      "confianza_promedio": null,
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/chen-yan-cheng-txqrVwV8/zhang-tianhui-EuCdP7ft/?mid=nJCHr9bd",
+      "match_id": "nJCHr9bd",
+      "h2h_url": "https://www.flashscore.com/match/tennis/chen-yan-cheng-txqrVwV8/zhang-tianhui-EuCdP7ft/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Huang T.",
+      "jugador2": "Lu C.",
+      "resultado": "1",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": null,
+      "cuota2": null,
+      "confianza_promedio": null,
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/OvjJwauo/",
+      "match_id": "OvjJwauo",
+      "h2h_url": "https://www.flashscore.com/match/tennis/OvjJwauo/#/h2h/overall/"
+    }
+  ],
+  "M15 Monastir 20 (Tunisia)": [
+    {
+      "superficie": "hard",
+      "jugador1": "Dlimi Y.",
+      "jugador2": "Tepmahc N.",
+      "resultado": "-",
+      "estado": "04:00FRO",
+      "hora_partido": null,
+      "cuota1": 1.42,
+      "cuota2": 2.6,
+      "confianza_promedio": {
+        "jugador1": 0.647,
+        "jugador2": 0.353
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/dlimi-yassine-zeU8VKrH/tepmahc-nicolas-I17Wo6gj/?mid=2FKeFHVs",
+      "match_id": "2FKeFHVs",
+      "h2h_url": "https://www.flashscore.com/match/tennis/dlimi-yassine-zeU8VKrH/tepmahc-nicolas-I17Wo6gj/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Sahtali T.",
+      "jugador2": "Almazan Valiente I.",
+      "resultado": "-",
+      "estado": "04:00FRO",
+      "hora_partido": null,
+      "cuota1": 2.3,
+      "cuota2": 1.53,
+      "confianza_promedio": {
+        "jugador1": 0.399,
+        "jugador2": 0.601
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/almazan-valiente-izan-Sxms8uzF/sahtali-toufik-bDMnwyZM/?mid=zTI3De0f",
+      "match_id": "zTI3De0f",
+      "h2h_url": "https://www.flashscore.com/match/tennis/almazan-valiente-izan-Sxms8uzF/sahtali-toufik-bDMnwyZM/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Coquelin H.",
+      "jugador2": "Vulpitta G.",
+      "resultado": "-",
+      "estado": "05:30FRO",
+      "hora_partido": null,
+      "cuota1": 1.55,
+      "cuota2": 2.2,
+      "confianza_promedio": {
+        "jugador1": 0.587,
+        "jugador2": 0.413
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/8fWABZU6/",
+      "match_id": "8fWABZU6",
+      "h2h_url": "https://www.flashscore.com/match/tennis/8fWABZU6/#/h2h/overall/"
+    }
+  ],
+  "M15 Tsaghkadzor (Armenia)": [
+    {
+      "superficie": "clay",
+      "jugador1": "Bosio G.",
+      "jugador2": "Binda A.",
+      "resultado": "-",
+      "estado": "03:00FRO",
+      "hora_partido": null,
+      "cuota1": 2.4,
+      "cuota2": 1.48,
+      "confianza_promedio": {
+        "jugador1": 0.381,
+        "jugador2": 0.619
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/binda-alexandr-pY05SOxc/bosio-gabriele-z3kBxqS5/?mid=Aq4Ki8ne",
+      "match_id": "Aq4Ki8ne",
+      "h2h_url": "https://www.flashscore.com/match/tennis/binda-alexandr-pY05SOxc/bosio-gabriele-z3kBxqS5/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Lechno-Wasiutynski F.",
+      "jugador2": "Shebekin G.",
+      "resultado": "-",
+      "estado": "04:30FRO",
+      "hora_partido": null,
+      "cuota1": 1.42,
+      "cuota2": 2.6,
+      "confianza_promedio": {
+        "jugador1": 0.647,
+        "jugador2": 0.353
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/lechno-wasiutynski-fryderyk-8UVBz17q/shebekin-grigory-QsEbTSZ0/?mid=4n1CgUHr",
+      "match_id": "4n1CgUHr",
+      "h2h_url": "https://www.flashscore.com/match/tennis/lechno-wasiutynski-fryderyk-8UVBz17q/shebekin-grigory-QsEbTSZ0/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Burtsev D.",
+      "jugador2": "Valetov R.",
+      "resultado": "-",
+      "estado": "06:00FRO",
+      "hora_partido": null,
+      "cuota1": null,
+      "cuota2": null,
+      "confianza_promedio": null,
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/rc2SknH7/",
+      "match_id": "rc2SknH7",
+      "h2h_url": "https://www.flashscore.com/match/tennis/rc2SknH7/#/h2h/overall/"
+    }
+  ],
+  "M25 Bol 2 (Croatia)": [
+    {
+      "superficie": "clay",
+      "jugador1": "Pereira T.",
+      "jugador2": "Vukadin N.",
+      "resultado": "1",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 1.55,
+      "cuota2": 2.25,
+      "confianza_promedio": {
+        "jugador1": 0.592,
+        "jugador2": 0.408
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/tiago-pereira-U1XJJHtq/vukadin-noa-C4FsEz63/?mid=Um7063a6",
+      "match_id": "Um7063a6",
+      "h2h_url": "https://www.flashscore.com/match/tennis/tiago-pereira-U1XJJHtq/vukadin-noa-C4FsEz63/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Poljicak M.",
+      "jugador2": "Ajdukovic D.",
+      "resultado": "1",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 1.65,
+      "cuota2": 2.05,
+      "confianza_promedio": {
+        "jugador1": 0.554,
+        "jugador2": 0.446
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/ajdukovic-duje-n11bz7QK/poljicak-mili-COLpkwNk/?mid=bkMKOqX9",
+      "match_id": "bkMKOqX9",
+      "h2h_url": "https://www.flashscore.com/match/tennis/ajdukovic-duje-n11bz7QK/poljicak-mili-COLpkwNk/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Kalender A.",
+      "jugador2": "Poljicak M.",
+      "resultado": "-",
+      "estado": "Programado 07:00",
+      "hora_partido": "07:00",
+      "cuota1": 1.09,
+      "cuota2": 5.5,
+      "confianza_promedio": {
+        "jugador1": 0.835,
+        "jugador2": 0.165
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/jJinkT5M/",
+      "match_id": "jJinkT5M",
+      "h2h_url": "https://www.flashscore.com/match/tennis/jJinkT5M/#/h2h/overall/"
+    }
+  ],
+  "M25 Carnac (France)": [
+    {
+      "superficie": "clay",
+      "jugador1": "Nagel A.",
+      "jugador2": "Jade D.",
+      "resultado": "-",
+      "estado": "Programado 07:30",
+      "hora_partido": "07:30",
+      "cuota1": 1.72,
+      "cuota2": 1.95,
+      "confianza_promedio": {
+        "jugador1": 0.531,
+        "jugador2": 0.469
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/jade-daniel-ABqFnqUJ/nagel-arthur-6eO0SM8J/?mid=AcJdXXtm",
+      "match_id": "AcJdXXtm",
+      "h2h_url": "https://www.flashscore.com/match/tennis/jade-daniel-ABqFnqUJ/nagel-arthur-6eO0SM8J/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Faut P. A.",
+      "jugador2": "Kaouk M.",
+      "resultado": "0",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 2.8,
+      "cuota2": 1.35,
+      "confianza_promedio": {
+        "jugador1": 0.325,
+        "jugador2": 0.675
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/ILHyf1pL/",
+      "match_id": "ILHyf1pL",
+      "h2h_url": "https://www.flashscore.com/match/tennis/ILHyf1pL/#/h2h/overall/"
+    }
+  ],
+  "M25 Grado (Italy)": [
+    {
+      "superficie": "clay",
+      "jugador1": "Ferrari G.",
+      "jugador2": "Ratti L.",
+      "resultado": "-",
+      "estado": "Programado 10:00",
+      "hora_partido": "10:00",
+      "cuota1": 1.95,
+      "cuota2": 1.72,
+      "confianza_promedio": {
+        "jugador1": 0.469,
+        "jugador2": 0.531
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/ferrari-gianmarco-IoLNpAMF/ratti-lucio-xdrR3fug/?mid=vHiyrgcm",
+      "match_id": "vHiyrgcm",
+      "h2h_url": "https://www.flashscore.com/match/tennis/ferrari-gianmarco-IoLNpAMF/ratti-lucio-xdrR3fug/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Crawford O.",
+      "jugador2": "Sorger S.",
+      "resultado": "-",
+      "estado": "Programado 12:30",
+      "hora_partido": "12:30",
+      "cuota1": 1.72,
+      "cuota2": 1.95,
+      "confianza_promedio": {
+        "jugador1": 0.531,
+        "jugador2": 0.469
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/crawford-oliver-2VE4Ko5r/sorger-sebastian-YVX2xrZ3/?mid=IRnnKLZa",
+      "match_id": "IRnnKLZa",
+      "h2h_url": "https://www.flashscore.com/match/tennis/crawford-oliver-2VE4Ko5r/sorger-sebastian-YVX2xrZ3/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Poulsen Brostrom O.",
+      "jugador2": "Slavic N.",
+      "resultado": "-",
+      "estado": "Programado 12:00",
+      "hora_partido": "12:00",
+      "cuota1": 1.4,
+      "cuota2": 2.6,
+      "confianza_promedio": {
+        "jugador1": 0.65,
+        "jugador2": 0.35
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/CQXvSFWp/",
+      "match_id": "CQXvSFWp",
+      "h2h_url": "https://www.flashscore.com/match/tennis/CQXvSFWp/#/h2h/overall/"
+    }
+  ],
+  "M25 Kursumlijska Banja (Serbia)": [
+    {
+      "superficie": "clay",
+      "jugador1": "Stankovic S.",
+      "jugador2": "Vasilev A.",
+      "resultado": "-",
+      "estado": "Programado 05:05",
+      "hora_partido": "05:05",
+      "cuota1": 2.3,
+      "cuota2": 1.53,
+      "confianza_promedio": {
+        "jugador1": 0.399,
+        "jugador2": 0.601
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/stankovic-simeon-pOfJqQGb/vasilev-alexander-MmYbRkbA/?mid=jX80008s",
+      "match_id": "jX80008s",
+      "h2h_url": "https://www.flashscore.com/match/tennis/stankovic-simeon-pOfJqQGb/vasilev-alexander-MmYbRkbA/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Klok D.",
+      "jugador2": "Thanos A.",
+      "resultado": "-",
+      "estado": "Programado 07:00",
+      "hora_partido": "07:00",
+      "cuota1": 3.1,
+      "cuota2": 1.3,
+      "confianza_promedio": {
+        "jugador1": 0.295,
+        "jugador2": 0.705
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/klok-denis-rau6U2Wp/thanos-aristotelis-29NI2v8f/?mid=hCuxM4wA",
+      "match_id": "hCuxM4wA",
+      "h2h_url": "https://www.flashscore.com/match/tennis/klok-denis-rau6U2Wp/thanos-aristotelis-29NI2v8f/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Arzhankin A.",
+      "jugador2": "George B. T.",
+      "resultado": "-",
+      "estado": "Programado 07:00",
+      "hora_partido": "07:00",
+      "cuota1": null,
+      "cuota2": null,
+      "confianza_promedio": null,
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/b5b0MwWI/",
+      "match_id": "b5b0MwWI",
+      "h2h_url": "https://www.flashscore.com/match/tennis/b5b0MwWI/#/h2h/overall/"
+    }
+  ],
+  "M25 Troisdorf (Germany)": [
+    {
+      "superficie": "clay",
+      "jugador1": "Zielinski M.",
+      "jugador2": "Schoenhaus M.",
+      "resultado": "-",
+      "estado": "Programado 05:00",
+      "hora_partido": "05:00",
+      "cuota1": 5.25,
+      "cuota2": 1.11,
+      "confianza_promedio": {
+        "jugador1": 0.175,
+        "jugador2": 0.825
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/schoenhaus-max-2k82Daun/zielinski-marcel-QBMo5hEE/?mid=ETIi59W0",
+      "match_id": "ETIi59W0",
+      "h2h_url": "https://www.flashscore.com/match/tennis/schoenhaus-max-2k82Daun/zielinski-marcel-QBMo5hEE/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Durasovic V.",
+      "jugador2": "Petkovic M.",
+      "resultado": "-",
+      "estado": "Programado 07:00",
+      "hora_partido": "07:00",
+      "cuota1": 2.54,
+      "cuota2": 1.44,
+      "confianza_promedio": {
+        "jugador1": 0.362,
+        "jugador2": 0.638
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/durasovic-viktor-Wv6uZNr5/petkovic-mika-jFlzjsv5/?mid=nP5M30kJ",
+      "match_id": "nP5M30kJ",
+      "h2h_url": "https://www.flashscore.com/match/tennis/durasovic-viktor-Wv6uZNr5/petkovic-mika-jFlzjsv5/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Schoenhaus M.",
+      "jugador2": "Wehnelt K.",
+      "resultado": "-",
+      "estado": "Programado 06:30",
+      "hora_partido": "06:30",
+      "cuota1": null,
+      "cuota2": null,
+      "confianza_promedio": null,
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/dd2UBrPk/",
+      "match_id": "dd2UBrPk",
+      "h2h_url": "https://www.flashscore.com/match/tennis/dd2UBrPk/#/h2h/overall/"
+    }
+  ],
+  "W15 Fukui (Japan)": [
+    {
+      "superficie": "hard",
+      "jugador1": "Abe H.",
+      "jugador2": "Yoshimoto N.",
+      "resultado": "-",
+      "estado": "21:00FRO",
+      "hora_partido": null,
+      "cuota1": null,
+      "cuota2": null,
+      "confianza_promedio": null,
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/hiromi-abe-QsVoilGt/yoshimoto-natsuki-UHg3VwOu/?mid=QNG1X0CG",
+      "match_id": "QNG1X0CG",
+      "h2h_url": "https://www.flashscore.com/match/tennis/hiromi-abe-QsVoilGt/yoshimoto-natsuki-UHg3VwOu/#/h2h/overall/"
+    }
+  ],
+  "W15 Kayseri 2 (Turkey)": [
+    {
+      "superficie": "hard",
+      "jugador1": "Arystanbekova A.",
+      "jugador2": "Dilek D.",
+      "resultado": "0",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 2.45,
+      "cuota2": 1.47,
+      "confianza_promedio": {
+        "jugador1": 0.375,
+        "jugador2": 0.625
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/arystanbekova-asylzhan-UiGNvuN0/dilek-deniz-dEQa9FEi/?mid=tUN6knw8",
+      "match_id": "tUN6knw8",
+      "h2h_url": "https://www.flashscore.com/match/tennis/arystanbekova-asylzhan-UiGNvuN0/dilek-deniz-dEQa9FEi/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Kumru A.",
+      "jugador2": "Sartz-Lunde E.",
+      "resultado": "0",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 2.05,
+      "cuota2": 1.67,
+      "confianza_promedio": {
+        "jugador1": 0.449,
+        "jugador2": 0.551
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/kumru-ada-l45T0hem/sartz-lunde-emily-69wBmPB9/?mid=xEA84sUI",
+      "match_id": "xEA84sUI",
+      "h2h_url": "https://www.flashscore.com/match/tennis/kumru-ada-l45T0hem/sartz-lunde-emily-69wBmPB9/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Smirnova K.",
+      "jugador2": "Kurt I.",
+      "resultado": "1",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 1.67,
+      "cuota2": 2.05,
+      "confianza_promedio": {
+        "jugador1": 0.551,
+        "jugador2": 0.449
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/kurt-irem-AFB4GXoo/smirnova-ksenia-t26bcqnD/?mid=2i2fSpMP",
+      "match_id": "2i2fSpMP",
+      "h2h_url": "https://www.flashscore.com/match/tennis/kurt-irem-AFB4GXoo/smirnova-ksenia-t26bcqnD/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Soke D.",
+      "jugador2": "Atay S.",
+      "resultado": "2",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 1.16,
+      "cuota2": 4.33,
+      "confianza_promedio": {
+        "jugador1": 0.789,
+        "jugador2": 0.211
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/atay-selina-zoO1dSos/soke-duru-fwKqc9Nl/?mid=bNmQMOqm",
+      "match_id": "bNmQMOqm",
+      "h2h_url": "https://www.flashscore.com/match/tennis/atay-selina-zoO1dSos/soke-duru-fwKqc9Nl/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Soke D.",
+      "jugador2": "Sartz-Lunde E.",
+      "resultado": "-",
+      "estado": "04:30FRO",
+      "hora_partido": null,
+      "cuota1": null,
+      "cuota2": null,
+      "confianza_promedio": null,
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/sartz-lunde-emily-69wBmPB9/soke-duru-fwKqc9Nl/?mid=ENNWL68t",
+      "match_id": "ENNWL68t",
+      "h2h_url": "https://www.flashscore.com/match/tennis/sartz-lunde-emily-69wBmPB9/soke-duru-fwKqc9Nl/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Ceuca A. A.",
+      "jugador2": "Kapcia V.",
+      "resultado": "-",
+      "estado": "03:30FRO",
+      "hora_partido": null,
+      "cuota1": 4.2,
+      "cuota2": 1.16,
+      "confianza_promedio": {
+        "jugador1": 0.216,
+        "jugador2": 0.784
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/GtqoMq9C/",
+      "match_id": "GtqoMq9C",
+      "h2h_url": "https://www.flashscore.com/match/tennis/GtqoMq9C/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Aksu S.",
+      "jugador2": "Ozen Y.",
+      "resultado": "-",
+      "estado": "04:00FRO",
+      "hora_partido": null,
+      "cuota1": 6.25,
+      "cuota2": 1.06,
+      "confianza_promedio": {
+        "jugador1": 0.145,
+        "jugador2": 0.855
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/EDM7MDKh/",
+      "match_id": "EDM7MDKh",
+      "h2h_url": "https://www.flashscore.com/match/tennis/EDM7MDKh/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Dilek D.",
+      "jugador2": "Gureva A.",
+      "resultado": "-",
+      "estado": "05:00FRO",
+      "hora_partido": null,
+      "cuota1": 1.03,
+      "cuota2": 7.75,
+      "confianza_promedio": {
+        "jugador1": 0.883,
+        "jugador2": 0.117
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/vsaD7pfJ/",
+      "match_id": "vsaD7pfJ",
+      "h2h_url": "https://www.flashscore.com/match/tennis/vsaD7pfJ/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Soke D.",
+      "jugador2": "Turkmen D.",
+      "resultado": "-",
+      "estado": "06:00FRO",
+      "hora_partido": null,
+      "cuota1": 1.24,
+      "cuota2": 3.4,
+      "confianza_promedio": {
+        "jugador1": 0.733,
+        "jugador2": 0.267
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/nRKFKik5/",
+      "match_id": "nRKFKik5",
+      "h2h_url": "https://www.flashscore.com/match/tennis/nRKFKik5/#/h2h/overall/"
+    }
+  ],
+  "W15 Lakewood, CA (USA)": [
+    {
+      "superficie": "hard",
+      "jugador1": "Crossley M.",
+      "jugador2": "Evans T.",
+      "resultado": "-",
+      "estado": "12:00FRO",
+      "hora_partido": null,
+      "cuota1": 1.53,
+      "cuota2": 2.27,
+      "confianza_promedio": {
+        "jugador1": 0.597,
+        "jugador2": 0.403
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/crossley-mayu-rapg1GOD/evans-tatum-jcJMERNu/?mid=M3DxqlIb",
+      "match_id": "M3DxqlIb",
+      "h2h_url": "https://www.flashscore.com/match/tennis/crossley-mayu-rapg1GOD/evans-tatum-jcJMERNu/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Wang A.",
+      "jugador2": "Lutkemeyer A.",
+      "resultado": "-",
+      "estado": "12:00FRO",
+      "hora_partido": null,
+      "cuota1": 2.3,
+      "cuota2": 1.53,
+      "confianza_promedio": {
+        "jugador1": 0.399,
+        "jugador2": 0.601
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/lutkemeyer-anne-christine-WGO5GTY1/wang-allison-p6TTeAIO/?mid=nPTiu6HN",
+      "match_id": "nPTiu6HN",
+      "h2h_url": "https://www.flashscore.com/match/tennis/lutkemeyer-anne-christine-WGO5GTY1/wang-allison-p6TTeAIO/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Brown J.",
+      "jugador2": "Evans K.",
+      "resultado": "-",
+      "estado": "14:00FRO",
+      "hora_partido": null,
+      "cuota1": 1.28,
+      "cuota2": 3.1,
+      "confianza_promedio": {
+        "jugador1": 0.708,
+        "jugador2": 0.292
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/EBVqsSnB/",
+      "match_id": "EBVqsSnB",
+      "h2h_url": "https://www.flashscore.com/match/tennis/EBVqsSnB/#/h2h/overall/"
+    }
+  ],
+  "W15 Monastir 15 (Tunisia)": [
+    {
+      "superficie": "hard",
+      "jugador1": "Lazarenko M.",
+      "jugador2": "Bertacchi A.",
+      "resultado": "-",
+      "estado": "04:00FRO",
+      "hora_partido": null,
+      "cuota1": 1.38,
+      "cuota2": 2.72,
+      "confianza_promedio": {
+        "jugador1": 0.663,
+        "jugador2": 0.337
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/bertacchi-anastasia-GYsfXRF7/lazarenko-masha-b1ZDfU5e/?mid=rVLQf56l",
+      "match_id": "rVLQf56l",
+      "h2h_url": "https://www.flashscore.com/match/tennis/bertacchi-anastasia-GYsfXRF7/lazarenko-masha-b1ZDfU5e/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Lukosiute A.",
+      "jugador2": "Oliver Sanchez M.",
+      "resultado": "-",
+      "estado": "04:00FRO",
+      "hora_partido": null,
+      "cuota1": 1.32,
+      "cuota2": 3.0,
+      "confianza_promedio": {
+        "jugador1": 0.694,
+        "jugador2": 0.306
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/lukosiute-andre-fN0eaq2P/oliver-sanchez-maria-x8DXxyFD/?mid=jePYhqy1",
+      "match_id": "jePYhqy1",
+      "h2h_url": "https://www.flashscore.com/match/tennis/lukosiute-andre-fN0eaq2P/oliver-sanchez-maria-x8DXxyFD/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Luciano L.",
+      "jugador2": "Mariani Mat.",
+      "resultado": "-",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": null,
+      "cuota2": null,
+      "confianza_promedio": null,
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/EwAUpAmn/",
+      "match_id": "EwAUpAmn",
+      "h2h_url": "https://www.flashscore.com/match/tennis/EwAUpAmn/#/h2h/overall/"
+    }
+  ],
+  "W15 Oliva (Spain)": [
+    {
+      "superficie": "clay",
+      "jugador1": "Dols S.",
+      "jugador2": "Lim J.",
+      "resultado": "-",
+      "estado": "05:00FRO",
+      "hora_partido": null,
+      "cuota1": 2.25,
+      "cuota2": 1.55,
+      "confianza_promedio": {
+        "jugador1": 0.408,
+        "jugador2": 0.592
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/dols-sara-Stkbax5S/lim-jenny-YT8aUj0p/?mid=UJ7z54nn",
+      "match_id": "UJ7z54nn",
+      "h2h_url": "https://www.flashscore.com/match/tennis/dols-sara-Stkbax5S/lim-jenny-YT8aUj0p/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Langlais C.",
+      "jugador2": "Sziedat F.",
+      "resultado": "-",
+      "estado": "05:00FRO",
+      "hora_partido": null,
+      "cuota1": 2.18,
+      "cuota2": 1.59,
+      "confianza_promedio": {
+        "jugador1": 0.422,
+        "jugador2": 0.578
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/langlais-cindy-jH3mTvCG/sziedat-franziska-fyxycq7g/?mid=04XQp11U",
+      "match_id": "04XQp11U",
+      "h2h_url": "https://www.flashscore.com/match/tennis/langlais-cindy-jH3mTvCG/sziedat-franziska-fyxycq7g/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Brune A.",
+      "jugador2": "Tse E.",
+      "resultado": "2",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": null,
+      "cuota2": null,
+      "confianza_promedio": null,
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/SjZInNWH/",
+      "match_id": "SjZInNWH",
+      "h2h_url": "https://www.flashscore.com/match/tennis/SjZInNWH/#/h2h/overall/"
+    }
+  ],
+  "W15 Szentendre (Hungary)": [
+    {
+      "superficie": "clay",
+      "jugador1": "Vogt M.",
+      "jugador2": "Lovric P.",
+      "resultado": "2",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 2.15,
+      "cuota2": 1.6,
+      "confianza_promedio": {
+        "jugador1": 0.427,
+        "jugador2": 0.573
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/lovric-pia-tjmKNr7A/vogt-marie-UFtfbtIc/?mid=2V6gvLAm",
+      "match_id": "2V6gvLAm",
+      "h2h_url": "https://www.flashscore.com/match/tennis/lovric-pia-tjmKNr7A/vogt-marie-UFtfbtIc/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Zelnickova R.",
+      "jugador2": "Balus I.",
+      "resultado": "2",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 2.15,
+      "cuota2": 1.6,
+      "confianza_promedio": {
+        "jugador1": 0.427,
+        "jugador2": 0.573
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/balus-irina-4InIE6Su/zelnickova-radka-2yKQRdij/?mid=dWvMdTQE",
+      "match_id": "dWvMdTQE",
+      "h2h_url": "https://www.flashscore.com/match/tennis/balus-irina-4InIE6Su/zelnickova-radka-2yKQRdij/#/h2h/overall/"
+    }
+  ],
+  "W15 Tsaghkadzor 2 (Armenia)": [
+    {
+      "superficie": "clay",
+      "jugador1": "Kroitor K.",
+      "jugador2": "Sagandikova A.",
+      "resultado": "2",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 1.08,
+      "cuota2": 6.0,
+      "confianza_promedio": {
+        "jugador1": 0.847,
+        "jugador2": 0.153
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/kroitor-kristina-00nLQLBN/sagandikova-aruzhan-nHKY2PCh/?mid=xtkNrCQa",
+      "match_id": "xtkNrCQa",
+      "h2h_url": "https://www.flashscore.com/match/tennis/kroitor-kristina-00nLQLBN/sagandikova-aruzhan-nHKY2PCh/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Jovanovic M.",
+      "jugador2": "Bazderova A.",
+      "resultado": "-",
+      "estado": "04:00FRO",
+      "hora_partido": null,
+      "cuota1": 3.4,
+      "cuota2": 1.26,
+      "confianza_promedio": {
+        "jugador1": 0.27,
+        "jugador2": 0.73
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/bazderova-anna-nkfg5MhT/jovanovic-mirjana-0jieYeGh/?mid=A72UtjeC",
+      "match_id": "A72UtjeC",
+      "h2h_url": "https://www.flashscore.com/match/tennis/bazderova-anna-nkfg5MhT/jovanovic-mirjana-0jieYeGh/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Sagandikova A.",
+      "jugador2": "Yuldasheva S.",
+      "resultado": "-",
+      "estado": "05:15FRO",
+      "hora_partido": null,
+      "cuota1": null,
+      "cuota2": null,
+      "confianza_promedio": null,
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/4SjFpYem/",
+      "match_id": "4SjFpYem",
+      "h2h_url": "https://www.flashscore.com/match/tennis/4SjFpYem/#/h2h/overall/"
+    }
+  ],
+  "W35 Bol 2 (Croatia)": [
+    {
+      "superficie": "clay",
+      "jugador1": "Ivanov V.",
+      "jugador2": "Mikaca S.",
+      "resultado": "1",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 1.28,
+      "cuota2": 3.25,
+      "confianza_promedio": {
+        "jugador1": 0.717,
+        "jugador2": 0.283
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/ivanov-valentina-AcsrBtL8/sara-mikaca-joPJ8o9T/?mid=6miYK2Ea",
+      "match_id": "6miYK2Ea",
+      "h2h_url": "https://www.flashscore.com/match/tennis/ivanov-valentina-AcsrBtL8/sara-mikaca-joPJ8o9T/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Zantedeschi A.",
+      "jugador2": "Korokozidi E.",
+      "resultado": "1",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 1.38,
+      "cuota2": 2.72,
+      "confianza_promedio": {
+        "jugador1": 0.663,
+        "jugador2": 0.337
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/korokozidi-elena-MZvOlfWi/zantedeschi-aurora-KIRyWIvq/?mid=p4DAShGG",
+      "match_id": "p4DAShGG",
+      "h2h_url": "https://www.flashscore.com/match/tennis/korokozidi-elena-MZvOlfWi/zantedeschi-aurora-KIRyWIvq/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Dernikovic R.",
+      "jugador2": "Miskovic D.",
+      "resultado": "-",
+      "estado": "Programado 05:30",
+      "hora_partido": "05:30",
+      "cuota1": 2.8,
+      "cuota2": 1.35,
+      "confianza_promedio": {
+        "jugador1": 0.325,
+        "jugador2": 0.675
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/nRda4oW0/",
+      "match_id": "nRda4oW0",
+      "h2h_url": "https://www.flashscore.com/match/tennis/nRda4oW0/#/h2h/overall/"
+    }
+  ],
+  "W35 Wichita, KS (USA)": [
+    {
+      "superficie": "hard",
+      "jugador1": "Wang X. T.",
+      "jugador2": "Dmitrichenko Y.",
+      "resultado": "-",
+      "estado": "Programado 11:00",
+      "hora_partido": "11:00",
+      "cuota1": 1.95,
+      "cuota2": 1.72,
+      "confianza_promedio": {
+        "jugador1": 0.469,
+        "jugador2": 0.531
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/dmitrichenko-yekaterina-8CcZvnJk/wang-xin-tong-zXP4TLYb/?mid=A1Rjcvw9",
+      "match_id": "A1Rjcvw9",
+      "h2h_url": "https://www.flashscore.com/match/tennis/dmitrichenko-yekaterina-8CcZvnJk/wang-xin-tong-zXP4TLYb/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Yamalapalli S.",
+      "jugador2": "Khayrutdinova E.",
+      "resultado": "-",
+      "estado": "Programado 11:00",
+      "hora_partido": "11:00",
+      "cuota1": 2.15,
+      "cuota2": 1.6,
+      "confianza_promedio": {
+        "jugador1": 0.427,
+        "jugador2": 0.573
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/ekaterina-khayrutdinova-Khqo00n1/yamalapalli-sahaja-UZAhfYfD/?mid=j3eh3C46",
+      "match_id": "j3eh3C46",
+      "h2h_url": "https://www.flashscore.com/match/tennis/ekaterina-khayrutdinova-Khqo00n1/yamalapalli-sahaja-UZAhfYfD/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Brantmeier R.",
+      "jugador2": "Ngounoue C.",
+      "resultado": "-",
+      "estado": "Programado 12:00",
+      "hora_partido": "12:00",
+      "cuota1": 2.3,
+      "cuota2": 1.53,
+      "confianza_promedio": {
+        "jugador1": 0.399,
+        "jugador2": 0.601
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/brantmeier-reese-zLzL0ABD/ngounoue-clervie-dlm9zwW5/?mid=KU5b94Ls",
+      "match_id": "KU5b94Ls",
+      "h2h_url": "https://www.flashscore.com/match/tennis/brantmeier-reese-zLzL0ABD/ngounoue-clervie-dlm9zwW5/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Guzman D.",
+      "jugador2": "Ma L.",
+      "resultado": "-",
+      "estado": "Programado 12:00",
+      "hora_partido": "12:00",
+      "cuota1": 2.32,
+      "cuota2": 1.52,
+      "confianza_promedio": {
+        "jugador1": 0.396,
+        "jugador2": 0.604
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/guzman-dana-6qytzwBS/ma-lea-QDN44n8g/?mid=EVc8R3sQ",
+      "match_id": "EVc8R3sQ",
+      "h2h_url": "https://www.flashscore.com/match/tennis/guzman-dana-6qytzwBS/ma-lea-QDN44n8g/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Brantmeier R.",
+      "jugador2": "Sholokhova M.",
+      "resultado": "-",
+      "estado": "Programado 17:00",
+      "hora_partido": "17:00",
+      "cuota1": 1.55,
+      "cuota2": 2.2,
+      "confianza_promedio": {
+        "jugador1": 0.587,
+        "jugador2": 0.413
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/dxCH0Dq1/",
+      "match_id": "dxCH0Dq1",
+      "h2h_url": "https://www.flashscore.com/match/tennis/dxCH0Dq1/#/h2h/overall/"
+    }
+  ],
+  "W35 Wuning 2 (China)": [
+    {
+      "superficie": "hard",
+      "jugador1": "Shubladze A.",
+      "jugador2": "Inoue H.",
+      "resultado": "-",
+      "estado": "Programado 21:00",
+      "hora_partido": "21:00",
+      "cuota1": null,
+      "cuota2": null,
+      "confianza_promedio": null,
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/inoue-hina-xUr2qOCl/shubladze-alexandra-hfB76jCN/?mid=4hWqPN16",
+      "match_id": "4hWqPN16",
+      "h2h_url": "https://www.flashscore.com/match/tennis/inoue-hina-xUr2qOCl/shubladze-alexandra-hfB76jCN/#/h2h/overall/"
+    },
+    {
+      "superficie": "hard",
+      "jugador1": "Barry M.",
+      "jugador2": "Sato H.",
+      "resultado": "2",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 2.2,
+      "cuota2": 1.55,
+      "confianza_promedio": {
+        "jugador1": 0.413,
+        "jugador2": 0.587
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/zqTEClP9/",
+      "match_id": "zqTEClP9",
+      "h2h_url": "https://www.flashscore.com/match/tennis/zqTEClP9/#/h2h/overall/"
+    }
+  ],
+  "W75 Kursumlijska Banja (Serbia)": [
+    {
+      "superficie": "clay",
+      "jugador1": "Zaar L.",
+      "jugador2": "Samson L.",
+      "resultado": "1",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 2.55,
+      "cuota2": 1.44,
+      "confianza_promedio": {
+        "jugador1": 0.361,
+        "jugador2": 0.639
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/samsonova-laura-WQ5OxBkB/zaar-lisa-Acy373ml/?mid=6q7bEBn3",
+      "match_id": "6q7bEBn3",
+      "h2h_url": "https://www.flashscore.com/match/tennis/samsonova-laura-WQ5OxBkB/zaar-lisa-Acy373ml/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Radivojevic L.",
+      "jugador2": "Matoula M.",
+      "resultado": "-",
+      "estado": "Programado 06:00",
+      "hora_partido": "06:00",
+      "cuota1": 1.19,
+      "cuota2": 4.0,
+      "confianza_promedio": {
+        "jugador1": 0.771,
+        "jugador2": 0.229
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/matoula-martha-I91UyxFR/radivojevic-lola-UTN9MbHt/?mid=hW3gLAQH",
+      "match_id": "hW3gLAQH",
+      "h2h_url": "https://www.flashscore.com/match/tennis/matoula-martha-I91UyxFR/radivojevic-lola-UTN9MbHt/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Bayerlova M.",
+      "jugador2": "Milovanovic E.",
+      "resultado": "-",
+      "estado": "Programado 05:30",
+      "hora_partido": "05:30",
+      "cuota1": 2.9,
+      "cuota2": 1.33,
+      "confianza_promedio": {
+        "jugador1": 0.314,
+        "jugador2": 0.686
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/tWG880aE/",
+      "match_id": "tWG880aE",
+      "h2h_url": "https://www.flashscore.com/match/tennis/tWG880aE/#/h2h/overall/"
+    }
+  ],
+  "W75 Zaragoza (Spain)": [
+    {
+      "superficie": "clay",
+      "jugador1": "Day K.",
+      "jugador2": "Giovannini L.",
+      "resultado": "1",
+      "estado": "",
+      "hora_partido": null,
+      "cuota1": 1.67,
+      "cuota2": 2.05,
+      "confianza_promedio": {
+        "jugador1": 0.551,
+        "jugador2": 0.449
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/day-kayla-rkOojWt6/giovannini-luisina-ruSbIQqA/?mid=4hIn6cXQ",
+      "match_id": "4hIn6cXQ",
+      "h2h_url": "https://www.flashscore.com/match/tennis/day-kayla-rkOojWt6/giovannini-luisina-ruSbIQqA/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Ruggeri J.",
+      "jugador2": "Maristany G.",
+      "resultado": "-",
+      "estado": "Programado 05:00",
+      "hora_partido": "05:00",
+      "cuota1": 2.9,
+      "cuota2": 1.34,
+      "confianza_promedio": {
+        "jugador1": 0.316,
+        "jugador2": 0.684
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/maristany-zuleta-de-reales-guiomar-G4F8vGbd/ruggeri-jennifer-2HyunfM6/?mid=MFZGNFck",
+      "match_id": "MFZGNFck",
+      "h2h_url": "https://www.flashscore.com/match/tennis/maristany-zuleta-de-reales-guiomar-G4F8vGbd/ruggeri-jennifer-2HyunfM6/#/h2h/overall/"
+    },
+    {
+      "superficie": "clay",
+      "jugador1": "Akli A.",
+      "jugador2": "Salden L.",
+      "resultado": "-",
+      "estado": "Programado 09:30",
+      "hora_partido": "09:30",
+      "cuota1": 1.56,
+      "cuota2": 2.18,
+      "confianza_promedio": {
+        "jugador1": 0.583,
+        "jugador2": 0.417
+      },
+      "screenshot_origen": null,
+      "match_url": "https://www.flashscore.com/match/tennis/vmUfhR2t/",
+      "match_id": "vmUfhR2t",
+      "h2h_url": "https://www.flashscore.com/match/tennis/vmUfhR2t/#/h2h/overall/"
+    }
+  ]
+}

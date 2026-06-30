@@ -1,0 +1,62 @@
+{
+  "metadata": {
+    "timestamp": "20260614_104908",
+    "bankroll": 125000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260614_104024.json",
+    "n_partidos_analizados": 39,
+    "calibracion_n": 755,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "itf",
+      "superficie": "clay",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Alina Shcherbinina vs Kaitlyn Carnicella",
+      "favorito": "Kaitlyn Carnicella",
+      "cuota": 3.05,
+      "edge_pct": "18.1%",
+      "p_modelo": 0.509,
+      "n_h2h": 0,
+      "p_blend": 0.5849,
+      "kelly_kl": 0.0957,
+      "kelly_usado": 0.0956,
+      "stake": 12000,
+      "retorno_potencial": 36600.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [],
+  "risk_management": {},
+  "resumen": {
+    "gastado_individuales": 12000.0,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 0.0,
+    "total_en_riesgo": 12000.0,
+    "pct_bankroll_en_riesgo": 0.096,
+    "n_senales_apostar": 1,
+    "pool_cobertura": 1,
+    "alerta_riesgo": false
+  }
+}

@@ -560,6 +560,9 @@ class IntelligentDatasetGenerator:
         # cuando hay columnas duplicadas o dtype edge-cases que hacen que
         # columns=numeric_cols (lista) y el array transformado difieran en largo.
         df_numeric = df.select_dtypes(include=np.number)
+        # Eliminar columnas all-NaN antes de imputar — KNNImputer las descarta
+        # internamente pero mantiene el shape del array sin ellas, causando mismatch
+        df_numeric = df_numeric.dropna(axis=1, how='all')
 
         if df_numeric.isnull().sum().sum() == 0:
             self.logger.success("No hay datos numéricos faltantes para imputar.")
@@ -570,7 +573,7 @@ class IntelligentDatasetGenerator:
 
         df_imputed_numeric = pd.DataFrame(
             imputed_array,
-            columns=df_numeric.columns,  # siempre en sync con el array
+            columns=df_numeric.columns,
             index=df.index,
         )
 
@@ -589,7 +592,7 @@ class IntelligentDatasetGenerator:
             self.logger.warning("No hay columnas numéricas para la detección de anomalías.")
             return df
 
-        df_numeric = df[numeric_cols].fillna(df[numeric_cols].median())
+        df_numeric = df[numeric_cols].fillna(df[numeric_cols].median()).fillna(0)
 
         iso_forest = IsolationForest(contamination=0.05, random_state=42)
         outlier_labels = iso_forest.fit_predict(df_numeric)
@@ -605,18 +608,49 @@ class IntelligentDatasetGenerator:
             
         return df_clean
 
+    # Columnas prohibidas — data leakage o no disponibles en runtime
+    LEAKAGE_COLS = {
+        # Circulares: son output del modelo heurístico actual
+        'prediction_confidence', 'p1_predicted_score', 'p2_predicted_score', 'predicted_score_diff',
+        # No disponibles en rivalry_analyzer al momento de predecir
+        'cuota1', 'cuota2',
+        # Identifier estructural — no es feature predictiva
+        'match_url',
+        'p1_last_match_date', 'p2_last_match_date',
+    }
+
+    # Columnas de trazabilidad — excluidas de X (no son features) pero preservadas en el CSV
+    # para verificación humana y auditoría del join feature↔label. NO usar como predictores.
+    TRACE_COLS = {'jugador1', 'jugador2', 'torneo_nombre', '_trace_fecha'}
+
     def _hybrid_feature_selection(self, df):
         """Selecciona las features más relevantes usando RFE y análisis de correlación."""
         self.logger.progress("Iniciando selección de features híbrida...")
-        
+
         if self.target_column not in df.columns:
             self.logger.critical_alert("Target column no encontrada para la selección de features.")
             return df
 
+        # Eliminar columnas con data leakage o no disponibles en runtime
+        # TRACE_COLS se preservan en df para auditoría pero NO entran en X (feature_cols es solo numérico)
+        leakage_present = [c for c in self.LEAKAGE_COLS if c in df.columns]
+        if leakage_present:
+            df = df.drop(columns=leakage_present)
+            self.logger.progress(f"Excluidas {len(leakage_present)} columnas con data leakage: {leakage_present}")
+        trace_present = [c for c in self.TRACE_COLS if c in df.columns]
+        if trace_present:
+            self.logger.progress(f"Columnas de trazabilidad preservadas en CSV (excluidas de X): {trace_present}")
+
+        # Eliminar columnas cuyo nombre contiene datos corruptos (artefactos del merge)
+        corrupted = [c for c in df.columns if len(c) > 80 or '\xa0' in c or '\n' in c]
+        if corrupted:
+            df = df.drop(columns=corrupted)
+            self.logger.progress(f"Eliminadas {len(corrupted)} columnas corruptas")
+
         # Codificar target para RFE
         le = LabelEncoder()
         y = le.fit_transform(df[self.target_column])
-        
+
         feature_cols = [col for col in df.columns if df[col].dtype in ['int64', 'float64']]
         
         if not feature_cols:
@@ -668,8 +702,8 @@ class IntelligentDatasetGenerator:
         
         return df[final_cols]
 
-    def generate_superior_dataset(self, features_folder='input/features', 
-                                labels_folder='input/labels', 
+    def generate_superior_dataset(self, features_folder='reports',
+                                labels_folder='reports',
                                 output_folder='reports'):
         """Genera un dataset superior con validaciones inteligentes."""
         
@@ -765,23 +799,40 @@ class IntelligentDatasetGenerator:
         self.logger.progress("Cargando y fusionando datos de múltiples archivos...")
 
         # 1. Cargar TODOS los datos de features (H2H)
+        MOTOR_VALIDO = "nodo32-fase3-markov-postnorm"
         h2h_files = glob.glob(os.path.join(features_folder, "h2h_results_enhanced_*.json"))
         if not h2h_files:
             self.logger.critical_alert(f"No se encontró ningún archivo de features en '{features_folder}'")
             return None
-        
-        self.logger.progress(f"Encontrados {len(h2h_files)} archivos de features. Procesando...")
+
+        self.logger.progress(f"Encontrados {len(h2h_files)} archivos de features. Filtrando por motor válido...")
         all_h2h_data = []
+        archivos_aceptados = 0
+        archivos_rechazados = 0
         for file_path in h2h_files:
             try:
                 with open(file_path, 'r', encoding='utf-8') as f:
                     data = json.load(f)
                     if data and isinstance(data, dict):
+                        rv = data.get('metadata', {}).get('rivalry_version') or data.get('rivalry_version')
+                        if rv != MOTOR_VALIDO:
+                            archivos_rechazados += 1
+                            self.logger.ml_warning(f"Motor inválido (rivalry_version='{rv}'), omitiendo: {os.path.basename(file_path)}")
+                            continue
                         partidos_data = data.get('partidos')
                         if partidos_data and isinstance(partidos_data, list):
+                            # Acción 2: inyectar fecha_archivo como campo de trazabilidad
+                            fname = os.path.basename(file_path)
+                            fecha_archivo = fname.replace('h2h_results_enhanced_', '').replace('.json', '')[:8]
+                            fecha_fmt = f"{fecha_archivo[:4]}-{fecha_archivo[4:6]}-{fecha_archivo[6:8]}"
+                            for p in partidos_data:
+                                p['_trace_fecha'] = fecha_fmt
                             all_h2h_data.extend(partidos_data)
+                            archivos_aceptados += 1
             except json.JSONDecodeError:
                 self.logger.ml_warning(f"Archivo JSON inválido o vacío, omitiendo: {file_path}")
+
+        self.logger.progress(f"Features: {archivos_aceptados} archivos aceptados (motor válido), {archivos_rechazados} rechazados (motor viejo)")
 
         # 2. Cargar TODOS los datos de labels (resultados)
         labels_files = glob.glob(os.path.join(labels_folder, "resultados_finales_*.json"))
@@ -791,6 +842,9 @@ class IntelligentDatasetGenerator:
 
         self.logger.progress(f"Encontrados {len(labels_files)} archivos de labels. Procesando...")
         all_labels_data = []
+        labels_formato_b = 0
+        labels_formato_a_ignorados = 0
+        labels_formato_desconocido = 0
         for file_path in labels_files:
             try:
                 with open(file_path, 'r', encoding='utf-8') as f:
@@ -799,8 +853,19 @@ class IntelligentDatasetGenerator:
                         detailed_results = data.get('detailed_results')
                         if detailed_results and isinstance(detailed_results, list):
                             all_labels_data.extend(detailed_results)
+                            labels_formato_b += 1
+                        elif 'accuracy' in data and 'partidos' in data:
+                            # Formato A (validar_con_api.py): tiene accuracy/partidos/correctas
+                            # No tiene detailed_results → no compatible con el join por match_url
+                            labels_formato_a_ignorados += 1
+                            self.logger.ml_warning(f"Formato A no compatible (sin detailed_results), ignorado: {os.path.basename(file_path)}")
+                        else:
+                            labels_formato_desconocido += 1
+                            self.logger.ml_warning(f"Formato desconocido, ignorado: {os.path.basename(file_path)}")
             except json.JSONDecodeError:
                 self.logger.ml_warning(f"Archivo JSON inválido o vacío, omitiendo: {file_path}")
+
+        self.logger.progress(f"Labels: {labels_formato_b} formato-B usados | {labels_formato_a_ignorados} formato-A ignorados | {labels_formato_desconocido} formato desconocido")
 
         # 3. Procesar y aplanar los datos de H2H combinados
         features_list = []
@@ -901,6 +966,7 @@ class IntelligentDatasetGenerator:
         record['jugador1'] = original_data.get('jugador1') or original_data.get('player1')
         record['jugador2'] = original_data.get('jugador2') or original_data.get('player2')
         record['torneo_nombre'] = original_data.get('torneo_nombre')
+        record['_trace_fecha'] = original_data.get('_trace_fecha')  # trazabilidad: fecha del archivo h2h
         record['tipo_cancha'] = original_data.get('tipo_cancha', 'Desconocida').capitalize()
         record['cuota1'] = original_data.get('cuota1')
         record['cuota2'] = original_data.get('cuota2')
@@ -1604,8 +1670,8 @@ def main():
     
     # Ejecutar generación superior
     success = generator.generate_superior_dataset(
-        features_folder='input/features',
-        labels_folder='input/labels',
+        features_folder='reports',
+        labels_folder='reports',
         output_folder='reports'
     )
     

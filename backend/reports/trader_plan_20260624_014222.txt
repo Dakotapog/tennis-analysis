@@ -1,0 +1,227 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — ITF CLAY
+  2026-06-24 01:42  │  Bankroll: $10,000
+  Señales APOSTAR: 10  │  Watchlist: 4  │  Sin edge: 5
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 14 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.05 (itf)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $4,000 (40% bankroll)
+
+  │  🎾 Christopher Thies vs Tim Hammes
+  │     Apostar: Christopher Thies
+  │     Cuota 2.48  │  Edge 40.4%  │  p_blend 0.500 (n_h2h=0)
+  │     Kelly-KL 19.4% → stake $1,000  │  Retorno potencial $2,480
+  │     EV real +24.0%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Paul Inchauspe vs Iker Urribarrens Ramirez
+  │     Apostar: Iker Urribarrens Ramirez
+  │     Cuota 4.30  │  Edge 48.9%  │  p_blend 0.500 (n_h2h=0)
+  │     Kelly-KL 19.3% → stake $1,000  │  Retorno potencial $4,300
+  │     EV real +115.0%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Diego Dedura-Palomero vs Joaquin Guilleme
+  │     Apostar: Joaquin Guilleme
+  │     Cuota 4.30  │  Edge 58.7%  │  p_blend 0.500 (n_h2h=0)
+  │     Kelly-KL 19.0% → stake $1,000  │  Retorno potencial $4,300
+  │     EV real +115.0%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Constantin Bittoun Kouzmine vs Bogdan Seleznev
+  │     Apostar: Bogdan Seleznev
+  │     Cuota 9.00  │  Edge 56.2%  │  p_blend 0.500 (n_h2h=0)
+  │     Kelly-KL 17.9% → stake $1,000  │  Retorno potencial $9,000
+  │     EV real +350.0%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Roman Sancilio vs Cagan Efe Tufekci
+  │     Apostar: Cagan Efe Tufekci
+  │     Cuota 2.95  │  Edge 34.4%  │  p_blend 0.500 (n_h2h=0)
+  │     Kelly-KL 17.0% → stake $1,000  │  Retorno potencial $2,950
+  │     EV real +47.5%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Odeta Panasa vs Alessia Popescu
+  │     Apostar: Alessia Popescu
+  │     Cuota 1.98  │  Edge 27.8%  │  p_blend 0.500 (n_h2h=0)
+  │     Kelly-KL 15.2% → stake $1,000  │  Retorno potencial $1,980
+  │     EV real -1.0%  │  Zona: slight_underdog  │  Sup: clay
+
+  │  🎾 David Tixhon vs Tomohiro Masabayashi
+  │     Apostar: Tomohiro Masabayashi
+  │     Cuota 1.79  │  Edge 21.8%  │  p_blend 0.500 (n_h2h=0)
+  │     Kelly-KL 13.5% → stake $1,000  │  Retorno potencial $1,790
+  │     EV real -10.5%  │  Zona: slight_underdog  │  Sup: clay
+
+  │  🎾 Markus Malaszszak vs Marcel Volz
+  │     Apostar: Markus Malaszszak
+  │     Cuota 1.64  │  Edge 19.8%  │  p_blend 0.500 (n_h2h=0)
+  │     Kelly-KL 12.0% → stake $1,000  │  Retorno potencial $1,640
+  │     EV real -18.0%  │  Zona: slight_underdog  │  Sup: clay
+
+  │  🎾 Marko Milosavljevic vs Victor Ryden
+  │     Apostar: Marko Milosavljevic
+  │     Cuota 1.64  │  Edge 14.8%  │  p_blend 0.500 (n_h2h=0)
+  │     Kelly-KL 10.8% → stake $1,000  │  Retorno potencial $1,640
+  │     EV real -18.0%  │  Zona: slight_underdog  │  Sup: clay
+
+  │  🎾 Nik Miković vs Maximilian Figl
+  │     Apostar: Maximilian Figl
+  │     Cuota 1.62  │  Edge 14.6%  │  p_blend 0.500 (n_h2h=0)
+  │     Kelly-KL 10.7% → stake $1,000  │  Retorno potencial $1,620
+  │     EV real -19.0%  │  Zona: slight_underdog  │  Sup: clay
+
+  │  Total individuales: $10,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 14 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $6,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Bogdan Seleznev      @9.00  p=0.500  zona=underdog
+  │    2. Oliver Majdandzic    @6.75  p=0.500  zona=underdog [W]
+  │    3. Karyna Fiadosik      @6.50  p=0.500  zona=underdog [W]
+  │    4. Giulia Alexandra Musat @6.00  p=0.500  zona=underdog [W]
+  │    5. Louay Makke          @6.00  p=0.500  zona=underdog [W]
+  │    6. Iker Urribarrens Ramirez @4.30  p=0.500  zona=underdog
+  │    7. Joaquin Guilleme     @4.30  p=0.500  zona=underdog
+  │    8. Cagan Efe Tufekci    @2.95  p=0.500  zona=underdog
+  │    9. Christopher Thies    @2.48  p=0.500  zona=underdog
+  │    10. Alessia Popescu      @1.98  p=0.500  zona=slight_underdog
+  │    11. Tomohiro Masabayashi @1.79  p=0.500  zona=slight_underdog
+  │    12. Markus Malaszszak    @1.64  p=0.500  zona=slight_underdog
+  │    13. Marko Milosavljevic  @1.64  p=0.500  zona=slight_underdog
+  │    14. Maximilian Figl      @1.62  p=0.500  zona=slight_underdog
+
+  │  ── 3 PIERNAS: TOP 4 combos × $1,000 = $4,000 ──
+  │     (cada combo excluye 11 jugadores)
+  │     [3p-1] Bogdan Seleznev@9.00 + Oliver Majdandzic@6.75 + Karyna Fiadosik@6.50
+  │            @394.88 HR:12.5% EV:+4835.9% →$394,880  excluye:[Christopher Thies, Iker Urribarrens Ramirez, Joaquin Guilleme, Cagan Efe Tufekci, Alessia Popescu, Tomohiro Masabayashi, Markus Malaszszak, Marko Milosavljevic, Maximilian Figl, Giulia Alexandra Musat, Louay Makke]
+  │     [3p-2] Bogdan Seleznev@9.00 + Giulia Alexandra Musat@6.00 + Oliver Majdandzic@6.75
+  │            @364.50 HR:12.5% EV:+4456.2% →$364,500  excluye:[Christopher Thies, Iker Urribarrens Ramirez, Joaquin Guilleme, Cagan Efe Tufekci, Alessia Popescu, Tomohiro Masabayashi, Markus Malaszszak, Marko Milosavljevic, Maximilian Figl, Karyna Fiadosik, Louay Makke]
+  │     [3p-3] Bogdan Seleznev@9.00 + Giulia Alexandra Musat@6.00 + Karyna Fiadosik@6.50
+  │            @351.00 HR:12.5% EV:+4287.5% →$351,000  excluye:[Christopher Thies, Iker Urribarrens Ramirez, Joaquin Guilleme, Cagan Efe Tufekci, Alessia Popescu, Tomohiro Masabayashi, Markus Malaszszak, Marko Milosavljevic, Maximilian Figl, Oliver Majdandzic, Louay Makke]
+  │     [3p-4] Giulia Alexandra Musat@6.00 + Oliver Majdandzic@6.75 + Karyna Fiadosik@6.50
+  │            @263.25 HR:12.5% EV:+3190.6% →$263,250  excluye:[Christopher Thies, Iker Urribarrens Ramirez, Joaquin Guilleme, Bogdan Seleznev, Cagan Efe Tufekci, Alessia Popescu, Tomohiro Masabayashi, Markus Malaszszak, Marko Milosavljevic, Maximilian Figl, Louay Makke]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $1,000 = $4,000 ──
+  │     (cada combo excluye 10 jugadores)
+  │     [4p-1] Bogdan Seleznev@9.00 + Giulia Alexandra Musat@6.00 + Oliver Majdandzic@6.75 + Karyna Fiadosik@6.50
+  │            @2369.25 HR:6.2% EV:+14707.8% →$2,369,250  excluye:[Christopher Thies, Iker Urribarrens Ramirez, Joaquin Guilleme, Cagan Efe Tufekci, Alessia Popescu, Tomohiro Masabayashi, Markus Malaszszak, Marko Milosavljevic, Maximilian Figl, Louay Makke]
+  │     [4p-2] Bogdan Seleznev@9.00 + Oliver Majdandzic@6.75 + Karyna Fiadosik@6.50 + Louay Makke@6.00
+  │            @2369.25 HR:6.2% EV:+14707.8% →$2,369,250  excluye:[Christopher Thies, Iker Urribarrens Ramirez, Joaquin Guilleme, Cagan Efe Tufekci, Alessia Popescu, Tomohiro Masabayashi, Markus Malaszszak, Marko Milosavljevic, Maximilian Figl, Giulia Alexandra Musat]
+  │     [4p-3] Bogdan Seleznev@9.00 + Giulia Alexandra Musat@6.00 + Oliver Majdandzic@6.75 + Louay Makke@6.00
+  │            @2187.00 HR:6.2% EV:+13568.8% →$2,187,000  excluye:[Christopher Thies, Iker Urribarrens Ramirez, Joaquin Guilleme, Cagan Efe Tufekci, Alessia Popescu, Tomohiro Masabayashi, Markus Malaszszak, Marko Milosavljevic, Maximilian Figl, Karyna Fiadosik]
+  │     [4p-4] Giulia Alexandra Musat@6.00 + Oliver Majdandzic@6.75 + Karyna Fiadosik@6.50 + Louay Makke@6.00
+  │            @1579.50 HR:6.2% EV:+9771.9% →$1,579,500  excluye:[Christopher Thies, Iker Urribarrens Ramirez, Joaquin Guilleme, Bogdan Seleznev, Cagan Efe Tufekci, Alessia Popescu, Tomohiro Masabayashi, Markus Malaszszak, Marko Milosavljevic, Maximilian Figl]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-4 picks?) ──
+  │  Total apostado: $8,000
+
+  │  🏆 0 fallos (14/14 ganan): retorno $9,878,630 → P&L +$9,870,630 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Maximilian Figl]):
+  │       retorno $9,878,630 → P&L +$9,870,630 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Bogdan Seleznev]):
+  │       retorno $1,842,750 → P&L +$1,834,750 (2/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Maximilian Figl, Markus Malaszszak]):
+  │       retorno $9,878,630 → P&L +$9,870,630 (8/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Bogdan Seleznev, Oliver Majdandzic]):
+  │       retorno $0 → P&L $-8,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Maximilian Figl, Markus Malaszszak, Marko Milosavljevic]):
+  │       retorno $9,878,630 → P&L +$9,870,630 (8/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Bogdan Seleznev, Oliver Majdandzic, Karyna Fiadosik]):
+  │       retorno $0 → P&L $-8,000 (0/8 combos pagan)
+  │  ✅ 4 fallos (mejor caso: fallan favoritos [Maximilian Figl, Markus Malaszszak, Marko Milosavljevic, Tomohiro Masabayashi]):
+  │       retorno $9,878,630 → P&L +$9,870,630 (8/8 combos pagan)
+  │  ❌ 4 fallos (peor caso: fallan underdogs [Bogdan Seleznev, Oliver Majdandzic, Karyna Fiadosik, Giulia Alexandra Musat]):
+  │       retorno $0 → P&L $-8,000 (0/8 combos pagan)
+
+  │  Total cobertura: $8,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     14
+  │  ρ estructural:       0.05 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.606
+  │  Reducción vs naive:  -39.4%
+  │
+  │  Stake naive (sin ajuste):    $      18,000
+  │  Stake ajustado (PK):         $      10,909
+  │  Ahorro por correlación:      $       7,091
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $       5,591  (55.9% bankroll)
+  │  CVaR 95%:           $      -1,052
+  │  Max VaR permitido:  $       2,500  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.56
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $     699,856
+  │  σ(P&L):             $     822,657
+  │  Sharpe Ratio:              0.851
+  │  Kelly Growth Rate:        3.5395 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $485,196,718,403
+  │  Bankroll en 10 sesiones:  $23,541,585,554,871,046,144
+  │  Bankroll en 30 sesiones:  $130,468,938,597,142,965,063,648,928,762,240,290,038,315,959,189,504
+  │  Sesiones para duplicar:   0.2
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.56 (de $18,000 a $10,000)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.56) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Christopher Thies         @2.48  →  $   1,000  (ret. $     2,480)
+  │    Iker Urribarrens Ramirez  @4.30  →  $   1,000  (ret. $     4,300)
+  │    Joaquin Guilleme          @4.30  →  $   1,000  (ret. $     4,300)
+  │    Bogdan Seleznev           @9.00  →  $   1,000  (ret. $     9,000)
+  │    Cagan Efe Tufekci         @2.95  →  $   1,000  (ret. $     2,950)
+  │    Alessia Popescu           @1.98  →  $   1,000  (ret. $     1,980)
+  │    Tomohiro Masabayashi      @1.79  →  $   1,000  (ret. $     1,790)
+  │    Markus Malaszszak         @1.64  →  $   1,000  (ret. $     1,640)
+  │    Marko Milosavljevic       @1.64  →  $   1,000  (ret. $     1,640)
+  │    Maximilian Figl           @1.62  →  $   1,000  (ret. $     1,620)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @394.88]  $   1,000  →  Bogdan Seleznev@9.00 + Oliver Majdandzic@6.75 + Karyna Fiadosik@6.50
+  │    [3p @364.50]  $   1,000  →  Bogdan Seleznev@9.00 + Giulia Alexandra Musat@6.00 + Oliver Majdandzic@6.75
+  │    [3p @351.00]  $   1,000  →  Bogdan Seleznev@9.00 + Giulia Alexandra Musat@6.00 + Karyna Fiadosik@6.50
+  │    [3p @263.25]  $   1,000  →  Giulia Alexandra Musat@6.00 + Oliver Majdandzic@6.75 + Karyna Fiadosik@6.50
+  │    [4p @2369.25]  $   1,000  →  Bogdan Seleznev@9.00 + Giulia Alexandra Musat@6.00 + Oliver Majdandzic@6.75 + Karyna Fiadosik@6.50
+  │    [4p @2369.25]  $   1,000  →  Bogdan Seleznev@9.00 + Oliver Majdandzic@6.75 + Karyna Fiadosik@6.50 + Louay Makke@6.00
+  │    [4p @2187.00]  $   1,000  →  Bogdan Seleznev@9.00 + Giulia Alexandra Musat@6.00 + Oliver Majdandzic@6.75 + Louay Makke@6.00
+  │    [4p @1579.50]  $   1,000  →  Giulia Alexandra Musat@6.00 + Oliver Majdandzic@6.75 + Karyna Fiadosik@6.50 + Louay Makke@6.00
+  │
+  │  TOTAL EN RIESGO:  $    18,000  (180.0% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $        10,000                       ║
+  ║  Individuales:        $        10,000  (100.0% bankroll)      ║
+  ║  Cobertura:           $         8,000  (80.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $        18,000  (180.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:      10                                       ║
+  ║  Pool cobertura:       14 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260624_01  ║
+  ║  Partidos analizados: 252                                       ║
+  ║  Superficie:          clay (itf)                                  ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  ⚠️  ALERTA: 180.0% bankroll en riesgo — por encima del 30% recomendado.
+      Reducir combos o sistema hasta n≥30 con datos limpios.
+
+  📊 Calibración: n=1704 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.500 (calibrado clay) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260624_014222.json

@@ -1,0 +1,298 @@
+{
+  "metadata": {
+    "verification_date": "2026-06-28 17:47:01",
+    "source_file": "reports/h2h_results_enhanced_20260628_105242.json",
+    "tier_filter": null,
+    "total_matches_processed": 14,
+    "total_matches_verified": 14,
+    "total_not_finished": 0,
+    "total_errors": 0
+  },
+  "summary": {
+    "total_hits": 11,
+    "total_misses": 3,
+    "accuracy_percentage": 78.57
+  },
+  "detailed_results": [
+    {
+      "match_info": {
+        "jugador1": "Charlie Camus",
+        "jugador2": "Jay Dylan Hara Friend",
+        "match_url": "https://www.flashscore.co/match/tennis/camus-charlie-friend-jay-dylan-hara/4j3W9fKN/#/h2h",
+        "torneo": "Cary (Estados Unidos) - Fase previa"
+      },
+      "prediction": {
+        "predicted_winner": "Jay Dylan Hara Friend",
+        "confidence": 61.2
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Jay Dylan Hara Friend"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Justin Boulais",
+        "jugador2": "Enzo Aguiard",
+        "match_url": "https://www.flashscore.co/match/tennis/boulais-justin-aguiard-enzo/j9QJrILO/#/h2h",
+        "torneo": "Cary (Estados Unidos) - Fase previa"
+      },
+      "prediction": {
+        "predicted_winner": "Enzo Aguiard",
+        "confidence": 50.4
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Justin Boulais"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Ian Mayew",
+        "jugador2": "Edward Winter",
+        "match_url": "https://www.flashscore.co/match/tennis/mayew-ian-winter-edward/A91GDxLb/#/h2h",
+        "torneo": "Cary (Estados Unidos) - Fase previa"
+      },
+      "prediction": {
+        "predicted_winner": "Edward Winter",
+        "confidence": 63.2
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Edward Winter"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Christian Langmo",
+        "jugador2": "Samir Banerjee",
+        "match_url": "https://www.flashscore.co/match/tennis/langmo-christian-banerjee-samir/nXNbee5U/#/h2h",
+        "torneo": "Cary (Estados Unidos) - Fase previa"
+      },
+      "prediction": {
+        "predicted_winner": "Samir Banerjee",
+        "confidence": 51.3
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Samir Banerjee"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Mitchell Krueger",
+        "jugador2": "Dhakshineswar Suresh",
+        "match_url": "https://www.flashscore.co/match/tennis/krueger-mitchell-suresh-dhakshineswar/6L0T2L6t/#/h2h",
+        "torneo": "Cary (Estados Unidos) - Fase previa"
+      },
+      "prediction": {
+        "predicted_winner": "Dhakshineswar Suresh",
+        "confidence": 55.4
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Dhakshineswar Suresh"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Ronit Karki",
+        "jugador2": "James Kent Trotter",
+        "match_url": "https://www.flashscore.co/match/tennis/karki-ronit-trotter-james-kent/xd38Fbjn/#/h2h",
+        "torneo": "Cary (Estados Unidos) - Fase previa"
+      },
+      "prediction": {
+        "predicted_winner": "James Kent Trotter",
+        "confidence": 51
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "James Kent Trotter"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Daniel Milavsky",
+        "jugador2": "Ozan Baris",
+        "match_url": "https://www.flashscore.co/match/tennis/milavsky-daniel-baris-ozan/6gMraw65/#/h2h",
+        "torneo": "Cary (Estados Unidos) - Fase previa"
+      },
+      "prediction": {
+        "predicted_winner": "Ozan Baris",
+        "confidence": 52.7
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Ozan Baris"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Giuseppe La Vela",
+        "jugador2": "Petr Nesterov",
+        "match_url": "https://www.flashscore.co/match/tennis/la-vela-giuseppe-nesterov-petr/0C5lHYXQ/#/h2h",
+        "torneo": "Milan (Italia) - Fase previa"
+      },
+      "prediction": {
+        "predicted_winner": "Petr Nesterov",
+        "confidence": 55.4
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Petr Nesterov"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Salvador Price",
+        "jugador2": "Martin Maldonado",
+        "match_url": "https://www.flashscore.co/match/tennis/price-salvador-maldonado-martin/zXMAzuvm/#/h2h",
+        "torneo": "Quito (Ecuador) - Fase previa"
+      },
+      "prediction": {
+        "predicted_winner": "Salvador Price",
+        "confidence": 59.5
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Martin Maldonado"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Tsz Fu Wong",
+        "jugador2": "Segundo Goity Zapico",
+        "match_url": "https://www.flashscore.co/match/tennis/wong-tsz-fu-goity-zapico-segundo/GAOQWdwC/#/h2h",
+        "torneo": "Quito (Ecuador) - Fase previa"
+      },
+      "prediction": {
+        "predicted_winner": "Segundo Goity Zapico",
+        "confidence": 64.2
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Segundo Goity Zapico"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Lucas Andrade Da Silva",
+        "jugador2": "Jorge Ruiz",
+        "match_url": "https://www.flashscore.co/match/tennis/andrade-da-silva-lucas-ruiz-jorge/rcQIYI8a/#/h2h",
+        "torneo": "Quito (Ecuador) - Fase previa"
+      },
+      "prediction": {
+        "predicted_winner": "Lucas Andrade Da Silva",
+        "confidence": 80.8
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Lucas Andrade Da Silva"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Herman Hoeyeraal",
+        "jugador2": "Alan Wazny",
+        "match_url": "https://www.flashscore.co/match/tennis/hoeyeraal-herman-wazny-alan/MNcAv6PE/#/h2h",
+        "torneo": "M15 Rzeszow (Polonia)"
+      },
+      "prediction": {
+        "predicted_winner": "Herman Hoeyeraal",
+        "confidence": 50.8
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Herman Hoeyeraal"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Alexis Nguyen",
+        "jugador2": "Alyssa Ahn",
+        "match_url": "https://www.flashscore.co/match/tennis/nguyen-alexis-ahn-alyssa/UBaxLgug/#/h2h",
+        "torneo": "W15 Claremont, CA (Estados Unidos)"
+      },
+      "prediction": {
+        "predicted_winner": "Alyssa Ahn",
+        "confidence": 51
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Alexis Nguyen"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Eva Vedder",
+        "jugador2": "Elena Micic",
+        "match_url": "https://www.flashscore.co/match/tennis/vedder-eva-micic-elena/r73aAoho/#/h2h",
+        "torneo": "W50 Palma del Rio (España)"
+      },
+      "prediction": {
+        "predicted_winner": "Eva Vedder",
+        "confidence": 52.3
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Eva Vedder"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    }
+  ]
+}

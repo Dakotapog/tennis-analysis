@@ -1,0 +1,53 @@
+{
+  "ts_registro": "2026-06-18T10:38:21.312361",
+  "ts_bookmarklet": "2026-06-18T15:38:21.013Z",
+  "estado": "CERRADO",
+  "betslip_index": "reports/betslip_index_20260618_100526.json",
+  "n_picks": 2,
+  "picks": [
+    {
+      "outcome_id": "4227006761",
+      "jugador": "Jiaqi Wang",
+      "cuota": 3.3,
+      "cuota_kambi": 3.3,
+      "partido": "Jiaqi Wang vs Han Shi",
+      "match_id": "Kb7PUrsm",
+      "match_url": "https://www.flashscore.co/match/tennis/wang-jiaqi-shi-han/Kb7PUrsm/#/h2h",
+      "torneo": "W35 Zhengzhou (China)",
+      "superficie": "?",
+      "tier": "?",
+      "edge": "20.2%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0,
+      "stake": 1000,
+      "retorno_potencial": 3300.0,
+      "resultado_real": "Jiaqi Wang",
+      "correcto": true,
+      "ganancia": 2300,
+      "sets": "2-0"
+    },
+    {
+      "outcome_id": "4226561934",
+      "jugador": "Arthur Fery",
+      "cuota": 2.6,
+      "cuota_kambi": 2.6,
+      "partido": "Arthur Fery vs Francisco Cerundolo",
+      "match_id": "hA6Wwi1d",
+      "match_url": "https://www.flashscore.co/match/tennis/fery-arthur-cerundolo-francisco/hA6Wwi1d/#/h2h",
+      "torneo": "Londres (Reino Unido)",
+      "superficie": "?",
+      "tier": "?",
+      "edge": "14.9%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0,
+      "stake": 0,
+      "retorno_potencial": 0,
+      "resultado_real": "Francisco Cerundolo",
+      "correcto": false,
+      "ganancia": 0,
+      "sets": "1-2"
+    }
+  ],
+  "pl_sesion": 2300,
+  "ts_cierre": "2026-06-28T09:55:30.882549"
+}

@@ -1,0 +1,32 @@
+{
+  "ts_registro": "2026-06-26T00:55:34.911353",
+  "ts_bookmarklet": "2026-06-26T05:55:34.213Z",
+  "estado": "CERRADO",
+  "betslip_index": "reports/betslip_index_20260626_003700.json",
+  "n_picks": 1,
+  "picks": [
+    {
+      "outcome_id": "4236432762",
+      "jugador": "Sandro Kopp",
+      "cuota": 1.62,
+      "cuota_kambi": 1.62,
+      "partido": "Sandro Kopp vs Petr Nesterov",
+      "match_id": "SfcjEc7L",
+      "match_url": "https://www.flashscore.co/match/tennis/kopp-sandro-blanch-dali/SfcjEc7L/#/h2h",
+      "torneo": "Plovdiv (Bulgaria)",
+      "superficie": "clay",
+      "tier": "challenger",
+      "edge": "21.0%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0,
+      "stake": 0,
+      "retorno_potencial": 0,
+      "resultado_real": "Sandro Kopp",
+      "correcto": true,
+      "ganancia": 0,
+      "sets": "2-0"
+    }
+  ],
+  "pl_sesion": 0,
+  "ts_cierre": "2026-06-27T07:51:15.662070"
+}

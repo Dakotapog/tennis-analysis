@@ -1,0 +1,12 @@
+{
+  "player x": {
+    "display_name": "Player X",
+    "n_apostado": 2,
+    "n_ganado": 2,
+    "profit_total": 1500.0,
+    "total_apostado": 1000.0,
+    "roi": 1.5,
+    "avg_cuota": 2.5,
+    "last_seen": "2026-06-15T10:00:00"
+  }
+}

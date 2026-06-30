@@ -1,0 +1,110 @@
+{
+  "metadata": {
+    "timestamp": "20260609_122648",
+    "bankroll": 10000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260609_115832.json",
+    "n_partidos_analizados": 51,
+    "calibracion_n": 284,
+    "parametros": {
+      "modo": "cobertura",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Giannicola Misasi vs Giorgio Tabacco",
+      "favorito": "Giannicola Misasi",
+      "cuota": 3.6,
+      "edge_pct": "22.7%",
+      "p_modelo": 0.505,
+      "n_h2h": 0,
+      "p_blend": 0.6778846153846154,
+      "kelly_kl": 0.3509,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Londyn McCord vs Elena-Teodora Cadar",
+      "favorito": "Elena-Teodora Cadar",
+      "cuota": 1.16,
+      "edge_pct": "8.8%",
+      "p_modelo": 0.95,
+      "n_h2h": 0,
+      "p_blend": 0.6778846153846154,
+      "kelly_kl": 0.0797,
+      "kelly_usado": 0.0,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "heavy_favorite",
+      "superficie": "hard"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Giannicola Misasi",
+          "cuota": 3.6
+        },
+        {
+          "jugador": "Ryan Colby",
+          "cuota": 2.1
+        },
+        {
+          "jugador": "Karl Poling",
+          "cuota": 2.0
+        }
+      ],
+      "cuota_combo": 15.12,
+      "hr_combo": 0.296,
+      "ev_combo": 3.4757,
+      "excluidos": [],
+      "stake": 2000,
+      "retorno_potencial": 30240.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.9090909090909091,
+    "total_ajustado": 7272.727272727272,
+    "var_95": -6000.0,
+    "cvar_95": -5999.999999999999,
+    "expected_pl": 20859.845039579996,
+    "sharpe_ratio": 0.5036679804638092,
+    "kelly_growth_rate": 0.8041427751657273,
+    "sessions_to_double": 0.8619702893147219,
+    "var_excedido": true,
+    "factor_var": 0.4166666666666667
+  },
+  "resumen": {
+    "gastado_individuales": 0,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 2000,
+    "total_en_riesgo": 2000.0,
+    "pct_bankroll_en_riesgo": 0.2,
+    "n_senales_apostar": 2,
+    "pool_cobertura": 3,
+    "alerta_riesgo": false
+  }
+}

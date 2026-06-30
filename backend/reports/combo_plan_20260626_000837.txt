@@ -1,0 +1,210 @@
+==============================================================
+COMBO PLAN — 2026-06-26  |  Confianza minima: 53.0%
+Fuente: h2h_results_enhanced_20260625_092551.json
+Picks seleccionados: 31
+==============================================================
+
+PICKS SELECCIONADOS (ordenados por confianza):
+   1. [DIAMOND 95.0%]  Andy Nguyen                     @1.10  ITF FEMENINO - INDIVIDUALES: W15 Claremont, C
+   2. [DIAMOND 83.5%]  Max Hans Rehberg                @1.01  ITF MASCULINO - INDIVIDUALES: M25 Brussels (B
+   3. [DIAMOND 82.1%]  Nicolas Kicker                  @1.22  CHALLENGER MASCULINO - INDIVIDUALES: Piracica
+   4. [DIAMOND 80.8%]  Juan Manuel La Serna            @1.13  CHALLENGER MASCULINO - INDIVIDUALES: Piracica
+   5. [DIAMOND 78.4%]  Grigor Dimitrov                 @2.40  ATP - INDIVIDUALES: Mallorca (España), hierba
+   6. [SILVER  63.2%]  Mert Alkaya                     @1.05  ITF MASCULINO - INDIVIDUALES: M25 Porto (Port
+   7. [SILVER  61.8%]  Alexandra Vagramov              @1.19  ITF FEMENINO - INDIVIDUALES: W15 Claremont, C
+   8. [SILVER  61.5%]  Karol Filar                     @1.18  ITF MASCULINO - INDIVIDUALES: M15 Rzeszow (Po
+   9. [SILVER  60.9%]  Miho Kuramochi                  @1.06  ITF FEMENINO - INDIVIDUALES: W15 Sapporo 2 (J
+  10. [SILVER  60.7%]  Elena Micic                     @1.12  ITF FEMENINO - INDIVIDUALES: W50 Palma del Ri
+  11. [SILVER  60.1%]  Alyssa Ahn                      @1.28  ITF FEMENINO - INDIVIDUALES: W15 Claremont, C
+  12. [SILVER  60.1%]  Max Purcell                     @1.12  ITF MASCULINO - INDIVIDUALES: M15 Wuning 3 (C
+  13. [SILVER  58.5%]  Salma Ewing                     @1.18  ITF FEMENINO - INDIVIDUALES: W15 Claremont, C
+  14. [SILVER  57.9%]  Bor Artnak                      @1.20  ITF MASCULINO - INDIVIDUALES: M15 Slovenska B
+  15. [SILVER  57.2%]  Dylan Dietrich                  @1.29  ITF MASCULINO - INDIVIDUALES: M25 Brussels (B
+  16. [BRONZE  56.8%]  Anna Snigireva                  @1.49  ITF FEMENINO - INDIVIDUALES: W15 Maanshan 3 (
+  17. [BRONZE  56.8%]  Fanming Meng                    @1.22  ITF MASCULINO - INDIVIDUALES: M15 Wuning 3 (C
+  18. [BRONZE  56.3%]  Sae Noguchi                     @1.46  ITF FEMENINO - INDIVIDUALES: W15 Sapporo 2 (J
+  19. [BRONZE  55.9%]  Samuele Pieri                   @1.29  ITF MASCULINO - INDIVIDUALES: M25 Brussels (B
+  20. [BRONZE  55.1%]  Lucia Bronzetti                 @1.33  WTA - INDIVIDUALES: Wimbledon (Reino Unido) -
+  21. [BRONZE  55.0%]  Anne-Christine Lutkemeyer       @1.42  ITF FEMENINO - INDIVIDUALES: W15 Claremont, C
+  22. [BRONZE  55.0%]  Eva Vedder                      @1.07  ITF FEMENINO - INDIVIDUALES: W50 Palma del Ri
+  23. [BRONZE  54.3%]  Carolyn Ansari                  @1.06  ITF FEMENINO - INDIVIDUALES: W50 Palma del Ri
+  24. [BRONZE  54.0%]  Matthew Dellavedova             @1.20  ITF MASCULINO - INDIVIDUALES: M15 Wuning 3 (C
+  25. [BRONZE  53.9%]  Thiago Seyboth Wild             @1.09  CHALLENGER MASCULINO - INDIVIDUALES: Piracica
+  26. [BRONZE  53.8%]  Jiaqi Wang                      @1.85  ITF FEMENINO - INDIVIDUALES: W15 Maanshan 3 (
+  27. [BRONZE  53.4%]  Han Shi                         @1.29  ITF FEMENINO - INDIVIDUALES: W50 Palma del Ri
+  28. [BRONZE  53.3%]  Meiqi Guo                       @1.24  ITF FEMENINO - INDIVIDUALES: W15 Maanshan 3 (
+  29. [BRONZE  53.2%]  Alexis Nguyen                   @1.28  ITF FEMENINO - INDIVIDUALES: W15 Claremont, C
+  30. [BRONZE  53.1%]  Federico Arnaboldi              @1.47  ITF MASCULINO - INDIVIDUALES: M15 Bergamo (It
+  31. [BRONZE  53.0%]  Ayumi Miyamoto                  @1.64  ITF FEMENINO - INDIVIDUALES: W15 Sapporo 2 (J
+
+PORTFOLIO DE COMBOS:
+--------------------------------------------------------------
+
+C5 — PRINCIPAL
+  Picks (5): Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov
+  Cuotas: 1.10 x 1.01 x 1.22 x 1.13 x 2.40
+  Odds total: 3.68  |  P(win): 41.3%  |  EV: $+10,330
+  STAKE: $20,000  ->  Retorno si gana: $73,518  |  Retorno esperado: $30,330
+--------------------------------------------------------------
+
+C7 — PRINCIPAL
+  Picks (7): Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov
+  Cuotas: 1.10 x 1.01 x 1.22 x 1.13 x 2.40 x 1.05 x 1.19
+  Odds total: 4.59  |  P(win): 16.1%  |  EV: $-3,899
+  STAKE: $15,000  ->  Retorno si gana: $68,896  |  Retorno esperado: $11,101
+
+  COBERTURA C7 (5 combos, excluyen picks de menor confianza):
+    [COB_excl_Dimitrov]  Excluye: Grigor Dimitrov
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Mert Alkaya, Alexandra Vagramov, Karol Filar
+      Odds: 2.26  P(win): 12.6%  EV: $-715  STAKE: $1,000
+    [COB_excl_Alkaya]  Excluye: Mert Alkaya
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Alexandra Vagramov, Karol Filar
+      Odds: 5.16  P(win): 15.7%  EV: $-191  STAKE: $1,000
+    [COB_excl_Vagramov]  Excluye: Alexandra Vagramov
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Karol Filar
+      Odds: 4.55  P(win): 16.0%  EV: $-270  STAKE: $1,000
+    [COB_excl_Dimitrov_Alkaya]  Excluye: Grigor Dimitrov, Mert Alkaya
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Alexandra Vagramov, Karol Filar, Miho Kuramochi
+      Odds: 2.28  P(win): 12.2%  EV: $-722  STAKE: $1,000
+    [COB_excl_Dimitrov_Vagramov]  Excluye: Grigor Dimitrov, Alexandra Vagramov
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Mert Alkaya, Karol Filar, Miho Kuramochi
+      Odds: 2.01  P(win): 12.5%  EV: $-749  STAKE: $1,000
+--------------------------------------------------------------
+
+C9 — PRINCIPAL
+  Picks (9): Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Miho Kuramochi
+  Cuotas: 1.10 x 1.01 x 1.22 x 1.13 x 2.40 x 1.05 x 1.19 x 1.18 x 1.06
+  Odds total: 5.74  |  P(win): 6.0%  |  EV: $-6,533
+  STAKE: $10,000  ->  Retorno si gana: $57,450  |  Retorno esperado: $3,467
+
+  COBERTURA C9 (5 combos, excluyen picks de menor confianza):
+    [COB_excl_Vagramov]  Excluye: Alexandra Vagramov
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Karol Filar, Miho Kuramochi, Elena Micic
+      Odds: 5.41  P(win): 5.9%  EV: $-340  STAKE: $500
+    [COB_excl_Filar]  Excluye: Karol Filar
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Miho Kuramochi, Elena Micic
+      Odds: 5.45  P(win): 6.0%  EV: $-338  STAKE: $500
+    [COB_excl_Kuramochi]  Excluye: Miho Kuramochi
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Elena Micic
+      Odds: 6.07  P(win): 6.0%  EV: $-317  STAKE: $500
+    [COB_excl_Vagramov_Filar]  Excluye: Alexandra Vagramov, Karol Filar
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Miho Kuramochi, Elena Micic, Alyssa Ahn
+      Odds: 5.87  P(win): 5.8%  EV: $-330  STAKE: $500
+    [COB_excl_Vagramov_Kuramochi]  Excluye: Alexandra Vagramov, Miho Kuramochi
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Karol Filar, Elena Micic, Alyssa Ahn
+      Odds: 6.53  P(win): 5.8%  EV: $-309  STAKE: $500
+--------------------------------------------------------------
+
+C11 — PRINCIPAL
+  Picks (11): Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Miho Kuramochi, Elena Micic, Alyssa Ahn
+  Cuotas: 1.10 x 1.01 x 1.22 x 1.13 x 2.40 x 1.05 x 1.19 x 1.18 x 1.06 x 1.12 x 1.28
+  Odds total: 8.24  |  P(win): 2.2%  |  EV: $-5,731
+  STAKE: $7,000  ->  Retorno si gana: $57,652  |  Retorno esperado: $1,269
+
+  COBERTURA C11 (5 combos, excluyen picks de menor confianza):
+    [COB_excl_Kuramochi]  Excluye: Miho Kuramochi
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Elena Micic, Alyssa Ahn, Max Purcell
+      Odds: 8.70  P(win): 2.2%  EV: $-405  STAKE: $500
+    [COB_excl_Micic]  Excluye: Elena Micic
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Miho Kuramochi, Alyssa Ahn, Max Purcell
+      Odds: 8.24  P(win): 2.2%  EV: $-410  STAKE: $500
+    [COB_excl_Ahn]  Excluye: Alyssa Ahn
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Miho Kuramochi, Elena Micic, Max Purcell
+      Odds: 7.21  P(win): 2.2%  EV: $-421  STAKE: $500
+    [COB_excl_Kuramochi_Micic]  Excluye: Miho Kuramochi, Elena Micic
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Alyssa Ahn, Max Purcell, Salma Ewing
+      Odds: 9.17  P(win): 2.1%  EV: $-404  STAKE: $500
+    [COB_excl_Kuramochi_Ahn]  Excluye: Miho Kuramochi, Alyssa Ahn
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Elena Micic, Max Purcell, Salma Ewing
+      Odds: 8.02  P(win): 2.1%  EV: $-415  STAKE: $500
+--------------------------------------------------------------
+
+C13 — PRINCIPAL
+  Picks (13): Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Miho Kuramochi, Elena Micic, Alyssa Ahn, Max Purcell, Salma Ewing
+  Cuotas: 1.10 x 1.01 x 1.22 x 1.13 x 2.40 x 1.05 x 1.19 x 1.18 x 1.06 x 1.12 x 1.28 x 1.12 x 1.18
+  Odds total: 10.88  |  P(win): 0.8%  |  EV: $-4,579
+  STAKE: $5,000  ->  Retorno si gana: $54,423  |  Retorno esperado: $421
+
+  COBERTURA C13 (5 combos, excluyen picks de menor confianza):
+    [COB_excl_Ahn]  Excluye: Alyssa Ahn
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Miho Kuramochi, Elena Micic, Max Purcell, Salma Ewing, Bor Artnak
+      Odds: 10.20  P(win): 0.7%  EV: $-462  STAKE: $500
+    [COB_excl_Purcell]  Excluye: Max Purcell
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Miho Kuramochi, Elena Micic, Alyssa Ahn, Salma Ewing, Bor Artnak
+      Odds: 11.66  P(win): 0.7%  EV: $-457  STAKE: $500
+    [COB_excl_Ewing]  Excluye: Salma Ewing
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Miho Kuramochi, Elena Micic, Alyssa Ahn, Max Purcell, Bor Artnak
+      Odds: 11.07  P(win): 0.8%  EV: $-458  STAKE: $500
+    [COB_excl_Ahn_Purcell]  Excluye: Alyssa Ahn, Max Purcell
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Miho Kuramochi, Elena Micic, Salma Ewing, Bor Artnak, Dylan Dietrich
+      Odds: 11.75  P(win): 0.7%  EV: $-458  STAKE: $500
+    [COB_excl_Ahn_Ewing]  Excluye: Alyssa Ahn, Salma Ewing
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Miho Kuramochi, Elena Micic, Max Purcell, Bor Artnak, Dylan Dietrich
+      Odds: 11.16  P(win): 0.7%  EV: $-459  STAKE: $500
+--------------------------------------------------------------
+
+C15 — PRINCIPAL
+  Picks (15): Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Miho Kuramochi, Elena Micic, Alyssa Ahn, Max Purcell, Salma Ewing, Bor Artnak, Dylan Dietrich
+  Cuotas: 1.10 x 1.01 x 1.22 x 1.13 x 2.40 x 1.05 x 1.19 x 1.18 x 1.06 x 1.12 x 1.28 x 1.12 x 1.18 x 1.20 x 1.29
+  Odds total: 16.85  |  P(win): 0.3%  |  EV: $-2,870
+  STAKE: $3,000  ->  Retorno si gana: $50,548  |  Retorno esperado: $130
+
+  COBERTURA C15 (5 combos, excluyen picks de menor confianza):
+    [COB_excl_Ewing]  Excluye: Salma Ewing
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Miho Kuramochi, Elena Micic, Alyssa Ahn, Max Purcell, Bor Artnak, Dylan Dietrich, Anna Snigireva
+      Odds: 21.28  P(win): 0.2%  EV: $-474  STAKE: $500
+    [COB_excl_Artnak]  Excluye: Bor Artnak
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Miho Kuramochi, Elena Micic, Alyssa Ahn, Max Purcell, Salma Ewing, Dylan Dietrich, Anna Snigireva
+      Odds: 20.92  P(win): 0.3%  EV: $-474  STAKE: $500
+    [COB_excl_Dietrich]  Excluye: Dylan Dietrich
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Miho Kuramochi, Elena Micic, Alyssa Ahn, Max Purcell, Salma Ewing, Bor Artnak, Anna Snigireva
+      Odds: 19.46  P(win): 0.3%  EV: $-475  STAKE: $500
+    [COB_excl_Ewing_Artnak]  Excluye: Salma Ewing, Bor Artnak
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Miho Kuramochi, Elena Micic, Alyssa Ahn, Max Purcell, Dylan Dietrich, Anna Snigireva, Fanming Meng
+      Odds: 21.63  P(win): 0.2%  EV: $-474  STAKE: $500
+    [COB_excl_Ewing_Dietrich]  Excluye: Salma Ewing, Dylan Dietrich
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Miho Kuramochi, Elena Micic, Alyssa Ahn, Max Purcell, Bor Artnak, Anna Snigireva, Fanming Meng
+      Odds: 20.12  P(win): 0.2%  EV: $-475  STAKE: $500
+--------------------------------------------------------------
+
+C20 — PRINCIPAL
+  Picks (20): Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Miho Kuramochi, Elena Micic, Alyssa Ahn, Max Purcell, Salma Ewing, Bor Artnak, Dylan Dietrich, Anna Snigireva, Fanming Meng, Sae Noguchi, Samuele Pieri, Lucia Bronzetti
+  Cuotas: 1.10 x 1.01 x 1.22 x 1.13 x 2.40 x 1.05 x 1.19 x 1.18 x 1.06 x 1.12 x 1.28 x 1.12 x 1.18 x 1.20 x 1.29 x 1.49 x 1.22 x 1.46 x 1.29 x 1.33
+  Odds total: 76.72  |  P(win): 0.0%  |  EV: $-989
+  STAKE: $1,000  ->  Retorno si gana: $76,723  |  Retorno esperado: $11
+
+  COBERTURA C20 (5 combos, excluyen picks de menor confianza):
+    [COB_excl_Noguchi]  Excluye: Sae Noguchi
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Miho Kuramochi, Elena Micic, Alyssa Ahn, Max Purcell, Salma Ewing, Bor Artnak, Dylan Dietrich, Anna Snigireva, Fanming Meng, Samuele Pieri, Lucia Bronzetti, Anne-Christine Lutkemeyer
+      Odds: 74.62  P(win): 0.0%  EV: $-495  STAKE: $500
+    [COB_excl_Pieri]  Excluye: Samuele Pieri
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Miho Kuramochi, Elena Micic, Alyssa Ahn, Max Purcell, Salma Ewing, Bor Artnak, Dylan Dietrich, Anna Snigireva, Fanming Meng, Sae Noguchi, Lucia Bronzetti, Anne-Christine Lutkemeyer
+      Odds: 84.46  P(win): 0.0%  EV: $-494  STAKE: $500
+    [COB_excl_Bronzetti]  Excluye: Lucia Bronzetti
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Miho Kuramochi, Elena Micic, Alyssa Ahn, Max Purcell, Salma Ewing, Bor Artnak, Dylan Dietrich, Anna Snigireva, Fanming Meng, Sae Noguchi, Samuele Pieri, Anne-Christine Lutkemeyer
+      Odds: 81.92  P(win): 0.0%  EV: $-494  STAKE: $500
+    [COB_excl_Noguchi_Pieri]  Excluye: Sae Noguchi, Samuele Pieri
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Miho Kuramochi, Elena Micic, Alyssa Ahn, Max Purcell, Salma Ewing, Bor Artnak, Dylan Dietrich, Anna Snigireva, Fanming Meng, Lucia Bronzetti, Anne-Christine Lutkemeyer, Eva Vedder
+      Odds: 61.90  P(win): 0.0%  EV: $-496  STAKE: $500
+    [COB_excl_Noguchi_Bronzetti]  Excluye: Sae Noguchi, Lucia Bronzetti
+      Picks: Andy Nguyen, Max Hans Rehberg, Nicolas Kicker, Juan Manuel La Serna, Grigor Dimitrov, Mert Alkaya, Alexandra Vagramov, Karol Filar, Miho Kuramochi, Elena Micic, Alyssa Ahn, Max Purcell, Salma Ewing, Bor Artnak, Dylan Dietrich, Anna Snigireva, Fanming Meng, Samuele Pieri, Anne-Christine Lutkemeyer, Eva Vedder
+      Odds: 60.03  P(win): 0.0%  EV: $-496  STAKE: $500
+--------------------------------------------------------------
+
+RESUMEN PORTFOLIO:
+  Total combos:             37
+  Total invertido:          $78,500
+  Retorno esperado total:   $50,752
+  EV total:                 $-27,748
+  Combos con toler. 1 fallo: 18
+  Combos con toler. 2 fallos:12
+
+NOTAS:
+  - DIAMOND (>=75%) y GOLD (>=65%) entran desde C5.
+  - SILVER (57-65%) entra desde C7.
+  - BRONZE (53-57%) entra desde C9 y son prioritarios en exclusion.
+  - Combos de cobertura sobreviven si el pick excluido falla.
+  - EV calculado como: stake*(odds_total*P_modelo - 1).
+  - P_modelo = producto de confianzas individuales (no calibradas Kelly-KL).
+  - NO desplegar si EV total < 0 o si los combos C5/C7 tienen P(win)<20%.
+==============================================================

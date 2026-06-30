@@ -12,6 +12,11 @@ from analysis.erdos_graph import (
 
 logger = logging.getLogger(__name__)
 
+# Nodo-32 Fase 3: versión del cálculo de predicción serializada en h2h_results_enhanced.
+# Incrementar al cambiar el punto de aplicación de factores Markov/tardío (afecta `confidence`).
+# Consumidores validan este campo para rechazar archivos generados con Markov PRE-norm.
+RIVALRY_VERSION = "nodo32-fase3-markov-postnorm"
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # T21-06 (Nodo-21 Fase 2) — Densidad local del grafo como modulador continuo
@@ -327,6 +332,61 @@ class RivalryAnalyzer:
             analysis_log.insert(0, f"📊 Puntuación total de 'Strength of Schedule': {schedule_score:.1f}")
 
         return schedule_score, analysis_log
+
+    # ═══════════════════════════════════════════════════════════════════
+    # N29 — CIRCUIT ASYMMETRY DEFLATOR (CAD)
+    # ═══════════════════════════════════════════════════════════════════
+
+    def circuit_tier_index(self, player_history):
+        """
+        Nodo-29: Calcula el Circuit Tier Index (CTI) del jugador.
+
+        Mide el nivel promedio del circuito donde ha competido basándose
+        en el ranking de los oponentes enfrentados. Ponderación temporal:
+        los últimos 10 partidos pesan 2× para capturar el circuito ACTUAL.
+
+        Criterios por partido:
+          ranking ≤ 10  → tier_score = 5.0  (élite absoluta)
+          ranking ≤ 50  → tier_score = 4.0  (top ATP)
+          ranking ≤ 100 → tier_score = 3.0  (ATP consolidado)
+          ranking ≤ 200 → tier_score = 2.0  (ATP/Challenger alto)
+          ranking ≤ 500 → tier_score = 1.0  (Challenger/ITF alto)
+          ranking > 500 → tier_score = 0.0  (ITF bajo)
+
+        Returns:
+            tuple(float, int): (CTI 0.0–5.0, n_partidos_con_ranking)
+        """
+        if not player_history:
+            return 0.0, 0
+
+        def rank_to_tier_score(rank):
+            if rank <= 10:  return 5.0
+            if rank <= 50:  return 4.0
+            if rank <= 100: return 3.0
+            if rank <= 200: return 2.0
+            if rank <= 500: return 1.0
+            return 0.0
+
+        scores = []
+        weights_list = []
+        n_con_ranking = 0
+
+        for i, match in enumerate(player_history):
+            rank = match.get('opponent_ranking')
+            if rank is None or rank <= 0:
+                continue
+            n_con_ranking += 1
+            ts = rank_to_tier_score(rank)
+            # Últimos 10 (i < 10) pesan 2×, resto 1× (REGLA-N29-3)
+            w = 2.0 if i < 10 else 1.0
+            scores.append(ts * w)
+            weights_list.append(w)
+
+        if not scores:
+            return 0.0, 0
+
+        cti = sum(scores) / sum(weights_list)
+        return round(cti, 3), n_con_ranking
 
     def analyze_streaks_and_consistency(self, player_history, player_name):
         """
@@ -667,11 +727,12 @@ class RivalryAnalyzer:
         🔬 Analiza la especialización y calidad de un jugador en una superficie específica.
         Recompensa victorias de calidad y considera la tasa de victorias.
         """
+        _empty_meta = {'score': 0, 'raw_score': 0.0, 'win_rate': 0.0, 'matches': 0, 'skill_factor': 1.0, 'alpha_bonus': 1.0, 'volume_confidence': 0.0, 'surface_alpha': 0.0}
         if not player_history:
-            return 0, []
+            return _empty_meta, []
 
         if not surface or surface == 'Desconocida':
-            return 0, []
+            return _empty_meta, []
 
         # Normalizar superficie de entrada (puede venir ya normalizada o en minúsculas)
         surface_lower = surface.lower() if surface else ''
@@ -696,8 +757,8 @@ class RivalryAnalyzer:
             if match_surface_normalized == normalized_surface:
                 surface_matches.append(m)
 
-        if len(surface_matches) < 3: # AJUSTADO: Reducido a 3 partidos mínimos
-            return 0, [f"LOG_SURFACE: No hay suficientes partidos en {normalized_surface} ({len(surface_matches)}) para un análisis profundo."]
+        if len(surface_matches) < 2: # Mínimo 2 partidos; VolConf (n/8) penaliza muestras pequeñas
+            return {'score': 0, 'raw_score': 0.0, 'win_rate': 0.0, 'matches': len(surface_matches), 'skill_factor': 1.0, 'alpha_bonus': 1.0, 'volume_confidence': 0.0, 'surface_alpha': 0.0}, [f"LOG_SURFACE: No hay suficientes partidos en {normalized_surface} ({len(surface_matches)}) para un análisis profundo."]
         
         quality_score = 0
         analysis_log = []
@@ -729,18 +790,123 @@ class RivalryAnalyzer:
 
             quality_score += points
 
+        # FIX-4: Bonus torneo completo — ≥4 victorias sin derrotas en mismo torneo+año
+        # Ganar un torneo completo es cualitativamente diferente a partidos dispersos
+        # Si torneo='N/A' (Ninja API no devuelve KF), agrupar por semana del año
+        import datetime as _dt_mod
+        _tour_stats = {}
+        _today = _dt_mod.datetime.today()
+        for _m in surface_matches:
+            _tname = str(_m.get('torneo', '') or '')
+            _fecha_str = str(_m.get('fecha', '') or '')
+            _tyear = _fecha_str[-4:] if len(_fecha_str) >= 4 else _fecha_str
+            if _tname in ('N/A', '', 'Unknown'):
+                try:
+                    _dt = _dt_mod.datetime.strptime(_fecha_str, '%d.%m.%Y')
+                    _tname = f'_semana_{_dt.isocalendar()[1]}'
+                except Exception:
+                    _tname = f'_chunk_{_tyear}'
+            _tk = (_tname, _tyear)
+            if _tk not in _tour_stats:
+                _tour_stats[_tk] = {'wins': 0, 'losses': 0, 'label': _tname,
+                                    'max_fecha': None, 'best_opp_rank': 9999}
+            if self.determine_match_winner(_m, player_name):
+                _tour_stats[_tk]['wins'] += 1
+            else:
+                _tour_stats[_tk]['losses'] += 1
+            # Track recency and best opponent
+            try:
+                _mdate = _dt_mod.datetime.strptime(_fecha_str, '%d.%m.%Y')
+                if _tour_stats[_tk]['max_fecha'] is None or _mdate > _tour_stats[_tk]['max_fecha']:
+                    _tour_stats[_tk]['max_fecha'] = _mdate
+            except Exception:
+                pass
+            _opp_rank = _m.get('opponent_ranking') or _m.get('ranking_oponente') or 9999
+            try:
+                _opp_rank = int(_opp_rank)
+            except (ValueError, TypeError):
+                _opp_rank = 9999
+            if _opp_rank < _tour_stats[_tk]['best_opp_rank']:
+                _tour_stats[_tk]['best_opp_rank'] = _opp_rank
+
+        for (_tname, _tyear), _ts in _tour_stats.items():
+            if _ts['wins'] >= 4 and _ts['losses'] == 0:
+                # Gate: torneo debe ser reciente (≤90 días). Un torneo de hace 1 año no es señal.
+                if _ts['max_fecha'] is not None:
+                    _days_ago = (_today - _ts['max_fecha']).days
+                    if _days_ago > 90:
+                        analysis_log.append(
+                            f"TORNEO_COMPLETO_EXPIRADO: {_tname} {_tyear} "
+                            f"({_ts['wins']}W-0L, hace {_days_ago}d) → sin bonus (>90d)"
+                        )
+                        continue
+                else:
+                    continue  # sin fecha = no podemos verificar recencia
+                # E-2: Bonus escalonado — base 1.3 + recency + top10 + final
+                _bonus = 1.3
+                _bonus_parts = []
+                # +0.2 si torneo terminó hace <=14 días
+                if _days_ago <= 14:
+                    _bonus += 0.2
+                    _bonus_parts.append(f'recency({_days_ago}d)')
+                # +0.1 si venció a Top-10
+                if _ts['best_opp_rank'] <= 10:
+                    _bonus += 0.1
+                    _bonus_parts.append(f'top10(#{_ts["best_opp_rank"]})')
+                # +0.1 si >=5 victorias (implica final ganada)
+                if _ts['wins'] >= 5:
+                    _bonus += 0.1
+                    _bonus_parts.append(f'final({_ts["wins"]}W)')
+                _bonus = min(_bonus, 2.0)  # cap
+                quality_score *= _bonus
+                _parts_str = ' + '.join(_bonus_parts) if _bonus_parts else 'base'
+                analysis_log.append(
+                    f"TORNEO_COMPLETO_BONUS: {_tname} {_tyear} "
+                    f"({_ts['wins']}W-0L) → x{_bonus:.1f} quality_score [{_parts_str}]"
+                )
+                break  # un solo bonus aunque haya múltiples torneos completos
+
         # Normalizar por número de partidos para no favorecer a quien jugó más
         normalized_quality_score = (quality_score / len(surface_matches)) * 2.5
         
         # Factor de tasa de victorias
         wins = sum(1 for m in surface_matches if self.determine_match_winner(m, player_name))
         win_rate = (wins / len(surface_matches))
-        
-        final_score = normalized_quality_score * (1 + win_rate) # Ponderar por win_rate
-        
-        analysis_log.insert(0, f"Puntuación de Calidad en {normalized_surface}: {final_score:.1f} (Base: {quality_score:.1f}, Partidos: {len(surface_matches)}, Tasa Vic: {win_rate:.1%})")
 
-        return final_score, analysis_log
+        # Skill Factor — función convexa anclada en 50% (coin flip = neutral)
+        # 85% → 2.22x | 60% → 1.33x | 50% → 1.0x | 33% → 0.54x
+        # Reemplaza (1 + win_rate) que solo daba rango [1.0, 2.0] con ratio máximo 1.27x
+        skill_factor = (max(win_rate, 0.01) / 0.5) ** 1.5
+
+        # Surface Alpha — win rate en esta superficie vs overall (alpha_vs_elo para superficies)
+        # Positivo = especialista real. Negativo = peor en esta superficie que en general.
+        overall_wins = sum(1 for m in player_history if self.determine_match_winner(m, player_name))
+        overall_wr = overall_wins / max(len(player_history), 1)
+        surface_alpha = win_rate - overall_wr
+        alpha_bonus = 1.0 + max(surface_alpha, 0) * 2.0  # +10% alpha → 1.20x boost
+
+        final_score = normalized_quality_score * skill_factor * alpha_bonus
+
+        # Confianza por volumen: n=2→0.25, n=5→0.63, n=8+→1.0
+        volume_confidence = min(len(surface_matches) / 8.0, 1.0)
+        final_score = final_score * volume_confidence
+
+        analysis_log.insert(0, f"Puntuación de Calidad en {normalized_surface}: {final_score:.1f} (Base: {quality_score:.1f}, Partidos: {len(surface_matches)}, Tasa Vic: {win_rate:.1%}, SkillF: {skill_factor:.2f}, Alpha: {surface_alpha:+.1%}, VolConf: {volume_confidence:.2f})")
+
+        # Flag for E-1 dynamic weight boost
+        _has_torneo_bonus = any('TORNEO_COMPLETO_BONUS' in l for l in analysis_log)
+
+        return {
+            'score':             round(final_score, 4),
+            'raw_score':         round(normalized_quality_score, 4),
+            'win_rate':          round(win_rate, 4),
+            'matches':           len(surface_matches),
+            'skill_factor':      round(skill_factor, 4),
+            'alpha_bonus':       round(alpha_bonus, 4),
+            'volume_confidence': round(volume_confidence, 4),
+            'surface_alpha':     round(surface_alpha, 4),
+            'torneo_completo':   _has_torneo_bonus,
+        }, analysis_log
 
     def analyze_surface_performance(self, player_history, player_name):
         """📊 Analiza el rendimiento de un jugador por superficie."""
@@ -912,21 +1078,52 @@ class RivalryAnalyzer:
         player2_advantages = []
         p1_common_opponent_score = 0
         p2_common_opponent_score = 0
-        
+
+        # M-28-3 (Nodo-28 Fase 1): superficie del partido objetivo para filtrar common_opponents
+        _target_surface_raw = prediction_context.get('current_match_surface', '')
+        _target_surface = self.SURFACE_NORMALIZATION_MAP.get(
+            (_target_surface_raw or '').lower(), _target_surface_raw
+        ) if _target_surface_raw else None
+
         for common_opponent in common_opponents:
-            p1_matches = [m for m in player1_history if self.ranking_manager.normalize_name(m.get('oponente', '')) == common_opponent]
-            p2_matches = [m for m in player2_history if self.ranking_manager.normalize_name(m.get('oponente', '')) == common_opponent]
-            
+            p1_matches_all = [m for m in player1_history if self.ranking_manager.normalize_name(m.get('oponente', '')) == common_opponent]
+            p2_matches_all = [m for m in player2_history if self.ranking_manager.normalize_name(m.get('oponente', '')) == common_opponent]
+
+            # M-28-1: preferir partidos en misma superficie; fallback a todos
+            if _target_surface:
+                p1_matches_surf = [m for m in p1_matches_all if self.SURFACE_NORMALIZATION_MAP.get((m.get('superficie', '') or '').lower(), m.get('superficie', '')) == _target_surface or m.get('superficie', '') == _target_surface]
+                p2_matches_surf = [m for m in p2_matches_all if self.SURFACE_NORMALIZATION_MAP.get((m.get('superficie', '') or '').lower(), m.get('superficie', '')) == _target_surface or m.get('superficie', '') == _target_surface]
+                p1_matches = p1_matches_surf if p1_matches_surf else p1_matches_all
+                p2_matches = p2_matches_surf if p2_matches_surf else p2_matches_all
+            else:
+                p1_matches = p1_matches_all
+                p2_matches = p2_matches_all
+
             if p1_matches and p2_matches:
                 p1_recent = p1_matches[0]
                 p2_recent = p2_matches[0]
-                
+
                 p1_won = self.determine_match_winner(p1_recent, player1_name)
                 p2_won = self.determine_match_winner(p2_recent, player2_name)
-                
+
                 opponent_rank = self.ranking_manager.get_player_ranking(p1_recent.get('oponente', ''))
-                
+
                 weight = self.calcular_peso_oponentes_comunes(player1_history, player2_history, common_opponent, player1_name, player2_name)
+
+                # M-28-2: surface_relevance — misma superficie +30%, otra -40%
+                if _target_surface:
+                    _p1_surf = self.SURFACE_NORMALIZATION_MAP.get((p1_recent.get('superficie', '') or '').lower(), p1_recent.get('superficie', ''))
+                    _p2_surf = self.SURFACE_NORMALIZATION_MAP.get((p2_recent.get('superficie', '') or '').lower(), p2_recent.get('superficie', ''))
+                    _p1_same = (_p1_surf == _target_surface)
+                    _p2_same = (_p2_surf == _target_surface)
+                    # Promedio de relevancia de ambos partidos
+                    _rel1 = 1.30 if _p1_same else 0.60
+                    _rel2 = 1.30 if _p2_same else 0.60
+                    surface_relevance = (_rel1 + _rel2) / 2.0
+                else:
+                    surface_relevance = 1.0
+                weight *= surface_relevance
+
                 opponent_display_rank = f"(rank {opponent_rank})" if opponent_rank is not None else "(rank N/A)"
                 common_opponent_name = p1_recent.get('oponente', '')
 
@@ -939,7 +1136,7 @@ class RivalryAnalyzer:
                         elif 31 <= opponent_rank <= 50: advantage_points *= 1.1  # AJUSTADO
                     
                     reason = f"{player1_name} venció a {common_opponent_name} {opponent_display_rank}, mientras que {player2_name} perdió"
-                    advantage = {'opponent': common_opponent_name, 'opponent_rank': opponent_rank, 'weight': advantage_points, 'reason': reason, 'player1_result': p1_recent.get('resultado', ''), 'player2_result': p2_recent.get('resultado', '')}
+                    advantage = {'opponent': common_opponent_name, 'opponent_rank': opponent_rank, 'weight': advantage_points, 'reason': reason, 'player1_result': p1_recent.get('resultado', ''), 'player2_result': p2_recent.get('resultado', ''), 'p1_won': p1_won, 'p2_won': p2_won, 'player1_date': p1_recent.get('fecha', ''), 'player2_date': p2_recent.get('fecha', ''), 'player1_surface': p1_recent.get('superficie', ''), 'player2_surface': p2_recent.get('superficie', '')}
                     player1_advantages.append(advantage)
                     p1_common_opponent_score += advantage_points
 
@@ -952,7 +1149,7 @@ class RivalryAnalyzer:
                         elif 31 <= opponent_rank <= 50: advantage_points *= 1.1  # AJUSTADO
 
                     reason = f"{player2_name} venció a {common_opponent_name} {opponent_display_rank}, mientras que {player1_name} perdió"
-                    advantage = {'opponent': common_opponent_name, 'opponent_rank': opponent_rank, 'weight': advantage_points, 'reason': reason, 'player1_result': p1_recent.get('resultado', ''), 'player2_result': p2_recent.get('resultado', '')}
+                    advantage = {'opponent': common_opponent_name, 'opponent_rank': opponent_rank, 'weight': advantage_points, 'reason': reason, 'player1_result': p1_recent.get('resultado', ''), 'player2_result': p2_recent.get('resultado', ''), 'p1_won': p1_won, 'p2_won': p2_won, 'player1_date': p1_recent.get('fecha', ''), 'player2_date': p2_recent.get('fecha', ''), 'player1_surface': p1_recent.get('superficie', ''), 'player2_surface': p2_recent.get('superficie', '')}
                     player2_advantages.append(advantage)
                     p2_common_opponent_score += advantage_points
 
@@ -960,17 +1157,17 @@ class RivalryAnalyzer:
                 elif p1_won and p2_won:
                     contundencia_p1 = self.analizar_contundencia(p1_recent.get('resultado', ''))
                     contundencia_p2 = self.analizar_contundencia(p2_recent.get('resultado', ''))
-                    
+
                     advantage_points = (contundencia_p1 - contundencia_p2) * weight
-                    
+
                     if advantage_points > 0:
                         reason = f"Ambos vencieron a {common_opponent_name} {opponent_display_rank}, pero {player1_name} fue más contundente (Factor: {contundencia_p1:.1f} vs {contundencia_p2:.1f})"
-                        advantage = {'opponent': common_opponent_name, 'opponent_rank': opponent_rank, 'weight': advantage_points, 'reason': reason, 'player1_result': p1_recent.get('resultado', ''), 'player2_result': p2_recent.get('resultado', '')}
+                        advantage = {'opponent': common_opponent_name, 'opponent_rank': opponent_rank, 'weight': advantage_points, 'reason': reason, 'player1_result': p1_recent.get('resultado', ''), 'player2_result': p2_recent.get('resultado', ''), 'p1_won': p1_won, 'p2_won': p2_won, 'player1_date': p1_recent.get('fecha', ''), 'player2_date': p2_recent.get('fecha', ''), 'player1_surface': p1_recent.get('superficie', ''), 'player2_surface': p2_recent.get('superficie', '')}
                         player1_advantages.append(advantage)
                         p1_common_opponent_score += advantage_points
                     elif advantage_points < 0:
                         reason = f"Ambos vencieron a {common_opponent_name} {opponent_display_rank}, pero {player2_name} fue más contundente (Factor: {contundencia_p2:.1f} vs {contundencia_p1:.1f})"
-                        advantage = {'opponent': common_opponent_name, 'opponent_rank': opponent_rank, 'weight': abs(advantage_points), 'reason': reason, 'player1_result': p1_recent.get('resultado', ''), 'player2_result': p2_recent.get('resultado', '')}
+                        advantage = {'opponent': common_opponent_name, 'opponent_rank': opponent_rank, 'weight': abs(advantage_points), 'reason': reason, 'player1_result': p1_recent.get('resultado', ''), 'player2_result': p2_recent.get('resultado', ''), 'p1_won': p1_won, 'p2_won': p2_won, 'player1_date': p1_recent.get('fecha', ''), 'player2_date': p2_recent.get('fecha', ''), 'player1_surface': p1_recent.get('superficie', ''), 'player2_surface': p2_recent.get('superficie', '')}
                         player2_advantages.append(advantage)
                         p2_common_opponent_score += abs(advantage_points)
 
@@ -980,15 +1177,15 @@ class RivalryAnalyzer:
                     resistencia_p2 = self.analizar_resistencia(p2_recent.get('resultado', ''))
 
                     advantage_points = (resistencia_p1 - resistencia_p2) * weight
-                    
+
                     if advantage_points > 0:
                         reason = f"Ambos perdieron con {common_opponent_name} {opponent_display_rank}, pero {player1_name} mostró más resistencia (Factor: {resistencia_p1:.1f} vs {resistencia_p2:.1f})"
-                        advantage = {'opponent': common_opponent_name, 'opponent_rank': opponent_rank, 'weight': advantage_points, 'reason': reason, 'player1_result': p1_recent.get('resultado', ''), 'player2_result': p2_recent.get('resultado', '')}
+                        advantage = {'opponent': common_opponent_name, 'opponent_rank': opponent_rank, 'weight': advantage_points, 'reason': reason, 'player1_result': p1_recent.get('resultado', ''), 'player2_result': p2_recent.get('resultado', ''), 'p1_won': p1_won, 'p2_won': p2_won, 'player1_date': p1_recent.get('fecha', ''), 'player2_date': p2_recent.get('fecha', ''), 'player1_surface': p1_recent.get('superficie', ''), 'player2_surface': p2_recent.get('superficie', '')}
                         player1_advantages.append(advantage)
                         p1_common_opponent_score += advantage_points
                     elif advantage_points < 0:
                         reason = f"Ambos perdieron con {common_opponent_name} {opponent_display_rank}, pero {player2_name} mostró más resistencia (Factor: {resistencia_p2:.1f} vs {resistencia_p1:.1f})"
-                        advantage = {'opponent': common_opponent_name, 'opponent_rank': opponent_rank, 'weight': abs(advantage_points), 'reason': reason, 'player1_result': p1_recent.get('resultado', ''), 'player2_result': p2_recent.get('resultado', '')}
+                        advantage = {'opponent': common_opponent_name, 'opponent_rank': opponent_rank, 'weight': abs(advantage_points), 'reason': reason, 'player1_result': p1_recent.get('resultado', ''), 'player2_result': p2_recent.get('resultado', ''), 'p1_won': p1_won, 'p2_won': p2_won, 'player1_date': p1_recent.get('fecha', ''), 'player2_date': p2_recent.get('fecha', ''), 'player1_surface': p1_recent.get('superficie', ''), 'player2_surface': p2_recent.get('superficie', '')}
                         player2_advantages.append(advantage)
                         p2_common_opponent_score += abs(advantage_points)
         
@@ -1208,10 +1405,25 @@ class RivalryAnalyzer:
 
         # NUEVO: ANÁLISIS DE ESPECIALIZACIÓN POR SUPERFICIE
         current_surface = prediction_context.get('current_match_surface')
-        p1_surface_score, p1_surface_log = self.analyze_surface_specialization(player1_history, current_surface, player1_name)
-        p2_surface_score, p2_surface_log = self.analyze_surface_specialization(player2_history, current_surface, player2_name)
+        p1_surface_result, p1_surface_log = self.analyze_surface_specialization(player1_history, current_surface, player1_name)
+        p2_surface_result, p2_surface_log = self.analyze_surface_specialization(player2_history, current_surface, player2_name)
+        p1_surface_score = p1_surface_result['score']
+        p2_surface_score = p2_surface_result['score']
         if p1_surface_log: reasoning.extend([f"P1_LOG_SURF: {log}" for log in p1_surface_log])
         if p2_surface_log: reasoning.extend([f"P2_LOG_SURF: {log}" for log in p2_surface_log])
+
+        # E-1: Dynamic surface weight boost when TORNEO_COMPLETO detected
+        # A tournament champion on THIS surface deserves more weight on surface
+        _any_torneo = p1_surface_result.get('torneo_completo') or p2_surface_result.get('torneo_completo')
+        if _any_torneo and weights.get('form_recent', 0) > 0.10:
+            _boost = 0.07
+            weights['surface_specialization'] = round(weights.get('surface_specialization', 0.15) + _boost, 4)
+            weights['form_recent'] = round(weights['form_recent'] - _boost, 4)
+            reasoning.append(
+                f"LOG_E1_TORNEO_WEIGHT: surface {weights['surface_specialization']-_boost:.2f}→{weights['surface_specialization']:.2f} "
+                f"form {weights['form_recent']+_boost:.2f}→{weights['form_recent']:.2f} "
+                f"(tournament champion on this surface)"
+            )
 
         p1_streak_mult, p1_streak_log = self.analyze_streaks_and_consistency(player1_history, player1_name)
         p2_streak_mult, p2_streak_log = self.analyze_streaks_and_consistency(player2_history, player2_name)
@@ -1307,9 +1519,9 @@ class RivalryAnalyzer:
             raw_scores['h2h_direct'] = min(h2h_score * 100, 350)
 
             # 5. Rating ELO (Límite: 250)
-            # ELO ya es una puntuación, solo se necesita limitar. 
-            # Se resta el ELO por defecto para normalizar.
-            raw_scores['elo_rating'] = max(0, elo - 1500) 
+            # floor=1500, cap=250 → rango útil [1500, 1750]
+            # B-11 fix: cap explícito como los 7 componentes hermanos
+            raw_scores['elo_rating'] = min(max(0, elo - 1500), 250)
 
             # 6. Strength of Schedule (Límite: 200)
             raw_scores['strength_of_schedule'] = min(schedule_score * diversity_mult, 200)
@@ -1344,6 +1556,10 @@ class RivalryAnalyzer:
         raw_p2, days_since_p2 = calculate_raw_scores(player2_info, elo2, p2_streak_mult, p2_quality_mult, p2_diversity_mult, p2_rivalry_score, dominance_multiplier_p2, player2_form, p2_h2h_score, p2_schedule_score, p2_context)
 
         # --- MARKOV / PELT CHANGE-POINT (Nodo-02) ---
+        # Nodo-32 Fase 3: inicializados a 1.0 para que post-norm los encuentre
+        # incluso si el bloque Markov falla por datos insuficientes.
+        factor_p1 = 1.0
+        factor_p2 = 1.0
         markov_analysis = None
         try:
             from analysis.markov_analyzer import (
@@ -1372,10 +1588,8 @@ class RivalryAnalyzer:
             factor_p1 = round(factor_p1 * immunity_p1['immunity_factor'], 4)
             factor_p2 = round(factor_p2 * immunity_p2['immunity_factor'], 4)
 
-            # Aplicar al componente form_recent (límite 300 se reaplica)
-            raw_p1['form_recent'] = min(raw_p1['form_recent'] * factor_p1, 300)
-            raw_p2['form_recent'] = min(raw_p2['form_recent'] * factor_p2, 300)
-
+            # Nodo-32 Fase 3: factor_p1/p2 se aplican POST-normalizacion (ver abajo).
+            # PRE-norm causaba compresión por log1p → delta ~0.072 (ruido imperceptible).
             reasoning.append(
                 f"LOG_MARKOV_P1: estado={markov_p1['estado_actual']} "
                 f"momentum={markov_p1['momentum']} factor={factor_p1} "
@@ -1400,6 +1614,7 @@ class RivalryAnalyzer:
             reasoning.append(f"LOG_MARKOV_ERROR: {_markov_err}")
 
         # --- FACTOR TARDÍO (T14-02) — win rate en partidos de 4to/5to set ---
+        factor_tardio = 1.0  # Nodo-32 Fase 3: inicializado para post-norm
         tardio_analysis = None
         try:
             from analysis.markov_analyzer import (
@@ -1411,7 +1626,7 @@ class RivalryAnalyzer:
             factor_tardio = calcular_factor_tardio_comparativo(tardio_p1, tardio_p2)
 
             if factor_tardio != 1.0:
-                raw_p1['form_recent'] = min(raw_p1['form_recent'] * factor_tardio, 300)
+                # Nodo-32 Fase 3: aplicación movida a POST-norm (ver abajo)
                 reasoning.append(
                     f"LOG_TARDIO: factor={factor_tardio} "
                     f"wr_tardio_p1={tardio_p1['win_rate_tardio'] if tardio_p1 else 'N/A'} "
@@ -1466,23 +1681,147 @@ class RivalryAnalyzer:
         except Exception as e:
             reasoning.append(f"LOG_DYNAMIC_WEIGHTING_ERROR: {e}")
 
+        # --- CIRCUIT ASYMMETRY DEFLATOR (Nodo-29) ---
+        # Detecta asimetría de circuito competitivo y deflacta form/ELO
+        # del jugador de circuito inferior para corregir sesgo de circuito.
+        # REGLA-N29-5: después de dynamic weighting, antes de normalización.
+        circuit_asymmetry = {
+            'p1_circuit_tier_index': 0.0,
+            'p2_circuit_tier_index': 0.0,
+            'asymmetry_ratio': 1.0,
+            'deflactor_applied': 1.0,
+            'player_deflated': None,
+            'signal': 'SYMMETRIC',
+        }
+        try:
+            cti_p1, n_rank_p1 = self.circuit_tier_index(player1_history)
+            cti_p2, n_rank_p2 = self.circuit_tier_index(player2_history)
+            circuit_asymmetry['p1_circuit_tier_index'] = cti_p1
+            circuit_asymmetry['p2_circuit_tier_index'] = cti_p2
+
+            n_min = min(n_rank_p1, n_rank_p2)
+            if n_min < 10:
+                # REGLA-N29-4: muestra insuficiente → no aplicar
+                reasoning.append(
+                    f"LOG_CAD_SKIP: n_min={n_min} < 10 (CTI_P1={cti_p1} CTI_P2={cti_p2})"
+                )
+            else:
+                cti_max = max(cti_p1, cti_p2)
+                cti_min = max(min(cti_p1, cti_p2), 0.1)
+                asimetria = cti_max / cti_min
+                circuit_asymmetry['asymmetry_ratio'] = round(asimetria, 2)
+
+                if asimetria >= 5.0:
+                    circuit_asymmetry['signal'] = 'STRONG_ASYMMETRY'
+                elif asimetria >= 2.0:
+                    circuit_asymmetry['signal'] = 'MODERATE_ASYMMETRY'
+
+                # REGLA-N29-1b: el jugador "superior" debe tener CTI ≥ 0.8
+                # Esto filtra falsos positivos donde ambos son ITF pero uno
+                # tuvo oponentes levemente mejor rankeados (ej: Filip vs Kelm).
+                # CTI ≥ 0.8 implica presencia real en circuito Challenger/ATP.
+                cad_guardada = cti_max >= 0.8
+
+                if asimetria > 2.0 and cad_guardada:
+                    # REGLA-N29-1: solo aplica cuando asimetría > 2.0 y CTI_max ≥ 0.8
+                    deflactor = 1.0 / (1.0 + 0.15 * math.log(asimetria))
+                    bonificacion = 1.0 + (1.0 - deflactor) * 0.5
+                    circuit_asymmetry['deflactor_applied'] = round(deflactor, 4)
+
+                    # Identificar jugador de circuito inferior
+                    if cti_p1 < cti_p2:
+                        # P1 es el de circuito inferior
+                        circuit_asymmetry['player_deflated'] = player1_name
+                        raw_p1['form_recent'] = min(raw_p1['form_recent'] * deflactor, 300)
+                        raw_p1['elo_rating']  = min(raw_p1['elo_rating']  * deflactor, 250)
+                        raw_p2['form_recent'] = min(raw_p2['form_recent'] * bonificacion, 300)
+                        raw_p2['elo_rating']  = min(raw_p2['elo_rating']  * bonificacion, 250)
+                    else:
+                        # P2 es el de circuito inferior
+                        circuit_asymmetry['player_deflated'] = player2_name
+                        raw_p2['form_recent'] = min(raw_p2['form_recent'] * deflactor, 300)
+                        raw_p2['elo_rating']  = min(raw_p2['elo_rating']  * deflactor, 250)
+                        raw_p1['form_recent'] = min(raw_p1['form_recent'] * bonificacion, 300)
+                        raw_p1['elo_rating']  = min(raw_p1['elo_rating']  * bonificacion, 250)
+
+                    # Fase 3: SoS weight dinámico (toma de form_recent)
+                    # REGLA-N29-1: solo en tier donde SoS tiene peso base > 0
+                    base_sos_w = weights.get('strength_of_schedule', 0.0)
+                    if base_sos_w > 0:
+                        sos_multiplier = 1.0 + math.log(asimetria)
+                        extra_w = round(base_sos_w * (sos_multiplier - 1.0), 4)
+                        extra_w = min(extra_w, weights.get('form_recent', 0.0) * 0.5)
+                        weights['strength_of_schedule'] = round(weights['strength_of_schedule'] + extra_w, 4)
+                        weights['form_recent'] = round(weights['form_recent'] - extra_w, 4)
+
+                    reasoning.append(
+                        f"LOG_CAD: CTI_P1={cti_p1} CTI_P2={cti_p2} "
+                        f"asimetria={round(asimetria,2)} deflactor={round(deflactor,4)} "
+                        f"bonificacion={round(bonificacion,4)} "
+                        f"jugador_deflactado={circuit_asymmetry['player_deflated']} "
+                        f"signal={circuit_asymmetry['signal']} "
+                        f"sos_w→{weights.get('strength_of_schedule',0):.4f} "
+                        f"form_w→{weights.get('form_recent',0):.4f}"
+                    )
+                elif asimetria > 2.0 and not cad_guardada:
+                    reasoning.append(
+                        f"LOG_CAD: CTI_P1={cti_p1} CTI_P2={cti_p2} "
+                        f"asimetria={round(asimetria,2)} → SKIP (CTI_max={cti_max:.3f} < 0.8, ambos ITF)"
+                    )
+                else:
+                    reasoning.append(
+                        f"LOG_CAD: CTI_P1={cti_p1} CTI_P2={cti_p2} "
+                        f"asimetria={round(asimetria,2)} → SYMMETRIC (sin deflactor)"
+                    )
+        except Exception as _cad_err:
+            reasoning.append(f"LOG_CAD_ERROR: {_cad_err}")
+
         # 2. NORMALIZACIÓN DE SCORES
+        # surface_specialization usa normalización LINEAL porque SkillFactor/VolConf
+        # (Nodo-28 Fase 1.5) ya controlan la escala. log1p aplasta la señal:
+        # raw 86 vs 142 → log 4.47 vs 4.97 (ratio 1.11x vs 1.65x real).
+        _LINEAR_COMPONENTS = {'surface_specialization'}
         def normalize_scores(p1_scores, p2_scores):
             normalized_p1 = {}
             normalized_p2 = {}
             for key in p1_scores:
                 p1_val = p1_scores[key]
                 p2_val = p2_scores[key]
-                
-                # Normalización Logarítmica: log(1 + x) para manejar scores de 0
-                norm_p1 = math.log1p(p1_val)
-                norm_p2 = math.log1p(p2_val)
-                
+
+                if key in _LINEAR_COMPONENTS:
+                    # Normalización lineal: preserva ratio real entre jugadores
+                    from normalization import MAX_RAW_SCORES
+                    max_expected = MAX_RAW_SCORES.get(key, 350)
+                    norm_p1 = min(p1_val / max_expected, 1.0) * math.log1p(max_expected)
+                    norm_p2 = min(p2_val / max_expected, 1.0) * math.log1p(max_expected)
+                else:
+                    # Normalización Logarítmica: log(1 + x) para manejar scores de 0
+                    norm_p1 = math.log1p(p1_val)
+                    norm_p2 = math.log1p(p2_val)
+
                 normalized_p1[key] = norm_p1
                 normalized_p2[key] = norm_p2
             return normalized_p1, normalized_p2
 
         norm_p1, norm_p2 = normalize_scores(raw_p1, raw_p2)
+
+        # --- Nodo-32 Fase 3: factores Markov + tardío POST-normalizacion (T32-20..T32-27) ---
+        # PRE-norm (anterior): log1p(200*1.15)=5.375 vs log1p(200)=5.303 → delta=0.072 (ruido)
+        # POST-norm (ahora):   log1p(200)*1.15=6.098 vs log1p(200)=5.303 → delta=0.795 (10x)
+        # Cap equivalente al raw cap=300: log1p(300)=5.707
+        _norm_cap = math.log1p(300)
+        if factor_p1 != 1.0:
+            norm_p1['form_recent'] = min(norm_p1['form_recent'] * factor_p1, _norm_cap)
+        if factor_p2 != 1.0:
+            norm_p2['form_recent'] = min(norm_p2['form_recent'] * factor_p2, _norm_cap)
+        if factor_tardio != 1.0:
+            norm_p1['form_recent'] = min(norm_p1['form_recent'] * factor_tardio, _norm_cap)
+        reasoning.append(
+            f"LOG_MARKOV_POST_NORM: factor_p1={factor_p1} factor_p2={factor_p2} "
+            f"factor_tardio={factor_tardio} cap={_norm_cap:.3f} "
+            f"norm_form_p1={norm_p1['form_recent']:.3f} norm_form_p2={norm_p2['form_recent']:.3f}"
+        )
+
         reasoning.append(f"LOG_RAW_SCORES_P1: { {k: round(v, 2) for k, v in raw_p1.items()} }")
         reasoning.append(f"LOG_RAW_SCORES_P2: { {k: round(v, 2) for k, v in raw_p2.items()} }")
         reasoning.append(f"LOG_NORM_SCORES_P1: { {k: round(v, 2) for k, v in norm_p1.items()} }")
@@ -1558,4 +1897,13 @@ class RivalryAnalyzer:
             'weights_used': weights,
             'markov_analysis': markov_analysis,
             'tardio_analysis': tardio_analysis,
+            'circuit_asymmetry': circuit_asymmetry,  # Nodo-29
+            'surface_specialization_meta': {          # FIX-1 (Nodo-28 Fase 2)
+                'player1': p1_surface_result,
+                'player2': p2_surface_result,
+            },
+            'historial_incompleto': {                 # Nodo-35: flag propagado desde extracción
+                'p1': len(player1_history) == 0,
+                'p2': len(player2_history) == 0,
+            },
         }

@@ -1,0 +1,569 @@
+{
+  "metadata": {
+    "timestamp": "20260611_125142",
+    "bankroll": 10000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260611_123946.json",
+    "n_partidos_analizados": 99,
+    "calibracion_n": 695,
+    "parametros": {
+      "modo": "cobertura",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Neus Torner Sensano vs Carmen Gallardo Guevara",
+      "favorito": "Carmen Gallardo Guevara",
+      "cuota": 3.6,
+      "edge_pct": "26.0%",
+      "p_modelo": 0.538,
+      "n_h2h": 1,
+      "p_blend": 0.6623969957081546,
+      "kelly_kl": 0.4099,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Marie Mettraux vs Anja Stankovic",
+      "favorito": "Marie Mettraux",
+      "cuota": 2.85,
+      "edge_pct": "20.0%",
+      "p_modelo": 0.551,
+      "n_h2h": 1,
+      "p_blend": 0.6656469957081546,
+      "kelly_kl": 0.3636,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Eva Bennemann vs Pia Lovric",
+      "favorito": "Pia Lovric",
+      "cuota": 3.95,
+      "edge_pct": "25.2%",
+      "p_modelo": 0.505,
+      "n_h2h": 0,
+      "p_blend": 0.703862660944206,
+      "kelly_kl": 0.3588,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Kaitlyn Carnicella vs Rachel Gailis",
+      "favorito": "Kaitlyn Carnicella",
+      "cuota": 3.4,
+      "edge_pct": "21.2%",
+      "p_modelo": 0.506,
+      "n_h2h": 0,
+      "p_blend": 0.703862660944206,
+      "kelly_kl": 0.3483,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    },
+    {
+      "partido": "Anastasia Tikhonova vs Sandra Samir",
+      "favorito": "Sandra Samir",
+      "cuota": 3.2,
+      "edge_pct": "20.2%",
+      "p_modelo": 0.515,
+      "n_h2h": 0,
+      "p_blend": 0.703862660944206,
+      "kelly_kl": 0.3429,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "grass"
+    },
+    {
+      "partido": "Hikaru Sato vs Yuno Kitahara",
+      "favorito": "Yuno Kitahara",
+      "cuota": 3.25,
+      "edge_pct": "19.5%",
+      "p_modelo": 0.503,
+      "n_h2h": 0,
+      "p_blend": 0.703862660944206,
+      "kelly_kl": 0.3272,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    },
+    {
+      "partido": "Alexis Nguyen vs Lily Taylor",
+      "favorito": "Lily Taylor",
+      "cuota": 2.9,
+      "edge_pct": "15.9%",
+      "p_modelo": 0.504,
+      "n_h2h": 0,
+      "p_blend": 0.703862660944206,
+      "kelly_kl": 0.2811,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    },
+    {
+      "partido": "Max Wiskandt vs Sandro Kopp",
+      "favorito": "Max Wiskandt",
+      "cuota": 2.6,
+      "edge_pct": "13.1%",
+      "p_modelo": 0.516,
+      "n_h2h": 0,
+      "p_blend": 0.703862660944206,
+      "kelly_kl": 0.2412,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Naoya Honda vs Taisei Ichikawa",
+      "favorito": "Taisei Ichikawa",
+      "cuota": 2.5,
+      "edge_pct": "11.6%",
+      "p_modelo": 0.516,
+      "n_h2h": 0,
+      "p_blend": 0.703862660944206,
+      "kelly_kl": 0.2319,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    },
+    {
+      "partido": "Benjamin O'Connell vs Matic Kriznik",
+      "favorito": "Benjamin O'Connell",
+      "cuota": 2.48,
+      "edge_pct": "10.6%",
+      "p_modelo": 0.509,
+      "n_h2h": 0,
+      "p_blend": 0.703862660944206,
+      "kelly_kl": 0.2085,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    },
+    {
+      "partido": "Hanyi Liu vs Kokoro Isomura",
+      "favorito": "Hanyi Liu",
+      "cuota": 2.32,
+      "edge_pct": "7.3%",
+      "p_modelo": 0.504,
+      "n_h2h": 0,
+      "p_blend": 0.703862660944206,
+      "kelly_kl": 0.1534,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    },
+    {
+      "partido": "Sahaja Yamalapalli vs Dasha Plekhanova",
+      "favorito": "Dasha Plekhanova",
+      "cuota": 2.25,
+      "edge_pct": "6.6%",
+      "p_modelo": 0.51,
+      "n_h2h": 0,
+      "p_blend": 0.703862660944206,
+      "kelly_kl": 0.1422,
+      "kelly_usado": 0.1,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "hard"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Carmen Gallardo Guevara",
+          "cuota": 3.6
+        },
+        {
+          "jugador": "Pia Lovric",
+          "cuota": 3.95
+        },
+        {
+          "jugador": "Kaitlyn Carnicella",
+          "cuota": 3.4
+        }
+      ],
+      "cuota_combo": 48.35,
+      "hr_combo": 0.2751,
+      "ev_combo": 12.3008,
+      "excluidos": [
+        "Marie Mettraux",
+        "Sandra Samir",
+        "Yuno Kitahara",
+        "Lily Taylor",
+        "Max Wiskandt",
+        "Taisei Ichikawa",
+        "Benjamin O'Connell",
+        "Hanyi Liu",
+        "Dasha Plekhanova",
+        "Blake Ellis",
+        "Guillaume Dalmasso",
+        "Sofiia Bielinska",
+        "Matt Ponchet",
+        "Maileen Nuudi",
+        "Theodore Dean",
+        "Salma Ewing"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Carmen Gallardo Guevara",
+          "cuota": 3.6
+        },
+        {
+          "jugador": "Pia Lovric",
+          "cuota": 3.95
+        },
+        {
+          "jugador": "Yuno Kitahara",
+          "cuota": 3.25
+        }
+      ],
+      "cuota_combo": 46.22,
+      "hr_combo": 0.2751,
+      "ev_combo": 11.714,
+      "excluidos": [
+        "Marie Mettraux",
+        "Kaitlyn Carnicella",
+        "Sandra Samir",
+        "Lily Taylor",
+        "Max Wiskandt",
+        "Taisei Ichikawa",
+        "Benjamin O'Connell",
+        "Hanyi Liu",
+        "Dasha Plekhanova",
+        "Blake Ellis",
+        "Guillaume Dalmasso",
+        "Sofiia Bielinska",
+        "Matt Ponchet",
+        "Maileen Nuudi",
+        "Theodore Dean",
+        "Salma Ewing"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Pia Lovric",
+          "cuota": 3.95
+        },
+        {
+          "jugador": "Kaitlyn Carnicella",
+          "cuota": 3.4
+        },
+        {
+          "jugador": "Yuno Kitahara",
+          "cuota": 3.25
+        }
+      ],
+      "cuota_combo": 43.65,
+      "hr_combo": 0.245,
+      "ev_combo": 9.6948,
+      "excluidos": [
+        "Carmen Gallardo Guevara",
+        "Marie Mettraux",
+        "Sandra Samir",
+        "Lily Taylor",
+        "Max Wiskandt",
+        "Taisei Ichikawa",
+        "Benjamin O'Connell",
+        "Hanyi Liu",
+        "Dasha Plekhanova",
+        "Blake Ellis",
+        "Guillaume Dalmasso",
+        "Sofiia Bielinska",
+        "Matt Ponchet",
+        "Maileen Nuudi",
+        "Theodore Dean",
+        "Salma Ewing"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Carmen Gallardo Guevara",
+          "cuota": 3.6
+        },
+        {
+          "jugador": "Kaitlyn Carnicella",
+          "cuota": 3.4
+        },
+        {
+          "jugador": "Yuno Kitahara",
+          "cuota": 3.25
+        }
+      ],
+      "cuota_combo": 39.78,
+      "hr_combo": 0.2306,
+      "ev_combo": 8.1729,
+      "excluidos": [
+        "Marie Mettraux",
+        "Pia Lovric",
+        "Sandra Samir",
+        "Lily Taylor",
+        "Max Wiskandt",
+        "Taisei Ichikawa",
+        "Benjamin O'Connell",
+        "Hanyi Liu",
+        "Dasha Plekhanova",
+        "Blake Ellis",
+        "Guillaume Dalmasso",
+        "Sofiia Bielinska",
+        "Matt Ponchet",
+        "Maileen Nuudi",
+        "Theodore Dean",
+        "Salma Ewing"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Carmen Gallardo Guevara",
+          "cuota": 3.6
+        },
+        {
+          "jugador": "Pia Lovric",
+          "cuota": 3.95
+        },
+        {
+          "jugador": "Kaitlyn Carnicella",
+          "cuota": 3.4
+        },
+        {
+          "jugador": "Yuno Kitahara",
+          "cuota": 3.25
+        }
+      ],
+      "cuota_combo": 157.13,
+      "hr_combo": 0.1623,
+      "ev_combo": 24.5043,
+      "excluidos": [
+        "Marie Mettraux",
+        "Sandra Samir",
+        "Lily Taylor",
+        "Max Wiskandt",
+        "Taisei Ichikawa",
+        "Benjamin O'Connell",
+        "Hanyi Liu",
+        "Dasha Plekhanova",
+        "Blake Ellis",
+        "Guillaume Dalmasso",
+        "Sofiia Bielinska",
+        "Matt Ponchet",
+        "Maileen Nuudi",
+        "Theodore Dean",
+        "Salma Ewing"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Carmen Gallardo Guevara",
+          "cuota": 3.6
+        },
+        {
+          "jugador": "Marie Mettraux",
+          "cuota": 2.85
+        },
+        {
+          "jugador": "Pia Lovric",
+          "cuota": 3.95
+        },
+        {
+          "jugador": "Yuno Kitahara",
+          "cuota": 3.25
+        }
+      ],
+      "cuota_combo": 131.71,
+      "hr_combo": 0.1831,
+      "ev_combo": 23.1207,
+      "excluidos": [
+        "Kaitlyn Carnicella",
+        "Sandra Samir",
+        "Lily Taylor",
+        "Max Wiskandt",
+        "Taisei Ichikawa",
+        "Benjamin O'Connell",
+        "Hanyi Liu",
+        "Dasha Plekhanova",
+        "Blake Ellis",
+        "Guillaume Dalmasso",
+        "Sofiia Bielinska",
+        "Matt Ponchet",
+        "Maileen Nuudi",
+        "Theodore Dean",
+        "Salma Ewing"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Marie Mettraux",
+          "cuota": 2.85
+        },
+        {
+          "jugador": "Pia Lovric",
+          "cuota": 3.95
+        },
+        {
+          "jugador": "Kaitlyn Carnicella",
+          "cuota": 3.4
+        },
+        {
+          "jugador": "Yuno Kitahara",
+          "cuota": 3.25
+        }
+      ],
+      "cuota_combo": 124.4,
+      "hr_combo": 0.1631,
+      "ev_combo": 19.29,
+      "excluidos": [
+        "Carmen Gallardo Guevara",
+        "Sandra Samir",
+        "Lily Taylor",
+        "Max Wiskandt",
+        "Taisei Ichikawa",
+        "Benjamin O'Connell",
+        "Hanyi Liu",
+        "Dasha Plekhanova",
+        "Blake Ellis",
+        "Guillaume Dalmasso",
+        "Sofiia Bielinska",
+        "Matt Ponchet",
+        "Maileen Nuudi",
+        "Theodore Dean",
+        "Salma Ewing"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Carmen Gallardo Guevara",
+          "cuota": 3.6
+        },
+        {
+          "jugador": "Marie Mettraux",
+          "cuota": 2.85
+        },
+        {
+          "jugador": "Kaitlyn Carnicella",
+          "cuota": 3.4
+        },
+        {
+          "jugador": "Yuno Kitahara",
+          "cuota": 3.25
+        }
+      ],
+      "cuota_combo": 113.37,
+      "hr_combo": 0.1535,
+      "ev_combo": 16.4025,
+      "excluidos": [
+        "Pia Lovric",
+        "Sandra Samir",
+        "Lily Taylor",
+        "Max Wiskandt",
+        "Taisei Ichikawa",
+        "Benjamin O'Connell",
+        "Hanyi Liu",
+        "Dasha Plekhanova",
+        "Blake Ellis",
+        "Guillaume Dalmasso",
+        "Sofiia Bielinska",
+        "Matt Ponchet",
+        "Maileen Nuudi",
+        "Theodore Dean",
+        "Salma Ewing"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.5263157894736842,
+    "total_ajustado": 10526.315789473683,
+    "var_95": 11797.394220846232,
+    "cvar_95": 7794.010798312222,
+    "expected_pl": 108236.26756491911,
+    "sharpe_ratio": 1.3202006284595038,
+    "kelly_growth_rate": 2.407285926655752,
+    "sessions_to_double": 0.2879372046688607,
+    "var_excedido": true,
+    "factor_var": 0.5
+  },
+  "resumen": {
+    "gastado_individuales": 0,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 0,
+    "total_en_riesgo": 0.0,
+    "pct_bankroll_en_riesgo": 0.0,
+    "n_senales_apostar": 12,
+    "pool_cobertura": 19,
+    "alerta_riesgo": false
+  }
+}

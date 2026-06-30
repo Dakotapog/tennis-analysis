@@ -1,0 +1,158 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — CHALLENGER CLAY
+  2026-06-19 00:46  │  Bankroll: $20,000
+  Señales APOSTAR: 3  │  Watchlist: 2  │  Sin edge: 0
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 5 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.10 (challenger)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $8,000 (40% bankroll)
+
+  │  🎾 Susan Bandecchi vs Alina Charaeva
+  │     Apostar: Susan Bandecchi
+  │     Cuota 3.45  │  Edge 21.2%  │  p_blend 0.556 (n_h2h=3)
+  │     Kelly-KL 10.3% → stake $2,000  │  Retorno potencial $6,900
+  │     EV real +92.0%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Remy Bertola vs Christopher O'Connell
+  │     Apostar: Remy Bertola
+  │     Cuota 2.55  │  Edge 14.5%  │  p_blend 0.554 (n_h2h=0)
+  │     Kelly-KL 8.9% → stake $1,000  │  Retorno potencial $2,550
+  │     EV real +41.3%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Zhizhen Zhang vs Otto Virtanen
+  │     Apostar: Zhizhen Zhang
+  │     Cuota 2.40  │  Edge 9.5%  │  p_blend 0.533 (n_h2h=3)
+  │     Kelly-KL 6.1% → stake $1,000  │  Retorno potencial $2,400
+  │     EV real +27.9%  │  Zona: underdog  │  Sup: grass
+
+  │  Total individuales: $4,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 5 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $12,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Susan Bandecchi      @3.45  p=0.556  zona=underdog
+  │    2. Remy Bertola         @2.55  p=0.554  zona=underdog
+  │    3. Zhizhen Zhang        @2.40  p=0.533  zona=underdog
+  │    4. Jurij Rodionov       @2.00  p=0.554  zona=slight_underdog [W]
+  │    5. Lucio Ratti          @1.95  p=0.590  zona=slight_underdog [W]
+
+  │  ── 3 PIERNAS: TOP 4 combos × $2,000 = $8,000 ──
+  │     (cada combo excluye 2 jugadores)
+  │     [3p-1] Susan Bandecchi@3.45 + Remy Bertola@2.55 + Zhizhen Zhang@2.40
+  │            @21.11 HR:16.4% EV:+246.9% →$42,220  excluye:[Lucio Ratti, Jurij Rodionov]
+  │     [3p-2] Susan Bandecchi@3.45 + Remy Bertola@2.55 + Lucio Ratti@1.95
+  │            @17.16 HR:18.2% EV:+211.9% →$34,320  excluye:[Zhizhen Zhang, Jurij Rodionov]
+  │     [3p-3] Susan Bandecchi@3.45 + Zhizhen Zhang@2.40 + Lucio Ratti@1.95
+  │            @16.15 HR:17.5% EV:+182.4% →$32,300  excluye:[Remy Bertola, Jurij Rodionov]
+  │     [3p-4] Remy Bertola@2.55 + Zhizhen Zhang@2.40 + Lucio Ratti@1.95
+  │            @11.93 HR:17.4% EV:+107.8% →$23,860  excluye:[Susan Bandecchi, Jurij Rodionov]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $1,000 = $4,000 ──
+  │     (cada combo excluye 1 jugador)
+  │     [4p-1] Susan Bandecchi@3.45 + Remy Bertola@2.55 + Zhizhen Zhang@2.40 + Lucio Ratti@1.95
+  │            @41.17 HR:9.7% EV:+299.0% →$41,170  excluye:[Jurij Rodionov]
+  │     [4p-2] Susan Bandecchi@3.45 + Remy Bertola@2.55 + Zhizhen Zhang@2.40 + Jurij Rodionov@2.00
+  │            @42.23 HR:9.1% EV:+284.4% →$42,230  excluye:[Lucio Ratti]
+  │     [4p-3] Susan Bandecchi@3.45 + Zhizhen Zhang@2.40 + Lucio Ratti@1.95 + Jurij Rodionov@2.00
+  │            @32.29 HR:9.7% EV:+212.9% →$32,290  excluye:[Remy Bertola]
+  │     [4p-4] Remy Bertola@2.55 + Zhizhen Zhang@2.40 + Lucio Ratti@1.95 + Jurij Rodionov@2.00
+  │            @23.87 HR:9.7% EV:+130.2% →$23,870  excluye:[Susan Bandecchi]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-2 picks?) ──
+  │  Total apostado: $12,000
+
+  │  🏆 0 fallos (5/5 ganan): retorno $272,260 → P&L +$260,260 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Lucio Ratti]):
+  │       retorno $84,450 → P&L +$72,450 (2/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Susan Bandecchi]):
+  │       retorno $47,730 → P&L +$35,730 (2/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Lucio Ratti, Jurij Rodionov]):
+  │       retorno $42,220 → P&L +$30,220 (1/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Susan Bandecchi, Remy Bertola]):
+  │       retorno $0 → P&L $-12,000 (0/8 combos pagan)
+
+  │  Total cobertura: $12,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     5
+  │  ρ estructural:       0.10 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.714
+  │  Reducción vs naive:  -28.6%
+  │
+  │  Stake naive (sin ajuste):    $      16,000
+  │  Stake ajustado (PK):         $      11,429
+  │  Ahorro por correlación:      $       4,571
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $     -16,000  (80.0% bankroll)
+  │  CVaR 95%:           $     -16,000
+  │  Max VaR permitido:  $       5,000  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.31
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $      25,355
+  │  σ(P&L):             $      65,417
+  │  Sharpe Ratio:              0.388
+  │  Kelly Growth Rate:        0.1290 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $      38,121
+  │  Bankroll en 10 sesiones:  $      72,662
+  │  Bankroll en 30 sesiones:  $     959,092
+  │  Sesiones para duplicar:   5.4
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.31 (de $16,000 a $5,000)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.31) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Susan Bandecchi           @3.45  →  $   1,000  (ret. $     3,450)
+  │    Remy Bertola              @2.55  →  $       0  (ret. $         0)
+  │    Zhizhen Zhang             @2.40  →  $       0  (ret. $         0)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @21.11]  $   1,000  →  Susan Bandecchi@3.45 + Remy Bertola@2.55 + Zhizhen Zhang@2.40
+  │    [3p @17.16]  $   1,000  →  Susan Bandecchi@3.45 + Remy Bertola@2.55 + Lucio Ratti@1.95
+  │    [3p @16.15]  $   1,000  →  Susan Bandecchi@3.45 + Zhizhen Zhang@2.40 + Lucio Ratti@1.95
+  │    [3p @11.93]  $   1,000  →  Remy Bertola@2.55 + Zhizhen Zhang@2.40 + Lucio Ratti@1.95
+  │    [4p @41.17]  $       0  →  Susan Bandecchi@3.45 + Remy Bertola@2.55 + Zhizhen Zhang@2.40 + Lucio Ratti@1.95
+  │    [4p @42.23]  $       0  →  Susan Bandecchi@3.45 + Remy Bertola@2.55 + Zhizhen Zhang@2.40 + Jurij Rodionov@2.00
+  │    [4p @32.29]  $       0  →  Susan Bandecchi@3.45 + Zhizhen Zhang@2.40 + Lucio Ratti@1.95 + Jurij Rodionov@2.00
+  │    [4p @23.87]  $       0  →  Remy Bertola@2.55 + Zhizhen Zhang@2.40 + Lucio Ratti@1.95 + Jurij Rodionov@2.00
+  │
+  │  TOTAL EN RIESGO:  $     5,000  (25.0% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $        20,000                       ║
+  ║  Individuales:        $         1,000  (5.0% bankroll)      ║
+  ║  Cobertura:           $         4,000  (20.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $         5,000  (25.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       3                                       ║
+  ║  Pool cobertura:        5 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260619_00  ║
+  ║  Partidos analizados:  95                                       ║
+  ║  Superficie:          clay (challenger)                           ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  📊 Calibración: n=1241 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.590 (calibrado clay) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260619_004627.json

@@ -1,0 +1,49 @@
+{
+  "ts": "2026-06-28T10:57:11.690226",
+  "modo": "LIVE",
+  "n_picks": 3,
+  "index": {
+    "4238815557": {
+      "jugador": "Dhakshineswar Suresh",
+      "cuota": 2.1,
+      "cuota_kambi": 2.1,
+      "partido": "Mitchell Krueger vs Dhakshineswar Suresh",
+      "match_id": "6L0T2L6t",
+      "match_url": "https://www.flashscore.co/match/tennis/krueger-mitchell-suresh-dhakshineswar/6L0T2L6t/#/h2h",
+      "torneo": "Cary (Estados Unidos) - Fase previa",
+      "superficie": "hard",
+      "tier": "challenger",
+      "edge": "7.8%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0
+    },
+    "4238501406": {
+      "jugador": "Herman Hoeyeraal",
+      "cuota": 2.55,
+      "cuota_kambi": 2.55,
+      "partido": "Herman Hoeyeraal vs Alan Wazny",
+      "match_id": "MNcAv6PE",
+      "match_url": "https://www.flashscore.co/match/tennis/hoeyeraal-herman-wazny-alan/MNcAv6PE/#/h2h",
+      "torneo": "M15 Rzeszow (Polonia)",
+      "superficie": "clay",
+      "tier": "itf",
+      "edge": "11.6%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0
+    },
+    "4238479139": {
+      "jugador": "Alyssa Ahn",
+      "cuota": 2.12,
+      "cuota_kambi": 2.12,
+      "partido": "Alexis Nguyen vs Alyssa Ahn",
+      "match_id": "UBaxLgug",
+      "match_url": "https://www.flashscore.co/match/tennis/nguyen-alexis-ahn-alyssa/UBaxLgug/#/h2h",
+      "torneo": "W15 Claremont, CA (Estados Unidos)",
+      "superficie": "hard",
+      "tier": "itf",
+      "edge": "3.8%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0
+    }
+  }
+}

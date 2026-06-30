@@ -20,10 +20,12 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import time
+import unicodedata
 from collections import defaultdict
 from datetime import datetime
-from typing import Optional
+from typing import Dict, Optional, Tuple
 
 import requests
 
@@ -31,14 +33,8 @@ import requests
 # Configuración
 # ──────────────────────────────────────────────────────────────────────────────
 
-FLASHSCORE_BASE = "https://global.flashscore.ninja/202/x/feed"
-HEADERS = {
-    "X-Fsign": "SW9D1eZo",
-    "Referer": "https://www.flashscore.co/",
-    "Origin": "https://www.flashscore.co",
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-    "Accept": "*/*",
-}
+from config import FLASHSCORE_BASE, FLASHSCORE_HEADERS as HEADERS  # D-17
+
 DELAY_ENTRE_REQUESTS = 0.5   # segundos — no martillar la API
 CALIBRACION_FILE = "data/calibracion_edge.json"
 
@@ -130,28 +126,290 @@ def obtener_resultado_partido(event_id: str) -> dict:
 
 
 # ──────────────────────────────────────────────────────────────────────────────
+# Detección de orden home/away FlashScore vs Kambi (Nodo-05 fix)
+# ──────────────────────────────────────────────────────────────────────────────
+
+def _detectar_jugador_home_fs(match_url: str, jugador1: str, jugador2: str) -> str:
+    """
+    Detecta qué jugador del partido es el 'home' en el endpoint dc_1 de FlashScore.
+
+    El problema: Kambi y FlashScore pueden ordenar a los jugadores de forma distinta.
+    En dc_1, DJ='H' significa que el jugador HOME de FlashScore ganó.
+    Si el orden Kambi != orden FS, 'jugador1' en nuestros datos es el 'away' en FS,
+    por lo que DJ='H' se mapearía al nombre incorrecto.
+
+    Solución: la match_url tiene el formato
+        /tennis/{slug1}-{slug2}/{match_id}/
+    donde slug1 corresponde al jugador HOME de FlashScore. Buscamos qué jugador
+    tiene sus tokens de nombre apareciendo más temprano en el slug combinado.
+
+    Retorna: 'jugador1' si jugador1 es FS-home, 'jugador2' si jugador2 es FS-home.
+    Ante empate o sin URL, retorna 'jugador1' (comportamiento previo conservado).
+    """
+    if not match_url:
+        return 'jugador1'
+    m = re.search(r'/tennis/([^/]+)/[^/]+/', match_url)
+    if not m:
+        return 'jugador1'
+    slug_combined = m.group(1).lower()
+
+    def earliest_token_pos(name: str) -> int:
+        tokens = name.lower().split()
+        positions = [slug_combined.find(t) for t in tokens if slug_combined.find(t) >= 0]
+        return min(positions) if positions else 9999
+
+    pos1 = earliest_token_pos(jugador1)
+    pos2 = earliest_token_pos(jugador2)
+    return 'jugador2' if pos2 < pos1 else 'jugador1'
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Slug validation — detect wrong match_id from Kambi Tier 3 matcher
+# ──────────────────────────────────────────────────────────────────────────────
+
+def _validar_slug_ambos_jugadores(match_url: str, jugador1: str, jugador2: str) -> bool:
+    """
+    Check if the URL slug contains name tokens from BOTH players.
+    Returns True if both players are represented, False if slug is wrong.
+
+    The Kambi Tier 3 substring matcher can match 2+ tokens from the SAME player's
+    compound name (e.g., "andrade" + "silva" from "Lucas Andrade Da Silva"),
+    accepting a match against a DIFFERENT opponent.  This validator catches that.
+    """
+    if not match_url:
+        return True  # no URL to validate — assume OK
+
+    m = re.search(r'/tennis/([^/]+)/[^/]+/', match_url)
+    if not m:
+        return True  # can't parse slug — assume OK
+
+    slug = m.group(1).lower()
+
+    def _has_token(name: str) -> bool:
+        tokens = name.lower().split()
+        # Filter short tokens (<=2 chars) — "da", "de", "van" are too common
+        tokens = [t for t in tokens if len(t) >= 3]
+        if not tokens:
+            return False
+        matched = sum(1 for t in tokens if t in slug)
+        # For compound names (3+ tokens), require >=2 matches to avoid
+        # false positives from shared first names (e.g. "juan" in slug
+        # matching "Juan Bautista Torres" when slug is actually "estevez-juan")
+        if len(tokens) >= 3:
+            return matched >= 2
+        return matched >= 1
+
+    return _has_token(jugador1) and _has_token(jugador2)
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# FlashScore feed lookup — fallback when match_id is wrong
+# Adopted from resultados_finales.py
+# ──────────────────────────────────────────────────────────────────────────────
+
+def _normalize_name(name: str) -> str:
+    """Normalize name: lowercase, no accents, no punctuation."""
+    name = unicodedata.normalize("NFD", name.lower())
+    name = "".join(c for c in name if unicodedata.category(c) != "Mn")
+    name = re.sub(r"[^a-z\s]", "", name)
+    return name.strip()
+
+
+_SUFFIXES = frozenset({"jr", "sr", "ii", "iii", "iv"})
+
+
+def _parse_nombre(nombre: str) -> Tuple[str, str]:
+    """Extract (surname, initial) from any name format."""
+    normalized = _normalize_name(nombre)
+    raw = normalized.split()
+    if not raw:
+        return ("", "")
+    while raw and raw[-1] in _SUFFIXES:
+        raw.pop()
+    if not raw:
+        return ("", "")
+    iniciales = []
+    apellido_parts = []
+    for token in raw:
+        if len(token) <= 1:
+            iniciales.append(token)
+        else:
+            apellido_parts.append(token)
+    if not apellido_parts:
+        return (raw[-1], raw[0][0])
+    apellido = apellido_parts[-1]
+    inicial = iniciales[0][0] if iniciales else apellido_parts[0][0]
+    return (apellido, inicial)
+
+
+def _build_match_key(name1: str, name2: str) -> Tuple[str, str, str, str]:
+    """Match key: (surname1, ini1, surname2, ini2) sorted."""
+    a1, i1 = _parse_nombre(name1)
+    a2, i2 = _parse_nombre(name2)
+    if a1 <= a2:
+        return (a1, i1, a2, i2)
+    return (a2, i2, a1, i1)
+
+
+def _fetch_finished_matches_feed() -> Dict[Tuple, Dict]:
+    """
+    Fetch FlashScore feed for today/yesterday/day-before to get
+    finished matches with their correct match_id and slug.
+
+    Returns:
+        Dict mapping match_key -> {match_id, jugador1_fs, jugador2_fs, slug, ...}
+    """
+    lookup: Dict[Tuple, Dict] = {}
+
+    for day_offset in [0, -1, 1, -2]:
+        ep = f"f_2_{day_offset}_2_es_1"
+        url = f"{FLASHSCORE_BASE}/{ep}"
+
+        try:
+            resp = requests.get(url, headers=HEADERS, timeout=15)
+            if resp.status_code != 200:
+                continue
+        except Exception:
+            continue
+
+        sections = resp.text.split("~")
+        current_tournament = ""
+
+        for sec in sections:
+            fields: dict = {}
+            for pair in sec.split("¬"):
+                if "÷" in pair:
+                    k, v = pair.split("÷", 1)
+                    fields[k] = v
+
+            if "ZA" in fields:
+                current_tournament = fields["ZA"]
+                continue
+
+            if "AA" not in fields:
+                continue
+
+            if "DOBLES" in current_tournament or "DOUBLES" in current_tournament:
+                continue
+
+            j1 = fields.get("AE", "")
+            j2 = fields.get("AF", "")
+            match_id = fields.get("AA", "")
+
+            if not j1 or not j2 or not match_id:
+                continue
+
+            entry = {
+                "match_id": match_id,
+                "jugador1_fs": j1,
+                "jugador2_fs": j2,
+                "torneo_fs": current_tournament,
+            }
+
+            key = _build_match_key(j1, j2)
+            lookup[key] = entry
+
+            # Also index by surnames only (fallback tier 2)
+            a1, _ = _parse_nombre(j1)
+            a2, _ = _parse_nombre(j2)
+            key_apellido = (min(a1, a2), "", max(a1, a2), "")
+            if key_apellido not in lookup:
+                lookup[key_apellido] = entry
+
+    return lookup
+
+
+def _buscar_en_feed(jugador1: str, jugador2: str,
+                    feed_lookup: Dict[Tuple, Dict]) -> Optional[Dict]:
+    """
+    Search for correct match in FlashScore feed by player name matching.
+    Returns the feed entry dict (with match_id, jugador1_fs, jugador2_fs) or None.
+
+    3-tier matching: exact key, surnames only, substring overlap.
+    """
+    # Tier 1: exact key
+    key = _build_match_key(jugador1, jugador2)
+    if key in feed_lookup:
+        return feed_lookup[key]
+
+    # Tier 2: surnames only
+    a1, _ = _parse_nombre(jugador1)
+    a2, _ = _parse_nombre(jugador2)
+    key_apellido = (min(a1, a2), "", max(a1, a2), "")
+    if key_apellido in feed_lookup:
+        return feed_lookup[key_apellido]
+
+    # Tier 3: substring overlap (>=4 chars)
+    for fkey, fval in feed_lookup.items():
+        fa1, _, fa2, _ = fkey
+        if not fa1 or not fa2:
+            continue
+        a1_match = (a1 and fa1 and (a1 in fa1 or fa1 in a1) and len(min(a1, fa1, key=len)) >= 4)
+        a2_match = (a2 and fa2 and (a2 in fa2 or fa2 in a2) and len(min(a2, fa2, key=len)) >= 4)
+        if a1_match and a2_match:
+            return fval
+        # Cross (home/away flipped)
+        a1x = (a1 and fa2 and (a1 in fa2 or fa2 in a1) and len(min(a1, fa2, key=len)) >= 4)
+        a2x = (a2 and fa1 and (a2 in fa1 or fa1 in a2) and len(min(a2, fa1, key=len)) >= 4)
+        if a1x and a2x:
+            return fval
+
+    return None
+
+
+# ──────────────────────────────────────────────────────────────────────────────
 # Validación individual (testeable sin I/O)
 # ──────────────────────────────────────────────────────────────────────────────
 
-def validar_partido_individual(partido: dict, resultado_api: Optional[dict] = None) -> Optional[dict]:
+def validar_partido_individual(partido: dict, resultado_api: Optional[dict] = None,
+                               feed_lookup: Optional[Dict[Tuple, Dict]] = None) -> Optional[dict]:
     """
     Valida UN partido comparando predicción con resultado real.
 
     Args:
         partido:       dict del h2h_results_enhanced (con ranking_analysis, match_id, etc.)
         resultado_api: si se pasa, evita la llamada HTTP (útil en tests)
+        feed_lookup:   pre-fetched FlashScore feed for fallback when match_id is wrong
 
     Retorna None si no se puede validar (match_id inválido, partido no terminado,
     sin predicción, etc.).
     """
     match_id = partido.get('match_id')
-    if not match_id or match_id in ('tennis', '', None):
-        return None
+    match_url = partido.get('match_url', '')
 
     pred = partido.get('ranking_analysis', {}).get('prediction', {})
     favorito_pred = pred.get('favored_player')
     if not favorito_pred:
         return None
+
+    jugador1 = partido.get('jugador1', '')
+    jugador2 = partido.get('jugador2', '')
+
+    # ── Step 1: Validate slug — detect wrong match_id from Kambi Tier 3 matcher ──
+    slug_valid = _validar_slug_ambos_jugadores(match_url, jugador1, jugador2)
+    resolved_from_feed = False
+    feed_entry = None
+
+    if not slug_valid and feed_lookup is not None:
+        # Slug is wrong — re-resolve match_id from FlashScore feed
+        feed_entry = _buscar_en_feed(jugador1, jugador2, feed_lookup)
+        if feed_entry:
+            match_id = feed_entry['match_id']
+            resolved_from_feed = True
+        else:
+            # Can't find in feed — don't report wrong result
+            return None
+    elif not match_id or match_id in ('tennis', '', None):
+        # No match_id at all — try feed fallback
+        if feed_lookup is not None:
+            feed_entry = _buscar_en_feed(jugador1, jugador2, feed_lookup)
+            if feed_entry:
+                match_id = feed_entry['match_id']
+                resolved_from_feed = True
+            else:
+                return None
+        else:
+            return None
 
     if resultado_api is None:
         resultado_api = obtener_resultado_partido(match_id)
@@ -163,9 +421,37 @@ def validar_partido_individual(partido: dict, resultado_api: Optional[dict] = No
     if lado_ganador is None:
         return None
 
-    jugador1 = partido.get('jugador1', '')
-    jugador2 = partido.get('jugador2', '')
-    ganador_real = jugador1 if lado_ganador == 'jugador1' else jugador2
+    # ── Step 2: Determine home/away mapping ──
+    # When resolved from feed, use feed player names for slug detection
+    # since the original match_url slug was wrong.
+    if resolved_from_feed and feed_entry:
+        # Feed entry has correct FS player names — FS home = jugador1_fs
+        fs_j1 = feed_entry.get('jugador1_fs', '')
+        fs_j2 = feed_entry.get('jugador2_fs', '')
+        # Determine which of our jugador1/jugador2 is the FS home
+        # by matching feed player names to our player names
+        a1_ours, _ = _parse_nombre(jugador1)
+        a1_fs, _ = _parse_nombre(fs_j1)
+        a2_fs, _ = _parse_nombre(fs_j2)
+        if a1_ours and a1_fs and (a1_ours in a1_fs or a1_fs in a1_ours):
+            fs_home = 'jugador1'  # our jugador1 = FS home (jugador1_fs)
+        elif a1_ours and a2_fs and (a1_ours in a2_fs or a2_fs in a1_ours):
+            fs_home = 'jugador2'  # our jugador1 = FS away, so our jugador2 = FS home
+        else:
+            fs_home = 'jugador1'  # fallback
+    else:
+        # DJ='H' en dc_1 significa HOME de FlashScore ganó, y DJ='A' significa AWAY ganó.
+        # Kambi y FS pueden ordenar a los jugadores de forma distinta: cuando el orden
+        # difiere, 'jugador1' de Kambi es el 'away' de FS, así que DJ='H' → jugador2 real.
+        # _detectar_jugador_home_fs() usa la match_url para resolver el orden correcto.
+        fs_home = _detectar_jugador_home_fs(match_url, jugador1, jugador2)
+
+    if lado_ganador == 'jugador1':
+        # FS-home ganó → nombre real del jugador FS-home
+        ganador_real = jugador1 if fs_home == 'jugador1' else jugador2
+    else:
+        # FS-away ganó → nombre real del jugador FS-away
+        ganador_real = jugador2 if fs_home == 'jugador1' else jugador1
 
     correcto = (favorito_pred.strip().lower() == ganador_real.strip().lower())
 
@@ -177,7 +463,8 @@ def validar_partido_individual(partido: dict, resultado_api: Optional[dict] = No
         'correcto': correcto,
         'match_id': match_id,
         'torneo': partido.get('torneo', 'Desconocido'),
-        'superficie': partido.get('superficie', 'unknown'),
+        'superficie': partido.get('tipo_cancha') or partido.get('superficie') or 'unknown',
+        'resolved_from_feed': resolved_from_feed,
     }
 
 
@@ -275,27 +562,54 @@ def validar_predicciones(h2h_file: str, output_file: str, actualizar_cal: bool =
 
     print(f"Validando {len(partidos)} partidos desde {h2h_file} ...")
 
+    # Pre-fetch FlashScore feed for fallback when match_id slug is wrong
+    print("  Fetching FlashScore feed for slug validation fallback...")
+    feed_lookup = _fetch_finished_matches_feed()
+    print(f"  Feed: {len(feed_lookup)} partidos indexados")
+
     resultados: list[dict] = []
     saltados = 0
+    resueltos_feed = 0
 
     for i, partido in enumerate(partidos, 1):
         match_id = partido.get('match_id')
-        if not match_id or match_id in ('tennis', ''):
-            saltados += 1
-            continue
+        match_url = partido.get('match_url', '')
+        jugador1 = partido.get('jugador1', '')
+        jugador2 = partido.get('jugador2', '')
 
-        resultado_api = obtener_resultado_partido(match_id)
+        # Check slug validity BEFORE using match_id
+        slug_valid = _validar_slug_ambos_jugadores(match_url, jugador1, jugador2)
 
-        r = validar_partido_individual(partido, resultado_api)
-        if r is None:
-            # No terminado, sin predicción, o match_id inválido
-            if resultado_api.get('status') not in ('NS', 'LIVE'):
+        if not slug_valid:
+            # Slug is wrong — let validar_partido_individual handle feed fallback
+            r = validar_partido_individual(partido, None, feed_lookup=feed_lookup)
+            if r is None:
                 saltados += 1
-            continue
+                print(f"  [{i:3d}] ⚠️  {jugador1} vs {jugador2} — slug incorrecto, no encontrado en feed")
+                continue
+            if r.get('resolved_from_feed'):
+                resueltos_feed += 1
+        elif not match_id or match_id in ('tennis', ''):
+            # No match_id — try feed fallback
+            r = validar_partido_individual(partido, None, feed_lookup=feed_lookup)
+            if r is None:
+                saltados += 1
+                continue
+            if r.get('resolved_from_feed'):
+                resueltos_feed += 1
+        else:
+            resultado_api = obtener_resultado_partido(match_id)
+            r = validar_partido_individual(partido, resultado_api, feed_lookup=feed_lookup)
+            if r is None:
+                # No terminado, sin predicción, o match_id inválido
+                if resultado_api.get('status') not in ('NS', 'LIVE'):
+                    saltados += 1
+                continue
 
         resultados.append(r)
+        feed_tag = ' [feed]' if r.get('resolved_from_feed') else ''
         estado = '✅' if r['correcto'] else '❌'
-        print(f"  [{i:3d}] {estado} {r['partido']} → {r['resultado_real']} (pred: {r['prediccion']})")
+        print(f"  [{i:3d}] {estado} {r['partido']} → {r['resultado_real']} (pred: {r['prediccion']}){feed_tag}")
 
         time.sleep(DELAY_ENTRE_REQUESTS)
 
@@ -321,6 +635,8 @@ def validar_predicciones(h2h_file: str, output_file: str, actualizar_cal: bool =
     print(f"\n✅ Accuracy: {accuracy*100:.1f}% ({output['correctas']}/{output['total_validados']})")
     for sup, datos in por_sup.items():
         print(f"   {sup:8s}: {datos['accuracy']*100:.1f}% (n={datos['n']})")
+    if resueltos_feed:
+        print(f"   Resueltos por feed (slug incorrecto): {resueltos_feed}")
     print(f"   Exportado → {output_file}")
 
     if actualizar_cal and resultados:

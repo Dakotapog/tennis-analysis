@@ -1,0 +1,43 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — ITF CLAY
+  2026-06-14 11:05  │  Bankroll: $125,000
+  Señales APOSTAR: 1  │  Watchlist: 0  │  Sin edge: 0
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 1 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.05 (itf)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $50,000 (40% bankroll)
+
+  │  🎾 Alina Shcherbinina vs Kaitlyn Carnicella
+  │     Apostar: Kaitlyn Carnicella
+  │     Cuota 3.05  │  Edge 18.1%  │  p_blend 0.585 (n_h2h=0)
+  │     Kelly-KL 9.6% → stake $12,000  │  Retorno potencial $36,600
+  │     EV real +78.4%  │  Zona: underdog  │  Sup: hard
+
+  │  Total individuales: $12,000
+  └─────────────────────────────────────────────────────────────────
+
+  ⚠️  Solo 1 picks en pool — se necesitan ≥3.
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $       125,000                       ║
+  ║  Individuales:        $        12,000  (9.6% bankroll)      ║
+  ║  Combos:              $             0  (0.0% bankroll)      ║
+  ║  Sistema:             $             0  (0.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $        12,000  (9.6% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       1                                       ║
+  ║  Pool cobertura:        1 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260614_10  ║
+  ║  Partidos analizados:  39                                       ║
+  ║  Superficie:          clay (itf)                                  ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  📊 Calibración: n=755 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.694 (calibrado clay) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260614_110543.json

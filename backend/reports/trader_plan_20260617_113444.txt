@@ -1,0 +1,156 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — CHALLENGER CLAY
+  2026-06-17 11:34  │  Bankroll: $20,000
+  Señales APOSTAR: 2  │  Watchlist: 3  │  Sin edge: 1
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 6 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.10 (challenger)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $8,000 (40% bankroll)
+
+  │  🎾 Jennifer Ruggeri vs Mayar Sherif
+  │     Apostar: Jennifer Ruggeri
+  │     Cuota 3.65  │  Edge 24.3%  │  p_blend 0.590 (n_h2h=0)
+  │     Kelly-KL 26.4% → stake $2,000  │  Retorno potencial $7,300
+  │     EV real +115.2%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Jazmin Ortenzi vs Elizara Yaneva
+  │     Apostar: Jazmin Ortenzi
+  │     Cuota 2.23  │  Edge 8.0%  │  p_blend 0.590 (n_h2h=0)
+  │     Kelly-KL 11.8% → stake $1,000  │  Retorno potencial $2,230
+  │     EV real +31.5%  │  Zona: underdog  │  Sup: clay
+
+  │  Total individuales: $3,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 6 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $12,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Jennifer Ruggeri     @3.65  p=0.590  zona=underdog
+  │    2. Jazmin Ortenzi       @2.23  p=0.590  zona=underdog
+  │    3. Nick Hardt           @2.06  p=0.573  zona=slight_underdog [W]
+  │    4. Zhizhen Zhang        @2.06  p=0.519  zona=slight_underdog [W]
+  │    5. Remy Bertola         @1.93  p=0.534  zona=slight_underdog [W]
+  │    6. Yi Zhou              @1.63  p=0.532  zona=slight_underdog
+
+  │  ── 3 PIERNAS: TOP 4 combos × $2,000 = $8,000 ──
+  │     (cada combo excluye 3 jugadores)
+  │     [3p-1] Jennifer Ruggeri@3.65 + Jazmin Ortenzi@2.23 + Nick Hardt@2.06
+  │            @16.77 HR:19.9% EV:+233.8% →$33,540  excluye:[Zhizhen Zhang, Remy Bertola, Yi Zhou]
+  │     [3p-2] Jennifer Ruggeri@3.65 + Jazmin Ortenzi@2.23 + Zhizhen Zhang@2.06
+  │            @16.77 HR:18.1% EV:+202.9% →$33,540  excluye:[Nick Hardt, Remy Bertola, Yi Zhou]
+  │     [3p-3] Jennifer Ruggeri@3.65 + Nick Hardt@2.06 + Zhizhen Zhang@2.06
+  │            @15.49 HR:17.5% EV:+171.6% →$30,980  excluye:[Jazmin Ortenzi, Remy Bertola, Yi Zhou]
+  │     [3p-4] Jazmin Ortenzi@2.23 + Nick Hardt@2.06 + Zhizhen Zhang@2.06
+  │            @9.46 HR:17.5% EV:+66.0% →$18,920  excluye:[Jennifer Ruggeri, Remy Bertola, Yi Zhou]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $1,000 = $4,000 ──
+  │     (cada combo excluye 2 jugadores)
+  │     [4p-1] Jennifer Ruggeri@3.65 + Jazmin Ortenzi@2.23 + Nick Hardt@2.06 + Zhizhen Zhang@2.06
+  │            @34.54 HR:10.3% EV:+257.2% →$34,540  excluye:[Remy Bertola, Yi Zhou]
+  │     [4p-2] Jennifer Ruggeri@3.65 + Jazmin Ortenzi@2.23 + Zhizhen Zhang@2.06 + Remy Bertola@1.93
+  │            @32.36 HR:9.7% EV:+212.4% →$32,360  excluye:[Nick Hardt, Yi Zhou]
+  │     [4p-3] Jennifer Ruggeri@3.65 + Nick Hardt@2.06 + Zhizhen Zhang@2.06 + Remy Bertola@1.93
+  │            @29.89 HR:9.4% EV:+180.2% →$29,890  excluye:[Jazmin Ortenzi, Yi Zhou]
+  │     [4p-4] Jazmin Ortenzi@2.23 + Nick Hardt@2.06 + Zhizhen Zhang@2.06 + Remy Bertola@1.93
+  │            @18.26 HR:9.4% EV:+71.2% →$18,260  excluye:[Jennifer Ruggeri, Yi Zhou]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-3 picks?) ──
+  │  Total apostado: $12,000
+
+  │  🏆 0 fallos (6/6 ganan): retorno $232,030 → P&L +$220,030 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Yi Zhou]):
+  │       retorno $232,030 → P&L +$220,030 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Jennifer Ruggeri]):
+  │       retorno $37,180 → P&L +$25,180 (2/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Yi Zhou, Remy Bertola]):
+  │       retorno $151,520 → P&L +$139,520 (5/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Jennifer Ruggeri, Jazmin Ortenzi]):
+  │       retorno $0 → P&L $-12,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Yi Zhou, Remy Bertola, Nick Hardt]):
+  │       retorno $33,540 → P&L +$21,540 (1/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Jennifer Ruggeri, Jazmin Ortenzi, Nick Hardt]):
+  │       retorno $0 → P&L $-12,000 (0/8 combos pagan)
+
+  │  Total cobertura: $12,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     6
+  │  ρ estructural:       0.10 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.667
+  │  Reducción vs naive:  -33.3%
+  │
+  │  Stake naive (sin ajuste):    $      15,000
+  │  Stake ajustado (PK):         $      10,000
+  │  Ahorro por correlación:      $       5,000
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $     -15,000  (75.0% bankroll)
+  │  CVaR 95%:           $     -15,000
+  │  Max VaR permitido:  $       5,000  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.33
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $      19,733
+  │  σ(P&L):             $      48,127
+  │  Sharpe Ratio:              0.410
+  │  Kelly Growth Rate:        0.1686 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $      46,473
+  │  Bankroll en 10 sesiones:  $     107,988
+  │  Bankroll en 30 sesiones:  $   3,148,249
+  │  Sesiones para duplicar:   4.1
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.33 (de $15,000 a $5,000)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.33) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Jennifer Ruggeri          @3.65  →  $   1,000  (ret. $     3,650)
+  │    Jazmin Ortenzi            @2.23  →  $       0  (ret. $         0)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @16.77]  $   1,000  →  Jennifer Ruggeri@3.65 + Jazmin Ortenzi@2.23 + Nick Hardt@2.06
+  │    [3p @16.77]  $   1,000  →  Jennifer Ruggeri@3.65 + Jazmin Ortenzi@2.23 + Zhizhen Zhang@2.06
+  │    [3p @15.49]  $   1,000  →  Jennifer Ruggeri@3.65 + Nick Hardt@2.06 + Zhizhen Zhang@2.06
+  │    [3p @9.46]  $   1,000  →  Jazmin Ortenzi@2.23 + Nick Hardt@2.06 + Zhizhen Zhang@2.06
+  │    [4p @34.54]  $       0  →  Jennifer Ruggeri@3.65 + Jazmin Ortenzi@2.23 + Nick Hardt@2.06 + Zhizhen Zhang@2.06
+  │    [4p @32.36]  $       0  →  Jennifer Ruggeri@3.65 + Jazmin Ortenzi@2.23 + Zhizhen Zhang@2.06 + Remy Bertola@1.93
+  │    [4p @29.89]  $       0  →  Jennifer Ruggeri@3.65 + Nick Hardt@2.06 + Zhizhen Zhang@2.06 + Remy Bertola@1.93
+  │    [4p @18.26]  $       0  →  Jazmin Ortenzi@2.23 + Nick Hardt@2.06 + Zhizhen Zhang@2.06 + Remy Bertola@1.93
+  │
+  │  TOTAL EN RIESGO:  $     5,000  (25.0% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $        20,000                       ║
+  ║  Individuales:        $         1,000  (5.0% bankroll)      ║
+  ║  Cobertura:           $         4,000  (20.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $         5,000  (25.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       2                                       ║
+  ║  Pool cobertura:        6 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260617_11  ║
+  ║  Partidos analizados:  91                                       ║
+  ║  Superficie:          clay (challenger)                           ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  📊 Calibración: n=798 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.590 (calibrado clay) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260617_113444.json

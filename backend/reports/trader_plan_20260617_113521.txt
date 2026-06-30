@@ -1,0 +1,184 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — ITF CLAY
+  2026-06-17 11:35  │  Bankroll: $10,000
+  Señales APOSTAR: 5  │  Watchlist: 3  │  Sin edge: 1
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 8 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.05 (itf)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $4,000 (40% bankroll)
+
+  │  🎾 Camille Allegre vs Yilin Chen
+  │     Apostar: Camille Allegre
+  │     Cuota 3.25  │  Edge 25.2%  │  p_blend 0.629 (n_h2h=0)
+  │     Kelly-KL 13.2% → stake $1,000  │  Retorno potencial $3,250
+  │     EV real +104.5%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Robert Guna vs Stefan Ilie Bogdan Petre
+  │     Apostar: Stefan Ilie Bogdan Petre
+  │     Cuota 3.85  │  Edge 27.0%  │  p_blend 0.654 (n_h2h=1)
+  │     Kelly-KL 12.5% → stake $1,000  │  Retorno potencial $3,850
+  │     EV real +151.9%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Paola Lopez vs Bianca Molnar
+  │     Apostar: Paola Lopez
+  │     Cuota 3.55  │  Edge 23.8%  │  p_blend 0.629 (n_h2h=0)
+  │     Kelly-KL 11.7% → stake $1,000  │  Retorno potencial $3,550
+  │     EV real +123.4%  │  Zona: underdog  │  Sup: hard
+
+  │  🎾 Stefan Adrian Andreescu vs David Eichenseher
+  │     Apostar: David Eichenseher
+  │     Cuota 3.50  │  Edge 22.4%  │  p_blend 0.696 (n_h2h=0)
+  │     Kelly-KL 10.4% → stake $1,000  │  Retorno potencial $3,500
+  │     EV real +143.5%  │  Zona: underdog  │  Sup: clay
+
+  │  🎾 Ares Teixido Garcia vs Lamija Avdic
+  │     Apostar: Ares Teixido Garcia
+  │     Cuota 1.85  │  Edge 6.4%  │  p_blend 0.673 (n_h2h=1)
+  │     Kelly-KL 5.2% → stake $1,000  │  Retorno potencial $1,850
+  │     EV real +24.5%  │  Zona: slight_underdog  │  Sup: clay
+
+  │  Total individuales: $5,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 8 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $6,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Stefan Ilie Bogdan Petre @3.85  p=0.654  zona=underdog
+  │    2. Paola Lopez          @3.55  p=0.629  zona=underdog
+  │    3. David Eichenseher    @3.50  p=0.696  zona=underdog
+  │    4. Camille Allegre      @3.25  p=0.629  zona=underdog
+  │    5. Simona Ogescu        @2.17  p=0.649  zona=underdog [W]
+  │    6. Jaesung Choe         @2.08  p=0.629  zona=slight_underdog [W]
+  │    7. Ares Teixido Garcia  @1.85  p=0.673  zona=slight_underdog
+  │    8. Eva Marie Voracek    @1.84  p=0.696  zona=slight_underdog [W]
+
+  │  ── 3 PIERNAS: TOP 4 combos × $1,000 = $4,000 ──
+  │     (cada combo excluye 5 jugadores)
+  │     [3p-1] Stefan Ilie Bogdan Petre@3.85 + Paola Lopez@3.55 + David Eichenseher@3.50
+  │            @47.84 HR:28.6% EV:+1269.7% →$47,840  excluye:[Camille Allegre, Ares Teixido Garcia, Simona Ogescu, Jaesung Choe, Eva Marie Voracek]
+  │     [3p-2] Camille Allegre@3.25 + Stefan Ilie Bogdan Petre@3.85 + David Eichenseher@3.50
+  │            @43.79 HR:28.6% EV:+1153.9% →$43,790  excluye:[Paola Lopez, Ares Teixido Garcia, Simona Ogescu, Jaesung Choe, Eva Marie Voracek]
+  │     [3p-3] Camille Allegre@3.25 + Stefan Ilie Bogdan Petre@3.85 + Paola Lopez@3.55
+  │            @44.42 HR:25.9% EV:+1050.4% →$44,420  excluye:[David Eichenseher, Ares Teixido Garcia, Simona Ogescu, Jaesung Choe, Eva Marie Voracek]
+  │     [3p-4] Camille Allegre@3.25 + Paola Lopez@3.55 + David Eichenseher@3.50
+  │            @40.38 HR:27.5% EV:+1012.0% →$40,380  excluye:[Stefan Ilie Bogdan Petre, Ares Teixido Garcia, Simona Ogescu, Jaesung Choe, Eva Marie Voracek]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $1,000 = $4,000 ──
+  │     (cada combo excluye 4 jugadores)
+  │     [4p-1] Camille Allegre@3.25 + Stefan Ilie Bogdan Petre@3.85 + Paola Lopez@3.55 + David Eichenseher@3.50
+  │            @155.47 HR:18.0% EV:+2700.8% →$155,470  excluye:[Ares Teixido Garcia, Simona Ogescu, Jaesung Choe, Eva Marie Voracek]
+  │     [4p-2] Stefan Ilie Bogdan Petre@3.85 + Paola Lopez@3.55 + David Eichenseher@3.50 + Simona Ogescu@2.17
+  │            @103.80 HR:18.6% EV:+1828.8% →$103,800  excluye:[Camille Allegre, Ares Teixido Garcia, Jaesung Choe, Eva Marie Voracek]
+  │     [4p-3] Camille Allegre@3.25 + Stefan Ilie Bogdan Petre@3.85 + David Eichenseher@3.50 + Simona Ogescu@2.17
+  │            @95.03 HR:18.6% EV:+1665.8% →$95,030  excluye:[Paola Lopez, Ares Teixido Garcia, Jaesung Choe, Eva Marie Voracek]
+  │     [4p-4] Camille Allegre@3.25 + Stefan Ilie Bogdan Petre@3.85 + Paola Lopez@3.55 + Simona Ogescu@2.17
+  │            @96.39 HR:16.8% EV:+1520.1% →$96,390  excluye:[David Eichenseher, Ares Teixido Garcia, Jaesung Choe, Eva Marie Voracek]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-4 picks?) ──
+  │  Total apostado: $8,000
+
+  │  🏆 0 fallos (8/8 ganan): retorno $627,120 → P&L +$619,120 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Eva Marie Voracek]):
+  │       retorno $627,120 → P&L +$619,120 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Stefan Ilie Bogdan Petre]):
+  │       retorno $40,380 → P&L +$32,380 (1/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Eva Marie Voracek, Ares Teixido Garcia]):
+  │       retorno $627,120 → P&L +$619,120 (8/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Stefan Ilie Bogdan Petre, Paola Lopez]):
+  │       retorno $0 → P&L $-8,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Eva Marie Voracek, Ares Teixido Garcia, Jaesung Choe]):
+  │       retorno $627,120 → P&L +$619,120 (8/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Stefan Ilie Bogdan Petre, Paola Lopez, David Eichenseher]):
+  │       retorno $0 → P&L $-8,000 (0/8 combos pagan)
+  │  ✅ 4 fallos (mejor caso: fallan favoritos [Eva Marie Voracek, Ares Teixido Garcia, Jaesung Choe, Simona Ogescu]):
+  │       retorno $331,900 → P&L +$323,900 (5/8 combos pagan)
+  │  ❌ 4 fallos (peor caso: fallan underdogs [Stefan Ilie Bogdan Petre, Paola Lopez, David Eichenseher, Camille Allegre]):
+  │       retorno $0 → P&L $-8,000 (0/8 combos pagan)
+
+  │  Total cobertura: $8,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     8
+  │  ρ estructural:       0.05 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.741
+  │  Reducción vs naive:  -25.9%
+  │
+  │  Stake naive (sin ajuste):    $      13,000
+  │  Stake ajustado (PK):         $       9,630
+  │  Ahorro por correlación:      $       3,370
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $      -9,849  (98.5% bankroll)
+  │  CVaR 95%:           $     -10,588
+  │  Max VaR permitido:  $       2,500  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.25
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $     126,564
+  │  σ(P&L):             $     142,256
+  │  Sharpe Ratio:              0.890
+  │  Kelly Growth Rate:        1.9553 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $ 176,162,493
+  │  Bankroll en 10 sesiones:  $3,103,322,409,023
+  │  Bankroll en 30 sesiones:  $298,868,877,459,564,463,342,082,850,816
+  │  Sesiones para duplicar:   0.4
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.25 (de $13,000 a $3,300)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.25) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Camille Allegre           @3.25  →  $       0  (ret. $         0)
+  │    Stefan Ilie Bogdan Petre  @3.85  →  $       0  (ret. $         0)
+  │    Paola Lopez               @3.55  →  $       0  (ret. $         0)
+  │    David Eichenseher         @3.50  →  $       0  (ret. $         0)
+  │    Ares Teixido Garcia       @1.85  →  $       0  (ret. $         0)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @47.84]  $       0  →  Stefan Ilie Bogdan Petre@3.85 + Paola Lopez@3.55 + David Eichenseher@3.50
+  │    [3p @43.79]  $       0  →  Camille Allegre@3.25 + Stefan Ilie Bogdan Petre@3.85 + David Eichenseher@3.50
+  │    [3p @44.42]  $       0  →  Camille Allegre@3.25 + Stefan Ilie Bogdan Petre@3.85 + Paola Lopez@3.55
+  │    [3p @40.38]  $       0  →  Camille Allegre@3.25 + Paola Lopez@3.55 + David Eichenseher@3.50
+  │    [4p @155.47]  $       0  →  Camille Allegre@3.25 + Stefan Ilie Bogdan Petre@3.85 + Paola Lopez@3.55 + David Eichenseher@3.50
+  │    [4p @103.80]  $       0  →  Stefan Ilie Bogdan Petre@3.85 + Paola Lopez@3.55 + David Eichenseher@3.50 + Simona Ogescu@2.17
+  │    [4p @95.03]  $       0  →  Camille Allegre@3.25 + Stefan Ilie Bogdan Petre@3.85 + David Eichenseher@3.50 + Simona Ogescu@2.17
+  │    [4p @96.39]  $       0  →  Camille Allegre@3.25 + Stefan Ilie Bogdan Petre@3.85 + Paola Lopez@3.55 + Simona Ogescu@2.17
+  │
+  │  TOTAL EN RIESGO:  $         0  (0.0% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $        10,000                       ║
+  ║  Individuales:        $             0  (0.0% bankroll)      ║
+  ║  Combos:              $             0  (0.0% bankroll)      ║
+  ║  Sistema:             $             0  (0.0% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $             0  (0.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       5                                       ║
+  ║  Pool cobertura:        8 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260617_11  ║
+  ║  Partidos analizados:  91                                       ║
+  ║  Superficie:          clay (itf)                                  ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  📊 Calibración: n=798 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.696 (calibrado clay) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260617_113521.json

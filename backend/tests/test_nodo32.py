@@ -111,22 +111,27 @@ class TestNodo32Fase1BetslipCalibration:
 
     def test_t32_06_theta_thompson_itf_uses_fallback(self):
         """T32-06: theta_thompson(superficie='clay', tier='itf') usa fallback_por_tier['itf']
-        en lugar de caer a global o por_superficie.
-        Verifica la jerarquía de priors: por_superficie_y_tier → fallback_por_tier → ..."""
-        # Cargar calibración
-        calib_path = Path("data/calibracion_edge.json")
-        if calib_path.exists():
-            with open(calib_path) as f:
-                calib = json.load(f)
+        cuando por_superficie_y_tier['clay_itf'] tiene n < 10.
+        Usa calibración sintética para ser data-independent del archivo real."""
+        # Calibración sintética con clay_itf n=1 (demasiado pequeño → debe usar fallback)
+        calib_sintetico = {
+            "global": {"wins": 467, "losses": 239},
+            "por_superficie": {
+                "clay": {"wins": 50, "losses": 20},
+            },
+            "por_superficie_y_tier": {
+                "clay_itf": {"wins": 1, "losses": 0},   # n=1 → fallback
+            },
+            "fallback_por_tier": {
+                "itf": 0.50,
+            },
+        }
 
-            # Llamar theta_thompson para clay+itf
-            p = theta_thompson(calib, superficie="clay", tier="itf")
+        p = theta_thompson(calib_sintetico, superficie="clay", tier="itf")
 
-            # clay_itf tiene n=1 (demasiado pequeño), debe caer a fallback_por_tier["itf"]
-            expected = calib["fallback_por_tier"]["itf"]
-            # No es una igualdad exacta porque la jerarquía puede tener clamps
-            # pero debe estar cerca de 0.50
-            assert 0.45 <= p <= 0.55, f"Expected near 0.50, got {p}"
+        # Con n=1 en clay_itf, debe caer a fallback_por_tier["itf"] = 0.50
+        # (B-08: clamp con p_superficie aplica solo si diverge > 0.03)
+        assert 0.45 <= p <= 0.58, f"Expected cerca de 0.50, got {p}"
 
 
 # ─────────────────────────────────────────────────────────────────────────────

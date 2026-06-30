@@ -1,0 +1,174 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — GRAND_SLAM GRASS
+  2026-06-22 08:28  │  Bankroll: $125,000
+  Señales APOSTAR: 3  │  Watchlist: 3  │  Sin edge: 5
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 10 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.25 (grand_slam)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $50,000 (40% bankroll)
+
+  │  🎾 Facundo Diaz Acosta vs Alexis Galarneau
+  │     Apostar: Facundo Diaz Acosta
+  │     Cuota 3.35  │  Edge 21.9%  │  p_blend 0.535 (n_h2h=1)
+  │     Kelly-KL 11.0% → stake $11,000  │  Retorno potencial $36,850
+  │     EV real +79.3%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Jay Clarke vs Andrea Pellegrino
+  │     Apostar: Andrea Pellegrino
+  │     Cuota 3.00  │  Edge 17.0%  │  p_blend 0.532 (n_h2h=1)
+  │     Kelly-KL 8.9% → stake $9,000  │  Retorno potencial $27,000
+  │     EV real +59.5%  │  Zona: underdog  │  Sup: grass
+
+  │  🎾 Francesco Maestrelli vs Max Basing
+  │     Apostar: Max Basing
+  │     Cuota 2.43  │  Edge 10.5%  │  p_blend 0.541 (n_h2h=0)
+  │     Kelly-KL 6.3% → stake $7,000  │  Retorno potencial $17,010
+  │     EV real +31.5%  │  Zona: underdog  │  Sup: grass
+
+  │  Total individuales: $27,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 10 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $75,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Franco Roncadelli    @9.00  p=0.541  zona=underdog [W]
+  │    2. Marco Cecchinato     @5.60  p=0.541  zona=underdog [W]
+  │    3. Federico Coria       @3.65  p=0.541  zona=underdog [W]
+  │    4. Facundo Diaz Acosta  @3.35  p=0.535  zona=underdog
+  │    5. Andrea Pellegrino    @3.00  p=0.532  zona=underdog
+  │    6. Max Basing           @2.43  p=0.541  zona=underdog
+  │    7. Pol Martin Tiffon    @1.90  p=0.541  zona=slight_underdog
+  │    8. August Holmgren      @1.74  p=0.532  zona=slight_underdog
+  │    9. Yi Zhou              @1.66  p=0.541  zona=slight_underdog
+  │    10. Stefano Travaglia    @1.58  p=0.531  zona=moderate_favorite
+
+  │  ── 3 PIERNAS: TOP 4 combos × $12,000 = $48,000 ──
+  │     (cada combo excluye 7 jugadores)
+  │     [3p-1] Franco Roncadelli@9.00 + Marco Cecchinato@5.60 + Federico Coria@3.65
+  │            @183.96 HR:15.8% EV:+2814.5% →$2,207,520  excluye:[Facundo Diaz Acosta, Andrea Pellegrino, Max Basing, Stefano Travaglia, August Holmgren, Yi Zhou, Pol Martin Tiffon]
+  │     [3p-2] Facundo Diaz Acosta@3.35 + Franco Roncadelli@9.00 + Marco Cecchinato@5.60
+  │            @168.84 HR:15.7% EV:+2546.3% →$2,026,080  excluye:[Andrea Pellegrino, Max Basing, Federico Coria, Stefano Travaglia, August Holmgren, Yi Zhou, Pol Martin Tiffon]
+  │     [3p-3] Facundo Diaz Acosta@3.35 + Franco Roncadelli@9.00 + Federico Coria@3.65
+  │            @110.05 HR:15.7% EV:+1624.9% →$1,320,600  excluye:[Andrea Pellegrino, Max Basing, Marco Cecchinato, Stefano Travaglia, August Holmgren, Yi Zhou, Pol Martin Tiffon]
+  │     [3p-4] Facundo Diaz Acosta@3.35 + Marco Cecchinato@5.60 + Federico Coria@3.65
+  │            @68.47 HR:15.7% EV:+973.2% →$821,640  excluye:[Andrea Pellegrino, Max Basing, Franco Roncadelli, Stefano Travaglia, August Holmgren, Yi Zhou, Pol Martin Tiffon]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $6,000 = $24,000 ──
+  │     (cada combo excluye 6 jugadores)
+  │     [4p-1] Facundo Diaz Acosta@3.35 + Franco Roncadelli@9.00 + Marco Cecchinato@5.60 + Federico Coria@3.65
+  │            @616.27 HR:8.5% EV:+5126.6% →$3,697,620  excluye:[Andrea Pellegrino, Max Basing, Stefano Travaglia, August Holmgren, Yi Zhou, Pol Martin Tiffon]
+  │     [4p-2] Andrea Pellegrino@3.00 + Franco Roncadelli@9.00 + Marco Cecchinato@5.60 + Federico Coria@3.65
+  │            @551.88 HR:8.4% EV:+4547.7% →$3,311,280  excluye:[Facundo Diaz Acosta, Max Basing, Stefano Travaglia, August Holmgren, Yi Zhou, Pol Martin Tiffon]
+  │     [4p-3] Facundo Diaz Acosta@3.35 + Andrea Pellegrino@3.00 + Franco Roncadelli@9.00 + Marco Cecchinato@5.60
+  │            @506.52 HR:8.3% EV:+4120.2% →$3,039,120  excluye:[Max Basing, Federico Coria, Stefano Travaglia, August Holmgren, Yi Zhou, Pol Martin Tiffon]
+  │     [4p-4] Facundo Diaz Acosta@3.35 + Andrea Pellegrino@3.00 + Marco Cecchinato@5.60 + Federico Coria@3.65
+  │            @205.42 HR:8.3% EV:+1611.5% →$1,232,520  excluye:[Max Basing, Franco Roncadelli, Stefano Travaglia, August Holmgren, Yi Zhou, Pol Martin Tiffon]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-4 picks?) ──
+  │  Total apostado: $72,000
+
+  │  🏆 0 fallos (10/10 ganan): retorno $17,656,380 → P&L +$17,584,380 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Stefano Travaglia]):
+  │       retorno $17,656,380 → P&L +$17,584,380 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Franco Roncadelli]):
+  │       retorno $2,054,160 → P&L +$1,982,160 (2/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Stefano Travaglia, Yi Zhou]):
+  │       retorno $17,656,380 → P&L +$17,584,380 (8/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Franco Roncadelli, Marco Cecchinato]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Stefano Travaglia, Yi Zhou, August Holmgren]):
+  │       retorno $17,656,380 → P&L +$17,584,380 (8/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Franco Roncadelli, Marco Cecchinato, Federico Coria]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+  │  ✅ 4 fallos (mejor caso: fallan favoritos [Stefano Travaglia, Yi Zhou, August Holmgren, Pol Martin Tiffon]):
+  │       retorno $17,656,380 → P&L +$17,584,380 (8/8 combos pagan)
+  │  ❌ 4 fallos (peor caso: fallan underdogs [Franco Roncadelli, Marco Cecchinato, Federico Coria, Facundo Diaz Acosta]):
+  │       retorno $0 → P&L $-72,000 (0/8 combos pagan)
+
+  │  Total cobertura: $72,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     10
+  │  ρ estructural:       0.25 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.308
+  │  Reducción vs naive:  -69.2%
+  │
+  │  Stake naive (sin ajuste):    $      99,000
+  │  Stake ajustado (PK):         $      30,462
+  │  Ahorro por correlación:      $      68,538
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $     -45,868  (36.7% bankroll)
+  │  CVaR 95%:           $     -61,221
+  │  Max VaR permitido:  $      31,250  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.68
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $   1,912,146
+  │  σ(P&L):             $   2,376,570
+  │  Sharpe Ratio:              0.805
+  │  Kelly Growth Rate:        2.0855 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $4,222,876,548
+  │  Bankroll en 10 sesiones:  $142,661,490,708,344
+  │  Bankroll en 30 sesiones:  $185,823,333,771,480,970,051,865,144,197,120
+  │  Sesiones para duplicar:   0.3
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.68 (de $99,000 a $67,449)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.68) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Facundo Diaz Acosta       @3.35  →  $   7,000  (ret. $    23,450)
+  │    Andrea Pellegrino         @3.00  →  $   6,000  (ret. $    18,000)
+  │    Max Basing                @2.43  →  $   5,000  (ret. $    12,150)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @183.96]  $   8,000  →  Franco Roncadelli@9.00 + Marco Cecchinato@5.60 + Federico Coria@3.65
+  │    [3p @168.84]  $   8,000  →  Facundo Diaz Acosta@3.35 + Franco Roncadelli@9.00 + Marco Cecchinato@5.60
+  │    [3p @110.05]  $   8,000  →  Facundo Diaz Acosta@3.35 + Franco Roncadelli@9.00 + Federico Coria@3.65
+  │    [3p @68.47]  $   8,000  →  Facundo Diaz Acosta@3.35 + Marco Cecchinato@5.60 + Federico Coria@3.65
+  │    [4p @616.27]  $   4,000  →  Facundo Diaz Acosta@3.35 + Franco Roncadelli@9.00 + Marco Cecchinato@5.60 + Federico Coria@3.65
+  │    [4p @551.88]  $   4,000  →  Andrea Pellegrino@3.00 + Franco Roncadelli@9.00 + Marco Cecchinato@5.60 + Federico Coria@3.65
+  │    [4p @506.52]  $   4,000  →  Facundo Diaz Acosta@3.35 + Andrea Pellegrino@3.00 + Franco Roncadelli@9.00 + Marco Cecchinato@5.60
+  │    [4p @205.42]  $   4,000  →  Facundo Diaz Acosta@3.35 + Andrea Pellegrino@3.00 + Marco Cecchinato@5.60 + Federico Coria@3.65
+  │
+  │  TOTAL EN RIESGO:  $    66,000  (52.8% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $       125,000                       ║
+  ║  Individuales:        $        18,000  (14.4% bankroll)      ║
+  ║  Cobertura:           $        48,000  (38.4% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $        66,000  (52.8% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       3                                       ║
+  ║  Pool cobertura:       10 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260622_08  ║
+  ║  Partidos analizados:  89                                       ║
+  ║  Superficie:          grass (grand_slam)                          ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  ⚠️  ALERTA: 52.8% bankroll en riesgo — por encima del 30% recomendado.
+      Reducir combos o sistema hasta n≥30 con datos limpios.
+
+  📊 Calibración: n=1325 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.541 (calibrado grass) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260622_082808.json

@@ -1,0 +1,52 @@
+{
+  "metadata": {
+    "verification_date": "2026-06-05 10:33:19",
+    "total_matches_processed": 2,
+    "total_matches_verified": 2
+  },
+  "summary": {
+    "total_hits": 1,
+    "total_misses": 1,
+    "accuracy_percentage": 50.0
+  },
+  "detailed_results": [
+    {
+      "match_info": {
+        "jugador1": "Kostyuk M.",
+        "jugador2": "Andreeva M.",
+        "match_url": "https://www.flashscore.com/match/tennis/andreeva-mirra-lI6fOOat/kostyuk-marta-8CZqQdSa/?mid=tMeHmEwK"
+      },
+      "prediction": {
+        "predicted_winner": "Andreeva M.",
+        "confidence": 51
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Andreeva M."
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Shnaider D.",
+        "jugador2": "Chwalinska M.",
+        "match_url": "https://www.flashscore.com/match/tennis/chwalinska-maja-OIxOD54s/shnaider-diana-028BdVOj/?mid=6J1JWr7N"
+      },
+      "prediction": {
+        "predicted_winner": "Shnaider D.",
+        "confidence": 51
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Chwalinska M."
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "fecha_validacion": "2026-05-30T01:03:37.400462",
+  "fuente_h2h": "reports/h2h_results_enhanced_20260530_010113.json",
+  "total_partidos": 3,
+  "total_validados": 3,
+  "saltados": 0,
+  "correctas": 3,
+  "accuracy": 1.0,
+  "accuracy_por_superficie": {
+    "clay": {
+      "accuracy": 1.0,
+      "n": 3,
+      "correctas": 3
+    }
+  },
+  "partidos": [
+    {
+      "partido": "Borges N. vs Rublev A.",
+      "prediccion": "Rublev A.",
+      "confianza": 58.1,
+      "resultado_real": "Rublev A.",
+      "correcto": true,
+      "match_id": "WIzfqXXr",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Tirante T. A. vs Carreno-Busta P.",
+      "prediccion": "Carreno-Busta P.",
+      "confianza": 52.7,
+      "resultado_real": "Carreno-Busta P.",
+      "correcto": true,
+      "match_id": "CW6rxGQF",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Michelsen A. vs Jodar R.",
+      "prediccion": "Jodar R.",
+      "confianza": 56.3,
+      "resultado_real": "Jodar R.",
+      "correcto": true,
+      "match_id": "4llKbBxJ",
+      "torneo": "Desconocido",
+      "superficie": "clay"
+    }
+  ]
+}

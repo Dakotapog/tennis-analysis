@@ -1,0 +1,92 @@
+==============================================================
+COMBO PLAN — 2026-06-26  |  Confianza minima: 80.0%
+Fuente: h2h_results_enhanced_20260625_230211.json
+Picks seleccionados: 9
+==============================================================
+
+PICKS SELECCIONADOS (ordenados por confianza):
+   1. [DIAMOND 86.2%]  Dylan Dietrich                  @1.06  ITF MASCULINO - INDIVIDUALES: M25 Brussels (B
+   2. [DIAMOND 83.8%]  Lucas Andrade Da Silva          @3.60  CHALLENGER MASCULINO - INDIVIDUALES: Piracica
+   3. [DIAMOND 83.5%]  Max Hans Rehberg                @1.52  ITF MASCULINO - INDIVIDUALES: M25 Brussels (B
+   4. [DIAMOND 82.7%]  Sandro Kopp                     @1.62  CHALLENGER MASCULINO - INDIVIDUALES: Plovdiv 
+   5. [DIAMOND 82.1%]  Alan Wazny                      @2.02  ITF MASCULINO - INDIVIDUALES: M15 Rzeszow (Po
+   6. [DIAMOND 82.1%]  Nicolas Kicker                  @1.20  CHALLENGER MASCULINO - INDIVIDUALES: Piracica
+   7. [DIAMOND 81.2%]  Joaquin Aguilar Cardozo         @2.55  CHALLENGER MASCULINO - INDIVIDUALES: Piracica
+   8. [DIAMOND 80.6%]  Gina Feistel                    @1.23  ITF FEMENINO - INDIVIDUALES: W50 Gdansk (Polo
+   9. [DIAMOND 80.0%]  Olle Wallin                     @1.43  ITF MASCULINO - INDIVIDUALES: M25 Brussels (B
+
+PORTFOLIO DE COMBOS:
+--------------------------------------------------------------
+
+C5 — PRINCIPAL
+  Picks (5): Dylan Dietrich, Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny
+  Cuotas: 1.06 x 3.60 x 1.52 x 1.62 x 2.02
+  Odds total: 18.98  |  P(win): 41.0%  |  EV: $+67,733
+  STAKE: $10,000  ->  Retorno si gana: $189,810  |  Retorno esperado: $77,733
+
+  COBERTURA C5 (5 combos, excluyen picks de menor confianza):
+    [COB_excl_Rehberg]  Excluye: Max Hans Rehberg
+      Picks: Dylan Dietrich, Lucas Andrade Da Silva, Sandro Kopp, Alan Wazny, Nicolas Kicker
+      Odds: 14.98  P(win): 40.3%  EV: $+2,517  STAKE: $500
+    [COB_excl_Kopp]  Excluye: Sandro Kopp
+      Picks: Dylan Dietrich, Lucas Andrade Da Silva, Max Hans Rehberg, Alan Wazny, Nicolas Kicker
+      Odds: 14.06  P(win): 40.7%  EV: $+2,358  STAKE: $500
+    [COB_excl_Wazny]  Excluye: Alan Wazny
+      Picks: Dylan Dietrich, Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Nicolas Kicker
+      Odds: 11.28  P(win): 41.0%  EV: $+1,809  STAKE: $500
+    [COB_excl_Rehberg_Kopp]  Excluye: Max Hans Rehberg, Sandro Kopp
+      Picks: Dylan Dietrich, Lucas Andrade Da Silva, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo
+      Odds: 23.59  P(win): 39.5%  EV: $+4,163  STAKE: $500
+    [COB_excl_Rehberg_Wazny]  Excluye: Max Hans Rehberg, Alan Wazny
+      Picks: Dylan Dietrich, Lucas Andrade Da Silva, Sandro Kopp, Nicolas Kicker, Joaquin Aguilar Cardozo
+      Odds: 18.92  P(win): 39.8%  EV: $+3,267  STAKE: $500
+--------------------------------------------------------------
+
+C7 — PRINCIPAL
+  Picks (7): Dylan Dietrich, Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo
+  Cuotas: 1.06 x 3.60 x 1.52 x 1.62 x 2.02 x 1.20 x 2.55
+  Odds total: 58.08  |  P(win): 27.3%  |  EV: $+111,429
+  STAKE: $7,500  ->  Retorno si gana: $435,613  |  Retorno esperado: $118,929
+
+  COBERTURA C7 (5 combos, excluyen picks de menor confianza):
+    [COB_excl_Wazny]  Excluye: Alan Wazny
+      Picks: Dylan Dietrich, Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel
+      Odds: 35.37  P(win): 26.8%  EV: $+4,240  STAKE: $500
+    [COB_excl_Kicker]  Excluye: Nicolas Kicker
+      Picks: Dylan Dietrich, Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Joaquin Aguilar Cardozo, Gina Feistel
+      Odds: 59.53  P(win): 26.8%  EV: $+7,478  STAKE: $500
+    [COB_excl_Cardozo]  Excluye: Joaquin Aguilar Cardozo
+      Picks: Dylan Dietrich, Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Gina Feistel
+      Odds: 28.02  P(win): 27.1%  EV: $+3,296  STAKE: $500
+    [COB_excl_Wazny_Kicker]  Excluye: Alan Wazny, Nicolas Kicker
+      Picks: Dylan Dietrich, Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin
+      Odds: 42.15  P(win): 26.1%  EV: $+5,004  STAKE: $500
+    [COB_excl_Wazny_Cardozo]  Excluye: Alan Wazny, Joaquin Aguilar Cardozo
+      Picks: Dylan Dietrich, Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Nicolas Kicker, Gina Feistel, Olle Wallin
+      Odds: 19.83  P(win): 26.4%  EV: $+2,119  STAKE: $500
+--------------------------------------------------------------
+
+C9 — PRINCIPAL
+  Picks (9): Dylan Dietrich, Lucas Andrade Da Silva, Max Hans Rehberg, Sandro Kopp, Alan Wazny, Nicolas Kicker, Joaquin Aguilar Cardozo, Gina Feistel, Olle Wallin
+  Cuotas: 1.06 x 3.60 x 1.52 x 1.62 x 2.02 x 1.20 x 2.55 x 1.23 x 1.43
+  Odds total: 102.16  |  P(win): 17.6%  |  EV: $+84,921
+  STAKE: $5,000  ->  Retorno si gana: $510,800  |  Retorno esperado: $89,921
+--------------------------------------------------------------
+
+RESUMEN PORTFOLIO:
+  Total combos:             13
+  Total invertido:          $27,500
+  Retorno esperado total:   $327,834
+  EV total:                 $+300,334
+  Combos con toler. 1 fallo: 6
+  Combos con toler. 2 fallos:4
+
+NOTAS:
+  - DIAMOND (>=75%) y GOLD (>=65%) entran desde C5.
+  - SILVER (57-65%) entra desde C7.
+  - BRONZE (53-57%) entra desde C9 y son prioritarios en exclusion.
+  - Combos de cobertura sobreviven si el pick excluido falla.
+  - EV calculado como: stake*(odds_total*P_modelo - 1).
+  - P_modelo = producto de confianzas individuales (no calibradas Kelly-KL).
+  - NO desplegar si EV total < 0 o si los combos C5/C7 tienen P(win)<20%.
+==============================================================

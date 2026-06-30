@@ -1,0 +1,149 @@
+
+═══════════════════════════════════════════════════════════════════
+  TRADER EV TENIS — ATP500 GRASS
+  2026-06-22 08:29  │  Bankroll: $30,000
+  Señales APOSTAR: 1  │  Watchlist: 5  │  Sin edge: 0
+  MODO: COBERTURA POR EXCLUSIÓN  │  Pool: 6 picks
+  Piernas: 3-4  │  Min cuota: 1.50  │  ρ=0.15 (atp500)
+═══════════════════════════════════════════════════════════════════
+
+  ┌─ INDIVIDUALES ──────────────────────────────────────────────────
+  │  Budget: $12,000 (40% bankroll)
+
+  │  🎾 Thiago Agustin Tirante vs Jacob Fearnley
+  │     Apostar: Thiago Agustin Tirante
+  │     Cuota 2.75  │  Edge 14.5%  │  p_blend 0.541 (n_h2h=0)
+  │     Kelly-KL 8.1% → stake $2,000  │  Retorno potencial $5,500
+  │     EV real +48.8%  │  Zona: underdog  │  Sup: grass
+
+  │  Total individuales: $2,000
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ COBERTURA POR EXCLUSIÓN ───────────────────────────────────────
+  │  Pool: 6 picks  │  Combos: 3 a 4 piernas
+  │  Budget: $18,000
+  │
+  │  Picks en pool (ordenados por cuota):
+  │    1. Roman Andres Burruchaga @3.70  p=0.532  zona=underdog [W]
+  │    2. Thiago Agustin Tirante @2.75  p=0.541  zona=underdog
+  │    3. Jan Choinski         @2.70  p=0.533  zona=underdog [W]
+  │    4. Elisabetta Cocciaretto @2.50  p=0.541  zona=underdog [W]
+  │    5. Aleksandar Vukic     @2.38  p=0.525  zona=underdog [W]
+  │    6. Ignacio Buse         @2.30  p=0.541  zona=underdog [W]
+
+  │  ── 3 PIERNAS: TOP 4 combos × $3,000 = $12,000 ──
+  │     (cada combo excluye 3 jugadores)
+  │     [3p-1] Thiago Agustin Tirante@2.75 + Roman Andres Burruchaga@3.70 + Jan Choinski@2.70
+  │            @27.47 HR:15.3% EV:+321.0% →$82,410  excluye:[Elisabetta Cocciaretto, Aleksandar Vukic, Ignacio Buse]
+  │     [3p-2] Thiago Agustin Tirante@2.75 + Elisabetta Cocciaretto@2.50 + Roman Andres Burruchaga@3.70
+  │            @25.44 HR:15.6% EV:+295.9% →$76,320  excluye:[Jan Choinski, Aleksandar Vukic, Ignacio Buse]
+  │     [3p-3] Elisabetta Cocciaretto@2.50 + Roman Andres Burruchaga@3.70 + Jan Choinski@2.70
+  │            @24.98 HR:15.3% EV:+282.8% →$74,940  excluye:[Thiago Agustin Tirante, Aleksandar Vukic, Ignacio Buse]
+  │     [3p-4] Thiago Agustin Tirante@2.75 + Elisabetta Cocciaretto@2.50 + Jan Choinski@2.70
+  │            @18.56 HR:15.6% EV:+189.6% →$55,680  excluye:[Roman Andres Burruchaga, Aleksandar Vukic, Ignacio Buse]
+
+  │  ── 4 PIERNAS: TOP 4 combos × $2,000 = $8,000 ──
+  │     (cada combo excluye 2 jugadores)
+  │     [4p-1] Thiago Agustin Tirante@2.75 + Elisabetta Cocciaretto@2.50 + Roman Andres Burruchaga@3.70 + Jan Choinski@2.70
+  │            @68.68 HR:8.3% EV:+469.6% →$137,360  excluye:[Aleksandar Vukic, Ignacio Buse]
+  │     [4p-2] Thiago Agustin Tirante@2.75 + Roman Andres Burruchaga@3.70 + Jan Choinski@2.70 + Aleksandar Vukic@2.38
+  │            @65.38 HR:8.1% EV:+426.1% →$130,760  excluye:[Elisabetta Cocciaretto, Ignacio Buse]
+  │     [4p-3] Thiago Agustin Tirante@2.75 + Elisabetta Cocciaretto@2.50 + Roman Andres Burruchaga@3.70 + Aleksandar Vukic@2.38
+  │            @60.54 HR:8.2% EV:+394.7% →$121,080  excluye:[Jan Choinski, Ignacio Buse]
+  │     [4p-4] Thiago Agustin Tirante@2.75 + Elisabetta Cocciaretto@2.50 + Jan Choinski@2.70 + Aleksandar Vukic@2.38
+  │            @44.18 HR:8.2% EV:+261.9% →$88,360  excluye:[Roman Andres Burruchaga, Ignacio Buse]
+
+  │  ── ESCENARIOS DE P&L (¿qué pasa si fallan 0-3 picks?) ──
+  │  Total apostado: $20,000
+
+  │  🏆 0 fallos (6/6 ganan): retorno $766,910 → P&L +$746,910 (TODOS 8 combos pagan)
+  │  ✅ 1 fallo (mejor caso: fallan favoritos [Ignacio Buse]):
+  │       retorno $766,910 → P&L +$746,910 (8/8 combos pagan)
+  │  ✅ 1 fallo (peor caso: fallan underdogs [Roman Andres Burruchaga]):
+  │       retorno $144,040 → P&L +$124,040 (2/8 combos pagan)
+  │  ✅ 2 fallos (mejor caso: fallan favoritos [Ignacio Buse, Aleksandar Vukic]):
+  │       retorno $426,710 → P&L +$406,710 (5/8 combos pagan)
+  │  ❌ 2 fallos (peor caso: fallan underdogs [Roman Andres Burruchaga, Thiago Agustin Tirante]):
+  │       retorno $0 → P&L $-20,000 (0/8 combos pagan)
+  │  ✅ 3 fallos (mejor caso: fallan favoritos [Ignacio Buse, Aleksandar Vukic, Elisabetta Cocciaretto]):
+  │       retorno $82,410 → P&L +$62,410 (1/8 combos pagan)
+  │  ❌ 3 fallos (peor caso: fallan underdogs [Roman Andres Burruchaga, Thiago Agustin Tirante, Jan Choinski]):
+  │       retorno $0 → P&L $-20,000 (0/8 combos pagan)
+
+  │  Total cobertura: $20,000  │  8 combos totales
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ PORTFOLIO RISK MANAGEMENT (HEDGE FUND LAYER) ─────────────────
+  │
+  │  ── Correlación y Portfolio Kelly ──
+  │  Picks en sesión:     6
+  │  ρ estructural:       0.15 (misma superficie + ronda)
+  │  Portfolio Kelly:     factor = 0.571
+  │  Reducción vs naive:  -42.9%
+  │
+  │  Stake naive (sin ajuste):    $      22,000
+  │  Stake ajustado (PK):         $      12,571
+  │  Ahorro por correlación:      $       9,429
+  │
+  │  ── Value at Risk ──
+  │  VaR 95%:            $     -22,000  (73.3% bankroll)
+  │  CVaR 95%:           $     -22,000
+  │  Max VaR permitido:  $       7,500  (25% bankroll)
+  │  ⚠️  VaR EXCEDIDO → reducir stakes ×0.34
+  │
+  │  ── Métricas de Retorno ──
+  │  E[P&L] por sesión:  $      66,539
+  │  σ(P&L):             $     146,796
+  │  Sharpe Ratio:              0.453
+  │  Kelly Growth Rate:        0.3254 (por sesión)
+  │
+  │  ── Proyección Bankroll ──
+  │  Bankroll en  5 sesiones:  $     152,644
+  │  Bankroll en 10 sesiones:  $     776,670
+  │  Bankroll en 30 sesiones:  $ 520,554,564
+  │  Sesiones para duplicar:   2.1
+  │
+  │  ── RECOMENDACIÓN DE TRADER ──
+  │  ⚠️  Edge positivo PERO VaR excedido
+  │  → REDUCIR stakes ×0.34 (de $22,000 a $7,500)
+  │  → O reducir --top-n a 2 combos/tier
+  └─────────────────────────────────────────────────────────────────
+
+  ┌─ STAKES FINALES (VaR AJUSTADO ×0.34) ───────────────────────────
+  │
+  │  INDIVIDUALES:
+  │    Thiago Agustin Tirante    @2.75  →  $   1,000  (ret. $     2,750)
+  │
+  │  COBERTURA (8 combos):
+  │    [3p @27.47]  $   1,000  →  Thiago Agustin Tirante@2.75 + Roman Andres Burruchaga@3.70 + Jan Choinski@2.70
+  │    [3p @25.44]  $   1,000  →  Thiago Agustin Tirante@2.75 + Elisabetta Cocciaretto@2.50 + Roman Andres Burruchaga@3.70
+  │    [3p @24.98]  $   1,000  →  Elisabetta Cocciaretto@2.50 + Roman Andres Burruchaga@3.70 + Jan Choinski@2.70
+  │    [3p @18.56]  $   1,000  →  Thiago Agustin Tirante@2.75 + Elisabetta Cocciaretto@2.50 + Jan Choinski@2.70
+  │    [4p @68.68]  $   1,000  →  Thiago Agustin Tirante@2.75 + Elisabetta Cocciaretto@2.50 + Roman Andres Burruchaga@3.70 + Jan Choinski@2.70
+  │    [4p @65.38]  $   1,000  →  Thiago Agustin Tirante@2.75 + Roman Andres Burruchaga@3.70 + Jan Choinski@2.70 + Aleksandar Vukic@2.38
+  │    [4p @60.54]  $   1,000  →  Thiago Agustin Tirante@2.75 + Elisabetta Cocciaretto@2.50 + Roman Andres Burruchaga@3.70 + Aleksandar Vukic@2.38
+  │    [4p @44.18]  $   1,000  →  Thiago Agustin Tirante@2.75 + Elisabetta Cocciaretto@2.50 + Jan Choinski@2.70 + Aleksandar Vukic@2.38
+  │
+  │  TOTAL EN RIESGO:  $     9,000  (30.0% bankroll)
+  └─────────────────────────────────────────────────────────────────
+
+
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║                   RESUMEN DEPLOY                             ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Bankroll total:      $        30,000                       ║
+  ║  Individuales:        $         1,000  (3.3% bankroll)      ║
+  ║  Cobertura:           $         8,000  (26.7% bankroll)      ║
+  ║  TOTAL EN RIESGO:     $         9,000  (30.0% bankroll)      ║
+  ╠═══════════════════════════════════════════════════════════════╣
+  ║  Señales APOSTAR:       1                                       ║
+  ║  Pool cobertura:        6 picks                                    ║
+  ║  Fuente:              reports/h2h_results_enhanced_20260622_08  ║
+  ║  Partidos analizados:  89                                       ║
+  ║  Superficie:          grass (atp500)                              ║
+  ╚═══════════════════════════════════════════════════════════════╝
+
+  📊 Calibración: n=1325 validaciones. ✅ Suficiente n para Kelly real.
+  📊 p_blend usa Bayesian k=3 sobre prior 0.541 (calibrado grass) — converge a p_modelo cuando n_h2h≥10.
+
+  💾 Plan guardado: /mnt/c/users/hogar/tennis-analysis/backend/reports/trader_plan_20260622_082912.json

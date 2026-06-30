@@ -1,0 +1,19 @@
+{
+  "metadata": {
+    "fecha_extraccion": "2026-06-09 00:47:51",
+    "total_partidos_procesados": 0,
+    "version": "4.0_ninja_api",
+    "modo": "api_ninja",
+    "funcionalidades": [
+      "Extracción H2H via API Ninja",
+      "Análisis de rankings ATP",
+      "Sistema ELO calculado",
+      "Rivalidad transitiva",
+      "Predicciones avanzadas",
+      "Análisis de superficie",
+      "Ventaja de localización"
+    ]
+  },
+  "partidos": [],
+  "estadisticas_globales": {}
+}

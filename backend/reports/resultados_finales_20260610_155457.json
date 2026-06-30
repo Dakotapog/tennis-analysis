@@ -1,0 +1,3838 @@
+{
+  "metadata": {
+    "verification_date": "2026-06-10 15:54:57",
+    "source_file": "reports/h2h_results_enhanced_20260610_050642.json",
+    "tier_filter": null,
+    "total_matches_processed": 223,
+    "total_matches_verified": 191,
+    "total_not_finished": 4,
+    "total_errors": 28
+  },
+  "summary": {
+    "total_hits": 128,
+    "total_misses": 63,
+    "accuracy_percentage": 67.02
+  },
+  "detailed_results": [
+    {
+      "match_info": {
+        "jugador1": "Anna Sedysheva",
+        "jugador2": "Allegra Korpanec Davies",
+        "match_url": "https://www.flashscore.co/match/tennis/sedysheva-anna-korpanec-davies-allegra/dz9W0HNr/#/h2h",
+        "torneo": "W50 Hurghada (Egipto)"
+      },
+      "prediction": {
+        "predicted_winner": "Allegra Korpanec Davies",
+        "confidence": 52.9
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Allegra Korpanec Davies"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Viktoria Morvayova",
+        "jugador2": "Francesca Gandolfi",
+        "match_url": "https://www.flashscore.co/match/tennis/morvayova-viktoria-gandolfi-francesca/dzTTivoS/#/h2h",
+        "torneo": "W50 Hurghada (Egipto)"
+      },
+      "prediction": {
+        "predicted_winner": "Francesca Gandolfi",
+        "confidence": 50.6
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Viktoria Morvayova"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Shiyu Ye",
+        "jugador2": "Anchisa Chanta",
+        "match_url": "https://www.flashscore.co/match/tennis/ye-shiyu-chanta-aunchisa/IceRMQhn/#/h2h",
+        "torneo": "W100 Wuning (China)"
+      },
+      "prediction": {
+        "predicted_winner": "Anchisa Chanta",
+        "confidence": 50.4
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Anchisa Chanta"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Rebecca Sramkova",
+        "jugador2": "Iva Primorac",
+        "match_url": "https://www.flashscore.co/match/tennis/sramkova-rebecca-primorac-iva/I72V43V7/#/h2h",
+        "torneo": "W100 Zagreb (Croacia)"
+      },
+      "prediction": {
+        "predicted_winner": "Rebecca Sramkova",
+        "confidence": 51.8
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Iva Primorac"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Amarissa Kiara Toth",
+        "jugador2": "Caroline Werner",
+        "match_url": "https://www.flashscore.co/match/tennis/toth-amarissa-kiara-werner-caroline/6oAqE78L/#/h2h",
+        "torneo": "W100 Zagreb (Croacia)"
+      },
+      "prediction": {
+        "predicted_winner": "Caroline Werner",
+        "confidence": 52.4
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Amarissa Kiara Toth"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Bianca Elena Barbulescu",
+        "jugador2": "Dalila Jakupovic",
+        "match_url": "https://www.flashscore.co/match/tennis/barbulescu-bianca-elena-jakupovic-dalila/nsqeLOFl/#/h2h",
+        "torneo": "W100 Zagreb (Croacia)"
+      },
+      "prediction": {
+        "predicted_winner": "Bianca Elena Barbulescu",
+        "confidence": 51.7
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Dalila Jakupovic"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Katerina Tsygourova",
+        "jugador2": "Mina Hodzic",
+        "match_url": "https://www.flashscore.co/match/tennis/tsygourova-katerina-hodzic-mina/SKpBHtFD/#/h2h",
+        "torneo": "W100 Zagreb (Croacia)"
+      },
+      "prediction": {
+        "predicted_winner": "Katerina Tsygourova",
+        "confidence": 55.1
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Mina Hodzic"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Adrienn Nagy",
+        "jugador2": "Eszter Meri",
+        "match_url": "https://www.flashscore.co/match/tennis/nagy-adrienn-meri-eszter/AsaN6P0e/#/h2h",
+        "torneo": "W100 Zagreb (Croacia)"
+      },
+      "prediction": {
+        "predicted_winner": "Adrienn Nagy",
+        "confidence": 50.4
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Eszter Meri"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Lea Boskovic",
+        "jugador2": "Erika Andreeva",
+        "match_url": "https://www.flashscore.co/match/tennis/boskovic-lea-andreeva-erika/GbhPQphR/#/h2h",
+        "torneo": "W100 Zagreb (Croacia)"
+      },
+      "prediction": {
+        "predicted_winner": "Erika Andreeva",
+        "confidence": 54.8
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Lea Boskovic"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Mia Ristic",
+        "jugador2": "Tena Lukas",
+        "match_url": "https://www.flashscore.co/match/tennis/ristic-mia-lukas-tena/xU0F8oWr/#/h2h",
+        "torneo": "W100 Zagreb (Croacia)"
+      },
+      "prediction": {
+        "predicted_winner": "Tena Lukas",
+        "confidence": 50.2
+      },
+      "actual_result": {
+        "final_score": "1-0",
+        "actual_winner": "Mia Ristic"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Galatea Ferro",
+        "jugador2": "Anastasia Abbagnato",
+        "match_url": "https://www.flashscore.co/match/tennis/ferro-galatea-abbagnato-anastasia/8GecKCXH/#/h2h",
+        "torneo": "W35 San Gregorio 3 (Italia)"
+      },
+      "prediction": {
+        "predicted_winner": "Anastasia Abbagnato",
+        "confidence": 56.1
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Anastasia Abbagnato"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Denise Valente",
+        "jugador2": "Camilla Gennaro",
+        "match_url": "https://www.flashscore.co/match/tennis/valente-denise-gennaro-camilla/2JhkMY25/#/h2h",
+        "torneo": "W35 San Gregorio 3 (Italia)"
+      },
+      "prediction": {
+        "predicted_winner": "Camilla Gennaro",
+        "confidence": 59.4
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Camilla Gennaro"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Maria Toma",
+        "jugador2": "Alessandra Mazzola",
+        "match_url": "https://www.flashscore.co/match/tennis/toma-maria-mazzola-alessandra/YmtrVA7t/#/h2h",
+        "torneo": "W35 San Gregorio 3 (Italia)"
+      },
+      "prediction": {
+        "predicted_winner": "Alessandra Mazzola",
+        "confidence": 56.2
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Alessandra Mazzola"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Andreea Prisacariu",
+        "jugador2": "Ylenia Zocco",
+        "match_url": "https://www.flashscore.co/match/tennis/prisacariu-andreea-zocco-ylenia/bkbI7ZmC/#/h2h",
+        "torneo": "W35 San Gregorio 3 (Italia)"
+      },
+      "prediction": {
+        "predicted_winner": "Andreea Prisacariu",
+        "confidence": 73.1
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Andreea Prisacariu"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Aurora Zantedeschi",
+        "jugador2": "Carolina Troiano",
+        "match_url": "https://www.flashscore.co/match/tennis/zantedeschi-aurora-troiano-carolina/MuiZPG3t/#/h2h",
+        "torneo": "W35 San Gregorio 3 (Italia)"
+      },
+      "prediction": {
+        "predicted_winner": "Aurora Zantedeschi",
+        "confidence": 54.1
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Aurora Zantedeschi"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Noemi La Cagnina",
+        "jugador2": "Tahlia Kokkinis",
+        "match_url": "https://www.flashscore.co/match/tennis/la-cagnina-noemi-kokkinis-tahlia/tUg5Ij2U/#/h2h",
+        "torneo": "W35 San Gregorio 3 (Italia)"
+      },
+      "prediction": {
+        "predicted_winner": "Tahlia Kokkinis",
+        "confidence": 61.3
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Tahlia Kokkinis"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Carmen Andreea Herea",
+        "jugador2": "Angelica Raggi",
+        "match_url": "https://www.flashscore.co/match/tennis/herea-carmen-andreea-raggi-angelica/nge5P6yI/#/h2h",
+        "torneo": "W35 San Gregorio 3 (Italia)"
+      },
+      "prediction": {
+        "predicted_winner": "Carmen Andreea Herea",
+        "confidence": 52.2
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Carmen Andreea Herea"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Beatrise Zeltina",
+        "jugador2": "Amy Stevens",
+        "match_url": "https://www.flashscore.co/match/tennis/zeltina-beatrise-stevens-amy/tEqjTlxg/#/h2h",
+        "torneo": "W35 San Gregorio 3 (Italia)"
+      },
+      "prediction": {
+        "predicted_winner": "Beatrise Zeltina",
+        "confidence": 55.1
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Beatrise Zeltina"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Ruien Zhang",
+        "jugador2": "Nadia Podoroska",
+        "match_url": "https://www.flashscore.co/match/tennis/zhang-ruien-podoroska-nadia/ERsbRS65/#/h2h",
+        "torneo": "W35 San Gregorio 3 (Italia)"
+      },
+      "prediction": {
+        "predicted_winner": "Nadia Podoroska",
+        "confidence": 52.3
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Nadia Podoroska"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Gianmarco Ferrari",
+        "jugador2": "Roberto Carballes Baena",
+        "match_url": "https://www.flashscore.co/match/tennis/ferrari-gianmarco-carballes-baena-roberto/KCQmGi0c/#/h2h",
+        "torneo": "Cattolica (Italia)"
+      },
+      "prediction": {
+        "predicted_winner": "Roberto Carballes Baena",
+        "confidence": 51.8
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Roberto Carballes Baena"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Francesco Forti",
+        "jugador2": "Franco Agamenone",
+        "match_url": "https://www.flashscore.co/match/tennis/forti-francesco-agamenone-franco/KGjVKXKE/#/h2h",
+        "torneo": "Cattolica (Italia)"
+      },
+      "prediction": {
+        "predicted_winner": "Francesco Forti",
+        "confidence": 53.1
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Francesco Forti"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Alexander Vasilev",
+        "jugador2": "Andrea Guerrieri",
+        "match_url": "https://www.flashscore.co/match/tennis/vasilev-alexander-guerrieri-andrea/dIer8gtH/#/h2h",
+        "torneo": "Cattolica (Italia)"
+      },
+      "prediction": {
+        "predicted_winner": "Andrea Guerrieri",
+        "confidence": 51.6
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Andrea Guerrieri"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Mustapha El Natour",
+        "jugador2": "Esteban Talavera Cortes",
+        "match_url": "https://www.flashscore.co/match/tennis/el-natour-mustapha-talavera-cortes-esteban/h0FZ1AGc/#/h2h",
+        "torneo": "M25 Martos (España)"
+      },
+      "prediction": {
+        "predicted_winner": "Esteban Talavera Cortes",
+        "confidence": 54.5
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Mustapha El Natour"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Izan Orgiles Garcia Retamero",
+        "jugador2": "Enrique Carrascosa Diaz",
+        "match_url": "https://www.flashscore.co/match/tennis/orgiles-garcia-retamero-izan-carrascosa-diaz-enrique/jsxVwbU7/#/h2h",
+        "torneo": "M25 Martos (España)"
+      },
+      "prediction": {
+        "predicted_winner": "Enrique Carrascosa Diaz",
+        "confidence": 67.5
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Enrique Carrascosa Diaz"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Rafael Izquierdo Luque",
+        "jugador2": "Thomas Miranda",
+        "match_url": "https://www.flashscore.co/match/tennis/izquierdo-luque-rafael-miranda-thomas/vRpyFbHr/#/h2h",
+        "torneo": "M25 Martos (España)"
+      },
+      "prediction": {
+        "predicted_winner": "Rafael Izquierdo Luque",
+        "confidence": 77.6
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Rafael Izquierdo Luque"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Emile Hudd",
+        "jugador2": "Xavi Palomar",
+        "match_url": "https://www.flashscore.co/match/tennis/hudd-emile-palomar-xavi/besiBGG7/#/h2h",
+        "torneo": "M25 Martos (España)"
+      },
+      "prediction": {
+        "predicted_winner": "Emile Hudd",
+        "confidence": 58.4
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Emile Hudd"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Pablo Perez Ramos",
+        "jugador2": "Tiago Torres",
+        "match_url": "https://www.flashscore.co/match/tennis/perez-ramos-pablo-torres-tiago/ImUG11ME/#/h2h",
+        "torneo": "M25 Martos (España)"
+      },
+      "prediction": {
+        "predicted_winner": "Tiago Torres",
+        "confidence": 52.0
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Pablo Perez Ramos"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Alberto Barroso Campos",
+        "jugador2": "Matthew Summers",
+        "match_url": "https://www.flashscore.co/match/tennis/barroso-campos-alberto-summers-matthew/CvqqDxne/#/h2h",
+        "torneo": "M25 Martos (España)"
+      },
+      "prediction": {
+        "predicted_winner": "Alberto Barroso Campos",
+        "confidence": 52.0
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Alberto Barroso Campos"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Corentin Denolly",
+        "jugador2": "Radovan Michalik",
+        "match_url": "https://www.flashscore.co/match/tennis/denolly-corentin-michalik-radovan/lneCyn4N/#/h2h",
+        "torneo": "M15 Nyiregyhaza (Hungría)"
+      },
+      "prediction": {
+        "predicted_winner": "Corentin Denolly",
+        "confidence": 57.2
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Corentin Denolly"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Botond Nagy",
+        "jugador2": "Yannik Kelm",
+        "match_url": "https://www.flashscore.co/match/tennis/nagy-botond-kelm-yannik/0QvvBFQF/#/h2h",
+        "torneo": "M15 Nyiregyhaza (Hungría)"
+      },
+      "prediction": {
+        "predicted_winner": "Yannik Kelm",
+        "confidence": 59.7
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Yannik Kelm"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Gabor Hornung",
+        "jugador2": "Oscar Jose Gutierrez",
+        "match_url": "https://www.flashscore.co/match/tennis/hornung-gabor-gutierrez-oscar-jose/SCtWCyd3/#/h2h",
+        "torneo": "M15 Nyiregyhaza (Hungría)"
+      },
+      "prediction": {
+        "predicted_winner": "Oscar Jose Gutierrez",
+        "confidence": 50.8
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Oscar Jose Gutierrez"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Peter Makk",
+        "jugador2": "Oskari Paldanius",
+        "match_url": "https://www.flashscore.co/match/tennis/makk-peter-paldanius-oskari/xQOBPEu9/#/h2h",
+        "torneo": "M15 Nyiregyhaza (Hungría)"
+      },
+      "prediction": {
+        "predicted_winner": "Peter Makk",
+        "confidence": 54.0
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Peter Makk"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "John Sperle",
+        "jugador2": "Sasha Colleu",
+        "match_url": "https://www.flashscore.co/match/tennis/sperle-john-colleu-sasha/buXyh7l4/#/h2h",
+        "torneo": "M15 Nyiregyhaza (Hungría)"
+      },
+      "prediction": {
+        "predicted_winner": "John Sperle",
+        "confidence": 57.4
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "John Sperle"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Alexander Wagner",
+        "jugador2": "Alexandr Tiutchenko",
+        "match_url": "https://www.flashscore.co/match/tennis/wagner-alexander-tiutchenko-alexandr/bLtrWPRp/#/h2h",
+        "torneo": "M15 Nyiregyhaza (Hungría)"
+      },
+      "prediction": {
+        "predicted_winner": "Alexander Wagner",
+        "confidence": 82.8
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Alexandr Tiutchenko"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Heorhii Shylov",
+        "jugador2": "Richard Antoni",
+        "match_url": "https://www.flashscore.co/match/tennis/shylov-heorhii-antoni-richard/8YONr3Bj/#/h2h",
+        "torneo": "M15 Nyiregyhaza (Hungría)"
+      },
+      "prediction": {
+        "predicted_winner": "Heorhii Shylov",
+        "confidence": 52.7
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Heorhii Shylov"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Attila Boros",
+        "jugador2": "Piet Luis Pinter",
+        "match_url": "https://www.flashscore.co/match/tennis/boros-attila-pinter-piet-luis/rPjq76Ps/#/h2h",
+        "torneo": "M15 Nyiregyhaza (Hungría)"
+      },
+      "prediction": {
+        "predicted_winner": "Attila Boros",
+        "confidence": 55.0
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Attila Boros"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Masha Lazarenko",
+        "jugador2": "Arina Bulatova",
+        "match_url": "https://www.flashscore.co/match/tennis/lazarenko-masha-bulatova-arina/h6AP0RzS/#/h2h",
+        "torneo": "W35 Nice + H (Francia)"
+      },
+      "prediction": {
+        "predicted_winner": "Arina Bulatova",
+        "confidence": 50.8
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Masha Lazarenko"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Liv Boulard",
+        "jugador2": "Deborah Chiesa",
+        "match_url": "https://www.flashscore.co/match/tennis/boulard-liv-chiesa-deborah/l6gZUUYo/#/h2h",
+        "torneo": "W35 Nice + H (Francia)"
+      },
+      "prediction": {
+        "predicted_winner": "Deborah Chiesa",
+        "confidence": 54.5
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Deborah Chiesa"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Berfu Cengiz",
+        "jugador2": "Hena Cehajic",
+        "match_url": "https://www.flashscore.co/match/tennis/cengiz-berfu-cehajic-hena/drDplliM/#/h2h",
+        "torneo": "W35 Nice + H (Francia)"
+      },
+      "prediction": {
+        "predicted_winner": "Berfu Cengiz",
+        "confidence": 55.8
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Berfu Cengiz"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Jordina Font",
+        "jugador2": "Emira Diabate",
+        "match_url": "https://www.flashscore.co/match/tennis/font-jordina-diabate-emira/hEbGrSEq/#/h2h",
+        "torneo": "W35 Nice + H (Francia)"
+      },
+      "prediction": {
+        "predicted_winner": "Jordina Font",
+        "confidence": 50.6
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Emira Diabate"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Maria Sara Popa",
+        "jugador2": "Yelyzaveta Kotliar",
+        "match_url": "https://www.flashscore.co/match/tennis/popa-maria-sara-kotliar-yelyzaveta/O0TJSvhI/#/h2h",
+        "torneo": "W35 Nice + H (Francia)"
+      },
+      "prediction": {
+        "predicted_winner": "Maria Sara Popa",
+        "confidence": 51.8
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Maria Sara Popa"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Manon Favier",
+        "jugador2": "Julia Stusek",
+        "match_url": "https://www.flashscore.co/match/tennis/favier-manon-stusek-julia/lI9xjAM9/#/h2h",
+        "torneo": "W35 Nice + H (Francia)"
+      },
+      "prediction": {
+        "predicted_winner": "Julia Stusek",
+        "confidence": 58.4
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Julia Stusek"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Jenny Lim",
+        "jugador2": "Margaux Rouvroy",
+        "match_url": "https://www.flashscore.co/match/tennis/lim-jenny-rouvroy-margaux/SGfkRnYA/#/h2h",
+        "torneo": "W35 Nice + H (Francia)"
+      },
+      "prediction": {
+        "predicted_winner": "Margaux Rouvroy",
+        "confidence": 50.2
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Jenny Lim"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Amandine Hesse",
+        "jugador2": "Tatiana Pieri",
+        "match_url": "https://www.flashscore.co/match/tennis/hesse-amandine-pieri-tatiana/dERRQIMU/#/h2h",
+        "torneo": "W35 Nice + H (Francia)"
+      },
+      "prediction": {
+        "predicted_winner": "Amandine Hesse",
+        "confidence": 51.0
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Tatiana Pieri"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Kayla Lorrimer",
+        "jugador2": "Diana Martynov",
+        "match_url": "https://www.flashscore.co/match/tennis/lorrimer-kayla-martynov-diana/pt7H2m6F/#/h2h",
+        "torneo": "W35 Nice + H (Francia)"
+      },
+      "prediction": {
+        "predicted_winner": "Diana Martynov",
+        "confidence": 53.5
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Diana Martynov"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Kirill Kivattsev",
+        "jugador2": "Dusan Obradovic",
+        "match_url": "https://www.flashscore.co/match/tennis/kivattsev-kirill-obradovic-dusan/xv014tYQ/#/h2h",
+        "torneo": "M25 Kiseljak (Bosnia y Herzegovina)"
+      },
+      "prediction": {
+        "predicted_winner": "Kirill Kivattsev",
+        "confidence": 53.3
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Kirill Kivattsev"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Yanis Ghazouani Durand",
+        "jugador2": "Naoki Tajima",
+        "match_url": "https://www.flashscore.co/match/tennis/ghazouani-durand-yanis-tajima-naoki/APkcFQkL/#/h2h",
+        "torneo": "M25 Kiseljak (Bosnia y Herzegovina)"
+      },
+      "prediction": {
+        "predicted_winner": "Yanis Ghazouani Durand",
+        "confidence": 53.1
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Yanis Ghazouani Durand"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Valeriy Martishev",
+        "jugador2": "Andrey Chepelev",
+        "match_url": "https://www.flashscore.co/match/tennis/martishev-valeriy-chepelev-andrey/CCUUTP4E/#/h2h",
+        "torneo": "M25 Kiseljak (Bosnia y Herzegovina)"
+      },
+      "prediction": {
+        "predicted_winner": "Andrey Chepelev",
+        "confidence": 72.1
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Andrey Chepelev"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Marat Sharipov",
+        "jugador2": "Mirza Basic",
+        "match_url": "https://www.flashscore.co/match/tennis/sharipov-marat-basic-mirza/nDoXbKel/#/h2h",
+        "torneo": "M25 Kiseljak (Bosnia y Herzegovina)"
+      },
+      "prediction": {
+        "predicted_winner": "Mirza Basic",
+        "confidence": 53.7
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Marat Sharipov"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Tarik Bajrovic",
+        "jugador2": "Massimo Pizzigoni",
+        "match_url": "https://www.flashscore.co/match/tennis/bajrovic-tarik-pizzigoni-massimo/Ol1ee5bk/#/h2h",
+        "torneo": "M25 Kiseljak (Bosnia y Herzegovina)"
+      },
+      "prediction": {
+        "predicted_winner": "Tarik Bajrovic",
+        "confidence": 53.0
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Massimo Pizzigoni"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Yaroslav Demin",
+        "jugador2": "Younes Lalami Laaroussi",
+        "match_url": "https://www.flashscore.co/match/tennis/demin-yaroslav-lalami-laaroussi-younes/OCV4DJAs/#/h2h",
+        "torneo": "M25 Kiseljak (Bosnia y Herzegovina)"
+      },
+      "prediction": {
+        "predicted_winner": "Yaroslav Demin",
+        "confidence": 51.7
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Yaroslav Demin"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Alen Mujakic",
+        "jugador2": "Antonio Voljavec",
+        "match_url": "https://www.flashscore.co/match/tennis/mujakic-alen-voljavec-antonio/dQTCBcuf/#/h2h",
+        "torneo": "M25 Kiseljak (Bosnia y Herzegovina)"
+      },
+      "prediction": {
+        "predicted_winner": "Alen Mujakic",
+        "confidence": 53.3
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Alen Mujakic"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Drazen Petrovic",
+        "jugador2": "Henry Best",
+        "match_url": "https://www.flashscore.co/match/tennis/petrovic-drazen-best-henry/2ankHnL8/#/h2h",
+        "torneo": "M25 Kiseljak (Bosnia y Herzegovina)"
+      },
+      "prediction": {
+        "predicted_winner": "Drazen Petrovic",
+        "confidence": 50.7
+      },
+      "actual_result": {
+        "final_score": "1-1",
+        "actual_winner": "Drazen Petrovic"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Vladyslav Orlov",
+        "jugador2": "Filip Jeff Planinsek",
+        "match_url": "https://www.flashscore.co/match/tennis/orlov-vladyslav-filip-jeff-planinsek/SjmmexeD/#/h2h",
+        "torneo": "M25 Kiseljak (Bosnia y Herzegovina)"
+      },
+      "prediction": {
+        "predicted_winner": "Filip Jeff Planinsek",
+        "confidence": 50.9
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Vladyslav Orlov"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Nicolo Toffanin",
+        "jugador2": "Duje Ajdukovic",
+        "match_url": "https://www.flashscore.co/match/tennis/toffanin-nicolo-ajdukovic-duje/ELvy8rre/#/h2h",
+        "torneo": "M25 Kiseljak (Bosnia y Herzegovina)"
+      },
+      "prediction": {
+        "predicted_winner": "Duje Ajdukovic",
+        "confidence": 53.2
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Duje Ajdukovic"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Dalila Spiteri",
+        "jugador2": "Laura Svatikova",
+        "match_url": "https://www.flashscore.co/match/tennis/spiteri-dalila-svatikova-laura/Yse5fa5e/#/h2h",
+        "torneo": "W75 Ceska Lipa (República Checa)"
+      },
+      "prediction": {
+        "predicted_winner": "Dalila Spiteri",
+        "confidence": 51.0
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Laura Svatikova"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Carolin Raschdorf",
+        "jugador2": "Denisa Zoldakova",
+        "match_url": "https://www.flashscore.co/match/tennis/raschdorf-carolin-zoldakova-denisa/APmp7xk1/#/h2h",
+        "torneo": "W75 Ceska Lipa (República Checa)"
+      },
+      "prediction": {
+        "predicted_winner": "Denisa Zoldakova",
+        "confidence": 56.8
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Denisa Zoldakova"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Sapfo Sakellaridi",
+        "jugador2": "Raluca Georgiana Serban",
+        "match_url": "https://www.flashscore.co/match/tennis/sakellaridi-sapfo-serban-raluca-georgiana/6egDhwz8/#/h2h",
+        "torneo": "W75 Ceska Lipa (República Checa)"
+      },
+      "prediction": {
+        "predicted_winner": "Raluca Georgiana Serban",
+        "confidence": 51.5
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Raluca Georgiana Serban"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Lucie Havlickova",
+        "jugador2": "Hibah Shaikh",
+        "match_url": "https://www.flashscore.co/match/tennis/havlickova-lucie-shaikh-hibah/SphcdLzq/#/h2h",
+        "torneo": "W75 Ceska Lipa (República Checa)"
+      },
+      "prediction": {
+        "predicted_winner": "Lucie Havlickova",
+        "confidence": 51
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Lucie Havlickova"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Jakub Nicod",
+        "jugador2": "Jakub Filip",
+        "match_url": "https://www.flashscore.co/match/tennis/nicod-jakub-filip-jakub/ri3seoEd/#/h2h",
+        "torneo": "M25 Ceska Lipa (República Checa)"
+      },
+      "prediction": {
+        "predicted_winner": "Jakub Nicod",
+        "confidence": 50.8
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Jakub Filip"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Georgii Kravchenko",
+        "jugador2": "Jiri Cizek",
+        "match_url": "https://www.flashscore.co/match/tennis/kravchenko-georgii-cizek-jiri/AcynJc0n/#/h2h",
+        "torneo": "M25 Ceska Lipa (República Checa)"
+      },
+      "prediction": {
+        "predicted_winner": "Georgii Kravchenko",
+        "confidence": 52.8
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Georgii Kravchenko"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Max Frohlich",
+        "jugador2": "Matyas Cerny",
+        "match_url": "https://www.flashscore.co/match/tennis/frohlich-max-cerny-matyas/zojTIl63/#/h2h",
+        "torneo": "M25 Ceska Lipa (República Checa)"
+      },
+      "prediction": {
+        "predicted_winner": "Matyas Cerny",
+        "confidence": 55.2
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Matyas Cerny"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Daniel Dutra Da Silva",
+        "jugador2": "Matyas Kozlovsky",
+        "match_url": "https://www.flashscore.co/match/tennis/dutra-da-silva-daniel-kozlovsky-matyas/nLcU0GpI/#/h2h",
+        "torneo": "M25 Ceska Lipa (República Checa)"
+      },
+      "prediction": {
+        "predicted_winner": "Matyas Kozlovsky",
+        "confidence": 50.2
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Daniel Dutra Da Silva"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Stefan Cooper",
+        "jugador2": "Rethin Pranav Senthil Kumar",
+        "match_url": "https://www.flashscore.co/match/tennis/stefan-cooper-senthil-kumar-rethin-pranav/Eo46lDQE/#/h2h",
+        "torneo": "M15 Kayseri 4 (Turquía)"
+      },
+      "prediction": {
+        "predicted_winner": "Stefan Cooper",
+        "confidence": 52.4
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Rethin Pranav Senthil Kumar"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Felix Roussel",
+        "jugador2": "Maxwell Mckennon",
+        "match_url": "https://www.flashscore.co/match/tennis/roussel-felix-mckennon-maxwell/hOcXO8KH/#/h2h",
+        "torneo": "M15 Kayseri 4 (Turquía)"
+      },
+      "prediction": {
+        "predicted_winner": "Maxwell Mckennon",
+        "confidence": 55.2
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Maxwell Mckennon"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Haydar Cem Gokpinar",
+        "jugador2": "Cemil Tugra Duran",
+        "match_url": "https://www.flashscore.co/match/tennis/gokpinar-haydar-cem-duran-cemil-tugra/8UA4UiZr/#/h2h",
+        "torneo": "M15 Kayseri 4 (Turquía)"
+      },
+      "prediction": {
+        "predicted_winner": "Haydar Cem Gokpinar",
+        "confidence": 51.0
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Haydar Cem Gokpinar"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Charles Chen",
+        "jugador2": "Felipe Jose Rivadeneira Gallegos",
+        "match_url": "https://www.flashscore.co/match/tennis/chen-charles-rivadeneira-gallegos-felipe-jose/0rjlsjzn/#/h2h",
+        "torneo": "M15 Kayseri 4 (Turquía)"
+      },
+      "prediction": {
+        "predicted_winner": "Charles Chen",
+        "confidence": 65.7
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Felipe Jose Rivadeneira Gallegos"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Adhithya Ganesan",
+        "jugador2": "Vladimir Osminkin",
+        "match_url": "https://www.flashscore.co/match/tennis/ganesan-adhithya-osminkin-vladimir/4Kh9UCjt/#/h2h",
+        "torneo": "M15 Kayseri 4 (Turquía)"
+      },
+      "prediction": {
+        "predicted_winner": "Adhithya Ganesan",
+        "confidence": 66.6
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Adhithya Ganesan"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Patricia Georgiana Goina",
+        "jugador2": "Karine Sarkisova",
+        "match_url": "https://www.flashscore.co/match/tennis/goina-patricia-georgiana-sarkisova-karine/6LzYZsn2/#/h2h",
+        "torneo": "W15 Kursumlijska Banja 4 (Serbia)"
+      },
+      "prediction": {
+        "predicted_winner": "Patricia Georgiana Goina",
+        "confidence": 50.2
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Karine Sarkisova"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Emma Ottavia Ghirardato",
+        "jugador2": "Elena Milovanovic",
+        "match_url": "https://www.flashscore.co/match/tennis/ghirardato-emma-ottavia-milovanovic-elena/zgOtGmeT/#/h2h",
+        "torneo": "W15 Kursumlijska Banja 4 (Serbia)"
+      },
+      "prediction": {
+        "predicted_winner": "Elena Milovanovic",
+        "confidence": 53.8
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Emma Ottavia Ghirardato"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Fadi Bidan",
+        "jugador2": "Vito Dell'Elba",
+        "match_url": "https://www.flashscore.co/match/tennis/bidan-fadi-dell-elba-vito/vJtKvrdc/#/h2h",
+        "torneo": "M15 Curtea de Arges (Rumanía)"
+      },
+      "prediction": {
+        "predicted_winner": "Fadi Bidan",
+        "confidence": 50.9
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Fadi Bidan"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Radu David Turcanu",
+        "jugador2": "Anas Mazdrashki",
+        "match_url": "https://www.flashscore.co/match/tennis/turcanu-radu-david-mazdrashki-anas/O8H9TdWb/#/h2h",
+        "torneo": "M15 Curtea de Arges (Rumanía)"
+      },
+      "prediction": {
+        "predicted_winner": "Radu David Turcanu",
+        "confidence": 51.4
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Anas Mazdrashki"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "David Eichenseher",
+        "jugador2": "Cezar Stefan Bentzel",
+        "match_url": "https://www.flashscore.co/match/tennis/eichenseher-david-bentzel-cezar-stefan/nqpSxMQ9/#/h2h",
+        "torneo": "M15 Curtea de Arges (Rumanía)"
+      },
+      "prediction": {
+        "predicted_winner": "David Eichenseher",
+        "confidence": 54.1
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "David Eichenseher"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Alan Fernando Rubio Fierros",
+        "jugador2": "Stefan Ilie Bogdan Petre",
+        "match_url": "https://www.flashscore.co/match/tennis/rubio-fierros-alan-fernando-petre-stefan-ilie-bogdan/UP4fOMBG/#/h2h",
+        "torneo": "M15 Curtea de Arges (Rumanía)"
+      },
+      "prediction": {
+        "predicted_winner": "Stefan Ilie Bogdan Petre",
+        "confidence": 53.4
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Alan Fernando Rubio Fierros"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Calin Apostol",
+        "jugador2": "Sebastian Gima",
+        "match_url": "https://www.flashscore.co/match/tennis/apostol-calin-gima-sebastian/WYKHRz1B/#/h2h",
+        "torneo": "M15 Curtea de Arges (Rumanía)"
+      },
+      "prediction": {
+        "predicted_winner": "Sebastian Gima",
+        "confidence": 73.1
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Sebastian Gima"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Julia Adams",
+        "jugador2": "Jana Hossam Salah",
+        "match_url": "https://www.flashscore.co/match/tennis/adams-julia-hossam-salah-jana/z7T7fohC/#/h2h",
+        "torneo": "W15 Kayseri 4 (Turquía)"
+      },
+      "prediction": {
+        "predicted_winner": "Julia Adams",
+        "confidence": 52.1
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Julia Adams"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Samuil Chestovaliev",
+        "jugador2": "Nikita Mashtakov",
+        "match_url": "https://www.flashscore.co/match/tennis/chestovaliev-samuil-mashtakov-nikita/8AdxZnqI/#/h2h",
+        "torneo": "M15 Kursumlijska Banja 4 (Serbia)"
+      },
+      "prediction": {
+        "predicted_winner": "Nikita Mashtakov",
+        "confidence": 72.3
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Nikita Mashtakov"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Andreas Timini",
+        "jugador2": "Marko Maksimovic",
+        "match_url": "https://www.flashscore.co/match/tennis/timini-andreas-maksimovic-marko/ADFlOVUa/#/h2h",
+        "torneo": "M15 Kursumlijska Banja 4 (Serbia)"
+      },
+      "prediction": {
+        "predicted_winner": "Marko Maksimovic",
+        "confidence": 53.3
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Marko Maksimovic"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Uros Zivkovic",
+        "jugador2": "Boris Butulija",
+        "match_url": "https://www.flashscore.co/match/tennis/zivkovic-uros-butulija-boris/xpw2k8Tb/#/h2h",
+        "torneo": "M15 Kursumlijska Banja 4 (Serbia)"
+      },
+      "prediction": {
+        "predicted_winner": "Boris Butulija",
+        "confidence": 68.7
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Boris Butulija"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Stefano D'Agostino",
+        "jugador2": "Djordje Sapic",
+        "match_url": "https://www.flashscore.co/match/tennis/d-agostino-stefano-sapic-djordje/Gz0pXQDU/#/h2h",
+        "torneo": "M15 Kursumlijska Banja 4 (Serbia)"
+      },
+      "prediction": {
+        "predicted_winner": "Stefano D'Agostino",
+        "confidence": 54.7
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Stefano D'Agostino"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Margaux Komano",
+        "jugador2": "Chloe Noel",
+        "match_url": "https://www.flashscore.co/match/tennis/komano-margaux-noel-chloe/zsCWB5Za/#/h2h",
+        "torneo": "W15 Monastir 17 (Túnez)"
+      },
+      "prediction": {
+        "predicted_winner": "Chloe Noel",
+        "confidence": 53.5
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Margaux Komano"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Maddalena Giordano",
+        "jugador2": "Lourdes Ayala",
+        "match_url": "https://www.flashscore.co/match/tennis/giordano-maddalena-ayala-lourdes/bsSbc6K6/#/h2h",
+        "torneo": "W15 Monastir 17 (Túnez)"
+      },
+      "prediction": {
+        "predicted_winner": "Maddalena Giordano",
+        "confidence": 50.4
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Lourdes Ayala"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Julie Myatovic",
+        "jugador2": "Ava Schueller",
+        "match_url": "https://www.flashscore.co/match/tennis/myatovic-julie-schueller-ava/pzldSQJt/#/h2h",
+        "torneo": "W15 Monastir 17 (Túnez)"
+      },
+      "prediction": {
+        "predicted_winner": "Ava Schueller",
+        "confidence": 50.7
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Julie Myatovic"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Sofia Avataneo",
+        "jugador2": "Soo Ha Jang",
+        "match_url": "https://www.flashscore.co/match/tennis/avataneo-sofia-jang-soo-ha/dYHhJmsQ/#/h2h",
+        "torneo": "W15 Monastir 17 (Túnez)"
+      },
+      "prediction": {
+        "predicted_winner": "Sofia Avataneo",
+        "confidence": 50.7
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Sofia Avataneo"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Chiara Fornasieri",
+        "jugador2": "Natalia Sousa Salazar",
+        "match_url": "https://www.flashscore.co/match/tennis/chiara-fornasieri-sousa-salazar-natalia/4vV6epkJ/#/h2h",
+        "torneo": "W15 Monastir 17 (Túnez)"
+      },
+      "prediction": {
+        "predicted_winner": "Chiara Fornasieri",
+        "confidence": 50.6
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Chiara Fornasieri"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Nicolas Tepmahc",
+        "jugador2": "Mahmoud Chetouane",
+        "match_url": "https://www.flashscore.co/match/tennis/tepmahc-nicolas-chetouane-mahmoud/djBXh2il/#/h2h",
+        "torneo": "M15 Monastir 22 (Túnez)"
+      },
+      "prediction": {
+        "predicted_winner": "Nicolas Tepmahc",
+        "confidence": 56.6
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Nicolas Tepmahc"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Roger Pascual Ferra",
+        "jugador2": "Filippo Francesco Garbero",
+        "match_url": "https://www.flashscore.co/match/tennis/pascual-ferra-roger-garbero-filippo-francesco/xOLw9Esn/#/h2h",
+        "torneo": "M15 Monastir 22 (Túnez)"
+      },
+      "prediction": {
+        "predicted_winner": "Roger Pascual Ferra",
+        "confidence": 52.8
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Roger Pascual Ferra"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Rodrigo Fernandes",
+        "jugador2": "Aziz Dougaz",
+        "match_url": "https://www.flashscore.co/match/tennis/fernandes-rodrigo-dougaz-aziz/vV6K3J56/#/h2h",
+        "torneo": "M15 Monastir 22 (Túnez)"
+      },
+      "prediction": {
+        "predicted_winner": "Aziz Dougaz",
+        "confidence": 52.8
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Aziz Dougaz"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Aziz Ouakaa",
+        "jugador2": "Marcus Walters",
+        "match_url": "https://www.flashscore.co/match/tennis/ouakaa-aziz-walters-marcus/MBRnkKjD/#/h2h",
+        "torneo": "M15 Monastir 22 (Túnez)"
+      },
+      "prediction": {
+        "predicted_winner": "Aziz Ouakaa",
+        "confidence": 52.3
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Marcus Walters"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Daniil Sarksian",
+        "jugador2": "Ryuki Matsuda",
+        "match_url": "https://www.flashscore.co/match/tennis/sarksian-daniil-matsuda-ryuki/Mm9JLiRi/#/h2h",
+        "torneo": "M15 Monastir 22 (Túnez)"
+      },
+      "prediction": {
+        "predicted_winner": "Daniil Sarksian",
+        "confidence": 50.3
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Ryuki Matsuda"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Viktor Frydrych",
+        "jugador2": "Matthew Rankin",
+        "match_url": "https://www.flashscore.co/match/tennis/frydrych-viktor-rankin-matthew/lIJYCNrK/#/h2h",
+        "torneo": "M15 Monastir 22 (Túnez)"
+      },
+      "prediction": {
+        "predicted_winner": "Matthew Rankin",
+        "confidence": 50.4
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Viktor Frydrych"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Fangran Tian",
+        "jugador2": "Diana Marcinkevica",
+        "match_url": "https://www.flashscore.co/match/tennis/tian-fangran-marcinkevica-diana/4MmWZBMr/#/h2h",
+        "torneo": "W50 Guimaraes (Portugal)"
+      },
+      "prediction": {
+        "predicted_winner": "Fangran Tian",
+        "confidence": 53.0
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Fangran Tian"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Anastasia Kulikova",
+        "jugador2": "Maria Martinez Vaquero",
+        "match_url": "https://www.flashscore.co/match/tennis/kulikova-anastasia-martinez-vaquero-maria/tMaacwp3/#/h2h",
+        "torneo": "W50 Guimaraes (Portugal)"
+      },
+      "prediction": {
+        "predicted_winner": "Anastasia Kulikova",
+        "confidence": 50.6
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Anastasia Kulikova"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Ariana Arseneault",
+        "jugador2": "Maria Oliver Sanchez",
+        "match_url": "https://www.flashscore.co/match/tennis/arseneault-ariana-oliver-sanchez-maria/bNLbhKxA/#/h2h",
+        "torneo": "W50 Guimaraes (Portugal)"
+      },
+      "prediction": {
+        "predicted_winner": "Maria Oliver Sanchez",
+        "confidence": 50.7
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Ariana Arseneault"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Katherine Sebov",
+        "jugador2": "Carolyn Ansari",
+        "match_url": "https://www.flashscore.co/match/tennis/sebov-katherine-ansari-carolyn/jFiolZ6k/#/h2h",
+        "torneo": "W50 Guimaraes (Portugal)"
+      },
+      "prediction": {
+        "predicted_winner": "Katherine Sebov",
+        "confidence": 51.0
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Katherine Sebov"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Lauryn John-Baptiste",
+        "jugador2": "Viktoria Hruncakova",
+        "match_url": "https://www.flashscore.co/match/tennis/john-baptiste-lauryn-hruncakova-viktoria-kuzmova/p0knWTL7/#/h2h",
+        "torneo": "W50 Guimaraes (Portugal)"
+      },
+      "prediction": {
+        "predicted_winner": "Viktoria Hruncakova",
+        "confidence": 51.0
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Lauryn John-Baptiste"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Matilde Jorge",
+        "jugador2": "Polina Isakova",
+        "match_url": "https://www.flashscore.co/match/tennis/jorge-matilde-isakova-polina/AwsYgXDE/#/h2h",
+        "torneo": "W50 Guimaraes (Portugal)"
+      },
+      "prediction": {
+        "predicted_winner": "Matilde Jorge",
+        "confidence": 70.6
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Matilde Jorge"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Belle Thompson",
+        "jugador2": "Angelina Voloshchuk",
+        "match_url": "https://www.flashscore.co/match/tennis/thompson-belle-voloshchuk-angelina/t4tRwLNG/#/h2h",
+        "torneo": "W50 Guimaraes (Portugal)"
+      },
+      "prediction": {
+        "predicted_winner": "Angelina Voloshchuk",
+        "confidence": 51.4
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Angelina Voloshchuk"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Elizabeth Coleman",
+        "jugador2": "Katarina Kuzmova",
+        "match_url": "https://www.flashscore.co/match/tennis/coleman-elizabeth-kuzmova-katarina-2001/KCz5WxGj/#/h2h",
+        "torneo": "W50 Guimaraes (Portugal)"
+      },
+      "prediction": {
+        "predicted_winner": "Katarina Kuzmova",
+        "confidence": 55.2
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Katarina Kuzmova"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Francisca Jorge",
+        "jugador2": "Mariam Bolkvadze",
+        "match_url": "https://www.flashscore.co/match/tennis/jorge-francisca-bolkvadze-mariam/ln37eHEF/#/h2h",
+        "torneo": "W50 Guimaraes (Portugal)"
+      },
+      "prediction": {
+        "predicted_winner": "Francisca Jorge",
+        "confidence": 51.3
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Francisca Jorge"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Indianna Spink",
+        "jugador2": "Chelsea Fontenel",
+        "match_url": "https://www.flashscore.co/match/tennis/spink-indianna-fontenel-chelsea/C6Njft8c/#/h2h",
+        "torneo": "W50 Guimaraes (Portugal)"
+      },
+      "prediction": {
+        "predicted_winner": "Indianna Spink",
+        "confidence": 50.6
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Chelsea Fontenel"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Savannah Broadus",
+        "jugador2": "Carmen Lopez Martinez",
+        "match_url": "https://www.flashscore.co/match/tennis/broadus-savannah-lopez-martinez-carmen/xznvYkie/#/h2h",
+        "torneo": "W50 Guimaraes (Portugal)"
+      },
+      "prediction": {
+        "predicted_winner": "Carmen Lopez Martinez",
+        "confidence": 50.6
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Savannah Broadus"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Federico Cina",
+        "jugador2": "Jan Choinski",
+        "match_url": "https://www.flashscore.co/match/tennis/cina-federico-choinski-jan/pI8zsIaM/#/h2h",
+        "torneo": "Bratislava (Eslovaquia)"
+      },
+      "prediction": {
+        "predicted_winner": "Federico Cina",
+        "confidence": 50.6
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Federico Cina"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Petr Brunclik",
+        "jugador2": "Andrej Martin",
+        "match_url": "https://www.flashscore.co/match/tennis/brunclik-petr-martin-andrej/hhiZ03Aa/#/h2h",
+        "torneo": "Bratislava (Eslovaquia)"
+      },
+      "prediction": {
+        "predicted_winner": "Andrej Martin",
+        "confidence": 50.8
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Petr Brunclik"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Vitaliy Sachko",
+        "jugador2": "Thanasi Kokkinakis",
+        "match_url": "https://www.flashscore.co/match/tennis/sachko-vitaliy-kokkinakis-thanasi/dldAGBhm/#/h2h",
+        "torneo": "Bratislava (Eslovaquia)"
+      },
+      "prediction": {
+        "predicted_winner": "Thanasi Kokkinakis",
+        "confidence": 53.3
+      },
+      "actual_result": {
+        "final_score": "0-0",
+        "actual_winner": "Vitaliy Sachko"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Rebecca Munk Mortensen",
+        "jugador2": "Didi Bredberg Canizares",
+        "match_url": "https://www.flashscore.co/match/tennis/munk-mortensen-rebecca-didi-bredberg-canizares/GQG4cc1N/#/h2h",
+        "torneo": "W15 Madrid 2 (España)"
+      },
+      "prediction": {
+        "predicted_winner": "Rebecca Munk Mortensen",
+        "confidence": 51
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Rebecca Munk Mortensen"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Georgina Garcia Perez",
+        "jugador2": "Juliana Giaccio",
+        "match_url": "https://www.flashscore.co/match/tennis/garcia-perez-georgina-giaccio-juliana/EumWiG7m/#/h2h",
+        "torneo": "W15 Madrid 2 (España)"
+      },
+      "prediction": {
+        "predicted_winner": "Georgina Garcia Perez",
+        "confidence": 56.2
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Juliana Giaccio"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Cristina Ramos Sierra",
+        "jugador2": "Ella Haavisto",
+        "match_url": "https://www.flashscore.co/match/tennis/ramos-sierra-cristina-haavisto-ella/dM7bwHhf/#/h2h",
+        "torneo": "W15 Madrid 2 (España)"
+      },
+      "prediction": {
+        "predicted_winner": "Ella Haavisto",
+        "confidence": 53.5
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Ella Haavisto"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Jimena Gomez",
+        "jugador2": "Johanne Christine Svendsen",
+        "match_url": "https://www.flashscore.co/match/tennis/gomez-jimena-svendsen-johanne-christine/ngovjfx0/#/h2h",
+        "torneo": "W15 Madrid 2 (España)"
+      },
+      "prediction": {
+        "predicted_winner": "Johanne Christine Svendsen",
+        "confidence": 85.3
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Johanne Christine Svendsen"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Marina Benito",
+        "jugador2": "Maileen Nuudi",
+        "match_url": "https://www.flashscore.co/match/tennis/benito-marina-nuudi-maileen/OhVB4gig/#/h2h",
+        "torneo": "W15 Madrid 2 (España)"
+      },
+      "prediction": {
+        "predicted_winner": "Maileen Nuudi",
+        "confidence": 59.4
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Maileen Nuudi"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Neus Torner Sensano",
+        "jugador2": "Yleymi Lugiana Muelle Valdez",
+        "match_url": "https://www.flashscore.co/match/tennis/torner-sensano-neus-muelle-valdez-yleymi-lugiana/UkCt31Xo/#/h2h",
+        "torneo": "W15 Madrid 2 (España)"
+      },
+      "prediction": {
+        "predicted_winner": "Neus Torner Sensano",
+        "confidence": 55.3
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Neus Torner Sensano"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Alexia Lavinia Puiac",
+        "jugador2": "Carmen Gallardo Guevara",
+        "match_url": "https://www.flashscore.co/match/tennis/puiac-alexia-lavinia-gallardo-guevara-carmen/4nB6yeN6/#/h2h",
+        "torneo": "W15 Madrid 2 (España)"
+      },
+      "prediction": {
+        "predicted_winner": "Carmen Gallardo Guevara",
+        "confidence": 60.2
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Carmen Gallardo Guevara"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Otto Virtanen",
+        "jugador2": "Kamil Majchrzak",
+        "match_url": "https://www.flashscore.co/match/tennis/virtanen-otto-majchrzak-kamil/Wbtmw5vK/#/h2h",
+        "torneo": "'s-Hertogenbosch (Países Bajos)"
+      },
+      "prediction": {
+        "predicted_winner": "Otto Virtanen",
+        "confidence": 51
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Kamil Majchrzak"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Thijs Boogaard",
+        "jugador2": "Yibing Wu",
+        "match_url": "https://www.flashscore.co/match/tennis/boogaard-thijs-wu-yibing/A9N5r0Ga/#/h2h",
+        "torneo": "'s-Hertogenbosch (Países Bajos)"
+      },
+      "prediction": {
+        "predicted_winner": "Thijs Boogaard",
+        "confidence": 51.1
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Thijs Boogaard"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "James McCabe",
+        "jugador2": "Zizou Bergs",
+        "match_url": "https://www.flashscore.co/match/tennis/mccabe-james-bergs-zizou/QRKkSPt1/#/h2h",
+        "torneo": "'s-Hertogenbosch (Países Bajos)"
+      },
+      "prediction": {
+        "predicted_winner": "James McCabe",
+        "confidence": 54.6
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "James McCabe"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Martin Damm",
+        "jugador2": "Alex De Minaur",
+        "match_url": "https://www.flashscore.co/match/tennis/damm-martin-2003-de-minaur-alex/WQKn2ZMH/#/h2h",
+        "torneo": "'s-Hertogenbosch (Países Bajos)"
+      },
+      "prediction": {
+        "predicted_winner": "Martin Damm",
+        "confidence": 53.8
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Alex De Minaur"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Madison Sieg",
+        "jugador2": "Luna Vujovic",
+        "match_url": "https://www.flashscore.co/match/tennis/sieg-madison-vujovic-luna/QDkCOrJ5/#/h2h",
+        "torneo": "W35 Casablanca (Marruecos)"
+      },
+      "prediction": {
+        "predicted_winner": "Luna Vujovic",
+        "confidence": 51.1
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Luna Vujovic"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Emma Lene",
+        "jugador2": "Sarah Iliev",
+        "match_url": "https://www.flashscore.co/match/tennis/lene-emma-iliev-sarah/dhOhOZOM/#/h2h",
+        "torneo": "W35 Casablanca (Marruecos)"
+      },
+      "prediction": {
+        "predicted_winner": "Emma Lene",
+        "confidence": 51.0
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Emma Lene"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Lina Bezza",
+        "jugador2": "Verena Meliss",
+        "match_url": "https://www.flashscore.co/match/tennis/bezza-lina-meliss-verena/GvjOMs5F/#/h2h",
+        "torneo": "W35 Casablanca (Marruecos)"
+      },
+      "prediction": {
+        "predicted_winner": "Verena Meliss",
+        "confidence": 54.7
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Verena Meliss"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Aya El Aouni",
+        "jugador2": "Aran Teixido Garcia",
+        "match_url": "https://www.flashscore.co/match/tennis/el-aouni-aya-teixido-garcia-maria-aran/l8Uj4EXj/#/h2h",
+        "torneo": "W35 Casablanca (Marruecos)"
+      },
+      "prediction": {
+        "predicted_winner": "Aran Teixido Garcia",
+        "confidence": 51.2
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Aran Teixido Garcia"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Zeel Desai",
+        "jugador2": "Alina Mokrynska",
+        "match_url": "https://www.flashscore.co/match/tennis/desai-zeel-mokrynska-alina/6R9OIDnp/#/h2h",
+        "torneo": "W35 Casablanca (Marruecos)"
+      },
+      "prediction": {
+        "predicted_winner": "Zeel Desai",
+        "confidence": 55.5
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Zeel Desai"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Manal Ennaciri",
+        "jugador2": "Warda Ait El Bachir",
+        "match_url": "https://www.flashscore.co/match/tennis/ennaciri-manal-ait-el-bachir-warda/MygWKLZR/#/h2h",
+        "torneo": "W35 Casablanca (Marruecos)"
+      },
+      "prediction": {
+        "predicted_winner": "Warda Ait El Bachir",
+        "confidence": 54.4
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Warda Ait El Bachir"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Leonie Rabl",
+        "jugador2": "Nour El Ouazzani",
+        "match_url": "https://www.flashscore.co/match/tennis/rabl-leonie-el-ouazzani-nour/EiDWGiHd/#/h2h",
+        "torneo": "W35 Casablanca (Marruecos)"
+      },
+      "prediction": {
+        "predicted_winner": "Leonie Rabl",
+        "confidence": 53.1
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Leonie Rabl"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Nina Vargova",
+        "jugador2": "Daria Egorova",
+        "match_url": "https://www.flashscore.co/match/tennis/vargova-nina-egorova-daria/I7v2Fack/#/h2h",
+        "torneo": "W35 Casablanca (Marruecos)"
+      },
+      "prediction": {
+        "predicted_winner": "Nina Vargova",
+        "confidence": 52.4
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Nina Vargova"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Elina Nepliy",
+        "jugador2": "Diae El Jardi",
+        "match_url": "https://www.flashscore.co/match/tennis/nepliy-elina-el-jardi-diae/GEMxSHPc/#/h2h",
+        "torneo": "W35 Casablanca (Marruecos)"
+      },
+      "prediction": {
+        "predicted_winner": "Elina Nepliy",
+        "confidence": 54.4
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Elina Nepliy"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Valentini Grammatikopoulou",
+        "jugador2": "Ksenia Krupenina",
+        "match_url": "https://www.flashscore.co/match/tennis/grammatikopoulou-valentini-krupenina-ksenia/MyZYTbCr/#/h2h",
+        "torneo": "W35 Casablanca (Marruecos)"
+      },
+      "prediction": {
+        "predicted_winner": "Valentini Grammatikopoulou",
+        "confidence": 57.4
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Valentini Grammatikopoulou"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Lois Boisson",
+        "jugador2": "Solana Sierra",
+        "match_url": "https://www.flashscore.co/match/tennis/boisson-lois-sierra-solana/hCJNIFy8/#/h2h",
+        "torneo": "'s-Hertogenbosch (Países Bajos)"
+      },
+      "prediction": {
+        "predicted_winner": "Solana Sierra",
+        "confidence": 50.3
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Solana Sierra"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Anastasia Potapova",
+        "jugador2": "Suzan Lamens",
+        "match_url": "https://www.flashscore.co/match/tennis/potapova-anastasia-lamens-suzan/fZSTTup9/#/h2h",
+        "torneo": "'s-Hertogenbosch (Países Bajos)"
+      },
+      "prediction": {
+        "predicted_winner": "Anastasia Potapova",
+        "confidence": 52.8
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Anastasia Potapova"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Jessica Bouzas Maneiro",
+        "jugador2": "Ajla Tomljanović",
+        "match_url": "https://www.flashscore.co/match/tennis/bouzas-maneiro-jessica-tomljanovic-ajla/fadFO5PQ/#/h2h",
+        "torneo": "'s-Hertogenbosch (Países Bajos)"
+      },
+      "prediction": {
+        "predicted_winner": "Jessica Bouzas Maneiro",
+        "confidence": 50.9
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Ajla Tomljanović"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Giovanni Mpetshi Perricard",
+        "jugador2": "Gauthier Onclin",
+        "match_url": "https://www.flashscore.co/match/tennis/mpetshi-perricard-giovanni-onclin-gauthier/xtX1pJEb/#/h2h",
+        "torneo": "Stuttgart (Alemania)"
+      },
+      "prediction": {
+        "predicted_winner": "Gauthier Onclin",
+        "confidence": 53.2
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Giovanni Mpetshi Perricard"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Mattia Bellucci",
+        "jugador2": "Yannick Hanfmann",
+        "match_url": "https://www.flashscore.co/match/tennis/bellucci-mattia-hanfmann-yannick/bu1P7wgt/#/h2h",
+        "torneo": "Stuttgart (Alemania)"
+      },
+      "prediction": {
+        "predicted_winner": "Yannick Hanfmann",
+        "confidence": 51.1
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Mattia Bellucci"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Danique Havermans",
+        "jugador2": "Luisa Meyer Auf Der Heide",
+        "match_url": "https://www.flashscore.co/match/tennis/danique-havermans-meyer-auf-der-heide-luisa/bPpvT39b/#/h2h",
+        "torneo": "W15 Merzig (Alemania)"
+      },
+      "prediction": {
+        "predicted_winner": "Luisa Meyer Auf Der Heide",
+        "confidence": 56.1
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Luisa Meyer Auf Der Heide"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Aurora Zurmuehle",
+        "jugador2": "Pia Lovric",
+        "match_url": "https://www.flashscore.co/match/tennis/zurmuehle-aurora-lovric-pia/CU9J3mtm/#/h2h",
+        "torneo": "W15 Merzig (Alemania)"
+      },
+      "prediction": {
+        "predicted_winner": "Pia Lovric",
+        "confidence": 74.4
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Pia Lovric"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Victoria Pohle",
+        "jugador2": "Valentina Steiner",
+        "match_url": "https://www.flashscore.co/match/tennis/pohle-victoria-steiner-valentina/f956E4f5/#/h2h",
+        "torneo": "W15 Merzig (Alemania)"
+      },
+      "prediction": {
+        "predicted_winner": "Valentina Steiner",
+        "confidence": 55.3
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Valentina Steiner"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Laura Boehner",
+        "jugador2": "Onalee Wagner",
+        "match_url": "https://www.flashscore.co/match/tennis/boehner-laura-wagner-onalee/tnajInet/#/h2h",
+        "torneo": "W15 Merzig (Alemania)"
+      },
+      "prediction": {
+        "predicted_winner": "Laura Boehner",
+        "confidence": 55.9
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Laura Boehner"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Anina Lanz",
+        "jugador2": "Marie Weckerle",
+        "match_url": "https://www.flashscore.co/match/tennis/lanz-anina-weckerle-marie/SM3ECrPH/#/h2h",
+        "torneo": "W15 Merzig (Alemania)"
+      },
+      "prediction": {
+        "predicted_winner": "Marie Weckerle",
+        "confidence": 55.2
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Marie Weckerle"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Vivien Sandberg",
+        "jugador2": "Salma Djoubri",
+        "match_url": "https://www.flashscore.co/match/tennis/sandberg-vivien-djoubri-salma/pr8R1RAa/#/h2h",
+        "torneo": "W15 Merzig (Alemania)"
+      },
+      "prediction": {
+        "predicted_winner": "Salma Djoubri",
+        "confidence": 54.3
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Vivien Sandberg"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Tamila Gadamauri",
+        "jugador2": "Jolie Angelique Abendroth",
+        "match_url": "https://www.flashscore.co/match/tennis/gadamauri-tamila-abendroth-jolie-angelique/I9LYa5uC/#/h2h",
+        "torneo": "W15 Merzig (Alemania)"
+      },
+      "prediction": {
+        "predicted_winner": "Tamila Gadamauri",
+        "confidence": 85.9
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Tamila Gadamauri"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Alejandro Moro Canas",
+        "jugador2": "Kimmer Coppejans",
+        "match_url": "https://www.flashscore.co/match/tennis/moro-canas-alejandro-coppejans-kimmer/WxqHBTs1/#/h2h",
+        "torneo": "Lyon (Francia)"
+      },
+      "prediction": {
+        "predicted_winner": "Kimmer Coppejans",
+        "confidence": 51.8
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Kimmer Coppejans"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Tristan Boyer",
+        "jugador2": "Matteo Martineau",
+        "match_url": "https://www.flashscore.co/match/tennis/boyer-tristan-martineau-matteo/Imn4Q4lg/#/h2h",
+        "torneo": "Lyon (Francia)"
+      },
+      "prediction": {
+        "predicted_winner": "Tristan Boyer",
+        "confidence": 50.8
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Tristan Boyer"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Nikolas Sanchez Izquierdo",
+        "jugador2": "Luca Van Assche",
+        "match_url": "https://www.flashscore.co/match/tennis/sanchez-izquierdo-nikolas-van-assche-luca/tt2nOLGO/#/h2h",
+        "torneo": "Lyon (Francia)"
+      },
+      "prediction": {
+        "predicted_winner": "Nikolas Sanchez Izquierdo",
+        "confidence": 51.2
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Nikolas Sanchez Izquierdo"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Adrian Oetzbach",
+        "jugador2": "Olle Wallin",
+        "match_url": "https://www.flashscore.co/match/tennis/oetzbach-adrian-wallin-olle/8KRiOzPa/#/h2h",
+        "torneo": "M25 Varnamo (Suecia)"
+      },
+      "prediction": {
+        "predicted_winner": "Olle Wallin",
+        "confidence": 53.1
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Adrian Oetzbach"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Eric Vanshelboim",
+        "jugador2": "Louis Wessels",
+        "match_url": "https://www.flashscore.co/match/tennis/vanshelboim-eric-wessels-louis/0fOqQdfm/#/h2h",
+        "torneo": "M25 Varnamo (Suecia)"
+      },
+      "prediction": {
+        "predicted_winner": "Eric Vanshelboim",
+        "confidence": 54.1
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Eric Vanshelboim"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Oskar Jansson",
+        "jugador2": "Anton Shepp",
+        "match_url": "https://www.flashscore.co/match/tennis/jansson-oskar-shepp-anton/A76Pxzvg/#/h2h",
+        "torneo": "M25 Varnamo (Suecia)"
+      },
+      "prediction": {
+        "predicted_winner": "Anton Shepp",
+        "confidence": 56.8
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Anton Shepp"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "John Hallquist Lithen",
+        "jugador2": "Aristotelis Thanos",
+        "match_url": "https://www.flashscore.co/match/tennis/hallquist-lithen-john-thanos-aristotelis/IX9XzE85/#/h2h",
+        "torneo": "M25 Varnamo (Suecia)"
+      },
+      "prediction": {
+        "predicted_winner": "Aristotelis Thanos",
+        "confidence": 51.9
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Aristotelis Thanos"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Niels McDonald",
+        "jugador2": "Cruz Hewitt",
+        "match_url": "https://www.flashscore.co/match/tennis/mcdonald-niels-hewitt-cruz/4ANEVIWP/#/h2h",
+        "torneo": "M25 Varnamo (Suecia)"
+      },
+      "prediction": {
+        "predicted_winner": "Niels McDonald",
+        "confidence": 53.4
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Niels McDonald"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Gilles Arnaud Bailly",
+        "jugador2": "Duje Markovina",
+        "match_url": "https://www.flashscore.co/match/tennis/bailly-gilles-arnaud-markovina-duje/tYPaMEgC/#/h2h",
+        "torneo": "M25 Varnamo (Suecia)"
+      },
+      "prediction": {
+        "predicted_winner": "Gilles Arnaud Bailly",
+        "confidence": 50.3
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Gilles Arnaud Bailly"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Andrea Fiorentini",
+        "jugador2": "Andreja Petrovic",
+        "match_url": "https://www.flashscore.co/match/tennis/fiorentini-andrea-petrovic-andreja/xf8Hvd9t/#/h2h",
+        "torneo": "M25 Varnamo (Suecia)"
+      },
+      "prediction": {
+        "predicted_winner": "Andreja Petrovic",
+        "confidence": 52.5
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Andrea Fiorentini"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Tereza Martincova",
+        "jugador2": "Katie Swan",
+        "match_url": "https://www.flashscore.co/match/tennis/martincova-tereza-swan-katie/lCQFAWCj/#/h2h",
+        "torneo": "Ilkley (Reino Unido)"
+      },
+      "prediction": {
+        "predicted_winner": "Tereza Martincova",
+        "confidence": 53.1
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Katie Swan"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Emerson Jones",
+        "jugador2": "Dalma Galfi",
+        "match_url": "https://www.flashscore.co/match/tennis/jones-emerson-galfi-dalma/SbBEgbg4/#/h2h",
+        "torneo": "Ilkley (Reino Unido)"
+      },
+      "prediction": {
+        "predicted_winner": "Emerson Jones",
+        "confidence": 51.1
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Dalma Galfi"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Mark Lajal",
+        "jugador2": "Michael Zheng",
+        "match_url": "https://www.flashscore.co/match/tennis/lajal-mark-zheng-michael/dCOoXarB/#/h2h",
+        "torneo": "Ilkley (Reino Unido)"
+      },
+      "prediction": {
+        "predicted_winner": "Mark Lajal",
+        "confidence": 52.2
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Mark Lajal"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Felix Gill",
+        "jugador2": "Filippo Romano",
+        "match_url": "https://www.flashscore.co/match/tennis/gill-felix-romano-filippo/6BiLTQyJ/#/h2h",
+        "torneo": "Ilkley (Reino Unido)"
+      },
+      "prediction": {
+        "predicted_winner": "Filippo Romano",
+        "confidence": 53.8
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Filippo Romano"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Luca Nardi",
+        "jugador2": "Jacob Fearnley",
+        "match_url": "https://www.flashscore.co/match/tennis/nardi-luca-fearnley-jacob/pCZR2W6b/#/h2h",
+        "torneo": "Ilkley (Reino Unido)"
+      },
+      "prediction": {
+        "predicted_winner": "Jacob Fearnley",
+        "confidence": 52.4
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Jacob Fearnley"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Yunchaokete Bu",
+        "jugador2": "Chris Rodesch",
+        "match_url": "https://www.flashscore.co/match/tennis/yunchaokete-bu-rodesch-chris/GCPGios0/#/h2h",
+        "torneo": "Ilkley (Reino Unido)"
+      },
+      "prediction": {
+        "predicted_winner": "Yunchaokete Bu",
+        "confidence": 51.9
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Yunchaokete Bu"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Alex Bolt",
+        "jugador2": "Keegan Smith",
+        "match_url": "https://www.flashscore.co/match/tennis/bolt-alex-smith-keegan/4xSgVwDN/#/h2h",
+        "torneo": "Ilkley (Reino Unido)"
+      },
+      "prediction": {
+        "predicted_winner": "Keegan Smith",
+        "confidence": 53.3
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Keegan Smith"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Hamish Stewart",
+        "jugador2": "Leandro Riedi",
+        "match_url": "https://www.flashscore.co/match/tennis/stewart-hamish-riedi-leandro/GYMVzrqn/#/h2h",
+        "torneo": "Ilkley (Reino Unido)"
+      },
+      "prediction": {
+        "predicted_winner": "Hamish Stewart",
+        "confidence": 50.5
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Leandro Riedi"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Henrique Rocha",
+        "jugador2": "Charles Broom",
+        "match_url": "https://www.flashscore.co/match/tennis/rocha-henrique-broom-charles/bolDVn76/#/h2h",
+        "torneo": "Ilkley (Reino Unido)"
+      },
+      "prediction": {
+        "predicted_winner": "Charles Broom",
+        "confidence": 51.2
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Henrique Rocha"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Noma Noha Akugue",
+        "jugador2": "Katarzyna Kawa",
+        "match_url": "https://www.flashscore.co/match/tennis/akugue-noha-noma-kawa-katarzyna/r3DyyI2S/#/h2h",
+        "torneo": "Modena (Italia)"
+      },
+      "prediction": {
+        "predicted_winner": "Noma Noha Akugue",
+        "confidence": 52.1
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Katarzyna Kawa"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Kaitlin Quevedo",
+        "jugador2": "Jeline Vandromme",
+        "match_url": "https://www.flashscore.co/match/tennis/quevedo-kaitlin-vandromme-jeline/fiOEDEoL/#/h2h",
+        "torneo": "Modena (Italia)"
+      },
+      "prediction": {
+        "predicted_winner": "Jeline Vandromme",
+        "confidence": 51.9
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Kaitlin Quevedo"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Laura Samson",
+        "jugador2": "Darja Semenistaja",
+        "match_url": "https://www.flashscore.co/match/tennis/samsonova-laura-semenistaja-darja/42c40b2C/#/h2h",
+        "torneo": "Modena (Italia)"
+      },
+      "prediction": {
+        "predicted_winner": "Darja Semenistaja",
+        "confidence": 51.6
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Laura Samson"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Dominika Salkova",
+        "jugador2": "Martina Trevisan",
+        "match_url": "https://www.flashscore.co/match/tennis/salkova-dominika-trevisan-martina/On01vZ1E/#/h2h",
+        "torneo": "Modena (Italia)"
+      },
+      "prediction": {
+        "predicted_winner": "Dominika Salkova",
+        "confidence": 53.0
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Dominika Salkova"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "James Beaven",
+        "jugador2": "Tom Zeuch",
+        "match_url": "https://www.flashscore.co/match/tennis/beaven-james-zeuch-tom/ELY3dBHM/#/h2h",
+        "torneo": "M15 Vaasa (Finlandia)"
+      },
+      "prediction": {
+        "predicted_winner": "James Beaven",
+        "confidence": 50.8
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Tom Zeuch"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Oskari Eerola",
+        "jugador2": "Seydina Andre",
+        "match_url": "https://www.flashscore.co/match/tennis/eerola-oskari-andre-seydina/GOiGof34/#/h2h",
+        "torneo": "M15 Vaasa (Finlandia)"
+      },
+      "prediction": {
+        "predicted_winner": "Seydina Andre",
+        "confidence": 56.8
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Oskari Eerola"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Stevan Popovic",
+        "jugador2": "Melvin Kumar",
+        "match_url": "https://www.flashscore.co/match/tennis/popovic-stevan-kumar-melvin/pdyq9l1S/#/h2h",
+        "torneo": "M15 Vaasa (Finlandia)"
+      },
+      "prediction": {
+        "predicted_winner": "Melvin Kumar",
+        "confidence": 51.0
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Melvin Kumar"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Guillaume Dalmasso",
+        "jugador2": "Sten Hiiesalu",
+        "match_url": "https://www.flashscore.co/match/tennis/dalmasso-guillaume-hiiesalu-sten/tSME3SOk/#/h2h",
+        "torneo": "M15 Vaasa (Finlandia)"
+      },
+      "prediction": {
+        "predicted_winner": "Guillaume Dalmasso",
+        "confidence": 54.0
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Guillaume Dalmasso"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Filip Peliwo",
+        "jugador2": "Kristjan Tamm",
+        "match_url": "https://www.flashscore.co/match/tennis/peliwo-filip-tamm-kristjan/p4PZjkup/#/h2h",
+        "torneo": "M15 Vaasa (Finlandia)"
+      },
+      "prediction": {
+        "predicted_winner": "Kristjan Tamm",
+        "confidence": 50.1
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Filip Peliwo"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Aleksi Lofman",
+        "jugador2": "Matt Ponchet",
+        "match_url": "https://www.flashscore.co/match/tennis/lofman-aleksi-matt-ponchet/OleOqYXG/#/h2h",
+        "torneo": "M15 Vaasa (Finlandia)"
+      },
+      "prediction": {
+        "predicted_winner": "Matt Ponchet",
+        "confidence": 50.6
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Matt Ponchet"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Nikola Slavic",
+        "jugador2": "Karl Friberg",
+        "match_url": "https://www.flashscore.co/match/tennis/slavic-nikola-friberg-karl/SrLM16g2/#/h2h",
+        "torneo": "M15 Vaasa (Finlandia)"
+      },
+      "prediction": {
+        "predicted_winner": "Nikola Slavic",
+        "confidence": 51.3
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Karl Friberg"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Vesa Ahti",
+        "jugador2": "Rafael Ymer",
+        "match_url": "https://www.flashscore.co/match/tennis/ahti-vesa-ymer-rafael/WEbWsC2T/#/h2h",
+        "torneo": "M15 Vaasa (Finlandia)"
+      },
+      "prediction": {
+        "predicted_winner": "Vesa Ahti",
+        "confidence": 54.7
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Rafael Ymer"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Moritz Kudernatsch",
+        "jugador2": "Aryan Lakshmanan",
+        "match_url": "https://www.flashscore.co/match/tennis/kudernatsch-moritz-lakshmanan-aryan/fkD8P9o9/#/h2h",
+        "torneo": "M15 Vaasa (Finlandia)"
+      },
+      "prediction": {
+        "predicted_winner": "Moritz Kudernatsch",
+        "confidence": 55.2
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Moritz Kudernatsch"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Markus Molder",
+        "jugador2": "Matthias Uwe Kask",
+        "match_url": "https://www.flashscore.co/match/tennis/molder-markus-kask-matthias-uwe/U5USCW13/#/h2h",
+        "torneo": "M15 Vaasa (Finlandia)"
+      },
+      "prediction": {
+        "predicted_winner": "Markus Molder",
+        "confidence": 67.6
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Markus Molder"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Iiro Vasa",
+        "jugador2": "Jonas Eriksson Ziverts",
+        "match_url": "https://www.flashscore.co/match/tennis/vasa-iiro-eriksson-ziverts-jonas/Spp2xjQj/#/h2h",
+        "torneo": "M15 Vaasa (Finlandia)"
+      },
+      "prediction": {
+        "predicted_winner": "Iiro Vasa",
+        "confidence": 52.2
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Iiro Vasa"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Antonio Caruso",
+        "jugador2": "Gian Marco Ortenzi",
+        "match_url": "https://www.flashscore.co/match/tennis/caruso-antonio-ortenzi-gian-marco/zRs554vm/#/h2h",
+        "torneo": "M15 Messina (Italia)"
+      },
+      "prediction": {
+        "predicted_winner": "Gian Marco Ortenzi",
+        "confidence": 53.6
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Gian Marco Ortenzi"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Pietro Marino",
+        "jugador2": "Matteo Sciahbasi",
+        "match_url": "https://www.flashscore.co/match/tennis/marino-pietro-sciahbasi-matteo/hpNxK3gt/#/h2h",
+        "torneo": "M15 Messina (Italia)"
+      },
+      "prediction": {
+        "predicted_winner": "Matteo Sciahbasi",
+        "confidence": 52.6
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Matteo Sciahbasi"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Fausto Tabacco",
+        "jugador2": "Alexandre Reco",
+        "match_url": "https://www.flashscore.co/match/tennis/tabacco-fausto-reco-alexandre/OpDR8ITs/#/h2h",
+        "torneo": "M15 Messina (Italia)"
+      },
+      "prediction": {
+        "predicted_winner": "Fausto Tabacco",
+        "confidence": 50.9
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Fausto Tabacco"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Jacopo Bilardo",
+        "jugador2": "Giorgio Tabacco",
+        "match_url": "https://www.flashscore.co/match/tennis/bilardo-jacopo-tabacco-giorgio/rioD3r9a/#/h2h",
+        "torneo": "M15 Messina (Italia)"
+      },
+      "prediction": {
+        "predicted_winner": "Giorgio Tabacco",
+        "confidence": 52.0
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Jacopo Bilardo"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Gabriele Piraino",
+        "jugador2": "Sebastiano Cocola",
+        "match_url": "https://www.flashscore.co/match/tennis/piraino-gabriele-cocola-sebastiano/WAGZ6dbf/#/h2h",
+        "torneo": "M15 Messina (Italia)"
+      },
+      "prediction": {
+        "predicted_winner": "Gabriele Piraino",
+        "confidence": 56.9
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Gabriele Piraino"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Marcel Zielinski",
+        "jugador2": "Giacomo Crisostomo",
+        "match_url": "https://www.flashscore.co/match/tennis/zielinski-marcel-crisostomo-giacomo/lK4ae9hC/#/h2h",
+        "torneo": "M15 Messina (Italia)"
+      },
+      "prediction": {
+        "predicted_winner": "Marcel Zielinski",
+        "confidence": 50.1
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Marcel Zielinski"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Leonardo Primucci",
+        "jugador2": "Maxence Rivet",
+        "match_url": "https://www.flashscore.co/match/tennis/primucci-leonardo-rivet-maxence/4OEs5zT6/#/h2h",
+        "torneo": "M15 Messina (Italia)"
+      },
+      "prediction": {
+        "predicted_winner": "Maxence Rivet",
+        "confidence": 50.8
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Maxence Rivet"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Christian Sigsgaard",
+        "jugador2": "Lorenzo Beraldo",
+        "match_url": "https://www.flashscore.co/match/tennis/sigsgaard-christian-beraldo-lorenzo/ClIk3EcJ/#/h2h",
+        "torneo": "M15 Messina (Italia)"
+      },
+      "prediction": {
+        "predicted_winner": "Christian Sigsgaard",
+        "confidence": 54.9
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Christian Sigsgaard"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Iva Jovic",
+        "jugador2": "Alexandra Eala",
+        "match_url": "https://www.flashscore.co/match/tennis/jovic-iva-eala-alexandra/4dtpeX0D/#/h2h",
+        "torneo": "London (Reino Unido)"
+      },
+      "prediction": {
+        "predicted_winner": "Alexandra Eala",
+        "confidence": 55.0
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Iva Jovic"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Laura Siegemund",
+        "jugador2": "Amanda Anisimova",
+        "match_url": "https://www.flashscore.co/match/tennis/siegemund-laura-anisimova-amanda/zuH9663c/#/h2h",
+        "torneo": "London (Reino Unido)"
+      },
+      "prediction": {
+        "predicted_winner": "Amanda Anisimova",
+        "confidence": 51.6
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Amanda Anisimova"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Julian Cundom",
+        "jugador2": "Andrea Collarini",
+        "match_url": "https://www.flashscore.co/match/tennis/cundom-julian-collarini-andrea/j7qX9875/#/h2h",
+        "torneo": "San Miguel de Tucuman (Argentina)"
+      },
+      "prediction": {
+        "predicted_winner": "Andrea Collarini",
+        "confidence": 51.6
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Andrea Collarini"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Johan Alexander Rodriguez Rodriguez",
+        "jugador2": "Juan Manuel La Serna",
+        "match_url": "https://www.flashscore.co/match/tennis/rodriguez-johan-alexander-la-serna-juan-manuel/CdrHDj8t/#/h2h",
+        "torneo": "San Miguel de Tucuman (Argentina)"
+      },
+      "prediction": {
+        "predicted_winner": "Juan Manuel La Serna",
+        "confidence": 51.4
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Johan Alexander Rodriguez Rodriguez"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Nicolas Kicker",
+        "jugador2": "Tomás Martinez",
+        "match_url": "https://www.flashscore.co/match/tennis/kicker-nicolas-martinez-tomas/bXnu8nxI/#/h2h",
+        "torneo": "San Miguel de Tucuman (Argentina)"
+      },
+      "prediction": {
+        "predicted_winner": "Nicolas Kicker",
+        "confidence": 51.0
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Nicolas Kicker"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Nick Hardt",
+        "jugador2": "Bruno Fernandez",
+        "match_url": "https://www.flashscore.co/match/tennis/hardt-nick-fernandez-bruno/IcZuC9dt/#/h2h",
+        "torneo": "San Miguel de Tucuman (Argentina)"
+      },
+      "prediction": {
+        "predicted_winner": "Nick Hardt",
+        "confidence": 56.4
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Nick Hardt"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Juan Bautista Torres",
+        "jugador2": "Carlos Maria Zarate",
+        "match_url": "https://www.flashscore.co/match/tennis/torres-juan-bautista-zarate-carlos-maria/fuSKOntn/#/h2h",
+        "torneo": "San Miguel de Tucuman (Argentina)"
+      },
+      "prediction": {
+        "predicted_winner": "Carlos Maria Zarate",
+        "confidence": 51.3
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Carlos Maria Zarate"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Valentino Grippo",
+        "jugador2": "Pedro Andre De Almeida Santos",
+        "match_url": "https://www.flashscore.co/match/tennis/grippo-valentino-de-almeida-santos-pedro-andre/jNNBphvf/#/h2h",
+        "torneo": "M15 Brasilia (Brasil)"
+      },
+      "prediction": {
+        "predicted_winner": "Valentino Grippo",
+        "confidence": 53.5
+      },
+      "actual_result": {
+        "final_score": "2-0",
+        "actual_winner": "Valentino Grippo"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Ryan Augusto Dos Santos",
+        "jugador2": "Joao Victor Couto Loureiro",
+        "match_url": "https://www.flashscore.co/match/tennis/augusto-dos-santos-ryan-loureiro-joao-victor-couto/OzMJrW86/#/h2h",
+        "torneo": "M15 Brasilia (Brasil)"
+      },
+      "prediction": {
+        "predicted_winner": "Joao Victor Couto Loureiro",
+        "confidence": 52.3
+      },
+      "actual_result": {
+        "final_score": "1-2",
+        "actual_winner": "Joao Victor Couto Loureiro"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Andrew Fenty",
+        "jugador2": "Timo Legout",
+        "match_url": "https://www.flashscore.co/match/tennis/fenty-andrew-legout-timo/h8kEzhq4/#/h2h",
+        "torneo": "M25 Wichita, KS (Estados Unidos)"
+      },
+      "prediction": {
+        "predicted_winner": "Timo Legout",
+        "confidence": 50.1
+      },
+      "actual_result": {
+        "final_score": "2-1",
+        "actual_winner": "Andrew Fenty"
+      },
+      "verification": {
+        "hit": false,
+        "status": "Verified"
+      }
+    },
+    {
+      "match_info": {
+        "jugador1": "Dan Martin",
+        "jugador2": "Zsombor Velcz",
+        "match_url": "https://www.flashscore.co/match/tennis/martin-dan-zsombor-velcz/nBn6xEEi/#/h2h",
+        "torneo": "M25 Wichita, KS (Estados Unidos)"
+      },
+      "prediction": {
+        "predicted_winner": "Zsombor Velcz",
+        "confidence": 51.8
+      },
+      "actual_result": {
+        "final_score": "0-2",
+        "actual_winner": "Zsombor Velcz"
+      },
+      "verification": {
+        "hit": true,
+        "status": "Verified"
+      }
+    }
+  ]
+}

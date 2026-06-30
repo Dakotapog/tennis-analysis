@@ -1,0 +1,317 @@
+{
+  "metadata": {
+    "timestamp": "20260617_113444",
+    "bankroll": 20000.0,
+    "edge_report_fuente": "reports/h2h_results_enhanced_20260617_113250.json",
+    "n_partidos_analizados": 91,
+    "calibracion_n": 798,
+    "parametros": {
+      "modo": "cobertura",
+      "torneo_tipo": "challenger",
+      "superficie": "clay",
+      "combos": 2,
+      "sistema": 3,
+      "ncombos": 3,
+      "nsistema": 2,
+      "watchlist": true,
+      "all_picks": true,
+      "piernas_min": 3,
+      "piernas_max": 4,
+      "excluir": "",
+      "min_cuota": 1.5,
+      "kelly_fraction": 0.25,
+      "budget_pct": {
+        "individuales": 0.4,
+        "combos": 0.4,
+        "sistema": 0.2
+      }
+    }
+  },
+  "individuales": [
+    {
+      "partido": "Jennifer Ruggeri vs Mayar Sherif",
+      "favorito": "Jennifer Ruggeri",
+      "cuota": 3.65,
+      "edge_pct": "24.3%",
+      "p_modelo": 0.517,
+      "n_h2h": 0,
+      "p_blend": 0.5897,
+      "kelly_kl": 0.2638,
+      "kelly_usado": 0.1,
+      "stake": 1000,
+      "retorno_potencial": 3650.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    },
+    {
+      "partido": "Jazmin Ortenzi vs Elizara Yaneva",
+      "favorito": "Jazmin Ortenzi",
+      "cuota": 2.23,
+      "edge_pct": "8.0%",
+      "p_modelo": 0.528,
+      "n_h2h": 0,
+      "p_blend": 0.5897,
+      "kelly_kl": 0.1178,
+      "kelly_usado": 0.064,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "zona_cuota": "underdog",
+      "superficie": "clay"
+    }
+  ],
+  "combos": [],
+  "sistema": [],
+  "cobertura": [
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Jennifer Ruggeri",
+          "cuota": 3.65
+        },
+        {
+          "jugador": "Jazmin Ortenzi",
+          "cuota": 2.23
+        },
+        {
+          "jugador": "Nick Hardt",
+          "cuota": 2.06
+        }
+      ],
+      "cuota_combo": 16.77,
+      "hr_combo": 0.1991,
+      "ev_combo": 2.3383,
+      "excluidos": [
+        "Zhizhen Zhang",
+        "Remy Bertola",
+        "Yi Zhou"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 16770.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Jennifer Ruggeri",
+          "cuota": 3.65
+        },
+        {
+          "jugador": "Jazmin Ortenzi",
+          "cuota": 2.23
+        },
+        {
+          "jugador": "Zhizhen Zhang",
+          "cuota": 2.06
+        }
+      ],
+      "cuota_combo": 16.77,
+      "hr_combo": 0.1806,
+      "ev_combo": 2.0288,
+      "excluidos": [
+        "Nick Hardt",
+        "Remy Bertola",
+        "Yi Zhou"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 16770.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Jennifer Ruggeri",
+          "cuota": 3.65
+        },
+        {
+          "jugador": "Nick Hardt",
+          "cuota": 2.06
+        },
+        {
+          "jugador": "Zhizhen Zhang",
+          "cuota": 2.06
+        }
+      ],
+      "cuota_combo": 15.49,
+      "hr_combo": 0.1754,
+      "ev_combo": 1.7164,
+      "excluidos": [
+        "Jazmin Ortenzi",
+        "Remy Bertola",
+        "Yi Zhou"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 15490.0
+    },
+    {
+      "piernas_n": 3,
+      "legs": [
+        {
+          "jugador": "Jazmin Ortenzi",
+          "cuota": 2.23
+        },
+        {
+          "jugador": "Nick Hardt",
+          "cuota": 2.06
+        },
+        {
+          "jugador": "Zhizhen Zhang",
+          "cuota": 2.06
+        }
+      ],
+      "cuota_combo": 9.46,
+      "hr_combo": 0.1754,
+      "ev_combo": 0.6596,
+      "excluidos": [
+        "Jennifer Ruggeri",
+        "Remy Bertola",
+        "Yi Zhou"
+      ],
+      "stake": 1000,
+      "retorno_potencial": 9460.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Jennifer Ruggeri",
+          "cuota": 3.65
+        },
+        {
+          "jugador": "Jazmin Ortenzi",
+          "cuota": 2.23
+        },
+        {
+          "jugador": "Nick Hardt",
+          "cuota": 2.06
+        },
+        {
+          "jugador": "Zhizhen Zhang",
+          "cuota": 2.06
+        }
+      ],
+      "cuota_combo": 34.54,
+      "hr_combo": 0.1034,
+      "ev_combo": 2.5722,
+      "excluidos": [
+        "Remy Bertola",
+        "Yi Zhou"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Jennifer Ruggeri",
+          "cuota": 3.65
+        },
+        {
+          "jugador": "Jazmin Ortenzi",
+          "cuota": 2.23
+        },
+        {
+          "jugador": "Zhizhen Zhang",
+          "cuota": 2.06
+        },
+        {
+          "jugador": "Remy Bertola",
+          "cuota": 1.93
+        }
+      ],
+      "cuota_combo": 32.36,
+      "hr_combo": 0.0965,
+      "ev_combo": 2.1242,
+      "excluidos": [
+        "Nick Hardt",
+        "Yi Zhou"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Jennifer Ruggeri",
+          "cuota": 3.65
+        },
+        {
+          "jugador": "Nick Hardt",
+          "cuota": 2.06
+        },
+        {
+          "jugador": "Zhizhen Zhang",
+          "cuota": 2.06
+        },
+        {
+          "jugador": "Remy Bertola",
+          "cuota": 1.93
+        }
+      ],
+      "cuota_combo": 29.89,
+      "hr_combo": 0.0937,
+      "ev_combo": 1.802,
+      "excluidos": [
+        "Jazmin Ortenzi",
+        "Yi Zhou"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    },
+    {
+      "piernas_n": 4,
+      "legs": [
+        {
+          "jugador": "Jazmin Ortenzi",
+          "cuota": 2.23
+        },
+        {
+          "jugador": "Nick Hardt",
+          "cuota": 2.06
+        },
+        {
+          "jugador": "Zhizhen Zhang",
+          "cuota": 2.06
+        },
+        {
+          "jugador": "Remy Bertola",
+          "cuota": 1.93
+        }
+      ],
+      "cuota_combo": 18.26,
+      "hr_combo": 0.0937,
+      "ev_combo": 0.7119,
+      "excluidos": [
+        "Jennifer Ruggeri",
+        "Yi Zhou"
+      ],
+      "stake": 0,
+      "retorno_potencial": 0.0
+    }
+  ],
+  "risk_management": {
+    "pk_factor": 0.6666666666666666,
+    "total_ajustado": 10000.0,
+    "var_95": -15000.0,
+    "cvar_95": -15000.0,
+    "expected_pl": 19733.316111160468,
+    "sharpe_ratio": 0.41002573055619895,
+    "kelly_growth_rate": 0.16862898209499277,
+    "sessions_to_double": 4.110486655072607,
+    "var_excedido": true,
+    "factor_var": 0.3333333333333333
+  },
+  "resumen": {
+    "gastado_individuales": 1000,
+    "gastado_combos": 0.0,
+    "gastado_sistema": 0.0,
+    "gastado_cobertura": 4000,
+    "total_en_riesgo": 5000.0,
+    "pct_bankroll_en_riesgo": 0.25,
+    "n_senales_apostar": 2,
+    "pool_cobertura": 6,
+    "alerta_riesgo": false
+  }
+}
