@@ -1,6 +1,6 @@
 # MOC Principal — Tennis Prediction Engine
 
-> **Última actualización:** 2026-06-30 (Nodo-45 ✅ IMPLEMENTADO — D45-01/02/03/04 completados, 1438 tests) | Nodo-44 ✅ IMPLEMENTADO — WAS framework activo (D44-01 combos + D44-02 campos Markov) | **Tests:** 1438 passed ✅ | **Pipeline:** Data limpia ✅ | Cobertura expandida sin Cat-C ✅ | Games/Sets Signal Layer activo | THF (Temporal History Fallback) activo para match_id=None
+> **Última actualización:** 2026-06-30 (Nodo-47 ✅ RESUELTO — bug crítico: _inject_kambi_ranking sobreescribía rankings ATP reales por mismatch "Nombre Apellido" vs "Apellido Nombre". Causa directa de fallo Glinka/Mayo. Fix optimizado: O(1) key invertido + slow path. Nodo-45 ✅ THF activo | **Tests:** 1438 passed ✅)
 > **Calibración global:** n=1353 | 850W/503L hit=62.8% | clay GS: 25W/8L p=75.8% | grass: 92W/73L=55.7%
 > **ALERTA Nodo-32 (Jun 19-22):** APOSTAR hit%=26.7% (8W/22L) | Markov HOT=8.3% | Golden Zone=12.5% | 86% picks LOW | ROI=-21.1% | Phantom Edge + Markov decorativo + Golden Zone ciega → 5 fixes spec
 > **Hallazgo Nodo-28 (18-jun):** 80.8% INFLADO por data leakage (H2H post-partido). Backtest limpio: **36/52=69.2%** (clay 76% | grass 67% | hard 64%). 6 predicciones cambiaron al quitar leak. 16 fallos → análisis post-mortem reveló Circuit Asymmetry → Nodo-29.
@@ -82,7 +82,9 @@
 │   ├── [[Nodo-40-Games-Sets-Signal-Layer]] ✅ COMPLETO — Alpha ortogonal al ganador: diff→sets/games, 5 fases. games_signal_calculator.py + --games flag + betslip ground truth + pipeline_tracker S-40 + auto-calibración. 37 tests ✅. calibracion_n dinámico. (2026-06-28)
 │   ├── [[Nodo-43-PELT-Cold-Rival-Promo-Filter]] HALLAZGO — rival COLD conf≥0.60 = alpha para promo combos bloqueados por T33-01/FIX-3. n=2 descubrimiento 2026-06-29. Caso: Ilagan @2.05 + Mayo @2.18 = 4.47x promo.
 │   ├── [[Nodo-44-Watchlist-Alpha-Signal]] HALLAZGO — framework unificado: watchlist edge≥10% + cuota≥2.0 + señal Markov. Bookmaker sobrevalora marca, modelo captura estado actual. Validado 2026-06-29: Carreno @3.30 (edge=21.1%) + Safiullin @2.65 (edge=12.8%) ambos GANARON. PCRS (Nodo-43) es subconjunto de WAS.
-│   └── [[Nodo-45-Temporal-History-Fallback]] ✅ IMPLEMENTADO — match_id=None → busca en h2h_results previos (7 días). D45-01 tests ✓ | D45-02 función ✓ | D45-03 refactor ✓ | D45-04 routing ✓
+│   ├── [[Nodo-45-Temporal-History-Fallback]] ✅ IMPLEMENTADO — match_id=None → busca en h2h_results previos (7 días). D45-01 tests ✓ | D45-02 función ✓ | D45-03 refactor ✓ | D45-04 routing ✓
+│   ├── [[Nodo-46-Markov-Surface-Context-Discount]] HALLAZGO — estado COLD/HOT mezclando superficies. Evidencia real: 1/3 fallos Cary (Watanuki). Pendiente más n antes de implementar discount.
+│   └── [[Nodo-47-Inject-Kambi-Ranking-Guard-Bug]] ✅ RESUELTO — guard `rankings_data.get(normalized)` fallaba por formato "Apellido Nombre" vs "Nombre Apellido". Kambi estimate sobreescribía ATP real. Fix: fast path O(1) invertido + slow path intelligent match. 1438 tests ✅
 │
 ├── 02_Sources/
 │   └── Fuentes-Datos.md              ← contrato con FlashScore (Playwright + Ninja API) + Kambi API (Betplay)

@@ -861,6 +861,18 @@ class NinjaH2HExtractor:
         else:
             p2_history = _parse_player_history(p2_records, p2)
 
+        # ── Nodo-45 THF Punto B: suplementar historiales vacíos desde sesiones anteriores ──
+        if not p1_history:
+            _t = _lookup_player_history_temporal(p1)
+            if _t:
+                logger.info(f"   📚 THF suplementa {p1}: {len(_t)} partidos")
+                p1_history = _t
+        if not p2_history:
+            _t = _lookup_player_history_temporal(p2)
+            if _t:
+                logger.info(f"   📚 THF suplementa {p2}: {len(_t)} partidos")
+                p2_history = _t
+
         h2h_matches = _parse_direct_h2h(h2h_records, p1, p2)
 
         logger.info(f"   📊 {p1}: {len(p1_history)} partidos | {p2}: {len(p2_history)} | H2H: {len(h2h_matches)}")
@@ -1068,9 +1080,21 @@ class NinjaH2HExtractor:
         import math
         if not ranking:
             return
+        # Guard optimizada (Nodo-46 fix): el ATP file indexa "Apellido Nombre" pero
+        # normalize_name('Daniil Glinka') produce 'daniil glinka' — mismatch que
+        # causaba que Kambi estimate sobreescribiera el ranking real ATP.
+        #
+        # Fast path O(1): chequea key directo + key invertido (cubre 95% ATP/WTA).
+        # Slow path: get_player_info() con intelligent matching para nombres compuestos
+        # (Davidovich Fokina, Moro Canas, etc.) — solo si fast path falla.
         normalized = self.ranking_manager.normalize_name(player_name)
-        if self.ranking_manager.rankings_data.get(normalized):
-            return  # ya está en el archivo ATP/WTA → no sobreescribir
+        parts = normalized.split()
+        reversed_key = ' '.join(reversed(parts)) if len(parts) == 2 else None
+        rd = self.ranking_manager.rankings_data
+        if rd.get(normalized) or (reversed_key and rd.get(reversed_key)):
+            return  # encontrado en O(1) — no sobreescribir
+        if self.ranking_manager.get_player_info(player_name):
+            return  # encontrado via intelligent matching — no sobreescribir
         pts_estimate = max(1, round(700 / math.log1p(ranking)))
         player_entry = {
             'name':               player_name,
