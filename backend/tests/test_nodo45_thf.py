@@ -273,10 +273,9 @@ class TestProcessMatchTHF:
         )
 
     def test_t45_08_process_match_thf_supplements_empty_api_history(self, extractor):
-        """T45-08: API retorna historial vacío → THF suplementa.
-        La API tiene match_id válido pero el bloque del jugador sale vacío."""
-        fake_raw = "~KB÷Últimos partidos: Rival J.~"   # solo bloque del rival, no de Maldonado
-
+        """T45-08: API retorna historial vacío → THF suplementa con datos reales.
+        D45-05 (Punto B): match_id válido pero _parse_player_history retorna [].
+        FALLA si no se llama a _lookup_player_history_temporal en el path API."""
         thf_returns = {"Martin Maldonado": HIST_MALDONADO}
 
         def fake_thf(player_name, days_back=7):
@@ -285,18 +284,23 @@ class TestProcessMatchTHF:
         match_with_id = dict(self._BASE_MATCH)
         match_with_id["match_url"] = "https://www.flashscore.co/match/tennis/maldonado-rival/AbCdEf/#/h2h"
 
-        with patch("scraping.ninja_h2h_parser.fetch_h2h_from_api", return_value=fake_raw), \
-             patch("scraping.ninja_h2h_parser._parse_sections", return_value=[{"KB": "Últimos partidos: Rival J."}]), \
+        with patch("scraping.ninja_h2h_parser.fetch_h2h_from_api", return_value="~raw~"), \
+             patch("scraping.ninja_h2h_parser._parse_sections", return_value=[{"KB": "x"}]), \
              patch("scraping.ninja_h2h_parser._split_into_h2h_blocks", return_value=([], [], [])), \
              patch("scraping.ninja_h2h_parser._parse_player_history", return_value=[]), \
              patch("scraping.ninja_h2h_parser._parse_direct_h2h", return_value=[]), \
-             patch("scraping.ninja_h2h_parser._lookup_player_history_temporal", side_effect=fake_thf):
+             patch("scraping.ninja_h2h_parser._lookup_player_history_temporal",
+                   side_effect=fake_thf) as mock_thf:
             result = extractor._process_match(match_with_id)
 
-        # Con THF, el match debería procesarse aunque la API retorne historial vacío
-        assert result is True, (
-            "THF debe suplementar historial vacío de la API (Punto B del Nodo-45)"
+        assert result is True, "THF debe suplementar historial vacío de la API (Punto B)"
+        # Verificar que THF fue llamado para el jugador con historial vacío
+        thf_calls = [call.args[0] for call in mock_thf.call_args_list]
+        assert "Martin Maldonado" in thf_calls, (
+            "THF debe intentar recuperar el historial de Martin Maldonado (API retornó vacío)"
         )
+        # Verificar que los datos THF llegaron a _analyze_and_consolidate
+        assert len(extractor.all_results) == 1, "El partido debe quedar en all_results"
 
     def test_t45_09_returns_false_when_no_match_id_and_no_temporal_data(self, extractor):
         """T45-09: Sin match_id Y sin datos temporales → return False.

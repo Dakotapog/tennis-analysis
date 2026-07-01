@@ -930,6 +930,26 @@ def main():
     watchlist   = reporte.get('watchlist', [])
     sin_edge    = reporte.get('sin_edge', [])
 
+    # ── D48-05 (Nodo-48): Guard cuota_es_real ────────────────────────────────
+    # Si algún pick tiene cuota_es_real=False → las cuotas son de referencia
+    # (FlashScore bookmaker id=523), NO de Betplay. No desplegar capital real.
+    todos_los_picks = senales_raw + watchlist + sin_edge
+    picks_sin_cuota_real = [p for p in todos_los_picks if p.get('cuota_es_real') is False]
+    if picks_sin_cuota_real:
+        print("=" * 70)
+        print("  GUARD D48-05 — CUOTAS NO REALES DETECTADAS")
+        print("=" * 70)
+        print(f"  {len(picks_sin_cuota_real)}/{len(todos_los_picks)} picks tienen cuota_es_real=False")
+        print("  Origen: FlashScore odds de referencia (--flashscore-only), NO Betplay.")
+        print("  Este reporte es SOLO para testing/validacion post-hoc.")
+        print()
+        print("  NO desplegar capital real con este reporte.")
+        print("  Para apuestas reales: correr PASO 1 con Kambi antes del partido.")
+        print("=" * 70)
+        sys.stdout = sys.stdout._real
+        return
+    # ─────────────────────────────────────────────────────────────────────────
+
     # Filtrar por tier del torneo ANTES de construir pool — el trader procesa UN tier por ejecución
     _tier_filtro = args.torneo_tipo
     senales_raw = [p for p in senales_raw if p.get('tier', 'atp500') == _tier_filtro]

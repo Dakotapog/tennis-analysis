@@ -10,10 +10,16 @@ con dos API calls HTTP (~2 segundos total):
 Produce: data/zita_tennis_matches_FECHA.json — mismo formato del pipeline.
 
 Uso:
-  python3 extraer_partidos_api.py                    # partidos de hoy
-  python3 extraer_partidos_api.py --tomorrow          # partidos de mañana
-  python3 extraer_partidos_api.py --tier atp wta      # solo ATP + WTA
-  python3 extraer_partidos_api.py --tomorrow --tier atp wta challenger
+  python3 extraer_partidos_api.py                           # partidos de hoy (Kambi)
+  python3 extraer_partidos_api.py --tomorrow                # partidos de mañana
+  python3 extraer_partidos_api.py --tier atp wta            # solo ATP + WTA
+  python3 extraer_partidos_api.py --flashscore-only         # TESTING: jornada completa sin Kambi
+  python3 extraer_partidos_api.py --flashscore-only --tier atp wta
+
+NOTA --flashscore-only:
+  Usa FlashScore feed (match_ids) + FlashScore odds (Playwright ~90s).
+  cuota_es_real=False — NO usar para apuestas reales.
+  Util para validar el pipeline post-hoc cuando Kambi ya no tiene cuotas.
 """
 
 import argparse
@@ -41,26 +47,44 @@ def main():
         choices=["atp", "wta", "challenger", "wta125", "itf"],
         help="Filtrar por tier (default: todos los singles)"
     )
+    parser.add_argument(
+        "--flashscore-only", action="store_true",
+        help="Modo testing: FlashScore feed + FlashScore odds (sin Kambi). cuota_es_real=False"
+    )
     args = parser.parse_args()
 
     day_offset = 1 if args.tomorrow else 0
     dia = "MAÑANA" if args.tomorrow else "HOY"
 
-    logger.info("🎾 PASO 1 API — Partidos + Cuotas Reales Betplay")
-    logger.info("=" * 70)
-    logger.info(f"📅 Día: {dia} (offset={day_offset})")
-    if args.tier:
-        logger.info(f"🔍 Tiers: {args.tier}")
-    logger.info("=" * 70)
+    if args.flashscore_only:
+        logger.info("🎾 PASO 1 FLASHSCORE-ONLY — Jornada completa sin Kambi (TESTING)")
+        logger.info("=" * 70)
+        logger.info(f"📅 Día: {dia} (offset={day_offset})")
+        logger.info("⚠️  cuota_es_real=False — NO usar para apuestas reales")
+        if args.tier:
+            logger.info(f"🔍 Tiers: {args.tier}")
+        logger.info("=" * 70)
 
-    start = time.time()
+        start = time.time()
+        from scraping.kambi_tennis import extract_matches_flashscore_only
+        filename, matches = extract_matches_flashscore_only(
+            day_offset=day_offset,
+            tiers=args.tier,
+        )
+    else:
+        logger.info("🎾 PASO 1 API — Partidos + Cuotas Reales Betplay")
+        logger.info("=" * 70)
+        logger.info(f"📅 Día: {dia} (offset={day_offset})")
+        if args.tier:
+            logger.info(f"🔍 Tiers: {args.tier}")
+        logger.info("=" * 70)
 
-    from scraping.kambi_tennis import extract_matches
-
-    filename, matches = extract_matches(
-        day_offset=day_offset,
-        tiers=args.tier
-    )
+        start = time.time()
+        from scraping.kambi_tennis import extract_matches
+        filename, matches = extract_matches(
+            day_offset=day_offset,
+            tiers=args.tier,
+        )
 
     elapsed = time.time() - start
 
@@ -90,8 +114,10 @@ def main():
     for tier in sorted(by_tier.keys()):
         logger.info(f"   {tier:12s}: {by_tier[tier]:3d} partidos")
     logger.info(f"   {'TOTAL':12s}: {len(matches):3d} partidos")
+    con_cuota = sum(1 for m in matches if m.get("cuota1") and m.get("cuota2"))
+    tipo_cuota = "FlashScore referencia" if args.flashscore_only else "Betplay Kambi"
     logger.info(f"   Con match_id: {with_match_id}/{len(matches)} (para H2H API)")
-    logger.info(f"   Cuota real:   {len(matches)}/{len(matches)} (Betplay Kambi)")
+    logger.info(f"   Con cuotas:   {con_cuota}/{len(matches)} ({tipo_cuota})")
 
     # Mostrar primeros partidos ATP/WTA
     logger.info("")

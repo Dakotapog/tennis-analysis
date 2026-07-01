@@ -571,6 +571,230 @@ def match_players(kambi_matches: List[Dict], fs_matches: List[Dict]) -> List[Dic
     return merged
 
 
+# ══════════════════════════════════════════════════════════════════════════════
+# FLASHSCORE ODDS — Cuotas de referencia via Playwright (solo testing)
+# ══════════════════════════════════════════════════════════════════════════════
+
+_PLAYWRIGHT_ARGS = [
+    "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu",
+    "--disable-software-rasterizer", "--disable-background-timer-throttling",
+    "--disable-backgrounding-occluded-windows", "--disable-renderer-backgrounding",
+    "--disable-features=TranslateUI", "--disable-extensions", "--no-first-run",
+    "--disable-default-apps",
+    "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+]
+
+
+def _parse_odd(text: str) -> Optional[float]:
+    """Convierte texto de cuota a float. Retorna None si no es válido (≤1.0)."""
+    if not text:
+        return None
+    clean = re.sub(r"[^\d.]", "", text.strip())
+    if not clean or not clean.replace(".", "").isdigit():
+        return None
+    try:
+        val = float(clean)
+        return val if val > 1.0 else None
+    except ValueError:
+        return None
+
+
+async def _scrape_flashscore_odds_async() -> Dict[Tuple, Tuple[float, float]]:
+    """Implementación async interna — usa Playwright para extraer cuotas de FlashScore."""
+    import asyncio
+    from playwright.async_api import async_playwright
+
+    odds_map: Dict[Tuple, Tuple[float, float]] = {}
+
+    async with async_playwright() as pw:
+        browser = await pw.chromium.launch(headless=True, args=_PLAYWRIGHT_ARGS)
+        page = await browser.new_page()
+        await page.set_viewport_size({"width": 1920, "height": 1080})
+
+        try:
+            await page.goto(
+                "https://www.flashscore.com/tennis/",
+                wait_until="domcontentloaded",
+                timeout=45000,
+            )
+            import asyncio as _aio
+            await _aio.sleep(3)
+
+            # Cookie consent
+            try:
+                btn = await page.wait_for_selector("#onetrust-accept-btn-handler", timeout=7000)
+                if btn:
+                    await btn.click()
+                    await _aio.sleep(2)
+            except Exception:
+                pass
+
+            # Click odds button para activar columnas de cuotas
+            for sel in ['text="Odds"', 'text="Cuotas"', '[data-testid*="odds"]',
+                        'button:has-text("Odds")', 'a[href*="odds"]']:
+                try:
+                    el = await page.wait_for_selector(sel, timeout=3000)
+                    if el:
+                        await el.click()
+                        await _aio.sleep(3)
+                        break
+                except Exception:
+                    continue
+
+            # Scroll para cargar todos los partidos
+            await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+            await _aio.sleep(3)
+
+            # Extraer partidos
+            match_elements = await page.query_selector_all(".event__match")
+            logger.info(f"⚡ FlashScore odds: {len(match_elements)} elementos encontrados")
+
+            for element in match_elements:
+                try:
+                    # Jugadores
+                    participants = await element.query_selector_all(".event__participant")
+                    if len(participants) < 2:
+                        continue
+                    j1 = (await participants[0].text_content() or "").strip()
+                    j2 = (await participants[1].text_content() or "").strip()
+                    if not j1 or not j2:
+                        continue
+
+                    # Cuotas — selectores específicos primero
+                    odd1_el = await element.query_selector(".event__odd--odd1")
+                    odd2_el = await element.query_selector(".event__odd--odd2")
+                    if not odd1_el or not odd2_el:
+                        odd1_el = await element.query_selector('[class*="odd1"]')
+                        odd2_el = await element.query_selector('[class*="odd2"]')
+                    if not odd1_el or not odd2_el:
+                        continue
+
+                    c1 = _parse_odd(await odd1_el.text_content() or "")
+                    c2 = _parse_odd(await odd2_el.text_content() or "")
+                    if c1 and c2:
+                        key = _build_match_key(j1, j2)
+                        odds_map[key] = (c1, c2)
+                except Exception:
+                    continue
+
+        finally:
+            await browser.close()
+
+    logger.info(f"   ✅ {len(odds_map)} partidos con cuotas extraídos de FlashScore")
+    return odds_map
+
+
+def fetch_flashscore_odds() -> Dict[Tuple, Tuple[float, float]]:
+    """
+    Extrae cuotas de FlashScore via Playwright.
+
+    Solo para testing/validación post-hoc — NO son cuotas de Betplay.
+    Las cuotas se marcan cuota_es_real=False en el pipeline.
+
+    Returns:
+        Dict[match_key -> (cuota_j1, cuota_j2)]
+        match_key = _build_match_key(j1, j2) — compatible con match_players()
+    """
+    import asyncio
+    try:
+        loop = asyncio.get_event_loop()
+        if loop.is_running():
+            import concurrent.futures
+            with concurrent.futures.ThreadPoolExecutor() as pool:
+                future = pool.submit(asyncio.run, _scrape_flashscore_odds_async())
+                return future.result()
+        return loop.run_until_complete(_scrape_flashscore_odds_async())
+    except RuntimeError:
+        return asyncio.run(_scrape_flashscore_odds_async())
+
+
+def extract_matches_flashscore_only(
+    day_offset: int = 0,
+    tiers: Optional[List[str]] = None,
+) -> Tuple[str, List[Dict]]:
+    """
+    Modo testing: FlashScore feed + FlashScore odds — sin depender de Kambi.
+
+    Usa cuota_es_real=False. NO usar para apuestas reales.
+    Util para validar el pipeline post-hoc con la jornada completa.
+
+    Args:
+        day_offset: 0=hoy, 1=mañana, -1=ayer
+        tiers: filtrar por tier (None = todos los singles)
+
+    Returns:
+        (filename, matches)
+    """
+    from config import detectar_tier
+
+    # 1. FlashScore feed — match_ids + rankings + superficie
+    fs_matches = fetch_flashscore_feed(day_offset)
+    if not fs_matches:
+        logger.error("❌ FlashScore feed vacío")
+        return "", []
+
+    # 2. FlashScore odds — Playwright
+    logger.info("🎭 Iniciando Playwright para cuotas FlashScore...")
+    odds_map = fetch_flashscore_odds()
+    logger.info(f"   💰 {len(odds_map)} pares con cuotas encontrados")
+
+    # 3. Merge: feed + odds
+    merged = []
+    con_cuotas = 0
+    for m in fs_matches:
+        key = _build_match_key(m["jugador1_fs"], m["jugador2_fs"])
+        cuotas = odds_map.get(key)
+        cuota1 = cuotas[0] if cuotas else None
+        cuota2 = cuotas[1] if cuotas else None
+        if cuota1:
+            con_cuotas += 1
+
+        # match_url desde slugs del feed
+        match_url = ""
+        if m.get("slug1") and m.get("slug2") and m.get("match_id"):
+            match_url = (
+                f"https://www.flashscore.co/match/tennis/"
+                f"{m['slug1']}-{m['slug2']}/{m['match_id']}/#/h2h"
+            )
+
+        tier = detectar_tier(m.get("torneo_fs", ""))
+
+        merged.append({
+            "jugador1": m["jugador1_fs"],
+            "jugador2": m["jugador2_fs"],
+            "cuota1": cuota1,
+            "cuota2": cuota2,
+            "match_url": match_url,
+            "match_id": m.get("match_id"),
+            "ranking1": m.get("ranking1"),
+            "ranking2": m.get("ranking2"),
+            "superficie": m.get("superficie", "unknown"),
+            "torneo_nombre": m.get("torneo_fs", ""),
+            "torneo_completo": m.get("torneo_fs", ""),
+            "tier": tier,
+            "hora": None,
+            "pais": _extract_country_from_tournament(m.get("torneo_fs", "")),
+            "kambi_event_id": None,
+            "cuota_es_real": False,
+        })
+
+    logger.info(f"🔗 FlashScore-only: {len(merged)} partidos | {con_cuotas} con cuotas")
+
+    # 4. Filtrar por tier si se especifica
+    if tiers:
+        merged = [m for m in merged if m.get("tier") in tiers]
+        logger.info(f"   🔍 Filtrado por tiers {tiers}: {len(merged)} partidos")
+
+    if not merged:
+        logger.warning("⚠️ No hay partidos para guardar")
+        return "", []
+
+    # 5. Guardar
+    filename = save_matches(merged, day_offset)
+    return filename, merged
+
+
 def _extract_country_from_tournament(torneo: str) -> str:
     """Extrae país del nombre del torneo FlashScore."""
     # "ATP - INDIVIDUALES: Stuttgart (Alemania), hierba" → "Alemania"

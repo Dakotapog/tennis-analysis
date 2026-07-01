@@ -1,6 +1,6 @@
 # CLAUDE.md — Tennis Prediction & Betting Engine
 
-> Last updated: 2026-06-29 (Nodo-41 ML dataset cleanup implementado)
+> Last updated: 2026-06-30 (Nodo-45 D45-05 THF completo, Nodo-48 BLOQUEADO)
 > Spec-Driven Development (SDD) — no vibe coding.
 > Este archivo es la fuente de verdad. Cualquier sesión futura de Claude debe leerlo completo antes de tocar código.
 
@@ -310,10 +310,10 @@ Target: n≥1000 por superficie+tier. Acumular datos con betslip_registrar.py.
 
 ---
 
-## 5. Estado Real — 2026-06-29
+## 5. Estado Real — 2026-06-30
 
 ```
-Tests:         1420 passed, 0 failed (1330 → 1420 tras fixes Nodo-39/41)
+Tests:         1438 passed, 0 failed (1330 → 1420 → 1438 tras Nodo-39/41/45)
 Calibración:   clay GS: p=0.758 (n=31) | global: wins=467, losses=239, n=706 + 14 nuevos (Jun-28)
 Bankroll:      $125,000+
 Hedge Fund:    Portfolio Kelly + VaR auto-ajustado + Cobertura Exclusión — ACTIVO ✅
@@ -327,6 +327,10 @@ Lecciones validadas:
   - Cobertura Exclusión demostrada: pick falla pero combo sin él sobrevive
   - Cross-tier mega-combos: ρ≈0.03 entre tiers → casi independientes
   - ML dataset DEBE tener trazabilidad; 69% contaminación por motor viejo = no entrenable (Nodo-41)
+  - THF (Nodo-45): recupera historiales de sesiones anteriores cuando match_id=None o API vacía — D45-01 a D45-05 ✅
+  - Nodo-48 ✅ COMPLETO: `--flashscore-only` en extraer_partidos_api.py — 507 partidos + 233 con cuotas sin Kambi.
+    `fetch_flashscore_odds()` + `extract_matches_flashscore_only()` en scraping/kambi_tennis.py.
+    Guard D48-05: trader para si cuota_es_real=False — nunca despliega capital con cuotas de referencia.
 ```
 
 ---
@@ -419,11 +423,15 @@ predecir_partidos.py  (importa informe_detallado.py que no existe)
 ## 8. Protocolo de Trabajo
 
 ```bash
+# PRIMERO — buscar en git si ya existe una implementacion previa (OBLIGATORIO)
+git log --all --oneline -- '*keyword*'               # buscar archivos eliminados
+git show COMMIT:backend/archivo.py                   # recuperar si existe
+
 # Antes de cualquier edición
 grep -n "texto_exacto" archivo.py
 
 # Antes de cualquier PR — baseline obligatorio
-python -m pytest tests/ --no-cov -q  # debe dar 1330 passed
+python -m pytest tests/ --no-cov -q  # debe dar 1438 passed
 
 # Verificar syntax
 python -c "import ast; ast.parse(open('archivo.py').read()); print('OK')"
@@ -431,6 +439,15 @@ python -c "import ast; ast.parse(open('archivo.py').read()); print('OK')"
 # Antes de eliminar cualquier archivo
 grep -rn "nombre_archivo" --include="*.py"
 ```
+
+### REGLA GIT-FIRST: Antes de implementar cualquier feature, buscar en git history si el usuario ya lo resolvio antes.
+El usuario construyo soluciones que funcionan ANTES de usar IA. Ignorarlas y reinventar desde cero es el error mas costoso.
+Caso real: extraer_cuotas_partidos.py (git: 23d2d91) resuelve Nodo-48. La IA lo declaro BLOQUEADO por usar URL incorrecta.
+
+### Sobre URLs de scraping vs APIs:
+- `global.flashscore.ninja/202/x/feed` = Ninja API (datos JSON, sin cuotas)
+- `www.flashscore.com/tennis/` = sitio web real (DOM con cuotas, usar Playwright)
+- NUNCA derivar URLs de browser desde URLs de API — son sistemas completamente distintos.
 
 ### Spec-Driven: ninguna línea de código nueva sin Nodo en `.spec/01_Nodos/`
 ### Para tareas spec-críticas (eliminaciones, migraciones): ver `.spec/TTC-Protocol.md`
@@ -463,7 +480,7 @@ grep -rn "nombre_archivo" --include="*.py"
 - **REGLA-KAMBI-2: localStorage es origen-compartido.** Solución: `target="_blank"` + `||replace` en redirect de GitHub Pages.
 
 ### Testing y Specs
-- **1330 tests pasan.** No romper. Correr pytest antes de cualquier modificación. 62 tests Nodo-31 blindan ninja_h2h_parser.py. 25 tests Nodo-38 blindan combo_confianza_builder.py.
+- **1438 tests pasan.** No romper. Correr pytest antes de cualquier modificación. 62 tests Nodo-31 blindan ninja_h2h_parser.py. 25 tests Nodo-38 blindan combo_confianza_builder.py. 9 tests Nodo-45 blindan THF.
 - **Spec-Driven.** Ver `.spec/01_Nodos/`.
 - **detectar_tier()** en `config.py` — fuente única para clasificación de torneo en todo el pipeline.
 

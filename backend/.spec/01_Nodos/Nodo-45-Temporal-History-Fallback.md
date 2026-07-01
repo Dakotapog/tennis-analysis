@@ -2,7 +2,7 @@
 
 > **Wikilinks:** [[Nodo-31-Ronda-Futura-H2H]] | [[Nodo-36-Unicode-Acento-Apellidos-Cortos]] | [[Nodo-34-Corrupcion-Datos-Extraccion-H2H]]
 > **Fecha de descubrimiento:** 2026-06-30
-> **Estado:** ✅ IMPLEMENTADO 2026-06-30 — D45-01 a D45-04 completados, 1438 tests pasando
+> **Estado:** ✅ IMPLEMENTADO 2026-06-30 — D45-01 a D45-05 completados, 1438 tests pasando
 
 **Prioridad:** ALTA — afecta la calidad del modelo para jugadores ITF/Challenger y partidos con baja cobertura en FlashScore
 **Archivos objetivo:**
@@ -354,15 +354,13 @@ def test_process_match_no_thf_data_returns_false():
 | D45-02 | Implementar `_lookup_player_history_temporal()` en `ninja_h2h_parser.py` | ALTA | ✅ COMPLETADO |
 | D45-03 | Extraer `_analyze_and_consolidate()` de `_process_match()` (refactor) | ALTA | ✅ COMPLETADO |
 | D45-04 | Modificar `_process_match()` para usar THF en punto A (match_id=None) | ALTA | ✅ COMPLETADO |
-| D45-05 | Modificar `_process_match()` para usar THF en punto B (API vacío) | MEDIA | ⏳ PENDIENTE |
+| D45-05 | Modificar `_process_match()` para usar THF en punto B (API vacío) | MEDIA | ✅ COMPLETADO |
 | D45-06 | Agregar campo `thf_usado: bool` al resultado para observabilidad | BAJA | ⏳ DIFERIDA |
 | D45-07 | Aplicar THF equivalente en `h2h_extractor.py` (modo Playwright) | BAJA | ⏳ DIFERIDA |
 
-**Orden de implementación completado:** D45-01 → D45-02 → D45-03 → D45-04 ✅
+**Orden de implementación completado:** D45-01 → D45-02 → D45-03 → D45-04 → D45-05 ✅
 
-**Fase 1 — CIERRE:** Punto A (match_id=None) ahora es manejado correctamente. Jugadores con fallo de cruce Kambi↔FlashScore pueden utilizar historiales previos de `reports/`. Validado por todos 9 tests de Nodo-45 + 1438 tests del suite completo pasando.
-
-**Fase 2 — Próxima (opcional):** D45-05 (Punto B — suplementar historial vacío de API cuando match_id sí existe). Baja frecuencia relativa al Punto A, pero útil para nuevos jugadores en la API.
+**CIERRE COMPLETO:** Punto A (match_id=None) y Punto B (API vacío con match_id válido) ahora son manejados correctamente. THF suplementa historiales vacíos desde sesiones anteriores en ambos casos. Validado con 9 tests de Nodo-45 + 1438 tests del suite completo pasando. T45-08 corregido de falso positivo a test real (verifica que `_lookup_player_history_temporal` es llamado cuando API retorna vacío).
 
 ---
 
@@ -474,10 +472,9 @@ grep "⚠️ Sin match_id y sin historial" reports/extraction.log
 
 ---
 
-## Próximos Pasos (Fase 2 — opcional)
+## Próximos Pasos (opcionales)
 
-- **D45-05:** Suplementar historial vacío de API cuando match_id sí existe (Punto B)
 - **D45-06:** Agregar campo `thf_usado: bool` para observabilidad en edge_report
 - **D45-07:** Aplicar THF equivalente en modo Playwright (`h2h_extractor.py`)
 
-El Punto A está 100% resuelto. Punto B puede implementarse si en producción se detecta que el THF recurre frecuentemente.
+Puntos A y B 100% resueltos. D45-05 implementado en commit `7f159dd`, T45-08 corregido para verificar llamada real a THF.

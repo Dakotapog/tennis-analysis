@@ -1193,6 +1193,7 @@ class NinjaH2HExtractor:
             'torneo_completo': match_data.get('torneo_completo', 'N/A'),
             'cuota1': match_data.get('cuota1', 'N/A'),
             'cuota2': match_data.get('cuota2', 'N/A'),
+            'cuota_es_real': match_data.get('cuota_es_real', True),
             'match_url': match_data.get('match_url', ''),
             f'historial_{p1_key}': p1_hist,
             f'historial_{p2_key}': p2_hist,

@@ -764,6 +764,7 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
         'ranking_rival':        rank_rival,
         'match_url':            partido.get('match_url'),
         'match_id':             partido.get('match_id'),
+        'cuota_es_real':        partido.get('cuota_es_real', True),
         # Historial H2H directo — alimenta p_blend Bayesiano en trader_ev_tenis.py
         'n_h2h':                len([m for m in partido.get('enfrentamientos_directos', []) if isinstance(m, dict)]),
         # Contexto Markov (si ya está disponible en el partido)
