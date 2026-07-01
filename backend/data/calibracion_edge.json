@@ -1,7 +1,7 @@
 {
   "global": {
-    "wins": 1671,
-    "losses": 1055
+    "wins": 1673,
+    "losses": 1058
   },
   "por_superficie": {
     "clay": {
@@ -17,8 +17,8 @@
       "losses": 189
     },
     "hard": {
-      "wins": 403,
-      "losses": 257
+      "wins": 405,
+      "losses": 260
     },
     "?": {
       "wins": 23,
@@ -104,7 +104,7 @@
     "challenger": 0.611,
     "itf": 0.5
   },
-  "ultima_actualizacion": "2026-06-29T11:52:13.788951",
+  "ultima_actualizacion": "2026-06-30T12:50:32.760505",
   "_nota_revert_B11": "Revertidos 14W/17L de sesión Jun15-16 (modelo B-11 roto, accuracy=46.9% ruido puro)",
   "_nota_era_v2": "FIX-5: era_v2 acumula datos post-normalización-fix desde 2026-06-19. Usar como prior cuando era_v2_n >= 10."
 }

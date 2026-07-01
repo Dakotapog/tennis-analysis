@@ -15,6 +15,8 @@ Produce el mismo formato de salida que H2HExtractor._consolidate_result()
 para ser consumido por edge_calculator.py sin cambios.
 """
 
+import asyncio
+import concurrent.futures
 import json
 import logging
 import re
@@ -514,6 +516,141 @@ def extract_match_id_from_url(url: str) -> Optional[str]:
 
 
 # ══════════════════════════════════════════════════════════════════════════════
+# NODO-49: PLAYWRIGHT H2H FALLBACK — cuando Ninja API + THF fallan
+# ══════════════════════════════════════════════════════════════════════════════
+
+async def _playwright_h2h_async(match_id: str, player_name: str,
+                                 section_idx: int) -> List[Dict]:
+    """
+    Nodo-49: Extrae historial de un jugador desde el DOM de FlashScore via Playwright.
+    URL validada por usuario en flashs_revisa_h2h_inspector.py (git 23d2d91):
+        https://www.flashscore.co/partido/tenis/{match_id}/#/h2h/general
+    Selectores validados: .h2h__section, .h2h__row, wcl-stageTime, wcl-tableScore.
+    section_idx: 0=jugador1, 1=jugador2 (sección 2 = H2H directo, no usada aquí).
+    """
+    from playwright.async_api import async_playwright
+
+    h2h_url = f"https://www.flashscore.co/partido/tenis/{match_id}/#/h2h/general"
+
+    async with async_playwright() as pw:
+        browser = await pw.chromium.launch(headless=True, args=[
+            '--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu',
+            '--disable-software-rasterizer',
+            '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        ])
+        page = await browser.new_page()
+        await page.set_viewport_size({"width": 1920, "height": 1080})
+
+        try:
+            await page.goto(h2h_url, wait_until="domcontentloaded", timeout=30000)
+
+            # Cookie consent (mismo handler que ZitaScraper en extraer_cuotas_partidos.py)
+            try:
+                btn = await page.wait_for_selector("#onetrust-accept-btn-handler", timeout=5000)
+                if btn:
+                    await btn.click()
+                    await asyncio.sleep(2)
+            except Exception:
+                pass
+
+            await asyncio.sleep(5)
+
+            sections = await page.locator('.h2h__section').all()
+            if len(sections) <= section_idx:
+                logger.warning(f"   ⚠️ Playwright H2H: solo {len(sections)} secciones para {player_name}")
+                return []
+
+            section = sections[section_idx]
+            rows = await section.locator('.h2h__row').all()
+            logger.info(f"   🌐 Playwright H2H [{player_name}]: {len(rows)} filas (sección {section_idx})")
+
+            matches = []
+            for row in rows:
+                try:
+                    # JS evaluate idéntico al de h2h_extractor.py _parse_player_history()
+                    row_data = await row.evaluate('''el => {
+                        const date_el = el.querySelector('[data-testid="wcl-stageTime"]');
+                        const score_spans = el.querySelectorAll('[data-testid="wcl-tableScore"]');
+                        const result = score_spans.length > 0
+                            ? Array.from(score_spans).map(s => s.textContent.trim()).join('-')
+                            : (el.querySelector('.h2h__result') ? el.querySelector('.h2h__result').textContent.trim() : null);
+                        const participants = el.querySelectorAll('[class*="h2h__participant"]:not([class*="participantInner"])');
+                        let opponent = null;
+                        for (const p of participants) {
+                            const nameSpan = p.querySelector('[data-testid="wcl-scores-simple-text-01"]');
+                            if (nameSpan && !nameSpan.className.includes('wcl-hasBackground')) {
+                                opponent = nameSpan.textContent.trim();
+                                break;
+                            }
+                        }
+                        const icon_div = el.querySelector('.h2h__icon > div');
+                        const outcome = icon_div && icon_div.className.toLowerCase().includes('win') ? 'Gano' : 'Perdio';
+                        const event_el = el.querySelector('.h2h__event');
+                        return {
+                            date: date_el ? date_el.textContent.trim() : null,
+                            result: result,
+                            opponent: opponent,
+                            outcome: outcome,
+                            tournament: event_el ? event_el.textContent.trim() : 'N/A',
+                            event_class: event_el ? (event_el.getAttribute('class') || '') : '',
+                        };
+                    }''')
+
+                    if not row_data.get('date') or not row_data.get('result'):
+                        continue
+
+                    ec = row_data.get('event_class', '').lower()
+                    surface = 'N/A'
+                    if 'hard' in ec:
+                        surface = 'Dura'
+                    elif 'clay' in ec:
+                        surface = 'Arcilla'
+                    elif 'grass' in ec:
+                        surface = 'Hierba'
+                    elif 'indoor' in ec:
+                        surface = 'Indoor'
+
+                    matches.append({
+                        'fecha': row_data['date'],
+                        'oponente': (row_data.get('opponent') or 'N/A').strip(),
+                        'resultado': row_data['result'].replace('\n', '-'),
+                        'outcome': row_data['outcome'],
+                        'torneo': row_data['tournament'].replace('\n', ' '),
+                        'ciudad': 'N/A',
+                        'pais': 'N/A',
+                        'superficie': surface,
+                    })
+                except Exception:
+                    continue
+
+            return matches
+
+        finally:
+            await browser.close()
+
+
+def _fetch_player_history_playwright(match_id: str, player_name: str,
+                                      section_idx: int) -> List[Dict]:
+    """
+    Nodo-49: Sync wrapper para el fallback Playwright.
+    Usa ThreadPoolExecutor para correr async desde contexto sync de _process_match().
+    timeout=90s por partido (Playwright es ~15-30s en WSL).
+    """
+    def _run():
+        return asyncio.run(_playwright_h2h_async(match_id, player_name, section_idx))
+
+    try:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=1) as pool:
+            return pool.submit(_run).result(timeout=90)
+    except concurrent.futures.TimeoutError:
+        logger.warning(f"   ⚠️ Playwright H2H timeout (90s) para {player_name}")
+        return []
+    except Exception as e:
+        logger.warning(f"   ⚠️ Playwright H2H falló para {player_name}: {e}")
+        return []
+
+
+# ══════════════════════════════════════════════════════════════════════════════
 # NODO-45: TEMPORAL HISTORY FALLBACK
 # ══════════════════════════════════════════════════════════════════════════════
 
@@ -872,6 +1009,20 @@ class NinjaH2HExtractor:
             if _t:
                 logger.info(f"   📚 THF suplementa {p2}: {len(_t)} partidos")
                 p2_history = _t
+
+        # ── Nodo-49: Playwright H2H Fallback — si API + THF fallaron y hay match_id ──
+        if not p1_history and match_id:
+            logger.info(f"   🌐 Playwright fallback P1: {p1} (n_h2h=0, THF vacío)")
+            _pw = _fetch_player_history_playwright(match_id, p1, section_idx=0)
+            if _pw:
+                logger.info(f"   ✅ Playwright recuperó {len(_pw)} partidos para {p1}")
+                p1_history = _pw
+        if not p2_history and match_id:
+            logger.info(f"   🌐 Playwright fallback P2: {p2} (n_h2h=0, THF vacío)")
+            _pw = _fetch_player_history_playwright(match_id, p2, section_idx=1)
+            if _pw:
+                logger.info(f"   ✅ Playwright recuperó {len(_pw)} partidos para {p2}")
+                p2_history = _pw
 
         h2h_matches = _parse_direct_h2h(h2h_records, p1, p2)
 
