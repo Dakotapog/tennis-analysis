@@ -41,6 +41,7 @@ import logging
 from config import detectar_tier  # T21-02: fuente única de verdad para tier
 from analysis.markov_analyzer import calcular_recencia_regimen, factor_alpha_temporal  # T18-03 (Nodo-18)
 from analysis.rivalry_analyzer import RIVALRY_VERSION as _EXPECTED_RIVALRY_VERSION  # Nodo-32 Fase 3
+from core.data_contract import PICK_STATUS_NO_DATA  # F2: NO_DATA status para historial vacío
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -784,6 +785,11 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
         # Data completeness: fracción de componentes con datos reales (0.0-1.0)
         # <0.5 = modelo apostando con huecos grandes → revisar antes de desplegar
         'data_completeness':    completeness,
+        # F3/Nodo-51 §6: history_provenance serializado en edge_report por pick
+        # Nodo-52 shadow book lo captura; H52-02 lo necesita para segmentar por fuente
+        'history_provenance':   partido.get('data_quality', {}).get('history_provenance', {
+            'p1': 'EMPTY', 'p2': 'EMPTY',
+        }),
     })
 
     # ─── Nodo-24: Bookmaker Blindness Scoring ───────────────────────────────
@@ -852,20 +858,24 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
     _vol_dog = _surf_dog.get('volume_confidence', 1.0)
     resultado['data_insufficient_surface'] = min(_vol_fav, _vol_dog) < 0.25
 
-    # ─── Nodo-35: HISTORIAL_NO_EXTRAIDO — bloqueo en origen ─────────────────────
+    # ─── Nodo-35 / F2: HISTORIAL_NO_EXTRAIDO — bloqueo en origen + NO_DATA status ──
     # Si la extracción de historial falló para cualquiera de los dos jugadores,
-    # la predicción está basada en datos incompletos → bloqueado sin importar el edge.
-    # El flag viaja desde ninja_h2h_parser → rivalry_analyzer → aquí.
+    # la predicción está basada en datos incompletos → status='NO_DATA', excluido
+    # de TODOS los pools (apostar/watchlist/sin_edge/cobertura).
+    # F2: eliminado 'and resultado.get("apostar")' — se marca siempre, no solo
+    # cuando apostar era True. Picks con edge < threshold + historial vacío también
+    # entraban al pool vía watchlist/sin_edge → origen del bug Combo1-8 (2026-07-01).
     _historial_incompleto = pred.get('historial_incompleto', {})
     _p1_sin_datos = _historial_incompleto.get('p1', False)
     _p2_sin_datos = _historial_incompleto.get('p2', False)
-    if (_p1_sin_datos or _p2_sin_datos) and resultado.get('apostar'):
+    if _p1_sin_datos or _p2_sin_datos:
         _sin_datos_nombres = []
         if _p1_sin_datos:
             _sin_datos_nombres.append(partido.get('jugador1', 'jugador1'))
         if _p2_sin_datos:
             _sin_datos_nombres.append(partido.get('jugador2', 'jugador2'))
         resultado['apostar'] = False
+        resultado['status'] = PICK_STATUS_NO_DATA  # F2: excluido de todos los pools
         resultado['motivo_reclasificacion'] = (
             f'HISTORIAL_NO_EXTRAIDO: sin datos de {", ".join(_sin_datos_nombres)} '
             f'— predicción no confiable, bloqueada en origen'
@@ -951,7 +961,7 @@ def _validate_h2h_rivalry_version(raw: dict, path: str) -> None:
         raise SystemExit(msg)
 
 
-def procesar_archivo_h2h(h2h_file: str, output_file: Optional[str] = None) -> dict:
+def procesar_archivo_h2h(h2h_file: str, output_file: Optional[str] = None, shadow_log: bool = True) -> dict:
     """
     Lee h2h_results_enhanced_FECHA.json y calcula el edge para todos los partidos.
     Genera un reporte de apuestas con las 5 capas activadas.
@@ -988,10 +998,12 @@ def procesar_archivo_h2h(h2h_file: str, output_file: Optional[str] = None) -> di
             continue
         resultados.append(r)
 
-    # Separar por decisión
-    apostar_lista = [r for r in resultados if r['apostar']]
-    no_apostar_lista = [r for r in resultados if not r['apostar'] and r['edge'] > 0]
-    edge_negativo = [r for r in resultados if r['edge'] <= 0]
+    # Separar por decisión — F2: NO_DATA excluido de todos los pools del trader
+    no_data_lista = [r for r in resultados if r.get('status') == PICK_STATUS_NO_DATA]
+    resultados_con_datos = [r for r in resultados if r.get('status') != PICK_STATUS_NO_DATA]
+    apostar_lista = [r for r in resultados_con_datos if r['apostar']]
+    no_apostar_lista = [r for r in resultados_con_datos if not r['apostar'] and r['edge'] > 0]
+    edge_negativo = [r for r in resultados_con_datos if r['edge'] <= 0]
 
     # Ordenar por kelly_kl descendente
     apostar_lista.sort(key=lambda x: -x['kelly_kl'])
@@ -1008,6 +1020,7 @@ def procesar_archivo_h2h(h2h_file: str, output_file: Optional[str] = None) -> di
             'fuente':         h2h_file,
             'n_procesados':   n_total,
             'n_sin_datos':    len(sin_datos),
+            'n_no_data':      len(no_data_lista),  # F2: picks con historial EMPTY
             'n_edge_positivo': len(edges_positivos),
             'n_apostar':      len(apostar_lista),
             'calibracion_n':  n_calibracion,
@@ -1018,6 +1031,7 @@ def procesar_archivo_h2h(h2h_file: str, output_file: Optional[str] = None) -> di
         'watchlist': no_apostar_lista[:10],   # edge positivo pero bajo threshold
         'sin_edge': edge_negativo[:5],         # sample de edge negativo
         'sin_datos': sin_datos[:5],
+        'no_data': no_data_lista,              # F2: historial EMPTY — excluido de todos los pools
     }
 
     # Mostrar resumen
@@ -1028,6 +1042,18 @@ def procesar_archivo_h2h(h2h_file: str, output_file: Optional[str] = None) -> di
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(output, f, indent=2, ensure_ascii=False)
         logger.info(f"💾 Reporte guardado: {output_file}")
+
+    # ── Nodo-52: Shadow Book hook (--shadow-log, default ON) ─────────────────
+    # NUNCA puede romper el PASO 3 — try/except obligatorio (spec §7).
+    if shadow_log:
+        try:
+            import shadow_book
+            session_meta = {'fecha': datetime.now().strftime('%Y-%m-%d'), 'h2h_file': h2h_file}
+            n_sb = shadow_book.log_picks(output, session_meta)
+            if n_sb > 0:
+                logger.info(f"[ShadowBook] {n_sb} picks registrados en shadow book")
+        except Exception as _sb_exc:
+            logger.warning(f"[ShadowBook] Error al registrar picks (PASO 3 no afectado): {_sb_exc}")
 
     return output
 
@@ -1087,6 +1113,10 @@ def main():
         '--actualizar-calibracion', action='store_true',
         help="Muestra instrucciones para actualizar la calibración"
     )
+    parser.add_argument(
+        '--no-shadow-log', action='store_true',
+        help="Deshabilitar registro en shadow book (Nodo-52)"
+    )
     args = parser.parse_args()
 
     if args.actualizar_calibracion:
@@ -1103,7 +1133,7 @@ def main():
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
     output_file = args.output or f"reports/edge_report_{ts}.json"
 
-    procesar_archivo_h2h(h2h_file, output_file)
+    procesar_archivo_h2h(h2h_file, output_file, shadow_log=not args.no_shadow_log)
 
 
 if __name__ == "__main__":
