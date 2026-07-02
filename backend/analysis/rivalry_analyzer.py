@@ -1563,7 +1563,8 @@ class RivalryAnalyzer:
         markov_analysis = None
         try:
             from analysis.markov_analyzer import (
-                detectar_cambio_regimen, calcular_factor_markov, extraer_resultados_binarios
+                detectar_cambio_regimen, calcular_factor_markov, extraer_resultados_binarios,
+                _normalize_surface, _surface_overlap_rate, apply_surface_context_discount,
             )
             resultados_p1 = extraer_resultados_binarios(player1_history, player1_name, n=20)
             resultados_p2 = extraer_resultados_binarios(player2_history, player2_name, n=20)
@@ -1588,19 +1589,45 @@ class RivalryAnalyzer:
             factor_p1 = round(factor_p1 * immunity_p1['immunity_factor'], 4)
             factor_p2 = round(factor_p2 * immunity_p2['immunity_factor'], 4)
 
+            # --- F4 (Nodo-46): Surface Context Discount ---
+            # Descuenta factor_markov cuando la racha reciente es de otra superficie.
+            # current_match_context['apply_surface_discount']=False activa --no-surface-discount A/B.
+            current_surface = _normalize_surface(
+                current_match_context.get('surface', '')
+                or current_match_context.get('tournament_context', {}).get('superficie', '')
+            )
+            season_transition = bool(
+                current_match_context.get('tournament_context', {}).get('season_transition_flag', False)
+            )
+            apply_sd = current_match_context.get('apply_surface_discount', True)
+
+            overlap_p1 = _surface_overlap_rate(player1_history, current_surface)
+            overlap_p2 = _surface_overlap_rate(player2_history, current_surface)
+
+            factor_p1, confianza_markov_p1, sd_p1 = apply_surface_context_discount(
+                factor_p1, markov_p1['confianza'], overlap_p1,
+                markov_p1['estado_actual'], season_transition, apply_sd,
+            )
+            factor_p2, confianza_markov_p2, sd_p2 = apply_surface_context_discount(
+                factor_p2, markov_p2['confianza'], overlap_p2,
+                markov_p2['estado_actual'], season_transition, apply_sd,
+            )
+
             # Nodo-32 Fase 3: factor_p1/p2 se aplican POST-normalizacion (ver abajo).
             # PRE-norm causaba compresión por log1p → delta ~0.072 (ruido imperceptible).
             reasoning.append(
                 f"LOG_MARKOV_P1: estado={markov_p1['estado_actual']} "
                 f"momentum={markov_p1['momentum']} factor={factor_p1} "
                 f"wr_rec={markov_p1['win_rate_reciente']} cp={markov_p1['change_point']} "
-                f"immunity={immunity_p1['immunity_factor']} h2h_wr={immunity_p1['h2h_win_rate']}"
+                f"immunity={immunity_p1['immunity_factor']} h2h_wr={immunity_p1['h2h_win_rate']} "
+                f"surf_overlap={overlap_p1} surf_discount={sd_p1}"
             )
             reasoning.append(
                 f"LOG_MARKOV_P2: estado={markov_p2['estado_actual']} "
                 f"momentum={markov_p2['momentum']} factor={factor_p2} "
                 f"wr_rec={markov_p2['win_rate_reciente']} cp={markov_p2['change_point']} "
-                f"immunity={immunity_p2['immunity_factor']} h2h_wr={immunity_p2['h2h_win_rate']}"
+                f"immunity={immunity_p2['immunity_factor']} h2h_wr={immunity_p2['h2h_win_rate']} "
+                f"surf_overlap={overlap_p2} surf_discount={sd_p2}"
             )
 
             markov_analysis = {
@@ -1609,6 +1636,12 @@ class RivalryAnalyzer:
                 'factor_markov':         factor_p1,          # perspectiva P1 vs P2
                 'h2h_immunity_p1':       immunity_p1,        # T19-03
                 'h2h_immunity_p2':       immunity_p2,
+                # D46-06: campos de procedencia de superficie (solo registrar, no descontar tier)
+                'surface_overlap_rate_p1': round(overlap_p1, 3),
+                'surface_overlap_rate_p2': round(overlap_p2, 3),
+                'surface_discount_p1':     round(sd_p1, 4),
+                'surface_discount_p2':     round(sd_p2, 4),
+                'current_surface':         current_surface,
             }
         except Exception as _markov_err:
             reasoning.append(f"LOG_MARKOV_ERROR: {_markov_err}")

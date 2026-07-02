@@ -20,8 +20,108 @@ Factor de integración:
   calcular_factor_markov(neutral, neutral) → 1.0  (sin cambio)
 """
 
-from typing import List, Optional
+from typing import List, Optional, Tuple
 import numpy as np
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# NODO-46 / F4: Markov Surface-Context Discount
+# ══════════════════════════════════════════════════════════════════════════════
+
+_SURFACE_MAP = {
+    'hierba': 'grass', 'grass': 'grass', 'herb': 'grass', 'grama': 'grass',
+    'dura': 'hard', 'hard': 'hard', 'hardcourt': 'hard', 'hard court': 'hard',
+    'indoor hard': 'hard', 'carpet': 'hard', 'cemento': 'hard',
+    'arcilla': 'clay', 'clay': 'clay', 'tierra': 'clay', 'tierra batida': 'clay',
+}
+
+# D46-07: constantes BLOQUEADAS para calibración hasta n≥5 casos atribuibles (hoy n=1, Watanuki)
+_SURFACE_DISCOUNT_THRESHOLD = 0.40  # overlap mínimo para no descontar
+_SURFACE_DISCOUNT_MIN_FLOOR = 0.70  # discount máximo (0% overlap → factor se acerca 30% a 1.0)
+
+
+def _normalize_surface(s: str) -> str:
+    """D46-02: Normaliza superficie a 'hard' | 'clay' | 'grass' | 'unknown'."""
+    if not s:
+        return 'unknown'
+    return _SURFACE_MAP.get(s.lower().strip(), 'unknown')
+
+
+def _surface_overlap_rate(recent_matches: list, current_surface: str, k: int = 10) -> float:
+    """
+    D46-03: Fracción de los últimos K partidos jugados en la misma superficie que current_surface.
+
+    Args:
+        recent_matches : historial del jugador (más reciente primero)
+        current_surface: superficie del torneo actual (ya normalizada: 'hard'|'clay'|'grass')
+        k              : ventana de partidos recientes
+
+    Returns:
+        float [0.0, 1.0] — 1.0 = todos recientes en misma superficie | 0.0 = ninguno
+        0.0 también cuando: historial vacío, current_surface='unknown', n<5
+    """
+    if not recent_matches or current_surface == 'unknown':
+        return 0.0
+    window = recent_matches[:k]
+    if len(window) < 5:
+        return 0.0  # muestra muy pequeña — PELT ya tiene baja confianza (Nodo-46 §casos no-intervención)
+    same = sum(
+        1 for m in window
+        if _normalize_surface(m.get('superficie', '')) == current_surface
+    )
+    return same / len(window)
+
+
+def apply_surface_context_discount(
+    factor_markov: float,
+    confianza: float,
+    surface_overlap_rate: float,
+    estado: str,
+    season_transition_flag: bool = False,
+    apply_discount: bool = True,
+) -> Tuple[float, float, float]:
+    """
+    D46-04: Ajusta factor_markov y confianza según overlap de superficie.
+
+    Curva de descuento lineal:
+      overlap = 1.0 → discount = 1.0  (sin cambio — racha en misma superficie)
+      overlap = 0.5 → discount ≈ 0.875 (descuento moderado)
+      overlap = 0.0 → discount = min_floor (racha en otra superficie)
+
+    Solo aplica cuando:
+      - apply_discount=True (flag --no-surface-discount desactivado)
+      - estado != 'NEUTRAL' (NEUTRAL no tiene señal que distorsionar)
+      - overlap < THRESHOLD (sin overlap suficiente en misma superficie)
+
+    season_transition_flag=True → fuerza apply aunque overlap sea ambiguo (MM-4).
+
+    Returns:
+        (new_factor_markov, new_confianza, discount_applied)
+    """
+    if not apply_discount:
+        return factor_markov, confianza, 1.0
+
+    if estado == 'NEUTRAL':
+        return factor_markov, confianza, 1.0
+
+    threshold = _SURFACE_DISCOUNT_THRESHOLD
+    min_floor = _SURFACE_DISCOUNT_MIN_FLOOR
+
+    # season_transition_flag: usar el min_floor aunque overlap esté en zona ambigua
+    effective_threshold = threshold if not season_transition_flag else min(threshold * 1.5, 0.60)
+
+    if surface_overlap_rate >= effective_threshold:
+        return factor_markov, confianza, 1.0
+
+    # Interpolar linealmente: overlap=0 → discount=min_floor; overlap=threshold → discount=1.0
+    discount = min_floor + (1.0 - min_floor) * (surface_overlap_rate / effective_threshold)
+    discount = round(max(min_floor, min(1.0, discount)), 4)
+
+    # factor_markov HOT > 1.0 → se acerca a 1.0 | COLD < 1.0 → se acerca a 1.0
+    new_factor = round(1.0 + (factor_markov - 1.0) * discount, 4)
+    new_confianza = round(confianza * discount, 4)
+
+    return new_factor, new_confianza, discount
 
 
 def detectar_cambio_regimen(

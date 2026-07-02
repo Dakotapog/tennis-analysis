@@ -1,0 +1,152 @@
+{
+  "_meta": {
+    "created": "2026-07-02",
+    "nodo": "Nodo-51-F5",
+    "version": "1.0",
+    "regla": "Los umbrales de cada hipótesis NO se modifican hasta alcanzar n_stop. Modificar antes = p-hacking.",
+    "calibration_epochs": {
+      "epoch_1": {
+        "descripcion": "Pre-fix Nodo-47 (ranking Kambi sobreescribía ATP)",
+        "corte_hasta": "2026-06-30",
+        "n_observaciones": 706,
+        "nota": "Válidas para GS/clay (ranking bug afecta principalmente Challenger/ITF). Usar con precaución en Challenger."
+      },
+      "epoch_2": {
+        "descripcion": "Post-fix Nodo-47 + Post-fix Nodo-32 (motor limpio)",
+        "corte_desde": "2026-07-01",
+        "n_observaciones": 0,
+        "nota": "Recalibraciones de Challenger/ITF SOLO usar epoch_2."
+      },
+      "epoch_3": {
+        "descripcion": "Reservada para post-fix futuro",
+        "corte_desde": null,
+        "n_observaciones": 0
+      }
+    }
+  },
+  "hypotheses": {
+    "H52-01": {
+      "nombre": "WAS (Watchlist Alpha Signal) supera breakeven",
+      "descripcion": "edge≥10%, cuota≥2.0, con señal Markov activa → hit% > 1/cuota_media",
+      "origen_deuda": "D44-03",
+      "umbrales_congelados": {
+        "edge_min": 0.10,
+        "cuota_min": 2.0,
+        "senales_requeridas": ["markov_hot_or_cold", "cuota_en_rango"]
+      },
+      "metrica": "hit% con IC Wilson 95% inferior > 1/cuota_media",
+      "n_stop": 30,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0,
+      "roi_flat_1u": 0.0,
+      "nota": "Carreno @3.30 + Safiullin @2.65 ganaron 2026-06-29 (n=2, case report — no actualiza calibración)"
+    },
+    "H52-02": {
+      "nombre": "n_h2h=0 + tier=itf: ¿ELO/Markov/Erdős discriminan sin H2H?",
+      "descripcion": "Para picks con historial vacío en ITF, ¿el modelo sin H2H tiene hit% medible?",
+      "origen_deuda": "Nodo-33 Fase 2 (trigger: n≥30)",
+      "umbrales_congelados": {
+        "n_h2h": 0,
+        "tier": "itf",
+        "status": ["WATCHLIST", "APOSTAR"]
+      },
+      "metrica": "hit% documentado → decide floor James-Stein para tier ITF",
+      "n_stop": 30,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0,
+      "nota": "Cada pick NO_DATA/WATCHLIST de ITF debe registrarse en shadow book con history_provenance"
+    },
+    "H52-03": {
+      "nombre": "STRUCTURAL_ALPHA hit% > LOW confidence hit%",
+      "descripcion": "Picks con alignment_flag=STRUCTURAL_ALPHA superan en hit% a picks LOW confidence",
+      "origen_deuda": "V-28-2",
+      "metrica": "chi² p<0.10 → habilita M-28-6 y V-28-5",
+      "n_stop": 20,
+      "estado": "PENDIENTE",
+      "n_actual": 0,
+      "hits_structural": 0,
+      "hits_low": 0
+    },
+    "H52-04": {
+      "nombre": "Surface discount ON mejora Brier vs OFF",
+      "descripcion": "El descuento Markov por superficie (Nodo-46 F4) mejora calibración probabilística",
+      "origen_deuda": "D46-07",
+      "umbrales_congelados": {
+        "min_floor": 0.70,
+        "threshold": 0.40,
+        "nota": "BLOQUEADO hasta n_stop casos atribuibles — no calibrar antes"
+      },
+      "metrica": "Brier_ON < Brier_OFF (comparación A/B via --no-surface-discount)",
+      "n_stop_casos_atribuibles": 5,
+      "criterio_atribucion": [
+        "Nodo-47 no es causa (diferencia Kambi vs ATP < 20pts)",
+        "Estado COLD/HOT ganado principalmente en otra superficie (≥60% partidos recientes)",
+        "Modelo habría predicho diferente con Markov descontado"
+      ],
+      "estado": "BLOQUEADO_ACUMULANDO",
+      "n_casos_atribuibles": 1,
+      "casos": [
+        {
+          "jugador": "Watanuki",
+          "sesion": "2026-06-29",
+          "torneo": "Cary Hard",
+          "estado_markov": "COLD",
+          "superficie_racha": "clay",
+          "superficie_torneo": "hard",
+          "atribuido": true
+        }
+      ]
+    },
+    "H52-05": {
+      "nombre": "STEAM_IN hit% > DRIFT_OUT hit%",
+      "descripcion": "Movimiento de línea hacia el modelo predice mejor que movimiento contrario",
+      "origen_deuda": "V-26-3d",
+      "metrica": "diferencia positiva → valida veto asimétrico futuro",
+      "n_stop": 20,
+      "estado": "PENDIENTE",
+      "n_actual": 0
+    },
+    "H52-06": {
+      "nombre": "Ranking p_modelo preservado predice en sesiones BLIND",
+      "descripcion": "El p_modelo generado antes de ver cuotas mantiene Spearman > 0.3 vs outcome",
+      "origen_deuda": "V-26-1a/b",
+      "metrica": "Spearman > 0.3 → mantener AMPLIFICATION; si no → 0",
+      "n_stop": 5,
+      "estado": "PENDIENTE",
+      "n_sesiones": 0
+    },
+    "H52-07": {
+      "nombre": "Qualifiers GS/WTA vs cuadro principal",
+      "descripcion": "Qualifiers con p∈[0.52,0.55) tienen ROI comparable a cuadro principal p≥0.55",
+      "origen_deuda": "Conversación 2026-07-01 (patrón 23-jun)",
+      "umbrales_congelados": {
+        "qualifier_p_range": [0.52, 0.55],
+        "main_p_min": 0.55,
+        "flag_es_qualifying": true
+      },
+      "metrica": "ROI_qualy ≥ ROI_main − 2pts",
+      "n_stop": 50,
+      "estado": "PENDIENTE",
+      "n_qualifying": 0,
+      "n_main": 0
+    },
+    "H52-08": {
+      "nombre": "Zona cuota 2.00-2.50 sigue siendo trampa post-fixes 32/33",
+      "descripcion": "La banda cuota 2.00-2.50 mantiene hit% bajo (21.4% histórico) incluso con gates actuales",
+      "origen_deuda": "S-27-2 hallazgo",
+      "umbrales_congelados": {
+        "cuota_min": 2.00,
+        "cuota_max": 2.50
+      },
+      "metrica": "re-medir con gates actuales — si hit% < breakeven → mantener exclusión",
+      "n_stop": 30,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0,
+      "hit_rate_historico": 0.214,
+      "nota": "Hit rate histórico medido pre-fixes S-27-2"
+    }
+  }
+}
