@@ -17,6 +17,22 @@ logger = logging.getLogger(__name__)
 # Consumidores validan este campo para rechazar archivos generados con Markov PRE-norm.
 RIVALRY_VERSION = "nodo32-fase3-markov-postnorm"
 
+# Nodo-57 D57-01: decaimiento exponencial de forma por inactividad
+# Solo form_recent decae; ELO, H2H, rivales comunes no tienen fecha de vencimiento.
+# Marco bayesiano: encoger hacia prior en vez de penalizar el score total.
+_FORM_DECAY_LAMBDA = 0.025   # half-life efectivo ≈ 28d post-gracia
+_FORM_GRACE_DAYS   = 30      # sin decay hasta 30 días (transiciones de superficie normales)
+_FORM_DECAY_FLOOR  = 0.35    # nunca perder más del 65% de la señal de forma
+
+# Nodo-57 D57-03: victorias mínimas en cuadro principal para ser campeón completo
+_MIN_WINS_CHAMPION = {
+    'grand_slam': 7,    # R1-R7 cuadro principal
+    'atp1000': 6,       # R1-R6 (con bye = 5, sin bye = 6) → conservador
+    'atp500': 5,
+    'challenger': 5,
+    'itf': 4,
+}
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # T21-06 (Nodo-21 Fase 2) — Densidad local del grafo como modulador continuo
@@ -65,6 +81,55 @@ def shrink_weights(tier_weights: dict, default_weights: dict, n_tier: int, n_thr
         k: round(factor * tier_weights[k] + (1 - factor) * default_weights[k], 4)
         for k in tier_weights
     }
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Nodo-53 — Funciones extraídas a nivel módulo para testabilidad (D53-06, D53-07)
+# PRESERVA el bug hasta que los tests lo confirmen: _LINEAR_COMPONENTS intacto, cap=250 intacto.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# D53-06 FIX: surface_specialization usa log1p igual que los demás componentes.
+# Anterior: lineal con MAX_RAW=350 → escala 0.56 vs form 4.33 → peso efectivo 1.4% (nominal 15%).
+# Fix: log1p → escala 3.54 vs form 4.33 → ratio 0.82, peso efectivo proporcional al nominal.
+_LINEAR_COMPONENTS = set()
+
+
+def normalize_scores(p1_scores, p2_scores):
+    """Normaliza raw scores. surface_specialization usa escala lineal (D53-06 BUG hasta fix)."""
+    from normalization import MAX_RAW_SCORES
+    normalized_p1 = {}
+    normalized_p2 = {}
+    for key in p1_scores:
+        p1_val = p1_scores[key]
+        p2_val = p2_scores[key]
+
+        if key in _LINEAR_COMPONENTS:
+            max_expected = MAX_RAW_SCORES.get(key, 350)
+            norm_p1 = min(p1_val / max_expected, 1.0) * math.log1p(max_expected)
+            norm_p2 = min(p2_val / max_expected, 1.0) * math.log1p(max_expected)
+        else:
+            norm_p1 = math.log1p(p1_val)
+            norm_p2 = math.log1p(p2_val)
+
+        normalized_p1[key] = norm_p1
+        normalized_p2[key] = norm_p2
+    return normalized_p1, normalized_p2
+
+
+def _compute_raw_elo(elo):
+    """Convierte ELO a raw score. D53-07 FIX: sin cap → diferencia real entre top-200.
+    Deuda D53-12: jugadores ITF con ELO<1500 → raw=0 (floor aceptable, Nodo-21 maneja tier).
+    """
+    return max(0, elo - 1500)
+
+
+def _parse_match_date(date_str):
+    """Parsea fecha de partido en formato DD.MM.YYYY. D53-01 FIX: año 4 dígitos.
+
+    Antes del fix: '%d.%m.%y' → ValueError 'unconverted data remains: 24' para '09.10.2024'.
+    Extraída a nivel módulo para testabilidad (REGLA-T53).
+    """
+    return datetime.strptime(date_str, '%d.%m.%Y')
 
 
 class RivalryAnalyzer:
@@ -652,7 +717,7 @@ class RivalryAnalyzer:
                 if not match_date_str:
                     continue
 
-                match_date = datetime.strptime(match_date_str, '%d.%m.%y')
+                match_date = datetime.strptime(match_date_str, '%d.%m.%Y')
                 days_since_match = (today - match_date).days
                 
                 ponderacion = 0.0
@@ -830,15 +895,29 @@ class RivalryAnalyzer:
                 _tour_stats[_tk]['best_opp_rank'] = _opp_rank
 
         for (_tname, _tyear), _ts in _tour_stats.items():
-            if _ts['wins'] >= 4 and _ts['losses'] == 0:
+            # Nodo-57 D57-03: gate tier-aware — GS necesita 7W, no 4W
+            from config import detectar_tier as _dt_tier
+            _tier_champ = _dt_tier(_tname)
+            _min_wins = _MIN_WINS_CHAMPION.get(_tier_champ, 5)  # fallback conservador
+            if _ts['wins'] >= _min_wins and _ts['losses'] == 0:
                 # Gate: torneo debe ser reciente (≤90 días). Un torneo de hace 1 año no es señal.
                 if _ts['max_fecha'] is not None:
                     _days_ago = (_today - _ts['max_fecha']).days
                     if _days_ago > 90:
-                        analysis_log.append(
-                            f"TORNEO_COMPLETO_EXPIRADO: {_tname} {_tyear} "
-                            f"({_ts['wins']}W-0L, hace {_days_ago}d) → sin bonus (>90d)"
-                        )
+                        # Nodo-57 D57-04: compensación reducida para campeones históricos en superficie
+                        if _days_ago <= 365:
+                            _comp_bonus = 1.15 if _days_ago <= 180 else 1.05
+                            quality_score *= _comp_bonus
+                            analysis_log.append(
+                                f"TORNEO_COMPLETO_EXPIRADO: {_tname} {_tyear} "
+                                f"({_ts['wins']}W-0L, hace {_days_ago}d) → sin bonus activo "
+                                f"pero +{(_comp_bonus-1)*100:.0f}% historial superficie"
+                            )
+                        else:
+                            analysis_log.append(
+                                f"TORNEO_COMPLETO_EXPIRADO: {_tname} {_tyear} "
+                                f"({_ts['wins']}W-0L, hace {_days_ago}d) → sin bonus (>365d)"
+                            )
                         continue
                 else:
                     continue  # sin fecha = no podemos verificar recencia
@@ -853,16 +932,17 @@ class RivalryAnalyzer:
                 if _ts['best_opp_rank'] <= 10:
                     _bonus += 0.1
                     _bonus_parts.append(f'top10(#{_ts["best_opp_rank"]})')
-                # +0.1 si >=5 victorias (implica final ganada)
-                if _ts['wins'] >= 5:
+                # +0.1 si victorias >= mínimo requerido por tier (implica final ganada)
+                if _ts['wins'] >= _min_wins:
                     _bonus += 0.1
-                    _bonus_parts.append(f'final({_ts["wins"]}W)')
+                    _bonus_parts.append(f'final({_ts["wins"]}W≥{_min_wins}req)')
                 _bonus = min(_bonus, 2.0)  # cap
                 quality_score *= _bonus
                 _parts_str = ' + '.join(_bonus_parts) if _bonus_parts else 'base'
                 analysis_log.append(
                     f"TORNEO_COMPLETO_BONUS: {_tname} {_tyear} "
-                    f"({_ts['wins']}W-0L) → x{_bonus:.1f} quality_score [{_parts_str}]"
+                    f"({_ts['wins']}W-0L, tier={_tier_champ}, req≥{_min_wins}) "
+                    f"→ x{_bonus:.1f} quality_score [{_parts_str}]"
                 )
                 break  # un solo bonus aunque haya múltiples torneos completos
 
@@ -1033,7 +1113,10 @@ class RivalryAnalyzer:
             'p1_nationality': player1_nationality,
             'p2_nationality': player2_nationality,
             'current_match_surface': current_match_context.get('surface'),
-            'current_match_country': current_match_context.get('country')
+            'current_match_country': current_match_context.get('country'),
+            # F4 (Nodo-46): pasar campos necesarios para Surface Context Discount
+            'apply_surface_discount': current_match_context.get('apply_surface_discount', True),
+            'tournament_context': current_match_context.get('tournament_context', {}),
         }
 
         if not common_opponents:
@@ -1387,15 +1470,15 @@ class RivalryAnalyzer:
             # En grass más varianza → bajar common_opponents, subir form_recent.
             _surf_adj = prediction_context.get('current_match_surface', '')
             if _surf_adj == 'clay':
-                weights['common_opponents'] = round(weights['common_opponents'] + 0.08, 2)
-                weights['ranking_momentum']  = round(weights['ranking_momentum']  - 0.08, 2)
+                weights['common_opponents'] = round(weights['common_opponents'] + 0.08, 4)  # D56-04
+                weights['ranking_momentum']  = round(weights['ranking_momentum']  - 0.08, 4)  # D56-04
                 reasoning.append(
                     f"LOG_WEIGHTS_SURFACE_CLAY: common_opp→{weights['common_opponents']} "
                     f"ranking_mom→{weights['ranking_momentum']} (Erdős+clay, Nodo-14)"
                 )
             elif _surf_adj == 'grass':
-                weights['common_opponents'] = round(weights['common_opponents'] - 0.05, 2)
-                weights['form_recent']       = round(weights['form_recent']       + 0.05, 2)
+                weights['common_opponents'] = round(weights['common_opponents'] - 0.05, 4)  # D56-04
+                weights['form_recent']       = round(weights['form_recent']       + 0.05, 4)  # D56-04
                 reasoning.append(
                     f"LOG_WEIGHTS_SURFACE_GRASS: common_opp→{weights['common_opponents']} "
                     f"form_recent→{weights['form_recent']} (alta varianza césped, Nodo-14)"
@@ -1521,7 +1604,7 @@ class RivalryAnalyzer:
             # 5. Rating ELO (Límite: 250)
             # floor=1500, cap=250 → rango útil [1500, 1750]
             # B-11 fix: cap explícito como los 7 componentes hermanos
-            raw_scores['elo_rating'] = min(max(0, elo - 1500), 250)
+            raw_scores['elo_rating'] = _compute_raw_elo(elo)
 
             # 6. Strength of Schedule (Límite: 200)
             raw_scores['strength_of_schedule'] = min(schedule_score * diversity_mult, 200)
@@ -1530,7 +1613,7 @@ class RivalryAnalyzer:
             days_since = -1  # Valor por defecto si no hay datos
             if form and form.get('last_match_date') and form['last_match_date'] != 'N/A':
                 try:
-                    last_match_date = datetime.strptime(form['last_match_date'], '%d.%m.%y')
+                    last_match_date = datetime.strptime(form['last_match_date'], '%d.%m.%Y')
                     days_since = (datetime.now() - last_match_date).days
                 except ValueError:
                     days_since = -1
@@ -1593,13 +1676,13 @@ class RivalryAnalyzer:
             # Descuenta factor_markov cuando la racha reciente es de otra superficie.
             # current_match_context['apply_surface_discount']=False activa --no-surface-discount A/B.
             current_surface = _normalize_surface(
-                current_match_context.get('surface', '')
-                or current_match_context.get('tournament_context', {}).get('superficie', '')
+                prediction_context.get('current_match_surface', '')
+                or prediction_context.get('tournament_context', {}).get('superficie', '')
             )
             season_transition = bool(
-                current_match_context.get('tournament_context', {}).get('season_transition_flag', False)
+                prediction_context.get('tournament_context', {}).get('season_transition_flag', False)
             )
-            apply_sd = current_match_context.get('apply_surface_discount', True)
+            apply_sd = prediction_context.get('apply_surface_discount', True)
 
             overlap_p1 = _surface_overlap_rate(player1_history, current_surface)
             overlap_p2 = _surface_overlap_rate(player2_history, current_surface)
@@ -1679,7 +1762,7 @@ class RivalryAnalyzer:
         # --- LÓGICA DE PONDERACIÓN DINÁMICA (H2H Antiguo vs. Rivales Comunes) ---
         try:
             if direct_h2h_matches:
-                last_match_date = datetime.strptime(direct_h2h_matches[0]['fecha'], '%d.%m.%y')
+                last_match_date = datetime.strptime(direct_h2h_matches[0]['fecha'], '%d.%m.%Y')
                 last_match_days_ago = (datetime.now() - last_match_date).days
                 H2H_ANTIQUITY_THRESHOLD = 730 # 2 años
 
@@ -1809,33 +1892,10 @@ class RivalryAnalyzer:
         except Exception as _cad_err:
             reasoning.append(f"LOG_CAD_ERROR: {_cad_err}")
 
-        # 2. NORMALIZACIÓN DE SCORES
+        # 2. NORMALIZACIÓN DE SCORES — usa normalize_scores() de nivel módulo (Nodo-53 Paso 1)
         # surface_specialization usa normalización LINEAL porque SkillFactor/VolConf
         # (Nodo-28 Fase 1.5) ya controlan la escala. log1p aplasta la señal:
         # raw 86 vs 142 → log 4.47 vs 4.97 (ratio 1.11x vs 1.65x real).
-        _LINEAR_COMPONENTS = {'surface_specialization'}
-        def normalize_scores(p1_scores, p2_scores):
-            normalized_p1 = {}
-            normalized_p2 = {}
-            for key in p1_scores:
-                p1_val = p1_scores[key]
-                p2_val = p2_scores[key]
-
-                if key in _LINEAR_COMPONENTS:
-                    # Normalización lineal: preserva ratio real entre jugadores
-                    from normalization import MAX_RAW_SCORES
-                    max_expected = MAX_RAW_SCORES.get(key, 350)
-                    norm_p1 = min(p1_val / max_expected, 1.0) * math.log1p(max_expected)
-                    norm_p2 = min(p2_val / max_expected, 1.0) * math.log1p(max_expected)
-                else:
-                    # Normalización Logarítmica: log(1 + x) para manejar scores de 0
-                    norm_p1 = math.log1p(p1_val)
-                    norm_p2 = math.log1p(p2_val)
-
-                normalized_p1[key] = norm_p1
-                normalized_p2[key] = norm_p2
-            return normalized_p1, normalized_p2
-
         norm_p1, norm_p2 = normalize_scores(raw_p1, raw_p2)
 
         # --- Nodo-32 Fase 3: factores Markov + tardío POST-normalizacion (T32-20..T32-27) ---
@@ -1855,21 +1915,38 @@ class RivalryAnalyzer:
             f"norm_form_p1={norm_p1['form_recent']:.3f} norm_form_p2={norm_p2['form_recent']:.3f}"
         )
 
+        # --- Nodo-57 D57-01: Decaimiento exponencial de forma por inactividad ---
+        # Solo form_recent decae. ELO, H2H, rivales comunes NO expiran en 30-60 días.
+        # La respuesta bayesiana correcta: encoger form hacia prior, no penalizar el total.
+        def _form_decay_factor(days):
+            if days == -1: return 0.70           # fecha desconocida: decay moderado fijo
+            if days <= _FORM_GRACE_DAYS: return 1.0
+            return max(_FORM_DECAY_FLOOR, math.exp(-_FORM_DECAY_LAMBDA * (days - _FORM_GRACE_DAYS)))
+
+        _fd_p1 = _form_decay_factor(days_since_p1)
+        _fd_p2 = _form_decay_factor(days_since_p2)
+        if _fd_p1 < 1.0:
+            norm_p1 = dict(norm_p1)
+            norm_p1['form_recent'] = norm_p1['form_recent'] * _fd_p1
+        if _fd_p2 < 1.0:
+            norm_p2 = dict(norm_p2)
+            norm_p2['form_recent'] = norm_p2['form_recent'] * _fd_p2
+        reasoning.append(
+            f"LOG_FORM_DECAY: p1_days={days_since_p1} fd_p1={_fd_p1:.3f} "
+            f"p2_days={days_since_p2} fd_p2={_fd_p2:.3f}"
+        )
+
         reasoning.append(f"LOG_RAW_SCORES_P1: { {k: round(v, 2) for k, v in raw_p1.items()} }")
         reasoning.append(f"LOG_RAW_SCORES_P2: { {k: round(v, 2) for k, v in raw_p2.items()} }")
         reasoning.append(f"LOG_NORM_SCORES_P1: { {k: round(v, 2) for k, v in norm_p1.items()} }")
         reasoning.append(f"LOG_NORM_SCORES_P2: { {k: round(v, 2) for k, v in norm_p2.items()} }")
 
         # --- APLICAR PESOS Y CALCULAR PUNTAJE FINAL ---
+        # Nodo-57 D57-02: penalty eliminada del total — inactividad ya manejada vía form_decay
         def apply_weights_and_penalties(normalized_scores, weights, days_since):
             weighted_scores = {k: normalized_scores[k] * weights[k] for k in weights}
-            
-            penalty = 0
-            if days_since == -1: penalty = sum(weighted_scores.values()) * 0.3
-            elif days_since > 30: penalty = min(sum(weighted_scores.values()) * 0.5, (days_since - 30) * 0.1)
-
-            final_score = sum(weighted_scores.values()) - penalty
-            return final_score, weighted_scores, penalty
+            final_score = sum(weighted_scores.values())
+            return final_score, weighted_scores, 0.0  # penalty=0: inactividad vía form_decay
 
         final_p1, weighted_p1, penalty_p1 = apply_weights_and_penalties(norm_p1, weights, days_since_p1)
         final_p2, weighted_p2, penalty_p2 = apply_weights_and_penalties(norm_p2, weights, days_since_p2)
@@ -1928,6 +2005,7 @@ class RivalryAnalyzer:
                 'player2': breakdown_p2
             },
             'weights_used': weights,
+            '_weights_final': dict(weights),  # D56-01: snapshot post-todas-las-modificaciones (shrinkage+density+surface)
             'markov_analysis': markov_analysis,
             'tardio_analysis': tardio_analysis,
             'circuit_asymmetry': circuit_asymmetry,  # Nodo-29

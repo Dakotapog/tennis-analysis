@@ -23,6 +23,46 @@
     # Orden de búsqueda: cache → API → Playwright → NO_DATA (nunca phantom edge)
 ```
 
+## REGLA-T53 — Tests de Bug (Nodo-53, elevada a regla permanente)
+
+```
+Ningún test de bug reproduce la fórmula manualmente en el test.
+SIEMPRE invocar la función del módulo real.
+
+MAL:
+  max_surface = 350
+  norm = min(raw/max_surface, 1.0) * math.log1p(max_surface)  # hardcodea la fórmula buggy
+  assert norm > 0.40  # permanece FAIL después del fix — el test no detecta el cambio
+
+BIEN:
+  from analysis.rivalry_analyzer import normalize_scores
+  norm_p1, _ = normalize_scores({'surface_specialization': 33.49}, {'surface_specialization': 10.89})
+  assert norm_p1['surface_specialization'] > 0.40  # FAIL antes, PASS después
+
+Por qué: un test que hardcodea la fórmula buggy permanece en FAIL después del fix.
+Sonnet concluye que el fix no funcionó y elimina el test. El contrato FAIL→PASS
+solo es válido si el test llama al código real.
+Tercera ocurrencia del mismo error en el ciclo Nodo-53.
+```
+
+## REGLA-T53 — Tests de Bug Deben Llamar al Módulo Real
+
+```
+Ningún test de bug reproduce la fórmula manualmente. SIEMPRE invocar la función del módulo.
+
+MAL — test en FAIL permanente (antes Y después del fix):
+  norm = min(raw/350, 1.0) * math.log1p(350)  # hardcodea fórmula buggy
+  assert norm > 0.40  # sigue fallando después del fix — no detecta el cambio
+
+BIEN — contrato real FAIL→PASS:
+  from analysis.rivalry_analyzer import normalize_scores  # función de módulo
+  norm_p1, _ = normalize_scores({'surface_specialization': 33.49}, {...})
+  assert norm_p1['surface_specialization'] > 0.40  # FAIL antes, PASS después del fix
+
+Si la función es anidada (no importable) → extraerla a nivel módulo como parte del fix.
+Tercera ocurrencia del mismo error en Nodo-53. Elevada a regla permanente.
+```
+
 ## Regla de Evidencia (MM-5, Jerarquía Clínica)
 
 ```

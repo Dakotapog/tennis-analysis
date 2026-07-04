@@ -49,6 +49,25 @@ def _load_profitability_data() -> dict:
         return {}
 
 
+def _load_edge_report() -> dict:
+    """Carga el edge_report más reciente. Retorna dict partido→pick. Graceful degradation."""
+    from pathlib import Path
+    files = sorted(glob.glob('reports/edge_report_*.json'), reverse=True)
+    if not files:
+        return {}
+    try:
+        data = json.loads(Path(files[0]).read_text(encoding='utf-8'))
+    except Exception:
+        return {}
+    lookup = {}
+    for section in ('apostar', 'watchlist', 'sin_edge', 'sin_datos', 'no_data'):
+        for pick in data.get(section, []):
+            partido = pick.get('partido', '')
+            if partido:
+                lookup[partido] = pick
+    return lookup
+
+
 def _normalize_player_name_for_prof(name: str) -> str:
     """Normalize player name for profitability lookup."""
     if PROFITABILITY_AVAILABLE:
@@ -502,7 +521,11 @@ def format_weights_distribution(f, weights):
     df = pd.DataFrame(weights_data)
     f.write("\n")
     f.write(df.to_markdown(index=False))
-    f.write(f"\n\nSuma Total de Pesos: {total_weight * 100:.1f}%\n\n")
+    f.write(f"\n\nSuma Total de Pesos: {total_weight * 100:.1f}%\n")
+    # D53-04: suma de pesos debe ser 100% ± 0.5% (assert en producción visible en output)
+    if abs(total_weight - 1.0) >= 0.005:
+        f.write(f"ALERTA D53-04: pesos suman {total_weight*100:.2f}% (esperado 100% +-0.5%). Bug de reconstruccion de pesos desde logs -- ver Nodo-56. Con _weights_final este alerta deberia desaparecer.\n")
+    f.write("\n")
     
     # Validar pesos usando el módulo de normalización
     if NORMALIZATION_AVAILABLE:
@@ -599,16 +622,34 @@ def generar_resumen_consolidado(f, p1_name, p2_name, score_breakdown, scores):
     if not summary_data:
         f.write("Desglose de puntuación no disponible.\n\n")
         return
-    
+
     try:
         p1_final_score = float(scores.get('p1_final_weight', 0))
     except (ValueError, TypeError):
         p1_final_score = 0.0
-    
+
     try:
         p2_final_score = float(scores.get('p2_final_weight', 0))
     except (ValueError, TypeError):
         p2_final_score = 0.0
+
+    # D56-05: mostrar penalización de inactividad cuando existe (días_desde > 30)
+    # sin esto: sum(componentes)=3.77 pero PUNTAJE FINAL=1.89 parece un error de suma
+    def _parse_penalty(s):
+        try:
+            return float(str(s).replace(' pts', ''))
+        except (ValueError, TypeError):
+            return 0.0
+
+    p1_penalty = _parse_penalty(p1_breakdown.get('Penalizacion_Inactividad', '0.00 pts'))
+    p2_penalty = _parse_penalty(p2_breakdown.get('Penalizacion_Inactividad', '0.00 pts'))
+
+    if p1_penalty != 0.0 or p2_penalty != 0.0:
+        summary_data.append({
+            'Componente': 'Penalizacion Inactividad',
+            f'Puntos {p1_name}': f"{p1_penalty:.4f}",
+            f'Puntos {p2_name}': f"{p2_penalty:.4f}"
+        })
 
     df = pd.DataFrame(summary_data)
     total_row = {
@@ -773,6 +814,9 @@ def analyze_matches_with_pandas(file_path, output_filename="analisis_partidos_pa
                 f.write(meta_df.to_markdown(index=False))
                 f.write("\n\n")
 
+            # Cargar edge_report para edge_vs_mercado (Fase E D53-01/ADDENDUM-3)
+            _edge_lookup = _load_edge_report()
+
             for match in matches:
                 if not match:
                     continue
@@ -813,47 +857,15 @@ def analyze_matches_with_pandas(file_path, output_filename="analisis_partidos_pa
                 # en el primer partido y datos rancios del partido anterior en el resto.
                 score_breakdown = prediction.get('score_breakdown', {}) or {}
 
-                # Prediction Summary
-                p1_ranking_key = next((k for k in ranking_analysis if k.endswith('_ranking') and p1.split(' ')[0] in k), None)
-                p2_ranking_key = next((k for k in ranking_analysis if k.endswith('_ranking') and p2.split(' ')[0] in k), None)
-
-                summary_data = {
-                    'Jugador': [p1, p2],
-                    'Ranking': [ranking_analysis.get(p1_ranking_key, 'N/A'), ranking_analysis.get(p2_ranking_key, 'N/A')],
-                    'Cuota': [match.get('cuota1', 'N/A'), match.get('cuota2', 'N/A')],
-                    'Puntaje Final': [scores.get('p1_final_weight', 'N/A'), scores.get('p2_final_weight', 'N/A')]
-                }
-                summary_df = pd.DataFrame(summary_data)
-                f.write("\n--- RESUMEN DE PREDICCIÓN ---\n")
-                f.write(summary_df.to_markdown(index=False))
-                f.write(f"\n\nJugador Favorito: {prediction.get('favored_player', 'N/A')}\n")
-                f.write(f"Confianza: {prediction.get('confidence', 'N/A')}%\n")
-                f.write(f"Diferencia de Puntaje: {scores.get('score_difference', 'N/A')}\n\n")
-
-                # Predicción de Sets y Games
-                score_diff_val = scores.get('score_difference', 0)
-                p1_final_score = scores.get('p1_final_weight', 0)
-                p2_final_score = scores.get('p2_final_weight', 0)
-                
-                set_game_prediction = predecir_sets_y_games(score_diff_val, p1_final_score, p2_final_score)
-                
-                f.write("\n--- PREDICCIÓN DE SETS Y GAMES ---\n")
-
-                f.write(f"Sets Pronosticados: {set_game_prediction['predicted_sets']}\n")
-                f.write(f"Games Pronosticados: {set_game_prediction['predicted_games']}\n")
-                f.write(f"Justificación: {set_game_prediction['reason']}\n\n")
-
-
-                # Reasoning
+                # Extraer reasoning ANTES de escribir señales (Fase E: señales al inicio)
                 reasoning = prediction.get('reasoning', [])
-                weights = get_weights_from_reasoning(reasoning)
-                format_weights_distribution(f, weights)
+                # D56-02: usar _weights_final (fuente única de verdad) si está disponible
+                weights = prediction.get('_weights_final') or get_weights_from_reasoning(reasoning)
 
-                # --- SEÑALES ESPECIALES (visible para clientes) ---
+                # --- SEÑALES ESPECIALES al inicio del bloque de partido (Fase E D53 ADDENDUM-3) ---
                 _special_signals = []
                 for reason in reasoning:
                     if 'TORNEO_COMPLETO_BONUS' in reason:
-                        # Extract: "TORNEO_COMPLETO_BONUS: Birmingham 2026 (5W-0L) → x1.6 quality_score [recency(12d) + final(5W)]"
                         _clean = reason.replace('P1_LOG_SURF: ', '').replace('P2_LOG_SURF: ', '')
                         _player = p1 if 'P1_LOG_SURF' in reason else p2
                         _special_signals.append(f"CAMPEON DE TORNEO: {_player} -- {_clean}")
@@ -866,13 +878,10 @@ def analyze_matches_with_pandas(file_path, output_filename="analisis_partidos_pa
                         _special_signals.append(f"RACHA CALIENTE: {_player} en estado HOT{_wr_str}")
                     if 'motivo_reclasificacion' in reason:
                         _special_signals.append(f"FILTRO MARKOV-BBI: {reason}")
-                    # Scalp tier-relativo: victoria contra top-N en la superficie del match
-                    # GS/ATP1000: Top-10 | ATP500: Top-20 | Challenger: Top-50 | ITF: Top-100
                     if '_LOG_SURF' in reason and 'Victoria vs Rank' in reason:
                         _rank_match = re.search(r'Victoria vs Rank (\d+) \(([^)]+)\)', reason)
                         if _rank_match:
                             _opp_rank_int = int(_rank_match.group(1))
-                            # Determine scalp threshold from tier in LOG_WEIGHTS_STRATEGY
                             _tier_from_weights = ''
                             for _r in reasoning:
                                 if 'LOG_WEIGHTS_STRATEGY' in _r:
@@ -891,12 +900,27 @@ def analyze_matches_with_pandas(file_path, output_filename="analisis_partidos_pa
                                 _special_signals.append(
                                     f"SCALP TOP-{_threshold} EN SUPERFICIE: {_player} vencio a {_opp_name} (#{_opp_rank_int}) en esta superficie"
                                 )
-                    # Torneo completo expirado — advertencia visible
                     if 'TORNEO_COMPLETO_EXPIRADO' in reason:
+                        # D57-04: atribuir señal al jugador correcto
+                        _player = p1 if 'P1_LOG_SURF' in reason else p2
                         _clean = reason.replace('P1_LOG_SURF: ', '').replace('P2_LOG_SURF: ', '')
-                        _special_signals.append(f"TORNEO EXPIRADO (sin bonus): {_clean}")
+                        _special_signals.append(f"CAMPEON ANTERIOR EN SUPERFICIE: {_player} -- {_clean}")
+                    if 'LOG_FORM_DECAY' in reason:
+                        # D57-05: señal de inactividad visible al usuario
+                        _fd_p1m = re.search(r'fd_p1=([\d.]+)', reason)
+                        _fd_p2m = re.search(r'fd_p2=([\d.]+)', reason)
+                        _dp1m   = re.search(r'p1_days=([-\d]+)', reason)
+                        _dp2m   = re.search(r'p2_days=([-\d]+)', reason)
+                        for _pn, _fdm, _dm in [(p1, _fd_p1m, _dp1m), (p2, _fd_p2m, _dp2m)]:
+                            if _fdm and _dm:
+                                _fdv = float(_fdm.group(1))
+                                _dv  = int(_dm.group(1))
+                                if _fdv < 1.0 and _dv > 30:
+                                    _special_signals.append(
+                                        f"INACTIVIDAD: {_pn} -- {_dv}d sin jugar -> "
+                                        f"form_recent x{_fdv:.2f} (decay exponencial Nodo-57)"
+                                    )
 
-                # Check player profitability from historical betslip data
                 _prof_data = _load_profitability_data()
                 for _player_name in [p1, p2]:
                     _prof_key = _normalize_player_name_for_prof(_player_name)
@@ -913,6 +937,74 @@ def analyze_matches_with_pandas(file_path, output_filename="analisis_partidos_pa
                     for sig in _special_signals:
                         f.write(f"  >> {sig}\n")
                     f.write("\n")
+
+                # Prediction Summary
+                p1_ranking_key = next((k for k in ranking_analysis if k.endswith('_ranking') and p1.split(' ')[0] in k), None)
+                p2_ranking_key = next((k for k in ranking_analysis if k.endswith('_ranking') and p2.split(' ')[0] in k), None)
+
+                summary_data = {
+                    'Jugador': [p1, p2],
+                    'Ranking': [ranking_analysis.get(p1_ranking_key, 'N/A'), ranking_analysis.get(p2_ranking_key, 'N/A')],
+                    'Cuota': [match.get('cuota1', 'N/A'), match.get('cuota2', 'N/A')],
+                    'Puntaje Final': [scores.get('p1_final_weight', 'N/A'), scores.get('p2_final_weight', 'N/A')]
+                }
+                summary_df = pd.DataFrame(summary_data)
+                f.write("\n--- RESUMEN DE PREDICCIÓN ---\n")
+                f.write(summary_df.to_markdown(index=False))
+                _confidence = prediction.get('confidence', 0) or 0
+                f.write(f"\n\nJugador Favorito: {prediction.get('favored_player', 'N/A')}\n")
+                f.write(f"Confianza: {_confidence}%\n")
+
+                # Fase E: banda NO-BET + edge_vs_mercado (ADDENDUM-3)
+                if _confidence and float(_confidence) < 54:
+                    f.write(f"ACCION: NO-BET — confianza {_confidence}% < 54% (umbral minimo). Coin flip.\n")
+                else:
+                    f.write(f"ACCION: EVALUAR — confianza {_confidence}%\n")
+
+                # edge_vs_mercado: reutiliza p_implicita de edge_report (no recalcula)
+                _partido_key = f"{p1} vs {p2}"
+                _partido_key_inv = f"{p2} vs {p1}"
+                _edge_pick = _edge_lookup.get(_partido_key) or _edge_lookup.get(_partido_key_inv)
+                if _edge_pick:
+                    _p_modelo_fav = _edge_pick.get('p_modelo', 0)
+                    _p_impl_fav = _edge_pick.get('p_implicita', 0)
+                    _favorito_edge = _edge_pick.get('favorito_predicho', prediction.get('favored_player', ''))
+                    _edge_fav = _p_modelo_fav - _p_impl_fav
+                    _edge_rival = -_edge_fav
+                    _p_modelo_rival = 1.0 - _p_modelo_fav
+                    _p_impl_rival = 1.0 - _p_impl_fav
+                    _cuota_fav = _edge_pick.get('cuota_favorito', 'N/A')
+                    _cuota_rival_val = _edge_pick.get('cuota_rival', 'N/A')
+                    if _edge_fav >= 0:
+                        f.write(
+                            f"edge_vs_mercado: {_favorito_edge} +{_edge_fav*100:.1f}% "
+                            f"(modelo {_p_modelo_fav*100:.1f}% vs bookmaker {_p_impl_fav*100:.1f}%, cuota {_cuota_fav})\n"
+                        )
+                    else:
+                        # Rival tiene edge positivo
+                        _rival_name = p2 if _favorito_edge == p1 else p1
+                        f.write(
+                            f"edge_vs_mercado: {_rival_name} +{_edge_rival*100:.1f}% "
+                            f"(modelo {_p_modelo_rival*100:.1f}% vs bookmaker {_p_impl_rival*100:.1f}%, cuota {_cuota_rival_val})\n"
+                        )
+
+                f.write(f"Diferencia de Puntaje: {scores.get('score_difference', 'N/A')}\n\n")
+
+                # Predicción de Sets y Games
+                score_diff_val = scores.get('score_difference', 0)
+                p1_final_score = scores.get('p1_final_weight', 0)
+                p2_final_score = scores.get('p2_final_weight', 0)
+
+                set_game_prediction = predecir_sets_y_games(score_diff_val, p1_final_score, p2_final_score)
+
+                f.write("\n--- PREDICCIÓN DE SETS Y GAMES ---\n")
+
+                f.write(f"Sets Pronosticados: {set_game_prediction['predicted_sets']}\n")
+                f.write(f"Games Pronosticados: {set_game_prediction['predicted_games']}\n")
+                f.write(f"Justificación: {set_game_prediction['reason']}\n\n")
+
+                # Weights distribution (reasoning ya extraído arriba)
+                format_weights_distribution(f, weights)
 
                 if reasoning:
                     f.write("\n--- RAZONAMIENTO CLAVE Y LOGS DE PREDICCIÓN ---\n")

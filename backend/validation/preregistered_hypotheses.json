@@ -30,9 +30,12 @@
       "descripcion": "edge≥10%, cuota≥2.0, con señal Markov activa → hit% > 1/cuota_media",
       "origen_deuda": "D44-03",
       "umbrales_congelados": {
-        "edge_min": 0.10,
+        "edge_min": 0.1,
         "cuota_min": 2.0,
-        "senales_requeridas": ["markov_hot_or_cold", "cuota_en_rango"]
+        "senales_requeridas": [
+          "markov_hot_or_cold",
+          "cuota_en_rango"
+        ]
       },
       "metrica": "hit% con IC Wilson 95% inferior > 1/cuota_media",
       "n_stop": 30,
@@ -49,7 +52,10 @@
       "umbrales_congelados": {
         "n_h2h": 0,
         "tier": "itf",
-        "status": ["WATCHLIST", "APOSTAR"]
+        "status": [
+          "WATCHLIST",
+          "APOSTAR"
+        ]
       },
       "metrica": "hit% documentado → decide floor James-Stein para tier ITF",
       "n_stop": 30,
@@ -74,8 +80,8 @@
       "descripcion": "El descuento Markov por superficie (Nodo-46 F4) mejora calibración probabilística",
       "origen_deuda": "D46-07",
       "umbrales_congelados": {
-        "min_floor": 0.70,
-        "threshold": 0.40,
+        "min_floor": 0.7,
+        "threshold": 0.4,
         "nota": "BLOQUEADO hasta n_stop casos atribuibles — no calibrar antes"
       },
       "metrica": "Brier_ON < Brier_OFF (comparación A/B via --no-surface-discount)",
@@ -122,7 +128,10 @@
       "descripcion": "Qualifiers con p∈[0.52,0.55) tienen ROI comparable a cuadro principal p≥0.55",
       "origen_deuda": "Conversación 2026-07-01 (patrón 23-jun)",
       "umbrales_congelados": {
-        "qualifier_p_range": [0.52, 0.55],
+        "qualifier_p_range": [
+          0.52,
+          0.55
+        ],
         "main_p_min": 0.55,
         "flag_es_qualifying": true
       },
@@ -137,8 +146,8 @@
       "descripcion": "La banda cuota 2.00-2.50 mantiene hit% bajo (21.4% histórico) incluso con gates actuales",
       "origen_deuda": "S-27-2 hallazgo",
       "umbrales_congelados": {
-        "cuota_min": 2.00,
-        "cuota_max": 2.50
+        "cuota_min": 2.0,
+        "cuota_max": 2.5
       },
       "metrica": "re-medir con gates actuales — si hit% < breakeven → mantener exclusión",
       "n_stop": 30,
@@ -147,6 +156,23 @@
       "hits": 0,
       "hit_rate_historico": 0.214,
       "nota": "Hit rate histórico medido pre-fixes S-27-2"
+    },
+    "H54-01": {
+      "nombre": "APOSTAR con stake_real=0 tienen hit% y CLV iguales o mejores que APOSTAR financiados",
+      "descripcion": "Picks que pasan todos los gates (edge>5%, conf>54%, kelly_kl>0) pero son aplastados a $0 por VaR/MIN_BET_CLIFF tienen al menos igual calidad predictiva que los que sí se financian. Si se confirma: implementar stake floor mínimo como NIVEL 1 de escalera existente.",
+      "origen_deuda": "D54-01 — Nodo-55 P54-02 Parte 2",
+      "preregistrado": "2026-07-03",
+      "umbrales_congelados": {
+        "metrica_principal": "hit_rate",
+        "metrica_secundaria": "clv_median",
+        "gate": "var_flattened=true AND apostar=true"
+      },
+      "metrica": "hit% y CLV median del segmento var_flattened vs segmento financiado — misma superficie+tier",
+      "n_stop": 30,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0,
+      "nota": "Si H54-01 gradua (hit% flattened >= hit% financiado): implementar floor MIN_STAKE_APOSTAR=$500 fuera del pool VaR de combos. PROHIBIDO cambiar hasta n=30."
     }
   }
 }
