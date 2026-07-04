@@ -1,6 +1,6 @@
 # CLAUDE.md — Tennis Prediction & Betting Engine
 
-> Last updated: 2026-06-30 (Nodo-45 D45-05 THF completo, Nodo-48 BLOQUEADO)
+> Last updated: 2026-07-03 (Nodo-58 COMPLETO — 1649 tests)
 > Spec-Driven Development (SDD) — no vibe coding.
 > Este archivo es la fuente de verdad. Cualquier sesión futura de Claude debe leerlo completo antes de tocar código.
 
@@ -133,9 +133,11 @@ python3 extraer_ranking_wta_version2.py   # rankings WTA → data/wta_rankings_c
 
 ```bash
 # ── MODO API (RECOMENDADO — ~1.3 segundos, cuotas REALES Betplay) ──────────
-python3 extraer_partidos_api.py                    # partidos de hoy
-python3 extraer_partidos_api.py --tomorrow          # partidos de mañana
-python3 extraer_partidos_api.py --tier atp wta      # solo ATP + WTA
+python3 extraer_partidos_api.py                              # partidos de hoy
+python3 extraer_partidos_api.py --tomorrow                   # partidos de mañana
+python3 extraer_partidos_api.py --tier atp wta               # solo ATP + WTA
+python3 extraer_partidos_api.py --tier atp wta --torneo wimbledon     # solo Wimbledon (Nodo-50)
+python3 extraer_partidos_api.py --torneo wimbledon "us open"          # múltiples torneos (OR)
 
 # ── MODO PLAYWRIGHT (fallback — ~8 min, DOM frágil) ────────────────────────
 python3 extraer_URL_partidos_version2.py
@@ -269,6 +271,13 @@ Flujo: `--live` genera betslip_index → `--listen` → bookmarklet POST → `--
 
 ### DESPUÉS DEL PARTIDO
 
+**PASO 5.5 — Shadow Book Momento 2** (correr ~15 min ANTES del inicio de cada partido)
+```bash
+python3 shadow_book.py --close-snapshot
+```
+→ Captura cuota de cierre Kambi para calcular CLV real (cuota_entrada vs cuota_cierre)
+→ Sin este paso, CLV se calcula solo con cuota de entrada (menos preciso)
+
 **PASO 6** — Registrar resultados
 ```bash
 python3 resultados_finales.py
@@ -297,6 +306,18 @@ python3 pipeline_tracker.py --save                    # guardar snapshot JSON
 ```
 → `pipeline_tracking.txt` (sobreescribe) | READ-ONLY — no modifica ningún dato
 
+**PASO 10 — Shadow Book Momento 3** (después de conocer resultado del partido)
+```bash
+python3 shadow_book.py --settle YYYY-MM-DD    # AUTOMÁTICO — lee resultados_finales.json o scraping FlashScore
+python3 shadow_book.py --report               # S-27-8: hit%, CLV median, IC Wilson por segmento
+python3 pipeline_tracker.py --section shadow  # integrado en tracker general
+```
+→ `reports/shadow_book/sb_YYYY-MM-DD.jsonl` (append-only, inmutable)
+→ **NO requiere input manual** — join automático por match_id, fallback fuzzy name.
+→ Si ya corriste `resultados_finales.py` (PASO 6), lo usa. Si no, va directo a FlashScore.
+→ El `--report` es el documento de validación más importante del proyecto: confirma si el edge es real o ruido.
+→ Correr `--settle` ANTES de `--report`. Sin settled>0 el reporte no tiene métricas.
+
 ---
 
 ### PIPELINE ML — SUSPENDIDO (2026-06-10)
@@ -310,15 +331,37 @@ Target: n≥1000 por superficie+tier. Acumular datos con betslip_registrar.py.
 
 ---
 
-## 5. Estado Real — 2026-06-30
+## 5. Estado Real — 2026-07-03
 
 ```
-Tests:         1438 passed, 0 failed (1330 → 1420 → 1438 tras Nodo-39/41/45)
+Tests:         1649 passed, 0 failed (1563→1588→1598→1601→1612→1649 tras Nodo-53/55/56/57/58)
 Calibración:   clay GS: p=0.758 (n=31) | global: wins=467, losses=239, n=706 + 14 nuevos (Jun-28)
+               calibration_epoch: epoch-1=pre-Nodo-47 (n=706, ranking parcial), epoch-2=post 2026-06-30
 Bankroll:      $125,000+
 Hedge Fund:    Portfolio Kelly + VaR auto-ajustado + Cobertura Exclusión — ACTIVO ✅
 ML Dataset:    2,573 registros limpios (motor nodo32-fase3-markov-postnorm) — Nodo-41 ✅
                Trazabilidad: jugador1/jugador2/_trace_fecha/torneo_nombre verificada manualmente
+
+Nodo-51 ✅ COMPLETO (2026-07-02):
+  F0: PlayerRegistry — entity resolution canónica, absorbe clase entera de bugs tipo Nodo-47
+  F1: TournamentContext — superficie + season_transition_flag viajan con cada partido
+  F2: DataContract — picks con historial EMPTY → status=NO_DATA, excluidos de TODOS los pools
+      El hueco por donde entraron combos fantasma (2026-07-01) está cerrado por construcción.
+  F3: Playwright batch con presupuesto + memoria THF (Nodo-49 completado)
+  F4: Surface Context Discount — _normalize_surface + surface_overlap_rate en markov_analyzer
+      Constantes BLOQUEADAS (n=1, Watanuki) — flag --no-surface-discount para A/B
+  F5: validation/preregistered_hypotheses.json — H52-01→H52-08 congeladas 2026-07-02
+      validation/hypothesis_tracker.py — nodo46_unlocked() False hasta n≥5
+  F-Meta: PRE_IMPLEMENTATION_CHECKLIST.md — GIT-FIRST como proceso, no como regla
+
+Nodo-52 ✅ COMPLETO (2026-07-02):
+  shadow_book.py — Libro Sombra: log_picks (Momento 1) + settle (Momento 3) + CLV + report (S-27-8)
+  Hook --shadow-log en edge_calculator (default ON, try/except — PASO 3 nunca crashea)
+  pipeline_tracker.py --section shadow — S-27-8 integrado (D52-05)
+  Hipótesis H52-01→H52-08 pre-registradas y congeladas en validation/preregistered_hypotheses.json
+  USO: python3 shadow_book.py --settle YYYY-MM-DD   # después del partido
+       python3 shadow_book.py --report               # métricas por segmento
+       python3 pipeline_tracker.py --section shadow  # integrado en tracker
 
 Lecciones validadas:
   - Challenger/ITF: bookmaker tiene menos datos → mayor ventaja informacional (sesión 9/10 del 13-jun)
@@ -328,9 +371,72 @@ Lecciones validadas:
   - Cross-tier mega-combos: ρ≈0.03 entre tiers → casi independientes
   - ML dataset DEBE tener trazabilidad; 69% contaminación por motor viejo = no entrenable (Nodo-41)
   - THF (Nodo-45): recupera historiales de sesiones anteriores cuando match_id=None o API vacía — D45-01 a D45-05 ✅
-  - Nodo-48 ✅ COMPLETO: `--flashscore-only` en extraer_partidos_api.py — 507 partidos + 233 con cuotas sin Kambi.
-    `fetch_flashscore_odds()` + `extract_matches_flashscore_only()` en scraping/kambi_tennis.py.
-    Guard D48-05: trader para si cuota_es_real=False — nunca despliega capital con cuotas de referencia.
+  - Nodo-48 ✅: `--flashscore-only` — 507 partidos + 233 con cuotas sin Kambi. Guard D48-05 activo.
+  - edges fantasma 2026-07-01 (Arce/Vlajic/Guajardo/Cooper): causa raíz = historial vacío sin gate.
+    FIX: F2 DataContract — status=NO_DATA por construcción, trader no los ve nunca.
+
+Nodo-55 ✅ COMPLETO (2026-07-03):
+  Respuesta Fable al brief Nodo-54: el embudo no está roto — es opaco y caro de operar.
+  P54-01 CERRADO: λ_ITF=4.5 se mantiene. A54-01a confirma n=0 datos ITF post-Nodo-47 fix.
+    ITF epoch_2 (post-2026-07-01): n=0. Hit 20% en shadow book con 2 stakes reales perdiendo = λ funciona.
+  P54-02 IMPLEMENTADO: Stake Waterfall Log en trader_ev_tenis.py
+    LOG_STAKE_WATERFALL: kelly_kl → q_kelly → ×portfolio_factor → ×var_factor → MIN_BET_CLIFF → $0
+    var_flattened + stake_real escritos al shadow book via update_trader_stakes()
+    H54-01 pre-registrado: APOSTAR stake=0 vs financiados — n=30 para decidir floor.
+  P54-03 CERRADO: ruta WAS ya existe (Nodo-44). Sin gate nuevo. Liu/Zheng/Safiullin p≈0.51 = coin-flip.
+    D54-02: sub-segmento WATCHLIST+grand_slam+edge>=20% visible en --report S-27-8.
+  D54-03 IMPLEMENTADO: run_daily.py — pipeline completo en un comando, daily_brief_FECHA.txt
+    PASO 0→4.3 + settle ayer + WAS check. Tiempo humano: 45 min → ~7 min/día.
+  Tests: T55-01→T55-05 (5 tests, todos pasan)
+  PROHIBIDO (doc):  λ_tier recalibración, GS_WATCHLIST_HIGH_EDGE gate, MIN_STAKE_APOSTAR incondicional.
+
+Nodo-56 COMPLETO (2026-07-03):
+  Bug A: get_weights_from_reasoning ignoraba LOG_SHRINKAGE → pesos 99%-103% en display.
+    Fix D56-01: _weights_final retornado por rivalry_analyzer.py (fuente única de verdad).
+    Fix D56-02: generar_tabla_favoritos2.py usa _weights_final en lugar de reconstruir desde logs.
+    Fix D56-04: round(...,2) → round(...,4) en ajuste de superficie (clay/grass).
+  Bug B: PUNTAJE FINAL TOTAL ≠ suma de componentes (caso Meligeni vs Pacheco: 3.77 vs 1.89).
+    Causa: penalización de inactividad (days_since>30) se aplicaba pero NO se mostraba.
+    Fix D56-05: generar_resumen_consolidado muestra fila Penalizacion_Inactividad cuando != 0.
+    → con fila visible: sum(componentes) + penalización = PUNTAJE FINAL TOTAL.
+  Scoring y predicciones: NUNCA estuvieron rotos. Solo el display era engañoso.
+  Tests: T56-04→T56-06 (3 tests, todos pasan)
+
+Nodo-57 COMPLETO (2026-07-03):
+  Bug A: Penalización de inactividad global demasiado agresiva (50% a los 30d+).
+    Fix D57-01: apply_weights_and_penalties simplificado — penalty siempre 0.0.
+    Fix D57-02: form_decay_factor exponencial aplicado SOLO a norm_p['form_recent'].
+      decay = max(0.35, exp(-0.025 × max(0, days-30))) | grace=30d | floor=0.35
+      days=-1 → decay=0.70 (moderado fijo) | days≤30 → 1.0 (sin decay)
+  Bug B: Gate de campeon de torneo no validaba tier — wins>=4 para cualquier torneo.
+    Fix D57-03: _MIN_WINS_CHAMPION = {grand_slam:7, atp1000:6, atp500:5, challenger:5, itf:4}
+    Caso real: Safiullin (3 qualifying + 2 main draw = 5 wins) recibía bonus GS champion.
+    GS requiere 7 victorias consecutivas en draw principal.
+  Bug C: TORNEO_COMPLETO_EXPIRADO no mostraba a quién pertenecía el campeonato.
+    Fix D57-04: compensation bonus 90-180d → x1.15 | 180-365d → x1.05 | >365d sin bonus.
+    Fix D57-05: LOG_FORM_DECAY añadido a SEÑALES ESPECIALES con atribución por jugador.
+  Tests: T57-01→T57-09 + T30-10b + T30-10c (11 tests nuevos, todos pasan)
+  PROHIBIDO: modificar shrinkage, kelly, ELO — solo form_recent decay y champion gate.
+
+Nodo-58 ✅ COMPLETO (2026-07-03):
+  Dashboard de Observabilidad — 6 paneles READ-ONLY con tema McLaren Electric Dark.
+  D58-01: report_dict() en shadow_book.py + --json flags (shadow_book, pipeline_tracker)
+    Expone métricas como dicts para el dashboard (nunca recalcula — fuente única shadow_book)
+    T58-02: paridad garantizada — hit%/IC/CLV del dashboard == report_dict() para el mismo rango
+  D58-02: Panel 1 (HOY) — cascada de stakes interactiva, WAS candidatos, alertas KGR/VaR/NO_DATA
+  D58-03: Panel 2 (HIPÓTESIS) + Panel 6 (DECISIÓN) — semáforos vivos H52-01→08/H54-01
+    Panel 6: 6 acciones tentadoras materializadas como criterios pre-registrados AUTORIZADO/NO_AUTORIZADO
+    La disciplina deja de depender de la memoria
+  D58-04: Panel 3 (SALUD) — distribución history_provenance por día, ranking_provenance alerta Nodo-47,
+           Panel 5 (RIESGO) — KGR/VaR/Sharpe/drawdown, apuestas REALES vs SIMULADAS siempre separadas
+  D58-05: Panel 4 (ATRIBUCIÓN) — componentes con _weights_final (D56-01), Penalizacion_Inactividad visible (D56-05)
+  D58-06: Coloreo por componente post-settlement (✓ apuntó al ganador | ✗ no | ~ empate)
+          Tabla acumulada acierto-por-señal × tier (con n≥100: insumo para Nodo-21 recalibración)
+  Theme: McLaren Electric Dark — Naranja #FF8000 / Azul #00BFFF / Verde #00FF87 / Rojo #FF1E56
+         Badges, cards, cascadas, progreso bars con bordes definidos
+  CLI: streamlit run dashboard.py [--server.port PORT]
+  Tests: T58-01→T58-05 (16 tests nuevos, todos pasan)
+  PROHIBIDO: botones que ejecuten pipeline/apuestas, recalcular métricas, mezclar betslips+shadow en tabla
 ```
 
 ---
@@ -372,27 +478,40 @@ combo_confianza_builder.py        ← PASO 4.3 (Nodo-38): CORE/Satellite/Moonsho
 games_signal_calculator.py        ← PASO 3.6 (Nodo-40): señales totales juegos/sets → reports/games_signal_report_FECHA.json
 betplay_combo_builder.py          ← PASO 4.4 (--games) + 4.5 + 4.55 + 4.57: totales + combos (--live) + megas (--mega) + safe (--safe)
 betslip_registrar.py              ← PASO 4.6: registra apuesta + cierra loop calibración
+run_daily.py                      ← D54-03 (Nodo-55): orquestador PASO 0→4.3 + settle + daily_brief
+                                    python3 run_daily.py [--bankroll N] [--tomorrow] [--settle-only]
+                                   → reports/daily_brief_FECHA.txt (5 min lectura humana/día)
 
 ── DESPUÉS DEL PARTIDO ─────────────────────────────────────────────────────────
 resultados_finales.py             ← PASO 6
 validar_con_api.py                ← PASO 7
 consultar_resultados_historicos.py← PASO 8
-pipeline_tracker.py               ← PASO 9: observabilidad READ-ONLY (Nodo-27)
+pipeline_tracker.py               ← PASO 9: observabilidad READ-ONLY (Nodo-27 + S-27-8 shadow)
+shadow_book.py                    ← PASO 10: Libro Sombra CLV (Nodo-52)
+  --settle FECHA    → settlement post-match, calcula CLV
+  --report          → métricas S-27-8 por segmento (hit%, IC Wilson, CLV median)
+  --close-snapshot  → Momento 2: captura cuota cierre Kambi ~15min antes del inicio
 
 ── DATOS ACTIVOS ────────────────────────────────────────────────────────────────
 data/calibracion_edge.json        ← Thompson Beta: fuente de verdad para priors por tier+superficie
+reports/shadow_book/sb_YYYY-MM-DD.jsonl  ← Shadow Book (append-only, inmutable en predicción)
+validation/preregistered_hypotheses.json ← H52-01→H52-08 congeladas 2026-07-02 (NO modificar)
+validation/hypothesis_tracker.py  ← nodo46_unlocked(), was_thresholds(), get_calibration_epochs()
 
 ── MÓDULOS COMPARTIDOS ──────────────────────────────────────────────────────────
 config.py                         ← constantes API + browser + detectar_tier() (fuente única de tiers)
 normalization.py                  ← MAX_RAW_SCORES + DEFAULT_WEIGHTS
+core/player_registry.py           ← PlayerRegistry: entity resolution canónica (Nodo-51 F0)
+core/tournament_context.py        ← TournamentContext: superficie+tier+season_flag (Nodo-51 F1)
+core/data_contract.py             ← PICK_STATUS_NO_DATA + has_empty_history() (Nodo-51 F2)
 scraping/kambi_tennis.py          ← Kambi API Betplay + FlashScore feed + name matching
-scraping/ninja_h2h_parser.py      ← NinjaH2HExtractor — FlashScore Ninja H2H API
+scraping/ninja_h2h_parser.py      ← NinjaH2HExtractor — FlashScore Ninja H2H API + F3 Playwright batch
 scraping/h2h_extractor.py         ← orquestador Playwright (fallback)
 scraping/browser_manager.py       ← Playwright WSL-optimized (solo fallback)
 scraping/data_parser.py           ← parser HTML corregido
 scraping/file_utils.py            ← selección recency-first
-analysis/rivalry_analyzer.py      ← motor de predicción + Erdős + Markov + Nodo-19/21
-analysis/markov_analyzer.py       ← PELT + factor_tardio + recencia_regimen + factor_alpha_temporal
+analysis/rivalry_analyzer.py      ← motor de predicción + Erdős + Markov + Nodo-19/21 + surface discount
+analysis/markov_analyzer.py       ← PELT + factor_tardio + recencia_regimen + surface_context_discount (F4)
 analysis/erdos_graph.py           ← grafo transitivo + PageRank (Nodo-20)
 analysis/elo_system.py            ← ELO + K-factor por tier + reset post-PELT
 analysis/ranking_manager.py
@@ -431,7 +550,7 @@ git show COMMIT:backend/archivo.py                   # recuperar si existe
 grep -n "texto_exacto" archivo.py
 
 # Antes de cualquier PR — baseline obligatorio
-python -m pytest tests/ --no-cov -q  # debe dar 1438 passed
+python -m pytest tests/ --no-cov -q  # debe dar 1563 passed
 
 # Verificar syntax
 python -c "import ast; ast.parse(open('archivo.py').read()); print('OK')"
@@ -480,7 +599,8 @@ Caso real: extraer_cuotas_partidos.py (git: 23d2d91) resuelve Nodo-48. La IA lo 
 - **REGLA-KAMBI-2: localStorage es origen-compartido.** Solución: `target="_blank"` + `||replace` en redirect de GitHub Pages.
 
 ### Testing y Specs
-- **1438 tests pasan.** No romper. Correr pytest antes de cualquier modificación. 62 tests Nodo-31 blindan ninja_h2h_parser.py. 25 tests Nodo-38 blindan combo_confianza_builder.py. 9 tests Nodo-45 blindan THF.
+- **1585 tests pasan.** No romper. Correr pytest antes de cualquier modificación. 62 tests Nodo-31 blindan ninja_h2h_parser.py. 25 tests Nodo-38 blindan combo_confianza_builder.py. 9 tests Nodo-45 blindan THF.
+- **REGLA-T53:** Ningún test de bug reproduce la fórmula manualmente. Siempre invoca la función del módulo real. Un test que hardcodea la fórmula buggy permanece en FAIL después del fix → Sonnet concluye que el fix falló → elimina el test. (Nodo-53, tercera ocurrencia del mismo error.)
 - **Spec-Driven.** Ver `.spec/01_Nodos/`.
 - **detectar_tier()** en `config.py` — fuente única para clasificación de torneo en todo el pipeline.
 
