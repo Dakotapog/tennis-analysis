@@ -33,6 +33,12 @@ _MIN_WINS_CHAMPION = {
     'itf': 4,
 }
 
+# Nodo-60 D60-02 (FABLE-ADDENDUM): GCS_RECENCY_BOOST GATED — OFF hasta que H60-01 gradúe (n≥30)
+# Cuando False: LOG_GCS_SHADOW acumula A/B gratis; final_score NO cambia.
+# Cuando True (--gcs-boost): aplica multiplicadores 2.2×/1.8×/1.5×.
+# PROHIBIDO activar en producción antes de exito=True en H60-01.
+_GCS_BOOST_ENABLED = False
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # T21-06 (Nodo-21 Fase 2) — Densidad local del grafo como modulador continuo
@@ -977,25 +983,34 @@ class RivalryAnalyzer:
         volume_confidence = min(len(surface_matches) / 8.0, 1.0)
         final_score = final_score * volume_confidence
 
-        # Nodo-60 D60-02: GCS_RECENCY_BOOST — campeón pre-torneo en esta misma superficie
-        # Aplica DESPUÉS de normalización para evitar dilución por historial histórico.
-        # Solo tier≥ATP500 y ≤21 días. Constantes congeladas hasta n≥30 (H60-01).
+        # Nodo-60 D60-02 (FABLE-ADDENDUM): GCS_RECENCY_BOOST
+        # GATED: _GCS_BOOST_ENABLED=False hasta que H60-01 gradúe (n≥30).
+        # Si False: LOG_GCS_SHADOW (A/B gratis); gcs_active=True para shadow book / combo builder.
+        # Si True: aplica multiplicador al final_score post-normalización.
         _GCS_TIER_MIN = {'grand_slam', 'atp1000', 'atp500'}
         _gcs_active = False
         if (_gcs_boost_tier in _GCS_TIER_MIN and
                 _gcs_boost_days is not None and _gcs_boost_days <= 21):
             if _gcs_boost_days <= 7:
-                _gcs_mult = 2.2   # muy reciente: ganó la semana pasada
+                _gcs_mult = 2.2
             elif _gcs_boost_days <= 14:
-                _gcs_mult = 1.8   # reciente: ≤2 semanas
+                _gcs_mult = 1.8
             else:
-                _gcs_mult = 1.5   # moderado: 15-21 días
-            final_score *= _gcs_mult
-            _gcs_active = True
-            analysis_log.append(
-                f"GCS_RECENCY_BOOST: tier={_gcs_boost_tier} days={_gcs_boost_days}d "
-                f"→ ×{_gcs_mult} final_score (Nodo-60)"
-            )
+                _gcs_mult = 1.5
+            _gcs_active = True  # siempre True cuando califica — shadow book lo trackea
+            if _GCS_BOOST_ENABLED:
+                final_score *= _gcs_mult
+                analysis_log.append(
+                    f"GCS_RECENCY_BOOST: tier={_gcs_boost_tier} days={_gcs_boost_days}d "
+                    f"→ ×{_gcs_mult} final_score (Nodo-60)"
+                )
+            else:
+                # A/B shadow: registra lo que habría pasado sin alterar el score
+                analysis_log.append(
+                    f"LOG_GCS_SHADOW: {player_name} habría recibido ×{_gcs_mult} "
+                    f"(GCS_RECENCY_BOOST GATED — tier={_gcs_boost_tier} days={_gcs_boost_days}d, "
+                    f"H60-01 n<30)"
+                )
 
         analysis_log.insert(0, f"Puntuación de Calidad en {normalized_surface}: {final_score:.1f} (Base: {quality_score:.1f}, Partidos: {len(surface_matches)}, Tasa Vic: {win_rate:.1%}, SkillF: {skill_factor:.2f}, Alpha: {surface_alpha:+.1%}, VolConf: {volume_confidence:.2f})")
 

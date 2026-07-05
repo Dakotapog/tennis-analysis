@@ -1,6 +1,6 @@
 # CLAUDE.md — Tennis Prediction & Betting Engine
 
-> Last updated: 2026-07-05 (Nodo-60 COMPLETO — 1654 tests)
+> Last updated: 2026-07-05 (Nodo-60-ADDENDUM-FABLE COMPLETO — 1659 tests)
 > Spec-Driven Development (SDD) — no vibe coding.
 > Este archivo es la fuente de verdad. Cualquier sesión futura de Claude debe leerlo completo antes de tocar código.
 
@@ -334,7 +334,7 @@ Target: n≥1000 por superficie+tier. Acumular datos con betslip_registrar.py.
 ## 5. Estado Real — 2026-07-03
 
 ```
-Tests:         1654 passed, 0 failed (1563→1588→1598→1601→1612→1649→1654 tras Nodo-53/55/56/57/58/60)
+Tests:         1659 passed, 0 failed (1563→1588→1598→1601→1612→1649→1654→1659 tras Nodo-53/55/56/57/58/60/60-ADDENDUM)
 Calibración:   clay GS: p=0.758 (n=31) | global: wins=467, losses=239, n=706 + 14 nuevos (Jun-28)
                calibration_epoch: epoch-1=pre-Nodo-47 (n=706, ranking parcial), epoch-2=post 2026-06-30
 Bankroll:      $125,000+
@@ -473,40 +473,56 @@ Nodo-60 ✅ COMPLETO (2026-07-05):
   
   D60-05: Spec .spec/01_Nodos/Nodo-60-GCS-Grass-Surface-Champion-Signal.md
 
-Nodo-60-ADDON ✅ COMPLETAMENTE INTEGRADO (2026-07-05):
-  GCS gate en pipeline NORMAL (edge_calculator + trader). Cierra el loop.
-  
-  D60-06: GCS Special Gate en edge_calculator.py (líneas 915-963)
-          Cuando gcs_active=True en surface_specialization_meta:
-          - Reduce edge_min: 50% → 15%
-          - Amplifica kelly_kl: kelly_kl_ef = kelly_kl × gcs_score_boost
-          - gcs_score_boost = min(1.0 + edge%/100 × 0.75, ×1.15 max)
-          - Aplica apostar=True si edge≥15% + kelly>2% + p_blend≥0.45
-          Resultado Eala (edge=23.9%, 13d): APOSTAR ✅ (antes WATCHLIST)
-  
-  D60-07: Tests T60-06, T60-07, T60-08 (edge_calculator gate validation):
-          T60-06: GCS gate aplica cuando edge≥15% + gcs_active → apostar=True
-          T60-07: GCS gate NO aplica cuando edge<15%
-          T60-08: gcs_score_boost clamped ×1.15 max
-          Total tests: 1657 (1654 baseline + 3 nuevos). 0 failed.
+Nodo-60-ADDENDUM-FABLE ✅ COMPLETO (2026-07-05):
+  Restructura en 3 carriles por auditoría Fable. Veredito: evidencia 3/3 es 1 upset real
+  + 1 moderado + 1 chalk. n=11, hits=6 (54.5%) — insuficiente para activar boost.
 
-Arquitectura FINAL Nodo-60 COMPLETO:
-  rivalry_analyzer.py → surface_specialization_meta (gcs_active, gcs_days)
-  edge_calculator.py → D60-06 gate (reduce edge_min 50%→15%, amplifia kelly)
-  trader_ev_tenis.py → procesa picks APOSTAR con GCS
-  combo_confianza_builder.py → GCS sub-plan paralelo (2-3 piernas puro)
-  shadow_book.py → acumula H60-01 (n=8→n=11)
+  CARRIL 1 — GATE DURO (D60-02 + D60-06):
+    _GCS_BOOST_ENABLED = False  en rivalry_analyzer.py (módulo-nivel)
+    _GCS_GATE_ENABLED  = False  en edge_calculator.py
+    → final_score NO cambia. Decisión apostar NO cambia.
+    → LOG_GCS_SHADOW aparece en log: "X habría recibido ×1.8 (GATED — H60-01 n<30)"
+    → A/B gratis: shadow book acumula lo que habría pasado para cuando H60-01 gradúe.
 
-  Flujo unificado: rivalry_analyzer → edge_calculator → trader normal
-                                    ↘ combo_builder (paralelo)
+  CARRIL 2 — OBSERVABILIDAD COMPLETA (D60-03/04/05 — APROBADOS por Fable):
+    gcs_active + gcs_days siguen propagándose a edge_report → shadow book → combo builder
+    universo GCS visible en output (separado de GS/ITF) — sin mezclar con ITF
+    MAX_GCS_PER_COMBO=1 en combos estándar (hereda Nodo-25 concentration guard)
 
-Guardrails Nodo-60-ADDON:
-  - gcs_gate_applied=True solo si 4 condiciones simultáneas
-  - gcs_score_boost clamped ×1.15 (conservador, respeta λ=0.3)
-  - H60-01 congelada hasta n≥30 (actualmente n=11)
-  - Reversible: toggle `_GCS_GATE_ENABLED=False`
+  CARRIL 3 — H60-01 CORREGIDA (§2 Fable):
+    exito: "limite inferior IC Wilson 95% > 1/cuota_media"
+    corte_secundario_preregistrado: edge≥10% congelado ahora (no se decide post-hoc)
+    estado_inicial: "n=8, hits=3 (37.5%) — EVIDENCIA ACTUAL EN CONTRA"
+    gated: "GCS_MULT permanece OFF hasta exito=true Y Brier con-boost < sin-boost"
+    n_actual=11, hits=6 (54.5%) post Wimbledon 04-jul
+    A60-01 PENDIENTE: shadow book no tiene los 8 casos históricos pre-04-jul.
 
-Cambios pendientes conocidos: ninguno (implementación 100% completa).
+  Tests reestructurados (10 tests, todos pasan):
+    T60-01: LOG_GCS_SHADOW aparece con flag OFF (no GCS_RECENCY_BOOST activo)
+    T60-06 (FABLE): 5W-0L en grand_slam → gcs_active=False (GS requiere 7W, D57-03)
+    T60-07 (FABLE): flag OFF → final_score idéntico con/sin código GCS
+    T60-08 (FABLE): clay tournament → grass match → gcs_active=False
+    T60-09 (FABLE): pick GCS + pick ITF → nunca en el mismo CORE combo
+    T60-10 (FABLE): LOG_GCS_SHADOW presente con flag=OFF, menciona ×mult y GATED
+    Total: 1659 tests. 0 failed.
+
+  A60-02 CONFIRMADO: Birmingham/Nottingham/Ilkley → atp500 (3/3 casos califican guard).
+
+Arquitectura GCS (estado actual — flags OFF):
+  rivalry_analyzer.py → gcs_active=True (señal), score NO inflado, LOG_GCS_SHADOW
+  edge_calculator.py  → gcs_bonus=True serializado, apostar NO overrideado
+  combo_confianza_builder.py → universo GCS, sub-plan separado (paralelo aprobado)
+  shadow_book.py → acumula H60-01 (n=11, hits=6)
+  Panel 6 Nodo-58 → H60-01 en rojo: n=11/30, tendencia honesta
+
+  Para activar GCS cuando H60-01 gradúe (n≥30 + exito=True + Brier mejor):
+    rivalry_analyzer.py: _GCS_BOOST_ENABLED = True
+    edge_calculator.py:  _GCS_GATE_ENABLED = True
+    Diseño correcto (§3 Fable): ponderación-en-origen (dentro del surface score),
+    no multiplicador post-normalización. Las constantes 2.2/1.8/1.5 son propuesta
+    inicial descartada por diseño. Calibrar contra Brier de settled.
+
+Cambios pendientes conocidos: A60-01 (tabla 8 casos históricos — datos no disponibles en shadow book pre-04-jul).
 ```
 
 ---

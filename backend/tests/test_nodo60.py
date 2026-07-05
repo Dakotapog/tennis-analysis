@@ -1,11 +1,16 @@
 """
-Tests Nodo-60: GCS — Grass/Surface Champion Signal
+Tests Nodo-60: GCS — Grass/Surface Champion Signal (FABLE-ADDENDUM restructura)
 
-T60-01: GCS_RECENCY_BOOST aplica cuando tier>=ATP500 y days<=14
-T60-02: GCS_RECENCY_BOOST NO aplica cuando tier=ITF
-T60-03: GCS_RECENCY_BOOST NO aplica cuando days>21
+T60-01: LOG_GCS_SHADOW aparece (flag OFF) y gcs_active=True cuando tier>=ATP500 y days<=14
+T60-02: gcs_active=False cuando tier=ITF (guard tier)
+T60-03: gcs_active=False cuando days>21 (ventana caducada)
 T60-04: _extract_and_categorize marca gcs_active=True cuando torneo_completo=True + tier>=atp500
-T60-05: H60-01 existe en preregistered_hypotheses.json con n_stop=30
+T60-05: H60-01 existe en preregistered_hypotheses.json con n_stop=30 y campo gated
+T60-06: 5W-0L en grand_slam → gcs_active=False (D57-03: GS requiere 7W)
+T60-07: flag OFF por default → final_score idéntico con/sin código GCS
+T60-08: torneo ganado en clay, partido actual en grass → gcs_active=False
+T60-09: pick GCS + pick ITF → nunca en el mismo CORE combo
+T60-10: LOG_GCS_SHADOW presente cuando flag=OFF y pick califica
 """
 import json
 import math
@@ -79,17 +84,19 @@ def _get_analyzer():
     return RivalryAnalyzer(rm, es)
 
 
-# ── T60-01: GCS_RECENCY_BOOST aplica con tier>=ATP500 y days<=14 ─────────────
+# ── T60-01: flag OFF → LOG_GCS_SHADOW aparece y gcs_active=True con tier>=ATP500 y days<=14 ──
 
-def test_T60_01_gcs_boost_fires_atp500_recent():
-    """GCS_RECENCY_BOOST activa (×1.8) cuando tier=atp500 y days=13."""
+def test_T60_01_gcs_shadow_log_atp500_recent():
+    """Con _GCS_BOOST_ENABLED=False (default): gcs_active=True y LOG_GCS_SHADOW en log para
+    torneo ATP500 hace 13 días. El score NO cambia (A/B shadow)."""
+    import analysis.rivalry_analyzer as ra_mod
+    assert ra_mod._GCS_BOOST_ENABLED is False, "_GCS_BOOST_ENABLED debe ser False por default"
+
     analyzer = _get_analyzer()
 
-    # Historial con torneo completo ATP500 hace 13 días en hierba
     history_with_bonus = _make_complete_tournament_matches(
         torneo_name='Nottingham 2026', days_ago=13, n_wins=5, surface='Hierba'
     )
-    # Añadir partidos dispersos para tener volumen
     history_base = _make_surface_matches(n_wins=20, n_total=30, surface='Hierba')
     full_history = history_with_bonus + history_base
 
@@ -97,13 +104,14 @@ def test_T60_01_gcs_boost_fires_atp500_recent():
         full_history, 'Hierba', 'TestPlayer'
     )
 
-    # El score con GCS debe ser mayor que sin (ya que x1.8 aplica)
     assert result['gcs_active'] is True, "gcs_active debe ser True con torneo ATP500 en 13 días"
     assert result['gcs_days'] == 13, f"gcs_days debe ser 13, got {result['gcs_days']}"
-    # Log debe contener GCS_RECENCY_BOOST
-    gcs_log = [l for l in log if 'GCS_RECENCY_BOOST' in l]
-    assert len(gcs_log) == 1, f"Debe haber exactamente 1 línea GCS_RECENCY_BOOST, got {gcs_log}"
-    assert '×1.8' in gcs_log[0], f"Multiplicador debe ser ×1.8 para days=13, got: {gcs_log[0]}"
+    # Con flag OFF: LOG_GCS_SHADOW en log, NO GCS_RECENCY_BOOST
+    shadow_log = [l for l in log if 'LOG_GCS_SHADOW' in l]
+    boost_log = [l for l in log if 'GCS_RECENCY_BOOST' in l and 'LOG_GCS_SHADOW' not in l]
+    assert len(shadow_log) >= 1, f"Debe haber LOG_GCS_SHADOW con flag OFF, got: {log}"
+    assert len(boost_log) == 0, f"NO debe haber GCS_RECENCY_BOOST activo con flag OFF"
+    assert '×1.8' in shadow_log[0], f"Shadow debe mencionar ×1.8 para days=13, got: {shadow_log[0]}"
 
 
 # ── T60-02: GCS_RECENCY_BOOST NO aplica con tier=ITF ─────────────────────────
@@ -245,264 +253,197 @@ def test_T60_05_h60_01_exists_in_hypotheses():
     assert umbrales.get('dias_max') == 21, "dias_max debe ser 21"
     assert umbrales.get('gcs_mult_days_14') == 1.8, "gcs_mult_days_14 debe ser 1.8"
 
-
-# ── T60-06: GCS gate en edge_calculator aplica cuando edge>=15% + gcs_active ─────
-
-def test_T60_06_gcs_gate_fires_edge_calculator():
-    """D60-06: GCS gate en edge_calculator aplica apostar=True cuando edge>=15% + gcs_active + kelly>2%."""
-    from edge_calculator import calcular_edge_completo
-
-    # Simular Eala vs Swiatek: edge=23.9%, confidence=50.2%, gcs_active=True
-    # Estructura de score_breakdown compatible con phi_idiosincratico
-    _sb = {
-        'player1': {
-            'surface_specialization': {'contribution': '15%'},
-            'form_recent': {'contribution': '20%'},
-            'common_opponents': {'contribution': '10%'},
-            'h2h_direct': {'contribution': '0%'},
-            'ranking_momentum': {'contribution': '18%'},
-            'elo_rating': {'contribution': '12%'},
-            'home_advantage': {'contribution': '0%'},
-            'strength_of_schedule': {'contribution': '25%'},
-        },
-        'player2': {
-            'surface_specialization': {'contribution': '10%'},
-            'form_recent': {'contribution': '25%'},
-            'common_opponents': {'contribution': '8%'},
-            'h2h_direct': {'contribution': '20%'},
-            'ranking_momentum': {'contribution': '15%'},
-            'elo_rating': {'contribution': '12%'},
-            'home_advantage': {'contribution': '0%'},
-            'strength_of_schedule': {'contribution': '10%'},
-        },
-    }
-
-    partido = {
-        'jugador1': 'Alexandra Eala',
-        'jugador2': 'Iga Swiatek',
-        'cuota1': 3.80,
-        'cuota2': 1.27,
-        'cuota_es_real': True,
-        'torneo_nombre': 'WTA - INDIVIDUALES: Wimbledon (Reino Unido), hierba',
-        'tipo_cancha': 'hierba',
-        'superficie': 'Hierba',
-        'ranking_analysis': {
-            'prediction': {
-                'favored_player': 'Alexandra Eala',
-                'confidence': 50.2,  # p_modelo=0.502 (LOW, pero GCS rescata)
-                'reasoning': ['GCS_RECENCY_BOOST: Birmingham 2026 hace 13 días'],
-                'score_breakdown': _sb,
-                'markov_analysis': {
-                    'jugador1': {'estado_actual': 'NEUTRAL', 'win_rate_reciente': 0.5, 'win_rate_anterior': 0.5, 'confianza': 0.50},
-                    'jugador2': {'estado_actual': 'NEUTRAL', 'win_rate_reciente': 0.5, 'win_rate_anterior': 0.5, 'confianza': 0.50},
-                },
-                'surface_specialization_meta': {
-                    'player1': {
-                        'score': 85.0, 'raw_score': 47.2, 'win_rate': 0.72, 'matches': 18,
-                        'skill_factor': 1.8, 'alpha_bonus': 1.3, 'volume_confidence': 0.9,
-                        'surface_alpha': 0.22, 'torneo_completo': True,
-                        'gcs_active': True,  # ← KEY: GCS activated
-                        'gcs_days': 13,
-                    },
-                    'player2': {
-                        'score': 55.9, 'raw_score': 40.1, 'win_rate': 0.65, 'matches': 20,
-                        'skill_factor': 1.5, 'alpha_bonus': 1.0, 'volume_confidence': 0.95,
-                        'surface_alpha': 0.18, 'torneo_completo': False,
-                        'gcs_active': False,
-                        'gcs_days': None,
-                    },
-                },
-            },
-            'ranking_fav': {'ranking_position': 75, 'elo': 1787},
-            'ranking_rival': {'ranking_position': 22, 'elo': 1915},
-        },
-        'enfrentamientos_directos': [],  # sin H2H directo
-    }
-
-    calibracion = {
-        'global': {'wins': 467, 'losses': 239},
-        'por_superficie': {'grass': {'wins': 150, 'losses': 60}},
-        'por_superficie_y_tier': {'grass_grand_slam': {'wins': 31, 'losses': 10}},
-    }
-
-    resultado = calcular_edge_completo(partido, calibracion)
-
-    assert resultado is not None, "Debe retornar un resultado para Eala"
-    assert resultado['gcs_bonus'] is True, f"gcs_bonus debe ser True, got {resultado.get('gcs_bonus')}"
-    assert resultado['gcs_gate_applied'] is True, f"gcs_gate_applied debe ser True con edge=23.9%, got {resultado.get('gcs_gate_applied')}"
-    assert resultado['apostar'] is True, f"apostar debe ser True con GCS gate, got {resultado.get('apostar')}"
-    assert resultado['edge'] >= 0.15, f"edge debe ser >=15%, got {resultado['edge']}"
+    # FABLE §2: campo gated obligatorio (GCS_MULT permanece OFF hasta graduacion)
+    assert h60.get('gated'), "H60-01 debe tener campo 'gated' con condicion de activacion"
+    assert 'estado_inicial' in h60, "H60-01 debe tener campo 'estado_inicial' con estado honesto"
 
 
-# ── T60-07: GCS gate NO aplica cuando edge<15% ────────────────────────────────
+# ── T60-06: 5W-0L en grand_slam → gcs_active=False (D57-03: GS requiere 7W) ─────
 
-def test_T60_07_gcs_gate_no_fires_edge_low():
-    """D60-06: GCS gate NO aplica cuando edge<15% aunque gcs_active=True."""
-    from edge_calculator import calcular_edge_completo
+def test_T60_06_grand_slam_5wins_no_gcs():
+    """D57-03 dependencia: 5W-0L en grand_slam NO activa gcs_active (GS requiere 7W)."""
+    analyzer = _get_analyzer()
 
-    _sb = {
-        'player1': {
-            'surface_specialization': {'contribution': '12%'},
-            'form_recent': {'contribution': '18%'},
-            'common_opponents': {'contribution': '8%'},
-            'h2h_direct': {'contribution': '3%'},
-            'ranking_momentum': {'contribution': '16%'},
-            'elo_rating': {'contribution': '12%'},
-            'home_advantage': {'contribution': '0%'},
-            'strength_of_schedule': {'contribution': '31%'},
-        },
-        'player2': {
-            'surface_specialization': {'contribution': '10%'},
-            'form_recent': {'contribution': '20%'},
-            'common_opponents': {'contribution': '8%'},
-            'h2h_direct': {'contribution': '10%'},
-            'ranking_momentum': {'contribution': '15%'},
-            'elo_rating': {'contribution': '12%'},
-            'home_advantage': {'contribution': '0%'},
-            'strength_of_schedule': {'contribution': '25%'},
-        },
-    }
+    # 5 victorias en Grand Slam (insuficiente — necesita 7)
+    history_gs = _make_complete_tournament_matches(
+        torneo_name='Wimbledon 2026', days_ago=7, n_wins=5, surface='Hierba'
+    )
+    history_base = _make_surface_matches(n_wins=20, n_total=30, surface='Hierba')
+    full_history = history_gs + history_base
 
-    # Simular partido con GCS activo pero edge bajo
-    partido = {
-        'jugador1': 'Test Player 1',
-        'jugador2': 'Test Player 2',
-        'cuota1': 1.95,  # edge ~10% (p_modelo=0.56, p_implicita=0.513)
-        'cuota2': 1.88,
-        'cuota_es_real': True,
-        'torneo_nombre': 'ATP - INDIVIDUALES: London (Inglaterra), hierba',
-        'tipo_cancha': 'hierba',
-        'superficie': 'Hierba',
-        'ranking_analysis': {
-            'prediction': {
-                'favored_player': 'Test Player 1',
-                'confidence': 56.0,  # p_modelo=0.56 (MODERATE)
+    result, log = analyzer.analyze_surface_specialization(
+        full_history, 'Hierba', 'TestPlayer'
+    )
+
+    # Grand Slam requiere 7W (D57-03). Con 5W NO debe activar TORNEO_COMPLETO_BONUS
+    # y por tanto tampoco GCS.
+    assert result['gcs_active'] is False, (
+        f"5W en GS NO debe activar gcs_active (requiere 7W). "
+        f"gcs_active={result['gcs_active']}, gcs_days={result['gcs_days']}"
+    )
+    gcs_log = [l for l in log if 'GCS' in l and 'LOG_GCS_SHADOW' not in l]
+    assert len(gcs_log) == 0, f"NO debe haber GCS_RECENCY_BOOST con 5W en GS: {gcs_log}"
+
+
+
+# ── T60-07: flag OFF por default → final_score idéntico con/sin código GCS ────
+
+def test_T60_07_flag_off_score_unchanged():
+    """FABLE §S60-7: _GCS_BOOST_ENABLED=False por default → final_score idéntico
+    con o sin historia de torneo GCS (el código existe, pero no altera el score)."""
+    import analysis.rivalry_analyzer as ra_mod
+    assert ra_mod._GCS_BOOST_ENABLED is False, "_GCS_BOOST_ENABLED debe ser False por default"
+
+    analyzer = _get_analyzer()
+
+    # Historial base (sin torneo completo)
+    history_base = _make_surface_matches(n_wins=20, n_total=30, surface='Hierba')
+    result_base, _ = analyzer.analyze_surface_specialization(
+        history_base, 'Hierba', 'TestPlayer'
+    )
+
+    # Historial con torneo completo ATP500 reciente (debería activar GCS si flag estuviera ON)
+    history_gcs = _make_complete_tournament_matches(
+        torneo_name='Nottingham 2026', days_ago=10, n_wins=5, surface='Hierba'
+    ) + history_base
+    result_gcs, log_gcs = analyzer.analyze_surface_specialization(
+        history_gcs, 'Hierba', 'TestPlayer'
+    )
+
+    # Con flag OFF: gcs_active=True pero el score no debe cambiar por el boost
+    assert result_gcs['gcs_active'] is True, "gcs_active debe ser True (señal detectada)"
+    # LOG_GCS_SHADOW debe aparecer (no GCS_RECENCY_BOOST activo)
+    shadow = [l for l in log_gcs if 'LOG_GCS_SHADOW' in l]
+    assert len(shadow) >= 1, f"LOG_GCS_SHADOW debe aparecer con flag OFF, got: {log_gcs}"
+    no_active_boost = [l for l in log_gcs if 'GCS_RECENCY_BOOST' in l and 'LOG_GCS_SHADOW' not in l]
+    assert len(no_active_boost) == 0, f"GCS_RECENCY_BOOST activo NO debe aparecer con flag OFF"
+
+
+# ── T60-08: torneo ganado en clay, partido actual en grass → gcs_active=False ──
+
+def test_T60_08_clay_tournament_grass_match_no_gcs():
+    """FABLE §S60-7: Si el torneo fue ganado en clay pero el partido es en grass,
+    gcs_active debe ser False (superficie no coincide con el análisis)."""
+    analyzer = _get_analyzer()
+
+    # Torneo completo ATP500 en CLAY hace 10 días
+    history_clay_champ = _make_complete_tournament_matches(
+        torneo_name='Nottingham 2026', days_ago=10, n_wins=5, surface='Arcilla'
+    )
+    history_base = _make_surface_matches(n_wins=10, n_total=15, surface='Hierba')
+    full_history = history_clay_champ + history_base
+
+    # Análisis pedido para HIERBA (diferente a clay del torneo ganado)
+    result, log = analyzer.analyze_surface_specialization(
+        full_history, 'Hierba', 'TestPlayer'
+    )
+
+    # El torneo en Arcilla solo aporta partidos a Arcilla, no a Hierba.
+    # El TORNEO_COMPLETO_BONUS solo se detecta sobre los partidos de la superficie analizada.
+    # → En análisis de Hierba, los partidos de Arcilla no se procesan → gcs_active=False.
+    assert result['gcs_active'] is False, (
+        f"Torneo ganado en clay NO debe activar gcs en análisis de grass. "
+        f"gcs_active={result['gcs_active']}"
+    )
+
+
+# ── T60-09: pick GCS + pick ITF → nunca en el mismo CORE combo ───────────────
+
+def test_T60_09_gcs_itf_not_mixed_in_core():
+    """FABLE §S60-7: Picks con universo=GCS y universo=ITF nunca se mezclan
+    en el mismo combo CORE (MAX_GCS_PER_COMBO=1 y GCS se reporta por separado)."""
+    from combo_confianza_builder import _extract_and_categorize, _build_portfolio_v2
+
+    picks_raw = [
+        # GCS pick: ATP500 + gcs_active
+        {
+            'jugador1': 'Alexandra Eala', 'jugador2': 'Iga Swiatek',
+            'torneo_nombre': 'WTA - INDIVIDUALES: Wimbledon (Reino Unido), hierba',
+            'tipo_cancha': 'hierba', 'cuota1': 3.80, 'cuota2': 1.27,
+            'cuota_es_real': True,
+            'ranking_analysis': {'prediction': {
+                'favored_player': 'Alexandra Eala', 'confidence': 55.0,
                 'reasoning': [],
-                'score_breakdown': _sb,
-                'markov_analysis': {
-                    'player1': {'estado_actual': 'NEUTRAL', 'win_rate_reciente': 0.5, 'win_rate_anterior': 0.5, 'confianza': 0.50},
-                    'player2': {'estado_actual': 'NEUTRAL', 'win_rate_reciente': 0.5, 'win_rate_anterior': 0.5, 'confianza': 0.50},
-                },
                 'surface_specialization_meta': {
-                    'player1': {
-                        'score': 70.0, 'raw_score': 40.0, 'win_rate': 0.68, 'matches': 15,
-                        'skill_factor': 1.5, 'alpha_bonus': 1.2, 'volume_confidence': 0.85,
-                        'surface_alpha': 0.12, 'torneo_completo': True,
-                        'gcs_active': True,  # GCS está activo
-                        'gcs_days': 10,
-                    },
-                    'player2': {
-                        'score': 50.0, 'raw_score': 35.0, 'win_rate': 0.60, 'matches': 18,
-                        'skill_factor': 1.3, 'alpha_bonus': 1.0, 'volume_confidence': 0.80,
-                        'surface_alpha': 0.10, 'torneo_completo': False,
-                        'gcs_active': False,
-                        'gcs_days': None,
-                    },
+                    'player1': {'score': 85.0, 'torneo_completo': True, 'gcs_active': True, 'gcs_days': 13},
+                    'player2': {'score': 55.0, 'torneo_completo': False, 'gcs_active': False},
                 },
-            },
-            'ranking_fav': {'ranking_position': 50, 'elo': 1800},
-            'ranking_rival': {'ranking_position': 80, 'elo': 1700},
+            }}
         },
-        'enfrentamientos_directos': [],
-    }
-
-    calibracion = {
-        'global': {'wins': 467, 'losses': 239},
-        'por_superficie': {'grass': {'wins': 150, 'losses': 60}},
-        'por_superficie_y_tier': {'grass_atp500': {'wins': 25, 'losses': 8}},
-    }
-
-    resultado = calcular_edge_completo(partido, calibracion)
-
-    assert resultado is not None, "Debe retornar un resultado"
-    assert resultado['gcs_bonus'] is True, f"gcs_bonus debe ser True, got {resultado.get('gcs_bonus')}"
-    assert resultado['edge'] < 0.15, f"edge debe ser <15%, got {resultado['edge']}"
-    # GCS gate NO aplica porque edge<15%, aunque gcs_active=True
-    assert resultado['gcs_gate_applied'] is False, f"gcs_gate_applied debe ser False con edge<15%, got {resultado.get('gcs_gate_applied')}"
-
-
-# ── T60-08: GCS score_boost clamped a ×1.15 máximo ──────────────────────────────
-
-def test_T60_08_gcs_score_boost_clamped():
-    """D60-06: gcs_score_boost se clampea a ×1.15 máximo."""
-    from edge_calculator import calcular_edge_completo
-
-    _sb = {
-        'player1': {
-            'surface_specialization': {'contribution': '18%'},
-            'form_recent': {'contribution': '25%'},
-            'common_opponents': {'contribution': '10%'},
-            'h2h_direct': {'contribution': '3%'},
-            'ranking_momentum': {'contribution': '16%'},
-            'elo_rating': {'contribution': '10%'},
-            'home_advantage': {'contribution': '0%'},
-            'strength_of_schedule': {'contribution': '18%'},
-        },
-        'player2': {
-            'surface_specialization': {'contribution': '5%'},
-            'form_recent': {'contribution': '15%'},
-            'common_opponents': {'contribution': '5%'},
-            'h2h_direct': {'contribution': '8%'},
-            'ranking_momentum': {'contribution': '12%'},
-            'elo_rating': {'contribution': '8%'},
-            'home_advantage': {'contribution': '0%'},
-            'strength_of_schedule': {'contribution': '47%'},
-        },
-    }
-
-    # Partido con edge muy alto (~40%) → gcs_score_boost sería ~1.30 sin clamp
-    partido = {
-        'jugador1': 'Test Player 1',
-        'jugador2': 'Test Player 2',
-        'cuota1': 5.50,  # edge~35% (p_modelo=0.56, p_implicita=0.182)
-        'cuota2': 1.10,
-        'cuota_es_real': True,
-        'torneo_nombre': 'ATP - INDIVIDUALES: London (Inglaterra), hierba',
-        'tipo_cancha': 'hierba',
-        'superficie': 'Hierba',
-        'ranking_analysis': {
-            'prediction': {
-                'favored_player': 'Test Player 1',
-                'confidence': 56.0,
+        # ITF pick
+        {
+            'jugador1': 'Kalin Ivanovski', 'jugador2': 'Yanaki Milev',
+            'torneo_nombre': 'ITF MASCULINO: M25 Skopje',
+            'tipo_cancha': 'arcilla', 'cuota1': 1.45, 'cuota2': 3.20,
+            'cuota_es_real': True,
+            'ranking_analysis': {'prediction': {
+                'favored_player': 'Kalin Ivanovski', 'confidence': 60.0,
                 'reasoning': [],
-                'score_breakdown': _sb,
-                'markov_analysis': {
-                    'player1': {'estado_actual': 'HOT', 'win_rate_reciente': 0.75, 'win_rate_anterior': 0.50, 'confianza': 0.70},
-                    'player2': {'estado_actual': 'COLD', 'win_rate_reciente': 0.25, 'win_rate_anterior': 0.50, 'confianza': 0.70},
-                },
                 'surface_specialization_meta': {
-                    'player1': {
-                        'score': 80.0, 'raw_score': 45.0, 'win_rate': 0.75, 'matches': 20,
-                        'skill_factor': 1.8, 'alpha_bonus': 1.3, 'volume_confidence': 0.90,
-                        'surface_alpha': 0.25, 'torneo_completo': True,
-                        'gcs_active': True,
-                        'gcs_days': 7,
-                    },
-                    'player2': {
-                        'score': 30.0, 'raw_score': 20.0, 'win_rate': 0.40, 'matches': 10,
-                        'skill_factor': 1.0, 'alpha_bonus': 0.9, 'volume_confidence': 0.60,
-                        'surface_alpha': 0.05, 'torneo_completo': False,
-                        'gcs_active': False,
-                        'gcs_days': None,
-                    },
+                    'player1': {'score': 40.0, 'torneo_completo': False, 'gcs_active': False},
+                    'player2': {'score': 25.0, 'torneo_completo': False, 'gcs_active': False},
                 },
-            },
-            'ranking_fav': {'ranking_position': 5, 'elo': 2000},
-            'ranking_rival': {'ranking_position': 200, 'elo': 1400},
+            }}
         },
-        'enfrentamientos_directos': [],
-    }
+    ]
 
-    calibracion = {
-        'global': {'wins': 467, 'losses': 239},
-        'por_superficie': {'grass': {'wins': 150, 'losses': 60}},
-        'por_superficie_y_tier': {'grass_atp500': {'wins': 25, 'losses': 8}},
-    }
+    picks = _extract_and_categorize(picks_raw, threshold=50.0, pipeline_picks=None, conf_min=50.0)
+    assert len(picks) == 2, f"Deben extraerse 2 picks, got {len(picks)}"
 
-    resultado = calcular_edge_completo(partido, calibracion)
+    gcs_picks = [p for p in picks if p.get('universo') == 'GCS']
+    itf_picks = [p for p in picks if p.get('universo') == 'ITF']
 
-    assert resultado is not None, "Debe retornar un resultado"
-    assert resultado['gcs_bonus'] is True, f"gcs_bonus debe ser True, got {resultado.get('gcs_bonus')}"
-    # gcs_score_boost no puede exceder 1.15 aunque edge sea alto
-    assert resultado['gcs_score_boost'] <= 1.15, f"gcs_score_boost debe estar clamped <=1.15, got {resultado['gcs_score_boost']}"
-    assert resultado['gcs_gate_applied'] is True, f"gcs_gate_applied debe ser True con edge alto + gcs_active, got {resultado.get('gcs_gate_applied')}"
+    assert len(gcs_picks) == 1, f"Debe haber 1 pick GCS, got {len(gcs_picks)}"
+    assert len(itf_picks) == 1, f"Debe haber 1 pick ITF, got {len(itf_picks)}"
+
+    # El combo builder nunca mezcla GCS con ITF
+    plan = _build_portfolio_v2(picks, bankroll=5000)
+    all_combos = plan.get('combos', []) + plan.get('satellite', [])
+    for combo in all_combos:
+        legs = combo.get('legs', [])
+        leg_names = [l.get('nombre', '') for l in legs]
+        universos = [l.get('universo', '') for l in legs]
+        has_gcs = 'GCS' in universos
+        has_itf = 'ITF' in universos
+        assert not (has_gcs and has_itf), (
+            f"Combo mezcla GCS con ITF: {leg_names} universos={universos}"
+        )
+
+
+# ── T60-10: LOG_GCS_SHADOW presente cuando flag=OFF y pick califica ───────────
+
+def test_T60_10_log_gcs_shadow_present_when_flag_off():
+    """FABLE §S60-7: Con _GCS_BOOST_ENABLED=False, LOG_GCS_SHADOW aparece en el
+    analysis_log cuando el pick califica (tier>=ATP500, days<=21, misma superficie).
+    Esto es el A/B gratis: shadow book acumula 'qué habría pasado'."""
+    import analysis.rivalry_analyzer as ra_mod
+    assert ra_mod._GCS_BOOST_ENABLED is False, "_GCS_BOOST_ENABLED debe ser False por default"
+
+    analyzer = _get_analyzer()
+
+    # Torneo ATP500 en hierba hace 7 días (máximo boost potencial ×2.2)
+    history_gcs = _make_complete_tournament_matches(
+        torneo_name='Birmingham 2026', days_ago=7, n_wins=5, surface='Hierba'
+    ) + _make_surface_matches(n_wins=15, n_total=25, surface='Hierba')
+
+    result, log = analyzer.analyze_surface_specialization(
+        history_gcs, 'Hierba', 'TestPlayer'
+    )
+
+    assert result['gcs_active'] is True, "gcs_active debe ser True"
+
+    shadow_lines = [l for l in log if 'LOG_GCS_SHADOW' in l]
+    assert len(shadow_lines) >= 1, f"LOG_GCS_SHADOW debe aparecer con flag OFF: {log}"
+
+    # Debe mencionar el multiplicador que se habría aplicado
+    assert '×2.2' in shadow_lines[0], (
+        f"LOG_GCS_SHADOW debe mencionar ×2.2 para days=7, got: {shadow_lines[0]}"
+    )
+    # Y debe mencionar GATED para auditabilidad
+    assert 'GATED' in shadow_lines[0], (
+        f"LOG_GCS_SHADOW debe indicar GATED, got: {shadow_lines[0]}"
+    )
+
+    # Verificar que GCS_RECENCY_BOOST activo NO está en el log
+    active_boost = [l for l in log if 'GCS_RECENCY_BOOST:' in l and 'LOG_GCS_SHADOW' not in l]
+    assert len(active_boost) == 0, f"NO debe haber boost activo con flag OFF: {active_boost}"

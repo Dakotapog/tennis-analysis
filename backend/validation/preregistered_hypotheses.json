@@ -176,6 +176,7 @@
     },
     "H60-01": {
       "nombre": "GCS Pattern (pre-torneo campeón en superficie) supera breakeven",
+      "hipotesis": "Picks con TORNEO_COMPLETO_BONUS validado (D57-03), torneo ganado tier>=atp500, dias<=21, MISMA superficie que el partido actual",
       "descripcion": "TORNEO_COMPLETO_BONUS (tier>=ATP500, <=21d, misma superficie) → hit% > 1/cuota_media del segmento. Patrón observado Wimbledon 2026-07-04: Eala/Bouzkova/Krueger ganaron siendo coin-flip o underdog.",
       "origen_deuda": "Nodo-60 — observacion Wimbledon R3 2026-07-04",
       "preregistrado": "2026-07-05",
@@ -184,15 +185,20 @@
         "dias_max": 21,
         "gcs_mult_days_7": 2.2,
         "gcs_mult_days_14": 1.8,
-        "gcs_mult_days_21": 1.5
+        "gcs_mult_days_21": 1.5,
+        "nota_multiplicadores": "Propuesta inicial — descartada por diseño (FABLE §3). Solo documentada; no se activan hasta Fase-H post-graduacion."
       },
-      "metrica": "hit% con IC Wilson 95% inferior > 1/cuota_media; segmento cuota>=2.00 (underdog) evaluado separado",
+      "metrica": "hit% con IC Wilson 95%",
+      "exito": "limite inferior IC Wilson 95% > 1/cuota_media del segmento",
+      "corte_secundario_preregistrado": "mismo segmento AND edge_vs_mercado>=0.10 (de-vig, Nodo-53 V2) — congelado como sub-segmento ahora, no se decide post-hoc",
       "n_stop": 30,
       "estado": "ACUMULANDO",
-      "n_actual": 8,
-      "hits": 3,
-      "hit_rate": 0.375,
-      "nota": "n=8 pre-registro (scan historico). Insuficiente para validar. Observar Keys/Tiafoe/Noskova/Bergs (Wimbledon R3 hoy). GCS_MULT congelados hasta n>=30. PROHIBIDO cambiar multiplicadores antes."
+      "estado_inicial": "n=8, hits=3 (37.5%) — EVIDENCIA ACTUAL EN CONTRA. A60-01 pendiente: verificar si los 3 hits del scan coinciden con el 04-jul (survivorship bias potencial).",
+      "gated": "GCS_MULT permanece OFF (_GCS_BOOST_ENABLED=False, _GCS_GATE_ENABLED=False) hasta exito=true Y Brier con-boost < sin-boost (Fase-H). Panel 6 Nodo-58: H60-01 en rojo con tendencia honesta.",
+      "n_actual": 11,
+      "hits": 6,
+      "hit_rate": 0.545,
+      "nota": "n=8 scan historico (hits=3, 37.5%) + n=3 Wimbledon 04-jul (Eala/Bouzkova/Krueger, 3/3) = n=11, hits=6 (54.5%). A60-01 PENDIENTE: shadow book no tiene los 8 casos historicos — registros solo desde 2026-07-02. Verificar manualmente torneos pre-Wimbledon con campeones en hierba. GCS_MULT congelados hasta n>=30 Y graduacion H60-01. PROHIBIDO cambiar multiplicadores o activar flags antes."
     }
   }
 }

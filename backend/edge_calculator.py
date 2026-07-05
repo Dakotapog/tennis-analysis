@@ -912,18 +912,14 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
             f'T33-01: n_h2h=0 + p_modelo={p_modelo:.3f}<{P_MODELO_MIN_UNDERDOG} (coin-flip bloqueado)'
         )
 
-    # ─── D60-06 (Nodo-60-ADDON): GCS Special Gate ────────────────────────────────
-    # GCS_RECENCY_BOOST en rivalry_analyzer multiplica el score de especialización en
-    # superficie. Si un jugador ganó un torneo ATP500+ en la misma superficie hace ≤21d,
-    # su surface_specialization_meta.gcs_active=True.
-    #
-    # Edge matemático puede ser alto (>5%) pero model conviction puede ser LOW (p<0.55).
-    # GCS gate reduce edge_min de 50% a 15% y amplifica kelly_kl × gcs_score_boost,
-    # pero solo si gcs_active=True AND edge>=15% AND kelly>2% AND p_blend>=0.45.
-    #
-    # Casos de uso:
-    #   - Eala @3.80: edge=23.9%, kelly_kl=16.4% → sin gate, rechazado (edge>5% pero p<0.55)
-    #   - Con D60-06: gcs_active=True, edge=23.9% >= 15% → kelly_kl_ef=0.189 (~19%) → APOSTAR
+    # ─── D60-06 (Nodo-60-ADDON): GCS Special Gate ─────────────────────────────────
+    # FABLE-ADDENDUM: _GCS_GATE_ENABLED=False hasta que H60-01 gradúe (n≥30).
+    # Cuando False: gcs_bonus/gcs_days se serializan (shadow book los trackea) pero
+    #   la decisión apostar/kelly NO se modifica.
+    # Cuando True: reduce edge_min 50%→15% y amplifica kelly_kl × gcs_score_boost.
+    # PROHIBIDO activar en producción antes de exito=True en H60-01.
+    _GCS_GATE_ENABLED = False   # toggle para habilitar cuando H60-01 gradúe
+
     _gcs_bonus = False
     _gcs_score_boost = 1.0
     _gcs_gate_applied = False
@@ -944,18 +940,14 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
     _kelly_kl_base = resultado['kelly_kl_base']
     _kelly_kl_ef = _kelly_kl_base * _gcs_score_boost
 
-    # Gate GCS: reduce edge_min a 15% (vs 50% normal) si todas las condiciones se cumplen
-    if _gcs_bonus and resultado['edge'] >= 0.15 and _kelly_kl_ef > 0.02 and _p_blend >= 0.45:
+    # Gate GCS: solo opera si _GCS_GATE_ENABLED=True
+    if (_GCS_GATE_ENABLED and _gcs_bonus and
+            resultado['edge'] >= 0.15 and _kelly_kl_ef > 0.02 and _p_blend >= 0.45):
         resultado['apostar'] = True
         _gcs_gate_applied = True
-        # Actualizar kelly_kl en resultado para reflejar el boost (solo para auditoría)
         resultado['kelly_kl_gcs_boosted'] = round(_kelly_kl_ef, 4)
-    elif resultado['edge'] >= EDGE_MIN and resultado['kelly_kl'] > KELLY_KL_MIN:
-        # Mantener la decisión original si no se aplica GCS gate
-        # (ya fue computada en calcular_edge)
-        pass
 
-    # Serializar metadata GCS en edge_report para shadow book + trader
+    # Serializar metadata GCS en edge_report para shadow book + trader (siempre, flag aparte)
     resultado.update({
         'gcs_bonus':          _gcs_bonus,
         'gcs_score_boost':    round(_gcs_score_boost, 4),
