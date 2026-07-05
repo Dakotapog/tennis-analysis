@@ -44,7 +44,7 @@ import logging
 import argparse
 import glob as glob_mod
 import statistics
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Dict, List, Optional, Tuple
 
 logger = logging.getLogger(__name__)
@@ -694,16 +694,75 @@ def _load_resultados(fecha: str) -> Dict[str, dict]:
     """
     result_map: Dict[str, dict] = {}
 
-    # 1. resultados_finales_*.json
+    # 1. resultados_finales_*.json — soporta 3 formatos de salida distintos
     for fpath in sorted(glob_mod.glob("reports/resultados_finales_*.json")):
+        # Usar fecha del nombre de archivo como filtro primario (los items no tienen campo fecha)
+        fname = os.path.basename(fpath)  # resultados_finales_20260703_235253.json
+        raw = fname[19:27]  # "20260703"
+        file_date = f"{raw[:4]}-{raw[4:6]}-{raw[6:8]}"  # "2026-07-03"
+        # Aceptar archivos del mismo día O del día siguiente (resultados_finales corre after midnight)
+        try:
+            _target = datetime.strptime(fecha, "%Y-%m-%d")
+            _next = (_target + timedelta(days=1)).strftime("%Y-%m-%d")
+        except Exception:
+            _next = None
+        if fecha not in file_date and (_next is None or _next not in file_date):
+            continue
         try:
             with open(fpath, 'r', encoding='utf-8') as f:
                 data = json.load(f)
-            items = data if isinstance(data, list) else data.get('resultados', [])
+
+            # Normalizar a lista plana de {p1, p2, ganador, match_id}
+            def _extract_items(d):
+                if isinstance(d, list):
+                    return d
+                # Formato legacy: {'resultados': [...]}
+                if 'resultados' in d and isinstance(d['resultados'], list):
+                    return d['resultados']
+                # Formato validar_con_api.py: {'partidos': [{partido, resultado_real, match_id}]}
+                if 'partidos' in d and isinstance(d['partidos'], list):
+                    out = []
+                    for r in d['partidos']:
+                        partido_str = r.get('partido', '')
+                        if ' vs ' not in partido_str:
+                            continue
+                        p1_r, p2_r = partido_str.split(' vs ', 1)
+                        out.append({
+                            'jugador1': p1_r.strip(),
+                            'jugador2': p2_r.strip(),
+                            'ganador': r.get('resultado_real', ''),
+                            'match_id': r.get('match_id'),
+                        })
+                    return out
+                # Formato resultados_finales.py: {'detailed_results': [{match_info, actual_result}]}
+                if 'detailed_results' in d and isinstance(d['detailed_results'], list):
+                    out = []
+                    for r in d['detailed_results']:
+                        mi = r.get('match_info', {})
+                        ar = r.get('actual_result', {})
+                        p1_r = mi.get('jugador1', '')
+                        p2_r = mi.get('jugador2', '')
+                        ganador_r = ar.get('actual_winner', '')
+                        # extraer match_id de match_url si está disponible
+                        url = mi.get('match_url', '')
+                        mid = None
+                        if url:
+                            parts = [x for x in url.rstrip('/').split('/') if x]
+                            if parts:
+                                mid = parts[-1] if parts[-1] != '#' else parts[-2]
+                                if mid.startswith('#'):
+                                    mid = parts[-2] if len(parts) >= 2 else None
+                        out.append({
+                            'jugador1': p1_r,
+                            'jugador2': p2_r,
+                            'ganador': ganador_r,
+                            'match_id': mid,
+                        })
+                    return out
+                return []
+
+            items = _extract_items(data)
             for r in items:
-                r_fecha = str(r.get('fecha', '') or r.get('date', ''))
-                if fecha not in r_fecha:
-                    continue
                 p1 = r.get('jugador1', '') or r.get('p1', '')
                 p2 = r.get('jugador2', '') or r.get('p2', '')
                 ganador = r.get('ganador', '') or r.get('resultado', '')

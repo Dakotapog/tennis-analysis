@@ -173,6 +173,26 @@
       "n_actual": 0,
       "hits": 0,
       "nota": "Si H54-01 gradua (hit% flattened >= hit% financiado): implementar floor MIN_STAKE_APOSTAR=$500 fuera del pool VaR de combos. PROHIBIDO cambiar hasta n=30."
+    },
+    "H60-01": {
+      "nombre": "GCS Pattern (pre-torneo campeón en superficie) supera breakeven",
+      "descripcion": "TORNEO_COMPLETO_BONUS (tier>=ATP500, <=21d, misma superficie) → hit% > 1/cuota_media del segmento. Patrón observado Wimbledon 2026-07-04: Eala/Bouzkova/Krueger ganaron siendo coin-flip o underdog.",
+      "origen_deuda": "Nodo-60 — observacion Wimbledon R3 2026-07-04",
+      "preregistrado": "2026-07-05",
+      "umbrales_congelados": {
+        "tier_min": "atp500",
+        "dias_max": 21,
+        "gcs_mult_days_7": 2.2,
+        "gcs_mult_days_14": 1.8,
+        "gcs_mult_days_21": 1.5
+      },
+      "metrica": "hit% con IC Wilson 95% inferior > 1/cuota_media; segmento cuota>=2.00 (underdog) evaluado separado",
+      "n_stop": 30,
+      "estado": "ACUMULANDO",
+      "n_actual": 8,
+      "hits": 3,
+      "hit_rate": 0.375,
+      "nota": "n=8 pre-registro (scan historico). Insuficiente para validar. Observar Keys/Tiafoe/Noskova/Bergs (Wimbledon R3 hoy). GCS_MULT congelados hasta n>=30. PROHIBIDO cambiar multiplicadores antes."
     }
   }
 }

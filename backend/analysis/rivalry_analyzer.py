@@ -894,6 +894,9 @@ class RivalryAnalyzer:
             if _opp_rank < _tour_stats[_tk]['best_opp_rank']:
                 _tour_stats[_tk]['best_opp_rank'] = _opp_rank
 
+        # Nodo-60 D60-02: tracked for GCS_RECENCY_BOOST
+        _gcs_boost_tier = None
+        _gcs_boost_days = None
         for (_tname, _tyear), _ts in _tour_stats.items():
             # Nodo-57 D57-03: gate tier-aware — GS necesita 7W, no 4W
             from config import detectar_tier as _dt_tier
@@ -944,6 +947,9 @@ class RivalryAnalyzer:
                     f"({_ts['wins']}W-0L, tier={_tier_champ}, req≥{_min_wins}) "
                     f"→ x{_bonus:.1f} quality_score [{_parts_str}]"
                 )
+                # Nodo-60 D60-02: track para GCS_RECENCY_BOOST
+                _gcs_boost_tier = _tier_champ
+                _gcs_boost_days = _days_ago
                 break  # un solo bonus aunque haya múltiples torneos completos
 
         # Normalizar por número de partidos para no favorecer a quien jugó más
@@ -971,6 +977,26 @@ class RivalryAnalyzer:
         volume_confidence = min(len(surface_matches) / 8.0, 1.0)
         final_score = final_score * volume_confidence
 
+        # Nodo-60 D60-02: GCS_RECENCY_BOOST — campeón pre-torneo en esta misma superficie
+        # Aplica DESPUÉS de normalización para evitar dilución por historial histórico.
+        # Solo tier≥ATP500 y ≤21 días. Constantes congeladas hasta n≥30 (H60-01).
+        _GCS_TIER_MIN = {'grand_slam', 'atp1000', 'atp500'}
+        _gcs_active = False
+        if (_gcs_boost_tier in _GCS_TIER_MIN and
+                _gcs_boost_days is not None and _gcs_boost_days <= 21):
+            if _gcs_boost_days <= 7:
+                _gcs_mult = 2.2   # muy reciente: ganó la semana pasada
+            elif _gcs_boost_days <= 14:
+                _gcs_mult = 1.8   # reciente: ≤2 semanas
+            else:
+                _gcs_mult = 1.5   # moderado: 15-21 días
+            final_score *= _gcs_mult
+            _gcs_active = True
+            analysis_log.append(
+                f"GCS_RECENCY_BOOST: tier={_gcs_boost_tier} days={_gcs_boost_days}d "
+                f"→ ×{_gcs_mult} final_score (Nodo-60)"
+            )
+
         analysis_log.insert(0, f"Puntuación de Calidad en {normalized_surface}: {final_score:.1f} (Base: {quality_score:.1f}, Partidos: {len(surface_matches)}, Tasa Vic: {win_rate:.1%}, SkillF: {skill_factor:.2f}, Alpha: {surface_alpha:+.1%}, VolConf: {volume_confidence:.2f})")
 
         # Flag for E-1 dynamic weight boost
@@ -986,6 +1012,8 @@ class RivalryAnalyzer:
             'volume_confidence': round(volume_confidence, 4),
             'surface_alpha':     round(surface_alpha, 4),
             'torneo_completo':   _has_torneo_bonus,
+            'gcs_active':        _gcs_active,
+            'gcs_days':          _gcs_boost_days,
         }, analysis_log
 
     def analyze_surface_performance(self, player_history, player_name):

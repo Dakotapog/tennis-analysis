@@ -1,6 +1,6 @@
 # CLAUDE.md — Tennis Prediction & Betting Engine
 
-> Last updated: 2026-07-03 (Nodo-58 COMPLETO — 1649 tests)
+> Last updated: 2026-07-05 (Nodo-60 COMPLETO — 1654 tests)
 > Spec-Driven Development (SDD) — no vibe coding.
 > Este archivo es la fuente de verdad. Cualquier sesión futura de Claude debe leerlo completo antes de tocar código.
 
@@ -334,7 +334,7 @@ Target: n≥1000 por superficie+tier. Acumular datos con betslip_registrar.py.
 ## 5. Estado Real — 2026-07-03
 
 ```
-Tests:         1649 passed, 0 failed (1563→1588→1598→1601→1612→1649 tras Nodo-53/55/56/57/58)
+Tests:         1654 passed, 0 failed (1563→1588→1598→1601→1612→1649→1654 tras Nodo-53/55/56/57/58/60)
 Calibración:   clay GS: p=0.758 (n=31) | global: wins=467, losses=239, n=706 + 14 nuevos (Jun-28)
                calibration_epoch: epoch-1=pre-Nodo-47 (n=706, ranking parcial), epoch-2=post 2026-06-30
 Bankroll:      $125,000+
@@ -437,6 +437,44 @@ Nodo-58 ✅ COMPLETO (2026-07-03):
   CLI: streamlit run dashboard.py [--server.port PORT]
   Tests: T58-01→T58-05 (16 tests nuevos, todos pasan)
   PROHIBIDO: botones que ejecuten pipeline/apuestas, recalcular métricas, mezclar betslips+shadow en tabla
+
+Nodo-60 ✅ COMPLETO (2026-07-05):
+  GCS — Grass/Surface Champion Signal. Patrón descubierto Wimbledon 2026-07-04 (3/3 casos).
+  Causa: TORNEO_COMPLETO_BONUS se aplicaba ANTES de normalización → dilución por volumen histórico.
+  Validación: Eala @3.80+23.9% edge (no se pudo apostar conf=50%), Bouzkova vs Samsonova 
+             (modelo predecía S pese a ELO/Ranking/Markov superiores de B), 
+             Krueger @1.19 coinflip (modelo tenía razón). 3/3 ganaron.
+  Solución: GCS_RECENCY_BOOST post-normalización + H60-01 pre-registrada + universos separados.
+  
+  D60-01: H60-01 pre-registrado en validation/preregistered_hypotheses.json
+          Hipótesis: TORNEO_COMPLETO_BONUS (tier≥ATP500, ≤21d) → hit% > 1/cuota_media
+          Umbrales: tier_min=atp500, dias_max=21, n_stop=30. n_actual=8, hits=3 (37.5%).
+          PROHIBIDO: cambiar umbrales/multiplicadores antes de n≥30. Congelado 2026-07-05.
+  
+  D60-02: GCS_RECENCY_BOOST en analysis/rivalry_analyzer.py — analyze_surface_specialization()
+          Multiplicador post-normalización (bypassa dilución por volumen histórico):
+          ≤7d → ×2.2 | 8-14d → ×1.8 | 15-21d → ×1.5 | >21d o tier=ITF → sin boost
+          Retorna gcs_active (bool) + gcs_days (int). Corrige Bouzkova: 27.6 → 49.7.
+          Guard: Solo tier ∈ {grand_slam, atp1000, atp500}. ITF/Challenger excluidos.
+  
+  D60-03: Universos separados en combo_confianza_builder.py — GCS vs GS vs ITF
+          _extract_and_categorize lee surface_specialization_meta.player1/2.gcs_active
+          Asigna universo: GCS si gcs_active+tier≥atp500 | GS si tier≥atp500 sin bonus | ITF resto
+          _build_portfolio_v2 genera plan['gcs_plan'] = pares/tríos GCS puro (stake 2% budget)
+          _format_report muestra sección GCS separada con etiqueta clara.
+          Guard: MAX_GCS_PER_COMBO=1 en combos estándar. GCS nunca con ITF.
+  
+  D60-04: Tests T60-01→T60-05 validación:
+          T60-01: GCS_RECENCY_BOOST ×1.8 cuando ATP500 + days=13 ✅
+          T60-02: NO boost cuando tier=ITF ✅
+          T60-03: NO boost cuando days>21 ✅
+          T60-04: _extract_and_categorize marca gcs_active=True ✅
+          T60-05: H60-01 en preregistered_hypotheses.json con n_stop=30 ✅
+          Total tests: 1654 (1649 baseline + 5 nuevos). 0 failed.
+  
+  D60-05: Spec .spec/01_Nodos/Nodo-60-GCS-Grass-Surface-Champion-Signal.md
+  
+  Cambios pendientes conocidos: ninguno (implementación completa).
 ```
 
 ---

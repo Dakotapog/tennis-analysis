@@ -301,6 +301,22 @@ def _extract_and_categorize(partidos: list, threshold: float,
             or 'Desconocido'
         )
 
+        # Nodo-60 D60-03: detectar GCS flag y universo del pick
+        from config import detectar_tier as _detect_tier_ccb
+        _tier_partido = _detect_tier_ccb(str(torneo))
+        _gcs_active_pick = False
+        _ss_meta = pred.get('surface_specialization_meta', {})
+        if _ss_meta:
+            _is_p1 = (favorito == partido.get('jugador1'))
+            _pkey = 'player1' if _is_p1 else 'player2'
+            _player_sm = _ss_meta.get(_pkey, {})
+            if _player_sm.get('gcs_active') or _player_sm.get('torneo_completo'):
+                if _tier_partido in ('grand_slam', 'atp1000', 'atp500'):
+                    _gcs_active_pick = True
+        _universo = 'GCS' if _gcs_active_pick else (
+            'GS' if _tier_partido in ('grand_slam', 'atp1000', 'atp500') else 'ITF'
+        )
+
         picks.append({
             'nombre':       favorito,
             'confianza':    conf,
@@ -309,6 +325,9 @@ def _extract_and_categorize(partidos: list, threshold: float,
             'torneo':       torneo,
             'rival':        _get_rival(partido, favorito),
             'cat':          cat,
+            'gcs_active':   _gcs_active_pick,
+            'universo':     _universo,
+            'tier_partido': _tier_partido,
         })
 
     picks.sort(key=lambda x: x['confianza'], reverse=True)
@@ -577,6 +596,35 @@ def _build_portfolio_v2(picks: list, bankroll: float, fase: int = 4,
     if stake_max is not None:
         _cap_stakes(plan, stake_max)
 
+    # ═══ GCS SUB-PLAN (Nodo-60 D60-04) ═══
+    # Picks con TORNEO_COMPLETO_BONUS en superficie actual + tier≥ATP500
+    # Se construyen en universo propio — NO mezclar con picks ITF en CORE/Satellite
+    gcs_picks = [p for p in picks if p.get('gcs_active')]
+    if len(gcs_picks) >= 2:
+        gcs_stake = round(budget * 0.02 / 500) * 500  # 2% budget fijo
+        gcs_stake = max(500, gcs_stake)
+        gcs_combos = []
+        # Combos de 2 piernas (cada par único)
+        seen = set()
+        for i in range(len(gcs_picks)):
+            for j in range(i + 1, len(gcs_picks)):
+                pair = (gcs_picks[i]['nombre'], gcs_picks[j]['nombre'])
+                if pair not in seen:
+                    seen.add(pair)
+                    gcs_combos.append(
+                        _calc_combo([gcs_picks[i], gcs_picks[j]], gcs_stake,
+                                    f'GCS_2p_{gcs_picks[i]["nombre"].split()[0]}_{gcs_picks[j]["nombre"].split()[0]}')
+                    )
+        # Combo de 3 piernas si hay ≥3 GCS picks
+        if len(gcs_picks) >= 3:
+            gcs_combos.append(
+                _calc_combo(gcs_picks[:3], gcs_stake,
+                            f'GCS_3p_{"+".join(p["nombre"].split()[0] for p in gcs_picks[:3])}')
+            )
+        plan['gcs_plan'] = {'picks': gcs_picks, 'combos': gcs_combos, 'stake_per_combo': gcs_stake}
+    else:
+        plan['gcs_plan'] = None
+
     # ═══ RESUMEN ═══
     plan['resumen'] = _resumen_portfolio(plan)
 
@@ -794,6 +842,29 @@ def _format_report(picks: list, plan: dict, threshold: float,
             add(f'    Odds: {cob["odds_total"]:.2f}x  P(win): {cob["p_win"]*100:.1f}%  '
                 f'STAKE: ${cob["stake"]:,.0f}')
 
+    # ── GCS SUB-PLAN (Nodo-60) ────────────────────────────────────────────────
+    gcs_plan = plan.get('gcs_plan')
+    if gcs_plan and gcs_plan.get('combos'):
+        add()
+        sep('-', 70)
+        add()
+        add('GCS — CAMPEONES PRE-TORNEO (universo separado, no mezclar con ITF)')
+        add('  Condicion: TORNEO_COMPLETO_BONUS en superficie actual, tier>=ATP500, <=21d')
+        for gp in gcs_plan['picks']:
+            add(f'  * {gp["nombre"]:28s}  @{gp["cuota"]:.2f}  '
+                f'conf:{gp["confianza"]:.1f}%  [{(gp["torneo"] or "")[:40]}]')
+        add()
+        for gc in gcs_plan['combos']:
+            piernas_str = ' + '.join(
+                f'{n}@{q:.2f}' for n, q in zip(gc['piernas'], gc['cuotas'])
+            )
+            add(f'  [{gc["nombre"]}]  {piernas_str}')
+            add(f'    Odds: {gc["odds_total"]:.2f}x  P(win): {gc["p_win"]*100:.1f}%  '
+                f'STAKE: ${gc["stake"]:,.0f}  Retorno: ${gc["retorno_bruto"]:,.0f}')
+        add()
+        add('  REGLA-GCS: estos combos son independientes del CORE. Si el CORE muere, GCS vive.')
+        add('  H60-01 acumulando: n<30, no escalar stakes hasta graduacion.')
+
     # ── RESUMEN ───────────────────────────────────────────────────────────────
     add()
     sep('=', 70)
@@ -804,6 +875,9 @@ def _format_report(picks: list, plan: dict, threshold: float,
         f'(de ${res["budget"]:,.0f} budget)')
     add(f'  Retorno esperado:       ${res["total_retorno_esp"]:,.0f}')
     add(f'  EV total:               ${res["total_ev"]:+,.0f}')
+    if gcs_plan and gcs_plan.get('combos'):
+        gcs_total = sum(c['stake'] for c in gcs_plan['combos'])
+        add(f'  GCS sub-plan:           ${gcs_total:,.0f} ({len(gcs_plan["combos"])} combos, universo separado)')
     add()
 
     # ── Notas ─────────────────────────────────────────────────────────────────
