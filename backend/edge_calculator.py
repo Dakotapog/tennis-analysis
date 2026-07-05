@@ -912,6 +912,57 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
             f'T33-01: n_h2h=0 + p_modelo={p_modelo:.3f}<{P_MODELO_MIN_UNDERDOG} (coin-flip bloqueado)'
         )
 
+    # ─── D60-06 (Nodo-60-ADDON): GCS Special Gate ────────────────────────────────
+    # GCS_RECENCY_BOOST en rivalry_analyzer multiplica el score de especialización en
+    # superficie. Si un jugador ganó un torneo ATP500+ en la misma superficie hace ≤21d,
+    # su surface_specialization_meta.gcs_active=True.
+    #
+    # Edge matemático puede ser alto (>5%) pero model conviction puede ser LOW (p<0.55).
+    # GCS gate reduce edge_min de 50% a 15% y amplifica kelly_kl × gcs_score_boost,
+    # pero solo si gcs_active=True AND edge>=15% AND kelly>2% AND p_blend>=0.45.
+    #
+    # Casos de uso:
+    #   - Eala @3.80: edge=23.9%, kelly_kl=16.4% → sin gate, rechazado (edge>5% pero p<0.55)
+    #   - Con D60-06: gcs_active=True, edge=23.9% >= 15% → kelly_kl_ef=0.189 (~19%) → APOSTAR
+    _gcs_bonus = False
+    _gcs_score_boost = 1.0
+    _gcs_gate_applied = False
+
+    # Extraer metadata GCS del jugador favorito predicho
+    _surf_meta = pred.get('surface_specialization_meta', {})
+    _is_p1_fav = (favored == jugador1)
+    _pkey_fav = 'player1' if _is_p1_fav else 'player2'
+    _player_gcs = _surf_meta.get(_pkey_fav, {})
+
+    if _player_gcs.get('gcs_active'):
+        _gcs_bonus = True
+        # Mapear edge% a multiplicador: 5%→1.0, 15%→1.15 (clamped)
+        _edge_pct = resultado['edge'] * 100
+        _gcs_score_boost = min(1.0 + (_edge_pct / 100.0) * 0.75, 1.15)
+
+    # Kelly efectivo con boost GCS (solo si se activó)
+    _kelly_kl_base = resultado['kelly_kl_base']
+    _kelly_kl_ef = _kelly_kl_base * _gcs_score_boost
+
+    # Gate GCS: reduce edge_min a 15% (vs 50% normal) si todas las condiciones se cumplen
+    if _gcs_bonus and resultado['edge'] >= 0.15 and _kelly_kl_ef > 0.02 and _p_blend >= 0.45:
+        resultado['apostar'] = True
+        _gcs_gate_applied = True
+        # Actualizar kelly_kl en resultado para reflejar el boost (solo para auditoría)
+        resultado['kelly_kl_gcs_boosted'] = round(_kelly_kl_ef, 4)
+    elif resultado['edge'] >= EDGE_MIN and resultado['kelly_kl'] > KELLY_KL_MIN:
+        # Mantener la decisión original si no se aplica GCS gate
+        # (ya fue computada en calcular_edge)
+        pass
+
+    # Serializar metadata GCS en edge_report para shadow book + trader
+    resultado.update({
+        'gcs_bonus':          _gcs_bonus,
+        'gcs_score_boost':    round(_gcs_score_boost, 4),
+        'gcs_gate_applied':   _gcs_gate_applied,
+        'gcs_days':           _player_gcs.get('gcs_days'),
+    })
+
     # ─── FIX-5 / Nodo-29 Fase 4: circuit_asymmetry en edge_report ───────────────
     # Lee la señal de asimetría de circuito calculada en rivalry_analyzer y
     # agrega campos informativos. NO modifica edge ni Kelly.

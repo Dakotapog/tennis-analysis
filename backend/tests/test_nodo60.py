@@ -244,3 +244,265 @@ def test_T60_05_h60_01_exists_in_hypotheses():
     assert umbrales.get('tier_min') == 'atp500', "tier_min debe ser atp500"
     assert umbrales.get('dias_max') == 21, "dias_max debe ser 21"
     assert umbrales.get('gcs_mult_days_14') == 1.8, "gcs_mult_days_14 debe ser 1.8"
+
+
+# ── T60-06: GCS gate en edge_calculator aplica cuando edge>=15% + gcs_active ─────
+
+def test_T60_06_gcs_gate_fires_edge_calculator():
+    """D60-06: GCS gate en edge_calculator aplica apostar=True cuando edge>=15% + gcs_active + kelly>2%."""
+    from edge_calculator import calcular_edge_completo
+
+    # Simular Eala vs Swiatek: edge=23.9%, confidence=50.2%, gcs_active=True
+    # Estructura de score_breakdown compatible con phi_idiosincratico
+    _sb = {
+        'player1': {
+            'surface_specialization': {'contribution': '15%'},
+            'form_recent': {'contribution': '20%'},
+            'common_opponents': {'contribution': '10%'},
+            'h2h_direct': {'contribution': '0%'},
+            'ranking_momentum': {'contribution': '18%'},
+            'elo_rating': {'contribution': '12%'},
+            'home_advantage': {'contribution': '0%'},
+            'strength_of_schedule': {'contribution': '25%'},
+        },
+        'player2': {
+            'surface_specialization': {'contribution': '10%'},
+            'form_recent': {'contribution': '25%'},
+            'common_opponents': {'contribution': '8%'},
+            'h2h_direct': {'contribution': '20%'},
+            'ranking_momentum': {'contribution': '15%'},
+            'elo_rating': {'contribution': '12%'},
+            'home_advantage': {'contribution': '0%'},
+            'strength_of_schedule': {'contribution': '10%'},
+        },
+    }
+
+    partido = {
+        'jugador1': 'Alexandra Eala',
+        'jugador2': 'Iga Swiatek',
+        'cuota1': 3.80,
+        'cuota2': 1.27,
+        'cuota_es_real': True,
+        'torneo_nombre': 'WTA - INDIVIDUALES: Wimbledon (Reino Unido), hierba',
+        'tipo_cancha': 'hierba',
+        'superficie': 'Hierba',
+        'ranking_analysis': {
+            'prediction': {
+                'favored_player': 'Alexandra Eala',
+                'confidence': 50.2,  # p_modelo=0.502 (LOW, pero GCS rescata)
+                'reasoning': ['GCS_RECENCY_BOOST: Birmingham 2026 hace 13 días'],
+                'score_breakdown': _sb,
+                'markov_analysis': {
+                    'jugador1': {'estado_actual': 'NEUTRAL', 'win_rate_reciente': 0.5, 'win_rate_anterior': 0.5, 'confianza': 0.50},
+                    'jugador2': {'estado_actual': 'NEUTRAL', 'win_rate_reciente': 0.5, 'win_rate_anterior': 0.5, 'confianza': 0.50},
+                },
+                'surface_specialization_meta': {
+                    'player1': {
+                        'score': 85.0, 'raw_score': 47.2, 'win_rate': 0.72, 'matches': 18,
+                        'skill_factor': 1.8, 'alpha_bonus': 1.3, 'volume_confidence': 0.9,
+                        'surface_alpha': 0.22, 'torneo_completo': True,
+                        'gcs_active': True,  # ← KEY: GCS activated
+                        'gcs_days': 13,
+                    },
+                    'player2': {
+                        'score': 55.9, 'raw_score': 40.1, 'win_rate': 0.65, 'matches': 20,
+                        'skill_factor': 1.5, 'alpha_bonus': 1.0, 'volume_confidence': 0.95,
+                        'surface_alpha': 0.18, 'torneo_completo': False,
+                        'gcs_active': False,
+                        'gcs_days': None,
+                    },
+                },
+            },
+            'ranking_fav': {'ranking_position': 75, 'elo': 1787},
+            'ranking_rival': {'ranking_position': 22, 'elo': 1915},
+        },
+        'enfrentamientos_directos': [],  # sin H2H directo
+    }
+
+    calibracion = {
+        'global': {'wins': 467, 'losses': 239},
+        'por_superficie': {'grass': {'wins': 150, 'losses': 60}},
+        'por_superficie_y_tier': {'grass_grand_slam': {'wins': 31, 'losses': 10}},
+    }
+
+    resultado = calcular_edge_completo(partido, calibracion)
+
+    assert resultado is not None, "Debe retornar un resultado para Eala"
+    assert resultado['gcs_bonus'] is True, f"gcs_bonus debe ser True, got {resultado.get('gcs_bonus')}"
+    assert resultado['gcs_gate_applied'] is True, f"gcs_gate_applied debe ser True con edge=23.9%, got {resultado.get('gcs_gate_applied')}"
+    assert resultado['apostar'] is True, f"apostar debe ser True con GCS gate, got {resultado.get('apostar')}"
+    assert resultado['edge'] >= 0.15, f"edge debe ser >=15%, got {resultado['edge']}"
+
+
+# ── T60-07: GCS gate NO aplica cuando edge<15% ────────────────────────────────
+
+def test_T60_07_gcs_gate_no_fires_edge_low():
+    """D60-06: GCS gate NO aplica cuando edge<15% aunque gcs_active=True."""
+    from edge_calculator import calcular_edge_completo
+
+    _sb = {
+        'player1': {
+            'surface_specialization': {'contribution': '12%'},
+            'form_recent': {'contribution': '18%'},
+            'common_opponents': {'contribution': '8%'},
+            'h2h_direct': {'contribution': '3%'},
+            'ranking_momentum': {'contribution': '16%'},
+            'elo_rating': {'contribution': '12%'},
+            'home_advantage': {'contribution': '0%'},
+            'strength_of_schedule': {'contribution': '31%'},
+        },
+        'player2': {
+            'surface_specialization': {'contribution': '10%'},
+            'form_recent': {'contribution': '20%'},
+            'common_opponents': {'contribution': '8%'},
+            'h2h_direct': {'contribution': '10%'},
+            'ranking_momentum': {'contribution': '15%'},
+            'elo_rating': {'contribution': '12%'},
+            'home_advantage': {'contribution': '0%'},
+            'strength_of_schedule': {'contribution': '25%'},
+        },
+    }
+
+    # Simular partido con GCS activo pero edge bajo
+    partido = {
+        'jugador1': 'Test Player 1',
+        'jugador2': 'Test Player 2',
+        'cuota1': 1.95,  # edge ~10% (p_modelo=0.56, p_implicita=0.513)
+        'cuota2': 1.88,
+        'cuota_es_real': True,
+        'torneo_nombre': 'ATP - INDIVIDUALES: London (Inglaterra), hierba',
+        'tipo_cancha': 'hierba',
+        'superficie': 'Hierba',
+        'ranking_analysis': {
+            'prediction': {
+                'favored_player': 'Test Player 1',
+                'confidence': 56.0,  # p_modelo=0.56 (MODERATE)
+                'reasoning': [],
+                'score_breakdown': _sb,
+                'markov_analysis': {
+                    'player1': {'estado_actual': 'NEUTRAL', 'win_rate_reciente': 0.5, 'win_rate_anterior': 0.5, 'confianza': 0.50},
+                    'player2': {'estado_actual': 'NEUTRAL', 'win_rate_reciente': 0.5, 'win_rate_anterior': 0.5, 'confianza': 0.50},
+                },
+                'surface_specialization_meta': {
+                    'player1': {
+                        'score': 70.0, 'raw_score': 40.0, 'win_rate': 0.68, 'matches': 15,
+                        'skill_factor': 1.5, 'alpha_bonus': 1.2, 'volume_confidence': 0.85,
+                        'surface_alpha': 0.12, 'torneo_completo': True,
+                        'gcs_active': True,  # GCS está activo
+                        'gcs_days': 10,
+                    },
+                    'player2': {
+                        'score': 50.0, 'raw_score': 35.0, 'win_rate': 0.60, 'matches': 18,
+                        'skill_factor': 1.3, 'alpha_bonus': 1.0, 'volume_confidence': 0.80,
+                        'surface_alpha': 0.10, 'torneo_completo': False,
+                        'gcs_active': False,
+                        'gcs_days': None,
+                    },
+                },
+            },
+            'ranking_fav': {'ranking_position': 50, 'elo': 1800},
+            'ranking_rival': {'ranking_position': 80, 'elo': 1700},
+        },
+        'enfrentamientos_directos': [],
+    }
+
+    calibracion = {
+        'global': {'wins': 467, 'losses': 239},
+        'por_superficie': {'grass': {'wins': 150, 'losses': 60}},
+        'por_superficie_y_tier': {'grass_atp500': {'wins': 25, 'losses': 8}},
+    }
+
+    resultado = calcular_edge_completo(partido, calibracion)
+
+    assert resultado is not None, "Debe retornar un resultado"
+    assert resultado['gcs_bonus'] is True, f"gcs_bonus debe ser True, got {resultado.get('gcs_bonus')}"
+    assert resultado['edge'] < 0.15, f"edge debe ser <15%, got {resultado['edge']}"
+    # GCS gate NO aplica porque edge<15%, aunque gcs_active=True
+    assert resultado['gcs_gate_applied'] is False, f"gcs_gate_applied debe ser False con edge<15%, got {resultado.get('gcs_gate_applied')}"
+
+
+# ── T60-08: GCS score_boost clamped a ×1.15 máximo ──────────────────────────────
+
+def test_T60_08_gcs_score_boost_clamped():
+    """D60-06: gcs_score_boost se clampea a ×1.15 máximo."""
+    from edge_calculator import calcular_edge_completo
+
+    _sb = {
+        'player1': {
+            'surface_specialization': {'contribution': '18%'},
+            'form_recent': {'contribution': '25%'},
+            'common_opponents': {'contribution': '10%'},
+            'h2h_direct': {'contribution': '3%'},
+            'ranking_momentum': {'contribution': '16%'},
+            'elo_rating': {'contribution': '10%'},
+            'home_advantage': {'contribution': '0%'},
+            'strength_of_schedule': {'contribution': '18%'},
+        },
+        'player2': {
+            'surface_specialization': {'contribution': '5%'},
+            'form_recent': {'contribution': '15%'},
+            'common_opponents': {'contribution': '5%'},
+            'h2h_direct': {'contribution': '8%'},
+            'ranking_momentum': {'contribution': '12%'},
+            'elo_rating': {'contribution': '8%'},
+            'home_advantage': {'contribution': '0%'},
+            'strength_of_schedule': {'contribution': '47%'},
+        },
+    }
+
+    # Partido con edge muy alto (~40%) → gcs_score_boost sería ~1.30 sin clamp
+    partido = {
+        'jugador1': 'Test Player 1',
+        'jugador2': 'Test Player 2',
+        'cuota1': 5.50,  # edge~35% (p_modelo=0.56, p_implicita=0.182)
+        'cuota2': 1.10,
+        'cuota_es_real': True,
+        'torneo_nombre': 'ATP - INDIVIDUALES: London (Inglaterra), hierba',
+        'tipo_cancha': 'hierba',
+        'superficie': 'Hierba',
+        'ranking_analysis': {
+            'prediction': {
+                'favored_player': 'Test Player 1',
+                'confidence': 56.0,
+                'reasoning': [],
+                'score_breakdown': _sb,
+                'markov_analysis': {
+                    'player1': {'estado_actual': 'HOT', 'win_rate_reciente': 0.75, 'win_rate_anterior': 0.50, 'confianza': 0.70},
+                    'player2': {'estado_actual': 'COLD', 'win_rate_reciente': 0.25, 'win_rate_anterior': 0.50, 'confianza': 0.70},
+                },
+                'surface_specialization_meta': {
+                    'player1': {
+                        'score': 80.0, 'raw_score': 45.0, 'win_rate': 0.75, 'matches': 20,
+                        'skill_factor': 1.8, 'alpha_bonus': 1.3, 'volume_confidence': 0.90,
+                        'surface_alpha': 0.25, 'torneo_completo': True,
+                        'gcs_active': True,
+                        'gcs_days': 7,
+                    },
+                    'player2': {
+                        'score': 30.0, 'raw_score': 20.0, 'win_rate': 0.40, 'matches': 10,
+                        'skill_factor': 1.0, 'alpha_bonus': 0.9, 'volume_confidence': 0.60,
+                        'surface_alpha': 0.05, 'torneo_completo': False,
+                        'gcs_active': False,
+                        'gcs_days': None,
+                    },
+                },
+            },
+            'ranking_fav': {'ranking_position': 5, 'elo': 2000},
+            'ranking_rival': {'ranking_position': 200, 'elo': 1400},
+        },
+        'enfrentamientos_directos': [],
+    }
+
+    calibracion = {
+        'global': {'wins': 467, 'losses': 239},
+        'por_superficie': {'grass': {'wins': 150, 'losses': 60}},
+        'por_superficie_y_tier': {'grass_atp500': {'wins': 25, 'losses': 8}},
+    }
+
+    resultado = calcular_edge_completo(partido, calibracion)
+
+    assert resultado is not None, "Debe retornar un resultado"
+    assert resultado['gcs_bonus'] is True, f"gcs_bonus debe ser True, got {resultado.get('gcs_bonus')}"
+    # gcs_score_boost no puede exceder 1.15 aunque edge sea alto
+    assert resultado['gcs_score_boost'] <= 1.15, f"gcs_score_boost debe estar clamped <=1.15, got {resultado['gcs_score_boost']}"
+    assert resultado['gcs_gate_applied'] is True, f"gcs_gate_applied debe ser True con edge alto + gcs_active, got {resultado.get('gcs_gate_applied')}"
