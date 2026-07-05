@@ -492,10 +492,20 @@ Nodo-60-ADDENDUM-FABLE ✅ COMPLETO (2026-07-05):
   CARRIL 3 — H60-01 CORREGIDA (§2 Fable):
     exito: "limite inferior IC Wilson 95% > 1/cuota_media"
     corte_secundario_preregistrado: edge≥10% congelado ahora (no se decide post-hoc)
-    estado_inicial: "n=8, hits=3 (37.5%) — EVIDENCIA ACTUAL EN CONTRA"
+    estado_inicial: CORREGIDO 2026-07-05 (ver A60-01 abajo)
     gated: "GCS_MULT permanece OFF hasta exito=true Y Brier con-boost < sin-boost"
-    n_actual=11, hits=6 (54.5%) post Wimbledon 04-jul
-    A60-01 PENDIENTE: shadow book no tiene los 8 casos históricos pre-04-jul.
+    n_actual=54 settled (scan completo), hits=35 (64.8% hit rate)
+
+  A60-01 CERRADO 2026-07-05:
+    Método: scan automatizado 87 archivos h2h_results_enhanced
+    Filtros: superficie=grass|hierba + tier>=atp500 + cuota real + deduplicado
+    n_total=76 únicos | n_settled=54 | GANO=35 | PERDIO=19
+    Hit rate: 64.8% (35/54) — supera breakeven típico ~50%
+    Survivorship bias: NO confirmado. Casos históricos desde 2026-06-19 (Eala en Berlin)
+    Etiqueta 'EVIDENCIA EN CONTRA' era incorrecta — basada en n=8 manual limitado.
+    Tabla completa en .spec/01_Nodos/Nodo-60-ADDENDUM-FABLE-Auditoria-Tres-Carriles.md §A60-01
+
+  A60-02 CONFIRMADO: Birmingham/Nottingham/Ilkley → atp500 (3/3 casos califican guard).
 
   Tests reestructurados (10 tests, todos pasan):
     T60-01: LOG_GCS_SHADOW aparece con flag OFF (no GCS_RECENCY_BOOST activo)
@@ -506,23 +516,21 @@ Nodo-60-ADDENDUM-FABLE ✅ COMPLETO (2026-07-05):
     T60-10 (FABLE): LOG_GCS_SHADOW presente con flag=OFF, menciona ×mult y GATED
     Total: 1659 tests. 0 failed.
 
-  A60-02 CONFIRMADO: Birmingham/Nottingham/Ilkley → atp500 (3/3 casos califican guard).
-
 Arquitectura GCS (estado actual — flags OFF):
   rivalry_analyzer.py → gcs_active=True (señal), score NO inflado, LOG_GCS_SHADOW
   edge_calculator.py  → gcs_bonus=True serializado, apostar NO overrideado
   combo_confianza_builder.py → universo GCS, sub-plan separado (paralelo aprobado)
-  shadow_book.py → acumula H60-01 (n=11, hits=6)
-  Panel 6 Nodo-58 → H60-01 en rojo: n=11/30, tendencia honesta
+  shadow_book.py → acumula H60-01 (n=54 scan histórico, hits=35, 64.8%)
+  Panel 6 Nodo-58 → H60-01 acumulando, pendiente n≥30 prospectivo en shadow book
 
-  Para activar GCS cuando H60-01 gradúe (n≥30 + exito=True + Brier mejor):
+  Para activar GCS cuando H60-01 gradúe (n≥30 prospectivo + exito=True + Brier mejor):
     rivalry_analyzer.py: _GCS_BOOST_ENABLED = True
     edge_calculator.py:  _GCS_GATE_ENABLED = True
     Diseño correcto (§3 Fable): ponderación-en-origen (dentro del surface score),
     no multiplicador post-normalización. Las constantes 2.2/1.8/1.5 son propuesta
     inicial descartada por diseño. Calibrar contra Brier de settled.
 
-Cambios pendientes conocidos: A60-01 (tabla 8 casos históricos — datos no disponibles en shadow book pre-04-jul).
+Cambios pendientes conocidos: ninguno (A60-01 CERRADO, A60-02 CERRADO).
 ```
 
 ---

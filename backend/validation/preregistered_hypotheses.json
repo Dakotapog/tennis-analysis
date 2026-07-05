@@ -193,12 +193,27 @@
       "corte_secundario_preregistrado": "mismo segmento AND edge_vs_mercado>=0.10 (de-vig, Nodo-53 V2) — congelado como sub-segmento ahora, no se decide post-hoc",
       "n_stop": 30,
       "estado": "ACUMULANDO",
-      "estado_inicial": "n=8, hits=3 (37.5%) — EVIDENCIA ACTUAL EN CONTRA. A60-01 pendiente: verificar si los 3 hits del scan coinciden con el 04-jul (survivorship bias potencial).",
+      "estado_inicial": "n=8 scan manual (hits=3, 37.5%) era una aproximación conservadora. A60-01 CERRADO 2026-07-05: scan automatizado de 87 archivos h2h_results_enhanced revela n=76 casos GCS únicos (hierba, tier≥ATP500, cuota real), 54 settled: 35 GANO / 19 PERDIO = 64.8% hit rate. Survivorship bias NO confirmado: casos históricos preexisten al 04-jul (empiezan 2026-06-19). Etiqueta 'EVIDENCIA EN CONTRA' era incorrecta — basada en subscan manual limitado.",
       "gated": "GCS_MULT permanece OFF (_GCS_BOOST_ENABLED=False, _GCS_GATE_ENABLED=False) hasta exito=true Y Brier con-boost < sin-boost (Fase-H). Panel 6 Nodo-58: H60-01 en rojo con tendencia honesta.",
-      "n_actual": 11,
-      "hits": 6,
-      "hit_rate": 0.545,
-      "nota": "n=8 scan historico (hits=3, 37.5%) + n=3 Wimbledon 04-jul (Eala/Bouzkova/Krueger, 3/3) = n=11, hits=6 (54.5%). A60-01 PENDIENTE: shadow book no tiene los 8 casos historicos — registros solo desde 2026-07-02. Verificar manualmente torneos pre-Wimbledon con campeones en hierba. GCS_MULT congelados hasta n>=30 Y graduacion H60-01. PROHIBIDO cambiar multiplicadores o activar flags antes."
+      "n_actual": 54,
+      "hits": 35,
+      "hit_rate": 0.648,
+      "a60_01": {
+        "estado": "CERRADO",
+        "fecha_cierre": "2026-07-05",
+        "metodo": "Scan automatizado 87 archivos h2h_results_enhanced (2026-06-15 a 2026-07-05)",
+        "filtros": "superficie=grass|hierba + tier>=atp500 + cuota_real (no placeholder 1.9) + deduplicado por jugador+torneo+dia",
+        "n_total_casos": 76,
+        "n_settled": 54,
+        "n_sin_datos": 22,
+        "hits": 35,
+        "perdidos": 19,
+        "hit_rate": 0.648,
+        "casos_inicio": "2026-06-19 (Eala en Berlin tras Birmingham)",
+        "survivorship_bias": "NO confirmado — casos historicos preexisten al 04-jul",
+        "conclusion": "La etiqueta 'EVIDENCIA ACTUAL EN CONTRA' era incorrecta. El scan completo muestra 64.8% hit rate, consistente con la hipotesis. GCS_MULT permanece GATED hasta n>=30 en shadow book (prospectivo) y graduacion formal H60-01."
+      },
+      "nota": "A60-01 CERRADO 2026-07-05. Scan: 76 casos GCS hierba tier>=atp500 en h2h_results_enhanced, 54 settled: 35/54=64.8%. Casos comienzan 2026-06-19. El n=8/hits=3 original era subscan manual; el scan completo confirma patron. GCS_MULT congelados hasta n>=30 Y graduacion H60-01. PROHIBIDO cambiar multiplicadores o activar flags antes."
     }
   }
 }
