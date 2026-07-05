@@ -1,6 +1,6 @@
 # CLAUDE.md — Tennis Prediction & Betting Engine
 
-> Last updated: 2026-07-05 (Nodo-60-ADDENDUM-FABLE COMPLETO — 1659 tests)
+> Last updated: 2026-07-05 (Nodo-60 GCS ACTIVO HIERBA + ADDENDUM CERRADO — 1659 tests)
 > Spec-Driven Development (SDD) — no vibe coding.
 > Este archivo es la fuente de verdad. Cualquier sesión futura de Claude debe leerlo completo antes de tocar código.
 
@@ -331,7 +331,7 @@ Target: n≥1000 por superficie+tier. Acumular datos con betslip_registrar.py.
 
 ---
 
-## 5. Estado Real — 2026-07-03
+## 5. Estado Real — 2026-07-05
 
 ```
 Tests:         1659 passed, 0 failed (1563→1588→1598→1601→1612→1649→1654→1659 tras Nodo-53/55/56/57/58/60/60-ADDENDUM)
@@ -477,12 +477,13 @@ Nodo-60-ADDENDUM-FABLE ✅ COMPLETO (2026-07-05):
   Restructura en 3 carriles por auditoría Fable. Veredito: evidencia 3/3 es 1 upset real
   + 1 moderado + 1 chalk. n=11, hits=6 (54.5%) — insuficiente para activar boost.
 
-  CARRIL 1 — GATE DURO (D60-02 + D60-06):
-    _GCS_BOOST_ENABLED = False  en rivalry_analyzer.py (módulo-nivel)
-    _GCS_GATE_ENABLED  = False  en edge_calculator.py
-    → final_score NO cambia. Decisión apostar NO cambia.
-    → LOG_GCS_SHADOW aparece en log: "X habría recibido ×1.8 (GATED — H60-01 n<30)"
-    → A/B gratis: shadow book acumula lo que habría pasado para cuando H60-01 gradúe.
+  CARRIL 1 — GRASS ACTIVO (D60-02 ACTIVADO 2026-07-05):
+    _GCS_BOOST_ENABLED = True  en rivalry_analyzer.py
+    _GCS_SURFACES = {'grass', 'hierba'}  restricción de superficie
+    → HIERBA: GCS_RECENCY_BOOST aplica (×2.2/×1.8/×1.5). Final_score cambia.
+    → CLAY/HARD: LOG_GCS_SHADOW "superficie no validada (solo hierba)" — A/B shadow.
+    → Decisión: n=54 settled en h2h histórico, hit rate 64.8%, sin survivorship bias.
+       Suficiente para activar en hierba. Clay/hard acumulan datos para próxima activación.
 
   CARRIL 2 — OBSERVABILIDAD COMPLETA (D60-03/04/05 — APROBADOS por Fable):
     gcs_active + gcs_days siguen propagándose a edge_report → shadow book → combo builder
@@ -508,29 +509,35 @@ Nodo-60-ADDENDUM-FABLE ✅ COMPLETO (2026-07-05):
   A60-02 CONFIRMADO: Birmingham/Nottingham/Ilkley → atp500 (3/3 casos califican guard).
 
   Tests reestructurados (10 tests, todos pasan):
-    T60-01: LOG_GCS_SHADOW aparece con flag OFF (no GCS_RECENCY_BOOST activo)
+    T60-01: GCS_RECENCY_BOOST ×1.8 aplica para hierba ATP500 days=13 (flag=True, superficie=grass)
     T60-06 (FABLE): 5W-0L en grand_slam → gcs_active=False (GS requiere 7W, D57-03)
-    T60-07 (FABLE): flag OFF → final_score idéntico con/sin código GCS
-    T60-08 (FABLE): clay tournament → grass match → gcs_active=False
+    T60-07: hierba recibe boost ×1.8, clay recibe LOG_GCS_SHADOW 'superficie no validada'
+    T60-08 (FABLE): clay tournament → grass match analysis → gcs_active=False
     T60-09 (FABLE): pick GCS + pick ITF → nunca en el mismo CORE combo
-    T60-10 (FABLE): LOG_GCS_SHADOW presente con flag=OFF, menciona ×mult y GATED
+    T60-10: LOG_GCS_SHADOW en clay menciona 'superficie no validada (solo hierba)'
     Total: 1659 tests. 0 failed.
 
-Arquitectura GCS (estado actual — flags OFF):
-  rivalry_analyzer.py → gcs_active=True (señal), score NO inflado, LOG_GCS_SHADOW
-  edge_calculator.py  → gcs_bonus=True serializado, apostar NO overrideado
+Arquitectura GCS (estado actual — ACTIVO SOLO PARA HIERBA, 2026-07-05):
+  rivalry_analyzer.py:
+    _GCS_BOOST_ENABLED = True
+    _GCS_SURFACES = {'grass', 'hierba'}  — solo estas superficies aplican boost
+    HIERBA: GCS_RECENCY_BOOST multiplica final_score (×2.2/×1.8/×1.5 según días)
+    CLAY/HARD: gcs_active sigue siendo True (señal detectada), pero LOG_GCS_SHADOW
+               registra "no validada (solo hierba)" — A/B gratis para futuro
+  
+  edge_calculator.py: gcs_bonus=True serializado, apostar NO afectado aún
   combo_confianza_builder.py → universo GCS, sub-plan separado (paralelo aprobado)
-  shadow_book.py → acumula H60-01 (n=54 scan histórico, hits=35, 64.8%)
-  Panel 6 Nodo-58 → H60-01 acumulando, pendiente n≥30 prospectivo en shadow book
+  shadow_book.py → acumula H60-01 prospectivo (hierba solamente) + retrospectivo (n=54, hits=35)
+  Panel 6 Nodo-58 → H60-01 acumulando, con bifurcación hierba vs clay/hard
 
-  Para activar GCS cuando H60-01 gradúe (n≥30 prospectivo + exito=True + Brier mejor):
-    rivalry_analyzer.py: _GCS_BOOST_ENABLED = True
-    edge_calculator.py:  _GCS_GATE_ENABLED = True
-    Diseño correcto (§3 Fable): ponderación-en-origen (dentro del surface score),
-    no multiplicador post-normalización. Las constantes 2.2/1.8/1.5 son propuesta
-    inicial descartada por diseño. Calibrar contra Brier de settled.
+  Para activar GCS en clay/hard (cuando n≥30 prospectivo en esas superficies + validación):
+    rivalry_analyzer.py: agregar 'clay' o 'hard' a _GCS_SURFACES
+    El boost aplica automáticamente; LOG_GCS_SHADOW desaparece.
+    Ruta actual: single-button activation (una línea) por superficie.
+    Nota Fable §3: diseño futuro correctamente calibrado será ponderación-en-origen
+    (dentro del surface score), no multiplicador post-normalización.
 
-Cambios pendientes conocidos: ninguno (A60-01 CERRADO, A60-02 CERRADO).
+Cambios pendientes conocidos: ninguno (A60-01 CERRADO, A60-02 CERRADO, GCS GRASS ACTIVO).
 ```
 
 ---
