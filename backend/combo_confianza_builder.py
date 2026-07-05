@@ -1163,6 +1163,9 @@ def main():
 
     # --threshold sobrescribe el default (explícito tiene prioridad)
     threshold = args.threshold if args.threshold is not None else conf_min_efectivo
+    # Si el user pasa --threshold explícitamente, sincronizar conf_min (Nodo-60: GCS picks pueden tener conf<53%)
+    if args.threshold is not None:
+        conf_min_efectivo = min(conf_min_efectivo, args.threshold)
 
     # Seleccionar archivo
     if args.file:
