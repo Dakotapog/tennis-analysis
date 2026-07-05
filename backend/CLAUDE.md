@@ -464,17 +464,49 @@ Nodo-60 ✅ COMPLETO (2026-07-05):
           _format_report muestra sección GCS separada con etiqueta clara.
           Guard: MAX_GCS_PER_COMBO=1 en combos estándar. GCS nunca con ITF.
   
-  D60-04: Tests T60-01→T60-05 validación:
+  D60-04: Tests T60-01→T60-05 validación (rivalry_analyzer + combo_builder):
           T60-01: GCS_RECENCY_BOOST ×1.8 cuando ATP500 + days=13 ✅
           T60-02: NO boost cuando tier=ITF ✅
           T60-03: NO boost cuando days>21 ✅
           T60-04: _extract_and_categorize marca gcs_active=True ✅
           T60-05: H60-01 en preregistered_hypotheses.json con n_stop=30 ✅
-          Total tests: 1654 (1649 baseline + 5 nuevos). 0 failed.
   
   D60-05: Spec .spec/01_Nodos/Nodo-60-GCS-Grass-Surface-Champion-Signal.md
+
+Nodo-60-ADDON ✅ COMPLETAMENTE INTEGRADO (2026-07-05):
+  GCS gate en pipeline NORMAL (edge_calculator + trader). Cierra el loop.
   
-  Cambios pendientes conocidos: ninguno (implementación completa).
+  D60-06: GCS Special Gate en edge_calculator.py (líneas 915-963)
+          Cuando gcs_active=True en surface_specialization_meta:
+          - Reduce edge_min: 50% → 15%
+          - Amplifica kelly_kl: kelly_kl_ef = kelly_kl × gcs_score_boost
+          - gcs_score_boost = min(1.0 + edge%/100 × 0.75, ×1.15 max)
+          - Aplica apostar=True si edge≥15% + kelly>2% + p_blend≥0.45
+          Resultado Eala (edge=23.9%, 13d): APOSTAR ✅ (antes WATCHLIST)
+  
+  D60-07: Tests T60-06, T60-07, T60-08 (edge_calculator gate validation):
+          T60-06: GCS gate aplica cuando edge≥15% + gcs_active → apostar=True
+          T60-07: GCS gate NO aplica cuando edge<15%
+          T60-08: gcs_score_boost clamped ×1.15 max
+          Total tests: 1657 (1654 baseline + 3 nuevos). 0 failed.
+
+Arquitectura FINAL Nodo-60 COMPLETO:
+  rivalry_analyzer.py → surface_specialization_meta (gcs_active, gcs_days)
+  edge_calculator.py → D60-06 gate (reduce edge_min 50%→15%, amplifia kelly)
+  trader_ev_tenis.py → procesa picks APOSTAR con GCS
+  combo_confianza_builder.py → GCS sub-plan paralelo (2-3 piernas puro)
+  shadow_book.py → acumula H60-01 (n=8→n=11)
+
+  Flujo unificado: rivalry_analyzer → edge_calculator → trader normal
+                                    ↘ combo_builder (paralelo)
+
+Guardrails Nodo-60-ADDON:
+  - gcs_gate_applied=True solo si 4 condiciones simultáneas
+  - gcs_score_boost clamped ×1.15 (conservador, respeta λ=0.3)
+  - H60-01 congelada hasta n≥30 (actualmente n=11)
+  - Reversible: toggle `_GCS_GATE_ENABLED=False`
+
+Cambios pendientes conocidos: ninguno (implementación 100% completa).
 ```
 
 ---
