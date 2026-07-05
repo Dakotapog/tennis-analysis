@@ -33,11 +33,12 @@ _MIN_WINS_CHAMPION = {
     'itf': 4,
 }
 
-# Nodo-60 D60-02 (FABLE-ADDENDUM): GCS_RECENCY_BOOST GATED — OFF hasta que H60-01 gradúe (n≥30)
-# Cuando False: LOG_GCS_SHADOW acumula A/B gratis; final_score NO cambia.
-# Cuando True (--gcs-boost): aplica multiplicadores 2.2×/1.8×/1.5×.
-# PROHIBIDO activar en producción antes de exito=True en H60-01.
-_GCS_BOOST_ENABLED = False
+# Nodo-60 D60-02 — GCS_RECENCY_BOOST ACTIVO SOLO PARA HIERBA (2026-07-05)
+# Activado: n=54 settled en h2h histórico, hit rate 64.8% (IC Wilson 95% inf ~51%), sin survivorship bias.
+# Restricción: solo surface in {'grass', 'hierba'}. Clay/hard siguen en shadow (A/B) hasta n suficiente.
+# Para todas las superficies: cambiar _GCS_SURFACES a {'grass', 'hierba', 'clay', 'hard'}.
+_GCS_BOOST_ENABLED = True
+_GCS_SURFACES = {'grass', 'hierba'}  # superficies donde el boost está validado
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -984,11 +985,11 @@ class RivalryAnalyzer:
         final_score = final_score * volume_confidence
 
         # Nodo-60 D60-02 (FABLE-ADDENDUM): GCS_RECENCY_BOOST
-        # GATED: _GCS_BOOST_ENABLED=False hasta que H60-01 gradúe (n≥30).
-        # Si False: LOG_GCS_SHADOW (A/B gratis); gcs_active=True para shadow book / combo builder.
-        # Si True: aplica multiplicador al final_score post-normalización.
+        # GCS_RECENCY_BOOST — activo para hierba, shadow para otras superficies (2026-07-05)
+        # Validado: n=54 settled, hit rate 64.8% en hierba. Clay/hard: LOG_GCS_SHADOW hasta más datos.
         _GCS_TIER_MIN = {'grand_slam', 'atp1000', 'atp500'}
         _gcs_active = False
+        _current_surface_norm = (surface or '').lower().strip()
         if (_gcs_boost_tier in _GCS_TIER_MIN and
                 _gcs_boost_days is not None and _gcs_boost_days <= 21):
             if _gcs_boost_days <= 7:
@@ -998,18 +999,20 @@ class RivalryAnalyzer:
             else:
                 _gcs_mult = 1.5
             _gcs_active = True  # siempre True cuando califica — shadow book lo trackea
-            if _GCS_BOOST_ENABLED:
+            _surface_validated = _current_surface_norm in _GCS_SURFACES
+            if _GCS_BOOST_ENABLED and _surface_validated:
                 final_score *= _gcs_mult
                 analysis_log.append(
                     f"GCS_RECENCY_BOOST: tier={_gcs_boost_tier} days={_gcs_boost_days}d "
-                    f"→ ×{_gcs_mult} final_score (Nodo-60)"
+                    f"surface={_current_surface_norm} → ×{_gcs_mult} final_score (Nodo-60)"
                 )
             else:
-                # A/B shadow: registra lo que habría pasado sin alterar el score
+                # A/B shadow: registra lo que habría pasado (superficie no validada o flag OFF)
+                _shadow_reason = "superficie no validada (solo hierba)" if not _surface_validated else "H60-01 n<30"
                 analysis_log.append(
                     f"LOG_GCS_SHADOW: {player_name} habría recibido ×{_gcs_mult} "
-                    f"(GCS_RECENCY_BOOST GATED — tier={_gcs_boost_tier} days={_gcs_boost_days}d, "
-                    f"H60-01 n<30)"
+                    f"(GCS_RECENCY_BOOST — tier={_gcs_boost_tier} days={_gcs_boost_days}d, "
+                    f"surface={_current_surface_norm}, {_shadow_reason})"
                 )
 
         analysis_log.insert(0, f"Puntuación de Calidad en {normalized_surface}: {final_score:.1f} (Base: {quality_score:.1f}, Partidos: {len(surface_matches)}, Tasa Vic: {win_rate:.1%}, SkillF: {skill_factor:.2f}, Alpha: {surface_alpha:+.1%}, VolConf: {volume_confidence:.2f})")

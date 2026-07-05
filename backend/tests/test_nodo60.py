@@ -1,16 +1,16 @@
 """
-Tests Nodo-60: GCS — Grass/Surface Champion Signal (FABLE-ADDENDUM restructura)
+Tests Nodo-60: GCS — Grass/Surface Champion Signal (FABLE-ADDENDUM + activación hierba 2026-07-05)
 
-T60-01: LOG_GCS_SHADOW aparece (flag OFF) y gcs_active=True cuando tier>=ATP500 y days<=14
+T60-01: GCS_RECENCY_BOOST ×1.8 aplica para hierba ATP500 days=13 (flag ON, superficie validada)
 T60-02: gcs_active=False cuando tier=ITF (guard tier)
 T60-03: gcs_active=False cuando days>21 (ventana caducada)
 T60-04: _extract_and_categorize marca gcs_active=True cuando torneo_completo=True + tier>=atp500
 T60-05: H60-01 existe en preregistered_hypotheses.json con n_stop=30 y campo gated
 T60-06: 5W-0L en grand_slam → gcs_active=False (D57-03: GS requiere 7W)
-T60-07: flag OFF por default → final_score idéntico con/sin código GCS
+T60-07: boost aplica para hierba, LOG_GCS_SHADOW para clay (superficie no validada)
 T60-08: torneo ganado en clay, partido actual en grass → gcs_active=False
 T60-09: pick GCS + pick ITF → nunca en el mismo CORE combo
-T60-10: LOG_GCS_SHADOW presente cuando flag=OFF y pick califica
+T60-10: LOG_GCS_SHADOW en clay menciona 'superficie no validada (solo hierba)'
 """
 import json
 import math
@@ -84,13 +84,15 @@ def _get_analyzer():
     return RivalryAnalyzer(rm, es)
 
 
-# ── T60-01: flag OFF → LOG_GCS_SHADOW aparece y gcs_active=True con tier>=ATP500 y days<=14 ──
+# ── T60-01: boost activo en hierba — GCS_RECENCY_BOOST ×1.8 para ATP500 days=13 ──
 
-def test_T60_01_gcs_shadow_log_atp500_recent():
-    """Con _GCS_BOOST_ENABLED=False (default): gcs_active=True y LOG_GCS_SHADOW en log para
-    torneo ATP500 hace 13 días. El score NO cambia (A/B shadow)."""
+def test_T60_01_gcs_boost_active_grass_atp500_recent():
+    """Con _GCS_BOOST_ENABLED=True y superficie=hierba: GCS_RECENCY_BOOST ×1.8 aplica
+    para torneo ATP500 hace 13 días. Score sube; NO aparece LOG_GCS_SHADOW."""
     import analysis.rivalry_analyzer as ra_mod
-    assert ra_mod._GCS_BOOST_ENABLED is False, "_GCS_BOOST_ENABLED debe ser False por default"
+    assert ra_mod._GCS_BOOST_ENABLED is True, "_GCS_BOOST_ENABLED debe ser True (activado para hierba)"
+    assert 'grass' in ra_mod._GCS_SURFACES or 'hierba' in ra_mod._GCS_SURFACES, \
+        "_GCS_SURFACES debe incluir hierba"
 
     analyzer = _get_analyzer()
 
@@ -106,12 +108,12 @@ def test_T60_01_gcs_shadow_log_atp500_recent():
 
     assert result['gcs_active'] is True, "gcs_active debe ser True con torneo ATP500 en 13 días"
     assert result['gcs_days'] == 13, f"gcs_days debe ser 13, got {result['gcs_days']}"
-    # Con flag OFF: LOG_GCS_SHADOW en log, NO GCS_RECENCY_BOOST
-    shadow_log = [l for l in log if 'LOG_GCS_SHADOW' in l]
+    # Con flag ON y hierba: GCS_RECENCY_BOOST activo, NO LOG_GCS_SHADOW
     boost_log = [l for l in log if 'GCS_RECENCY_BOOST' in l and 'LOG_GCS_SHADOW' not in l]
-    assert len(shadow_log) >= 1, f"Debe haber LOG_GCS_SHADOW con flag OFF, got: {log}"
-    assert len(boost_log) == 0, f"NO debe haber GCS_RECENCY_BOOST activo con flag OFF"
-    assert '×1.8' in shadow_log[0], f"Shadow debe mencionar ×1.8 para days=13, got: {shadow_log[0]}"
+    shadow_log = [l for l in log if 'LOG_GCS_SHADOW' in l]
+    assert len(boost_log) >= 1, f"Debe haber GCS_RECENCY_BOOST activo para hierba, got: {log}"
+    assert len(shadow_log) == 0, f"NO debe haber LOG_GCS_SHADOW cuando el boost aplica"
+    assert '×1.8' in boost_log[0], f"Boost debe ser ×1.8 para days=13, got: {boost_log[0]}"
 
 
 # ── T60-02: GCS_RECENCY_BOOST NO aplica con tier=ITF ─────────────────────────
@@ -286,37 +288,39 @@ def test_T60_06_grand_slam_5wins_no_gcs():
 
 
 
-# ── T60-07: flag OFF por default → final_score idéntico con/sin código GCS ────
+# ── T60-07: hierba recibe boost, clay recibe LOG_GCS_SHADOW (superficie no validada) ──
 
-def test_T60_07_flag_off_score_unchanged():
-    """FABLE §S60-7: _GCS_BOOST_ENABLED=False por default → final_score idéntico
-    con o sin historia de torneo GCS (el código existe, pero no altera el score)."""
+def test_T60_07_grass_boost_clay_shadow():
+    """Activación selectiva por superficie: mismo torneo ATP500 reciente →
+    hierba recibe GCS_RECENCY_BOOST ×1.8, clay recibe LOG_GCS_SHADOW 'superficie no validada'."""
     import analysis.rivalry_analyzer as ra_mod
-    assert ra_mod._GCS_BOOST_ENABLED is False, "_GCS_BOOST_ENABLED debe ser False por default"
+    assert ra_mod._GCS_BOOST_ENABLED is True, "_GCS_BOOST_ENABLED debe ser True"
 
     analyzer = _get_analyzer()
 
-    # Historial base (sin torneo completo)
-    history_base = _make_surface_matches(n_wins=20, n_total=30, surface='Hierba')
-    result_base, _ = analyzer.analyze_surface_specialization(
-        history_base, 'Hierba', 'TestPlayer'
-    )
-
-    # Historial con torneo completo ATP500 reciente (debería activar GCS si flag estuviera ON)
+    # Mismo historial con torneo completo ATP500 en hierba hace 10 días
     history_gcs = _make_complete_tournament_matches(
         torneo_name='Nottingham 2026', days_ago=10, n_wins=5, surface='Hierba'
-    ) + history_base
-    result_gcs, log_gcs = analyzer.analyze_surface_specialization(
+    ) + _make_surface_matches(n_wins=20, n_total=30, surface='Hierba')
+
+    # Análisis en hierba → boost debe aplicar
+    result_grass, log_grass = analyzer.analyze_surface_specialization(
         history_gcs, 'Hierba', 'TestPlayer'
     )
+    boost_log = [l for l in log_grass if 'GCS_RECENCY_BOOST' in l and 'LOG_GCS_SHADOW' not in l]
+    assert len(boost_log) >= 1, f"Hierba debe recibir GCS_RECENCY_BOOST, got: {log_grass}"
 
-    # Con flag OFF: gcs_active=True pero el score no debe cambiar por el boost
-    assert result_gcs['gcs_active'] is True, "gcs_active debe ser True (señal detectada)"
-    # LOG_GCS_SHADOW debe aparecer (no GCS_RECENCY_BOOST activo)
-    shadow = [l for l in log_gcs if 'LOG_GCS_SHADOW' in l]
-    assert len(shadow) >= 1, f"LOG_GCS_SHADOW debe aparecer con flag OFF, got: {log_gcs}"
-    no_active_boost = [l for l in log_gcs if 'GCS_RECENCY_BOOST' in l and 'LOG_GCS_SHADOW' not in l]
-    assert len(no_active_boost) == 0, f"GCS_RECENCY_BOOST activo NO debe aparecer con flag OFF"
+    # Mismo torneo pero análisis pedido para clay → LOG_GCS_SHADOW (no validado)
+    history_gcs_clay = _make_complete_tournament_matches(
+        torneo_name='Nottingham 2026', days_ago=10, n_wins=5, surface='Arcilla'
+    ) + _make_surface_matches(n_wins=20, n_total=30, surface='Arcilla')
+    result_clay, log_clay = analyzer.analyze_surface_specialization(
+        history_gcs_clay, 'Arcilla', 'TestPlayer'
+    )
+    shadow_log = [l for l in log_clay if 'LOG_GCS_SHADOW' in l]
+    assert len(shadow_log) >= 1, f"Clay debe recibir LOG_GCS_SHADOW, got: {log_clay}"
+    assert 'no validada' in shadow_log[0] or 'superficie' in shadow_log[0], \
+        f"Shadow debe indicar superficie no validada, got: {shadow_log[0]}"
 
 
 # ── T60-08: torneo ganado en clay, partido actual en grass → gcs_active=False ──
@@ -412,38 +416,38 @@ def test_T60_09_gcs_itf_not_mixed_in_core():
 
 # ── T60-10: LOG_GCS_SHADOW presente cuando flag=OFF y pick califica ───────────
 
-def test_T60_10_log_gcs_shadow_present_when_flag_off():
-    """FABLE §S60-7: Con _GCS_BOOST_ENABLED=False, LOG_GCS_SHADOW aparece en el
-    analysis_log cuando el pick califica (tier>=ATP500, days<=21, misma superficie).
-    Esto es el A/B gratis: shadow book acumula 'qué habría pasado'."""
+def test_T60_10_log_gcs_shadow_clay_superficie_no_validada():
+    """Con _GCS_BOOST_ENABLED=True pero superficie=clay (no validada):
+    LOG_GCS_SHADOW aparece mencionando 'superficie no validada (solo hierba)'.
+    El A/B shadow sigue funcionando para acumular datos en otras superficies."""
     import analysis.rivalry_analyzer as ra_mod
-    assert ra_mod._GCS_BOOST_ENABLED is False, "_GCS_BOOST_ENABLED debe ser False por default"
+    assert ra_mod._GCS_BOOST_ENABLED is True, "_GCS_BOOST_ENABLED debe ser True"
 
     analyzer = _get_analyzer()
 
-    # Torneo ATP500 en hierba hace 7 días (máximo boost potencial ×2.2)
+    # Torneo ATP500 en arcilla hace 7 días — superficie no validada para GCS
     history_gcs = _make_complete_tournament_matches(
-        torneo_name='Birmingham 2026', days_ago=7, n_wins=5, surface='Hierba'
-    ) + _make_surface_matches(n_wins=15, n_total=25, surface='Hierba')
+        torneo_name='Barcelona 2026', days_ago=7, n_wins=5, surface='Arcilla'
+    ) + _make_surface_matches(n_wins=15, n_total=25, surface='Arcilla')
 
     result, log = analyzer.analyze_surface_specialization(
-        history_gcs, 'Hierba', 'TestPlayer'
+        history_gcs, 'Arcilla', 'TestPlayer'
     )
 
-    assert result['gcs_active'] is True, "gcs_active debe ser True"
+    assert result['gcs_active'] is True, "gcs_active debe ser True (señal detectada aunque no se aplica)"
 
     shadow_lines = [l for l in log if 'LOG_GCS_SHADOW' in l]
-    assert len(shadow_lines) >= 1, f"LOG_GCS_SHADOW debe aparecer con flag OFF: {log}"
+    assert len(shadow_lines) >= 1, f"LOG_GCS_SHADOW debe aparecer para superficie no validada: {log}"
 
     # Debe mencionar el multiplicador que se habría aplicado
     assert '×2.2' in shadow_lines[0], (
         f"LOG_GCS_SHADOW debe mencionar ×2.2 para days=7, got: {shadow_lines[0]}"
     )
-    # Y debe mencionar GATED para auditabilidad
-    assert 'GATED' in shadow_lines[0], (
-        f"LOG_GCS_SHADOW debe indicar GATED, got: {shadow_lines[0]}"
+    # Debe mencionar que la superficie no está validada
+    assert 'no validada' in shadow_lines[0] or 'superficie' in shadow_lines[0], (
+        f"LOG_GCS_SHADOW debe mencionar superficie no validada, got: {shadow_lines[0]}"
     )
 
-    # Verificar que GCS_RECENCY_BOOST activo NO está en el log
+    # Verificar que GCS_RECENCY_BOOST activo NO está en el log (clay no activado)
     active_boost = [l for l in log if 'GCS_RECENCY_BOOST:' in l and 'LOG_GCS_SHADOW' not in l]
-    assert len(active_boost) == 0, f"NO debe haber boost activo con flag OFF: {active_boost}"
+    assert len(active_boost) == 0, f"NO debe haber boost activo en clay: {active_boost}"
