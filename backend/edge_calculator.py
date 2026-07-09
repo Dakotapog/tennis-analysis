@@ -857,6 +857,7 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
     _vol_fav = _surf_fav.get('volume_confidence', 1.0)
     _vol_dog = _surf_dog.get('volume_confidence', 1.0)
     resultado['data_insufficient_surface'] = min(_vol_fav, _vol_dog) < 0.25
+    resultado['phantom_data'] = False  # Nodo-72: default, se sobreescribe abajo si phantom detectado
 
     # ─── Nodo-35 / F2: HISTORIAL_NO_EXTRAIDO — bloqueo en origen + NO_DATA status ──
     # Si la extracción de historial falló para cualquiera de los dos jugadores,
@@ -878,6 +879,25 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
         resultado['status'] = PICK_STATUS_NO_DATA  # F2: excluido de todos los pools
         resultado['motivo_reclasificacion'] = (
             f'HISTORIAL_NO_EXTRAIDO: sin datos de {", ".join(_sin_datos_nombres)} '
+            f'— predicción no confiable, bloqueada en origen'
+        )
+
+    # ─── Nodo-72: PHANTOM_IDENTITY gate ─────────────────────────────────────────
+    # Si rivalry_analyzer detectó colisión de identidad → status=NO_DATA siempre.
+    # Caso Morris: WTA player con historial ATP (CIRCUIT_MISMATCH).
+    # Caso Pereyra: sin ranking + >20 partidos + oldest >365d (HOMONYM_GAP).
+    _ranking_analysis_ph = partido.get('ranking_analysis', {})
+    _ph_p1 = _ranking_analysis_ph.get('phantom_identity_p1', {})
+    _ph_p2 = _ranking_analysis_ph.get('phantom_identity_p2', {})
+    _phantom_detected = _ph_p1.get('phantom', False) or _ph_p2.get('phantom', False)
+    if _phantom_detected:
+        _ph_type = _ph_p1.get('type') or _ph_p2.get('type') or 'UNKNOWN'
+        _ph_player = partido.get('jugador1') if _ph_p1.get('phantom') else partido.get('jugador2')
+        resultado['apostar'] = False
+        resultado['phantom_data'] = True
+        resultado['status'] = PICK_STATUS_NO_DATA
+        resultado['motivo_reclasificacion'] = (
+            f'PHANTOM_IDENTITY [{_ph_type}]: historial contaminado de {_ph_player} '
             f'— predicción no confiable, bloqueada en origen'
         )
 
@@ -948,11 +968,15 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
         resultado['kelly_kl_gcs_boosted'] = round(_kelly_kl_ef, 4)
 
     # Serializar metadata GCS en edge_report para shadow book + trader (siempre, flag aparte)
+    # Nodo-61 D61-F5: añadir gcs_extended_* para H60-02 prospectivo
     resultado.update({
-        'gcs_bonus':          _gcs_bonus,
-        'gcs_score_boost':    round(_gcs_score_boost, 4),
-        'gcs_gate_applied':   _gcs_gate_applied,
-        'gcs_days':           _player_gcs.get('gcs_days'),
+        'gcs_bonus':                   _gcs_bonus,
+        'gcs_score_boost':             round(_gcs_score_boost, 4),
+        'gcs_gate_applied':            _gcs_gate_applied,
+        'gcs_days':                    _player_gcs.get('gcs_days'),
+        'gcs_extended_active':         _player_gcs.get('gcs_extended_active', False),
+        'gcs_extended_days':           _player_gcs.get('gcs_extended_days'),
+        'gcs_extended_mult_potencial': _player_gcs.get('gcs_extended_mult_potencial'),
     })
 
     # ─── FIX-5 / Nodo-29 Fase 4: circuit_asymmetry en edge_report ───────────────
