@@ -1,0 +1,18 @@
+# Obsidian metadata
+.spec/.obsidian/
+
+# Archivos de runtime / output operacional
+analisis_partidos_pandas.txt
+pipeline_tracking.txt
+data/betplay_ofertas.txt
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Entorno
+.env
+.env.local
