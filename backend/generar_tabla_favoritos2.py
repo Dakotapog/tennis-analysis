@@ -907,12 +907,15 @@ def analyze_matches_with_pandas(file_path, output_filename="analisis_partidos_pa
                         _special_signals.append(f"CAMPEON ANTERIOR EN SUPERFICIE: {_player} -- {_clean}")
                     if 'LOG_FORM_DECAY' in reason:
                         # D57-05: señal de inactividad visible al usuario
+                        # Nodo-63: no mostrar INACTIVIDAD si LOG_INSUFFICIENT_HISTORY activo
+                        _insuf_p1 = any('LOG_INSUFFICIENT_HISTORY' in r and p1 in r for r in reasoning)
+                        _insuf_p2 = any('LOG_INSUFFICIENT_HISTORY' in r and p2 in r for r in reasoning)
                         _fd_p1m = re.search(r'fd_p1=([\d.]+)', reason)
                         _fd_p2m = re.search(r'fd_p2=([\d.]+)', reason)
                         _dp1m   = re.search(r'p1_days=([-\d]+)', reason)
                         _dp2m   = re.search(r'p2_days=([-\d]+)', reason)
-                        for _pn, _fdm, _dm in [(p1, _fd_p1m, _dp1m), (p2, _fd_p2m, _dp2m)]:
-                            if _fdm and _dm:
+                        for _pn, _fdm, _dm, _insuf in [(p1, _fd_p1m, _dp1m, _insuf_p1), (p2, _fd_p2m, _dp2m, _insuf_p2)]:
+                            if _fdm and _dm and not _insuf:
                                 _fdv = float(_fdm.group(1))
                                 _dv  = int(_dm.group(1))
                                 if _fdv < 1.0 and _dv > 30:
