@@ -2,6 +2,7 @@ import re
 from datetime import datetime
 import logging
 import math
+from pathlib import Path
 
 from analysis.elo_system import k_factor_efectivo
 from analysis.erdos_graph import (
@@ -23,6 +24,35 @@ RIVALRY_VERSION = "nodo32-fase3-markov-postnorm"
 _FORM_DECAY_LAMBDA = 0.025   # half-life efectivo ≈ 28d post-gracia
 _FORM_GRACE_DAYS   = 30      # sin decay hasta 30 días (transiciones de superficie normales)
 _FORM_DECAY_FLOOR  = 0.35    # nunca perder más del 65% de la señal de forma
+_MIN_HISTORY_FOR_DECAY = 8   # Nodo-63: n mínimo para aplicar form_decay
+                              # n<8 = datos incompletos (qualifying/ITF local), no inactividad real
+_PLAYWRIGHT_QUEUE_PATH = Path(__file__).parent.parent / "data" / "playwright_queue.json"
+
+
+def _enqueue_playwright_candidate(nombre: str, n_partidos: int, match_id: str) -> None:
+    """C63-A: escribe candidato a cola Playwright (append-only, deduplicado por match_id+nombre)."""
+    import json as _json
+    try:
+        queue = []
+        if _PLAYWRIGHT_QUEUE_PATH.exists():
+            try:
+                queue = _json.loads(_PLAYWRIGHT_QUEUE_PATH.read_text(encoding="utf-8"))
+            except Exception:
+                queue = []
+        key = f"{match_id}::{nombre}"
+        existing_keys = {f"{e.get('match_id')}::{e.get('nombre')}" for e in queue}
+        if key not in existing_keys:
+            from datetime import datetime as _dt
+            queue.append({
+                "nombre": nombre, "n_partidos": n_partidos,
+                "match_id": match_id, "enqueued_at": _dt.now().isoformat(),
+                "source": "C63-A_insufficient_history",
+            })
+            _PLAYWRIGHT_QUEUE_PATH.write_text(
+                _json.dumps(queue, indent=2, ensure_ascii=False), encoding="utf-8"
+            )
+    except Exception:
+        pass  # queue es best-effort; no bloquear predicción
 
 # Nodo-57 D57-03: victorias mínimas en cuadro principal para ser campeón completo
 _MIN_WINS_CHAMPION = {
@@ -34,11 +64,28 @@ _MIN_WINS_CHAMPION = {
 }
 
 # Nodo-60 D60-02 — GCS_RECENCY_BOOST ACTIVO SOLO PARA HIERBA (2026-07-05)
-# Activado: n=54 settled en h2h histórico, hit rate 64.8% (IC Wilson 95% inf ~51%), sin survivorship bias.
+# DECISIÓN DE ACTIVACIÓN C61-B (FABLE_02_TENIS_DOCTORADO_SPEC §2, 2026-07-08):
+#   Opción (a): activación formal por evidencia RETROSPECTIVA A60-01 (n=54 settled, 64.8% hit rate,
+#   IC Wilson 95% inferior ~51%), con H60-01 PROSPECTIVA continuando acumulación.
+#   Regla de descenso: si H60-01 prospectiva acumula n≥30 y hit% < breakeven → apagar flag.
+#   La activación NO se basa en H60-01 prospectiva (que sigue en ACUMULANDO, n aún insuficiente).
+#   Evidencia usada: prior retrospectivo A60-01 (scan 87 archivos h2h_results_enhanced).
+#   PROHIBIDO: cualquier log/docstring que atribuya activación a H60-01 prospectiva — usar "prior A60-01".
 # Restricción: solo surface in {'grass', 'hierba'}. Clay/hard siguen en shadow (A/B) hasta n suficiente.
 # Para todas las superficies: cambiar _GCS_SURFACES a {'grass', 'hierba', 'clay', 'hard'}.
 _GCS_BOOST_ENABLED = True
 _GCS_SURFACES = {'grass', 'hierba'}  # superficies donde el boost está validado
+
+# Nodo-61 D61-F0/F1/F3: season-aware GCS gate — corrige Bug F0 (año erróneo) + Bug F1 (21d ciego a semana 1)
+# Bug F0: _tour_stats iteraba TODOS los años → podía detectar torneo de 2025 en vez de 2026
+# Bug F1: ventana 21d excluye torneos de semana 1 pre-Wimbledon (Birmingham/Nottingham, finales ~Jun 8-15)
+# Solución: lookback 42d + verificación de ventana estacional Jun 1 - Jul 13
+_GCS_EXTENDED_ENABLED = False   # H60-02 pendiente graduación (n≥30 prospectivo + Brier)
+_GCS_LOOKBACK_DAYS = 42         # ventana máxima: cubre semana 1 (≤42d) + semana 2 (≤21d) pre-Wimbledon
+_GCS_SEASON_WINDOWS = {
+    'grass':  {'start': (6, 1), 'end': (7, 13), 'dias_max': 42},
+    'hierba': {'start': (6, 1), 'end': (7, 13), 'dias_max': 42},
+}
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -137,6 +184,52 @@ def _parse_match_date(date_str):
     Extraída a nivel módulo para testabilidad (REGLA-T53).
     """
     return datetime.strptime(date_str, '%d.%m.%Y')
+
+
+def _is_gcs_season_active(torneo_fecha, partido_fecha, superficie_norm):
+    """Nodo-61 D61-F1: verifica si un torneo ganado está en la ventana estacional activa de GCS.
+
+    Reemplaza la cuenta regresiva de 21d ciega por verificación estacional.
+    Una victoria en Wimbledon 2025 NO debe activar GCS en Wimbledon 2026.
+    El torneo debe ser del mismo año que el partido Y dentro de la ventana estacional.
+
+    Returns:
+        (is_active, days_since): is_active=True si califica para GCS activo (≤21d, en temporada)
+                                  is_active puede ser False con days_since en zona extendida (22-42d)
+    """
+    import datetime as _dt
+    if torneo_fecha is None or partido_fecha is None:
+        return False, None
+    if isinstance(partido_fecha, _dt.date) and not isinstance(partido_fecha, _dt.datetime):
+        partido_fecha = _dt.datetime.combine(partido_fecha, _dt.time.min)
+    if isinstance(torneo_fecha, _dt.date) and not isinstance(torneo_fecha, _dt.datetime):
+        torneo_fecha = _dt.datetime.combine(torneo_fecha, _dt.time.min)
+
+    days_since = (partido_fecha - torneo_fecha).days
+    if days_since < 0:
+        return False, None  # torneo en el futuro
+
+    window = _GCS_SEASON_WINDOWS.get(superficie_norm)
+    if window is None:
+        # Sin ventana estacional definida: usar comportamiento 21d anterior
+        return days_since <= 21, days_since
+
+    # Verificar que el torneo fue en el mismo año que el partido
+    if torneo_fecha.year != partido_fecha.year:
+        return False, days_since  # Año diferente — Bug F0 resuelto
+
+    # Verificar que el torneo esté dentro de la ventana estacional
+    year = partido_fecha.year
+    start_dt = _dt.datetime(year, window['start'][0], window['start'][1])
+    end_dt = _dt.datetime(year, window['end'][0], window['end'][1])
+    in_season = (start_dt <= torneo_fecha <= end_dt)
+    in_range = (0 <= days_since <= window['dias_max'])
+
+    if not (in_season and in_range):
+        return False, days_since
+
+    # Dentro de ventana estacional: activo (≤21d) o zona extendida (22-42d)
+    return days_since <= 21, days_since
 
 
 class RivalryAnalyzer:
@@ -794,10 +887,15 @@ class RivalryAnalyzer:
             'pressure_index': pressure_index
         }
 
-    def analyze_surface_specialization(self, player_history, surface, player_name):
+    def analyze_surface_specialization(self, player_history, surface, player_name, *, fecha_partido=None):
         """
         🔬 Analiza la especialización y calidad de un jugador en una superficie específica.
         Recompensa victorias de calidad y considera la tasa de victorias.
+
+        Args:
+            fecha_partido: date/datetime del partido a analizar. Si None, usa datetime.today().
+                           Nodo-61 D61-F0: evita calcular gcs_days con fecha de ejecución incorrecta
+                           cuando se analiza mañana por la noche (causa Bug F0: gcs_days off by 1-2d).
         """
         _empty_meta = {'score': 0, 'raw_score': 0.0, 'win_rate': 0.0, 'matches': 0, 'skill_factor': 1.0, 'alpha_bonus': 1.0, 'volume_confidence': 0.0, 'surface_alpha': 0.0}
         if not player_history:
@@ -866,8 +964,18 @@ class RivalryAnalyzer:
         # Ganar un torneo completo es cualitativamente diferente a partidos dispersos
         # Si torneo='N/A' (Ninja API no devuelve KF), agrupar por semana del año
         import datetime as _dt_mod
+        # Nodo-61 D61-F0: usar fecha_partido si está disponible para evitar off-by-N-days
+        # cuando se analiza el día anterior (pipeline nocturno para partidos de mañana)
+        if fecha_partido is not None:
+            if isinstance(fecha_partido, _dt_mod.date) and not isinstance(fecha_partido, _dt_mod.datetime):
+                _today = _dt_mod.datetime.combine(fecha_partido, _dt_mod.time.min)
+            else:
+                _today = fecha_partido
+        else:
+            _today = _dt_mod.datetime.today()
+        # Nodo-61: definida aquí (antes del loop _tour_stats) para uso en _is_gcs_season_active
+        _current_surface_norm = (surface or '').lower().strip()
         _tour_stats = {}
-        _today = _dt_mod.datetime.today()
         for _m in surface_matches:
             _tname = str(_m.get('torneo', '') or '')
             _fecha_str = str(_m.get('fecha', '') or '')
@@ -901,12 +1009,10 @@ class RivalryAnalyzer:
             if _opp_rank < _tour_stats[_tk]['best_opp_rank']:
                 _tour_stats[_tk]['best_opp_rank'] = _opp_rank
 
-        # Nodo-60 D60-02: tracked for GCS_RECENCY_BOOST
-        _gcs_boost_tier = None
-        _gcs_boost_days = None
+        # Loop TORNEO_COMPLETO_BONUS (Nodo-57 D57-03/04 — sin GCS tracking, eso es loop separado)
+        from config import detectar_tier as _dt_tier
         for (_tname, _tyear), _ts in _tour_stats.items():
             # Nodo-57 D57-03: gate tier-aware — GS necesita 7W, no 4W
-            from config import detectar_tier as _dt_tier
             _tier_champ = _dt_tier(_tname)
             _min_wins = _MIN_WINS_CHAMPION.get(_tier_champ, 5)  # fallback conservador
             if _ts['wins'] >= _min_wins and _ts['losses'] == 0:
@@ -954,10 +1060,40 @@ class RivalryAnalyzer:
                     f"({_ts['wins']}W-0L, tier={_tier_champ}, req≥{_min_wins}) "
                     f"→ x{_bonus:.1f} quality_score [{_parts_str}]"
                 )
-                # Nodo-60 D60-02: track para GCS_RECENCY_BOOST
-                _gcs_boost_tier = _tier_champ
-                _gcs_boost_days = _days_ago
                 break  # un solo bonus aunque haya múltiples torneos completos
+
+        # Nodo-61 D61-F0: SCAN GCS SEPARADO — desacoplado de TORNEO_COMPLETO_BONUS
+        # Busca el campeón MÁS RECIENTE en ventana _GCS_LOOKBACK_DAYS (no el primero encontrado).
+        # Fixes: Bug F0 (año erróneo via _tyear key) + Bug F1 (21d ciego semana 1 pre-Wimbledon).
+        _GCS_TIER_MIN = {'grand_slam', 'atp1000', 'atp500'}
+        _gcs_boost_tier = None
+        _gcs_boost_days = None
+        _gcs_torneo_fecha = None
+        for (_tname, _tyear), _ts in _tour_stats.items():
+            if _ts['max_fecha'] is None:
+                continue
+            _g_days = (_today - _ts['max_fecha']).days
+            if _g_days < 0 or _g_days > _GCS_LOOKBACK_DAYS:
+                continue  # fuera de ventana
+            _g_tier = _dt_tier(_tname)
+            if _g_tier not in _GCS_TIER_MIN:
+                continue
+            _g_min_wins = _MIN_WINS_CHAMPION.get(_g_tier, 5)
+            if _ts['wins'] >= _g_min_wins and _ts['losses'] == 0:
+                # Verificar ventana estacional (corrige Bug F0: año diferente → False)
+                _in_active, _g_days_check = _is_gcs_season_active(
+                    _ts['max_fecha'], _today, _current_surface_norm)
+                _g_days_final = _g_days_check if _g_days_check is not None else _g_days
+                # Incluir si está en ventana activa (≤21d) O en zona extendida (22-42d, misma temporada)
+                _in_extended = (_g_days_final is not None and
+                                21 < _g_days_final <= _GCS_LOOKBACK_DAYS and
+                                _ts['max_fecha'].year == _today.year)
+                if _in_active or _in_extended:
+                    # Tomar el más reciente (menor gcs_days)
+                    if _gcs_boost_days is None or _g_days_final < _gcs_boost_days:
+                        _gcs_boost_tier = _g_tier
+                        _gcs_boost_days = _g_days_final
+                        _gcs_torneo_fecha = _ts['max_fecha']
 
         # Normalizar por número de partidos para no favorecer a quien jugó más
         normalized_quality_score = (quality_score / len(surface_matches)) * 2.5
@@ -984,36 +1120,57 @@ class RivalryAnalyzer:
         volume_confidence = min(len(surface_matches) / 8.0, 1.0)
         final_score = final_score * volume_confidence
 
-        # Nodo-60 D60-02 (FABLE-ADDENDUM): GCS_RECENCY_BOOST
-        # GCS_RECENCY_BOOST — activo para hierba, shadow para otras superficies (2026-07-05)
-        # Validado: n=54 settled, hit rate 64.8% en hierba. Clay/hard: LOG_GCS_SHADOW hasta más datos.
-        _GCS_TIER_MIN = {'grand_slam', 'atp1000', 'atp500'}
+        # Nodo-60/61: GCS_RECENCY_BOOST (activo para hierba, shadow para otras superficies)
+        # Nodo-61: _current_surface_norm ya definido arriba; separado en zona activa (≤21d) y extendida (22-42d)
         _gcs_active = False
-        _current_surface_norm = (surface or '').lower().strip()
-        if (_gcs_boost_tier in _GCS_TIER_MIN and
-                _gcs_boost_days is not None and _gcs_boost_days <= 21):
-            if _gcs_boost_days <= 7:
-                _gcs_mult = 2.2
-            elif _gcs_boost_days <= 14:
-                _gcs_mult = 1.8
-            else:
-                _gcs_mult = 1.5
-            _gcs_active = True  # siempre True cuando califica — shadow book lo trackea
+        _gcs_extended_active = False
+        _gcs_extended_days = None
+        _gcs_extended_mult_potencial = None
+        # _GCS_TIER_MIN ya definido en el scan separado arriba
+        if (_gcs_boost_tier in _GCS_TIER_MIN and _gcs_boost_days is not None):
             _surface_validated = _current_surface_norm in _GCS_SURFACES
-            if _GCS_BOOST_ENABLED and _surface_validated:
-                final_score *= _gcs_mult
-                analysis_log.append(
-                    f"GCS_RECENCY_BOOST: tier={_gcs_boost_tier} days={_gcs_boost_days}d "
-                    f"surface={_current_surface_norm} → ×{_gcs_mult} final_score (Nodo-60)"
-                )
-            else:
-                # A/B shadow: registra lo que habría pasado (superficie no validada o flag OFF)
-                _shadow_reason = "superficie no validada (solo hierba)" if not _surface_validated else "H60-01 n<30"
-                analysis_log.append(
-                    f"LOG_GCS_SHADOW: {player_name} habría recibido ×{_gcs_mult} "
-                    f"(GCS_RECENCY_BOOST — tier={_gcs_boost_tier} days={_gcs_boost_days}d, "
-                    f"surface={_current_surface_norm}, {_shadow_reason})"
-                )
+            if _gcs_boost_days <= 21:
+                # ZONA ACTIVA: boost aplica (si superficie validada y flag ON)
+                if _gcs_boost_days <= 7:
+                    _gcs_mult = 2.2
+                elif _gcs_boost_days <= 14:
+                    _gcs_mult = 1.8
+                else:
+                    _gcs_mult = 1.5
+                _gcs_active = True  # siempre True cuando califica — shadow book lo trackea
+                if _GCS_BOOST_ENABLED and _surface_validated:
+                    final_score *= _gcs_mult
+                    analysis_log.append(
+                        f"GCS_RECENCY_BOOST: tier={_gcs_boost_tier} days={_gcs_boost_days}d "
+                        f"surface={_current_surface_norm} → ×{_gcs_mult} final_score (Nodo-60/61)"
+                    )
+                else:
+                    _shadow_reason = "superficie no validada (solo hierba)" if not _surface_validated else "n<30 prospectivo (prior A60-01 activó solo hierba)"
+                    analysis_log.append(
+                        f"LOG_GCS_SHADOW: {player_name} habría recibido ×{_gcs_mult} "
+                        f"(GCS_RECENCY_BOOST — tier={_gcs_boost_tier} days={_gcs_boost_days}d, "
+                        f"surface={_current_surface_norm}, {_shadow_reason})"
+                    )
+            elif _gcs_boost_days <= _GCS_LOOKBACK_DAYS:
+                # ZONA EXTENDIDA: 22-42d — H60-02 acumula datos, NO se aplica boost aún
+                # Nodo-61 D61-F2: LOG_GCS_SHADOW_EXTENDED para prospectivo H60-02
+                if _gcs_boost_days <= 28:
+                    _gcs_extended_mult_potencial = 1.3  # estimado para calibración futura
+                else:
+                    _gcs_extended_mult_potencial = 1.15
+                _gcs_extended_active = True
+                _gcs_extended_days = _gcs_boost_days
+                if _surface_validated:
+                    _ext_reason = "zona extendida (22-42d)" if not _GCS_EXTENDED_ENABLED else "H60-02 flag ON"
+                    analysis_log.append(
+                        f"LOG_GCS_SHADOW_EXTENDED: {player_name} en zona extendida "
+                        f"tier={_gcs_boost_tier} days={_gcs_boost_days}d "
+                        f"mult_potencial=×{_gcs_extended_mult_potencial} "
+                        f"({'ACTIVO — boost aplica' if _GCS_EXTENDED_ENABLED else 'H60-02 PENDIENTE — sin boost'})"
+                    )
+                    if _GCS_EXTENDED_ENABLED:
+                        final_score *= _gcs_extended_mult_potencial
+                        _gcs_active = True  # extended activado → también reportar como gcs_active
 
         analysis_log.insert(0, f"Puntuación de Calidad en {normalized_surface}: {final_score:.1f} (Base: {quality_score:.1f}, Partidos: {len(surface_matches)}, Tasa Vic: {win_rate:.1%}, SkillF: {skill_factor:.2f}, Alpha: {surface_alpha:+.1%}, VolConf: {volume_confidence:.2f})")
 
@@ -1021,17 +1178,20 @@ class RivalryAnalyzer:
         _has_torneo_bonus = any('TORNEO_COMPLETO_BONUS' in l for l in analysis_log)
 
         return {
-            'score':             round(final_score, 4),
-            'raw_score':         round(normalized_quality_score, 4),
-            'win_rate':          round(win_rate, 4),
-            'matches':           len(surface_matches),
-            'skill_factor':      round(skill_factor, 4),
-            'alpha_bonus':       round(alpha_bonus, 4),
-            'volume_confidence': round(volume_confidence, 4),
-            'surface_alpha':     round(surface_alpha, 4),
-            'torneo_completo':   _has_torneo_bonus,
-            'gcs_active':        _gcs_active,
-            'gcs_days':          _gcs_boost_days,
+            'score':                      round(final_score, 4),
+            'raw_score':                  round(normalized_quality_score, 4),
+            'win_rate':                   round(win_rate, 4),
+            'matches':                    len(surface_matches),
+            'skill_factor':               round(skill_factor, 4),
+            'alpha_bonus':                round(alpha_bonus, 4),
+            'volume_confidence':          round(volume_confidence, 4),
+            'surface_alpha':              round(surface_alpha, 4),
+            'torneo_completo':            _has_torneo_bonus,
+            'gcs_active':                 _gcs_active,
+            'gcs_days':                   _gcs_boost_days if _gcs_boost_days is not None and _gcs_boost_days <= 21 else None,
+            'gcs_extended_active':        _gcs_extended_active,
+            'gcs_extended_days':          _gcs_extended_days,
+            'gcs_extended_mult_potencial': _gcs_extended_mult_potencial,
         }, analysis_log
 
     def analyze_surface_performance(self, player_history, player_name):
@@ -1109,6 +1269,121 @@ class RivalryAnalyzer:
         
         return {'home_advantage': home_stats, 'regional_comfort': regional_stats}
 
+    def _detect_phantom_identity(self, player_name, player_info, history):
+        """
+        Nodo-72: Detecta colisión de identidad en historial H2H.
+
+        Caso 1 — Circuit/gender mismatch (Morris 2026-07-08):
+            Jugadora WTA con historial de torneos/oponentes ATP (o viceversa).
+            Señal A: >50% oponentes en ranking del circuito opuesto (muestra 8).
+            Señal B: >50% torneos con prefijo de circuito opuesto (M15/M25 vs W15/W25).
+
+        Caso 2 — Homonym time gap (Pereyra 2026-07-06):
+            Jugador sin ranking con >20 partidos, oldest >365d.
+            Señal: debutante recibió historial de veterano homónimo.
+
+        Retorna: dict {phantom: bool, type: str|None, confidence: float, reason: str}
+        """
+        n = len(history)
+        if n == 0:
+            return {'phantom': False, 'type': None, 'confidence': 0.0, 'reason': ''}
+
+        player_tour = ((player_info or {}).get('tour') or '').lower()  # 'atp' or 'wta'
+        player_rank = (player_info or {}).get('ranking_position')
+
+        # ── Caso 2: Homonym time gap (Pereyra) ──────────────────────────────
+        if player_rank is None and n > 20:
+            try:
+                from datetime import datetime
+                oldest = None
+                for entry in history:
+                    fecha_str = entry.get('fecha', '')
+                    if fecha_str:
+                        try:
+                            d = datetime.strptime(str(fecha_str)[:10], '%Y-%m-%d')
+                            if oldest is None or d < oldest:
+                                oldest = d
+                        except Exception:
+                            pass
+                if oldest and (datetime.now() - oldest).days > 365:
+                    reason = (
+                        f"ranking=None + n_history={n} + "
+                        f"oldest={oldest.date()} ({(datetime.now()-oldest).days}d ago)"
+                    )
+                    logger.warning(f"🚨 LOG_PHANTOM_IDENTITY HOMONYM_GAP: {player_name} — {reason}")
+                    return {
+                        'phantom': True, 'type': 'HOMONYM_GAP',
+                        'confidence': 0.85, 'reason': reason,
+                    }
+            except Exception:
+                pass
+
+        # ── Caso 1: Circuit/gender mismatch (Morris) ─────────────────────────
+        if player_tour in ('atp', 'wta') and n >= 3:
+            opposite_tour = 'wta' if player_tour == 'atp' else 'atp'
+
+            # Señal A: verificar tour de oponentes en ranking DB (muestra 8)
+            sample_opponents = [
+                e.get('oponente', '').strip()
+                for e in history[:10]
+                if e.get('oponente', '').strip()
+            ]
+            opposite_count = 0
+            checked = 0
+            for opp_name in sample_opponents[:8]:
+                try:
+                    opp_info = self.ranking_manager.get_player_info(opp_name)
+                    if opp_info:
+                        opp_tour = ((opp_info.get('tour') or '')).lower()
+                        if opp_tour == opposite_tour:
+                            opposite_count += 1
+                        if opp_tour in ('atp', 'wta'):
+                            checked += 1
+                except Exception:
+                    pass
+
+            if checked >= 3 and opposite_count / checked > 0.5:
+                ratio = opposite_count / checked
+                reason = (
+                    f"tour={player_tour} pero {opposite_count}/{checked} "
+                    f"oponentes son {opposite_tour} (ratio={ratio:.0%})"
+                )
+                logger.warning(f"🚨 LOG_PHANTOM_IDENTITY CIRCUIT_MISMATCH: {player_name} — {reason}")
+                return {
+                    'phantom': True, 'type': 'CIRCUIT_MISMATCH',
+                    'confidence': min(0.95, 0.60 + ratio * 0.35),
+                    'reason': reason,
+                }
+
+            # Señal B: prefijos de torneo opuesto (M15/M25 = ATP-men's | W15/W25 = WTA)
+            men_prefixes = ('M15 ', 'M25 ', 'M15\xa0', 'M25\xa0')
+            women_prefixes = ('W15 ', 'W25 ', 'W15\xa0', 'W25\xa0')
+            wrong_prefix = 0
+            total_prefix = 0
+            for entry in history[:15]:
+                torneo = (entry.get('torneo') or '').strip()
+                if torneo and torneo != 'N/A':
+                    total_prefix += 1
+                    if player_tour == 'wta' and any(torneo.startswith(p) for p in men_prefixes):
+                        wrong_prefix += 1
+                    elif player_tour == 'atp' and any(torneo.startswith(p) for p in women_prefixes):
+                        wrong_prefix += 1
+
+            if total_prefix >= 3 and wrong_prefix / total_prefix > 0.5:
+                ratio = wrong_prefix / total_prefix
+                reason = (
+                    f"tour={player_tour} pero {wrong_prefix}/{total_prefix} "
+                    f"torneos tienen prefijo de circuito opuesto"
+                )
+                logger.warning(f"🚨 LOG_PHANTOM_IDENTITY CIRCUIT_MISMATCH (prefijos): {player_name} — {reason}")
+                return {
+                    'phantom': True, 'type': 'CIRCUIT_MISMATCH',
+                    'confidence': min(0.90, 0.55 + ratio * 0.35),
+                    'reason': reason,
+                }
+
+        return {'phantom': False, 'type': None, 'confidence': 0.0, 'reason': ''}
+
     def analyze_rivalry(self, player1_history, player2_history, player1_name, player2_name, player1_form, player2_form, direct_h2h_matches, current_match_context, p1_elo, p2_elo, tournament_name='', optimized_weights=None):
         """⚔️ Realizar análisis completo de rivalidad transitiva"""
         logger.info(f"⚔️ Analizando rivalidad transitiva: {player1_name} vs {player2_name}")
@@ -1141,7 +1416,17 @@ class RivalryAnalyzer:
         
         logger.info(f"   📊 Rankings: {player1_name} ({player1_rank}, {player1_nationality}) vs {player2_name} ({player2_rank}, {player2_nationality})")
         logger.info(f"   🌍 Contexto Partido Actual: Torneo en {current_match_context.get('country')}, Superficie: {current_match_context.get('surface')}")
-        
+
+        # ── Nodo-72: Phantom Identity Guard ─────────────────────────────────────
+        _phantom_p1 = self._detect_phantom_identity(player1_name, player1_info, player1_history)
+        _phantom_p2 = self._detect_phantom_identity(player2_name, player2_info, player2_history)
+        for _ph, _pn in [(_phantom_p1, player1_name), (_phantom_p2, player2_name)]:
+            if _ph['phantom']:
+                logger.warning(
+                    f"🚨 PHANTOM_IDENTITY [{_ph['type']}] {_pn}: "
+                    f"conf={_ph['confidence']:.0%} — {_ph['reason']}"
+                )
+
         # Realizar análisis de superficie y ubicación
         p1_surface_stats = self.analyze_surface_performance(player1_history, player1_name)
         p2_surface_stats = self.analyze_surface_performance(player2_history, player2_name)
@@ -1200,6 +1485,8 @@ class RivalryAnalyzer:
             'p1_location_stats': p1_location_stats,
             'p2_location_stats': p2_location_stats,
             'erdos_analysis': _erdos,
+            'phantom_identity_p1': _phantom_p1,
+            'phantom_identity_p2': _phantom_p2,
             'prediction': self.generate_advanced_prediction(player1_info, player2_info, _p1_erdos_co, _p2_erdos_co, player1_name, player2_name, player1_history, player2_history, 0, 0, player1_form, player2_form, direct_h2h_matches, tournament_name, prediction_context, p1_elo, p2_elo, optimized_weights=optimized_weights, n_common_opponents=0, n_erdos_paths=_erdos.get('n_paths', 0))
         }
 
@@ -1365,6 +1652,8 @@ class RivalryAnalyzer:
             'p1_location_stats': p1_location_stats,
             'p2_location_stats': p2_location_stats,
             'erdos_analysis': _erdos,
+            'phantom_identity_p1': _phantom_p1,
+            'phantom_identity_p2': _phantom_p2,
             'prediction': self.generate_advanced_prediction(player1_info, player2_info, p1_common_opponent_score, p2_common_opponent_score, player1_name, player2_name, player1_history, player2_history, len(player1_advantages), len(player2_advantages), player1_form, player2_form, direct_h2h_matches, tournament_name, prediction_context, p1_elo, p2_elo, optimized_weights=optimized_weights, n_common_opponents=len(common_opponents), n_erdos_paths=_erdos.get('n_paths', 0))
         }
 
@@ -1969,8 +2258,41 @@ class RivalryAnalyzer:
             if days <= _FORM_GRACE_DAYS: return 1.0
             return max(_FORM_DECAY_FLOOR, math.exp(-_FORM_DECAY_LAMBDA * (days - _FORM_GRACE_DAYS)))
 
-        _fd_p1 = _form_decay_factor(days_since_p1)
-        _fd_p2 = _form_decay_factor(days_since_p2)
+        # Nodo-63: Insufficient History Guard
+        # n_partidos < _MIN_HISTORY_FOR_DECAY → datos incompletos (no inactividad real)
+        # FlashScore devuelve pocos partidos en qualifying/ITF local → no penalizar form
+        _n_p1 = len(player1_history) if player1_history else 0
+        _n_p2 = len(player2_history) if player2_history else 0
+
+        _fd_p1 = 1.0 if _n_p1 < _MIN_HISTORY_FOR_DECAY else _form_decay_factor(days_since_p1)
+        _fd_p2 = 1.0 if _n_p2 < _MIN_HISTORY_FOR_DECAY else _form_decay_factor(days_since_p2)
+
+        _match_id = prediction_context.get('match_id') or prediction_context.get('match_url')
+        if _n_p1 < _MIN_HISTORY_FOR_DECAY:
+            reasoning.append(
+                f"LOG_INSUFFICIENT_HISTORY: {player1_name} — solo {_n_p1} partidos, "
+                f"form_decay omitido (n<{_MIN_HISTORY_FOR_DECAY} = datos incompletos, no inactividad real)"
+            )
+            # C63-A (Nodo-FABLE02): encolar para Playwright fallback si match_id disponible
+            if _match_id:
+                reasoning.append(
+                    f"LOG_PLAYWRIGHT_CANDIDATE: {player1_name} n={_n_p1} match_id={_match_id} "
+                    f"— FlashScore incompleto, candidato a enriquecimiento Playwright F3"
+                )
+                _enqueue_playwright_candidate(player1_name, _n_p1, _match_id)
+        if _n_p2 < _MIN_HISTORY_FOR_DECAY:
+            reasoning.append(
+                f"LOG_INSUFFICIENT_HISTORY: {player2_name} — solo {_n_p2} partidos, "
+                f"form_decay omitido (n<{_MIN_HISTORY_FOR_DECAY} = datos incompletos, no inactividad real)"
+            )
+            # C63-A (Nodo-FABLE02): encolar para Playwright fallback si match_id disponible
+            if _match_id:
+                reasoning.append(
+                    f"LOG_PLAYWRIGHT_CANDIDATE: {player2_name} n={_n_p2} match_id={_match_id} "
+                    f"— FlashScore incompleto, candidato a enriquecimiento Playwright F3"
+                )
+                _enqueue_playwright_candidate(player2_name, _n_p2, _match_id)
+
         if _fd_p1 < 1.0:
             norm_p1 = dict(norm_p1)
             norm_p1['form_recent'] = norm_p1['form_recent'] * _fd_p1
@@ -1978,8 +2300,8 @@ class RivalryAnalyzer:
             norm_p2 = dict(norm_p2)
             norm_p2['form_recent'] = norm_p2['form_recent'] * _fd_p2
         reasoning.append(
-            f"LOG_FORM_DECAY: p1_days={days_since_p1} fd_p1={_fd_p1:.3f} "
-            f"p2_days={days_since_p2} fd_p2={_fd_p2:.3f}"
+            f"LOG_FORM_DECAY: p1_days={days_since_p1} fd_p1={_fd_p1:.3f} n_p1={_n_p1} "
+            f"p2_days={days_since_p2} fd_p2={_fd_p2:.3f} n_p2={_n_p2}"
         )
 
         reasoning.append(f"LOG_RAW_SCORES_P1: { {k: round(v, 2) for k, v in raw_p1.items()} }")
