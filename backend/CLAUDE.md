@@ -1,6 +1,6 @@
 # CLAUDE.md — Tennis Prediction & Betting Engine
 
-> Last updated: 2026-07-08 (FABLE_02 Fases 1-5 — 1756 tests)
+> Last updated: 2026-07-09 (FABLE_02 Fases 1-5 + Nodo-73 n8n — 1756 tests)
 > Spec-Driven Development (SDD). CLAUDE.md es VISTA DERIVADA — los nodos son la fuente de verdad.
 > Leer completo antes de tocar código. Ver política de precedencia §10.
 
@@ -102,7 +102,8 @@ python3 run_daily.py [--bankroll N] [--tomorrow] [--settle-only]
 
 ```bash
 python3 shadow_book.py --close-snapshot             # PASO 5.5 — ~15 min ANTES del inicio
-                                                    # (automático via cron */10 con close_snapshot_trigger.py)
+                                                    # AUTOMÁTICO: n8n (Nodo-73) via systemd tennis-snapshot-bridge
+                                                    # FALLBACK: cron */10 con close_snapshot_trigger.py (si n8n cae)
 python3 resultados_finales.py                       # PASO 6
 python3 validar_con_api.py                          # PASO 7 → calibracion_edge.json
 python3 consultar_resultados_historicos.py          # PASO 8
@@ -121,7 +122,7 @@ python3 check_contradictions.py [--quick]           # cron lun 9am: CLAUDE.md vs
 
 ---
 
-## 5. ESTADO ACTUAL — 2026-07-08
+## 5. ESTADO ACTUAL — 2026-07-09
 
 | Métrica | Valor |
 |---|---|
@@ -131,19 +132,20 @@ python3 check_contradictions.py [--quick]           # cron lun 9am: CLAUDE.md vs
 | Shadow Book hit% | GS: 50% ROI+47% \| Challenger: + \| ITF: 30.8% ROI-23.7% |
 | ML Dataset | 2,573 registros limpios (motor nodo32, trazabilidad verificada) |
 | Graphify | 1,588 nodos, 2,987 edges. Tamp activo (puerto 7778). |
+| **n8n** | **Docker :5678 + systemd tennis-snapshot-bridge :8765 — ACTIVO** |
 
 **Fases FABLE_02:**
 
 | Fase | Estado |
 |---|---|
-| F0 Reconciliación (C61/C62/C63) | ✅ 10 tests |
-| F1 Infraestructura (Graphify+Tamp+slash-cmds+validator) | ✅ cron activo |
-| F2 Automation (close-snapshot cron cada 10 min) | ✅ cron activo |
-| F3 Hermes gate | pendiente — arquitectura externa |
+| F0 Reconciliación (C61/C62/C63) | ✅ completada |
+| F1 Infraestructura (Graphify+Tamp+slash-cmds+validator) | ✅ completada |
+| F2 Automation (n8n + close-snapshot timing exacto) | ✅ **Nodo-73 ACTIVO** |
+| F3 Hermes gate | 🟠 GATED — observación ≥5 ambiguedades/semana |
 | F4 Estadística doctoral (Nodos 64-71) | ✅ 43 tests |
-| F5 Vault + memory-compiler + CLAUDE.md adelgazado | ✅ en curso |
+| F5 Vault + session_compiler + CLAUDE.md slim | ✅ completada |
 
-**Nodos completos:** 51-63, 64-71, 72 — detalles en `.spec/01_Nodos/Nodo-XX.md`
+**Nodos completos:** 51-63, 64-71, 72, 73 — detalles en `.spec/01_Nodos/Nodo-XX.md`
 
 ---
 
@@ -166,8 +168,14 @@ run_daily.py                      ← Orquestador PASO 0→4.3 + settle
 shadow_book.py                    ← CLV: log_picks | close_snapshot | settle | report
 pipeline_tracker.py               ← READ-ONLY (--section shadow|confianza|drift|portfolio)
 pre_game_validator.py             ← cron 0 9-23: kelly_kl=0.0 BLOCK | n<8 WARN
-close_snapshot_trigger.py         ← cron */10: auto close-snapshot picks abiertos
+close_snapshot_server.py          ← HTTP :8765 bridge (Nodo-73) — timing exacto por partido
+close_snapshot_trigger.py         ← cron */10 FALLBACK (si n8n cae)
 check_contradictions.py           ← cron lun 9am: CLAUDE.md vs nodos (Vacío 3)
+
+── n8n AUTOMATION (Nodo-73, systemd) ─────────────────────────────────────────
+n8n Docker :5678                  ← Tennis Close-Snapshot Timing workflow
+tennis-snapshot-bridge.service    ← systemd, enabled, PID en logs/snapshot_bridge.log
+n8n_push_workflow.py              ← sube/actualiza workflow via API REST
 
 ── DATOS CRÍTICOS ───────────────────────────────────────────────────────────
 data/calibracion_edge.json              ← Thompson Beta priors (fuente de verdad)
