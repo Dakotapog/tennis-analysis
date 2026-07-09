@@ -94,7 +94,7 @@ def comprehensive_history():
             "opponent_ranking": 5,
             "surface": "Dura",
             "location": "USA",
-            "fecha": (now - timedelta(days=10)).strftime('%d.%m.%y')
+            "fecha": (now - timedelta(days=10)).strftime('%d.%m.%Y')
         },
         {
             "oponente": "MidPlayer",
@@ -103,7 +103,7 @@ def comprehensive_history():
             "opponent_ranking": 80,
             "surface": "Arcilla",
             "location": "Spain",
-            "fecha": (now - timedelta(days=20)).strftime('%d.%m.%y')
+            "fecha": (now - timedelta(days=20)).strftime('%d.%m.%Y')
         },
         {
             "oponente": "LowPlayer",
@@ -112,7 +112,7 @@ def comprehensive_history():
             "opponent_ranking": 200,
             "surface": "Dura",
             "location": "USA",
-            "fecha": (now - timedelta(days=30)).strftime('%d.%m.%y')
+            "fecha": (now - timedelta(days=30)).strftime('%d.%m.%Y')
         },
         {
             "oponente": "TopPlayer",
@@ -121,7 +121,7 @@ def comprehensive_history():
             "opponent_ranking": 5,
             "surface": "Hierba",
             "location": "UK",
-            "fecha": (now - timedelta(days=40)).strftime('%d.%m.%y')
+            "fecha": (now - timedelta(days=40)).strftime('%d.%m.%Y')
         },
     ]
 
@@ -366,9 +366,9 @@ def test_generate_advanced_prediction_happy_path(analyzer, sample_history):
 def test_analyze_direct_h2h_with_recent_dates(analyzer):
     """Test: Análisis de H2H con fechas recientes."""
     now = datetime.now()
-    date_30d = (now - timedelta(days=30)).strftime('%d.%m.%y')
-    date_60d = (now - timedelta(days=60)).strftime('%d.%m.%y')
-    date_90d = (now - timedelta(days=90)).strftime('%d.%m.%y')
+    date_30d = (now - timedelta(days=30)).strftime('%d.%m.%Y')
+    date_60d = (now - timedelta(days=60)).strftime('%d.%m.%Y')
+    date_90d = (now - timedelta(days=90)).strftime('%d.%m.%Y')
     
     h2h_matches = [
         {"ganador": "PlayerA", "fecha": date_30d},
@@ -409,7 +409,7 @@ def test_analyze_direct_h2h_single_match(analyzer):
 def test_analyze_direct_h2h_single_match_recent(analyzer):
     """Test: H2H directo con un partido reciente."""
     now = datetime.now()
-    recent_date = (now - timedelta(days=15)).strftime('%d.%m.%y')
+    recent_date = (now - timedelta(days=15)).strftime('%d.%m.%Y')
     
     h2h_matches = [{"ganador": "PlayerA", "fecha": recent_date}]
     p1_score, p2_score, log = analyzer.analyze_direct_h2h(h2h_matches, "PlayerA", "PlayerB")
@@ -626,8 +626,8 @@ def test_analyze_rivalry_with_h2h(analyzer, comprehensive_history):
     """Test: Análisis de rivalidad con H2H."""
     now = datetime.now()
     h2h = [
-        {"ganador": "PlayerA", "fecha": (now - timedelta(days=20)).strftime('%d.%m.%y')},
-        {"ganador": "PlayerB", "fecha": (now - timedelta(days=40)).strftime('%d.%m.%y')}
+        {"ganador": "PlayerA", "fecha": (now - timedelta(days=20)).strftime('%d.%m.%Y')},
+        {"ganador": "PlayerB", "fecha": (now - timedelta(days=40)).strftime('%d.%m.%Y')}
     ]
     result = analyzer.analyze_rivalry(
         comprehensive_history, comprehensive_history, "PlayerA", "PlayerB",
@@ -1411,8 +1411,8 @@ def test_generate_advanced_prediction_with_h2h(analyzer):
     """Test: Predicción avanzada con historial H2H."""
     now = datetime.now()
     h2h = [
-        {"ganador": "PlayerA", "fecha": (now - timedelta(days=10)).strftime('%d.%m.%y')},
-        {"ganador": "PlayerB", "fecha": (now - timedelta(days=20)).strftime('%d.%m.%y')}
+        {"ganador": "PlayerA", "fecha": (now - timedelta(days=10)).strftime('%d.%m.%Y')},
+        {"ganador": "PlayerB", "fecha": (now - timedelta(days=20)).strftime('%d.%m.%Y')}
     ]
     history = [{"oponente": "PlayerC", "resultado": "2-0", "outcome": "Ganó"}]
     result = analyzer.generate_advanced_prediction(
@@ -1563,8 +1563,8 @@ def test_analyze_rivalry_complex_scenario(analyzer, comprehensive_history):
     """Test: Análisis de rivalidad con escenario complejo."""
     now = datetime.now()
     h2h = [
-        {"ganador": "PlayerA", "fecha": (now - timedelta(days=5)).strftime('%d.%m.%y'), "superficie": "Dura"},
-        {"ganador": "PlayerB", "fecha": (now - timedelta(days=15)).strftime('%d.%m.%y'), "superficie": "Arcilla"}
+        {"ganador": "PlayerA", "fecha": (now - timedelta(days=5)).strftime('%d.%m.%Y'), "superficie": "Dura"},
+        {"ganador": "PlayerB", "fecha": (now - timedelta(days=15)).strftime('%d.%m.%Y'), "superficie": "Arcilla"}
     ]
     result = analyzer.analyze_rivalry(
         comprehensive_history, comprehensive_history, "TopPlayer", "MidPlayer",
@@ -1581,8 +1581,8 @@ def test_generate_advanced_prediction_full_scenario(analyzer, comprehensive_hist
     """Test: Predicción avanzada con escenario completo."""
     now = datetime.now()
     h2h = [
-        {"ganador": "TopPlayer", "fecha": (now - timedelta(days=30)).strftime('%d.%m.%y')},
-        {"ganador": "MidPlayer", "fecha": (now - timedelta(days=60)).strftime('%d.%m.%y')}
+        {"ganador": "TopPlayer", "fecha": (now - timedelta(days=30)).strftime('%d.%m.%Y')},
+        {"ganador": "MidPlayer", "fecha": (now - timedelta(days=60)).strftime('%d.%m.%Y')}
     ]
     result = analyzer.generate_advanced_prediction(
         {"ranking_position": 5, "ranking_points": 8000}, 
@@ -1641,7 +1641,7 @@ def test_analyze_streaks_with_long_history(analyzer):
         outcome = "Ganó" if i % 3 != 0 else "Perdió"
         history.append({
             "outcome": outcome,
-            "fecha": (now - timedelta(days=i*5)).strftime('%d.%m.%y')
+            "fecha": (now - timedelta(days=i*5)).strftime('%d.%m.%Y')
         })
     streak, log = analyzer.analyze_streaks_and_consistency(history, "TestPlayer")
     assert isinstance(streak, (int, float))
@@ -1704,10 +1704,10 @@ def test_analyze_direct_h2h_with_mixed_dates(analyzer):
     """Test: H2H con mezcla de fechas recientes y antiguas."""
     now = datetime.now()
     h2h_matches = [
-        {"ganador": "PlayerA", "fecha": (now - timedelta(days=15)).strftime('%d.%m.%y')},
-        {"ganador": "PlayerB", "fecha": (now - timedelta(days=200)).strftime('%d.%m.%y')},
-        {"ganador": "PlayerA", "fecha": (now - timedelta(days=400)).strftime('%d.%m.%y')},
-        {"ganador": "PlayerA", "fecha": (now - timedelta(days=30)).strftime('%d.%m.%y')}
+        {"ganador": "PlayerA", "fecha": (now - timedelta(days=15)).strftime('%d.%m.%Y')},
+        {"ganador": "PlayerB", "fecha": (now - timedelta(days=200)).strftime('%d.%m.%Y')},
+        {"ganador": "PlayerA", "fecha": (now - timedelta(days=400)).strftime('%d.%m.%Y')},
+        {"ganador": "PlayerA", "fecha": (now - timedelta(days=30)).strftime('%d.%m.%Y')}
     ]
     p1_score, p2_score, log = analyzer.analyze_direct_h2h(h2h_matches, "PlayerA", "PlayerB")
     assert isinstance(p1_score, (int, float))

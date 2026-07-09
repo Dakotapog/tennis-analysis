@@ -1556,7 +1556,13 @@ class NinjaH2HExtractor:
         self._player_registry.register_kambi_estimate(player_name)
 
     def _enrich_history(self, history: List[Dict]) -> List[Dict]:
-        """Enriquecer historial con rankings."""
+        """Enriquecer historial con rankings.
+
+        D53-09 (postergado → Nodo-51): siempre sobreescribe opponent_ranking con el
+        ranking ACTUAL del oponente. Rankings históricos no preservados. Experimento
+        2026-07-02: 0 divergencias (la Ninja API no provee ranking histórico por match —
+        fix requiere investigación de fuente en Nodo-51 F0).
+        """
         enriched = []
         for match in history:
             enriched_match = match.copy()

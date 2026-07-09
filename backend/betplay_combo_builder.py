@@ -378,6 +378,28 @@ def generar_bat_chrome(combo_links: List[Dict]) -> int:
         logger.info(f"  📄 Combo{idx}.bat — {legs_str}")
 
     logger.info(f"✅ {len(valid)} archivos .bat en escritorio")
+
+    # D-BAT-01: Notificar a Windows Explorer que el Desktop cambió.
+    # WSL2 escribe por /mnt/c/ — no genera notificaciones shell nativas →
+    # Explorer no refresca el Desktop automáticamente.
+    # SHChangeNotify(SHCNE_UPDATEDIR, SHCNF_PATH, desktop_path) fuerza el refresh.
+    try:
+        import subprocess
+        ps_cmd = (
+            r"$code='using System;using System.Runtime.InteropServices;"
+            r"public class SN{[DllImport(""shell32.dll"")]"
+            r"public static extern void SHChangeNotify(int e,uint f,IntPtr a,IntPtr b);}'"
+            r";Add-Type -TypeDefinition $code;"
+            r"[SN]::SHChangeNotify(0x00002000,0x0005,[System.Runtime.InteropServices.Marshal]::StringToHGlobalUni('C:\users\hogar\Desktop'),[IntPtr]::Zero)"
+        )
+        subprocess.run(
+            ["powershell.exe", "-NoProfile", "-NonInteractive", "-c", ps_cmd],
+            capture_output=True, timeout=8,
+        )
+        logger.info("🔔 Windows Explorer notificado — Desktop refrescado")
+    except Exception:
+        pass  # No bloquear si PowerShell no está disponible
+
     return len(valid)
 
 
@@ -1288,6 +1310,33 @@ def _enviar_safe_telegram(safe_links: List[Dict], metadata: Dict):
 # WAS — Nodo-44: Watchlist Alpha Signal (promo combos, alpha invisible)
 # ══════════════════════════════════════════════════════════════════════════════
 
+def _was_qualifies(pick: dict, min_edge: float = 10.0) -> bool:
+    """T55-04/05 (Nodo-55 P54-03): gate compuesto WAS extraído para testeo.
+    Requiere edge>=min_edge, cuota>=2.0, Y señal Markov explícita.
+    Sin señal Markov → False (coin-flip puro, p≈0.51 no es WAS)."""
+    edge_raw = pick.get('edge_pct', '0%')
+    try:
+        edge_val = float(str(edge_raw).replace('%', '').strip())
+    except ValueError:
+        edge_val = 0.0
+    if edge_val < min_edge:
+        return False
+    if pick.get('cuota_favorito', 0) < 2.0:
+        return False
+    estado_fav   = pick.get('markov_favorito')
+    estado_rival = pick.get('markov_rival')
+    conf_fav     = pick.get('markov_conf_fav', 0) or pick.get('conf_fav', 0) or 0
+    conf_rival   = pick.get('markov_conf_rival', 0) or pick.get('conf_rival', 0) or 0
+    wr_rec_fav   = pick.get('markov_wr_rec_fav') or 0.5
+    wr_rec_rival = pick.get('markov_wr_rec_rival') or 0.5
+    diff_abs     = abs(wr_rec_fav - wr_rec_rival)
+    rival_cold   = estado_rival == 'COLD' and conf_rival >= 0.60
+    pick_hot     = estado_fav == 'HOT' and conf_fav >= 0.60
+    es_dominante = diff_abs > 0.35
+    señal_markov = rival_cold or pick_hot or es_dominante
+    return señal_markov
+
+
 def build_was_combos(stake_per_combo: int = 5000,
                      min_edge: float = 10.0,
                      top_n: int = 5,
@@ -1328,41 +1377,31 @@ def build_was_combos(stake_per_combo: int = 5000,
         logger.warning("⚠️ WAS: edge_report sin picks en watchlist")
         return [], {}
 
-    # Filter WAS candidates
+    # Filter WAS candidates (usa _was_qualifies para testabilidad — T55-04/05)
     was_candidates = []
     for pick in watchlist:
-        # Gate 1: edge >= min_edge
         edge_raw = pick.get("edge_pct", "0%")
         try:
             edge_val = float(str(edge_raw).replace("%", "").strip())
         except ValueError:
             edge_val = 0.0
-        if edge_val < min_edge:
-            continue
-
-        # Gate 2: cuota >= 2.0
         cuota = pick.get("cuota_favorito", 0)
-        if cuota < 2.0:
+
+        if not _was_qualifies(pick, min_edge=min_edge):
             continue
 
-        # Gate 3: Markov signal (D44-02 fields required)
-        estado_fav  = pick.get("markov_favorito")
+        # Recalcular variables locales para señal_parts (solo picks que pasaron el gate)
+        estado_fav   = pick.get("markov_favorito")
         estado_rival = pick.get("markov_rival")
-        conf_fav    = pick.get("markov_conf_fav", 0) or 0
-        conf_rival  = pick.get("markov_conf_rival", 0) or 0
-        wr_rec_fav  = pick.get("markov_wr_rec_fav") or 0.5
+        conf_fav     = pick.get("markov_conf_fav", 0) or 0
+        conf_rival   = pick.get("markov_conf_rival", 0) or 0
+        wr_rec_fav   = pick.get("markov_wr_rec_fav") or 0.5
         wr_rec_rival = pick.get("markov_wr_rec_rival") or 0.5
-
         diff_abs_markov = abs(wr_rec_fav - wr_rec_rival)
         es_dominante = diff_abs_markov > 0.35
         es_coinflip  = diff_abs_markov <= 0.18
         rival_cold   = estado_rival == "COLD" and conf_rival >= 0.60
         pick_hot     = estado_fav == "HOT" and conf_fav >= 0.60
-
-        señal_markov = rival_cold or pick_hot or es_dominante or (es_coinflip and rival_cold)
-
-        if not señal_markov:
-            continue
 
         señal_parts = []
         if rival_cold:
@@ -2727,17 +2766,17 @@ Abrir en Betplay</a></p>
 
 def _enviar_mega_telegram(mega_links: List[Dict], metadata: Dict):
     """Envía resumen de mega-combos a Telegram."""
-    lines = ["🚀 *MEGA-COMBOS CROSS-TIER*\n"]
+    # Mensaje compacto — una línea por mega para no superar 4096 chars
+    lines = ["*MEGA-COMBOS*"]
     for mc in mega_links:
         piernas = mc["piernas"]
         cuota = mc["cuota_combo"]
         retorno = mc["retorno"]
-        tiers = "+".join(mc.get("tiers", []))
-        legs_str = " × ".join(f"{l['jugador']}@{l['cuota_kambi']:.2f}" for l in mc["legs"])
-        lines.append(f"*Mega {mc['combo_idx']}* [{piernas}p] @{cuota:,.1f} → ${retorno:,.0f}")
-        lines.append(f"  {tiers} | {legs_str}\n")
+        # Solo jugadores sin cuotas individuales para reducir largo
+        names = " + ".join(l['jugador'].split()[-1] for l in mc["legs"])
+        lines.append(f"Mega{mc['combo_idx']} [{piernas}p] @{cuota:,.0f} ${retorno:,.0f} | {names}")
 
-    lines.append(f"💰 Total: ${metadata.get('total_stake', 0):,}")
+    lines.append(f"Total: ${metadata.get('total_stake', 0):,}")
     text = "\n".join(lines)
 
     try:

@@ -512,11 +512,16 @@ class TestNodo32Fase3MarkovPostNorm:
 
     def _run(self, analyzer, h1, h2, h2h=None, weights=None):
         """Llama a generate_advanced_prediction() con parámetros mínimos válidos."""
+        from datetime import datetime as _dt
+        _today = _dt.now().strftime('%d.%m.%Y')
+        # Incluir last_match_date=hoy para que days_since=0 y form_decay=1.0 (Nodo-57).
+        # Sin esta fecha, days_since=-1 → fd=0.70 interfiere con las aserciones de T32-21.
+        _form = {"win_percentage": 50, "last_match_date": _today}
         return analyzer.generate_advanced_prediction(
             {"ranking_position": 50}, {"ranking_position": 50},
             50, 50, "P1_TestMarkov", "P2_TestMarkov",
             h1, h2, 0, 0,
-            {"win_percentage": 50}, {"win_percentage": 50},
+            _form, _form,
             h2h or [],
             "Roland Garros",
             {"current_match_surface": "Arcilla", "current_match_country": "France",

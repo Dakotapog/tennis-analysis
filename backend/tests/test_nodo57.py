@@ -67,9 +67,11 @@ def _form(days_ago=5):
 
 def test_t57_01_inactivity_only_decays_form_not_total(analyzer):
     """T57-01: jugador con 49d de inactividad no pierde el 50% del puntaje total.
-    La pérdida es solo en form_recent (decay ≈ 0.62 × form_contribution)."""
-    p1_hist = [_match(f'R{i}', 'Ganó', days_ago=5+i) for i in range(4)]
-    p2_hist = [_match(f'R{i}', 'Ganó', days_ago=5+i) for i in range(4)]
+    La pérdida es solo en form_recent (decay ≈ 0.62 × form_contribution).
+    Nota Nodo-63: historial debe tener n>=8 para que el Insufficient History Guard
+    no suprima el decay (n<8 = datos incompletos, no inactividad real)."""
+    p1_hist = [_match(f'R{i}', 'Ganó', days_ago=5+i) for i in range(8)]
+    p2_hist = [_match(f'R{i}', 'Ganó', days_ago=5+i) for i in range(8)]
 
     # P2 activo (5d), P1 activo (5d) — baseline sin inactividad
     result_baseline = analyzer.analyze_rivalry(
