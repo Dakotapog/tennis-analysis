@@ -6,6 +6,34 @@ analisis_partidos_pandas.txt
 pipeline_tracking.txt
 data/betplay_ofertas.txt
 
+# Data de sesión (generados en cada run)
+data/zita_tennis_matches_*.json
+data/zita_challenger_*.json
+data/atp_rankings_*.json
+data/wta_rankings_*.json
+data/test_*.json
+
+# Screenshots / imágenes H2H
+h2h_match_*.png
+screenshots/
+
+# Graphify output (regenerable)
+graphify-out/
+
+# Claude Code settings local
+.claude/
+
+# Reports de pipeline (output operacional por sesión)
+reports/edge_report_*.json
+reports/h2h_results_enhanced_*.json
+reports/trader_plan_*
+reports/combo_plan_*
+reports/analisis_partidos_*.txt
+reports/betslip_index_*.json
+reports/games_signal_report_*.json
+reports/resultados_finales_*.json
+reports/daily_brief_*.txt
+
 # Python
 __pycache__/
 *.pyc
