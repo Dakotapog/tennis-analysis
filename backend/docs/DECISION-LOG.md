@@ -93,6 +93,75 @@
 
 ---
 
+---
+
+## ERRORES HISTÓRICOS — Los 5 de CLAUDE.md §2
+
+### E-01 — Sin SPEC
+**Error:** 27 archivos sin especificación → duplicados, pipeline roto, accuracy 47.37%.
+**Causa raíz:** Vibe coding. Cada sesión reimplementaba sin consultar historia.
+**Fix:** SDD obligatorio. Ver `PRE_IMPLEMENTATION_CHECKLIST.md`.
+**Lección:** El costo de no documentar supera el de documentar.
+
+### E-02 — HTML garbage en tipo_cancha
+**Error:** `surface_specialization=0%` durante meses. Scraper extraía HTML en lugar de texto.
+**Fix:** `scraping/data_parser.py` corregido 2026-05-28.
+**Lección:** Un campo que siempre devuelve 0 silenciosamente es peor que un error visible.
+
+### E-03 — Sin edge calculator
+**Error:** Apuestas sin ventaja cuantificada. Accuracy alta ≠ P&L positivo.
+**Fix:** `edge_calculator.py` Kelly-KL 5 capas. Edge mínimo: P_modelo - P_implícita > 5%.
+**Lección:** P(modelo) > P(implícita) + 5% es el único criterio válido para apostar.
+
+### E-04 — Labels corruptas ML
+**Error:** accuracy real 47.37% pese a 95.4% CV (overfit). Labels cruzadas en generar_dataset_plus.py.
+**Fix:** Nodo-41 — filtro rivalry_version + trazabilidad jugador1/jugador2/_trace_fecha. 2,573 registros limpios.
+**Lección:** Un dataset sin trazabilidad es un dataset contaminado.
+
+### E-05 — Kelly naive sin portfolio
+**Error:** KGR=-0.51 (ruina silenciosa). N picks a Kelly completo = ruina garantizada.
+**Fix:** Portfolio Kelly multi-activo + VaR/CVaR + Cobertura por Exclusión. Ver `trader_ev_tenis.py` v2.0.
+**Lección:** REGLA-HF-5: si KGR < 0 en output → NO DESPLEGAR sin importar la confianza individual.
+
+---
+
+## CASOS NUEVOS (post FABLE_02)
+
+### C-01 — Tentación watchlist (2026-07-01)
+**Incidente:** Picks WATCHLIST entraron en combos directamente sin revisión humana.
+**Por qué es tentador:** La cuota alta del watchlist es atractiva; el combo builder los incluye si --watchlist activo.
+**Regla:** Picks WATCHLIST requieren revisión explícita en PASO 3.5 (generar_tabla_favoritos2.py) antes de apostar.
+
+### C-02 — Cuarentena Van Zyl / edges fantasma (2026-07-01)
+**Incidente:** Arce/Vlajic/Guajardo/Cooper en combos con historial vacío → edges fantasma → pérdidas reales.
+**Por qué pasó:** Pipeline no daba error — generaba confianza alta sin datos reales.
+**Fix:** F2 DataContract (Nodo-51) — status=NO_DATA por construcción. `core/data_contract.py`.
+
+### C-03 — Phantom Identity homónimos (2026-07-06)
+**Incidente:** Facundo Pereyra debutante recibió 105 partidos del veterano homónimo vía API → 64.4% confianza falsa → 5 combos inválidos → pérdida real confirmada.
+**Causa raíz:** API busca por nombre string; Playwright navega por entity ID de FlashScore.
+**Fix:** Playwright migrado a PRIMARIO (PASO 1 y 2). Nodo-72 Phantom Identity Guard.
+**Señal de alerta:** ranking=None + n_history>20 + fecha_más_antigua>365d = PHANTOM_IDENTITY_SIGNAL.
+
+### C-04 — Settle-retry ITF (2026-07-06)
+**Incidente:** Partidos ITF/Challenger no aparecían en FlashScore a tiempo → settle silenciosamente fallaba → picks permanecían open.
+**Fix:** `close_snapshot_trigger.py` cron 10 min. Slash-command `/settle-retry` reintenta hasta 48h.
+
+### C-05 — C61-B Gobernanza GCS (2026-07-06)
+**Incidente:** Docstring decía "validado por H60-01" pero H60-01 es prospectiva (n<30). La activación real fue por A60-01 retrospectivo (n=54, 64.8%).
+**Por qué importa:** Mezclar evidencia prospectiva con retrospectiva contamina el trail de decisión.
+**Fix:** Docstring corregido. PROHIBICIÓN permanente: no citar "validado por H60-01" para GCS.
+
+---
+
+## POLÍTICA DE PRECEDENCIA (§1.2 Vacío 3, FABLE_02)
+
+1. Los nodos y ADRs son **historia inmutable** — nunca se editan. Se añade entrada nueva o se marca `SUPERSEDED por [[Nodo-XX]]`.
+2. **CLAUDE.md es una VISTA derivada** — si contradice al nodo más reciente, CLAUDE.md está desactualizado por definición.
+3. Un **chequeo semanal de Haiku** compara bugs/estados de CLAUDE.md contra headers de los últimos 10 nodos y reporta contradicciones. La fuente de verdad es siempre el registro inmutable más reciente.
+
+---
+
 ## Plantilla para nuevas decisiones
 
 ```
