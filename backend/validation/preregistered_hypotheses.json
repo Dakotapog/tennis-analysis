@@ -214,6 +214,54 @@
         "conclusion": "La etiqueta 'EVIDENCIA ACTUAL EN CONTRA' era incorrecta. El scan completo muestra 64.8% hit rate, consistente con la hipotesis. GCS_MULT permanece GATED hasta n>=30 en shadow book (prospectivo) y graduacion formal H60-01."
       },
       "nota": "A60-01 CERRADO 2026-07-05. Scan: 76 casos GCS hierba tier>=atp500 en h2h_results_enhanced, 54 settled: 35/54=64.8%. Casos comienzan 2026-06-19. El n=8/hits=3 original era subscan manual; el scan completo confirma patron. GCS_MULT congelados hasta n>=30 Y graduacion H60-01. PROHIBIDO cambiar multiplicadores o activar flags antes."
+    },
+    "H62-01": {
+      "nombre": "alpha_promoted picks tienen hit% ≥ picks Cat-C1 orgánicos",
+      "descripcion": "Picks promovidos Cat-C2→Cat-C1 por gate alpha (edge≥5% AND triple≥0.2, D62-05) tienen hit% al menos igual a picks Cat-C1 que entraron por confianza≥60% orgánica. Si a n=30 los promovidos rinden peor, la promoción se apaga con constante.",
+      "origen_deuda": "C62-A (FABLE_02_TENIS_DOCTORADO_SPEC §2)",
+      "preregistrado": "2026-07-08",
+      "umbrales_congelados": {
+        "gate_alpha": "edge>=0.05 AND triple>=0.2",
+        "gate_organico": "confianza>=0.60",
+        "categoria": "Cat-C1 (cuota 2.21-3.50)",
+        "nota": "PROHIBIDO cambiar gates antes de n=30 por segmento"
+      },
+      "metrica": "hit% alpha_promoted vs hit% Cat-C1 orgánico — misma banda cuota y tier",
+      "exito": "hit% alpha_promoted >= hit% organico (no significativamente inferior en IC Wilson 95%)",
+      "n_stop": 30,
+      "estado": "ACUMULANDO",
+      "n_alpha_promoted": 0,
+      "hits_alpha_promoted": 0,
+      "n_organico": 0,
+      "hits_organico": 0,
+      "nota": "flag alpha_promoted debe propagarse al pick_snapshot del shadow book. Si falla: apagar D62-05 con constante _ALPHA_C1_GATE_ENABLED=False."
+    },
+    "H60-02": {
+      "nombre": "GCS zona extendida (22-42d, misma temporada hierba) supera breakeven",
+      "hipotesis": "Picks con campeón validado (D57-03) tier>=atp500, dias 22-42, MISMA temporada hierba (Jun 1 - Jul 13), MISMA superficie → hit% > 1/cuota_media del segmento",
+      "descripcion": "Extension de H60-01 para torneos semana 1 pre-Wimbledon (Birmingham/Nottingham/Halle/Queens, finales ~Jun 8-15). La ventana 21d de H60-01 es ciega a estos torneos para Wimbledon R3/R4 en adelante. Nodo-61 D61-F1.",
+      "origen_deuda": "Nodo-61 — Bug F1: 21d gate ciego a torneos semana 1 (dias=22-42 desde partido Wimbledon)",
+      "preregistrado": "2026-07-05",
+      "umbrales_congelados": {
+        "dias_min": 22,
+        "dias_max": 42,
+        "tier_min": "atp500",
+        "misma_temporada": true,
+        "ventana_estacional": "Jun 1 - Jul 13 mismo año",
+        "mult_potencial_22_28": 1.3,
+        "mult_potencial_29_42": 1.15,
+        "nota": "Multiplicadores congelados como estimados para calibración futura — NO ACTIVAR hasta exito=true"
+      },
+      "metrica": "hit% con IC Wilson 95%",
+      "exito": "limite inferior IC Wilson 95% > 1/cuota_media del segmento (mismo criterio H60-01)",
+      "corte_secundario_preregistrado": "mismo segmento AND edge_vs_mercado>=0.10 (de-vig, Nodo-53 V2)",
+      "n_stop": 30,
+      "estado": "PENDIENTE",
+      "estado_inicial": "n=0 prospectivo. LOG_GCS_SHADOW_EXTENDED acumula casos desde Nodo-61 (2026-07-05). PROHIBIDO activar _GCS_EXTENDED_ENABLED hasta n>=30 + Brier validado.",
+      "gated": "_GCS_EXTENDED_ENABLED=False hasta exito=true Y Brier con-extended < sin-extended",
+      "n_actual": 0,
+      "hits": 0,
+      "nota": "Nodo-61 D61-F2/F3: LOG_GCS_SHADOW_EXTENDED genera data prospectiva automaticamente cuando days in [22,42] y mismo año. Activacion: agregar 'clay'/'hard'/'grass' segun H60-02 graduacion por superficie."
     }
   }
 }
