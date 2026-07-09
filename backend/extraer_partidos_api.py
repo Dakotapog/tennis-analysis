@@ -51,6 +51,12 @@ def main():
         "--flashscore-only", action="store_true",
         help="Modo testing: FlashScore feed + FlashScore odds (sin Kambi). cuota_es_real=False"
     )
+    parser.add_argument(
+        "--torneo", nargs="+", default=None,
+        metavar="NOMBRE",
+        help="Filtrar por nombre de torneo (substring, case-insensitive). "
+             "Ej: --torneo wimbledon | --torneo wimbledon 'us open'"
+    )
     args = parser.parse_args()
 
     day_offset = 1 if args.tomorrow else 0
@@ -63,6 +69,8 @@ def main():
         logger.info("⚠️  cuota_es_real=False — NO usar para apuestas reales")
         if args.tier:
             logger.info(f"🔍 Tiers: {args.tier}")
+        if args.torneo:
+            logger.info(f"🏆 Torneos: {args.torneo}")
         logger.info("=" * 70)
 
         start = time.time()
@@ -70,6 +78,7 @@ def main():
         filename, matches = extract_matches_flashscore_only(
             day_offset=day_offset,
             tiers=args.tier,
+            torneos=args.torneo,
         )
     else:
         logger.info("🎾 PASO 1 API — Partidos + Cuotas Reales Betplay")
@@ -77,6 +86,8 @@ def main():
         logger.info(f"📅 Día: {dia} (offset={day_offset})")
         if args.tier:
             logger.info(f"🔍 Tiers: {args.tier}")
+        if args.torneo:
+            logger.info(f"🏆 Torneos: {args.torneo}")
         logger.info("=" * 70)
 
         start = time.time()
@@ -84,6 +95,7 @@ def main():
         filename, matches = extract_matches(
             day_offset=day_offset,
             tiers=args.tier,
+            torneos=args.torneo,
         )
 
     elapsed = time.time() - start

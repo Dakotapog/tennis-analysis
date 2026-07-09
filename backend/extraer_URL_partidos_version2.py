@@ -56,12 +56,12 @@ class ZitaScraper:
         await self.page.set_viewport_size({"width": 1920, "height": 1080})
         logger.info("✅ Navegador Zita listo")
     
-    async def navigate_to_flashscore(self):
-        """Navegar a FlashScore Tennis"""
+    async def navigate_to_flashscore(self, url: str = "https://www.flashscore.com/tennis/"):
+        """Navegar a FlashScore Tennis. url puede ser la página general o un torneo específico."""
         try:
-            logger.info("📍 Navegando a Flashscore Tennis...")
-            await self.page.goto("https://www.flashscore.com/tennis/", 
-                                wait_until="domcontentloaded", 
+            logger.info(f"📍 Navegando a: {url}")
+            await self.page.goto(url,
+                                wait_until="domcontentloaded",
                                 timeout=45000)
             
             await asyncio.sleep(3)
@@ -413,6 +413,8 @@ class ZitaScraper:
             # Extraer jugadores
             try:
                 participant_elements = await element.query_selector_all('.event__participant')
+                if len(participant_elements) >= 4:
+                    return None  # partido de dobles — 4 participantes (2 por equipo)
                 if len(participant_elements) >= 2:
                     match_data['jugador1'] = (await participant_elements[0].text_content()).strip()
                     match_data['jugador2'] = (await participant_elements[1].text_content()).strip()
@@ -664,6 +666,18 @@ async def main():
         '--max-matches', type=int, default=0,
         help="Límite de partidos individuales (dobles excluidos siempre). 0 = sin límite. Ej: --max-matches 80"
     )
+    parser.add_argument(
+        '--url', type=str, default=None,
+        help="URL específica de torneo en FlashScore (sin hash). "
+             "Ej: --url 'https://www.flashscore.co/tenis/wta-individuales/wimbledon/'. "
+             "Sin este flag navega a la página general de tenis."
+    )
+    parser.add_argument(
+        '--torneo', nargs='+', default=None,
+        metavar='NOMBRE',
+        help="Filtrar partidos por nombre de torneo (substring, case-insensitive). "
+             "Ej: --torneo wimbledon | --torneo wimbledon 'roland garros'"
+    )
     args = parser.parse_args()
 
     scraper = ZitaScraper()
@@ -679,8 +693,14 @@ async def main():
         # Inicializar navegador
         await scraper.init_browser()
 
+        # Determinar URL de navegación — torneo específico o listado general
+        # El hash (#/...) se elimina: los selectores funcionan en la vista de fixtures, no en el cuadro
+        nav_url = args.url.split('#')[0].rstrip('/') + '/' if args.url else "https://www.flashscore.com/tennis/"
+        if args.url:
+            logger.info(f"🏆 MODO TORNEO ESPECÍFICO: {nav_url}")
+
         # Navegar a FlashScore
-        success = await scraper.navigate_to_flashscore()
+        success = await scraper.navigate_to_flashscore(url=nav_url)
         if not success:
             logger.error("❌ Falló la navegación inicial")
             return
@@ -698,6 +718,19 @@ async def main():
         if not matches_data:
             logger.error("❌ No se extrajeron datos de partidos")
             return
+
+        # Nodo-50: filtrar por torneo si se especifica
+        if args.torneo:
+            keywords = [k.lower() for k in args.torneo]
+            before = len(matches_data)
+            matches_data = [
+                m for m in matches_data
+                if any(kw in (m.get('torneo') or '').lower() for kw in keywords)
+            ]
+            logger.info(f"🏆 Filtro --torneo {args.torneo}: {before} → {len(matches_data)} partidos")
+            if not matches_data:
+                logger.error(f"❌ Ningún partido coincide con --torneo {args.torneo}")
+                return
 
         # Tomar captura final
         await scraper.take_screenshot("flashscore_final")

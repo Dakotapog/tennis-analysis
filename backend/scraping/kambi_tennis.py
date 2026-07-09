@@ -21,6 +21,7 @@ from typing import Dict, List, Optional, Tuple
 import requests
 
 from config import FLASHSCORE_BASE, FLASHSCORE_HEADERS
+from core.tournament_context import build_tournament_context
 
 logger = logging.getLogger(__name__)
 
@@ -513,23 +514,42 @@ def match_players(kambi_matches: List[Dict], fs_matches: List[Dict]) -> List[Dic
                     r1, r2 = None, found_rank
 
                 matched += 1
-                match_url = ""
+                proxy_url = ""
                 if ref.get("slug1") and ref.get("slug2") and ref.get("match_id"):
-                    match_url = (
+                    proxy_url = (
                         f"https://www.flashscore.co/match/tennis/"
                         f"{ref['slug1']}-{ref['slug2']}/{ref['match_id']}/#/h2h"
                     )
+
+                # Bug fix Nodo-49: asignar proxy al jugador CORRECTO.
+                # Si solo encontramos j1 → match_id es proxy de P1, j2 no tiene proxy.
+                # Si solo encontramos j2 → match_id_j2 es proxy de P2, P1 no tiene proxy.
+                # Nunca asignar proxy de P2 a match_id (que _process_ronda_futura usa para P1).
+                if fs_j1:
+                    proxy_j1_id = ref.get("match_id")
+                    proxy_j1_url = proxy_url
+                    proxy_j2_id = None
+                    proxy_j2_url = ""
+                else:
+                    proxy_j1_id = None
+                    proxy_j1_url = ""
+                    proxy_j2_id = ref.get("match_id")
+                    proxy_j2_url = proxy_url
+
                 logger.info(
                     f"   🔗 Tier4 (parcial): {km['jugador1']} vs {km['jugador2']} "
-                    f"→ ranking parcial [{r1},{r2}] sup={superficie}"
+                    f"→ ranking parcial [{r1},{r2}] sup={superficie} "
+                    f"| proxy_j1={proxy_j1_id} proxy_j2={proxy_j2_id}"
                 )
                 merged.append({
                     "jugador1": km["jugador1"],
                     "jugador2": km["jugador2"],
                     "cuota1": km["cuota1"],
                     "cuota2": km["cuota2"],
-                    "match_url": match_url,
-                    "match_id": ref.get("match_id"),
+                    "match_url": proxy_j1_url,
+                    "match_id": proxy_j1_id,
+                    "match_id_j2": proxy_j2_id,
+                    "match_url_j2": proxy_j2_url,
                     "ranking1": r1,
                     "ranking2": r2,
                     "superficie": superficie,
@@ -600,12 +620,14 @@ def _parse_odd(text: str) -> Optional[float]:
         return None
 
 
-async def _scrape_flashscore_odds_async() -> Dict[Tuple, Tuple[float, float]]:
+async def _scrape_flashscore_odds_async(day_offset: int = 0) -> Dict[Tuple, Tuple[float, float]]:
     """Implementación async interna — usa Playwright para extraer cuotas de FlashScore."""
-    import asyncio
+    import asyncio as _aio
     from playwright.async_api import async_playwright
 
     odds_map: Dict[Tuple, Tuple[float, float]] = {}
+
+    logger.info(f"🎭 FlashScore odds scraping day_offset={day_offset}")
 
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(headless=True, args=_PLAYWRIGHT_ARGS)
@@ -613,12 +635,13 @@ async def _scrape_flashscore_odds_async() -> Dict[Tuple, Tuple[float, float]]:
         await page.set_viewport_size({"width": 1920, "height": 1080})
 
         try:
+            # Usar dominio colombiano (.co/tenis/) — misma cobertura y estructura HTML
+            # que ve el usuario. El .com internacional usa SVG+title (menos cobertura).
             await page.goto(
-                "https://www.flashscore.com/tennis/",
+                "https://www.flashscore.co/tenis/",
                 wait_until="domcontentloaded",
                 timeout=45000,
             )
-            import asyncio as _aio
             await _aio.sleep(3)
 
             # Cookie consent
@@ -629,6 +652,41 @@ async def _scrape_flashscore_odds_async() -> Dict[Tuple, Tuple[float, float]]:
                     await _aio.sleep(2)
             except Exception:
                 pass
+
+            # Navegar al día correcto — mismo patrón que extraer_URL_partidos_version2.py
+            if day_offset != 0:
+                arrow_dir = "next" if day_offset > 0 else "prev"
+                day_selectors = [
+                    f'button[data-day-picker-arrow="{arrow_dir}"]',
+                    f'button.wcl-arrow_YpdN4[aria-label="{"Día siguiente" if day_offset > 0 else "Día anterior"}"]',
+                ]
+                _navigated = False
+                for _step in range(abs(day_offset)):
+                    for sel in day_selectors:
+                        try:
+                            el = await page.query_selector(sel)
+                            if el:
+                                await el.click()
+                                await _aio.sleep(3)
+                                logger.info(f"📅 FlashScore odds: click día {'+' if day_offset > 0 else ''}{day_offset} ({sel})")
+                                _navigated = True
+                                break
+                        except Exception:
+                            continue
+                    if not _navigated:
+                        # Fallback por aria-label
+                        buttons = await page.query_selector_all("button[aria-label]")
+                        for btn in buttons:
+                            label = await btn.get_attribute('aria-label') or ''
+                            keywords = ['siguiente', 'next', 'tomorrow'] if day_offset > 0 else ['anterior', 'prev', 'yesterday']
+                            if any(kw in label.lower() for kw in keywords):
+                                await btn.click()
+                                await _aio.sleep(3)
+                                logger.info(f"📅 FlashScore odds: click día por aria-label '{label}'")
+                                _navigated = True
+                                break
+                    if not _navigated:
+                        logger.warning(f"⚠️  FlashScore odds: no se encontró botón de navegación día {day_offset} — usando día actual")
 
             # Click odds button para activar columnas de cuotas
             for sel in ['text="Odds"', 'text="Cuotas"', '[data-testid*="odds"]',
@@ -642,41 +700,101 @@ async def _scrape_flashscore_odds_async() -> Dict[Tuple, Tuple[float, float]]:
                 except Exception:
                     continue
 
-            # Scroll para cargar todos los partidos
-            await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-            await _aio.sleep(3)
+            import re as _re_odds
 
-            # Extraer partidos
-            match_elements = await page.query_selector_all(".event__match")
-            logger.info(f"⚡ FlashScore odds: {len(match_elements)} elementos encontrados")
+            def _extract_odd_from_title(title_str: str) -> Optional[float]:
+                """Extrae decimal odd de title '[bl]X[d]Y' (formato .com) o texto plano."""
+                _m = _re_odds.search(r'\[d\]([\d.]+)', title_str)
+                if _m:
+                    return _parse_odd(_m.group(1))
+                _m = _re_odds.search(r'\[bl\]([\d.]+)', title_str)
+                if _m:
+                    return _parse_odd(_m.group(1))
+                return _parse_odd(title_str)
 
-            for element in match_elements:
+            async def _extract_match_data(element) -> None:
+                """Extrae mid + cuotas de un elemento y los agrega a odds_map."""
                 try:
-                    # Jugadores
+                    # match_id desde href (?mid=) o desde id del elemento (g_2_XXXX)
+                    mid_from_dom = None
+                    row_link = await element.query_selector("a.eventRowLink")
+                    if row_link:
+                        href = await row_link.get_attribute('href') or ""
+                        mm = _re_odds.search(r'\?mid=([A-Za-z0-9]+)', href)
+                        if mm:
+                            mid_from_dom = mm.group(1)
+                    if not mid_from_dom:
+                        el_id = await element.get_attribute('id') or ""
+                        mm = _re_odds.search(r'g_\d+_([A-Za-z0-9]+)$', el_id)
+                        if mm:
+                            mid_from_dom = mm.group(1)
+
+                    # Jugadores (solo procesar singles — 2 participantes exactos para singles)
                     participants = await element.query_selector_all(".event__participant")
                     if len(participants) < 2:
-                        continue
+                        return
                     j1 = (await participants[0].text_content() or "").strip()
                     j2 = (await participants[1].text_content() or "").strip()
                     if not j1 or not j2:
-                        continue
+                        return
 
-                    # Cuotas — selectores específicos primero
+                    # Cuotas — estructura .co: <span>1.22</span> dentro del div
                     odd1_el = await element.query_selector(".event__odd--odd1")
                     odd2_el = await element.query_selector(".event__odd--odd2")
                     if not odd1_el or not odd2_el:
                         odd1_el = await element.query_selector('[class*="odd1"]')
                         odd2_el = await element.query_selector('[class*="odd2"]')
                     if not odd1_el or not odd2_el:
-                        continue
+                        return
 
-                    c1 = _parse_odd(await odd1_el.text_content() or "")
-                    c2 = _parse_odd(await odd2_el.text_content() or "")
+                    async def _get_odd_val(el) -> Optional[float]:
+                        sp = await el.query_selector("span")
+                        if sp:
+                            v = _parse_odd(await sp.text_content() or "")
+                            if v:
+                                return v
+                        v = _parse_odd(await el.text_content() or "")
+                        if v:
+                            return v
+                        t = await el.get_attribute('title') or ""
+                        return _extract_odd_from_title(t) if t else None
+
+                    c1 = await _get_odd_val(odd1_el)
+                    c2 = await _get_odd_val(odd2_el)
+
                     if c1 and c2:
                         key = _build_match_key(j1, j2)
                         odds_map[key] = (c1, c2)
+                        if mid_from_dom:
+                            odds_map[('__mid__', mid_from_dom)] = (c1, c2)
                 except Exception:
-                    continue
+                    pass
+
+            # Sweep con virtual scrolling: recolectar en múltiples posiciones
+            # FlashScore usa virtual scroll — elimina elementos fuera de viewport
+            # Necesitamos barrer desde arriba hasta abajo recogiendo datos en cada paso
+            seen_mids: set = set()
+            scroll_height = await page.evaluate("document.body.scrollHeight")
+            step_px = 2500
+            pos = 0
+            rounds = 0
+            while pos <= scroll_height + step_px:
+                await page.evaluate(f"window.scrollTo(0, {pos})")
+                await _aio.sleep(0.8)
+                match_elements = await page.query_selector_all(".event__match")
+                for element in match_elements:
+                    el_id = await element.get_attribute('id') or ""
+                    if el_id not in seen_mids:
+                        seen_mids.add(el_id)
+                        await _extract_match_data(element)
+                pos += step_px
+                # Recalcular altura en caso de lazy loading
+                scroll_height = await page.evaluate("document.body.scrollHeight")
+                rounds += 1
+                if rounds > 25:  # safety cap
+                    break
+
+            logger.info(f"⚡ FlashScore odds: sweep completado ({rounds} rondas, {len(seen_mids)} elementos únicos)")
 
         finally:
             await browser.close()
@@ -685,12 +803,15 @@ async def _scrape_flashscore_odds_async() -> Dict[Tuple, Tuple[float, float]]:
     return odds_map
 
 
-def fetch_flashscore_odds() -> Dict[Tuple, Tuple[float, float]]:
+def fetch_flashscore_odds(day_offset: int = 0) -> Dict[Tuple, Tuple[float, float]]:
     """
     Extrae cuotas de FlashScore via Playwright.
 
     Solo para testing/validación post-hoc — NO son cuotas de Betplay.
     Las cuotas se marcan cuota_es_real=False en el pipeline.
+
+    Args:
+        day_offset: 0=hoy, 1=mañana, -1=ayer (debe coincidir con el feed)
 
     Returns:
         Dict[match_key -> (cuota_j1, cuota_j2)]
@@ -702,16 +823,191 @@ def fetch_flashscore_odds() -> Dict[Tuple, Tuple[float, float]]:
         if loop.is_running():
             import concurrent.futures
             with concurrent.futures.ThreadPoolExecutor() as pool:
-                future = pool.submit(asyncio.run, _scrape_flashscore_odds_async())
+                future = pool.submit(asyncio.run, _scrape_flashscore_odds_async(day_offset))
                 return future.result()
-        return loop.run_until_complete(_scrape_flashscore_odds_async())
+        return loop.run_until_complete(_scrape_flashscore_odds_async(day_offset))
     except RuntimeError:
-        return asyncio.run(_scrape_flashscore_odds_async())
+        return asyncio.run(_scrape_flashscore_odds_async(day_offset))
+
+
+def _load_fs_cache_flat() -> List[Dict]:
+    """
+    Carga el JSON flashscore-only más reciente del disco como lista plana.
+    Nodo-50: fallback de caché para partidos sin match_id.
+    """
+    data_dir = Path("data")
+    files = sorted(data_dir.glob("zita_tennis_matches_*.json"), reverse=True)
+    for f in files:
+        try:
+            with open(f, encoding="utf-8") as fh:
+                data = json.load(fh)
+            if not isinstance(data, dict):
+                continue
+            flat = []
+            for torneo_key, matches in data.items():
+                if isinstance(matches, list):
+                    for m in matches:
+                        m_copy = dict(m)
+                        m_copy["_torneo_key"] = torneo_key
+                        # Convertir campos al formato de fetch_flashscore_feed
+                        if "jugador1" in m_copy and "jugador1_fs" not in m_copy:
+                            m_copy["jugador1_fs"] = m_copy["jugador1"]
+                            m_copy["jugador2_fs"] = m_copy["jugador2"]
+                        flat.append(m_copy)
+            if flat:
+                logger.info(f"   💾 Caché FS disk: {f.name} ({len(flat)} partidos)")
+                return flat
+        except Exception:
+            continue
+    return []
+
+
+def _enrich_match_ids(merged: List[Dict], day_offset: int) -> List[Dict]:
+    """
+    Nodo-50: Puente inteligente — enriquece match_id para partidos que fallaron el cruce.
+
+    Para cada partido con match_id=None, intenta 3 fuentes en cascada:
+      1. FlashScore feed day+1 (top seeds de GS a veces programados para mañana)
+      2. FlashScore feed day-1 (partido ya iniciado, no en feed de hoy)
+      3. JSON flashscore-only más reciente en disco (caché)
+
+    No modifica partidos que ya tienen match_id.
+    """
+    sin_id = [m for m in merged if not m.get("match_id")]
+    if not sin_id:
+        return merged
+
+    logger.info(f"   🌉 Nodo-50 Bridge: {len(sin_id)} partidos sin match_id — buscando en fuentes alternativas")
+
+    # Construir índices de cada fuente alternativa
+    alt_sources: List[Tuple[str, List[Dict]]] = []
+
+    # Fuente A: feed de mañana
+    try:
+        fs_tomorrow = fetch_flashscore_feed(day_offset + 1)
+        if fs_tomorrow:
+            alt_sources.append(("feed_day+1", fs_tomorrow))
+    except Exception:
+        pass
+
+    # Fuente B: feed de ayer (matches empezados tarde)
+    if day_offset == 0:
+        try:
+            fs_yesterday = fetch_flashscore_feed(-1)
+            if fs_yesterday:
+                alt_sources.append(("feed_day-1", fs_yesterday))
+        except Exception:
+            pass
+
+    # Fuente C: JSON flashscore-only en disco
+    fs_cache = _load_fs_cache_flat()
+    if fs_cache:
+        alt_sources.append(("disk_cache", fs_cache))
+
+    # Índices por full_key y apellidos para cada fuente
+    source_indices = []
+    for src_name, src_matches in alt_sources:
+        by_full: Dict[Tuple, Dict] = {}
+        by_surnames: Dict[Tuple[str, str], List[Dict]] = {}
+        for m in src_matches:
+            j1 = m.get("jugador1_fs") or m.get("jugador1", "")
+            j2 = m.get("jugador2_fs") or m.get("jugador2", "")
+            if not j1 or not j2:
+                continue
+            key = _build_match_key(j1, j2)
+            by_full[key] = m
+            a1, _ = _parse_nombre(j1)
+            a2, _ = _parse_nombre(j2)
+            sk = tuple(sorted([a1, a2]))
+            by_surnames.setdefault(sk, []).append(m)
+        source_indices.append((src_name, by_full, by_surnames, src_matches))
+
+    # Para cada partido sin match_id, buscar en cada fuente
+    enriched = 0
+    for m in merged:
+        if m.get("match_id"):
+            continue
+
+        km_key = _build_match_key(m["jugador1"], m["jugador2"])
+        km_a1, km_i1 = _parse_nombre(m["jugador1"])
+        km_a2, km_i2 = _parse_nombre(m["jugador2"])
+
+        found_fs = None
+        found_src = None
+
+        for src_name, by_full, by_surnames, src_matches in source_indices:
+            # Tier 1: match exacto
+            fs = by_full.get(km_key)
+            # Tier 2: solo apellidos
+            if not fs:
+                sk = tuple(sorted([km_a1, km_a2]))
+                candidates = by_surnames.get(sk, [])
+                if len(candidates) == 1:
+                    fs = candidates[0]
+                elif len(candidates) > 1:
+                    for c in candidates:
+                        j1 = c.get("jugador1_fs") or c.get("jugador1", "")
+                        j2 = c.get("jugador2_fs") or c.get("jugador2", "")
+                        ck = _build_match_key(j1, j2)
+                        if ck[1] == km_key[1] and ck[3] == km_key[3]:
+                            fs = c
+                            break
+                    if not fs:
+                        fs = candidates[0]
+            if fs:
+                found_fs = fs
+                found_src = src_name
+                break
+
+        if found_fs:
+            mid = found_fs.get("match_id") or found_fs.get("match_id")
+            if mid:
+                j1_name = found_fs.get("jugador1_fs") or found_fs.get("jugador1", "")
+                j2_name = found_fs.get("jugador2_fs") or found_fs.get("jugador2", "")
+                fs_a1, _ = _parse_nombre(j1_name)
+                km_a1_check, _ = _parse_nombre(m["jugador1"])
+                is_same_order = (km_a1_check == fs_a1)
+
+                slug1 = found_fs.get("slug1")
+                slug2 = found_fs.get("slug2")
+                match_url = ""
+                if slug1 and slug2 and mid:
+                    match_url = (
+                        f"https://www.flashscore.co/match/tennis/"
+                        f"{slug1}-{slug2}/{mid}/#/h2h"
+                    )
+
+                m["match_id"] = mid
+                m["match_url"] = match_url or found_fs.get("match_url", "")
+                if not m.get("superficie") or m["superficie"] == "unknown":
+                    m["superficie"] = found_fs.get("superficie", "unknown")
+                if not m.get("ranking1"):
+                    m["ranking1"] = found_fs.get("ranking1") if is_same_order else found_fs.get("ranking2")
+                if not m.get("ranking2"):
+                    m["ranking2"] = found_fs.get("ranking2") if is_same_order else found_fs.get("ranking1")
+                if not m.get("torneo_completo") or m["torneo_completo"] == m.get("torneo_nombre"):
+                    tc = found_fs.get("_torneo_key") or found_fs.get("torneo_fs") or found_fs.get("torneo_completo", "")
+                    if tc:
+                        m["torneo_completo"] = tc
+
+                m["match_id_source"] = found_src
+                enriched += 1
+                logger.info(
+                    f"   ✅ Bridge [{found_src}]: {m['jugador1']} vs {m['jugador2']} → id:{mid}"
+                )
+
+    if enriched:
+        logger.info(f"   🌉 Bridge recuperó {enriched}/{len(sin_id)} match_ids")
+    else:
+        logger.info(f"   ⚠️ Bridge: 0/{len(sin_id)} recuperados — partidos no encontrados en ninguna fuente")
+
+    return merged
 
 
 def extract_matches_flashscore_only(
     day_offset: int = 0,
     tiers: Optional[List[str]] = None,
+    torneos: Optional[List[str]] = None,
 ) -> Tuple[str, List[Dict]]:
     """
     Modo testing: FlashScore feed + FlashScore odds — sin depender de Kambi.
@@ -722,6 +1018,7 @@ def extract_matches_flashscore_only(
     Args:
         day_offset: 0=hoy, 1=mañana, -1=ayer
         tiers: filtrar por tier (None = todos los singles)
+        torneos: filtrar por nombre de torneo, substring case-insensitive (Nodo-50)
 
     Returns:
         (filename, matches)
@@ -734,17 +1031,22 @@ def extract_matches_flashscore_only(
         logger.error("❌ FlashScore feed vacío")
         return "", []
 
-    # 2. FlashScore odds — Playwright
+    # 2. FlashScore odds — Playwright (mismo day_offset que el feed)
     logger.info("🎭 Iniciando Playwright para cuotas FlashScore...")
-    odds_map = fetch_flashscore_odds()
+    odds_map = fetch_flashscore_odds(day_offset)
     logger.info(f"   💰 {len(odds_map)} pares con cuotas encontrados")
 
-    # 3. Merge: feed + odds
+    # 3. Merge: feed + odds — primero por match_id (exacto), luego por nombre (fuzzy)
     merged = []
     con_cuotas = 0
     for m in fs_matches:
-        key = _build_match_key(m["jugador1_fs"], m["jugador2_fs"])
-        cuotas = odds_map.get(key)
+        # Prioridad 1: match por match_id (exacto — sin depender de name parsing)
+        mid_key = ('__mid__', m.get("match_id", ""))
+        cuotas = odds_map.get(mid_key) if m.get("match_id") else None
+        # Prioridad 2: match por nombre (fallback)
+        if not cuotas:
+            key = _build_match_key(m["jugador1_fs"], m["jugador2_fs"])
+            cuotas = odds_map.get(key)
         cuota1 = cuotas[0] if cuotas else None
         cuota2 = cuotas[1] if cuotas else None
         if cuota1:
@@ -786,9 +1088,26 @@ def extract_matches_flashscore_only(
         merged = [m for m in merged if m.get("tier") in tiers]
         logger.info(f"   🔍 Filtrado por tiers {tiers}: {len(merged)} partidos")
 
+    # Nodo-50: filtrar por nombre de torneo si se especifica
+    if torneos:
+        keywords = [k.lower() for k in torneos]
+        before = len(merged)
+        merged = [
+            m for m in merged
+            if any(
+                kw in (m.get('torneo_nombre') or '').lower()
+                or kw in (m.get('torneo_completo') or '').lower()
+                for kw in keywords
+            )
+        ]
+        logger.info(f"   🏆 Filtro --torneo {torneos}: {before} → {len(merged)} partidos")
+
     if not merged:
         logger.warning("⚠️ No hay partidos para guardar")
         return "", []
+
+    # 4.9. Nodo-51 F1: añadir tournament_context a cada match
+    merged = _attach_tournament_contexts(merged)
 
     # 5. Guardar
     filename = save_matches(merged, day_offset)
@@ -800,6 +1119,28 @@ def _extract_country_from_tournament(torneo: str) -> str:
     # "ATP - INDIVIDUALES: Stuttgart (Alemania), hierba" → "Alemania"
     match = re.search(r"\(([^)]+)\)", torneo)
     return match.group(1) if match else "N/A"
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# NODO-51 F1 — TournamentContext como Entidad
+# ══════════════════════════════════════════════════════════════════════════════
+
+def _attach_tournament_contexts(
+    matches: List[Dict],
+    match_date=None,
+) -> List[Dict]:
+    """
+    Nodo-51 F1: añade 'tournament_context' a cada match dict.
+
+    La superficie se infiere de torneo_completo UNA VEZ aquí y viaja con el match.
+    Nodo-46 (F4) la leerá de tournament_context — no la reinfiere.
+
+    No modifica ningún campo existente del match dict (compatibilidad hacia atrás).
+    """
+    for m in matches:
+        torneo = m.get("torneo_completo") or m.get("torneo_nombre") or ""
+        m["tournament_context"] = build_tournament_context(torneo, match_date=match_date)
+    return matches
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -820,7 +1161,7 @@ def save_matches(matches: List[Dict], day_offset: int = 0) -> str:
         if key not in by_tournament:
             by_tournament[key] = []
 
-        by_tournament[key].append({
+        entry = {
             "jugador1": m["jugador1"],
             "jugador2": m["jugador2"],
             "cuota1": m["cuota1"],
@@ -837,7 +1178,17 @@ def save_matches(matches: List[Dict], day_offset: int = 0) -> str:
             "hora": m.get("hora"),
             "kambi_event_id": m.get("kambi_event_id"),
             "cuota_es_real": True,
-        })
+            "tournament_context": m.get("tournament_context"),
+        }
+        # Fix Nodo-49: preservar campos de ronda futura para que ninja_h2h_parser
+        # pueda usar los proxies correctos y detectar la ruta _process_ronda_futura.
+        if m.get("ronda_futura"):
+            entry["ronda_futura"] = True
+        if m.get("match_id_j2"):
+            entry["match_id_j2"] = m["match_id_j2"]
+        if m.get("match_url_j2"):
+            entry["match_url_j2"] = m["match_url_j2"]
+        by_tournament[key].append(entry)
 
     # Guardar
     data_dir = Path("data")
@@ -935,13 +1286,18 @@ def save_betplay_ofertas(matches: List[Dict]) -> str:
 # ENTRY POINT
 # ══════════════════════════════════════════════════════════════════════════════
 
-def extract_matches(day_offset: int = 0, tiers: Optional[List[str]] = None) -> Tuple[str, List[Dict]]:
+def extract_matches(
+    day_offset: int = 0,
+    tiers: Optional[List[str]] = None,
+    torneos: Optional[List[str]] = None,
+) -> Tuple[str, List[Dict]]:
     """
     Pipeline completo: Kambi + FlashScore → merge → save.
 
     Args:
         day_offset: 0=hoy, 1=mañana
         tiers: filtrar por tier (None = todos los singles)
+        torneos: filtrar por nombre de torneo, substring case-insensitive (Nodo-50)
 
     Returns:
         (filename, matches) — ruta al JSON guardado y lista de partidos
@@ -958,6 +1314,13 @@ def extract_matches(day_offset: int = 0, tiers: Optional[List[str]] = None) -> T
     # 3. Merge
     merged = match_players(kambi, fs)
 
+    # 3.1. Nodo-50 Bridge — enriquecer match_ids faltantes desde fuentes alternativas
+    sin_id_before = sum(1 for m in merged if not m.get("match_id"))
+    if sin_id_before:
+        merged = _enrich_match_ids(merged, day_offset)
+        sin_id_after = sum(1 for m in merged if not m.get("match_id"))
+        logger.info(f"   📊 Sin match_id: {sin_id_before} → {sin_id_after} tras bridge")
+
     # 3.5. Filtrar por fecha — Kambi devuelve partidos futuros (días adelante)
     target_date = (datetime.now(timezone.utc) + timedelta(days=day_offset)).date()
     before = len(merged)
@@ -973,6 +1336,23 @@ def extract_matches(day_offset: int = 0, tiers: Optional[List[str]] = None) -> T
     if tiers:
         merged = [m for m in merged if m.get("tier") in tiers]
         logger.info(f"   🔍 Filtrado por tiers {tiers}: {len(merged)} partidos")
+
+    # Nodo-50: filtrar por nombre de torneo si se especifica
+    if torneos:
+        keywords = [k.lower() for k in torneos]
+        before = len(merged)
+        merged = [
+            m for m in merged
+            if any(
+                kw in (m.get('torneo_nombre') or '').lower()
+                or kw in (m.get('torneo_completo') or '').lower()
+                for kw in keywords
+            )
+        ]
+        logger.info(f"   🏆 Filtro --torneo {torneos}: {before} → {len(merged)} partidos")
+
+    # 4.9. Nodo-51 F1: añadir tournament_context a cada match
+    merged = _attach_tournament_contexts(merged)
 
     # 5. Guardar
     if not merged:

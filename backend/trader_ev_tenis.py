@@ -50,6 +50,35 @@ _P_PRIOR     = 0.52   # prior neutral — fallback cuando no hay calibración
 
 _CALIBRACION_PATH = os.path.join(os.path.dirname(__file__), 'data', 'calibracion_edge.json')
 
+# Nodo-70: CPPI — Kelly con piso de supervivencia (Black-Perold)
+# Constantes PROVISIONALES etiquetadas — NO modificar sin sesión de recalibración
+_CPPI_FLOOR_PCT  = 0.70   # PROVISIONAL: piso = 70% del bankroll pico
+_CPPI_MULTIPLIER = 2.0    # PROVISIONAL: m=2 (apalancamiento sobre cushion)
+
+
+def _cppi_factor(bankroll: float, peak_bankroll: float) -> float:
+    """
+    Nodo-70: CPPI factor de sizing.
+
+    cushion_t = (bankroll_t - FLOOR) / bankroll_t
+    donde FLOOR = _CPPI_FLOOR_PCT * peak_bankroll
+
+    factor = min(1.0, max(0.0, _CPPI_MULTIPLIER * cushion_t))
+
+    A bankroll = peak  -> cushion = 1 - FLOOR_PCT  -> factor aprox 0.60 (FLOOR=70%, m=2)
+    A bankroll = FLOOR -> cushion = 0              -> factor = 0.0 (no sizing)
+    A bankroll > peak  (no ocurre en t=0): factor clampeado a 1.0
+
+    IMPORTANTE: Este factor se aplica DESPUES del VaR en el waterfall log.
+    Las constantes son PROVISIONALES y estan etiquetadas como tales.
+    """
+    floor = _CPPI_FLOOR_PCT * peak_bankroll
+    if bankroll <= 0:
+        return 0.0
+    cushion_t = (bankroll - floor) / bankroll
+    factor = _CPPI_MULTIPLIER * cushion_t
+    return min(1.0, max(0.0, factor))
+
 
 def _load_p_prior(superficie: str = 'unknown', tier: str = 'grand_slam') -> float:
     """
@@ -1083,19 +1112,38 @@ def main():
     if risk_metrics.get('var_excedido') and risk_metrics.get('factor_var', 1.0) < 1.0:
         fv = risk_metrics['factor_var']
 
+        # Nodo-70: CPPI factor — piso de supervivencia Black-Perold
+        # peak_bankroll = bankroll en t=0 (primera sesión siempre en peak)
+        cppi_f = _cppi_factor(bankroll=bankroll, peak_bankroll=bankroll)
+        floor_cppi = _CPPI_FLOOR_PCT * bankroll
+
         # Ajustar individuales
         for s in senales_enriched:
             stake_pre = s['stake']
-            s['stake'] = round(stake_pre * fv / MIN_BET) * MIN_BET
+            # Waterfall: kelly_kl → ×portfolio_factor → ×var_factor → ×cppi → MIN_BET_CLIFF
+            stake_post_var  = stake_pre * fv
+            stake_post_cppi = stake_post_var * cppi_f
+            s['stake'] = round(stake_post_cppi / MIN_BET) * MIN_BET
             s['retorno_potencial'] = round(s['stake'] * s['cuota_favorito'], 0)
             # Waterfall: registrar causa terminal (D54-01)
             wf = s.get('_waterfall', {})
             if s['stake'] == 0 and stake_pre > 0:
-                wf['terminal_reason'] = f'MIN_BET_CLIFF (stake_pre_var=${stake_pre:,.0f} × var_factor={fv:.2f} = ${stake_pre*fv:,.0f} < MIN_BET={MIN_BET:,})'
+                wf['terminal_reason'] = (
+                    f'MIN_BET_CLIFF (stake_pre_var=${stake_pre:,.0f} × var_factor={fv:.2f}'
+                    f' × cppi={cppi_f:.4f} = ${stake_post_cppi:,.0f} < MIN_BET={MIN_BET:,})'
+                )
             elif s['stake'] > 0:
-                wf['terminal_reason'] = f'OK (stake_pre_var=${stake_pre:,.0f} × {fv:.2f} = ${s["stake"]:,.0f})'
+                wf['terminal_reason'] = (
+                    f'OK (stake_pre_var=${stake_pre:,.0f} × {fv:.2f} × cppi={cppi_f:.4f}'
+                    f' = ${s["stake"]:,.0f})'
+                )
             wf['stake_final'] = s['stake']
             wf['var_factor'] = fv
+            wf['cppi_factor'] = cppi_f
+            wf['cppi_log'] = (
+                f'cppi={cppi_f:.4f}(bankroll={bankroll}, peak={bankroll},'
+                f' floor={floor_cppi:.0f})'
+            )
             wf['var_flattened'] = (s['stake'] == 0 and stake_pre > 0)
         gastado_ind = sum(s['stake'] for s in senales_enriched)
 

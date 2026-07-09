@@ -275,6 +275,11 @@ async def main():
         '--api-mode', action='store_true',
         help="Usar API Ninja en vez de Playwright (~0.5s/partido vs 2-3 min). No requiere navegador."
     )
+    parser.add_argument(
+        '--pw-budget', type=int, default=20,
+        help="F3: máximo de partidos que van al batch de Playwright por sesión (default 20). "
+             "Prioriza ITF/Challenger y cuota en rango apostable [1.5-6.0]."
+    )
     args = parser.parse_args()
 
     # ── API MODE: rápido, sin Playwright ──────────────────────────────────────
@@ -295,7 +300,7 @@ async def main():
             logger.error("❌ No se pudieron cargar los partidos desde JSON")
             return
 
-        ninja.run()
+        ninja.run(pw_budget=args.pw_budget)
         output_file = ninja.save_results()
 
         if output_file:

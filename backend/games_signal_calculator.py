@@ -186,7 +186,7 @@ def auto_calibrar_thresholds() -> dict:
 # IMPORTANTE: excluir "número total de juegos ganados por X" (mercado individual de jugador)
 LABELS_TOTAL_JUEGOS = ["total de juegos"]
 LABELS_TOTAL_SETS   = ["total de sets"]
-LABELS_EXCLUIR      = ["número total de juegos ganados", "juegos ganados por", "- set"]
+LABELS_EXCLUIR      = ["número total de juegos ganados", "juegos ganados por", "- set", "con quiebre"]
 
 # Rango de games según subzona (reutiliza lógica de generar_tabla_favoritos2.py)
 def _predecir_sets_y_games(diff_abs: float, total_score: float) -> dict:
