@@ -1,7 +1,7 @@
 {
   "ts_registro": "2026-06-29T02:58:17.747634",
   "ts_bookmarklet": "2026-06-29T07:58:17.627Z",
-  "estado": "PENDIENTE",
+  "estado": "CERRADO",
   "betslip_index": "reports/betslip_index_20260629_025010.json",
   "n_picks": 1,
   "picks": [
@@ -21,9 +21,12 @@
       "kelly_kl": 0.0,
       "stake": 0,
       "retorno_potencial": 0,
-      "resultado_real": null,
-      "correcto": null,
-      "ganancia": null
+      "resultado_real": "Marton Fucsovics",
+      "correcto": false,
+      "ganancia": 0,
+      "sets": "0-1"
     }
-  ]
+  ],
+  "pl_sesion": 0,
+  "ts_cierre": "2026-07-06T10:59:26.898694"
 }

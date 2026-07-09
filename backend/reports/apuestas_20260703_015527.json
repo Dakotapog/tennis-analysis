@@ -1,0 +1,53 @@
+{
+  "ts_registro": "2026-07-03T01:55:27.289670",
+  "ts_bookmarklet": "2026-07-03T06:55:26.687Z",
+  "estado": "CERRADO",
+  "betslip_index": "reports/betslip_index_20260703_004516.json",
+  "n_picks": 2,
+  "picks": [
+    {
+      "outcome_id": "4244753858",
+      "jugador": "Felipe Meligeni Rodrigues Alves",
+      "cuota": 1.81,
+      "cuota_kambi": 1.81,
+      "partido": "Felipe Meligeni Rodrigues Alves vs Rodrigo Pacheco Mendez",
+      "match_id": "Q5iuEpBU",
+      "match_url": "https://www.flashscore.co/match/tennis/aboian-valerio-meligeni-rodrigues-alves-felipe/Q5iuEpBU/#/h2h",
+      "torneo": "Quito (Ecuador)",
+      "superficie": "clay",
+      "tier": "challenger",
+      "edge": "10.8%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0,
+      "stake": 0,
+      "retorno_potencial": 0,
+      "resultado_real": "Rodrigo Pacheco Mendez",
+      "correcto": false,
+      "ganancia": 0,
+      "sets": "0-2"
+    },
+    {
+      "outcome_id": "4244470357",
+      "jugador": "Aziz Ouakaa",
+      "cuota": 1.74,
+      "cuota_kambi": 1.74,
+      "partido": "Alexander Frusina vs Aziz Ouakaa",
+      "match_id": "dYumjz7C",
+      "match_url": "https://www.flashscore.co/match/tennis/frusina-alexander-ouakaa-aziz/dYumjz7C/#/h2h",
+      "torneo": "M15 Monastir 25 (Túnez)",
+      "superficie": "hard",
+      "tier": "itf",
+      "edge": "7.0%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "resultado_real": "Aziz Ouakaa",
+      "correcto": true,
+      "ganancia": 0,
+      "sets": "0-2"
+    }
+  ],
+  "pl_sesion": 0,
+  "ts_cierre": "2026-07-06T10:58:44.832367"
+}

@@ -1,7 +1,7 @@
 {
   "ts_registro": "2026-06-28T11:05:15.872481",
   "ts_bookmarklet": "2026-06-28T16:05:15.512Z",
-  "estado": "PENDIENTE",
+  "estado": "CERRADO",
   "betslip_index": "reports/betslip_index_20260628_105711.json",
   "n_picks": 1,
   "picks": [
@@ -21,9 +21,12 @@
       "kelly_kl": 0.0,
       "stake": 0,
       "retorno_potencial": 0.0,
-      "resultado_real": null,
-      "correcto": null,
-      "ganancia": null
+      "resultado_real": "Dhakshineswar Suresh",
+      "correcto": true,
+      "ganancia": 0,
+      "sets": "0-2"
     }
-  ]
+  ],
+  "pl_sesion": 0,
+  "ts_cierre": "2026-07-06T10:59:39.867660"
 }

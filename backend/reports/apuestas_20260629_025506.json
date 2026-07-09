@@ -1,7 +1,7 @@
 {
   "ts_registro": "2026-06-29T02:55:06.497576",
   "ts_bookmarklet": "2026-06-29T07:55:05.602Z",
-  "estado": "PENDIENTE",
+  "estado": "CERRADO",
   "betslip_index": "reports/betslip_index_20260629_025010.json",
   "n_picks": 2,
   "picks": [
@@ -21,9 +21,10 @@
       "kelly_kl": 0.0,
       "stake": 0,
       "retorno_potencial": 0,
-      "resultado_real": null,
-      "correcto": null,
-      "ganancia": null
+      "resultado_real": "Jessica Pegula",
+      "correcto": false,
+      "ganancia": 0,
+      "sets": "2-0"
     },
     {
       "outcome_id": "4236946935",
@@ -41,9 +42,12 @@
       "kelly_kl": 0.0,
       "stake": 0,
       "retorno_potencial": 0,
-      "resultado_real": null,
-      "correcto": null,
-      "ganancia": null
+      "resultado_real": "Pablo Carreno Busta",
+      "correcto": true,
+      "ganancia": 0,
+      "sets": "0-2"
     }
-  ]
+  ],
+  "pl_sesion": 0,
+  "ts_cierre": "2026-07-06T10:59:30.706428"
 }

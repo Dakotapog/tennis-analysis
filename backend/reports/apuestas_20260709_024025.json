@@ -1,0 +1,49 @@
+{
+  "ts_registro": "2026-07-09T02:40:25.921831",
+  "ts_bookmarklet": "2026-07-09T07:40:25.553Z",
+  "estado": "PENDIENTE",
+  "betslip_index": "reports/betslip_index_20260709_014003.json",
+  "n_picks": 2,
+  "picks": [
+    {
+      "outcome_id": "4252209868",
+      "jugador": "Leyton Rivera",
+      "cuota": 4.35,
+      "cuota_kambi": 4.35,
+      "partido": "Petr Michnev vs Leyton Rivera",
+      "match_id": "tOfrl834",
+      "match_url": "https://www.flashscore.co/match/tennis/michnev-petr-rivera-leyton/tOfrl834/#/h2h",
+      "torneo": "M15 Lodz (Polonia)",
+      "superficie": "clay",
+      "tier": "itf",
+      "edge": "39.7%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0,
+      "stake": 0,
+      "retorno_potencial": 0.0,
+      "resultado_real": null,
+      "correcto": null,
+      "ganancia": null
+    },
+    {
+      "outcome_id": "4251695301",
+      "jugador": "Aren Baybars",
+      "cuota": 2.28,
+      "cuota_kambi": 2.28,
+      "partido": "Ludovico Vaccari vs Aren Baybars",
+      "match_id": "CMTABaUO",
+      "match_url": "https://www.flashscore.co/match/tennis/vaccari-ludovico-baybars-aren/CMTABaUO/#/h2h",
+      "torneo": "M25 Roda de Bara (España)",
+      "superficie": "hard",
+      "tier": "itf",
+      "edge": "15.1%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0,
+      "stake": 0,
+      "retorno_potencial": 0,
+      "resultado_real": null,
+      "correcto": null,
+      "ganancia": null
+    }
+  ]
+}
