@@ -58,18 +58,21 @@ def main():
             print(f"[n8n] Workflow existente encontrado: id={wf_id}")
             break
 
+    # n8n no acepta 'active' ni 'tags' en el body de creación/actualización
+    payload = {k: v for k, v in workflow.items() if k not in ("active", "tags")}
+
     if wf_id:
         # Actualizar
-        result = _api("PUT", f"/workflows/{wf_id}", workflow, args.api_key)
+        result = _api("PUT", f"/workflows/{wf_id}", payload, args.api_key)
         print(f"[n8n] Workflow actualizado: id={result.get('id')}")
     else:
         # Crear nuevo
-        result = _api("POST", "/workflows", workflow, args.api_key)
+        result = _api("POST", "/workflows", payload, args.api_key)
         wf_id = result.get("id")
         print(f"[n8n] Workflow creado: id={wf_id}")
 
-    # Activar
-    _api("PATCH", f"/workflows/{wf_id}", {"active": True}, args.api_key)
+    # Activar via endpoint dedicado
+    _api("POST", f"/workflows/{wf_id}/activate", None, args.api_key)
     print(f"[n8n] Workflow ACTIVO en http://localhost:5678/workflow/{wf_id}")
     print(f"[n8n] Listo. El workflow dispara cada 5 min via close_snapshot_server.py :8765")
 
