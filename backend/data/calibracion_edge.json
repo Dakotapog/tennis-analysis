@@ -1,24 +1,24 @@
 {
   "global": {
-    "wins": 1673,
-    "losses": 1058
+    "wins": 2143,
+    "losses": 1380
   },
   "por_superficie": {
     "clay": {
-      "wins": 942,
-      "losses": 507
+      "wins": 1183,
+      "losses": 642
     },
     "unknown": {
-      "wins": 45,
+      "wins": 46,
       "losses": 29
     },
     "grass": {
-      "wins": 258,
-      "losses": 189
+      "wins": 351,
+      "losses": 272
     },
     "hard": {
-      "wins": 405,
-      "losses": 260
+      "wins": 540,
+      "losses": 364
     },
     "?": {
       "wins": 23,
@@ -35,9 +35,9 @@
     },
     "clay_challenger": {
       "wins": 33,
-      "losses": 16,
+      "losses": 18,
       "era_v2_wins": 11,
-      "era_v2_losses": 1,
+      "era_v2_losses": 3,
       "era_v2_start": "2026-06-19"
     },
     "grass_challenger": {
@@ -69,10 +69,10 @@
       "era_v2_start": "2026-06-19"
     },
     "clay_itf": {
-      "wins": 13,
-      "losses": 29,
-      "era_v2_wins": 13,
-      "era_v2_losses": 28,
+      "wins": 39,
+      "losses": 50,
+      "era_v2_wins": 39,
+      "era_v2_losses": 49,
       "era_v2_start": "2026-06-19"
     },
     "?_?": {
@@ -83,17 +83,24 @@
       "era_v2_start": "2026-06-19"
     },
     "hard_itf": {
-      "wins": 18,
-      "losses": 32,
-      "era_v2_wins": 18,
-      "era_v2_losses": 32,
+      "wins": 32,
+      "losses": 66,
+      "era_v2_wins": 32,
+      "era_v2_losses": 66,
       "era_v2_start": "2026-06-19"
     },
     "grass_grand_slam": {
-      "wins": 9,
-      "losses": 6,
-      "era_v2_wins": 9,
-      "era_v2_losses": 6,
+      "wins": 40,
+      "losses": 41,
+      "era_v2_wins": 40,
+      "era_v2_losses": 41,
+      "era_v2_start": "2026-06-19"
+    },
+    "hard_challenger": {
+      "wins": 5,
+      "losses": 0,
+      "era_v2_wins": 5,
+      "era_v2_losses": 0,
       "era_v2_start": "2026-06-19"
     }
   },
@@ -104,7 +111,7 @@
     "challenger": 0.611,
     "itf": 0.5
   },
-  "ultima_actualizacion": "2026-06-30T12:50:32.760505",
+  "ultima_actualizacion": "2026-07-08T19:19:30.582200",
   "_nota_revert_B11": "Revertidos 14W/17L de sesión Jun15-16 (modelo B-11 roto, accuracy=46.9% ruido puro)",
   "_nota_era_v2": "FIX-5: era_v2 acumula datos post-normalización-fix desde 2026-06-19. Usar como prior cuando era_v2_n >= 10."
 }
