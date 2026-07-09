@@ -570,6 +570,49 @@ def update_trader_stakes(fecha: str, trader_plan: dict) -> int:
     return actualizados
 
 
+def update_alpha_flags(fecha: str, alpha_nombres: list[str]) -> int:
+    """
+    C62-A (H62-01): propaga flag alpha_promoted al shadow book.
+    Marca registros del día cuyos picks fueron promovidos Cat-C2→Cat-C1 por alpha.
+
+    Inmutabilidad §1: NO toca pick_snapshot.
+    Escribe en campo top-level 'combo_flags.alpha_promoted = True'.
+
+    Args:
+        fecha: 'YYYY-MM-DD'
+        alpha_nombres: lista de nombres de jugadores con alpha_promoted=True
+
+    Returns: número de registros marcados.
+    """
+    if not alpha_nombres:
+        return 0
+    path = _jsonl_path(fecha)
+    records = _load_jsonl(path)
+    if not records:
+        return 0
+
+    nombres_set = {n.strip().lower() for n in alpha_nombres}
+    marcados = 0
+    for sb_id, rec in records.items():
+        if rec.get('record_type') == 'session_meta':
+            continue
+        snap = rec.get('pick_snapshot', {})
+        nombre = (snap.get('nombre') or snap.get('jugador') or
+                  snap.get('player') or '').strip().lower()
+        if nombre and nombre in nombres_set:
+            flags = rec.get('combo_flags', {})
+            flags['alpha_promoted'] = True
+            flags['alpha_updated_at'] = datetime.now().isoformat()
+            rec['combo_flags'] = flags
+            marcados += 1
+
+    if marcados > 0:
+        _save_jsonl(path, records)
+        logger.info(f"[ShadowBook] {marcados} picks marcados alpha_promoted → H62-01 acumulando")
+
+    return marcados
+
+
 def settle(fecha: str, resultados_map: Optional[Dict] = None) -> int:
     """
     Momento 3: settlement post-match.
