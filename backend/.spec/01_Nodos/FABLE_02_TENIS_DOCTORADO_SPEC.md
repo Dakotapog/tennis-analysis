@@ -117,7 +117,7 @@ Cada una: origen → principio → ancla exacta en el pipeline → nodo nuevo �
 ### FASE 0 — Reconciliación (prerrequisito: ninguno) ✅ COMPLETA
 1. ✅ Capturar baseline real de pytest: 1756 passed (2026-07-08).
 2. ✅ `git log -- '*kelly_kl*' '*betslip*'` → bug resuelto (prediccion_ganador arreglado, API homónimos con Playwright).
-3. 🟠 Fix `prediccion_ganador` (Vacío 4): PENDIENTE (consumidores deben usar `ranking_analysis.prediction.favored_player`; test invocando módulo real). Menor — no bloquea otras fases.
+3. ✅ Fix `prediccion_ganador` (Vacío 4): RESUELTO. Campo trampa no existe en codebase. Todos los consumidores usan `ranking_analysis.prediction.favored_player`. Tests en test_rivalry_analyzer.py + test_nodo32.py invocan el módulo y verifican `favored_player` (REGLA-T53 cumplida).
 4. ✅ **C61-A forense CERRADO** — Ver C-06 en DECISION-LOG.md. No hay bug: ×2.2 aplica al componente surface_spec (peso 0.15-0.20); efecto sobre confianza final es 5-15%. ×0.92 = GCS boost al oponente, comportamiento esperado. Sin cambios al motor.
 5. ✅ **C61-B gobernanza CERRADO** — Opción (a) elegida: activación por prior retrospectivo A60-01 (n=54, 64.8%) + H60-01 prospectiva continuando acumulación. Docstring corregido (commit 87e854a). Ver C-05/C-06 DECISION-LOG.
 **Verificación:** baseline 1756 ✅; C61-A/C61-B cerrados con documentación ✅. Fix prediccion_ganador es tarea menor independiente.
