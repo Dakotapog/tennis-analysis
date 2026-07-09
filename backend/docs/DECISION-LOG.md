@@ -152,6 +152,16 @@
 **Por qué importa:** Mezclar evidencia prospectiva con retrospectiva contamina el trail de decisión.
 **Fix:** Docstring corregido. PROHIBICIÓN permanente: no citar "validado por H60-01" para GCS.
 
+### C-06 — C61-A Forense multiplicador GCS (2026-07-08)
+**Incidente:** Producción mostraba efectos ×1.15, ×1.13, ×1.03, ×0.92 cuando las constantes especifican ×2.2/×1.8/×1.5.
+**Causa raíz:** NO hay bug de cálculo. Arquitectura correcta pero descripción incompleta en la spec:
+  - `_gcs_mult` (×2.2/×1.8/×1.5) se aplica a `final_score` dentro de `analyze_surface_specialization()` — este `final_score` ES `surface_specialization.score`, un sub-componente.
+  - `surface_specialization` tiene peso **0.15–0.20** en `generate_advanced_prediction()` (suma ponderada con ELO, H2H, form_recent, common_opponents, etc.).
+  - Efecto real sobre confianza final ≈ weight × (mult − 1) × normalized_component / total_weighted ≈ 5–15%.
+  - El ×0.92 es comportamiento ESPERADO: GCS boost al oponente → su surface_spec sube → confianza del pick evaluado baja.
+**Lección:** "Multiplicador al final_score" en la spec significaba multiplicador al score del COMPONENTE surface_spec, no a la confianza global. Diferencia de semántica, no de cálculo.
+**Cuándo revisitar:** Si se quiere que GCS afecte directamente la confianza global → requiere un Nodo nuevo con ponderación explícita post-suma. Hoy: sin cambios al motor.
+
 ---
 
 ## POLÍTICA DE PRECEDENCIA (§1.2 Vacío 3, FABLE_02)

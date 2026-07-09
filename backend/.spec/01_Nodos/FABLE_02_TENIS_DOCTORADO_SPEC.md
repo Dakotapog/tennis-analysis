@@ -114,13 +114,13 @@ Cada una: origen → principio → ancla exacta en el pipeline → nodo nuevo �
 
 **Reglas globales de toda fase:** baseline pytest capturado antes/después (número real del momento, jamás hardcodeado); REGLA-T53 en todo test; GIT-FIRST antes de crear cualquier módulo; cero impacto en producción (todo lo nuevo es READ-ONLY o flag-OFF hasta su gate); si el criterio de verificación falla → rollback con `git checkout` y escalar a Fable con el output del fallo, NO improvisar un fix alternativo.
 
-### FASE 0 — Reconciliación (prerrequisito: ninguno)
+### FASE 0 — Reconciliación (prerrequisito: ninguno) ✅ COMPLETA
 1. ✅ Capturar baseline real de pytest: 1756 passed (2026-07-08).
 2. ✅ `git log -- '*kelly_kl*' '*betslip*'` → bug resuelto (prediccion_ganador arreglado, API homónimos con Playwright).
-3. 🟠 Fix `prediccion_ganador` (Vacío 4): PENDIENTE (consumidores deben usar `ranking_analysis.prediction.favored_player`; test invocando módulo real).
-4. 🔴 **C61-A forense:** PENDIENTE — trazar multiplicador GCS real vs valores 1.15/1.03/0.92 (constantess 2.2/1.8/1.5).
-5. 🔴 **C61-B gobernanza:** PENDIENTE — documento de decisión (opción a: retrospectivo + prospectivo con regla descenso; opción b: apagar hasta n_stop prospectivo).
-**Verificación:** baseline intacto (✅ 1756); C61-A/C61-B bloqueados en análisis forense.
+3. 🟠 Fix `prediccion_ganador` (Vacío 4): PENDIENTE (consumidores deben usar `ranking_analysis.prediction.favored_player`; test invocando módulo real). Menor — no bloquea otras fases.
+4. ✅ **C61-A forense CERRADO** — Ver C-06 en DECISION-LOG.md. No hay bug: ×2.2 aplica al componente surface_spec (peso 0.15-0.20); efecto sobre confianza final es 5-15%. ×0.92 = GCS boost al oponente, comportamiento esperado. Sin cambios al motor.
+5. ✅ **C61-B gobernanza CERRADO** — Opción (a) elegida: activación por prior retrospectivo A60-01 (n=54, 64.8%) + H60-01 prospectiva continuando acumulación. Docstring corregido (commit 87e854a). Ver C-05/C-06 DECISION-LOG.
+**Verificación:** baseline 1756 ✅; C61-A/C61-B cerrados con documentación ✅. Fix prediccion_ganador es tarea menor independiente.
 
 ### FASE 1 — Infraestructura mínima (prerrequisito: Fase 0)
 1. ✅ **Graphify elegido** — decisión: grafo dominante es "visualización + vault Obsidian" (1588 nodes, 2987 edges). `.graphifyignore` configurado (código solo). Commit: `b9553a4`.
