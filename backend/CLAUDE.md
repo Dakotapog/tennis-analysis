@@ -1,6 +1,6 @@
 # CLAUDE.md — Tennis Prediction & Betting Engine
 
-> Last updated: 2026-07-05 (Nodo-60 GCS ACTIVO HIERBA + ADDENDUM CERRADO — 1659 tests)
+> Last updated: 2026-07-08 (FABLE_02 Fases 1-2 completas — Graphify + Tamp + close-snapshot cron — 1756 tests)
 > Spec-Driven Development (SDD) — no vibe coding.
 > Este archivo es la fuente de verdad. Cualquier sesión futura de Claude debe leerlo completo antes de tocar código.
 
@@ -132,26 +132,34 @@ python3 extraer_ranking_wta_version2.py   # rankings WTA → data/wta_rankings_c
 **PASO 1** — Extraer partidos del día
 
 ```bash
-# ── MODO API (RECOMENDADO — ~1.3 segundos, cuotas REALES Betplay) ──────────
+# ── MODO PLAYWRIGHT (PRIMARIO — IDs de entidad FlashScore, identidad exacta) ──
+python3 extraer_URL_partidos_version2.py
+
+# ── MODO API (NO RECOMENDADO — búsqueda por nombre, vulnerable a homónimos) ──
+# ADVERTENCIA: El modo API causó el bug Pereyra (2026-07-06): jugador debutante
+# recibió 105 partidos del historial de un homónimo veterano → 64.4% confianza falsa
+# → entró en 5 combos → pérdida de dinero real. Causa raíz: Ninja API busca por
+# nombre string, no por ID de entidad. Playwright usa URLs con IDs únicos de FlashScore.
+# Usar API SOLO si Playwright no está disponible Y con guard Phantom Identity activo.
 python3 extraer_partidos_api.py                              # partidos de hoy
 python3 extraer_partidos_api.py --tomorrow                   # partidos de mañana
 python3 extraer_partidos_api.py --tier atp wta               # solo ATP + WTA
 python3 extraer_partidos_api.py --tier atp wta --torneo wimbledon     # solo Wimbledon (Nodo-50)
 python3 extraer_partidos_api.py --torneo wimbledon "us open"          # múltiples torneos (OR)
-
-# ── MODO PLAYWRIGHT (fallback — ~8 min, DOM frágil) ────────────────────────
-python3 extraer_URL_partidos_version2.py
 ```
 → `data/zita_tennis_matches_FECHA.json`
 
 **PASO 2** — Extraer H2H
 
 ```bash
-# ── MODO API (RECOMENDADO — ~0.5s/partido, FlashScore Ninja H2H) ──────────
-python3 extraer_historh2h.py --api-mode --all-tournaments
-
-# ── MODO PLAYWRIGHT (fallback — ~30 min para 80 partidos) ──────────────────
+# ── MODO PLAYWRIGHT (PRIMARIO — navega al ID de entidad del partido) ──────────
+# Evidencia 2026-07-06: Playwright retornó 0 partidos para Pereyra debutante (correcto).
+# API retornó 105 partidos del homónimo veterano (incorrecto). Diferencia: IDs vs nombres.
 python3 extraer_historh2h.py --all-tournaments
+
+# ── MODO API (NO RECOMENDADO — vulnerable a colisión de nombres) ───────────────
+# Ver advertencia PASO 1. Usar solo si Playwright falla completamente.
+python3 extraer_historh2h.py --api-mode --all-tournaments
 ```
 → `reports/h2h_results_enhanced_FECHA.json`
 
@@ -331,16 +339,42 @@ Target: n≥1000 por superficie+tier. Acumular datos con betslip_registrar.py.
 
 ---
 
-## 5. Estado Real — 2026-07-05
+## 5. Estado Real — 2026-07-06
 
 ```
-Tests:         1659 passed, 0 failed (1563→1588→1598→1601→1612→1649→1654→1659 tras Nodo-53/55/56/57/58/60/60-ADDENDUM)
+Tests:         1756 passed, 0 failed (1563→…→1691→1744→1756 tras Nodo-53…63/FABLE02/Nodo-72)
 Calibración:   clay GS: p=0.758 (n=31) | global: wins=467, losses=239, n=706 + 14 nuevos (Jun-28)
                calibration_epoch: epoch-1=pre-Nodo-47 (n=706, ranking parcial), epoch-2=post 2026-06-30
 Bankroll:      $125,000+
 Hedge Fund:    Portfolio Kelly + VaR auto-ajustado + Cobertura Exclusión — ACTIVO ✅
 ML Dataset:    2,573 registros limpios (motor nodo32-fase3-markov-postnorm) — Nodo-41 ✅
                Trazabilidad: jugador1/jugador2/_trace_fecha/torneo_nombre verificada manualmente
+
+Sesión 2026-07-06 — Playwright Migration + Phantom Identity Bug:
+  Accuracy del día: 63.5% (33/52 partidos verificados) — pipeline Nodo-63 funcionando ✅
+  Shadow Book: ~66 settled totales | 8 open (Newport — US night matches, próximo día)
+  Hit% por tier (shadow book histórico):
+    Grand Slam: 50.0% hit | ROI +47.1%   ← alpha estructural confirmado
+    Challenger:  hit% positivo           ← segmento rentable
+    ITF:        30.8% hit | ROI -23.7%   ← NEGATIVO — λ_ITF=4.5 correcto (filtro funciona)
+  Picks del día con edge real: Cundom ✓ | Varillas ✓ | Ribeiro ✓ | Magadan @2.06 ✓
+  
+  INCIDENTE PHANTOM IDENTITY — Facundo Pereyra (2026-07-06):
+    Causa: API Ninja H2H busca por nombre string "Facundo Pereyra" → retornó historial del
+           veterano homónimo (105 partidos desde 2018, ELO=1784, Francavilla champion bonus)
+           para el jugador DEBUTANTE ITF que nunca jugó un partido profesional.
+    Impacto: Confianza falsa 64.4% → entró en 5 combos → pérdida real confirmada.
+    Evidencia: Playwright con URL dhbmEGWr → 0 partidos (correcto). API → 105 (incorrecto).
+    FIX PERMANENTE: Migración a Playwright como modo PRIMARIO para PASO 1 y PASO 2.
+    Playwright navega por ID de entidad FlashScore → imposible confundir homónimos.
+    Ver §4 PASO 1 y PASO 2, §6 Mapa archivos, §9 APIs y Scraping.
+    Pendiente: Nodo-64 Phantom Identity Guard como defensa en profundidad adicional.
+      Guard propuesto: ranking==None AND n_history>20 AND fecha_más_antigua>365d → PHANTOM_IDENTITY
+      → status=NO_DATA, excluido de todos los pools igual que DataContract.
+
+  Insuficiente History Guard (Nodo-63) — VERIFICADO EN PRODUCCIÓN:
+    Rodriguez J.A.: n=3 partidos, days_since=356d → LOG_INSUFFICIENT_HISTORY → fd=1.000 ✅
+    Caso RESUELTO — ya no aparece con edge falso por "inactividad".
 
 Nodo-51 ✅ COMPLETO (2026-07-02):
   F0: PlayerRegistry — entity resolution canónica, absorbe clase entera de bugs tipo Nodo-47
@@ -374,6 +408,11 @@ Lecciones validadas:
   - Nodo-48 ✅: `--flashscore-only` — 507 partidos + 233 con cuotas sin Kambi. Guard D48-05 activo.
   - edges fantasma 2026-07-01 (Arce/Vlajic/Guajardo/Cooper): causa raíz = historial vacío sin gate.
     FIX: F2 DataContract — status=NO_DATA por construcción, trader no los ve nunca.
+  - Phantom identity homónimos 2026-07-06 (Pereyra): API busca por nombre → colisión → historial equivocado.
+    FIX: Playwright como modo PRIMARIO — navega por ID entidad FlashScore, imposible confundir.
+    SEÑAL DE ALERTA: ranking==None + n_history>20 + fecha_más_antigua>365d = sospecha de phantom.
+  - ITF ROI negativo confirmado (hit%=30.8%, ROI=-23.7%): λ_ITF=4.5 funciona como filtro de stakes,
+    pero el modelo sigue generando picks ITF con confianza falsa. Solución: revisar ITF en generar_tabla.
 
 Nodo-55 ✅ COMPLETO (2026-07-03):
   Respuesta Fable al brief Nodo-54: el embudo no está roto — es opaco y caro de operar.
@@ -537,8 +576,308 @@ Arquitectura GCS (estado actual — ACTIVO SOLO PARA HIERBA, 2026-07-05):
     Nota Fable §3: diseño futuro correctamente calibrado será ponderación-en-origen
     (dentro del surface score), no multiplicador post-normalización.
 
+Nodo-61 ✅ COMPLETO (2026-07-06):
+  GCS Season Window Fix — corrige Bug F0 (año erróneo) + Bug F1 (21d ciego semana 1 pre-Wimbledon).
+  Causa raíz Bug F0: _tour_stats iteraba todos los años sin filtro → detectaba Birmingham 2025 en vez de 2026.
+  Causa raíz Bug F1: ventana 21d excluía torneos semana 1 (Birmingham/Nottingham/Halle, finales ~Jun 8-15)
+    para jugadores en Wimbledon R3/R4 en adelante. Solo cubría semana 2 (Eastbourne/Bad Homburg, ~Jun 21-22).
+  
+  D61-F0: fecha_partido parameter en analyze_surface_specialization(*, fecha_partido=None)
+    Cuando None: usa datetime.today() (comportamiento anterior)
+    Cuando se pasa: gcs_days calculado desde fecha_partido, no fecha ejecución
+    Corrige off-by-N-days al correr pipeline nocturno para partidos de mañana
+  
+  D61-F1: _is_gcs_season_active(torneo_fecha, partido_fecha, superficie_norm) — función standalone
+    Reemplaza hard gate "days <= 21" por verificación estacional:
+    - Mismo año (2025 torneo ≠ 2026 partido → False)
+    - Ventana Jun 1 - Jul 13 (grass season)
+    - Días máx 42 (_GCS_LOOKBACK_DAYS)
+    Retorna (is_active, days): is_active=True si ≤21d; False si 22-42d (zona extendida) o fuera de ventana
+  
+  D61-F2: Scan GCS separado de TORNEO_COMPLETO_BONUS loop
+    Antes: GCS tracking inside el loop → break en primer campeón, podía ser el erróneo
+    Ahora: scan separado post-loop → busca campeón MÁS RECIENTE en _GCS_LOOKBACK_DAYS=42d
+    _gcs_torneo_fecha trackeado para _is_gcs_season_active()
+  
+  D61-F3: Zona extendida (22-42d): gcs_extended_active + LOG_GCS_SHADOW_EXTENDED
+    gcs_extended_active=True cuando days in [22,42] AND mismo año AND en temporada hierba
+    LOG_GCS_SHADOW_EXTENDED: "H60-02 PENDIENTE — sin boost" (acumula data prospectiva)
+    _GCS_EXTENDED_ENABLED=False: zona extendida NO aplica boost hasta H60-02 gradúe
+    _GCS_LOOKBACK_DAYS=42, _GCS_SEASON_WINDOWS={'grass': {start:(6,1), end:(7,13), dias_max:42}}
+  
+  D61-F4: H60-02 pre-registrado en validation/preregistered_hypotheses.json
+    dias_min=22, dias_max=42, tier_min=atp500, n_stop=30, estado=PENDIENTE
+    gated: _GCS_EXTENDED_ENABLED=False hasta exito=True Y Brier validado
+    LOG_GCS_SHADOW_EXTENDED genera data prospectiva automáticamente
+  
+  D61-F5: edge_calculator.py serializa gcs_extended_active/gcs_extended_days/gcs_extended_mult_potencial
+    Shadow book acumula H60-02 prospectivo por partido GCS zona extendida
+  
+  Tests: T61-01→T61-10 (10 tests nuevos, todos pasan)
+    T61-01: Year disambiguation 2025+2026 → gcs_days=15 (no 380)
+    T61-02: Solo 2025 → gcs_active=False (Bug F0 resuelto)
+    T61-03: days=26 → gcs_extended_active=True, gcs_active=False
+    T61-04: fecha_partido=Jul 7 → gcs_days=16
+    T61-05: Octubre (fuera temporada) → no GCS
+    T61-06: _GCS_EXTENDED_ENABLED=False por default
+    T61-07: LOG_GCS_SHADOW_EXTENDED en days=28 hierba
+    T61-08: H60-02 en hypotheses.json
+    T61-09: _is_gcs_season_active importable standalone (REGLA-T53)
+    T61-10: Eala R4 simulation — gcs_days=15 (no 28)
+  Total: 1669 tests. 0 failed.
+
+Arquitectura GCS actualizada (2026-07-06):
+  rivalry_analyzer.py:
+    _GCS_BOOST_ENABLED = True, _GCS_SURFACES = {'grass', 'hierba'}  (sin cambio)
+    _GCS_EXTENDED_ENABLED = False  (nuevo — H60-02 gated)
+    _GCS_LOOKBACK_DAYS = 42        (nuevo — ventana máxima)
+    _GCS_SEASON_WINDOWS = {'grass'/'hierba': start:(6,1), end:(7,13), dias_max:42}  (nuevo)
+    _is_gcs_season_active() → función standalone importable (nueva)
+    analyze_surface_specialization(..., *, fecha_partido=None) → parámetro nuevo
+    Retorna además: gcs_extended_active, gcs_extended_days, gcs_extended_mult_potencial
+  edge_calculator.py: serializa los 3 nuevos campos al edge_report
+  validation/preregistered_hypotheses.json: H60-02 añadido (n=0, PENDIENTE)
+  tests/test_nodo61.py: 10 tests nuevos
+
 Cambios pendientes conocidos: ninguno (A60-01 CERRADO, A60-02 CERRADO, GCS GRASS ACTIVO).
+  H60-02 acumula prospectivo automáticamente via LOG_GCS_SHADOW_EXTENDED.
+
+Nodo-62 ✅ COMPLETO (2026-07-06):
+  Signal Bridge — conecta edge_report con combo_confianza_builder vía alpha_score.
+  Diagnóstico: combo builder usaba UN float (confianza) ignorando 60+ campos del edge_report.
+  Picks con alta confianza Beta (ranking obvio) desplazaban picks con señales Alpha
+  (triple_alignment, markov=HOT, GCS, surface=1.0) — exactamente lo opuesto a un hedge fund.
+
+  D62-01: _compute_alpha_score(edge_data) → (float, list[str])
+    Pesos congelados hasta n≥30 por señal en shadow book:
+    triple≥0.5(+15) | triple≥0.3(+8) | markov=HOT(+10) | markov=COLD(-15)
+    gcs_bonus(+12) | edge≥15%(+10) | edge≥5%(+5)
+    surface≥0.8(+8) | surface≥0.5(+4) | bbi≥0.8(+6) | bbi≥0.6(+3)
+    cal≥0.7(+3) | phantom_data(-25)
+
+  D62-02: _load_edge_report_index() + _lookup_edge_data(nombre, index)
+    Carga edge_report_*.json más reciente → índice nombre_normalizado→datos.
+    Fuzzy match por apellido. Graceful degradation → {} si no hay archivo.
+
+  D62-03: combo_priority = confianza + alpha_score
+    Añadido a cada pick en _extract_and_categorize().
+    Sort final usa combo_priority en lugar de confianza.
+
+  D62-04: _select_core() ordena por combo_priority (no confianza).
+    Impacto hoy: Hoeyeraal (conf=55.8, alpha=+33 → priority=88.8) entra al CORE
+    desplazando a Wallin/Bu. CORE cuota @7.13x vs @4.26x anterior.
+
+  D62-05: Gate Cat-C1 por alpha — bypass conf≥60% cuando edge≥5% AND triple≥0.2.
+    Nilsson (@3.45, edge=23.6%, triple=0.33) elegible como satellite con este gate.
+
+  D62-06: Output muestra pri:{combo_priority} y línea [alpha +/-X: señal1, señal2...]
+    Tag [ALPHA-PROM] para picks promovidos Cat-C2→Cat-C1 por gate alpha.
+
+  Tests: T62-01→T62-10 (10 tests nuevos, todos pasan, REGLA-T53 cumplida)
+    T62-01: triple≥0.5 → alpha incluye +15
+    T62-02: markov=HOT → alpha incluye +10
+    T62-03: markov=COLD → alpha incluye -15
+    T62-04: gcs_bonus=True → alpha incluye +12
+    T62-05: edge_pct=23.6% → alpha incluye +10
+    T62-06: phantom_data → alpha incluye -25
+    T62-07: combo_priority = conf + alpha con Hoeyeraal params → priority ≥ conf+30
+    T62-08: constantes gate Cat-C1 alpha (_ALPHA_C1_EDGE_MIN=5.0, _ALPHA_C1_TRIPLE_MIN=0.2)
+    T62-09: _load_edge_report_index importable, retorna dict
+    T62-10: markov=COLD → combo_priority < confianza
+  Total: 1679 tests. 0 failed.
+
+Arquitectura Signal Bridge (estado actual):
+  combo_confianza_builder.py:
+    _load_edge_report_index() — carga edge_report más reciente como índice
+    _lookup_edge_data(nombre, index) — fuzzy match por apellido
+    _compute_alpha_score(edge_data) → (score, senales) — función standalone importable
+    _extract_and_categorize(): enriquece picks con alpha_score + combo_priority
+    _select_core(): ordena por combo_priority (no confianza)
+    Output: pri:{priority} + [alpha ±X: señales] por pick con alpha≠0
+  Pesos congelados en constantes _ALPHA_*: NO modificar sin n≥30 en shadow book por señal.
+  Para recalibrar: shadow book --section atribucion → acierto-por-señal × tier (Panel 4 Nodo-58).
+
+Nodo-63 ✅ COMPLETO (2026-07-06):
+  PARTE A: Insufficient History Guard — fix quirúrgico en rivalry_analyzer.py
+  Problema: FlashScore retorna 3 partidos ITF qualifying → days_since=356d → form_decay x0.35
+    → player aparece "inactivo" → edge falso (caso Rodriguez, Magadan edge 31.2% falso)
+  Fix D63-A: _MIN_HISTORY_FOR_DECAY = 8 en rivalry_analyzer.py
+    n < 8 → fd = 1.0 (datos incompletos, no inactividad real)
+    n >= 8 → decay normal (comportamiento Nodo-57 sin cambios)
+    LOG_INSUFFICIENT_HISTORY emitido cuando guard activo
+  Fix D63-A2: generar_tabla_favoritos2.py — INACTIVIDAD no se muestra si LOG_INSUFFICIENT_HISTORY activo
+  T57-01 actualizado: historial n=8 (antes n=4 < guard) — semántica correcta preservada
+
+  PARTE B: Anchor Combo Builder — nueva capa de combos con picks de cuota alta
+  Problema: picks con priority>=75 y cuota @1.65+ no tenían vehículo separado de cuota alta
+  Fix D63-B: _classify_anchors() + _build_anchor_combos() en combo_confianza_builder.py
+    Ancla = cuota>=1.65 AND (priority>=75 OR conf>=60% OR edge>=10%)
+    3 tiers: 1A+3B (@4-7x, P≈18-25%) | 2A+2B (@7-15x, P≈7-14%) | 3A+2B (@15-35x, P≈3-6%)
+    Guards: max 2 picks mismo torneo | P(win)>=2.5%
+    Budget: 30% del budget de fase, dividido en 3 tiers iguales
+    Genera AC*.bat en escritorio (prefijo AC = Anchor Combo)
+  --anchor flag en CLI: python3 combo_confianza_builder.py --bankroll 125000 --anchor
+  Constantes: ANCHOR_CUOTA_MIN=1.65 | ANCHOR_PRIORITY_MIN=75.0 | ANCHOR_CONF_MIN=60.0
+              ANCHOR_EDGE_MIN=10.0 | ANCHOR_PWIN_MIN=0.025 | MAX_ANCHOR_COMBOS=12
+
+  Tests: T63-01→T63-12 (12 tests nuevos, todos pasan)
+    T63-01: n=3 → fd=1.0 (guard activo)
+    T63-02: n=10, days=60 → fd<1.0 (decay normal)
+    T63-03: n=3, days=356 → fd=1.0 (NO floor 0.35)
+    T63-04: n=7 (boundary <8) → guard activo
+    T63-05: n=8 (exactamente =8) → guard NO activo
+    T63-06: _MIN_HISTORY_FOR_DECAY == 8
+    T63-07: priority=85, cuota=2.06 → ANCLA
+    T63-08: priority=65, cuota=1.33 → BASE
+    T63-09: _build_anchor_combos → combos_1a3b no vacío
+    T63-10: combo 1A+3B tiene >=1 ancla
+    T63-11: combo 2A+2B tiene >=2 anclas
+    T63-12: ANCHOR_CUOTA_MIN==1.65, ANCHOR_PRIORITY_MIN==75.0
+  Total: 1691 tests. 0 failed.
+
+FABLE_02_TENIS_DOCTORADO_SPEC ✅ COMPLETO (2026-07-08):
+  Implementado por fases según §4 del spec. 53 tests nuevos. Total: 1744 tests.
+
+  FASE 0 — Reconciliación (10 tests en tests/test_fable02_fase0.py):
+  C61-A FORENSE RESUELTO: El boost GCS (×2.2/×1.8/×1.5) aplica al sub-score de
+    surface_specialization DENTRO de analyze_surface_specialization(). Este sub-score
+    luego es: (1) capeado en 350 raw, (2) log1p-normalizado → ratio efectivo <<2.2.
+    Ejemplo producción: score=160 → ×2.2 → 352 → log1p(352)/log1p(160) = 1.155 (×1.15 observado).
+    El ×0.92 ocurre cuando el OPONENTE recibe el boost (confianza relativa P1 cae).
+    La doc "multiplicador al final_score" era técnicamente correcta pero engañosa —
+    final_score es el sub-score de superficie, no la confianza final del partido.
+    Fix: No se cambia el código (el boost es correcto según Nodo-60-ADDENDUM).
+    Evidencia: 3 tests T_C61-A validan el comportamiento real del módulo.
+  C61-B GOBERNANZA RESUELTA: Decisión (a) documentada en rivalry_analyzer.py header.
+    Activación por prior retrospectivo A60-01 (n=54, 64.8% hit rate).
+    Docstring "H60-01 n<30" corregido a "n<30 prospectivo (prior A60-01 activó solo hierba)".
+    PROHIBICIÓN: no citar "validado por H60-01" — usar "prior A60-01".
+  C63-A IMPLEMENTADO: LOG_PLAYWRIGHT_CANDIDATE emitido en reasoning cuando n<8 AND match_id.
+    Señaliza candidatos a re-scraping Playwright F3 sin romper el flujo de análisis.
+  C62-A IMPLEMENTADO: H62-01 pre-registrado en preregistered_hypotheses.json.
+    alpha_promoted añadido como clave top-level en picks de combo_confianza_builder.
+  kelly_kl VERIFICADO: git log muestra único commit (nodo45-THF) — no hay bug activo.
+  prediccion_ganador VERIFICADO: campo no existe en output JSON actual — no requiere fix.
+
+  FASE 4 — Estadística de Doctorado (43 tests en tests/test_nodo64_71.py):
+  Nodo-64 SPRT ✅: validation/hypothesis_tracker.py — sprt_verdict() + llr_update() + sprt_from_hypothesis()
+    Test T64: p=0.85 con H0=0.50,H1=0.70 → ACEPTA_H1 en n=20; p=0.50 → CONTINUA en n=30.
+    Fronteras Wald: A=ln(19)≈2.944, B=ln(1/19)≈-2.944 (α=β=0.05).
+    Hipótesis existentes: n_stop=30 como tope máximo; SPRT activo en hipótesis nuevas.
+  Nodo-67 CUSUM+PSI ✅: analysis/drift_monitor.py — cusum_brier() + psi_score() + daily_drift_report()
+    Constantes PROVISIONALES: k=0.005, h=0.05. Test T67: salto +0.08 en t=10 → alarma antes t=20.
+    PSI sobre n_partidos y history_provenance (detecta regime shift tipo Nodo-47).
+  Nodo-66 FLB ✅: analysis/flb_curve.py — flb_curve() + breakeven_ajustado_para_cuota()
+    Bandas: (1.0-1.5), (1.5-2.0), (2.0-2.5), (2.5-3.5), (3.5-5.0), (5.0-100.0). N_MIN=10.
+    breakeven_ajustado se usa en shadow_book report cuando n_banda≥10.
+  Nodo-69 Pattern Audit ✅: analysis/pattern_audit.py — audit_pattern(campo, valor)
+    Cohortes emparejadas (tier, cuota±0.3, p_modelo±0.05, superficie, epoch). McNemar pareado.
+    Industrializa lo que GCS-ADDENDUM hizo manualmente (A60-01).
+  Nodo-70 CPPI ✅: trader_ev_tenis.py — _cppi_factor() + eslabón waterfall
+    Constantes PROVISIONALES: FLOOR=70%, m=2. Waterfall: kelly_kl → ×portfolio → ×var → ×cppi → stake.
+    Test T70: bankroll=peak → factor>0; bankroll=FLOOR → factor=0.0; monótono.
+  Nodo-68 Conformal Band ✅: analysis/conformal_band.py — conformal_quantile() + is_no_bet_conformal()
+    Gate: n≥50 global, n≥30 por tier. p=0.52 con q=0.06 → NO-BET (intervalo cruza 0.5).
+    MODO REPORTE — muestra banda junto a umbral fijo 54%, sin cambiar decisiones aún.
+  Nodo-65 ρ Empírico ✅: analysis/rho_empirical.py — block_bootstrap_rho() (B=2000, seed=42)
+    Gate: ≥15 sesiones × ≥3 picks/tier. Recalibración solo en ventana mensual pre-agendada.
+    Test T65: mix pos/neg correlación → ρ̂ moderado; clonados → ρ̂>0.5.
+  Nodo-71 Velocity (Kyle's λ) ✅: analysis/velocity_monitor.py — velocity_zscore()
+    STEAM = z < -2.0 (acortamiento anómalo). MODO REPORTE — depende de H52-05.
+    Test T71: caída 4.0→2.0 en 2h → STEAM; serie plana → |z|<2.
+
+  Mapa de archivos nuevos:
+    analysis/drift_monitor.py    — Nodo-67 CUSUM+PSI
+    analysis/flb_curve.py        — Nodo-66 FLB empírico
+    analysis/pattern_audit.py    — Nodo-69 cohortes emparejadas
+    analysis/conformal_band.py   — Nodo-68 predicción conformal
+    analysis/rho_empirical.py    — Nodo-65 bootstrap ρ
+    analysis/velocity_monitor.py — Nodo-71 velocidad Kyle's λ
+    tests/test_fable02_fase0.py  — 10 tests Fase 0
+    tests/test_nodo64_71.py      — 43 tests Nodos 64-71
+
+  PROHIBICIONES GLOBALES (§6 del spec):
+  - Ningún módulo nuevo cambia decisión de producción en primera implementación (son instrumentos)
+  - Constantes provisionales: CPPI FLOOR/m, CUSUM k/h — etiquetadas, solo cambian en recalibración pre-agendada
+  - Recalibración de ρ solo en ventana mensual pre-agendada si valor cae FUERA del IC
+  - FASES 1/2/3/5 del spec (infraestructura, n8n, Hermes, vault) — ver abajo
+
+  FASE 1 — Infraestructura mínima ✅ COMPLETO (2026-07-08):
+  D1-01: Graphify knowledge graph — 1588 nodos, 2987 edges. Modo: código puro (no LLM).
+    graphify query/path/explain en terminal; /graphify skill en Claude Code.
+    `.graphifyignore` exluye datos/reportes/venv. `.md` nodos excluidos (requieren ANTHROPIC_API_KEY para docs).
+    Cuando setee API key: `graphify .` añade 117 nodos spec con extracción semántica.
+  D1-02: Tamp token compression proxy — `~/.config/systemd/user/tamp.service` activo.
+    ANTHROPIC_BASE_URL="http://localhost:7778" en ~/.bashrc — reduce tokens ~50%, cero riesgo.
+  D1-03: Slash-commands — `/tennis-audit`, `/tennis-session`, `/tennis-brief` activos.
+    tennis-audit: valida picks antes de apostar (kelly_kl=0.0 → BLOCK, n<8 → WARN, phantom → WARN).
+    tennis-session: resumen ejecutivo picks, stakes, combos, alpha scores del día.
+    tennis-brief: salud del pipeline (shadow book, drift, calibración, hipótesis activas).
+  D1-04: pre_game_validator.py — cron `0 9-23 * * *` (horario partidos).
+    Detecta fixture `--fixture` con kelly_kl=0.0 correctamente; exit code 2 BLOCK, 1 WARN, 0 OK.
+    Localiza 50 registros abiertos en shadow book hoy sin errores.
+  Verificación: graphify path edge_calculator→trader_ev_tenis responde con 2 hops vía math;
+               pre_game_validator --fixture retorna exit 2 (BLOCK).
+
+  FASE 2 — Automatización close-snapshot ✅ COMPLETO (2026-07-08):
+  D2-01: close_snapshot_trigger.py — cron `*/10 * * * *` (cada 10 min, todo el día).
+    Detecta registros abiertos en shadow book. Si hay → ejecuta `shadow_book.py --close-snapshot`.
+    Ventana silenciosa: 8am–11:30pm (fuera no ejecuta Kambi fetch innecesario).
+    Telegram opcional: si TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID en env → notifica CLV capturado.
+    REGLA FABLE_02 Fase 2: NUNCA toca betslip_registrar ni registra apuestas.
+  D2-02: Script detecta correctamente 50 picks abiertos hoy (michnev_seghetti, herzeele_sakamoto, ...).
+    Nombres extraídos de pick_snapshot correctamente; --dry-run mostraba ejecución sin lado efecto.
+  Verificación: crontab -l muestra ambas entradas (validator 0 9-23, trigger */10);
+               close_snapshot_trigger.py --dry-run --force detecta 50 y reporta ejecución.
+
+  Estado Fases FABLE_02:
+  - Fase 0 (reconciliación): ✅ completa — 10 tests
+  - Fase 1 (infraestructura): ✅ completa — Graphify+Tamp+slash-commands+validator
+  - Fase 2 (automation close-snapshot): ✅ completa — cron 10 min
+  - Fase 3 (Hermes gate): pendiente — decisión arquitectura externa
+  - Fase 4 (estadística doctoral): ✅ completa — 43 tests Nodos 64-71
+  - Fase 5 (vault + memory-compiler): pendiente — después Fases 1-2 estables
 ```
+
+Nodo-72 ✅ COMPLETO (2026-07-08):
+  Phantom Identity Guard — detecta historial contaminado por homónimos en modo API.
+  Causa raíz Morris (2026-07-08): WTA W15 "Ariana Morris" recibió historial de ATP male player
+    Rotterdam 2026 ATP500 (25+ Top-100 scalps: Zverev, Fritz, FAA). Entró CC2/CC5 con confianza falsa.
+  Causa raíz Pereyra (2026-07-06): debutante ITF (ranking=None) recibió 105 partidos de veterano homónimo.
+
+  D72-A: `_detect_phantom_identity(player_name, player_info, history)` en `rivalry_analyzer.py`
+    Caso 1 — CIRCUIT_MISMATCH:
+      Señal A: Verifica tour (ATP/WTA) de hasta 8 oponentes en ranking DB.
+               Si checked≥3 y >50% son circuito opuesto → PHANTOM confidence=min(0.95, 0.60+ratio×0.35)
+      Señal B (fallback): Prefijos torneo "M15 "/"M25 " = ATP-men's | "W15 "/"W25 " = WTA.
+               Si total≥3 y >50% son prefijo opuesto → PHANTOM confidence=min(0.90, 0.55+ratio×0.35)
+    Caso 2 — HOMONYM_GAP:
+      ranking=None AND n_history>20 AND oldest_match>365d → PHANTOM confidence=0.85
+    Retorna: {phantom: bool, type: str|None, confidence: float, reason: str}
+
+  D72-B: Integración en `analyze_rivalry()`:
+    Llamada inmediatamente después de obtener player_info para ambos jugadores.
+    LOG_PHANTOM_IDENTITY emitido en WARNING. phantom_identity_p1/p2 en AMBOS return dicts.
+
+  D72-C: Gate en `edge_calculator.py` (después de HISTORIAL_NO_EXTRAIDO):
+    phantom_identity detectado → apostar=False, phantom_data=True, status=PICK_STATUS_NO_DATA
+    motivo_reclasificacion: 'PHANTOM_IDENTITY [TYPE]: historial contaminado de PLAYER'
+    phantom_data=False como default (campo siempre presente → Nodo-62 alpha -25 aplica automático)
+
+  Tests: T72-01→T72-12 (12 tests, todos pasan)
+    T72-01: WTA + >50% ATP oponentes → CIRCUIT_MISMATCH
+    T72-02: ATP + >50% WTA oponentes → CIRCUIT_MISMATCH
+    T72-03: WTA + WTA oponentes → NOT phantom
+    T72-04: ranking=None, n=25, oldest=400d → HOMONYM_GAP
+    T72-05: ranking=None, n=15 (≤20) → NOT phantom
+    T72-06: ranking=None, n=25, oldest=300d (<365) → NOT phantom
+    T72-07: WTA + torneos "M15 Lodz" → CIRCUIT_MISMATCH (Señal B prefijos)
+    T72-08: historial vacío → NOT phantom
+    T72-09: CIRCUIT_MISMATCH 100% ratio → confidence > 0.6
+    T72-10: player_info=None → no crash, dict válido
+    T72-11: _detect_phantom_identity importable (REGLA-T53)
+    T72-12: boundary n=20 (False) vs n=21 (HOMONYM_GAP)
+  Total: 1756 tests. 0 failed.
 
 ---
 
@@ -547,9 +886,10 @@ Cambios pendientes conocidos: ninguno (A60-01 CERRADO, A60-02 CERRADO, GCS GRASS
 ### NÚCLEO ACTIVO
 ```
 ── ANTES DEL PARTIDO ──────────────────────────────────────────────────────────
-extraer_partidos_api.py           ← PASO 1 API (RECOMENDADO — Kambi + FlashScore, ~1.3s)
-extraer_URL_partidos_version2.py  ← PASO 1 Playwright (fallback — ~8 min)
-extraer_historh2h.py              ← PASO 2 (--api-mode: Ninja ~0.5s/p | default: Playwright ~2-3min/p)
+extraer_URL_partidos_version2.py  ← PASO 1 PRIMARIO (Playwright — IDs entidad FlashScore, identidad exacta)
+extraer_partidos_api.py           ← PASO 1 NO RECOMENDADO (API Kambi — búsqueda por nombre, vulnerable a homónimos)
+extraer_historh2h.py              ← PASO 2 PRIMARIO sin flags (Playwright — navega ID partido, historial correcto)
+                                    PASO 2 NO RECOMENDADO con --api-mode (Ninja por nombre — bug Pereyra 2026-07-06)
 edge_calculator.py                ← PASO 3: Kelly-KL 5 capas
 trader_ev_tenis.py (v2.0)        ← PASO 4: Hedge Fund Layer
   Parámetros (todos con defaults — solo --bankroll es obligatorio):
@@ -596,8 +936,8 @@ shadow_book.py                    ← PASO 10: Libro Sombra CLV (Nodo-52)
 ── DATOS ACTIVOS ────────────────────────────────────────────────────────────────
 data/calibracion_edge.json        ← Thompson Beta: fuente de verdad para priors por tier+superficie
 reports/shadow_book/sb_YYYY-MM-DD.jsonl  ← Shadow Book (append-only, inmutable en predicción)
-validation/preregistered_hypotheses.json ← H52-01→H52-08 congeladas 2026-07-02 (NO modificar)
-validation/hypothesis_tracker.py  ← nodo46_unlocked(), was_thresholds(), get_calibration_epochs()
+validation/preregistered_hypotheses.json ← H52-01→H62-01 (H62-01 añadida 2026-07-08) — NO modificar sin decisión formal
+validation/hypothesis_tracker.py  ← nodo46_unlocked(), was_thresholds(), sprt_verdict(), llr_update() (Nodo-64)
 
 ── MÓDULOS COMPARTIDOS ──────────────────────────────────────────────────────────
 config.py                         ← constantes API + browser + detectar_tier() (fuente única de tiers)
@@ -612,10 +952,18 @@ scraping/browser_manager.py       ← Playwright WSL-optimized (solo fallback)
 scraping/data_parser.py           ← parser HTML corregido
 scraping/file_utils.py            ← selección recency-first
 analysis/rivalry_analyzer.py      ← motor de predicción + Erdős + Markov + Nodo-19/21 + surface discount
+                                    GCS: _GCS_BOOST_ENABLED=True (hierba, prior A60-01). C63-A: LOG_PLAYWRIGHT_CANDIDATE cuando n<8.
+                                    Nodo-72: _detect_phantom_identity() — CIRCUIT_MISMATCH + HOMONYM_GAP. phantom_identity_p1/p2 en analyze_rivalry().
 analysis/markov_analyzer.py       ← PELT + factor_tardio + recencia_regimen + surface_context_discount (F4)
 analysis/erdos_graph.py           ← grafo transitivo + PageRank (Nodo-20)
 analysis/elo_system.py            ← ELO + K-factor por tier + reset post-PELT
 analysis/ranking_manager.py
+analysis/drift_monitor.py         ← Nodo-67: CUSUM (brier) + PSI (inputs) — REPORTE_SOLO
+analysis/flb_curve.py             ← Nodo-66: FLB empírico por banda — REPORTE_SOLO (n_banda≥10)
+analysis/pattern_audit.py         ← Nodo-69: audit_pattern(campo, valor) — cohortes emparejadas McNemar
+analysis/conformal_band.py        ← Nodo-68: banda conformal — REPORTE_SOLO (gate n≥50)
+analysis/rho_empirical.py         ← Nodo-65: block bootstrap ρ — REPORTE_SOLO (gate ≥15 sesiones)
+analysis/velocity_monitor.py      ← Nodo-71: velocity_zscore() Kyle's λ — REPORTE_SOLO (H52-05 pendiente)
 utils/logger.py                   ← SmartLogger (fuente única)
 
 ── ML (NODO-41 ✅ LIMPIEZA DE DATASET COMPLETADA 2026-06-29) ──────────────────────
@@ -634,7 +982,9 @@ predecir_partidos.py  (importa informe_detallado.py que no existe)
 
 | Bug | Archivo | Severidad | Estado |
 |---|---|---|---|
-| prediccion_ganador top-level = None | `extraer_historh2h.py` | 🟠 | Activo — usar `ranking_analysis.prediction.favored_player` |
+| prediccion_ganador top-level = None | `extraer_historh2h.py` | 🟠 | VERIFICADO RESUELTO 2026-07-08 — campo no existe en JSON actual; usar `ranking_analysis.prediction.favored_player` |
+| Edge falso por inactividad en historial corto (caso Rodriguez, n=3, days=356) | `analysis/rivalry_analyzer.py` | 🔴 | RESUELTO — Nodo-63 Insufficient History Guard (n<8 = datos incompletos, no inactividad real) |
+| Phantom Identity homónimos — API retorna historial de jugador veterano/erróneo (Pereyra 2026-07-06: 105 partidos falsos; Morris 2026-07-08: historial ATP male para WTA female) | `scraping/ninja_h2h_parser.py` (modo API) | 🔴 | RESUELTO — Nodo-72 Phantom Identity Guard: CIRCUIT_MISMATCH (tour opuesto en oponentes/torneos) + HOMONYM_GAP (ranking=None+n>20+oldest>365d) → status=NO_DATA, excluido de todos los pools. Playwright como PRIMARIO es defensa en profundidad adicional. |
 
 > Bugs resueltos archivados en git history. Ver commits de sesiones 3-6 (2026-06-05 a 2026-06-16).
 
@@ -694,13 +1044,15 @@ Caso real: extraer_cuotas_partidos.py (git: 23d2d91) resuelve Nodo-48. La IA lo 
 - **markov_analysis está anidado:** `partido['ranking_analysis']['prediction']['markov_analysis']` — NO `partido['markov_analysis']` (siempre None).
 
 ### APIs y Scraping
-- **MODO API es ruta primaria.** PASO 1: `extraer_partidos_api.py`. PASO 2: `--api-mode`. Playwright es fallback.
+- **PLAYWRIGHT ES RUTA PRIMARIA.** PASO 1: `extraer_URL_partidos_version2.py`. PASO 2: `extraer_historh2h.py` (sin --api-mode).
+- **MODO API NO RECOMENDADO para PASOS 1 y 2.** Bug Pereyra (2026-07-06): API busca por nombre string → colisión de homónimos → jugador debutante recibió 105 partidos del veterano homónimo → 64.4% confianza falsa → 5 combos con pick inválido → pérdida real. Playwright navega por ID de entidad FlashScore → imposible confundir jugadores. Evidencia: Playwright retornó 0 partidos para Pereyra debutante (correcto). API retornó 105 (incorrecto).
 - **Kambi API = cuotas reales Betplay** donde se apuesta. Campo `cuota_es_real=True`.
 - **REGLA-KAMBI-1: `||replace` es el flag correcto**, NO `||append`. `||append` acumula picks en localStorage entre tabs.
 - **REGLA-KAMBI-2: localStorage es origen-compartido.** Solución: `target="_blank"` + `||replace` en redirect de GitHub Pages.
 
 ### Testing y Specs
-- **1585 tests pasan.** No romper. Correr pytest antes de cualquier modificación. 62 tests Nodo-31 blindan ninja_h2h_parser.py. 25 tests Nodo-38 blindan combo_confianza_builder.py. 9 tests Nodo-45 blindan THF.
+- **1756 tests pasan.** No romper. Correr pytest antes de cualquier modificación. 62 tests Nodo-31 blindan ninja_h2h_parser.py. 25 tests Nodo-38 blindan combo_confianza_builder.py. 9 tests Nodo-45 blindan THF. 10 tests Nodo-62 blindan Signal Bridge. 12 tests Nodo-63 blindan Insufficient History Guard + Anchor Combo Builder. 12 tests Nodo-72 blindan Phantom Identity Guard.
+- **`_MIN_HISTORY_FOR_DECAY=8`** — si n<8 history records NO hay form_decay (datos incompletos FlashScore qualifying/ITF local, no inactividad real). Ver Nodo-63.
 - **REGLA-T53:** Ningún test de bug reproduce la fórmula manualmente. Siempre invoca la función del módulo real. Un test que hardcodea la fórmula buggy permanece en FAIL después del fix → Sonnet concluye que el fix falló → elimina el test. (Nodo-53, tercera ocurrencia del mismo error.)
 - **Spec-Driven.** Ver `.spec/01_Nodos/`.
 - **detectar_tier()** en `config.py` — fuente única para clasificación de torneo en todo el pipeline.
@@ -711,3 +1063,13 @@ Caso real: extraer_cuotas_partidos.py (git: 23d2d91) resuelve Nodo-48. La IA lo 
 - Guards implementados: Dispersion, Tournament Concentration, Discipline, Duplicate (ver código).
 - BBI, MPQ, golden_zone, gap_flag — campos en edge_report, documentados en `betplay_combo_builder.py`.
 - Circuit Breaker, line_movement, session_regime, cv_edge_guard — Nodo-26, documentados en `betplay_combo_builder.py` y `tests/test_nodo26.py`.
+
+## graphify
+
+This project has a knowledge graph at graphify-out/ with god nodes, community structure, and cross-file relationships.
+
+Rules:
+- For codebase questions, first run `graphify query "<question>"` when graphify-out/graph.json exists. Use `graphify path "<A>" "<B>"` for relationships and `graphify explain "<concept>"` for focused concepts. These return a scoped subgraph, usually much smaller than GRAPH_REPORT.md or raw grep output.
+- If graphify-out/wiki/index.md exists, use it for broad navigation instead of raw source browsing.
+- Read graphify-out/GRAPH_REPORT.md only for broad architecture review or when query/path/explain do not surface enough context.
+- After modifying code, run `graphify update .` to keep the graph current (AST-only, no API cost).
