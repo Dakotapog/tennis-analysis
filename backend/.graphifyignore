@@ -1,0 +1,63 @@
+# .graphifyignore — Graphify exclusions para tennis-analysis
+# Fable §1.2 Vacío 1: excluir datos/artefactos, incluir .md de nodos (memoria semántica)
+# Sintaxis idéntica a .gitignore
+
+# Tests y datos pesados
+tests/
+data/
+reports/
+ml_datasets/
+logs/
+htmlcov/
+.pytest_cache/
+docs/
+.claude/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Archivos binarios / generados
+*.json
+*.jsonl
+*.log
+*.bat
+*.txt
+
+# Imágenes (screenshots Playwright — no aportan al grafo de código)
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.ico
+*.webp
+
+# Venv — librerías externas
+venv/
+.venv/
+
+# Drivers y artefactos de scraping
+drivers/
+screenshots/
+
+# Output de graphify mismo (evitar loops)
+graphify-out/
+
+# Archivos de configuración que no aportan al grafo de código
+*.env
+*.db
+*.csv
+*.npz
+
+# LOS .md DE NODOS SÍ ENTRAN (son la memoria semántica del proyecto)
+# Para incluirlos: export ANTHROPIC_API_KEY="sk-ant-..." && graphify . (requiere API key para extracción semántica)
+# Mientras tanto: solo el grafo de código (68 archivos .py) — suficiente para queries de dependencias
+# Para activar docs: quitar las líneas *.md, **/*.md y *.html de abajo
+*.md
+**/*.md
+CLAUDE.md
+AGENTS.md
+*.html
+*.htm

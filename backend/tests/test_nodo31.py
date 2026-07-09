@@ -1024,6 +1024,8 @@ class TestProcessMatchProxyBlockSwap:
             'cuota1': 2.6, 'cuota2': 1.44,
         }
         ext._process_match(match_data)
+        # F3: Ekstrand (j2) sin bloque en proxy → encolado; drena con budget=0 (sin Playwright)
+        ext._run_playwright_batch(pw_budget=0)
         result = ext.all_results[-1]
         # Carnicella (j1) history should have Aytoyan, Ewing — NOT Rival M1, M2
         p1_hist = result.get('historial_Kaitlyn_Carnicella', [])
@@ -1045,6 +1047,8 @@ class TestProcessMatchProxyBlockSwap:
             'cuota1': 2.6, 'cuota2': 1.44,
         }
         ext._process_match(match_data)
+        # F3: Ekstrand sin bloque → encolado; drena con budget=0 → Ekstrand queda con historial vacío
+        ext._run_playwright_batch(pw_budget=0)
         result = ext.all_results[-1]
         p2_hist = result.get('historial_Monika_Ekstrand', [])
         # Ekstrand NO debe tener datos de Miroshnichenko
@@ -1121,6 +1125,8 @@ class TestProcessMatchProxyBlockSwap:
             'cuota1': 2.6, 'cuota2': 1.44,
         }
         ext._process_match(match_data)
+        # F3: Ekstrand sin bloque → encolado; drena con budget=0 → ningún extraño contamina
+        ext._run_playwright_batch(pw_budget=0)
         result = ext.all_results[-1]
         all_opponents = set()
         for k, v in result.items():

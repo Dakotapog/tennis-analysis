@@ -446,10 +446,25 @@ def _print_individuales(senales: list, bankroll: float, budget: float,
         p_b     = _p_blend(p_mod, n_h2h, s.get('p_historica_usada') or p_prior)
         cuota   = s['cuota_favorito']
         kelly   = min(KELLY_CAP_IND, _kelly_quarter(p_b, cuota))
-        stake   = round(min(kelly * bankroll, budget - gastado) / MIN_BET) * MIN_BET
-        stake   = max(MIN_BET, stake)
+        raw_stake     = kelly * bankroll
+        capped_stake  = min(raw_stake, budget - gastado)
+        rounded_stake = round(capped_stake / MIN_BET) * MIN_BET
+        stake         = max(MIN_BET, rounded_stake)
         ev_ind  = _ev(p_b, cuota)
         retorno = round(stake * cuota, 0)
+
+        # Waterfall log — almacenado para diagnóstico VaR (D54-01, P54-02)
+        waterfall = {
+            'kelly_kl_report': s.get('kelly_kl', 0),
+            'p_blend': round(p_b, 4),
+            'kelly_quarter': round(kelly, 4),
+            'raw_stake': round(raw_stake, 0),
+            'capped_by_budget': capped_stake < raw_stake,
+            'capped_stake': round(capped_stake, 0),
+            'rounded_stake': rounded_stake,
+            'stake_pre_var': stake,
+            'terminal_reason': None,  # se rellena en VaR adjustment
+        }
 
         print(f"  │  🎾 {s['partido']}")
         print(f"  │     Apostar: {s['favorito_predicho']}")
@@ -459,7 +474,8 @@ def _print_individuales(senales: list, bankroll: float, budget: float,
         print()
 
         gastado += stake
-        enriched.append({**s, 'stake': stake, 'p_blend': p_b, 'kelly_usado': kelly})
+        enriched.append({**s, 'stake': stake, 'p_blend': p_b, 'kelly_usado': kelly,
+                         '_waterfall': waterfall})
 
     print(f"  │  Total individuales: ${gastado:,.0f}")
     print("  └" + "─" * 65)
@@ -1069,8 +1085,18 @@ def main():
 
         # Ajustar individuales
         for s in senales_enriched:
-            s['stake'] = round(s['stake'] * fv / MIN_BET) * MIN_BET
+            stake_pre = s['stake']
+            s['stake'] = round(stake_pre * fv / MIN_BET) * MIN_BET
             s['retorno_potencial'] = round(s['stake'] * s['cuota_favorito'], 0)
+            # Waterfall: registrar causa terminal (D54-01)
+            wf = s.get('_waterfall', {})
+            if s['stake'] == 0 and stake_pre > 0:
+                wf['terminal_reason'] = f'MIN_BET_CLIFF (stake_pre_var=${stake_pre:,.0f} × var_factor={fv:.2f} = ${stake_pre*fv:,.0f} < MIN_BET={MIN_BET:,})'
+            elif s['stake'] > 0:
+                wf['terminal_reason'] = f'OK (stake_pre_var=${stake_pre:,.0f} × {fv:.2f} = ${s["stake"]:,.0f})'
+            wf['stake_final'] = s['stake']
+            wf['var_factor'] = fv
+            wf['var_flattened'] = (s['stake'] == 0 and stake_pre > 0)
         gastado_ind = sum(s['stake'] for s in senales_enriched)
 
         # Ajustar cobertura
@@ -1087,6 +1113,12 @@ def main():
             print(f"  │  INDIVIDUALES:")
             for s in senales_enriched:
                 print(f"  │    {s['favorito_predicho']:25s} @{s['cuota_favorito']:.2f}  →  ${s['stake']:>8,.0f}  (ret. ${s['retorno_potencial']:>10,.0f})")
+                wf = s.get('_waterfall', {})
+                if wf.get('var_flattened'):
+                    print(f"  │    LOG_STAKE_WATERFALL: kelly_kl={wf['kelly_kl_report']:.3f} "
+                          f"→ p_blend={wf['p_blend']:.4f} → kelly_q={wf['kelly_quarter']:.4f} "
+                          f"→ raw=${wf['raw_stake']:,.0f} → pre_var=${wf['stake_pre_var']:,.0f} "
+                          f"→ {wf['terminal_reason']}")
         print(f"  │")
         print(f"  │  COBERTURA ({len(cobertura_plan)} combos):")
         for c in cobertura_plan:
@@ -1146,6 +1178,7 @@ def main():
         "individuales": [
             {
                 "partido": s['partido'],
+                "match_id": s.get('match_id', ''),
                 "favorito": s['favorito_predicho'],
                 "cuota": s['cuota_favorito'],
                 "edge_pct": s['edge_pct'],
@@ -1158,9 +1191,11 @@ def main():
                 "retorno_potencial": round(s['stake'] * s['cuota_favorito'], 0),
                 "zona_cuota": s['zona_cuota'],
                 "superficie": s['superficie'],
+                "_waterfall": s.get('_waterfall', {}),
             }
             for s in senales_enriched
         ],
+        "senales": senales_enriched,  # para update_trader_stakes (P54-02)
         "combos": combos_plan,
         "sistema": sistema_plan,
         "cobertura": cobertura_plan,
@@ -1181,6 +1216,16 @@ def main():
     with open(plan_file, 'w', encoding='utf-8') as f:
         json.dump(plan, f, indent=2, ensure_ascii=False)
     print(f"  💾 Plan guardado: {plan_file}")
+
+    # ── P54-02 Parte 2: enriquecer shadow book con stakes reales ──
+    try:
+        from shadow_book import update_trader_stakes
+        fecha_hoy = datetime.now().strftime('%Y-%m-%d')
+        n_upd = update_trader_stakes(fecha_hoy, {'senales': senales_enriched})
+        if n_upd > 0:
+            print(f"  📒 Shadow book actualizado: {n_upd} pick(s) con stake_real/var_flattened")
+    except Exception as _sb_err:
+        pass  # shadow book nunca bloquea el trader
 
     # ── Guardar reporte .txt (captura todo lo impreso en main) ──
     sys.stdout = sys.stdout._real

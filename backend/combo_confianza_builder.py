@@ -89,6 +89,14 @@ BUDGET_COB_PCT      = 0.05
 MAX_COBERTURA_COMBOS = 3
 MAX_COBERTURA_COMBOS_EXPANDED = 6
 
+# Nodo-63: Anchor Combo Builder
+ANCHOR_CUOTA_MIN    = 1.65   # cuota mínima para ser ancla
+ANCHOR_PRIORITY_MIN = 75.0   # combo_priority mínima (Signal Bridge) para ser ancla
+ANCHOR_CONF_MIN     = 60.0   # conf% mínima para ancla por conf sola
+ANCHOR_EDGE_MIN     = 10.0   # edge_pct mínimo para ancla por edge solo
+ANCHOR_PWIN_MIN     = 0.025  # P(ganar combo) mínimo = 2.5%
+MAX_ANCHOR_COMBOS   = 12     # top combos a mostrar por tier
+
 
 # ── Selección de archivo ────────────────────────────────────────────────────────
 
@@ -146,6 +154,176 @@ def _load_pipeline_picks() -> set:
         return picks
     except (json.JSONDecodeError, OSError):
         return set()
+
+
+def _load_edge_report_index() -> dict:
+    """
+    Carga el edge_report más reciente y construye índice por nombre normalizado.
+    Retorna dict: nombre_normalizado -> datos_del_pick_del_edge_report.
+    Si no hay edge_report, retorna {} sin fallar (graceful degradation).
+    """
+    import glob as _glob_mod
+    pattern = os.path.join(REPORTS_DIR, 'edge_report_*.json')
+    files = sorted(_glob_mod.glob(pattern))
+    if not files:
+        return {}
+    latest = files[-1]
+    try:
+        with open(latest, encoding='utf-8') as f:
+            data = json.load(f)
+    except Exception:
+        return {}
+    index = {}
+    all_picks = (
+        data.get('apostar', []) +
+        data.get('watchlist', []) +
+        data.get('sin_edge', []) +
+        data.get('no_data', [])
+    )
+    for pick in all_picks:
+        name = pick.get('favorito_predicho', '')
+        if name:
+            key = name.lower().strip().replace('.', '')
+            index[key] = pick
+    return index
+
+
+def _lookup_edge_data(nombre: str, edge_index: dict) -> dict:
+    """
+    Busca datos edge_report para un jugador por nombre exacto o apellido.
+    Retorna {} si no encuentra (graceful degradation).
+    """
+    if not edge_index or not nombre:
+        return {}
+    key = nombre.lower().strip().replace('.', '')
+    if key in edge_index:
+        return edge_index[key]
+    # Fuzzy por apellido (ultima palabra)
+    parts = key.split()
+    apellido = parts[-1] if parts else ''
+    if apellido and len(apellido) > 3:
+        for k, v in edge_index.items():
+            if apellido in k:
+                return v
+    return {}
+
+
+# ── Nodo-62: Signal Bridge ──────────────────────────────────────────────────────
+
+# Pesos del alpha score — NO modificar sin evidencia en shadow book (n>=30 por senal)
+_ALPHA_TRIPLE_HIGH   = 15.0   # triple_alignment >= 0.5
+_ALPHA_TRIPLE_MED    = 8.0    # triple_alignment >= 0.3
+_ALPHA_MARKOV_HOT    = 10.0   # markov=HOT (regimen reciente, bookmaker no actualizo)
+_ALPHA_MARKOV_COLD   = -15.0  # markov=COLD
+_ALPHA_GCS           = 12.0   # gcs_bonus (campeon hierba reciente, bookmaker no modela)
+_ALPHA_EDGE_HIGH     = 10.0   # edge_pct >= 15%
+_ALPHA_EDGE_MED      = 5.0    # edge_pct >= 5%
+_ALPHA_SURFACE_HIGH  = 8.0    # surface_signal >= 0.8
+_ALPHA_SURFACE_MED   = 4.0    # surface_signal >= 0.5
+_ALPHA_BBI_HIGH      = 6.0    # bbi >= 0.8
+_ALPHA_BBI_MED       = 3.0    # bbi >= 0.6
+_ALPHA_CAL_HIGH      = 3.0    # calibration_confidence >= 0.7
+_ALPHA_PHANTOM       = -25.0  # historia vacia/fantasma
+
+# Gate para promocion Cat-C1 via alpha (bypass conf>=60%)
+_ALPHA_C1_EDGE_MIN   = 5.0    # edge_pct minimo
+_ALPHA_C1_TRIPLE_MIN = 0.2    # triple_alignment minimo
+
+
+def _compute_alpha_score(edge_data: dict) -> tuple:
+    """
+    Calcula alpha_score a partir de senales del edge_report.
+    Retorna (alpha_score: float, senales_activas: list[str]).
+
+    Alpha = senales que el bookmaker no modela bien:
+      - triple_alignment: ELO+Markov+Superficie coinciden internamente
+      - markov=HOT: cambio de regimen reciente (bookmaker no actualizo)
+      - gcs_bonus: campeon de hierba reciente (bookmaker no modela esto)
+      - surface_signal: especializacion real en la superficie del torneo
+      - bbi: bookmaker blindspot (cuanto mas alto, menos sabe el book)
+      - edge_pct: ventaja directa sobre la cuota implicita
+
+    REGLA: estos pesos estan CONGELADOS hasta n>=30 observaciones por senal
+    en el shadow book. No cambiar sin evidencia.
+    """
+    if not edge_data:
+        return 0.0, []
+
+    score = 0.0
+    senales = []
+
+    # Senal 1: Triple alignment
+    triple = float(edge_data.get('triple_alignment', 0) or 0)
+    if triple >= 0.5:
+        score += _ALPHA_TRIPLE_HIGH
+        senales.append(f'triple={triple:.2f}(+{_ALPHA_TRIPLE_HIGH:.0f})')
+    elif triple >= 0.3:
+        score += _ALPHA_TRIPLE_MED
+        senales.append(f'triple={triple:.2f}(+{_ALPHA_TRIPLE_MED:.0f})')
+
+    # Senal 2: Markov regime
+    markov = str(edge_data.get('markov_favorito', '') or '')
+    if markov == 'HOT':
+        score += _ALPHA_MARKOV_HOT
+        senales.append(f'markov=HOT(+{_ALPHA_MARKOV_HOT:.0f})')
+    elif markov == 'COLD':
+        score += _ALPHA_MARKOV_COLD
+        senales.append(f'markov=COLD({_ALPHA_MARKOV_COLD:.0f})')
+
+    # Senal 3: GCS activo
+    if edge_data.get('gcs_bonus'):
+        score += _ALPHA_GCS
+        senales.append(f'gcs_activo(+{_ALPHA_GCS:.0f})')
+
+    # Senal 4: Edge real Kelly-KL
+    edge_pct_raw = edge_data.get('edge_pct', '0%') or '0%'
+    try:
+        edge_val = float(str(edge_pct_raw).replace('%', ''))
+    except (ValueError, AttributeError):
+        edge_val = 0.0
+
+    if edge_val >= 15.0:
+        score += _ALPHA_EDGE_HIGH
+        senales.append(f'edge={edge_val:.1f}%(+{_ALPHA_EDGE_HIGH:.0f})')
+    elif edge_val >= 5.0:
+        score += _ALPHA_EDGE_MED
+        senales.append(f'edge={edge_val:.1f}%(+{_ALPHA_EDGE_MED:.0f})')
+
+    # Senal 5: Surface signal
+    surf = float(edge_data.get('surface_signal', 0) or 0)
+    if surf >= 0.8:
+        score += _ALPHA_SURFACE_HIGH
+        senales.append(f'surface={surf:.2f}(+{_ALPHA_SURFACE_HIGH:.0f})')
+    elif surf >= 0.5:
+        score += _ALPHA_SURFACE_MED
+        senales.append(f'surface={surf:.2f}(+{_ALPHA_SURFACE_MED:.0f})')
+
+    # Senal 6: BBI — Bookmaker Blindspot Index
+    bbi = float(edge_data.get('bbi', 0) or 0)
+    if bbi >= 0.8:
+        score += _ALPHA_BBI_HIGH
+        senales.append(f'bbi={bbi:.2f}(+{_ALPHA_BBI_HIGH:.0f})')
+    elif bbi >= 0.6:
+        score += _ALPHA_BBI_MED
+        senales.append(f'bbi={bbi:.2f}(+{_ALPHA_BBI_MED:.0f})')
+
+    # Senal 7: Calibration confidence
+    cal = float(edge_data.get('calibration_confidence', 0) or 0)
+    if cal >= 0.7:
+        score += _ALPHA_CAL_HIGH
+        senales.append(f'cal={cal:.2f}(+{_ALPHA_CAL_HIGH:.0f})')
+
+    # Penalizacion: datos fantasma o vacios
+    prov = edge_data.get('history_provenance', {})
+    if isinstance(prov, dict):
+        prov_vals = list(prov.values())
+    else:
+        prov_vals = [str(prov)]
+    if any(str(v).lower() in ('empty', 'phantom') for v in prov_vals):
+        score += _ALPHA_PHANTOM
+        senales.append(f'phantom_data({_ALPHA_PHANTOM:.0f})')
+
+    return round(score, 2), senales
 
 
 # ── Categorización de picks (Nodo-38) ────────────────────────────────────────
@@ -264,6 +442,9 @@ def _extract_and_categorize(partidos: list, threshold: float,
     superficie_filter: si se define, solo incluye partidos cuyo tipo_cancha coincide.
     """
     picks = []
+    # Nodo-62: Signal Bridge — cargar indice de edge_report una sola vez
+    edge_index = _load_edge_report_index()
+
     for partido in partidos:
         # Nodo-42: filtrar pool por superficie antes de evaluar confianza
         if superficie_filter is not None:
@@ -301,17 +482,69 @@ def _extract_and_categorize(partidos: list, threshold: float,
             or 'Desconocido'
         )
 
+        # Nodo-60 D60-03: detectar GCS flag y universo del pick
+        from config import detectar_tier as _detect_tier_ccb
+        _tier_partido = _detect_tier_ccb(str(torneo))
+        _gcs_active_pick = False
+        _ss_meta = pred.get('surface_specialization_meta', {})
+        if _ss_meta:
+            _is_p1 = (favorito == partido.get('jugador1'))
+            _pkey = 'player1' if _is_p1 else 'player2'
+            _player_sm = _ss_meta.get(_pkey, {})
+            if _player_sm.get('gcs_active') or _player_sm.get('torneo_completo'):
+                if _tier_partido in ('grand_slam', 'atp1000', 'atp500'):
+                    _gcs_active_pick = True
+        _universo = 'GCS' if _gcs_active_pick else (
+            'GS' if _tier_partido in ('grand_slam', 'atp1000', 'atp500') else 'ITF'
+        )
+
+        # Nodo-62: Signal Bridge — enriquecer con senales del edge_report
+        _edge_data = _lookup_edge_data(favorito, edge_index)
+        _alpha_score, _alpha_senales = _compute_alpha_score(_edge_data)
+        _combo_priority = round(conf + _alpha_score, 2)
+
+        # Nodo-62 D62-05: Gate Cat-C1 por alpha (bypass conf>=60%)
+        # Si edge_pct >= 5% AND triple >= 0.2, promover Cat-C2 a Cat-C1
+        if cat and cat.get('categoria') == 'CAT_C2' and cuota <= CUOTA_C1_MAX:
+            _edge_val_gate = 0.0
+            try:
+                _edge_val_gate = float(str(_edge_data.get('edge_pct', '0%') or '0%').replace('%', ''))
+            except (ValueError, AttributeError):
+                pass
+            _triple_gate = float(_edge_data.get('triple_alignment', 0) or 0)
+            if _edge_val_gate >= _ALPHA_C1_EDGE_MIN and _triple_gate >= _ALPHA_C1_TRIPLE_MIN:
+                cat = {
+                    'categoria': 'CAT_C1',
+                    'combos_permitidos': ['SATELLITE', 'MOONSHOT'],
+                    'pipeline_flag': cat.get('pipeline_flag', False),
+                    'alpha_promoted': True,
+                }
+
         picks.append({
-            'nombre':       favorito,
-            'confianza':    conf,
-            'cuota':        cuota,
-            'p_modelo':     conf / 100.0,
-            'torneo':       torneo,
-            'rival':        _get_rival(partido, favorito),
-            'cat':          cat,
+            'nombre':        favorito,
+            'confianza':     conf,
+            'cuota':         cuota,
+            'p_modelo':      conf / 100.0,
+            'torneo':        torneo,
+            'rival':         _get_rival(partido, favorito),
+            'cat':           cat,
+            'gcs_active':    _gcs_active_pick,
+            'universo':      _universo,
+            'tier_partido':  _tier_partido,
+            'alpha_score':   _alpha_score,
+            'alpha_senales': _alpha_senales,
+            'combo_priority': _combo_priority,
+            # C62-A (H62-01): alpha_promoted top-level para propagación a shadow book
+            'alpha_promoted': cat.get('alpha_promoted', False) if isinstance(cat, dict) else False,
+            'edge_data_ref': {
+                'edge_pct': _edge_data.get('edge_pct'),
+                'markov':   _edge_data.get('markov_favorito'),
+                'triple':   _edge_data.get('triple_alignment'),
+                'gcs':      _edge_data.get('gcs_bonus'),
+            } if _edge_data else {},
         })
 
-    picks.sort(key=lambda x: x['confianza'], reverse=True)
+    picks.sort(key=lambda x: x.get('combo_priority', x['confianza']), reverse=True)
     return picks
 
 
@@ -358,17 +591,277 @@ def _calc_combo(picks_subset: list, stake: float, nombre: str,
     }
 
 
+# ── Anchor Combo Builder (Nodo-63) ─────────────────────────────────────────────
+
+def _classify_anchors(picks: list) -> tuple:
+    """
+    Separa picks en anclas y base para Anchor Combo Builder (Nodo-63).
+
+    Ancla = pick con cuota alta Y fiabilidad por señal:
+      - combo_priority >= ANCHOR_PRIORITY_MIN AND cuota >= ANCHOR_CUOTA_MIN
+      - OR conf >= ANCHOR_CONF_MIN AND cuota >= ANCHOR_CUOTA_MIN
+      - OR edge_pct >= ANCHOR_EDGE_MIN AND cuota >= ANCHOR_CUOTA_MIN
+
+    Base = resto (cuota típicamente < 1.65, alta conf, baja varianza)
+
+    Retorna (anclas, bases) ordenados por combo_priority desc.
+    """
+    anclas = []
+    bases = []
+    for p in picks:
+        cuota = p.get('cuota', 0)
+        if cuota < ANCHOR_CUOTA_MIN:
+            bases.append(p)
+            continue
+
+        priority = p.get('combo_priority', p.get('confianza', 0))
+        conf = p.get('confianza', 0)
+        edge_val = 0.0
+        ed = p.get('edge_data_ref', {})
+        if ed:
+            try:
+                edge_val = float(str(ed.get('edge_pct') or '0%').replace('%', ''))
+            except (ValueError, AttributeError):
+                edge_val = 0.0
+
+        es_ancla = (
+            (priority >= ANCHOR_PRIORITY_MIN and cuota >= ANCHOR_CUOTA_MIN) or
+            (conf >= ANCHOR_CONF_MIN and cuota >= ANCHOR_CUOTA_MIN) or
+            (edge_val >= ANCHOR_EDGE_MIN and cuota >= ANCHOR_CUOTA_MIN)
+        )
+
+        if es_ancla:
+            anclas.append(p)
+        else:
+            bases.append(p)
+
+    anclas.sort(key=lambda x: x.get('combo_priority', x['confianza']), reverse=True)
+    bases.sort(key=lambda x: x.get('combo_priority', x['confianza']), reverse=True)
+    return anclas, bases
+
+
+def _build_anchor_combos(picks: list, bankroll: float, fase: int = 4) -> dict:
+    """
+    Genera combos anclados en 3 tiers (Nodo-63):
+      1A+3B: 1 ancla + 3 base  → cuota @4-6x
+      2A+2B: 2 anclas + 2 base → cuota @6-15x
+      3A+2B: 3 anclas + 2 base → cuota @14-35x (moonshot)
+
+    Cada combo debe incluir >=1 ancla para garantizar cuota elevada.
+    Guard: max 2 picks del mismo torneo. P(win) >= ANCHOR_PWIN_MIN.
+    """
+    import itertools as _itertools
+
+    anclas, bases = _classify_anchors(picks)
+
+    if not anclas:
+        return {
+            'anclas': [], 'bases': [], 'combos_1a3b': [], 'combos_2a2b': [],
+            'combos_3a2b': [], 'n_anclas': 0,
+        }
+
+    budget = bankroll * PHASE_CONFIG[fase]['max_daily_pct'] * 0.3  # 30% del budget de fase
+
+    def _valid_combo(subset):
+        """Guard: max 2 del mismo torneo, P(win) >= mínimo."""
+        torneos = [p.get('torneo', '') for p in subset]
+        if torneos and max(torneos.count(t) for t in set(torneos)) > MAX_SAME_TOURNAMENT:
+            return False
+        p_win = 1.0
+        for p in subset:
+            p_win *= min(1.0 / p['cuota'], 0.95)
+        return p_win >= ANCHOR_PWIN_MIN
+
+    def _score_combo(subset):
+        """Score = promedio combo_priority de los picks."""
+        return sum(p.get('combo_priority', p['confianza']) for p in subset) / len(subset)
+
+    combos_1a3b = []
+    combos_2a2b = []
+    combos_3a2b = []
+
+    stake_per_tier = round(budget / 3 / 500) * 500
+    stake_per_tier = max(500, stake_per_tier)
+
+    # 1A+3B
+    for ancla in anclas[:6]:
+        for base_trio in _itertools.combinations(bases[:10], 3):
+            subset = [ancla] + list(base_trio)
+            if not _valid_combo(subset):
+                continue
+            combos_1a3b.append((subset, _score_combo(subset)))
+    combos_1a3b.sort(key=lambda x: x[1], reverse=True)
+
+    # 2A+2B
+    for a_pair in _itertools.combinations(anclas[:5], 2):
+        for base_pair in _itertools.combinations(bases[:10], 2):
+            subset = list(a_pair) + list(base_pair)
+            if not _valid_combo(subset):
+                continue
+            combos_2a2b.append((subset, _score_combo(subset)))
+    combos_2a2b.sort(key=lambda x: x[1], reverse=True)
+
+    # 3A+2B
+    if len(anclas) >= 3:
+        for a_trio in _itertools.combinations(anclas[:5], 3):
+            for base_pair in _itertools.combinations(bases[:8], 2):
+                subset = list(a_trio) + list(base_pair)
+                if not _valid_combo(subset):
+                    continue
+                combos_3a2b.append((subset, _score_combo(subset)))
+        combos_3a2b.sort(key=lambda x: x[1], reverse=True)
+
+    result_1a3b = [
+        _calc_combo(s, stake_per_tier, f'ANCHOR_1A3B_{i+1}')
+        for i, (s, _) in enumerate(combos_1a3b[:MAX_ANCHOR_COMBOS])
+    ]
+    result_2a2b = [
+        _calc_combo(s, stake_per_tier, f'ANCHOR_2A2B_{i+1}')
+        for i, (s, _) in enumerate(combos_2a2b[:MAX_ANCHOR_COMBOS])
+    ]
+    result_3a2b = [
+        _calc_combo(s, stake_per_tier, f'ANCHOR_3A2B_{i+1}')
+        for i, (s, _) in enumerate(combos_3a2b[:MAX_ANCHOR_COMBOS // 2])
+    ]
+
+    return {
+        'anclas': anclas,
+        'bases': bases,
+        'combos_1a3b': result_1a3b,
+        'combos_2a2b': result_2a2b,
+        'combos_3a2b': result_3a2b,
+        'n_anclas': len(anclas),
+        'stake_per_tier': stake_per_tier,
+    }
+
+
+def _print_anchor_report(anchor_plan: dict):
+    """Imprime reporte de Anchor Combos (Nodo-63)."""
+    anclas = anchor_plan.get('anclas', [])
+    n_anclas = anchor_plan.get('n_anclas', 0)
+    stake = anchor_plan.get('stake_per_tier', 0)
+
+    print('=' * 70)
+    # cuota mínima de las anclas para mostrar en header
+    min_a = min((a['cuota'] for a in anclas), default=ANCHOR_CUOTA_MIN)
+    print(f'ANCHOR COMBOS (Nodo-63) — Anclas: {n_anclas} picks (@{min_a:.2f}+, priority>={ANCHOR_PRIORITY_MIN:.0f})')
+    print('=' * 70)
+    print()
+
+    print('ANCLAS identificadas:')
+    for i, a in enumerate(anclas, 1):
+        senales_str = ', '.join(a.get('alpha_senales', [])) if a.get('alpha_senales') else ''
+        senales_label = f'  [{senales_str}]' if senales_str else ''
+        print(f'  {i}. {a["nombre"]:28s}  @{a["cuota"]:.2f}  '
+              f'pri:{a.get("combo_priority", a["confianza"]):.1f}  '
+              f'conf:{a["confianza"]:.1f}%{senales_label}')
+    print()
+
+    for tier_name, combos, desc in [
+        ('1A+3B', anchor_plan.get('combos_1a3b', []), 'cuota objetivo @4-7x'),
+        ('2A+2B', anchor_plan.get('combos_2a2b', []), 'cuota objetivo @7-15x'),
+        ('3A+2B', anchor_plan.get('combos_3a2b', []), 'moonshot @15-35x'),
+    ]:
+        print(f'TIER {tier_name} ({"1 ancla" if tier_name.startswith("1") else "2 anclas" if tier_name.startswith("2") else "3 anclas"} + '
+              f'{"3 base" if tier_name.endswith("3B") else "2 base"}) — {desc}:')
+        if not combos:
+            print('  (sin combos — insuficientes anclas o bases)')
+        else:
+            for c in combos:
+                piernas_str = ' + '.join(
+                    f'{n}@{q:.2f}' for n, q in zip(c['piernas'], c['cuotas'])
+                )
+                ev_str = f'${c["ev"]:+,.0f}'
+                print(f'  [{c["nombre"]}]  {piernas_str}')
+                print(f'    @{c["odds_total"]:.2f}x  P(win):{c["p_win"]*100:.1f}%  '
+                      f'EV:{ev_str}  STAKE:${stake:,.0f}  -> ${c["retorno_bruto"]:,.0f}')
+        print()
+
+
+def _generate_anchor_bats(anchor_plan: dict, outcomes_map: dict):
+    """Genera archivos AC*.bat en escritorio para Anchor Combos (Nodo-63)."""
+    if not outcomes_map:
+        print('  WARN: Sin outcomes_map — no se generan AC*.bat')
+        return 0
+
+    COMBOS_DIR.mkdir(parents=True, exist_ok=True)
+
+    for old in DESKTOP_WIN.glob('AC*.bat'):
+        old.unlink(missing_ok=True)
+    for old in COMBOS_DIR.glob('ac*.html'):
+        old.unlink(missing_ok=True)
+
+    all_anchor_combos = (
+        anchor_plan.get('combos_1a3b', []) +
+        anchor_plan.get('combos_2a2b', []) +
+        anchor_plan.get('combos_3a2b', [])
+    )
+
+    generated = 0
+    for idx, combo in enumerate(all_anchor_combos, 1):
+        piernas = combo['piernas']
+        cuotas_list = combo['cuotas']
+
+        outcome_ids = []
+        legs_str_parts = []
+        ok = True
+        for nombre, cuota in zip(piernas, cuotas_list):
+            oc = _find_outcome(nombre, cuota, outcomes_map)
+            if oc:
+                outcome_ids.append(oc['outcome_id'])
+                legs_str_parts.append(f'{nombre}@{cuota:.2f}')
+            else:
+                ok = False
+                print(f'  WARN: Sin outcome para {nombre} @{cuota} — {combo["nombre"]} omitido')
+                break
+
+        if not ok or len(outcome_ids) < 2:
+            continue
+
+        ids_str  = ','.join(outcome_ids)
+        url      = f'{BETPLAY_URL_BASE}{ids_str}{BETPLAY_URL_TAIL}'
+        legs_str = ' + '.join(legs_str_parts)
+
+        html_content = (
+            f'<html><head><title>AC{idx}</title></head><body>\n'
+            f'<script>window.location.replace("{url}");</script>\n'
+            f'<p>Redirigiendo... {combo["nombre"]}: {legs_str}</p>\n'
+            f'</body></html>'
+        )
+        html_path = COMBOS_DIR / f'ac{idx}.html'
+        html_path.write_text(html_content, encoding='utf-8')
+
+        html_win = f'C:\\users\\hogar\\Desktop\\combos\\ac{idx}.html'
+        bat_path = DESKTOP_WIN / f'AC{idx}.bat'
+        bat_path.write_text(
+            f'@echo off\r\nstart "" "{CHROME_WIN}" "file:///{html_win}"\r\n',
+            encoding='utf-8',
+        )
+
+        print(f'  AC{idx}.bat — {combo["nombre"]}: {legs_str}')
+        generated += 1
+
+    return generated
+
+
 # ── Construcción del portfolio (Nodo-38) ────────────────────────────────────────
 
 def _select_core(picks_ab: list, max_size: int = CORE_MAX_SIZE,
                  max_same_tournament: int = MAX_SAME_TOURNAMENT) -> list:
     """
-    Selecciona picks para el CORE: top confianza con guard de concentración por torneo.
-    Solo acepta Cat-A y Cat-B.
+    Selecciona picks para el CORE ordenando por combo_priority (Signal Bridge, Nodo-62).
+    combo_priority = confianza + alpha_score (senales que el bookmaker no modela).
+    Fallback: confianza sola si Signal Bridge no disponible.
     """
+    # Nodo-62: ordenar por combo_priority en lugar de confianza
+    sorted_picks = sorted(
+        picks_ab,
+        key=lambda x: x.get('combo_priority', x['confianza']),
+        reverse=True,
+    )
     core = []
     torneo_count = Counter()
-    for pick in picks_ab:
+    for pick in sorted_picks:
         if len(core) >= max_size:
             break
         t = pick.get('torneo', '')
@@ -577,6 +1070,35 @@ def _build_portfolio_v2(picks: list, bankroll: float, fase: int = 4,
     if stake_max is not None:
         _cap_stakes(plan, stake_max)
 
+    # ═══ GCS SUB-PLAN (Nodo-60 D60-04) ═══
+    # Picks con TORNEO_COMPLETO_BONUS en superficie actual + tier≥ATP500
+    # Se construyen en universo propio — NO mezclar con picks ITF en CORE/Satellite
+    gcs_picks = [p for p in picks if p.get('gcs_active')]
+    if len(gcs_picks) >= 2:
+        gcs_stake = round(budget * 0.02 / 500) * 500  # 2% budget fijo
+        gcs_stake = max(500, gcs_stake)
+        gcs_combos = []
+        # Combos de 2 piernas (cada par único)
+        seen = set()
+        for i in range(len(gcs_picks)):
+            for j in range(i + 1, len(gcs_picks)):
+                pair = (gcs_picks[i]['nombre'], gcs_picks[j]['nombre'])
+                if pair not in seen:
+                    seen.add(pair)
+                    gcs_combos.append(
+                        _calc_combo([gcs_picks[i], gcs_picks[j]], gcs_stake,
+                                    f'GCS_2p_{gcs_picks[i]["nombre"].split()[0]}_{gcs_picks[j]["nombre"].split()[0]}')
+                    )
+        # Combo de 3 piernas si hay ≥3 GCS picks
+        if len(gcs_picks) >= 3:
+            gcs_combos.append(
+                _calc_combo(gcs_picks[:3], gcs_stake,
+                            f'GCS_3p_{"+".join(p["nombre"].split()[0] for p in gcs_picks[:3])}')
+            )
+        plan['gcs_plan'] = {'picks': gcs_picks, 'combos': gcs_combos, 'stake_per_combo': gcs_stake}
+    else:
+        plan['gcs_plan'] = None
+
     # ═══ RESUMEN ═══
     plan['resumen'] = _resumen_portfolio(plan)
 
@@ -703,9 +1225,15 @@ def _format_report(picks: list, plan: dict, threshold: float,
         add(f'{cat_desc}: {len(cat_picks)} picks')
         for i, p in enumerate(cat_picks, 1):
             pipeline_str = ' [PIPELINE]' if p['cat'].get('pipeline_flag') else ''
+            alpha_prom_str = ' [ALPHA-PROM]' if p['cat'].get('alpha_promoted') else ''
             torneo_corto = (p['torneo'] or '')[:40]
+            priority_str = (f'  pri:{p["combo_priority"]:.1f}'
+                            if p.get('alpha_score', 0) != 0 else '')
             add(f'  {i:2d}. {p["nombre"]:28s}  @{p["cuota"]:.2f}  '
-                f'conf:{p["confianza"]:.1f}%  {torneo_corto}{pipeline_str}')
+                f'conf:{p["confianza"]:.1f}%{priority_str}  {torneo_corto}'
+                f'{pipeline_str}{alpha_prom_str}')
+            if p.get('alpha_score', 0) != 0 and p.get('alpha_senales'):
+                add(f'       [alpha {p["alpha_score"]:+.1f}: {", ".join(p["alpha_senales"])}]')
         add()
 
     if not any([plan.get('core'), plan.get('satellites'), plan.get('moonshot')]):
@@ -794,6 +1322,29 @@ def _format_report(picks: list, plan: dict, threshold: float,
             add(f'    Odds: {cob["odds_total"]:.2f}x  P(win): {cob["p_win"]*100:.1f}%  '
                 f'STAKE: ${cob["stake"]:,.0f}')
 
+    # ── GCS SUB-PLAN (Nodo-60) ────────────────────────────────────────────────
+    gcs_plan = plan.get('gcs_plan')
+    if gcs_plan and gcs_plan.get('combos'):
+        add()
+        sep('-', 70)
+        add()
+        add('GCS — CAMPEONES PRE-TORNEO (universo separado, no mezclar con ITF)')
+        add('  Condicion: TORNEO_COMPLETO_BONUS en superficie actual, tier>=ATP500, <=21d')
+        for gp in gcs_plan['picks']:
+            add(f'  * {gp["nombre"]:28s}  @{gp["cuota"]:.2f}  '
+                f'conf:{gp["confianza"]:.1f}%  [{(gp["torneo"] or "")[:40]}]')
+        add()
+        for gc in gcs_plan['combos']:
+            piernas_str = ' + '.join(
+                f'{n}@{q:.2f}' for n, q in zip(gc['piernas'], gc['cuotas'])
+            )
+            add(f'  [{gc["nombre"]}]  {piernas_str}')
+            add(f'    Odds: {gc["odds_total"]:.2f}x  P(win): {gc["p_win"]*100:.1f}%  '
+                f'STAKE: ${gc["stake"]:,.0f}  Retorno: ${gc["retorno_bruto"]:,.0f}')
+        add()
+        add('  REGLA-GCS: estos combos son independientes del CORE. Si el CORE muere, GCS vive.')
+        add('  H60-01 acumulando: n<30, no escalar stakes hasta graduacion.')
+
     # ── RESUMEN ───────────────────────────────────────────────────────────────
     add()
     sep('=', 70)
@@ -804,6 +1355,9 @@ def _format_report(picks: list, plan: dict, threshold: float,
         f'(de ${res["budget"]:,.0f} budget)')
     add(f'  Retorno esperado:       ${res["total_retorno_esp"]:,.0f}')
     add(f'  EV total:               ${res["total_ev"]:+,.0f}')
+    if gcs_plan and gcs_plan.get('combos'):
+        gcs_total = sum(c['stake'] for c in gcs_plan['combos'])
+        add(f'  GCS sub-plan:           ${gcs_total:,.0f} ({len(gcs_plan["combos"])} combos, universo separado)')
     add()
 
     # ── Notas ─────────────────────────────────────────────────────────────────
@@ -1072,6 +1626,10 @@ def main():
                         help='Enviar combos a Telegram con links de redirect')
     parser.add_argument('--no-bat',      action='store_true',
                         help='No generar archivos .bat en el escritorio')
+    parser.add_argument('--excluir',     type=str,   default=None,
+                        help='Excluir jugadores (separados por coma): --excluir "Jugador A,Jugador B"')
+    parser.add_argument('--anchor',      action='store_true',
+                        help='Generar Anchor Combos (Nodo-63): 1A+3B, 2A+2B, 3A+2B con picks ancla')
     args = parser.parse_args()
 
     # ── Grass bootstrap mode (Nodo-42) ───────────────────────────────���────────
@@ -1089,6 +1647,9 @@ def main():
 
     # --threshold sobrescribe el default (explícito tiene prioridad)
     threshold = args.threshold if args.threshold is not None else conf_min_efectivo
+    # Si el user pasa --threshold explícitamente, sincronizar conf_min (Nodo-60: GCS picks pueden tener conf<53%)
+    if args.threshold is not None:
+        conf_min_efectivo = min(conf_min_efectivo, args.threshold)
 
     # Seleccionar archivo
     if args.file:
@@ -1131,6 +1692,14 @@ def main():
                                      conf_min=conf_min_efectivo, conf_c1=conf_c1_efectivo,
                                      superficie_filter=superficie_filter)
 
+    # --excluir: filtrar jugadores específicos del pool
+    if args.excluir:
+        excluidos_set = {n.strip().lower() for n in args.excluir.split(',')}
+        antes = len(picks)
+        picks = [p for p in picks if p['nombre'].lower() not in excluidos_set]
+        if len(picks) < antes:
+            print(f'Excluidos por --excluir: {antes - len(picks)} pick(s) ({args.excluir})')
+
     if not picks:
         print(f'Sin picks con confianza >= {threshold}%. '
               f'Revisa el threshold o los datos.')
@@ -1168,6 +1737,18 @@ def main():
 
     print(f'\nGuardado en: {out_path}')
 
+    # C62-A (H62-01): propagar alpha_promoted al shadow book del día
+    alpha_picks = [p['nombre'] for p in picks
+                   if p.get('alpha_promoted') or p.get('cat', {}).get('alpha_promoted')]
+    if alpha_picks:
+        try:
+            from shadow_book import update_alpha_flags
+            n_upd = update_alpha_flags(datetime.now().strftime('%Y-%m-%d'), alpha_picks)
+            if n_upd:
+                print(f'  [H62-01] {n_upd} picks alpha_promoted registrados en shadow book')
+        except Exception as _exc:
+            print(f'  [H62-01] WARNING: No se pudo propagar alpha_promoted: {_exc}')
+
     # Generar .bat en escritorio
     has_combos = any([plan.get('core'), plan.get('satellites'), plan.get('moonshot'),
                       plan.get('cobertura_expanded') and plan.get('cobertura')])
@@ -1184,6 +1765,23 @@ def main():
     if args.telegram and has_combos:
         print('\nEnviando a Telegram...')
         _enviar_telegram(plan)
+
+    # Nodo-63: Anchor Combos
+    if getattr(args, 'anchor', False) and picks:
+        anchor_plan = _build_anchor_combos(picks, args.bankroll, args.fase)
+        if anchor_plan['n_anclas'] > 0:
+            print()
+            _print_anchor_report(anchor_plan)
+            if not args.no_bat:
+                print('Generando AC*.bat en escritorio...')
+                outcomes_map = _fetch_kambi_outcomes()
+                n_ac = _generate_anchor_bats(anchor_plan, outcomes_map)
+                if n_ac:
+                    print(f'  {n_ac} archivos AC*.bat generados')
+                else:
+                    print('  Sin AC*.bat (picks no disponibles en Kambi)')
+        else:
+            print('\nAnchor Combos: sin picks ancla (cuota >= 1.65 con priority/conf/edge suficientes)')
 
 
 if __name__ == '__main__':

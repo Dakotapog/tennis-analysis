@@ -5,7 +5,8 @@ T30-01 to T30-09:  TORNEO_COMPLETO logic (via analyze_surface_specialization)
 T30-10 to T30-13:  E-1 weight shift + date parsing
 T30-14 to T30-18:  get_weights_from_reasoning() final weights
 T30-19 to T30-22:  SEÑALES ESPECIALES detection
-T30-23 to T30-30:  Player Profitability tracker
+T30-23 to T30-30:  Player Profitability tracker (real bets)
+T30-31 to T30-37:  Player Profitability Simulado — D52-06 (shadow book)
 """
 import json
 import os
@@ -89,9 +90,9 @@ class TestTorneoCompleto:
         return result, log
 
     def test_T30_01_fires_with_4W_0L(self, analyzer):
-        """T30-01: TORNEO_COMPLETO fires with >=4W, 0L in same torneo+year."""
+        """T30-01: TORNEO_COMPLETO fires with >=4W, 0L in ITF torneo (min 4W for ITF tier)."""
         fecha = _recent_date(7)  # recent, within 90d and <=14d
-        matches = [_make_match('Roland Garros', fecha) for _ in range(4)]
+        matches = [_make_match('W15 ITF Monastir', fecha) for _ in range(4)]
         _, log = self._run(analyzer, matches)
         assert any('TORNEO_COMPLETO_BONUS' in l for l in log)
 
@@ -111,28 +112,31 @@ class TestTorneoCompleto:
         assert not any('TORNEO_COMPLETO_BONUS' in l for l in log)
 
     def test_T30_04_expirado_when_over_90_days(self, analyzer):
-        """T30-04: TORNEO_COMPLETO_EXPIRADO when >90 days — bonus = 1.0 (no effect)."""
+        """T30-04: TORNEO_COMPLETO_EXPIRADO when >90 days — bonus = 1.0 (no effect). Uses ITF (4W min)."""
         fecha = _recent_date(100)  # 100 days ago
-        matches = [_make_match('Roland Garros', fecha) for _ in range(4)]
+        matches = [_make_match('W15 ITF Monastir', fecha) for _ in range(4)]
         _, log = self._run(analyzer, matches)
         assert any('TORNEO_COMPLETO_EXPIRADO' in l for l in log)
         assert not any('TORNEO_COMPLETO_BONUS' in l for l in log)
 
-    def test_T30_05_recent_14d_bonus_1_5(self, analyzer):
-        """T30-05: recent <=14d — bonus base 1.3 + recency 0.2 = 1.5."""
+    def test_T30_05_recent_14d_bonus_1_6(self, analyzer):
+        """T30-05: recent <=14d, ITF 4W — bonus base 1.3 + recency 0.2 + final 0.1 = 1.6.
+        'final' fires whenever wins >= min_wins (same gate condition), so minimum bonus with
+        recency is always 1.6 (not 1.5). Uses ITF (4W min).
+        """
         fecha = _recent_date(7)  # 7 days ago
-        matches = [_make_match('Roland Garros', fecha) for _ in range(4)]
+        matches = [_make_match('W15 ITF Monastir', fecha) for _ in range(4)]
         _, log = self._run(analyzer, matches)
         # Find the bonus log line
         bonus_lines = [l for l in log if 'TORNEO_COMPLETO_BONUS' in l]
         assert bonus_lines, "Expected TORNEO_COMPLETO_BONUS in log"
-        # Check bonus value: x1.5 expected (base 1.3 + recency 0.2)
-        assert 'x1.5' in bonus_lines[0]
+        # Check bonus value: x1.6 (base 1.3 + recency 0.2 + final 0.1)
+        assert 'x1.6' in bonus_lines[0]
 
     def test_T30_06_recent_14d_plus_final_5W_bonus_1_6(self, analyzer):
-        """T30-06: recent <=14d + final (>=5W) — bonus = 1.6."""
+        """T30-06: recent <=14d + final (>=5W) — bonus = 1.6. Uses Challenger (5W min)."""
         fecha = _recent_date(7)
-        matches = [_make_match('Roland Garros', fecha) for _ in range(5)]
+        matches = [_make_match('Buenos Aires Challenger 2026', fecha) for _ in range(5)]
         _, log = self._run(analyzer, matches)
         bonus_lines = [l for l in log if 'TORNEO_COMPLETO_BONUS' in l]
         assert bonus_lines
@@ -143,17 +147,18 @@ class TestTorneoCompleto:
         """T30-07: recent <=14d + top10 + final — bonus = 1.7.
         TORNEO_COMPLETO block reads opponent_ranking from match dict (line 819),
         NOT from ranking_manager. Must include 'opponent_ranking' in the match.
+        Uses Challenger (5W min).
         """
         fecha = _recent_date(7)
         # Need >=5 wins, one vs Top-10 — opponent_ranking must be in match dict
-        top10_match = _make_match('Roland Garros', fecha, oponente='OppTop')
+        top10_match = _make_match('Buenos Aires Challenger 2026', fecha, oponente='OppTop')
         top10_match['opponent_ranking'] = 5  # rank 5 = Top-10
         matches = [
             top10_match,
-            _make_match('Roland Garros', fecha),
-            _make_match('Roland Garros', fecha),
-            _make_match('Roland Garros', fecha),
-            _make_match('Roland Garros', fecha),
+            _make_match('Buenos Aires Challenger 2026', fecha),
+            _make_match('Buenos Aires Challenger 2026', fecha),
+            _make_match('Buenos Aires Challenger 2026', fecha),
+            _make_match('Buenos Aires Challenger 2026', fecha),
         ]
         _, log = self._run(analyzer, matches)
         bonus_lines = [l for l in log if 'TORNEO_COMPLETO_BONUS' in l]
@@ -187,6 +192,26 @@ class TestTorneoCompleto:
         _, log = self._run(analyzer, matches)
         assert not any('TORNEO_COMPLETO_BONUS' in l for l in log)
         assert not any('TORNEO_COMPLETO_EXPIRADO' in l for l in log)
+
+    def test_T30_10b_gs_requires_7W_not_5W(self, analyzer):
+        """T30-10b: Grand Slam (Roland Garros) requires 7W — 5W does NOT fire TORNEO_COMPLETO.
+        Regression guard for Nodo-57: Safiullin had 5 wins (3 qualifying + 2 main draw)
+        and incorrectly received GS champion bonus with old wins>=4 gate.
+        """
+        fecha = _recent_date(7)
+        # 5 wins at Roland Garros (GS) — should NOT fire (needs 7)
+        matches = [_make_match('Roland Garros', fecha) for _ in range(5)]
+        _, log = self._run(analyzer, matches)
+        assert not any('TORNEO_COMPLETO_BONUS' in l for l in log), (
+            "GS requires 7W for champion bonus — 5W (e.g. 3 qualifying + 2 main draw) must not trigger"
+        )
+
+    def test_T30_10c_gs_fires_with_7W(self, analyzer):
+        """T30-10c: Grand Slam (Roland Garros) fires with exactly 7W-0L."""
+        fecha = _recent_date(7)
+        matches = [_make_match('Roland Garros', fecha) for _ in range(7)]
+        _, log = self._run(analyzer, matches)
+        assert any('TORNEO_COMPLETO_BONUS' in l for l in log)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -647,3 +672,158 @@ class TestPlayerProfitability:
                 signals.append(f"JUGADOR RENTABLE: {_player_name}")
 
         assert signals == []
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# T30-31 to T30-37: Player Profitability Simulado — D52-06 (shadow book)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+class TestPlayerProfitabilitySimulado:
+    """D52-06 (Nodo-52 Addendum §A): build_player_profitability_simulado()"""
+
+    def _make_sb_record(self, jugador, cuota, resultado, clv=None, status='APROBADO',
+                        logged_at='2026-07-02T04:00:00+00:00'):
+        """Helper: construye un registro shadow book settled."""
+        pnl = round(cuota - 1, 4) if resultado == 'WON' else -1.0
+        return json.dumps({
+            'sb_id': f'test_{jugador}_{cuota}',
+            'logged_at': logged_at,
+            'match_key': f'{jugador.lower()}_rival',
+            'pick_snapshot': {
+                'favorito_predicho': jugador,
+                'cuota_favorito': cuota,
+                'apostar': (status == 'APROBADO'),
+                'status': status if status == 'NO_DATA' else None,
+            },
+            'resolucion': {
+                'resultado': resultado,
+                'pnl_flat_1u': pnl,
+                'clv_pct': clv,
+                'cuota_cierre': None,
+                'cuota_cierre_provenance': 'flashscore_ref',
+            },
+        })
+
+    def test_T30_31_empty_shadow_dir_returns_empty(self, tmp_path):
+        """T30-31: Sin archivos JSONL → retorna {} sin crash."""
+        from analysis.player_profitability import build_player_profitability_simulado
+        result = build_player_profitability_simulado(
+            shadow_dir=str(tmp_path / 'shadow_book'),
+            data_dir=str(tmp_path / 'data'),
+        )
+        assert result == {}
+
+    def test_T30_32_void_excluido(self, tmp_path):
+        """T30-32: Picks VOID excluidos de las métricas."""
+        from analysis.player_profitability import build_player_profitability_simulado
+        sb_dir = tmp_path / 'shadow_book'
+        sb_dir.mkdir()
+        (sb_dir / 'sb_2026-07-02.jsonl').write_text(
+            json.dumps({
+                'sb_id': 'void_test',
+                'logged_at': '2026-07-02T04:00:00+00:00',
+                'match_key': 'player_rival',
+                'pick_snapshot': {'favorito_predicho': 'Player A', 'cuota_favorito': 2.0, 'apostar': True},
+                'resolucion': {'resultado': 'VOID', 'pnl_flat_1u': 0.0, 'clv_pct': None},
+            }) + '\n',
+            encoding='utf-8'
+        )
+        result = build_player_profitability_simulado(
+            shadow_dir=str(sb_dir), data_dir=str(tmp_path / 'data')
+        )
+        assert result == {}
+
+    def test_T30_33_won_lost_flat_1u(self, tmp_path):
+        """T30-33: WON/LOST con flat 1u — ROI y profit calculados correctamente."""
+        from analysis.player_profitability import build_player_profitability_simulado, _normalize_name
+        sb_dir = tmp_path / 'shadow_book'
+        sb_dir.mkdir()
+        records = [
+            self._make_sb_record('Carlos Alcaraz', 2.00, 'WON'),
+            self._make_sb_record('Carlos Alcaraz', 2.00, 'LOST'),
+            self._make_sb_record('Carlos Alcaraz', 2.00, 'WON'),
+        ]
+        (sb_dir / 'sb_2026-07-02.jsonl').write_text('\n'.join(records) + '\n', encoding='utf-8')
+
+        result = build_player_profitability_simulado(
+            shadow_dir=str(sb_dir), data_dir=str(tmp_path / 'data')
+        )
+        key = _normalize_name('Carlos Alcaraz')
+        assert key in result
+        stats = result[key]
+        assert stats['n_apostado'] == 3
+        assert stats['n_ganado'] == 2
+        assert stats['profit_total'] == 1.0
+        assert stats['total_apostado'] == 3.0
+        assert abs(stats['roi'] - round(1.0 / 3.0, 4)) < 0.001
+        assert stats['simulado'] is True
+
+    def test_T30_34_clv_median_calculado(self, tmp_path):
+        """T30-34: CLV median se calcula correctamente desde los registros settled."""
+        from analysis.player_profitability import build_player_profitability_simulado, _normalize_name
+        sb_dir = tmp_path / 'shadow_book'
+        sb_dir.mkdir()
+        records = [
+            self._make_sb_record('Rafael Nadal', 2.00, 'WON',  clv=10.0),
+            self._make_sb_record('Rafael Nadal', 2.00, 'LOST', clv=5.0),
+            self._make_sb_record('Rafael Nadal', 2.00, 'WON',  clv=3.0),
+        ]
+        (sb_dir / 'sb_2026-07-02.jsonl').write_text('\n'.join(records) + '\n', encoding='utf-8')
+
+        result = build_player_profitability_simulado(
+            shadow_dir=str(sb_dir), data_dir=str(tmp_path / 'data')
+        )
+        stats = result[_normalize_name('Rafael Nadal')]
+        assert stats['clv_median'] == 5.0
+
+    def test_T30_35_output_en_archivo_separado(self, tmp_path):
+        """T30-35: Escribe player_profitability_simulado.json, NUNCA el real."""
+        from analysis.player_profitability import build_player_profitability_simulado
+        sb_dir = tmp_path / 'shadow_book'
+        sb_dir.mkdir()
+        data_dir = tmp_path / 'data'
+        (sb_dir / 'sb_2026-07-02.jsonl').write_text(
+            self._make_sb_record('Player X', 1.80, 'WON') + '\n', encoding='utf-8'
+        )
+        build_player_profitability_simulado(shadow_dir=str(sb_dir), data_dir=str(data_dir))
+
+        assert (data_dir / 'player_profitability_simulado.json').exists()
+        assert not (data_dir / 'player_profitability.json').exists()
+
+    def test_T30_36_get_simulado_lee_archivo_correcto(self, tmp_path):
+        """T30-36: get_player_profitability(simulado=True) lee el archivo simulado."""
+        from analysis.player_profitability import (
+            build_player_profitability_simulado,
+            get_player_profitability,
+        )
+        sb_dir = tmp_path / 'shadow_book'
+        sb_dir.mkdir()
+        data_dir = tmp_path / 'data'
+        (sb_dir / 'sb_2026-07-02.jsonl').write_text(
+            self._make_sb_record('Novak Djokovic', 1.50, 'WON') + '\n', encoding='utf-8'
+        )
+        build_player_profitability_simulado(shadow_dir=str(sb_dir), data_dir=str(data_dir))
+
+        stats = get_player_profitability('Novak Djokovic', data_dir=str(data_dir), simulado=True)
+        assert stats is not None
+        assert stats['simulado'] is True
+        assert stats['n_apostado'] == 1
+
+        assert get_player_profitability('Novak Djokovic', data_dir=str(data_dir), simulado=False) is None
+
+    def test_T30_37_session_meta_ignorado(self, tmp_path):
+        """T30-37: Registros _type=session_meta se ignoran completamente."""
+        from analysis.player_profitability import build_player_profitability_simulado
+        sb_dir = tmp_path / 'shadow_book'
+        sb_dir.mkdir()
+        content = (
+            json.dumps({'_type': 'session_meta', 'sb_id': 'SESSION_2026-07-02', 'n_apostar': 5})
+            + '\n'
+            + self._make_sb_record('Player Z', 2.00, 'WON')
+            + '\n'
+        )
+        (sb_dir / 'sb_2026-07-02.jsonl').write_text(content, encoding='utf-8')
+        result = build_player_profitability_simulado(
+            shadow_dir=str(sb_dir), data_dir=str(tmp_path / 'data')
+        )
+        assert len(result) == 1

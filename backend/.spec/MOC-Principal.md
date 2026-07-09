@@ -1,6 +1,7 @@
 # MOC Principal — Tennis Prediction Engine
 
-> **Última actualización:** 2026-06-30 (Nodo-47 ✅ RESUELTO — bug crítico: _inject_kambi_ranking sobreescribía rankings ATP reales por mismatch "Nombre Apellido" vs "Apellido Nombre". Causa directa de fallo Glinka/Mayo. Fix optimizado: O(1) key invertido + slow path. Nodo-45 ✅ THF activo | **Tests:** 1438 passed ✅)
+> **Última actualización:** 2026-07-03 (Nodo-59 ✅ COMPLETO — Motor Agéntico M0+M1: token_odometer.py ($1,292.27/semana1, cache 95.7%), MODEL-ROUTING.md, 5 skills .claude/commands/, ROI-LEDGER, DECISION-LOG, knowledge-assets. Dream M2 implementado (n≥3), activa post-30d shadow. Tests: 1649 passed.) | Nodo-57 ✅ COMPLETO — _MIN_WINS_CHAMPION{GS:7,ATP1k:6,500:5,CH:5,ITF:4}, form_decay exponencial. | Nodo-56 COMPLETO (_weights_final fuente única).
+> **Última actualización anterior:** 2026-06-30 (Nodo-47 ✅ RESUELTO — bug crítico: _inject_kambi_ranking sobreescribía rankings ATP reales por mismatch "Nombre Apellido" vs "Apellido Nombre". Causa directa de fallo Glinka/Mayo. Fix optimizado: O(1) key invertido + slow path. Nodo-45 ✅ THF activo | **Tests:** 1438 passed ✅)
 > **Calibración global:** n=1353 | 850W/503L hit=62.8% | clay GS: 25W/8L p=75.8% | grass: 92W/73L=55.7%
 > **ALERTA Nodo-32 (Jun 19-22):** APOSTAR hit%=26.7% (8W/22L) | Markov HOT=8.3% | Golden Zone=12.5% | 86% picks LOW | ROI=-21.1% | Phantom Edge + Markov decorativo + Golden Zone ciega → 5 fixes spec
 > **Hallazgo Nodo-28 (18-jun):** 80.8% INFLADO por data leakage (H2H post-partido). Backtest limpio: **36/52=69.2%** (clay 76% | grass 67% | hard 64%). 6 predicciones cambiaron al quitar leak. 16 fallos → análisis post-mortem reveló Circuit Asymmetry → Nodo-29.
@@ -84,7 +85,9 @@
 │   ├── [[Nodo-44-Watchlist-Alpha-Signal]] HALLAZGO — framework unificado: watchlist edge≥10% + cuota≥2.0 + señal Markov. Bookmaker sobrevalora marca, modelo captura estado actual. Validado 2026-06-29: Carreno @3.30 (edge=21.1%) + Safiullin @2.65 (edge=12.8%) ambos GANARON. PCRS (Nodo-43) es subconjunto de WAS.
 │   ├── [[Nodo-45-Temporal-History-Fallback]] ✅ IMPLEMENTADO — match_id=None → busca en h2h_results previos (7 días). D45-01 tests ✓ | D45-02 función ✓ | D45-03 refactor ✓ | D45-04 routing ✓
 │   ├── [[Nodo-46-Markov-Surface-Context-Discount]] HALLAZGO — estado COLD/HOT mezclando superficies. Evidencia real: 1/3 fallos Cary (Watanuki). Pendiente más n antes de implementar discount.
-│   └── [[Nodo-47-Inject-Kambi-Ranking-Guard-Bug]] ✅ RESUELTO — guard `rankings_data.get(normalized)` fallaba por formato "Apellido Nombre" vs "Nombre Apellido". Kambi estimate sobreescribía ATP real. Fix: fast path O(1) invertido + slow path intelligent match. 1438 tests ✅
+│   ├── [[Nodo-47-Inject-Kambi-Ranking-Guard-Bug]] ✅ RESUELTO — guard `rankings_data.get(normalized)` fallaba por formato "Apellido Nombre" vs "Nombre Apellido". Kambi estimate sobreescribía ATP real. Fix: fast path O(1) invertido + slow path intelligent match. 1438 tests ✅
+│   ├── [[Nodo-49-Playwright-H2H-Fallback-n-h2h-0]] ✅ IMPLEMENTADO — Playwright fallback como 3er eslabón (API → THF → Playwright). Elimina phantom edge n_h2h=0 en ITF/Challenger. Selectores validados de git 23d2d91.
+│   └── [[Nodo-50-Filtro-Torneo-PASO1]] ✅ IMPLEMENTADO 2026-07-01 — `--torneo wimbledon` en extraer_partidos_api.py. Substring case-insensitive sobre torneo_nombre + torneo_completo. AND con --tier. 8 tests T50-01→T50-08 ✅
 │
 ├── 02_Sources/
 │   └── Fuentes-Datos.md              ← contrato con FlashScore (Playwright + Ninja API) + Kambi API (Betplay)

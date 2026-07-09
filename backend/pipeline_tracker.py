@@ -14,6 +14,7 @@ Fases implementadas:
   Fase 2: S-27-4 (señales: golden_zone, markov, data_completeness, zona_cuota, edge bins)
            S-27-5 (calibración del modelo)
   Fase 3: S-27-6 (evolución temporal por semana), S-27-7 (portfolio: combos vs individuales)
+  Fase 4: S-27-8 (shadow book CLV — Nodo-52, --section shadow)
 """
 
 import argparse
@@ -881,6 +882,22 @@ def resumen_ejecutivo(picks, out):
 
 # ── CLI ───────────────────────────────────────────────────────────────────────
 
+def seccion_27_8_shadow(out: list, desde: str = None, hasta: str = None) -> None:
+    """
+    S-27-8 — Shadow Book CLV Tracking (Nodo-52, D52-05).
+    READ-ONLY: delega completamente a shadow_book.report().
+    Addendum §G.4: menor invasión — tracker llama al módulo, no duplica lógica.
+    """
+    try:
+        import shadow_book
+        texto = shadow_book.report(desde=desde, hasta=hasta)
+        out.append(texto)
+    except ImportError:
+        out.append("  [S-27-8] shadow_book.py no disponible.")
+    except Exception as e:
+        out.append(f"  [S-27-8] Error al cargar shadow book: {e}")
+
+
 def parse_args():
     parser = argparse.ArgumentParser(
         description="Pipeline Tracker & Observabilidad — Nodo-27 (READ-ONLY)"
@@ -896,12 +913,16 @@ def parse_args():
     )
     parser.add_argument(
         "--section", type=str, default=None,
-        choices=["confianza", "cuotas", "tiers", "senales", "calibracion", "drift", "portfolio", "games"],
-        help="Solo una seccion"
+        choices=["confianza", "cuotas", "tiers", "senales", "calibracion", "drift", "portfolio", "games", "shadow"],
+        help="Solo una seccion (shadow = S-27-8 Shadow Book CLV, Nodo-52)"
     )
     parser.add_argument(
         "--save", action="store_true",
         help="Guardar snapshot JSON en reports/pipeline_tracking_FECHA.json"
+    )
+    parser.add_argument(
+        "--json", action="store_true", dest="json_output",
+        help="D58-01: Output snapshot como JSON a stdout para el dashboard"
     )
     return parser.parse_args()
 
@@ -966,6 +987,10 @@ def main():
     if section is None or section == "games":
         seccion_40_games(out)
 
+    if section is None or section == "shadow":
+        since_str = str(since) if since else None
+        seccion_27_8_shadow(out, desde=since_str)
+
     out.append("")
     out.append("=" * 72)
     out.append("  FIN DEL REPORTE — pipeline_tracker.py (READ-ONLY, Nodo-27)")
@@ -982,6 +1007,18 @@ def main():
         print(f"\n[Guardado: {OUTPUT_FILE}]")
     except OSError as e:
         print(f"\n[WARN: no se pudo guardar {OUTPUT_FILE}: {e}]")
+
+    # D58-01: --json → stdout (no guarda archivo, no imprime reporte)
+    if args.json_output:
+        snap = {
+            "fecha": datetime.now().isoformat(),
+            "filtros": {"since": str(since) if since else None, "tier": args.tier},
+            "n_picks": len(picks),
+            "n_con_resultado": len(_with_resultado(picks)),
+            "report": report_text,
+        }
+        print(json.dumps(snap, ensure_ascii=False, indent=2))
+        return
 
     # Snapshot JSON opcional
     if args.save:

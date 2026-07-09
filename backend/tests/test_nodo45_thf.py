@@ -78,6 +78,7 @@ def extractor():
 
     ext.all_results = []
     ext.all_tournaments = False
+    ext._playwright_queue = []  # F3: batch queue — inicializar igual que __init__
     ext.ranking_manager = MagicMock()
     ext.elo_system = MagicMock()
     ext.rivalry_analyzer = MagicMock()
@@ -258,7 +259,7 @@ class TestProcessMatchTHF:
             "Rival Jugador": HIST_RIVAL,
         }
 
-        def fake_thf(player_name, days_back=7):
+        def fake_thf(player_name, days_back=7, player_ranking=None):
             return thf_returns.get(player_name, [])
 
         with patch("scraping.ninja_h2h_parser._lookup_player_history_temporal", side_effect=fake_thf):
@@ -278,7 +279,7 @@ class TestProcessMatchTHF:
         FALLA si no se llama a _lookup_player_history_temporal en el path API."""
         thf_returns = {"Martin Maldonado": HIST_MALDONADO}
 
-        def fake_thf(player_name, days_back=7):
+        def fake_thf(player_name, days_back=7, player_ranking=None):
             return thf_returns.get(player_name, [])
 
         match_with_id = dict(self._BASE_MATCH)
@@ -292,6 +293,8 @@ class TestProcessMatchTHF:
              patch("scraping.ninja_h2h_parser._lookup_player_history_temporal",
                    side_effect=fake_thf) as mock_thf:
             result = extractor._process_match(match_with_id)
+            # F3: si p2_history vacía, el partido queda en la cola — drena con budget=0
+            extractor._run_playwright_batch(pw_budget=0)
 
         assert result is True, "THF debe suplementar historial vacío de la API (Punto B)"
         # Verificar que THF fue llamado para el jugador con historial vacío
@@ -305,7 +308,7 @@ class TestProcessMatchTHF:
     def test_t45_09_returns_false_when_no_match_id_and_no_temporal_data(self, extractor):
         """T45-09: Sin match_id Y sin datos temporales → return False.
         FALLA si se elimina el guard de 'not p1_history and not p2_history'."""
-        def fake_thf_empty(player_name, days_back=7):
+        def fake_thf_empty(player_name, days_back=7, player_ranking=None):
             return []   # ningún archivo previo tiene a este jugador
 
         with patch("scraping.ninja_h2h_parser._lookup_player_history_temporal",

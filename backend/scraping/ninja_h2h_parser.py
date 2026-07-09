@@ -29,6 +29,12 @@ from typing import Dict, List, Optional, Tuple
 import requests
 
 from config import FLASHSCORE_BASE, FLASHSCORE_HEADERS
+from core.data_contract import (  # F2: procedencia de historial
+    PROVENANCE_NINJA_API,
+    PROVENANCE_THF_CACHE,
+    PROVENANCE_PLAYWRIGHT_DOM,
+    PROVENANCE_EMPTY,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -519,6 +525,120 @@ def extract_match_id_from_url(url: str) -> Optional[str]:
 # NODO-49: PLAYWRIGHT H2H FALLBACK — cuando Ninja API + THF fallan
 # ══════════════════════════════════════════════════════════════════════════════
 
+async def _playwright_h2h_with_browser(browser, match_id: str, player_name: str,
+                                        section_idx: int) -> List[Dict]:
+    """
+    F3 (Nodo-51): Extrae historial H2H usando un browser ya abierto (reutilizable en batch).
+    Selectores y URL validados en producción. Cierra la página al terminar, NO el browser.
+    section_idx: 0=jugador1, 1=jugador2.
+    """
+    h2h_url = f"https://www.flashscore.co/partido/tenis/{match_id}/#/h2h/general"
+    page = await browser.new_page()
+    await page.set_viewport_size({"width": 1920, "height": 1080})
+
+    try:
+        base_url = f"https://www.flashscore.co/partido/tenis/{match_id}/"
+        await page.goto(base_url, wait_until="domcontentloaded", timeout=30000)
+        await asyncio.sleep(3)
+
+        try:
+            btn = await page.wait_for_selector("#onetrust-accept-btn-handler", timeout=5000)
+            if btn:
+                await btn.click()
+                await asyncio.sleep(2)
+        except Exception:
+            pass
+
+        h2h_clicked = False
+        for selector in ['a[href*="h2h"]', 'button:has-text("H2H")', 'a:has-text("H2H")',
+                          'a:has-text("Cara a cara")', '[data-testid*="h2h"]']:
+            try:
+                el = page.locator(selector).first
+                if await el.count() > 0 and await el.is_visible():
+                    await el.click()
+                    h2h_clicked = True
+                    break
+            except Exception:
+                continue
+
+        if not h2h_clicked:
+            await page.goto(h2h_url, wait_until="domcontentloaded", timeout=30000)
+
+        await asyncio.sleep(8)
+
+        sections = await page.locator('.h2h__section').all()
+        if len(sections) <= section_idx:
+            logger.warning(f"   ⚠️ Playwright H2H: solo {len(sections)} secciones para {player_name}")
+            return []
+
+        section = sections[section_idx]
+        rows = await section.locator('.h2h__row').all()
+        logger.info(f"   🌐 Playwright H2H [{player_name}]: {len(rows)} filas (sección {section_idx})")
+
+        matches = []
+        for row in rows:
+            try:
+                row_data = await row.evaluate('''el => {
+                    const date_el = el.querySelector('[data-testid="wcl-stageTime"]');
+                    const score_spans = el.querySelectorAll('[data-testid="wcl-tableScore"]');
+                    const result = score_spans.length > 0
+                        ? Array.from(score_spans).map(s => s.textContent.trim()).join('-')
+                        : (el.querySelector('.h2h__result') ? el.querySelector('.h2h__result').textContent.trim() : null);
+                    const participants = el.querySelectorAll('[class*="h2h__participant"]:not([class*="participantInner"])');
+                    let opponent = null;
+                    for (const p of participants) {
+                        const nameSpan = p.querySelector('[data-testid="wcl-scores-simple-text-01"]');
+                        if (nameSpan && !nameSpan.className.includes('wcl-hasBackground')) {
+                            opponent = nameSpan.textContent.trim();
+                            break;
+                        }
+                    }
+                    const icon_div = el.querySelector('.h2h__icon > div');
+                    const outcome = icon_div && icon_div.className.toLowerCase().includes('win') ? 'Gano' : 'Perdio';
+                    const event_el = el.querySelector('.h2h__event');
+                    return {
+                        date: date_el ? date_el.textContent.trim() : null,
+                        result: result,
+                        opponent: opponent,
+                        outcome: outcome,
+                        tournament: event_el ? event_el.textContent.trim() : 'N/A',
+                        event_class: event_el ? (event_el.getAttribute('class') || '') : '',
+                    };
+                }''')
+
+                if not row_data.get('date') or not row_data.get('result'):
+                    continue
+
+                ec = row_data.get('event_class', '').lower()
+                surface = 'N/A'
+                if 'hard' in ec:
+                    surface = 'Dura'
+                elif 'clay' in ec:
+                    surface = 'Arcilla'
+                elif 'grass' in ec:
+                    surface = 'Hierba'
+                elif 'indoor' in ec:
+                    surface = 'Indoor'
+
+                matches.append({
+                    'fecha': row_data['date'],
+                    'oponente': (row_data.get('opponent') or 'N/A').strip(),
+                    'resultado': row_data['result'].replace('\n', '-'),
+                    'outcome': row_data['outcome'],
+                    'torneo': row_data['tournament'].replace('\n', ' '),
+                    'ciudad': 'N/A',
+                    'pais': 'N/A',
+                    'superficie': surface,
+                })
+            except Exception:
+                continue
+
+        return matches
+
+    finally:
+        await page.close()
+
+
 async def _playwright_h2h_async(match_id: str, player_name: str,
                                  section_idx: int) -> List[Dict]:
     """
@@ -527,10 +647,9 @@ async def _playwright_h2h_async(match_id: str, player_name: str,
         https://www.flashscore.co/partido/tenis/{match_id}/#/h2h/general
     Selectores validados: .h2h__section, .h2h__row, wcl-stageTime, wcl-tableScore.
     section_idx: 0=jugador1, 1=jugador2 (sección 2 = H2H directo, no usada aquí).
+    F3: delega a _playwright_h2h_with_browser (abre y cierra su propio browser).
     """
     from playwright.async_api import async_playwright
-
-    h2h_url = f"https://www.flashscore.co/partido/tenis/{match_id}/#/h2h/general"
 
     async with async_playwright() as pw:
         browser = await pw.chromium.launch(headless=True, args=[
@@ -538,93 +657,8 @@ async def _playwright_h2h_async(match_id: str, player_name: str,
             '--disable-software-rasterizer',
             '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
         ])
-        page = await browser.new_page()
-        await page.set_viewport_size({"width": 1920, "height": 1080})
-
         try:
-            await page.goto(h2h_url, wait_until="domcontentloaded", timeout=30000)
-
-            # Cookie consent (mismo handler que ZitaScraper en extraer_cuotas_partidos.py)
-            try:
-                btn = await page.wait_for_selector("#onetrust-accept-btn-handler", timeout=5000)
-                if btn:
-                    await btn.click()
-                    await asyncio.sleep(2)
-            except Exception:
-                pass
-
-            await asyncio.sleep(5)
-
-            sections = await page.locator('.h2h__section').all()
-            if len(sections) <= section_idx:
-                logger.warning(f"   ⚠️ Playwright H2H: solo {len(sections)} secciones para {player_name}")
-                return []
-
-            section = sections[section_idx]
-            rows = await section.locator('.h2h__row').all()
-            logger.info(f"   🌐 Playwright H2H [{player_name}]: {len(rows)} filas (sección {section_idx})")
-
-            matches = []
-            for row in rows:
-                try:
-                    # JS evaluate idéntico al de h2h_extractor.py _parse_player_history()
-                    row_data = await row.evaluate('''el => {
-                        const date_el = el.querySelector('[data-testid="wcl-stageTime"]');
-                        const score_spans = el.querySelectorAll('[data-testid="wcl-tableScore"]');
-                        const result = score_spans.length > 0
-                            ? Array.from(score_spans).map(s => s.textContent.trim()).join('-')
-                            : (el.querySelector('.h2h__result') ? el.querySelector('.h2h__result').textContent.trim() : null);
-                        const participants = el.querySelectorAll('[class*="h2h__participant"]:not([class*="participantInner"])');
-                        let opponent = null;
-                        for (const p of participants) {
-                            const nameSpan = p.querySelector('[data-testid="wcl-scores-simple-text-01"]');
-                            if (nameSpan && !nameSpan.className.includes('wcl-hasBackground')) {
-                                opponent = nameSpan.textContent.trim();
-                                break;
-                            }
-                        }
-                        const icon_div = el.querySelector('.h2h__icon > div');
-                        const outcome = icon_div && icon_div.className.toLowerCase().includes('win') ? 'Gano' : 'Perdio';
-                        const event_el = el.querySelector('.h2h__event');
-                        return {
-                            date: date_el ? date_el.textContent.trim() : null,
-                            result: result,
-                            opponent: opponent,
-                            outcome: outcome,
-                            tournament: event_el ? event_el.textContent.trim() : 'N/A',
-                            event_class: event_el ? (event_el.getAttribute('class') || '') : '',
-                        };
-                    }''')
-
-                    if not row_data.get('date') or not row_data.get('result'):
-                        continue
-
-                    ec = row_data.get('event_class', '').lower()
-                    surface = 'N/A'
-                    if 'hard' in ec:
-                        surface = 'Dura'
-                    elif 'clay' in ec:
-                        surface = 'Arcilla'
-                    elif 'grass' in ec:
-                        surface = 'Hierba'
-                    elif 'indoor' in ec:
-                        surface = 'Indoor'
-
-                    matches.append({
-                        'fecha': row_data['date'],
-                        'oponente': (row_data.get('opponent') or 'N/A').strip(),
-                        'resultado': row_data['result'].replace('\n', '-'),
-                        'outcome': row_data['outcome'],
-                        'torneo': row_data['tournament'].replace('\n', ' '),
-                        'ciudad': 'N/A',
-                        'pais': 'N/A',
-                        'superficie': surface,
-                    })
-                except Exception:
-                    continue
-
-            return matches
-
+            return await _playwright_h2h_with_browser(browser, match_id, player_name, section_idx)
         finally:
             await browser.close()
 
@@ -654,9 +688,47 @@ def _fetch_player_history_playwright(match_id: str, player_name: str,
 # NODO-45: TEMPORAL HISTORY FALLBACK
 # ══════════════════════════════════════════════════════════════════════════════
 
+def _is_low_level_itf_match(torneo: str) -> bool:
+    """True si el partido es de nivel ITF bajo (M25/M15/M10/W25/W15/W10/M35)."""
+    t = (torneo or "").upper()
+    return any(lvl in t for lvl in ["M25", "M15", "M10", "M35", "W25", "W15", "W10"])
+
+
+def _thf_quality_ok(hist: List[Dict], player_name: str,
+                    player_ranking: Optional[int], source_file: str) -> bool:
+    """
+    Fix Nodo-49: valida que el historial THF sea apropiado para el nivel del jugador.
+
+    Si el jugador tiene ranking ATP/WTA <= 150 y >80% de los partidos encontrados
+    son ITF low-level (M25/M15/W25/etc.), el historial es basura de una sesión
+    anterior donde el jugador apareció en datos ITF. Rechazar y dejar que
+    Nodo-49 Playwright lo resuelva.
+
+    Jugadores sin ranking conocido (ITF puros) aceptan cualquier historial.
+    """
+    if player_ranking is None or player_ranking > 150:
+        logger.info(f"   📚 THF {source_file}: {len(hist)} partidos para {player_name}")
+        return True
+
+    itf_count = sum(1 for m in hist if _is_low_level_itf_match(m.get("torneo", "")))
+    ratio = itf_count / len(hist) if hist else 0
+
+    if ratio > 0.80:
+        logger.warning(
+            f"   ⚠️ THF rechazado para {player_name} (ranking={player_ranking}): "
+            f"{itf_count}/{len(hist)} partidos son ITF low-level ({ratio:.0%}) — "
+            f"datos de sesión incorrecta. Dejando para Playwright fallback."
+        )
+        return False
+
+    logger.info(f"   📚 THF {source_file}: {len(hist)} partidos para {player_name}")
+    return True
+
+
 def _lookup_player_history_temporal(
     player_name: str,
     days_back: int = 7,
+    player_ranking: Optional[int] = None,
 ) -> List[Dict]:
     """
     Nodo-45 THF: busca el historial de un jugador en h2h_results_enhanced
@@ -671,13 +743,19 @@ def _lookup_player_history_temporal(
     Desambiguación por overlap de tokens cuando un token corto aparece en
     ambos jugadores del partido.
 
+    Fix Nodo-49: si player_ranking <= 150 (jugador ATP/WTA) y el historial
+    encontrado es >80% partidos ITF bajo nivel (M25/M15/W25), se rechaza.
+    Evita contaminar el modelo con datos de torneos ITF que no reflejan el
+    nivel real del jugador.
+
     Args:
-        player_name : nombre completo del jugador (ej. "Martin Maldonado")
-        days_back   : ventana de búsqueda hacia atrás en días (default 7)
+        player_name    : nombre completo del jugador (ej. "Martin Maldonado")
+        days_back      : ventana de búsqueda hacia atrás en días (default 7)
+        player_ranking : ranking ATP/WTA conocido del jugador (None = desconocido)
 
     Returns:
         Lista de partidos del historial (mismo formato que _parse_player_history),
-        o [] si ningún archivo reciente contiene datos para este jugador.
+        o [] si ningún archivo reciente contiene datos válidos para este jugador.
     """
     reports = Path("reports")
     if not reports.exists():
@@ -730,24 +808,68 @@ def _lookup_player_history_temporal(
                     key = j1.replace(" ", "_").replace(".", "")
                     hist = match.get(f"historial_{key}", [])
                     if hist:
-                        logger.info(
-                            f"   📚 THF {h2h_file.name}: "
-                            f"{len(hist)} partidos para {player_name}"
-                        )
-                        return hist
+                        if _thf_quality_ok(hist, player_name, player_ranking, h2h_file.name):
+                            return hist
                 elif p2_match:
                     key = j2.replace(" ", "_").replace(".", "")
                     hist = match.get(f"historial_{key}", [])
                     if hist:
-                        logger.info(
-                            f"   📚 THF {h2h_file.name}: "
-                            f"{len(hist)} partidos para {player_name}"
-                        )
-                        return hist
+                        if _thf_quality_ok(hist, player_name, player_ranking, h2h_file.name):
+                            return hist
         except Exception:
             continue
 
     return []
+
+
+def _persist_playwright_to_thf_cache(p1: str, p1_history: List[Dict],
+                                      p2: str, p2_history: List[Dict]) -> None:
+    """
+    F3 (Nodo-51): Persiste los historiales recuperados por Playwright al cache THF.
+
+    Escribe en reports/h2h_results_enhanced_playwright_cache.json — un archivo que
+    cumple el formato esperado por _lookup_player_history_temporal() y es encontrado
+    por el glob h2h_results_enhanced_*.json dentro de la ventana de 7 días.
+
+    Al escribir a este cache fijo, el mtime se actualiza en cada sesión y siempre
+    está dentro de la ventana. La próxima sesión resuelve estos jugadores vía THF
+    (capa innata, O(ms)) sin re-pagar el costo de Playwright (~30s/partido).
+    """
+    p1_key = p1.replace(" ", "_").replace(".", "")
+    p2_key = p2.replace(" ", "_").replace(".", "")
+
+    entry = {
+        "jugador1": p1,
+        "jugador2": p2,
+        f"historial_{p1_key}": p1_history,
+        f"historial_{p2_key}": p2_history,
+        "_playwright_provenance": True,
+        "_cached_at": datetime.now().isoformat(),
+    }
+
+    cache_dir = Path("reports")
+    cache_dir.mkdir(exist_ok=True)
+    cache_file = cache_dir / "h2h_results_enhanced_playwright_cache.json"
+
+    existing: List[Dict] = []
+    if cache_file.exists():
+        try:
+            existing = json.loads(cache_file.read_text(encoding="utf-8"))
+            if not isinstance(existing, list):
+                existing = []
+        except Exception:
+            existing = []
+
+    # Actualizar entrada si el par ya existe, evitar duplicados
+    existing = [e for e in existing
+                if not (e.get("jugador1") == p1 and e.get("jugador2") == p2)]
+    existing.append(entry)
+
+    cache_file.write_text(json.dumps(existing, ensure_ascii=False, indent=2),
+                          encoding="utf-8")
+    logger.info(
+        f"   💾 THF cache Playwright: {p1}({len(p1_history)}) + {p2}({len(p2_history)}) guardados"
+    )
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -767,13 +889,21 @@ class NinjaH2HExtractor:
 
     def __init__(self):
         from analysis import EloRatingSystem, RankingManager, RivalryAnalyzer
+        from core.player_registry import PlayerRegistry
 
         self.ranking_manager = RankingManager()
         self.elo_system = EloRatingSystem()
         self.rivalry_analyzer = RivalryAnalyzer(self.ranking_manager, self.elo_system)
 
+        # Nodo-51 F0: registro canónico de jugadores — absorbe la guard de Nodo-47
+        self._player_registry = PlayerRegistry(
+            normalize_fn=self.ranking_manager.normalize_name,
+            ranking_manager=self.ranking_manager,
+        )
+
         self.all_results = []
         self.all_tournaments = False
+        self._playwright_queue: List[Dict] = []  # F3: batch Playwright fallback queue
 
     def load_matches(self, json_file: Optional[str] = None) -> bool:
         """Cargar partidos desde JSON (misma lógica que H2HExtractor)."""
@@ -851,8 +981,12 @@ class NinjaH2HExtractor:
             logger.error(f"❌ Error cargando JSON: {e}")
             return False
 
-    def run(self) -> None:
-        """Procesar todos los partidos via API Ninja."""
+    def run(self, pw_budget: int = 20) -> None:
+        """
+        Procesar todos los partidos via API Ninja.
+        pw_budget: máximo de partidos que van a Playwright batch (default 20).
+                   Lo que exceda queda no_data (F2 garantiza que no genera edge fantasma).
+        """
         logger.info(f"🚀 INICIANDO EXTRACCIÓN VIA API NINJA — {len(self.matches_queue)} partidos")
         logger.info("=" * 80)
 
@@ -874,6 +1008,15 @@ class NinjaH2HExtractor:
             if idx < len(self.matches_queue):
                 time.sleep(DELAY_ENTRE_REQUESTS)
 
+        # F3: Playwright batch — UN solo browser para todos los partidos encolados
+        if self._playwright_queue:
+            logger.info("=" * 80)
+            logger.info(
+                f"🌐 F3 PLAYWRIGHT BATCH — {len(self._playwright_queue)} partidos encolados "
+                f"(presupuesto={pw_budget})"
+            )
+            self._run_playwright_batch(pw_budget=pw_budget)
+
         elapsed = time.time() - start_time
         logger.info("=" * 80)
         logger.info(f"🏁 COMPLETADO en {elapsed:.1f}s")
@@ -881,6 +1024,135 @@ class NinjaH2HExtractor:
         logger.info(f"   ❌ Fallidos: {failed}")
         if successful > 0:
             logger.info(f"   ⚡ Promedio: {elapsed/successful:.2f}s/partido")
+
+    # ──────────────────────────────────────────────────────────────────────────
+    # F3 (Nodo-51): Playwright Batch — un solo browser, N páginas secuenciales
+    # ──────────────────────────────────────────────────────────────────────────
+
+    def _run_playwright_batch(self, pw_budget: int = 20) -> None:
+        """
+        F3: Orquestador del batch de Playwright.
+        Prioriza por tier (ITF/Challenger primero — máximo alpha, MM-2) y cuota
+        en rango apostable [1.5, 6.0]. Lo que excede el presupuesto se procesa
+        con historiales vacíos → F2 los marca no_data.
+        """
+        def _priority_key(entry: Dict):
+            md = entry['match_data']
+            tier = md.get('tier', '') or ''
+            tier_order = {'itf': 0, 'challenger': 1, 'atp500': 2, 'atp1000': 3, 'grand_slam': 4}
+            tier_score = tier_order.get(tier.lower(), 5)
+            cuota = md.get('cuota1') or 9999.0
+            in_range = 1 if 1.5 <= float(cuota) <= 6.0 else 0
+            return (tier_score, 1 - in_range)  # menor = mejor prioridad
+
+        sorted_queue = sorted(self._playwright_queue, key=_priority_key)
+        within_budget = sorted_queue[:pw_budget]
+        over_budget = sorted_queue[pw_budget:]
+
+        if over_budget:
+            logger.info(
+                f"   ⚠️ {len(over_budget)} partidos sobre presupuesto → no_data "
+                f"(F2 garantiza 0 edges fantasma)"
+            )
+        for entry in over_budget:
+            md = entry['match_data']
+            md['_history_source_p1'] = entry['p1_source']
+            md['_history_source_p2'] = entry['p2_source']
+            h2h = _parse_direct_h2h(entry['h2h_records'], entry['p1'], entry['p2'])
+            self._analyze_and_consolidate(
+                md, entry['p1'], entry['p2'],
+                entry['p1_history'], entry['p2_history'], h2h
+            )
+
+        if within_budget:
+            try:
+                asyncio.run(self._run_playwright_batch_async(within_budget))
+            except Exception as e:
+                logger.error(f"   ❌ Playwright batch falló: {e} — procesando como no_data")
+                for entry in within_budget:
+                    md = entry['match_data']
+                    md['_history_source_p1'] = entry['p1_source']
+                    md['_history_source_p2'] = entry['p2_source']
+                    h2h = _parse_direct_h2h(entry['h2h_records'], entry['p1'], entry['p2'])
+                    self._analyze_and_consolidate(
+                        md, entry['p1'], entry['p2'],
+                        entry['p1_history'], entry['p2_history'], h2h
+                    )
+
+    async def _run_playwright_batch_async(self, entries: List[Dict]) -> None:
+        """
+        F3: Abre UN browser y procesa N partidos secuencialmente.
+        Cada partido puede necesitar historial de P1, P2, o ambos.
+        Persiste lo recuperado al cache THF para la próxima sesión (MM-3: memoria adaptativa).
+        """
+        from playwright.async_api import async_playwright
+
+        async with async_playwright() as pw:
+            browser = await pw.chromium.launch(headless=True, args=[
+                '--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu',
+                '--disable-software-rasterizer',
+                '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+            ])
+            try:
+                for i, entry in enumerate(entries, 1):
+                    md = entry['match_data']
+                    p1 = entry['p1']
+                    p2 = entry['p2']
+                    match_id = extract_match_id_from_url(md.get('match_url', ''))
+
+                    logger.info(
+                        f"   🌐 Playwright batch [{i}/{len(entries)}]: {p1} vs {p2}"
+                    )
+
+                    p1_history = entry['p1_history']
+                    p2_history = entry['p2_history']
+                    p1_source = entry['p1_source']
+                    p2_source = entry['p2_source']
+
+                    if not p1_history and match_id:
+                        try:
+                            pw_hist = await _playwright_h2h_with_browser(
+                                browser, match_id, p1, section_idx=0
+                            )
+                            if pw_hist:
+                                logger.info(
+                                    f"   ✅ Playwright recuperó {len(pw_hist)} partidos para {p1}"
+                                )
+                                p1_history = pw_hist
+                                p1_source = PROVENANCE_PLAYWRIGHT_DOM
+                        except Exception as e:
+                            logger.warning(f"   ⚠️ Playwright P1 falló para {p1}: {e}")
+
+                    if not p2_history and match_id:
+                        try:
+                            pw_hist = await _playwright_h2h_with_browser(
+                                browser, match_id, p2, section_idx=1
+                            )
+                            if pw_hist:
+                                logger.info(
+                                    f"   ✅ Playwright recuperó {len(pw_hist)} partidos para {p2}"
+                                )
+                                p2_history = pw_hist
+                                p2_source = PROVENANCE_PLAYWRIGHT_DOM
+                        except Exception as e:
+                            logger.warning(f"   ⚠️ Playwright P2 falló para {p2}: {e}")
+
+                    # Persistir al cache THF (MM-3: memoria adaptativa)
+                    if p1_history or p2_history:
+                        try:
+                            _persist_playwright_to_thf_cache(
+                                p1, p1_history, p2, p2_history
+                            )
+                        except Exception as e:
+                            logger.warning(f"   ⚠️ No se pudo persistir al THF cache: {e}")
+
+                    md['_history_source_p1'] = p1_source
+                    md['_history_source_p2'] = p2_source
+                    h2h = _parse_direct_h2h(entry['h2h_records'], p1, p2)
+                    self._analyze_and_consolidate(md, p1, p2, p1_history, p2_history, h2h)
+
+            finally:
+                await browser.close()
 
     def _process_match(self, match_data: Dict) -> bool:
         """Procesar un partido individual via API."""
@@ -899,12 +1171,15 @@ class NinjaH2HExtractor:
         if not match_id:
             logger.warning(f"   ⚠️ No se pudo extraer match_id de: {match_url}")
             # D45-04 (Nodo-45): Temporal History Fallback — buscar en archivos h2h recientes
-            p1_history = _lookup_player_history_temporal(p1)
-            p2_history = _lookup_player_history_temporal(p2)
+            p1_history = _lookup_player_history_temporal(p1, player_ranking=match_data.get('ranking1'))
+            p2_history = _lookup_player_history_temporal(p2, player_ranking=match_data.get('ranking2'))
             if not p1_history and not p2_history:
                 logger.warning(f"   ⚠️ Sin match_id y sin historial temporal — omitido")
                 return False
             logger.info(f"   📚 THF activo: {p1}={len(p1_history)} | {p2}={len(p2_history)}")
+            # F2: registrar procedencia — THF path
+            match_data['_history_source_p1'] = PROVENANCE_THF_CACHE if p1_history else PROVENANCE_EMPTY
+            match_data['_history_source_p2'] = PROVENANCE_THF_CACHE if p2_history else PROVENANCE_EMPTY
             return self._analyze_and_consolidate(match_data, p1, p2, p1_history, p2_history, [])
 
         # Fetch H2H data from API
@@ -982,6 +1257,10 @@ class NinjaH2HExtractor:
             p1_records, p2_records = block1_records, block2_records
 
         # Parse each block — si es None, buscar via proxy separado
+        # F2: inicializar procedencia — se actualiza en cada paso exitoso
+        p1_source = PROVENANCE_EMPTY
+        p2_source = PROVENANCE_EMPTY
+
         if p1_records is None:
             alt_id = match_data.get('match_id_j2') or extract_match_id_from_url(
                 match_data.get('match_url_j2', ''))
@@ -989,6 +1268,8 @@ class NinjaH2HExtractor:
                 alt_id, p1, match_data.get('match_url_j2', '')) if alt_id else []
         else:
             p1_history = _parse_player_history(p1_records, p1)
+        if p1_history:
+            p1_source = PROVENANCE_NINJA_API
 
         if p2_records is None:
             alt_id = match_data.get('match_id_j2') or extract_match_id_from_url(
@@ -997,32 +1278,47 @@ class NinjaH2HExtractor:
                 alt_id, p2, match_data.get('match_url_j2', '')) if alt_id else []
         else:
             p2_history = _parse_player_history(p2_records, p2)
+        if p2_history:
+            p2_source = PROVENANCE_NINJA_API
 
         # ── Nodo-45 THF Punto B: suplementar historiales vacíos desde sesiones anteriores ──
         if not p1_history:
-            _t = _lookup_player_history_temporal(p1)
+            _t = _lookup_player_history_temporal(p1, player_ranking=match_data.get('ranking1'))
             if _t:
-                logger.info(f"   📚 THF suplementa {p1}: {len(_t)} partidos")
                 p1_history = _t
+                p1_source = PROVENANCE_THF_CACHE
         if not p2_history:
-            _t = _lookup_player_history_temporal(p2)
+            _t = _lookup_player_history_temporal(p2, player_ranking=match_data.get('ranking2'))
             if _t:
-                logger.info(f"   📚 THF suplementa {p2}: {len(_t)} partidos")
                 p2_history = _t
+                p2_source = PROVENANCE_THF_CACHE
 
-        # ── Nodo-49: Playwright H2H Fallback — si API + THF fallaron y hay match_id ──
-        if not p1_history and match_id:
-            logger.info(f"   🌐 Playwright fallback P1: {p1} (n_h2h=0, THF vacío)")
-            _pw = _fetch_player_history_playwright(match_id, p1, section_idx=0)
-            if _pw:
-                logger.info(f"   ✅ Playwright recuperó {len(_pw)} partidos para {p1}")
-                p1_history = _pw
-        if not p2_history and match_id:
-            logger.info(f"   🌐 Playwright fallback P2: {p2} (n_h2h=0, THF vacío)")
-            _pw = _fetch_player_history_playwright(match_id, p2, section_idx=1)
-            if _pw:
-                logger.info(f"   ✅ Playwright recuperó {len(_pw)} partidos para {p2}")
-                p2_history = _pw
+        # ── F3 (Nodo-51): Playwright batch fallback — encolar si API + THF fallaron ──
+        if (not p1_history or not p2_history) and match_id:
+            needs = []
+            if not p1_history:
+                needs.append(p1)
+            if not p2_history:
+                needs.append(p2)
+            logger.info(
+                f"   📥 Playwright queue: {p1} vs {p2} "
+                f"(historial vacío para: {', '.join(needs)})"
+            )
+            self._playwright_queue.append({
+                'match_data': match_data,
+                'p1': p1,
+                'p2': p2,
+                'p1_history': p1_history,
+                'p2_history': p2_history,
+                'p1_source': p1_source,
+                'p2_source': p2_source,
+                'h2h_records': h2h_records,
+            })
+            return True  # diferido — se procesa en _run_playwright_batch()
+
+        # F2: registrar procedencia en match_data para _consolidate_result
+        match_data['_history_source_p1'] = p1_source
+        match_data['_history_source_p2'] = p2_source
 
         h2h_matches = _parse_direct_h2h(h2h_records, p1, p2)
 
@@ -1186,6 +1482,10 @@ class NinjaH2HExtractor:
         p1_hist = self._enrich_history(p1_hist_raw)
         p2_hist = self._enrich_history(p2_hist_raw)
 
+        # F2: registrar procedencia — ronda_futura usa proxy (Ninja API) o vacío
+        match_data['_history_source_p1'] = PROVENANCE_NINJA_API if p1_hist else PROVENANCE_EMPTY
+        match_data['_history_source_p2'] = PROVENANCE_NINJA_API if p2_hist else PROVENANCE_EMPTY
+
         logger.info(f"   📊 Ronda futura: {p1}: {len(p1_hist)} partidos | {p2}: {len(p2_hist)} | H2H: 0")
 
         p1_form = self._analyze_form(p1_hist, p1)
@@ -1219,7 +1519,7 @@ class NinjaH2HExtractor:
 
         return True
 
-    def _inject_kambi_ranking(self, player_name: str, ranking) -> None:
+    def _inject_kambi_ranking(self, player_name: str, kambi_rank) -> None:
         """
         Inyecta el ranking de PASO 1 (Kambi/FlashScore) en RankingManager
         como fallback para jugadores ITF/Challenger no presentes en el archivo
@@ -1229,23 +1529,15 @@ class NinjaH2HExtractor:
         pts_estimate usa log inverso: rank=1→700 | rank=37→210 | rank=100→130 | rank=300→90.
         """
         import math
+        ranking = kambi_rank
         if not ranking:
             return
-        # Guard optimizada (Nodo-46 fix): el ATP file indexa "Apellido Nombre" pero
-        # normalize_name('Daniil Glinka') produce 'daniil glinka' — mismatch que
-        # causaba que Kambi estimate sobreescribiera el ranking real ATP.
-        #
-        # Fast path O(1): chequea key directo + key invertido (cubre 95% ATP/WTA).
-        # Slow path: get_player_info() con intelligent matching para nombres compuestos
-        # (Davidovich Fokina, Moro Canas, etc.) — solo si fast path falla.
-        normalized = self.ranking_manager.normalize_name(player_name)
-        parts = normalized.split()
-        reversed_key = ' '.join(reversed(parts)) if len(parts) == 2 else None
-        rd = self.ranking_manager.rankings_data
-        if rd.get(normalized) or (reversed_key and rd.get(reversed_key)):
-            return  # encontrado en O(1) — no sobreescribir
-        if self.ranking_manager.get_player_info(player_name):
-            return  # encontrado via intelligent matching — no sobreescribir
+        # Nodo-51 F0: guard delegada a PlayerRegistry (absorbe el fix de Nodo-47).
+        # PlayerRegistry resuelve en dos capas: fast path O(1) (direct + reversed key)
+        # y slow path fuzzy (get_player_info). Ambas capas implementadas allí.
+        # Cualquier jugador en el ATP/WTA file retorna is_in_atp_file=True.
+        if self._player_registry.is_in_atp_file(player_name):
+            return  # en ATP file — no sobreescribir con estimate de Kambi
         pts_estimate = max(1, round(700 / math.log1p(ranking)))
         player_entry = {
             'name':               player_name,
@@ -1257,9 +1549,11 @@ class NinjaH2HExtractor:
             'nationality':        'N/A',
             '_source':            'kambi_fallback',
         }
-        # get_player_info() busca en atp_players/wta_players — inyectar en ambos
+        # Inyectar en rankings_data y registrar en PlayerRegistry como kambi_estimate
+        normalized = self._player_registry._normalize(player_name)
         self.ranking_manager.rankings_data[normalized] = player_entry
         self.ranking_manager.atp_players[normalized]   = player_entry
+        self._player_registry.register_kambi_estimate(player_name)
 
     def _enrich_history(self, history: List[Dict]) -> List[Dict]:
         """Enriquecer historial con rankings."""
@@ -1359,6 +1653,12 @@ class NinjaH2HExtractor:
                 'historial_extraido_p2': len(p2_hist) > 0,
                 'n_partidos_p1': len(p1_hist),
                 'n_partidos_p2': len(p2_hist),
+                'history_provenance': {  # F2: fuente del historial por jugador
+                    'p1': match_data.get('_history_source_p1',
+                                         PROVENANCE_NINJA_API if len(p1_hist) > 0 else PROVENANCE_EMPTY),
+                    'p2': match_data.get('_history_source_p2',
+                                         PROVENANCE_NINJA_API if len(p2_hist) > 0 else PROVENANCE_EMPTY),
+                },
             },
             'ranking_analysis': {
                 f'{p1_key}_ranking': rivalry['player1_rank'],
