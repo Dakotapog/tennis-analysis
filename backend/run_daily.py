@@ -306,6 +306,12 @@ def main():
     _run(['python3', 'combo_confianza_builder.py', '--bankroll', str(args.bankroll)],
          'PASO 4.3 — Combo confianza')
 
+    # ── PASO 4.4 — Governor presupuesto M-26-2 (Nodo-74, READ-ONLY reporte) ─
+    # No bloquea: imprime WARNING si suma de capas excede session_budget.
+    # Criterio de graduación a bloqueo: 10 sesiones reales en logs/combo_governor.log
+    _run(['python3', 'combo_governor.py', '--bankroll', str(args.bankroll)],
+         'PASO 4.4 — Governor presupuesto M-26-2 (reporte)')
+
     # ── WAS check ─────────────────────────────────────────────────────────
     was_candidates = []
     try:

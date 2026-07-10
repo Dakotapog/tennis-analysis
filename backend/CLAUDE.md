@@ -140,7 +140,7 @@ python3 check_contradictions.py [--quick]           # cron lun 9am: CLAUDE.md vs
 |---|---|
 | F0 Reconciliación (C61/C62/C63) | ✅ completada |
 | F1 Infraestructura (Graphify+Tamp+slash-cmds+validator) | ✅ completada |
-| F2 Automation (n8n + close-snapshot timing exacto) | ✅ **Nodo-73 ACTIVO** |
+| F2 Automation (n8n + close-snapshot timing exacto) | 🟠 PARCIAL — n8n+close-snapshot ✅ Nodo-73; C62-A código OK sin sesiones post-07-08 ⚠️; C63-B governor READ-ONLY 0 ejecuciones previas (gate: 10 sesiones) ⚠️; C63-A cola JSON implementada 0 activaciones ℹ️ |
 | F3 Hermes gate | 🟠 GATED — observación ≥5 ambiguedades/semana |
 | F4 Estadística doctoral (Nodos 64-71) | ✅ 43 tests |
 | F5 Vault + session_compiler + CLAUDE.md slim | ✅ completada |

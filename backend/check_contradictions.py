@@ -215,9 +215,34 @@ def main() -> None:
         print("ACCION: Sin contradicciones detectadas. CLAUDE.md consistente con los nodos.")
     print(f"{'='*60}\n")
 
+    # ── BLOQUE B: pendientes de FABLE_02 §4.5 ──────────────────────────────
+    fable_path = SPEC_DIR / "FABLE_02_TENIS_DOCTORADO_SPEC.md"
+    fable_pendientes = 0
+    if fable_path.exists():
+        fable_text = fable_path.read_text(encoding='utf-8', errors='replace')
+        # Extraer sección §4.5 para reducir falsos positivos
+        seccion = fable_text
+        m_inicio = re.search(r'§4\.5', fable_text)
+        m_fin    = re.search(r'^# §5', fable_text, re.MULTILINE)
+        if m_inicio and m_fin:
+            seccion = fable_text[m_inicio.start():m_fin.start()]
+        print(f"\n{'─'*60}")
+        print("BLOQUE B — FABLE_02 §4.5 pendientes no resueltos")
+        print(f"{'─'*60}")
+        for line in seccion.splitlines():
+            stripped = line.strip()
+            if ('🔴' in stripped or '🟠' in stripped) and stripped:
+                print(f"  [FABLE_PENDIENTE] {stripped}")
+                fable_pendientes += 1
+        if fable_pendientes == 0:
+            print("  [PASS] Sin pendientes activos en §4.5")
+        print(f"  Total pendientes FABLE_02: {fable_pendientes}")
+    else:
+        print(f"\n[WARN] FABLE_02 spec no encontrado en {fable_path}")
+
     # Log a archivo
     LOG_DIR.mkdir(exist_ok=True)
-    log_entry = f"[{ts}] {passes}P {warns}W {contras}C — {len(nodo_files)} nodos revisados\n"
+    log_entry = f"[{ts}] {passes}P {warns}W {contras}C — {len(nodo_files)} nodos | FABLE_pendientes={fable_pendientes}\n"
     (LOG_DIR / "contradicciones.log").open("a").write(log_entry)
 
     sys.exit(1 if contras > 0 else 0)
