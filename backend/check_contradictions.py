@@ -241,6 +241,29 @@ def main() -> None:
     else:
         print(f"\n[WARN] FABLE_02 spec no encontrado en {fable_path}")
 
+    # ── BLOQUE C: frescura de nodos_index.json (Nodo-75) ────────────────────
+    index_path = BASE_DIR / "nodos_index.json"
+    print(f"\n{'─'*60}")
+    print("BLOQUE C — Frescura de nodos_index.json (Nodo-75)")
+    print(f"{'─'*60}")
+    if not index_path.exists():
+        print(f"  [WARN] nodos_index.json no encontrado — ejecutar scripts/rebuild_nodos_index.py")
+    else:
+        index_mtime = index_path.stat().st_mtime
+        nodo_md_files = list(SPEC_DIR.glob("Nodo-*.md"))
+        if nodo_md_files:
+            newest_nodo = max(nodo_md_files, key=lambda p: p.stat().st_mtime)
+            newest_mtime = newest_nodo.stat().st_mtime
+            import time
+            delta_min = (newest_mtime - index_mtime) / 60
+            if newest_mtime > index_mtime:
+                print(f"  [WARN] nodos_index.json desactualizado — {newest_nodo.name} es {delta_min:.0f} min más reciente")
+                print(f"         Ejecutar: python3 scripts/rebuild_nodos_index.py")
+            else:
+                print(f"  [PASS] nodos_index.json al día (más reciente que {newest_nodo.name})")
+        else:
+            print("  [WARN] Sin archivos Nodo-*.md en .spec/01_Nodos/")
+
     # Log a archivo
     LOG_DIR.mkdir(exist_ok=True)
     log_entry = f"[{ts}] {passes}P {warns}W {contras}C — {len(nodo_files)} nodos | FABLE_pendientes={fable_pendientes}\n"

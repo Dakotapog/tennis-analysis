@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "generado": "2026-07-10T00:06:26",
-    "total_nodos": 74,
+    "generado": "2026-07-10T01:50:00",
+    "total_nodos": 75,
     "total_py_files": 62,
     "huerfanos_count": 0,
     "exclusiones_count": 19
@@ -1004,6 +1004,19 @@
         "run_daily.py",
         "test_nodo63.py",
         "tests/test_nodo63.py"
+      ]
+    },
+    {
+      "nodo_id": "78",
+      "nodo_archivo": "Nodo-78-Protocolo-Auditoria.md",
+      "fecha": "2026-07-09",
+      "estado": "PROPUESTO — para aplicar tal cual, sin reinterpretar",
+      "archivos_mencionados": [
+        "browser_manager.py",
+        "check_contradictions.py",
+        "combo_governor.py",
+        "data_parser.py",
+        "h2h_extractor.py"
       ]
     }
   ],
