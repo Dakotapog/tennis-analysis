@@ -12,9 +12,30 @@ import re
 import json
 from datetime import datetime
 from playwright.async_api import async_playwright
+import psutil
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+
+
+def _kill_zombie_chrome_processes() -> int:
+    """Limpiar procesos Chrome/Chromium zombies antes de iniciar Playwright.
+    Paridad con BrowserManager y extraer_historh2h.py — C-07 DECISION-LOG."""
+    killed = 0
+    for proc in psutil.process_iter(['pid', 'name']):
+        try:
+            if proc.info['name'] and any(
+                chrome in proc.info['name'].lower()
+                for chrome in ['chrome', 'chromium']
+            ):
+                proc.kill()
+                killed += 1
+        except (psutil.NoSuchProcess, psutil.AccessDenied):
+            pass
+    if killed > 0:
+        logger.info(f"🧹 {killed} proceso(s) Chrome/Chromium zombie eliminados antes de init_browser")
+    return killed
+
 
 class ZitaScraper:
     def __init__(self):
@@ -31,6 +52,7 @@ class ZitaScraper:
     
     async def init_browser(self):
         """Inicializar navegador con configuración optimizada para WSL"""
+        _kill_zombie_chrome_processes()
         logger.info("🚀 Iniciando navegador Zita...")
         
         self.playwright = await async_playwright().start()

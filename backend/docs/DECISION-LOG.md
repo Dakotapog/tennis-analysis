@@ -164,6 +164,37 @@
 
 ---
 
+### C-07 — Auditoría scraping/ Strangler Fig: huérfanos falsos + zombie cleanup (2026-07-09)
+
+**Hallazgo (auditoría Nodo-75):** `scraping/browser_manager.py` y `scraping/data_parser.py`
+aparecieron como huérfanos en el índice Nodo-75. Investigación completa reveló que NO son
+huérfanos — son dependencias activas de `scraping/h2h_extractor.py` (H2HExtractor), que ES
+el modo Playwright primario de `extraer_historh2h.py` hoy (línea 321: `extractor = H2HExtractor()`).
+La migración T07-0D (Nodo-07 Fase 2) se completó en 2026-05-30 y nunca fue revertida.
+d9dc90a (Nodo-61) solo tocó 7 líneas en extraer_historh2h.py, sin cambio de arquitectura.
+
+**Causa raíz del falso huérfano:** Nodo-07 referenciaba `BrowserManager` y `DataParser`
+por nombre de clase, no por nombre de archivo (`browser_manager.py`, `data_parser.py`).
+El regex del parser Nodo-75 busca patrón `*.py` y no los capturaba.
+
+**Fix aplicado:** Adendo 2026-07-09 en Nodo-07 — tabla de archivos explícita con nombres
+`*.py`. No hubo cambio de decisión arquitectónica; solo corrección de omisión de trazabilidad.
+
+**Identidad de jugador:** SequentialH2HExtractor (eliminado en bac389d) usaba
+`RankingManager.normalize_name()` — string-matching. Sin entity IDs FlashScore.
+La solución real al problema de homónimos llegó con Nodo-72 (julio 2026). H2HExtractor
+tampoco implementa resolución por entity ID — el Phantom Identity Guard opera en capas
+superiores (rivalry_analyzer.py + pre_game_validator.py).
+
+**Zombie Chrome cleanup — gap real cerrado:** `BrowserManager._kill_zombie_chrome_processes()`
+ya estaba portado a `extraer_historh2h.py` (psutil, líneas 39–53). Sin embargo,
+`extraer_URL_partidos_version2.py` (PASO 1 — corre Playwright desatendido en n8n/cron)
+no lo tenía. Sin evidencia histórica de impacto, pero gap real en sistema desatendido.
+**Fix aplicado 2026-07-09:** `_kill_zombie_chrome_processes()` portado a PASO 1
+(~15 líneas, sin cambio de arquitectura, referencia C-07).
+
+---
+
 ## POLÍTICA DE PRECEDENCIA (§1.2 Vacío 3, FABLE_02)
 
 1. Los nodos y ADRs son **historia inmutable** — nunca se editan. Se añade entrada nueva o se marca `SUPERSEDED por [[Nodo-XX]]`.

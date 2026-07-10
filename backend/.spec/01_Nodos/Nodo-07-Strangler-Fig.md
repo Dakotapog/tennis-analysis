@@ -202,6 +202,22 @@ DESPUÉS Fase 1: accuracy esperada ≈ 55%+ con Markov+Erdős activos + superfic
 
 ---
 
+## Archivos del módulo scraping/ (Nodo-07)
+
+| Archivo | Rol |
+|---|---|
+| `scraping/h2h_extractor.py` | Orquestador Playwright H2H — reemplazó SequentialH2HExtractor (T07-09) |
+| `scraping/browser_manager.py` | Lifecycle Playwright para WSL — zombie cleanup via psutil |
+| `scraping/data_parser.py` | Parser estático HTML FlashScore — superficie, torneo, ganador, fechas |
+
+> **Adendo 2026-07-09:** corrección de omisión en tabla de archivos (no cambio de decisión) —
+> `browser_manager.py` y `data_parser.py` ya estaban referenciados como clases (`BrowserManager`,
+> `DataParser`) en la tabla de APIs incompatibles (§ Verificación de APIs), pero ausentes como
+> nombres de archivo. El regex del índice Nodo-75 los buscaba por patrón `*.py` y no los encontraba.
+> Detectado en auditoría Nodo-75 (2026-07-09).
+
+---
+
 ## Vinculación
 
 - [[Mandatos-No-Negociables]] — Mandato 6: tests antes de código; Mandato 1: P&L sobre accuracy

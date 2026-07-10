@@ -1,0 +1,1011 @@
+{
+  "_meta": {
+    "generado": "2026-07-10T00:06:26",
+    "total_nodos": 74,
+    "total_py_files": 62,
+    "huerfanos_count": 0,
+    "exclusiones_count": 19
+  },
+  "exclusiones": {
+    "rivalry_analyzer.py": "Nodo-32",
+    "edge_calculator.py": "Nodo-35",
+    "trader_ev_tenis.py": "Nodo-55",
+    "shadow_book.py": "Nodo-27",
+    "combo_confianza_builder.py": "Nodo-62",
+    "betplay_combo_builder.py": "Nodo-26",
+    "extraer_URL_partidos_version2.py": "Nodo-51",
+    "extraer_historh2h.py": "Nodo-49",
+    "analysis/conformal_band.py": "Nodos-64-71",
+    "analysis/drift_monitor.py": "Nodos-64-71",
+    "analysis/flb_curve.py": "Nodos-64-71",
+    "analysis/pattern_audit.py": "Nodos-64-71",
+    "analysis/rho_empirical.py": "Nodos-64-71",
+    "analysis/velocity_monitor.py": "Nodos-64-71",
+    "extraer_ranking_atp_version2.py": null,
+    "extraer_ranking_wta_version2.py": null,
+    "session_compiler.py": null,
+    "Intelligent_ml_enhancer.py": null,
+    "feature_engineering.py": null
+  },
+  "nodos": [
+    {
+      "nodo_id": "01",
+      "nodo_archivo": "Nodo-01-Edge-Calculator.md",
+      "fecha": null,
+      "estado": null,
+      "archivos_mencionados": [
+        "edge_calculator.py",
+        "rivalry_analyzer.py",
+        "tests/test_edge_calculator.py"
+      ]
+    },
+    {
+      "nodo_id": "02",
+      "nodo_archivo": "Nodo-02-Markov-Changepoint.md",
+      "fecha": null,
+      "estado": null,
+      "archivos_mencionados": [
+        "analysis/markov_analyzer.py",
+        "analysis/rivalry_analyzer.py",
+        "rivalry_analyzer.py",
+        "tests/test_markov_analyzer.py"
+      ]
+    },
+    {
+      "nodo_id": "03",
+      "nodo_archivo": "Nodo-03-Scraper-Fix.md",
+      "fecha": null,
+      "estado": null,
+      "archivos_mencionados": [
+        "extraer_URL_partidos_version2.py",
+        "extraer_historh2h.py",
+        "rivalry_analyzer.py",
+        "tests/test_url_scraper_output.py"
+      ]
+    },
+    {
+      "nodo_id": "04",
+      "nodo_archivo": "Nodo-04-Dataset-Fix.md",
+      "fecha": null,
+      "estado": null,
+      "archivos_mencionados": [
+        "aplicar_enhancer.py",
+        "generar_dataset_plus.py",
+        "tests/test_dataset_generator.py"
+      ]
+    },
+    {
+      "nodo_id": "05",
+      "nodo_archivo": "Nodo-05-Validacion-API.md",
+      "fecha": null,
+      "estado": null,
+      "archivos_mencionados": [
+        "tests/test_validacion_api.py",
+        "validar_con_api.py"
+      ]
+    },
+    {
+      "nodo_id": "06",
+      "nodo_archivo": "Nodo-06-Erdos-Graph.md",
+      "fecha": null,
+      "estado": null,
+      "archivos_mencionados": [
+        "analysis/erdos_graph.py",
+        "analysis/rivalry_analyzer.py",
+        "rivalry_analyzer.py",
+        "tests/test_erdos_graph.py"
+      ]
+    },
+    {
+      "nodo_id": "07",
+      "nodo_archivo": "Nodo-07-Strangler-Fig.md",
+      "fecha": null,
+      "estado": "2026-05-30 | Prioridad: CERRADO | Patrón: Strangler Fig | Fase 1 ✅ COMPLETA | Fase 2 ✅ COMPLETA — T07-09 ✅ 2026-05-30 | 768 tests",
+      "archivos_mencionados": [
+        "analysis/__init__.py",
+        "browser_manager.py",
+        "data_parser.py",
+        "elo_system.py",
+        "extraer_historh2h.py",
+        "generar_dataset_plus.py",
+        "h2h_extractor.py",
+        "ranking_manager.py",
+        "rivalry_analyzer.py",
+        "scraping/browser_manager.py",
+        "scraping/data_parser.py",
+        "scraping/h2h_extractor.py",
+        "test_sequential_h2h_extractor.py",
+        "tests/test_h2h_extractor.py"
+      ]
+    },
+    {
+      "nodo_id": "08",
+      "nodo_archivo": "Nodo-08-File-Selection-Bug.md",
+      "fecha": null,
+      "estado": "2026-05-29 | Severidad: CRÍTICA | Tipo: Bug de Producción | Bug: línea 278",
+      "archivos_mencionados": [
+        "extraer_historh2h.py",
+        "scraping/file_utils.py",
+        "tests/test_file_selection.py",
+        "tests/test_file_utils.py",
+        "tests/test_h2h_extractor.py"
+      ]
+    },
+    {
+      "nodo_id": "09",
+      "nodo_archivo": "Nodo-09-API-Status-Keys.md",
+      "fecha": null,
+      "estado": "2026-05-29 | Severidad: CRÍTICA | Tipo: Bug de Producción | Archivo: `validar_con_api.py`",
+      "archivos_mencionados": [
+        "tests/test_validacion_api.py",
+        "validar_con_api.py"
+      ]
+    },
+    {
+      "nodo_id": "10",
+      "nodo_archivo": "Nodo-10-Surface-Propagation.md",
+      "fecha": null,
+      "estado": "2026-05-30 — RESUELTO ✅ | Verificado en run real (16 partidos Roland Garros)",
+      "archivos_mencionados": [
+        "extraer_URL_partidos_version2.py",
+        "extraer_historh2h.py"
+      ]
+    },
+    {
+      "nodo_id": "11",
+      "nodo_archivo": "Nodo-11-Inventario-Scripts-Legado.md",
+      "fecha": null,
+      "estado": "2026-05-30 — CERRADO ✅ | Todas las decisiones ejecutadas y verificadas en disco",
+      "archivos_mencionados": [
+        "aplicar_enhancer.py",
+        "consultar_resultados_historicos.py",
+        "extraer_URL_partidos_en_vivo.py",
+        "extraer_URL_partidos_version2.py",
+        "extraer_cuotas_partidos.py",
+        "generar_dataset_plus.py",
+        "generar_tabla_favoritos.py",
+        "generar_tabla_favoritos2.py",
+        "ml_trainer.py",
+        "validar_con_api.py"
+      ]
+    },
+    {
+      "nodo_id": "12",
+      "nodo_archivo": "Nodo-12-Inventario-Infraestructura-Legado.md",
+      "fecha": null,
+      "estado": "2026-05-30 — EJECUTADO ✅ | Auditoría + limpieza completadas",
+      "archivos_mencionados": [
+        "__init__.py",
+        "app.py",
+        "conftest.py",
+        "consultar_resultados_historicos.py",
+        "extraer_URL_partidos_en_vivo.py",
+        "flashscore_rankings_inspector.py",
+        "h2h_inspector.py",
+        "ml_trainer.py",
+        "models/database.py",
+        "routes/player_routes.py",
+        "routes/players.py",
+        "screenshots/conftest.py",
+        "screenshots/test_extraer_historh2h.py",
+        "selenium_config.py",
+        "test_extraer_historh2h.py"
+      ]
+    },
+    {
+      "nodo_id": "13",
+      "nodo_archivo": "Nodo-13-Trader-EV-Tenis.md",
+      "fecha": null,
+      "estado": "2026-06-01 — v2.0 HEDGE FUND LAYER ✅ | Sesión 1: +$25,000 (+25% bankroll) | Sesión 2: 8/8=100% RG R4 | bankroll $100,000 → $125,000",
+      "archivos_mencionados": [
+        "edge_calculator.py",
+        "generar_tabla_favoritos2.py",
+        "trader_ev.py",
+        "trader_ev_tenis.py",
+        "validar_con_api.py"
+      ]
+    },
+    {
+      "nodo_id": "14",
+      "nodo_archivo": "Nodo-14-Validacion-Live-Conexiones.md",
+      "fecha": null,
+      "estado": "2026-05-30 — P&L REGISTRADO ✅ | +$25,000 (+25% bankroll) | accuracy 70% (7/10) | p_historica calibrada 0.52→0.68",
+      "archivos_mencionados": [
+        "markov_analyzer.py",
+        "trader_ev_tenis.py",
+        "validar_con_api.py"
+      ]
+    },
+    {
+      "nodo_id": "15",
+      "nodo_archivo": "Nodo-15-Portfolio-HedgeFund.md",
+      "fecha": null,
+      "estado": "2026-06-01 — IMPLEMENTADO ✅ | Sistema cobertura por exclusión + Portfolio Kelly + VaR/CVaR activos",
+      "archivos_mencionados": [
+        "edge_calculator.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "16",
+      "nodo_archivo": "Nodo-16-Multi-Torneo-Pipeline.md",
+      "fecha": null,
+      "estado": "✅ IMPLEMENTADO — 2026-06-02",
+      "archivos_mencionados": [
+        "edge_calculator.py",
+        "extraer_URL_partidos_version2.py",
+        "extraer_historh2h.py",
+        "h2h_extractor.py",
+        "scraping/h2h_extractor.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "17",
+      "nodo_archivo": "Nodo-17-Calibracion-Por-Tier.md",
+      "fecha": null,
+      "estado": "🟡 FASE 1 IMPLEMENTADA — 2026-06-03 | Tests: 898 passed",
+      "archivos_mencionados": [
+        "analysis/elo_system.py",
+        "analysis/markov_analyzer.py",
+        "analysis/rivalry_analyzer.py",
+        "edge_calculator.py",
+        "elo_system.py",
+        "markov_analyzer.py",
+        "normalization.py",
+        "rivalry_analyzer.py"
+      ]
+    },
+    {
+      "nodo_id": "18",
+      "nodo_archivo": "Nodo-18-PELT-Recency-Alpha.md",
+      "fecha": null,
+      "estado": "✅ COMPLETADO — 2026-06-03",
+      "archivos_mencionados": [
+        "analysis/markov_analyzer.py",
+        "analysis/rivalry_analyzer.py",
+        "edge_calculator.py",
+        "markov_analyzer.py"
+      ]
+    },
+    {
+      "nodo_id": "19",
+      "nodo_archivo": "Nodo-19-H2H-Immunity-Dampener.md",
+      "fecha": null,
+      "estado": "✅ COMPLETADO — 2026-06-03",
+      "archivos_mencionados": [
+        "analysis/markov_analyzer.py",
+        "analysis/rivalry_analyzer.py",
+        "edge_calculator.py",
+        "rivalry_analyzer.py"
+      ]
+    },
+    {
+      "nodo_id": "20",
+      "nodo_archivo": "Nodo-20-PageRank-Erdos-Quality.md",
+      "fecha": null,
+      "estado": "✅ COMPLETADO — 2026-06-03",
+      "archivos_mencionados": [
+        "analysis/erdos_graph.py",
+        "analysis/rivalry_analyzer.py",
+        "edge_calculator.py",
+        "erdos_graph.py",
+        "tests/test_erdos_graph.py"
+      ]
+    },
+    {
+      "nodo_id": "21",
+      "nodo_archivo": "Nodo-21-Pesos-Diferenciados-Por-Tier.md",
+      "fecha": null,
+      "estado": "✅ COMPLETADO — Fases 1+2+3 implementadas — 2026-06-03",
+      "archivos_mencionados": [
+        "analysis/elo_system.py",
+        "analysis/rivalry_analyzer.py",
+        "config.py",
+        "edge_calculator.py",
+        "elo_system.py",
+        "erdos_graph.py",
+        "normalization.py",
+        "rivalry_analyzer.py",
+        "tests/test_rivalry_analyzer.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "23",
+      "nodo_archivo": "Nodo-23-Cross-Tier-Mega-Combos.md",
+      "fecha": null,
+      "estado": "🔧 EN IMPLEMENTACIÓN — 2026-06-14",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py"
+      ]
+    },
+    {
+      "nodo_id": "24",
+      "nodo_archivo": "Nodo-24-Bookmaker-Blindness-Scoring.md",
+      "fecha": null,
+      "estado": "🔧 IMPLEMENTADO — 2026-06-14",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "edge_calculator.py"
+      ]
+    },
+    {
+      "nodo_id": "25",
+      "nodo_archivo": "Nodo-25-Dispersion-Guard-Safe-Combos.md",
+      "fecha": null,
+      "estado": "📋 SPEC COMPLETO — 2026-06-14",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "26",
+      "nodo_archivo": "Nodo-26-Cross-Sectional-Signals.md",
+      "fecha": null,
+      "estado": "🔧 IMPLEMENTADO --- 2026-06-14",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "extraer_partidos_api.py",
+        "tests/test_nodo26.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "27",
+      "nodo_archivo": "Nodo-27-Pipeline-Tracker-Observabilidad.md",
+      "fecha": null,
+      "estado": "🔧 IMPLEMENTADO --- 2026-06-17",
+      "archivos_mencionados": [
+        "config.py",
+        "pipeline_tracker.py",
+        "utils/logger.py"
+      ]
+    },
+    {
+      "nodo_id": "28",
+      "nodo_archivo": "Nodo-28-Conditional-Decomposition-Metamodel.md",
+      "fecha": null,
+      "estado": "IMPLEMENTADO (Fase 1 + Fase 1.5 + Fase 2 + Post-Mortem 19-jun) --- 2026-06-19 | Tests: 1033→1113 passed",
+      "archivos_mencionados": [
+        "analysis/rivalry_analyzer.py",
+        "edge_calculator.py",
+        "rivalry_analyzer.py"
+      ]
+    },
+    {
+      "nodo_id": "29",
+      "nodo_archivo": "Nodo-29-Circuit-Asymmetry-Deflator.md",
+      "fecha": null,
+      "estado": "IMPLEMENTADO (Fase 1-4) + VALIDADO --- 2026-06-19 impl / 2026-06-28 backtest | Tests: 1050→1113 passed",
+      "archivos_mencionados": [
+        "analysis/rivalry_analyzer.py",
+        "backtest_nodo28_limpio.py",
+        "edge_calculator.py",
+        "normalization.py",
+        "rivalry_analyzer.py",
+        "tests/test_nodo29_integration.py"
+      ]
+    },
+    {
+      "nodo_id": "30",
+      "nodo_archivo": "Nodo-30-Tournament-Momentum-Output-Signals.md",
+      "fecha": null,
+      "estado": "IMPLEMENTADO — 2026-06-20 | Tests: 1113→1143 passed | 30 nuevos tests T30-01 a T30-30 | F6 player_profitability.py ✅ | F7 JUGADOR RENTABLE en SENALES ESPECIALES ✅",
+      "archivos_mencionados": [
+        "analysis/player_profitability.py",
+        "analysis/rivalry_analyzer.py",
+        "betslip_registrar.py",
+        "edge_calculator.py",
+        "generar_tabla_favoritos2.py",
+        "player_profitability.py",
+        "rivalry_analyzer.py",
+        "scraping/kambi_tennis.py",
+        "tests/test_nodo30.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "31",
+      "nodo_archivo": "Nodo-31-Future-Match-Data-Leakage.md",
+      "fecha": null,
+      "estado": "SOLUCIONADO + BLINDADO --- 2026-06-20 12:55 | Bugs: 10 encontrados, 10 corregidos | Tests: 1143→1210 passed (67 nuevos) | Resultado: Eala +13.0% edge, Carnicella-Ekstrand data completa ✅",
+      "archivos_mencionados": [
+        "edge_calculator.py",
+        "extraer_historh2h.py",
+        "generar_tabla_favoritos2.py",
+        "kambi_tennis.py",
+        "ninja_h2h_parser.py",
+        "rivalry_analyzer.py",
+        "tests/test_nodo31.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "32",
+      "nodo_archivo": "Nodo-32-Calibracion-Pipeline-Señales-Rotas.md",
+      "fecha": "2026-06-22",
+      "estado": null,
+      "archivos_mencionados": [
+        "analysis/rivalry_analyzer.py",
+        "betplay_combo_builder.py",
+        "betslip_registrar.py",
+        "edge_calculator.py",
+        "elo_system.py",
+        "erdos_graph.py",
+        "markov_analyzer.py",
+        "normalization.py",
+        "rivalry_analyzer.py",
+        "test_rivalry_analyzer.py",
+        "tests/test_nodo32.py"
+      ]
+    },
+    {
+      "nodo_id": "33",
+      "nodo_archivo": "Nodo-33-Filtro-Coinflip-Sin-H2H.md",
+      "fecha": "2026-06-24",
+      "estado": null,
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "betslip_registrar.py",
+        "edge_calculator.py",
+        "tests/test_nodo33.py"
+      ]
+    },
+    {
+      "nodo_id": "34",
+      "nodo_archivo": "Nodo-34-Corrupcion-Datos-Extraccion-H2H.md",
+      "fecha": "2026-06-24",
+      "estado": null,
+      "archivos_mencionados": [
+        "analysis/ranking_manager.py",
+        "edge_calculator.py",
+        "generar_tabla_favoritos2.py",
+        "ninja_h2h_parser.py",
+        "ranking_manager.py",
+        "scraping/ninja_h2h_parser.py",
+        "tests/test_nodo34.py"
+      ]
+    },
+    {
+      "nodo_id": "35",
+      "nodo_archivo": "Nodo-35-Historial-Vacio-Flag-Pipeline.md",
+      "fecha": "2026-06-25",
+      "estado": "⏳ PENDIENTE",
+      "archivos_mencionados": [
+        "analysis/rivalry_analyzer.py",
+        "edge_calculator.py",
+        "extraer_historh2h.py",
+        "generar_tabla_favoritos2.py",
+        "ninja_h2h_parser.py",
+        "rivalry_analyzer.py",
+        "scraping/ninja_h2h_parser.py",
+        "tests/test_nodo35.py"
+      ]
+    },
+    {
+      "nodo_id": "36",
+      "nodo_archivo": "Nodo-36-Unicode-Acento-Apellidos-Cortos.md",
+      "fecha": "2026-06-25",
+      "estado": "✅ CERRADO — 2026-06-25",
+      "archivos_mencionados": [
+        "ninja_h2h_parser.py",
+        "scraping/ninja_h2h_parser.py",
+        "test_nodo36.py",
+        "tests/test_nodo36.py"
+      ]
+    },
+    {
+      "nodo_id": "37",
+      "nodo_archivo": "Nodo-37-Combo-Confianza-Builder.md",
+      "fecha": null,
+      "estado": "SUPERSEDED por [[Nodo-38-Portfolio-Aislamiento-Riesgo]] — arquitectura CORE/Satellite/Moonshot reemplaza progresión C5→C20",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "betslip_registrar.py",
+        "combo_confianza_builder.py",
+        "edge_calculator.py",
+        "extraer_historh2h.py",
+        "extraer_partidos_api.py",
+        "generar_tabla_favoritos2.py",
+        "tests/test_nodo37.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "38",
+      "nodo_archivo": "Nodo-38-Portfolio-Aislamiento-Riesgo.md",
+      "fecha": null,
+      "estado": "🔄 EN CURSO",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "combo_confianza_builder.py",
+        "edge_calculator.py",
+        "tests/test_nodo38.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "38",
+      "nodo_archivo": "Nodo-38B-Cobertura-Expandida-Sin-CatC.md",
+      "fecha": null,
+      "estado": "✅ COMPLETO",
+      "archivos_mencionados": [
+        "combo_confianza_builder.py",
+        "tests/test_nodo38.py"
+      ]
+    },
+    {
+      "nodo_id": "39",
+      "nodo_archivo": "Nodo-39-Kambi-Filtro-Fecha.md",
+      "fecha": "2026-06-27",
+      "estado": "✅ COMPLETO",
+      "archivos_mencionados": [
+        "extraer_partidos_api.py",
+        "scraping/kambi_tennis.py"
+      ]
+    },
+    {
+      "nodo_id": "40",
+      "nodo_archivo": "Nodo-40-Games-Sets-Signal-Layer.md",
+      "fecha": null,
+      "estado": "✅ COMPLETO — Fases 1-5 implementadas | 35 tests pasan",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "betslip_registrar.py",
+        "combo_confianza_builder.py",
+        "edge_calculator.py",
+        "elo_system.py",
+        "games_signal_calculator.py",
+        "generar_tabla_favoritos2.py",
+        "markov_analyzer.py",
+        "pipeline_tracker.py",
+        "rivalry_analyzer.py",
+        "tests/test_nodo40.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "41",
+      "nodo_archivo": "Nodo-41-ML-Dataset-Cleanup-Trazabilidad.md",
+      "fecha": "2026-06-29",
+      "estado": null,
+      "archivos_mencionados": [
+        "aplicar_enhancer.py",
+        "generar_dataset_plus.py",
+        "scraping/h2h_extractor.py",
+        "validar_con_api.py"
+      ]
+    },
+    {
+      "nodo_id": "42",
+      "nodo_archivo": "Nodo-42-Grass-Bootstrap.md",
+      "fecha": "2026-06-29",
+      "estado": null,
+      "archivos_mencionados": [
+        "betslip_registrar.py",
+        "combo_confianza_builder.py",
+        "edge_calculator.py",
+        "rivalry_analyzer.py"
+      ]
+    },
+    {
+      "nodo_id": "43",
+      "nodo_archivo": "Nodo-43-PELT-Cold-Rival-Promo-Filter.md",
+      "fecha": "2026-06-29",
+      "estado": "IMPLEMENTADO VIA NODO-44 — usar `--was --was-min-edge 1` para PCRS puro (edge>0)",
+      "archivos_mencionados": [
+        "analysis/markov_analyzer.py",
+        "betplay_combo_builder.py",
+        "promo_combo_builder.py"
+      ]
+    },
+    {
+      "nodo_id": "44",
+      "nodo_archivo": "Nodo-44-Watchlist-Alpha-Signal.md",
+      "fecha": "2026-06-29",
+      "estado": "IMPLEMENTADO 2026-06-29 — D44-01 + D44-02 completados",
+      "archivos_mencionados": [
+        "analysis/markov_analyzer.py",
+        "betplay_combo_builder.py",
+        "games_signal_calculator.py"
+      ]
+    },
+    {
+      "nodo_id": "45",
+      "nodo_archivo": "Nodo-45-Temporal-History-Fallback.md",
+      "fecha": null,
+      "estado": "✅ IMPLEMENTADO 2026-06-30 — D45-01 a D45-05 completados, 1438 tests pasando",
+      "archivos_mencionados": [
+        "extraer_partidos_api.py",
+        "generar_tabla_favoritos2.py",
+        "h2h_extractor.py",
+        "kambi_tennis.py",
+        "ninja_h2h_parser.py",
+        "scraping/ninja_h2h_parser.py",
+        "test_nodo45_thf.py",
+        "tests/test_nodo45_thf.py"
+      ]
+    },
+    {
+      "nodo_id": "46",
+      "nodo_archivo": "Nodo-46-Markov-Surface-Context-Discount.md",
+      "fecha": null,
+      "estado": "HALLAZGO DOCUMENTADO — pendiente implementación (acumular más n antes de calibrar constantes)",
+      "archivos_mencionados": [
+        "analysis/markov_analyzer.py",
+        "analysis/rivalry_analyzer.py",
+        "markov_analyzer.py",
+        "test_nodo46_surface_discount.py"
+      ]
+    },
+    {
+      "nodo_id": "47",
+      "nodo_archivo": "Nodo-47-Inject-Kambi-Ranking-Guard-Bug.md",
+      "fecha": null,
+      "estado": "✅ RESUELTO 2026-06-30",
+      "archivos_mencionados": [
+        "scraping/ninja_h2h_parser.py"
+      ]
+    },
+    {
+      "nodo_id": "48",
+      "nodo_archivo": "Nodo-48-FlashScore-Odds-Scraper-Testing.md",
+      "fecha": null,
+      "estado": "✅ IMPLEMENTADO 2026-06-30 — D48-BUG-01, D48-01, D48-02, D48-04 completados",
+      "archivos_mencionados": [
+        "backend/extraer_cuotas_partidos.py",
+        "config.py",
+        "edge_calculator.py",
+        "extraer_cuotas_partidos.py",
+        "extraer_partidos_api.py",
+        "ninja_h2h_parser.py",
+        "scraping/kambi_tennis.py",
+        "scraping/ninja_h2h_parser.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "49",
+      "nodo_archivo": "Nodo-49-Playwright-H2H-Fallback-n-h2h-0.md",
+      "fecha": null,
+      "estado": "⏳ EN IMPLEMENTACION",
+      "archivos_mencionados": [
+        "extraer_historh2h.py",
+        "extraer_historh2h_version2.py",
+        "h2h_extractor.py",
+        "h2h_inspector.py",
+        "ninja_h2h_parser.py",
+        "scraping/h2h_extractor.py",
+        "scraping/ninja_h2h_parser.py",
+        "tests/test_nodo49.py"
+      ]
+    },
+    {
+      "nodo_id": "50",
+      "nodo_archivo": "Nodo-50-Filtro-Torneo-PASO1.md",
+      "fecha": null,
+      "estado": "✅ IMPLEMENTADO 2026-07-01",
+      "archivos_mencionados": [
+        "config.py",
+        "extraer_historh2h.py",
+        "extraer_partidos_api.py",
+        "scraping/kambi_tennis.py",
+        "tests/test_nodo50.py"
+      ]
+    },
+    {
+      "nodo_id": "51",
+      "nodo_archivo": "Nodo-51-Plan-Estrategico-Data-Layer-Torneo.md",
+      "fecha": null,
+      "estado": "📋 PLAN ESTRATÉGICO — nodo maestro, define orden de implementación de Fases 0-5",
+      "archivos_mencionados": [
+        "analysis/markov_analyzer.py",
+        "core/data_contract.py",
+        "core/player_registry.py",
+        "core/tournament_context.py",
+        "edge_calculator.py",
+        "markov_analyzer.py",
+        "ninja_h2h_parser.py",
+        "scraping/kambi_tennis.py",
+        "scraping/ninja_h2h_parser.py"
+      ]
+    },
+    {
+      "nodo_id": "52",
+      "nodo_archivo": "Nodo-52-ADDENDUM-Integracion-Contexto-Completo.md",
+      "fecha": "2026-07-02",
+      "estado": "📋 CORRECCIONES A NODO-52 — leer JUNTO con el Nodo-52 original antes de implementar",
+      "archivos_mencionados": [
+        "analysis/player_profitability.py",
+        "betplay_combo_builder.py",
+        "betslip_registrar.py",
+        "pipeline_tracker.py",
+        "shadow_book.py"
+      ]
+    },
+    {
+      "nodo_id": "52",
+      "nodo_archivo": "Nodo-52-Shadow-Book-CLV-Tracking.md",
+      "fecha": null,
+      "estado": "📋 ESPECIFICADO — listo para implementación por Sonnet",
+      "archivos_mencionados": [
+        "edge_calculator.py",
+        "shadow_book.py",
+        "tests/test_nodo52.py"
+      ]
+    },
+    {
+      "nodo_id": "53",
+      "nodo_archivo": "Nodo-53-ADDENDUM-2-Correcciones-Fable.md",
+      "fecha": "2026-07-02",
+      "estado": "📋 FIRMADO POR FABLE — implementación autorizada con estas correcciones incorporadas",
+      "archivos_mencionados": [
+        "extraer_historh2h.py",
+        "normalization.py",
+        "rivalry_analyzer.py",
+        "tests/test_nodo53.py"
+      ]
+    },
+    {
+      "nodo_id": "53",
+      "nodo_archivo": "Nodo-53-ADDENDUM-3-Fable-Final.md",
+      "fecha": "2026-07-02",
+      "estado": "📋 FIRMADO FABLE — este documento reemplaza las Fases A-E del ADDENDUM-2",
+      "archivos_mencionados": [
+        "edge_calculator.py",
+        "generar_tabla_favoritos2.py",
+        "rivalry_analyzer.py",
+        "test_nodo53.py",
+        "tests/test_nodo53.py"
+      ]
+    },
+    {
+      "nodo_id": "53",
+      "nodo_archivo": "Nodo-53-ADDENDUM-D53-06-a-D53-10.md",
+      "fecha": "2026-07-02",
+      "estado": "📋 ESPECIFICADO — auditoría Fable completa, causa raíz verificada con código y números reales",
+      "archivos_mencionados": [
+        "analysis/rivalry_analyzer.py",
+        "normalization.py",
+        "rivalry_analyzer.py",
+        "scraping/ninja_h2h_parser.py"
+      ]
+    },
+    {
+      "nodo_id": "53",
+      "nodo_archivo": "Nodo-53-Auditoria-Corazon-Prediccion.md",
+      "fecha": null,
+      "estado": "📋 ESPECIFICADO — para auditoría de Fable antes de cualquier implementación",
+      "archivos_mencionados": [
+        "analysis/markov_analyzer.py",
+        "analysis/rivalry_analyzer.py",
+        "core/data_contract.py",
+        "edge_calculator.py",
+        "generar_tabla_favoritos2.py",
+        "markov_analyzer.py",
+        "rivalry_analyzer.py",
+        "shadow_book.py",
+        "tests/test_nodo53.py"
+      ]
+    },
+    {
+      "nodo_id": "54",
+      "nodo_archivo": "Nodo-54-Brief-Fable-Funnel-Deploy.md",
+      "fecha": "2026-07-03",
+      "estado": "RESUELTO via Nodo-55 (2026-07-03) — ver [[Nodo-55-Respuesta-Fable-Funnel-Deploy]]",
+      "archivos_mencionados": [
+        "config.py",
+        "edge_calculator.py",
+        "run_daily.py",
+        "shadow_book.py",
+        "tests/test_nodo53.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "55",
+      "nodo_archivo": "Nodo-55-Respuesta-Fable-Funnel-Deploy.md",
+      "fecha": "2026-07-03",
+      "estado": "COMPLETO (2026-07-03) — 1598 tests pasan",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "run_daily.py",
+        "shadow_book.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "56",
+      "nodo_archivo": "Nodo-56-Bug-Normalizacion-Pesos.md",
+      "fecha": "2026-07-03",
+      "estado": "ABIERTO",
+      "archivos_mencionados": [
+        "generar_tabla_favoritos2.py",
+        "rivalry_analyzer.py"
+      ]
+    },
+    {
+      "nodo_id": "57",
+      "nodo_archivo": "Nodo-57-Penalizacion-Inactividad-Campeon-Validacion.md",
+      "fecha": "2026-07-03",
+      "estado": "✅ COMPLETO — 11 tests nuevos + 1612 tests totales (fue 1601)",
+      "archivos_mencionados": [
+        "analysis/rivalry_analyzer.py",
+        "generar_tabla_favoritos2.py",
+        "rivalry_analyzer.py"
+      ]
+    },
+    {
+      "nodo_id": "58",
+      "nodo_archivo": "Nodo-58-Dashboard-Observabilidad.md",
+      "fecha": "2026-07-03",
+      "estado": "📋 ESPECIFICADO Y FIRMADO FABLE — listo para Sonnet",
+      "archivos_mencionados": [
+        "dashboard.py",
+        "odds_series.py",
+        "pipeline_tracker.py",
+        "shadow_book.py"
+      ]
+    },
+    {
+      "nodo_id": "59",
+      "nodo_archivo": "Nodo-59-Motor-Agentico-Odometro-Dream.md",
+      "fecha": "2026-07-03",
+      "estado": "✅ COMPLETO — 21 tests + 1649 tests totales (M0+M1 completos, M2 post-30d shadow book)",
+      "archivos_mencionados": [
+        "run_daily.py",
+        "token_odometer.py"
+      ]
+    },
+    {
+      "nodo_id": "60",
+      "nodo_archivo": "Nodo-60-ADDENDUM-FABLE-Auditoria-Tres-Carriles.md",
+      "fecha": "2026-07-05",
+      "estado": "📋 FIRMADO FABLE — IMPLEMENTADO + A60-01 CERRADO 2026-07-05. GCS_MULT GATED. H60-01 acumulando (n=54 settled, hit=64.8%).",
+      "archivos_mencionados": []
+    },
+    {
+      "nodo_id": "60",
+      "nodo_archivo": "Nodo-60-GCS-Grass-Surface-Champion-Signal.md",
+      "fecha": null,
+      "estado": "✅ COMPLETO",
+      "archivos_mencionados": [
+        "analysis/rivalry_analyzer.py",
+        "combo_confianza_builder.py",
+        "rivalry_analyzer.py",
+        "tests/test_nodo60.py"
+      ]
+    },
+    {
+      "nodo_id": "61",
+      "nodo_archivo": "Nodo-61-GCS-Season-Window-Fix.md",
+      "fecha": null,
+      "estado": "✅ IMPLEMENTADO 2026-07-06 — 1669 tests (10 nuevos T61-01→T61-10). Bug F0+F1 cerrados.",
+      "archivos_mencionados": [
+        "analysis/rivalry_analyzer.py",
+        "dashboard.py",
+        "edge_calculator.py",
+        "rivalry_analyzer.py",
+        "tests/test_nodo61.py"
+      ]
+    },
+    {
+      "nodo_id": "62",
+      "nodo_archivo": "Nodo-62-Signal-Bridge.md",
+      "fecha": "2026-07-06",
+      "estado": "IMPLEMENTADO",
+      "archivos_mencionados": [
+        "combo_confianza_builder.py",
+        "rivalry_analyzer.py",
+        "shadow_book.py",
+        "tests/test_nodo62.py"
+      ]
+    },
+    {
+      "nodo_id": "63",
+      "nodo_archivo": "Nodo-63-Anchor-Combo-Builder.md",
+      "fecha": "2026-07-06",
+      "estado": "COMPLETO",
+      "archivos_mencionados": [
+        "analysis/rivalry_analyzer.py",
+        "combo_confianza_builder.py",
+        "extraer_historh2h.py",
+        "generar_tabla_favoritos2.py",
+        "pre_game_validator.py",
+        "rivalry_analyzer.py",
+        "tests/test_nodo63.py"
+      ]
+    },
+    {
+      "nodo_id": "64",
+      "nodo_archivo": "Nodo-64-RFI-Return-From-Inactivity.md",
+      "fecha": null,
+      "estado": "BORRADOR — hipótesis pre-registrada H76-01, implementación pendiente (n_stop=30)",
+      "archivos_mencionados": [
+        "edge_calculator.py",
+        "generar_tabla_favoritos2.py",
+        "shadow_book.py"
+      ]
+    },
+    {
+      "nodo_id": "72",
+      "nodo_archivo": "Nodo-72-Phantom-Identity-Guard.md",
+      "fecha": "2026-07-08",
+      "estado": "COMPLETO",
+      "archivos_mencionados": [
+        "analysis/rivalry_analyzer.py",
+        "edge_calculator.py",
+        "shadow_book.py",
+        "tests/test_nodo72.py"
+      ]
+    },
+    {
+      "nodo_id": "73",
+      "nodo_archivo": "Nodo-73-n8n-CloseSnapshot-Timing.md",
+      "fecha": "2026-07-09",
+      "estado": "IMPLEMENTADO",
+      "archivos_mencionados": [
+        "close_snapshot_server.py",
+        "close_snapshot_trigger.py",
+        "n8n_push_workflow.py",
+        "shadow_book.py"
+      ]
+    },
+    {
+      "nodo_id": "74",
+      "nodo_archivo": "Nodo-74-Combo-Governor.md",
+      "fecha": "2026-07-09",
+      "estado": "BORRADOR — condición de graduación pendiente (ver Decisión C63-B)",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "combo_governor.py",
+        "run_daily.py"
+      ]
+    },
+    {
+      "nodo_id": "75",
+      "nodo_archivo": "Nodo-75-Nodos-Index.md",
+      "fecha": "2026-07-09",
+      "estado": "BORRADOR — esperando confirmación antes de generar el índice",
+      "archivos_mencionados": [
+        "Intelligent_ml_enhancer.py",
+        "archivo.py",
+        "betplay_combo_builder.py",
+        "check_contradictions.py",
+        "combo_confianza_builder.py",
+        "combo_governor.py",
+        "combo_registry.py",
+        "edge_calculator.py",
+        "extraer_URL_partidos_version2.py",
+        "extraer_historh2h.py",
+        "extraer_ranking_atp_version2.py",
+        "extraer_ranking_wta_version2.py",
+        "n8n_push_workflow.py",
+        "rivalry_analyzer.py",
+        "scripts/rebuild_nodos_index.py",
+        "session_compiler.py",
+        "shadow_book.py",
+        "trader_ev_tenis.py",
+        "utils/feature_engineering.py"
+      ]
+    },
+    {
+      "nodo_id": "76",
+      "nodo_archivo": "Nodo-76-Combo-Registry.md",
+      "fecha": "2026-07-09",
+      "estado": "BORRADOR — esperando confirmación",
+      "archivos_mencionados": [
+        "combo_governor.py",
+        "combo_registry.py",
+        "hypothesis_tracker.py",
+        "resultados_finales.py",
+        "run_daily.py",
+        "test_nodo63.py",
+        "tests/test_nodo63.py"
+      ]
+    }
+  ],
+  "huerfanos": []
+}
