@@ -142,6 +142,27 @@ T57-01 usaba n=4 history matches para testear decay con 49d. Con Nodo-63, n=4 < 
 
 ---
 
+## §6 Limitación conocida: playwright_queue.json sin consumidor (auditoría 2026-07-09)
+
+La cola de candidatos Playwright (`data/playwright_queue.json`) tiene mecanismo de
+escritura funcional (`_enqueue_playwright_candidate` en `rivalry_analyzer.py:32`),
+conectado correctamente al gate n<8 (mismo bloque `if _match_id:` que emite
+`LOG_PLAYWRIGHT_CANDIDATE`).
+
+**Ciclo incompleto:** ningún script lee `playwright_queue.json` para disparar
+re-scraping Playwright real. El archivo ni siquiera existe en producción (nunca
+se ha activado la condición n<8+match_id en modo API desde su creación).
+
+**Decisión 2026-07-09:** no construir consumidor todavía.
+- Condición de disparo históricamente: 0 activaciones.
+- Playwright es PRIMARIO — el modo API (donde aplica este guard) es fallback.
+- Guard mínimo añadido: `pre_game_validator.py` emite `[WARN] PLAYWRIGHT_QUEUE_PENDIENTE`
+  si `data/playwright_queue.json` llega a tener contenido.
+- Prioridad de implementar consumidor: BAJA mientras Playwright siga siendo primario
+  y la condición de disparo no se active en producción.
+
+---
+
 ## §5 Checklist de Verificación Post-Implementación
 
 ```bash

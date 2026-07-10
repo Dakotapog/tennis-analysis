@@ -59,6 +59,11 @@ n8n (Docker :5678)
 | `close_snapshot_server.py` | HTTP bridge en :8765 — lógica de timing + ejecución |
 | `n8n_workflow_close_snapshot.json` | Definición del workflow (importado via API) |
 | `logs/n8n_snapshots.log` | Registro append-only de cada snapshot ejecutado |
+| `n8n_push_workflow.py` | Sube/actualiza workflow via API REST n8n (mantenimiento) |
+
+> **Adendo 2026-07-09:** corrección de omisión en la tabla de archivos (no cambio de decisión) —
+> `n8n_push_workflow.py` ya existía y se autodocumentaba como Nodo-73 desde su creación;
+> faltaba en esta tabla. Detectado en auditoría SDD 2026-07-09.
 
 ---
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-combo_registry.py — Nodo-64: Combo P&L Registry
+combo_registry.py — Nodo-76: Combo P&L Registry
 
 Registra combos generados por combo_confianza_builder y betplay_combo_builder,
 los settlea contra resultados_finales y genera reportes de P&L por tipo.

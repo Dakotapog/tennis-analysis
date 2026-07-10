@@ -110,6 +110,12 @@ def validate_file(path: Path) -> int:
     print(f"Archivo: {path.name}  ({len(picks)} picks)")
     print(f"{'='*60}")
 
+    # ── Guard C63-A: cola Playwright con candidatos pero sin consumidor ────
+    _pq = Path(__file__).parent / "data" / "playwright_queue.json"
+    if _pq.exists() and _pq.stat().st_size > 2:
+        print(f"  [WARN]  PLAYWRIGHT_QUEUE_PENDIENTE: data/playwright_queue.json "
+              f"tiene contenido — cola C63-A sin consumidor, revisar manualmente")
+
     exit_code = 0
     blocks = 0
     warns  = 0
