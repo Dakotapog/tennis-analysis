@@ -42,6 +42,16 @@ BUDGET_COMBO_PCT  = 0.40    # 40% para combos
 BUDGET_SIS_PCT    = 0.20    # 20% para sistema
 MIN_BET           = 1000    # apuesta mínima en COP/USD (ajustar)
 
+# Nodo-79: MIN_BET proporcional por tier — MODO SOMBRA (no afecta stake real)
+# Activar en real solo cuando H54-01 gradúe (n≥30, hit% flattened ≥ hit% financiado)
+_MIN_BET_BY_TIER = {
+    'itf':        100,
+    'challenger': 200,
+    'atp500':     500,
+    'atp1000':    750,
+    'grand_slam': 1000,
+}
+
 # Bayesian prior: k=3 equivale a "3 partidos de referencia" histórica (0.52)
 # Cuando n_h2h=5: blend = 62.5% p_modelo + 37.5% prior
 # Cuando n_h2h=20: blend = 87% p_modelo + 13% prior
@@ -1145,6 +1155,13 @@ def main():
                 f' floor={floor_cppi:.0f})'
             )
             wf['var_flattened'] = (s['stake'] == 0 and stake_pre > 0)
+            # Nodo-79: shadow mode — calcula stake con MIN_BET por tier, sin cambiar stake real
+            _tier_key = s.get('tier', 'grand_slam')
+            _min_bet_shadow = _MIN_BET_BY_TIER.get(_tier_key, MIN_BET)
+            _stake_shadow = round(stake_post_cppi / _min_bet_shadow) * _min_bet_shadow
+            wf['stake_final_shadow'] = _stake_shadow
+            wf['min_bet_shadow_usado'] = _min_bet_shadow
+            wf['shadow_survives_cliff'] = (_stake_shadow > 0 and wf['var_flattened'])
         gastado_ind = sum(s['stake'] for s in senales_enriched)
 
         # Ajustar cobertura

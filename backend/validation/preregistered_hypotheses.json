@@ -170,9 +170,10 @@
       "metrica": "hit% y CLV median del segmento var_flattened vs segmento financiado — misma superficie+tier",
       "n_stop": 30,
       "estado": "ACUMULANDO",
-      "n_actual": 0,
-      "hits": 0,
-      "nota": "Si H54-01 gradua (hit% flattened >= hit% financiado): implementar floor MIN_STAKE_APOSTAR=$500 fuera del pool VaR de combos. PROHIBIDO cambiar hasta n=30."
+      "n_actual": 8,
+      "hits": 3,
+      "nota": "Si H54-01 gradua (hit% flattened >= hit% financiado): implementar floor MIN_STAKE_APOSTAR=$500 fuera del pool VaR de combos. PROHIBIDO cambiar hasta n=30.",
+      "nota_backfill": "Backfill manual 2026-07-10 desde PROPUESTA_VAR_2026-07-10.md. resultado=None en JSONL porque shadow_book --settle pendiente para Jul 3/8/9. Fuente: tabla WATCHLIST-VAR verificada en sesión. Correr shadow_book.py --settle para cada fecha para hacer JSONL autoritativo."
     },
     "H60-01": {
       "nombre": "GCS Pattern (pre-torneo campeón en superficie) supera breakeven",
@@ -300,6 +301,166 @@
       "n_actual": 0,
       "hits": 0,
       "nota": "Nodo-61 D61-F2/F3: LOG_GCS_SHADOW_EXTENDED genera data prospectiva automaticamente cuando days in [22,42] y mismo año. Activacion: agregar 'clay'/'hard'/'grass' segun H60-02 graduacion por superficie."
+    },
+    "H77-01": {
+      "nombre": "Tier Mismatch como predictor de edge sistemático",
+      "descripcion": "Cuando un jugador recientemente campeón en un tier significativamente más alto juega en un tier inferior (dentro de los 30 días), el bookmaker subvalora su probabilidad real por actualización lenta de ranking y calibración más débil en tiers bajos. hit% del segmento tier_mismatch=True supera el de picks equivalentes sin tier_mismatch.",
+      "origen_deuda": "Nodo-65 — descubierto 2026-07-10 (Weis: RG ATP500 → M25 ITF; Choinski: Zagreb ATP500 → Challenger)",
+      "preregistrado": "2026-07-10",
+      "casos_semilla": [
+        {
+          "jugador": "Alexander Weis",
+          "fecha": "2026-07-10",
+          "campeon_en": "Abierto de Francia 2026 (ATP500)",
+          "campeon_days_ago": 5,
+          "torneo_actual": "M15 Bastia (ITF M25)",
+          "tier_mismatch_delta": "atp500_vs_itf",
+          "cuota": 2.12,
+          "edge": "+12.2%",
+          "resultado": "GANO",
+          "elo": 2161,
+          "scalp_count": 30
+        },
+        {
+          "jugador": "Jan Choinski",
+          "fecha": "2026-07-10",
+          "campeon_en": "Zagreb 2026 (ATP500)",
+          "campeon_days_ago": "n/d",
+          "torneo_actual": "Challenger Braunschweig",
+          "tier_mismatch_delta": "atp500_vs_challenger",
+          "cuota": 1.78,
+          "edge": "+29.6%",
+          "resultado": "GANO",
+          "elo": 1764,
+          "scalp_count": 1
+        }
+      ],
+      "umbrales_congelados": {
+        "campeon_days_ago_max": 30,
+        "tier_campeon_superior_a_tier_actual": true,
+        "deltas_validos": [
+          "gs_vs_itf",
+          "gs_vs_challenger",
+          "atp1000_vs_itf",
+          "atp1000_vs_challenger",
+          "atp500_vs_itf",
+          "atp500_vs_challenger",
+          "challenger_vs_itf"
+        ],
+        "rango_conf": [
+          0.55,
+          0.7
+        ],
+        "nota": "PROHIBIDO cambiar umbrales antes de n=30. Gate D65-04 solo observacional hasta graduación."
+      },
+      "metrica": "hit% picks tier_mismatch=True vs hit% picks equivalentes tier_mismatch=False (mismo rango conf 55-70%)",
+      "exito": "IC Wilson 95% inferior hit%_mismatch > 0.70 con n >= 30",
+      "gate_implementacion": "D65-04 (campo tier_mismatch en pick_snapshot) solo observacional hasta graduación H77-01. PROHIBIDO usar como criterio de inclusión/exclusión antes de n=30.",
+      "n_stop": 30,
+      "estado": "ACUMULANDO",
+      "n_actual": 2,
+      "hits": 2,
+      "perdidos": 0,
+      "nota": "n=2 casos semilla (2026-07-10): 2/2 ganaron. Sesgo de selección: ambos identificados post-hoc. Acumulación prospectiva desde D65-04 implementación. PROHIBIDO calibrar con n=2."
+    },
+    "H77-02": {
+      "nombre": "ANCHOR picks (edge positivo) superan estadísticamente a VARIABLE picks (edge negativo)",
+      "descripcion": "Picks seleccionados con p_modelo > p_implicita (edge positivo, ANCHOR) tienen hit% estadísticamente superior a picks con p_modelo < p_implicita (edge negativo, VARIABLE). Los VARIABLE son 'piernas baratas' de multiplicación de cuota en combos, no fuentes de alpha diferencial.",
+      "origen_deuda": "Nodo-65 — análisis post-sesión 2026-07-10 (6 ANCHOR ganaron 6/6; 4 VARIABLE ganaron 3/4 = rendimiento esperado por azar)",
+      "preregistrado": "2026-07-10",
+      "evidencia_semilla": {
+        "sesion": "2026-07-10",
+        "anchor_picks": 6,
+        "anchor_ganaron": 6,
+        "anchor_hit_rate": 1.0,
+        "variable_picks": 4,
+        "variable_ganaron": 3,
+        "variable_hit_rate": 0.75,
+        "nota": "n=10 total — insuficiente para conclusions estadísticas. Semilla únicamente."
+      },
+      "umbrales_congelados": {
+        "anchor_definicion": "p_modelo > p_implicita (edge_vs_mercado > 0.0%)",
+        "variable_definicion": "p_modelo < p_implicita (edge_vs_mercado < 0.0%)",
+        "rango_cuota_anchor": [
+          1.5,
+          2.2
+        ],
+        "rango_cuota_variable": [
+          1.15,
+          1.35
+        ],
+        "nota": "PROHIBIDO cambiar definiciones de ANCHOR/VARIABLE antes de n_stop. Umbrales congelados desde pre-registro."
+      },
+      "metrica": "hit%_ANCHOR vs hit%_VARIABLE por rango de cuota. ROI_ANCHOR vs ROI_VARIABLE. Test Fisher exact (p < 0.05).",
+      "exito": "hit%_ANCHOR estadísticamente superior a hit%_VARIABLE en Fisher exact p < 0.05 con n >= 30 por segmento",
+      "gate_implementacion": "D65-06 (shadow_book segmento ANCHOR/VARIABLE) activa prospectivamente. D65-01 (etiqueta pick_tier en combo plan) activa inmediato como observacional. PROHIBIDO cambiar confidence_flag o kelly_kl basado en pick_tier hasta graduación.",
+      "n_stop": 60,
+      "n_stop_por_segmento": 30,
+      "estado": "ACUMULANDO",
+      "n_anchor": 6,
+      "hits_anchor": 6,
+      "n_variable": 4,
+      "hits_variable": 3,
+      "nota": "D65-01 debe añadir campo pick_tier al combo plan output para acumulación automática. Hasta entonces: registro manual por sesión. PROHIBIDO activar lógica diferencial hasta n=60 (30+30)."
+    },
+    "H77-03": {
+      "nombre": "BLOQUEADO + SCALP TOP-100/50 en superficie + edge positivo: eliminación práctica de penalidad H2H",
+      "descripcion": "Picks en estado BLOQUEADO (sin historial H2H del rival específico) que tienen SCALP TOP-100/50 documentado en la misma superficie del partido Y edge positivo ≥10% tienen hit% equivalente al de picks no-BLOQUEADO con confianza similar. El phantom_data(-25) en alpha es insuficiente para degradar picks con calidad probada independiente del rival específico.",
+      "origen_deuda": "Nodo-65 — paradoja observada 2026-07-10: 4 picks BLOQUEADOS con SCALP+edge+ ganaron 4/4",
+      "preregistrado": "2026-07-10",
+      "casos_semilla": [
+        {
+          "jugador": "Max Wiskandt",
+          "fecha": "2026-07-10",
+          "estado": "BLOQUEADO",
+          "scalp": "Mannarino #48 clay",
+          "edge": "+33.9%",
+          "alpha": -2,
+          "resultado": "GANO"
+        },
+        {
+          "jugador": "Teodora Kostovic",
+          "fecha": "2026-07-10",
+          "estado": "BLOQUEADO",
+          "scalp": "Marcinko #45 + Oliynykova #47 clay",
+          "edge": "+28.7%",
+          "alpha": -2,
+          "resultado": "GANO"
+        },
+        {
+          "jugador": "Jan Choinski",
+          "fecha": "2026-07-10",
+          "estado": "BLOQUEADO",
+          "scalp": "Fery #36 clay",
+          "edge": "+29.6%",
+          "alpha": -12,
+          "resultado": "GANO"
+        },
+        {
+          "jugador": "Leolia Jeanjean",
+          "fecha": "2026-07-10",
+          "estado": "BLOQUEADO",
+          "scalp": "Vekic #35 + Chwalinska #22 + Oliynykova #47 clay",
+          "edge": "+17.2%",
+          "alpha": -2,
+          "resultado": "GANO"
+        }
+      ],
+      "umbrales_congelados": {
+        "estado_requerido": "BLOQUEADO",
+        "scalp_minimo": "TOP-100 o TOP-50 en superficie del partido",
+        "edge_minimo": 0.1,
+        "nota": "PROHIBIDO cambiar phantom_data penalty antes de n=20. Si H77-03 gradúa: revisar si reducir phantom_data(-25) cuando SCALP presente. No actuar antes."
+      },
+      "metrica": "hit% picks BLOQUEADO+SCALP+edge+ vs hit% picks no-BLOQUEADO con conf equivalente (misma banda)",
+      "exito": "IC Wilson 95% inferior hit%_BLOQUEADO_SCALP > 0.65 con n >= 20",
+      "gate_implementacion": "Si H77-03 gradúa: evaluar reducción de phantom_data penalty de -25 a -10 cuando SCALP presente en superficie. PROHIBIDO cualquier cambio a phantom_data antes de graduación.",
+      "n_stop": 20,
+      "estado": "ACUMULANDO",
+      "n_actual": 4,
+      "hits": 4,
+      "perdidos": 0,
+      "nota": "n=4 casos semilla (2026-07-10): 4/4 ganaron. Sesgo de selección: identificados post-hoc en sesión de alta precisión. Acumulación prospectiva requerida. PROHIBIDO calibrar con n=4."
     }
   }
 }
