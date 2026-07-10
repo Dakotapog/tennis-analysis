@@ -1,6 +1,6 @@
 # CLAUDE.md — Tennis Prediction & Betting Engine
 
-> Last updated: 2026-07-09 (FABLE_02 Fases 1-5 + Nodo-73 n8n — 1756 tests)
+> Last updated: 2026-07-10 (fix infra: cron venv + systemd unit close_snapshot + guard match_id=None — 1756 tests)
 > Spec-Driven Development (SDD). CLAUDE.md es VISTA DERIVADA — los nodos son la fuente de verdad.
 > Leer completo antes de tocar código. Ver política de precedencia §10.
 
@@ -174,7 +174,7 @@ shadow_book.py                    ← CLV: log_picks | close_snapshot | settle |
 pipeline_tracker.py               ← READ-ONLY (--section shadow|confianza|drift|portfolio)
 pre_game_validator.py             ← cron 0 9-23: kelly_kl=0.0 BLOCK | n<8 WARN
 close_snapshot_server.py          ← HTTP :8765 bridge (Nodo-73) — timing exacto por partido
-close_snapshot_trigger.py         ← cron */10 FALLBACK (si n8n cae)
+close_snapshot_trigger.py         ← cron */10 9-23h venv/bin/python3 FALLBACK (si n8n cae) — fix 2026-07-10
 check_contradictions.py           ← cron lun 9am: CLAUDE.md vs nodos (Vacío 3)
 
 ── n8n AUTOMATION (Nodo-73, systemd) ─────────────────────────────────────────

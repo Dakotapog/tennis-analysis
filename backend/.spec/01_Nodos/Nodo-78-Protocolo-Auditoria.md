@@ -52,6 +52,19 @@ Antes de crear un Nodo retroactivo completo para cerrar un gap SDD, verificar si
 
 Este protocolo aplica a cualquier sesión futura de Claude Code que realice auditorías de trazabilidad SDD (comparación CLAUDE.md vs Nodos vs código real), no solo a la de esta fecha. `check_contradictions.py` y cualquier script equivalente futuro deben citar este Nodo en su docstring como referencia de la disciplina esperada.
 
+## Regla 7 — Un respaldo no verificado bajo fallo real es indistinguible de no tener respaldo
+
+Nunca confiar en que "cron de respaldo" o "supervisado por systemd" significa que funciona, sin una prueba de fallo real o simulada.
+
+Caso real (2026-07-10 — simulacro de apagón WSL2): el cron `*/10` de `close_snapshot_trigger.py` corrió silenciosamente sin numpy disponible durante semanas. Nadie lo notó porque n8n (mecanismo primario) nunca falló, así que el respaldo roto nunca se puso a prueba. Adicionalmente, `tennis-snapshot-bridge.service` nunca se registró en systemd: el servidor en :8765 corría como proceso huérfano (PID 208) sin supervisor real, arrancado manualmente y sobreviviendo por linger — no por diseño. Un apagón real habría dejado ambos mecanismos de respaldo inoperativos simultáneamente, con n8n como único punto de fallo no redundado.
+
+Fixes aplicados en la misma sesión: (1) cron actualizado a `venv/bin/python3` explícito, restringido a 9-23h; (2) unit `tennis-snapshot-bridge.service` creado, registrado y habilitado bajo systemd real (PID 208 → PID 4519); (3) guard `if not match_id: return False` en `_already_processed()` (`close_snapshot_server.py:87`) — bug latente porque JSON puede traer `match_id: null` aunque el contrato de tipo diga `str`.
+
+Regla operativa: cada mecanismo de respaldo debe tener al menos una prueba de fallo documentada (real o simulada) antes de considerarse operativo. La existencia del código no equivale a la existencia del respaldo.
+
+---
+
 ## Vinculación
 
 Relacionado con el trabajo de auditoría 2026-07-09: Nodo-74, Nodo-75, Nodo-76, adendos a Nodo-07 y Nodo-73, entrada C-07 en `docs/DECISION-LOG.md`.
+Regla 7 derivada del simulacro de apagón 2026-07-10.

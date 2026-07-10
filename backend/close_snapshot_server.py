@@ -86,6 +86,8 @@ def _matches_in_window(matches: list[dict]) -> list[dict]:
 
 def _already_processed(match_id: str) -> bool:
     """Deduplica: si el match_id ya aparece en el log de hoy, skip (D73-04)."""
+    if not match_id:
+        return False
     if not LOG_FILE.exists():
         return False
     today = datetime.now().strftime("%Y-%m-%d")
