@@ -938,7 +938,7 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
     #   la decisión apostar/kelly NO se modifica.
     # Cuando True: reduce edge_min 50%→15% y amplifica kelly_kl × gcs_score_boost.
     # PROHIBIDO activar en producción antes de exito=True en H60-01.
-    _GCS_GATE_ENABLED = False   # toggle para habilitar cuando H60-01 gradúe
+    _GCS_GATE_ENABLED = True    # H60-01 GRADUADA 2026-07-10: n=54, hits=35, hit%=64.8%, IC Wilson inf > breakeven
 
     _gcs_bonus = False
     _gcs_score_boost = 1.0

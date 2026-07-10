@@ -234,7 +234,7 @@ def test_T60_04_extract_marks_gcs_active():
 # ── T60-05: H60-01 existe en preregistered_hypotheses.json ───────────────────
 
 def test_T60_05_h60_01_exists_in_hypotheses():
-    """H60-01 existe en preregistered_hypotheses.json con n_stop=30 y estado=ACUMULANDO."""
+    """H60-01 existe en preregistered_hypotheses.json con n_stop=30 y estado=GRADUADA (2026-07-10)."""
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     hyp_path = os.path.join(base_dir, 'validation', 'preregistered_hypotheses.json')
 
@@ -248,7 +248,9 @@ def test_T60_05_h60_01_exists_in_hypotheses():
 
     h60 = hypotheses['H60-01']
     assert h60.get('n_stop') == 30, f"n_stop debe ser 30, got {h60.get('n_stop')}"
-    assert h60.get('estado') == 'ACUMULANDO', f"estado debe ser ACUMULANDO, got {h60.get('estado')}"
+    assert h60.get('estado') == 'GRADUADA', f"estado debe ser GRADUADA (graduada 2026-07-10), got {h60.get('estado')}"
+    assert h60.get('fecha_graduacion') == '2026-07-10', "fecha_graduacion debe ser 2026-07-10"
+    assert h60.get('decision'), "H60-01 debe tener campo 'decision' con accion tomada"
 
     umbrales = h60.get('umbrales_congelados', {})
     assert umbrales.get('tier_min') == 'atp500', "tier_min debe ser atp500"
