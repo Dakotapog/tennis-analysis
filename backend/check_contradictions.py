@@ -1,6 +1,7 @@
 """
 check_contradictions.py — Chequeo semanal de contradicciones (Haiku)
-FABLE_02 §1.2 Vacío 3, Fase 5.
+FABLE_02 §1.2 Vacío 3, Fase 5. Ver Nodo-78 para el protocolo de auditoría
+y disciplina de doble verificación que guía este tipo de script.
 
 Lee los headers de los últimos 10 nodos en .spec/01_Nodos/ y los compara
 contra el estado declarado en CLAUDE.md. Reporta contradicciones.
