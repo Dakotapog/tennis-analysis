@@ -145,7 +145,8 @@ python3 check_contradictions.py [--quick]           # cron lun 9am: CLAUDE.md vs
 | F4 Estadística doctoral (Nodos 64-71) | ✅ 43 tests |
 | F5 Vault + session_compiler + CLAUDE.md slim | ✅ completada |
 
-**Nodos completos:** 51-63, 64-71, 72, 73 — detalles en `.spec/01_Nodos/Nodo-XX.md`
+**Nodos completos:** 51-63, 64-71, 72, 73, 78 — detalles en `.spec/01_Nodos/Nodo-XX.md`
+**Nodos borrador/propuesto (auditoría 2026-07-09):** 74 (governor gate), 75 (índice), 76 (combo registry)
 
 ---
 
