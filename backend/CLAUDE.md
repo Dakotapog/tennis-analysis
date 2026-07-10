@@ -122,17 +122,18 @@ python3 check_contradictions.py [--quick]           # cron lun 9am: CLAUDE.md vs
 
 ---
 
-## 5. ESTADO ACTUAL — 2026-07-09
+## 5. ESTADO ACTUAL — 2026-07-10
 
 | Métrica | Valor |
 |---|---|
 | Tests | **1756 passed, 0 failed** |
 | Calibración | clay GS: p=0.758 (n=31) \| global: n=706, wins=467, losses=239 |
 | Bankroll | $125,000+ |
-| Shadow Book hit% | GS: 50% ROI+47% \| Challenger: + \| ITF: 30.8% ROI-23.7% |
+| Shadow Book hit% | GS: 50% ROI+47% \| Challenger: +7.9% \| ITF: 38% ROI-16.8% (jul-10) |
 | ML Dataset | 2,573 registros limpios (motor nodo32, trazabilidad verificada) |
 | Graphify | 1,588 nodos, 2,987 edges. Tamp activo (puerto 7778). |
 | **n8n** | **Docker :5678 + systemd tennis-snapshot-bridge :8765 — ACTIVO** |
+| **GCS** | **_GCS_GATE_ENABLED=True — H60-01 GRADUADA 2026-07-10 (n=54, 64.8%)** |
 
 **Fases FABLE_02:**
 
@@ -146,6 +147,7 @@ python3 check_contradictions.py [--quick]           # cron lun 9am: CLAUDE.md vs
 | F5 Vault + session_compiler + CLAUDE.md slim | ✅ completada |
 
 **Nodos completos:** 51-63, 64-71, 72, 73, 78 — detalles en `.spec/01_Nodos/Nodo-XX.md`
+**Nodo-64:** RFI Return-From-Inactivity (descubrimiento 2026-07-09 — H76-01 pre-registrada, n=1/30)
 **Nodos borrador/propuesto (auditoría 2026-07-09):** 74 (governor gate), 75 (índice), 76 (combo registry)
 
 ---
