@@ -12,7 +12,7 @@ import sys
 
 PORT = 7779
 SERVE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "graphify-out")
-NO_CACHE_EXTS = {".json"}
+NO_CACHE_EXTS = {".json", ".html"}
 
 
 class GraphifyHandler(http.server.SimpleHTTPRequestHandler):
@@ -39,8 +39,11 @@ def main():
     if not os.path.isdir(SERVE_DIR):
         print(f"ERROR: {SERVE_DIR} not found. Run `graphify update .` first.", file=sys.stderr)
         sys.exit(1)
-    server = http.server.HTTPServer(("127.0.0.1", PORT), GraphifyHandler)
+    server = http.server.HTTPServer(("0.0.0.0", PORT), GraphifyHandler)
+    import socket
+    wsl_ip = socket.gethostbyname(socket.gethostname())
     print(f"Graphify server: http://localhost:{PORT}/graph.html", flush=True)
+    print(f"Desde Windows:   http://{wsl_ip}:{PORT}/graph.html", flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:

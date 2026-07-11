@@ -103,5 +103,6 @@ systemctl --user start|stop|restart|status graphify.service
 - `graphify_server.py` — servidor HTTP principal
 - `graphify-out/graph.html` — cliente fetch() dinámico
 - `~/.config/systemd/user/graphify.service` — unit systemd
-- **Fase 2 (migración 3D):** gateada — requiere confirmación explícita antes de implementar
+- **Spec completa Fases 2-4:** `docs/specs/SPEC_GRAPHIFY_V2_3D_REPORTES.md`
+- Nodo-84 (pendiente): Fase 2 — migración 3D (`graph3d.html`)
 - Nodo-75: índice de nodos — graphify.service registrado como infraestructura Nodo-83
