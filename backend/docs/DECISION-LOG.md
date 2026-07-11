@@ -219,6 +219,18 @@ no lo tenía. Sin evidencia histórica de impacto, pero gap real en sistema desa
 
 ---
 
+## D-09 — Bergeron-St.Hilaire: trader_deploy={} investigado y cerrado (2026-07-11)
+
+**Decisión:** Clasificar el pick Bergeron-St.Hilaire (Jul-08, M25 Laval) como bug de logging aislado sin impacto operacional. No abrir Nodo nuevo.
+
+**Hallazgos verificados:** (1) Phantom Guard Nodo-72 funcionó correctamente — no disparó porque `ranking=47≠None`, condición cumplida. Sin bypass. (2) Cero dinero real — ausente en `reports/apuestas_*.json`. (3) `trader_deploy={}` es bug de logging puntual en trader_ev_tenis.py, no una decisión del sistema. (4) Predicción (rank 1961 sobre rank 47) explicada cuantitativamente: home advantage +50pts + Bergeron n=2/0% hard domina sobre ranking_momentum — data sparsity ITF, no fallo de arquitectura.
+
+**Observación pasiva para el futuro:** si "home advantage domina oponente n≤2 en ITF" aparece en un pick con capital real, revisar si shrinkage n/(n+20) necesita piso adicional para n≤2 antes de que kelly_kl se calcule. Con un solo caso (teórico, sin dinero), no se justifica Nodo nuevo.
+
+**Cuándo revisitar:** solo si el patrón se repite con apostar=True y stake>0 real.
+
+---
+
 ## Plantilla para nuevas decisiones
 
 ```
