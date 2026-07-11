@@ -203,6 +203,22 @@ no lo tenía. Sin evidencia histórica de impacto, pero gap real en sistema desa
 
 ---
 
+## D-08 — Gap WO/retiro entre PASO 1 y settle (2026-07-11)
+
+**Decisión:** No conectar la detección de walkover/retiro de PASO 1 (extraer_URL_partidos_version2.py, extraer_cuotas_partidos.py) con el mecanismo de settle() del shadow book. Gap documentado, no corregido.
+
+**Contexto:** resultados_finales.py usa ninja `dc_1_` endpoint: devuelve FT si DJ='H'/'A' (incluye WO con ganador declarado), o 404→ERROR si el partido fue cancelado antes de empezar. ERROR queda fuera de `detailed_results` → settle() no lo ve. En sesión 2026-07-11 se encontraron 17 picks sin settle explicados por esta vía (ninja 404 = partido cancelado/abandonado antes del inicio).
+
+**Alternativas consideradas:**
+- Añadir rama `status='WO'/'CANCELLED'` en `obtener_resultado_api()` que detecte 404 y lo cierre como No_Contest en shadow book
+- Propagarla señal del scraper PASO 1 hacia resultados_finales.py
+
+**Por qué no ahora:** Solo 17/208 picks afectados (5.9%) en la ronda de análisis — tasa baja. Todos con `apostar=False` o `stake=0` (sin P&L real expuesto en esta instancia). Costo de implementación no justificado con n actual.
+
+**Cuándo revisitar:** si en 4 semanas de operación la tasa de picks-sin-settle con 404 supera el 10% del total settled, o si aparece un pick con `apostar=True` y stake>0 con 404.
+
+---
+
 ## Plantilla para nuevas decisiones
 
 ```
