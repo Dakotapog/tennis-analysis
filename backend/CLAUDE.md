@@ -270,6 +270,8 @@ graphify query "<pregunta>"   # orientarse primero, grep solo para líneas espec
 
 Grafo de código en `graphify-out/` (1686 nodos, 2753 edges — código Python, reindexado 2026-07-10).
 
+- **Visualización:** http://localhost:7779/graph.html (Nodo-83 — `graphify.service` systemd, F5 = datos frescos)
 - Antes de grep: `graphify query "<pregunta>"` | `graphify path "<A>" "<B>"` | `graphify explain "<concepto>"`
-- Actualizar tras cambios: `graphify update .`
+- Actualizar tras cambios: `graphify update .` → F5 en browser muestra nuevos nodos sin regenerar HTML
 - Para incluir `.spec/` docs: `export ANTHROPIC_API_KEY="sk-ant-..." && graphify .`
+- Gestión servicio: `systemctl --user start|stop|restart graphify`
