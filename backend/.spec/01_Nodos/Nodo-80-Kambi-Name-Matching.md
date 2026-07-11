@@ -1,7 +1,8 @@
 # Nodo-80 — Kambi Name Matching: apellidos compuestos y normalización
 
 **Fecha:** 2026-07-10
-**Estado:** DIAGNÓSTICO — sin implementación todavía
+**Estado:** IMPLEMENTADO 2026-07-11 — Opción 1 (candidatos múltiples) en `close_snapshot()` de shadow_book.py
+**Opción implementada:** Opción 1 (parche táctico) — NO Opción 3 (Kambi match ID, deuda estructural → Nodo-82)
 **Rama:** main
 
 ---
@@ -74,11 +75,46 @@ solución estructural definitiva alineada con la filosofía de Nodo-72 (ID, no n
 
 ---
 
+## Implementación — 2026-07-11
+
+### Lo que se hizo (Opción 1)
+
+Gate de "≥5 ejemplos" revisado: `_normalize_name_match` ya existía como función probada en el
+mismo módulo, y la Opción 1 es un parche táctico de bajo riesgo (retro-compatible, no cambia
+`_parse_nombre` ni el formato de PASO 4). Se implementó sin esperar más ejemplos.
+
+**`shadow_book.py`** — función helper + Tier 2 actualizado en `close_snapshot()`:
+```python
+def _apellido_candidates(norm_nombre: str) -> list:
+    """Genera candidatos: último token, últimos 2, ... (Nodo-80 Opción 1)."""
+    parts = norm_nombre.split()
+    return [' '.join(parts[-i:]) for i in range(1, len(parts))]
+
+# close_snapshot() Tier 2 — antes: solo parts[-1]
+# ahora: itera candidatos hasta encontrar match en outcomes_map
+for _cand in _apellido_candidates(norm_fav):
+    found = outcomes_map.get(_cand)
+    if found:
+        break
+```
+
+**Caso Pedro Vives Marcos verificado (simulación):**
+- Antes: `outcomes_map.get("marcos")` → None
+- Ahora: candidatos `["marcos", "vives marcos"]` → `outcomes_map.get("vives marcos")` → match ✓
+
+**Tests:** `tests/test_nodo80_kambi_matching.py` — 12 tests, todos passed.
+
+### Lo que NO se hizo (gateado como Nodo-82)
+
+**Opción 3** (Kambi match ID en PASO 4): solución estructural definitiva, requiere cambio en
+`trader_ev_tenis.py` (PASO 4) y scraper (PASO 1). Documentado como deuda futura, NO ejecutar
+sin decisión explícita.
+
 ## Condición para implementar
 
-- [ ] Al menos 5 ejemplos adicionales de mismatch catalogados (para validar el fix)
-- [ ] Tests de regresión en `tests/test_nodo80_kambi_matching.py`
-- [ ] Pre-registro de hipótesis si el fix afecta datos de CLV retroactivos
+- [x] Tests de regresión en `tests/test_nodo80_kambi_matching.py` — 12 tests
+- [x] Implementación Opción 1 verificada con caso Pedro Vives Marcos
+- [ ] Opción 3 (match ID) → Nodo-82 (deuda estructural, gate abierto)
 
 ## Vinculación
 

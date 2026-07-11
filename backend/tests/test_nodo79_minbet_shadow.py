@@ -13,14 +13,15 @@ from trader_ev_tenis import _MIN_BET_BY_TIER, MIN_BET, KELLY_FRACTION, _cppi_fac
 def _simulate_waterfall(kelly_kl: float, bankroll: float, tier: str,
                         var_factor: float = 0.25) -> dict:
     """
-    Replica el waterfall de trader_ev_tenis.py (Nodo-79 shadow mode).
+    Replica el waterfall de trader_ev_tenis.py (Nodo-79 Opción A completa).
 
     Pasos reales:
       1. stake_raw = kelly_kl × bankroll × KELLY_FRACTION
-      2. stake_pre = round(stake_raw / MIN_BET) × MIN_BET; si >0 kelly y pre==0 → MIN_BET
+      2. stake_pre = max(MIN_BET, round(stake_raw / MIN_BET) × MIN_BET)   [paso real]
       3. stake_post_cppi = stake_pre × var_factor × cppi_factor
       4. stake_real = round(stake_post_cppi / MIN_BET) × MIN_BET
-      5. stake_shadow = round(stake_post_cppi / min_bet_tier) × min_bet_tier  [Nodo-79]
+      5. stake_pre_shadow = max(min_bet_tier, round(stake_raw / min_bet_tier) × min_bet_tier)
+      6. stake_shadow = round(stake_pre_shadow × var_factor × cppi / min_bet_tier) × min_bet_tier
     """
     cppi_f = _cppi_factor(bankroll=bankroll, peak_bankroll=bankroll)
     stake_raw = kelly_kl * bankroll * KELLY_FRACTION
@@ -30,9 +31,13 @@ def _simulate_waterfall(kelly_kl: float, bankroll: float, tier: str,
     stake_post_cppi = stake_pre * var_factor * cppi_f
     stake_real = round(stake_post_cppi / MIN_BET) * MIN_BET
     min_bet_shadow = _MIN_BET_BY_TIER.get(tier, MIN_BET)
-    stake_shadow = round(stake_post_cppi / min_bet_shadow) * min_bet_shadow
+    # Opción A completa: recalcula stake_pre con tier-specific min_bet (paso 2 shadow)
+    _rounded_shadow = round(stake_raw / min_bet_shadow) * min_bet_shadow
+    stake_pre_shadow = max(min_bet_shadow, _rounded_shadow)
+    stake_shadow = round(stake_pre_shadow * var_factor * cppi_f / min_bet_shadow) * min_bet_shadow
     return {
         'stake_pre': stake_pre,
+        'stake_pre_shadow': stake_pre_shadow,
         'stake_post_cppi': stake_post_cppi,
         'stake_real': stake_real,
         'stake_shadow': stake_shadow,
@@ -123,8 +128,9 @@ class TestMariaSaraPopaCase:
         assert wf['stake_pre'] == MIN_BET
 
     def test_shadow_survives_cliff(self):
+        # kelly=0.0843 → stake_pre_shadow=$200 → $200×0.15=$30 → sigue en CLIFF con Opción A
         wf = _simulate_waterfall(self.KELLY_KL, self.BANKROLL, self.TIER)
-        assert wf['shadow_survives_cliff'] is True
+        assert wf['shadow_survives_cliff'] is False
 
     def test_shadow_stake_multiple_of_itf_min_bet(self):
         wf = _simulate_waterfall(self.KELLY_KL, self.BANKROLL, self.TIER)

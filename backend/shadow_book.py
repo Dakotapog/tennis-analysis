@@ -326,12 +326,14 @@ def close_snapshot(fecha: Optional[str] = None) -> int:
         norm_fav = _norm_k(favorito)
         found = outcomes_map.get(norm_fav)
 
-        # Tier 2: apellido solo
+        # Tier 2: apellido(s) — candidatos múltiples para apellidos compuestos (Nodo-80 Opción 1)
+        # "pedro vives marcos" → ["marcos", "vives marcos"] — el primero es el comportamiento
+        # anterior; los adicionales cubren el caso Kambi donde el índice usa apellido compuesto.
         if not found:
-            parts = norm_fav.split()
-            apellido = parts[-1] if parts else ''
-            if apellido:
-                found = outcomes_map.get(apellido)
+            for _cand in _apellido_candidates(norm_fav):
+                found = outcomes_map.get(_cand)
+                if found:
+                    break
 
         # Tier 3: _name_tokens / _token_in_kb fallback (Nodo-36)
         if not found:
@@ -507,6 +509,37 @@ def _fuzzy_name_match(candidate: str, pick_name: str) -> bool:
         return p in c or c in p
 
 
+def _apellido_candidates(norm_nombre: str) -> list:
+    """
+    Genera candidatos de apellido para lookup en Kambi outcomes_map (Nodo-80 Opción 1).
+    Intenta último token, últimos 2, últimos 3... — cubre apellidos compuestos.
+
+    Ejemplo: "pedro vives marcos" → ["marcos", "vives marcos"]
+    Ejemplo: "leyton rivera"      → ["rivera"]
+    """
+    parts = norm_nombre.split()
+    return [' '.join(parts[-i:]) for i in range(1, len(parts))]
+
+
+def _normalize_name_match(candidate: str, pick_name: str) -> bool:
+    """
+    Tier 3a: normalización canónica via core.player_registry (Nodo-51) antes del fuzzy.
+    Maneja acentos, guiones y variaciones de formato.
+    Substring con guardia len >= 4 para evitar falsos positivos en nombres cortos.
+    """
+    try:
+        from core.player_registry import normalize_player_name
+        nc = normalize_player_name(candidate)
+        np_ = normalize_player_name(pick_name)
+        if not nc or not np_:
+            return False
+        return (nc == np_
+                or (len(np_) >= 4 and np_ in nc)
+                or (len(nc) >= 4 and nc in np_))
+    except Exception:
+        return False
+
+
 def update_trader_stakes(fecha: str, trader_plan: dict) -> int:
     """
     P54-02 Parte 2: enriquece registros del shadow book con stakes reales del trader.
@@ -670,15 +703,16 @@ def settle(fecha: str, resultados_map: Optional[Dict] = None) -> int:
         # Fallback: match_key
         elif mk and mk in resultados_map:
             res = resultados_map[mk]
-        # Fallback: _name_tokens (Nodo-36)
+        # Fallback nombre: Tier 3a normalize_player_name (Nodo-51) + Tier 3b _name_tokens (Nodo-36)
         else:
             favorito = snap.get('favorito_predicho', '')
             if favorito:
                 for res_candidate in resultados_map.values():
-                    g = res_candidate.get('ganador', '') or ''
                     p1_fs = res_candidate.get('p1', '') or ''
                     p2_fs = res_candidate.get('p2', '') or ''
-                    if (_fuzzy_name_match(p1_fs, favorito)
+                    if (_normalize_name_match(p1_fs, favorito)
+                            or _normalize_name_match(p2_fs, favorito)
+                            or _fuzzy_name_match(p1_fs, favorito)
                             or _fuzzy_name_match(p2_fs, favorito)):
                         res = res_candidate
                         break
@@ -708,7 +742,9 @@ def settle(fecha: str, resultados_map: Optional[Dict] = None) -> int:
         else:
             ganador = res.get('ganador', '')
             favorito = snap.get('favorito_predicho', '')
-            resultado = 'WON' if _fuzzy_name_match(ganador, favorito) else 'LOST'
+            resultado = 'WON' if (
+                _normalize_name_match(ganador, favorito) or _fuzzy_name_match(ganador, favorito)
+            ) else 'LOST'
             cuota_tomada = snap.get('cuota_favorito', 0)
             clv = calc_clv(cuota_tomada, cuota_cierre_final) if cuota_cierre_final else None
             pnl = round(cuota_tomada - 1, 4) if resultado == 'WON' else -1.0

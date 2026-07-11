@@ -1155,10 +1155,16 @@ def main():
                 f' floor={floor_cppi:.0f})'
             )
             wf['var_flattened'] = (s['stake'] == 0 and stake_pre > 0)
-            # Nodo-79: shadow mode — calcula stake con MIN_BET por tier, sin cambiar stake real
+            # Nodo-79: shadow Opción A completa — tier-specific MIN_BET en paso 2 Y paso 5
+            # paso 2: recomputa stake_pre con _min_bet_shadow (misma lógica que L490-491)
+            # paso 5: redondeo final también usa _min_bet_shadow
             _tier_key = s.get('tier', 'grand_slam')
             _min_bet_shadow = _MIN_BET_BY_TIER.get(_tier_key, MIN_BET)
-            _stake_shadow = round(stake_post_cppi / _min_bet_shadow) * _min_bet_shadow
+            _capped = s['_waterfall']['capped_stake']
+            _rounded_shadow = round(_capped / _min_bet_shadow) * _min_bet_shadow
+            _stake_pre_shadow = max(_min_bet_shadow, _rounded_shadow)
+            _stake_shadow = round(_stake_pre_shadow * fv * cppi_f / _min_bet_shadow) * _min_bet_shadow
+            wf['stake_pre_shadow'] = _stake_pre_shadow
             wf['stake_final_shadow'] = _stake_shadow
             wf['min_bet_shadow_usado'] = _min_bet_shadow
             wf['shadow_survives_cliff'] = (_stake_shadow > 0 and wf['var_flattened'])
