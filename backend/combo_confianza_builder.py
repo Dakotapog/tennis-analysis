@@ -1229,8 +1229,19 @@ def _format_report(picks: list, plan: dict, threshold: float,
             torneo_corto = (p['torneo'] or '')[:40]
             priority_str = (f'  pri:{p["combo_priority"]:.1f}'
                             if p.get('alpha_score', 0) != 0 else '')
+            # D65-01: pick_tier ANCHOR/VARIABLE basado en edge vs mercado (H77-02 Nodo-65)
+            _ep_raw = p.get('edge_data_ref', {}).get('edge_pct') or ''
+            _tier_str = ''
+            if _ep_raw:
+                try:
+                    _ep_val = float(str(_ep_raw).replace('%', ''))
+                    _tier_label = 'ANCHOR' if _ep_val >= 0 else 'VARIABLE'
+                    _ep_sign = '+' if _ep_val >= 0 else ''
+                    _tier_str = f'  [{_tier_label} {_ep_sign}{_ep_val:.1f}%]'
+                except (ValueError, AttributeError):
+                    pass
             add(f'  {i:2d}. {p["nombre"]:28s}  @{p["cuota"]:.2f}  '
-                f'conf:{p["confianza"]:.1f}%{priority_str}  {torneo_corto}'
+                f'conf:{p["confianza"]:.1f}%{priority_str}{_tier_str}  {torneo_corto}'
                 f'{pipeline_str}{alpha_prom_str}')
             if p.get('alpha_score', 0) != 0 and p.get('alpha_senales'):
                 add(f'       [alpha {p["alpha_score"]:+.1f}: {", ".join(p["alpha_senales"])}]')

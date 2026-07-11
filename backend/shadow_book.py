@@ -1037,6 +1037,39 @@ def report(desde: Optional[str] = None, hasta: Optional[str] = None) -> str:
     _append_segment(settled, lines, "season_transition=true",
                     lambda r: r.get('season_transition_flag', False))
 
+    # ── D65-05: ANCHOR (edge>0) vs VARIABLE (edge≤0) — Nodo-65 §6, H77-02 ──
+    # Observacional desde n=1. Nota [pre-graduacion n<30] hasta tener muestra.
+    _anchor_recs_65 = [
+        r for r in settled
+        if r.get('pick_snapshot', {}).get('edge') is not None
+        and r['pick_snapshot']['edge'] > 0
+    ]
+    _variable_recs_65 = [
+        r for r in settled
+        if r.get('pick_snapshot', {}).get('edge') is not None
+        and r['pick_snapshot']['edge'] <= 0
+    ]
+    if _anchor_recs_65 or _variable_recs_65:
+        lines.append("  NODO-65 ANCHOR/VARIABLE (H77-02):")
+        for _tier65_label, _recs65 in [
+            ("ANCHOR  (edge>0) ", _anchor_recs_65),
+            ("VARIABLE (edge<=0)", _variable_recs_65),
+        ]:
+            if not _recs65:
+                lines.append(f"    {_tier65_label}: n=0")
+                continue
+            _m65 = _segment_metrics(_recs65)
+            if _m65['n'] == 0:
+                continue
+            _sp65 = '*' if _m65['sparse'] else ''
+            _ic65 = _m65['ic']
+            _note65 = "  [pre-graduacion n<30]" if _m65['n'] < 30 else ""
+            lines.append(
+                f"    {_tier65_label}{_sp65}: n={_m65['n']}  hit%={_m65['hit_pct']}  "
+                f"IC95=[{_ic65[0]},{_ic65[1]}]  ROI={_m65['roi']}%{_note65}"
+            )
+        lines.append("")
+
     # ── D54-02: WATCHLIST ∩ tier=grand_slam ∩ edge≥20% (Nodo-55 P54-03) ──
     # Intersección de cortes ya pre-registrados: status × tier × banda de cuota.
     # NO es segmento nuevo — es visualización de uno existente para responder

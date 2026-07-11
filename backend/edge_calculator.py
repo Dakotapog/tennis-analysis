@@ -859,6 +859,38 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
     resultado['data_insufficient_surface'] = min(_vol_fav, _vol_dog) < 0.25
     resultado['phantom_data'] = False  # Nodo-72: default, se sobreescribe abajo si phantom detectado
 
+    # ─── D65-03: Tier Mismatch — favorito jugando torneo inferior al de su último título ──
+    # Observacional. Gate H77-01 (n≥15). NO modifica kelly_kl ni confidence_flag.
+    _surf_meta_65 = pred.get('surface_specialization_meta', {})
+    _surf_fav_65 = (
+        _surf_meta_65.get('player1') if player_key_sb == 'player1'
+        else _surf_meta_65.get('player2')
+    ) or {}
+    _campeon_tier_nivel = None
+    _tier_mismatch = False
+    _tier_mismatch_delta = None
+    if _surf_fav_65.get('torneo_completo'):
+        _log_prefix_65 = 'P1_LOG_SURF' if player_key_sb == 'player1' else 'P2_LOG_SURF'
+        for _rlog in pred.get('reasoning', []):
+            if _log_prefix_65 in _rlog and 'TORNEO_COMPLETO_BONUS' in _rlog and 'tier=' in _rlog:
+                try:
+                    _campeon_tier_nivel = _rlog.split('tier=')[1].split(',')[0].split(')')[0].strip()
+                except (IndexError, AttributeError):
+                    pass
+                break
+        if _campeon_tier_nivel:
+            _tier_order_65 = ['grand_slam', 'atp1000', 'atp500', 'atp250', 'challenger', 'itf']
+            if _campeon_tier_nivel in _tier_order_65 and tier in _tier_order_65:
+                if _tier_order_65.index(_campeon_tier_nivel) < _tier_order_65.index(tier):
+                    _tier_mismatch = True
+                    _tier_mismatch_delta = f"{_campeon_tier_nivel}_vs_{tier}"
+    resultado.update({
+        'tier_mismatch':       _tier_mismatch,
+        'tier_mismatch_delta': _tier_mismatch_delta,
+        'campeon_tier_nivel':  _campeon_tier_nivel,
+        'campeon_tier_actual': tier if _campeon_tier_nivel else None,
+    })
+
     # ─── Nodo-35 / F2: HISTORIAL_NO_EXTRAIDO — bloqueo en origen + NO_DATA status ──
     # Si la extracción de historial falló para cualquiera de los dos jugadores,
     # la predicción está basada en datos incompletos → status='NO_DATA', excluido

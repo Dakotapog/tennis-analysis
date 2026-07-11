@@ -817,6 +817,26 @@ def analyze_matches_with_pandas(file_path, output_filename="analisis_partidos_pa
             # Cargar edge_report para edge_vs_mercado (Fase E D53-01/ADDENDUM-3)
             _edge_lookup = _load_edge_report()
 
+            # D65-06: cargar calibracion_edge para WARN superficie discrepante (Nodo-65)
+            _calib_por_sup_65 = {}
+            _dom_sup_65 = None
+            try:
+                _calib_path_65 = os.path.join(os.path.dirname(__file__), 'data', 'calibracion_edge.json')
+                with open(_calib_path_65) as _cf65:
+                    _calib_json_65 = json.load(_cf65)
+                _calib_por_sup_65 = _calib_json_65.get('por_superficie', {})
+                # Superficie dominante = max total games, excluyendo 'unknown' y '?'
+                _dom_sup_games_65 = 0
+                for _sup_k65, _sup_v65 in _calib_por_sup_65.items():
+                    if _sup_k65 in ('unknown', '?'):
+                        continue
+                    _sup_total_65 = _sup_v65.get('wins', 0) + _sup_v65.get('losses', 0)
+                    if _sup_total_65 > _dom_sup_games_65:
+                        _dom_sup_games_65 = _sup_total_65
+                        _dom_sup_65 = _sup_k65
+            except Exception:
+                pass
+
             for match in matches:
                 if not match:
                     continue
@@ -978,18 +998,38 @@ def analyze_matches_with_pandas(file_path, output_filename="analisis_partidos_pa
                     _p_impl_rival = 1.0 - _p_impl_fav
                     _cuota_fav = _edge_pick.get('cuota_favorito', 'N/A')
                     _cuota_rival_val = _edge_pick.get('cuota_rival', 'N/A')
-                    if _edge_fav >= 0:
-                        f.write(
-                            f"edge_vs_mercado: {_favorito_edge} +{_edge_fav*100:.1f}% "
-                            f"(modelo {_p_modelo_fav*100:.1f}% vs bookmaker {_p_impl_fav*100:.1f}%, cuota {_cuota_fav})\n"
-                        )
-                    else:
-                        # Rival tiene edge positivo
+                    # D65-02: mostrar edge del jugador favorito SIEMPRE con signo explícito (H77-02 Nodo-65)
+                    _edge_sign = '+' if _edge_fav >= 0 else ''
+                    _edge_label = 'POSITIVO' if _edge_fav >= 0 else 'NEGATIVO'
+                    f.write(
+                        f"edge_vs_mercado: {_favorito_edge} {_edge_sign}{_edge_fav*100:.1f}% [{_edge_label}]"
+                        f" (modelo {_p_modelo_fav*100:.1f}% vs bookmaker {_p_impl_fav*100:.1f}%, cuota {_cuota_fav})\n"
+                    )
+                    if _edge_fav < 0:
+                        # El rival tiene edge positivo — mostrarlo también para contexto completo
                         _rival_name = p2 if _favorito_edge == p1 else p1
                         f.write(
-                            f"edge_vs_mercado: {_rival_name} +{_edge_rival*100:.1f}% "
-                            f"(modelo {_p_modelo_rival*100:.1f}% vs bookmaker {_p_impl_rival*100:.1f}%, cuota {_cuota_rival_val})\n"
+                            f"edge_vs_mercado_rival: {_rival_name} +{_edge_rival*100:.1f}% [POSITIVO]"
+                            f" (modelo {_p_modelo_rival*100:.1f}% vs bookmaker {_p_impl_rival*100:.1f}%, cuota {_cuota_rival_val})\n"
                         )
+
+                    # D65-06: WARN superficie discrepante vs calibración dominante (Nodo-65)
+                    _match_sup_65 = (match.get('tipo_cancha') or '').lower()
+                    if (_dom_sup_65 and _match_sup_65
+                            and _match_sup_65 not in ('unknown', '?', '')
+                            and _match_sup_65 != _dom_sup_65):
+                        _dom_d65 = _calib_por_sup_65.get(_dom_sup_65, {})
+                        _match_d65 = _calib_por_sup_65.get(_match_sup_65, {})
+                        _dom_n65 = _dom_d65.get('wins', 0) + _dom_d65.get('losses', 0)
+                        _match_n65 = _match_d65.get('wins', 0) + _match_d65.get('losses', 0)
+                        _dom_hit65 = round(_dom_d65.get('wins', 0) / _dom_n65 * 100, 1) if _dom_n65 > 0 else 0.0
+                        _match_hit65 = round(_match_d65.get('wins', 0) / _match_n65 * 100, 1) if _match_n65 > 0 else 0.0
+                        if _dom_hit65 - _match_hit65 >= 5.0:
+                            f.write(
+                                f"WARN_SUPERFICIE: partido en {_match_sup_65} (hit={_match_hit65}% n={_match_n65})"
+                                f" vs superficie dominante {_dom_sup_65} (hit={_dom_hit65}% n={_dom_n65})"
+                                f" — menor calibracion historica. Verificar señales adicionales.\n"
+                            )
 
                 f.write(f"Diferencia de Puntaje: {scores.get('score_difference', 'N/A')}\n\n")
 

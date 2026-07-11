@@ -69,6 +69,25 @@ def _validate_pick(pick: dict) -> list[tuple[str, str, str]]:
         issues.append((WARN, "CUOTA_SIMULADA",
                        f"{nombre}: cuota_es_real=False — Kambi no tiene precio, cuota estimada"))
 
+    # D65-04: WARN VARIABLE sin respaldo — cuota ≤1.30 + edge negativo + sin triple alignment (Nodo-65 H77-02)
+    try:
+        _cuota_65 = float(pick.get("cuota_favorito") or pick.get("cuota") or 0.0)
+    except (TypeError, ValueError):
+        _cuota_65 = 0.0
+    try:
+        _edge_65 = float(pick.get("edge") or 0.0)
+    except (TypeError, ValueError):
+        _edge_65 = 0.0
+    try:
+        _triple_65 = float(pick.get("triple_alignment") or 0.0)
+    except (TypeError, ValueError):
+        _triple_65 = 0.0
+    if 0.0 < _cuota_65 <= 1.30 and _edge_65 < 0.0 and _triple_65 < 0.35:
+        issues.append((WARN, "VARIABLE_SIN_RESPALDO",
+                       f"{nombre}: cuota={_cuota_65:.2f} ≤1.30 + edge={_edge_65*100:.1f}% [NEGATIVO] + "
+                       f"triple_alignment={_triple_65:.2f} — pick VARIABLE sin señal de respaldo (Nodo-65). "
+                       f"Verificar SCALP/RFI en tabla_favoritos antes de incluir en combo."))
+
     # PASS: si no hay problemas
     if not issues:
         kl_str = f"{kl:.4f}" if kl is not None else "?"
