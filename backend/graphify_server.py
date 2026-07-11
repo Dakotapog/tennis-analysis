@@ -15,9 +15,32 @@ SERVE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "graphify-o
 NO_CACHE_EXTS = {".json", ".html"}
 
 
+BACKEND_ROOT = os.path.dirname(os.path.abspath(__file__))
+# Files served from backend root (not graphify-out/) via special routes
+BACKEND_ROUTES = {"/nodos_index.json": "nodos_index.json"}
+
+
 class GraphifyHandler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=SERVE_DIR, **kwargs)
+
+    def do_GET(self):
+        clean = self.path.split("?")[0].rstrip("/")
+        if clean in BACKEND_ROUTES:
+            fpath = os.path.join(BACKEND_ROOT, BACKEND_ROUTES[clean])
+            try:
+                with open(fpath, "rb") as f:
+                    data = f.read()
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
+                self.send_header("Content-Length", str(len(data)))
+                self.end_headers()
+                self.wfile.write(data)
+            except FileNotFoundError:
+                self.send_error(404)
+            return
+        super().do_GET()
 
     def end_headers(self):
         ext = os.path.splitext(self.path.split("?")[0])[1].lower()
