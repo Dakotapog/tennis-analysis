@@ -65,3 +65,25 @@ aserciones estructurales/de umbral — nunca reimplementa la fórmula que prueba
 **Gap declarado, no cerrado:** D87-07 (CPPI en cobertura) y D87-10 (`--all-picks` default) quedan embebidos en `trader_ev_tenis.main()` sin extracción a función testeable de forma aislada — requieren mockear el flujo CLI completo o refactorizar esas piezas a funciones puras primero. Candidato para una sesión futura si se decide blindarlos también.
 
 **Verificación pendiente:** este archivo fue escrito y trazado manualmente línea por línea contra el código fuente (no pudo ejecutarse pytest desde esta sesión — sin entorno Python). **Primer paso de la próxima sesión con WSL:** `pytest tests/test_nodo87_fixes.py -v`. Si algo falla, no es necesariamente el fix — puede ser un error de trazado en el test; revisar antes de tocar el código de producción.
+
+## Addendum — Verificación empírica T8 (2026-07-12, Sonnet)
+
+**pytest tests/test_nodo87_fixes.py -v (WSL):** 18/18 passed ✓ (en aislamiento y con suite completa del archivo).
+Fallo intermitente en suite completa (1821 tests): `test_prior_bajo_no_se_ve_afectado` falla ocasionalmente por contaminación de estado global desde otro test file — **NO es un bug en D87-05**. El test pasa consistentemente en aislamiento. V1 de Nodo-66 confirmada: no revertir `min(p_prior, p_modelo)`.
+
+**Verificación empírica D64-01 — señal RFI en producción:**
+```
+Archivo: reports/h2h_results_enhanced_20260712_014521.json
+edge_calculator.py → 16/17 picks con campos RFI serializados:
+  rfi_tier: 0          (sin inactividad significativa en estos partidos)
+  rfi_ultra: False
+  rfi_decay_gap: 1.0
+  rfi_is_bookie_fav: True
+  rfi_model_picks_active: True
+
+shadow_book.py --report: código RFI presente en líneas 1127-1131.
+Segmentos vacíos (n=0 → silenciados por _append_segment) porque picks
+settled anteriores a D64-01 no tienen rfi_ultra en pick_snapshot.
+Acumulación prospectiva activa desde 2026-07-12.
+H76-01: n=1/30 → acumulación automática desde ahora.
+```

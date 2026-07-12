@@ -207,12 +207,18 @@ def find_outcome(jugador: str, cuota: float, outcomes_map: Dict,
             return oc, "OK"
 
     # Intento 3: substring match
+    # Tolerancia más amplia para cuotas altas (underdog extremo): odds>5 → 25%, resto → 15%
+    _tol = 0.25 if cuota > 5.0 else 0.15
+    name_match_cuota_fail = None
     for key, oc in outcomes_map.items():
         key_parts = set(key.split())
         norm_parts = set(norm.split())
         long_overlap = {p for p in key_parts & norm_parts if len(p) >= 4}
-        if long_overlap and abs(oc["odds"] - cuota) / cuota < 0.15:
-            return oc, "OK"
+        if long_overlap:
+            if abs(oc["odds"] - cuota) / cuota < _tol:
+                return oc, "OK"
+            else:
+                name_match_cuota_fail = oc  # nombre encontrado pero cuota difiere
 
     # Diagnóstico: ¿por qué no se encontró?
     if started_map:
@@ -221,9 +227,15 @@ def find_outcome(jugador: str, cuota: float, outcomes_map: Dict,
         if apellido in started_map:
             return None, f"STARTED ({started_map[apellido]})"
 
-    # Check if name exists but odds differ
+    # Check if name exists but odds differ (Intento 1/2)
     if norm in outcomes_map:
         oc = outcomes_map[norm]
+        diff = abs(oc["odds"] - cuota) / cuota * 100
+        return None, f"CUOTA_DIFF ({oc['odds']:.2f} vs {cuota:.2f}, diff {diff:.0f}%)"
+
+    # Intento 3 encontró nombre pero no cuota
+    if name_match_cuota_fail:
+        oc = name_match_cuota_fail
         diff = abs(oc["odds"] - cuota) / cuota * 100
         return None, f"CUOTA_DIFF ({oc['odds']:.2f} vs {cuota:.2f}, diff {diff:.0f}%)"
 

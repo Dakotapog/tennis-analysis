@@ -1,24 +1,24 @@
 {
   "global": {
-    "wins": 2143,
-    "losses": 1380
+    "wins": 2358,
+    "losses": 1480
   },
   "por_superficie": {
     "clay": {
-      "wins": 1183,
-      "losses": 642
+      "wins": 1291,
+      "losses": 710
     },
     "unknown": {
       "wins": 46,
       "losses": 29
     },
     "grass": {
-      "wins": 351,
-      "losses": 272
+      "wins": 370,
+      "losses": 276
     },
     "hard": {
-      "wins": 540,
-      "losses": 364
+      "wins": 628,
+      "losses": 392
     },
     "?": {
       "wins": 23,
@@ -111,7 +111,7 @@
     "challenger": 0.611,
     "itf": 0.5
   },
-  "ultima_actualizacion": "2026-07-08T19:19:30.582200",
+  "ultima_actualizacion": "2026-07-12T00:08:24.052134",
   "_nota_revert_B11": "Revertidos 14W/17L de sesión Jun15-16 (modelo B-11 roto, accuracy=46.9% ruido puro)",
   "_nota_era_v2": "FIX-5: era_v2 acumula datos post-normalización-fix desde 2026-06-19. Usar como prior cuando era_v2_n >= 10."
 }

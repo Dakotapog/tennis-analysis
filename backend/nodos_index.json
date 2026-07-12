@@ -1,8 +1,8 @@
 {
   "_meta": {
-    "generado": "2026-07-10T01:50:00",
-    "total_nodos": 75,
-    "total_py_files": 62,
+    "generado": "2026-07-12T02:07:40",
+    "total_nodos": 89,
+    "total_py_files": 64,
     "huerfanos_count": 0,
     "exclusiones_count": 19
   },
@@ -930,6 +930,53 @@
       ]
     },
     {
+      "nodo_id": "65",
+      "nodo_archivo": "Nodo-65-Convergencia-Multi-Senal-Patron-Combos.md",
+      "fecha": null,
+      "estado": "IMPLEMENTADO — todas las deudas D65-01→D65-07 resueltas (2026-07-10)",
+      "archivos_mencionados": [
+        "combo_confianza_builder.py",
+        "edge_calculator.py",
+        "generar_tabla_favoritos2.py",
+        "pre_game_validator.py",
+        "shadow_book.py"
+      ]
+    },
+    {
+      "nodo_id": "66",
+      "nodo_archivo": "Nodo-66-Plan-Trabajo-Semanal-Sonnet.md",
+      "fecha": "2026-07-11",
+      "estado": null,
+      "archivos_mencionados": [
+        "check_contradictions.py",
+        "scripts/rebuild_nodos_index.py",
+        "shadow_book.py",
+        "tests/test_nodo87_fixes.py"
+      ]
+    },
+    {
+      "nodo_id": "67",
+      "nodo_archivo": "Nodo-67-Integracion-Herramientas.md",
+      "fecha": "2026-07-11",
+      "estado": null,
+      "archivos_mencionados": [
+        "combo_registry.py",
+        "core/data_contract.py",
+        "n8n_push_workflow.py"
+      ]
+    },
+    {
+      "nodo_id": "68",
+      "nodo_archivo": "Nodo-68-Rival-Value-Flip.md",
+      "fecha": "2026-07-11",
+      "estado": "PRE-REGISTRO PENDIENTE (H88-01) — implementación observacional esta semana (Sonnet)",
+      "archivos_mencionados": [
+        "edge_calculator.py",
+        "generar_tabla_favoritos2.py",
+        "shadow_book.py"
+      ]
+    },
+    {
       "nodo_id": "72",
       "nodo_archivo": "Nodo-72-Phantom-Identity-Guard.md",
       "fecha": "2026-07-08",
@@ -1014,9 +1061,125 @@
       "archivos_mencionados": [
         "browser_manager.py",
         "check_contradictions.py",
+        "close_snapshot_server.py",
+        "close_snapshot_trigger.py",
         "combo_governor.py",
         "data_parser.py",
         "h2h_extractor.py"
+      ]
+    },
+    {
+      "nodo_id": "79",
+      "nodo_archivo": "Nodo-79-MinBet-Por-Tier.md",
+      "fecha": "2026-07-10",
+      "estado": "BORRADOR — modo sombra activo desde 2026-07-10",
+      "archivos_mencionados": [
+        "tests/test_nodo79_minbet_shadow.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "80",
+      "nodo_archivo": "Nodo-80-Kambi-Name-Matching.md",
+      "fecha": "2026-07-10",
+      "estado": "IMPLEMENTADO 2026-07-11 — Opción 1 (candidatos múltiples) en `close_snapshot()` de shadow_book.py",
+      "archivos_mencionados": [
+        "scraping/kambi_tennis.py",
+        "shadow_book.py",
+        "tests/test_nodo80_kambi_matching.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "81",
+      "nodo_archivo": "Nodo-81-Settlement-Name-Normalize.md",
+      "fecha": "2026-07-11",
+      "estado": "IMPLEMENTADO 2026-07-11 — `_normalize_name_match` Tier 3a en `settle()` de shadow_book.py",
+      "archivos_mencionados": [
+        "core/player_registry.py",
+        "shadow_book.py",
+        "tests/test_settlement_name_normalize.py"
+      ]
+    },
+    {
+      "nodo_id": "82",
+      "nodo_archivo": "Nodo-82-Kambi-Match-ID-Structural.md",
+      "fecha": "2026-07-11",
+      "estado": "GATEADO — criterio de activación definido, NO implementar hasta cumplir gate",
+      "archivos_mencionados": [
+        "scraping/kambi_tennis.py",
+        "shadow_book.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "83",
+      "nodo_archivo": "Nodo-83-Graphify-Server.md",
+      "fecha": "2026-07-11",
+      "estado": "IMPLEMENTADO",
+      "archivos_mencionados": [
+        "graphify_server.py"
+      ]
+    },
+    {
+      "nodo_id": "84",
+      "nodo_archivo": "Nodo-84-Graphify-3D.md",
+      "fecha": "2026-07-11",
+      "estado": "IMPLEMENTADO",
+      "archivos_mencionados": []
+    },
+    {
+      "nodo_id": "85",
+      "nodo_archivo": "Nodo-85-Graphify-Fase3.md",
+      "fecha": "2026-07-11",
+      "estado": "IMPLEMENTADO",
+      "archivos_mencionados": [
+        "graphify_report.py",
+        "graphify_server.py",
+        "rebuild_nodos_index.py"
+      ]
+    },
+    {
+      "nodo_id": "86",
+      "nodo_archivo": "Nodo-86-Auditoria-Fable5.md",
+      "fecha": "2026-07-11",
+      "estado": "DIAGNÓSTICO PURO — cero cambios de código aplicados. Cada fix se decide con el usuario, uno por uno.",
+      "archivos_mencionados": [
+        "betslip_registrar.py",
+        "core/data_contract.py",
+        "edge_calculator.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "87",
+      "nodo_archivo": "Nodo-87-Fixes-Auditoria-D87.md",
+      "fecha": "2026-07-11",
+      "estado": "IMPLEMENTADO — 12 fixes de código + verificación pytest. Commit `2251667`.",
+      "archivos_mencionados": [
+        "analysis/rivalry_analyzer.py",
+        "betplay_combo_builder.py",
+        "betslip_registrar.py",
+        "edge_calculator.py",
+        "pre_game_validator.py",
+        "shadow_book.py",
+        "tests/test_nodo87_fixes.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "88",
+      "nodo_archivo": "Nodo-88-Graphify-Fase4-Report.md",
+      "fecha": "2026-07-12",
+      "estado": "IMPLEMENTADO",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "check_contradictions.py",
+        "graphify_report.py",
+        "graphify_server.py",
+        "rebuild_nodos_index.py",
+        "scripts/rebuild_nodos_index.py",
+        "shadow_book.py"
       ]
     }
   ],
