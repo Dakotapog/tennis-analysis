@@ -52,6 +52,12 @@ Div flotante `#tooltip` posicionado en `mousemove`.
 Toggle oculta/muestra nodos del tipo (`nodeVal → 0.001`, `nodeColor → transparent`).
 Compatible con filtro de comunidades y path mode (todas las condiciones se combinan en `_nodeColor`/`_nodeVal`).
 
+**Limitación conocida — visual only, no físico:** Los nodos ocultados siguen participando en
+la simulación de física (ForceGraph3D). Solo se vuelven transparentes/invisibles; no se
+eliminan del grafo ni del cálculo de fuerzas. Esto es intencional: quitar nodos del grafo
+en tiempo de ejecución requeriría llamar `G.graphData({...})` de nuevo y resetearía toda la
+simulación. La solución actual es adecuada para exploración visual rápida.
+
 ## Cambio en graphify_server.py
 
 Ruta especial `GET /nodos_index.json` → sirve `{BACKEND_ROOT}/nodos_index.json`.
@@ -74,4 +80,4 @@ Tooltip: aparece en hover con info de nodo
 - Nodo-84: graph3d.html (Fase 2, base de esta implementación)
 - `docs/specs/SPEC_GRAPHIFY_V2_3D_REPORTES.md` §Fase 3
 - `nodos_index.json` — fuente SDD (Nodo-75, generado por `rebuild_nodos_index.py`)
-- Fase 4 (graphify report) — pendiente, requiere confirmación
+- Nodo-88: Fase 4 — graphify report CLI (`graphify_report.py`)
