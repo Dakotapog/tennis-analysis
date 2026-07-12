@@ -1,6 +1,6 @@
 # CLAUDE.md — Tennis Prediction & Betting Engine
 
-> Last updated: 2026-07-10 (Nodo-65 D65-01→D65-07 implementados — ANCHOR/VARIABLE segmentación, tier mismatch, WARN superficie — 1775 tests)
+> Last updated: 2026-07-12 (Nodo-87 D87-01→D87-11+D64-01 verificados — 18 tests REGLA-T53 + T5 nodos_index + betplay underdog fix — 1822 tests)
 > Spec-Driven Development (SDD). CLAUDE.md es VISTA DERIVADA — los nodos son la fuente de verdad.
 > Leer completo antes de tocar código. Ver política de precedencia §10.
 
@@ -124,13 +124,13 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 
 ---
 
-## 5. ESTADO ACTUAL — 2026-07-10
+## 5. ESTADO ACTUAL — 2026-07-12
 
 | Métrica | Valor |
 |---|---|
-| Tests | **1804 passed, 0 failed** (verificado 2026-07-11 POST-fixes D87+D64-01). Gap conocido: los caminos corregidos por D87 no tenían cobertura — añadir tests REGLA-T53 en Nodo-87 |
-| Calibración | clay GS: p=0.758 (n=31) \| global: wins=2307, losses=1452 (n=3759) \| ⚠️ buckets huérfanos `?`/`?_?` con ~141 resultados de dinero real (24% hit) — ver Nodo-86 §1.1, migración pendiente de decisión |
-| **Auditoría Fable5** | **2026-07-11 — `docs/auditorias/AUDITORIA_FABLE5_2026-07-11.md` + Nodo-86. 12 fixes D87-01→D87-11 + D64-01 (RFI) aplicados y documentados en Nodo-87 (tabla completa archivo:línea). D-10 en DECISION-LOG. Pendiente: tests REGLA-T53 (Nodo-66 T3), Nodo-67 (integración herramientas), Nodo-68 (H88-01 Rival Value Flip)** |
+| Tests | **1822 passed, 0 failed** (verificado 2026-07-12 — 18 tests REGLA-T53 Nodo-87 añadidos y pasando). Nota: fallo intermitente `test_prior_bajo_no_se_ve_afectado` por contaminación estado global entre test files — pasa en aislamiento, NO es bug D87-05 (V1 Nodo-66 confirmada) |
+| Calibración | clay GS: p=0.758 (n=31) \| global: wins=2358, losses=1480 (n=3838) \| ⚠️ buckets huérfanos `?`/`?_?` con ~141 resultados de dinero real (24% hit) — ver Nodo-86 §1.1, migración en evaluación: T7 Nodo-66 decide |
+| **Auditoría Fable5** | **Nodo-86: COMPLETO** (diagnóstico 2026-07-11 — `docs/auditorias/AUDITORIA_FABLE5_2026-07-11.md`). Nodo-87: 12 fixes D87-01→D87-11+D64-01 verificados 18/18 tests REGLA-T53 (2026-07-12). D-10 en DECISION-LOG. Trabajo derivado: T7 bucket `?` (propuesta, Nodo-66), T9 settle deuda (Nodo-66), D68-01→D68-05 Rival Value Flip EN CURSO (Nodo-68), I1→I7 integración herramientas (Nodo-67) |
 | Bankroll | $125,000+ |
 | Shadow Book hit% | GS: 50% ROI+47% \| Challenger: +7.9% \| ITF: 38% ROI-16.8% (jul-10) |
 | ML Dataset | 2,573 registros limpios (motor nodo32, trazabilidad verificada) |
@@ -153,8 +153,8 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 **Nodo-64:** RFI Return-From-Inactivity — **implementado 2026-07-11 (D64-01)**: `rfi_tier`/`rfi_ultra`/`rfi_decay_gap` serializados en edge_report, segmentos en shadow_book --report. H76-01 acumula automático (antes: registro manual, n=1/30 estancado desde 2026-07-09).
 **Nodo-65:** Convergencia Multi-Señal — dos poblaciones ANCHOR(edge>0) / VARIABLE(edge≤0). D65-01→D65-07 implementados 2026-07-10. H77-01/02/03 pre-registradas (n_stop=30/60/20). tier_mismatch observacional en pick_snapshot. WARN_SUPERFICIE en tabla favoritos. Segmento ANCHOR/VARIABLE en shadow_book --report.
 **Nodos documentados, implementacion gateada (auditoría 2026-07-09):** 74 (governor — READ-ONLY, gate: 10 sesiones reales), 75 (índice nodos — 75 nodos, 0 huérfanos), 76 (combo registry — sin invoke en prod)
-**Nodos 86-87 (auditoría 2026-07-11):** 86 = hallazgos + doc completo. 87 = tabla de los 12 fixes D87-01→D87-11+D64-01 aplicados, archivo:línea, verificado 1804 tests passed.
-**Nodos 66-68 (plan de trabajo, 2026-07-11):** 66 = checklist semanal Sonnet (T1-T10, trampas V1-V10). 67 = integración n8n/dashboard/governor/graphify/docker/tamp + plan conexiones ocultas C1-C5. 68 = H88-01 Rival Value Flip (hallazgo Opus, PRE-REGISTRO, backtest retrospectivo gratis disponible sobre settled existentes) — implementación PENDIENTE.
+**Nodos 86-87 (auditoría 2026-07-11):** 86 = hallazgos + doc completo. 87 = tabla de los 12 fixes D87-01→D87-11+D64-01 aplicados, archivo:línea, verificado 1822 tests passed (18 nuevos REGLA-T53 en `tests/test_nodo87_fixes.py`, adendum T8 con verificación empírica RFI).
+**Nodos 66-68 (plan de trabajo, 2026-07-11):** 66 = checklist semanal Sonnet (T1-T10 — T1/T2/T3/T5/T8 completados 2026-07-12). 67 = integración n8n/dashboard/governor/graphify/docker/tamp + plan conexiones ocultas C1-C5 (pendiente). 68 = H88-01 Rival Value Flip (hallazgo Opus, PRE-REGISTRO) — D68-01→D68-05 EN CURSO 2026-07-12.
 
 ---
 
@@ -191,7 +191,7 @@ data/calibracion_edge.json              ← Thompson Beta priors (fuente de verd
 reports/shadow_book/sb_YYYY-MM-DD.jsonl ← append-only, inmutable en predicción
 validation/preregistered_hypotheses.json ← H52-01→H62-01, NO modificar sin decisión
 validation/hypothesis_tracker.py        ← sprt_verdict() + llr_update() (Nodo-64)
-docs/DECISION-LOG.md                    ← D-01→D-07 + E-01→E-05 + C-01→C-05
+docs/DECISION-LOG.md                    ← D-01→D-10 + E-01→E-05 + C-01→C-07
 
 ── MOTOR DE PREDICCIÓN ──────────────────────────────────────────────────────
 analysis/rivalry_analyzer.py      ← Erdős+Markov+GCS+PhantomGuard (núcleo)
@@ -217,7 +217,7 @@ app.py | routes/ | models/ | services/ | database.db
 
 | Bug | Estado |
 |---|---|
-| Auditoría Nodo-86 (15 hallazgos) | ✅ 12 fixes D87-01→D87-11 aplicados 2026-07-11 (calibración `?`, H62-01 alpha_flags, floor MIN_BET, p_blend inflado, gate GCS, puente betslip, settle rival, --all-picks) — **pytest pendiente desde WSL** |
+| Auditoría Nodo-86 (15 hallazgos) | ✅ 12 fixes D87-01→D87-11 + D64-01 aplicados 2026-07-11 — 18/18 tests REGLA-T53 verificados 2026-07-12 en WSL. Gap D87-07/D87-10: embebidos en `trader_ev_tenis.main()`, requieren refactor para aislar — candidato sesión futura |
 | prediccion_ganador top-level=None | ✅ RESUELTO — usar `ranking_analysis.prediction.favored_player` |
 | Edge falso historial corto (n<8) | ✅ RESUELTO — Nodo-63 `_MIN_HISTORY_FOR_DECAY=8` |
 | Phantom Identity API homónimos | ✅ RESUELTO — Nodo-72 `_detect_phantom_identity()` + Playwright PRIMARIO |
@@ -232,7 +232,7 @@ git log --all --oneline -- '*keyword*'
 git show COMMIT:backend/archivo.py    # recuperar si existe
 
 # 2. Baseline antes de modificar
-python -m pytest tests/ --no-cov -q  # 1756 passed
+python -m pytest tests/ --no-cov -q  # 1822 passed
 
 # 3. Syntax check después de editar
 python -c "import ast; ast.parse(open('archivo.py').read()); print('OK')"
@@ -254,7 +254,7 @@ graphify query "<pregunta>"   # orientarse primero, grep solo para líneas espec
 
 **Datos:** Predicción anidada en `ranking_analysis.prediction.favored_player`. Phantom alerta: ranking=None + n>20 + oldest>365d → LOG_PLAYWRIGHT_CANDIDATE. `_MIN_HISTORY_FOR_DECAY=8`.
 
-**Testing:** REGLA-T53 (función real, nunca hardcodear fórmula). 1756 tests: no romper.
+**Testing:** REGLA-T53 (función real, nunca hardcodear fórmula). 1822 tests: no romper.
 
 **Combo Builder:** correr trader POR TIER antes del combo builder. REGLA-KAMBI-1: `||replace` (no `||append`).
 
