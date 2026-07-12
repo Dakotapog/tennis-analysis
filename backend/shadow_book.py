@@ -575,7 +575,7 @@ def update_trader_stakes(fecha: str, trader_plan: dict) -> int:
 
     actualizados = 0
     for sb_id, rec in records.items():
-        if rec.get('record_type') == 'session_meta':
+        if rec.get('_type') == 'session_meta':  # D87-01: el campo real es '_type', no 'record_type'
             continue
         snap = rec.get('pick_snapshot', {})
         match_id = snap.get('match_id', '')
@@ -627,11 +627,13 @@ def update_alpha_flags(fecha: str, alpha_nombres: list[str]) -> int:
     nombres_set = {n.strip().lower() for n in alpha_nombres}
     marcados = 0
     for sb_id, rec in records.items():
-        if rec.get('record_type') == 'session_meta':
+        if rec.get('_type') == 'session_meta':  # D87-01: el campo real es '_type', no 'record_type'
             continue
         snap = rec.get('pick_snapshot', {})
-        nombre = (snap.get('nombre') or snap.get('jugador') or
-                  snap.get('player') or '').strip().lower()
+        # D87-01 (Nodo-87): pick_snapshot usa 'favorito_predicho' (edge_report),
+        # no 'nombre' — sin este campo el flag nunca matcheaba (0 registros marcados)
+        nombre = (snap.get('favorito_predicho') or snap.get('nombre') or
+                  snap.get('jugador') or snap.get('player') or '').strip().lower()
         if nombre and nombre in nombres_set:
             flags = rec.get('combo_flags', {})
             flags['alpha_promoted'] = True
@@ -706,16 +708,32 @@ def settle(fecha: str, resultados_map: Optional[Dict] = None) -> int:
         # Fallback nombre: Tier 3a normalize_player_name (Nodo-51) + Tier 3b _name_tokens (Nodo-36)
         else:
             favorito = snap.get('favorito_predicho', '')
+            _p1_pick, _p2_pick = _pick_partido_parts(snap)
+            # D87-11 (Nodo-86 §4.4): el rival del pick — favorito_predicho es
+            # exactamente jugador1 o jugador2 (edge_calculator garantiza igualdad)
+            _rival_pick = _p2_pick if favorito == _p1_pick else _p1_pick
             if favorito:
                 for res_candidate in resultados_map.values():
                     p1_fs = res_candidate.get('p1', '') or ''
                     p2_fs = res_candidate.get('p2', '') or ''
-                    if (_normalize_name_match(p1_fs, favorito)
-                            or _normalize_name_match(p2_fs, favorito)
-                            or _fuzzy_name_match(p1_fs, favorito)
-                            or _fuzzy_name_match(p2_fs, favorito)):
-                        res = res_candidate
-                        break
+                    _fav_ok = (_normalize_name_match(p1_fs, favorito)
+                               or _normalize_name_match(p2_fs, favorito)
+                               or _fuzzy_name_match(p1_fs, favorito)
+                               or _fuzzy_name_match(p2_fs, favorito))
+                    if not _fav_ok:
+                        continue
+                    # D87-11: exigir que el RIVAL también esté en el resultado —
+                    # sin esto, un jugador con dos partidos el mismo día (qualy +
+                    # main) u homónimo se settleaba contra el partido equivocado
+                    if _rival_pick:
+                        _rival_ok = (_normalize_name_match(p1_fs, _rival_pick)
+                                     or _normalize_name_match(p2_fs, _rival_pick)
+                                     or _fuzzy_name_match(p1_fs, _rival_pick)
+                                     or _fuzzy_name_match(p2_fs, _rival_pick))
+                        if not _rival_ok:
+                            continue
+                    res = res_candidate
+                    break
 
         if res is None:
             continue
@@ -1105,6 +1123,12 @@ def report(desde: Optional[str] = None, hasta: Optional[str] = None) -> str:
                 f"IC95=[{_ic65[0]},{_ic65[1]}]  ROI={_m65['roi']}%{_note65}"
             )
         lines.append("")
+
+    # ── D64-01: RFI (H76-01) — observacional, acumulación automática desde pick_snapshot ──
+    _append_segment(settled, lines, "RFI-ULTRA (H76-01: inactivo>=180d fav bookie, modelo va al activo)",
+                    lambda r: r.get('pick_snapshot', {}).get('rfi_ultra', False))
+    _append_segment(settled, lines, "rfi_tier>=1 (rival o fav >=90d inactivo)",
+                    lambda r: (r.get('pick_snapshot', {}).get('rfi_tier') or 0) >= 1)
 
     # ── D54-02: WATCHLIST ∩ tier=grand_slam ∩ edge≥20% (Nodo-55 P54-03) ──
     # Intersección de cortes ya pre-registrados: status × tier × banda de cuota.

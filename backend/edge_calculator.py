@@ -723,7 +723,7 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
 
     # ─── L5: Thompson Sampling estratificado (T17-02/T17-03) ─
     superficie = partido.get('superficie') or partido.get('tipo_cancha') or 'unknown'
-    if superficie in ('N/A', 'Desconocida', None):
+    if superficie in ('N/A', 'Desconocida', '?', '', None):  # D87-04: '?' del bookmarklet Kambi
         superficie = 'unknown'
     p_hist = theta_thompson(calibracion, superficie, tier)
 
@@ -891,6 +891,52 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
         'campeon_tier_actual': tier if _campeon_tier_nivel else None,
     })
 
+    # ─── D64-01 (Nodo-64): RFI — Return From Inactivity. OBSERVACIONAL PURO ─────
+    # Serializa la señal al pick_snapshot para acumulación automática de H76-01
+    # (llevaba n=1/30 en registro manual). PROHIBIDO usar en decisión: el boost
+    # D64-04 sigue gateado hasta graduación (n>=30 + IC Wilson).
+    _fd_meta = pred.get('form_decay_meta') or {}
+    _fd_fav = _fd_meta.get('p1' if player_key_sb == 'player1' else 'p2') or {}
+    _fd_rival_m = _fd_meta.get('p2' if player_key_sb == 'player1' else 'p1') or {}
+    _days_fav = _fd_fav.get('days_since', -1)
+    _days_rival = _fd_rival_m.get('days_since', -1)
+
+    def _rfi_tier_de(days):
+        # RFI-0 <90d (normal entre torneos) | RFI-1 90-179 | RFI-2 180-364 | RFI-3 >=365
+        if days is None or days < 90:
+            return 0
+        if days < 180:
+            return 1
+        if days < 365:
+            return 2
+        return 3
+
+    # El "inactivo" del partido = quien lleva más días sin jugar
+    if _days_rival >= _days_fav:
+        _rfi_days, _rfi_inactivo_es_fav = _days_rival, False
+        _cuota_inactivo, _cuota_activo = cuota_rival, cuota_fav
+    else:
+        _rfi_days, _rfi_inactivo_es_fav = _days_fav, True
+        _cuota_inactivo, _cuota_activo = cuota_fav, cuota_rival
+    _rfi_tier_v = _rfi_tier_de(_rfi_days)
+    _rfi_is_bookie_fav = bool(
+        _cuota_inactivo and _cuota_activo and _cuota_inactivo < _cuota_activo
+    )
+    resultado.update({
+        'rfi_days_inactive':      _rfi_days if (_rfi_days is not None and _rfi_days >= 0) else None,
+        'rfi_tier':               _rfi_tier_v,
+        'rfi_inactive_is_fav':    _rfi_inactivo_es_fav,
+        'rfi_is_bookie_fav':      _rfi_is_bookie_fav,
+        # el modelo elige al ACTIVO cuando el favorito predicho no es el inactivo
+        'rfi_model_picks_active': not _rfi_inactivo_es_fav,
+        # marco: gap de frescura favorito/rival (fd_fav / fd_rival) — >1 = favorito más fresco
+        'rfi_decay_gap':          round(
+            (_fd_fav.get('fd') or 1.0) / max(_fd_rival_m.get('fd') or 1.0, 1e-6), 3),
+        # H76-01 RFI-ULTRA: inactivo >=180d es favorito del bookmaker y el modelo va al activo
+        'rfi_ultra':              bool(
+            _rfi_tier_v >= 2 and _rfi_is_bookie_fav and not _rfi_inactivo_es_fav),
+    })
+
     # ─── Nodo-35 / F2: HISTORIAL_NO_EXTRAIDO — bloqueo en origen + NO_DATA status ──
     # Si la extracción de historial falló para cualquiera de los dos jugadores,
     # la predicción está basada en datos incompletos → status='NO_DATA', excluido
@@ -993,8 +1039,13 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
     _kelly_kl_ef = _kelly_kl_base * _gcs_score_boost
 
     # Gate GCS: solo opera si _GCS_GATE_ENABLED=True
+    # D87-02 (Nodo-87): el gate solo levanta picks frenados por umbral de edge —
+    # NUNCA picks bloqueados por gates de seguridad (NO_DATA, T33-01 coin-flip,
+    # HOT_sin_BBI, N28F2 n_axes<2). Esos dejan motivo_reclasificacion/status.
     if (_GCS_GATE_ENABLED and _gcs_bonus and
-            resultado['edge'] >= 0.15 and _kelly_kl_ef > 0.02 and _p_blend >= 0.45):
+            resultado['edge'] >= 0.15 and _kelly_kl_ef > 0.02 and _p_blend >= 0.45
+            and not resultado.get('motivo_reclasificacion')
+            and resultado.get('status') != PICK_STATUS_NO_DATA):
         resultado['apostar'] = True
         _gcs_gate_applied = True
         resultado['kelly_kl_gcs_boosted'] = round(_kelly_kl_ef, 4)

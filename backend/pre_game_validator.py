@@ -39,7 +39,9 @@ def _latest_edge_report() -> Path | None:
 def _validate_pick(pick: dict) -> list[tuple[str, str, str]]:
     """Devuelve lista de (nivel, codigo, mensaje) para un pick."""
     issues = []
-    nombre = pick.get("jugador") or pick.get("player") or pick.get("nombre") or "?"
+    # D87-06: 'favorito_predicho' es el campo real del edge_report
+    nombre = (pick.get("favorito_predicho") or pick.get("jugador")
+              or pick.get("player") or pick.get("nombre") or "?")
 
     # BLOCK: kelly_kl == 0.0
     kl = pick.get("kelly_kl", None)
@@ -54,7 +56,7 @@ def _validate_pick(pick: dict) -> list[tuple[str, str, str]]:
                        f"{nombre}: n_partidos={n} < 8 — datos incompletos, no inactividad real"))
 
     # WARN: Phantom Identity signal
-    ranking = pick.get("ranking") or pick.get("ranking_actual")
+    ranking = pick.get("ranking") or pick.get("ranking_actual") or pick.get("ranking_favorito")  # D87-06
     if ranking is None and n is not None and int(n) > 20:
         fecha_min = pick.get("fecha_mas_antigua") or pick.get("oldest_match")
         issues.append((WARN, "PHANTOM_IDENTITY_SIGNAL",
@@ -106,6 +108,13 @@ def validate_file(path: Path) -> int:
     picks = []
     if isinstance(data, list):
         picks = data
+    elif "apostar" in data or "watchlist" in data:
+        # D87-06 (Nodo-86 §1.6): schema real de edge_calculator. Antes el fallback
+        # generico tomaba solo la primera lista ('apostar') — watchlist y sin_edge
+        # entran al pool del trader por defecto y nunca se validaban.
+        picks = (list(data.get("apostar") or [])
+                 + list(data.get("watchlist") or [])
+                 + list(data.get("sin_edge") or []))
     elif "picks" in data:
         picks = data["picks"]
     elif "apuestas" in data:

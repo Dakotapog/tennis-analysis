@@ -128,8 +128,9 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 
 | Métrica | Valor |
 |---|---|
-| Tests | **1775 passed, 0 failed** |
-| Calibración | clay GS: p=0.758 (n=31) \| global: n=706, wins=467, losses=239 |
+| Tests | **1804 passed, 0 failed** (verificado 2026-07-11 POST-fixes D87+D64-01). Gap conocido: los caminos corregidos por D87 no tenían cobertura — añadir tests REGLA-T53 en Nodo-87 |
+| Calibración | clay GS: p=0.758 (n=31) \| global: wins=2307, losses=1452 (n=3759) \| ⚠️ buckets huérfanos `?`/`?_?` con ~141 resultados de dinero real (24% hit) — ver Nodo-86 §1.1, migración pendiente de decisión |
+| **Auditoría Fable5** | **2026-07-11 — `docs/auditorias/AUDITORIA_FABLE5_2026-07-11.md` + Nodo-86. Fixes D87-01→D87-11 + D64-01 (RFI) aplicados; Nodo-87 (documentación) pendiente** |
 | Bankroll | $125,000+ |
 | Shadow Book hit% | GS: 50% ROI+47% \| Challenger: +7.9% \| ITF: 38% ROI-16.8% (jul-10) |
 | ML Dataset | 2,573 registros limpios (motor nodo32, trazabilidad verificada) |
@@ -214,6 +215,7 @@ app.py | routes/ | models/ | services/ | database.db
 
 | Bug | Estado |
 |---|---|
+| Auditoría Nodo-86 (15 hallazgos) | ✅ 12 fixes D87-01→D87-11 aplicados 2026-07-11 (calibración `?`, H62-01 alpha_flags, floor MIN_BET, p_blend inflado, gate GCS, puente betslip, settle rival, --all-picks) — **pytest pendiente desde WSL** |
 | prediccion_ganador top-level=None | ✅ RESUELTO — usar `ranking_analysis.prediction.favored_player` |
 | Edge falso historial corto (n<8) | ✅ RESUELTO — Nodo-63 `_MIN_HISTORY_FOR_DECAY=8` |
 | Phantom Identity API homónimos | ✅ RESUELTO — Nodo-72 `_detect_phantom_identity()` + Playwright PRIMARIO |

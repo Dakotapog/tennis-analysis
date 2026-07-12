@@ -2385,4 +2385,9 @@ class RivalryAnalyzer:
                 'p1': len(player1_history) == 0,
                 'p2': len(player2_history) == 0,
             },
+            'form_decay_meta': {                      # D64-01 (Nodo-64): base estructurada
+                # para la señal RFI — antes solo existía en el string LOG_FORM_DECAY
+                'p1': {'days_since': days_since_p1, 'fd': round(_fd_p1, 3), 'n': _n_p1},
+                'p2': {'days_since': days_since_p2, 'fd': round(_fd_p2, 3), 'n': _n_p2},
+            },
         }

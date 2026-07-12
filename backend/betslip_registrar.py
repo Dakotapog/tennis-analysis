@@ -236,6 +236,60 @@ def _cargar_betslip_index(ts_bookmarklet: Optional[str] = None) -> tuple[dict, s
 # MODO 1 — Registrar apuesta desde JSON del bookmarklet
 # ══════════════════════════════════════════════════════════════════════════════
 
+def _cargar_edge_index() -> dict:
+    """
+    D87-09 (Nodo-86 §4.2): indexa el edge_report más reciente por nombre del
+    favorito (lower) para backfillear picks con campos degradados ('?', match_id
+    vacío, p_modelo=0.5 default). Best-effort: nunca rompe el registro.
+    """
+    try:
+        reports = sorted(REPORTS_DIR.glob("edge_report_*.json"))
+        if not reports:
+            return {}
+        with open(reports[-1], encoding="utf-8") as f:
+            data = json.load(f)
+        idx = {}
+        for cat in ("apostar", "watchlist", "sin_edge", "no_data"):
+            for p in data.get(cat, []) or []:
+                nombre = (p.get("favorito_predicho") or "").strip().lower()
+                if nombre and nombre not in idx:
+                    idx[nombre] = p
+        return idx
+    except Exception:
+        return {}
+
+
+def _backfill_desde_edge(pick: dict, edge_idx: dict) -> bool:
+    """
+    D87-09: completa campos degradados del pick con datos del edge_report.
+    Retorna True si backfilleó algo. Solo escribe sobre valores vacíos/'?'/defaults.
+    """
+    if not edge_idx:
+        return False
+    nombre = (pick.get("jugador") or "").strip().lower()
+    ep = edge_idx.get(nombre)
+    if not ep:
+        return False
+    filled = False
+    _degradado = ("?", "", None, "unknown")
+    if pick.get("superficie") in _degradado and ep.get("superficie"):
+        pick["superficie"] = ep["superficie"]
+        filled = True
+    if pick.get("tier") in ("?", "", None, "unknown") and ep.get("tier"):
+        pick["tier"] = ep["tier"]
+        filled = True
+    for campo in ("partido", "match_id", "match_url", "torneo"):
+        if not pick.get(campo) and ep.get(campo):
+            pick[campo] = ep[campo]
+            filled = True
+    if pick.get("p_modelo", 0.5) == 0.5 and ep.get("p_modelo"):
+        pick["p_modelo"] = ep["p_modelo"]
+        pick["kelly_kl"] = ep.get("kelly_kl", pick.get("kelly_kl", 0.0))
+        pick["edge"] = ep.get("edge_pct", pick.get("edge", "0%"))
+        filled = True
+    return filled
+
+
 def registrar(bookmarklet_json: str):
     """
     Recibe el JSON copiado del bookmarklet y lo mapea a picks con nombres.
@@ -295,15 +349,52 @@ def registrar(bookmarklet_json: str):
             })
             logger.info(f"   ✅ {info['jugador']:25s} @{info['cuota']:.2f} — {info.get('partido','')}")
         else:
+            # D87-09: dinero real fuera del index — registrar degradado (backfill
+            # abajo intenta completar) en vez de omitirlo silenciosamente del tracking
             no_encontrados.append(oid)
-            logger.warning(f"   ⚠️  outcome_id {oid} no está en el betslip_index (pick manual o combo viejo)")
+            _nombre_raw = str(raw.get("label") or raw.get("name") or raw.get("jugador") or "").strip()
+            try:
+                _cuota_raw = float(raw.get("odds") or 0)
+                if _cuota_raw > 100:  # Kambi entrega odds en milésimas
+                    _cuota_raw = _cuota_raw / 1000.0
+            except (TypeError, ValueError):
+                _cuota_raw = 0.0
+            picks_registrados.append({
+                "outcome_id":        oid,
+                "jugador":           _nombre_raw or f"OUTCOME_{oid}",
+                "cuota":             _cuota_raw,
+                "cuota_kambi":       _cuota_raw,
+                "partido":           "",
+                "match_id":          "",
+                "match_url":         "",
+                "torneo":            "",
+                "superficie":        "unknown",
+                "tier":              "unknown",
+                "edge":              "0%",
+                "p_modelo":          0.5,
+                "kelly_kl":          0.0,
+                "stake":             0,
+                "retorno_potencial": 0,
+                "resultado_real":    None,
+                "correcto":          None,
+                "ganancia":          None,
+                "fuera_de_index":    True,
+            })
+            logger.warning(f"   ⚠️  outcome_id {oid} no está en el betslip_index — registrado DEGRADADO (backfill pendiente)")
 
     if not picks_registrados:
         logger.error("❌ Ningún pick mapeado. ¿Usaste el combo correcto del índice?")
         sys.exit(1)
 
+    # D87-09: backfill desde el edge_report más reciente para campos degradados
+    _edge_idx = _cargar_edge_index()
+    if _edge_idx:
+        _n_bf = sum(1 for pick in picks_registrados if _backfill_desde_edge(pick, _edge_idx))
+        if _n_bf:
+            logger.info(f"   🔗 D87-09: {_n_bf} pick(s) backfilleados desde edge_report (superficie/tier/match_id/p_modelo)")
+
     if no_encontrados:
-        logger.warning(f"   {len(no_encontrados)} picks sin mapear — omitidos del registro")
+        logger.warning(f"   {len(no_encontrados)} picks fuera del index — registrados degradados, revisar backfill")
 
     # Agregar stake desde trader_plan
     plan = _cargar_trader_plan()
@@ -314,6 +405,13 @@ def registrar(bookmarklet_json: str):
             pick["retorno_potencial"] = s["retorno_potencial"]
             if s["stake"]:
                 logger.info(f"   💰 {pick['jugador']:25s} stake=${s['stake']:,.0f} → retorno=${s['retorno_potencial']:,.0f}")
+        # Nodo-86 §6 — DISCIPLINA DE STAKE (incidente stake x10 documentado):
+        # VaR auto-ajustado y CPPI asumen EXACTAMENTE el stake del plan. Multiplicarlo
+        # convierte un sistema con growth rate positivo en uno con ruina garantizada.
+        _total_plan = sum(p.get("stake", 0) for p in picks_registrados)
+        if _total_plan:
+            logger.info(f"   ⚖️  DISCIPLINA: apostar EXACTAMENTE ${_total_plan:,.0f} total (stakes del plan).")
+            logger.info("      Multiplicar el stake (p.ej. x10) invalida VaR/CPPI — la matematica de supervivencia asume estos tamaños.")
     else:
         logger.warning("   ⚠️  Sin trader_plan — stake=0. Corré trader_ev_tenis.py primero.")
 
@@ -456,8 +554,15 @@ def cerrar(archivo: Optional[str] = None):
                 logger.info(f"   {estado} {pick['jugador']:25s} → {ganador_real} ({pick['sets']}){pl_str}")
 
                 # Actualizar calibracion
+                # D87-04 (Nodo-87): el bookmarklet entrega superficie/tier='?' sin
+                # enriquecer — normalizar aqui evita crear buckets huerfanos ('?_?')
+                # que theta_thompson nunca lee (141 resultados reales perdidos asi)
                 sup = pick.get("superficie", "unknown")
                 tier = pick.get("tier", "unknown")
+                if sup in ("?", "", None, "N/A", "Desconocida"):
+                    sup = "unknown"
+                if tier in ("?", "", None):
+                    tier = "unknown"
 
                 if correcto:
                     total_wins += 1

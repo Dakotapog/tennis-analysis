@@ -1704,15 +1704,15 @@ def build_games_combos(stake_per_combo: int = 2000,
         legs = signals[:max_legs]
         if not legs:
             return None
-        outcome_ids = [s["outcome_id"] for s in legs if s.get("outcome_id")]
+        outcome_ids = list(dict.fromkeys(s["outcome_id"] for s in legs if s.get("outcome_id")))
         if not outcome_ids:
             return None
         cuota_combo = 1.0
         for s in legs:
             cuota_combo *= s["cuota"]
         retorno = round(effective_stake * cuota_combo)
-        ids_str = ",".join(str(oid) for oid in outcome_ids)
-        url = f"{BETPLAY_URL_BASE}{ids_str}{BETPLAY_URL_TAIL}"
+        ids_str = "|".join(str(oid) for oid in outcome_ids)
+        url = f"{REDIRECT_BASE}{ids_str}"
         return {
             "combo_idx": idx,
             "label": label,
@@ -1827,13 +1827,11 @@ def _generar_bat_games(games_links: List[Dict]) -> int:
             for l in gc["legs"]
         )
         html_content = f"""<!DOCTYPE html>
-<html><head><meta charset="utf-8"><title>{label}</title></head>
-<body style="font-family:monospace;text-align:center;padding:40px">
-<h2>GAMES {label[-1]} [{gc['n_piernas']}p] @{cuota:.2f}</h2>
-<p style="font-size:18px">${stake:,} → ${retorno:,.0f}</p>
-<p style="font-size:13px">{legs_desc}</p>
-<p><a href="{gc['url']}" target="_blank" style="font-size:24px;padding:20px;background:#0066cc;color:white;text-decoration:none;border-radius:8px">
-Abrir en Betplay</a></p>
+<html><head><meta charset="utf-8"><title>{label}</title>
+<script>window.location.replace("{gc['url']}");</script>
+</head><body>
+<p>Redirigiendo a Betplay...</p>
+<p><a href="{gc['url']}">Click aqui si no redirige</a></p>
 </body></html>"""
 
         html_path = COMBOS_DIR / f"{html_name}.html"
@@ -2042,7 +2040,11 @@ def build_live_combos(piernas_min: int = 3, piernas_max: int = 4,
                 cuota = p.get("cuota_favorito", 0)
                 if isinstance(cuota, str):
                     cuota = float(cuota)
-                if cuota >= min_cuota:
+                # D87-08 (Nodo-86 §4.2): el betslip_index es el puente outcome_id →
+                # datos del modelo para betslip_registrar/calibración. Debe cubrir
+                # TODOS los picks (incl. piernas VARIABLE cuota<1.50 usadas en combos
+                # de confianza) — el filtro min_cuota aplica a combos, no al index.
+                if cuota > 1.0:
                     all_picks.append({
                         "jugador":     p["favorito_predicho"],
                         "cuota":       cuota,
@@ -2053,6 +2055,11 @@ def build_live_combos(piernas_min: int = 3, piernas_max: int = 4,
                         "torneo":      p.get("torneo", ""),
                         "superficie":  p.get("superficie", "unknown"),
                         "tier":        p.get("tier", "unknown"),
+                        # D87-08: sin estos campos las apuestas reales llegaban a la
+                        # calibración con p_modelo=0.5 / kelly_kl=0.0
+                        "p_modelo":    p.get("p_modelo", 0.5),
+                        "kelly_kl":    p.get("kelly_kl", 0.0),
+                        "n_h2h":       p.get("n_h2h", 0),
                     })
         # Fetch outcomes para betslip_index
         outcomes_map, started_map = fetch_kambi_outcomes()
@@ -2511,7 +2518,10 @@ def _build_live_combos_legacy(piernas_min: int = 3, piernas_max: int = 4,
             cuota = p.get("cuota_favorito", 0)
             if isinstance(cuota, str):
                 cuota = float(cuota)
-            if cuota >= min_cuota:
+            # D87-08: sin filtro min_cuota aquí — el betslip_index debe cubrir
+            # también las piernas VARIABLE (cuota<1.50); el filtro de combos se
+            # aplica después sobre combo_pool.
+            if cuota > 1.0:
                 all_picks.append({
                     "jugador":           p["favorito_predicho"],
                     "cuota":             cuota,
@@ -2549,18 +2559,23 @@ def _build_live_combos_legacy(piernas_min: int = 3, piernas_max: int = 4,
         else:
             logger.warning(f"  ❌ {pick['jugador']:25s} @{pick['cuota']:.2f} — {reason}")
 
-    if len(available_picks) < piernas_min:
-        logger.error(f"❌ Solo {len(available_picks)} picks disponibles, mínimo {piernas_min}")
+    # D87-08: guardar el index ANTES del gate de combos — el registro y la
+    # calibración de apuestas reales no dependen de que haya combos armables.
+    if available_picks:
+        _save_betslip_index(available_picks)
+    combo_pool = [p for p in available_picks if p["cuota"] >= min_cuota]
+
+    if len(combo_pool) < piernas_min:
+        logger.error(f"❌ Solo {len(combo_pool)} picks disponibles, mínimo {piernas_min}")
         return [], {}
 
-    logger.info(f"   🎯 {len(available_picks)} picks disponibles para combos")
-    _save_betslip_index(available_picks)
+    logger.info(f"   🎯 {len(combo_pool)} picks disponibles para combos")
 
     combos = []
     combo_idx = 0
-    for k in range(piernas_min, min(piernas_max, len(available_picks)) + 1):
+    for k in range(piernas_min, min(piernas_max, len(combo_pool)) + 1):
         tier_combos = []
-        for combo_picks in combinations(available_picks, k):
+        for combo_picks in combinations(combo_pool, k):
             cuota_combo = 1.0
             for cp in combo_picks:
                 cuota_combo *= cp["cuota_kambi"]
@@ -2580,7 +2595,7 @@ def _build_live_combos_legacy(piernas_min: int = 3, piernas_max: int = 4,
         for tc in tier_combos:
             tc.update(_score_combo(tc["picks"], strategy=strategy))
         tier_combos.sort(key=lambda x: x["combo_score"], reverse=True)
-        selected_tier = _select_with_cobertura(tier_combos, available_picks, top_n, k)
+        selected_tier = _select_with_cobertura(tier_combos, combo_pool, top_n, k)
         for tc in selected_tier:
             combo_idx += 1
             legs = [{

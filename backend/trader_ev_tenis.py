@@ -434,8 +434,15 @@ def _p_blend(p_modelo: float, n_h2h: int = 0, p_prior: float = _P_PRIOR) -> floa
     Cuando n_h2h=0: usa solo el prior (señal sin historial directo)
     Cuando n_h2h grande: converge a p_modelo
     p_prior: derivado de calibracion_edge.json si n≥30 (T13-06), sino _P_PRIOR=0.52
+
+    D87-05 (Nodo-86 §1.4): el prior es la accuracy media del modelo en el tier
+    (dominada por favoritos) — NO la probabilidad de que ESTE pick gane. Cuando
+    p_prior > p_modelo (ej. 0.758 clay GS con n_h2h=0), el blend inflaba el EV y
+    ordenaba/financiaba combos con probabilidad ficticia. Guard: el prior solo
+    puede reducir, nunca inflar por encima de la estimación del propio modelo.
     """
-    return (n_h2h * p_modelo + _K_PRIOR * p_prior) / (n_h2h + _K_PRIOR)
+    p_prior_ef = min(p_prior, p_modelo)
+    return (n_h2h * p_modelo + _K_PRIOR * p_prior_ef) / (n_h2h + _K_PRIOR)
 
 
 def _binom_prob_at_least_k(n: int, k: int, p: float) -> float:
@@ -488,7 +495,9 @@ def _print_individuales(senales: list, bankroll: float, budget: float,
         raw_stake     = kelly * bankroll
         capped_stake  = min(raw_stake, budget - gastado)
         rounded_stake = round(capped_stake / MIN_BET) * MIN_BET
-        stake         = max(MIN_BET, rounded_stake)
+        # D87-03 (Nodo-87): kelly=0 (EV<=0 bajo p_blend) o budget agotado => stake 0.
+        # El floor anterior forzaba $MIN_BET incluso con EV negativo o sobre el budget.
+        stake         = 0 if (kelly <= 0 or capped_stake <= 0) else max(MIN_BET, rounded_stake)
         ev_ind  = _ev(p_b, cuota)
         retorno = round(stake * cuota, 0)
 
@@ -566,7 +575,8 @@ def _build_combos(senales: list, n_lines: int, n_combos: int,
     combos_plan = []
     for i, c in enumerate(candidates[:n_combos]):
         stake   = round(min(c['kelly_combo'] * bankroll, budget / n_combos) / MIN_BET) * MIN_BET
-        stake   = max(MIN_BET, stake)
+        # D87-03: combo con kelly=0 (EV<=0) no recibe stake forzado
+        stake   = 0 if c['kelly_combo'] <= 0 else max(MIN_BET, stake)
         retorno = round(stake * c['cuota_combo'], 0)
 
         print(f"  │  🔗 COMBO {i+1} ({n_lines} piernas):")
@@ -611,7 +621,8 @@ def _build_sistema(senales: list, n_sistema: int, n_sistema_apostar: int,
     pares        = list(combinations(legs, 2))
     n_pares      = len(pares)
     stake_por_par = round(budget / n_pares / MIN_BET) * MIN_BET
-    stake_por_par = max(MIN_BET, stake_por_par)
+    # D87-03: si el budget no cubre MIN_BET por par => 0 (no sobre-apostar)
+    stake_por_par = stake_por_par if stake_por_par >= MIN_BET else 0
 
     # EV esperado por par
     ev_pares = []
@@ -764,7 +775,8 @@ def _build_cobertura(pool: list, piernas_min: int, piernas_max: int,
         weight_tier = tier_weights[k] * n_combos_tier
         budget_tier = budget * (weight_tier / total_weight)
         stake_each = round(budget_tier / n_combos_tier / MIN_BET) * MIN_BET
-        stake_each = max(MIN_BET, stake_each)
+        # D87-03: si el budget del tier no cubre MIN_BET por combo => 0 (no sobre-apostar)
+        stake_each = stake_each if stake_each >= MIN_BET else 0
         tier_stakes[k] = stake_each
 
     # Imprimir cada tier
@@ -931,8 +943,11 @@ def main():
     # ── Nuevos: sistema cobertura por exclusión ──
     parser.add_argument('--cobertura',    action=argparse.BooleanOptionalAction, default=True,
                         help='Activar sistema cobertura por exclusión (default: activado, --no-cobertura para desactivar)')
-    parser.add_argument('--all-picks',    action=argparse.BooleanOptionalAction, default=True,
-                        help='Incluir TODOS los picks en pool cobertura (default: activado, --no-all-picks para desactivar)')
+    # D87-10 (Nodo-86 §1.7): default=False — picks sin_edge (edge<=0) entraban al
+    # pool de cobertura por defecto y recibían stake real via budget-split aunque
+    # su EV fuera negativo. Usar --all-picks explícito para incluirlos.
+    parser.add_argument('--all-picks',    action=argparse.BooleanOptionalAction, default=False,
+                        help='Incluir TODOS los picks en pool cobertura (default: DESACTIVADO — D87-10)')
     parser.add_argument('--piernas-min',  type=int, default=3,
                         help='Mínimo piernas en cobertura (default 3)')
     parser.add_argument('--piernas-max',  type=int, default=4,
@@ -1171,8 +1186,11 @@ def main():
         gastado_ind = sum(s['stake'] for s in senales_enriched)
 
         # Ajustar cobertura
+        # D87-07: aplicar tambien cppi_f — el piso de supervivencia Nodo-70 solo
+        # cubria individuales; la cobertura (la capa que mas capital consume)
+        # quedaba fuera del waterfall kelly → var → cppi documentado.
         for c in cobertura_plan:
-            c['stake'] = round(c['stake'] * fv / MIN_BET) * MIN_BET
+            c['stake'] = round(c['stake'] * fv * cppi_f / MIN_BET) * MIN_BET
             c['retorno_potencial'] = round(c['stake'] * c['cuota_combo'], 0)
         gastado_cobertura = sum(c['stake'] for c in cobertura_plan)
 
