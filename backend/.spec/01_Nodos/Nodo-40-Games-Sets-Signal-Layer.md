@@ -9,6 +9,7 @@
 > **Implementa:** Sonnet | **Tests:** pendiente
 >
 > **Estado:** ✅ COMPLETO — Fases 1-5 implementadas | 35 tests pasan
+> **Última actualización:** 2026-07-11 — ADDENDUM §10: bug Kambi ID compartido corregido, REGLAS G7-G10, validación empírica "Día de Paridad" Wimbledon
 
 ---
 
@@ -293,6 +294,70 @@ La diversificación entre capas es el verdadero hedge fund — no son competidor
 | 4 | Sección S-40 en `pipeline_tracker.py` | ✅ Implementado |
 | 5 | `tests/test_nodo40.py` — gate diff, gap línea, anti-correlación, selección línea óptima | ✅ 35 tests pasan |
 | 6 | Acumular n≥50 antes de escalar stakes | ⏳ En curso (n=3 hoy) |
+
+---
+
+## 10. ADDENDUM 2026-07-11 — Sesión Wimbledon/Challenger "Día de Paridad"
+
+### 10.1 Validación empírica coinflip (n=8 señales)
+
+| Partido | zona | diff | Señal | Resultado | Hit |
+|---|---|---|---|---|---|
+| Walton vs Michelsen | coinflip | 0.09 | OVER 19.5j @2.20 | GANO (3 sets) | ✅ |
+| Muchova vs Noskova | coinflip | 0.07 | OVER 19.5j @2.20 | GANO (3 sets) | ✅ |
+| Recek vs Wiskandt | dominante | 0.46 | UNDER 2.5s @1.68 | GANO (2 sets) | ✅ |
+| Michalski vs Hemery | dominante | 0.50 | UNDER 2.5s @1.68 | PERDIO (3 sets) | ❌ |
+| Rincon vs Choinski | coinflip | 0.04 | OVER 20.5j @1.75 | PERDIO (2 sets rápido) | ❌ |
+
+**Observación clave:** La señal OVER coinflip fue correcta en los partidos identificados como más contundentes (Walton/Michelsen gap=6.5, Noskova gap=6.5). La señal UNDER dominante falla cuando el favorito pierde y el partido se extiende — el dominio del modelo no garantiza dominio en cancha.
+
+### 10.2 Bug crítico descubierto y corregido: Kambi outcome_id compartido
+
+**Problema raíz:** El `outcome_id` para `OVER X.Y Total de juegos` NO es único por partido — Kambi asigna el mismo ID a todos los partidos que comparten la misma línea de mercado en la misma sesión.
+
+Ejemplo del 2026-07-11:
+```
+id=4255197383  →  OVER 19.5j @2.20  (Walton/Michelsen, Noskova/Muchova, Galarneau/Fearnley, Badosa/Waltert)
+id=4255238876  →  UNDER 2.5s @1.68  (Michalski/Hemery Y Recek/Wiskandt — compartido)
+id=4255212878  →  OVER 18.5j @1.71  (Miyoshi/Legout — ÚNICO)
+id=4255190100  →  OVER 20.5j @1.75  (Rincon/Choinski — ÚNICO)
+```
+
+**Consecuencia:** `_make_combo` producía `combination|4255197383|4255197383|4255197383||replace` → Betplay rechaza como link inválido.
+
+**Fix implementado en `betplay_combo_builder.py` (2026-07-11):**
+```python
+# ANTES (bug):
+ids_str = ",".join(str(oid) for oid in outcome_ids)
+url = f"{BETPLAY_URL_BASE}{ids_str}{BETPLAY_URL_TAIL}"
+
+# DESPUÉS (fix):
+outcome_ids = list(dict.fromkeys(s["outcome_id"] for s in legs if s.get("outcome_id")))
+ids_str = "|".join(str(oid) for oid in outcome_ids)
+url = f"{REDIRECT_BASE}{ids_str}"
+```
+
+### 10.3 Nuevas reglas operacionales
+
+**REGLA-G7:** El separador entre `outcome_ids` en la URL Betplay es `|` (pipe), NO `,` (coma). El formato correcto es `combination|ID1|ID2|ID3||replace`.
+
+**REGLA-G8:** Deduplicar `outcome_ids` antes de construir URL — Kambi comparte IDs de mercado entre partidos con la misma línea. Después de dedup, si el combo queda con ≤1 pierna única, NO generar combo (señal degenerada).
+
+**REGLA-G9:** El HTML de games combos usa `window.location.replace(REDIRECT_BASE + ids)` vía GitHub Pages redirect, NO enlace directo a Betplay. Los `|` en el hash de Betplay se pierden si se abre directamente desde `file:///` sin redirect.
+
+**REGLA-G10 (Día de Paridad):** Cuando ≥5/8 señales del día son coinflip (diff<0.10), el OVER games está estructuralmente descontado — el bookmaker usa promedios históricos que incluyen días no-paridad. Identificar "Día de Paridad" antes de armar combos y priorizar OVER coinflip sobre UNDER dominante.
+
+### 10.4 Contrafactual 2026-07-11
+
+Combos tal como estaban armados (Rincon OVER 20.5j + Michalski UNDER 2.5s como piernas clave): **todos hubieran PERDIDO** por Michalski (fue 3 sets) y Rincon (2-0 rápido).
+
+Pick individual óptimo que el análisis identificó correctamente: **Walton vs Michelsen OVER 19.5j @2.20** — pick más contundente del día (diff=0.09, gap=6.5, grass coinflip, Newport). Hubiera dado +$2,400 sobre stake de $2,000.
+
+**Lección operacional:** En días donde los IDs se colapsan por compartición, mejor una apuesta individual sobre el pick con ID único + mayor gap que un combo con IDs duplicados.
+
+### 10.5 Bug secundario: .bat path
+
+El formato `"%~dp0GamesComboN.html"` pasado a Chrome no funciona — Chrome necesita `"file:///C:\users\hogar\Desktop\GamesComboN.html"` (path absoluto con scheme `file:///`). El `betplay_combo_builder.py` ya lo hace correctamente con `COMBOS_DIR`. Los GamesCombo manuales futuros deben seguir el mismo patrón.
 
 ---
 

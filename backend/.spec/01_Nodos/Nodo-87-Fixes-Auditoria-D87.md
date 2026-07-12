@@ -44,6 +44,24 @@ AHORA: p_blend no puede superar p_modelo → EV≤0 da stake 0 → si se apuesta
        correcto → medible
 ```
 
-## 4. Trabajo derivado (ver Nodo-66 T3)
+## 4. Trabajo derivado (ver Nodo-66 T3) — ✅ ESCRITO 2026-07-12, pendiente de correr en WSL
 
-Escribir `tests/test_nodo87_fixes.py` con REGLA-T53 para los 12 fixes de esta tabla — ninguno tiene cobertura hoy. Sin esos tests, cualquier refactor futuro puede reintroducir los mismos 12 bugs sin que pytest lo detecte.
+`tests/test_nodo87_fixes.py` cubre 9 de los 12 IDs con REGLA-T53 (invoca la función real,
+aserciones estructurales/de umbral — nunca reimplementa la fórmula que prueba):
+
+| Clase | IDs cubiertos |
+|---|---|
+| `TestD87_01AlphaFlags` | D87-01 (update_alpha_flags matchea `favorito_predicho`) |
+| `TestD87_02GateGCSRespetaGuards` | D87-02 (gate GCS no revive picks NO_DATA/phantom) — incluye test de control confirmando que el camino feliz (H60-01) sigue intacto |
+| `TestD87_04NormalizacionSuperficie` | D87-04 (`'?'` → `unknown` en edge_calculator) |
+| `TestD87_05PBlendNoInfla` | D87-05 (prior nunca infla por encima de p_modelo) |
+| `TestD87_06ValidatorSchemaReal` | D87-06 (pre_game_validator escanea watchlist/sin_edge) |
+| `TestD87_08BetslipIndexCubreVariable` | D87-08 (index persiste p_modelo/kelly_kl) |
+| `TestD87_09BackfillDesdeEdge` | D87-09 (backfill no pisa campos ya reales) |
+| `TestD87_11SettleExigeRival` | D87-11 (settle exige que el rival también matchee — reproduce el escenario de dos partidos mismo día/mismo favorito) |
+| `TestD87_03NoStakeFantasma` | D87-03 (floor MIN_BET eliminado con EV≤0 o budget agotado) |
+| `TestD64_01SenalRFI` | D64-01 (reproduce el caso semilla Michnev/Rivera de Nodo-64: rfi_tier, rfi_ultra, rfi_decay_gap) |
+
+**Gap declarado, no cerrado:** D87-07 (CPPI en cobertura) y D87-10 (`--all-picks` default) quedan embebidos en `trader_ev_tenis.main()` sin extracción a función testeable de forma aislada — requieren mockear el flujo CLI completo o refactorizar esas piezas a funciones puras primero. Candidato para una sesión futura si se decide blindarlos también.
+
+**Verificación pendiente:** este archivo fue escrito y trazado manualmente línea por línea contra el código fuente (no pudo ejecutarse pytest desde esta sesión — sin entorno Python). **Primer paso de la próxima sesión con WSL:** `pytest tests/test_nodo87_fixes.py -v`. Si algo falla, no es necesariamente el fix — puede ser un error de trazado en el test; revisar antes de tocar el código de producción.

@@ -229,3 +229,140 @@ grep -rn "betslip_registrar" ~/n8n-flows/ && echo "VIOLACIÓN" || echo "OK"
 - El plan NO desplaza la operación diaria: run_daily + shadow book + settle tienen prioridad absoluta sobre cualquier fase de este SPEC. Si un día hay que elegir, se elige la operación — el n es el activo.
 - Hermes jamás en Kelly, apostar, o hipótesis. n8n jamás en registro de apuestas. El dashboard jamás con botones de acción.
 - Este documento no se edita tras el inicio de la ejecución: correcciones van en un ADDENDUM fechado, como todo en este proyecto.
+
+---
+
+# ADDENDUM 2026-07-09 — Auditoría de Implementación (Fases 0-2)
+
+**Ejecutor:** Claude Haiku 4.5 (sesión auditoría)  
+**Comandos:** graphify query + grep + shadow_book JSONL analysis  
+**Veredicto:** PARCIAL con hallazgos críticos SDD.
+
+## Hallazgos por punto (evidencia objetiva)
+
+### C62-A: `alpha_promoted` propagación
+
+**Código:** ✅ Implementado
+- `combo_confianza_builder.py:520` — flag asignado
+- `shadow_book.py:575-611` — lógica de propagación
+- `test_fable02_fase0.py:167` — test de unidad pasa
+
+**Shadow book JSONL (datos reales):** ❌ Nunca registrado
+```
+grep -l "alpha_promoted" reports/shadow_book/sb_*.jsonl → 0 archivos
+```
+
+**Causa:** no se ha ejecutado una sesión completa con `--fase 2+` desde la implementación. Las apuestas registradas en julio no han cruzado el path `alpha_promoted=True`.
+
+**Acción:** observar en próximas sesiones. H62-01 no está siendo medida aún.
+
+---
+
+### C63-B: Governor de presupuesto (sesión_budget M-26-2)
+
+**Código:** ✅ Implementado (READ-ONLY)
+- `combo_governor.py` — suma 6 capas (CORE, SAT_*, MOONSHOT, COB_*, mega, safe)
+- `betplay_combo_builder.py:766-771` — `session_budget()` función auxiliar
+- `test_nodo26.py:25/30` — tests de `session_budget()` pasan
+
+**Comportamiento real:** ⚠️ No es automático
+```python
+# combo_governor.py:6
+Modo REPORTE (READ-ONLY — no cambia stakes ni bloquea builders)
+```
+El governor suma las capas y REPORTA si excede M-26-2, pero NO bloquea automáticamente. Requiere acción manual del operador.
+
+**SDD Compliance:** ❌ VIOLA §1
+```
+.spec/01_Nodos/
+  ├── Nodo-60*.md (GCS)
+  ├── Nodo-61*.md (GCS gobernanza)
+  ├── Nodo-62-Signal-Bridge.md (C62-A alpha_promoted)
+  ├── Nodo-63-Anchor-Combo-Builder.md (C63-A/C63-B)
+  └── [NO EXISTE] Nodo-74-Combo-Governor.md ← FALTA
+```
+
+**combo_governor.py existe sin Nodo dedicado** — incumple Constitución §1: "Ningún código sin Nodo en `.spec/01_Nodos/`".
+
+**Acción:** crear Nodo-74-Combo-Governor.md antes del próximo commit.
+
+---
+
+### C63-A: `LOG_PLAYWRIGHT_CANDIDATE` como cola
+
+**Código:** ✅ Implementado (parcial)
+```python
+# rivalry_analyzer.py:2279/2291
+logger.warning(
+    f"LOG_PLAYWRIGHT_CANDIDATE: {player_name} n={_n} match_id={match_id} "
+)
+```
+
+**Lo que es:** string log emitido a WARNING.
+
+**Lo que NO es:** cola, enqueue, archivo persistente, trigger automático de Playwright re-scraping.
+
+**Spec vs Implementación:** ⚠️ Desvío
+- **FABLE_02 §2 C63-A:** "enqueue candidate for Playwright fallback de Nodo-49/F3"
+- **Código actual:** solo `logger.warning(...)`, sin enqueue
+
+**Acción:** definir destino de cola en Nodo-63 o crear un módulo de entrada (`nodo63_playwright_queue.py`) que consuma los logs y ejecute el enqueue real. Hoy es señal sin efector.
+
+---
+
+### Graphify: stale para Nodo-72, Nodo-73
+
+**Estado:**
+```
+graphify-out/graph.json: modificado 2026-07-08 19:11
+.spec/01_Nodos/Nodo-72-Phantom-Identity-Guard.md: 2026-07-09 (más nuevo)
+.spec/01_Nodos/Nodo-73-n8n-CloseSnapshot-Timing.md: 2026-07-09 (más nuevo)
+combo_governor.py: untracked, no en grafo
+```
+
+**Consecuencia:** queries sobre "phantom guard" o "governor" devuelven resultados del grafo Python, no del spec. Los archivos .md no están indexados.
+
+**Acción:** `graphify update .` después de hacer commit de Nodo-74 (requiere ANTHROPIC_API_KEY para indexar specs).
+
+---
+
+### `check_contradictions.py`: cobertura gap
+
+**Funcionamiento actual:**
+- Lee encabezados de Nodo-XX.md (✅/⚠️/🔴)
+- Compara contra CLAUDE.md §5 tabla de estados
+
+**Lo que no cubre:**
+- FABLE_02_TENIS_DOCTORADO_SPEC.md §4.5 (pendientes listados)
+- Archivos de código sin Nodo (como combo_governor.py)
+
+**Consecuencia directa:** C63-B implementado sin Nodo → script nunca lo detectará como violación SDD porque no hay un header que comparar.
+
+**Acción:** extender script para ejecutar `git ls-files --others --exclude-standard` + filtrar `.py` principales + buscar si existe su Nodo en `.spec/`. O: crear `nodos_index.json` (propuesta Point 8 de auditoría previa).
+
+---
+
+## Resumen: qué corregir antes de Fase 3
+
+| Ítem | Prioridad | Acción |
+|---|---|---|
+| Crear Nodo-74-Combo-Governor.md | 🔴 ALTA | Documento 2-3 párrafos: archivo, rol, tests. Bloquea SDD compliance. |
+| C63-A: definir queue destino | 🟠 MEDIA | Nodo-63 update o nodo63_playwright_queue.py. Hoy es log sin efecto. |
+| graphify update . | 🟠 MEDIA | Post-Nodo-74. Requiere ANTHROPIC_API_KEY (semántico). |
+| check_contradictions.py extender | 🟡 BAJA | Mejora de cobertura. No bloquea operación. |
+
+---
+
+## Próxima sesión auditoría (post-Nodo-74)
+
+Verificación Fase 2:
+```bash
+# Verificar C63-B READ-ONLY en shadow book real
+python3 combo_governor.py --fecha 2026-07-09 | head -20
+
+# Verificar C63-A queue (después de implementar)
+grep -rn "playwright_queue" logs/ | wc -l
+
+# Re-ejecutar check_contradictions.py (debe pasar)
+python3 check_contradictions.py --verbose
+```
