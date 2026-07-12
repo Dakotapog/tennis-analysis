@@ -231,6 +231,20 @@ no lo tenía. Sin evidencia histórica de impacto, pero gap real en sistema desa
 
 ---
 
+## D-10 — Auditoría Nodo-86: 12 fixes de fuga de dinero real (2026-07-11)
+
+**Decisión:** Aplicar de inmediato los 12 fixes identificados por la auditoría estática Nodo-86 (`docs/auditorias/AUDITORIA_FABLE5_2026-07-11.md`), documentados en [[Nodo-87-Fixes-Auditoria-D87]], sin esperar a escribir tests primero.
+
+**Alternativas consideradas:**
+- Esperar a tener tests REGLA-T53 antes de tocar código — más seguro en teoría, pero cada día sin el fix del `_p_blend` inflado (D87-05) seguía fabricando EV ficticio en picks n_h2h=0 y financiando combos con probabilidad inventada
+- Aplicar solo el fix de mayor impacto (D87-05) y diferir el resto — dejaba abiertas H62-01 (muerta desde su pre-registro) y el settle contra partido equivocado (D87-11)
+
+**Por qué aplicar todos ahora:** los 12 fixes son estáticamente verificables (cada uno cambia un comportamiento local y documentado en Nodo-86 con evidencia archivo:línea), `pytest tests/ --no-cov -q` corrido POST-fix dio 1804 passed / 0 failed, y el costo de esperar era seguir perdiendo la única medición de dinero real (§1.1: 24% hit oculto en buckets `?`/`?_?` vs 50-64% shadow reportado). El riesgo real no era el fix — era que ningún test cubría estos caminos, por eso vivieron meses sin detectarse.
+
+**Cuándo revisitar:** cuando `tests/test_nodo87_fixes.py` (Nodo-66 T3) exista y confirme cada uno de los 12 comportamientos — hasta entonces, cualquier refactor de `edge_calculator.py`, `trader_ev_tenis.py`, `shadow_book.py` o `betslip_registrar.py` debe releer Nodo-87 antes de tocar las líneas listadas ahí.
+
+---
+
 ## Plantilla para nuevas decisiones
 
 ```
