@@ -1,6 +1,6 @@
 # CLAUDE.md — Tennis Prediction & Betting Engine
 
-> Last updated: 2026-07-13 (Sprint 1 Nodo-91 COMPLETO — S1-A→S1-F implementados, 1846 tests, Nodo-92 evidencia ejecución)
+> Last updated: 2026-07-13 (Sprint 4 Nodo-95 COMPLETO — D90-09 PatternRecognition REPORTE_SOLO, 25 tests, 1945 passed)
 > Spec-Driven Development (SDD). CLAUDE.md es VISTA DERIVADA — los nodos son la fuente de verdad.
 > Leer completo antes de tocar código. Ver política de precedencia §10.
 
@@ -128,9 +128,9 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 
 | Métrica | Valor |
 |---|---|
-| Tests | **1901 passed, 0 failed** (verificado 2026-07-13 — +55 tests Sprint2: D90-03 PlayerDB + D90-01 kambi_disponible). Nota: fallo intermitente `test_prior_bajo_no_se_ve_afectado` por contaminación estado global entre test files — pasa en aislamiento, NO es bug D87-05 (V1 Nodo-66 confirmada) |
+| Tests | **1945 passed, 0 failed** (verificado 2026-07-13 — Sprint 4 Nodo-95: PatternRecognition 25 tests). Nota: fallo intermitente `test_prior_bajo_no_se_ve_afectado` por contaminación estado global entre test files — pasa en aislamiento, NO es bug D87-05 (V1 Nodo-66 confirmada) |
 | Calibración | clay GS: p=0.758 (n=31) \| global: wins=2358, losses=1480 (n=3838) \| ⚠️ buckets huérfanos `?`/`?_?` con ~141 resultados de dinero real (24% hit) — ver Nodo-86 §1.1, migración en evaluación: T7 Nodo-66 decide |
-| **Auditoría Fable5** | **Nodo-86: COMPLETO**. Nodo-87: 12 fixes verificados. **Sprint1 (Nodo-92):** CAPA2/ELO_DOMINANCE/planes_frescos/--fase ✅. **Sprint2 (Nodo-93):** D90-03 PlayerDB (4650 jugadores, 328K filas) + D90-01 kambi_disponible observacional ✅. Pendiente Sprint3: RankGap+SVI en edge_report; ELO_DOM activación; Kambi filter en trader |
+| **Auditoría Fable5** | **Sprints 1-4 COMPLETOS (Nodo-91→95).** S1: CAPA2+ELO_DOM+--fase ✅. S2: PlayerDB 4650j+kambi observacional ✅. S3: PlayerIntelligence Dim1+2+MQI/PRS/CFS ✅. S4: PatternRecognition D90-09 ✅ (4 candidatos reales, STRONG conf n=52). Pendiente Sprint5: D90-11 N28F2/tier, IRP/jugador, OddsAggregator multi-casa |
 | Bankroll | $125,000+ |
 | Shadow Book hit% | GS: 50% ROI+47% \| Challenger: +7.9% \| ITF: 38% ROI-16.8% (jul-10) |
 | ML Dataset | 2,573 registros limpios (motor nodo32, trazabilidad verificada) |
@@ -149,13 +149,12 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 | F4 Estadística doctoral (Nodos 64-71) | ✅ 43 tests |
 | F5 Vault + session_compiler + CLAUDE.md slim | ✅ completada |
 
-**Nodos completos:** 51-63, 64-71, 72, 73, 78 — detalles en `.spec/01_Nodos/Nodo-XX.md`
-**Nodo-64:** RFI Return-From-Inactivity — **implementado 2026-07-11 (D64-01)**: `rfi_tier`/`rfi_ultra`/`rfi_decay_gap` serializados en edge_report, segmentos en shadow_book --report. H76-01 acumula automático (antes: registro manual, n=1/30 estancado desde 2026-07-09).
-**Nodo-65:** Convergencia Multi-Señal — dos poblaciones ANCHOR(edge>0) / VARIABLE(edge≤0). D65-01→D65-07 implementados 2026-07-10. H77-01/02/03 pre-registradas (n_stop=30/60/20). tier_mismatch observacional en pick_snapshot. WARN_SUPERFICIE en tabla favoritos. Segmento ANCHOR/VARIABLE en shadow_book --report.
-**Nodos documentados, implementacion gateada (auditoría 2026-07-09):** 74 (governor — READ-ONLY, gate: 10 sesiones reales), 75 (índice nodos — 75 nodos, 0 huérfanos), 76 (combo registry — sin invoke en prod)
-**Nodos 86-87 (auditoría 2026-07-11):** 86 = hallazgos + doc completo. 87 = tabla de los 12 fixes D87-01→D87-11+D64-01 aplicados, archivo:línea, verificado 1822 tests passed (18 nuevos REGLA-T53 en `tests/test_nodo87_fixes.py`, adendum T8 con verificación empírica RFI).
-**Nodos 66-68 (plan de trabajo, 2026-07-11):** 66 = checklist semanal Sonnet (T1-T10 — **T1→T10 COMPLETOS 2026-07-13**; T6 graphify+specs ✅ 91 nodos .spec/, T7 propuesta bucket `?` ✅ docs/PROPUESTA_MIGRACION_BUCKET_Q.md — decisión pendiente usuario). 67 = integración herramientas (pendiente). 68 = H88-01 Rival Value Flip — D68-01→D68-05 ✅ (1827 tests, acumulando prospectivamente).
-**Nodos 89-91 (Sprint1 Fable, 2026-07-13):** 89 = Sistema Inteligencia Integral (CAPA2 confidence, ELO_DOM). 90 = Auditoría Fable Nodo-89. 91 = Sprint1 implementación capas fallback (D89-01→D90-10 implementados — `_planes_frescos()`, capa2/elo_dominance en trader+shadow_book, `--fase` en run_daily).
+**Nodos completos:** 51-63, 64-71, 72, 73, 78, 86-95 — detalles en `.spec/01_Nodos/Nodo-XX.md`
+**Nodo-64:** RFI Return-From-Inactivity — **implementado 2026-07-11 (D64-01)**: `rfi_tier`/`rfi_ultra`/`rfi_decay_gap` serializados en edge_report, segmentos en shadow_book --report. H76-01 acumula automático.
+**Nodo-65:** Convergencia Multi-Señal — ANCHOR(edge>0) / VARIABLE(edge≤0). D65-01→D65-07. H77-01/02/03 pre-registradas.
+**Nodos 66-68:** 66=checklist T1→T10 COMPLETOS. 67=integración herramientas (pendiente). 68=H88-01 Rival Value Flip ✅ acumulando.
+**Nodos 86-87 (auditoría):** 86=hallazgos. 87=12 fixes D87-01→D87-11+D64-01 aplicados, 18 tests REGLA-T53.
+**Nodos 89-95 (Fable Sprint1→4):** 89=spec Sistema Inteligencia. 90=Auditoría Fable. 91=Sprint1 CAPA2+ELO_DOM+--fase. 92=evidencia ejecución. 93=Sprint2 PlayerDB+kambi. 94=Sprint3 PlayerIntelligence+PI en trader. 95=Sprint4 PatternRecognition REPORTE_SOLO (4 candidatos, confidence_flag=STRONG señal más robusta n=52).
 
 ---
 
