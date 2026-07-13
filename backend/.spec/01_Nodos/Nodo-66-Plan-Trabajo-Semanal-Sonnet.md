@@ -74,3 +74,24 @@ Ejecutar sus checklists (ver [[Nodo-67-Integracion-Herramientas]] y [[Nodo-68-Ri
 
 ## 3. CRITERIO DE ACEPTACIÓN DE LA SEMANA
 Commit(s) en main · pytest verde con tests T3 · nodos 87/66/67/68 indexados · shadow book sin días huérfanos · RFI y rival_value acumulando en producción · cero cambios a umbrales de hipótesis existentes.
+
+---
+
+## Addendum — Ejecución T9 (2026-07-13, Sonnet)
+
+| Tarea | Estado | Detalle |
+|---|---|---|
+| T9 settle 07-05 | ✅ DONE | `--settle 2026-07-05`: 20/31 settled (10 pendientes permanentes — ITF/Challenger sin API) |
+| T9 settle 07-10 | ✅ DONE | 0→10/19 settled. Técnica: `settle('2026-07-10', resultados_map=...)` inyectando salida de `validar_con_api.py` directamente (fuente: `resultados_finales_20260713_00*.json`). 9 permanentes: ITF M15 Serbia y Challenger sin cobertura Ninja API. |
+| T9 criterio | ✅ CUMPLIDO | 0 días con settled=0 en 07-02→07-11 (verificado 2026-07-13) |
+
+**07-10 resultados (10 settled):** 3 WON (Milosavljevic @1.91, Choinski @1.78, Basing @2.25) — 7 LOST (Jankanj, Djokovic, de Lange, Vlajic, Liu, Curmi, Sun). Día neto negativo.
+
+**Hallazgo estructural:** `extract_matches_flashscore_only` NO puebla `ganador` — solo extrae fixtures/odds. Para settle retroactivo >1d, la única fuente con resultados reales es `resultados_finales.py` (Ninja API) o `validar_con_api.py`. Si no se corre ese mismo día o el siguiente, los picks ITF/Challenger son irrecuperables (Ninja API no los cubre). Lección: correr `resultados_finales.py` todos los días, incluso ITF, para que quede el archivo antes de midnight.
+
+**Settle count final 07-02→07-12:**
+```
+07-02: 27/29 | 07-03: 15/16 | 07-04: 11/12 | 07-05: 20/31
+07-06: 18/22 | 07-07: 14/15 | 07-08: 47/61 | 07-09: 28/33
+07-10: 10/19 | 07-11: 17/29 | 07-12: 17/21
+```

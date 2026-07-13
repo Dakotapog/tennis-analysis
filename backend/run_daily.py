@@ -226,6 +226,15 @@ def main():
     parser.add_argument('--tier',          nargs='+',
                         default=['grand_slam', 'challenger', 'itf'],
                         help='Tiers a procesar en PASO 4')
+    # S1-C (D90-07): pipeline nocturno / matutino (Nodo-91 §S1-C)
+    # Cron sugerido (NO instalar sin n8n — documentado en Nodo-91 §S1-C):
+    #   0 21 * * * .../run_daily.py --tomorrow --fase noche   (prepara picks del día siguiente)
+    #   0 7  * * * .../run_daily.py --fase manana             (despliega con reports de anoche)
+    parser.add_argument('--fase',          type=str, default='completa',
+                        choices=['completa', 'noche', 'manana'],
+                        help='Fase del pipeline: noche (PASOS 0-3.6 con --tomorrow), '
+                             'manana (PASO 4+ con reports de anoche), '
+                             'completa (todo, default)')
     args = parser.parse_args()
 
     fecha_hoy   = datetime.now().strftime('%Y-%m-%d')
@@ -244,30 +253,46 @@ def main():
         print(f"\n  Settle completado para {fecha_ayer}")
         return
 
+    # S1-C: fase noche/manana/completa (D90-07, Nodo-91 §S1-C)
+    _fase = args.fase
+    _skip_pasos_0_36 = (_fase == 'manana')
+    _skip_pasos_4_plus = (_fase == 'noche')
+
+    if _fase == 'noche':
+        print(f"\n  FASE NOCHE — PASOS 0→3.6 con --tomorrow (prepara picks de mañana)")
+    elif _fase == 'manana':
+        print(f"\n  FASE MANANA — PASOS 4+ con reports de anoche")
+
     # ── PASO 0 — Rankings ────────────────────────────────────────────────
-    if not args.skip_rankings and _rankings_stale():
-        _run(['python3', 'extraer_ranking_atp_version2.py'], 'PASO 0a — Rankings ATP')
-        _run(['python3', 'extraer_ranking_wta_version2.py'], 'PASO 0b — Rankings WTA')
+    if not _skip_pasos_0_36:
+        if not args.skip_rankings and _rankings_stale():
+            _run(['python3', 'extraer_ranking_atp_version2.py'], 'PASO 0a — Rankings ATP')
+            _run(['python3', 'extraer_ranking_wta_version2.py'], 'PASO 0b — Rankings WTA')
 
-    # ── PASO 1 — Extraer partidos ─────────────────────────────────────────
-    cmd_paso1 = ['python3', 'extraer_partidos_api.py']
-    if args.tomorrow:
-        cmd_paso1.append('--tomorrow')
-    _run(cmd_paso1, 'PASO 1 — Extraer partidos (API)')
+        # ── PASO 1 — Extraer partidos ─────────────────────────────────────────
+        cmd_paso1 = ['python3', 'extraer_partidos_api.py']
+        # fase noche siempre fuerza --tomorrow
+        if args.tomorrow or _fase == 'noche':
+            cmd_paso1.append('--tomorrow')
+        _run(cmd_paso1, 'PASO 1 — Extraer partidos (API)')
 
-    # ── PASO 2 — H2H ─────────────────────────────────────────────────────
-    if not args.skip_h2h:
-        _run(['python3', 'extraer_historh2h.py', '--api-mode', '--all-tournaments'],
-             'PASO 2 — Extraer H2H (Ninja API)')
+        # ── PASO 2 — H2H ─────────────────────────────────────────────────────
+        if not args.skip_h2h:
+            _run(['python3', 'extraer_historh2h.py', '--api-mode', '--all-tournaments'],
+                 'PASO 2 — Extraer H2H (Ninja API)')
 
-    # ── PASO 3 — Edge calculator ──────────────────────────────────────────
-    _run(['python3', 'edge_calculator.py'], 'PASO 3 — Edge calculator + shadow-log')
+        # ── PASO 3 — Edge calculator ──────────────────────────────────────────
+        _run(['python3', 'edge_calculator.py'], 'PASO 3 — Edge calculator + shadow-log')
 
-    # ── PASO 3.5 — Tabla análisis ─────────────────────────────────────────
-    _run(['python3', 'generar_tabla_favoritos2.py'], 'PASO 3.5 — Tabla análisis')
+        # ── PASO 3.5 — Tabla análisis ─────────────────────────────────────────
+        _run(['python3', 'generar_tabla_favoritos2.py'], 'PASO 3.5 — Tabla análisis')
 
-    # ── PASO 3.6 — Games signal ───────────────────────────────────────────
-    _run(['python3', 'games_signal_calculator.py'], 'PASO 3.6 — Games signal')
+        # ── PASO 3.6 — Games signal ───────────────────────────────────────────
+        _run(['python3', 'games_signal_calculator.py'], 'PASO 3.6 — Games signal')
+
+    if _skip_pasos_4_plus:
+        print(f"\n  FASE NOCHE completada. PASOS 4+ se ejecutarán con --fase manana")
+        return
 
     # ── PASO 4 — Trader por tier ──────────────────────────────────────────
     tier_config = {
@@ -301,6 +326,41 @@ def main():
                 }
             except Exception:
                 pass
+
+    # S1-C: CAPA 3 — Games fallback si TODOS los tiers dieron 0 picks (Nodo-91 §S1-C)
+    _total_ind = sum(len(v.get('individuales', [])) for v in tier_results.values())
+    _total_cob = sum(len(v.get('cobertura', [])) for v in tier_results.values())
+    _hubo_capa2 = any(
+        p.get('parametros', {}).get('modo') == 'CONFIDENCE_MODE_CAPA2'
+        for v in tier_results.values()
+        for p in [{}]  # placeholder — leído del plan en el loop de arriba
+    )
+    # Re-leer el modo del plan más reciente para detectar CAPA 2
+    _ultimo_plan_file = _latest_report(f'{REPORTS_DIR}/trader_plan_*.json')
+    if _ultimo_plan_file:
+        try:
+            _ultimo_plan = json.loads(Path(_ultimo_plan_file).read_text(encoding='utf-8'))
+            _hubo_capa2 = _ultimo_plan.get('metadata', {}).get('parametros', {}).get('modo') == 'CONFIDENCE_MODE_CAPA2'
+        except Exception:
+            pass
+
+    if _total_ind == 0 and _total_cob == 0 and not _hubo_capa2:
+        print(f"\n{'='*70}")
+        print("  CAPA 3 — GAMES FALLBACK (todos los tiers dieron 0 picks)")
+        print(f"{'='*70}")
+        rc_games, out_games = _run(
+            ['python3', 'betplay_combo_builder.py', '--games'],
+            'CAPA 3 — Games signal (REGLA-G6 $2,000)',
+            capture=True,
+        )
+        # Marcar brief con GAMES MODE
+        tier_results['_capa3_games'] = {'modo': 'GAMES MODE', 'rc': rc_games}
+        if rc_games != 0 or not out_games.strip():
+            print("\n  CAPA 3 también vacía. Estado por capa:")
+            print(f"    CAPA 1 (edge): {_total_ind} individuales, {_total_cob} cobertura")
+            print(f"    CAPA 2 (confidence): {'activa' if _hubo_capa2 else 'sin candidatos (p<0.60 o cuota fuera rango)'}")
+            print(f"    CAPA 3 (games): 0 señales (rc={rc_games})")
+            print("  Acción: revisar games_signal_report más reciente o esperar datos del día.")
 
     # ── PASO 4.3 — Combo confianza ─────────────────────────────────────────
     _run(['python3', 'combo_confianza_builder.py', '--bankroll', str(args.bankroll)],
