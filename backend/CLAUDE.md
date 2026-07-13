@@ -134,7 +134,7 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 | Bankroll | $125,000+ |
 | Shadow Book hit% | GS: 50% ROI+47% \| Challenger: +7.9% \| ITF: 38% ROI-16.8% (jul-10) |
 | ML Dataset | 2,573 registros limpios (motor nodo32, trazabilidad verificada) |
-| Graphify | 1,686 nodos, 2,753 edges (reindexado 2026-07-10). Tamp :7778 preset=aggressive, linger=yes. |
+| Graphify | 949 nodos, 1,302 edges + 91 nodos .spec/ indexados (reindexado 2026-07-13 con Gemini). Tamp :7778 preset=aggressive, linger=yes. |
 | **n8n** | **Docker :5678 + systemd tennis-snapshot-bridge :8765 — ACTIVO** |
 | **GCS** | **_GCS_GATE_ENABLED=True — H60-01 GRADUADA 2026-07-10 (n=54, 64.8%)** |
 
@@ -154,7 +154,7 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 **Nodo-65:** Convergencia Multi-Señal — dos poblaciones ANCHOR(edge>0) / VARIABLE(edge≤0). D65-01→D65-07 implementados 2026-07-10. H77-01/02/03 pre-registradas (n_stop=30/60/20). tier_mismatch observacional en pick_snapshot. WARN_SUPERFICIE en tabla favoritos. Segmento ANCHOR/VARIABLE en shadow_book --report.
 **Nodos documentados, implementacion gateada (auditoría 2026-07-09):** 74 (governor — READ-ONLY, gate: 10 sesiones reales), 75 (índice nodos — 75 nodos, 0 huérfanos), 76 (combo registry — sin invoke en prod)
 **Nodos 86-87 (auditoría 2026-07-11):** 86 = hallazgos + doc completo. 87 = tabla de los 12 fixes D87-01→D87-11+D64-01 aplicados, archivo:línea, verificado 1822 tests passed (18 nuevos REGLA-T53 en `tests/test_nodo87_fixes.py`, adendum T8 con verificación empírica RFI).
-**Nodos 66-68 (plan de trabajo, 2026-07-11):** 66 = checklist semanal Sonnet (T1-T10 — **T1/T2/T3/T4/T5/T8/T9/T10 COMPLETOS 2026-07-13**; T6 graphify+specs y T7 propuesta bucket `?` pendientes). 67 = integración herramientas (pendiente). 68 = H88-01 Rival Value Flip — D68-01→D68-05 ✅ (1827 tests, acumulando prospectivamente).
+**Nodos 66-68 (plan de trabajo, 2026-07-11):** 66 = checklist semanal Sonnet (T1-T10 — **T1→T10 COMPLETOS 2026-07-13**; T6 graphify+specs ✅ 91 nodos .spec/, T7 propuesta bucket `?` ✅ docs/PROPUESTA_MIGRACION_BUCKET_Q.md — decisión pendiente usuario). 67 = integración herramientas (pendiente). 68 = H88-01 Rival Value Flip — D68-01→D68-05 ✅ (1827 tests, acumulando prospectivamente).
 **Nodos 89-91 (Sprint1 Fable, 2026-07-13):** 89 = Sistema Inteligencia Integral (CAPA2 confidence, ELO_DOM). 90 = Auditoría Fable Nodo-89. 91 = Sprint1 implementación capas fallback (D89-01→D90-10 implementados — `_planes_frescos()`, capa2/elo_dominance en trader+shadow_book, `--fase` en run_daily).
 
 ---
@@ -273,7 +273,7 @@ graphify query "<pregunta>"   # orientarse primero, grep solo para líneas espec
 
 ## graphify
 
-Grafo de código en `graphify-out/` (1686 nodos, 2753 edges — código Python, reindexado 2026-07-10).
+Grafo de código en `graphify-out/` (949 nodos, 1302 edges + 91 nodos .spec/ — código Python + memoria semántica, reindexado 2026-07-13).
 
 - **Visualización 2D:** http://localhost:7779/graph.html (Nodo-83 — vis.js, F5 = datos frescos)
 - **Visualización 3D:** http://localhost:7779/graph3d.html (Nodo-84 — Three.js/ForceGraph3D, rotación orbital)

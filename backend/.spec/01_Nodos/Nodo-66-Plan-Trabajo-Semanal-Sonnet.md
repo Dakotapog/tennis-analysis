@@ -85,6 +85,30 @@ Commit(s) en main · pytest verde con tests T3 · nodos 87/66/67/68 indexados ·
 | T9 settle 07-10 | ✅ DONE | 0→10/19 settled. Técnica: `settle('2026-07-10', resultados_map=...)` inyectando salida de `validar_con_api.py` directamente (fuente: `resultados_finales_20260713_00*.json`). 9 permanentes: ITF M15 Serbia y Challenger sin cobertura Ninja API. |
 | T9 criterio | ✅ CUMPLIDO | 0 días con settled=0 en 07-02→07-11 (verificado 2026-07-13) |
 
+## Addendum — Ejecución T6 (2026-07-13, Sonnet)
+
+| Tarea | Estado | Detalle |
+|---|---|---|
+| Fix `.graphifyignore` | ✅ DONE | Eliminadas líneas `*.md` / `**/*.md` / `CLAUDE.md` / `AGENTS.md` que bloqueaban toda la memoria semántica — contradicción con FABLE_02 §1.2 Vacío 1 |
+| Instalar deps Gemini | ✅ DONE | `pip install "graphifyy[anthropic]"` + `pip install openai` (Anthropic API sin créditos — switcheo a Gemini) |
+| `graphify .` primera pasada | ✅ DONE | 4/7 chunks OK, 3/7 rate-limited (free tier Gemini 5 req/min). → 1049 nodos, 1529 edges |
+| `graphify .` segunda pasada | ✅ DONE | 4/4 chunks restantes. → 949 nodos, 1302 edges, 123 comunidades. Costo total: ~$0.38 Gemini |
+| Verificación .spec | ✅ DONE | `grep -c '\.spec' graphify-out/graph.json` = 181. Nodos con source_file=.spec/: **91** (Nodo-01→87, FABLE_02_TENIS_DOCTORADO_SPEC.md) |
+| T6 criterio | ✅ CUMPLIDO | `grep -c '\.spec' graphify-out/graph.json` > 0 ← 181 |
+
+**Hallazgo estructural:** `.graphifyignore` bloqueaba activamente la memoria semántica del proyecto — la contradicción existía desde el commit b9553a4 (Fase 1). Fix: eliminar bloqueo global `*.md`, conservar exclusiones de directorios (`docs/`, `reports/`). Los nodos .spec/ ahora entran con `source_file` = path completo; su `id` usa guión-bajo (ej: `spec_01_nodos_nodo_01_edge_calculator`).
+
+## Addendum — Ejecución T7 (2026-07-13, Sonnet)
+
+| Tarea | Estado | Detalle |
+|---|---|---|
+| T7 propuesta bucket `?` | ✅ DONE | `docs/PROPUESTA_MIGRACION_BUCKET_Q.md` creado — REPORTE_SOLO, nada ejecutado |
+| T7 criterio | ✅ CUMPLIDO | Archivo existe, 3 opciones (A/B/C) con pros/contras, decisión pendiente usuario |
+
+**Decision pendiente (usuario):** Opción A (renombrar `?`→`real_money_unknown`, riesgo BAJO) es la recomendación preliminar. Ver `docs/PROPUESTA_MIGRACION_BUCKET_Q.md` §3.
+
+---
+
 **07-10 resultados (10 settled):** 3 WON (Milosavljevic @1.91, Choinski @1.78, Basing @2.25) — 7 LOST (Jankanj, Djokovic, de Lange, Vlajic, Liu, Curmi, Sun). Día neto negativo.
 
 **Hallazgo estructural:** `extract_matches_flashscore_only` NO puebla `ganador` — solo extrae fixtures/odds. Para settle retroactivo >1d, la única fuente con resultados reales es `resultados_finales.py` (Ninja API) o `validar_con_api.py`. Si no se corre ese mismo día o el siguiente, los picks ITF/Challenger son irrecuperables (Ninja API no los cubre). Lección: correr `resultados_finales.py` todos los días, incluso ITF, para que quede el archivo antes de midnight.
