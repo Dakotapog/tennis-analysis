@@ -52,12 +52,8 @@ graphify-out/
 *.npz
 
 # LOS .md DE NODOS SÍ ENTRAN (son la memoria semántica del proyecto)
-# Para incluirlos: export ANTHROPIC_API_KEY="sk-ant-..." && graphify . (requiere API key para extracción semántica)
-# Mientras tanto: solo el grafo de código (68 archivos .py) — suficiente para queries de dependencias
-# Para activar docs: quitar las líneas *.md, **/*.md y *.html de abajo
-*.md
-**/*.md
-CLAUDE.md
-AGENTS.md
+# docs/ y reports/ ya excluidos arriba — no hace falta bloquear *.md globalmente
+# Fix 2026-07-13: eliminado bloqueo *.md que impedía indexar .spec/01_Nodos/
+# Contradicción resuelta: §1.2 Vacío 1 dice "nodos .md SÍ entran" — ahora es real
 *.html
 *.htm
