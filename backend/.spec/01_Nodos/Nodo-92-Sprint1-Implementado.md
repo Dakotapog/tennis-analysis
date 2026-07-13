@@ -3,6 +3,8 @@
 > **Wikilinks:** [[Nodo-91-Sprint1-Capas-Fallback-Implementacion]] | [[Nodo-90-Auditoria-Fable-Nodo89]] | [[Nodo-87-Fixes-Auditoria-D87]]
 > **Fecha:** 2026-07-13 | **Autor:** Sonnet 4.6 (WSL) | **Patrón:** Nodo-87
 > **Baseline:** 1827 tests → **1846 tests** (19 nuevos REGLA-T53, 0 failed)
+> **Estado:** SPRINT 1 COMPLETO — S1-A→S1-F + H89-01/H89-02 pre-registrados (aprobados usuario 2026-07-13)
+> **Graphify:** 1723 nodos, 2804 edges (actualizado 2026-07-13 post-Sprint1)
 
 ---
 
@@ -76,9 +78,16 @@ Archivo: `tests/test_nodo91_sprint1.py`
 
 ---
 
-## §5. Pre-registros pendientes (requieren OK usuario)
+## §5. Pre-registros — APROBADOS y REGISTRADOS
 
-Per Constitución §8, H89-01 y H89-02 propuestos en Nodo-91 §S1-F no se han escrito en `validation/preregistered_hypotheses.json`. Esperando aprobación explícita del usuario.
+Aprobados por usuario 2026-07-13. Commit `5a532f8`.
+
+| ID | Nombre | Gate | n_stop | Kill-switch |
+|---|---|---|---|---|
+| H89-01 | CAPA2 Model-Confidence | p≥0.60, cuota [1.50-2.80], n_h2h≥1, sin HOT_sin_BBI/phantom/NO_DATA | 30 | hit%<45% con n≥20 → CAPA2_ENABLED=False |
+| H89-02 | ELO_DOMINANCE axis | elo_gap>50 AND ranking_fav>ranking_rival (número peor = más alto) | 30 | — (observacional) |
+
+Archivo: `validation/preregistered_hypotheses.json` — ambas en estado `ACUMULANDO`, n_actual=0.
 
 ---
 
