@@ -1130,6 +1130,41 @@ def report(desde: Optional[str] = None, hasta: Optional[str] = None) -> str:
     _append_segment(settled, lines, "rfi_tier>=1 (rival o fav >=90d inactivo)",
                     lambda r: (r.get('pick_snapshot', {}).get('rfi_tier') or 0) >= 1)
 
+    # ── D68-02 (Nodo-68): Rival Value Flip H88-01 — OBSERVACIONAL ───────────────
+    # hit%_rival = % LOST del favorito (el rival ganó). ROI a cuota_rival.
+    # Sub-segmento sin rfi_ultra aísla el flip puro del alpha RFI (lección C-05).
+    _rv_recs = [
+        r for r in settled
+        if r.get('pick_snapshot', {}).get('rival_value_flag', False)
+    ]
+    if _rv_recs:
+        _rv_m = _rival_value_metrics(_rv_recs)
+        if _rv_m['n'] > 0:
+            _rv_sp = '*' if _rv_m['sparse'] else ''
+            _rv_ic = _rv_m['ic']
+            _rv_note = "  [pre-graduacion n<30]" if _rv_m['n'] < 30 else ""
+            lines.append(
+                f"  RIVAL_VALUE H88-01 (edge_fav<=-10%, cuota_rival [2.50-8.00]){_rv_sp}:"
+            )
+            lines.append(
+                f"    n={_rv_m['n']}  hit%_rival={_rv_m['hit_pct_rival']}  "
+                f"IC95=[{_rv_ic[0]},{_rv_ic[1]}]  ROI_rival={_rv_m['roi_rival']}%{_rv_note}"
+            )
+            _rv_no_rfi = [
+                r for r in _rv_recs
+                if not r.get('pick_snapshot', {}).get('rfi_ultra', False)
+            ]
+            if _rv_no_rfi:
+                _rv_nr_m = _rival_value_metrics(_rv_no_rfi)
+                if _rv_nr_m['n'] > 0:
+                    _rv_nr_sp = '*' if _rv_nr_m['sparse'] else ''
+                    lines.append(
+                        f"    sub: sin rfi_ultra{_rv_nr_sp}: n={_rv_nr_m['n']}  "
+                        f"hit%_rival={_rv_nr_m['hit_pct_rival']}  "
+                        f"ROI_rival={_rv_nr_m['roi_rival']}%"
+                    )
+            lines.append("")
+
     # ── D54-02: WATCHLIST ∩ tier=grand_slam ∩ edge≥20% (Nodo-55 P54-03) ──
     # Intersección de cortes ya pre-registrados: status × tier × banda de cuota.
     # NO es segmento nuevo — es visualización de uno existente para responder
@@ -1215,6 +1250,50 @@ def report(desde: Optional[str] = None, hasta: Optional[str] = None) -> str:
     lines.append("")
     lines.append(sep)
     return "\n".join(lines)
+
+
+def _rival_value_metrics(recs: list) -> dict:
+    """
+    D68-02 (Nodo-68): Métricas INVERTIDAS para RIVAL_VALUE (H88-01).
+    hit%_rival = % donde el favorito PERDIÓ (= el rival ganó).
+    ROI flat 1u a cuota_rival: (cuota_rival-1) si LOST, -1 si WON/VOID.
+    IC Wilson sobre hit%_rival — misma escala (0-100) que _segment_metrics.
+    """
+    non_void = [
+        r for r in recs
+        if r.get('resolucion', {}).get('resultado') not in (None, 'VOID')
+    ]
+    n = len(non_void)
+    n_void = len(recs) - n
+    if n == 0:
+        return {
+            'n': 0, 'n_void': n_void, 'sparse': True,
+            'hits_rival': 0, 'hit_pct_rival': 0.0,
+            'roi_rival': 0.0, 'ic': (0.0, 0.0),
+        }
+    hits_rival = sum(
+        1 for r in non_void
+        if r.get('resolucion', {}).get('resultado') == 'LOST'
+    )
+    roi_vals = []
+    for r in non_void:
+        resultado_fav = r.get('resolucion', {}).get('resultado')
+        cuota_rival = r.get('pick_snapshot', {}).get('cuota_rival', 0)
+        if resultado_fav == 'LOST' and cuota_rival > 1:
+            roi_vals.append(cuota_rival - 1.0)
+        else:
+            roi_vals.append(-1.0)
+    roi_rival = round(sum(roi_vals) / n * 100, 1)
+    ic = wilson_ci(n, hits_rival)
+    return {
+        'n': n,
+        'n_void': n_void,
+        'sparse': n < 10,
+        'hits_rival': hits_rival,
+        'hit_pct_rival': round(hits_rival / n * 100, 1),
+        'roi_rival': roi_rival,
+        'ic': ic,
+    }
 
 
 def _append_segment(settled: list, lines: list, label: str, pred) -> None:
@@ -1512,6 +1591,47 @@ def report_dict(desde: Optional[str] = None, hasta: Optional[str] = None) -> dic
             'excluded': prov == 'kambi_inplay',
         }
     result['clv_by_provenance'] = clv_by_prov
+
+    # ── D68-02 (Nodo-68): Rival Value Flip H88-01 — misma fuente de verdad que report() ──
+    _rv_recs_d = [r for r in settled if r.get('pick_snapshot', {}).get('rival_value_flag', False)]
+    _rv_m_d = _rival_value_metrics(_rv_recs_d)
+    _rv_cuotas_d = [
+        r.get('pick_snapshot', {}).get('cuota_rival', 0)
+        for r in _rv_recs_d
+        if r.get('pick_snapshot', {}).get('cuota_rival', 0) > 1
+    ]
+    _rv_cuota_media = round(sum(_rv_cuotas_d) / len(_rv_cuotas_d), 2) if _rv_cuotas_d else None
+    _rv_breakeven = round(100.0 / _rv_cuota_media, 1) if _rv_cuota_media else None
+    if _rv_m_d['n'] < 30:
+        _rv_estado = f"CONTINUAR (n={_rv_m_d['n']}/30)"
+    elif _rv_breakeven is not None and _rv_m_d['ic'][0] > _rv_breakeven:
+        _rv_estado = "GRADUABLE"
+    else:
+        _rv_estado = "NO_GRADUABLE"
+    _rv_no_rfi_d = [
+        r for r in _rv_recs_d
+        if not r.get('pick_snapshot', {}).get('rfi_ultra', False)
+    ]
+    _rv_nr_m_d = _rival_value_metrics(_rv_no_rfi_d)
+    result['rival_value'] = {
+        'label': 'RIVAL_VALUE H88-01',
+        'n': _rv_m_d['n'],
+        'n_stop': 30,
+        'hits_rival': _rv_m_d['hits_rival'],
+        'hit_pct_rival': _rv_m_d['hit_pct_rival'],
+        'roi_rival': _rv_m_d['roi_rival'],
+        'ic': list(_rv_m_d['ic']),
+        'sparse': _rv_m_d['sparse'],
+        'cuota_rival_media': _rv_cuota_media,
+        'breakeven_rival': _rv_breakeven,
+        'estado': _rv_estado,
+        'sub_sin_rfi_ultra': {
+            'n': _rv_nr_m_d['n'],
+            'hit_pct_rival': _rv_nr_m_d['hit_pct_rival'],
+            'roi_rival': _rv_nr_m_d['roi_rival'],
+            'ic': list(_rv_nr_m_d['ic']),
+        },
+    }
 
     return result
 
