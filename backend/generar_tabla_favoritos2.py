@@ -1046,6 +1046,23 @@ def analyze_matches_with_pandas(file_path, output_filename="analisis_partidos_pa
                             f"{_rfi_label}: jugador inactivo {_rfi_days_str}{_rfi_fav_str}{_rfi_decay_str}\n"
                         )
 
+                    # D68-06: señal Rival Value Flip en tabla favoritos (Nodo-68)
+                    # OBSERVACIONAL — H88-01 acumula; NO modifica apostar ni kelly.
+                    if _edge_pick.get('rival_value_flag', False):
+                        _rv_cuota = _edge_pick.get('cuota_rival')
+                        _rv_edge  = _edge_pick.get('edge_vs_mercado_rival')
+                        _rv_vig   = _edge_pick.get('vig')
+                        _rv_cuota_str = f"{_rv_cuota:.2f}" if _rv_cuota is not None else '?'
+                        _rv_edge_str  = (f"+{_rv_edge*100:.1f}%" if _rv_edge is not None and _rv_edge >= 0
+                                         else f"{_rv_edge*100:.1f}%" if _rv_edge is not None else '?')
+                        _rv_vig_str   = f"{_rv_vig*100:.1f}%" if _rv_vig is not None else '?'
+                        f.write(
+                            f"RIVAL VALUE (H88-01): cuota_rival={_rv_cuota_str}"
+                            f" | edge_vs_rival={_rv_edge_str}"
+                            f" | vig={_rv_vig_str}"
+                            f" — señal observacional, no apuesta automatica\n"
+                        )
+
                 f.write(f"Diferencia de Puntaje: {scores.get('score_difference', 'N/A')}\n\n")
 
                 # Predicción de Sets y Games
