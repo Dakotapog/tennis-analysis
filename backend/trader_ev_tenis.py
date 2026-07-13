@@ -42,6 +42,16 @@ BUDGET_COMBO_PCT  = 0.40    # 40% para combos
 BUDGET_SIS_PCT    = 0.20    # 20% para sistema
 MIN_BET           = 1000    # apuesta mínima en COP/USD (ajustar)
 
+# S1-B (Nodo-91 D90-04): tope de suma de stakes CAPA 2 por tier
+CAPA2_CAP_POR_TIER = {
+    'grand_slam': 10_000,
+    'atp1000':    10_000,
+    'atp500':     10_000,
+    'challenger':  5_000,
+    'itf':         2_000,
+}
+CAPA2_STAKE_FACTOR = 0.25  # stake = 25% del sizing normal
+
 # Nodo-79: MIN_BET proporcional por tier — MODO SOMBRA (no afecta stake real)
 # Activar en real solo cuando H54-01 gradúe (n≥30, hit% flattened ≥ hit% financiado)
 _MIN_BET_BY_TIER = {
@@ -473,15 +483,30 @@ def _load_latest_edge_report(file_override: str = None) -> dict:
 
 # ── Individuales ──────────────────────────────────────────────────────────────
 
+def _pool_capa2(watchlist: list, sin_edge: list) -> list:
+    """S1-B (D90-04/H89-01): construye el pool de CAPA 2 (Model Confidence).
+
+    Función pura — solo filtra por el flag capa2_candidate=True calculado en
+    edge_calculator.evaluar_capa2(). REGLA-T53: no reimplementa la fórmula.
+    """
+    return [p for p in (watchlist + sin_edge) if p.get('capa2_candidate')]
+
+
 def _print_individuales(senales: list, bankroll: float, budget: float,
-                        p_prior: float = _P_PRIOR) -> tuple:
+                        p_prior: float = _P_PRIOR,
+                        capa2_factor: float = 1.0) -> tuple:
     """
     Imprime tabla de individuales. Retorna (total_gastado, lista_enriched).
     Usa p_historica_usada per-pick del edge_calculator si disponible; cae a p_prior como fallback.
+    capa2_factor: 0.25 para CAPA 2 (stake = 25% del sizing normal, S1-B D90-04).
     """
+    _capa2 = capa2_factor < 1.0
     print()
     print("  ┌─ INDIVIDUALES " + "─" * 50)
-    print(f"  │  Budget: ${budget:,.0f} ({BUDGET_IND_PCT*100:.0f}% bankroll)")
+    if _capa2:
+        print(f"  │  [CAPA 2] Budget cap: ${budget:,.0f}  │  Factor stake: {capa2_factor:.0%}")
+    else:
+        print(f"  │  Budget: ${budget:,.0f} ({BUDGET_IND_PCT*100:.0f}% bankroll)")
     print()
 
     gastado = 0.0
@@ -492,7 +517,7 @@ def _print_individuales(senales: list, bankroll: float, budget: float,
         p_b     = _p_blend(p_mod, n_h2h, s.get('p_historica_usada') or p_prior)
         cuota   = s['cuota_favorito']
         kelly   = min(KELLY_CAP_IND, _kelly_quarter(p_b, cuota))
-        raw_stake     = kelly * bankroll
+        raw_stake     = kelly * bankroll * capa2_factor  # D90-04: 25% en CAPA 2
         capped_stake  = min(raw_stake, budget - gastado)
         rounded_stake = round(capped_stake / MIN_BET) * MIN_BET
         # D87-03 (Nodo-87): kelly=0 (EV<=0 bajo p_blend) o budget agotado => stake 0.
@@ -1026,13 +1051,45 @@ def main():
     watchlist   = [p for p in watchlist   if p.get('tier', 'atp500') == _tier_filtro]
     sin_edge    = [p for p in sin_edge    if p.get('tier', 'atp500') == _tier_filtro]
 
+    _capa2_mode = False  # S1-B: modo CONFIDENCE_MODE_CAPA2
     if not senales_raw and not args.all_picks:
-        print(f"⚠️  Sin señales APOSTAR para tier '{_tier_filtro}'. Tiers disponibles en reporte:")
-        _all = reporte.get('apostar', []) + reporte.get('watchlist', [])
-        for t in sorted(set(p.get('tier', '?') for p in _all)):
-            n = sum(1 for p in _all if p.get('tier') == t)
-            print(f"     {t}: {n} picks")
-        return
+        # S1-B (D90-04): intentar CAPA 2 antes de rendirse
+        _pool_c2 = _pool_capa2(watchlist, sin_edge)
+        if _pool_c2:
+            _capa2_mode = True
+            _cap_c2 = CAPA2_CAP_POR_TIER.get(_tier_filtro, 5_000)
+            print(f"\n{'='*70}")
+            print(f"  CONFIDENCE MODE — CAPA 2  [OBSERVACIONAL]")
+            print(f"  {len(_pool_c2)} candidato(s) con p_modelo>=0.60, cuota [1.50-2.80], n_h2h>=1")
+            print(f"  Stakes: {int(CAPA2_STAKE_FACTOR*100)}% del sizing normal  |  Cap: ${_cap_c2:,}")
+            print(f"{'='*70}")
+            # Picks de CAPA 1 bloqueados y su motivo
+            _bloqueados = [p for p in (watchlist + sin_edge) if not p.get('capa2_candidate')]
+            if _bloqueados:
+                print(f"  Picks CAPA 1 bloqueados ({len(_bloqueados)}):")
+                for b in _bloqueados[:8]:
+                    motivo = b.get('motivo_reclasificacion') or b.get('status') or 'gate económico (p<0.55 o n_axes<2)'
+                    print(f"    [{b.get('partido','?')}] {motivo}")
+                print()
+            for p in _pool_c2:
+                p['_capa'] = 2
+            senales_raw = _pool_c2
+        else:
+            print(f"⚠️  Sin señales APOSTAR para tier '{_tier_filtro}' (CAPA 1 y CAPA 2 vacías).")
+            _all_tier = watchlist + sin_edge
+            if _all_tier:
+                print(f"  Candidatos analizados ({len(_all_tier)}) y razón de bloqueo:")
+                for p in _all_tier[:10]:
+                    motivo = (p.get('motivo_reclasificacion') or p.get('status')
+                              or f"p={p.get('p_modelo', 0):.2f} cuota={p.get('cuota_favorito', 0):.2f} h2h={p.get('n_h2h', 0)}")
+                    print(f"    [{p.get('partido','?')}] {motivo}")
+            else:
+                print(f"  Tiers disponibles en reporte:")
+                _all = reporte.get('apostar', []) + reporte.get('watchlist', [])
+                for t in sorted(set(p.get('tier', '?') for p in _all)):
+                    n = sum(1 for p in _all if p.get('tier') == t)
+                    print(f"     {t}: {n} picks")
+            return
 
     # ── Construir pool ──
     pool = list(senales_raw)
@@ -1097,8 +1154,12 @@ def main():
     gastado_ind = 0.0
     senales_enriched = []
     if senales_raw:
-        gastado_ind, senales_enriched = _print_individuales(senales_raw, bankroll, budget_ind,
-                                                             p_prior=p_prior_efectivo)
+        _budget_ind_c2 = CAPA2_CAP_POR_TIER.get(_tier_filtro, 5_000) if _capa2_mode else budget_ind
+        gastado_ind, senales_enriched = _print_individuales(
+            senales_raw, bankroll, _budget_ind_c2,
+            p_prior=p_prior_efectivo,
+            capa2_factor=CAPA2_STAKE_FACTOR if _capa2_mode else 1.0,
+        )
         # p_blend ya calculado per-pick con p_historica_usada dentro de _print_individuales — no sobreescribir
 
     # ── 2/3. Modo normal: Combos + Sistema ──
@@ -1247,7 +1308,9 @@ def main():
             "n_partidos_analizados": reporte['metadata'].get('n_procesados', 0),
             "calibracion_n": cal_n,
             "parametros": {
-                "modo": "cobertura" if args.cobertura else "normal",
+                "modo": ("CONFIDENCE_MODE_CAPA2" if _capa2_mode
+                         else "cobertura" if args.cobertura
+                         else "normal"),
                 "torneo_tipo": args.torneo_tipo,
                 "superficie": args.superficie,
                 "combos": args.combos,
