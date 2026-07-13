@@ -1184,7 +1184,7 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
 
     # D90-01: kambi_disponible — campo observacional (side-car kambi_coverage_*.json)
     # Filtro real solo en trader/combo builder, NUNCA aquí ni en shadow_book.
-    resultado['kambi_disponible'] = _annotate_kambi(resultado.get('favorito', ''))
+    resultado['kambi_disponible'] = _annotate_kambi(resultado.get('favorito_predicho', ''))
 
     return resultado
 
