@@ -152,7 +152,7 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 **Nodos completos:** 51-63, 64-71, 72, 73, 78, 86-95 — detalles en `.spec/01_Nodos/Nodo-XX.md`
 **Nodo-64:** RFI Return-From-Inactivity — **implementado 2026-07-11 (D64-01)**: `rfi_tier`/`rfi_ultra`/`rfi_decay_gap` serializados en edge_report, segmentos en shadow_book --report. H76-01 acumula automático.
 **Nodo-65:** Convergencia Multi-Señal — ANCHOR(edge>0) / VARIABLE(edge≤0). D65-01→D65-07. H77-01/02/03 pre-registradas.
-**Nodos 66-68:** 66=checklist T1→T10 COMPLETOS. 67=integración herramientas (pendiente). 68=H88-01 Rival Value Flip ✅ acumulando.
+**Nodos 66-68:** 66=checklist T1→T10 COMPLETOS. 67=integración herramientas **COMPLETO** (I2+I3+I4+I5+I6+I7+C1+C4 — dashboard señales+M0, governor JSON-first, graphify timer, docker propuesta, tamp brief, registry desislado, DataContract v2). 68=H88-01 Rival Value Flip ✅ acumulando.
 **Nodos 86-87 (auditoría):** 86=hallazgos. 87=12 fixes D87-01→D87-11+D64-01 aplicados, 18 tests REGLA-T53.
 **Nodos 89-95 (Fable Sprint1→4):** 89=spec Sistema Inteligencia. 90=Auditoría Fable. 91=Sprint1 CAPA2+ELO_DOM+--fase. 92=evidencia ejecución. 93=Sprint2 PlayerDB+kambi. 94=Sprint3 PlayerIntelligence+PI en trader. 95=Sprint4 PatternRecognition REPORTE_SOLO (4 candidatos, confidence_flag=STRONG señal más robusta n=52).
 

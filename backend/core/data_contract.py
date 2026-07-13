@@ -90,3 +90,89 @@ def completeness_score(partido_or_pick: dict) -> float:
     if has_empty_history(partido_or_pick):
         return 0.0
     return 1.0
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# C1 Nodo-67: DataContract v2 — schema por artefacto
+# Cierra las 6 fronteras de Nodo-86 §4.1 con UN mecanismo.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+class DataContractViolation(Exception):
+    """Fallo de contrato de artefacto — fail-loud (no silencioso)."""
+
+
+# Schemas: cada entrada define las claves requeridas en el top-level del artefacto.
+# 'required'       — claves obligatorias en el objeto raíz
+# 'pick_required'  — claves obligatorias en cada pick de la lista indicada
+# 'list_key'       — nombre de la lista de picks (para pick_required)
+ARTIFACT_SCHEMAS: dict = {
+    # Frontera 1: edge_calculator → trader_ev_tenis
+    'edge_report': {
+        'required': ['metadata', 'apostar'],
+    },
+    # Frontera 2: trader_ev_tenis → combo_governor / dashboard
+    'trader_plan': {
+        'required': ['metadata', 'individuales'],
+    },
+    # Frontera 3: bookmarklet → betslip_registrar --listen
+    'betslip_index': {
+        'required': ['ts', 'index'],
+    },
+    # Frontera 4: betslip_registrar --listen → --cerrar
+    'apuestas': {
+        'required': ['estado', 'picks', 'ts_registro'],
+        'list_key': 'picks',
+        'pick_required': ['jugador', 'cuota', 'outcome_id'],
+    },
+    # Frontera 5: shadow_book --settle → report_dict / dashboard
+    'sb_jsonl_pick': {
+        'required': ['sb_id', 'partido', 'pick_snapshot'],
+    },
+    # Frontera 6 (I3 Nodo-67): combo_confianza_builder → combo_governor
+    'combo_plan_json': {
+        'required': ['fecha', 'bankroll', 'budget', 'cobertura'],
+    },
+}
+
+
+def validate_artifact(name: str, obj: dict) -> bool:
+    """
+    Valida que `obj` cumple el schema registrado para `name`.
+    Lanza DataContractViolation si falla (fail-loud — no retorna False en silencio).
+    Retorna True si el artefacto es válido.
+
+    Uso:
+        from core.data_contract import validate_artifact
+        validate_artifact('edge_report', edge_data)   # lanza si falta 'apostar'
+    """
+    schema = ARTIFACT_SCHEMAS.get(name)
+    if schema is None:
+        raise DataContractViolation(
+            f"Artefacto '{name}' no registrado en ARTIFACT_SCHEMAS. "
+            f"Añadir schema en core/data_contract.py antes de consumir."
+        )
+
+    # Verificar claves requeridas en raíz
+    missing = [k for k in schema.get('required', []) if k not in obj]
+    if missing:
+        raise DataContractViolation(
+            f"[{name}] Claves requeridas ausentes: {missing}. "
+            f"Artefacto recibido con claves: {list(obj.keys())}"
+        )
+
+    # Verificar claves requeridas en cada pick
+    list_key = schema.get('list_key')
+    pick_required = schema.get('pick_required', [])
+    if list_key and pick_required:
+        picks = obj.get(list_key, [])
+        for i, pick in enumerate(picks):
+            if not isinstance(pick, dict):
+                continue
+            missing_pick = [k for k in pick_required if k not in pick]
+            if missing_pick:
+                raise DataContractViolation(
+                    f"[{name}] Pick [{i}] ({pick.get('jugador', pick.get('partido', '?'))}) "
+                    f"faltan campos: {missing_pick}"
+                )
+
+    return True

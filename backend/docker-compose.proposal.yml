@@ -1,0 +1,93 @@
+# docker-compose.proposal.yml — I5 Nodo-67
+# PROPUESTA — no desplegar sin decisión del usuario.
+# Ver rollback al final.
+#
+# Objetivo: unificar n8n + bridge + graphify bajo Docker Compose.
+# Tamp se queda en systemd (dependencia dura de Claude Code — no del pipeline).
+#
+# Estado actual (2026-07-13):
+#   n8n      → Docker  :5678  (ya existe)
+#   bridge   → systemd :8765  (tennis-snapshot-bridge.service, PID 88729)
+#   graphify → systemd :7779  (graphify.service)
+#   tamp     → systemd :7778  (NO mover — Claude Code lo necesita en host)
+#
+# Prueba en paralelo (SIN tocar los units actuales):
+#   docker compose -f docker-compose.proposal.yml up -d
+#   # Verificar puertos alternativos: bridge=8766, graphify=7780
+#   # Si OK → migrar uno a uno, stopear el unit systemd correspondiente
+#
+# ROLLBACK:
+#   docker compose -f docker-compose.proposal.yml down
+#   systemctl --user start tennis-snapshot-bridge
+#   systemctl --user start graphify
+#   # Los units systemd nunca se tocan hasta que la propuesta sea aprobada.
+
+version: "3.9"
+
+services:
+
+  # ── n8n (ya existente en Docker) ──────────────────────────────────────────
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=false
+      - N8N_HOST=localhost
+      - WEBHOOK_URL=http://localhost:5678/
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - /mnt/c/users/hogar/tennis-analysis/backend:/workspace:ro
+
+  # ── snapshot-bridge (propuesta: mover de systemd a Docker) ────────────────
+  # Puerto alternativo 8766 para prueba en paralelo (no choca con :8765 systemd)
+  snapshot-bridge:
+    image: python:3.11-slim
+    container_name: snapshot-bridge-proposal
+    restart: unless-stopped
+    ports:
+      - "8766:8765"           # host:8766 → container:8765 (paralelo al :8765 systemd)
+    working_dir: /workspace
+    command: python3 close_snapshot_server.py
+    volumes:
+      - /mnt/c/users/hogar/tennis-analysis/backend:/workspace
+    depends_on:
+      - n8n
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8765/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  # ── graphify server (propuesta: mover de systemd a Docker) ────────────────
+  # Puerto alternativo 7780 para prueba en paralelo (no choca con :7779 systemd)
+  graphify:
+    image: python:3.11-slim
+    container_name: graphify-proposal
+    restart: unless-stopped
+    ports:
+      - "7780:7779"           # host:7780 → container:7779 (paralelo al :7779 systemd)
+    working_dir: /workspace
+    command: python3 graphify_server.py
+    volumes:
+      - /mnt/c/users/hogar/tennis-analysis/backend:/workspace
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7779/graph.html"]
+      interval: 60s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  n8n_data:
+    external: true           # usa el volumen existente de n8n
+
+# ─────────────────────────────────────────────────────────────────────────────
+# NOTAS:
+# 1. Tamp (:7778) NO está aquí — depende de Claude Code como ANTHROPIC_BASE_URL.
+# 2. Los puertos alternativos (8766, 7780) permiten prueba sin romper los units.
+# 3. Migración incremental recomendada: bridge primero, graphify después.
+# 4. Cuando graphify migre a Docker, actualizar graphify-update.service para
+#    ejecutar `docker exec graphify graphify update /workspace` en vez de venv.
+# ─────────────────────────────────────────────────────────────────────────────

@@ -103,3 +103,254 @@ Healthcheck en el workflow I1.3 + sección en TROUBLESHOOTING con cómo medir hi
 3. `systemctl --user start tennis-snapshot-bridge.service` — levantar bajo control de systemd
 
 **Estado post-fix:** PID 88729, `active (running)`, `/health` OK. Si el bridge cae, systemd lo reinicia automáticamente. No habrá nuevos errores en el log.
+
+---
+
+## Addendum — Ejecución I2 (2026-07-13, Sonnet)
+
+### Dashboard: señales nuevas + odómetro M0
+
+**Cambios implementados:**
+
+#### shadow_book.py — `report_dict()` — 3 nuevas claves
+
+| Clave | Contenido |
+|---|---|
+| `anchor_variable` | `{'anchor': {n, hit_pct, roi, ic, sparse}, 'variable': {...}}` — D65-05 |
+| `rfi` | `{'ultra': {n, hit_pct, roi, ic, sparse}, 'tier1plus': {...}}` — D64-01 |
+| `m0` | `{'dias_sin_settle': int, 'governor_executions': int}` — full-history, no date filter |
+
+`anchor_variable` y `rfi` usan los mismos `_segment_metrics()` y `settled` que `report()` (D58-01: única fuente de verdad). `m0.dias_sin_settle` escanea todos los `sb_*.jsonl` del historial (fuera del rango de fechas filtrado) y cuenta los días con picks > 0 y settled = 0. `m0.governor_executions` cuenta líneas en `logs/combo_governor.log`.
+
+#### dashboard.py — `panel_hoy()` — 2 nuevas secciones al final
+
+**Sección "Señales Activas":**
+- 4 métricas en columnas: ANCHOR (edge>0) | VARIABLE (edge≤0) | RFI Ultra | RFI tier≥1
+- Card RIVAL VALUE H88-01 si hay datos (n > 0)
+
+**Sección "Odómetro M0 — Pipeline (READ-ONLY)":**
+- Fila 1 (4 cols): Sesiones (periodo) | Picks loggeados | Settled | Días sin settle (hist.)
+- Fila 2 (1+3 cols): Ejecuciones Governor (con delta "gate: 10 sesiones") | Barras H-XX activas n_actual/n_stop
+
+**Verificación empírica (2026-07-13):**
+```
+m0:              dias_sin_settle=1, governor_executions=3
+anchor_variable: ANCHOR n=201 hit=34.8% ROI=-4.1% | VARIABLE n=23 hit=60.9% ROI=-26.3%
+rfi:             ultra n=0 (sparse) | tier1+ n=0 (sparse)
+sessions:        n=12
+```
+
+**Tests:** 1945 passed (sin regresiones). I2 criterio CUMPLIDO: dashboard muestra odómetro + 3 segmentos nuevos.
+
+---
+
+## Addendum — Ejecución I3 (2026-07-13, Sonnet)
+
+### Governor v2: fuentes estructuradas
+
+**Cambios implementados:**
+
+#### combo_confianza_builder.py — emisión JSON paralela
+
+Tras escribir el `.txt` (`out_path`), emite `combo_plan_*.json` con la misma fecha/sufijo:
+
+```json
+{
+  "fecha": "20260713_120000",
+  "bankroll": 125000,
+  "budget": 5000,
+  "fase": 1,
+  "cobertura": [
+    {"nombre": "CORE", "stake": 2500},
+    {"nombre": "SAT_1", "stake": 1000},
+    {"nombre": "MOONSHOT", "stake": 500}
+  ]
+}
+```
+
+El `.txt` se conserva intacto (aditivo). Imprime `[I3] JSON: <path>` al generar.
+
+#### combo_governor.py — nuevas funciones + lógica JSON-first
+
+| Función | Descripción |
+|---|---|
+| `_parse_combo_plan_json(path)` | Lee `.json`, extrae `{nombre: stake}` + `budget` — sin regex |
+| `_latest_combo_plan_json(fecha)` | Busca `combo_plan_FECHA*.json` más reciente |
+
+Flujo en `main()`:
+1. Si existe `.json` → leer vía `_parse_combo_plan_json` (fuente primaria)
+2. Si también existe `.txt` → cross-verify total JSON vs TXT → imprimir OK o WARN
+3. Si solo existe `.txt` → fallback `_parse_combo_plan` (regex, marcado como `[TXT fallback]`)
+4. Si ninguno → mensaje sin plan
+
+**Verificación empírica cross-verify (2026-07-13):**
+```
+TXT total:  $77,000
+JSON total: $77,000
+Match: True — parsers equivalentes
+```
+
+**Tests:** 1945 passed (sin regresiones). I3 criterio CUMPLIDO: governor reporta idéntico total por ambas vías; log acumulando hacia gate de 10 sesiones (3 ejecuciones registradas).
+
+---
+
+## Addendum — Ejecución C4 (2026-07-13, Sonnet)
+
+### outcome_id↔match_id completo + brecha hit%_real vs hit%_shadow
+
+**Pieza 1 — Persistir el mapa en el settle (`betslip_registrar.py`)**
+
+Nueva función `_resolve_match_id_from_edge(partido, jugador)`:
+- Escanea edge_reports de últimos 7 días (secciones `apostar`, `watchlist`, `sin_edge`, `sin_datos`)
+- Busca match por `partido` (substring) o `jugador` (primer token)
+- Retorna `match_id` FlashScore si encuentra, `''` si no
+
+En `cerrar()`: cuando `match_id` está vacío, llama a `_resolve_match_id_from_edge` antes de `_obtener_resultado`. Si resuelve, persiste en el pick y loguea `[C4] match_id resuelto desde edge_report`.
+
+**Verificación empírica (apuestas 2026-07-10, 4 picks):**
+```
+Max Wiskandt       -> '4dd7TOZo'  ✅
+Teodora Kostovic   -> 'zL2Lm363'  ✅
+Marko Milosavljevic -> 'GAx4aFN5' ✅
+Tuncay Duran       -> ''          (pick >7 días, fuera de ventana)
+```
+3/4 resueltos. El cuarto requiere ventana extendida o re-registro.
+
+**Pieza 2 — Brecha hit%_real vs hit%_shadow en dashboard (`dashboard.py` + `shadow_book.py`)**
+
+`shadow_book.report_dict()['summary']` ahora incluye `n_hits` (WON entre settled, sin VOID).
+
+`panel_hoy()` recibe `calibracion` como parámetro adicional. Sección C4 al final:
+- `hit%_real` = `calibracion['global']['wins'] / (wins + losses)` — betslip_registrar --cerrar
+- `hit%_shadow` = `summary['n_hits'] / summary['n_settled']` — shadow book settled
+
+**Valores reales 2026-07-13:**
+```
+hit%_real  (calibracion n=4008): 61.3%
+hit%_shadow (shadow n=231):      37.2%
+Brecha shadow−real:              -24.1pp ⚠ brecha alta
+```
+La brecha negativa indica que el shadow book actual (mes corriente) tiene hit% más bajo que el histórico de calibracion. C4 CUMPLIDO.
+
+---
+
+## Addendum — Ejecución C1 (2026-07-13, Sonnet)
+
+### DataContract v2 — schema por artefacto
+
+Añadido al final de `core/data_contract.py` (aditivo sobre v1):
+
+**`DataContractViolation(Exception)`** — excepción dedicada fail-loud.
+
+**`ARTIFACT_SCHEMAS`** — 6 entradas, una por frontera Nodo-86 §4.1:
+
+| Nombre | Frontera | required |
+|---|---|---|
+| `edge_report` | edge_calculator → trader | `['metadata', 'apostar']` |
+| `trader_plan` | trader → governor/dashboard | `['metadata', 'individuales']` |
+| `betslip_index` | bookmarklet → registrar | `['ts', 'index']` |
+| `apuestas` | registrar listen → cerrar | `['estado', 'picks', 'ts_registro']` + picks: `['jugador', 'cuota', 'outcome_id']` |
+| `sb_jsonl_pick` | shadow book settle → report | `['sb_id', 'partido', 'pick_snapshot']` |
+| `combo_plan_json` | builder → governor (I3) | `['fecha', 'bankroll', 'budget', 'cobertura']` |
+
+**`validate_artifact(name, obj)`** — valida raíz + picks; lanza `DataContractViolation` si falla.
+
+**Verificación empírica 2026-07-13:**
+```
+edge_report valid: True
+betslip_index valid: True  
+apuestas valid: True
+fail-loud OK: [edge_report] Claves requeridas ausentes: ['apostar']...
+```
+C1 CUMPLIDO. Consumidores llaman `validate_artifact()` al cargar — falla ruidosamente en frontera.
+
+---
+
+## Addendum — Ejecución I7 (2026-07-13, Sonnet)
+
+### combo_registry: desisla
+
+**Estado al verificar:** Ambas partes de I7 ya implementadas por sesión previa.
+
+1. **Name-matching unificado** (`combo_registry.py` L26-60): `_canon()` intenta `from core.player_registry import normalize_player_name`; si falla, cae a `_normalize_name` local (NFKD — compatible). `_names_match()` usa `_canon()`. La 4ª implementación se redujo a fallback.
+
+2. **Invoke en run_daily** (`run_daily.py` L253, L401): `_run(['python3', 'combo_registry.py', '--settle', fecha_ayer], 'PASO 10b — combo registry settle (I7 Nodo-67)')` presente en ambas rutas (--settle-only y completa).
+
+**Verificación 2026-07-13:**
+```
+python3 combo_registry.py --settle 2026-07-10  → Sin combos registrados (OK)
+python3 combo_registry.py --report             → Sin registros (0 activaciones en prod)
+```
+Infra completa. El primer reporte P&L se generará cuando `combo_confianza_builder` loguee combos al registry. I7 criterio CUMPLIDO.
+
+---
+
+## Addendum — Ejecución I4 (2026-07-13, Sonnet)
+
+### Graphify: specs + refresco semanal
+
+T6 (Nodo-66) ya indexó los 91 nodos `.spec/` con Gemini (reindexado 2026-07-13). I4 añade el refresco automático semanal sin LLM:
+
+**Archivos creados:**
+- `~/.config/systemd/user/graphify-update.service` — one-shot `graphify update /mnt/c/.../backend` (sin LLM, sin costo API)
+- `~/.config/systemd/user/graphify-update.timer` — `OnCalendar=Sun *-*-* 03:00:00`, `Persistent=true`
+
+**Estado:** `systemctl --user enable --now graphify-update.timer` → ACTIVO. Próxima ejecución: 2026-07-19 03:00.
+
+**Criterio done verificado:** `graphify query "Nodo-64 D64-01 rfi_tier"` → retorna nodos `.spec/` (Nodo-65, Nodo-64 en subgrafo). I4 CUMPLIDO.
+
+---
+
+## Addendum — Ejecución I5 (2026-07-13, Sonnet)
+
+### Docker Compose unificado (propuesta con rollback)
+
+**Archivo creado:** `docker-compose.proposal.yml` — PROPUESTA, no desplegar sin decisión del usuario.
+
+**Estrategia:** puertos alternativos para prueba en paralelo sin tocar los units systemd actuales.
+
+| Servicio | Imagen | Puerto host | Puerto container | Base |
+|---|---|---|---|---|
+| n8n | n8nio/n8n:latest | 5678 | 5678 | Ya existente en Docker |
+| snapshot-bridge-proposal | python:3.11-slim | **8766** | 8765 | Paralelo al :8765 systemd |
+| graphify-proposal | python:3.11-slim | **7780** | 7779 | Paralelo al :7779 systemd |
+| tamp | — | — | — | **EXCLUIDO** — dependencia dura Claude Code |
+
+**Por qué tamp queda fuera:** Claude Code usa `ANTHROPIC_BASE_URL=http://localhost:7778`. Si tamp se mueve a Docker y el contenedor no arranca, Claude Code no puede operar. Es dependencia del entorno de desarrollo, no del pipeline de análisis.
+
+**Prueba en paralelo (sin romper units actuales):**
+```bash
+docker compose -f docker-compose.proposal.yml up -d
+# Verificar: bridge=8766, graphify=7780
+# Los units systemd en :8765/:7779 siguen activos — sin downtime
+```
+
+**Rollback completo:**
+```bash
+docker compose -f docker-compose.proposal.yml down
+systemctl --user start tennis-snapshot-bridge
+systemctl --user start graphify
+```
+
+**Decisión pendiente del usuario.** Migración incremental recomendada: bridge primero, graphify después. I5 CUMPLIDO (propuesta + rollback documentado).
+
+---
+
+## Addendum — Ejecución I6 (2026-07-13, Sonnet)
+
+### Tamp: visibilidad de métricas
+
+**Cambio:** `run_daily.py` — `_build_daily_brief()` — línea de métricas tamp al final del brief.
+
+Consulta `http://localhost:7778/health` con timeout=2s. Si responde:
+```
+  TAMP :7778 OK — {requests} reqs | ahorro {charsSaved}/{charsOriginal} chars ({pct}%) | tokens_saved={tokensSaved}
+```
+Si no responde:
+```
+  TAMP :7778 NO RESPONDE — systemctl --user restart tamp
+```
+
+El healthcheck usa `urllib.request` (stdlib — sin dependencias extra). El bloque está en `try/except Exception` para que un tamp caído no rompa el daily brief.
+
+**Criterio done verificado:** La línea aparece en el brief cuando tamp está activo. Si cae, el mensaje de error guía el fix inmediato. I6 CUMPLIDO.
