@@ -1,6 +1,6 @@
 # CLAUDE.md — Tennis Prediction & Betting Engine
 
-> Last updated: 2026-07-13 (Sprint 4 Nodo-95 COMPLETO — D90-09 PatternRecognition REPORTE_SOLO, 25 tests, 1945 passed)
+> Last updated: 2026-07-13 (Nodo-66/67/68 COMPLETO — I7+C1+C4+D64-02+D68-06, 24 tests DataContract, 1969 passed)
 > Spec-Driven Development (SDD). CLAUDE.md es VISTA DERIVADA — los nodos son la fuente de verdad.
 > Leer completo antes de tocar código. Ver política de precedencia §10.
 
@@ -128,7 +128,7 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 
 | Métrica | Valor |
 |---|---|
-| Tests | **1945 passed, 0 failed** (verificado 2026-07-13 — Sprint 4 Nodo-95: PatternRecognition 25 tests). Nota: fallo intermitente `test_prior_bajo_no_se_ve_afectado` por contaminación estado global entre test files — pasa en aislamiento, NO es bug D87-05 (V1 Nodo-66 confirmada) |
+| Tests | **1969 passed, 0 failed** (verificado 2026-07-13 — Nodo-95 PatternRecognition 25t + Nodo-67 DataContract 24t). Nota: fallo intermitente `test_prior_bajo_no_se_ve_afectado` por contaminación estado global entre test files — pasa en aislamiento, NO es bug D87-05 (V1 Nodo-66 confirmada) |
 | Calibración | clay GS: p=0.758 (n=31) \| global: wins=2358, losses=1480 (n=3838) \| ⚠️ buckets huérfanos `?`/`?_?` con ~141 resultados de dinero real (24% hit) — ver Nodo-86 §1.1, migración en evaluación: T7 Nodo-66 decide |
 | **Auditoría Fable5** | **Sprints 1-4 COMPLETOS (Nodo-91→95).** S1: CAPA2+ELO_DOM+--fase ✅. S2: PlayerDB 4650j+kambi observacional ✅. S3: PlayerIntelligence Dim1+2+MQI/PRS/CFS ✅. S4: PatternRecognition D90-09 ✅ (4 candidatos reales, STRONG conf n=52). Pendiente Sprint5: D90-11 N28F2/tier, IRP/jugador, OddsAggregator multi-casa |
 | Bankroll | $125,000+ |
@@ -146,13 +146,13 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 | F1 Infraestructura (Graphify+Tamp+slash-cmds+validator) | ✅ completada |
 | F2 Automation (n8n + close-snapshot timing exacto) | 🟠 PARCIAL — n8n+close-snapshot ✅ Nodo-73; C62-A código OK sin sesiones post-07-08 ⚠️; C63-B governor READ-ONLY 0 ejecuciones previas (gate: 10 sesiones) ⚠️; C63-A cola JSON implementada 0 activaciones ℹ️ |
 | F3 Hermes gate | 🟠 GATED — observación ≥5 ambiguedades/semana |
-| F4 Estadística doctoral (Nodos 64-71) | ✅ 43 tests |
+| F4 Estadística doctoral (Nodos 64-71) | ✅ 67 tests (43 base + 24 C1/Nodo-67) |
 | F5 Vault + session_compiler + CLAUDE.md slim | ✅ completada |
 
 **Nodos completos:** 51-63, 64-71, 72, 73, 78, 86-95 — detalles en `.spec/01_Nodos/Nodo-XX.md`
 **Nodo-64:** RFI Return-From-Inactivity — **implementado 2026-07-11 (D64-01)**: `rfi_tier`/`rfi_ultra`/`rfi_decay_gap` serializados en edge_report, segmentos en shadow_book --report. H76-01 acumula automático.
 **Nodo-65:** Convergencia Multi-Señal — ANCHOR(edge>0) / VARIABLE(edge≤0). D65-01→D65-07. H77-01/02/03 pre-registradas.
-**Nodos 66-68:** 66=checklist T1→T10 COMPLETOS. 67=integración herramientas **COMPLETO** (I2+I3+I4+I5+I6+I7+C1+C4 — dashboard señales+M0, governor JSON-first, graphify timer, docker propuesta, tamp brief, registry desislado, DataContract v2). 68=H88-01 Rival Value Flip ✅ acumulando.
+**Nodos 66-68:** 66=checklist T1→T10 COMPLETOS. 67=integración herramientas **COMPLETO** (I3 governor JSON-first, I7 combo_registry→player_registry+run_daily settle, C1 DataContract v2 6 fronteras 24 tests, C4 brecha hit%_real vs shadow en dashboard). 68=H88-01 Rival Value Flip ✅ acumulando (D68-06 RIVAL VALUE en tabla favoritos con cuota+edge+vig, D64-02 RFI-ULTRA en tabla favoritos).
 **Nodos 86-87 (auditoría):** 86=hallazgos. 87=12 fixes D87-01→D87-11+D64-01 aplicados, 18 tests REGLA-T53.
 **Nodos 89-95 (Fable Sprint1→4):** 89=spec Sistema Inteligencia. 90=Auditoría Fable. 91=Sprint1 CAPA2+ELO_DOM+--fase. 92=evidencia ejecución. 93=Sprint2 PlayerDB+kambi. 94=Sprint3 PlayerIntelligence+PI en trader. 95=Sprint4 PatternRecognition REPORTE_SOLO (4 candidatos, confidence_flag=STRONG señal más robusta n=52).
 
@@ -197,7 +197,7 @@ docs/DECISION-LOG.md                    ← D-01→D-10 + E-01→E-05 + C-01→C
 analysis/rivalry_analyzer.py      ← Erdős+Markov+GCS+PhantomGuard (núcleo)
 analysis/markov_analyzer.py       ← PELT + surface_context_discount
 config.py                         ← detectar_tier() — fuente única de tiers
-core/data_contract.py             ← PICK_STATUS_NO_DATA (cierra hueco combos fantasma)
+core/data_contract.py             ← PICK_STATUS_NO_DATA + DataContract v2: validate_artifact() 6 fronteras (C1 Nodo-67)
 core/player_registry.py           ← entity resolution canónica (Nodo-51)
 
 ── INSTRUMENTOS FASE 4 (REPORTE_SOLO, no cambian decisiones) ────────────────
@@ -232,7 +232,7 @@ git log --all --oneline -- '*keyword*'
 git show COMMIT:backend/archivo.py    # recuperar si existe
 
 # 2. Baseline antes de modificar
-python -m pytest tests/ --no-cov -q  # 1827 passed
+python -m pytest tests/ --no-cov -q  # 1969 passed
 
 # 3. Syntax check después de editar
 python -c "import ast; ast.parse(open('archivo.py').read()); print('OK')"
