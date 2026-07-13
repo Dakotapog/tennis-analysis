@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generado": "2026-07-13T12:07:37",
-    "total_nodos": 95,
+    "total_nodos": 96,
     "total_py_files": 64,
     "huerfanos_count": 0,
     "exclusiones_count": 19
@@ -1287,6 +1287,16 @@
         "edge_calculator.py",
         "scripts/build_player_db.py",
         "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "95",
+      "nodo_archivo": "Nodo-95-Sprint4-PatternRecognition.md",
+      "fecha": "2026-07-13",
+      "estado": "SPRINT 4 COMPLETO — D90-09 PatternRecognition REPORTE_SOLO, 25 tests",
+      "archivos_mencionados": [
+        "scripts/pattern_recognition.py",
+        "tests/test_nodo95_pattern_recognition.py"
       ]
     }
   ],
