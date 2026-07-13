@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "generado": "2026-07-13T11:14:08",
-    "total_nodos": 94,
+    "generado": "2026-07-13T12:07:37",
+    "total_nodos": 95,
     "total_py_files": 64,
     "huerfanos_count": 0,
     "exclusiones_count": 19
@@ -1274,6 +1274,18 @@
         "shadow_book.py",
         "tests/test_nodo92_d90_01.py",
         "tests/test_nodo92_sprint2.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "94",
+      "nodo_archivo": "Nodo-94-Sprint3-PlayerIntelligence.md",
+      "fecha": "2026-07-13",
+      "estado": "SPRINT 3 COMPLETO — S3-A (PlayerIntelligence) + S3-B (kambi en trader)",
+      "archivos_mencionados": [
+        "build_player_db.py",
+        "edge_calculator.py",
+        "scripts/build_player_db.py",
         "trader_ev_tenis.py"
       ]
     }
