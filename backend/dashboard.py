@@ -205,14 +205,15 @@ def load_odometer(desde_dt=None) -> dict:
 
 
 def load_apuestas_reales() -> list:
-    """Carga todas las apuestas REALES de betslip_registrar."""
+    """Carga picks CERRADO con resultado real de reports/apuestas_*.json."""
     results = []
     try:
         for f in sorted(glob.glob("reports/apuestas_*.json")):
             d = json.load(open(f, encoding="utf-8"))
-            idx = d.get("index", {})
-            for pick in idx.values() if isinstance(idx, dict) else []:
-                if isinstance(pick, dict):
+            if d.get("estado") != "CERRADO":
+                continue
+            for pick in d.get("picks", []):
+                if isinstance(pick, dict) and "correcto" in pick:
                     results.append(pick)
     except Exception:
         pass
@@ -412,7 +413,7 @@ def _was_candidates(edge: dict) -> list:
 # PANEL 1 — HOY
 # ══════════════════════════════════════════════════════════════════════════════
 
-def panel_hoy(shadow: dict, trader: dict, edge: dict) -> None:
+def panel_hoy(shadow: dict, trader: dict, edge: dict, calibracion: dict = None) -> None:
     st.header("Panel 1 — HOY")
 
     summary = shadow.get('summary', {})
@@ -486,6 +487,149 @@ def panel_hoy(shadow: dict, trader: dict, edge: dict) -> None:
             for c in was_cands
         ]
         st.dataframe(rows, use_container_width=True, hide_index=True)
+
+    st.divider()
+
+    # ── Señales Activas (I2 Nodo-67) ──
+    st.subheader("Señales Activas")
+    av  = shadow.get('anchor_variable', {})
+    rfi = shadow.get('rfi', {})
+    rv  = shadow.get('rival_value', {})
+    anc  = av.get('anchor', {})
+    var_ = av.get('variable', {})
+    rfi_u = rfi.get('ultra', {})
+    rfi_t = rfi.get('tier1plus', {})
+
+    def _fmt_seg(d: dict) -> str:
+        if not d or d.get('sparse') or d.get('n', 0) == 0:
+            return "n insuf."
+        return f"n={d['n']} | {d['hit_pct']}% | ROI {d['roi']:+.1f}%"
+
+    sc1, sc2, sc3, sc4 = st.columns(4)
+    sc1.metric("ANCHOR (edge>0)",  _fmt_seg(anc))
+    sc2.metric("VARIABLE (edge≤0)", _fmt_seg(var_))
+    sc3.metric("RFI Ultra",         _fmt_seg(rfi_u))
+    sc4.metric("RFI tier≥1",        _fmt_seg(rfi_t))
+
+    if rv.get('n', 0) > 0:
+        _card(
+            f'<b style="color:{_TEAL};">RIVAL VALUE H88-01</b>  '
+            f'n={rv["n"]}/30 · {rv.get("hit_pct_rival", 0)}% hit_rival · '
+            f'ROI {rv.get("roi_rival", 0):+.1f}% · {rv.get("estado", "—")}',
+            border_color=_TEAL,
+        )
+
+    st.divider()
+
+    # ── Odómetro M0 — Pipeline (I2 Nodo-67) ──
+    st.subheader("Odómetro M0 — Pipeline  (READ-ONLY)")
+    m0   = shadow.get('m0', {})
+    sess = shadow.get('sessions', {})
+    summ = shadow.get('summary', {})
+    hyps = shadow.get('hypotheses', [])
+
+    oc1, oc2, oc3, oc4 = st.columns(4)
+    oc1.metric("Sesiones (periodo)", sess.get('n', 0))
+    oc2.metric("Picks loggeados",    summ.get('n_total', 0))
+    oc3.metric("Settled",            summ.get('n_settled', 0))
+    dias_ss = m0.get('dias_sin_settle', 0)
+    oc4.metric(
+        "Días sin settle (hist.)", dias_ss,
+        delta="settle-guard activo" if dias_ss > 0 else "OK",
+        delta_color="inverse" if dias_ss > 0 else "normal",
+    )
+
+    oc5, oc6 = st.columns([1, 3])
+    gov_exec = m0.get('governor_executions', 0)
+    oc5.metric(
+        "Ejecuciones Governor", gov_exec,
+        delta="gate: 10 sesiones" if gov_exec < 10 else "SIN GATE",
+        delta_color="off",
+    )
+
+    active_hyps = [h for h in hyps if h.get('estado', 'CONTINUAR') == 'CONTINUAR']
+    with oc6:
+        if active_hyps:
+            st.caption("H-XX activas — n_actual / n_stop")
+            for h in active_hyps:
+                h_id   = h.get('id', '?')
+                n_act  = h.get('n', 0)
+                n_stop = h.get('n_stop', 30)
+                pct    = min(n_act / n_stop, 1.0) if n_stop else 0
+                bar_w  = int(pct * 180)
+                color  = _GREEN if pct >= 1.0 else (_ORANGE if pct >= 0.5 else _BLUE)
+                st.markdown(
+                    f'<div style="margin:3px 0;">'
+                    f'<span style="color:{_MUTED};width:80px;display:inline-block;'
+                    f'font-size:0.78rem;">{h_id}</span>'
+                    f'<div style="display:inline-block;background:{color};'
+                    f'width:{bar_w}px;height:9px;border-radius:3px;vertical-align:middle;"></div>'
+                    f'<span style="color:{_TEXT};margin-left:8px;font-size:0.78rem;">'
+                    f'{n_act}/{n_stop}</span></div>',
+                    unsafe_allow_html=True,
+                )
+        else:
+            st.caption("Sin hipótesis activas (CONTINUAR) en el período.")
+
+    # ── C4 Nodo-67: Brecha hit%_real vs hit%_shadow (Nodo-86 §1.1) ──
+    st.subheader("Brecha hit%_real vs hit%_shadow  (C4 — Nodo-86 §1.1)")
+
+    # hit%_real — de calibracion_edge.json (fuente: betslip_registrar --cerrar)
+    _cal  = calibracion or {}
+    _glob = _cal.get('global', {})
+    _n_real  = _glob.get('wins', 0) + _glob.get('losses', 0)
+    _won_real = _glob.get('wins', 0)
+
+    # hit%_shadow — de report_dict() full-history (summary.n_hits / n_settled)
+    try:
+        from shadow_book import report_dict as _sb_rdict, wilson_ci as _wci
+        _sb = _sb_rdict()
+        _sb_sum = _sb.get('summary', {})
+        _n_sh   = _sb_sum.get('n_settled', 0)
+        _won_sh = _sb_sum.get('n_hits', 0)
+    except Exception:
+        _n_sh, _won_sh = 0, 0
+        _wci = None
+
+    def _hit(w, n): return w / n if n else None
+    def _ic_c4(w, n):
+        try:
+            return _wci(w, n) if _wci else (0.0, 1.0)
+        except Exception:
+            return (0.0, 1.0)
+
+    _hr  = _hit(_won_real, _n_real)
+    _hs  = _hit(_won_sh,   _n_sh)
+    _icr = _ic_c4(_won_real, _n_real)
+    _ics = _ic_c4(_won_sh,   _n_sh)
+
+    bc1, bc2, bc3 = st.columns(3)
+    bc1.metric(
+        f"hit%_REAL calibracion (n={_n_real})",
+        f"{_hr:.1%}" if _hr is not None else "N/A",
+        delta=f"IC95 [{_icr[0]:.1%}, {_icr[1]:.1%}]" if _n_real > 0 else None,
+        delta_color="off",
+    )
+    bc2.metric(
+        f"hit%_SHADOW settled (n={_n_sh})",
+        f"{_hs:.1%}" if _hs is not None else "N/A",
+        delta=f"IC95 [{_ics[0]:.1%}, {_ics[1]:.1%}]" if _n_sh > 0 else None,
+        delta_color="off",
+    )
+    if _hr is not None and _hs is not None:
+        _brecha = _hs - _hr
+        _sign   = f"+{_brecha:.1%}" if _brecha >= 0 else f"{_brecha:.1%}"
+        _nota   = "brecha alta — revisar sesgo de seleccion" if abs(_brecha) > 0.10 else "OK"
+        bc3.metric("Brecha shadow−real", _sign, delta=_nota,
+                   delta_color="inverse" if abs(_brecha) > 0.10 else "normal")
+    else:
+        bc3.metric("Brecha shadow−real", "N/A", delta="sin datos suficientes", delta_color="off")
+
+    st.caption(
+        "hit%_real = calibracion_edge.json global (betslip_registrar --cerrar). "
+        "hit%_shadow = shadow book settled (WON/total). "
+        "Brecha positiva = shadow sobreestima — revisar sesgo de seleccion."
+    )
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1353,7 +1497,7 @@ def main() -> None:
     tabs = st.tabs(["HOY", "HIPÓTESIS", "SALUD", "ATRIBUCIÓN", "RIESGO", "DECISIÓN", "MOTOR"])
 
     with tabs[0]:
-        panel_hoy(shadow, trader, edge)
+        panel_hoy(shadow, trader, edge, calibracion)
     with tabs[1]:
         panel_hipotesis(shadow, hypotheses_json)
     with tabs[2]:

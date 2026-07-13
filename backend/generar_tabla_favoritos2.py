@@ -1031,6 +1031,21 @@ def analyze_matches_with_pandas(file_path, output_filename="analisis_partidos_pa
                                 f" — menor calibracion historica. Verificar señales adicionales.\n"
                             )
 
+                    # D64-02: señal RFI en tabla favoritos (Nodo-64)
+                    _rfi_tier_v = _edge_pick.get('rfi_tier', 0) or 0
+                    _rfi_ultra = _edge_pick.get('rfi_ultra', False)
+                    _rfi_days = _edge_pick.get('rfi_days_inactive')
+                    _rfi_bookie_fav = _edge_pick.get('rfi_is_bookie_fav', False)
+                    _rfi_decay = _edge_pick.get('rfi_decay_gap')
+                    if _rfi_tier_v >= 2:
+                        _rfi_label = 'RFI-ULTRA' if _rfi_ultra else f'RFI-{_rfi_tier_v}'
+                        _rfi_days_str = f'{_rfi_days}d' if _rfi_days is not None else '?d'
+                        _rfi_fav_str = ' + FAVORITO BOOKMAKER (error sistematico de mercado)' if _rfi_bookie_fav else ''
+                        _rfi_decay_str = f' | decay_gap={_rfi_decay:.2f}' if _rfi_decay is not None else ''
+                        f.write(
+                            f"{_rfi_label}: jugador inactivo {_rfi_days_str}{_rfi_fav_str}{_rfi_decay_str}\n"
+                        )
+
                 f.write(f"Diferencia de Puntaje: {scores.get('score_difference', 'N/A')}\n\n")
 
                 # Predicción de Sets y Games
