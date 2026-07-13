@@ -41,7 +41,7 @@ import sys
 import unicodedata
 import urllib.parse
 import urllib.request
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, List, Optional
 
@@ -773,6 +773,28 @@ def _select_with_cobertura(tier_combos: list, available_picks: list,
 # ══════════════════════════════════════════════════════════════════════════════
 
 MAX_SESSION_LOSS_PCT = 0.04  # 4% bankroll = $5,000 con $125k
+
+PLAN_MAX_AGE_H = 4  # D89-01: trader_plan más viejo → regenerar, no combinar
+
+
+def _planes_frescos(paths: list, max_age_h: float = PLAN_MAX_AGE_H) -> list:
+    """D89-01/S1-D: Filtra trader_plan paths a los generados en las últimas max_age_h horas.
+
+    Parsea el timestamp desde el stem del archivo (trader_plan_YYYYMMDD_HHMMSS).
+    Si quedan 0 planes frescos, el llamador debe emitir mensaje accionable —
+    PROHIBIDO caer silenciosamente al fallback legacy.
+    """
+    cutoff = datetime.now() - timedelta(hours=max_age_h)
+    frescos = []
+    for p in paths:
+        try:
+            ts_str = p.stem.replace('trader_plan_', '')
+            ts = datetime.strptime(ts_str, '%Y%m%d_%H%M%S')
+            if ts > cutoff:
+                frescos.append(p)
+        except ValueError:
+            pass  # stem sin formato timestamp → ignorar
+    return frescos
 
 
 def session_budget(bankroll: float, max_loss_pct: float = MAX_SESSION_LOSS_PCT) -> float:
@@ -1987,7 +2009,8 @@ def _save_betslip_index(picks: list) -> str:
 def build_live_combos(piernas_min: int = 3, piernas_max: int = 4,
                       top_n: int = 4, min_cuota: float = 1.50,
                       edge_file: Optional[str] = None,
-                      strategy: str = "balanced") -> tuple[List[Dict], Dict]:
+                      strategy: str = "balanced",
+                      max_age_h: float = PLAN_MAX_AGE_H) -> tuple[List[Dict], Dict]:
     """
     Lee cobertura de TODOS los trader_plans del día, verifica disponibilidad
     en Kambi en tiempo real, y conserva stakes originales del trader.
@@ -2000,15 +2023,22 @@ def build_live_combos(piernas_min: int = 3, piernas_max: int = 4,
     Returns:
         Tuple de (lista de combo dicts, metadata dict)
     """
-    # 1. Cargar cobertura + individuales de trader_plans de las últimas 24h
+    # 1. Cargar cobertura + individuales de trader_plans frescos (D89-01/S1-D)
     reports = Path("reports")
-    from datetime import timedelta
-    cutoff = datetime.now() - timedelta(hours=24)
     all_plans = sorted(reports.glob("trader_plan_*.json"), reverse=True)
-    plan_files = [
-        p for p in all_plans
-        if p.stat().st_mtime >= cutoff.timestamp() and p.stat().st_size > 100
-    ]
+    all_plans = [p for p in all_plans if p.stat().st_size > 100]
+    plan_files = _planes_frescos(all_plans, max_age_h=max_age_h)
+    if not plan_files:
+        tiers = [('gs', 125000), ('atp1000', 50000), ('challenger', 20000), ('itf', 10000)]
+        cmds = '\n  '.join(
+            f"python3 trader_ev_tenis.py --torneo-tipo {t} --bankroll {b}"
+            for t, b in tiers
+        )
+        print(
+            f"\n[CAPA-LIVE] 0 trader_plans frescos (< {max_age_h}h). "
+            f"Regenerar con:\n  {cmds}\nLuego re-ejecutar: python3 betplay_combo_builder.py --live"
+        )
+        return [], {}
 
     merged_cobertura = []
     merged_individuales = []
@@ -2838,6 +2868,8 @@ def main():
     parser.add_argument("--live", action="store_true",
                         help="Modo LIVE: re-arma combos con jugadores disponibles AHORA en Kambi")
     parser.add_argument("--edge-file", help="edge_report JSON específico (para --live)")
+    parser.add_argument("--max-plan-age-h", type=float, default=PLAN_MAX_AGE_H,
+                        help=f"Antigüedad máxima de trader_plan en horas (default: {PLAN_MAX_AGE_H}h, D89-01)")
     parser.add_argument("--piernas-min", type=int, default=3, help="Piernas mínimas (default: 3)")
     parser.add_argument("--piernas-max", type=int, default=4, help="Piernas máximas (default: 4)")
     parser.add_argument("--top-n", type=int, default=4, help="Top N combos por pierna (default: 4)")
@@ -2915,6 +2947,7 @@ def main():
             min_cuota=args.min_cuota,
             edge_file=args.edge_file,
             strategy=args.strategy,
+            max_age_h=args.max_plan_age_h,
         )
         if not combo_links:
             sys.exit(1)
