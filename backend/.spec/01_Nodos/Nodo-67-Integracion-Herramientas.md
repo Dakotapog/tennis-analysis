@@ -58,3 +58,37 @@ Healthcheck en el workflow I1.3 + sección en TROUBLESHOOTING con cómo medir hi
 | C5 | **fd/decay como familia de señales** | `rfi_decay_gap` ya existe (D64-01). Conexión futura: gap de decay × superficie secundaria del inactivo (caso Michnev: 273d + vuelve en arcilla no siendo su superficie) — pre-registrar H antes de codificar umbral | Bajo | Observar primero |
 
 **Prioridad de la semana: C4 → C1 → (C2 vía I7). C3 y C5 solo diseño/observación.**
+
+---
+
+## Addendum — Ejecución I1 (2026-07-13, Sonnet)
+
+### Diagnóstico cierre_kambi
+
+| Fecha | picks | cierre_kambi | resolucion |
+|---|---|---|---|
+| 07-02 | 29 | 7 | 27 |
+| 07-03 | 16 | **0** | 15 |
+| 07-04 | 12 | **0** | 11 |
+| 07-05 | 31 | **0** | 20 |
+| 07-06 | 22 | 8 | 18 |
+| 07-07 | 15 | **0** | 14 |
+| 07-08 | 61 | **0** | 47 |
+| 07-09 | 33 | 31 | 28 |
+| 07-10+ | ✅ cobertura normal | | |
+
+**Causa raíz:** `logs/snapshot_bridge.log` arranca el 2026-07-09 02:23:36 — antes de esa fecha el bridge simplemente no existía (Nodo-73 no había sido implementado). Los 5 días sin cierre_kambi son el período pre-Nodo-73, no un fallo del workflow.
+
+**Hallazgo adicional:** 7,557 errores `OSError: [Errno 98] Address already in use` en el log. PID 174 arranca en WSL boot fuera de systemd; cuando systemd intenta levantar el servicio, el puerto ya está ocupado → loop de restart. El bridge FUNCIONA (PID 174 responde /health), pero systemd no lo controla. No se toca el proceso activo sin decisión del usuario.
+
+### Workflows creados y activados (2026-07-13)
+
+| Workflow | ID n8n | Estado | Qué hace |
+|---|---|---|---|
+| Tennis Settle-Guard | `l0b1ndJBkTWmgzoP` | ACTIVO | Cron 10am diario — si sb_AYER.jsonl existe con 0 resoluciones → Telegram alerta |
+| Tennis Bridge Healthcheck | `NKRhxW2FSMpPbBkc` | ACTIVO | Cada 30min — ping :8765/health → Telegram si cae |
+| Tennis Close-Snapshot Timing | `fjn39Q6ctfpB3vWe` | ACTIVO (pre-existente) | Cada 5min — dispara close-snapshot en ventana T-25→T-10 |
+
+**Archivos:** `n8n_workflow_settle_guard.json` + `n8n_workflow_bridge_healthcheck.json`
+**Prueba de alerta:** Telegram msg_id=1525 ✅ (alerta forzada manual confirmada)
+**I1 criterio CUMPLIDO:** causa documentada + 2 workflows activos + alerta probada.
