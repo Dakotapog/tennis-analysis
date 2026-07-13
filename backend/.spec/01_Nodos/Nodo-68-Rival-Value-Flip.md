@@ -86,3 +86,15 @@ ROI_rival_flat_1u = (cuota_rival − 1) si LOST, −1 si WON
 ## 7. Por qué esta oportunidad es coherente con todo lo que ya sabemos
 
 Es el marco #1 de Nodo-86 leído al revés: si el edge del favorito es el interruptor de las señales, un edge **muy negativo** no es ausencia de señal — es señal de que el mercado sobre-pagó, y el valor cruzó de lado. Los VARIABLE de Nodo-65 rendían "al azar" apostados COMO favoritos baratos; este nodo pregunta lo que nadie preguntó: ¿cuánto pagaba sistemáticamente el otro lado? La respuesta cuesta n=30 settled y cero riesgo, porque la acumulación es gratis.
+
+## Addendum — Implementación (2026-07-12, Sonnet)
+
+| ID | Estado | Commit | Detalle |
+|---|---|---|---|
+| D68-01 | ✅ IMPLEMENTADO | `1516d11` | `edge_calculator.py`: 3 campos serializados al final de `calcular_edge_completo()`, después de todos los guards (status y phantom_data finales). Caso Obradovic: edge_rival=+0.1327, flag=True. Control vig=-0.04: flag=False. 1822 tests OK. |
+| D68-02 | ✅ IMPLEMENTADO | `7d68e1c` | `shadow_book.py`: helper `_rival_value_metrics()` (métricas invertidas), bloque RIVAL_VALUE en `report()` entre RFI y D54-02, clave `rival_value` en `report_dict()` con estado CONTINUAR/GRADUABLE/NO_GRADUABLE. Misma fuente de verdad (D58-01). |
+| D68-03 | ✅ IMPLEMENTADO | `f04100c` | H88-01 añadida a `preregistered_hypotheses.json` (hipótesis #17, sin tocar existentes). Umbrales congelados: edge_fav_max=-0.10, cuota_rival [2.50-8.00]. n_actual=0. |
+| D68-04 | ✅ IMPLEMENTADO | `2fe6fb3` | Backtest RETROSPECTIVO: n=0 picks en segmento (esperado — shadow book solo loggea pools con edge>0). Sin sesgo de supervivencia. Acumulación H88-01 arranca prospectivamente desde hoy. Reporte en `reports/backtest_rival_value_RETRO.md`. |
+| D68-05 | ✅ IMPLEMENTADO | `e16af9d` | 5 tests REGLA-T53 en `tests/test_nodo68_rival_value.py`. 5/5 pasando. Suite total: 1827 passed. |
+
+**Gap conocido (D68-06 — a decisión del usuario):** línea informativa en `generar_tabla_favoritos2.py` mostrando el flip cuando `rival_value_flag=True`. No implementado — el spec lo marcaba como opcional.

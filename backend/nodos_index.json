@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "generado": "2026-07-12T10:42:27",
-    "total_nodos": 89,
+    "generado": "2026-07-12T23:33:55",
+    "total_nodos": 92,
     "total_py_files": 64,
     "huerfanos_count": 0,
     "exclusiones_count": 19
@@ -973,7 +973,8 @@
       "archivos_mencionados": [
         "edge_calculator.py",
         "generar_tabla_favoritos2.py",
-        "shadow_book.py"
+        "shadow_book.py",
+        "tests/test_nodo68_rival_value.py"
       ]
     },
     {
@@ -1180,6 +1181,63 @@
         "rebuild_nodos_index.py",
         "scripts/rebuild_nodos_index.py",
         "shadow_book.py"
+      ]
+    },
+    {
+      "nodo_id": "89",
+      "nodo_archivo": "Nodo-89-Sistema-Inteligencia-Integral.md",
+      "fecha": null,
+      "estado": null,
+      "archivos_mencionados": [
+        "analysis/pattern_recognition.py",
+        "betplay_combo_builder.py",
+        "core/player_registry.py",
+        "edge_calculator.py",
+        "extraer_historh2h.py",
+        "extraer_partidos_api.py",
+        "games_signal_calculator.py",
+        "hypothesis_tracker.py",
+        "player_registry.py",
+        "run_daily.py",
+        "run_daily_evening.py",
+        "run_daily_morning.py",
+        "scraping/injury_tracker.py",
+        "scraping/news_intelligence.py",
+        "scraping/odds_aggregator.py",
+        "scraping/realtime_intelligence.py",
+        "scraping/weather_intelligence.py",
+        "scripts/build_player_db.py",
+        "shadow_book.py",
+        "tests/test_nodo89.py"
+      ]
+    },
+    {
+      "nodo_id": "90",
+      "nodo_archivo": "Nodo-90-Auditoria-Fable-Nodo89.md",
+      "fecha": "2026-07-12",
+      "estado": "AUDITORÍA COMPLETA. Nodo-89 queda como historia inmutable; las correcciones de este nodo tienen precedencia (§10 CLAUDE.md).",
+      "archivos_mencionados": [
+        "analysis/ranking_manager.py",
+        "betplay_combo_builder.py",
+        "edge_calculator.py",
+        "extraer_historh2h.py",
+        "run_daily.py",
+        "scripts/build_player_db.py"
+      ]
+    },
+    {
+      "nodo_id": "91",
+      "nodo_archivo": "Nodo-91-Sprint1-Capas-Fallback-Implementacion.md",
+      "fecha": "2026-07-12",
+      "estado": null,
+      "archivos_mencionados": [
+        "analysis/ranking_manager.py",
+        "betplay_combo_builder.py",
+        "edge_calculator.py",
+        "run_daily.py",
+        "shadow_book.py",
+        "tests/test_nodo91_sprint1.py",
+        "trader_ev_tenis.py"
       ]
     }
   ],
