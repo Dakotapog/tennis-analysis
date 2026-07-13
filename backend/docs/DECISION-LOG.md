@@ -245,6 +245,20 @@ no lo tenía. Sin evidencia histórica de impacto, pero gap real en sistema desa
 
 ---
 
+## D-11 — Migración bucket `?` → `real_money_unknown` en calibracion_edge.json (2026-07-13)
+
+**Decisión:** Renombrar las claves `"?"` y `"?_?"` en `calibracion_edge.json` a `"real_money_unknown"` y `"real_money_unknown_?"` respectivamente. Opción A de `docs/PROPUESTA_MIGRACION_BUCKET_Q.md`.
+
+**Alternativas consideradas:**
+- Opción B (re-atribuir por fecha+jugador) — riesgo ALTO de double-counting, join frágil por homónimos/fechas
+- Opción C (dejar como está) — no resuelve el problema; bucket sigue creciendo si persiste la causa raíz
+
+**Por qué esta:** Los 23W/73L (hits=24%) del bucket `?` son datos de calidad desconocida, probablemente pre-era-v2 (antes del fix de normalización 2026-06-19). `theta_thompson()` nunca construye la clave `real_money_unknown` → los datos quedan aislados sin contaminar calibraciones futuras. Riesgo: NINGUNO — solo renombra, no modifica wins/losses. Verificado: `theta_thompson(cal, '?', '?')` sigue retornando el fallback `global` (p=0.6132). 1901 tests passed post-cambio.
+
+**Cuándo revisitar:** Si aparecen nuevos picks con superficie='?' en el flujo activo (investigar causa raíz en `betslip_registrar.py` y `validar_con_api.py`). Si n_real_money_unknown > 150 → evaluar descarte definitivo (todos son pre-era-v2).
+
+---
+
 ## Plantilla para nuevas decisiones
 
 ```

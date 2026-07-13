@@ -20,7 +20,7 @@
       "wins": 663,
       "losses": 416
     },
-    "?": {
+    "real_money_unknown": {
       "wins": 23,
       "losses": 73
     }
@@ -75,13 +75,6 @@
       "era_v2_losses": 49,
       "era_v2_start": "2026-06-19"
     },
-    "?_?": {
-      "wins": 23,
-      "losses": 73,
-      "era_v2_wins": 11,
-      "era_v2_losses": 34,
-      "era_v2_start": "2026-06-19"
-    },
     "hard_itf": {
       "wins": 32,
       "losses": 66,
@@ -101,6 +94,13 @@
       "losses": 0,
       "era_v2_wins": 5,
       "era_v2_losses": 0,
+      "era_v2_start": "2026-06-19"
+    },
+    "real_money_unknown_?": {
+      "wins": 23,
+      "losses": 73,
+      "era_v2_wins": 11,
+      "era_v2_losses": 34,
       "era_v2_start": "2026-06-19"
     }
   },
