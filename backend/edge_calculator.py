@@ -630,6 +630,101 @@ def _get_ranking(ranking_analysis: dict, player_name: str) -> Optional[int]:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# S3-A — PLAYER INTELLIGENCE Dim 1 (RankGap) + Dim 2 (SVI) — D90-05
+# Observacional: serializa win_rates históricos, NO cambia gates ni kelly.
+# ─────────────────────────────────────────────────────────────────────────────
+
+_player_db_cache: dict | None = None  # player_db_index cargado una vez por proceso
+
+_SURFACE_MAP_EC_TO_DB = {
+    'hard':    'dura',
+    'clay':    'arcilla',
+    'grass':   'hierba',
+    'unknown': 'unknown',
+}
+
+_RANK_BRACKETS_EC = [
+    ('dominant',        lambda d: d < -50),
+    ('favored',         lambda d: -50 <= d < -10),
+    ('even',            lambda d: -10 <= d <= 10),
+    ('underdog_slight', lambda d: 10 < d <= 50),
+    ('underdog_big',    lambda d: d > 50),
+]
+
+
+def _load_player_db_index_once() -> dict:
+    """Carga data/player_db_index.json una vez por proceso. Retorna {} si no existe."""
+    global _player_db_cache
+    if _player_db_cache is not None:
+        return _player_db_cache
+    try:
+        db_path = os.path.join(os.path.dirname(__file__), 'data', 'player_db_index.json')
+        with open(db_path, encoding='utf-8') as f:
+            data = json.load(f)
+        _player_db_cache = data.get('players', {})
+    except Exception:
+        _player_db_cache = {}
+    return _player_db_cache
+
+
+def _rank_bracket_ec(rank_diff: int) -> str | None:
+    for name, pred in _RANK_BRACKETS_EC:
+        if pred(rank_diff):
+            return name
+    return None
+
+
+def _get_player_intelligence(player_name: str, superficie: str,
+                             ranking_fav, ranking_rival) -> dict:
+    """
+    Retorna campos PlayerIntelligence observacionales para un pick.
+    Todos los valores son None si el jugador no está en PlayerDB.
+    """
+    empty = {
+        'pi_rank_gap_bracket':  None,
+        'pi_rank_gap_win_rate': None,
+        'pi_svi_surface':       None,
+        'pi_svi_n_surface':     None,
+        'pi_n_total':           None,
+    }
+    db = _load_player_db_index_once()
+    if not db:
+        return empty
+
+    slug = player_name.replace(' ', '_')
+    entry = db.get(slug)
+    if entry is None:
+        return empty
+
+    result = dict(empty)
+    result['pi_n_total'] = entry.get('n_matches')
+
+    # Dim 1 — RankGap
+    if ranking_fav and ranking_rival:
+        try:
+            rank_diff = int(ranking_fav) - int(ranking_rival)
+            bracket = _rank_bracket_ec(rank_diff)
+            result['pi_rank_gap_bracket'] = bracket
+            rg_wr = entry.get('ranking_gap_win_rates', {}) or {}
+            if bracket and bracket in rg_wr:
+                result['pi_rank_gap_win_rate'] = rg_wr[bracket]
+        except (TypeError, ValueError):
+            pass
+
+    # Dim 2 — SVI (Surface Victory Index)
+    db_surface = _SURFACE_MAP_EC_TO_DB.get(superficie, 'unknown')
+    svi_map = entry.get('surface_win_rates') or {}
+    svi_n_map = {}
+    # n_surface requires full db — use index-level data if available
+    if db_surface in svi_map:
+        result['pi_svi_surface'] = svi_map[db_surface]
+    # n_surface: stored in full player_db but not in index; mark as unknown
+    result['pi_svi_n_surface'] = None  # available in player_db.json full build
+
+    return result
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # D90-01 — KAMBI COVERAGE (observacional, sin HTTP aquí)
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -1185,6 +1280,15 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
     # D90-01: kambi_disponible — campo observacional (side-car kambi_coverage_*.json)
     # Filtro real solo en trader/combo builder, NUNCA aquí ni en shadow_book.
     resultado['kambi_disponible'] = _annotate_kambi(resultado.get('favorito_predicho', ''))
+
+    # S3-A: PlayerIntelligence Dim 1 (RankGap) + Dim 2 (SVI) — D90-05
+    # OBSERVACIONAL: no modifica gates ni kelly. Sprint 4 activará si stats son sanas.
+    resultado.update(_get_player_intelligence(
+        player_name=resultado.get('favorito_predicho', ''),
+        superficie=resultado.get('superficie', 'unknown'),
+        ranking_fav=resultado.get('ranking_favorito'),
+        ranking_rival=resultado.get('ranking_rival'),
+    ))
 
     return resultado
 

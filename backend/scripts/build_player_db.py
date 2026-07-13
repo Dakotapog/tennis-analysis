@@ -339,6 +339,11 @@ def build_index(players: dict) -> dict:
             for tier, s in stats.get('tier_stats', {}).items()
             if s['n'] >= 3
         }
+        rank_gap_wr = {
+            bracket: s['win_rate']
+            for bracket, s in stats.get('ranking_gap_stats', {}).items()
+            if s['n'] >= 3
+        }
         index[slug] = {
             'slug': slug,
             'own_ranking': pdata.get('own_ranking'),
@@ -346,6 +351,7 @@ def build_index(players: dict) -> dict:
             'n_matches': stats.get('n_total', 0),
             'surface_win_rates': surface_wr,
             'tier_win_rates': tier_wr,
+            'ranking_gap_win_rates': rank_gap_wr,
             'prs_three_set_win_rate': stats.get('prs_stats', {}).get('three_set', {}).get('win_rate'),
             'prs_underdog_win_rate': stats.get('prs_stats', {}).get('underdog', {}).get('win_rate'),
         }

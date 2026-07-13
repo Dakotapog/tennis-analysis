@@ -544,6 +544,23 @@ def _print_individuales(senales: list, bankroll: float, budget: float,
         print(f"  │     Cuota {cuota:.2f}  │  Edge {s['edge_pct']}  │  p_blend {p_b:.3f} (n_h2h={n_h2h})")
         print(f"  │     Kelly-KL {s['kelly_kl']:.1%} → stake ${stake:,.0f}  │  Retorno potencial ${retorno:,.0f}")
         print(f"  │     EV real {ev_ind:+.1%}  │  Zona: {s['zona_cuota']}  │  Sup: {s['superficie']}")
+        # S3-A/S3-B: PlayerIntelligence + kambi_disponible (observacional)
+        _pi_parts = []
+        _rg = s.get('pi_rank_gap_win_rate')
+        _svi = s.get('pi_svi_surface')
+        _bracket = s.get('pi_rank_gap_bracket')
+        _pi_n = s.get('pi_n_total')
+        if _rg is not None:
+            _pi_parts.append(f"RankGap({_bracket})={_rg:.0%}")
+        if _svi is not None:
+            _pi_parts.append(f"SVI={_svi:.0%}")
+        if _pi_n is not None:
+            _pi_parts.append(f"n={_pi_n}")
+        _kambi = s.get('kambi_disponible')
+        if _kambi is False:
+            _pi_parts.append("KAMBI:NO-DISPONIBLE")
+        if _pi_parts:
+            print(f"  │     PI: {' | '.join(_pi_parts)}")
         print()
 
         gastado += stake
