@@ -92,3 +92,14 @@ Healthcheck en el workflow I1.3 + sección en TROUBLESHOOTING con cómo medir hi
 **Archivos:** `n8n_workflow_settle_guard.json` + `n8n_workflow_bridge_healthcheck.json`
 **Prueba de alerta:** Telegram msg_id=1525 ✅ (alerta forzada manual confirmada)
 **I1 criterio CUMPLIDO:** causa documentada + 2 workflows activos + alerta probada.
+
+### Fix bridge orphan (2026-07-13, Sonnet)
+
+**Problema:** PID 174 arrancaba en WSL boot fuera de systemd. Cuando systemd intentaba levantar `tennis-snapshot-bridge.service`, el puerto 8765 ya estaba ocupado → loop `activating (auto-restart)` → 7,557 errores `Address already in use` en el log.
+
+**Fix ejecutado:**
+1. `systemctl --user stop tennis-snapshot-bridge.service` — detener el unit en loop
+2. `kill 174` — terminar el proceso orphan
+3. `systemctl --user start tennis-snapshot-bridge.service` — levantar bajo control de systemd
+
+**Estado post-fix:** PID 88729, `active (running)`, `/health` OK. Si el bridge cae, systemd lo reinicia automáticamente. No habrá nuevos errores en el log.
