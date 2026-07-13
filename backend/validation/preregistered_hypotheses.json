@@ -461,6 +461,26 @@
       "hits": 4,
       "perdidos": 0,
       "nota": "n=4 casos semilla (2026-07-10): 4/4 ganaron. Sesgo de selección: identificados post-hoc en sesión de alta precisión. Acumulación prospectiva requerida. PROHIBIDO calibrar con n=4."
+    },
+    "H88-01": {
+      "nombre": "Rival Value Flip: el lado rival supera breakeven cuando edge_fav < -10%",
+      "descripcion": "Picks donde el favorito del modelo tiene edge_vs_mercado <= -0.10 (muy por debajo de -vig): el RIVAL, a su cuota, supera breakeven. Acumulacion gratis: rival gana cuando resolucion=LOST.",
+      "origen_deuda": "Nodo-68 — hallazgo Opus 2026-07-10 (Obradovic/Fabre), precedente Rivera/Michnev (Nodo-64)",
+      "preregistrado": "2026-07-12",
+      "umbrales_congelados": {
+        "edge_fav_max": -0.10,
+        "cuota_rival_min": 2.50,
+        "cuota_rival_max": 8.00,
+        "excluir": "status=NO_DATA, phantom_data=true",
+        "sub_segmento_preregistrado": "mismo segmento AND rfi_ultra=false (aislar del alpha RFI)",
+        "nota": "PROHIBIDO cambiar umbrales antes de n_stop. PROHIBIDO apostar el lado rival antes de graduacion."
+      },
+      "metrica": "hit%_rival (=% LOST del favorito en el segmento) con IC Wilson 95% + ROI flat 1u a cuota_rival",
+      "exito": "IC Wilson 95% inferior > 1/cuota_rival_media del segmento, con n >= 30",
+      "n_stop": 30,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0
     }
   }
 }
