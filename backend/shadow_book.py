@@ -1165,6 +1165,14 @@ def report(desde: Optional[str] = None, hasta: Optional[str] = None) -> str:
                     )
             lines.append("")
 
+    # ── D90-04: CAPA 2 (H89-01) — Model Confidence fallback ─────────────────
+    _append_segment(settled, lines, "CAPA2 (H89-01: p>=0.60, cuota [1.50-2.80], n_h2h>=1)",
+                    lambda r: r.get('pick_snapshot', {}).get('capa2_candidate', False))
+
+    # ── D90-10: ELO_DOMINANCE axis (H89-02) — observacional ─────────────────
+    _append_segment(settled, lines, "ELO_DOMINANCE (H89-02: elo_gap>50 y ranking peor que ELO sugiere)",
+                    lambda r: r.get('pick_snapshot', {}).get('elo_dominance_axis', False))
+
     # ── D54-02: WATCHLIST ∩ tier=grand_slam ∩ edge≥20% (Nodo-55 P54-03) ──
     # Intersección de cortes ya pre-registrados: status × tier × banda de cuota.
     # NO es segmento nuevo — es visualización de uno existente para responder
@@ -1465,6 +1473,15 @@ def report_dict(desde: Optional[str] = None, hasta: Optional[str] = None) -> dic
             and r.get('pick_snapshot', {}).get('tier') == 'grand_slam'
             and r.get('pick_snapshot', {}).get('edge', 0) >= 0.20
         )),
+    ]:
+        s = _seg(label, pred)
+        if s:
+            result['segments'].append(s)
+
+    # ── D90-04/D90-10: CAPA2 y ELO_DOM (H89-01/H89-02) — observacional ──────
+    for label, pred in [
+        ("CAPA2 (H89-01)", lambda r: r.get('pick_snapshot', {}).get('capa2_candidate', False)),
+        ("ELO_DOMINANCE (H89-02)", lambda r: r.get('pick_snapshot', {}).get('elo_dominance_axis', False)),
     ]:
         s = _seg(label, pred)
         if s:
