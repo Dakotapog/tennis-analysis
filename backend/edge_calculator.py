@@ -630,6 +630,43 @@ def _get_ranking(ranking_analysis: dict, player_name: str) -> Optional[int]:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# S1-A — CAPA 2 (D90-04 / H89-01) + ELO DOMINANCE (D90-10)
+# ─────────────────────────────────────────────────────────────────────────────
+
+def evaluar_capa2(resultado: dict, p_modelo: float, cuota_fav: float, n_h2h: int) -> bool:
+    """D90-04/H89-01: candidato a CAPA 2 (Model Confidence).
+
+    Re-evalúa los gates de seguridad que la cadena principal solo corre
+    cuando apostar=True (ver Nodo-90 §1 C-2). OBSERVACIONAL + stake 25% en trader.
+    """
+    if resultado.get('apostar'):
+        return False                                    # ya es CAPA 1
+    if resultado.get('status') == PICK_STATUS_NO_DATA:  # NO_DATA re-check
+        return False
+    if resultado.get('phantom_data'):                   # Nodo-72 re-check
+        return False
+    if resultado.get('markov_favorito') == 'HOT' and (resultado.get('bbi') or 0.5) < 0.50:
+        return False                                    # HOT_sin_BBI re-check
+    return (p_modelo >= 0.60 and 1.50 <= cuota_fav <= 2.80 and n_h2h >= 1)
+
+
+def _calc_elo_dominance_axis(resultado: dict) -> bool:
+    """D90-10: favorito con mejor ELO pero peor ranking (número más alto) → anomalía observable.
+
+    Condición: elo_favorito - elo_rival > 50  Y  ranking_favorito > ranking_rival
+    (ranking como número de posición: número mayor = peor posición).
+    OBSERVACIONAL — no modifica N28F2 en Sprint 1. Solo serializa (H89-02 acumula).
+    """
+    elo_f = resultado.get('elo_favorito')
+    elo_r = resultado.get('elo_rival')
+    rk_f  = resultado.get('ranking_favorito')
+    rk_r  = resultado.get('ranking_rival')
+    if not (elo_f and elo_r and rk_f and rk_r):
+        return False
+    return (elo_f - elo_r) > 50 and rk_f > rk_r
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # PIPELINE COMPLETO POR PARTIDO
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -1104,6 +1141,10 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
         'vig':                   _vig_d68,
         'rival_value_flag':      _rival_value_flag,
     })
+
+    # S1-A: CAPA 2 candidate + ELO dominance axis (D90-04, D90-10)
+    resultado['capa2_candidate'] = evaluar_capa2(resultado, p_modelo, cuota_fav, _n_h2h_v)
+    resultado['elo_dominance_axis'] = _calc_elo_dominance_axis(resultado)
 
     return resultado
 

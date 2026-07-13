@@ -252,17 +252,24 @@ class TestNodo34FixBRankingFalso:
     """Fix B: ranking_manager.py paso 5 no debe matchear iniciales de 1-2 chars."""
 
     def test_t34_09_desvignes_em_no_matchea_auger_aliassime(self, rm_top_atp):
-        """T34-09: 'Desvignes E. M.' → None (no matchea Auger-Aliassime rank 4)
+        """T34-09: 'Desvignes E. M.' NO matchea Auger-Aliassime rank 4.
 
-        Eva-Marie Desvignes es WTA rank ~1027, no aparece en rankings top.
-        Antes del fix, paso 5:
-          parts=['desvignes','e','m'] | 'e' in 'auger'=True | 'm' in 'aliassime'=True
-          → 2 matches ≥ min(2,3) → retornaba rank 4 (Auger-Aliassime)
+        Eva-Marie Desvignes es WTA rank ~1027. Antes del fix, paso 5 retornaba rank 4
+        (Auger-Aliassime) porque 'e' in 'auger' y 'm' in 'aliassime'.
+
+        D90-02 (paso 3 multi-inicial): ahora resuelve correctamente 'E. M.' como
+        iniciales de 'Eva Marie', encontrando a Desvignes rank 1027.
+        La anti-regresión crítica es rank != 4 (no matchear Auger-Aliassime).
         """
         result = rm_top_atp.get_player_ranking('Desvignes E. M.')
-        assert result is None, (
-            f"'Desvignes E. M.' debe retornar None (jugadora ITF desconocida). "
-            f"got rank={result} — posible falso match a Auger-Aliassime rank 4"
+        assert result != 4, (
+            f"'Desvignes E. M.' matcheó Auger-Aliassime rank 4 — Fix B revertido. "
+            f"got rank={result}"
+        )
+        # D90-02: paso 3 multi-inicial ahora resuelve correctamente a rank 1027
+        assert result in (None, 1027), (
+            f"'Desvignes E. M.' debe resolver a None o rank 1027 (Eva-Marie Desvignes). "
+            f"got rank={result}"
         )
 
     def test_t34_10_mutation_detection_fix_b(self, rm_top_atp):

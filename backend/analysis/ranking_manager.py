@@ -452,23 +452,22 @@ class RankingManager:
                             logger.info(f"Coincidencia Apellido+Inicial para '{player_name}': {display_name} ({tour_info})")
                             return data
         
-        # 3. Búsqueda por formato "Apellido(s) + Inicial" (ej: "Cerundolo F.", "Moro Canas A.")
-        if len(name_parts) >= 2 and len(name_parts[-1]) == 1:
-            last_name_parts = name_parts[:-1]
-            initial = name_parts[-1]
-            
+        # 3. Búsqueda por formato "Apellido(s) + N iniciales" (ej: "Cerundolo F.", "Hsu Y. H.", "Burruchaga R. A.")
+        # D90-02: generalizado para soportar múltiples iniciales finales de 1 carácter
+        _parts = list(name_parts)
+        _iniciales = []
+        while _parts and len(_parts[-1]) == 1:
+            _iniciales.insert(0, _parts.pop())
+        if _parts and _iniciales:
             for search_dict in search_dicts:
                 for ranked_name, data in search_dict.items():
                     ranked_parts = ranked_name.split()
-                    
-                    # Verificar que todas las partes del apellido estén en el nombre completo
-                    if all(part in ranked_parts for part in last_name_parts):
-                        # Verificar que una de las partes restantes comience con la inicial
-                        remaining_parts = [p for p in ranked_parts if p not in last_name_parts]
-                        if any(p.startswith(initial) for p in remaining_parts):
+                    if all(p in ranked_parts for p in _parts):
+                        restantes = [p for p in ranked_parts if p not in _parts]
+                        if all(any(r.startswith(ini) for r in restantes) for ini in _iniciales):
                             display_name = data.get('original_name') or data.get('name', 'N/A')
                             tour_info = data.get('tour', '')
-                            logger.info(f"Coincidencia Apellido+Inicial para '{player_name}': {display_name} ({tour_info})")
+                            logger.info(f"Coincidencia Apellido+Iniciales para '{player_name}': {display_name} ({tour_info})")
                             return data
         
         # 4. Búsqueda inteligente con validación de contexto y jugadores retirados
