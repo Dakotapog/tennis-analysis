@@ -462,6 +462,44 @@
       "perdidos": 0,
       "nota": "n=4 casos semilla (2026-07-10): 4/4 ganaron. Sesgo de selección: identificados post-hoc en sesión de alta precisión. Acumulación prospectiva requerida. PROHIBIDO calibrar con n=4."
     },
+    "H89-01": {
+      "nombre": "CAPA2 Model-Confidence",
+      "descripcion": "Picks con capa2_candidate=True (p_modelo>=0.60, cuota [1.50-2.80], n_h2h>=1, sin HOT_sin_BBI, sin phantom, sin NO_DATA) logran hit% > 52.4% (breakeven a cuota media ~1.91). OBSERVACIONAL: stake 25% del sizing normal.",
+      "origen": "Nodo-91 Sprint 1 S1-A/S1-B — implementado 2026-07-13",
+      "preregistrado": "2026-07-13",
+      "umbrales_congelados": {
+        "p_modelo_min": 0.60,
+        "cuota_min": 1.50,
+        "cuota_max": 2.80,
+        "n_h2h_min": 1,
+        "excluir": "status=NO_DATA, phantom_data=true, markov_favorito=HOT AND bbi<0.50",
+        "nota": "PROHIBIDO cambiar umbrales antes de n_stop."
+      },
+      "metrica": "hit% con IC Wilson 95% sobre resoluciones pick_snapshot.capa2_candidate=True",
+      "exito": "hit% > 52.4% con IC Wilson 95% inferior > 52.4% (breakeven cuota ~1.91), n >= 30",
+      "kill_switch": "hit% < 45% con n >= 20 → CAPA2_ENABLED=False",
+      "n_stop": 30,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0
+    },
+    "H89-02": {
+      "nombre": "ELO_DOMINANCE axis",
+      "descripcion": "Picks con elo_dominance_axis=True (elo_favorito - elo_rival > 50 Y ranking_favorito > ranking_rival numéricamente) logran hit% > 50% (vs 29% BBI-sola histórico). OBSERVACIONAL — no modifica N28F2.",
+      "origen": "Nodo-91 Sprint 1 S1-A — implementado 2026-07-13",
+      "preregistrado": "2026-07-13",
+      "umbrales_congelados": {
+        "elo_gap_min": 50,
+        "condicion": "elo_favorito - elo_rival > 50 AND ranking_favorito > ranking_rival",
+        "nota": "ranking como número de posición — número mayor = peor posición. PROHIBIDO cambiar umbrales antes de n_stop."
+      },
+      "metrica": "hit% con IC Wilson 95% sobre resoluciones pick_snapshot.elo_dominance_axis=True",
+      "exito": "hit% > 50% con IC Wilson 95% inferior > 50%, n >= 30",
+      "n_stop": 30,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0
+    },
     "H88-01": {
       "nombre": "Rival Value Flip: el lado rival supera breakeven cuando edge_fav < -10%",
       "descripcion": "Picks donde el favorito del modelo tiene edge_vs_mercado <= -0.10 (muy por debajo de -vig): el RIVAL, a su cuota, supera breakeven. Acumulacion gratis: rival gana cuando resolucion=LOST.",
