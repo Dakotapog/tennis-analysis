@@ -630,6 +630,42 @@ def _get_ranking(ranking_analysis: dict, player_name: str) -> Optional[int]:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# D90-01 — KAMBI COVERAGE (observacional, sin HTTP aquí)
+# ─────────────────────────────────────────────────────────────────────────────
+
+_kambi_coverage_cache: dict | None = None  # cargado una vez por proceso
+
+
+def _load_kambi_coverage_once() -> dict | None:
+    """Carga el kambi_coverage más reciente desde reports/. Lazy, una vez por proceso."""
+    global _kambi_coverage_cache
+    if _kambi_coverage_cache is not None:
+        return _kambi_coverage_cache
+    try:
+        from scripts.fetch_kambi_coverage import load_coverage
+        _kambi_coverage_cache = load_coverage() or {}
+    except Exception:
+        _kambi_coverage_cache = {}
+    return _kambi_coverage_cache
+
+
+def _annotate_kambi(nombre_favorito: str) -> bool | None:
+    """
+    Retorna True/False/None según disponibilidad en Kambi.
+    None = sin cobertura cargada (archivo no encontrado).
+    Nunca hace HTTP — solo lee el side-car pre-fetchado.
+    """
+    coverage = _load_kambi_coverage_once()
+    if not coverage:
+        return None
+    try:
+        from scripts.fetch_kambi_coverage import is_player_available
+        return is_player_available(nombre_favorito, coverage)
+    except Exception:
+        return None
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # S1-A — CAPA 2 (D90-04 / H89-01) + ELO DOMINANCE (D90-10)
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -1145,6 +1181,10 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
     # S1-A: CAPA 2 candidate + ELO dominance axis (D90-04, D90-10)
     resultado['capa2_candidate'] = evaluar_capa2(resultado, p_modelo, cuota_fav, _n_h2h_v)
     resultado['elo_dominance_axis'] = _calc_elo_dominance_axis(resultado)
+
+    # D90-01: kambi_disponible — campo observacional (side-car kambi_coverage_*.json)
+    # Filtro real solo en trader/combo builder, NUNCA aquí ni en shadow_book.
+    resultado['kambi_disponible'] = _annotate_kambi(resultado.get('favorito', ''))
 
     return resultado
 
