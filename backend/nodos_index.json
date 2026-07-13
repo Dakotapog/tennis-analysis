@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "generado": "2026-07-13T08:29:38",
-    "total_nodos": 92,
+    "generado": "2026-07-13T11:14:08",
+    "total_nodos": 94,
     "total_py_files": 64,
     "huerfanos_count": 0,
     "exclusiones_count": 19
@@ -1239,6 +1239,41 @@
         "run_daily.py",
         "shadow_book.py",
         "tests/test_nodo91_sprint1.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "92",
+      "nodo_archivo": "Nodo-92-Sprint1-Implementado.md",
+      "fecha": "2026-07-13",
+      "estado": "SPRINT 1 COMPLETO — S1-A→S1-F + H89-01/H89-02 pre-registrados (aprobados usuario 2026-07-13)",
+      "archivos_mencionados": [
+        "analysis/ranking_manager.py",
+        "betplay_combo_builder.py",
+        "edge_calculator.py",
+        "path/to/run_daily.py",
+        "run_daily.py",
+        "shadow_book.py",
+        "tests/test_nodo34.py",
+        "tests/test_nodo91_sprint1.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "93",
+      "nodo_archivo": "Nodo-93-Sprint2-Implementado.md",
+      "fecha": "2026-07-13",
+      "estado": "SPRINT 2 COMPLETO — D90-03 + D90-01",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "combo_confianza_builder.py",
+        "edge_calculator.py",
+        "fetch_kambi_coverage.py",
+        "scripts/build_player_db.py",
+        "scripts/fetch_kambi_coverage.py",
+        "shadow_book.py",
+        "tests/test_nodo92_d90_01.py",
+        "tests/test_nodo92_sprint2.py",
         "trader_ev_tenis.py"
       ]
     }
