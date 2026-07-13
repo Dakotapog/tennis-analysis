@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generado": "2026-07-12T23:33:55",
+    "generado": "2026-07-13T08:29:38",
     "total_nodos": 92,
     "total_py_files": 64,
     "huerfanos_count": 0,
@@ -949,9 +949,11 @@
       "estado": null,
       "archivos_mencionados": [
         "check_contradictions.py",
+        "resultados_finales.py",
         "scripts/rebuild_nodos_index.py",
         "shadow_book.py",
-        "tests/test_nodo87_fixes.py"
+        "tests/test_nodo87_fixes.py",
+        "validar_con_api.py"
       ]
     },
     {
