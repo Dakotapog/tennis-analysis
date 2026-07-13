@@ -128,9 +128,9 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 
 | Métrica | Valor |
 |---|---|
-| Tests | **1846 passed, 0 failed** (verificado 2026-07-13 — +19 tests Nodo-91 Sprint1 S1-A→S1-E). Nota: fallo intermitente `test_prior_bajo_no_se_ve_afectado` por contaminación estado global entre test files — pasa en aislamiento, NO es bug D87-05 (V1 Nodo-66 confirmada) |
+| Tests | **1901 passed, 0 failed** (verificado 2026-07-13 — +55 tests Sprint2: D90-03 PlayerDB + D90-01 kambi_disponible). Nota: fallo intermitente `test_prior_bajo_no_se_ve_afectado` por contaminación estado global entre test files — pasa en aislamiento, NO es bug D87-05 (V1 Nodo-66 confirmada) |
 | Calibración | clay GS: p=0.758 (n=31) \| global: wins=2358, losses=1480 (n=3838) \| ⚠️ buckets huérfanos `?`/`?_?` con ~141 resultados de dinero real (24% hit) — ver Nodo-86 §1.1, migración en evaluación: T7 Nodo-66 decide |
-| **Auditoría Fable5** | **Nodo-86: COMPLETO** (diagnóstico 2026-07-11). Nodo-87: 12 fixes verificados 18/18 tests REGLA-T53. Trabajo derivado: T7 bucket `?` (pendiente), D68-01→D68-05 Rival Value Flip ✅ (Nodo-68), I1→I7 integración herramientas (Nodo-67 pendiente). **Sprint1 Nodo-89/90/91:** CAPA2 (H89-01 confidence≥0.60), ELO_DOMINANCE (H89-02), `_planes_frescos()` 4h, `--fase noche/manana/completa` en run_daily |
+| **Auditoría Fable5** | **Nodo-86: COMPLETO**. Nodo-87: 12 fixes verificados. **Sprint1 (Nodo-92):** CAPA2/ELO_DOMINANCE/planes_frescos/--fase ✅. **Sprint2 (Nodo-93):** D90-03 PlayerDB (4650 jugadores, 328K filas) + D90-01 kambi_disponible observacional ✅. Pendiente Sprint3: RankGap+SVI en edge_report; ELO_DOM activación; Kambi filter en trader |
 | Bankroll | $125,000+ |
 | Shadow Book hit% | GS: 50% ROI+47% \| Challenger: +7.9% \| ITF: 38% ROI-16.8% (jul-10) |
 | ML Dataset | 2,573 registros limpios (motor nodo32, trazabilidad verificada) |
