@@ -1079,6 +1079,32 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
         'circuit_warning':          _circuit_warning,
     })
 
+    # ─── D68-01 (Nodo-68): Rival Value Flip — OBSERVACIONAL PURO ──────────────
+    # Matemática: edge_fav + edge_rival = −vig. Solo cuando edge_fav < −vig el
+    # lado rival tiene valor real. Umbral −0.10 ≫ vig típico (3-8%).
+    # Inserción DESPUÉS de todos los guards: status y phantom_data ya son finales.
+    # PROHIBIDO hasta graduación H88-01: NO modifica apostar ni kelly.
+    _vig_d68 = (
+        round(1.0 / cuota_fav + 1.0 / cuota_rival - 1.0, 4)
+        if (cuota_fav and cuota_rival) else None
+    )
+    _edge_vs_rival_d68 = (
+        round((1.0 - p_modelo) - 1.0 / cuota_rival, 4)
+        if cuota_rival else None
+    )
+    _rival_value_flag = bool(
+        resultado.get('edge', 0) <= -0.10
+        and cuota_rival is not None
+        and 2.50 <= cuota_rival <= 8.00
+        and resultado.get('status') != PICK_STATUS_NO_DATA
+        and not resultado.get('phantom_data', False)
+    )
+    resultado.update({
+        'edge_vs_mercado_rival': _edge_vs_rival_d68,
+        'vig':                   _vig_d68,
+        'rival_value_flag':      _rival_value_flag,
+    })
+
     return resultado
 
 
