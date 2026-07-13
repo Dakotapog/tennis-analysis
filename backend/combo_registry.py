@@ -23,6 +23,13 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
+# I7 Nodo-67: usar normalize canónica de player_registry cuando esté disponible.
+# Fallback a implementación local si el stack del modelo no está accesible.
+try:
+    from core.player_registry import normalize_player_name as _pr_normalize
+except Exception:
+    _pr_normalize = None
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Directorio de datos
 # ─────────────────────────────────────────────────────────────────────────────
@@ -36,23 +43,34 @@ REPORTS_DIR = Path("reports")
 # ─────────────────────────────────────────────────────────────────────────────
 
 def _normalize_name(nombre: str) -> str:
-    """Quita acentos, lowercase, colapsa espacios."""
+    """Quita acentos, lowercase, colapsa espacios (implementación local stdlib)."""
     nfkd = unicodedata.normalize("NFKD", nombre)
     sin_acentos = "".join(c for c in nfkd if not unicodedata.combining(c))
     return re.sub(r"\s+", " ", sin_acentos.lower().strip())
 
 
+def _canon(nombre: str) -> str:
+    """
+    I7 Nodo-67: normalización canónica unificada.
+    Usa player_registry.normalize_player_name si está disponible (misma clave
+    que rankings_data), sino cae al _normalize_name local (NFKD — compatible).
+    """
+    if _pr_normalize is not None:
+        return _pr_normalize(nombre)
+    return _normalize_name(nombre)
+
+
 def _names_match(pick_name: str, result_winner: str) -> bool:
     """
     True si el pick y el ganador se refieren a la misma persona.
-    Estrategia: normalizar ambos, luego:
+    Estrategia: normalizar con _canon() (unificada), luego:
     1. Nombre completo de pick en resultado (o viceversa)
     2. Apellido exacto (última palabra) coincide
     """
     if not pick_name or not result_winner:
         return False
-    p = _normalize_name(pick_name)
-    r = _normalize_name(result_winner)
+    p = _canon(pick_name)
+    r = _canon(result_winner)
     # Coincidencia substring
     if p in r or r in p:
         return True

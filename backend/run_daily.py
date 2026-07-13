@@ -250,6 +250,7 @@ def main():
         print("\n  MODO: solo settle")
         _run(['python3', 'resultados_finales.py'], 'PASO 6 — resultados de ayer')
         _run(['python3', 'shadow_book.py', '--settle', fecha_ayer], 'PASO 10 — shadow book settle')
+        _run(['python3', 'combo_registry.py', '--settle', fecha_ayer], 'PASO 10b — combo registry settle (I7 Nodo-67)')
         print(f"\n  Settle completado para {fecha_ayer}")
         return
 
@@ -397,6 +398,7 @@ def main():
     rc_res, _ = _run(['python3', 'resultados_finales.py'], 'PASO 6 — resultados de ayer')
     if rc_res == 0:
         _run(['python3', 'shadow_book.py', '--settle', fecha_ayer], 'PASO 10 — shadow book settle')
+        _run(['python3', 'combo_registry.py', '--settle', fecha_ayer], 'PASO 10b — combo registry settle (I7 Nodo-67)')
 
     # ── DAILY BRIEF ───────────────────────────────────────────────────────
     brief = _build_daily_brief(fecha_hoy, tier_results, was_candidates, fecha_ayer)
