@@ -205,6 +205,22 @@ def _build_daily_brief(fecha: str, tier_results: dict, was_candidates: list,
     except Exception:
         pass
 
+    # ── Tamp: visibilidad (I6 Nodo-67) ───────────────────────────────────────
+    lines.append("")
+    try:
+        import urllib.request as _ur
+        with _ur.urlopen('http://localhost:7778/health', timeout=2) as _tr:
+            _th = json.loads(_tr.read())
+        _s = _th.get('session', {})
+        _orig = _s.get('charsOriginal', 0)
+        _saved = _s.get('charsSaved', 0)
+        _pct = round(_saved / _orig * 100, 1) if _orig else 0
+        lines.append(f"  TAMP :7778 OK — {_s.get('requests',0)} reqs | "
+                     f"ahorro {_saved:,}/{_orig:,} chars ({_pct}%) | "
+                     f"tokens_saved={_s.get('tokensSaved',0):,}")
+    except Exception:
+        lines.append("  TAMP :7778 NO RESPONDE — systemctl --user restart tamp")
+
     lines.append("")
     lines.append(sep)
     lines.append("  ACCIONES:")
@@ -269,6 +285,11 @@ def main():
         if not args.skip_rankings and _rankings_stale():
             _run(['python3', 'extraer_ranking_atp_version2.py'], 'PASO 0a — Rankings ATP')
             _run(['python3', 'extraer_ranking_wta_version2.py'], 'PASO 0b — Rankings WTA')
+
+        # PASO 0c — IRP profiles (Nodo-96, solo si player_db existe)
+        import os as _os
+        if _os.path.exists('data/player_db.json'):
+            _run(['python3', 'scripts/build_irp_profiles.py'], 'PASO 0c — IRP profiles (Nodo-96)')
 
         # ── PASO 1 — Extraer partidos ─────────────────────────────────────────
         cmd_paso1 = ['python3', 'extraer_partidos_api.py']

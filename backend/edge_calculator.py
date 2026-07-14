@@ -51,6 +51,7 @@ logger = logging.getLogger(__name__)
 # ─────────────────────────────────────────────────────────────────────────────
 
 CALIBRACION_FILE = "data/calibracion_edge.json"
+IRP_PROFILES_FILE = "data/irp_profiles.json"   # Nodo-96: Individual Return-from-inactivity Profile
 
 CALIBRACION_DEFAULT = {
     "global": {"wins": 0, "losses": 0},
@@ -295,6 +296,42 @@ def cargar_calibracion() -> dict:
         except Exception:
             pass
     return dict(CALIBRACION_DEFAULT)
+
+
+# ─── Nodo-96: IRP — Individual Return-from-inactivity Profile ────────────────
+_IRP_DATA_CACHE: dict | None = None
+
+def _load_irp_profiles() -> dict:
+    """Carga irp_profiles.json una vez (cached). Retorna {} si no existe."""
+    global _IRP_DATA_CACHE
+    if _IRP_DATA_CACHE is None:
+        if os.path.exists(IRP_PROFILES_FILE):
+            try:
+                with open(IRP_PROFILES_FILE, 'r', encoding='utf-8') as _f:
+                    _IRP_DATA_CACHE = json.load(_f)
+            except Exception:
+                _IRP_DATA_CACHE = {}
+        else:
+            _IRP_DATA_CACHE = {}
+    return _IRP_DATA_CACHE
+
+
+def _irp_lookup(nombre: str, irp_data: dict) -> dict:
+    """
+    Busca el IRP de un jugador por nombre.
+    Normaliza: NFKD → ASCII lower → busca en name_index → retorna profile dict.
+    Retorna {} si no encontrado (D96-07: silencioso, no bloquea pipeline).
+    """
+    if not nombre or not irp_data:
+        return {}
+    import unicodedata as _ud
+    _n = nombre.replace('_', ' ')
+    _n = _ud.normalize('NFKD', _n)
+    _n = ''.join(c for c in _n if not _ud.combining(c)).lower().strip()
+    slug = irp_data.get('name_index', {}).get(_n)
+    if slug:
+        return irp_data.get('profiles', {}).get(slug, {})
+    return {}
 
 
 def guardar_calibracion(state: dict):
@@ -675,10 +712,11 @@ def _rank_bracket_ec(rank_diff: int) -> str | None:
 
 
 def _get_player_intelligence(player_name: str, superficie: str,
-                             ranking_fav, ranking_rival) -> dict:
+                             ranking_fav, ranking_rival, tier: str = None) -> dict:
     """
     Retorna campos PlayerIntelligence observacionales para un pick.
     Todos los valores son None si el jugador no está en PlayerDB.
+    Dims: 1=RankGap, 2=SVI, 3=MQI, 4=PRS, 5=CFS
     """
     empty = {
         'pi_rank_gap_bracket':  None,
@@ -686,6 +724,10 @@ def _get_player_intelligence(player_name: str, superficie: str,
         'pi_svi_surface':       None,
         'pi_svi_n_surface':     None,
         'pi_n_total':           None,
+        'pi_prs_three_set':     None,   # Dim 4: win rate en partidos a 3 sets
+        'pi_prs_underdog':      None,   # Dim 4: win rate como underdog de ranking
+        'pi_cfs':               None,   # Dim 5: win rate en este tier (Circuit Fit)
+        'pi_mqi':               None,   # Dim 3: avg ranking de oponentes enfrentados
     }
     db = _load_player_db_index_once()
     if not db:
@@ -714,12 +756,21 @@ def _get_player_intelligence(player_name: str, superficie: str,
     # Dim 2 — SVI (Surface Victory Index)
     db_surface = _SURFACE_MAP_EC_TO_DB.get(superficie, 'unknown')
     svi_map = entry.get('surface_win_rates') or {}
-    svi_n_map = {}
-    # n_surface requires full db — use index-level data if available
     if db_surface in svi_map:
         result['pi_svi_surface'] = svi_map[db_surface]
-    # n_surface: stored in full player_db but not in index; mark as unknown
-    result['pi_svi_n_surface'] = None  # available in player_db.json full build
+    result['pi_svi_n_surface'] = None  # en player_db.json completo, no en índice
+
+    # Dim 3 — MQI (Match Quality Index): avg ranking de oponentes enfrentados
+    result['pi_mqi'] = entry.get('mqi_avg_opponent_ranking')
+
+    # Dim 4 — PRS (Performance in Relevant Situations)
+    result['pi_prs_three_set'] = entry.get('prs_three_set_win_rate')
+    result['pi_prs_underdog']  = entry.get('prs_underdog_win_rate')
+
+    # Dim 5 — CFS (Circuit Fit Score): win rate en el tier de este partido
+    if tier:
+        tier_wr = entry.get('tier_win_rates') or {}
+        result['pi_cfs'] = tier_wr.get(tier)
 
     return result
 
@@ -1105,6 +1156,14 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
             _rfi_tier_v >= 2 and _rfi_is_bookie_fav and not _rfi_inactivo_es_fav),
     })
 
+    # ─── Nodo-96: IRP — Individual Return-from-inactivity Profile. REPORTE_SOLO ──
+    # Serializa el perfil histórico de retorno para favorito y rival.
+    # NO modifica edge, kelly_kl, p_modelo ni ningún gate (D96-01).
+    _irp_data = _load_irp_profiles()
+    _nombre_rival = jugador2 if player_key_sb == 'player1' else jugador1
+    resultado['irp_fav']   = _irp_lookup(favored, _irp_data)
+    resultado['irp_rival'] = _irp_lookup(_nombre_rival, _irp_data)
+
     # ─── Nodo-35 / F2: HISTORIAL_NO_EXTRAIDO — bloqueo en origen + NO_DATA status ──
     # Si la extracción de historial falló para cualquiera de los dos jugadores,
     # la predicción está basada en datos incompletos → status='NO_DATA', excluido
@@ -1288,6 +1347,7 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
         superficie=resultado.get('superficie', 'unknown'),
         ranking_fav=resultado.get('ranking_favorito'),
         ranking_rival=resultado.get('ranking_rival'),
+        tier=resultado.get('tier'),
     ))
 
     return resultado
