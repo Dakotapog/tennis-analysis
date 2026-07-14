@@ -1,6 +1,6 @@
 # CLAUDE.md — Tennis Prediction & Betting Engine
 
-> Last updated: 2026-07-14 (Nodo-96 IRP Sprint5 — 4361 perfiles, 15 tests, 1984 passed)
+> Last updated: 2026-07-14 (Nodo-96 IRP Sprint5 — 4361 perfiles, 17 tests, H96-01 registrada, 1986 passed)
 > Spec-Driven Development (SDD). CLAUDE.md es VISTA DERIVADA — los nodos son la fuente de verdad.
 > Leer completo antes de tocar código. Ver política de precedencia §10.
 
@@ -128,7 +128,7 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 
 | Métrica | Valor |
 |---|---|
-| Tests | **1984 passed, 0 failed** (verificado 2026-07-14 — Nodo-96 IRP +15 tests). Nota: fallo intermitente `test_prior_bajo_no_se_ve_afectado` por contaminación estado global entre test files — pasa en aislamiento, NO es bug D87-05 (V1 Nodo-66 confirmada) |
+| Tests | **1986 passed, 0 failed** (verificado 2026-07-14 — Nodo-96 IRP 17 tests + H96-02 apellido fallback). Nota: fallo intermitente `test_prior_bajo_no_se_ve_afectado` por contaminación estado global entre test files — pasa en aislamiento, NO es bug D87-05 (V1 Nodo-66 confirmada) |
 | Calibración | clay GS: p=0.758 (n=31) \| global: wins=2358, losses=1480 (n=3838) \| ⚠️ buckets huérfanos `?`/`?_?` con ~141 resultados de dinero real (24% hit) — ver Nodo-86 §1.1, migración en evaluación: T7 Nodo-66 decide |
 | **Auditoría Fable5** | **Sprints 1-5 EN CURSO.** S1-S4 ✅. S5: IRP ✅ (Nodo-96, 4361 perfiles, 15 tests). Pendiente S5: D90-11 N28F2/tier (gate n≥30), OddsAggregator multi-casa (gate cuentas reales) |
 | Bankroll | $125,000+ |
@@ -155,7 +155,7 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 **Nodos 66-68:** 66=checklist T1→T10 COMPLETOS. 67=integración herramientas **COMPLETO** (I3 governor JSON-first, I7 combo_registry→player_registry+run_daily settle, C1 DataContract v2 6 fronteras 24 tests, C4 brecha hit%_real vs shadow en dashboard). 68=H88-01 Rival Value Flip ✅ acumulando (D68-06 RIVAL VALUE en tabla favoritos con cuota+edge+vig, D64-02 RFI-ULTRA en tabla favoritos).
 **Nodos 86-87 (auditoría):** 86=hallazgos. 87=12 fixes D87-01→D87-11+D64-01 aplicados, 18 tests REGLA-T53.
 **Nodos 89-95 (Fable Sprint1→4):** 89=spec Sistema Inteligencia. 90=Auditoría Fable. 91=Sprint1 CAPA2+ELO_DOM+--fase. 92=evidencia ejecución. 93=Sprint2 PlayerDB+kambi. 94=Sprint3 PlayerIntelligence+PI en trader. 95=Sprint4 PatternRecognition REPORTE_SOLO (4 candidatos, confidence_flag=STRONG señal más robusta n=52).
-**Nodo-96 (Sprint5-IRP):** IRP Individual Return-from-inactivity Profile — REPORTE_SOLO. `scripts/build_irp_profiles.py` → `data/irp_profiles.json` (4361 jugadores, delta_prom=-0.006). `irp_fav`/`irp_rival` serializados en edge_report. PASO 0c en run_daily. 15 tests. Pendiente: D90-11 N28F2/tier (gate n≥30 CAPA2 settled), OddsAggregator multi-casa.
+**Nodo-96 (Sprint5-IRP):** IRP Individual Return-from-inactivity Profile — REPORTE_SOLO. `scripts/build_irp_profiles.py` → `data/irp_profiles.json` (4361 jugadores, delta_prom=-0.006). `irp_fav`/`irp_rival` serializados en edge_report. PASO 0c en run_daily. 17 tests (15 base + 2 H96-02 apellido fallback). H96-01 pre-registrada. Pendiente: D90-11 N28F2/tier (gate n≥30 CAPA2 settled), OddsAggregator multi-casa.
 
 ---
 
@@ -233,7 +233,7 @@ git log --all --oneline -- '*keyword*'
 git show COMMIT:backend/archivo.py    # recuperar si existe
 
 # 2. Baseline antes de modificar
-python -m pytest tests/ --no-cov -q  # 1984 passed
+python -m pytest tests/ --no-cov -q  # 1986 passed
 
 # 3. Syntax check después de editar
 python -c "import ast; ast.parse(open('archivo.py').read()); print('OK')"

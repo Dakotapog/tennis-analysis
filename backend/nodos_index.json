@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "generado": "2026-07-13T12:07:37",
-    "total_nodos": 96,
+    "generado": "2026-07-14T10:56:12",
+    "total_nodos": 97,
     "total_py_files": 64,
     "huerfanos_count": 0,
     "exclusiones_count": 19
@@ -962,9 +962,15 @@
       "fecha": "2026-07-11",
       "estado": null,
       "archivos_mencionados": [
+        "betslip_registrar.py",
+        "combo_confianza_builder.py",
+        "combo_governor.py",
         "combo_registry.py",
         "core/data_contract.py",
-        "n8n_push_workflow.py"
+        "dashboard.py",
+        "n8n_push_workflow.py",
+        "run_daily.py",
+        "shadow_book.py"
       ]
     },
     {
@@ -1292,11 +1298,24 @@
     {
       "nodo_id": "95",
       "nodo_archivo": "Nodo-95-Sprint4-PatternRecognition.md",
-      "fecha": "2026-07-13",
-      "estado": "SPRINT 4 COMPLETO — D90-09 PatternRecognition REPORTE_SOLO, 25 tests",
+      "fecha": null,
+      "estado": "COMPLETO 2026-07-13",
       "archivos_mencionados": [
         "scripts/pattern_recognition.py",
         "tests/test_nodo95_pattern_recognition.py"
+      ]
+    },
+    {
+      "nodo_id": "96",
+      "nodo_archivo": "Nodo-96-IRP-Individual-Return-Profile.md",
+      "fecha": "2026-07-14",
+      "estado": null,
+      "archivos_mencionados": [
+        "build_irp_profiles.py",
+        "edge_calculator.py",
+        "run_daily.py",
+        "scripts/build_irp_profiles.py",
+        "tests/test_nodo96_irp.py"
       ]
     }
   ],
