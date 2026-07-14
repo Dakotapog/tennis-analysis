@@ -188,8 +188,16 @@ def build_irp_profiles(
         profile = compute_player_irp(slug, rows, bd)
         if profile is not None:
             profiles[slug] = profile
-            # Añadir al name_index: slug normalizado → slug original
-            name_index[normalize_for_index(slug)] = slug
+            # H96-02: name_index con slug completo + apellido fallback
+            # slug completo: 'novak djokovic' → 'Novak_Djokovic'
+            _full_key = normalize_for_index(slug)
+            name_index[_full_key] = slug
+            # apellido (última palabra): 'djokovic' → 'Novak_Djokovic'
+            # Colisión posible si dos jugadores comparten apellido — el último gana.
+            # Aceptable: REPORTE_SOLO, colisión = dato observacional erróneo, nunca decisión.
+            _parts = _full_key.split()
+            if len(_parts) > 1:
+                name_index[_parts[-1]] = slug
 
     n_with_irp = len(profiles)
     print(f'  [IRP] {n_with_irp:,} jugadores con IRP (n_retornos≥{MIN_RETORNOS})')

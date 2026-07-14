@@ -500,6 +500,25 @@
       "n_actual": 0,
       "hits": 0
     },
+    "H96-01": {
+      "nombre": "IRP — jugadores con delta_return negativo rinden peor en partidos de retorno",
+      "descripcion": "Para jugadores con irp_fav.delta_return < -0.10 (rinden >=10% peor al volver de inactividad >30d), la probabilidad de ganar en su primer partido de retorno es significativamente menor que su win_rate normal. Señal candidata a reducir la penalizacion form_decay en casos positivos (delta_return > 0).",
+      "origen_deuda": "Nodo-96 — IRP Individual Return-from-inactivity Profile. Extiende RFI uniforme (Nodo-64) con perfil por jugador. Implementado 2026-07-14, REPORTE_SOLO.",
+      "preregistrado": "2026-07-14",
+      "umbrales_congelados": {
+        "delta_return_umbral": -0.10,
+        "n_retornos_min": 2,
+        "return_threshold_days": 30,
+        "excluir": "jugadores con n_retornos < 2 (no hay patron estadistico)",
+        "nota": "PROHIBIDO usar irp_fav para modificar edge/kelly/apostar antes de graduacion. Gate: n >= 30 jugadores con irp_fav activo en edge_report + IC Wilson 95%."
+      },
+      "metrica": "win_rate_return vs win_rate_normal por jugador. Agregado: hit%_return del segmento irp_fav activo con IC Wilson 95%",
+      "exito": "hit%_return < win_rate_normal con IC Wilson 95% inferior separado, n >= 30 jugadores con irp_fav en edge_report",
+      "n_stop": 30,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0
+    },
     "H88-01": {
       "nombre": "Rival Value Flip: el lado rival supera breakeven cuando edge_fav < -10%",
       "descripcion": "Picks donde el favorito del modelo tiene edge_vs_mercado <= -0.10 (muy por debajo de -vig): el RIVAL, a su cuota, supera breakeven. Acumulacion gratis: rival gana cuando resolucion=LOST.",

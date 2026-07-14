@@ -280,3 +280,49 @@ def test_avg_gap_return_is_mean_of_return_gaps():
     assert profile is not None
     expected_avg = (40 + 80) / 2
     assert profile['avg_gap_return'] == pytest.approx(expected_avg, abs=0.5)
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# TEST 9: apellido fallback en name_index (H96-02)
+# ══════════════════════════════════════════════════════════════════════════════
+
+def test_name_index_contiene_apellido_fallback():
+    """build_irp_profiles genera name_index con slug completo Y apellido (H96-02)."""
+    player_db = {
+        'players': {
+            'Novak_Djokovic': {
+                'slug': 'Novak_Djokovic',
+                'rows': [
+                    {'fecha': '2026-01-01', 'won': True},
+                    {'fecha': '2026-03-15', 'won': False},   # RETURN
+                    {'fecha': '2026-07-01', 'won': True},    # RETURN
+                ]
+            }
+        }
+    }
+    with tempfile.TemporaryDirectory() as tmpdir:
+        db_path  = Path(tmpdir) / 'player_db.json'
+        out_path = Path(tmpdir) / 'irp_profiles.json'
+        db_path.write_text(json.dumps(player_db), encoding='utf-8')
+        result = build_irp_profiles(db_path, out_path, BUILD_DATE)
+
+    idx = result['name_index']
+    assert 'novak djokovic' in idx, "Slug completo debe estar en name_index"
+    assert 'djokovic' in idx,       "Apellido debe estar en name_index (H96-02)"
+    assert idx['djokovic'] == 'Novak_Djokovic'
+
+
+def test_irp_lookup_encuentra_por_apellido(tmp_path):
+    """_irp_lookup resuelve cuando edge_calculator pasa solo apellido (H96-02)."""
+    from edge_calculator import _irp_lookup
+    irp_data = {
+        'name_index': {
+            'novak djokovic': 'Novak_Djokovic',
+            'djokovic':       'Novak_Djokovic',   # apellido fallback
+        },
+        'profiles': {
+            'Novak_Djokovic': {'n_retornos': 8, 'delta_return': -0.12}
+        }
+    }
+    result = _irp_lookup('Djokovic', irp_data)
+    assert result.get('n_retornos') == 8, "Lookup por apellido debe encontrar el perfil"
