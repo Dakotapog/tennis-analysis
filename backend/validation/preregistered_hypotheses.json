@@ -468,9 +468,9 @@
       "origen": "Nodo-91 Sprint 1 S1-A/S1-B — implementado 2026-07-13",
       "preregistrado": "2026-07-13",
       "umbrales_congelados": {
-        "p_modelo_min": 0.60,
-        "cuota_min": 1.50,
-        "cuota_max": 2.80,
+        "p_modelo_min": 0.6,
+        "cuota_min": 1.5,
+        "cuota_max": 2.8,
         "n_h2h_min": 1,
         "excluir": "status=NO_DATA, phantom_data=true, markov_favorito=HOT AND bbi<0.50",
         "nota": "PROHIBIDO cambiar umbrales antes de n_stop."
@@ -506,7 +506,7 @@
       "origen_deuda": "Nodo-96 — IRP Individual Return-from-inactivity Profile. Extiende RFI uniforme (Nodo-64) con perfil por jugador. Implementado 2026-07-14, REPORTE_SOLO.",
       "preregistrado": "2026-07-14",
       "umbrales_congelados": {
-        "delta_return_umbral": -0.10,
+        "delta_return_umbral": -0.1,
         "n_retornos_min": 2,
         "return_threshold_days": 30,
         "excluir": "jugadores con n_retornos < 2 (no hay patron estadistico)",
@@ -525,15 +525,65 @@
       "origen_deuda": "Nodo-68 — hallazgo Opus 2026-07-10 (Obradovic/Fabre), precedente Rivera/Michnev (Nodo-64)",
       "preregistrado": "2026-07-12",
       "umbrales_congelados": {
-        "edge_fav_max": -0.10,
-        "cuota_rival_min": 2.50,
-        "cuota_rival_max": 8.00,
+        "edge_fav_max": -0.1,
+        "cuota_rival_min": 2.5,
+        "cuota_rival_max": 8.0,
         "excluir": "status=NO_DATA, phantom_data=true",
         "sub_segmento_preregistrado": "mismo segmento AND rfi_ultra=false (aislar del alpha RFI)",
         "nota": "PROHIBIDO cambiar umbrales antes de n_stop. PROHIBIDO apostar el lado rival antes de graduacion."
       },
       "metrica": "hit%_rival (=% LOST del favorito en el segmento) con IC Wilson 95% + ROI flat 1u a cuota_rival",
       "exito": "IC Wilson 95% inferior > 1/cuota_rival_media del segmento, con n >= 30",
+      "n_stop": 30,
+      "estado": "ACUMULANDO",
+      "n_actual": 3,
+      "hits": 3,
+      "roi_flat_1u": 2.75,
+      "wilson_lb_actual": 0.526,
+      "wilson_ub_actual": 1.0,
+      "cuota_media_acumulada": 3.75,
+      "observaciones": [
+        {
+          "fecha": "2026-07-14",
+          "partido": "Maaya Rajeshwaran Revathi vs Leticia Romanova",
+          "cuota_rival": 6.0,
+          "edge_fav": -0.203,
+          "resultado": "RIVAL_GANO",
+          "nota": "p_hist=0.33, Markov fav COLD, ranking rival 197 vs cuota 6.00"
+        },
+        {
+          "fecha": "2026-07-14",
+          "partido": "Raluca Georgiana Serban vs Daria Kuczer",
+          "cuota_rival": 2.5,
+          "edge_fav": -0.153,
+          "resultado": "RIVAL_GANO",
+          "nota": "confidence LOW, n_axes=0 — señal mínima, rival ganó igualmente"
+        },
+        {
+          "fecha": "2026-07-14",
+          "partido": "Deniz Dilek vs Weronika Falkowska",
+          "cuota_rival": 2.75,
+          "edge_fav": -0.197,
+          "resultado": "RIVAL_GANO",
+          "nota": "cal_conf=0.30 n=5, fav HOT — señales contradictorias, rival ganó"
+        }
+      ],
+      "alerta_protocolo": "AVISO: apuesta realizada antes de n=30 (PROHIBIDO por umbrales). Resultó en 3/3 wins + combinada 41.25x. Esto NO cambia el gate — n=30 protege contra overfitting en muestras pequeñas. Continuar acumulando hasta n=30 con apuestas individuales."
+    },
+    "H98-01": {
+      "nombre": "Meta-Señal Convergencia: picks con score >= 3 superan breakeven",
+      "descripcion": "Picks donde meta_signal_score >= 3 señales simultáneas (HOT + STRONG + RFI + IRP + ELO_DOM) tienen hit% significativamente superior al breakeven de su cuota media. La convergencia de señales ortogonales reduce la varianza del estimador.",
+      "origen_deuda": "Nodo-98 — Meta-Señal conexión oculta identificada 2026-07-14. Extiende Nodo-65 (ANCHOR/VARIABLE) con dimensión multi-señal.",
+      "preregistrado": "2026-07-14",
+      "umbrales_congelados": {
+        "meta_signal_score_min": 3,
+        "senales_validas": ["HOT", "STRONG", "RFI_tier1plus", "IRP_delta_negativo", "ELO_DOM"],
+        "rival_value_cuenta_separado": true,
+        "excluir": "status=NO_DATA, phantom_data=true, KGR_sesion < 0 (observar pero no contar)",
+        "nota": "PROHIBIDO cambiar el umbral de 3 antes de n_stop. score_rival_value cuenta en direccion opuesta — pick va al RIVAL no al favorito."
+      },
+      "metrica": "hit% del segmento score>=3 con IC Wilson 95% inferior > 1/cuota_media_segmento",
+      "exito": "IC Wilson 95% inferior > breakeven, n >= 30 picks con score >= 3",
       "n_stop": 30,
       "estado": "ACUMULANDO",
       "n_actual": 0,

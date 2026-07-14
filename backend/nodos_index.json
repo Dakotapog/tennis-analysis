@@ -1,8 +1,8 @@
 {
   "_meta": {
-    "generado": "2026-07-14T10:56:12",
-    "total_nodos": 97,
-    "total_py_files": 64,
+    "generado": "2026-07-14T15:27:52",
+    "total_nodos": 99,
+    "total_py_files": 65,
     "huerfanos_count": 0,
     "exclusiones_count": 19
   },
@@ -981,6 +981,7 @@
       "archivos_mencionados": [
         "edge_calculator.py",
         "generar_tabla_favoritos2.py",
+        "rival_value_betslip.py",
         "shadow_book.py",
         "tests/test_nodo68_rival_value.py"
       ]
@@ -1316,6 +1317,30 @@
         "run_daily.py",
         "scripts/build_irp_profiles.py",
         "tests/test_nodo96_irp.py"
+      ]
+    },
+    {
+      "nodo_id": "97",
+      "nodo_archivo": "Nodo-97-Live-Edge-Monitor.md",
+      "fecha": "2026-07-14",
+      "estado": null,
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "scripts/live_edge_monitor.py",
+        "shadow_book.py",
+        "tests/test_nodo97_live_edge.py"
+      ]
+    },
+    {
+      "nodo_id": "98",
+      "nodo_archivo": "Nodo-98-Meta-Senal-Convergencia.md",
+      "fecha": "2026-07-14",
+      "estado": null,
+      "archivos_mencionados": [
+        "edge_calculator.py",
+        "pipeline_tracker.py",
+        "scripts/meta_signal_scorer.py",
+        "tests/test_nodo98_meta_signal.py"
       ]
     }
   ],
