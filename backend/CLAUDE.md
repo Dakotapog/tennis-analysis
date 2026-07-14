@@ -1,6 +1,6 @@
 # CLAUDE.md — Tennis Prediction & Betting Engine
 
-> Last updated: 2026-07-13 (Nodo-66/67/68 COMPLETO — I7+C1+C4+D64-02+D68-06, 24 tests DataContract, 1969 passed)
+> Last updated: 2026-07-14 (Nodo-96 IRP Sprint5 — 4361 perfiles, 15 tests, 1984 passed)
 > Spec-Driven Development (SDD). CLAUDE.md es VISTA DERIVADA — los nodos son la fuente de verdad.
 > Leer completo antes de tocar código. Ver política de precedencia §10.
 
@@ -128,7 +128,7 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 
 | Métrica | Valor |
 |---|---|
-| Tests | **1969 passed, 0 failed** (verificado 2026-07-13 — Nodo-95 PatternRecognition 25t + Nodo-67 DataContract 24t). Nota: fallo intermitente `test_prior_bajo_no_se_ve_afectado` por contaminación estado global entre test files — pasa en aislamiento, NO es bug D87-05 (V1 Nodo-66 confirmada) |
+| Tests | **1984 passed, 0 failed** (verificado 2026-07-14 — Nodo-96 IRP +15 tests). Nota: fallo intermitente `test_prior_bajo_no_se_ve_afectado` por contaminación estado global entre test files — pasa en aislamiento, NO es bug D87-05 (V1 Nodo-66 confirmada) |
 | Calibración | clay GS: p=0.758 (n=31) \| global: wins=2358, losses=1480 (n=3838) \| ⚠️ buckets huérfanos `?`/`?_?` con ~141 resultados de dinero real (24% hit) — ver Nodo-86 §1.1, migración en evaluación: T7 Nodo-66 decide |
 | **Auditoría Fable5** | **Sprints 1-5 EN CURSO.** S1-S4 ✅. S5: IRP ✅ (Nodo-96, 4361 perfiles, 15 tests). Pendiente S5: D90-11 N28F2/tier (gate n≥30), OddsAggregator multi-casa (gate cuentas reales) |
 | Bankroll | $125,000+ |
@@ -233,7 +233,7 @@ git log --all --oneline -- '*keyword*'
 git show COMMIT:backend/archivo.py    # recuperar si existe
 
 # 2. Baseline antes de modificar
-python -m pytest tests/ --no-cov -q  # 1969 passed
+python -m pytest tests/ --no-cov -q  # 1984 passed
 
 # 3. Syntax check después de editar
 python -c "import ast; ast.parse(open('archivo.py').read()); print('OK')"
