@@ -848,6 +848,34 @@ def _calc_elo_dominance_axis(resultado: dict) -> bool:
     return (elo_f - elo_r) > 50 and rk_f > rk_r
 
 
+def _calc_meta_score_directo(resultado: dict) -> int:
+    """Nodo-98 D99-03: score_directo = suma de señales pro-favorito (max=5).
+
+    Señales (todas observacionales, REPORTE_SOLO):
+      +1 Markov HOT       — markov_favorito == 'HOT'
+      +1 STRONG           — confidence_flag == 'STRONG'
+      +1 ELO dominance    — elo_dominance_axis == True  (D90-10)
+      +1 RFI rival        — rfi_tier >= 1 (rival inactivo >=90d)
+      +1 IRP rival delta  — irp_rival.delta_return < -0.10
+
+    score_rival_value (señal contraria, campo separado) se calcula en el caller.
+    NO modifica edge, kelly_kl ni ningún gate.
+    """
+    score = 0
+    if resultado.get('markov_favorito') == 'HOT':
+        score += 1
+    if resultado.get('confidence_flag') == 'STRONG':
+        score += 1
+    if resultado.get('elo_dominance_axis') is True:
+        score += 1
+    if (resultado.get('rfi_tier') or 0) >= 1:
+        score += 1
+    _irp_rv = resultado.get('irp_rival') or {}
+    if (_irp_rv.get('delta_return') or 0.0) < -0.10:
+        score += 1
+    return score
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # PIPELINE COMPLETO POR PARTIDO
 # ─────────────────────────────────────────────────────────────────────────────
@@ -1349,6 +1377,22 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
         ranking_rival=resultado.get('ranking_rival'),
         tier=resultado.get('tier'),
     ))
+
+    # ─── Nodo-98: Meta-Señal Convergencia — REPORTE_SOLO ────────────────────
+    # Se calcula AL FINAL (D98-09/D99-03): todos los campos ya están disponibles.
+    # NO modifica edge, kelly_kl, apostar ni ningún gate.
+    _score_d = _calc_meta_score_directo(resultado)
+    _score_rv = 1 if (resultado.get('rival_value_flag') is True) else 0
+    if _score_rv >= 1 and _score_d >= 2:
+        _direccion_meta = 'SPLIT'
+    elif _score_rv >= 1:
+        _direccion_meta = 'RIVAL'
+    else:
+        _direccion_meta = 'FAVORITO'
+    resultado['score_directo']              = _score_d
+    resultado['score_rival_value']          = _score_rv
+    resultado['direccion_meta']             = _direccion_meta
+    resultado['rival_value_delegado_h8801'] = bool(_score_rv >= 1)
 
     return resultado
 

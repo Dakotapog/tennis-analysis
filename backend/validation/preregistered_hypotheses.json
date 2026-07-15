@@ -577,7 +577,13 @@
       "preregistrado": "2026-07-14",
       "umbrales_congelados": {
         "meta_signal_score_min": 3,
-        "senales_validas": ["HOT", "STRONG", "RFI_tier1plus", "IRP_delta_negativo", "ELO_DOM"],
+        "senales_validas": [
+          "HOT",
+          "STRONG",
+          "RFI_tier1plus",
+          "IRP_delta_negativo",
+          "ELO_DOM"
+        ],
         "rival_value_cuenta_separado": true,
         "excluir": "status=NO_DATA, phantom_data=true, KGR_sesion < 0 (observar pero no contar)",
         "nota": "PROHIBIDO cambiar el umbral de 3 antes de n_stop. score_rival_value cuenta en direccion opuesta — pick va al RIVAL no al favorito."
@@ -585,6 +591,26 @@
       "metrica": "hit% del segmento score>=3 con IC Wilson 95% inferior > 1/cuota_media_segmento",
       "exito": "IC Wilson 95% inferior > breakeven, n >= 30 picks con score >= 3",
       "n_stop": 30,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0
+    },
+    "H97-01": {
+      "nombre": "Live Edge Monitor: picks con drift>=15% y edge_live>5% superan breakeven de cuota_live",
+      "descripcion": "Picks detectados en ventana live [-30min, +45min] del partido, donde cuota cae >=15% desde pre-partido Y edge_live = p_modelo - 1/cuota_live > 0.05, tienen hit% superior al breakeven. La caída de cuota es señal de que el mercado está descubriendo el mismo edge que el modelo.",
+      "origen_deuda": "Nodo-97 — Live Edge Monitor. Nodo-99 D99-04: gap detectado en auditoría Fable 2026-07-14. Sin hipótesis pre-registrada el gate de activación Telegram no tiene base estadística.",
+      "preregistrado": "2026-07-14",
+      "umbrales_congelados": {
+        "drift_min_pct": 15.0,
+        "edge_live_min": 0.05,
+        "ventana_pre_min": -30,
+        "ventana_post_min": 45,
+        "confidence_gate": "STRONG o HOT (confidence_flag del edge_report pre-partido)",
+        "excluir": "KGR_sesion < 0 (observar pero no contar en n_actual)"
+      },
+      "metrica": "hit% de picks live con IC Wilson 95% inferior > 1/cuota_live_trigger",
+      "exito": "IC Wilson 95% inferior > breakeven, n >= 20 picks live con trigger",
+      "n_stop": 20,
       "estado": "ACUMULANDO",
       "n_actual": 0,
       "hits": 0

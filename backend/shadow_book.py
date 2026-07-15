@@ -437,6 +437,46 @@ def log_picks(edge_report: dict, session_meta: dict) -> int:
     return nuevos
 
 
+def log_live_pick(pick: dict, cuota_trigger: float,
+                  fecha: Optional[str] = None) -> Optional[str]:
+    """
+    D97-13 / D99-02 (Nodo-97): registra un pick detectado por el Live Edge Monitor.
+
+    Diferencia clave vs log_picks():
+      - pick_type = 'live'  (pre-game default es ausencia del campo)
+      - cuota_trigger = cuota en el momento del trigger (~5min in partido)
+      - CLV_live = (cuota_trigger - cuota_cierre) / cuota_cierre  (se calcula en settle)
+
+    El pick original NO se muta — se copia y se añaden los campos live.
+    Retorna sb_id del registro escrito, o None si hubo error.
+    """
+    fecha = fecha or datetime.now().strftime('%Y-%m-%d')
+    live_pick = dict(pick)                     # copia — no mutar el original
+    live_pick['pick_type']      = 'live'
+    live_pick['cuota_trigger']  = cuota_trigger
+    live_pick['trigger_ts']     = datetime.now().astimezone().isoformat()
+
+    try:
+        rec = _build_record(live_pick, fecha)
+        if rec is None:
+            logger.warning("[ShadowBook] log_live_pick: pick inválido (sin jugadores)")
+            return None
+        path = _jsonl_path(fecha)
+        existing = _load_jsonl(path)
+        # Prefijo 'LIVE_' en sb_id para distinguir de picks pre-game del mismo partido
+        rec['sb_id'] = 'LIVE_' + rec['sb_id']
+        if rec['sb_id'] in existing:
+            logger.info(f"[ShadowBook] log_live_pick: {rec['sb_id']} ya registrado")
+            return rec['sb_id']
+        existing[rec['sb_id']] = rec
+        _save_jsonl(path, existing)
+        logger.info(f"[ShadowBook] live pick registrado → {rec['sb_id']}")
+        return rec['sb_id']
+    except Exception as e:
+        logger.warning(f"[ShadowBook] log_live_pick error: {e}")
+        return None
+
+
 # ══════════════════════════════════════════════════════════════════════════════
 # CLV CALCULATION
 # ══════════════════════════════════════════════════════════════════════════════
@@ -763,7 +803,11 @@ def settle(fecha: str, resultados_map: Optional[Dict] = None) -> int:
             resultado = 'WON' if (
                 _normalize_name_match(ganador, favorito) or _fuzzy_name_match(ganador, favorito)
             ) else 'LOST'
-            cuota_tomada = snap.get('cuota_favorito', 0)
+            # D97-13/D99-02: picks live usan cuota_trigger como apertura para CLV
+            # CLV_live = (cuota_trigger - cuota_cierre) / cuota_cierre
+            _es_live = snap.get('pick_type') == 'live'
+            cuota_tomada = (snap.get('cuota_trigger') or snap.get('cuota_favorito', 0)
+                            if _es_live else snap.get('cuota_favorito', 0))
             clv = calc_clv(cuota_tomada, cuota_cierre_final) if cuota_cierre_final else None
             pnl = round(cuota_tomada - 1, 4) if resultado == 'WON' else -1.0
 
@@ -1421,10 +1465,14 @@ def report_dict(desde: Optional[str] = None, hasta: Optional[str] = None) -> dic
 
     n_total = len(picks)
     n_settled = len(settled)
+    # C4 Nodo-67: n_hits para brecha hit%_shadow vs hit%_real
+    n_hits = sum(1 for r in settled
+                 if r.get('resolucion', {}).get('resultado') == 'WON')
 
     result: dict = {
         'range': {'desde': desde, 'hasta': hasta},
-        'summary': {'n_total': n_total, 'n_settled': n_settled, 'n_open': n_total - n_settled},
+        'summary': {'n_total': n_total, 'n_settled': n_settled,
+                    'n_open': n_total - n_settled, 'n_hits': n_hits},
         'sessions': {
             'n': len(session_metas),
             'last_cv_edge': session_metas[-1].get('cv_edge') if session_metas else None,
@@ -1434,10 +1482,25 @@ def report_dict(desde: Optional[str] = None, hasta: Optional[str] = None) -> dic
         'hypotheses': [],
         'graduation': {'any_graduated': False, 'nearest_n': 0, 'graduated_labels': []},
         'clv_by_provenance': {},
+        'clv_pregame': None,   # D99-12: CLV picks pre-partido (no mezclar con live)
+        'clv_live': None,      # D99-12: CLV picks live (cuota_trigger como apertura)
     }
 
     if n_settled == 0:
         return result
+
+    # D99-12 (Nodo-98): CLV pre-partido vs CLV live separados
+    def _clv_medio(recs: list) -> Optional[float]:
+        vals = [r['resolucion']['clv_pct'] for r in recs
+                if r.get('resolucion', {}).get('clv_pct') is not None]
+        return round(sum(vals) / len(vals), 2) if vals else None
+
+    _settled_pregame = [r for r in settled
+                        if r.get('pick_snapshot', {}).get('pick_type') != 'live']
+    _settled_live    = [r for r in settled
+                        if r.get('pick_snapshot', {}).get('pick_type') == 'live']
+    result['clv_pregame'] = _clv_medio(_settled_pregame)
+    result['clv_live']    = _clv_medio(_settled_live)
 
     def _seg(label: str, pred) -> Optional[dict]:
         seg = [r for r in settled if pred(r)]
@@ -1648,6 +1711,56 @@ def report_dict(desde: Optional[str] = None, hasta: Optional[str] = None) -> dic
             'roi_rival': _rv_nr_m_d['roi_rival'],
             'ic': list(_rv_nr_m_d['ic']),
         },
+    }
+
+    # ── I2 Nodo-67: D65-05 ANCHOR/VARIABLE — misma fuente que report() ───────
+    _anchor_d = [r for r in settled
+                 if r.get('pick_snapshot', {}).get('edge') is not None
+                 and r['pick_snapshot']['edge'] > 0]
+    _variable_d = [r for r in settled
+                   if r.get('pick_snapshot', {}).get('edge') is not None
+                   and r['pick_snapshot']['edge'] <= 0]
+    _am = _segment_metrics(_anchor_d)
+    _vm = _segment_metrics(_variable_d)
+    result['anchor_variable'] = {
+        'anchor':   {'n': _am['n'], 'hit_pct': _am['hit_pct'], 'roi': _am['roi'],
+                     'ic': list(_am['ic']), 'sparse': _am['sparse']},
+        'variable': {'n': _vm['n'], 'hit_pct': _vm['hit_pct'], 'roi': _vm['roi'],
+                     'ic': list(_vm['ic']), 'sparse': _vm['sparse']},
+    }
+
+    # ── I2 Nodo-67: D64-01 RFI segments — misma fuente que report() ──────────
+    _rfi_ultra_d  = [r for r in settled if r.get('pick_snapshot', {}).get('rfi_ultra', False)]
+    _rfi_tier1_d  = [r for r in settled if (r.get('pick_snapshot', {}).get('rfi_tier') or 0) >= 1]
+    _rum = _segment_metrics(_rfi_ultra_d)
+    _r1m = _segment_metrics(_rfi_tier1_d)
+    result['rfi'] = {
+        'ultra':     {'n': _rum['n'], 'hit_pct': _rum['hit_pct'], 'roi': _rum['roi'],
+                      'ic': list(_rum['ic']), 'sparse': _rum['sparse']},
+        'tier1plus': {'n': _r1m['n'], 'hit_pct': _r1m['hit_pct'], 'roi': _r1m['roi'],
+                      'ic': list(_r1m['ic']), 'sparse': _r1m['sparse']},
+    }
+
+    # ── I2 Nodo-67: M0 odómetro — contadores full-history (no date filter) ─────
+    _all_sb_files = sorted(glob_mod.glob(os.path.join(SHADOW_DIR, "sb_*.jsonl")))
+    _dias_sin_settle = 0
+    for _fp_m0 in _all_sb_files:
+        _recs_m0 = list(_load_jsonl(_fp_m0).values())
+        _picks_m0 = [r for r in _recs_m0 if r.get('_type') != 'session_meta']
+        _settled_m0 = [r for r in _picks_m0 if 'resolucion' in r]
+        if _picks_m0 and not _settled_m0:
+            _dias_sin_settle += 1
+    _gov_log_path = os.path.join(os.path.dirname(__file__), 'logs', 'combo_governor.log')
+    _gov_exec = 0
+    if os.path.exists(_gov_log_path):
+        try:
+            with open(_gov_log_path) as _gf:
+                _gov_exec = sum(1 for _ in _gf)
+        except OSError:
+            pass
+    result['m0'] = {
+        'dias_sin_settle': _dias_sin_settle,
+        'governor_executions': _gov_exec,
     }
 
     return result

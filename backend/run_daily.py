@@ -306,6 +306,12 @@ def main():
         # ── PASO 3 — Edge calculator ──────────────────────────────────────────
         _run(['python3', 'edge_calculator.py'], 'PASO 3 — Edge calculator + shadow-log')
 
+        # ── PASO 3b — Meta-Señal Convergencia (Nodo-98, REPORTE_SOLO) ────────
+        import glob as _glob
+        _edge_reports = _glob.glob('reports/edge_report_*.json')
+        if _edge_reports:
+            _run(['python3', 'scripts/meta_signal_scorer.py'], 'PASO 3b — Meta-Señal Convergencia (Nodo-98)')
+
         # ── PASO 3.5 — Tabla análisis ─────────────────────────────────────────
         _run(['python3', 'generar_tabla_favoritos2.py'], 'PASO 3.5 — Tabla análisis')
 

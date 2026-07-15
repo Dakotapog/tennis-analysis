@@ -78,16 +78,35 @@ El sistema ve: "A vuelve de 200 días, históricamente pierde 18% más al volver
 
 ## 4. `meta_signal_score` — Componentes
 
+**D99-03:** Los scores se separan en DOS campos. Señales pro-favorito y señal contraria no se suman en un único número — evita que el trader interprete señales opuestas como convergencia.
+
+### 4.1 `score_directo` — señales pro-favorito
+
 | Señal | Condición activa | Peso |
 |---|---|---|
-| RFI tier | rfi_tier ≥ 1 del rival (inactivo ≥90d) | +1 |
-| IRP delta | irp_rival.delta_return < -0.10 | +1 |
 | Markov HOT | markov_favorito = HOT | +1 |
 | STRONG | confidence_flag = STRONG | +1 |
-| ELO dom. | elo_dominance_axis = True | +1 |
-| Rival Value | edge < -0.10 (rival tiene valor) | +1 (señal contraria) |
+| ELO dom. | elo_dominance_axis = True (threshold en D91-XX — ver [[Nodo-91-Sprint1]]) | +1 |
+| RFI tier | rfi_tier ≥ 1 del rival (inactivo ≥90d) | +1 |
+| IRP delta | irp_rival.delta_return < -0.10 | +1 |
 
-Score máximo: 5 (dirección favorable) + 1 (Rival Value, dirección opuesta)
+`score_directo` máximo: 5
+
+### 4.2 `score_rival_value` — señal contraria (DIRECCIÓN OPUESTA)
+
+| Señal | Condición activa | Peso |
+|---|---|---|
+| Rival Value | edge_fav < -0.10 (el RIVAL tiene valor, no el favorito) | +1 |
+
+`score_rival_value` máximo: 1
+
+**Protocolo de coordinación con H88-01 (D99-10):**
+Si `score_rival_value >= 1` → el pick de Rival Value **delega a `rival_value_betslip.py`** (H88-01 ya maneja micro-Kelly shrink=5.7%). Nodo-98 reporta la señal pero NO genera stake independiente para Rival Value. Mensaje en output: `"rival_value_delegado_a_H88_01": true`.
+
+**`direccion` del output:**
+- `score_directo >= 3` Y `score_rival_value == 0` → `"direccion": "FAVORITO"` — apostar favorito
+- `score_rival_value >= 1` Y `score_directo < 2` → `"direccion": "RIVAL"` — ver H88-01
+- `score_rival_value >= 1` Y `score_directo >= 2` → `"direccion": "SPLIT"` — conflicto, no apostar combo mixto
 
 ---
 
@@ -119,16 +138,27 @@ en el dashboard — por encima del hit%.
 ### 7.1 `scripts/meta_signal_scorer.py`
 
 Lee `edge_report_FECHA.json` (todas las secciones: apostar + watchlist + sin_edge).
-Para cada pick calcula `meta_signal_score` y emite `reports/meta_signal_FECHA.json`.
+Para cada pick calcula `score_directo` + `score_rival_value` + `direccion` y emite `reports/meta_signal_FECHA.json`.
 
-### 7.2 `edge_calculator.py` — campo `meta_signal_score`
+**D99-08 — Slot en run_daily.py (PASO 3b):**
+```python
+# PASO 3b — Meta-Señal Convergencia (Nodo-98, REPORTE_SOLO)
+if os.path.exists(f'reports/edge_report_{fecha}.json'):
+    _run(['python3', 'scripts/meta_signal_scorer.py'], 'PASO 3b — Meta-Señal (Nodo-98)')
+```
+Corre DESPUÉS de edge_calculator (PASO 3), ANTES de trader (PASO 4).
 
-Después del bloque IRP (Nodo-96), añadir cálculo del score (4 señales disponibles en ese punto):
-`confidence_flag`, `markov_favorito`, `elo_dominance_axis`, `rfi_tier`, `irp_rival.delta_return`.
+### 7.2 `edge_calculator.py` — campos `score_directo` + `score_rival_value`
+
+Después del bloque IRP (Nodo-96, L1165), añadir cálculo del score usando los 5 campos disponibles:
+`confidence_flag`, `markov_favorito`, `elo_dominance_axis` (threshold D91-XX), `rfi_tier`, `irp_rival.delta_return`.
+El campo `edge` para `score_rival_value` también está disponible en ese punto.
 
 ### 7.3 Dashboard — sección "Convergencia"
 
-Tabla ordenada por `meta_signal_score` desc. Picks con score ≥ 3 resaltados.
+Tabla ordenada por `score_directo` desc. Picks con `score_directo ≥ 3` resaltados en verde.
+Picks con `direccion=SPLIT` marcados en amarillo — conflicto de señales, no combo mixto.
+CLV pre-partido y CLV live en KPIs separados (D99-12).
 
 ---
 
@@ -139,16 +169,21 @@ Tabla ordenada por `meta_signal_score` desc. Picks con score ≥ 3 resaltados.
 {
   "fecha": "2026-07-14",
   "n_picks_analizados": 47,
-  "picks_score_3plus": [
+  "picks_score_directo_3plus": [
     {
       "partido": "Boogaard vs Onclin",
-      "meta_signal_score": 3,
-      "senales_activas": ["HOT", "STRONG", "RFI_tier1"],
+      "score_directo": 3,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": ["HOT", "STRONG", "RFI_tier1"],
+      "senales_activas_rival": [],
+      "rival_value_delegado_a_H88_01": false,
       "edge": 0.220,
       "cuota": 3.55,
       "tier": "challenger"
     }
   ],
+  "picks_split": [],
   "h98_01_n_actual": 0
 }
 ```
@@ -158,14 +193,14 @@ Tabla ordenada por `meta_signal_score` desc. Picks con score ≥ 3 resaltados.
 ## 9. TESTS (REGLA-T53)
 
 `tests/test_nodo98_meta_signal.py` — mínimo 8 tests:
-1. `test_score_0_cuando_ninguna_senal` — pick sin señales → score=0
-2. `test_score_3_cuando_hot_strong_rfi` — 3 señales → score=3
-3. `test_irp_delta_activa_cuando_menor_umbral` — delta<-0.10 → cuenta
-4. `test_rival_value_cuenta_como_senal_contraria` — edge<-0.10 → score=1 Rival Value
-5. `test_solo_score_3plus_en_output_destacados` — filtro correcto
-6. `test_output_json_escrito` — archivo generado
-7. `test_scorer_no_modifica_edge_ni_kelly` — REPORTE_SOLO invariante
-8. `test_h98_01_counter_incrementa` — n_actual sube con cada pick score≥3
+1. `test_score_directo_0_cuando_ninguna_senal` — pick sin señales → score_directo=0, score_rival_value=0
+2. `test_score_directo_3_cuando_hot_strong_rfi` — 3 señales pro-fav → score_directo=3, direccion="FAVORITO"
+3. `test_irp_delta_activa_cuando_menor_umbral` — irp_rival.delta_return<-0.10 → cuenta en score_directo
+4. `test_rival_value_va_a_score_rival_value_no_a_directo` — edge<-0.10 → score_rival_value=1, score_directo sin cambio, rival_value_delegado_a_H88_01=True (D99-03/D99-10)
+5. `test_direccion_split_cuando_ambos_scores_activos` — score_directo>=2 Y score_rival_value>=1 → direccion="SPLIT"
+6. `test_solo_score_directo_3plus_en_output_destacados` — filtro correcto en picks_score_directo_3plus
+7. `test_output_json_escrito` — archivo reports/meta_signal_*.json generado
+8. `test_scorer_no_modifica_edge_ni_kelly` — REPORTE_SOLO invariante: pick original sin cambios
 
 ---
 

@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "generado": "2026-07-14T15:27:52",
-    "total_nodos": 99,
+    "generado": "2026-07-14T19:39:25",
+    "total_nodos": 100,
     "total_py_files": 65,
     "huerfanos_count": 0,
     "exclusiones_count": 19
@@ -1231,7 +1231,8 @@
         "edge_calculator.py",
         "extraer_historh2h.py",
         "run_daily.py",
-        "scripts/build_player_db.py"
+        "scripts/build_player_db.py",
+        "scripts/odds_aggregator.py"
       ]
     },
     {
@@ -1326,6 +1327,7 @@
       "estado": null,
       "archivos_mencionados": [
         "betplay_combo_builder.py",
+        "close_snapshot_trigger.py",
         "scripts/live_edge_monitor.py",
         "shadow_book.py",
         "tests/test_nodo97_live_edge.py"
@@ -1339,8 +1341,26 @@
       "archivos_mencionados": [
         "edge_calculator.py",
         "pipeline_tracker.py",
+        "rival_value_betslip.py",
+        "run_daily.py",
         "scripts/meta_signal_scorer.py",
         "tests/test_nodo98_meta_signal.py"
+      ]
+    },
+    {
+      "nodo_id": "99",
+      "nodo_archivo": "Nodo-99-Auditoria-Fable-N97-N98.md",
+      "fecha": "2026-07-14",
+      "estado": null,
+      "archivos_mencionados": [
+        "close_snapshot_trigger.py",
+        "live_edge_monitor.py",
+        "meta_signal_scorer.py",
+        "rival_value_betslip.py",
+        "run_daily.py",
+        "scripts/live_edge_monitor.py",
+        "scripts/meta_signal_scorer.py",
+        "shadow_book.py"
       ]
     }
   ],

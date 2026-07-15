@@ -1,6 +1,6 @@
 # CLAUDE.md — Tennis Prediction & Betting Engine
 
-> Last updated: 2026-07-14 (Nodo-96 IRP Sprint5 — 4361 perfiles, 17 tests, H96-01 registrada, 1986 passed)
+> Last updated: 2026-07-14 (Nodo-99 Auditoría Fable N97+N98 — 3 blockers cerrados, H97-01 registrada, specs corregidos. 100 nodos indexados)
 > Spec-Driven Development (SDD). CLAUDE.md es VISTA DERIVADA — los nodos son la fuente de verdad.
 > Leer completo antes de tocar código. Ver política de precedencia §10.
 
@@ -128,7 +128,7 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 
 | Métrica | Valor |
 |---|---|
-| Tests | **1986 passed, 0 failed** (verificado 2026-07-14 — Nodo-96 IRP 17 tests + H96-02 apellido fallback). Nota: fallo intermitente `test_prior_bajo_no_se_ve_afectado` por contaminación estado global entre test files — pasa en aislamiento, NO es bug D87-05 (V1 Nodo-66 confirmada) |
+| Tests | **2002 passed, 0 failed** (verificado 2026-07-14 — Nodo-96 IRP 17 tests + H96-02 apellido fallback). Nota: fallo intermitente `test_prior_bajo_no_se_ve_afectado` por contaminación estado global entre test files — pasa en aislamiento, NO es bug D87-05 (V1 Nodo-66 confirmada) |
 | Calibración | clay GS: p=0.758 (n=31) \| global: wins=2358, losses=1480 (n=3838) \| ⚠️ buckets huérfanos `?`/`?_?` con ~141 resultados de dinero real (24% hit) — ver Nodo-86 §1.1, migración en evaluación: T7 Nodo-66 decide |
 | **Auditoría Fable5** | **Sprints 1-5 EN CURSO.** S1-S4 ✅. S5: IRP ✅ (Nodo-96, 4361 perfiles, 15 tests). Pendiente S5: D90-11 N28F2/tier (gate n≥30), OddsAggregator multi-casa (gate cuentas reales) |
 | Bankroll | $125,000+ |
@@ -152,10 +152,13 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 **Nodos completos:** 51-63, 64-71, 72, 73, 78, 86-95 — detalles en `.spec/01_Nodos/Nodo-XX.md`
 **Nodo-64:** RFI Return-From-Inactivity — **implementado 2026-07-11 (D64-01)**: `rfi_tier`/`rfi_ultra`/`rfi_decay_gap` serializados en edge_report, segmentos en shadow_book --report. H76-01 acumula automático.
 **Nodo-65:** Convergencia Multi-Señal — ANCHOR(edge>0) / VARIABLE(edge≤0). D65-01→D65-07. H77-01/02/03 pre-registradas.
-**Nodos 66-68:** 66=checklist T1→T10 COMPLETOS. 67=integración herramientas **COMPLETO** (I3 governor JSON-first, I7 combo_registry→player_registry+run_daily settle, C1 DataContract v2 6 fronteras 24 tests, C4 brecha hit%_real vs shadow en dashboard). 68=H88-01 Rival Value Flip ✅ acumulando (D68-06 RIVAL VALUE en tabla favoritos con cuota+edge+vig, D64-02 RFI-ULTRA en tabla favoritos).
+**Nodos 66-68:** 66=checklist T1→T10 COMPLETOS. 67=integración herramientas **COMPLETO** (I3 governor JSON-first, I7 combo_registry→player_registry+run_daily settle, C1 DataContract v2 6 fronteras 24 tests, C4 brecha hit%_real vs shadow en dashboard). 68=H88-01 Rival Value Flip — **EVIDENCIA REAL 2026-07-14: 3/3 wins, combinada 41.25x** — n_actual=3, Wilson LB=0.526 > breakeven 0.267. D68-07 `rival_value_betslip.py` operativo (micro-Kelly shrink=5.7%, cap 0.5%). Gate: n=30 (faltan 27).
 **Nodos 86-87 (auditoría):** 86=hallazgos. 87=12 fixes D87-01→D87-11+D64-01 aplicados, 18 tests REGLA-T53.
 **Nodos 89-95 (Fable Sprint1→4):** 89=spec Sistema Inteligencia. 90=Auditoría Fable. 91=Sprint1 CAPA2+ELO_DOM+--fase. 92=evidencia ejecución. 93=Sprint2 PlayerDB+kambi. 94=Sprint3 PlayerIntelligence+PI en trader. 95=Sprint4 PatternRecognition REPORTE_SOLO (4 candidatos, confidence_flag=STRONG señal más robusta n=52).
 **Nodo-96 (Sprint5-IRP):** IRP Individual Return-from-inactivity Profile — REPORTE_SOLO. `scripts/build_irp_profiles.py` → `data/irp_profiles.json` (4361 jugadores, delta_prom=-0.006). `irp_fav`/`irp_rival` serializados en edge_report. PASO 0c en run_daily. 17 tests (15 base + 2 H96-02 apellido fallback). H96-01 pre-registrada. Pendiente: D90-11 N28F2/tier (gate n≥30 CAPA2 settled), OddsAggregator multi-casa.
+**Nodo-97 (Live Edge Monitor):** Spec completo — D97-01→D97-14 (incluye D97-13 shadow_book live + D97-14 Combo Governor). n8n PRIMARIO (cron=fallback). Ventana asimétrica [-30min,+45min] corregida. H97-01 pre-registrada (drift≥15%+edge>5%, n_stop=20). BLOCKER: Kambi LIVE endpoint pendiente verificación DevTools. Tests planificados: 8 en test_nodo97_live_edge.py.
+**Nodo-98 (Meta-Señal Convergencia):** Spec corregido — score_directo (pro-fav, max=5) + score_rival_value (contrario, max=1) SEPARADOS. direccion=FAVORITO/RIVAL/SPLIT. Rival Value delega a rival_value_betslip.py (H88-01, no doble apuesta). PASO 3b asignado en run_daily. ELO dominance referenciado a Nodo-91. CLV pre-partido vs live separados. H98-01 pre-registrada (score≥3, n_stop=30). Tests: 8 en test_nodo98_meta_signal.py.
+**Nodo-99 (Auditoría Fable N97+N98):** 3 blockers críticos + 5 gaps técnicos + 4 conexiones ocultas documentados. D99-01→D99-12. H97-01 pre-registrada. Specs N97/N98 corregidos. Triple Convergencia (C1: STRONG+rival_COLD+drift_live) = alpha oculto más puro. 100 nodos indexados.
 
 ---
 
@@ -171,6 +174,7 @@ generar_tabla_favoritos2.py       ← PASO 3.5: revisión humana
 trader_ev_tenis.py                ← PASO 4: Hedge Fund Layer + CPPI
 combo_confianza_builder.py        ← PASO 4.3: CORE/Satellite/Moonshot
 betplay_combo_builder.py          ← PASO 4.4-4.57: links Betplay
+rival_value_betslip.py            ← D68-07: micro-Kelly rival H88-01 (n=3/30, shrink=5.7%)
 betslip_registrar.py              ← PASO 4.6: registro + loop calibración
 run_daily.py                      ← Orquestador PASO 0→4.3 + settle
 

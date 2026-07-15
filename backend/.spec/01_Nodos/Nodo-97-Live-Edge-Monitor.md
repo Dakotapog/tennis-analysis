@@ -33,6 +33,8 @@ que el pipeline ya tiene todos los ingredientes para explotar:
 | D97-06 | Ventana de monitoreo: desde 30min antes del partido hasta 45min después del inicio (primer set) |
 | D97-07 | No apuesta automática — alerta humana siempre. La decisión final es del trader |
 | D97-08 | Gate: solo picks con `confidence_flag=STRONG` o `markov_favorito=HOT` del edge_report del día |
+| D97-13 | Shadow book para picks live: campo `pick_type='live'` + `cuota_trigger` como cuota de apertura para CLV. CLV_live = (cuota_trigger - cuota_cierre) / cuota_cierre — separado de CLV_pregame en dashboard (D99-02) |
+| D97-14 | Live combo respeta Combo Governor (Nodo-74): si `governor.budget_restante > 0` → stake Kelly live shrink 5%; si budget=0 → stake=$0 + banner "OBSERVACION — budget diario agotado". Live combo es ADICIONAL solo si KGR>0 Y budget>0 (D99-06) |
 
 ---
 
@@ -52,9 +54,12 @@ que el pipeline ya tiene todos los ingredientes para explotar:
 # 4. Escribir snapshot en reports/live_edge_*.json
 ```
 
-### 3.2 Integración n8n (opcional)
+### 3.2 Integración n8n (PRIMARIO — cron independiente = FALLBACK)
 
-Workflow nuevo: cron cada 60s entre 9am-11pm → POST a bridge `:8765/live-check` → ejecuta monitor.
+**D99-11:** n8n es la arquitectura primaria. El workflow de Nodo-73 ya tiene cron, retry logic y bridge :8765 activos.
+Añadir live monitor como nodo adicional en el MISMO workflow n8n:
+cron cada 60s entre 9am-11pm → POST a bridge `:8765/live-check` → ejecuta monitor.
+Fallback: `close_snapshot_trigger.py`-style cron (`*/1 9-23 * * *`) si n8n cae — misma lógica que Nodo-73.
 
 ### 3.3 Telegram alert format
 
@@ -130,7 +135,7 @@ Kelly sugerido: $850 total (shrink 5%)
 2. `test_no_trigger_si_edge_negativo` — cuota bajó pero p_modelo no cubre → trigger=False
 3. `test_no_trigger_si_drift_insuficiente` — cuota bajó solo 5% → trigger=False
 4. `test_solo_picks_strong_hot_monitoreados` — filtro correcto por confidence_flag
-5. `test_ventana_horaria_activa` — pick fuera de ventana ±75min → excluido
+5. `test_ventana_horaria_activa` — ventana ASIMÉTRICA [-30min pre, +45min post]: pick 60min antes → excluido; pick 20min antes → incluido; pick 50min después → excluido; pick 30min después → incluido (D99-05: corregido de ±75min simétrico)
 6. `test_combo_live_construido_con_2_triggers` — 2 picks con trigger → combo 2 patas
 7. `test_output_json_escrito_en_reports` — snapshot escrito en path correcto
 8. `test_edge_live_formula_correcta` — edge_live = p_modelo - 1/cuota_live
