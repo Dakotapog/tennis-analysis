@@ -267,6 +267,8 @@ def main():
         _run(['python3', 'resultados_finales.py'], 'PASO 6 — resultados de ayer')
         _run(['python3', 'shadow_book.py', '--settle', fecha_ayer], 'PASO 10 — shadow book settle')
         _run(['python3', 'combo_registry.py', '--settle', fecha_ayer], 'PASO 10b — combo registry settle (I7 Nodo-67)')
+        _run(['python3', 'scripts/signal_audit.py', '--rebuild'],      'PASO 10c — signal audit trazabilidad (Nodo-101)')
+        _run(['python3', 'scripts/player_consistency.py', '--rebuild'], 'PASO 10d — player consistency perfiles (Nodo-101)')
         print(f"\n  Settle completado para {fecha_ayer}")
         return
 
@@ -317,6 +319,15 @@ def main():
 
         # ── PASO 3.6 — Games signal ───────────────────────────────────────────
         _run(['python3', 'games_signal_calculator.py'], 'PASO 3.6 — Games signal')
+
+        # ── PASO 3.7 — Dual-Book Router X1 (Nodo-111) ────────────────────────
+        # Compara cuotas Kambi vs zita file (FlashScore/Playwright, book2).
+        # Output: tabla routing + ROI extra por line shopping. No bloquea si falla.
+        _zita_book2 = _latest_report(f'{DATA_DIR}/zita_tennis_matches_*.json')
+        _dual_cmd = ['python3', 'scraping/dual_book_client.py', '--compare']
+        if _zita_book2:
+            _dual_cmd += ['--book2', _zita_book2]
+        _run(_dual_cmd, 'PASO 3.7 — Dual-Book Router X1 (Nodo-111)')
 
     if _skip_pasos_4_plus:
         print(f"\n  FASE NOCHE completada. PASOS 4+ se ejecutarán con --fase manana")
@@ -394,6 +405,10 @@ def main():
     _run(['python3', 'combo_confianza_builder.py', '--bankroll', str(args.bankroll)],
          'PASO 4.3 — Combo confianza')
 
+    # ── PASO 4.3b — Favoritos Compuestos (estrategia #13, Nodo-110) ──────────
+    _run(['python3', 'favoritos_combo_builder.py', '--bankroll', str(args.bankroll)],
+         'PASO 4.3b — Favoritos Compuestos #13')
+
     # ── PASO 4.4 — Governor presupuesto M-26-2 (Nodo-74, READ-ONLY reporte) ─
     # No bloquea: imprime WARNING si suma de capas excede session_budget.
     # Criterio de graduación a bloqueo: 10 sesiones reales en logs/combo_governor.log
@@ -426,6 +441,8 @@ def main():
     if rc_res == 0:
         _run(['python3', 'shadow_book.py', '--settle', fecha_ayer], 'PASO 10 — shadow book settle')
         _run(['python3', 'combo_registry.py', '--settle', fecha_ayer], 'PASO 10b — combo registry settle (I7 Nodo-67)')
+        _run(['python3', 'scripts/signal_audit.py', '--rebuild'],      'PASO 10c — signal audit trazabilidad (Nodo-101)')
+        _run(['python3', 'scripts/player_consistency.py', '--rebuild'], 'PASO 10d — player consistency perfiles (Nodo-101)')
 
     # ── DAILY BRIEF ───────────────────────────────────────────────────────
     brief = _build_daily_brief(fecha_hoy, tier_results, was_candidates, fecha_ayer)
