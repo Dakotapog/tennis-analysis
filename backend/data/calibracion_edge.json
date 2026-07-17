@@ -1,24 +1,24 @@
 {
   "global": {
-    "wins": 2426,
-    "losses": 1530
+    "wins": 2468,
+    "losses": 1599
   },
   "por_superficie": {
     "clay": {
-      "wins": 1320,
-      "losses": 732
+      "wins": 1340,
+      "losses": 755
     },
     "unknown": {
       "wins": 46,
-      "losses": 29
+      "losses": 59
     },
     "grass": {
       "wins": 374,
-      "losses": 280
+      "losses": 286
     },
     "hard": {
-      "wins": 663,
-      "losses": 416
+      "wins": 685,
+      "losses": 426
     },
     "real_money_unknown": {
       "wins": 23,
@@ -69,24 +69,24 @@
       "era_v2_start": "2026-06-19"
     },
     "clay_itf": {
-      "wins": 39,
-      "losses": 50,
-      "era_v2_wins": 39,
-      "era_v2_losses": 49,
+      "wins": 48,
+      "losses": 63,
+      "era_v2_wins": 48,
+      "era_v2_losses": 62,
       "era_v2_start": "2026-06-19"
     },
     "hard_itf": {
-      "wins": 32,
+      "wins": 33,
       "losses": 66,
-      "era_v2_wins": 32,
+      "era_v2_wins": 33,
       "era_v2_losses": 66,
       "era_v2_start": "2026-06-19"
     },
     "grass_grand_slam": {
       "wins": 40,
-      "losses": 41,
+      "losses": 47,
       "era_v2_wins": 40,
-      "era_v2_losses": 41,
+      "era_v2_losses": 47,
       "era_v2_start": "2026-06-19"
     },
     "hard_challenger": {
@@ -102,6 +102,13 @@
       "era_v2_wins": 11,
       "era_v2_losses": 34,
       "era_v2_start": "2026-06-19"
+    },
+    "unknown_unknown": {
+      "wins": 0,
+      "losses": 30,
+      "era_v2_wins": 0,
+      "era_v2_losses": 30,
+      "era_v2_start": "2026-06-19"
     }
   },
   "fallback_por_tier": {
@@ -111,7 +118,7 @@
     "challenger": 0.611,
     "itf": 0.5
   },
-  "ultima_actualizacion": "2026-07-13T00:24:44.644452",
+  "ultima_actualizacion": "2026-07-14T08:12:29.338374",
   "_nota_revert_B11": "Revertidos 14W/17L de sesión Jun15-16 (modelo B-11 roto, accuracy=46.9% ruido puro)",
   "_nota_era_v2": "FIX-5: era_v2 acumula datos post-normalización-fix desde 2026-06-19. Usar como prior cuando era_v2_n >= 10."
 }

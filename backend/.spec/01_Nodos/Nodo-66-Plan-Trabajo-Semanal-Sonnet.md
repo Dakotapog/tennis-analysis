@@ -85,6 +85,20 @@ Commit(s) en main · pytest verde con tests T3 · nodos 87/66/67/68 indexados ·
 | T9 settle 07-10 | ✅ DONE | 0→10/19 settled. Técnica: `settle('2026-07-10', resultados_map=...)` inyectando salida de `validar_con_api.py` directamente (fuente: `resultados_finales_20260713_00*.json`). 9 permanentes: ITF M15 Serbia y Challenger sin cobertura Ninja API. |
 | T9 criterio | ✅ CUMPLIDO | 0 días con settled=0 en 07-02→07-11 (verificado 2026-07-13) |
 
+## Addendum — T9-ext: Settle retroactivo 07-13→07-15 (2026-07-16, Sonnet)
+
+> Workflow completo documentado en [[Nodo-106-Retroactive-Settle-Workflow]]
+
+| Tarea | Estado | Detalle |
+|---|---|---|
+| Settle 07-13 vía API | ✅ DONE | 4/12 picks settled. H2H: h2h_..._20260713_083345.json. 8 permanentes ITF |
+| Settle 07-14 vía API | ✅ DONE | 16/37 picks settled. H2H: h2h_..._20260714_073915.json. 21 permanentes ITF |
+| Settle 07-15 vía API | ✅ DONE | 22/35 picks settled. H2H: h2h_..._20260715_225410.json. 2 permanentes ITF |
+| Settle GS/ATP manual | ✅ DONE | +18 picks via WebSearch directo (Wimbledon, Newport, Kitzbuhel, Umag, Roma). `provenance='manual_lookup_usuario'` |
+| Estado final | ✅ | 302 settled / 71 abiertos (57 permanentes ITF minors sin API coverage) |
+
+**Lección registrada:** Para picks GS/ATP/Challenger usar WebSearch directamente — no delegar al usuario. El dato está en cualquier página de resultados de tenis en 5 minutos.
+
 ## Addendum — Ejecución T6 (2026-07-13, Sonnet)
 
 | Tarea | Estado | Detalle |
