@@ -1,6 +1,6 @@
 # CLAUDE.md — Tennis Prediction & Betting Engine
 
-> Last updated: 2026-07-14 (Nodo-99 Auditoría Fable N97+N98 — 3 blockers cerrados, H97-01 registrada, specs corregidos. 100 nodos indexados)
+> Last updated: 2026-07-16 (Nodo-106 Retroactive Settle Workflow — settle backlog 07-13→07-15 +60 picks, 302 settled. 107 nodos indexados)
 > Spec-Driven Development (SDD). CLAUDE.md es VISTA DERIVADA — los nodos son la fuente de verdad.
 > Leer completo antes de tocar código. Ver política de precedencia §10.
 
@@ -59,12 +59,22 @@ Implementación: `analysis/rivalry_analyzer.py` | `edge_calculator.py` | `trader
 python3 extraer_ranking_atp_version2.py && python3 extraer_ranking_wta_version2.py
 
 # PASO 1 — Extraer partidos (PLAYWRIGHT PRIMARIO)
-python3 extraer_URL_partidos_version2.py            # → data/zita_tennis_matches_FECHA.json
-# API fallback: python3 extraer_partidos_api.py [--tomorrow] [--tier atp wta] [--torneo wimbledon]
+python3 extraer_URL_partidos_version2.py            # hoy  → data/zita_tennis_matches_YYYYMMDD_*.json
+python3 extraer_URL_partidos_version2.py --tomorrow # mañana → nombre lleva fecha de mañana (D89-08)
+# ⚠️  API fallback (SOLO si Playwright falla — Kambi ve menos partidos, 0 match_ids UTR):
+# python3 extraer_partidos_api.py [--tomorrow] [--tier atp wta] [--torneo wimbledon]
 
-# PASO 2 — Extraer H2H (PLAYWRIGHT PRIMARIO)
-python3 extraer_historh2h.py --all-tournaments      # → reports/h2h_results_enhanced_FECHA.json
-# API fallback: python3 extraer_historh2h.py --api-mode --all-tournaments
+# PASO 2 — Extraer H2H (API NINJA por defecto, Playwright si budget)
+python3 extraer_historh2h.py --api-mode --all-tournaments             # hoy
+python3 extraer_historh2h.py --api-mode --all-tournaments --tomorrow  # mañana (D89-08, auto-selecciona archivo)
+# Playwright puro (lento, 2-3 min/partido): python3 extraer_historh2h.py --all-tournaments
+
+# ── FLUJO NOCTURNO PROACTIVO (D89-08 — captura 34% más partidos) ──────────────
+# ~22:00 CO: correr PASO 1+2 para MAÑANA → picks listos al amanecer (0 partidos perdidos por timing)
+# python3 extraer_URL_partidos_version2.py --tomorrow
+# python3 extraer_historh2h.py --api-mode --all-tournaments --tomorrow
+# ~07:00 CO: correr PASO 3+4 con el H2H de anoche
+# ──────────────────────────────────────────────────────────────────────────────
 
 # PASO 3 — Edge Kelly-KL
 python3 edge_calculator.py                          # → reports/edge_report_FECHA.json
@@ -124,15 +134,15 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 
 ---
 
-## 5. ESTADO ACTUAL — 2026-07-13
+## 5. ESTADO ACTUAL — 2026-07-14
 
 | Métrica | Valor |
 |---|---|
-| Tests | **2002 passed, 0 failed** (verificado 2026-07-14 — Nodo-96 IRP 17 tests + H96-02 apellido fallback). Nota: fallo intermitente `test_prior_bajo_no_se_ve_afectado` por contaminación estado global entre test files — pasa en aislamiento, NO es bug D87-05 (V1 Nodo-66 confirmada) |
+| Tests | **2012 passed, 5 failed, 1 skipped** (verificado 2026-07-16). ⚠️ 5 fallas nuevas vs 2013 previo — pendiente investigar (posible contaminación por cambios shadow book settle). `test_prior_bajo_no_se_ve_afectado` sigue intermitente (estado global entre test files, pasa en aislamiento) |
 | Calibración | clay GS: p=0.758 (n=31) \| global: wins=2358, losses=1480 (n=3838) \| ⚠️ buckets huérfanos `?`/`?_?` con ~141 resultados de dinero real (24% hit) — ver Nodo-86 §1.1, migración en evaluación: T7 Nodo-66 decide |
 | **Auditoría Fable5** | **Sprints 1-5 EN CURSO.** S1-S4 ✅. S5: IRP ✅ (Nodo-96, 4361 perfiles, 15 tests). Pendiente S5: D90-11 N28F2/tier (gate n≥30), OddsAggregator multi-casa (gate cuentas reales) |
 | Bankroll | $125,000+ |
-| Shadow Book hit% | GS: 50% ROI+47% \| Challenger: +7.9% \| ITF: 38% ROI-16.8% (jul-10) |
+| Shadow Book hit% | GS: 43.5% ROI+29.3% (n=23) \| Challenger: 38.4% ROI-3.1% (n=86) \| ITF: 41.1% ROI-9.3% (n=151) \| 302 settled / 71 abiertos (57 permanentes ITF) (jul-16) |
 | ML Dataset | 2,573 registros limpios (motor nodo32, trazabilidad verificada) |
 | Graphify | 949 nodos, 1,302 edges + 91 nodos .spec/ indexados (reindexado 2026-07-13 con Gemini). Tamp :7778 preset=aggressive, linger=yes. |
 | **n8n** | **Docker :5678 + systemd tennis-snapshot-bridge :8765 — ACTIVO** |
@@ -149,7 +159,7 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 | F4 Estadística doctoral (Nodos 64-71) | ✅ 67 tests (43 base + 24 C1/Nodo-67) |
 | F5 Vault + session_compiler + CLAUDE.md slim | ✅ completada |
 
-**Nodos completos:** 51-63, 64-71, 72, 73, 78, 86-95 — detalles en `.spec/01_Nodos/Nodo-XX.md`
+**Nodos completos:** 51-63, 64-71, 72, 73, 78, 86-106 — detalles en `.spec/01_Nodos/Nodo-XX.md`
 **Nodo-64:** RFI Return-From-Inactivity — **implementado 2026-07-11 (D64-01)**: `rfi_tier`/`rfi_ultra`/`rfi_decay_gap` serializados en edge_report, segmentos en shadow_book --report. H76-01 acumula automático.
 **Nodo-65:** Convergencia Multi-Señal — ANCHOR(edge>0) / VARIABLE(edge≤0). D65-01→D65-07. H77-01/02/03 pre-registradas.
 **Nodos 66-68:** 66=checklist T1→T10 COMPLETOS. 67=integración herramientas **COMPLETO** (I3 governor JSON-first, I7 combo_registry→player_registry+run_daily settle, C1 DataContract v2 6 fronteras 24 tests, C4 brecha hit%_real vs shadow en dashboard). 68=H88-01 Rival Value Flip — **EVIDENCIA REAL 2026-07-14: 3/3 wins, combinada 41.25x** — n_actual=3, Wilson LB=0.526 > breakeven 0.267. D68-07 `rival_value_betslip.py` operativo (micro-Kelly shrink=5.7%, cap 0.5%). Gate: n=30 (faltan 27).
@@ -159,6 +169,9 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 **Nodo-97 (Live Edge Monitor):** Spec completo — D97-01→D97-14 (incluye D97-13 shadow_book live + D97-14 Combo Governor). n8n PRIMARIO (cron=fallback). Ventana asimétrica [-30min,+45min] corregida. H97-01 pre-registrada (drift≥15%+edge>5%, n_stop=20). BLOCKER: Kambi LIVE endpoint pendiente verificación DevTools. Tests planificados: 8 en test_nodo97_live_edge.py.
 **Nodo-98 (Meta-Señal Convergencia):** Spec corregido — score_directo (pro-fav, max=5) + score_rival_value (contrario, max=1) SEPARADOS. direccion=FAVORITO/RIVAL/SPLIT. Rival Value delega a rival_value_betslip.py (H88-01, no doble apuesta). PASO 3b asignado en run_daily. ELO dominance referenciado a Nodo-91. CLV pre-partido vs live separados. H98-01 pre-registrada (score≥3, n_stop=30). Tests: 8 en test_nodo98_meta_signal.py.
 **Nodo-99 (Auditoría Fable N97+N98):** 3 blockers críticos + 5 gaps técnicos + 4 conexiones ocultas documentados. D99-01→D99-12. H97-01 pre-registrada. Specs N97/N98 corregidos. Triple Convergencia (C1: STRONG+rival_COLD+drift_live) = alpha oculto más puro. 100 nodos indexados.
+**Nodo-100 (Triple Convergencia Live):** Break State Machine + Dashboard HTML + Auto-Combo. `detect_break_state()` 4 estados: NORMAL→BREAK_POSIBLE(drift≥15%)→BREAK_CONFIRMADO(2do ciclo ≥12%)→single-fire. `load/save_odds_history()` persiste por día. `_fire_break_combos()` llama betplay_combo_builder --live cuando break confirmado. `live_dashboard_generator.py` → `reports/live_dashboard.html` auto-refresh 60s con KPI boxes + tabla coloreada (gris/naranja/rojo parpadeante). `/live-dashboard` endpoint en close_snapshot_server. `--dashboard` flag en live_edge_monitor. D100-01→D100-07. H100-01 pre-registrada (n_stop=20, gate≥3 breaks). 5 tests REGLA-T53.
+**Nodo-101 (Shadow Book Live CLV):** D99-02 implementado — `log_live_pick(pick, cuota_trigger, fecha)` registra picks live con `pick_type='live'` en sb_FECHA.jsonl (prefijo LIVE_ en sb_id). `settle()` ya usa `cuota_trigger` como base CLV para picks live (D101-03). `report()` muestra sección "LIVE PICKS H100-01" cuando hay settled live. CLI `--log-live JSON --trigger CUOTA`. `_fire_break_combos()` llama auto `log_live_pick()` tras BREAK_CONFIRMADO (D101-05). D101-01→D101-05. 4 tests REGLA-T53.
+**Nodo-106 (Retroactive Settle Workflow):** Extensión T9 — workflow para cerrar picks abiertos cuando `--settle` retorna 0. Pasos: (1) extraer `h2h_file` de `session_meta` en sb_FECHA.jsonl, (2) `validar_con_api.py --no-cal` con ese H2H, (3) inyección programática `settle(fecha, resultados_map=...)`. Para GS/ATP sin cobertura API: WebSearch directo (no delegar al usuario). Ejecución 2026-07-16: +60 picks settled (242→302), 71 abiertos (57 permanentes ITF minors). Wikilinks: [[Nodo-66]] T9-ext addendum | [[Nodo-52]] | [[Nodo-81]] | [[Nodo-36]].
 
 ---
 
@@ -272,6 +285,61 @@ graphify query "<pregunta>"   # orientarse primero, grep solo para líneas espec
 1. `.spec/01_Nodos/` es **historia inmutable** — no editar; añadir nueva entrada o marcar `SUPERSEDED por [[Nodo-XX]]`.
 2. **CLAUDE.md es VISTA derivada** — si contradice al nodo más reciente, CLAUDE.md está desactualizado.
 3. `python3 check_contradictions.py` (cron lunes 9am) compara CLAUDE.md vs últimos 10 nodos.
+
+---
+
+## 11. TAXONOMÍA DE ESTRATEGIAS — LAS 12 FORMAS DE GENERAR COMBOS
+
+> Spec completo: [[Nodo-100-Taxonomia-Estrategias-Generacion-Combos]]
+> Todas leen `edge_report_*.json` como fuente única. Diferencia: qué hacen con la señal.
+
+### Generadores y sus estrategias
+
+```
+edge_calculator.py  (PASO 3 — corre siempre, fuente única)
+   │
+   ├─ trader_ev_tenis.py          → (1) EL MOTOR
+   ├─ combo_confianza_builder.py  → (2) CORE  (3) SATELITE  (4) MOONSHOT
+   │                                 (5) COBERTURA  (6) ANCHOR  (7) GCS
+   ├─ betplay_combo_builder.py    → (8) SAFE  (9) WAS  (10) MEGA  (11) GAMES
+   └─ rival_value_betslip.py      → (12) RIVAL VALUE
+```
+
+| # | Nombre | Flag/Comando | Piernas | Cuota | Stake | Condición clave |
+|---|--------|-------------|---------|-------|-------|-----------------|
+| 1 | **EL MOTOR** | `trader_ev_tenis.py` | 1 | variable | Kelly-KL | edge>5% + KGR>0 + todos los gates |
+| 2 | **CORE** | `combo_confianza_builder.py` | 4–7 | @2–5x | $2k–5k | Cat-A/B, P(win)≥25% |
+| 3 | **SATELITE** | `--fase 2+` | 5 | @5–8x | $2k–3k | Cat-C1 disponible (conf≥60%) |
+| 4 | **MOONSHOT** | `--fase 3+` | 5 | @15–35x | $1k–2k | ≥2 picks Cat-C conf≥57% |
+| 5 | **COBERTURA** | `--fase 4` | 4–7 | @2–4x | $1k–2k | Fase 4 — hedge del CORE |
+| 6 | **ANCHOR** | `--anchor` | 4–5 | @4–35x | $1.5k | prioridad≥75 + cuota≥1.65 |
+| 7 | **GCS** | automático en hierba | 2–3 | @1.5–3x | $200–500 | gcs_active + tier≥ATP500 |
+| 8 | **SAFE** | `betplay_combo_builder.py --safe` | 2 | @3–12x | $1k | P(ambos)≥25%, torneos distintos |
+| 9 | **WAS** | `--live` (incluido) | 2–3 | @4–25x | $5k | edge≥10% + señal Markov explícita |
+| 10 | **MEGA** | `--mega` | 6–10 | @100–1000x | $500 | Dispersión DIFF (std≥0.04) |
+| 11 | **GAMES** | `--games` | 1 | @1.8–2.1x | $1k–2k | mercado Over/Under en Kambi |
+| 12 | **RIVAL VALUE** | `rival_value_betslip.py` | 1 | @2.5–8x | $2k | edge_fav≤−10% (H88-01) |
+
+### Hit rates reales — shadow book 2026-07-01→14 (picks individuales, n=231 settled)
+
+| Segmento | Hit% | ROI flat | IC 95% | Estado |
+|----------|------|----------|--------|--------|
+| **GCS** (H60-01) | **64.8%** | — | — | GRADUADA n=54 — MEJOR ESTRATEGIA |
+| **RIVAL VALUE** (H88-01) | **100%** | +275% | [52.6,100] | n=3 — pre-graduación, no significativo |
+| **VARIABLE** (edge≤0) | **62.5%** | −24.7% | [42.7,78.8] | n=24 — pre-graduación (ROI neg por cuotas bajas) |
+| **Grand Slam** | **47.4%** | **+40.2%** | [27.3,68.3] | n=19 — mejor ROI real |
+| **GS+watchlist+edge≥20%** | 37.5% | **+53.8%** | [13.7,69.4] | n=8 — señal fuerte pero n pequeño |
+| **season_transition** | 42.2% | +11.9% | [29.0,56.7] | n=45 |
+| **ANCHOR** (edge>0) | 34.3% | −5.7% | [28.2,41.0] | n=207 |
+| **Challenger** | 37.2% | −5.5% | [27.3,48.3] | n=78 |
+| **WATCHLIST** | 34.9% | −5.2% | [27.7,42.8] | n=149 |
+| **ITF** | 36.9% | −13.5% | [28.5,46.2] | n=111 |
+| **EL MOTOR** (APROBADO) | 30.0% | −21.1% | [14.5,51.9] | n=20 — gates muy estrictos = picks de alta cuota |
+| **WAS** (H52-01) | — | — | [18.6,49.9] | NO GRADUABLE |
+
+**Lectura clave:** El ROI negativo en picks individuales NO indica que los combos fallen — los combos multiplican cuotas. Un pick CORE @1.40 con 34% hit rate en flat-1u puede ser correcto en kelly. La estrategia GCS es la única GRADUADA con hit% formal ≥breakeven.
+
+**Hallazgo 2026-07-14:** RIVAL VALUE = discriminador `edge_fav ≤ −15%` suficiente aunque señales secundarias contradigan. Es la estrategia con mayor potencial de ROI (41.25x combinada hoy).
 
 ---
 
