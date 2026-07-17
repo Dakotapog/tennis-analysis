@@ -142,7 +142,7 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 
 | Métrica | Valor |
 |---|---|
-| Tests | **~2060 passed, 1 failed, 1 skipped** (estimado 2026-07-17 — suite completa en curso). `test_nodo51_f3_02_budget_processes_itf_before_grand_slam` pre-existente. `test_prior_bajo_no_se_ve_afectado` intermitente (estado global, pasa en aislamiento). |
+| Tests | **2118 passed, 1 failed** (verificado 2026-07-17). `test_nodo51_f3_02_budget_processes_itf_before_grand_slam` pre-existente. `test_prior_bajo_no_se_ve_afectado` intermitente (estado global, pasa en aislamiento). +106 tests nuevos vs sesión anterior (Nodos 107-113). |
 | Calibración | clay GS: p=0.758 (n=31) \| global: wins=2358, losses=1480 (n=3838) \| ⚠️ buckets huérfanos `?`/`?_?` con ~141 resultados de dinero real (24% hit) — ver Nodo-86 §1.1, migración en evaluación: T7 Nodo-66 decide |
 | **Auditoría Fable5** | **Sprints 1-5 EN CURSO.** S1-S4 ✅. S5: IRP ✅ (Nodo-96, 4361 perfiles, 15 tests). Pendiente S5: D90-11 N28F2/tier (gate n≥30), OddsAggregator multi-casa (gate cuentas reales) |
 | Bankroll | $125,000+ |
