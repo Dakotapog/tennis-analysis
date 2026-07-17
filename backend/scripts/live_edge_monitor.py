@@ -43,9 +43,10 @@ _TG_CHAT  = "8520949513"
 _TG_URL   = f"https://api.telegram.org/bot{_TG_TOKEN}/sendMessage"
 
 # Output Desktop (mismo patrón betplay_combo_builder)
-_DESKTOP   = Path("/mnt/c/users/hogar/Desktop")
-_COMBOS    = _DESKTOP / "combos"
-_CHROME    = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+_DESKTOP       = Path("/mnt/c/users/hogar/Desktop")
+_COMBOS        = _DESKTOP / "combos"
+_CHROME        = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+_REDIRECT_BASE = "https://dakotapog.github.io/tennis-analysis/bp/?ids="
 
 
 # ─── KambiLiveClient adapter ─────────────────────────────────────────────────
@@ -97,6 +98,124 @@ class KambiLiveClientFallback:
                     odds_raw = oc.get("odds")
                     if odds_raw:
                         return round(odds_raw / 1000, 2)  # Kambi: odds en milésimas
+        return None
+
+
+class KambiLiveClientReal:
+    """
+    D99-01 RESUELTO: endpoint dedicado liveEvents.json (eventos en curso Betplay).
+
+    Cadena de lookup:
+    1. /liveEvents.json?sport=tennis — solo partidos en vivo (Kambi LIVE real)
+    2. /listView/tennis.json STARTED — fallback: pre-game offering con filtro state
+    KambiLiveClientFallback queda como tercer nivel si este falla completamente.
+
+    D97-15: operativo desde 2026-07-14.
+    """
+    _BASE    = "https://us.offering-api.kambicdn.com/offering/v2018/betplay"
+    _PARAMS  = "lang=es_CO&market=CO&client_id=2&channel_id=1"
+    _HEADERS = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+        "Referer":    "https://betplay.com.co/",
+        "Accept":     "application/json",
+    }
+
+    def __init__(self):
+        # Cache de datos de score/saque por jugador (jugador_norm → dict)
+        self._score_cache: dict = {}
+
+    def get_score_data(self, jugador: str) -> dict:
+        """Retorna {server:'FAV'|'OPP'|None, fav_games:int, opp_games:int} del último fetch."""
+        return self._score_cache.get(jugador.lower().strip(), {})
+
+    def get_live_odds(self, jugador: str) -> Optional[float]:
+        """Retorna cuota live del jugador o None si no encontrado."""
+        jugador_norm = jugador.lower().strip()
+
+        # 1. liveEvents.json — eventos Kambi en curso (endpoint dedicado live)
+        odds = self._fetch_live_events(jugador_norm)
+        if odds:
+            return odds
+
+        # 2. listView STARTED — fallback pre-game con filtro state=STARTED
+        return self._fetch_listview_started(jugador_norm)
+
+    def _fetch_live_events(self, jugador_norm: str) -> Optional[float]:
+        url = f"{self._BASE}/liveEvents.json?{self._PARAMS}&sport=tennis"
+        try:
+            req = urllib.request.Request(url, headers=self._HEADERS)
+            with urllib.request.urlopen(req, timeout=8) as resp:
+                data = json.loads(resp.read())
+            # Kambi puede devolver "liveEvents" o "events" según versión
+            events = data.get("liveEvents") or data.get("events") or []
+            return self._search_events(events, jugador_norm)
+        except Exception:
+            return None
+
+    def _fetch_listview_started(self, jugador_norm: str) -> Optional[float]:
+        url = f"{self._BASE}/listView/tennis.json?{self._PARAMS}"
+        try:
+            req = urllib.request.Request(url, headers=self._HEADERS)
+            with urllib.request.urlopen(req, timeout=8) as resp:
+                data = json.loads(resp.read())
+            events = [e for e in (data.get("events") or [])
+                      if e.get("event", {}).get("state") == "STARTED"]
+            return self._search_events(events, jugador_norm)
+        except Exception:
+            return None
+
+    def _search_events(self, events: list, jugador_norm: str) -> Optional[float]:
+        for ev_wrapper in events:
+            ev     = ev_wrapper.get("event", {}) if isinstance(ev_wrapper, dict) else {}
+            offers = ev_wrapper.get("betOffers", []) if isinstance(ev_wrapper, dict) else []
+            if not offers:
+                continue
+            home = ev.get("homeName", "").lower()
+            away = ev.get("awayName", "").lower()
+
+            # Determinar si nuestro jugador es home o away
+            is_home = bool(jugador_norm in home or (home and home in jugador_norm))
+
+            # ── Extraer score y saque de liveData ──────────────────────────────
+            live_data = ev.get("liveData") or {}
+
+            # Quién saca: Kambi usa "currentServer" o "server" con valores HOME/AWAY
+            server_raw = (live_data.get("currentServer") or
+                          live_data.get("server") or "").upper()
+            if server_raw in ("HOME", "PLAYER1", "1"):
+                server = "FAV" if is_home else "OPP"
+            elif server_raw in ("AWAY", "PLAYER2", "2"):
+                server = "FAV" if not is_home else "OPP"
+            else:
+                server = None
+
+            # Score del set actual (Kambi puede usar dict o string)
+            score_raw = live_data.get("score") or {}
+            if isinstance(score_raw, dict):
+                home_g = int(score_raw.get("home") or score_raw.get("homeScore") or 0)
+                away_g = int(score_raw.get("away") or score_raw.get("awayScore") or 0)
+            else:
+                # Intentar parsear string "3:2" o "3-2"
+                import re as _re
+                m = _re.search(r"(\d+)[:\-](\d+)", str(score_raw))
+                home_g, away_g = (int(m.group(1)), int(m.group(2))) if m else (0, 0)
+
+            # Guardar en cache (por jugador_norm)
+            self._score_cache[jugador_norm] = {
+                "server":    server,
+                "fav_games": home_g if is_home else away_g,
+                "opp_games": away_g if is_home else home_g,
+            }
+            # ─────────────────────────────────────────────────────────────────
+
+            for oc in offers[0].get("outcomes", []):
+                oc_type = oc.get("type", "")
+                nombre  = (home if oc_type == "OT_ONE" else
+                           away if oc_type == "OT_TWO" else "").lower()
+                if jugador_norm in nombre or nombre in jugador_norm:
+                    odds_raw = oc.get("odds")
+                    if odds_raw:
+                        return round(odds_raw / 1000, 2)
         return None
 
 
@@ -162,7 +281,9 @@ def get_p_modelo(pick: dict) -> float:
 
 def filtrar_picks_monitoreados(picks: list[dict]) -> list[dict]:
     """
-    D97-08: solo picks STRONG o HOT del edge_report.
+    D97-08: picks STRONG/HOT del edge_report.
+    D97-08b: también incluye picks ATP500/GS/ATP1000/Challenger — tiers que
+             Kambi cubre en vivo (ITF no aparece en STARTED; estos sí).
     Excluye picks con status NO_DATA o phantom_data.
     """
     result = []
@@ -171,12 +292,37 @@ def filtrar_picks_monitoreados(picks: list[dict]) -> list[dict]:
             continue
         flag = p.get('confidence_flag', '')
         markov = p.get('markov_favorito', '')
-        if flag == 'STRONG' or markov == 'HOT':
+        tier = p.get('tier', '')
+        kambi_visible = tier in ('atp500', 'gs', 'atp1000', 'challenger')
+        if flag == 'STRONG' or markov == 'HOT' or kambi_visible:
             result.append(p)
     return result
 
 
 # ─── Leer edge_report del día ────────────────────────────────────────────────
+
+def load_betslip_index(reports_dir: str = 'reports') -> dict:
+    """
+    Mergea TODOS los betslip_index del día → mapa jugador_norm → betplay_url.
+    Usa todos los archivos del día para no perder picks entre runs de combo_confianza
+    y betplay_combo_builder (cada uno genera su propio index).
+    """
+    today = datetime.now().strftime('%Y%m%d')
+    files = sorted(glob.glob(os.path.join(reports_dir, f'betslip_index_{today}_*.json')))
+    result = {}
+    for f in files:
+        try:
+            with open(f, encoding='utf-8') as fp:
+                data = json.load(fp)
+            index = data.get('index', {})
+            for oid, info in index.items():
+                jugador = info.get('jugador', '').lower().strip()
+                if jugador and jugador not in result:
+                    result[jugador] = f"{_REDIRECT_BASE}{oid}"
+        except Exception:
+            continue
+    return result
+
 
 def load_picks_del_dia(reports_dir: str = 'reports') -> list[dict]:
     """Lee el edge_report más reciente y retorna picks STRONG/HOT."""
@@ -210,16 +356,30 @@ def _generar_html_bat_live(triggers: list[dict], timestamp: str) -> Optional[str
     html_path = _COMBOS / html_name
     bat_path  = _DESKTOP / bat_name
 
-    lines = ["<html><head><meta charset='utf-8'><title>LIVE EDGE</title></head><body>"]
-    lines.append("<h2>LIVE EDGE DETECTADO</h2><ul>")
+    lines = [
+        "<html><head><meta charset='utf-8'><title>LIVE EDGE</title>",
+        "<style>body{font-family:monospace;background:#1a1a2e;color:#e0e0e0;padding:20px;}",
+        "h2{color:#dc3545;} .pick{background:#16213e;border-left:4px solid #dc3545;",
+        "padding:12px 16px;margin:10px 0;border-radius:4px;}",
+        ".btn{display:inline-block;background:#00d4ff;color:#1a1a2e;padding:10px 24px;",
+        "font-size:15px;font-weight:bold;border-radius:6px;text-decoration:none;margin-top:8px;}",
+        ".btn:hover{background:#00b8d9;} .odds{color:#fd7e14;font-size:18px;font-weight:bold;}",
+        "</style></head><body>",
+        "<h2>🔴 LIVE EDGE DETECTADO</h2>",
+    ]
     for t in triggers:
+        url = t.get('betplay_url', '')
+        btn_html = (f'<a class="btn" href="{url}" target="_blank">APOSTAR EN BETPLAY</a>'
+                    if url else '<span style="color:#888">Sin link Betplay</span>')
         lines.append(
-            f"<li><b>{t['partido']}</b> | "
-            f"Pre: {t['cuota_pre']:.2f} → Live: {t['cuota_live']:.2f} "
-            f"(drift {t['drift_pct']:+.1f}%) | "
-            f"edge_live: {t['edge_live']:+.3f}</li>"
+            f"<div class='pick'>"
+            f"<b>{t['partido']}</b><br>"
+            f"Pre: {t['cuota_pre']:.2f} → <span class='odds'>Live: {t['cuota_live']:.2f}</span> "
+            f"(drift <b>{t['drift_pct']:+.1f}%</b>) | edge_live: {t['edge_live']:+.3f}<br>"
+            f"{btn_html}"
+            f"</div>"
         )
-    lines.append("</ul></body></html>")
+    lines.append("</body></html>")
     html_path.write_text("\n".join(lines), encoding="utf-8")
 
     html_win = f"C:\\users\\hogar\\Desktop\\combos\\{html_name}"
@@ -285,11 +445,15 @@ def run(
         telegram:        True = enviar Telegram cuando TRIGGER
     """
     if cliente is None:
-        cliente = KambiLiveClientFallback()
+        cliente = KambiLiveClientReal()  # D97-15: usa liveEvents.json (D99-01 resuelto)
 
     ahora = ahora or datetime.now()
     timestamp = ahora.strftime('%Y%m%d_%H%M%S')
 
+    # Break state machine — cargar history del día (D100-06)
+    history = load_odds_history(reports_dir)
+
+    betslip_map       = load_betslip_index(reports_dir)
     picks_monitoreados = load_picks_del_dia(reports_dir)
     triggers = []
     picks_chequeados = []
@@ -312,7 +476,7 @@ def run(
             except (ValueError, TypeError, OSError):
                 pass  # sin fecha → no filtrar por ventana
 
-        # Fetch cuota live
+        # Fetch cuota live + datos de score/saque
         cuota_live = cliente.get_live_odds(favorito)
         if cuota_live is None or cuota_live <= 0:
             picks_chequeados.append({'partido': pick.get('partido', favorito), 'cuota_live': None})
@@ -322,6 +486,18 @@ def run(
         edge_live  = calc_edge_live(p_modelo, cuota_live)
         es_trig    = es_trigger(drift, edge_live)
 
+        # Score data (server + games) — disponible si KambiLiveClientReal resolvió saque
+        score_data = {}
+        if hasattr(cliente, 'get_score_data'):
+            score_data = cliente.get_score_data(favorito)
+
+        partido_key = pick.get('partido', favorito).replace(' ', '_')
+        break_state = detect_break_state(partido_key, drift, cuota_live, history,
+                                         score_data=score_data or None)
+        # Marcar si ya estaba fired (para single-fire logic)
+        _fired_prev = history.get(partido_key, {}).get('fired', False)
+
+        betplay_url = betslip_map.get(favorito.lower().strip(), '')
         check_info = {
             'partido':      pick.get('partido', favorito),
             'favorito':     favorito,
@@ -332,6 +508,10 @@ def run(
             'edge_live':    edge_live,
             'trigger':      es_trig,
             'senales':      _senales_activas(pick),
+            'break_state':  break_state,
+            '_fired_prev':  _fired_prev,
+            'betplay_url':  betplay_url,
+            'server':       score_data.get('server', '') if score_data else '',
         }
         picks_chequeados.append(check_info)
 
@@ -353,14 +533,33 @@ def run(
         elif telegram and kgr_negativo:
             alerta_enviada = _enviar_telegram_live(triggers, kgr_negativo=True)
 
+    # ── Break confirmados → auto-combo (D100-04) ─────────────────────────────
+    breaks_confirmados = [c for c in picks_chequeados
+                          if c.get('break_state') == 'BREAK_CONFIRMADO']
+    combo_break_output = None
+    if breaks_confirmados and stake_permitido and not observe_only:
+        combo_break_output = _fire_break_combos(breaks_confirmados, reports_dir)
+        # Marcar fired=True en history para los partidos disparados
+        for c in breaks_confirmados:
+            if not c.get('_fired_prev'):
+                pk = c['partido'].replace(' ', '_')
+                if pk in history:
+                    history[pk]['fired'] = True
+
+    # Persistir history actualizado
+    save_odds_history(history, reports_dir)
+
     # ── Snapshot JSON (D97-05) ────────────────────────────────────────────────
     snapshot = {
         'ts':                 ahora.isoformat(),
-        'picks_monitoreados': len(picks_monitoreados),
-        'picks_chequeados':   len(picks_chequeados),
+        'picks_monitoreados':      len(picks_monitoreados),
+        'picks_chequeados':        len(picks_chequeados),
+        'picks_chequeados_data':   picks_chequeados,   # lista completa para dashboard
         'triggers':           triggers,
         'n_triggers':         len(triggers),
+        'break_confirmados':  len(breaks_confirmados),
         'combo_sugerido':     {'patas': len(triggers)} if triggers else None,
+        'combo_break_output': combo_break_output,
         'kgr_negativo':       kgr_negativo,
         'budget_agotado':     budget_agotado,
         'stake_permitido':    stake_permitido,
@@ -379,18 +578,264 @@ def run(
 
 
 def _senales_activas(pick: dict) -> list[str]:
-    """Extrae etiquetas de señales activas del pick para el alert."""
+    """
+    Extrae TODAS las señales que justifican el pick — visibles en dashboard/panel.
+    Orden: confianza → markov → superficie → score_directo → ELO → RFI → IRP → GCS
+    """
     s = []
-    if pick.get('confidence_flag') == 'STRONG':
+    # Confianza base
+    flag = pick.get('confidence_flag', '')
+    if flag == 'STRONG':
         s.append('STRONG')
-    if pick.get('markov_favorito') == 'HOT':
+    elif flag == 'MOD':
+        s.append('MOD')
+
+    # Markov (estado de forma)
+    markov = pick.get('markov_favorito', '')
+    if markov == 'HOT':
         s.append('HOT')
-    if (pick.get('rfi_tier') or 0) >= 1:
-        s.append(f"RFI_tier{pick.get('rfi_tier')}")
+    elif markov == 'COLD':
+        s.append('COLD_fav')   # favorito frío — señal débil
+    markov_r = pick.get('markov_rival', '')
+    if markov_r == 'COLD':
+        s.append('rival_COLD')  # rival frío — alpha (WAS/ANCHOR)
+
+    # Superficie especialización
+    surf = pick.get('surface_specialization') or {}
+    surf_score = surf.get('raw_score') or surf.get('score') or 0.0
+    if surf_score >= 0.65:
+        s.append(f'SURF{surf_score:.0%}')
+    elif surf_score >= 0.55:
+        s.append('SURF_ok')
+
+    # Score directo convergencia (Nodo-98)
+    sd = pick.get('score_directo') or 0
+    if sd >= 4:
+        s.append(f'SD{sd}★')
+    elif sd >= 3:
+        s.append(f'SD{sd}')
+
+    # ELO dominance
+    elo_d = pick.get('elo_dominance', '')
+    if elo_d in ('STRONG', 'DOMINANT'):
+        s.append('ELO_DOM')
+
+    # Edge bruto — formato consistente con signal_audit (EDGE_HIGH/EDGE_MED)
+    edge = pick.get('edge') or 0.0
+    if edge >= 0.20:
+        s.append('EDGE_HIGH')
+    elif edge >= 0.10:
+        s.append('EDGE_MED')
+
+    # RFI (Return from Inactivity)
+    rfi = pick.get('rfi_tier') or 0
+    if rfi >= 2:
+        s.append(f'RFI_T{rfi}')
+    elif rfi == 1:
+        s.append('RFI')
+
+    # IRP rival (Individual Return Profile negativo del rival)
     irp = pick.get('irp_rival') or {}
-    if (irp.get('delta_return') or 0.0) < -0.10:
-        s.append('IRP_negativo')
+    delta = irp.get('delta_return') or 0.0
+    if delta < -0.15:
+        s.append('IRP_rival--')
+    elif delta < -0.10:
+        s.append('IRP_rival-')
+
+    # GCS (Grass Court Specialist)
+    if pick.get('gcs_active'):
+        s.append('GCS')
+
+    # Contribution% al puntaje (generar_tabla_favoritos2.py → rivalry_analyzer)
+    contrib = float(pick.get('contribution') or 0.0)
+    if contrib >= 0.70:
+        s.append('CONTRIB_HIGH')
+    elif contrib >= 0.50:
+        s.append('CONTRIB_MED')
+
+    # Señales especiales del analyzer (special_signals + reasoning)
+    special_raw = list(pick.get('special_signals') or [])
+    for reason in (pick.get('reasoning') or []):
+        special_raw.append(str(reason))
+    for raw in special_raw:
+        ru = raw.upper()
+        if 'CAMPEON' in ru and 'SUPERFICIE' in ru and 'CAMPEON_SUPERF' not in s:
+            s.append('CAMPEON_SUPERF')
+        if 'CAMPEON DE TORNEO' in ru and 'CAMPEON_TORNEO' not in s:
+            s.append('CAMPEON_TORNEO')
+        if 'AJUSTE DINAMICO' in ru and 'AJUSTE_DIN' not in s:
+            s.append('AJUSTE_DIN')
+
     return s
+
+
+# ─── Break State Machine (D100-01 → D100-07) ─────────────────────────────────
+
+_BREAK_POSIBLE_DRIFT    = 0.15   # drift >= 15% → BREAK_POSIBLE
+_BREAK_CONFIRM_DRIFT    = 0.12   # drift >= 12% en ciclo siguiente → CONFIRMADO
+_BREAK_RECOVERY_DRIFT   = 0.10   # drift < 10% → recovery → NORMAL
+
+
+def _history_path(reports_dir: str) -> str:
+    today = datetime.now().strftime('%Y%m%d')
+    return os.path.join(reports_dir, f'live_odds_history_{today}.json')
+
+
+def load_odds_history(reports_dir: str = 'reports') -> dict:
+    """Carga el historial de odds del día. Retorna {} si no existe."""
+    path = _history_path(reports_dir)
+    if not os.path.exists(path):
+        return {}
+    try:
+        with open(path, encoding='utf-8') as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
+def save_odds_history(history: dict, reports_dir: str = 'reports') -> None:
+    """Persiste el historial de odds del día."""
+    path = _history_path(reports_dir)
+    try:
+        with open(path, 'w', encoding='utf-8') as f:
+            json.dump(history, f, indent=2, ensure_ascii=False)
+    except Exception:
+        pass
+
+
+def detect_break_state(partido_key: str, current_drift: float,
+                       current_cuota: float, history: dict,
+                       score_data: dict = None) -> str:
+    """
+    Máquina de estado Break por partido (D100-01→D100-07).
+
+    MODO PRECISO (cuando score_data tiene server + games):
+      NORMAL → BREAK_POSIBLE   = FAV gana un game en el SAQUE del OPP (quiebre real)
+      BREAK_POSIBLE → BREAK_CONFIRMADO = FAV gana el game siguiente en su PROPIO saque
+      Cualquier estado → NORMAL si OPP quiebra de vuelta (contra-break)
+
+    MODO FALLBACK (sin score_data de Kambi):
+      Usa umbrales de drift (comportamiento original D100-01→D100-07).
+
+    Actualiza history[partido_key] in-place. Retorna nuevo estado.
+    """
+    now_ts = datetime.now().strftime('%H:%M:%S')
+    entry  = history.setdefault(partido_key, {
+        'readings': [], 'estado': 'NORMAL', 'fired': False,
+        'last_fav_games': None, 'last_opp_games': None, 'last_server': None,
+        'break_pending_confirm': False,
+    })
+    estado_prev = entry.get('estado', 'NORMAL')
+
+    if entry.get('fired'):
+        return 'BREAK_CONFIRMADO'
+
+    entry['readings'].append({
+        'ts': now_ts, 'cuota': current_cuota, 'drift': round(current_drift, 4)
+    })
+    entry['readings'] = entry['readings'][-10:]
+
+    # ── MODO PRECISO: quiebre real por score + saque ──────────────────────────
+    if score_data and score_data.get('server'):
+        fav_g    = score_data.get('fav_games', 0)
+        opp_g    = score_data.get('opp_games', 0)
+        server   = score_data.get('server')          # 'FAV' o 'OPP'
+        last_fav = entry.get('last_fav_games')
+        last_opp = entry.get('last_opp_games')
+        last_srv = entry.get('last_server')
+
+        if last_fav is not None and last_opp is not None and last_srv is not None:
+            fav_won = fav_g > last_fav   # FAV ganó un game
+            opp_won = opp_g > last_opp   # OPP ganó un game
+
+            # QUIEBRE: FAV gana un game en el saque del OPP
+            if fav_won and last_srv == 'OPP' and estado_prev == 'NORMAL':
+                entry['estado'] = 'BREAK_POSIBLE'
+                entry['break_pending_confirm'] = True
+
+            # CONFIRMACIÓN: después del quiebre, FAV sostiene su propio saque
+            elif (fav_won and last_srv == 'FAV'
+                  and entry.get('break_pending_confirm')
+                  and estado_prev == 'BREAK_POSIBLE'):
+                entry['estado'] = 'BREAK_CONFIRMADO'
+                entry['break_pending_confirm'] = False
+
+            # CONTRA-BREAK: OPP quiebra de vuelta → volver a NORMAL
+            elif opp_won and last_srv == 'FAV':
+                entry['estado'] = 'NORMAL'
+                entry['break_pending_confirm'] = False
+
+        entry['last_fav_games'] = fav_g
+        entry['last_opp_games'] = opp_g
+        entry['last_server']    = server
+
+    # ── MODO FALLBACK: drift-based ────────────────────────────────────────────
+    else:
+        if estado_prev == 'NORMAL':
+            if current_drift >= _BREAK_POSIBLE_DRIFT:
+                entry['estado'] = 'BREAK_POSIBLE'
+        elif estado_prev == 'BREAK_POSIBLE':
+            if current_drift < _BREAK_RECOVERY_DRIFT:
+                entry['estado'] = 'NORMAL'
+            elif current_drift >= _BREAK_CONFIRM_DRIFT:
+                entry['estado'] = 'BREAK_CONFIRMADO'
+
+    return entry['estado']
+
+
+def _fire_break_combos(triggers_confirmados: list, reports_dir: str = 'reports') -> Optional[str]:
+    """
+    Dispara betplay_combo_builder.py --live cuando hay breaks confirmados.
+    Single-fire por partido: fired=True previene re-disparo (D100-03).
+    Retorna output del subprocess o None si no hay nada que disparar.
+    """
+    if not triggers_confirmados:
+        return None
+
+    # Verificar si alguno no ha sido fired aún
+    hay_nuevo = any(not t.get('_fired_prev', False) for t in triggers_confirmados)
+    if not hay_nuevo:
+        return None
+
+    partidos = [t['partido'] for t in triggers_confirmados if not t.get('_fired_prev', False)]
+    print(f'[live_edge_monitor] BREAK CONFIRMADO en: {", ".join(partidos)} — disparando combos')
+
+    try:
+        _base = Path(__file__).parent.parent
+        r = subprocess.run(
+            [sys.executable, str(_base / 'betplay_combo_builder.py'),
+             '--live', '--telegram'],
+            capture_output=True, text=True,
+            cwd=str(_base), timeout=120
+        )
+        output = (r.stdout + r.stderr).strip()
+        print(f'[live_edge_monitor] combo_builder rc={r.returncode} | {output[:200]}')
+
+        # D101-05: auto-log al shadow book (D99-02)
+        try:
+            import sys as _sys
+            _sys.path.insert(0, str(_base))
+            import shadow_book as _sb
+            for t in triggers_confirmados:
+                if not t.get('_fired_prev', False):
+                    _pick_live = {
+                        'partido':          t.get('partido', ''),
+                        'favorito_predicho': t.get('favorito', ''),
+                        'cuota_favorito':   t.get('cuota_pre', 0),
+                        'p_modelo':         t.get('p_modelo', 0),
+                        'edge':             t.get('edge_live', 0),
+                        'break_state':      'BREAK_CONFIRMADO',
+                        'drift_pct':        t.get('drift_pct', 0),
+                        'pick_type':        'live',
+                    }
+                    _sb.log_live_pick(_pick_live, cuota_trigger=t.get('cuota_live', t.get('cuota_pre', 0)))
+        except Exception as _e:
+            print(f'[live_edge_monitor] shadow_book log_live error: {_e}')
+
+        return output
+    except Exception as e:
+        print(f'[live_edge_monitor] ERROR _fire_break_combos: {e}')
+        return None
 
 
 if __name__ == '__main__':
@@ -400,5 +845,15 @@ if __name__ == '__main__':
                     help='Modo observación (sin Telegram efectivo)')
     ap.add_argument('--telegram', action='store_true', default=False,
                     help='Activar envío Telegram (post-gate 3/5 sesiones)')
+    ap.add_argument('--dashboard', action='store_true', default=False,
+                    help='Generar live_dashboard.html después del ciclo (Nodo-100)')
     args = ap.parse_args()
-    run(observe_only=args.observe, telegram=args.telegram)
+    resultado = run(observe_only=args.observe, telegram=args.telegram)
+    if args.dashboard:
+        try:
+            sys.path.insert(0, str(Path(__file__).parent))
+            from live_dashboard_generator import generar_dashboard_html
+            html_path = generar_dashboard_html()
+            print(f'[dashboard] generado: {html_path}')
+        except Exception as e:
+            print(f'[dashboard] WARN: {e}')

@@ -7,6 +7,7 @@ hay partido próximo y ejecuta shadow_book.py --close-snapshot.
 Endpoints:
   GET /health               → {"ok": true}
   GET /check-and-close      → {"ok", "snapshot_ran", "matches_found", "matches"}
+  GET /live-check           → {"ok", "n_triggers", "rc", "output"} (Nodo-97)
   GET /status               → últimas 10 entradas del log
 
 Uso:
@@ -126,6 +127,12 @@ class Handler(BaseHTTPRequestHandler):
         elif path == "/check-and-close":
             self._handle_check_and_close()
 
+        elif path == "/live-check":
+            self._handle_live_check()
+
+        elif path == "/live-dashboard":
+            self._handle_live_dashboard()
+
         elif path == "/status":
             self._handle_status()
 
@@ -180,6 +187,64 @@ class Handler(BaseHTTPRequestHandler):
             "rc": rc,
             "output": output[:500]
         })
+
+    def _handle_live_check(self):
+        """Ejecuta live_edge_monitor.py --observe. Nodo-97."""
+        import re as _re
+        try:
+            r = subprocess.run(
+                [sys.executable,
+                 str(BASE_DIR / "scripts" / "live_edge_monitor.py"), "--observe", "--dashboard"],
+                capture_output=True, text=True, cwd=BASE_DIR, timeout=60
+            )
+            ok = r.returncode == 0
+            output = (r.stdout + r.stderr).strip()
+
+            n_triggers = 0
+            m = _re.search(r'"n_triggers"\s*:\s*(\d+)', output)
+            if m:
+                n_triggers = int(m.group(1))
+
+            _log(f"live-check rc={r.returncode} n_triggers={n_triggers}", error=not ok)
+            self._send_json(200 if ok else 500, {
+                "ok": ok,
+                "n_triggers": n_triggers,
+                "rc": r.returncode,
+                "output": output[:500],
+            })
+        except subprocess.TimeoutExpired:
+            _log("live-check TIMEOUT > 60s", error=True)
+            self._send_json(500, {"ok": False, "error": "timeout"})
+        except Exception as e:
+            _log(f"live-check ERROR: {e}", error=True)
+            self._send_json(500, {"ok": False, "error": str(e)})
+
+    def _handle_live_dashboard(self):
+        """Sirve live_dashboard.html generado por live_dashboard_generator.py (Nodo-100)."""
+        dashboard_path = BASE_DIR / "reports" / "live_dashboard.html"
+        if not dashboard_path.exists():
+            # Intentar generar uno al vuelo
+            try:
+                import sys as _sys
+                _sys.path.insert(0, str(BASE_DIR / "scripts"))
+                from live_dashboard_generator import generar_dashboard_html
+                generar_dashboard_html(str(BASE_DIR / "reports"))
+            except Exception:
+                pass
+        if dashboard_path.exists():
+            html = dashboard_path.read_bytes()
+            self.send_response(200)
+            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Content-Length", str(len(html)))
+            self.end_headers()
+            self.wfile.write(html)
+        else:
+            fallback = b"<html><body><h2>Sin datos live_dashboard.html</h2><p>Correr: python3 scripts/live_edge_monitor.py --dashboard</p></body></html>"
+            self.send_response(200)
+            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Content-Length", str(len(fallback)))
+            self.end_headers()
+            self.wfile.write(fallback)
 
     def _handle_status(self):
         lines = []

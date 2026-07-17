@@ -3,18 +3,21 @@ Tests Nodo-97 — Live Edge Monitor (REGLA-T53).
 Invocan funciones reales del módulo. Nunca hardcodean la fórmula.
 
 Ventana ASIMÉTRICA verificada: [-30min pre, +45min post] (D99-05).
+Tests 9-11: KambiLiveClientReal — cadena liveEvents → listView STARTED (D97-15 / D99-01).
 """
 import json
 import os
 import sys
 import tempfile
 from datetime import datetime, timedelta
+from unittest.mock import patch, MagicMock
 
 import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'scripts'))
 from live_edge_monitor import (
     KambiLiveClientMock,
+    KambiLiveClientReal,
     calc_drift,
     calc_edge_live,
     en_ventana,
@@ -207,3 +210,96 @@ def test_edge_live_formula_correcta():
     esperado2  = 0.50 - 1.0 / 2.50
     assert abs(resultado2 - esperado2) < 0.001
     assert resultado != resultado2   # varía con los inputs
+
+
+# ─── Tests 9-11: KambiLiveClientReal (D97-15 / D99-01) ──────────────────────
+
+def _kambi_live_response(home: str, away: str, odds_home: int, odds_away: int,
+                          state: str = "STARTED") -> bytes:
+    """Construye respuesta JSON Kambi con formato real (odds en milésimas)."""
+    payload = {
+        "liveEvents": [
+            {
+                "event": {"id": 999, "homeName": home, "awayName": away, "state": state},
+                "betOffers": [
+                    {
+                        "outcomes": [
+                            {"type": "OT_ONE", "odds": odds_home},
+                            {"type": "OT_TWO", "odds": odds_away},
+                        ]
+                    }
+                ],
+            }
+        ]
+    }
+    return json.dumps(payload).encode()
+
+
+def test_kambi_live_client_real_usa_live_events():
+    """Test 9: KambiLiveClientReal usa liveEvents.json como primera fuente (D97-15)."""
+    # Simular respuesta exitosa de liveEvents.json
+    resp_mock = MagicMock()
+    resp_mock.read.return_value = _kambi_live_response("Boogaard", "Onclin", 2900, 1450)
+    resp_mock.__enter__ = lambda s: s
+    resp_mock.__exit__ = MagicMock(return_value=False)
+
+    cliente = KambiLiveClientReal()
+    with patch('urllib.request.urlopen', return_value=resp_mock) as mock_open:
+        cuota = cliente.get_live_odds("Boogaard")
+
+    # Cuota retornada: 2900 / 1000 = 2.90
+    assert cuota == 2.90
+    # Solo debe haber llamado liveEvents (primera fuente — no fallback)
+    url_llamada = mock_open.call_args[0][0].full_url
+    assert "liveEvents" in url_llamada
+
+
+def test_kambi_live_client_real_fallback_a_listview_cuando_live_falla():
+    """Test 10: si liveEvents falla, KambiLiveClientReal cae a listView STARTED."""
+    listview_resp = {
+        "events": [
+            {
+                "event": {"homeName": "Dodig", "awayName": "Rival", "state": "STARTED"},
+                "betOffers": [
+                    {"outcomes": [
+                        {"type": "OT_ONE", "odds": 3100},
+                        {"type": "OT_TWO", "odds": 1350},
+                    ]}
+                ],
+            }
+        ]
+    }
+
+    call_count = [0]
+
+    def fake_urlopen(req, timeout=None):
+        call_count[0] += 1
+        if call_count[0] == 1:
+            raise Exception("liveEvents endpoint no disponible")
+        # Segunda llamada: listView
+        resp = MagicMock()
+        resp.read.return_value = json.dumps(listview_resp).encode()
+        resp.__enter__ = lambda s: s
+        resp.__exit__ = MagicMock(return_value=False)
+        return resp
+
+    cliente = KambiLiveClientReal()
+    with patch('urllib.request.urlopen', side_effect=fake_urlopen):
+        cuota = cliente.get_live_odds("Dodig")
+
+    assert cuota == 3.10      # 3100 / 1000
+    assert call_count[0] == 2  # intentó dos endpoints
+
+
+def test_kambi_live_client_real_retorna_none_si_jugador_no_encontrado():
+    """Test 11: si el jugador no está en ningún evento live → retorna None."""
+    resp_mock = MagicMock()
+    resp_mock.read.return_value = _kambi_live_response("Alcaraz", "Djokovic", 2200, 1700)
+    resp_mock.__enter__ = lambda s: s
+    resp_mock.__exit__ = MagicMock(return_value=False)
+
+    cliente = KambiLiveClientReal()
+    with patch('urllib.request.urlopen', return_value=resp_mock):
+        cuota = cliente.get_live_odds("Boogaard")  # no está en ese partido
+
+    assert cuota is None

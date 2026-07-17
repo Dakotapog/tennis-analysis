@@ -1209,6 +1209,57 @@ def report(desde: Optional[str] = None, hasta: Optional[str] = None) -> str:
                     )
             lines.append("")
 
+    # ── D98-05: score_directo >= 3 (H98-01 — Meta-Señal Convergencia) ───────
+    _append_segment(
+        settled, lines,
+        "score_directo>=3 (H98-01: convergencia STRONG+HOT+RFI+IRP+ELO_DOM)",
+        lambda r: (r.get('pick_snapshot', {}).get('score_directo') or 0) >= 3,
+    )
+
+    # ── D99-02: LIVE PICKS (H100-01 — Triple Convergencia) ──────────────────
+    _live_recs = [r for r in settled
+                  if r.get('pick_snapshot', {}).get('pick_type') == 'live']
+    if _live_recs:
+        _lm = _segment_metrics(_live_recs)
+        if _lm['n'] > 0:
+            _l_sp = '*' if _lm['sparse'] else ''
+            _l_ic = _lm['ic']
+            _gate = "  [gate: n>=3 breaks confirmados]" if _lm['n'] < 3 else ""
+            lines.append(f"  LIVE PICKS H100-01 (Triple Convergencia — pick_type=live){_l_sp}:")
+            lines.append(
+                f"    n={_lm['n']}  hit%={_lm['hit_pct']}  IC95=[{_l_ic[0]},{_l_ic[1]}]"
+                f"  CLV_live_median={_lm['clv_median']}  ROI={_lm['roi']}%{_gate}"
+            )
+            lines.append("")
+
+    # ── S107-E H107-01: MOTOR por cuota (acumula mientras MOTOR_DEFENSIVE activo) ──
+    _motor_recs = [
+        r for r in settled
+        if r.get('pick_snapshot', {}).get('tipo') == 'APOSTAR'
+        and r.get('pick_snapshot', {}).get('pick_type') != 'live'
+    ]
+    if _motor_recs:
+        lines.append("  MOTOR H107-01 (cuota split — MOTOR_DEFENSIVE activo):")
+        for _m_label, _m_pred in [
+            ("MOTOR_cuota<=2.5", lambda r: float(r.get('pick_snapshot', {}).get('cuota_favorito', 0)) <= 2.5),
+            ("MOTOR_cuota>2.5 ", lambda r: float(r.get('pick_snapshot', {}).get('cuota_favorito', 0)) > 2.5),
+        ]:
+            _m_sub = [r for r in _motor_recs if _m_pred(r)]
+            if not _m_sub:
+                lines.append(f"    {_m_label}: n=0")
+                continue
+            _mm = _segment_metrics(_m_sub)
+            if _mm['n'] == 0:
+                continue
+            _m_sp = '*' if _mm['sparse'] else ''
+            _m_ic = _mm['ic']
+            _m_note = "  [pre-graduacion n<30]" if _mm['n'] < 30 else ""
+            lines.append(
+                f"    {_m_label}{_m_sp}: n={_mm['n']}  hit%={_mm['hit_pct']}  "
+                f"IC95=[{_m_ic[0]},{_m_ic[1]}]  ROI={_mm['roi']}%{_m_note}"
+            )
+        lines.append("")
+
     # ── D90-04: CAPA 2 (H89-01) — Model Confidence fallback ─────────────────
     _append_segment(settled, lines, "CAPA2 (H89-01: p>=0.60, cuota [1.50-2.80], n_h2h>=1)",
                     lambda r: r.get('pick_snapshot', {}).get('capa2_candidate', False))
@@ -1274,6 +1325,20 @@ def report(desde: Optional[str] = None, hasta: Optional[str] = None) -> str:
     _append_hypothesis(settled, lines, "H52-08", "Zona 2.00-2.50 trampa post-fixes",
                        _is_zona_2_25, n_stop=30)
 
+    # ── H98-01: Meta-Señal score>=3 (Nodo-98, n_stop=30) ────────────────────
+    _append_hypothesis(
+        settled, lines, "H98-01", "score_directo>=3 supera breakeven",
+        lambda r: (r.get('pick_snapshot', {}).get('score_directo') or 0) >= 3,
+        n_stop=30,
+    )
+
+    # ── H100-01: Triple Convergencia Live break_confirmado (Nodo-100, n_stop=20) ──
+    _append_hypothesis(
+        settled, lines, "H100-01", "BREAK_CONFIRMADO picks superan breakeven live",
+        lambda r: r.get('pick_snapshot', {}).get('pick_type') == 'live',
+        n_stop=20,
+    )
+
     # ── Graduación ──
     lines.append("")
     lines.append("  GRADUACIÓN (n≥30 + IC_lower>breakeven + CLV_median>0):")
@@ -1300,6 +1365,52 @@ def report(desde: Optional[str] = None, hasta: Optional[str] = None) -> str:
         lines.append(f"    Sin segmento graduado. Más cercano: n={nearest_n}/30")
 
     lines.append("")
+
+    # ── B108-04: CHECKLIST SEMANAL H89-01/H89-02 (N28F2 por tier) ──────────
+    # Leer n y hits de los segmentos CAPA2 y ELO_DOMINANCE desde picks settled.
+    # Cuando n>=30 → correr SPRT. PROHIBIDO cambiar threshold antes de n_stop.
+    _capa2_recs = [r for r in settled if r.get('pick_snapshot', {}).get('capa2_candidate', False)]
+    _elo_recs   = [r for r in settled if r.get('pick_snapshot', {}).get('elo_dominance_axis', False)]
+
+    def _hits(recs):
+        return sum(1 for r in recs if r.get('resultado') in ('W', 'WIN', 'GANO', 1, True))
+
+    lines.append("  CHECKLIST SEMANAL (B108-04 — N28F2 por tier):")
+
+    for _h_id, _h_name, _recs, _p0, _p1 in [
+        ("H89-01", "CAPA2 (p>=0.60, cuota [1.50-2.80], n_h2h>=1)", _capa2_recs, 0.45, 0.55),
+        ("H89-02", "ELO_DOMINANCE (elo_gap>50, ranking discordante)", _elo_recs, 0.45, 0.55),
+    ]:
+        _n = len(_recs)
+        _h = _hits(_recs)
+        if _n == 0:
+            lines.append(f"    [{_h_id}] {_h_name}: n=0 — acumulando (gate n>=30)")
+            continue
+        _m = _segment_metrics(_recs)
+        _status = "GATE NO ALCANZADO" if _n < 30 else "REVISAR — n>=30"
+        lines.append(
+            f"    [{_h_id}] {_h_name}:"
+            f"  n={_n}  hit%={_m['hit_pct']}  ROI={_m['roi']}%  [{_status}]"
+        )
+        if _n >= 30:
+            try:
+                from validation.hypothesis_tracker import sprt_verdict as _sv
+                _v = _sv(_n, _h, _p0, _p1)
+                _verdict = _v['verdict']
+                _llr = round(_v['llr'], 3)
+                _action = {
+                    'ACEPTA_H1': 'ACTIVAR gate de cuota (recalibrar con SPRT)',
+                    'ACEPTA_H0': 'DESACTIVAR segmento — no hay alpha',
+                    'CONTINUA':  'Seguir acumulando — aun dentro de fronteras',
+                }.get(_verdict, _verdict)
+                lines.append(f"      SPRT: verdict={_verdict}  LLR={_llr}  → {_action}")
+            except Exception as _e:
+                lines.append(f"      SPRT: no disponible ({_e})")
+
+    lines.append("    Accion: revisar cada lunes o cuando n cambie de 29→30.")
+    lines.append("    PROHIBIDO cambiar thresholds antes de n_stop=30 (anti p-hacking).")
+    lines.append("")
+
     lines.append(sep)
     return "\n".join(lines)
 
@@ -1786,6 +1897,10 @@ def main():
                         help="Fecha para --close-snapshot (YYYY-MM-DD, default: hoy)")
     parser.add_argument('--json', action='store_true', dest='json_output',
                         help="D58-01: Output métricas como JSON para el dashboard")
+    parser.add_argument('--log-live', type=str, metavar='JSON', default=None,
+                        help="D99-02: Log pick live desde Triple Convergencia (JSON string con campo 'partido')")
+    parser.add_argument('--trigger', type=float, default=None,
+                        help="cuota_trigger para --log-live (cuota live en momento del break)")
     args = parser.parse_args()
 
     logging.basicConfig(level=logging.INFO, format='%(levelname)s %(message)s')
@@ -1801,6 +1916,12 @@ def main():
     elif args.close_snapshot:
         n = close_snapshot(fecha=args.fecha)
         print(f"Cierre Kambi capturado: {n} registros para {args.fecha or 'hoy'}")
+    elif args.log_live:
+        import json as _json
+        _pick = _json.loads(args.log_live)
+        _cuota = args.trigger or _pick.get('cuota_trigger') or _pick.get('cuota_favorito', 0.0)
+        _sb_id = log_live_pick(_pick, cuota_trigger=_cuota)
+        print(f"Live pick registrado: {_sb_id}")
     else:
         parser.print_help()
 

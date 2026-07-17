@@ -59,7 +59,8 @@ def _parse_nodo(path: Path) -> dict | None:
     lines = text.splitlines()
 
     # ID desde nombre de archivo: Nodo-63-Anchor-Combo-Builder.md → "63"
-    m = re.match(r"Nodo-(\d+)", path.stem, re.IGNORECASE)
+    # Nodo-100B-Triple-Convergencia-Live.md → "100B" (B108-01: sufijo letra evita colisión)
+    m = re.match(r"Nodo-(\d+[A-Za-z]?)", path.stem, re.IGNORECASE)
     if not m:
         return None
     nodo_id = m.group(1)
@@ -153,11 +154,34 @@ def build_index(dry_run: bool = False) -> dict:
         sys.exit(1)
 
     # 1. Parsear todos los Nodo-*.md
+    # ADDENDUM files (Nodo-53-ADDENDUM-*.md) son suplementos a un nodo existente,
+    # no nodos independientes — se excluyen del índice principal (B108-01).
     nodos = []
     for md in sorted(SPEC_DIR.glob("Nodo-*.md")):
+        if "ADDENDUM" in md.stem.upper():
+            continue  # suplemento, no nodo independiente
         entry = _parse_nodo(md)
         if entry:
             nodos.append(entry)
+
+    # 1b. Detectar números de nodo duplicados (B108-01) — falla ruidosamente
+    seen_ids: dict[str, str] = {}
+    duplicados: list[str] = []
+    for nodo in nodos:
+        nid = nodo["nodo_id"]
+        archivo = nodo["nodo_archivo"]
+        if nid in seen_ids:
+            duplicados.append(
+                f"  DUPLICADO nodo_id={nid}: '{seen_ids[nid]}' y '{archivo}'"
+            )
+        else:
+            seen_ids[nid] = archivo
+    if duplicados:
+        print("[rebuild_nodos_index] ERROR: números de nodo duplicados detectados:", file=sys.stderr)
+        for d in duplicados:
+            print(d, file=sys.stderr)
+        print("[rebuild_nodos_index] Renombra o elimina el duplicado antes de continuar.", file=sys.stderr)
+        sys.exit(2)
 
     # 2. Construir conjunto de archivos cubiertos
     cubiertos: set[str] = set()
