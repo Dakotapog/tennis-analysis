@@ -28,6 +28,7 @@ Uso:
 import argparse
 import json
 import os
+import subprocess
 import sys
 from collections import Counter
 from datetime import datetime
@@ -96,6 +97,12 @@ ANCHOR_CONF_MIN     = 60.0   # conf% mínima para ancla por conf sola
 ANCHOR_EDGE_MIN     = 10.0   # edge_pct mínimo para ancla por edge solo
 ANCHOR_PWIN_MIN     = 0.025  # P(ganar combo) mínimo = 2.5%
 MAX_ANCHOR_COMBOS   = 12     # top combos a mostrar por tier
+
+# Nodo-103 — Gates de seguridad combo builder (D103-01→D103-05)
+MAX_PICK_COMBOS     = 2      # G5: un pick no puede aparecer en más de 2 combos simultáneos
+
+# Log de picks bloqueados por gates (D103-06) — se escribe al final de main()
+_COMBO_GATE_LOG: list = []
 
 
 # ── Selección de archivo ────────────────────────────────────────────────────────
@@ -206,6 +213,63 @@ def _lookup_edge_data(nombre: str, edge_index: dict) -> dict:
             if apellido in k:
                 return v
     return {}
+
+
+# ── Nodo-103: Gates de seguridad combo builder ────────────────────────────────
+
+def _apply_combo_gates(edge_data: dict, nombre: str) -> tuple[bool, str]:
+    """
+    Aplica los 5 gates de Nodo-103 (D103-01→D103-05).
+    Retorna (bloqueado: bool, motivo: str).
+
+    G1 — apostar=False: el trader ya rechazó este pick para apuesta individual.
+    G2 — n_h2h=0: sin historial directo; edge no verificable empíricamente.
+    G3 — n_axes_active<2: N28F2 — BBI sola no predice (Nodo-28).
+    G4 — alignment_flag=NO_ALIGNMENT AND net_alignment<-0.10: señales activamente en contra
+         (Nodo-65). net_alignment=0.0 (neutral) NO bloquea — evidencia Jul-16 (D103-08).
+
+    Excepción G2: si confidence_flag=STRONG AND n_axes_active>=3 AND score_directo>=3
+    se permite n_h2h=0 (triple convergencia confirma sin H2H directo).
+    """
+    if not edge_data:
+        # Sin datos de edge_report → no hay base para evaluar gates → pasar.
+        # G0 solo bloquearía si tuviéramos evidencia de que el pick fue rechazado;
+        # sin datos no hay evidencia de rechazo.
+        return False, ''
+
+    # G1 — apostar=False
+    if not edge_data.get('apostar', False):
+        return True, f'G1: apostar=False — trader rechazó este pick (conf={edge_data.get("confidence_flag","?")})'
+
+    # G2 — n_h2h < 1 (con excepción triple convergencia)
+    n_h2h = int(edge_data.get('n_h2h') or 0)
+    if n_h2h < 1:
+        # Excepción: STRONG + n_axes_active>=3 + score_directo>=3
+        conf_flag   = edge_data.get('confidence_flag', '')
+        n_axes      = int(edge_data.get('n_axes_active') or 0)
+        score_dir   = int(edge_data.get('score_directo') or 0)
+        if conf_flag == 'STRONG' and n_axes >= 3 and score_dir >= 3:
+            pass  # triple convergencia — permitir sin H2H
+        else:
+            return True, f'G2: n_h2h=0 — sin historial directo (axes={n_axes}, score_dir={score_dir})'
+
+    # G3 — n_axes_active < 2 (N28F2)
+    n_axes_active = int(edge_data.get('n_axes_active') or 0)
+    if n_axes_active < 2:
+        motivo_reclas = edge_data.get('motivo_reclasificacion', '')
+        return True, f'G3: n_axes_active={n_axes_active}<2 — N28F2: BBI sola no predice ({motivo_reclas})'
+
+    # G4 — alignment_flag=NO_ALIGNMENT AND net_alignment < -0.10
+    # D103-08 (2026-07-16): net_alignment=0.0 (neutral) NO bloquea — Gaines Jr ganó con
+    # NO_ALIGNMENT pero net=0.0. El riesgo real es net_alignment negativo (señales en contra).
+    # Bartel Jul-15: net=-0.286 → PERDIO. Gaines Jr Jul-16: net=0.0 → GANO.
+    alignment = edge_data.get('alignment_flag', '')
+    if alignment == 'NO_ALIGNMENT':
+        net = float(edge_data.get('net_alignment') or 0.0)
+        if net < -0.10:
+            return True, f'G4: NO_ALIGNMENT net={net:.3f}<-0.10 — señales activamente en contra del pick'
+
+    return False, ''
 
 
 # ── Nodo-62: Signal Bridge ──────────────────────────────────────────────────────
@@ -500,6 +564,27 @@ def _extract_and_categorize(partidos: list, threshold: float,
 
         # Nodo-62: Signal Bridge — enriquecer con senales del edge_report
         _edge_data = _lookup_edge_data(favorito, edge_index)
+
+        # Nodo-103: Gates G1–G4 (D103-01→D103-04)
+        # Si no hay edge_report en disco (edge_index vacío), no aplicar gates —
+        # operación sin pipeline completo (tests, modo manual). G0 solo aplica
+        # cuando el edge_report existe pero el pick no fue procesado.
+        _bloqueado, _motivo_gate = (
+            _apply_combo_gates(_edge_data, favorito)
+            if edge_index else (False, '')
+        )
+        if _bloqueado:
+            _COMBO_GATE_LOG.append({
+                'nombre':  favorito,
+                'torneo':  (partido.get('torneo_completo') or partido.get('torneo') or '?'),
+                'gate':    _motivo_gate.split(':')[0],
+                'motivo':  _motivo_gate,
+                'conf':    conf,
+                'cuota':   cuota,
+                'ts':      datetime.now().isoformat(),
+            })
+            continue  # excluir del pool de combos
+
         _alpha_score, _alpha_senales = _compute_alpha_score(_edge_data)
         _combo_priority = round(conf + _alpha_score, 2)
 
@@ -1616,6 +1701,45 @@ def _enviar_telegram(plan: dict):
         print(f"  WARN Telegram: {e}")
 
 
+# ── Governor soft-veto (S107-D D107-04) ─────────────────────────────────────
+
+def _governor_check(bankroll: float, override: bool, builder: str) -> None:
+    """
+    Invoca combo_governor.py y aplica soft-veto (D107-04).
+    Exit 0=PASS → continúa. Exit 1=WARN o 2=BLOCK → aborta si no hay --override-governor.
+    Override queda logueado en combo_governor.log.
+    Mensaje de abort accionable (Zero-Null D90-04: nunca silencio).
+    """
+    result = subprocess.run(
+        [sys.executable, str(Path(__file__).parent / 'combo_governor.py'),
+         '--bankroll', str(bankroll)],
+        capture_output=True, text=True
+    )
+    code = result.returncode
+    if code == 0:
+        return  # PASS — sin fricción
+
+    nivel = 'WARN' if code == 1 else 'BLOCK'
+    # Imprimir el reporte del governor completo
+    print(result.stdout)
+    print(f"[{builder}] Governor [{nivel}] — el presupuesto agregado está comprometido.")
+
+    if override:
+        ts = datetime.now().strftime('%Y-%m-%d %H:%M')
+        log_path = Path(__file__).parent / 'logs' / 'combo_governor.log'
+        log_path.parent.mkdir(exist_ok=True)
+        log_path.open('a').write(
+            f"[{ts}] OVERRIDE por {builder} (--override-governor) nivel={nivel}\n"
+        )
+        print(f"[{builder}] --override-governor activo — continuando. Override logueado.")
+        return
+
+    # Sin override → abort con instrucción accionable
+    print(f"[{builder}] Para continuar de todos modos: agregar --override-governor")
+    print(f"[{builder}] Para reducir el presupuesto: ver orden de corte arriba.")
+    sys.exit(code)
+
+
 # ── Main ────────────────────────────────────────────────────────────────────────
 
 def main():
@@ -1641,7 +1765,12 @@ def main():
                         help='Excluir jugadores (separados por coma): --excluir "Jugador A,Jugador B"')
     parser.add_argument('--anchor',      action='store_true',
                         help='Generar Anchor Combos (Nodo-63): 1A+3B, 2A+2B, 3A+2B con picks ancla')
+    parser.add_argument('--override-governor', action='store_true',
+                        help='Omitir bloqueo del governor (D107-04) — queda logueado en combo_governor.log')
     args = parser.parse_args()
+
+    # ── Governor soft-veto (S107-D D107-04) ────────────────────────────────
+    _governor_check(args.bankroll, args.override_governor, builder='combo_confianza_builder')
 
     # ── Grass bootstrap mode (Nodo-42) ───────────────────────────────���────────
     grass_mode = args.superficie == 'grass'
@@ -1725,6 +1854,56 @@ def main():
     # Construir portfolio
     plan = _build_portfolio_v2(picks, args.bankroll, args.fase, stake_max=stake_max)
 
+    # Nodo-103 G5 — Cap de repetición: un pick no puede aparecer en > MAX_PICK_COMBOS combos
+    # Orden de protección: CORE > SATELLITE > MOONSHOT > COBERTURA
+    _pick_combo_count: dict = {}
+    _combos_ordered = []
+    if plan.get('core'):
+        _combos_ordered.append(('core', plan['core']))
+    for _i, _sat in enumerate(plan.get('satellites', [])):
+        _combos_ordered.append((f'satellite_{_i}', _sat))
+    if plan.get('moonshot'):
+        _combos_ordered.append(('moonshot', plan['moonshot']))
+    for _i, _cob in enumerate(plan.get('cobertura', [])):
+        _combos_ordered.append((f'cobertura_{_i}', _cob))
+
+    _combos_bloqueados_g5 = set()
+    for _ckey, _combo in _combos_ordered:
+        _piernas = _combo.get('piernas', [])
+        _viola = False
+        for _pick_nombre in _piernas:
+            if _pick_combo_count.get(_pick_nombre, 0) >= MAX_PICK_COMBOS:
+                _viola = True
+                _COMBO_GATE_LOG.append({
+                    'nombre':  _pick_nombre,
+                    'gate':    'G5',
+                    'motivo':  f'G5: pick ya en {MAX_PICK_COMBOS} combos — combo {_ckey} bloqueado',
+                    'combo':   _ckey,
+                    'ts':      datetime.now().isoformat(),
+                })
+                break
+        if _viola:
+            _combos_bloqueados_g5.add(_ckey)
+        else:
+            for _pick_nombre in _piernas:
+                _pick_combo_count[_pick_nombre] = _pick_combo_count.get(_pick_nombre, 0) + 1
+
+    # Eliminar combos que violan G5
+    if _combos_bloqueados_g5:
+        if 'core' in _combos_bloqueados_g5:
+            plan['core'] = None
+        plan['satellites'] = [
+            _sat for _i, _sat in enumerate(plan.get('satellites', []))
+            if f'satellite_{_i}' not in _combos_bloqueados_g5
+        ]
+        if 'moonshot' in _combos_bloqueados_g5:
+            plan['moonshot'] = None
+        plan['cobertura'] = [
+            _cob for _i, _cob in enumerate(plan.get('cobertura', []))
+            if f'cobertura_{_i}' not in _combos_bloqueados_g5
+        ]
+        print(f'[G5] {len(_combos_bloqueados_g5)} combo(s) bloqueados por cap de repetición (MAX={MAX_PICK_COMBOS})')
+
     # Grass VaR guard: si total > 1% bankroll, escalar
     if grass_mode and var_budget_grass is not None:
         total_grass = _total_stakes(plan)
@@ -1747,6 +1926,28 @@ def main():
         f.write(report)
 
     print(f'\nGuardado en: {out_path}')
+
+    # I3 Nodo-67: emitir combo_plan_*.json paralelo (aditivo — .txt se conserva)
+    _cobertura_layers = []
+    if plan.get('core'):
+        _cobertura_layers.append({'nombre': plan['core']['nombre'], 'stake': int(plan['core']['stake'])})
+    for _sat in plan.get('satellites', []):
+        _cobertura_layers.append({'nombre': _sat['nombre'], 'stake': int(_sat['stake'])})
+    if plan.get('moonshot'):
+        _cobertura_layers.append({'nombre': plan['moonshot']['nombre'], 'stake': int(plan['moonshot']['stake'])})
+    for _cob in plan.get('cobertura', []):
+        _cobertura_layers.append({'nombre': _cob['nombre'], 'stake': int(_cob['stake'])})
+    _plan_json = {
+        'fecha': fecha,
+        'bankroll': int(args.bankroll),
+        'budget': int(plan.get('budget', 0)),
+        'fase': plan.get('fase', args.fase),
+        'cobertura': _cobertura_layers,
+    }
+    _json_path = out_path.replace('.txt', '.json')
+    with open(_json_path, 'w', encoding='utf-8') as _jf:
+        json.dump(_plan_json, _jf, ensure_ascii=False, indent=2)
+    print(f'  [I3] JSON: {_json_path}')
 
     # C62-A (H62-01): propagar alpha_promoted al shadow book del día
     alpha_picks = [p['nombre'] for p in picks
@@ -1793,6 +1994,19 @@ def main():
                     print('  Sin AC*.bat (picks no disponibles en Kambi)')
         else:
             print('\nAnchor Combos: sin picks ancla (cuota >= 1.65 con priority/conf/edge suficientes)')
+
+    # Nodo-103 D103-06 — Escribir gate log (picks bloqueados por G1-G5)
+    if _COMBO_GATE_LOG:
+        _gate_log_path = os.path.join(
+            REPORTS_DIR, f'combo_gate_log_{datetime.now().strftime("%Y%m%d_%H%M%S")}.json'
+        )
+        os.makedirs(REPORTS_DIR, exist_ok=True)
+        with open(_gate_log_path, 'w', encoding='utf-8') as _glf:
+            json.dump(_COMBO_GATE_LOG, _glf, ensure_ascii=False, indent=2)
+        g_counts = Counter(r.get('gate', '?') for r in _COMBO_GATE_LOG)
+        print(f'\n[Nodo-103] {len(_COMBO_GATE_LOG)} picks bloqueados por gates → {_gate_log_path}')
+        for _g, _c in sorted(g_counts.items()):
+            print(f'  {_g}: {_c} bloqueados')
 
 
 if __name__ == '__main__':

@@ -1010,6 +1010,11 @@ class RivalryAnalyzer:
                 _tour_stats[_tk]['best_opp_rank'] = _opp_rank
 
         # Loop TORNEO_COMPLETO_BONUS (Nodo-57 D57-03/04 — sin GCS tracking, eso es loop separado)
+        # C3 (Nodo-108): capturar campeon_tier/torneo/days para que consumidores lean el campo,
+        # no parsen strings de reasoning (edge_calculator.py línea ~1124 era frágil).
+        _campeon_tier_val: Optional[str] = None
+        _campeon_torneo_val: Optional[str] = None
+        _campeon_days_val: Optional[int] = None
         from config import detectar_tier as _dt_tier
         for (_tname, _tyear), _ts in _tour_stats.items():
             # Nodo-57 D57-03: gate tier-aware — GS necesita 7W, no 4W
@@ -1060,6 +1065,10 @@ class RivalryAnalyzer:
                     f"({_ts['wins']}W-0L, tier={_tier_champ}, req≥{_min_wins}) "
                     f"→ x{_bonus:.1f} quality_score [{_parts_str}]"
                 )
+                # C3: capturar campos estructurados (evita string-parsing en consumidores)
+                _campeon_tier_val = _tier_champ
+                _campeon_torneo_val = _tname
+                _campeon_days_val = _days_ago
                 break  # un solo bonus aunque haya múltiples torneos completos
 
         # Nodo-61 D61-F0: SCAN GCS SEPARADO — desacoplado de TORNEO_COMPLETO_BONUS
@@ -1187,6 +1196,10 @@ class RivalryAnalyzer:
             'volume_confidence':          round(volume_confidence, 4),
             'surface_alpha':              round(surface_alpha, 4),
             'torneo_completo':            _has_torneo_bonus,
+            'campeon_signal':             _has_torneo_bonus,   # C3: alias semántico (fuente de verdad)
+            'campeon_tier':               _campeon_tier_val,   # C3: tier del torneo ganado (str|None)
+            'campeon_torneo':             _campeon_torneo_val, # C3: nombre torneo (str|None)
+            'campeon_days_ago':           _campeon_days_val,   # C3: hace N días (int|None)
             'gcs_active':                 _gcs_active,
             'gcs_days':                   _gcs_boost_days if _gcs_boost_days is not None and _gcs_boost_days <= 21 else None,
             'gcs_extended_active':        _gcs_extended_active,

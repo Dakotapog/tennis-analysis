@@ -614,6 +614,137 @@
       "estado": "ACUMULANDO",
       "n_actual": 0,
       "hits": 0
+    },
+    "H100-01": {
+      "nombre": "Triple Convergencia Live: picks break_confirmado superan breakeven a cuota_trigger",
+      "descripcion": "Picks registrados por live_edge_monitor cuando break_state=BREAK_CONFIRMADO (2 ciclos consecutivos drift>=12%): la convergencia STRONG+drift_live confirma que el modelo tiene edge real HOY. Se apuesta en partidos NOT_STARTED del mismo día con mayor confianza. pick_type='live' en shadow book.",
+      "origen_deuda": "Nodo-100 — Triple Convergencia Live 2026-07-14. La máquina de estado Break reduce falsas señales (filtro 2-ciclo). Nodo-101 D101-05 cierra la brecha B2 de Nodo-99: auto-log al shadow book.",
+      "preregistrado": "2026-07-14",
+      "umbrales_congelados": {
+        "drift_min_ciclo1_pct": 15.0,
+        "drift_min_ciclo2_pct": 12.0,
+        "break_state": "BREAK_CONFIRMADO",
+        "pick_type": "live",
+        "cuota_trigger_como_base_clv": true,
+        "single_fire": true,
+        "excluir": "fired=True (ya disparado), KGR_sesion < 0"
+      },
+      "metrica": "hit% de picks live con IC Wilson 95% inferior > 1/cuota_trigger_media. CLV_live = (cuota_trigger/cuota_cierre - 1)*100 > 0",
+      "exito": "IC Wilson 95% inferior > breakeven Y n_fired >= 20. Gate activacion formal: n>=3 breaks confirmados reales.",
+      "n_stop": 20,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0
+    },
+    "H103-01": {
+      "nombre": "Gates G1+G2+G3 elevan hit% de combos a >=55%",
+      "descripcion": "Aplicar gates apostar=True (G1) + n_h2h>=1 (G2) + n_axes_active>=2 (G3) en combo_confianza_builder.py reduce picks fantasma y eleva hit% de combos de <40% observado a >=55%",
+      "origen_deuda": "D103-01 D103-02 D103-03 — Nodo-103 auditoria perdidas 2026-07-15",
+      "umbrales_congelados": {
+        "gate_G1": "apostar == True",
+        "gate_G2": "n_h2h >= 1 (excepcion: STRONG + n_axes>=3 + score_directo>=3)",
+        "gate_G3": "n_axes_active >= 2 (N28F2)",
+        "hit_pct_minimo": 0.55
+      },
+      "metrica": "hit% de combos settled cuyos picks pasaron G1+G2+G3, IC Wilson 95% inferior > 0.45",
+      "n_stop": 50,
+      "estado": "ACTIVA",
+      "fecha_registro": "2026-07-16",
+      "baseline": "Jul-15 sin gates: ~17% hit (5 perdidos / 6 totales)",
+      "archivo_evidencia": "reports/combo_gate_log_FECHA.json + data/signal_audit_nobets.jsonl"
+    },
+    "H107-01": {
+      "nombre": "MOTOR split por cuota: el tramo cuota>2.50 es la fuente del ROI negativo",
+      "descripcion": "Los picks APROBADOS del Motor (trader_ev_tenis, estrategia #1) con cuota <= 2.50 logran hit% >= breakeven de su cuota media; los de cuota > 2.50 son la fuente del ROI negativo del segmento MOTOR (30% hit, ROI -21.1%, n=20, shadow book 2026-07-01→14).",
+      "origen_deuda": "Nodo-107 — reconciliación embudo Nodo-54/55 vs O-01. Diagnóstico Fable 2026-07-17: el Motor dispara pero pierde; el fallo es de selección, no de restricción.",
+      "preregistrado": "2026-07-17",
+      "umbrales_congelados": {
+        "cuota_corte": 2.5,
+        "poblacion": "picks apostar=True del edge_report que entran al pool individuales del trader (segmento MOTOR/APROBADO del shadow book)",
+        "segmentos": ["MOTOR_cuota_baja (cuota <= 2.50)", "MOTOR_cuota_alta (cuota > 2.50)"],
+        "excluir": "status=NO_DATA, phantom_data=true, capa2_candidate=true (población CAPA2 tiene su propia H89-01)",
+        "nota": "PROHIBIDO cambiar el corte 2.50 antes de n_stop. PROHIBIDO aflojar gates del Motor mientras acumula (Nodo-55 prohibición vigente)."
+      },
+      "metrica": "hit% con IC Wilson 95% por segmento vs breakeven de la cuota media de cada segmento",
+      "exito": "MOTOR_cuota_baja: IC Wilson 95% inferior > 1/cuota_media_segmento con n >= 30 total (ambos segmentos suman)",
+      "accion_si_exito": "gate de cuota máxima 2.50 en el pool de individuales del trader (D107-05 → nodo propio)",
+      "accion_si_fracaso": "revisar la función de selección completa del Motor, no los umbrales — y mantener defensive sizing 0.5x",
+      "n_stop": 30,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0
+    },
+    "H110-01": {
+      "nombre": "FAVORITOS_COMPUESTOS: combos 3-4 piernas de favoritos claros logran hit% >= 25% (breakeven @4.0x media)",
+      "descripcion": "Combos de 3-4 piernas con favoritos seleccionados por p_modelo>=0.62 O cuota<=1.40 O ranking_gap>300, pierna [1.15,2.10], cuota combinada [3.5,7.0], stake $650 fijo — hit% combo >= 25%. Evidencia semilla retrospectiva: 8/8 combos ganados (jul-14 y jul-16), cuotas 3.84-6.51x, stakes $600-680, pago total ~$27,500.",
+      "origen_deuda": "Nodo-110 — Modo Operador Favoritos Compuestos 2026-07-17. El patrón ganador del operador estaba excluido por REGLA-HF-1 para singles; D110-01 aclara que piernas de combo tienen piso LEG_MIN_CUOTA=1.15.",
+      "preregistrado": "2026-07-17",
+      "umbrales_congelados": {
+        "p_modelo_min": 0.62,
+        "cuota_leg_min": 1.15,
+        "cuota_leg_max": 2.10,
+        "cuota_combinada_min": 3.5,
+        "cuota_combinada_max": 7.0,
+        "piernas_min": 3,
+        "piernas_max": 4,
+        "max_piernas_por_torneo": 2,
+        "stake_fijo": 650,
+        "tope_sesion": 2000,
+        "hit_pct_minimo_combo": 0.25,
+        "kill_switch": "hit% < 15% con n >= 15 → OFF",
+        "semilla_retrospectiva": "8/8 combos jul-14 y jul-16"
+      },
+      "metrica": "hit% combo (todas las piernas ganadas) con IC Wilson 95% inferior > 0.15 (kill-switch) y > 0.25 (graduacion)",
+      "exito": "IC Wilson 95% inferior > 0.25 con n_stop >= 30 combos prospectivos",
+      "accion_si_exito": "Escalar stake $650 → $1000, extender a MEGA-OPERADOR (5-8 piernas, D110-05)",
+      "accion_si_fracaso": "Revisar filtros de seleccion — en particular si el alpha es especifico WTA/ITF-F (serializar circuito en registro)",
+      "n_stop": 30,
+      "estado": "ACUMULANDO",
+      "n_actual": 8,
+      "hits": 8,
+      "nota_semilla": "8 observaciones retrospectivas (jul-14, jul-16) como semilla pre-registro — prospectivo desde 2026-07-17"
+    },
+    "H111-01": {
+      "nombre": "Steam-lag dual-book: ejecutar en la casa rezagada supera breakeven de la cuota stale",
+      "descripcion": "Picks ejecutados via steam-lag (Nodo-111 X2): casa lider mueve linea >=15% (BREAK_CONFIRMADO) EN LA DIRECCION del favorito del modelo (STRONG o meta_signal_score>=3), y la casa rezagada aun ofrece cuota_B >= cuota_A_pre_drift * 0.97 → se ejecuta en la rezagada. Hit% > breakeven de la cuota stale capturada.",
+      "origen_deuda": "Nodo-111 — Dual-Book Live Intelligence 2026-07-17. Extiende H52-05 (STEAM_IN) con segunda casa como venue de ejecucion. Leader-follower profesional, EV+ sin las dos piernas del arb.",
+      "preregistrado": "2026-07-17",
+      "umbrales_congelados": {
+        "drift_min_pct": 15.0,
+        "break_state": "BREAK_CONFIRMADO",
+        "direccion": "favorito del modelo (confidence_flag STRONG o meta_signal_score >= 3)",
+        "cuota_stale_min_ratio": 0.97,
+        "governor": "PASS obligatorio (exit-code 0, Nodo-107 D107-04)",
+        "tope_diario": "X2+X3 <= $2000/dia hasta graduacion",
+        "excluir": "steam contra la direccion del modelo (PROHIBIDO apostar), status=NO_DATA, phantom_data=true, KGR_sesion < 0",
+        "nota": "PROHIBIDO cambiar umbrales antes de n_stop. Arbs y middles son registro observacional aparte (riesgo acotado por construccion)."
+      },
+      "metrica": "hit% con IC Wilson 95% sobre picks ejecutados via steam-lag vs breakeven 1/cuota_stale_media",
+      "exito": "IC Wilson 95% inferior > 1/cuota_stale_media con n >= 20",
+      "kill_switch": "hit% < 40% con n >= 10 → X2 OFF (X1 routing y P8 siguen — no dependen de esta hipotesis)",
+      "n_stop": 20,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0
+    },
+    "H113-01": {
+      "nombre": "RAIN_RISK reduce hit% en picks outdoor clay/grass vs CLEAR",
+      "descripcion": "Picks outdoor (clay o grass) con weather_flag=RAIN_RISK tienen hit% significativamente menor que picks con weather_flag=CLEAR. Hipotesis observacional — el bookmaker no ajusta bien la cuota ante lluvia en arcilla (botes irregulares) ni en hierba (cancha rapida se ralentiza). MVP: solo registrar, no ajustar p_modelo hasta graduacion.",
+      "origen_deuda": "Nodo-113 / B108-06 — Weather MVP 2026-07-17. open-meteo sin key, pais del zita file. Campo weather_flag en edge_report.",
+      "preregistrado": "2026-07-17",
+      "umbrales_congelados": {
+        "segmento_test": "weather_flag=RAIN_RISK en picks outdoor (clay/grass) con apostar=True",
+        "segmento_control": "weather_flag=CLEAR mismas condiciones",
+        "nota": "PROHIBIDO ajustar p_modelo o kelly_kl antes de n_stop. Solo observar.",
+        "exclusiones": "status=NO_DATA, phantom_data=true, superficie indoor o UNKNOWN"
+      },
+      "metrica": "hit% RAIN_RISK vs hit% CLEAR, IC Wilson 95%",
+      "exito": "IC Wilson 95% superior RAIN_RISK < IC Wilson 95% inferior CLEAR con n >= 40",
+      "kill_switch": "ninguno — observacional puro hasta graduacion",
+      "n_stop": 40,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0
     }
   }
 }

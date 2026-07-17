@@ -1,8 +1,8 @@
 {
   "_meta": {
-    "generado": "2026-07-17T00:42:34",
-    "total_nodos": 108,
-    "total_py_files": 66,
+    "generado": "2026-07-17T15:29:15",
+    "total_nodos": 110,
+    "total_py_files": 70,
     "huerfanos_count": 1,
     "exclusiones_count": 19
   },
@@ -169,10 +169,10 @@
       ]
     },
     {
-      "nodo_id": "100",
-      "nodo_archivo": "Nodo-100-Triple-Convergencia-Live.md",
+      "nodo_id": "100B",
+      "nodo_archivo": "Nodo-100B-Triple-Convergencia-Live.md",
       "fecha": "2026-07-14",
-      "estado": "activo",
+      "estado": "historico",
       "archivos_mencionados": [
         "betplay_combo_builder.py",
         "close_snapshot_server.py",
@@ -258,6 +258,44 @@
       ]
     },
     {
+      "nodo_id": "107",
+      "nodo_archivo": "Nodo-107-Riesgo-Agregado-Motor-Reconciliacion.md",
+      "fecha": "2026-07-17",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "combo_confianza_builder.py",
+        "combo_governor.py",
+        "rival_value_betslip.py",
+        "shadow_book.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "108",
+      "nodo_archivo": "Nodo-108-Backlog-Auditoria-Conexiones-Ocultas.md",
+      "fecha": "2026-07-17",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "check_contradictions.py",
+        "combo_governor.py",
+        "core/player_registry.py",
+        "scripts/rebuild_nodos_index.py"
+      ]
+    },
+    {
+      "nodo_id": "109",
+      "nodo_archivo": "Nodo-109-Live-Trading-Desk-Dashboard.md",
+      "fecha": "2026-07-17",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "close_snapshot_server.py",
+        "dashboard.py",
+        "live_desk.py"
+      ]
+    },
+    {
       "nodo_id": "11",
       "nodo_archivo": "Nodo-11-Inventario-Scripts-Legado.md",
       "fecha": null,
@@ -273,6 +311,49 @@
         "generar_tabla_favoritos2.py",
         "ml_trainer.py",
         "validar_con_api.py"
+      ]
+    },
+    {
+      "nodo_id": "110",
+      "nodo_archivo": "Nodo-110-Modo-Operador-Favoritos-Compuestos.md",
+      "fecha": "2026-07-17",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "favoritos_combo_builder.py",
+        "run_daily.py"
+      ]
+    },
+    {
+      "nodo_id": "111",
+      "nodo_archivo": "Nodo-111-Dual-Book-Live-Intelligence.md",
+      "fecha": "2026-07-17",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "analysis/dual_book.py",
+        "scraping/dual_book_client.py"
+      ]
+    },
+    {
+      "nodo_id": "112",
+      "nodo_archivo": "Nodo-112-C3-Campeon-Signal-Estructurado.md",
+      "fecha": null,
+      "estado": "activo",
+      "archivos_mencionados": [
+        "analysis/rivalry_analyzer.py",
+        "edge_calculator.py",
+        "tests/test_edge_calculator.py",
+        "tests/test_rivalry_analyzer.py"
+      ]
+    },
+    {
+      "nodo_id": "113",
+      "nodo_archivo": "Nodo-113-B108-06-Weather-MVP.md",
+      "fecha": null,
+      "estado": "activo",
+      "archivos_mencionados": [
+        "core/weather_client.py",
+        "edge_calculator.py",
+        "extraer_URL_partidos_version2.py"
       ]
     },
     {
@@ -633,7 +714,7 @@
       ]
     },
     {
-      "nodo_id": "38",
+      "nodo_id": "38B",
       "nodo_archivo": "Nodo-38B-Cobertura-Expandida-Sin-CatC.md",
       "fecha": null,
       "estado": "historico",
@@ -820,19 +901,6 @@
     },
     {
       "nodo_id": "52",
-      "nodo_archivo": "Nodo-52-ADDENDUM-Integracion-Contexto-Completo.md",
-      "fecha": "2026-07-02",
-      "estado": "historico",
-      "archivos_mencionados": [
-        "analysis/player_profitability.py",
-        "betplay_combo_builder.py",
-        "betslip_registrar.py",
-        "pipeline_tracker.py",
-        "shadow_book.py"
-      ]
-    },
-    {
-      "nodo_id": "52",
       "nodo_archivo": "Nodo-52-Shadow-Book-CLV-Tracking.md",
       "fecha": null,
       "estado": "historico",
@@ -840,43 +908,6 @@
         "edge_calculator.py",
         "shadow_book.py",
         "tests/test_nodo52.py"
-      ]
-    },
-    {
-      "nodo_id": "53",
-      "nodo_archivo": "Nodo-53-ADDENDUM-2-Correcciones-Fable.md",
-      "fecha": "2026-07-02",
-      "estado": "historico",
-      "archivos_mencionados": [
-        "extraer_historh2h.py",
-        "normalization.py",
-        "rivalry_analyzer.py",
-        "tests/test_nodo53.py"
-      ]
-    },
-    {
-      "nodo_id": "53",
-      "nodo_archivo": "Nodo-53-ADDENDUM-3-Fable-Final.md",
-      "fecha": "2026-07-02",
-      "estado": "historico",
-      "archivos_mencionados": [
-        "edge_calculator.py",
-        "generar_tabla_favoritos2.py",
-        "rivalry_analyzer.py",
-        "test_nodo53.py",
-        "tests/test_nodo53.py"
-      ]
-    },
-    {
-      "nodo_id": "53",
-      "nodo_archivo": "Nodo-53-ADDENDUM-D53-06-a-D53-10.md",
-      "fecha": "2026-07-02",
-      "estado": "historico",
-      "archivos_mencionados": [
-        "analysis/rivalry_analyzer.py",
-        "normalization.py",
-        "rivalry_analyzer.py",
-        "scraping/ninja_h2h_parser.py"
       ]
     },
     {
@@ -964,13 +995,6 @@
         "run_daily.py",
         "token_odometer.py"
       ]
-    },
-    {
-      "nodo_id": "60",
-      "nodo_archivo": "Nodo-60-ADDENDUM-FABLE-Auditoria-Tres-Carriles.md",
-      "fecha": "2026-07-05",
-      "estado": "gateado",
-      "archivos_mencionados": []
     },
     {
       "nodo_id": "60",

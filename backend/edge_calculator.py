@@ -42,6 +42,7 @@ from config import detectar_tier  # T21-02: fuente única de verdad para tier
 from analysis.markov_analyzer import calcular_recencia_regimen, factor_alpha_temporal  # T18-03 (Nodo-18)
 from analysis.rivalry_analyzer import RIVALRY_VERSION as _EXPECTED_RIVALRY_VERSION  # Nodo-32 Fase 3
 from core.data_contract import PICK_STATUS_NO_DATA  # F2: NO_DATA status para historial vacío
+from core.weather_client import get_weather_flag    # B108-06: campo observacional weather_flag
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -1116,15 +1117,9 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
     _campeon_tier_nivel = None
     _tier_mismatch = False
     _tier_mismatch_delta = None
-    if _surf_fav_65.get('torneo_completo'):
-        _log_prefix_65 = 'P1_LOG_SURF' if player_key_sb == 'player1' else 'P2_LOG_SURF'
-        for _rlog in pred.get('reasoning', []):
-            if _log_prefix_65 in _rlog and 'TORNEO_COMPLETO_BONUS' in _rlog and 'tier=' in _rlog:
-                try:
-                    _campeon_tier_nivel = _rlog.split('tier=')[1].split(',')[0].split(')')[0].strip()
-                except (IndexError, AttributeError):
-                    pass
-                break
+    if _surf_fav_65.get('campeon_signal', _surf_fav_65.get('torneo_completo')):
+        # C3 (Nodo-108): leer campeon_tier del campo estructurado — no parsear reasoning strings
+        _campeon_tier_nivel = _surf_fav_65.get('campeon_tier')
         if _campeon_tier_nivel:
             _tier_order_65 = ['grand_slam', 'atp1000', 'atp500', 'atp250', 'challenger', 'itf']
             if _campeon_tier_nivel in _tier_order_65 and tier in _tier_order_65:
@@ -1191,6 +1186,15 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
     _nombre_rival = jugador2 if player_key_sb == 'player1' else jugador1
     resultado['irp_fav']   = _irp_lookup(favored, _irp_data)
     resultado['irp_rival'] = _irp_lookup(_nombre_rival, _irp_data)
+
+    # ─── B108-06 / Nodo-113: weather_flag observacional ─────────────────────────
+    # Solo outdoor. No ajusta p_modelo — H113-01 acumula para decidir señal real.
+    _pais_torneo = partido.get('pais', '')
+    _superficie_partido = partido.get('superficie', partido.get('tipo_cancha', ''))
+    resultado['weather_flag'] = get_weather_flag(
+        pais=_pais_torneo,
+        superficie=_superficie_partido,
+    )
 
     # ─── Nodo-35 / F2: HISTORIAL_NO_EXTRAIDO — bloqueo en origen + NO_DATA status ──
     # Si la extracción de historial falló para cualquiera de los dos jugadores,
