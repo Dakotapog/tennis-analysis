@@ -1,6 +1,6 @@
 # Nodo-53 ADDENDUM — D53-06 a D53-10: Los Bugs que Decidieron el Partido
 
-> **Wikilinks:** [[Nodo-53-Auditoria-Corazon-Prediccion]] | [[Nodo-52-Shadow-Book-CLV-Tracking]] | [[Nodo-51-Plan-Estrategico-Data-Layer-Torneo]] | [[Nodo-28-Backtest-Limpio]]
+> **Wikilinks:** [[Nodo-53-Auditoria-Corazon-Prediccion]] | [[Nodo-52-Shadow-Book-CLV-Tracking]] | [[Nodo-51-Plan-Estrategico-Data-Layer-Torneo]] | ~~~~[[Nodo-28-Backtest-Limpio]]~~ _(MISSING)_~~ _(MISSING)_
 > **Fecha:** 2026-07-02
 > **Estado:** 📋 ESPECIFICADO — auditoría Fable completa, causa raíz verificada con código y números reales
 > **Contexto:** Fable identificó 5 problemas que el Nodo-53 original no recogía. Este addendum los documenta con bloques de código exactos, líneas, y aritmética verificada.

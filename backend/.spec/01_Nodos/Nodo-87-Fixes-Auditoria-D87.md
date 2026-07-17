@@ -1,6 +1,6 @@
 # Nodo-87 — Fixes de la Auditoría D87 (implementación de Nodo-86)
 
-> **Wikilinks:** [[Nodo-86-Auditoria-Fable5]] | [[Nodo-64-RFI-Return-From-Inactivity]] | [[Nodo-66-Plan-Trabajo-Semanal-Sonnet]] | [[Nodo-51-Plan-Estrategico-Data-Layer-Torneo]] | [[Nodo-70-CPPI]] | [[Nodo-72-Phantom-Identity-Guard]]
+> **Wikilinks:** [[Nodo-86-Auditoria-Fable5]] | [[Nodo-64-RFI-Return-From-Inactivity]] | [[Nodo-66-Plan-Trabajo-Semanal-Sonnet]] | [[Nodo-51-Plan-Estrategico-Data-Layer-Torneo]] | ~~[[Nodo-70-CPPI]]~~ _(MISSING — no implementado como Nodo independiente)_ | [[Nodo-72-Phantom-Identity-Guard]]
 > **Fecha:** 2026-07-11 | **Autor:** Fable 5 (implementación) — documentado por Sonnet 5
 > **Estado:** IMPLEMENTADO — 12 fixes de código + verificación pytest. Commit `2251667`.
 > **Verificación:** `pytest tests/ --no-cov -q` → **1804 passed, 0 failed** (WSL, post-fixes, 2026-07-11).

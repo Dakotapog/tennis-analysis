@@ -151,6 +151,61 @@ NO inventes contradicciones. Solo las evidentes."""
         return [f"[HAIKU] Error: {e}"]
 
 
+def _check_huerfanos() -> tuple[int, list[str]]:
+    """
+    D105-05: Cuenta Nodos sin wikilinks entrantes (huérfanos estructurales).
+    Si el número sube semana a semana → señal de que se escribe más rápido de lo que se conecta.
+    Persiste baseline en logs/huerfanos_baseline.json para tracking semana a semana.
+    Retorna (n_huerfanos, lista_ids_huerfanos).
+    """
+    import json as _json
+    archivos = list(SPEC_DIR.glob("Nodo-*.md"))
+
+    # Mapa id_str (sin ceros) → Path
+    todos: dict[str, Path] = {}
+    for f in archivos:
+        m = re.match(r'Nodo-(\d+)', f.stem)
+        if m:
+            nid = str(int(m.group(1)))  # normalizar: "007" → "7"
+            todos[nid] = f
+
+    # Contar referencias entrantes por nodo
+    entrantes: dict[str, int] = {nid: 0 for nid in todos}
+    for nid, f in todos.items():
+        try:
+            texto = f.read_text(encoding='utf-8', errors='replace')
+        except OSError:
+            continue
+        refs = re.findall(r'\[\[Nodo-(\d+)', texto)
+        for ref in refs:
+            ref_norm = str(int(ref)) if ref.isdigit() else ref
+            if ref_norm in entrantes and ref_norm != nid:
+                entrantes[ref_norm] += 1
+
+    huerfanos = sorted([nid for nid, cnt in entrantes.items() if cnt == 0], key=lambda x: int(x))
+    n = len(huerfanos)
+
+    # Baseline semana anterior
+    baseline_path = LOG_DIR / "huerfanos_baseline.json"
+    semana_anterior = None
+    if baseline_path.exists():
+        try:
+            datos = _json.loads(baseline_path.read_text())
+            semana_anterior = datos.get("count")
+        except Exception:
+            pass
+
+    # Guardar baseline actual
+    LOG_DIR.mkdir(exist_ok=True)
+    baseline_path.write_text(_json.dumps({
+        "fecha": datetime.now().strftime("%Y-%m-%d"),
+        "count": n,
+        "ids": huerfanos,
+    }, indent=2))
+
+    return n, huerfanos, semana_anterior
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Chequeo semanal de contradicciones CLAUDE.md vs nodos")
     parser.add_argument('--quick', action='store_true', help="Solo regex, sin LLM")
@@ -264,9 +319,39 @@ def main() -> None:
         else:
             print("  [WARN] Sin archivos Nodo-*.md en .spec/01_Nodos/")
 
+    # ── BLOQUE D: ritual de huérfanos (D105-05) ────────────────────────────────
+    print(f"\n{'─'*60}")
+    print("BLOQUE D — Huérfanos estructurales (Nodo-105 D105-05)")
+    print(f"{'─'*60}")
+    n_huerfanos, ids_huerfanos, semana_ant = _check_huerfanos()
+    if semana_ant is None:
+        delta_str = "(primera ejecución — baseline guardado)"
+        delta_icon = "ℹ"
+    else:
+        delta = n_huerfanos - semana_ant
+        if delta > 0:
+            delta_str = f"+{delta} vs semana anterior ({semana_ant}) — SEÑAL: se escribe más rápido de lo que se conecta"
+            delta_icon = "⚠"
+        elif delta < 0:
+            delta_str = f"{delta} vs semana anterior ({semana_ant}) — conexiones mejoraron"
+            delta_icon = "✓"
+        else:
+            delta_str = f"sin cambio vs semana anterior ({semana_ant})"
+            delta_icon = "="
+    print(f"  [{delta_icon}] Nodos huérfanos (0 wikilinks entrantes): {n_huerfanos}  {delta_str}")
+    if ids_huerfanos:
+        preview = ", ".join(f"Nodo-{i}" for i in ids_huerfanos[:8])
+        sufijo = f" …+{len(ids_huerfanos)-8}" if len(ids_huerfanos) > 8 else ""
+        print(f"      {preview}{sufijo}")
+    else:
+        print("      Ninguno — todos los nodos tienen al menos una cita entrante.")
+
     # Log a archivo
     LOG_DIR.mkdir(exist_ok=True)
-    log_entry = f"[{ts}] {passes}P {warns}W {contras}C — {len(nodo_files)} nodos | FABLE_pendientes={fable_pendientes}\n"
+    log_entry = (
+        f"[{ts}] {passes}P {warns}W {contras}C — {len(nodo_files)} nodos | "
+        f"FABLE_pendientes={fable_pendientes} | huerfanos={n_huerfanos}\n"
+    )
     (LOG_DIR / "contradicciones.log").open("a").write(log_entry)
 
     sys.exit(1 if contras > 0 else 0)

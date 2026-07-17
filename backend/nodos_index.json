@@ -1,9 +1,9 @@
 {
   "_meta": {
-    "generado": "2026-07-14T19:39:25",
-    "total_nodos": 100,
-    "total_py_files": 65,
-    "huerfanos_count": 0,
+    "generado": "2026-07-17T00:42:34",
+    "total_nodos": 108,
+    "total_py_files": 66,
+    "huerfanos_count": 1,
     "exclusiones_count": 19
   },
   "exclusiones": {
@@ -32,7 +32,7 @@
       "nodo_id": "01",
       "nodo_archivo": "Nodo-01-Edge-Calculator.md",
       "fecha": null,
-      "estado": null,
+      "estado": "historico",
       "archivos_mencionados": [
         "edge_calculator.py",
         "rivalry_analyzer.py",
@@ -43,7 +43,7 @@
       "nodo_id": "02",
       "nodo_archivo": "Nodo-02-Markov-Changepoint.md",
       "fecha": null,
-      "estado": null,
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/markov_analyzer.py",
         "analysis/rivalry_analyzer.py",
@@ -55,7 +55,7 @@
       "nodo_id": "03",
       "nodo_archivo": "Nodo-03-Scraper-Fix.md",
       "fecha": null,
-      "estado": null,
+      "estado": "historico",
       "archivos_mencionados": [
         "extraer_URL_partidos_version2.py",
         "extraer_historh2h.py",
@@ -67,7 +67,7 @@
       "nodo_id": "04",
       "nodo_archivo": "Nodo-04-Dataset-Fix.md",
       "fecha": null,
-      "estado": null,
+      "estado": "historico",
       "archivos_mencionados": [
         "aplicar_enhancer.py",
         "generar_dataset_plus.py",
@@ -78,7 +78,7 @@
       "nodo_id": "05",
       "nodo_archivo": "Nodo-05-Validacion-API.md",
       "fecha": null,
-      "estado": null,
+      "estado": "historico",
       "archivos_mencionados": [
         "tests/test_validacion_api.py",
         "validar_con_api.py"
@@ -88,7 +88,7 @@
       "nodo_id": "06",
       "nodo_archivo": "Nodo-06-Erdos-Graph.md",
       "fecha": null,
-      "estado": null,
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/erdos_graph.py",
         "analysis/rivalry_analyzer.py",
@@ -100,7 +100,7 @@
       "nodo_id": "07",
       "nodo_archivo": "Nodo-07-Strangler-Fig.md",
       "fecha": null,
-      "estado": "2026-05-30 | Prioridad: CERRADO | Patrón: Strangler Fig | Fase 1 ✅ COMPLETA | Fase 2 ✅ COMPLETA — T07-09 ✅ 2026-05-30 | 768 tests",
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/__init__.py",
         "browser_manager.py",
@@ -122,7 +122,7 @@
       "nodo_id": "08",
       "nodo_archivo": "Nodo-08-File-Selection-Bug.md",
       "fecha": null,
-      "estado": "2026-05-29 | Severidad: CRÍTICA | Tipo: Bug de Producción | Bug: línea 278",
+      "estado": "historico",
       "archivos_mencionados": [
         "extraer_historh2h.py",
         "scraping/file_utils.py",
@@ -135,7 +135,7 @@
       "nodo_id": "09",
       "nodo_archivo": "Nodo-09-API-Status-Keys.md",
       "fecha": null,
-      "estado": "2026-05-29 | Severidad: CRÍTICA | Tipo: Bug de Producción | Archivo: `validar_con_api.py`",
+      "estado": "historico",
       "archivos_mencionados": [
         "tests/test_validacion_api.py",
         "validar_con_api.py"
@@ -145,17 +145,123 @@
       "nodo_id": "10",
       "nodo_archivo": "Nodo-10-Surface-Propagation.md",
       "fecha": null,
-      "estado": "2026-05-30 — RESUELTO ✅ | Verificado en run real (16 partidos Roland Garros)",
+      "estado": "historico",
       "archivos_mencionados": [
         "extraer_URL_partidos_version2.py",
         "extraer_historh2h.py"
       ]
     },
     {
+      "nodo_id": "100",
+      "nodo_archivo": "Nodo-100-Taxonomia-Estrategias-Generacion-Combos.md",
+      "fecha": "2026-07-14",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "combo_confianza_builder.py",
+        "edge_calculator.py",
+        "extraer_URL_partidos_version2.py",
+        "extraer_historh2h.py",
+        "games_signal_calculator.py",
+        "generar_tabla_favoritos2.py",
+        "rival_value_betslip.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "100",
+      "nodo_archivo": "Nodo-100-Triple-Convergencia-Live.md",
+      "fecha": "2026-07-14",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "close_snapshot_server.py",
+        "live_edge_monitor.py",
+        "scripts/live_dashboard_generator.py",
+        "scripts/live_edge_monitor.py",
+        "tests/test_nodo100_triple_conv.py"
+      ]
+    },
+    {
+      "nodo_id": "101",
+      "nodo_archivo": "Nodo-101-Shadow-Book-Live-CLV.md",
+      "fecha": "2026-07-14",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "live_edge_monitor.py",
+        "scripts/live_edge_monitor.py",
+        "shadow_book.py",
+        "tests/test_nodo101_live_clv.py"
+      ]
+    },
+    {
+      "nodo_id": "102",
+      "nodo_archivo": "Nodo-102-Hypothesis-Tracking-H98-H100.md",
+      "fecha": "2026-07-14",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "edge_calculator.py",
+        "shadow_book.py",
+        "tests/test_nodo102_hypothesis_tracking.py"
+      ]
+    },
+    {
+      "nodo_id": "103",
+      "nodo_archivo": "Nodo-103-Auditoria-Combo-Builder-Gates-n-h2h.md",
+      "fecha": "2026-07-16",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "combo_confianza_builder.py",
+        "edge_calculator.py",
+        "rivalry_analyzer.py",
+        "scripts/signal_audit.py",
+        "signal_audit.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "104",
+      "nodo_archivo": "Nodo-104-Graphify-Faceted-Filter-Wikilinks-Audit.md",
+      "fecha": "2026-07-16",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "Intelligent_ml_enhancer.py",
+        "aplicar_enhancer.py",
+        "archivo.py",
+        "edge_calculator.py",
+        "generar_dataset_plus.py",
+        "rivalry_analyzer.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "105",
+      "nodo_archivo": "Nodo-105-Knowledge-Graph-Navigation-Zettelkasten.md",
+      "fecha": "2026-07-16",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "analysis/erdos_graph.py",
+        "check_contradictions.py",
+        "edge_calculator.py",
+        "scripts/nodo_pagerank.py",
+        "scripts/rebuild_nodos_index.py"
+      ]
+    },
+    {
+      "nodo_id": "106",
+      "nodo_archivo": "Nodo-106-Retroactive-Settle-Workflow.md",
+      "fecha": "2026-07-16",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "shadow_book.py",
+        "validar_con_api.py"
+      ]
+    },
+    {
       "nodo_id": "11",
       "nodo_archivo": "Nodo-11-Inventario-Scripts-Legado.md",
       "fecha": null,
-      "estado": "2026-05-30 — CERRADO ✅ | Todas las decisiones ejecutadas y verificadas en disco",
+      "estado": "historico",
       "archivos_mencionados": [
         "aplicar_enhancer.py",
         "consultar_resultados_historicos.py",
@@ -173,7 +279,7 @@
       "nodo_id": "12",
       "nodo_archivo": "Nodo-12-Inventario-Infraestructura-Legado.md",
       "fecha": null,
-      "estado": "2026-05-30 — EJECUTADO ✅ | Auditoría + limpieza completadas",
+      "estado": "historico",
       "archivos_mencionados": [
         "__init__.py",
         "app.py",
@@ -196,7 +302,7 @@
       "nodo_id": "13",
       "nodo_archivo": "Nodo-13-Trader-EV-Tenis.md",
       "fecha": null,
-      "estado": "2026-06-01 — v2.0 HEDGE FUND LAYER ✅ | Sesión 1: +$25,000 (+25% bankroll) | Sesión 2: 8/8=100% RG R4 | bankroll $100,000 → $125,000",
+      "estado": "historico",
       "archivos_mencionados": [
         "edge_calculator.py",
         "generar_tabla_favoritos2.py",
@@ -209,7 +315,7 @@
       "nodo_id": "14",
       "nodo_archivo": "Nodo-14-Validacion-Live-Conexiones.md",
       "fecha": null,
-      "estado": "2026-05-30 — P&L REGISTRADO ✅ | +$25,000 (+25% bankroll) | accuracy 70% (7/10) | p_historica calibrada 0.52→0.68",
+      "estado": "historico",
       "archivos_mencionados": [
         "markov_analyzer.py",
         "trader_ev_tenis.py",
@@ -220,7 +326,7 @@
       "nodo_id": "15",
       "nodo_archivo": "Nodo-15-Portfolio-HedgeFund.md",
       "fecha": null,
-      "estado": "2026-06-01 — IMPLEMENTADO ✅ | Sistema cobertura por exclusión + Portfolio Kelly + VaR/CVaR activos",
+      "estado": "activo",
       "archivos_mencionados": [
         "edge_calculator.py",
         "trader_ev_tenis.py"
@@ -230,7 +336,7 @@
       "nodo_id": "16",
       "nodo_archivo": "Nodo-16-Multi-Torneo-Pipeline.md",
       "fecha": null,
-      "estado": "✅ IMPLEMENTADO — 2026-06-02",
+      "estado": "historico",
       "archivos_mencionados": [
         "edge_calculator.py",
         "extraer_URL_partidos_version2.py",
@@ -244,7 +350,7 @@
       "nodo_id": "17",
       "nodo_archivo": "Nodo-17-Calibracion-Por-Tier.md",
       "fecha": null,
-      "estado": "🟡 FASE 1 IMPLEMENTADA — 2026-06-03 | Tests: 898 passed",
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/elo_system.py",
         "analysis/markov_analyzer.py",
@@ -260,7 +366,7 @@
       "nodo_id": "18",
       "nodo_archivo": "Nodo-18-PELT-Recency-Alpha.md",
       "fecha": null,
-      "estado": "✅ COMPLETADO — 2026-06-03",
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/markov_analyzer.py",
         "analysis/rivalry_analyzer.py",
@@ -272,7 +378,7 @@
       "nodo_id": "19",
       "nodo_archivo": "Nodo-19-H2H-Immunity-Dampener.md",
       "fecha": null,
-      "estado": "✅ COMPLETADO — 2026-06-03",
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/markov_analyzer.py",
         "analysis/rivalry_analyzer.py",
@@ -284,7 +390,7 @@
       "nodo_id": "20",
       "nodo_archivo": "Nodo-20-PageRank-Erdos-Quality.md",
       "fecha": null,
-      "estado": "✅ COMPLETADO — 2026-06-03",
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/erdos_graph.py",
         "analysis/rivalry_analyzer.py",
@@ -297,7 +403,7 @@
       "nodo_id": "21",
       "nodo_archivo": "Nodo-21-Pesos-Diferenciados-Por-Tier.md",
       "fecha": null,
-      "estado": "✅ COMPLETADO — Fases 1+2+3 implementadas — 2026-06-03",
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/elo_system.py",
         "analysis/rivalry_analyzer.py",
@@ -315,7 +421,7 @@
       "nodo_id": "23",
       "nodo_archivo": "Nodo-23-Cross-Tier-Mega-Combos.md",
       "fecha": null,
-      "estado": "🔧 EN IMPLEMENTACIÓN — 2026-06-14",
+      "estado": "historico",
       "archivos_mencionados": [
         "betplay_combo_builder.py"
       ]
@@ -324,7 +430,7 @@
       "nodo_id": "24",
       "nodo_archivo": "Nodo-24-Bookmaker-Blindness-Scoring.md",
       "fecha": null,
-      "estado": "🔧 IMPLEMENTADO — 2026-06-14",
+      "estado": "historico",
       "archivos_mencionados": [
         "betplay_combo_builder.py",
         "edge_calculator.py"
@@ -334,7 +440,7 @@
       "nodo_id": "25",
       "nodo_archivo": "Nodo-25-Dispersion-Guard-Safe-Combos.md",
       "fecha": null,
-      "estado": "📋 SPEC COMPLETO — 2026-06-14",
+      "estado": "historico",
       "archivos_mencionados": [
         "betplay_combo_builder.py",
         "trader_ev_tenis.py"
@@ -344,7 +450,7 @@
       "nodo_id": "26",
       "nodo_archivo": "Nodo-26-Cross-Sectional-Signals.md",
       "fecha": null,
-      "estado": "🔧 IMPLEMENTADO --- 2026-06-14",
+      "estado": "historico",
       "archivos_mencionados": [
         "betplay_combo_builder.py",
         "extraer_partidos_api.py",
@@ -356,7 +462,7 @@
       "nodo_id": "27",
       "nodo_archivo": "Nodo-27-Pipeline-Tracker-Observabilidad.md",
       "fecha": null,
-      "estado": "🔧 IMPLEMENTADO --- 2026-06-17",
+      "estado": "historico",
       "archivos_mencionados": [
         "config.py",
         "pipeline_tracker.py",
@@ -367,7 +473,7 @@
       "nodo_id": "28",
       "nodo_archivo": "Nodo-28-Conditional-Decomposition-Metamodel.md",
       "fecha": null,
-      "estado": "IMPLEMENTADO (Fase 1 + Fase 1.5 + Fase 2 + Post-Mortem 19-jun) --- 2026-06-19 | Tests: 1033→1113 passed",
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/rivalry_analyzer.py",
         "edge_calculator.py",
@@ -378,7 +484,7 @@
       "nodo_id": "29",
       "nodo_archivo": "Nodo-29-Circuit-Asymmetry-Deflator.md",
       "fecha": null,
-      "estado": "IMPLEMENTADO (Fase 1-4) + VALIDADO --- 2026-06-19 impl / 2026-06-28 backtest | Tests: 1050→1113 passed",
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/rivalry_analyzer.py",
         "backtest_nodo28_limpio.py",
@@ -392,7 +498,7 @@
       "nodo_id": "30",
       "nodo_archivo": "Nodo-30-Tournament-Momentum-Output-Signals.md",
       "fecha": null,
-      "estado": "IMPLEMENTADO — 2026-06-20 | Tests: 1113→1143 passed | 30 nuevos tests T30-01 a T30-30 | F6 player_profitability.py ✅ | F7 JUGADOR RENTABLE en SENALES ESPECIALES ✅",
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/player_profitability.py",
         "analysis/rivalry_analyzer.py",
@@ -410,7 +516,7 @@
       "nodo_id": "31",
       "nodo_archivo": "Nodo-31-Future-Match-Data-Leakage.md",
       "fecha": null,
-      "estado": "SOLUCIONADO + BLINDADO --- 2026-06-20 12:55 | Bugs: 10 encontrados, 10 corregidos | Tests: 1143→1210 passed (67 nuevos) | Resultado: Eala +13.0% edge, Carnicella-Ekstrand data completa ✅",
+      "estado": "historico",
       "archivos_mencionados": [
         "edge_calculator.py",
         "extraer_historh2h.py",
@@ -426,7 +532,7 @@
       "nodo_id": "32",
       "nodo_archivo": "Nodo-32-Calibracion-Pipeline-Señales-Rotas.md",
       "fecha": "2026-06-22",
-      "estado": null,
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/rivalry_analyzer.py",
         "betplay_combo_builder.py",
@@ -445,7 +551,7 @@
       "nodo_id": "33",
       "nodo_archivo": "Nodo-33-Filtro-Coinflip-Sin-H2H.md",
       "fecha": "2026-06-24",
-      "estado": null,
+      "estado": "historico",
       "archivos_mencionados": [
         "betplay_combo_builder.py",
         "betslip_registrar.py",
@@ -457,7 +563,7 @@
       "nodo_id": "34",
       "nodo_archivo": "Nodo-34-Corrupcion-Datos-Extraccion-H2H.md",
       "fecha": "2026-06-24",
-      "estado": null,
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/ranking_manager.py",
         "edge_calculator.py",
@@ -472,7 +578,7 @@
       "nodo_id": "35",
       "nodo_archivo": "Nodo-35-Historial-Vacio-Flag-Pipeline.md",
       "fecha": "2026-06-25",
-      "estado": "⏳ PENDIENTE",
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/rivalry_analyzer.py",
         "edge_calculator.py",
@@ -488,7 +594,7 @@
       "nodo_id": "36",
       "nodo_archivo": "Nodo-36-Unicode-Acento-Apellidos-Cortos.md",
       "fecha": "2026-06-25",
-      "estado": "✅ CERRADO — 2026-06-25",
+      "estado": "historico",
       "archivos_mencionados": [
         "ninja_h2h_parser.py",
         "scraping/ninja_h2h_parser.py",
@@ -500,7 +606,7 @@
       "nodo_id": "37",
       "nodo_archivo": "Nodo-37-Combo-Confianza-Builder.md",
       "fecha": null,
-      "estado": "SUPERSEDED por [[Nodo-38-Portfolio-Aislamiento-Riesgo]] — arquitectura CORE/Satellite/Moonshot reemplaza progresión C5→C20",
+      "estado": "historico",
       "archivos_mencionados": [
         "betplay_combo_builder.py",
         "betslip_registrar.py",
@@ -517,7 +623,7 @@
       "nodo_id": "38",
       "nodo_archivo": "Nodo-38-Portfolio-Aislamiento-Riesgo.md",
       "fecha": null,
-      "estado": "🔄 EN CURSO",
+      "estado": "historico",
       "archivos_mencionados": [
         "betplay_combo_builder.py",
         "combo_confianza_builder.py",
@@ -530,7 +636,7 @@
       "nodo_id": "38",
       "nodo_archivo": "Nodo-38B-Cobertura-Expandida-Sin-CatC.md",
       "fecha": null,
-      "estado": "✅ COMPLETO",
+      "estado": "historico",
       "archivos_mencionados": [
         "combo_confianza_builder.py",
         "tests/test_nodo38.py"
@@ -540,7 +646,7 @@
       "nodo_id": "39",
       "nodo_archivo": "Nodo-39-Kambi-Filtro-Fecha.md",
       "fecha": "2026-06-27",
-      "estado": "✅ COMPLETO",
+      "estado": "suspendido",
       "archivos_mencionados": [
         "extraer_partidos_api.py",
         "scraping/kambi_tennis.py"
@@ -550,7 +656,7 @@
       "nodo_id": "40",
       "nodo_archivo": "Nodo-40-Games-Sets-Signal-Layer.md",
       "fecha": null,
-      "estado": "✅ COMPLETO — Fases 1-5 implementadas | 35 tests pasan",
+      "estado": "historico",
       "archivos_mencionados": [
         "betplay_combo_builder.py",
         "betslip_registrar.py",
@@ -570,7 +676,7 @@
       "nodo_id": "41",
       "nodo_archivo": "Nodo-41-ML-Dataset-Cleanup-Trazabilidad.md",
       "fecha": "2026-06-29",
-      "estado": null,
+      "estado": "suspendido",
       "archivos_mencionados": [
         "aplicar_enhancer.py",
         "generar_dataset_plus.py",
@@ -582,7 +688,7 @@
       "nodo_id": "42",
       "nodo_archivo": "Nodo-42-Grass-Bootstrap.md",
       "fecha": "2026-06-29",
-      "estado": null,
+      "estado": "historico",
       "archivos_mencionados": [
         "betslip_registrar.py",
         "combo_confianza_builder.py",
@@ -594,7 +700,7 @@
       "nodo_id": "43",
       "nodo_archivo": "Nodo-43-PELT-Cold-Rival-Promo-Filter.md",
       "fecha": "2026-06-29",
-      "estado": "IMPLEMENTADO VIA NODO-44 — usar `--was --was-min-edge 1` para PCRS puro (edge>0)",
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/markov_analyzer.py",
         "betplay_combo_builder.py",
@@ -605,7 +711,7 @@
       "nodo_id": "44",
       "nodo_archivo": "Nodo-44-Watchlist-Alpha-Signal.md",
       "fecha": "2026-06-29",
-      "estado": "IMPLEMENTADO 2026-06-29 — D44-01 + D44-02 completados",
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/markov_analyzer.py",
         "betplay_combo_builder.py",
@@ -616,7 +722,7 @@
       "nodo_id": "45",
       "nodo_archivo": "Nodo-45-Temporal-History-Fallback.md",
       "fecha": null,
-      "estado": "✅ IMPLEMENTADO 2026-06-30 — D45-01 a D45-05 completados, 1438 tests pasando",
+      "estado": "historico",
       "archivos_mencionados": [
         "extraer_partidos_api.py",
         "generar_tabla_favoritos2.py",
@@ -632,7 +738,7 @@
       "nodo_id": "46",
       "nodo_archivo": "Nodo-46-Markov-Surface-Context-Discount.md",
       "fecha": null,
-      "estado": "HALLAZGO DOCUMENTADO — pendiente implementación (acumular más n antes de calibrar constantes)",
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/markov_analyzer.py",
         "analysis/rivalry_analyzer.py",
@@ -644,7 +750,7 @@
       "nodo_id": "47",
       "nodo_archivo": "Nodo-47-Inject-Kambi-Ranking-Guard-Bug.md",
       "fecha": null,
-      "estado": "✅ RESUELTO 2026-06-30",
+      "estado": "historico",
       "archivos_mencionados": [
         "scraping/ninja_h2h_parser.py"
       ]
@@ -653,7 +759,7 @@
       "nodo_id": "48",
       "nodo_archivo": "Nodo-48-FlashScore-Odds-Scraper-Testing.md",
       "fecha": null,
-      "estado": "✅ IMPLEMENTADO 2026-06-30 — D48-BUG-01, D48-01, D48-02, D48-04 completados",
+      "estado": "historico",
       "archivos_mencionados": [
         "backend/extraer_cuotas_partidos.py",
         "config.py",
@@ -670,7 +776,7 @@
       "nodo_id": "49",
       "nodo_archivo": "Nodo-49-Playwright-H2H-Fallback-n-h2h-0.md",
       "fecha": null,
-      "estado": "⏳ EN IMPLEMENTACION",
+      "estado": "historico",
       "archivos_mencionados": [
         "extraer_historh2h.py",
         "extraer_historh2h_version2.py",
@@ -686,7 +792,7 @@
       "nodo_id": "50",
       "nodo_archivo": "Nodo-50-Filtro-Torneo-PASO1.md",
       "fecha": null,
-      "estado": "✅ IMPLEMENTADO 2026-07-01",
+      "estado": "historico",
       "archivos_mencionados": [
         "config.py",
         "extraer_historh2h.py",
@@ -699,7 +805,7 @@
       "nodo_id": "51",
       "nodo_archivo": "Nodo-51-Plan-Estrategico-Data-Layer-Torneo.md",
       "fecha": null,
-      "estado": "📋 PLAN ESTRATÉGICO — nodo maestro, define orden de implementación de Fases 0-5",
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/markov_analyzer.py",
         "core/data_contract.py",
@@ -716,7 +822,7 @@
       "nodo_id": "52",
       "nodo_archivo": "Nodo-52-ADDENDUM-Integracion-Contexto-Completo.md",
       "fecha": "2026-07-02",
-      "estado": "📋 CORRECCIONES A NODO-52 — leer JUNTO con el Nodo-52 original antes de implementar",
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/player_profitability.py",
         "betplay_combo_builder.py",
@@ -729,7 +835,7 @@
       "nodo_id": "52",
       "nodo_archivo": "Nodo-52-Shadow-Book-CLV-Tracking.md",
       "fecha": null,
-      "estado": "📋 ESPECIFICADO — listo para implementación por Sonnet",
+      "estado": "historico",
       "archivos_mencionados": [
         "edge_calculator.py",
         "shadow_book.py",
@@ -740,7 +846,7 @@
       "nodo_id": "53",
       "nodo_archivo": "Nodo-53-ADDENDUM-2-Correcciones-Fable.md",
       "fecha": "2026-07-02",
-      "estado": "📋 FIRMADO POR FABLE — implementación autorizada con estas correcciones incorporadas",
+      "estado": "historico",
       "archivos_mencionados": [
         "extraer_historh2h.py",
         "normalization.py",
@@ -752,7 +858,7 @@
       "nodo_id": "53",
       "nodo_archivo": "Nodo-53-ADDENDUM-3-Fable-Final.md",
       "fecha": "2026-07-02",
-      "estado": "📋 FIRMADO FABLE — este documento reemplaza las Fases A-E del ADDENDUM-2",
+      "estado": "historico",
       "archivos_mencionados": [
         "edge_calculator.py",
         "generar_tabla_favoritos2.py",
@@ -765,7 +871,7 @@
       "nodo_id": "53",
       "nodo_archivo": "Nodo-53-ADDENDUM-D53-06-a-D53-10.md",
       "fecha": "2026-07-02",
-      "estado": "📋 ESPECIFICADO — auditoría Fable completa, causa raíz verificada con código y números reales",
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/rivalry_analyzer.py",
         "normalization.py",
@@ -777,7 +883,7 @@
       "nodo_id": "53",
       "nodo_archivo": "Nodo-53-Auditoria-Corazon-Prediccion.md",
       "fecha": null,
-      "estado": "📋 ESPECIFICADO — para auditoría de Fable antes de cualquier implementación",
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/markov_analyzer.py",
         "analysis/rivalry_analyzer.py",
@@ -794,7 +900,7 @@
       "nodo_id": "54",
       "nodo_archivo": "Nodo-54-Brief-Fable-Funnel-Deploy.md",
       "fecha": "2026-07-03",
-      "estado": "RESUELTO via Nodo-55 (2026-07-03) — ver [[Nodo-55-Respuesta-Fable-Funnel-Deploy]]",
+      "estado": "historico",
       "archivos_mencionados": [
         "config.py",
         "edge_calculator.py",
@@ -808,7 +914,7 @@
       "nodo_id": "55",
       "nodo_archivo": "Nodo-55-Respuesta-Fable-Funnel-Deploy.md",
       "fecha": "2026-07-03",
-      "estado": "COMPLETO (2026-07-03) — 1598 tests pasan",
+      "estado": "historico",
       "archivos_mencionados": [
         "betplay_combo_builder.py",
         "run_daily.py",
@@ -820,7 +926,7 @@
       "nodo_id": "56",
       "nodo_archivo": "Nodo-56-Bug-Normalizacion-Pesos.md",
       "fecha": "2026-07-03",
-      "estado": "ABIERTO",
+      "estado": "historico",
       "archivos_mencionados": [
         "generar_tabla_favoritos2.py",
         "rivalry_analyzer.py"
@@ -830,7 +936,7 @@
       "nodo_id": "57",
       "nodo_archivo": "Nodo-57-Penalizacion-Inactividad-Campeon-Validacion.md",
       "fecha": "2026-07-03",
-      "estado": "✅ COMPLETO — 11 tests nuevos + 1612 tests totales (fue 1601)",
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/rivalry_analyzer.py",
         "generar_tabla_favoritos2.py",
@@ -841,7 +947,7 @@
       "nodo_id": "58",
       "nodo_archivo": "Nodo-58-Dashboard-Observabilidad.md",
       "fecha": "2026-07-03",
-      "estado": "📋 ESPECIFICADO Y FIRMADO FABLE — listo para Sonnet",
+      "estado": "historico",
       "archivos_mencionados": [
         "dashboard.py",
         "odds_series.py",
@@ -853,7 +959,7 @@
       "nodo_id": "59",
       "nodo_archivo": "Nodo-59-Motor-Agentico-Odometro-Dream.md",
       "fecha": "2026-07-03",
-      "estado": "✅ COMPLETO — 21 tests + 1649 tests totales (M0+M1 completos, M2 post-30d shadow book)",
+      "estado": "historico",
       "archivos_mencionados": [
         "run_daily.py",
         "token_odometer.py"
@@ -863,14 +969,14 @@
       "nodo_id": "60",
       "nodo_archivo": "Nodo-60-ADDENDUM-FABLE-Auditoria-Tres-Carriles.md",
       "fecha": "2026-07-05",
-      "estado": "📋 FIRMADO FABLE — IMPLEMENTADO + A60-01 CERRADO 2026-07-05. GCS_MULT GATED. H60-01 acumulando (n=54 settled, hit=64.8%).",
+      "estado": "gateado",
       "archivos_mencionados": []
     },
     {
       "nodo_id": "60",
       "nodo_archivo": "Nodo-60-GCS-Grass-Surface-Champion-Signal.md",
       "fecha": null,
-      "estado": "✅ COMPLETO",
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/rivalry_analyzer.py",
         "combo_confianza_builder.py",
@@ -882,7 +988,7 @@
       "nodo_id": "61",
       "nodo_archivo": "Nodo-61-GCS-Season-Window-Fix.md",
       "fecha": null,
-      "estado": "✅ IMPLEMENTADO 2026-07-06 — 1669 tests (10 nuevos T61-01→T61-10). Bug F0+F1 cerrados.",
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/rivalry_analyzer.py",
         "dashboard.py",
@@ -895,7 +1001,7 @@
       "nodo_id": "62",
       "nodo_archivo": "Nodo-62-Signal-Bridge.md",
       "fecha": "2026-07-06",
-      "estado": "IMPLEMENTADO",
+      "estado": "historico",
       "archivos_mencionados": [
         "combo_confianza_builder.py",
         "rivalry_analyzer.py",
@@ -907,7 +1013,7 @@
       "nodo_id": "63",
       "nodo_archivo": "Nodo-63-Anchor-Combo-Builder.md",
       "fecha": "2026-07-06",
-      "estado": "COMPLETO",
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/rivalry_analyzer.py",
         "combo_confianza_builder.py",
@@ -922,7 +1028,7 @@
       "nodo_id": "64",
       "nodo_archivo": "Nodo-64-RFI-Return-From-Inactivity.md",
       "fecha": null,
-      "estado": "BORRADOR — hipótesis pre-registrada H76-01, implementación pendiente (n_stop=30)",
+      "estado": "historico",
       "archivos_mencionados": [
         "edge_calculator.py",
         "generar_tabla_favoritos2.py",
@@ -933,7 +1039,7 @@
       "nodo_id": "65",
       "nodo_archivo": "Nodo-65-Convergencia-Multi-Senal-Patron-Combos.md",
       "fecha": null,
-      "estado": "IMPLEMENTADO — todas las deudas D65-01→D65-07 resueltas (2026-07-10)",
+      "estado": "historico",
       "archivos_mencionados": [
         "combo_confianza_builder.py",
         "edge_calculator.py",
@@ -946,7 +1052,7 @@
       "nodo_id": "66",
       "nodo_archivo": "Nodo-66-Plan-Trabajo-Semanal-Sonnet.md",
       "fecha": "2026-07-11",
-      "estado": null,
+      "estado": "historico",
       "archivos_mencionados": [
         "check_contradictions.py",
         "resultados_finales.py",
@@ -960,7 +1066,7 @@
       "nodo_id": "67",
       "nodo_archivo": "Nodo-67-Integracion-Herramientas.md",
       "fecha": "2026-07-11",
-      "estado": null,
+      "estado": "historico",
       "archivos_mencionados": [
         "betslip_registrar.py",
         "combo_confianza_builder.py",
@@ -977,7 +1083,7 @@
       "nodo_id": "68",
       "nodo_archivo": "Nodo-68-Rival-Value-Flip.md",
       "fecha": "2026-07-11",
-      "estado": "PRE-REGISTRO PENDIENTE (H88-01) — implementación observacional esta semana (Sonnet)",
+      "estado": "historico",
       "archivos_mencionados": [
         "edge_calculator.py",
         "generar_tabla_favoritos2.py",
@@ -990,7 +1096,7 @@
       "nodo_id": "72",
       "nodo_archivo": "Nodo-72-Phantom-Identity-Guard.md",
       "fecha": "2026-07-08",
-      "estado": "COMPLETO",
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/rivalry_analyzer.py",
         "edge_calculator.py",
@@ -1002,7 +1108,7 @@
       "nodo_id": "73",
       "nodo_archivo": "Nodo-73-n8n-CloseSnapshot-Timing.md",
       "fecha": "2026-07-09",
-      "estado": "IMPLEMENTADO",
+      "estado": "historico",
       "archivos_mencionados": [
         "close_snapshot_server.py",
         "close_snapshot_trigger.py",
@@ -1014,7 +1120,7 @@
       "nodo_id": "74",
       "nodo_archivo": "Nodo-74-Combo-Governor.md",
       "fecha": "2026-07-09",
-      "estado": "BORRADOR — condición de graduación pendiente (ver Decisión C63-B)",
+      "estado": "historico",
       "archivos_mencionados": [
         "betplay_combo_builder.py",
         "combo_governor.py",
@@ -1025,7 +1131,7 @@
       "nodo_id": "75",
       "nodo_archivo": "Nodo-75-Nodos-Index.md",
       "fecha": "2026-07-09",
-      "estado": "BORRADOR — esperando confirmación antes de generar el índice",
+      "estado": "historico",
       "archivos_mencionados": [
         "Intelligent_ml_enhancer.py",
         "archivo.py",
@@ -1052,7 +1158,7 @@
       "nodo_id": "76",
       "nodo_archivo": "Nodo-76-Combo-Registry.md",
       "fecha": "2026-07-09",
-      "estado": "BORRADOR — esperando confirmación",
+      "estado": "historico",
       "archivos_mencionados": [
         "combo_governor.py",
         "combo_registry.py",
@@ -1067,7 +1173,7 @@
       "nodo_id": "78",
       "nodo_archivo": "Nodo-78-Protocolo-Auditoria.md",
       "fecha": "2026-07-09",
-      "estado": "PROPUESTO — para aplicar tal cual, sin reinterpretar",
+      "estado": "historico",
       "archivos_mencionados": [
         "browser_manager.py",
         "check_contradictions.py",
@@ -1082,7 +1188,7 @@
       "nodo_id": "79",
       "nodo_archivo": "Nodo-79-MinBet-Por-Tier.md",
       "fecha": "2026-07-10",
-      "estado": "BORRADOR — modo sombra activo desde 2026-07-10",
+      "estado": "activo",
       "archivos_mencionados": [
         "tests/test_nodo79_minbet_shadow.py",
         "trader_ev_tenis.py"
@@ -1092,7 +1198,7 @@
       "nodo_id": "80",
       "nodo_archivo": "Nodo-80-Kambi-Name-Matching.md",
       "fecha": "2026-07-10",
-      "estado": "IMPLEMENTADO 2026-07-11 — Opción 1 (candidatos múltiples) en `close_snapshot()` de shadow_book.py",
+      "estado": "historico",
       "archivos_mencionados": [
         "scraping/kambi_tennis.py",
         "shadow_book.py",
@@ -1104,7 +1210,7 @@
       "nodo_id": "81",
       "nodo_archivo": "Nodo-81-Settlement-Name-Normalize.md",
       "fecha": "2026-07-11",
-      "estado": "IMPLEMENTADO 2026-07-11 — `_normalize_name_match` Tier 3a en `settle()` de shadow_book.py",
+      "estado": "historico",
       "archivos_mencionados": [
         "core/player_registry.py",
         "shadow_book.py",
@@ -1115,7 +1221,7 @@
       "nodo_id": "82",
       "nodo_archivo": "Nodo-82-Kambi-Match-ID-Structural.md",
       "fecha": "2026-07-11",
-      "estado": "GATEADO — criterio de activación definido, NO implementar hasta cumplir gate",
+      "estado": "gateado",
       "archivos_mencionados": [
         "scraping/kambi_tennis.py",
         "shadow_book.py",
@@ -1126,7 +1232,7 @@
       "nodo_id": "83",
       "nodo_archivo": "Nodo-83-Graphify-Server.md",
       "fecha": "2026-07-11",
-      "estado": "IMPLEMENTADO",
+      "estado": "historico",
       "archivos_mencionados": [
         "graphify_server.py"
       ]
@@ -1135,14 +1241,14 @@
       "nodo_id": "84",
       "nodo_archivo": "Nodo-84-Graphify-3D.md",
       "fecha": "2026-07-11",
-      "estado": "IMPLEMENTADO",
+      "estado": "historico",
       "archivos_mencionados": []
     },
     {
       "nodo_id": "85",
       "nodo_archivo": "Nodo-85-Graphify-Fase3.md",
       "fecha": "2026-07-11",
-      "estado": "IMPLEMENTADO",
+      "estado": "historico",
       "archivos_mencionados": [
         "graphify_report.py",
         "graphify_server.py",
@@ -1153,7 +1259,7 @@
       "nodo_id": "86",
       "nodo_archivo": "Nodo-86-Auditoria-Fable5.md",
       "fecha": "2026-07-11",
-      "estado": "DIAGNÓSTICO PURO — cero cambios de código aplicados. Cada fix se decide con el usuario, uno por uno.",
+      "estado": "historico",
       "archivos_mencionados": [
         "betslip_registrar.py",
         "core/data_contract.py",
@@ -1165,7 +1271,7 @@
       "nodo_id": "87",
       "nodo_archivo": "Nodo-87-Fixes-Auditoria-D87.md",
       "fecha": "2026-07-11",
-      "estado": "IMPLEMENTADO — 12 fixes de código + verificación pytest. Commit `2251667`.",
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/rivalry_analyzer.py",
         "betplay_combo_builder.py",
@@ -1181,7 +1287,7 @@
       "nodo_id": "88",
       "nodo_archivo": "Nodo-88-Graphify-Fase4-Report.md",
       "fecha": "2026-07-12",
-      "estado": "IMPLEMENTADO",
+      "estado": "historico",
       "archivos_mencionados": [
         "betplay_combo_builder.py",
         "check_contradictions.py",
@@ -1196,12 +1302,13 @@
       "nodo_id": "89",
       "nodo_archivo": "Nodo-89-Sistema-Inteligencia-Integral.md",
       "fecha": null,
-      "estado": null,
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/pattern_recognition.py",
         "betplay_combo_builder.py",
         "core/player_registry.py",
         "edge_calculator.py",
+        "extraer_URL_partidos_version2.py",
         "extraer_historh2h.py",
         "extraer_partidos_api.py",
         "games_signal_calculator.py",
@@ -1212,6 +1319,7 @@
         "run_daily_morning.py",
         "scraping/injury_tracker.py",
         "scraping/news_intelligence.py",
+        "scraping/ninja_h2h_parser.py",
         "scraping/odds_aggregator.py",
         "scraping/realtime_intelligence.py",
         "scraping/weather_intelligence.py",
@@ -1224,7 +1332,7 @@
       "nodo_id": "90",
       "nodo_archivo": "Nodo-90-Auditoria-Fable-Nodo89.md",
       "fecha": "2026-07-12",
-      "estado": "AUDITORÍA COMPLETA. Nodo-89 queda como historia inmutable; las correcciones de este nodo tienen precedencia (§10 CLAUDE.md).",
+      "estado": "gateado",
       "archivos_mencionados": [
         "analysis/ranking_manager.py",
         "betplay_combo_builder.py",
@@ -1239,7 +1347,7 @@
       "nodo_id": "91",
       "nodo_archivo": "Nodo-91-Sprint1-Capas-Fallback-Implementacion.md",
       "fecha": "2026-07-12",
-      "estado": null,
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/ranking_manager.py",
         "betplay_combo_builder.py",
@@ -1254,7 +1362,7 @@
       "nodo_id": "92",
       "nodo_archivo": "Nodo-92-Sprint1-Implementado.md",
       "fecha": "2026-07-13",
-      "estado": "SPRINT 1 COMPLETO — S1-A→S1-F + H89-01/H89-02 pre-registrados (aprobados usuario 2026-07-13)",
+      "estado": "historico",
       "archivos_mencionados": [
         "analysis/ranking_manager.py",
         "betplay_combo_builder.py",
@@ -1271,7 +1379,7 @@
       "nodo_id": "93",
       "nodo_archivo": "Nodo-93-Sprint2-Implementado.md",
       "fecha": "2026-07-13",
-      "estado": "SPRINT 2 COMPLETO — D90-03 + D90-01",
+      "estado": "historico",
       "archivos_mencionados": [
         "betplay_combo_builder.py",
         "combo_confianza_builder.py",
@@ -1289,7 +1397,7 @@
       "nodo_id": "94",
       "nodo_archivo": "Nodo-94-Sprint3-PlayerIntelligence.md",
       "fecha": "2026-07-13",
-      "estado": "SPRINT 3 COMPLETO — S3-A (PlayerIntelligence) + S3-B (kambi en trader)",
+      "estado": "historico",
       "archivos_mencionados": [
         "build_player_db.py",
         "edge_calculator.py",
@@ -1301,7 +1409,7 @@
       "nodo_id": "95",
       "nodo_archivo": "Nodo-95-Sprint4-PatternRecognition.md",
       "fecha": null,
-      "estado": "COMPLETO 2026-07-13",
+      "estado": "historico",
       "archivos_mencionados": [
         "scripts/pattern_recognition.py",
         "tests/test_nodo95_pattern_recognition.py"
@@ -1311,7 +1419,7 @@
       "nodo_id": "96",
       "nodo_archivo": "Nodo-96-IRP-Individual-Return-Profile.md",
       "fecha": "2026-07-14",
-      "estado": null,
+      "estado": "historico",
       "archivos_mencionados": [
         "build_irp_profiles.py",
         "edge_calculator.py",
@@ -1324,7 +1432,7 @@
       "nodo_id": "97",
       "nodo_archivo": "Nodo-97-Live-Edge-Monitor.md",
       "fecha": "2026-07-14",
-      "estado": null,
+      "estado": "historico",
       "archivos_mencionados": [
         "betplay_combo_builder.py",
         "close_snapshot_trigger.py",
@@ -1337,7 +1445,7 @@
       "nodo_id": "98",
       "nodo_archivo": "Nodo-98-Meta-Senal-Convergencia.md",
       "fecha": "2026-07-14",
-      "estado": null,
+      "estado": "historico",
       "archivos_mencionados": [
         "edge_calculator.py",
         "pipeline_tracker.py",
@@ -1351,7 +1459,7 @@
       "nodo_id": "99",
       "nodo_archivo": "Nodo-99-Auditoria-Fable-N97-N98.md",
       "fecha": "2026-07-14",
-      "estado": null,
+      "estado": "historico",
       "archivos_mencionados": [
         "close_snapshot_trigger.py",
         "live_edge_monitor.py",
@@ -1364,5 +1472,7 @@
       ]
     }
   ],
-  "huerfanos": []
+  "huerfanos": [
+    "live_check_trigger.py"
+  ]
 }

@@ -1,6 +1,6 @@
 # Nodo-90 — Auditoría Fable del Nodo-89 (Sistema de Inteligencia Integral)
 
-> **Wikilinks:** [[Nodo-89-Sistema-Inteligencia-Integral]] | [[Nodo-86-Auditoria-Fable5]] | [[Nodo-87-Fixes-Auditoria-D87]] | [[Nodo-72-Phantom-Identity-Guard]] | [[Nodo-64-RFI-Return-From-Inactivity]] | [[Nodo-68]] (Rival Value Flip)
+> **Wikilinks:** [[Nodo-89-Sistema-Inteligencia-Integral]] | [[Nodo-86-Auditoria-Fable5]] | [[Nodo-87-Fixes-Auditoria-D87]] | [[Nodo-72-Phantom-Identity-Guard]] | [[Nodo-64-RFI-Return-From-Inactivity]] | [[Nodo-68-Rival-Value-Flip]]
 > **Fecha:** 2026-07-12 | **Autor:** Fable 5 (auditoría solo-lectura, PowerShell — sin ejecución de tests)
 > **Estado:** AUDITORÍA COMPLETA. Nodo-89 queda como historia inmutable; las correcciones de este nodo tienen precedencia (§10 CLAUDE.md).
 > **Veredicto global:** El diagnóstico del Nodo-89 es correcto en dirección (el sistema falla en silencio en días de calificación) pero contiene **7 errores factuales contra el código real** y **4 decisiones que violan reglas constitucionales o repiten errores históricos ya documentados**. Con las correcciones de este nodo, Sprint 1 es implementable sin romper los 1822 tests.
@@ -111,3 +111,66 @@ NO tocar `triple_alignment_score()` (el producto de 3 normas es la definición d
 ---
 
 *Auditoría estática desde PowerShell (sin venv). Toda línea citada fue leída en esta sesión. Los tests los ejecuta Sonnet en WSL: baseline `pytest tests/ --no-cov -q` = 1822 passed ANTES de tocar código (Protocolo §8).*
+
+---
+
+## Addendum — D90-08 OddsAggregator Implementación (2026-07-14, Sonnet 4.6)
+
+### Estado D90-08
+
+| Sub-tarea | Estado | Detalle |
+|---|---|---|
+| betplay → Kambi REST | IMPLEMENTADO | `us.offering-api.kambicdn.com/offering/v2018/betplay` — ~900 outcomes tenis |
+| wplay → SSR HTML | IMPLEMENTADO | `https://m.wplay.co/es/s/TENN/Tenis` — GET público, sin auth, sin IP binding |
+| CLV shadow betplay vs wplay | OPERATIVO | `python3 scripts/odds_aggregator.py --bookmakers betplay,wplay` |
+| betcris / luckia / sportium / codere | PENDING_DEVTOOLS | Requieren captura de endpoint desde Chrome — no bloqueados desde WSL |
+| Ejecución multi-casa real | GATED | Requiere cuentas reales en cada casa |
+
+### Arquitectura WPlay confirmada (reverse-engineering 2026-07-14)
+
+**Plataforma:** Geneity (no Kambi, no SBTech — PlaytechApi.min.js es vestigio de integración de casino).
+
+**Carga inicial — SSR:**
+`GET https://m.wplay.co/es/s/TENN/Tenis` embebe TODOS los eventos con cuotas en `<button name="add-to-slip">`. Sin REST adicional para estado inicial.
+
+**Estructura HTML clave:**
+```html
+<div class="ev_participants">
+  <div class="home tenn">
+    <span class="team_player" data-player_ids="[2369146]">Sasha Rozin</span>
+  </div>
+  <div class="away tenn">
+    <span class="team_player">Keegan Rice</span>
+  </div>
+</div>
+<button name="add-to-slip" class="seln-2883299543 mkt-893788968 ev-32261362">
+  <span class="seln-short-name">Local</span>  <!-- "Local"/"Visita" en vivo; nombre en pre-partido -->
+  <span class="price dec">3.80</span>
+</button>
+```
+
+**IDs Geneity (distintos de Kambi):** `ev-32XXXXXX` / `mkt-XXXXXXXXX` / `seln-XXXXXXXXX` / client_id=1070.
+
+**WS real-time (protocolo descifrado, reservado para in-play futuro):**
+- URL: `wss://genpush.wplay.co:8443/`
+- Suscripción: `[{hier_type:"EV"|"MKT"|"SELN", hier_id:INT, get_all:BOOL, upd_secs:10}]`
+- obj_type servidor: `"T"` (marcador), `"PRICE"` (cuota), `"EV"`, `"MKT"`, `"INPLAYDETAILS"`
+- No implementado — SSR es suficiente para cuotas pre-partido
+
+### Cambios en `scripts/odds_aggregator.py`
+
+| Función | Descripción |
+|---|---|
+| `_parse_wplay_ssr_html(html, book)` | Parser regex: extrae ev_id, nombres (home/away), cuotas decimales |
+| `_fetch_wplay_ssr(book, cfg)` | GET SSR + parser — retorna outcomes_map compatible con `_fetch_kambi` |
+| Fix apellido deduplication | Si dos jugadores comparten apellido (ej: Evan/Mitchell/Winston Lee), el índice por apellido se elimina — solo nombre completo normalizado como clave de match |
+
+### Descartado (no reinvestigar)
+
+- WS IP binding: ms_token vinculado a IP de sesión browser — WSL tiene NAT distinto, conexión rechazada. Irrelevante: SSR resuelve el caso de uso.
+- IDs Kambi != IDs Geneity: betplay `E1028XXXXXX` vs WPlay `E32XXXXXX` — no intercambiables.
+- Monkey-patch fetch/XHR en consola: WPlay no tiene polling HTTP, todo va por WS.
+- `events?cee=no` → Facebook Pixel. `web_nr?key=sportsbook.cms.handlers.get_all_highlights` → CMS/banners.
+
+### Nota de horario
+De noche (>18h CO) WPlay tiene eventos ITF que betplay no cubre → 0 solapamientos. A partir de las 9h CO con partidos ATP/WTA/Challenger pre-partido ambas casas coinciden y el CLV% muestra oportunidades reales.

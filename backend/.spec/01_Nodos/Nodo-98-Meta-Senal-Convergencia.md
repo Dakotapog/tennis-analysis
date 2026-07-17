@@ -1,6 +1,6 @@
 # Nodo-98 — Meta-Señal: Convergencia IRP × RFI × Markov (Triángulo de Alpha)
 
-> **Wikilinks:** [[Nodo-64-RFI-Return-From-Inactivity]] | [[Nodo-96-IRP-Individual-Return-Profile]] | [[Nodo-65-Convergencia-Multi-Senal]] | [[Nodo-95-Sprint4-PatternRecognition]] | [[Nodo-68]] | [[Nodo-97-Live-Edge-Monitor]]
+> **Wikilinks:** [[Nodo-64-RFI-Return-From-Inactivity]] | [[Nodo-96-IRP-Individual-Return-Profile]] | [[Nodo-65-Convergencia-Multi-Senal-Patron-Combos]] | [[Nodo-95-Sprint4-PatternRecognition]] | [[Nodo-68-Rival-Value-Flip]] | [[Nodo-97-Live-Edge-Monitor]]
 > **Fecha:** 2026-07-14 | **Autor:** Sonnet 4.6 (conexión oculta — meta-modelo del pipeline)
 > **Principio:** El bookmaker precio poblaciones. El sistema precio individuos. La intersección de 3 señales ortogonales sobre el mismo partido es el alpha más grande sin explotar del pipeline.
 
@@ -86,7 +86,7 @@ El sistema ve: "A vuelve de 200 días, históricamente pierde 18% más al volver
 |---|---|---|
 | Markov HOT | markov_favorito = HOT | +1 |
 | STRONG | confidence_flag = STRONG | +1 |
-| ELO dom. | elo_dominance_axis = True (threshold en D91-XX — ver [[Nodo-91-Sprint1]]) | +1 |
+| ELO dom. | elo_dominance_axis = True (threshold en D91-XX — ver [[Nodo-91-Sprint1-Capas-Fallback-Implementacion]]) | +1 |
 | RFI tier | rfi_tier ≥ 1 del rival (inactivo ≥90d) | +1 |
 | IRP delta | irp_rival.delta_return < -0.10 | +1 |
 

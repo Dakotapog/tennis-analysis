@@ -1,6 +1,6 @@
 # Nodo-56 — Bugs de Display en generar_tabla_favoritos2.py
 
-> **Wikilinks:** [[Nodo-55-Respuesta-Fable-Funnel-Deploy]] | [[Nodo-54-Brief-Fable-Funnel-Deploy]] | [[Nodo-21-Calibracion-Shrinkage-Tier]]
+> **Wikilinks:** [[Nodo-55-Respuesta-Fable-Funnel-Deploy]] | [[Nodo-54-Brief-Fable-Funnel-Deploy]] | [[Nodo-21-Pesos-Diferenciados-Por-Tier]]
 > **Fecha:** 2026-07-03
 > **Estado:** ABIERTO
 > **Severidad:** COSMÉTICA para Bugs A/B (scoring correcto) | CONFUSIÓN CRÍTICA para Bug C (penalización oculta)

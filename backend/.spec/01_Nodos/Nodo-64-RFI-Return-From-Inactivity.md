@@ -1,6 +1,6 @@
 # Nodo-64 — RFI: Return From Inactivity Signal
 
-> **Wikilinks:** [[Nodo-57-Penalizacion-Inactividad-Campeon-Validacion]] | [[Nodo-32-Fase3-Markov-Postnorm]] | [[Nodo-21-Calibracion-Shrinkage-Tier]] | [[Nodo-44-Watchlist-Alpha-Signal]]
+> **Wikilinks:** [[Nodo-57-Penalizacion-Inactividad-Campeon-Validacion]] | ~~~~[[Nodo-32-Fase3-Markov-Postnorm]]~~ _(MISSING)_~~ _(MISSING)_ | [[Nodo-21-Pesos-Diferenciados-Por-Tier]] | [[Nodo-44-Watchlist-Alpha-Signal]]
 > **Fecha descubrimiento:** 2026-07-09
 > **Estado:** BORRADOR — hipótesis pre-registrada H76-01, implementación pendiente (n_stop=30)
 > **Severidad:** ALTA — alpha estructural explotable, bookmaker blind spot sistemático

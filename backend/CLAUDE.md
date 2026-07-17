@@ -1,6 +1,6 @@
 # CLAUDE.md — Tennis Prediction & Betting Engine
 
-> Last updated: 2026-07-16 (Nodo-106 Retroactive Settle Workflow — settle backlog 07-13→07-15 +60 picks, 302 settled. 107 nodos indexados)
+> Last updated: 2026-07-16 (Nodo-105 Knowledge Graph Navigation: Zettelkasten — bioluminescent sprites, ego-network click, MOCs, PageRank, estado facet, huérfanos ritual. 108 nodos indexados)
 > Spec-Driven Development (SDD). CLAUDE.md es VISTA DERIVADA — los nodos son la fuente de verdad.
 > Leer completo antes de tocar código. Ver política de precedencia §10.
 

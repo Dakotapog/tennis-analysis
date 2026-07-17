@@ -1,6 +1,6 @@
 # Nodo-46: Markov Surface-Context Discount — El Estado Markov No Discrimina Superficie
 
-> **Wikilinks:** [[Nodo-18-PELT-Recency-Alpha]] | [[Nodo-21-Pesos-Diferenciados-Tier]] | [[Nodo-32-Auditoria-Phantom-Edge]]
+> **Wikilinks:** [[Nodo-18-PELT-Recency-Alpha]] | [[Nodo-21-Pesos-Diferenciados-Por-Tier]] | ~~~~[[Nodo-32-Auditoria-Phantom-Edge]]~~ _(MISSING — ver [[Nodo-86-Auditoria-Fable5]])_~~ _(MISSING — ver [[Nodo-86-Auditoria-Fable5]])_
 > **Fecha de descubrimiento:** 2026-06-30
 > **Estado:** HALLAZGO DOCUMENTADO — pendiente implementación (acumular más n antes de calibrar constantes)
 > **Atribución revisada:** 2026-06-30 post Nodo-47 — evidencia real: 1/3 fallos (Watanuki), no 2-3
@@ -292,6 +292,6 @@ La transición hierba→hard americano (agosto: Washington, Montréal, Cincinnat
 | Nodo | Relación |
 |---|---|
 | [[Nodo-18-PELT-Recency-Alpha]] | Nodo-18 ajusta λ por recencia del régimen; Nodo-46 ajusta la confianza por superficie del régimen |
-| [[Nodo-21-Pesos-Diferenciados-Tier]] | Cuando Markov es descontado, otros componentes (ranking, H2H) deben pesar más — SNR implícito |
-| [[Nodo-32-Auditoria-Phantom-Edge]] | Phantom edge puede surgir cuando el Markov HOT en hierba se aplica incorrectamente a hard |
+| [[Nodo-21-Pesos-Diferenciados-Por-Tier]] | Cuando Markov es descontado, otros componentes (ranking, H2H) deben pesar más — SNR implícito |
+| ~~~~[[Nodo-32-Auditoria-Phantom-Edge]]~~ _(MISSING — ver [[Nodo-86-Auditoria-Fable5]])_~~ _(MISSING — ver [[Nodo-86-Auditoria-Fable5]])_ | Phantom edge puede surgir cuando el Markov HOT en hierba se aplica incorrectamente a hard |
 | [[Nodo-43-PELT-Cold-Rival-Promo-Filter]] | PCRS usa rival COLD para promo — si el COLD es de otra superficie, la señal es falsa positivo |

@@ -1,6 +1,6 @@
 # Nodo-57 — Penalización de Inactividad Quirúrgica + Validación de Campeón de Torneo
 
-> **Wikilinks:** [[Nodo-56-Bug-Normalizacion-Pesos]] | [[Nodo-55-Respuesta-Fable-Funnel-Deploy]] | [[Nodo-21-Calibracion-Shrinkage-Tier]] | [[Nodo-32-Fase3-Markov-Postnorm]] | [[Nodo-19-H2H-Immunity-Dampener]]
+> **Wikilinks:** [[Nodo-56-Bug-Normalizacion-Pesos]] | [[Nodo-55-Respuesta-Fable-Funnel-Deploy]] | [[Nodo-21-Pesos-Diferenciados-Por-Tier]] | ~~~~[[Nodo-32-Fase3-Markov-Postnorm]]~~ _(MISSING)_~~ _(MISSING)_ | [[Nodo-19-H2H-Immunity-Dampener]]
 > **Fecha:** 2026-07-03 (COMPLETO 2026-07-03 15:25)
 > **Estado:** ✅ COMPLETO — 11 tests nuevos + 1612 tests totales (fue 1601)
 > **Tests:** T57-01 a T57-09 (9 tests), T30-10b, T30-10c (2 tests regression)

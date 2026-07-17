@@ -216,6 +216,6 @@ capturada en cuota y confianza.
 ## 7. WIKILINKS
 
 - [[Nodo-37-Combo-Confianza-Builder]] — Nodo original que Nodo-38 refactoriza
-- [[Nodo-15-Portfolio-Kelly-Cobertura]] — Cobertura por Exclusión reutilizada
+- [[Nodo-15-Portfolio-HedgeFund]] — Cobertura por Exclusión reutilizada
 - [[Nodo-32-Calibracion-Pipeline-Señales-Rotas]] — Phantom edge gate
 - [[MOC-Principal]] — índice de specs

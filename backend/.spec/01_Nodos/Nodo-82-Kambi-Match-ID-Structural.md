@@ -1,5 +1,7 @@
 # Nodo-82 — Kambi Match ID en PASO 4: solución estructural (GATEADO)
 
+> **Familia normalización Kambi:** [[Nodo-80-Kambi-Name-Matching]] (close_snapshot, parche táctico, origen de esta deuda) | [[Nodo-81-Settlement-Name-Normalize]] (Tier 3a en settle)
+
 **Fecha:** 2026-07-11
 **Estado:** GATEADO — criterio de activación definido, NO implementar hasta cumplir gate
 **Deuda estructural de:** Nodo-80 Opción 3

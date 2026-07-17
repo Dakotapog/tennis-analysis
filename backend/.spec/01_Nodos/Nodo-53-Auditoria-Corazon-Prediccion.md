@@ -1,6 +1,6 @@
 # Nodo-53: Auditoría del Corazón de Predicción — Pre-Condiciones Antes de Tocar rivalry_analyzer.py
 
-> **Wikilinks:** [[Nodo-52-Shadow-Book-CLV-Tracking]] | [[Nodo-51-Plan-Estrategico-Data-Layer-Torneo]] | [[Nodo-46-Markov-Surface-Context-Discount]] | [[Nodo-21-Pesos-Diferenciados-Tier]] | [[Nodo-14-Grass-Variance]]
+> **Wikilinks:** [[Nodo-52-Shadow-Book-CLV-Tracking]] | [[Nodo-51-Plan-Estrategico-Data-Layer-Torneo]] | [[Nodo-46-Markov-Surface-Context-Discount]] | [[Nodo-21-Pesos-Diferenciados-Por-Tier]] | ~~~~[[Nodo-14-Grass-Variance]]~~ _(MISSING — ver [[Nodo-60-GCS-Grass-Surface-Champion-Signal]])_~~ _(MISSING — ver [[Nodo-60-GCS-Grass-Surface-Champion-Signal]])_
 > **Fecha de creación:** 2026-07-02
 > **Estado:** 📋 ESPECIFICADO — para auditoría de Fable antes de cualquier implementación
 > **Trigger:** Análisis de Mensik vs Dimitrov (Wimbledon, Hierba) reveló bugs silenciosos en el núcleo de predicción

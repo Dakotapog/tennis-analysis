@@ -97,4 +97,68 @@ Es el marco #1 de Nodo-86 leído al revés: si el edge del favorito es el interr
 | D68-04 | ✅ IMPLEMENTADO | `2fe6fb3` | Backtest RETROSPECTIVO: n=0 picks en segmento (esperado — shadow book solo loggea pools con edge>0). Sin sesgo de supervivencia. Acumulación H88-01 arranca prospectivamente desde hoy. Reporte en `reports/backtest_rival_value_RETRO.md`. |
 | D68-05 | ✅ IMPLEMENTADO | `e16af9d` | 5 tests REGLA-T53 en `tests/test_nodo68_rival_value.py`. 5/5 pasando. Suite total: 1827 passed. |
 
-**Gap conocido (D68-06 — a decisión del usuario):** línea informativa en `generar_tabla_favoritos2.py` mostrando el flip cuando `rival_value_flag=True`. No implementado — el spec lo marcaba como opcional.
+**Gap conocido (D68-06 — a decisión del usuario):** línea informativa en `generar_tabla_favoritos2.py` mostrando el flip cuando `rival_value_flag=True`. **IMPLEMENTADO 2026-07-14** (sesión de evidencia real — ver §8).
+
+---
+
+## §8 — EVIDENCIA REAL 2026-07-14 (sesión histórica)
+
+> **Auditoría:** Sonnet 4.6 — análisis multi-señal completo del stack de los 3 picks RIVAL VALUE.
+
+### 8.1 Resultados
+
+| Partido | Cuota rival | edge_fav | Veredicto modelo | Resultado |
+|---|---|---|---|---|
+| Maaya Rajeshwaran Revathi vs **Leticia Romanova** | @6.00 | −20.3% | OBSERVAR (p_hist=0.33, Markov COLD, n_axes=1) | **RIVAL GANO** |
+| Raluca Georgiana Serban vs **Daria Kuczer** | @2.50 | −15.3% | NO GO (n_axes=0, LOW conf, Kelly −0.46) | **RIVAL GANO** |
+| Deniz Dilek vs **Weronika Falkowska** | @2.75 | −19.7% | NO GO (cal_conf=0.30, n_cal=5, fav HOT) | **RIVAL GANO** |
+
+**Combinada apostada por el usuario: 6.00 × 2.50 × 2.75 = 41.25x el stake.**
+
+### 8.2 Análisis del stack de señales
+
+El análisis completo mostró que en 2 de 3 picks las señales secundarias CONTRADECÍAN la apuesta rival (fav HOT, p_hist=0.611, cal_conf=0.30). Sin embargo la señal primaria — `edge_fav <= −15%` — fue suficiente en los 3 casos. Hallazgo clave: **el RIVAL VALUE es más robusto de lo que el stack secundario sugería.**
+
+Señales pro-rival más consistentes entre los 3 picks:
+- `edge_fav` muy negativo (−15% a −20%): **el discriminador real**
+- `Markov fav = COLD` en 2/3: señal confirmatoria válida
+- `p_hist < 0.45` en 2/3: calibración histórica contradice al bookmaker
+
+### 8.3 Wilson IC actualizado
+
+```
+n=3, hits=3 | p_hat=1.000
+Wilson 95% IC: [0.526, 1.000]
+Cuota media: 3.75 | Breakeven: 0.267
+Wilson LB (0.526) > Breakeven (0.267): PASA ✓
+ROI flat 1u: +275%
+
+Gate formal: n >= 30 — faltan 27 observaciones independientes
+```
+
+### 8.4 Decisión post-evidencia: rival_value_betslip.py (D68-07)
+
+| ID | Decisión |
+|---|---|
+| D68-07 | Crear `rival_value_betslip.py` — micro-Kelly pre-graduación para apuestas individuales del rival. Shrinkage = n/(n+50) = 3/53 = 5.7%. Cap: 0.5% bankroll. Cada apuesta = 1 observación H88-01. |
+| D68-08 | Stake individual: `kelly_raw × shrinkage`, mínimo 2000 COP. **PROHIBIDO** subir antes de n=30. |
+| D68-09 | Combo Betplay: todos los rivales del día en 1 link. Útil como ancla de alta cuota combinada. |
+
+**`rival_value_betslip.py` implementado 2026-07-14** — `python3 rival_value_betslip.py --bankroll 125000 [--telegram]`
+
+### 8.5 H88-01 actualizada
+
+```json
+"n_actual": 3,
+"hits": 3,
+"wilson_lb_actual": 0.526,
+"roi_flat_1u": 2.75,
+"estado": "ACUMULANDO — 27 obs más para gate"
+```
+
+**Nota protocolo:** el usuario apostó antes del gate n=30 (PROHIBIDO por umbrales congelados). Resultó en 3/3. El gate sigue vigente — n=30 protege contra overfitting en muestras pequeñas. La combinada de n=3 no es estadísticamente equivalente a 3 observaciones independientes.
+
+### 8.6 Camino a graduación
+
+Con 3 picks RIVAL VALUE por sesión activa: **~9 sesiones más** → n=30 → evaluación formal IC Wilson.
+Criterio de éxito (pre-registrado, inmutable): IC Wilson 95% inferior > 1/3.75 = 0.267 con n≥30.

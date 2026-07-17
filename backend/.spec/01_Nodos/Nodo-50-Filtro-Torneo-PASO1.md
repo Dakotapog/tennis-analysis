@@ -1,6 +1,6 @@
 # Nodo-50: Filtro de Torneo en PASO 1 (`--torneo`)
 
-> **Wikilinks:** [[Nodo-22-API-Integration-Kambi-Ninja]] | [[Nodo-48-FlashScore-Odds-Scraper-Testing]]
+> **Wikilinks:** ~~~~[[Nodo-22-API-Integration-Kambi-Ninja]]~~ _(MISSING)_~~ _(MISSING)_ | [[Nodo-48-FlashScore-Odds-Scraper-Testing]]
 > **Fecha de creación:** 2026-07-01
 > **Estado:** ✅ IMPLEMENTADO 2026-07-01
 

@@ -1,5 +1,7 @@
 # Nodo-81 — Settlement Name Normalization: `_normalize_name_match` en settle()
 
+> **Familia normalización Kambi:** [[Nodo-80-Kambi-Name-Matching]] (close_snapshot, parche táctico) | [[Nodo-82-Kambi-Match-ID-Structural]] (solución estructural gateada)
+
 **Fecha:** 2026-07-11
 **Estado:** IMPLEMENTADO 2026-07-11 — `_normalize_name_match` Tier 3a en `settle()` de shadow_book.py
 **Rama:** main

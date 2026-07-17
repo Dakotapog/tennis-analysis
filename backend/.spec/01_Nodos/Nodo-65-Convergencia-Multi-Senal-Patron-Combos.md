@@ -1,6 +1,6 @@
 # Nodo-65 — Convergencia Multi-Señal: Anatomía de una Sesión de Alta Precisión
 
-> **Wikilinks:** [[Nodo-38-Combo-Confianza]] | [[Nodo-44-Watchlist-Alpha-Signal]] | [[Nodo-57-Penalizacion-Inactividad-Campeon-Validacion]] | [[Nodo-63-Anchor-Combo-Builder]] | [[Nodo-64-RFI-Return-From-Inactivity]]
+> **Wikilinks:** ~~~~[[Nodo-38-Combo-Confianza]]~~ _(MISSING — [[Nodo-38-Portfolio-Aislamiento-Riesgo]] es diferente)_~~ _(MISSING — [[Nodo-38-Portfolio-Aislamiento-Riesgo]] cubre concepto diferente)_ | [[Nodo-44-Watchlist-Alpha-Signal]] | [[Nodo-57-Penalizacion-Inactividad-Campeon-Validacion]] | [[Nodo-63-Anchor-Combo-Builder]] | [[Nodo-64-RFI-Return-From-Inactivity]]
 > **Fecha descubrimiento:** 2026-07-10
 > **Estado:** IMPLEMENTADO — todas las deudas D65-01→D65-07 resueltas (2026-07-10)
 > **Severidad:** ALTA — identifica dos poblaciones de picks cualitativamente distintas que el sistema actual trata como homogéneas

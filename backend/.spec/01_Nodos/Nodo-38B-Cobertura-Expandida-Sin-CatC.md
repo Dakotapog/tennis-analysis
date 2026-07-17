@@ -238,5 +238,5 @@ Cambios aplicados en `combo_confianza_builder.py`:
 
 - [[Nodo-38-Portfolio-Aislamiento-Riesgo]] — Nodo padre que implementa CORE/SAT/MOON
 - [[Nodo-37-Combo-Confianza-Builder]] — Nodo original de combos progresivos
-- [[Nodo-15-Portfolio-Kelly-Cobertura]] — Cobertura por Exclusion reutilizada
+- [[Nodo-15-Portfolio-HedgeFund]] — Cobertura por Exclusion reutilizada
 - [[MOC-Principal]] — indice de specs

@@ -968,12 +968,12 @@ Medido con `generate_advanced_prediction()` real, `optimized_weights={form_recen
 ## 10. WIKILINKS
 
 - [[Nodo-01-Edge-Calculator]] — formula Kelly-KL original
-- [[Nodo-02-Markov-PELT]] — factores Markov originales
+- [[Nodo-02-Markov-Changepoint]] — factores Markov originales
 - [[Nodo-18-PELT-Recency-Alpha]] — lambda temporal
 - [[Nodo-19-H2H-Immunity-Dampener]] — immunity factor
-- [[Nodo-21-Pesos-Diferenciados-Tier]] — tier weights + shrinkage
-- [[Nodo-24-Bookmaker-Blindness-BBI]] — BBI + golden_zone
-- [[Nodo-27-Pipeline-Tracker]] — observabilidad que detecto el problema
-- [[Nodo-28-Conditional-Decomposition]] — triple alignment
+- [[Nodo-21-Pesos-Diferenciados-Por-Tier]] — tier weights + shrinkage
+- [[Nodo-24-Bookmaker-Blindness-Scoring]] — BBI + golden_zone
+- [[Nodo-27-Pipeline-Tracker-Observabilidad]] — observabilidad que detecto el problema
+- [[Nodo-28-Conditional-Decomposition-Metamodel]] — triple alignment
 - [[MOC-Principal]] — indice de specs
 - [[Sprint-Pipeline]] — estado del sprint

@@ -72,13 +72,53 @@ def _parse_nodo(path: Path) -> dict | None:
             fecha = mf.group(1)
             break
 
-    # Estado — línea con Estado:
+    # Estado — YAML frontmatter `estado:` (D105-04) o cuerpo `**Estado:**`
     estado = None
-    for line in lines[:30]:
-        ms = re.search(r'(?:\*\*Estado:\*\*|>?\s*Estado:)\s*(.+)', line)
-        if ms:
-            estado = ms.group(1).strip().rstrip("*").strip()
-            break
+    # 1) YAML frontmatter entre --- delimiters
+    if lines and lines[0].strip() == '---':
+        for line in lines[1:20]:
+            if line.strip() == '---':
+                break
+            ms = re.match(r'\s*estado\s*:\s*(.+)', line, re.IGNORECASE)
+            if ms:
+                estado = ms.group(1).strip()
+                break
+    # 2) Cuerpo del doc: **Estado:** o > Estado:
+    if estado is None:
+        for line in lines[:30]:
+            ms = re.search(r'(?:\*\*Estado:\*\*|>?\s*Estado:)\s*(.+)', line)
+            if ms:
+                estado = ms.group(1).strip().rstrip("*").strip()
+                break
+    # 3) Normalizar a taxonomía D105-04: activo/gateado/suspendido/historico
+    nid = int(nodo_id) if nodo_id.isdigit() else 0
+    if estado:
+        e = estado.lower()
+        if "activo" in e:
+            estado = "activo"
+        elif "gateado" in e or "gate" in e:
+            estado = "gateado"
+        elif "suspendido" in e:
+            estado = "suspendido"
+        else:
+            # Derivar desde nodo_id — el cuerpo tiene texto verbose sin taxonomía D105-04
+            if nid >= 100:
+                estado = "activo"
+            elif nid in (39, 41):
+                estado = "suspendido"
+            elif nid in (82, 90):
+                estado = "gateado"
+            else:
+                estado = "historico"
+    else:
+        if nid >= 100:
+            estado = "activo"
+        elif nid in (39, 41):
+            estado = "suspendido"
+        elif nid in (82, 90):
+            estado = "gateado"
+        else:
+            estado = "historico"
 
     # Archivos mencionados — cualquier token *.py encontrado en el texto
     archivos_mencionados = sorted(set(re.findall(r'\b[\w./]+\.py\b', text)))

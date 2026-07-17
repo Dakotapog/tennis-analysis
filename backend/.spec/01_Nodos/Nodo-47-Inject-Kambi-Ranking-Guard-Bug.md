@@ -1,6 +1,6 @@
 # Nodo-47: Bug en Guard de _inject_kambi_ranking — Kambi Sobreescribía Rankings ATP Reales
 
-> **Wikilinks:** [[Nodo-46-Markov-Surface-Context-Discount]] | [[Nodo-21-Pesos-Diferenciados-Tier]]
+> **Wikilinks:** [[Nodo-46-Markov-Surface-Context-Discount]] | [[Nodo-21-Pesos-Diferenciados-Por-Tier]]
 > **Fecha de descubrimiento:** 2026-06-30
 > **Estado:** ✅ RESUELTO 2026-06-30
 
@@ -182,5 +182,5 @@ def test_inject_kambi_does_not_overwrite_real_atp_ranking():
 | Nodo | Relación |
 |---|---|
 | [[Nodo-46-Markov-Surface-Context-Discount]] | Este bug fue la causa primaria del fallo Glinka/Mayo que Nodo-46 atribuía a Markov surface. Nodo-46 sigue válido para Watanuki/Ilagan (1 caso confirmado). |
-| [[Nodo-21-Pesos-Diferenciados-Tier]] | Challenger/ITF eran los tiers más afectados — los de mayor ventaja informacional y donde los errores de ranking son más costosos |
+| [[Nodo-21-Pesos-Diferenciados-Por-Tier]] | Challenger/ITF eran los tiers más afectados — los de mayor ventaja informacional y donde los errores de ranking son más costosos |
 | [[Nodo-45-Temporal-History-Fallback]] | THF resuelve match_id=None. Este nodo resuelve que cuando el match SÍ se procesa, el ranking sea el correcto |

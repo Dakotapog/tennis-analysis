@@ -1,5 +1,7 @@
 # Nodo-80 — Kambi Name Matching: apellidos compuestos y normalización
 
+> **Familia normalización Kambi:** [[Nodo-81-Settlement-Name-Normalize]] (Tier 3a en settle) | [[Nodo-82-Kambi-Match-ID-Structural]] (solución estructural gateada)
+
 **Fecha:** 2026-07-10
 **Estado:** IMPLEMENTADO 2026-07-11 — Opción 1 (candidatos múltiples) en `close_snapshot()` de shadow_book.py
 **Opción implementada:** Opción 1 (parche táctico) — NO Opción 3 (Kambi match ID, deuda estructural → Nodo-82)

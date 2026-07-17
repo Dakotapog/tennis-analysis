@@ -365,7 +365,7 @@ El formato `"%~dp0GamesComboN.html"` pasado a Chrome no funciona — Chrome nece
 
 - [[Nodo-38-Portfolio-Aislamiento-Riesgo]] — arquitectura CORE/Satellite/Moonshot — reutilizar para combos de totales
 - [[Nodo-39-Kambi-Filtro-Fecha]] — consulta Kambi API — base para consultar mercados de totales
-- [[Nodo-22-API-Integration-Kambi-Ninja]] — Kambi API betOffers — fuente de outcome_ids para totales
+- ~~~~[[Nodo-22-API-Integration-Kambi-Ninja]]~~ _(MISSING)_~~ _(MISSING)_ — Kambi API betOffers — fuente de outcome_ids para totales
 - [[Nodo-32-Calibracion-Pipeline-Señales-Rotas]] — lección de señales rotas — aplicar mismo rigor al gate de diff
 - [[MOC-Principal]] — índice de specs
 - [[Sprint-Pipeline]] — estado del sprint

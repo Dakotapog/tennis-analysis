@@ -1,6 +1,6 @@
 # Nodo-99 — Auditoría Fable: Pre-implementación Nodo-97 × Nodo-98
 
-> **Wikilinks:** [[Nodo-97-Live-Edge-Monitor]] | [[Nodo-98-Meta-Senal-Convergencia]] | [[Nodo-74-Combo-Governor]] | [[Nodo-68-Rival-Value-Flip]] | [[Nodo-43-PELT-Cold-Rival]] | [[Nodo-73-n8n-CloseSnapshot-Timing]] | [[Nodo-65-Convergencia-Multi-Senal]]
+> **Wikilinks:** [[Nodo-97-Live-Edge-Monitor]] | [[Nodo-98-Meta-Senal-Convergencia]] | [[Nodo-74-Combo-Governor]] | [[Nodo-68-Rival-Value-Flip]] | [[Nodo-43-PELT-Cold-Rival-Promo-Filter]] | [[Nodo-73-n8n-CloseSnapshot-Timing]] | [[Nodo-65-Convergencia-Multi-Senal-Patron-Combos]]
 > **Fecha:** 2026-07-14 | **Autor:** Fable (auditoría Sonnet 4.6 via Graphify + Tamp)
 > **Contexto:** Antes de implementar scripts/live_edge_monitor.py y scripts/meta_signal_scorer.py, Fable realizó auditoría completa de los dos specs. Este nodo documenta los hallazgos, las correcciones aplicadas y las decisiones que desbloquean la implementación.
 

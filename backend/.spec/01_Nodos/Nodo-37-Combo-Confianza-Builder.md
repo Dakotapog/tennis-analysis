@@ -202,7 +202,7 @@ Cuando `n_picks_total >= 100`, la accuracy es confiable para usar como `--p-empi
 
 ## 8. WIKILINKS
 
-- [[Nodo-15-Portfolio-Kelly-Cobertura]] — Cobertura por Exclusión C(N,K) — lógica base reutilizada
+- [[Nodo-15-Portfolio-HedgeFund]] — Cobertura por Exclusión C(N,K) — lógica base reutilizada
 - [[Nodo-32-Calibracion-Pipeline-Señales-Rotas]] — Phantom edge gate — razón por la que el pipeline dice "0 apuestas"
 - [[Nodo-35-Historial-Vacio-Flag-Pipeline]] — Gate historial vacío — picks sin historial no deben entrar al pool
 - [[Nodo-36-Unicode-Acento-Apellidos-Cortos]] — Corrección de matching de nombres — afecta qué picks se extraen

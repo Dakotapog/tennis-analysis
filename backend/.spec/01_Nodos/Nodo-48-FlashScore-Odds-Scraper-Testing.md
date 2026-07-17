@@ -1,6 +1,6 @@
 # Nodo-48: FlashScore Odds Scraper — Cuotas Independientes de Kambi para Testing
 
-> **Wikilinks:** [[Nodo-45-Temporal-History-Fallback]] | [[Nodo-31-Ronda-Futura-H2H]]
+> **Wikilinks:** [[Nodo-45-Temporal-History-Fallback]] | ~~~~[[Nodo-31-Ronda-Futura-H2H]]~~ _(MISSING — [[Nodo-31-Future-Match-Data-Leakage]] es diferente)_~~ _(MISSING — [[Nodo-31-Future-Match-Data-Leakage]] es diferente)_
 > **Fecha de descubrimiento:** 2026-06-30
 > **Estado:** ✅ IMPLEMENTADO 2026-06-30 — D48-BUG-01, D48-01, D48-02, D48-04 completados
 
@@ -290,5 +290,5 @@ Output del guard cuando se intenta usar cuotas de testing para apostar:
 | Nodo | Relacion |
 |---|---|
 | [[Nodo-45-Temporal-History-Fallback]] | Ambos resuelven "datos que existen pero el pipeline no accede" |
-| [[Nodo-31-Ronda-Futura-H2H]] | Patron similar: fallback cuando fuente primaria no tiene datos |
-| [[Nodo-21-Pesos-Diferenciados-Tier]] | ITF/Challenger son los mas afectados por falta de cuotas post-match |
+| ~~~~[[Nodo-31-Ronda-Futura-H2H]]~~ _(MISSING — [[Nodo-31-Future-Match-Data-Leakage]] es diferente)_~~ _(MISSING — [[Nodo-31-Future-Match-Data-Leakage]] es diferente)_ | Patron similar: fallback cuando fuente primaria no tiene datos |
+| [[Nodo-21-Pesos-Diferenciados-Por-Tier]] | ITF/Challenger son los mas afectados por falta de cuotas post-match |

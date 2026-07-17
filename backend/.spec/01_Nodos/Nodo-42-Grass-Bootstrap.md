@@ -123,8 +123,8 @@ Reemplazar ajuste hardcodeado de ±0.05 en `rivalry_analyzer.py` con ajuste cali
 ## Wikilinks
 
 - [[Nodo-38-Portfolio-Aislamiento-Riesgo]] — arquitectura CORE/Satellite sobre la que opera
-- [[Nodo-17]] — theta_thompson y jerarquía de calibración
-- [[Nodo-43-Grass-Feature-Amplification]] (futuro) — ajuste calibrado por n_grass
+- [[Nodo-17-Calibracion-Por-Tier]] — theta_thompson y jerarquía de calibración
+- ~~~~[[Nodo-43-Grass-Feature-Amplification]]~~ _(MISSING — ver [[Nodo-60-GCS-Grass-Surface-Champion-Signal]])_~~ _(MISSING — ver [[Nodo-60-GCS-Grass-Surface-Champion-Signal]])_ (futuro) — ajuste calibrado por n_grass
 
 ---
 

@@ -1,6 +1,6 @@
 # Nodo-51: Plan Estratégico — Data Layer Unificado + Contexto de Torneo como Entidad de Primera Clase
 
-> **Wikilinks:** [[Nodo-45-Temporal-History-Fallback]] | [[Nodo-46-Markov-Surface-Context-Discount]] | [[Nodo-47-Inject-Kambi-Ranking-Guard-Bug]] | [[Nodo-48-FlashScore-Odds-Scraper-Testing]] | [[Nodo-49-Playwright-H2H-Fallback-n-h2h-0]] | [[Nodo-50-Filtro-Torneo-PASO1]] | [[Nodo-33-Filtro-Coinflip-Sin-H2H]] | [[Nodo-21-Pesos-Diferenciados-Tier]]
+> **Wikilinks:** [[Nodo-45-Temporal-History-Fallback]] | [[Nodo-46-Markov-Surface-Context-Discount]] | [[Nodo-47-Inject-Kambi-Ranking-Guard-Bug]] | [[Nodo-48-FlashScore-Odds-Scraper-Testing]] | [[Nodo-49-Playwright-H2H-Fallback-n-h2h-0]] | [[Nodo-50-Filtro-Torneo-PASO1]] | [[Nodo-33-Filtro-Coinflip-Sin-H2H]] | [[Nodo-21-Pesos-Diferenciados-Por-Tier]]
 > **Fecha de creación:** 2026-07-01
 > **Estado:** 📋 PLAN ESTRATÉGICO — nodo maestro, define orden de implementación de Fases 0-5
 > **Tipo:** Meta-nodo (organiza nodos 45-50 bajo un marco unificado; no introduce features nuevos sin dependencia previa)

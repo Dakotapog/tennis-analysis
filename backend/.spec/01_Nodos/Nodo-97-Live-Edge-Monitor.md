@@ -1,6 +1,6 @@
 # Nodo-97 — Live Edge Monitor: seguimiento de cuotas en vivo para combos intrapartido
 
-> **Wikilinks:** [[Nodo-90-Auditoria-Fable-Nodo89]] | [[Nodo-74-Combo-Governor]] | [[Nodo-73-n8n-CloseSnapshot-Timing]] | [[Nodo-65-Convergencia-Multi-Senal]] | [[Nodo-95-Sprint4-PatternRecognition]]
+> **Wikilinks:** [[Nodo-90-Auditoria-Fable-Nodo89]] | [[Nodo-74-Combo-Governor]] | [[Nodo-73-n8n-CloseSnapshot-Timing]] | [[Nodo-65-Convergencia-Multi-Senal-Patron-Combos]] | [[Nodo-95-Sprint4-PatternRecognition]]
 > **Fecha:** 2026-07-14 | **Autor:** Sonnet 4.6 (emergencia del pipeline — conexión oculta identificada)
 > **Principio:** El mercado en vivo tarda 2-3 minutos en reaccionar. Si el modelo pre-partido dijo STRONG y la cuota empieza a bajar, hay una ventana de ~90s donde el edge sigue intacto y se puede apostar.
 

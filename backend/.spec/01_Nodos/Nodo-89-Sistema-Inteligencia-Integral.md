@@ -848,6 +848,70 @@ def test_hoy_genera_al_menos_games_combo():
 
 ---
 
+## Addendum — D89-08 Pipeline Proactivo Implementado (2026-07-14)
+
+### Problema documentado en §1.7 P8
+
+El pipeline nocturno perdía el 34% de los partidos disponibles porque corría cuando ya estaban en progreso
+(Atenas WTA, Gstaad ATP250, Japan ITF filtrados por estar iniciados).
+
+### 3 fixes implementados (Sonnet, sesión 2026-07-14)
+
+**Fix 1 — RuntimeWarning asyncio** (`scraping/ninja_h2h_parser.py:1069`)
+
+`asyncio.run()` estaba anidado dentro de `async def main()` → event loop ya activo → coroutine creada
+pero nunca ejecutada → `RuntimeWarning: coroutine '_run_playwright_batch_async' was never awaited`.
+
+```python
+# ANTES (bug):
+asyncio.run(self._run_playwright_batch_async(within_budget))
+
+# DESPUÉS (fix):
+loop = asyncio.new_event_loop()
+try:
+    loop.run_until_complete(self._run_playwright_batch_async(within_budget))
+finally:
+    loop.close()
+```
+
+**Fix 2 — `--tomorrow` en `extraer_historh2h.py`** (D89-08 pendiente desde spec original)
+
+El flag no existía. Añadido: busca `data/zita_tennis_matches_YYYYMMDD_*.json` con fecha de mañana.
+Si no encuentra el archivo, emite warning pidiendo correr PASO 1 primero.
+
+```bash
+python3 extraer_historh2h.py --api-mode --all-tournaments --tomorrow
+```
+
+**Fix 3 — Date mismatch en `extraer_URL_partidos_version2.py`** (prerequisito del Fix 2)
+
+Con `--tomorrow`, el scraper guardaba el archivo con fecha de HOY (`20260714_HH:MM`) aunque el contenido
+fueran partidos del día siguiente → `--tomorrow` en PASO 2 no encontraba el archivo.
+
+Añadido parámetro `date_prefix` a `save_matches_data()`: cuando `--tomorrow` activo, el archivo se
+nombra con la fecha de mañana → `zita_tennis_matches_20260715_HH:MM.json`.
+
+### Flujo nocturno validado (2026-07-14, 22:32-22:54 CO)
+
+```bash
+python3 extraer_URL_partidos_version2.py --tomorrow    # 406 partidos, 45 torneos, 406/406 match_ids
+python3 extraer_historh2h.py --api-mode --all-tournaments --tomorrow  # 298 partidos, 17.8 MB
+```
+
+### Resultado
+
+| Métrica | Antes | Después |
+|---------|-------|---------|
+| Partidos procesados | ~36 (hoy filtrados) | 298 (mañana completo) |
+| Match IDs | 0/5 (API Kambi) | 406/406 (FlashScore Playwright) |
+| Archivo H2H | 718 KB | 17.8 MB |
+| RuntimeWarning | presente | eliminado |
+
+**Nota:** `extraer_partidos_api.py --tomorrow` NO reemplaza al Playwright — solo ve lo que Betplay/Kambi
+tiene cargado (~5 UTR sin match_ids). PRIMARIO siempre es `extraer_URL_partidos_version2.py --tomorrow`.
+
+---
+
 *Nodo-89 — Especificación completa para análisis por Fable (Opus extended-thinking)*  
 *Implementación secuencial por Sonnet según roadmap §8, Sprint 1→5*  
 *Evidencia de origen: sesión diagnóstica 2026-07-12, archivos:*  

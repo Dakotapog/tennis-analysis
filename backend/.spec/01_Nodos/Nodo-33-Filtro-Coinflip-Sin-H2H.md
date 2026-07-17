@@ -514,8 +514,8 @@ Fase 2 (revisar floor de James-Stein cuando `n_cal=0`) no debe implementarse has
 
 - [[Nodo-32-Calibracion-Pipeline-Señales-Rotas]] — gate P_MODELO_MIN_UNDERDOG, golden_zone, ITF fallback
 - [[Nodo-01-Edge-Calculator]] — fórmula Kelly-KL original
-- [[Nodo-21-Pesos-Diferenciados-Tier]] — James-Stein shrinkage en pesos
-- [[Nodo-24-Bookmaker-Blindness-BBI]] — BBI, n_h2h como señal de ceguera bookmaker
+- [[Nodo-21-Pesos-Diferenciados-Por-Tier]] — James-Stein shrinkage en pesos
+- [[Nodo-24-Bookmaker-Blindness-Scoring]] — BBI, n_h2h como señal de ceguera bookmaker
 - [[Nodo-27-Pipeline-Tracker-Observabilidad]] — observabilidad que detectó el patrón
 - [[MOC-Principal]] — índice de specs
 - [[Sprint-Pipeline]] — estado del sprint

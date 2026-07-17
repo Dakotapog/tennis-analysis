@@ -1,6 +1,6 @@
 # Nodo-96 — IRP: Individual Return-from-inactivity Profile
 
-> **Wikilinks:** [[Nodo-64-RFI-Return-From-Inactivity]] | [[Nodo-57-Penalizacion-Inactividad]] | [[Nodo-93-Sprint2-PlayerDB]] | [[Nodo-89-Sistema-Inteligencia-Integral]] | [[Nodo-90-Auditoria-Fable-Nodo89]]
+> **Wikilinks:** [[Nodo-64-RFI-Return-From-Inactivity]] | [[Nodo-57-Penalizacion-Inactividad-Campeon-Validacion]] | [[Nodo-93-Sprint2-Implementado]] | [[Nodo-89-Sistema-Inteligencia-Integral]] | [[Nodo-90-Auditoria-Fable-Nodo89]]
 > **Fecha:** 2026-07-14 | **Sprint:** 5 (Fable5 roadmap Nodo-90 §5)
 > **Principio:** REPORTE_SOLO — no modifica edge, kelly ni ninguna decisión de apuesta.
 > **Auditoría:** 2026-07-14 — ver §8. 15 tests passing. 2 hallazgos reales (H_IRP + apellido fallback). 1 falso positivo del revisor inicial corregido.

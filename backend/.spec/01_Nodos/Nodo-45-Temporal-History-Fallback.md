@@ -1,6 +1,6 @@
 # Nodo-45: Temporal History Fallback — Recuperación de Historial por Cache Temporal
 
-> **Wikilinks:** [[Nodo-31-Ronda-Futura-H2H]] | [[Nodo-36-Unicode-Acento-Apellidos-Cortos]] | [[Nodo-34-Corrupcion-Datos-Extraccion-H2H]]
+> **Wikilinks:** ~~~~[[Nodo-31-Ronda-Futura-H2H]]~~ _(MISSING — [[Nodo-31-Future-Match-Data-Leakage]] es diferente)_~~ _(MISSING — [[Nodo-31-Future-Match-Data-Leakage]] es diferente)_ | [[Nodo-36-Unicode-Acento-Apellidos-Cortos]] | [[Nodo-34-Corrupcion-Datos-Extraccion-H2H]]
 > **Fecha de descubrimiento:** 2026-06-30
 > **Estado:** ✅ IMPLEMENTADO 2026-06-30 — D45-01 a D45-05 completados, 1438 tests pasando
 
@@ -368,10 +368,10 @@ def test_process_match_no_thf_data_returns_false():
 
 | Nodo | Relación |
 |---|---|
-| [[Nodo-31-Ronda-Futura-H2H]] | THF extiende el mismo patrón de "fallback con proxy" a la dimensión temporal |
+| ~~~~[[Nodo-31-Ronda-Futura-H2H]]~~ _(MISSING — [[Nodo-31-Future-Match-Data-Leakage]] es diferente)_~~ _(MISSING — [[Nodo-31-Future-Match-Data-Leakage]] es diferente)_ | THF extiende el mismo patrón de "fallback con proxy" a la dimensión temporal |
 | [[Nodo-36-Unicode-Acento-Apellidos-Cortos]] | `_name_tokens` + `_token_in_kb` ya resuelven el matching fuzzy — THF los reutiliza |
 | [[Nodo-34-Corrupcion-Datos-Extraccion-H2H]] | Nodo-34 corrigió corrupción de datos; Nodo-45 resuelve ausencia de datos |
-| [[Nodo-21-Pesos-Diferenciados-Tier]] | ITF/Challenger son los tiers más afectados y los de mayor ventaja informacional |
+| [[Nodo-21-Pesos-Diferenciados-Por-Tier]] | ITF/Challenger son los tiers más afectados y los de mayor ventaja informacional |
 
 ---
 

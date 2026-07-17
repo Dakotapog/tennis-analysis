@@ -1,6 +1,6 @@
 # Nodo-52: Shadow Book — Libro Sombra con Validación Post-Hoc y CLV Tracking
 
-> **Wikilinks:** [[Nodo-51-Plan-Estrategico-Data-Layer-Torneo]] | [[Nodo-48-FlashScore-Odds-Scraper-Testing]] | [[Nodo-44-Watchlist-Alpha-Signal]] | [[Nodo-46-Markov-Surface-Context-Discount]] | [[Nodo-21-Pesos-Diferenciados-Tier]] | [[Nodo-33-Filtro-Coinflip-Sin-H2H]]
+> **Wikilinks:** [[Nodo-51-Plan-Estrategico-Data-Layer-Torneo]] | [[Nodo-48-FlashScore-Odds-Scraper-Testing]] | [[Nodo-44-Watchlist-Alpha-Signal]] | [[Nodo-46-Markov-Surface-Context-Discount]] | [[Nodo-21-Pesos-Diferenciados-Por-Tier]] | [[Nodo-33-Filtro-Coinflip-Sin-H2H]]
 > **Fecha de creación:** 2026-07-01
 > **Estado:** 📋 ESPECIFICADO — listo para implementación por Sonnet
 > **Dependencia de Nodo-51:** consume F1 (tournament_context) y F2 (provenance) si existen; puede arrancar SIN ellas con campos degradados (ver §8)
@@ -276,7 +276,7 @@ Cuando F1/F2 lleguen, los registros nuevos llevan los campos ricos; los viejos s
 | [[Nodo-44-Watchlist-Alpha-Signal]] | D44-03 (WAS n≥30) se resuelve con H52-01 — la watchlist loggeada ES el dataset |
 | [[Nodo-46-Markov-Surface-Context-Discount]] | H52-04 provee el A/B que D46-07 necesita para calibrar constantes |
 | [[Nodo-33-Filtro-Coinflip-Sin-H2H]] | H52-05 re-valida el gate con datos post-Nodo-49 — el gate se toca solo con evidencia |
-| [[Nodo-21-Pesos-Diferenciados-Tier]] | La segmentación por tier del reporte confirma o refuta dónde está la ventaja informacional |
+| [[Nodo-21-Pesos-Diferenciados-Por-Tier]] | La segmentación por tier del reporte confirma o refuta dónde está la ventaja informacional |
 
 ## 10. Deuda Técnica
 
