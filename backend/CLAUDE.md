@@ -86,6 +86,10 @@ python3 generar_tabla_favoritos2.py                 # → analisis_partidos_pand
 # PASO 3.6 (opcional) — Señales totales juegos/sets
 python3 games_signal_calculator.py                  # → reports/games_signal_report_FECHA.json
 
+# PASO 3.7 — Dual-Book Router X1 (Nodo-111, automático en run_daily)
+python3 scraping/dual_book_client.py --compare --book2 data/zita_tennis_matches_*.json
+# Imprime tabla: qué casa da mejor cuota por pick + ROI extra medio por routing
+
 # PASO 4 — Deploy (UN tier por ejecución — --torneo-tipo FILTRA)
 python3 trader_ev_tenis.py --bankroll 125000                              # GS clay (default)
 python3 trader_ev_tenis.py --bankroll 125000 --superficie grass           # GS grass
@@ -134,11 +138,11 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 
 ---
 
-## 5. ESTADO ACTUAL — 2026-07-14
+## 5. ESTADO ACTUAL — 2026-07-17
 
 | Métrica | Valor |
 |---|---|
-| Tests | **2012 passed, 5 failed, 1 skipped** (verificado 2026-07-16). ⚠️ 5 fallas nuevas vs 2013 previo — pendiente investigar (posible contaminación por cambios shadow book settle). `test_prior_bajo_no_se_ve_afectado` sigue intermitente (estado global entre test files, pasa en aislamiento) |
+| Tests | **~2060 passed, 1 failed, 1 skipped** (estimado 2026-07-17 — suite completa en curso). `test_nodo51_f3_02_budget_processes_itf_before_grand_slam` pre-existente. `test_prior_bajo_no_se_ve_afectado` intermitente (estado global, pasa en aislamiento). |
 | Calibración | clay GS: p=0.758 (n=31) \| global: wins=2358, losses=1480 (n=3838) \| ⚠️ buckets huérfanos `?`/`?_?` con ~141 resultados de dinero real (24% hit) — ver Nodo-86 §1.1, migración en evaluación: T7 Nodo-66 decide |
 | **Auditoría Fable5** | **Sprints 1-5 EN CURSO.** S1-S4 ✅. S5: IRP ✅ (Nodo-96, 4361 perfiles, 15 tests). Pendiente S5: D90-11 N28F2/tier (gate n≥30), OddsAggregator multi-casa (gate cuentas reales) |
 | Bankroll | $125,000+ |
@@ -159,7 +163,7 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 | F4 Estadística doctoral (Nodos 64-71) | ✅ 67 tests (43 base + 24 C1/Nodo-67) |
 | F5 Vault + session_compiler + CLAUDE.md slim | ✅ completada |
 
-**Nodos completos:** 51-63, 64-71, 72, 73, 78, 86-106 — detalles en `.spec/01_Nodos/Nodo-XX.md`
+**Nodos completos:** 51-63, 64-71, 72, 73, 78, 86-113 — detalles en `.spec/01_Nodos/Nodo-XX.md`
 **Nodo-64:** RFI Return-From-Inactivity — **implementado 2026-07-11 (D64-01)**: `rfi_tier`/`rfi_ultra`/`rfi_decay_gap` serializados en edge_report, segmentos en shadow_book --report. H76-01 acumula automático.
 **Nodo-65:** Convergencia Multi-Señal — ANCHOR(edge>0) / VARIABLE(edge≤0). D65-01→D65-07. H77-01/02/03 pre-registradas.
 **Nodos 66-68:** 66=checklist T1→T10 COMPLETOS. 67=integración herramientas **COMPLETO** (I3 governor JSON-first, I7 combo_registry→player_registry+run_daily settle, C1 DataContract v2 6 fronteras 24 tests, C4 brecha hit%_real vs shadow en dashboard). 68=H88-01 Rival Value Flip — **EVIDENCIA REAL 2026-07-14: 3/3 wins, combinada 41.25x** — n_actual=3, Wilson LB=0.526 > breakeven 0.267. D68-07 `rival_value_betslip.py` operativo (micro-Kelly shrink=5.7%, cap 0.5%). Gate: n=30 (faltan 27).
@@ -172,6 +176,9 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 **Nodo-100 (Triple Convergencia Live):** Break State Machine + Dashboard HTML + Auto-Combo. `detect_break_state()` 4 estados: NORMAL→BREAK_POSIBLE(drift≥15%)→BREAK_CONFIRMADO(2do ciclo ≥12%)→single-fire. `load/save_odds_history()` persiste por día. `_fire_break_combos()` llama betplay_combo_builder --live cuando break confirmado. `live_dashboard_generator.py` → `reports/live_dashboard.html` auto-refresh 60s con KPI boxes + tabla coloreada (gris/naranja/rojo parpadeante). `/live-dashboard` endpoint en close_snapshot_server. `--dashboard` flag en live_edge_monitor. D100-01→D100-07. H100-01 pre-registrada (n_stop=20, gate≥3 breaks). 5 tests REGLA-T53.
 **Nodo-101 (Shadow Book Live CLV):** D99-02 implementado — `log_live_pick(pick, cuota_trigger, fecha)` registra picks live con `pick_type='live'` en sb_FECHA.jsonl (prefijo LIVE_ en sb_id). `settle()` ya usa `cuota_trigger` como base CLV para picks live (D101-03). `report()` muestra sección "LIVE PICKS H100-01" cuando hay settled live. CLI `--log-live JSON --trigger CUOTA`. `_fire_break_combos()` llama auto `log_live_pick()` tras BREAK_CONFIRMADO (D101-05). D101-01→D101-05. 4 tests REGLA-T53.
 **Nodo-106 (Retroactive Settle Workflow):** Extensión T9 — workflow para cerrar picks abiertos cuando `--settle` retorna 0. Pasos: (1) extraer `h2h_file` de `session_meta` en sb_FECHA.jsonl, (2) `validar_con_api.py --no-cal` con ese H2H, (3) inyección programática `settle(fecha, resultados_map=...)`. Para GS/ATP sin cobertura API: WebSearch directo (no delegar al usuario). Ejecución 2026-07-16: +60 picks settled (242→302), 71 abiertos (57 permanentes ITF minors). Wikilinks: [[Nodo-66]] T9-ext addendum | [[Nodo-52]] | [[Nodo-81]] | [[Nodo-36]].
+**Nodos 107-111 (Fable Sprint 5B — implementados 2026-07-17):** 107=MOTOR_DEFENSIVE x0.5 + governor soft-veto (D107-04) exit-codes 0/1/2 en 3 builders + H107-01 ACUMULANDO. 108=B108-01(rename Nodo-100B) + B108-03(name-matching→player_registry, 3 call-sites) + B108-04(checklist H89-*/shadow_book) + B108-05(curl OddsAggregator cerrado) + C3(campeon_signal estructurado) + B108-06(weather MVP). 109=live_desk.py :7780 7 paneles P4-MANDA + 3 funciones puras + 9 tests. 110=favoritos_combo_builder.py estrategia #13 + LEG_MIN_CUOTA=1.15 (D110-01) + H110-01(n=8, ACUMULANDO). 111=dual_book_client.py funciones puras X1(best_price/divergencia/es_arb/es_middle) + 14 tests + CLI --compare + PASO 3.7 en run_daily + H111-01 ACUMULANDO.
+**Nodo-112 (C3 campeon_signal):** campos estructurados campeon_tier/torneo/days_ago en rivalry_analyzer — consumidores leen campo, no parsean strings de reasoning.
+**Nodo-113 (B108-06 Weather MVP):** core/weather_client.py → get_weather_flag() open-meteo gratuito, weather_flag en edge_report (observacional), H113-01 pre-registrada (n_stop=40).
 
 ---
 
