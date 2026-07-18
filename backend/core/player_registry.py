@@ -26,11 +26,14 @@ Invariante de seguridad:
 NOTA SOBRE NORMALIZACIÓN:
   normalize_player_name() replica la lógica de RankingManager.normalize_name().
   Si normalize_name() cambia en ranking_manager.py, actualizar aquí también.
-  TODO F0-DEUDA: hacer que RankingManager.normalize_name() delegue a esta función
-  (single source of truth). Pendiente hasta validar que no rompe tests existentes.
+  B108-03 (F0-DEUDA CERRADO 2026-07-17): RankingManager.normalize_name(),
+  kambi_tennis._normalize_name() y betslip_registrar._match_stake() ya delegan aquí.
 """
+import json
 import re
 import logging
+from datetime import datetime
+from pathlib import Path
 from typing import Callable, Dict, Optional
 
 logger = logging.getLogger(__name__)
@@ -73,6 +76,10 @@ def normalize_player_name(name: str) -> str:
 _PROVENANCE_ATP     = 'atp_file'
 _PROVENANCE_KAMBI   = 'kambi_estimate'
 _PROVENANCE_UNKNOWN = 'unknown'
+
+# ── Crosswalk (Nodo-118 F2) ───────────────────────────────────────────────────
+_CROSSWALK_FILE   = Path("data/player_crosswalk.json")
+_CONF_HIERARCHY   = {"MANUAL": 3, "VERIFIED": 2, "AUTO": 1}  # mayor = más confiable
 
 
 class PlayerRegistry:
@@ -119,6 +126,14 @@ class PlayerRegistry:
 
         if ranking_manager is not None:
             self._bootstrap(ranking_manager)
+
+        # ── Crosswalk (Nodo-118 F2) ───────────────────────────────────────────
+        # {canonical_id: {canonical, aliases:{norm_alias: {source, confidence, added}},
+        #                 last_seen}}
+        self._xwalk: Dict[str, dict] = {}
+        # Índice plano norm_alias → canonical_id para O(1) lookup
+        self._xwalk_alias_to_cid: Dict[str, str] = {}
+        self._load_crosswalk()
 
     # ── Bootstrap ────────────────────────────────────────────────────────────
 
@@ -261,4 +276,138 @@ class PlayerRegistry:
             "atp_file":        atp_count,
             "kambi_estimate":  kambi_count,
             "immune_memory":   len(self._alias_to_cid) - len(self._cid_to_provenance),
+        }
+
+    # ── Crosswalk — Nodo-118 F2 ──────────────────────────────────────────────
+
+    def _load_crosswalk(self, path: Path = None) -> None:
+        """Carga data/player_crosswalk.json en memoria. No-op si no existe."""
+        p = path or _CROSSWALK_FILE
+        if not p.exists():
+            return
+        try:
+            with open(p, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            self._xwalk = data.get("entries", {})
+            # Reconstruir índice plano
+            self._xwalk_alias_to_cid = {}
+            for cid, entry in self._xwalk.items():
+                for alias_norm in entry.get("aliases", {}):
+                    self._xwalk_alias_to_cid[alias_norm] = cid
+            logger.debug(
+                f"[Crosswalk] Cargado: {len(self._xwalk)} canónicos, "
+                f"{len(self._xwalk_alias_to_cid)} aliases"
+            )
+        except Exception as e:
+            logger.warning(f"[Crosswalk] Error cargando {p}: {e}")
+
+    def _save_crosswalk(self, path: Path = None) -> None:
+        """Persiste el crosswalk en disco."""
+        p = path or _CROSSWALK_FILE
+        p.parent.mkdir(parents=True, exist_ok=True)
+        with open(p, "w", encoding="utf-8") as f:
+            json.dump({"entries": self._xwalk}, f, ensure_ascii=False, indent=2)
+
+    def add_alias(
+        self,
+        canonical_id: str,
+        alias: str,
+        source: str,
+        confidence: str,
+        crosswalk_path: Path = None,
+    ) -> None:
+        """
+        Registra un alias en el crosswalk y lo persiste.
+
+        Jerarquía: MANUAL > VERIFIED > AUTO.
+        - MANUAL nunca se sobreescribe (protección contra automatismos).
+        - VERIFIED sobreescribe AUTO.
+        - AUTO no sobreescribe VERIFIED ni MANUAL.
+        - Acumula: un canonical_id puede tener múltiples aliases de distintas fuentes.
+
+        Args:
+            canonical_id: forma canónica del jugador (ej. "paula badosa")
+            alias: alias a registrar (ej. "P. Badosa", "Badosa P.")
+            source: "kambi" | "flashscore" | "atp" | "manual"
+            confidence: "MANUAL" | "VERIFIED" | "AUTO"
+        """
+        canonical_id = self._normalize(canonical_id)
+        alias_norm = self._normalize(alias)
+        if not canonical_id or not alias_norm:
+            return
+
+        new_level = _CONF_HIERARCHY.get(confidence, 0)
+
+        # Inicializar entrada si no existe
+        if canonical_id not in self._xwalk:
+            self._xwalk[canonical_id] = {
+                "canonical": canonical_id,
+                "aliases": {},
+                "last_seen": datetime.now().strftime("%Y-%m-%d"),
+            }
+
+        entry = self._xwalk[canonical_id]
+        existing = entry["aliases"].get(alias_norm)
+
+        if existing:
+            existing_level = _CONF_HIERARCHY.get(existing.get("confidence", "AUTO"), 0)
+            # MANUAL nunca se sobreescribe; tampoco se baja de nivel
+            if existing_level >= new_level:
+                logger.debug(
+                    f"[Crosswalk] add_alias: '{alias_norm}' ya existe con "
+                    f"{existing.get('confidence')} ≥ {confidence} — no se sobreescribe"
+                )
+                return
+
+        entry["aliases"][alias_norm] = {
+            "source": source,
+            "confidence": confidence,
+            "added": datetime.now().strftime("%Y-%m-%d"),
+        }
+        entry["last_seen"] = datetime.now().strftime("%Y-%m-%d")
+
+        # Actualizar índice plano
+        self._xwalk_alias_to_cid[alias_norm] = canonical_id
+
+        # También registrar en _alias_to_cid para que resolve() lo encuentre en O(1)
+        if alias_norm not in self._alias_to_cid:
+            self._alias_to_cid[alias_norm] = canonical_id
+
+        self._save_crosswalk(crosswalk_path)
+        logger.debug(
+            f"[Crosswalk] add_alias: '{alias}' → '{canonical_id}' "
+            f"({source}, {confidence})"
+        )
+
+    def resolve_crosswalk(self, name: str) -> Optional[str]:
+        """
+        Resuelve identidad consultando PRIMERO el crosswalk (aliases persistidos),
+        luego cae al resolve() normal (ATP/WTA + fuzzy).
+
+        Retorna canonical_id o None.
+        """
+        if not name:
+            return None
+        alias_norm = self._normalize(name)
+        # Capa 0: crosswalk lookup O(1) — antes del fuzzy
+        if alias_norm in self._xwalk_alias_to_cid:
+            return self._xwalk_alias_to_cid[alias_norm]
+        # Capa 1-3: resolve() existente
+        return self.resolve(name)
+
+    def crosswalk_stats(self) -> dict:
+        """Estadísticas del crosswalk para el embudo Nodo-118 §5."""
+        total_aliases = sum(
+            len(e.get("aliases", {})) for e in self._xwalk.values()
+        )
+        by_confidence = {}
+        for entry in self._xwalk.values():
+            for a in entry.get("aliases", {}).values():
+                c = a.get("confidence", "AUTO")
+                by_confidence[c] = by_confidence.get(c, 0) + 1
+        return {
+            "canonicals": len(self._xwalk),
+            "total_aliases": total_aliases,
+            "by_confidence": by_confidence,
+            "index_size": len(self._xwalk_alias_to_cid),
         }
