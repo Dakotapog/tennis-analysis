@@ -1,6 +1,6 @@
 # CLAUDE.md — Tennis Prediction & Betting Engine
 
-> Last updated: 2026-07-16 (Nodo-105 Knowledge Graph Navigation: Zettelkasten — bioluminescent sprites, ego-network click, MOCs, PageRank, estado facet, huérfanos ritual. 108 nodos indexados)
+> Last updated: 2026-07-18 (Nodo-117: auditoría scraping 4 bugs → D117-01/02/04 aplicados, D117-03 gateado. 9 tests REGLA-T53. Wikilinks Nodo-33/48/49/80/82/103 cosidos.)
 > Spec-Driven Development (SDD). CLAUDE.md es VISTA DERIVADA — los nodos son la fuente de verdad.
 > Leer completo antes de tocar código. Ver política de precedencia §10.
 
@@ -138,11 +138,11 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 
 ---
 
-## 5. ESTADO ACTUAL — 2026-07-17
+## 5. ESTADO ACTUAL — 2026-07-18
 
 | Métrica | Valor |
 |---|---|
-| Tests | **2118 passed, 1 failed** (verificado 2026-07-17). `test_nodo51_f3_02_budget_processes_itf_before_grand_slam` pre-existente. `test_prior_bajo_no_se_ve_afectado` intermitente (estado global, pasa en aislamiento). +106 tests nuevos vs sesión anterior (Nodos 107-113). |
+| Tests | **2163 passed, 1 failed** (verificado 2026-07-18). `test_nodo51_f3_02_budget_processes_itf_before_grand_slam` pre-existente. `test_prior_bajo_no_se_ve_afectado` intermitente (estado global, pasa en aislamiento). +9 tests Nodo-117 (5 file_utils + 4 ranking_only). |
 | Calibración | clay GS: p=0.758 (n=31) \| global: wins=2358, losses=1480 (n=3838) \| ⚠️ buckets huérfanos `?`/`?_?` con ~141 resultados de dinero real (24% hit) — ver Nodo-86 §1.1, migración en evaluación: T7 Nodo-66 decide |
 | **Auditoría Fable5** | **Sprints 1-5 EN CURSO.** S1-S4 ✅. S5: IRP ✅ (Nodo-96, 4361 perfiles, 15 tests). Pendiente S5: D90-11 N28F2/tier (gate n≥30), OddsAggregator multi-casa (gate cuentas reales) |
 | Bankroll | $125,000+ |
@@ -163,7 +163,7 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 | F4 Estadística doctoral (Nodos 64-71) | ✅ 67 tests (43 base + 24 C1/Nodo-67) |
 | F5 Vault + session_compiler + CLAUDE.md slim | ✅ completada |
 
-**Nodos completos:** 51-63, 64-71, 72, 73, 78, 86-113 — detalles en `.spec/01_Nodos/Nodo-XX.md`
+**Nodos completos:** 51-63, 64-71, 72, 73, 78, 86-113, 117 — detalles en `.spec/01_Nodos/Nodo-XX.md`
 **Nodo-64:** RFI Return-From-Inactivity — **implementado 2026-07-11 (D64-01)**: `rfi_tier`/`rfi_ultra`/`rfi_decay_gap` serializados en edge_report, segmentos en shadow_book --report. H76-01 acumula automático.
 **Nodo-65:** Convergencia Multi-Señal — ANCHOR(edge>0) / VARIABLE(edge≤0). D65-01→D65-07. H77-01/02/03 pre-registradas.
 **Nodos 66-68:** 66=checklist T1→T10 COMPLETOS. 67=integración herramientas **COMPLETO** (I3 governor JSON-first, I7 combo_registry→player_registry+run_daily settle, C1 DataContract v2 6 fronteras 24 tests, C4 brecha hit%_real vs shadow en dashboard). 68=H88-01 Rival Value Flip — **EVIDENCIA REAL 2026-07-14: 3/3 wins, combinada 41.25x** — n_actual=3, Wilson LB=0.526 > breakeven 0.267. D68-07 `rival_value_betslip.py` operativo (micro-Kelly shrink=5.7%, cap 0.5%). Gate: n=30 (faltan 27).
@@ -179,6 +179,7 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 **Nodos 107-111 (Fable Sprint 5B — implementados 2026-07-17):** 107=MOTOR_DEFENSIVE x0.5 + governor soft-veto (D107-04) exit-codes 0/1/2 en 3 builders + H107-01 ACUMULANDO. 108=B108-01(rename Nodo-100B) + B108-03(name-matching→player_registry, 3 call-sites) + B108-04(checklist H89-*/shadow_book) + B108-05(curl OddsAggregator cerrado) + C3(campeon_signal estructurado) + B108-06(weather MVP). 109=live_desk.py :7780 7 paneles P4-MANDA + 3 funciones puras + 9 tests. 110=favoritos_combo_builder.py estrategia #13 + LEG_MIN_CUOTA=1.15 (D110-01) + H110-01(n=8, ACUMULANDO). 111=dual_book_client.py funciones puras X1(best_price/divergencia/es_arb/es_middle) + 14 tests + CLI --compare + PASO 3.7 en run_daily + H111-01 ACUMULANDO.
 **Nodo-112 (C3 campeon_signal):** campos estructurados campeon_tier/torneo/days_ago en rivalry_analyzer — consumidores leen campo, no parsean strings de reasoning.
 **Nodo-113 (B108-06 Weather MVP):** core/weather_client.py → get_weather_flag() open-meteo gratuito, weather_flag en edge_report (observacional), H113-01 pre-registrada (n_stop=40).
+**Nodo-117 (Auditoría Scraping):** 4 bugs identificados 2026-07-18. D117-01 ✅: `_leer_matches_ranking_only()` prefiere ATP/WTA reales sobre CA/CB FlashScore (0→6 candidatos RANKING_ONLY). D117-02 ✅: `select_best_json_file()` prioriza `matches_with_cuotas>0` — archivo API con cuotas gana sobre Playwright sin cuotas aunque sea más grande. D117-04 ✅: comentario anti-regresión en `scraping/kambi_tennis.py` L196-199. D117-03 GATEADO: merge Playwright+API (+67% cobertura H2H) — requiere refactor PASO 1. 9 tests REGLA-T53.
 
 ---
 
