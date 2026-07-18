@@ -63,10 +63,22 @@ def build_desk_state(fecha: Optional[str] = None) -> Dict[str, Any]:
     if fecha is None:
         fecha = date.today().isoformat()
 
+    # p0_ncal: {nombre_lower: n_calibracion} para U2 en render — no cambia gates
+    _ncal: Dict[str, int] = {}
+    _er = _latest(str(REPORTS / f"edge_report_{fecha.replace('-', '')}*.json"))
+    _er_data = _load_json(_er)
+    if _er_data and isinstance(_er_data, dict):
+        for _section in ("apostar", "watchlist", "sin_edge", "sin_datos"):
+            for _p in _er_data.get(_section, []):
+                _jug = (_p.get("favorito_predicho") or "").lower().strip()
+                if _jug:
+                    _ncal[_jug] = int(_p.get("n_calibracion") or 0)
+
     state: Dict[str, Any] = {
         "fecha": fecha,
         "ts": datetime.now().isoformat(),
-        "p4_risk": _build_p4_risk(fecha),   # P4 primero — manda
+        "p0_ncal": _ncal,                    # Nodo-115 U2: evidencia por jugador
+        "p4_risk": _build_p4_risk(fecha),    # P4 primero — manda
         "p1_tape": _build_p1_tape(fecha),
         "p2_break": _build_p2_break(fecha),
         "p3_convergence": _build_p3_convergence(fecha),
@@ -74,6 +86,7 @@ def build_desk_state(fecha: Optional[str] = None) -> Dict[str, Any]:
         "p6_pnl": _build_p6_pnl(fecha),
         "p7_clock": _build_p7_clock(fecha),
         "p8_books": _build_p8_books(fecha),  # Nodo-114 §3: dual-book cache 120s
+        "p9_que_falta": _build_que_falta(fecha),  # Nodo-115 §2.4
     }
     return state
 
@@ -273,6 +286,102 @@ def linea_razonamiento(pick: dict) -> str:
     body = " + ".join(parts)
     line = f"{gate} {body}{precio_str}".strip() if gate else f"{body}{precio_str}"
     return line[:180]
+
+
+# ── Nodo-115: helpers de incertidumbre (U2, U3, QUÉ FALTA) ──────────────────
+
+# Constantes copiadas de favoritos_combo_builder.py (REGLA-T53: no importar el módulo)
+_FAV_P_MIN = 0.62
+_FAV_CUOTA_CLARA_MAX = 1.40
+_FAV_RANKING_GAP = 300
+_FAV_LEG_MIN = 1.15
+_FAV_LEG_MAX = 2.10
+
+
+def _peso_evidencia(n_cal: int) -> Dict[str, Any]:
+    """U2: shrinkage n/(n+20) → barra texto + etiqueta + color."""
+    n_cal = max(0, int(n_cal or 0))
+    pct = round(n_cal / (n_cal + 20) * 100)
+    filled = min(5, round(pct / 20))
+    bar = "█" * filled + "░" * (5 - filled)
+    if pct < 20:
+        color = "#f85149"   # rojo — prior manda
+        label = "PRIOR MANDA"
+    elif pct < 45:
+        color = "#d29922"   # ámbar — moderado
+        label = f"{pct}%"
+    else:
+        color = "#3fb950"   # verde — peso propio
+        label = f"{pct}%"
+    return {"pct": pct, "bar": bar, "label": label, "color": color, "n": n_cal}
+
+
+def _gate_barra(n_actual: int, n_stop: int) -> str:
+    """U3: barra texto █░ hacia n_stop."""
+    n_actual = int(n_actual or 0)
+    n_stop = int(n_stop or 0)
+    if n_stop <= 0:
+        return f"{n_actual}/??"
+    if n_actual >= n_stop:
+        return "GRADUADA"
+    frac = min(n_actual / n_stop, 1.0)
+    filled = round(frac * 10)
+    bar = "█" * filled + "░" * (10 - filled)
+    restantes = n_stop - n_actual
+    return f"{bar} {n_actual}/{n_stop} ({restantes} faltan)"
+
+
+def _build_que_falta(fecha: str) -> List[Dict]:
+    """
+    Panel QUÉ FALTA (§2.4): picks watchlist con primera condición fallida
+    para entrar a FAVORITOS_COMPUESTOS.  REPORTE_SOLO, cero lógica de gate.
+    """
+    er = _latest(str(REPORTS / f"edge_report_{fecha.replace('-', '')}*.json"))
+    data = _load_json(er)
+    if not data or isinstance(data, list):
+        return []
+
+    resultado: List[Dict] = []
+    for p in data.get("watchlist", []):
+        p_mod = float(p.get("p_modelo", 0) or 0)
+        cuota_fav = float(p.get("cuota_favorito", 99) or 99)
+        cuota_riv = float(p.get("cuota_rival", 99) or 99)
+        conf = (p.get("confidence_flag") or "").upper()
+        rk_fav = int(p.get("ranking_favorito") or 9999)
+        rk_riv = int(p.get("ranking_rival") or 9999)
+        rk_gap = rk_riv - rk_fav
+        nombre = p.get("favorito_predicho") or p.get("partido", "?")
+
+        # Cond 1 — favorito claro
+        c1_p    = p_mod >= _FAV_P_MIN
+        c1_cuota = (cuota_fav <= _FAV_CUOTA_CLARA_MAX and conf != "LOW")
+        c1_rank  = (rk_gap > _FAV_RANKING_GAP and cuota_fav <= 1.60)
+        if not (c1_p or c1_cuota or c1_rank):
+            delta = _FAV_P_MIN - p_mod
+            detalle = f"p_modelo={p_mod:.3f} < {_FAV_P_MIN} (faltan {delta:.3f})"
+            if not c1_cuota and cuota_fav < 90:
+                detalle += f" | cuota_fav={cuota_fav} > {_FAV_CUOTA_CLARA_MAX} o conf={conf}"
+            resultado.append({"jugador": nombre, "condicion": "favorito_claro", "detalle": detalle})
+            continue
+
+        # Cond 2 — cuota rango pierna
+        if cuota_fav < _FAV_LEG_MIN:
+            resultado.append({"jugador": nombre, "condicion": "cuota_rango",
+                               "detalle": f"cuota_fav={cuota_fav} < {_FAV_LEG_MIN} (piso pierna)"})
+            continue
+        if cuota_fav > _FAV_LEG_MAX:
+            delta = cuota_fav - _FAV_LEG_MAX
+            resultado.append({"jugador": nombre, "condicion": "cuota_rango",
+                               "detalle": f"cuota_fav={cuota_fav} > {_FAV_LEG_MAX:.2f} (techo, delta +{delta:.2f})"})
+            continue
+
+        # Cond 3 — model=bookie
+        if cuota_fav >= cuota_riv:
+            resultado.append({"jugador": nombre, "condicion": "model_neq_bookie",
+                               "detalle": f"cuota_fav={cuota_fav} >= cuota_rival={cuota_riv} (bookie discrepa)"})
+            continue
+
+    return resultado[:10]
 
 
 def render_html(state: Dict[str, Any]) -> str:
@@ -537,21 +646,96 @@ def render_html(state: Dict[str, Any]) -> str:
               "Sin partidos (correr PASO 1 para zita file del dia)")
     )
 
-    # ── Accionables ───────────────────────────────────────────────────────────
+    # ── Nodo-115: n_cal lookup y QUÉ FALTA ──────────────────────────────────
+    _ncal_map = state.get("p0_ncal", {})
+    _que_falta = state.get("p9_que_falta", [])
+
+    # ── Accionables con U2+U3+drill-down+facetas (Nodo-115) ─────────────────
     if accionables:
-        acc_rows = []
-        for a in accionables:
+        # Facet buttons por tipo
+        tipos_uniq = list(dict.fromkeys(a["tipo"] for a in accionables))
+        facet_btns = ""
+        for t in ["TODOS"] + tipos_uniq:
+            facet_btns += (f'<button class="facet-btn" data-f="{t}" '
+                           f'onclick="filtrarTipo(\'{t}\')" '
+                           f'style="background:#21262d;color:#e6edf3;border:1px solid #30363d;'
+                           f'padding:3px 10px;border-radius:4px;cursor:pointer;margin-right:4px;'
+                           f'font-size:0.78em;">{t}</button>')
+        facet_bar = f'<div style="margin-bottom:8px;">{facet_btns}</div>'
+
+        # Tabla manual para soportar data-attrs y drill-down
+        TD = f'padding:4px 10px;border-bottom:1px solid {BORDER};'
+        hdr_cells = "".join(
+            f'<td style="{TD}color:{GREY};font-weight:bold;">{h}</td>'
+            for h in ["Tipo", "Jugador/Pick", "Evidencia U2", "Gate U3", "Razonamiento"]
+        )
+        rows_html = f"<tr><tr>{hdr_cells}</tr></tr>"
+
+        for idx, a in enumerate(accionables):
             ac = GREEN if a.get("color") == "green" else AMBER
             razon = linea_razonamiento(a)
             razon_short = razon[:90] + ("…" if len(razon) > 90 else "")
-            acc_rows.append([
-                f'<span style="color:{ac};font-weight:bold;">{a["tipo"]}</span>',
-                a["jugador"],
-                a["hipotesis"],
-                f'{a["n_actual"]}/{a["n_stop"]}',
-                f'<span title="{razon}" style="color:{GREY};font-size:0.82em;">{razon_short}</span>',
-            ])
-        acc_content = table(["Tipo", "Jugador/Pick", "Gate", "n/n_stop", "Razonamiento"], acc_rows)
+
+            # U2 — peso evidencia
+            n_cal = _ncal_map.get(a.get("jugador", "").lower(), a.get("n_cal", 0))
+            ev = _peso_evidencia(n_cal)
+            u2_html = (f'<span style="font-family:monospace;color:{ev["color"]};font-size:0.85em;" '
+                       f'title="n={ev["n"]} → {ev["pct"]}% peso propio (shrinkage n/(n+20))">'
+                       f'{ev["bar"]} {ev["label"]}</span>')
+
+            # U3 — distancia gate
+            n_act = int(a.get("n_actual", 0))
+            n_stp = int(a.get("n_stop", 0))
+            u3_txt = _gate_barra(n_act, n_stp)
+            u3_color = GREEN if "GRADUADA" in u3_txt else (AMBER if n_act > 0 else GREY)
+            u3_html = (f'<span style="font-family:monospace;color:{u3_color};font-size:0.82em;">'
+                       f'{a["hipotesis"]}: {u3_txt}</span>')
+
+            # Fila principal
+            row_id = f"acc-{idx}"
+            main_row = (
+                f'<tr class="acc-row" id="{row_id}" data-tipo="{a["tipo"]}" '
+                f'style="cursor:pointer;" onclick="toggleDetalle(\'{row_id}\')">'
+                f'<td style="{TD}"><span style="color:{ac};font-weight:bold;">{a["tipo"]}</span></td>'
+                f'<td style="{TD}color:{WHITE};">{a["jugador"]}</td>'
+                f'<td style="{TD}">{u2_html}</td>'
+                f'<td style="{TD}">{u3_html}</td>'
+                f'<td style="{TD}"><span title="{razon}" style="color:{GREY};font-size:0.82em;">{razon_short}</span></td>'
+                f'</tr>'
+            )
+
+            # Fila detalle (oculta, expandible al clic)
+            mejor = a.get("mejor_precio", {})
+            precio_detalle = ""
+            if mejor and mejor.get("cuota"):
+                precio_detalle = (f'<br><b>P8 mejor precio:</b> {mejor.get("casa","?")} '
+                                  f'@{mejor.get("cuota","?")} (+{mejor.get("gain_pct",0):.1f}%)')
+            senas = ", ".join(a.get("señales_activas", [])) or "—"
+            det_content = (
+                f'<div style="padding:8px 12px;background:#0d1117;border-left:3px solid {ac};'
+                f'font-size:0.82em;color:{WHITE};">'
+                f'<b>Razonamiento completo:</b><br>'
+                f'<span style="color:{GREY};font-family:monospace;">{razon}</span>'
+                f'<br><br>'
+                f'<b>Evidencia U2:</b> n_calibracion={ev["n"]} → {ev["pct"]}% peso propio'
+                f'<br><b>Gate U3:</b> {a["hipotesis"]} {u3_txt}'
+                f'<br><b>Señales activas:</b> {senas}'
+                f'<br><b>meta_score:</b> {a.get("meta_score", "—")} | '
+                f'<b>n_h2h:</b> {a.get("n_h2h", "—")} | '
+                f'<b>drift:</b> {a.get("drift_pct", "—")}%'
+                f'{precio_detalle}'
+                f'</div>'
+            )
+            det_row = (
+                f'<tr id="det-{row_id}" style="display:none;">'
+                f'<td colspan="5" style="padding:0;border-bottom:1px solid {BORDER};">'
+                f'{det_content}</td></tr>'
+            )
+            rows_html += main_row + det_row
+
+        acc_table = (f'<table style="border-collapse:collapse;width:100%;font-size:0.85em;">'
+                     f'{rows_html}</table>')
+        acc_content = facet_bar + acc_table
     else:
         acc_content = f'<p style="color:{GREY};">{"DESK EN HALT — nada accionable" if halt else "Sin señales accionables ahora"}</p>'
 
@@ -561,6 +745,28 @@ def render_html(state: Dict[str, Any]) -> str:
         acc_content,
         f"{n_real} señales",
         GREEN if n_real and not halt else GREY,
+    )
+
+    # ── QUÉ FALTA (Nodo-115 §2.4) ────────────────────────────────────────────
+    if _que_falta:
+        qf_rows = []
+        for qf in _que_falta:
+            cond_color = {"favorito_claro": AMBER, "cuota_rango": BLUE,
+                          "model_neq_bookie": GREY}.get(qf["condicion"], GREY)
+            qf_rows.append([
+                qf["jugador"],
+                f'<span style="color:{cond_color};font-size:0.85em;">{qf["condicion"]}</span>',
+                f'<span style="color:{GREY};font-size:0.82em;font-family:monospace;">{qf["detalle"]}</span>',
+            ])
+        qf_content = table(["Jugador", "Filtro fallido", "Distancia / Detalle"], qf_rows)
+    else:
+        qf_content = f'<p style="color:{GREY};font-size:0.85em;">Sin casi-accionables en watchlist (correr PASO 3)</p>'
+
+    que_falta_panel = panel(
+        "QUÉ FALTA — casi-accionables (FAVORITOS_COMPUESTOS) + condición exacta",
+        qf_content,
+        f"{len(_que_falta)} candidatos" if _que_falta else "",
+        AMBER if _que_falta else GREY,
     )
 
     fecha = state.get("fecha", "")
@@ -593,9 +799,28 @@ def render_html(state: Dict[str, Any]) -> str:
   {p5_panel}
   {p6_panel}
   {p8_panel}
+  {que_falta_panel}
   {p1_panel}
   {p7_panel}
   {refresh_note}
+  <script>
+  function filtrarTipo(tipo) {{
+    document.querySelectorAll('.acc-row').forEach(function(r) {{
+      var t = r.getAttribute('data-tipo');
+      r.style.display = (tipo === 'TODOS' || t === tipo) ? '' : 'none';
+      var det = document.getElementById('det-' + r.id);
+      if (det) det.style.display = 'none';
+    }});
+    document.querySelectorAll('.facet-btn').forEach(function(b) {{
+      b.style.background = b.getAttribute('data-f') === tipo ? '#58a6ff' : '#21262d';
+      b.style.color = b.getAttribute('data-f') === tipo ? '#000' : '#e6edf3';
+    }});
+  }}
+  function toggleDetalle(rowId) {{
+    var d = document.getElementById('det-' + rowId);
+    if (d) d.style.display = d.style.display === 'none' ? 'table-row' : 'none';
+  }}
+  </script>
 </body>
 </html>"""
     return html
@@ -1017,6 +1242,113 @@ def _build_p8_books(fecha: str) -> Dict:
 _FECHA_OVERRIDE: Optional[str] = None
 
 
+def _demo_state() -> Dict[str, Any]:
+    """Estado sintético realista para demostración a Fable — sin datos reales requeridos."""
+    hoy = date.today().isoformat()
+    return {
+        "fecha": hoy,
+        "ts": datetime.now().isoformat(),
+        "p0_ncal": {"djokovic": 54, "alcaraz": 12},
+        "p9_que_falta": [
+            {"jugador": "Holger Rune", "condicion": "favorito_claro",
+             "detalle": "p_modelo=0.551 < 0.62 (faltan 0.069) | cuota_fav=1.78 > 1.40 o conf=LOW"},
+            {"jugador": "Andrey Rublev", "condicion": "cuota_rango",
+             "detalle": "cuota_fav=2.35 > 2.10 (techo, delta +0.25)"},
+            {"jugador": "Grigor Dimitrov", "condicion": "model_neq_bookie",
+             "detalle": "cuota_fav=1.90 >= cuota_rival=1.85 (bookie discrepa)"},
+        ],
+        "p4_risk": {
+            "governor_code": 0,
+            "kgr_sesion": 1.05,
+            "bankroll": 125000,
+            "stake_total": 7500,
+            "kill_switches": {"MOTOR_DEFENSIVE": True, "GCS_GATE_ENABLED": True},
+            "exposicion": [
+                {"jugador": "Alcaraz", "stake": 5000, "pct": 0.04},
+                {"jugador": "Djokovic", "stake": 2500, "pct": 0.02},
+            ],
+        },
+        "p1_tape": {
+            "entries": [
+                {"jugador": "Alcaraz", "drift_pct": -18.5, "direction": "CONFIRMA", "vel_zscore": 2.3, "ts": datetime.now().isoformat()},
+                {"jugador": "Djokovic", "drift_pct": -9.2, "direction": "CONFIRMA", "vel_zscore": 1.1, "ts": datetime.now().isoformat()},
+                {"jugador": "Zverev", "drift_pct": 4.1, "direction": "ALEJA", "vel_zscore": -0.5, "ts": datetime.now().isoformat()},
+            ]
+        },
+        "p2_break": {
+            "breaks": [{
+                "estado": "BREAK_CONFIRMADO",
+                "jugador": "Alcaraz",
+                "pick": "Alcaraz",
+                "drift_pct": -18.5,
+                "hipotesis": "H100-01",
+                "n_actual": 3,
+            }]
+        },
+        "p3_convergence": {
+            "picks": [
+                {
+                    "jugador": "Djokovic",
+                    "score_directo": 4,
+                    "confidence_flag": "STRONG",
+                    "markov_favorito": "HOT",
+                    "rival_value_flag": False,
+                    "rival": "Medvedev",
+                    "gcs_active": True,
+                    "señales_activas": ["STRONG", "HOT", "ELO_DOM"],
+                    "n_h2h": 12,
+                    "clv": 3.1,
+                },
+                {
+                    "jugador": "Alcaraz",
+                    "score_directo": 3,
+                    "confidence_flag": "STRONG",
+                    "markov_favorito": "HOT",
+                    "rival_value_flag": False,
+                    "rival": "Zverev",
+                    "gcs_active": False,
+                    "señales_activas": ["STRONG", "HOT"],
+                    "n_h2h": 5,
+                    "clv": 1.8,
+                },
+            ]
+        },
+        "p5_execution": {
+            "picks": [
+                {"jugador": "Alcaraz", "cuota_trigger": 2.10, "cuota_actual": 1.95, "clv_pct": -7.1},
+                {"jugador": "Djokovic", "cuota_trigger": 1.80, "cuota_actual": 1.75, "clv_pct": -2.8},
+            ],
+            "clv_median": -4.9,
+        },
+        "p6_pnl": {
+            "segmentos": [
+                {"segmento": "GCS (H60-01)", "n": 54, "hit_pct": 64.8, "roi_pct": 31.2, "stake_total": 18000},
+                {"segmento": "BREAK H100-01", "n": 3, "hit_pct": 66.7, "roi_pct": 12.5, "stake_total": 7500},
+                {"segmento": "FAVORITOS", "n": 8, "hit_pct": 100.0, "roi_pct": 220.0, "stake_total": 27500},
+            ]
+        },
+        "p7_clock": {
+            "partidos": [
+                {"jugador": "Alcaraz vs Zverev", "inicio": "18:00", "ventana_live": "-30min a +45min desde 18:00", "snapshot_deadline": "~15min antes de 18:00"},
+                {"jugador": "Djokovic vs Medvedev", "inicio": "20:30", "ventana_live": "-30min a +45min desde 20:30", "snapshot_deadline": "~15min antes de 20:30"},
+            ]
+        },
+        "p8_books": {
+            "picks": {
+                "alcaraz": {"jugador": "Alcaraz", "casa": "flashscore", "cuota": 2.15, "gain_pct": 2.4, "divergencia_pct": 3.1,
+                            "betplay_cuota": 2.10, "flashscore_cuota": 2.15, "cuota_plan": 2.10},
+                "djokovic": {"jugador": "Djokovic", "casa": "flashscore", "cuota": 1.85, "gain_pct": 5.7, "divergencia_pct": 9.2,
+                             "betplay_cuota": 1.75, "flashscore_cuota": 1.85, "cuota_plan": 1.80},
+            },
+            "feeds": ["betplay", "flashscore"],
+            "cache_age_s": 45,
+        },
+    }
+
+
+_DEMO_MODE: bool = False
+
+
 class DeskHandler(BaseHTTPRequestHandler):
     def log_message(self, fmt, *args):
         pass  # silenciar logs HTTP por defecto
@@ -1033,8 +1365,11 @@ class DeskHandler(BaseHTTPRequestHandler):
             return
 
         try:
-            fecha = _FECHA_OVERRIDE or date.today().isoformat()
-            state = build_desk_state(fecha)
+            if _DEMO_MODE:
+                state = _demo_state()
+            else:
+                fecha = _FECHA_OVERRIDE or date.today().isoformat()
+                state = build_desk_state(fecha)
             html = render_html(state)
             body = html.encode("utf-8")
             self.send_response(200)
@@ -1050,24 +1385,24 @@ class DeskHandler(BaseHTTPRequestHandler):
             self.wfile.write(err)
 
 
-# ══════════════════════════════════════════════════════════════════════════════
-# main
-# ══════════════════════════════════════════════════════════════════════════════
-
 def main() -> None:
-    global _FECHA_OVERRIDE
+    global _FECHA_OVERRIDE, _DEMO_MODE
     parser = argparse.ArgumentParser(description="Live Trading Desk — Nodo-109 :7780")
     parser.add_argument("--port", type=int, default=PORT_DEFAULT)
     parser.add_argument("--fecha", help="Fecha YYYY-MM-DD (default: hoy)")
     parser.add_argument("--once", action="store_true", help="Imprimir HTML y salir (sin servidor)")
+    parser.add_argument("--demo", action="store_true", help="Modo demo con datos sintéticos (Fable review)")
     args = parser.parse_args()
 
     if args.fecha:
         _FECHA_OVERRIDE = args.fecha
 
+    if args.demo:
+        _DEMO_MODE = True
+
     if args.once:
         fecha = args.fecha or date.today().isoformat()
-        state = build_desk_state(fecha)
+        state = _demo_state() if args.demo else build_desk_state(fecha)
         print(render_html(state))
         return
 
