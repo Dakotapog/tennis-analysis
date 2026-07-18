@@ -1,6 +1,6 @@
 # Nodo-103 — Auditoría Combo Builder: Gates n_h2h=0 + Watchlist Filtration + Correlation Cap
 
-> **Wikilinks:** [[Nodo-37-Combo-Confianza-Builder]] | [[Nodo-63-Anchor-Combo-Builder]] | [[Nodo-33-Filtro-Coinflip-Sin-H2H]] | [[Nodo-28-Conditional-Decomposition-Metamodel]] | [[Nodo-74-Combo-Governor]] | [[Nodo-86-Auditoria-Fable5]] | [[Nodo-99-Auditoria-Fable-N97-N98]] | [[Nodo-65-Convergencia-Multi-Senal-Patron-Combos]] | [[Nodo-49-Playwright-H2H-Fallback-n-h2h-0]] | [[Nodo-100-Triple-Convergencia-Live]] | [[Nodo-101-Shadow-Book-Live-CLV]]
+> **Wikilinks:** [[Nodo-37-Combo-Confianza-Builder]] | [[Nodo-63-Anchor-Combo-Builder]] | [[Nodo-33-Filtro-Coinflip-Sin-H2H]] | [[Nodo-28-Conditional-Decomposition-Metamodel]] | [[Nodo-74-Combo-Governor]] | [[Nodo-86-Auditoria-Fable5]] | [[Nodo-99-Auditoria-Fable-N97-N98]] | [[Nodo-65-Convergencia-Multi-Senal-Patron-Combos]] | [[Nodo-49-Playwright-H2H-Fallback-n-h2h-0]] | [[Nodo-100B-Triple-Convergencia-Live]] | [[Nodo-101-Shadow-Book-Live-CLV]] | [[Nodo-117-Auditoria-Scraping-Rankings-Cobertura-H2H]] (gates n_h2h afectan mismo universo restringido por B117-02/B117-03)
 > **Fecha:** 2026-07-16 | **Severidad:** CRÍTICA — pérdida real materializada 2026-07-15, combos con legs apostar=False
 > **Autor:** Auditoría Sonnet 4.6 con evidencia de edge_report + shadow_book
 > **NO DUPLICA:** Nodo-33 (gate cuota<2.10 individual), Nodo-63 (insuficient history guard individual). Este nodo es específico para el builder de combos.

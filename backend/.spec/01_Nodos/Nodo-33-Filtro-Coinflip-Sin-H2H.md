@@ -1,5 +1,6 @@
 # Nodo-33 — Filtro Coinflip Sin H2H: Gate Lateral cuota<2.10 y Colapso James-Stein en ITF
 
+> **Wikilinks:** [[Nodo-117-Auditoria-Scraping-Rankings-Cobertura-H2H]] (cobertura H2H 33% — misma familia: partidos sin H2H por bugs de pipeline)
 > **Fecha:** 2026-06-24
 > **Severidad:** ALTA — CONFIRMADA, pérdida real materializada en sesiones 2026-06-23 y 2026-06-24
 > **Prerequisitos:** Nodo-32 (gate p_modelo, golden_zone, ITF fallback — completado 2026-06-22)

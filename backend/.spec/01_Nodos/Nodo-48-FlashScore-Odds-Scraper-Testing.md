@@ -1,6 +1,6 @@
 # Nodo-48: FlashScore Odds Scraper — Cuotas Independientes de Kambi para Testing
 
-> **Wikilinks:** [[Nodo-45-Temporal-History-Fallback]] | ~~~~[[Nodo-31-Ronda-Futura-H2H]]~~ _(MISSING — [[Nodo-31-Future-Match-Data-Leakage]] es diferente)_~~ _(MISSING — [[Nodo-31-Future-Match-Data-Leakage]] es diferente)_
+> **Wikilinks:** [[Nodo-45-Temporal-History-Fallback]] | ~~~~[[Nodo-31-Ronda-Futura-H2H]]~~ _(MISSING — [[Nodo-31-Future-Match-Data-Leakage]] es diferente)_~~ _(MISSING — [[Nodo-31-Future-Match-Data-Leakage]] es diferente)_ | [[Nodo-117-Auditoria-Scraping-Rankings-Cobertura-H2H]] (B117-02: cuotas Kambi ausentes en Playwright → H2H ve 0 partidos)
 > **Fecha de descubrimiento:** 2026-06-30
 > **Estado:** ✅ IMPLEMENTADO 2026-06-30 — D48-BUG-01, D48-01, D48-02, D48-04 completados
 

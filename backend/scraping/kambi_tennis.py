@@ -193,6 +193,9 @@ def fetch_flashscore_feed(day_offset: int = 0) -> List[Dict]:
             "jugador1_fs": fields.get("AE", ""),
             "jugador2_fs": fields.get("AF", ""),
             "match_id": fields.get("AA", ""),
+            # NOTA B117-01 (Nodo-117): CA/CB son rankings del feed FlashScore (sistema interno),
+            # NO posiciones ATP/WTA oficiales. No usar para gaps de ranking — ver
+            # data/atp_rankings_complete_*.json y data/wta_rankings_complete_*.json.
             "ranking1": _safe_int(fields.get("CA")),
             "ranking2": _safe_int(fields.get("CB")),
             "torneo_fs": current_tournament,
@@ -223,13 +226,23 @@ def _safe_int(val) -> Optional[int]:
 def _normalize_name(name: str) -> str:
     """
     Normaliza nombre para matching: lowercase, sin acentos, sin puntuación.
-    Patrón NBA: _normalize_name de flashscore_api.py
+    B108-03: delega a core.player_registry.normalize_player_name (fuente canónica).
+    Fallback inline si el módulo no está disponible (ej. tests aislados).
     """
-    import unicodedata
-    name = unicodedata.normalize("NFD", name.lower())
-    name = "".join(c for c in name if unicodedata.category(c) != "Mn")
-    name = re.sub(r"[^a-z\s]", "", name)
-    return name.strip()
+    try:
+        import sys as _sys
+        from pathlib import Path as _Path
+        _root = str(_Path(__file__).parent.parent)
+        if _root not in _sys.path:
+            _sys.path.insert(0, _root)
+        from core.player_registry import normalize_player_name
+        return normalize_player_name(name)
+    except Exception:
+        import unicodedata
+        name = unicodedata.normalize("NFD", name.lower())
+        name = "".join(c for c in name if unicodedata.category(c) != "Mn")
+        name = re.sub(r"[^a-z\s]", "", name)
+        return name.strip()
 
 
 # Sufijos que no son parte del apellido (patrón NBA: _parse_nombre)

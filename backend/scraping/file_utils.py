@@ -71,11 +71,16 @@ def analyze_json_structure(json_file: Path) -> Dict:
                 if isinstance(matches, list):
                     total_matches += len(matches)
                     matches_with_urls += sum(1 for m in matches if isinstance(m, dict) and m.get('match_url'))
-            
+
             analysis['match_count'] = total_matches
             analysis['has_match_urls'] = matches_with_urls > 0
             analysis['matches_with_urls'] = matches_with_urls
-            
+            # D117-02: contar partidos con cuotas Kambi (cuota1 != None)
+            analysis['matches_with_cuotas'] = sum(
+                1 for matches in data.values() if isinstance(matches, list)
+                for m in matches if isinstance(m, dict) and m.get('cuota1') is not None
+            )
+
         elif isinstance(data, list):
             analysis['match_count'] = len(data)
             analysis['has_match_urls'] = any(
@@ -83,6 +88,10 @@ def analyze_json_structure(json_file: Path) -> Dict:
             )
             analysis['matches_with_urls'] = sum(
                 1 for m in data if isinstance(m, dict) and m.get('match_url')
+            )
+            # D117-02: contar partidos con cuotas Kambi (cuota1 != None)
+            analysis['matches_with_cuotas'] = sum(
+                1 for m in data if isinstance(m, dict) and m.get('cuota1') is not None
             )
         
         return analysis
@@ -175,10 +184,15 @@ def select_best_json_file(directory: str = ".",
         logger.error("❌ No se encontraron archivos JSON válidos")
         return None
     
-    # Ordenar por fecha de modificación primero (más reciente = mejor), luego por partidos
+    # D117-02: archivos con cuotas Kambi (cuota1 != None) SIEMPRE superan a archivos sin cuotas,
+    # independientemente del total de partidos. Desempate: más reciente, luego más URLs.
     # REGLA-5 (Nodo-08): recency first — datos nuevos tienen menos partidos pero h2h_url válidas
     valid_files.sort(
-        key=lambda x: (x['path'].stat().st_mtime, x['analysis'].get('matches_with_urls', 0)),
+        key=lambda x: (
+            x['analysis'].get('matches_with_cuotas', 0) > 0,  # con cuotas gana siempre
+            x['path'].stat().st_mtime,
+            x['analysis'].get('matches_with_urls', 0)
+        ),
         reverse=True
     )
     

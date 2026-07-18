@@ -1,6 +1,6 @@
 # Nodo-49: Playwright H2H Fallback para n_h2h=0 — El mismo error de Nodo-48
 
-> **Wikilinks:** [[Nodo-48-FlashScore-Odds-Scraper-Testing]] | [[Nodo-45-Temporal-History-Fallback]] | [[Nodo-33-Filtro-Coinflip-Sin-H2H]] | [[Nodo-35-Historial-Vacio-Flag-Pipeline]]
+> **Wikilinks:** [[Nodo-48-FlashScore-Odds-Scraper-Testing]] | [[Nodo-45-Temporal-History-Fallback]] | [[Nodo-33-Filtro-Coinflip-Sin-H2H]] | [[Nodo-35-Historial-Vacio-Flag-Pipeline]] | [[Nodo-117-Auditoria-Scraping-Rankings-Cobertura-H2H]] (B117-02/B117-03: Playwright sin cuotas + selector elige archivo incorrecto)
 > **Fecha de descubrimiento:** 2026-07-01
 > **Estado:** ⏳ EN IMPLEMENTACION
 
