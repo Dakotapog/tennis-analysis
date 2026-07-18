@@ -3,7 +3,7 @@ estado: activo
 ---
 # Nodo-117 — Auditoría Scraping: Rankings FlashScore ≠ ATP/WTA + Cobertura H2H 33%
 
-> **Wikilinks:** [[Nodo-48-FlashScore-Odds-Scraper-Testing]] | [[Nodo-49-Playwright-H2H-Fallback-n-h2h-0]] | [[Nodo-80-Kambi-Name-Matching]] | [[Nodo-82-Kambi-Match-ID-Structural]] | [[Nodo-86-Auditoria-Fable5]] | [[Nodo-103-Auditoria-Combo-Builder-Gates-n-h2h]] | [[Nodo-110-Modo-Operador-Favoritos-Compuestos]] | [[Nodo-33-Filtro-Coinflip-Sin-H2H]]
+> **Wikilinks:** [[Nodo-48-FlashScore-Odds-Scraper-Testing]] | [[Nodo-49-Playwright-H2H-Fallback-n-h2h-0]] | [[Nodo-80-Kambi-Name-Matching]] | [[Nodo-82-Kambi-Match-ID-Structural]] | [[Nodo-86-Auditoria-Fable5]] | [[Nodo-103-Auditoria-Combo-Builder-Gates-n-h2h]] | [[Nodo-110-Modo-Operador-Favoritos-Compuestos]] | [[Nodo-33-Filtro-Coinflip-Sin-H2H]] | [[Nodo-118-Match-Ledger-Crosswalk-Identidad-Fusion-Definitiva]] (D117-03 Opción 1 vía ledger con cuarentena)
 > **Fecha:** 2026-07-18 | **Autor:** Fable 5 / Sonnet 4.6 | **Prioridad:** ALTA — afecta cobertura diaria del universo de picks
 > **Contexto:** Investigación post-pipeline 2026-07-18. Pipeline extrajo 130 partidos Playwright pero H2H procesó solo 43 (33%). RANKING_ONLY (D110-06) devolvió 0 candidatos del archivo API a pesar de Paula Badosa @1.27 en el universo.
 
