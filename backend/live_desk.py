@@ -980,12 +980,34 @@ def render_html(state: Dict[str, Any]) -> str:
     _gs = state.get("p_games", {})
     x3_rows: List = []
     if _gs.get("disponible"):
+        _x3_middles = 0
         for _sig in _gs.get("signals", []):
             _conf   = _sig.get("confianza", "")
             _conf_c = GREEN if _conf == "ALTA" else (AMBER if _conf == "MEDIA" else GREY)
             _dir    = _sig.get("direccion", "")
             _dir_c  = GREEN if _dir == "OVER" else (AMBER if _dir == "UNDER" else GREY)
             _gap    = _sig.get("gap")
+            # ── MIDDLE CANDIDATO: qué línea necesita otra casa ──────────────────
+            _gr     = _sig.get("games_range", "")
+            _linea  = _sig.get("linea")
+            _mid_html = "—"
+            try:
+                _parts = _gr.replace("+", "").split("-")
+                _rlo, _rhi = float(_parts[0]), float(_parts[-1])
+                if _dir == "OVER" and _linea is not None:
+                    # Kambi tiene OVER _linea → otra casa necesita UNDER ≥ _rhi+0.5
+                    _needed = _rhi + 0.5
+                    if _rlo >= float(_linea) and _rhi <= _needed:
+                        _mid_html = f'<span style="color:{AMBER};font-weight:bold;">UNDER ≥{_needed:.1f}</span>'
+                        _x3_middles += 1
+                elif _dir == "UNDER" and _linea is not None:
+                    # Kambi tiene UNDER _linea → otra casa necesita OVER ≤ _rlo-0.5
+                    _needed = _rlo - 0.5
+                    if _rlo >= _needed and _rhi <= float(_linea):
+                        _mid_html = f'<span style="color:{AMBER};font-weight:bold;">OVER ≤{_needed:.1f}</span>'
+                        _x3_middles += 1
+            except Exception:
+                pass
             x3_rows.append([
                 _sig.get("partido", ""),
                 _sig.get("mercado", ""),
@@ -995,15 +1017,17 @@ def render_html(state: Dict[str, Any]) -> str:
                 f'{_gap:+.1f}j' if _gap is not None else "—",
                 f'<span style="color:{_conf_c};">{_conf}</span>',
                 _sig.get("games_range", ""),
+                _mid_html,
             ])
         _x3_n       = _gs["n_apostar"]
         _x3_total   = _gs["n_partidos"]
-        _x3_badge   = f"{_x3_n} señales" if _x3_n else f"0/{_x3_total} sin señal"
+        _mid_note   = f" | {_x3_middles} middle-candidatos" if _x3_middles else ""
+        _x3_badge   = f"{_x3_n} señales{_mid_note}" if _x3_n else f"0/{_x3_total} sin señal"
         _x3_badge_c = GREEN if _x3_n else GREY
         x3_panel = panel(
             f"X3 GAMES SIGNAL — Over/Under mercados Nodo-40 | {_gs['fuente']}",
             table(
-                ["Partido", "Mercado", "Dir", "Línea", "Cuota", "Gap", "Confianza", "Rango pred."],
+                ["Partido", "Mercado", "Dir", "Línea", "Cuota", "Gap", "Confianza", "Rango pred.", "Middle? (2da casa)"],
                 x3_rows,
                 "Sin señales accionables hoy (gap modelo-línea insuficiente)",
             ),
