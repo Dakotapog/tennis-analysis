@@ -49,6 +49,94 @@ PORT_DEFAULT = 7780
 # FUNCIONES PURAS (testeables REGLA-T53)
 # ══════════════════════════════════════════════════════════════════════════════
 
+_SPARK = '▁▂▃▄▅▆▇█'
+
+
+def _load_odds_history(fecha: str) -> dict:
+    """Lee live_odds_history_YYYYMMDD.json para sparklines U4. REPORTE_SOLO."""
+    p = REPORTS / f"live_odds_history_{fecha.replace('-', '')}.json"
+    if not p.exists():
+        return {}
+    try:
+        return json.loads(p.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+def _sparkline_drift(jugador: str, history: dict) -> str:
+    """
+    Últimos 4 drifts del jugador → chars ▁▂▄▇ + flecha tendencia (U4 Nodo-115).
+    Retorna "" si no hay historial. REPORTE_SOLO, función pura.
+    """
+    jug_lower = jugador.lower()
+    readings: list = []
+    for pk, entry in history.items():
+        if jug_lower in pk.lower():
+            readings = entry.get('readings', [])[-4:]
+            break
+    if not readings:
+        return ""
+    drifts = [r.get('drift', 0) for r in readings]
+    max_d = max(abs(d) for d in drifts) or 0.01
+    spark = ''.join(_SPARK[min(7, int(abs(d) / max_d * 7))] for d in drifts)
+    arrow = '→'
+    if len(drifts) >= 2:
+        delta = drifts[-1] - drifts[0]
+        if delta > 0.01:
+            arrow = '↑'
+        elif delta < -0.01:
+            arrow = '↓'
+    return f'{spark} {arrow}'
+
+
+def _build_conformal_band() -> dict:
+    """
+    Llama conformal_report() una vez por ciclo. Retorna q_global y gate.
+    REPORTE_SOLO — no cambia ningún gate. (U1 Nodo-115 §4)
+    """
+    try:
+        from analysis.conformal_band import conformal_report
+        return conformal_report()
+    except Exception:
+        return {"q_global": None, "gate_ok": False, "n_settled": 0}
+
+
+def _build_combo_live(fecha: str) -> List[Dict]:
+    """
+    Lee reports/combos_live/YYYY-MM-DD/_fired.json y retorna lista de dicts
+    para filas COMBO_LIVE en accionable_ahora() (D116-01 §B.5).
+    REPORTE_SOLO — no cambia gates.
+    """
+    fired_path = REPORTS / "combos_live" / fecha / "_fired.json"
+    if not fired_path.exists():
+        return []
+    try:
+        fired = json.load(fired_path.open(encoding="utf-8"))
+    except Exception:
+        return []
+    rows = []
+    combos_dir = REPORTS / "combos_live" / fecha
+    for event_id, meta in fired.items():
+        # Buscar .bat asociado (nombre contiene timestamp, no event_id directo)
+        # Usamos glob para encontrar cualquier .bat — el desk muestra el último
+        bat_files = sorted(combos_dir.glob("LiveCombo_*.bat"))
+        bat_link = str(bat_files[-1]) if bat_files else ""
+        rows.append({
+            "tipo": "COMBO_LIVE",
+            "jugador": event_id,
+            "pick": event_id,
+            "hipotesis": "H100-01",
+            "n_actual": 0,
+            "n_stop": 20,
+            "color": "amber",
+            "fired_at": meta.get("fired_at", ""),
+            "drift_pct": meta.get("drift_pct", 0),
+            "bat_link": bat_link,
+            "señales_activas": ["BREAK_CONFIRMADO"],
+        })
+    return rows
+
+
 def build_desk_state(fecha: Optional[str] = None) -> Dict[str, Any]:
     """
     Agrega las 7 fuentes de datos para el desk. Tolera archivos ausentes.
@@ -85,8 +173,11 @@ def build_desk_state(fecha: Optional[str] = None) -> Dict[str, Any]:
         "p5_execution": _build_p5_execution(fecha),
         "p6_pnl": _build_p6_pnl(fecha),
         "p7_clock": _build_p7_clock(fecha),
-        "p8_books": _build_p8_books(fecha),  # Nodo-114 §3: dual-book cache 120s
-        "p9_que_falta": _build_que_falta(fecha),  # Nodo-115 §2.4
+        "p8_books": _build_p8_books(fecha),      # Nodo-114 §3: dual-book cache 120s
+        "p9_que_falta": _build_que_falta(fecha),       # Nodo-115 §2.4
+        "p10_odds_history": _load_odds_history(fecha), # Nodo-115 U4 sparkline
+        "p11_combo_live": _build_combo_live(fecha),    # Nodo-116 §B.5
+        "p12_conformal": _build_conformal_band(),      # Nodo-115 U1 banda
     }
     return state
 
@@ -114,18 +205,29 @@ def accionable_ahora(state: Dict[str, Any]) -> List[Dict]:
     for brk in state.get("p2_break", {}).get("breaks", []):
         if brk.get("estado") == "BREAK_CONFIRMADO":
             p3d = _p3_by_jug.get(brk.get("jugador", ""), {})
+            edge_live = brk.get("edge_live")
+            trigger = brk.get("trigger", False)
+            # señales: preferir las del live_edge (HOT/EDGE_MED) sobre p3d vacío
+            senales_live = brk.get("senales", [])
+            senales = p3d.get("señales_activas") or senales_live
             accionables.append({
                 "tipo": "BREAK_CONFIRMADO",
+                "p_modelo": brk.get("p_modelo", 0),
                 "jugador": brk.get("jugador", ""),
                 "pick": brk.get("pick", ""),
+                "partido": brk.get("partido", ""),
                 "hipotesis": "H100-01",
                 "n_actual": brk.get("n_actual", 0),
                 "n_stop": 20,
                 "color": "amber",  # pre-graduacion: amber siempre
                 "governor_code": gov_code,
                 "drift_pct": brk.get("drift_pct", 0),
+                "cuota_pre": brk.get("cuota_pre"),
+                "cuota_live": brk.get("cuota_live"),
+                "edge_live": edge_live,
+                "trigger": trigger,
                 "meta_score": p3d.get("score_directo", 0),
-                "señales_activas": p3d.get("señales_activas", []),
+                "señales_activas": senales,
                 "n_h2h": p3d.get("n_h2h"),
                 "clv": p3d.get("clv"),
             })
@@ -196,6 +298,11 @@ def accionable_ahora(state: Dict[str, Any]) -> List[Dict]:
             "nota": "python3 favoritos_combo_builder.py --bankroll 125000",
         })
 
+    # COMBO_LIVE del día (D116-01 §B.5) — filas accionables del desk
+    for cl in state.get("p11_combo_live", []):
+        cl["governor_code"] = gov_code
+        accionables.append(cl)
+
     # Enriquecer todos con mejor_precio de P8
     p8_picks = state.get("p8_books", {}).get("picks", {})
     for a in accionables:
@@ -234,8 +341,20 @@ def linea_razonamiento(pick: dict) -> str:
     tipo = pick.get("tipo", "")
     if tipo == "BREAK_CONFIRMADO":
         drift = pick.get("drift_pct")
-        suf = f"(drift {drift:+.1f}%)" if drift is not None else ""
-        parts.append(f"BREAK_CONFIRMADO{suf}")
+        cuota_pre = pick.get("cuota_pre")
+        cuota_live = pick.get("cuota_live")
+        edge_live = pick.get("edge_live")
+        trigger = pick.get("trigger", False)
+        # cuota pre→live
+        cuota_str = (f" cuota {cuota_pre}→{cuota_live}" if cuota_pre and cuota_live else "")
+        drift_str = f" drift {drift:+.1f}%" if drift is not None else ""
+        edge_str = ""
+        if edge_live is not None:
+            edge_str = f" edge_live={edge_live:+.2f}"
+            if edge_live < 0:
+                edge_str += " EDGE NEGATIVO-NO APOSTAR"
+        trig_str = "" if trigger else " [monitor: NO DISPARAR]"
+        parts.append(f"BREAK_CONFIRMADO{cuota_str}{drift_str}{edge_str}{trig_str}")
     elif tipo == "GCS":
         parts.append("GCS(H60-01 GRADUADA)")
     elif tipo == "RIVAL_VALUE":
@@ -512,17 +631,27 @@ def render_html(state: Dict[str, Any]) -> str:
         rv = "RIVAL" if p.get("rival_value_flag") else ""
         gcs = "GCS" if p.get("gcs_active") else ""
         badges = " ".join(filter(None, [rv, gcs]))
+        dir_ = p.get("direccion", "FAVORITO")
+        if dir_ == "SPLIT":
+            dir_html = (f'<span style="background:{AMBER};color:#000;padding:1px 4px;'
+                        f'border-radius:3px;font-size:0.8em;font-weight:bold;" '
+                        f'title="Señales contradictorias: score_fav={score} + rival_value">SPLIT</span>')
+        elif dir_ == "RIVAL":
+            dir_html = f'<span style="color:{AMBER};">RIVAL</span>'
+        else:
+            dir_html = f'<span style="color:{GREY};">FAV</span>'
         conv_rows.append([
             p.get("jugador", ""),
             f'<span style="color:{sc_color};font-weight:bold;">{score}</span>',
             p.get("confidence_flag", ""),
             p.get("markov_favorito", ""),
+            dir_html,
             badges or "—",
         ])
     p3_panel = panel(
         "P3 CONVERGENCE — Meta-señal H98-01 (score>=3 = fila destacada)",
         f'<div style="{atenuado}">' + table(
-            ["Jugador", "Score", "Conf", "Markov", "Flags"],
+            ["Jugador", "Score", "Conf", "Markov", "Dir", "Flags"],
             conv_rows, "Sin datos de convergencia (correr PASO 3b)"
         ) + "</div>"
     )
@@ -608,8 +737,18 @@ def render_html(state: Dict[str, Any]) -> str:
         gain = bp.get("gain_pct", 0) or 0
         gain_str = f"+{gain:.1f}%" if gain > 0 else f"{gain:.1f}%"
         gain_color = GREEN if gain > 0 else GREY
+        # ARB flag
+        arb_html = ""
+        if bp.get("arb_flag"):
+            rc = bp.get("rival_cuota", "?")
+            rk = bp.get("rival_casa", "?")
+            arb_html = (
+                f'<span style="background:#00ff00;color:#000;padding:1px 5px;'
+                f'font-size:0.72em;border-radius:3px;font-weight:bold;" '
+                f'title="ARB: fav @{cuota_gana} ({casa_gana}) + rival @{rc} ({rk})">ARB</span> '
+            )
         p8_rows.append([
-            bp.get("jugador", jug_key),
+            arb_html + bp.get("jugador", jug_key),
             str(bp.get("betplay_cuota", "—")),
             str(bp.get("flashscore_cuota", "—")),
             f'<span style="color:{div_color};">{div:.1f}%{div_badge}</span>',
@@ -618,17 +757,26 @@ def render_html(state: Dict[str, Any]) -> str:
         ])
     cache_age = p8_books.get("cache_age_s", 0)
     from_cache = p8_books.get("from_cache", False)
+    is_stale = from_cache and cache_age > 300
     feeds_str = ", ".join(p8_books.get("feeds", []) or [])
-    cache_note = f"cache {cache_age}s restantes" if from_cache else "datos frescos"
+    cache_note = f"cache {cache_age}s" if from_cache else "datos frescos"
+    stale_badge = (
+        f' <span style="background:{RED};color:#fff;padding:1px 5px;font-size:0.72em;'
+        f'border-radius:3px;font-weight:bold;">STALE {cache_age}s</span>'
+        if is_stale else ""
+    )
+    middle_note = (
+        f'<p style="color:{GREY};font-size:0.78em;margin:4px 0;">MIDDLE: gateado — sin datos O/U en feeds actuales (D116-03)</p>'
+    )
     p8_badge = f"{len(p8_rows)} picks" if p8_rows else "SIN DATOS"
     p8_badge_color = BLUE if p8_rows else GREY
     p8_panel = panel(
-        f"P8 MULTI-BOOK — Router X1 Nodo-111 | feeds: {feeds_str or 'ninguno'} | {cache_note} (TTL 120s)",
+        f"P8 MULTI-BOOK — Router X1 Nodo-111 | feeds: {feeds_str or 'ninguno'} | {cache_note} (TTL 10min){stale_badge}",
         f'<div style="{atenuado}">' + table(
             ["Jugador", "betplay", "flashscore", "div%", "Mejor precio"],
             p8_rows,
             "Sin datos (dual_book_cache.json vacío — se genera en próximo ciclo de live_edge_monitor)"
-        ) + "</div>",
+        ) + middle_note + "</div>",
         p8_badge, p8_badge_color,
     )
 
@@ -647,7 +795,10 @@ def render_html(state: Dict[str, Any]) -> str:
     )
 
     # ── Nodo-115: n_cal lookup y QUÉ FALTA ──────────────────────────────────
-    _ncal_map = state.get("p0_ncal", {})
+    _ncal_map   = state.get("p0_ncal", {})
+    _odds_hist  = state.get("p10_odds_history", {})  # U4 sparkline
+    _conf_data  = state.get("p12_conformal", {})      # U1 banda
+    _q_global   = _conf_data.get("q_global")          # None si n_settled < gate
     _que_falta = state.get("p9_que_falta", [])
 
     # ── Accionables con U2+U3+drill-down+facetas (Nodo-115) ─────────────────
@@ -667,12 +818,20 @@ def render_html(state: Dict[str, Any]) -> str:
         TD = f'padding:4px 10px;border-bottom:1px solid {BORDER};'
         hdr_cells = "".join(
             f'<td style="{TD}color:{GREY};font-weight:bold;">{h}</td>'
-            for h in ["Tipo", "Jugador/Pick", "Evidencia U2", "Gate U3", "Razonamiento"]
+            for h in ["Tipo", "Jugador/Pick", "Evidencia U2", "Gate U3", "Tendencia U4", "Conf U1", "Razonamiento"]
         )
         rows_html = f"<tr><tr>{hdr_cells}</tr></tr>"
 
         for idx, a in enumerate(accionables):
             ac = GREEN if a.get("color") == "green" else AMBER
+            # CSS urgency classes migradas de live_dashboard_generator (Nodo-116 §A)
+            tipo_cls = ""
+            if a.get("tipo") == "BREAK_CONFIRMADO":
+                tipo_cls = " break-confirmado"
+            elif a.get("tipo") == "BREAK_POSIBLE":
+                tipo_cls = " break-posible"
+            elif a.get("tipo") == "COMBO_LIVE":
+                tipo_cls = " combo-live"
             razon = linea_razonamiento(a)
             razon_short = razon[:90] + ("…" if len(razon) > 90 else "")
 
@@ -691,15 +850,45 @@ def render_html(state: Dict[str, Any]) -> str:
             u3_html = (f'<span style="font-family:monospace;color:{u3_color};font-size:0.82em;">'
                        f'{a["hipotesis"]}: {u3_txt}</span>')
 
+            # U4 — sparkline tendencia drift (últimos 4 ciclos)
+            u4_spark = _sparkline_drift(a.get("jugador", ""), _odds_hist)
+            u4_html = (
+                f'<span style="font-family:monospace;color:{GREY};font-size:0.85em;">{u4_spark}</span>'
+                if u4_spark else f'<span style="color:{GREY};font-size:0.75em;">–</span>'
+            )
+
+            # U1 — banda conformal p=X ±q_global
+            p_m = float(a.get("p_modelo") or 0)
+            if _q_global is not None and p_m > 0:
+                cruza_be = (p_m - _q_global) <= 0.5 <= (p_m + _q_global)
+                u1_color = AMBER if cruza_be else GREEN
+                u1_label = "BANDA CRUZA BE" if cruza_be else f"±{_q_global:.2f}"
+                u1_html  = (
+                    f'<span style="font-family:monospace;color:{u1_color};font-size:0.82em;" '
+                    f'title="p={p_m:.2f} q={_q_global:.2f}: [{p_m-_q_global:.2f}, {p_m+_q_global:.2f}]">'
+                    f'p={p_m:.2f} {u1_label}</span>'
+                )
+            else:
+                u1_html = f'<span style="color:{GREY};font-size:0.75em;">n&lt;{_conf_data.get("n_settled",0)}</span>'
+
             # Fila principal
             row_id = f"acc-{idx}"
+            # Badge EDGE- visible sin abrir drill-down (task #67)
+            _el = a.get("edge_live")
+            edge_badge = (
+                f' <span style="background:{RED};color:#fff;padding:1px 4px;border-radius:3px;'
+                f'font-size:0.72em;font-weight:bold;" title="edge_live={_el:.2f} — NO APOSTAR">EDGE-</span>'
+                if _el is not None and _el < 0 else ""
+            )
             main_row = (
-                f'<tr class="acc-row" id="{row_id}" data-tipo="{a["tipo"]}" '
+                f'<tr class="acc-row{tipo_cls}" id="{row_id}" data-tipo="{a["tipo"]}" '
                 f'style="cursor:pointer;" onclick="toggleDetalle(\'{row_id}\')">'
-                f'<td style="{TD}"><span style="color:{ac};font-weight:bold;">{a["tipo"]}</span></td>'
+                f'<td style="{TD}"><span style="color:{ac};font-weight:bold;">{a["tipo"]}</span>{edge_badge}</td>'
                 f'<td style="{TD}color:{WHITE};">{a["jugador"]}</td>'
                 f'<td style="{TD}">{u2_html}</td>'
                 f'<td style="{TD}">{u3_html}</td>'
+                f'<td style="{TD}">{u4_html}</td>'
+                f'<td style="{TD}">{u1_html}</td>'
                 f'<td style="{TD}"><span title="{razon}" style="color:{GREY};font-size:0.82em;">{razon_short}</span></td>'
                 f'</tr>'
             )
@@ -711,6 +900,29 @@ def render_html(state: Dict[str, Any]) -> str:
                 precio_detalle = (f'<br><b>P8 mejor precio:</b> {mejor.get("casa","?")} '
                                   f'@{mejor.get("cuota","?")} (+{mejor.get("gain_pct",0):.1f}%)')
             senas = ", ".join(a.get("señales_activas", [])) or "—"
+            # Cuota pre→live (BREAK rows)
+            cuota_detalle = ""
+            if a.get("cuota_pre") and a.get("cuota_live"):
+                cp = a["cuota_pre"]; cl = a["cuota_live"]
+                edge_live = a.get("edge_live")
+                edge_color = RED if (edge_live is not None and edge_live < 0) else GREEN
+                edge_txt = (f'<span style="color:{edge_color};"> edge_live={edge_live:+.2f}'
+                            f'{"  ⚠ EDGE NEGATIVO — NO APOSTAR" if edge_live < 0 else ""}</span>'
+                            ) if edge_live is not None else ""
+                trig_txt = (f'<span style="color:{GREY};"> [monitor: NO DISPARAR]</span>'
+                            if not a.get("trigger", False) else "")
+                cuota_detalle = (f'<br><b>Cuota:</b> pre={cp} → live={cl} '
+                                 f'(drift {a.get("drift_pct",0):+.1f}%){edge_txt}{trig_txt}')
+            # COMBO_LIVE — bat link y hora de disparo
+            bat_html = ""
+            if a.get("tipo") == "COMBO_LIVE":
+                bat_path = a.get("bat_link", "")
+                fired_at = a.get("fired_at", "")
+                bat_html = (
+                    f'<br><b>Disparado:</b> {fired_at}'
+                    + (f'<br><b>Combo .bat:</b> <span style="color:{AMBER};font-family:monospace;">{bat_path}</span>'
+                       if bat_path else '<br><span style="color:{GREY};">(.bat no generado — sin trader_plans)</span>')
+                )
             det_content = (
                 f'<div style="padding:8px 12px;background:#0d1117;border-left:3px solid {ac};'
                 f'font-size:0.82em;color:{WHITE};">'
@@ -723,18 +935,20 @@ def render_html(state: Dict[str, Any]) -> str:
                 f'<br><b>meta_score:</b> {a.get("meta_score", "—")} | '
                 f'<b>n_h2h:</b> {a.get("n_h2h", "—")} | '
                 f'<b>drift:</b> {a.get("drift_pct", "—")}%'
+                f'{cuota_detalle}'
                 f'{precio_detalle}'
+                f'{bat_html}'
                 f'</div>'
             )
             det_row = (
                 f'<tr id="det-{row_id}" style="display:none;">'
-                f'<td colspan="5" style="padding:0;border-bottom:1px solid {BORDER};">'
+                f'<td colspan="7" style="padding:0;border-bottom:1px solid {BORDER};">'
                 f'{det_content}</td></tr>'
             )
             rows_html += main_row + det_row
 
         acc_table = (f'<table style="border-collapse:collapse;width:100%;font-size:0.85em;">'
-                     f'{rows_html}</table>')
+                     f'<tbody id="acc-tbody">{rows_html}</tbody></table>')
         acc_content = facet_bar + acc_table
     else:
         acc_content = f'<p style="color:{GREY};">{"DESK EN HALT — nada accionable" if halt else "Sin señales accionables ahora"}</p>'
@@ -771,13 +985,13 @@ def render_html(state: Dict[str, Any]) -> str:
 
     fecha = state.get("fecha", "")
     ts = state.get("ts", "")
-    refresh_note = f'<p style="color:{GREY};font-size:0.75em;text-align:right;">Auto-refresh 30s | {ts}</p>'
+    refresh_note = f'<p style="color:{GREY};font-size:0.75em;text-align:right;">Auto-refresh 30s | <span id="desk-ts">{ts}</span></p>'
 
     html = f"""<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="30">
+  <!-- refresh via fetch() — preserva filtros y drill-downs (§2.5 Nodo-115) -->
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Live Trading Desk — {fecha}</title>
   <style>
@@ -787,6 +1001,10 @@ def render_html(state: Dict[str, Any]) -> str:
     td {{ border-bottom: 1px solid {BORDER}; }}
     tr:last-child td {{ border-bottom: none; }}
     a {{ color: {BLUE}; }}
+    @keyframes blink {{ 0%,100% {{ opacity:1; }} 50% {{ opacity:0.25; }} }}
+    .break-confirmado {{ animation: blink 1s step-start infinite; background: #3a0a0a !important; color: {RED} !important; }}
+    .break-posible {{ background: #2d1a00 !important; color: #e67e22 !important; }}
+    .combo-live {{ background: #1a1200 !important; border-left: 3px solid #f0a500; }}
   </style>
 </head>
 <body>
@@ -804,22 +1022,70 @@ def render_html(state: Dict[str, Any]) -> str:
   {p7_panel}
   {refresh_note}
   <script>
+  // Estado cliente — preservado entre refreshes (§2.5 Nodo-115)
+  var _activeFilter = 'TODOS';
+  var _openRows = {{}};
+
   function filtrarTipo(tipo) {{
+    _activeFilter = tipo;
     document.querySelectorAll('.acc-row').forEach(function(r) {{
       var t = r.getAttribute('data-tipo');
       r.style.display = (tipo === 'TODOS' || t === tipo) ? '' : 'none';
       var det = document.getElementById('det-' + r.id);
-      if (det) det.style.display = 'none';
+      if (det && !_openRows[r.id]) det.style.display = 'none';
     }});
     document.querySelectorAll('.facet-btn').forEach(function(b) {{
       b.style.background = b.getAttribute('data-f') === tipo ? '#58a6ff' : '#21262d';
       b.style.color = b.getAttribute('data-f') === tipo ? '#000' : '#e6edf3';
     }});
   }}
+
   function toggleDetalle(rowId) {{
     var d = document.getElementById('det-' + rowId);
-    if (d) d.style.display = d.style.display === 'none' ? 'table-row' : 'none';
+    if (!d) return;
+    var open = d.style.display === 'table-row';
+    d.style.display = open ? 'none' : 'table-row';
+    _openRows[rowId] = !open;
   }}
+
+  function _reapplyState() {{
+    // Re-aplicar filtro activo
+    document.querySelectorAll('.acc-row').forEach(function(r) {{
+      var t = r.getAttribute('data-tipo');
+      r.style.display = (_activeFilter === 'TODOS' || t === _activeFilter) ? '' : 'none';
+    }});
+    // Re-abrir filas expandidas
+    Object.keys(_openRows).forEach(function(id) {{
+      if (_openRows[id]) {{
+        var d = document.getElementById('det-' + id);
+        if (d) d.style.display = 'table-row';
+      }}
+    }});
+  }}
+
+  function autoRefresh() {{
+    fetch('/', {{cache: 'no-store'}})
+      .then(function(r) {{ return r.text(); }})
+      .then(function(html) {{
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(html, 'text/html');
+        // Reemplazar tbody de accionables
+        var newTbody = doc.getElementById('acc-tbody');
+        var curTbody = document.getElementById('acc-tbody');
+        if (newTbody && curTbody) {{
+          curTbody.innerHTML = newTbody.innerHTML;
+        }}
+        // Actualizar timestamp
+        var newTs = doc.getElementById('desk-ts');
+        var curTs = document.getElementById('desk-ts');
+        if (newTs && curTs) curTs.textContent = newTs.textContent;
+        // Re-aplicar estado del operador
+        _reapplyState();
+      }})
+      .catch(function() {{}});  // silencioso — reintenta en 30s
+    setTimeout(autoRefresh, 30000);
+  }}
+  setTimeout(autoRefresh, 30000);
   </script>
 </body>
 </html>"""
@@ -930,43 +1196,61 @@ def _exposicion_hoy(fecha: str, bankroll: float) -> List[Dict]:
 
 def _build_p1_tape(fecha: str) -> Dict:
     """P1: drift% del live_edge_monitor."""
-    le = _latest(str(REPORTS / f"live_edge_state_{fecha.replace('-','')}*.json"))
+    le = _latest(str(REPORTS / f"live_edge_{fecha.replace('-','')}*.json"))
     data = _load_json(le)
     if not data:
         return {"entries": [], "source": "SIN DATO — live_edge_monitor no activo"}
 
     entries = []
-    for pick in data.get("picks", data.get("partidos", [])):
+    for pick in data.get("picks_chequeados_data", data.get("picks", data.get("partidos", []))):
+        if not isinstance(pick, dict):
+            continue
+        if pick.get("cuota_live") is None:  # sin dato live — no mostrar en tape
+            continue
+        jugador = pick.get("favorito", pick.get("jugador", pick.get("home", "")))
+        if not jugador or jugador == "?":
+            continue
         drift = pick.get("drift_pct", pick.get("drift", 0)) or 0
-        direction = "CONFIRMA" if drift < 0 else ("ALEJA" if drift > 0 else "NEUTRO")
+        # Convención monitor: drift = (cuota_pre - cuota_live)/cuota_pre
+        # drift > 0 → cuota bajó → CONFIRMA | drift < 0 → cuota subió → ALEJA
+        direction = "CONFIRMA" if drift > 0 else ("ALEJA" if drift < 0 else "NEUTRO")
         entries.append({
-            "jugador": pick.get("jugador", pick.get("home", "")),
+            "jugador": jugador,
             "drift_pct": drift,
             "direction": direction,
             "vel_zscore": pick.get("velocity_zscore", pick.get("vel_z", "—")),
-            "ts": pick.get("ts", pick.get("timestamp", "")),
+            "ts": pick.get("ts", data.get("ts", "")),
         })
     return {"entries": entries}
 
 
 def _build_p2_break(fecha: str) -> Dict:
     """P2: break_state de Nodo-100B."""
-    le = _latest(str(REPORTS / f"live_edge_state_{fecha.replace('-','')}*.json"))
+    le = _latest(str(REPORTS / f"live_edge_{fecha.replace('-','')}*.json"))
     data = _load_json(le)
     if not data:
         return {"breaks": [], "source": "SIN DATO — live_edge_monitor no activo"}
 
     breaks = []
-    for pick in data.get("picks", data.get("partidos", [])):
+    for pick in data.get("picks_chequeados_data", data.get("picks", data.get("partidos", []))):
+        if not isinstance(pick, dict):
+            continue
         bs = pick.get("break_state", "NORMAL")
         if bs != "NORMAL":
             breaks.append({
                 "estado": bs,
-                "jugador": pick.get("jugador", ""),
-                "pick": pick.get("pick", ""),
+                "jugador": pick.get("favorito", pick.get("jugador", "")),
+                "pick": pick.get("favorito", pick.get("pick", "")),
                 "drift_pct": pick.get("drift_pct", 0),
                 "hipotesis": "H100-01",
                 "n_actual": pick.get("n_fired", 0),
+                "p_modelo": pick.get("p_modelo", 0),
+                "cuota_pre": pick.get("cuota_pre"),
+                "cuota_live": pick.get("cuota_live"),
+                "edge_live": pick.get("edge_live"),
+                "trigger": pick.get("trigger", False),
+                "senales": pick.get("senales", []),
+                "partido": pick.get("partido", ""),
             })
     return {"breaks": breaks}
 
@@ -978,7 +1262,7 @@ def _build_p3_convergence(fecha: str) -> Dict:
     if not data:
         return {"picks": [], "source": "SIN DATO — correr PASO 3"}
 
-    raw = data if isinstance(data, list) else data.get("picks", [])
+    raw = data if isinstance(data, list) else (data.get("apostar") or []) + (data.get("watchlist") or [])
     picks = []
     for p in raw:
         score = p.get("score_directo", 0) or 0
@@ -997,8 +1281,15 @@ def _build_p3_convergence(fecha: str) -> Dict:
                 senas.append("ELO_DOM")
             if p.get("rfi_fav") and p.get("rfi_tier", 0) != 0:
                 senas.append("RFI")
+            # direccion: FAVORITO normal | RIVAL cuando solo rv | SPLIT cuando ambos (Nodo-98)
+            if score >= 2 and rv:
+                direccion = "SPLIT"
+            elif rv:
+                direccion = "RIVAL"
+            else:
+                direccion = "FAVORITO"
             picks.append({
-                "jugador": p.get("favorito", p.get("jugador", "")),
+                "jugador": p.get("favorito_predicho", p.get("favorito", p.get("jugador", ""))),
                 "score_directo": score,
                 "señales_activas": senas,
                 "n_h2h": p.get("n_h2h"),
@@ -1008,6 +1299,7 @@ def _build_p3_convergence(fecha: str) -> Dict:
                 "rival_value_flag": rv,
                 "rival": p.get("rival", ""),
                 "gcs_active": gcs,
+                "direccion": direccion,
             })
     picks.sort(key=lambda x: -(x.get("score_directo") or 0))
     return {"picks": picks}
@@ -1052,30 +1344,94 @@ def _build_p5_execution(fecha: str) -> Dict:
 
 
 def _build_p6_pnl(fecha: str) -> Dict:
-    """P6: segmentos de shadow_book --report (graduadas arriba)."""
-    # Intenta correr shadow_book --report y parsear salida
+    """P6: segmentos de shadow_book --report (parser multi-línea) + RIVAL_VALUE + MOTOR split."""
+    import re as _re
     segmentos = []
     try:
         res = subprocess.run(
             [sys.executable, str(BASE_DIR / "shadow_book.py"), "--report"],
             capture_output=True, text=True, timeout=30, cwd=str(BASE_DIR)
         )
-        lines = res.stdout.splitlines()
-        # Parsear líneas de segmento: "  LABEL: n=N  hit%=XX  IC95=...  ROI=XX%"
-        import re
-        for line in lines:
-            m = re.search(r"([\w\s/+<>=\-\.]+):\s+n=(\d+)\s+hit%=([\d\.]+)\s+.*ROI=([\-\d\.]+)%", line)
-            if m:
-                nombre = m.group(1).strip()
-                n = int(m.group(2))
-                hit = m.group(3)
-                roi = float(m.group(4))
-                graduada = "GCS" in nombre or "H60-01" in nombre
-                segmentos.append({"nombre": nombre, "n": n, "hit_pct": hit, "roi": roi, "graduada": graduada})
+        # Parser de bloques: bloques separados por línea vacía
+        blocks: list = []
+        current: list = []
+        for line in res.stdout.splitlines():
+            if line.strip() == "":
+                if current:
+                    blocks.append(current)
+                current = []
+            else:
+                current.append(line)
+        if current:
+            blocks.append(current)
+
+        for block in blocks:
+            m_seg = _re.match(r'\s+SEGMENTO:\s+(.+)', block[0])
+            if not m_seg:
+                continue
+            nombre = m_seg.group(1).strip()
+            n, hit_pct, roi = 0, "?", 0.0
+            for bl in block[1:]:
+                mn = _re.search(r'n=(\d+)\s+hit%=([\d\.]+)', bl)
+                if mn:
+                    n, hit_pct = int(mn.group(1)), mn.group(2)
+                mr = _re.search(r'ROI flat 1u:\s*([\-\d\.]+)%', bl)
+                if mr:
+                    roi = float(mr.group(1))
+            graduada = any(k in nombre for k in ("H60-01", "GCS", "gcs"))
+            segmentos.append({"nombre": nombre, "n": n, "hit_pct": hit_pct, "roi": roi, "graduada": graduada})
     except Exception:
         pass
 
-    # Ordenar: graduadas primero
+    # Segmentos adicionales directo de jsonl: RIVAL_VALUE y MOTOR cuota split
+    # Schema real: resolucion.resultado='WON'|'LOST', pick_snapshot.* para flags
+    rival_n, rival_wins = 0, 0
+    motor_lo_n, motor_lo_w = 0, 0   # cuota ≤ 2.5
+    motor_hi_n, motor_hi_w = 0, 0   # cuota > 2.5
+    for sb_f in sorted(SB_DIR.glob("sb_*.jsonl")):
+        try:
+            for line in sb_f.read_text(encoding="utf-8").splitlines():
+                if not line.strip():
+                    continue
+                r = json.loads(line)
+                res = r.get("resolucion") or {}
+                resultado = res.get("resultado")  # 'WON' | 'LOST' | None (abierto)
+                if not resultado:
+                    continue  # skip picks sin resolver
+                snap = r.get("pick_snapshot", {})
+                won = resultado == "WON"
+                # RIVAL_VALUE
+                if snap.get("rival_value_flag"):
+                    rival_n += 1
+                    if won:
+                        rival_wins += 1
+                # MOTOR cuota split
+                cuota = float(snap.get("cuota_favorito") or 0)
+                if cuota > 0:
+                    if cuota <= 2.5:
+                        motor_lo_n += 1
+                        if won:
+                            motor_lo_w += 1
+                    else:
+                        motor_hi_n += 1
+                        if won:
+                            motor_hi_w += 1
+        except Exception:
+            pass
+    if rival_n > 0:
+        segmentos.append({"nombre": "RIVAL_VALUE (H88-01)", "n": rival_n,
+                          "hit_pct": str(round(rival_wins / rival_n * 100, 1)),
+                          "roi": 0.0, "graduada": False})
+    if motor_lo_n > 0:
+        segmentos.append({"nombre": "MOTOR cuota≤2.5", "n": motor_lo_n,
+                          "hit_pct": str(round(motor_lo_w / motor_lo_n * 100, 1)),
+                          "roi": 0.0, "graduada": False})
+    if motor_hi_n > 0:
+        segmentos.append({"nombre": "MOTOR cuota>2.5", "n": motor_hi_n,
+                          "hit_pct": str(round(motor_hi_w / motor_hi_n * 100, 1)),
+                          "roi": 0.0, "graduada": False})
+
+    # Ordenar: graduadas primero, luego por n desc
     segmentos.sort(key=lambda s: (0 if s["graduada"] else 1, -s.get("n", 0)))
     return {"segmentos": segmentos}
 
@@ -1130,7 +1486,7 @@ def _favoritos_hoy(fecha: str) -> Optional[Dict]:
 
 
 _DUAL_BOOK_CACHE_PATH = REPORTS / "dual_book_cache.json"
-_DUAL_BOOK_TTL_S = 120  # UNA llamada de red por ciclo — respeta rate-limit 429
+_DUAL_BOOK_TTL_S = 600  # 10 min — reduce 429 Kambi (era 120s, demasiado agresivo)
 
 
 def _build_p8_books(fecha: str) -> Dict:
@@ -1155,7 +1511,7 @@ def _build_p8_books(fecha: str) -> Dict:
 
     # Fresh build — UNA llamada de red por ciclo
     try:
-        from scraping.dual_book_client import fetch_kambi, best_price as _best_price, _norm
+        from scraping.dual_book_client import fetch_kambi, best_price as _best_price, _norm, es_arb as _es_arb
     except ImportError:
         return {"picks": {}, "feeds": [], "error": "dual_book_client no disponible", "cache_age_s": 0}
 
@@ -1217,6 +1573,23 @@ def _build_p8_books(fecha: str) -> Dict:
             "cuota_plan":        base_cuota,
         }
 
+    # ARB detection: mejor cuota fav (book A) vs mejor cuota rival (book B)
+    for p in all_picks_er:
+        jug = p.get("favorito_predicho", p.get("favorito", ""))
+        rival = p.get("rival", "")
+        if not jug or not rival:
+            continue
+        jug_key = jug.lower()
+        if jug_key not in picks_result:
+            continue
+        rival_bp = _best_price(rival, feeds)
+        if rival_bp:
+            fav_cuota = picks_result[jug_key].get("cuota", 0)
+            arb = _es_arb(fav_cuota, rival_bp["cuota"]) if fav_cuota else False
+            picks_result[jug_key]["arb_flag"] = arb
+            picks_result[jug_key]["rival_cuota"] = rival_bp["cuota"]
+            picks_result[jug_key]["rival_casa"] = rival_bp.get("casa", "")
+
     result: Dict[str, Any] = {
         "ts":         datetime.now().isoformat(),
         "picks":      picks_result,
@@ -1224,6 +1597,7 @@ def _build_p8_books(fecha: str) -> Dict:
         "n_picks":    len(picks_result),
         "cache_age_s": 0,
         "from_cache": False,
+        "stale":      False,
     }
 
     # Persist cache (TTL 120s)
@@ -1283,6 +1657,12 @@ def _demo_state() -> Dict[str, Any]:
                 "drift_pct": -18.5,
                 "hipotesis": "H100-01",
                 "n_actual": 3,
+                "p_modelo": 0.55,
+                "cuota_pre": 2.33,
+                "cuota_live": 1.54,
+                "edge_live": -0.11,
+                "trigger": False,
+                "senales": ["drift≥15%"],
             }]
         },
         "p3_convergence": {
@@ -1343,6 +1723,28 @@ def _demo_state() -> Dict[str, Any]:
             "feeds": ["betplay", "flashscore"],
             "cache_age_s": 45,
         },
+        "p10_odds_history": {
+            "Alcaraz vs Zverev": {
+                "readings": [
+                    {"ts": "16:00:00", "cuota": 2.20, "drift": 0.04},
+                    {"ts": "16:05:00", "cuota": 2.10, "drift": 0.09},
+                    {"ts": "16:10:00", "cuota": 1.98, "drift": 0.14},
+                    {"ts": "16:15:00", "cuota": 1.85, "drift": 0.19},
+                ],
+                "estado": "BREAK_CONFIRMADO", "fired": False,
+            },
+            "Djokovic vs Medvedev": {
+                "readings": [
+                    {"ts": "16:00:00", "cuota": 1.90, "drift": 0.03},
+                    {"ts": "16:05:00", "cuota": 1.85, "drift": 0.06},
+                    {"ts": "16:10:00", "cuota": 1.80, "drift": 0.08},
+                    {"ts": "16:15:00", "cuota": 1.80, "drift": 0.08},
+                ],
+                "estado": "BREAK_POSIBLE", "fired": False,
+            },
+        },
+        "p11_combo_live": [],
+        "p12_conformal": _build_conformal_band(),
     }
 
 

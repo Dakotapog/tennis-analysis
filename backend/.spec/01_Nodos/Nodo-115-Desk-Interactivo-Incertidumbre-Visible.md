@@ -10,10 +10,10 @@
 
 | # | Qué | Fuente EXISTENTE | Render | Estado |
 |---|---|---|---|---|
-| U1 | **Banda conformal** de p_modelo | `conformal_quantile()` + `is_no_bet_conformal()` (`analysis/conformal_band.py:28,46`) | `p=0.62 ±0.09` — si banda cruza breakeven → celda ámbar "BANDA CRUZA BE" | ⏳ pendiente §3-4 |
+| U1 | **Banda conformal** de p_modelo | `conformal_quantile()` + `is_no_bet_conformal()` (`analysis/conformal_band.py:28,46`) | `p=0.62 ±0.09` — si banda cruza breakeven → celda ámbar "BANDA CRUZA BE" | ✅ COMPLETADO 2026-07-17 |
 | U2 | **Peso de la evidencia** | `n_calibracion` en edge_report + shrinkage `n/(n+20)` | Mini-barra `█░░░░ 17% PRIOR MANDA` / `████░ 73%` | ✅ IMPLEMENTADO |
 | U3 | **Distancia al gate** | `n_actual`/`n_stop` ya en accionable dict + `preregistered_hypotheses.json` | `H110-01: ███░░░░░░░ 8/30 (22 faltan)` / `GRADUADA` | ✅ IMPLEMENTADO |
-| U4 | **Tendencia vs tick** | `velocity_monitor` + odds_history (`load_odds_history()` Nodo-100B) | Sparkline texto `▁▃▅▇` últimos 4 ciclos + flecha | ⏳ pendiente §3-5 |
+| U4 | **Tendencia vs tick** | `velocity_monitor` + odds_history (`load_odds_history()` Nodo-100B) | Sparkline texto `▁▃▅▇` últimos 4 ciclos + flecha | ✅ COMPLETADO 2026-07-17 |
 
 **Regla de oro:** ninguno de estos cambia decisiones (REPORTE_SOLO se respeta) — cambian cuánto CONFÍA el operador en la decisión que el sistema ya tomó. Es la diferencia entre "el modelo dice 0.62" y "el modelo dice 0.62 con banda ±0.09, 33 casos reales detrás, gate a 22 combos de graduar, y la cuota lleva 3 ciclos moviéndose a favor".
 
@@ -25,7 +25,7 @@
 | §2.2 Facetas client-side | ✅ IMPLEMENTADO | `filtrarTipo(tipo)` — botones TODOS/BREAK/GCS/FAVORITOS_ZERO con `data-tipo` attrs |
 | §2.3 Orden por columna | ⏳ pendiente | JS sort por p_modelo/cuota/U2/U3 — valor bajo, diferible |
 | §2.4 Panel QUÉ FALTA | ✅ IMPLEMENTADO | `_build_que_falta()`: primera condición fallida con distancia exacta por jugador |
-| §2.5 fetch-refresh sin destruir estado | ⏳ pendiente | Reemplazar `<meta http-equiv="refresh">` por `fetch()` + reemplazo de `<tbody>` |
+| §2.5 fetch-refresh sin destruir estado | ✅ COMPLETADO 2026-07-17 | Reemplazar `<meta http-equiv="refresh">` por `fetch()` + reemplazo de `<tbody>` |
 
 ## §3. IMPLEMENTACIÓN — cierre 2026-07-17
 
@@ -71,19 +71,36 @@ JS: filtrarTipo=✅  toggleDetalle=✅  data-tipo=✅  barra█=✅  faltan=✅
 1. ~~**U2 + U3**~~ ✅ COMPLETADO
 2. ~~**§2.4 panel QUÉ FALTA**~~ ✅ COMPLETADO
 3. ~~**§2.1 drill-down + §2.2 facetas**~~ ✅ COMPLETADO
-4. **U1 conformal** — llamar `conformal_report()` (`analysis/conformal_band.py`) una vez por ciclo, cachear en state como `p10_conformal`. Render: columna extra en tabla accionable `p=X ±Y`. Gate: si banda cruza breakeven → celda ámbar.
-5. **U4 sparkline** — `load_odds_history()` de Nodo-100B, últimos 4 ciclos del jugador → `▁▃▅▇` + flecha tendencia. Cierra ítem TAPE del checklist Nodo-114 §5.
-6. **§2.5 fetch-refresh** — reemplazar `<meta http-equiv="refresh" content="30">` por fetch+setTimeout, preserva filtros y filas expandidas.
+4. ~~**U1 conformal**~~ ✅ COMPLETADO — `_build_conformal_band()` llama `conformal_report()`, cachea en state `p12_conformal`. Columna "Conf U1": `p=X ±Y`, celda ámbar "BANDA CRUZA BE" si banda cruza 0.5, `n<N` si gate no cumplido.
+5. ~~**U4 sparkline**~~ ✅ COMPLETADO — `_sparkline_drift(jugador, history)` pura. Lee `live_odds_history_YYYYMMDD.json`, últimos 4 ciclos → `▁▂▃▄▅▆▇█` + flecha `↑→↓`. Columna "Tendencia U4" en tabla.
+6. ~~**§2.5 fetch-refresh**~~ ✅ COMPLETADO — Eliminado `<meta http-equiv="refresh">`. `autoRefresh()` usa `fetch('/', {cache:'no-store'})` + DOMParser + `setTimeout(30000)`. Estado preservado: `_activeFilter` (filtro tipo) + `_openRows` (filas expandidas). Hooks: `id="acc-tbody"` en tbody, `id="desk-ts"` en timestamp.
 
 **PROHIBIDO siempre:** frameworks JS/CDN, cálculo estadístico nuevo en el desk, modificar `accionable_ahora()` o cualquier gate.
 
-## §5. PENDIENTES PARA PRÓXIMAS SESIONES
+## §5. CIERRE COMPLETO 2026-07-17
 
+| Ítem | Estado |
+|---|---|
+| U1 conformal band render | ✅ COMPLETADO |
+| U4 sparkline odds_history | ✅ COMPLETADO |
+| §2.5 fetch-refresh sin destruir estado | ✅ COMPLETADO |
+
+### Tests REGLA-T53 U1/U4/§2.5 — 8/8 GREEN (`tests/test_nodo115_u1_u4.py`)
+| Test | Qué verifica |
+|---|---|
+| U4-1 | `_sparkline_drift` 4 lecturas → string no vacío con ▁-█ + flecha |
+| U4-2 | `_sparkline_drift` drift creciente → flecha ↑ |
+| U4-3 | `_sparkline_drift` jugador sin historial → string vacío |
+| U1-1 | `render_html(_demo_state())` → columnas "Conf U1" y "Tendencia U4" presentes |
+| U1-2 | p=0.55 ±0.09 → banda [0.46,0.64] cruza 0.5 → "BANDA CRUZA BE" |
+| U1-3 | q_global=None (n_settled<gate) → muestra "n<23" sin crash |
+| R1 | render_html NO contiene `http-equiv="refresh"` (§2.5) |
+| R2 | render_html contiene `acc-tbody`, `desk-ts`, `autoRefresh`, `_activeFilter`, `_openRows` (§2.5) |
+
+### Pendientes próximas sesiones
 | Ítem | Prioridad | Gate |
 |---|---|---|
-| U1 conformal band render | Media | `conformal_band.py` ya existe, solo render |
-| U4 sparkline odds_history | Media | `live_odds_history_FECHA.json` ya existe |
 | §2.3 sort por columna | Baja | 15 líneas JS |
-| §2.5 fetch-refresh | Baja | Pulido UI, no señal |
 | Telegram hook BREAK_CONFIRMADO | Media | `enviar_combos_telegram()` ya existe en proyecto |
 | systemd tennis-live-desk.service :7780 | Baja | Arranque automático |
+| D116-03 multi-casa real | Media | Requiere scraper Nodo-48 emitiendo `{casa: cuota}` por partido |

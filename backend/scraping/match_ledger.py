@@ -455,6 +455,103 @@ def _imprimir_embudo(stats: dict, cuarentena: list) -> None:
 
 # ── Persistencia del ledger ───────────────────────────────────────────────────
 
+# ── Adapter para edge_calculator (Nodo-118 F4) ───────────────────────────────
+
+_REQUIRED_FIELDS_EDGE = ("jugador1", "jugador2", "cuota1", "cuota2",
+                          "match_id", "match_url", "superficie", "torneo_nombre")
+
+
+def exportar_para_edge_calculator(fecha: str, data_dir: str = "data") -> str:
+    """
+    Lee el ledger del día y exporta un archivo zita_tennis_matches_*_merged.json
+    en el schema plano que edge_calculator / extraer_historh2h ya consumen.
+
+    Incluye: joins (cuotas+match_id) + single_source_kambi (cuotas sin match_id).
+    Excluye single_source_fs (sin cuotas = no usable por edge_calculator).
+
+    Retorna el path del archivo escrito.
+    """
+    ledger = load_ledger(fecha, data_dir)
+    if not ledger:
+        return ""
+
+    partidos_export = []
+    for p in ledger.get("joins", []) + ledger.get("single_source_kambi", []):
+        if not isinstance(p, dict):
+            continue
+        partidos_export.append({
+            "jugador1":      p.get("jugador1", ""),
+            "jugador2":      p.get("jugador2", ""),
+            "cuota1":        p.get("cuota1"),
+            "cuota2":        p.get("cuota2"),
+            "match_id":      p.get("match_id", ""),
+            "match_url":     p.get("match_url", ""),
+            "superficie":    p.get("superficie", ""),
+            "torneo_nombre": p.get("torneo_nombre", ""),
+            "torneo_completo": p.get("torneo_completo", ""),
+            "tier":          p.get("tier", ""),
+            "hora":          p.get("hora") or p.get("hora_partido", ""),
+            "ranking1":      p.get("ranking1"),
+            "ranking2":      p.get("ranking2"),
+            "kambi_event_id": p.get("kambi_event_id") or p.get("outcome_id"),
+            "_ledger_status": p.get("join_method", ""),
+            "_join_score":    p.get("join_score"),
+        })
+
+    ts = datetime.now().strftime("%H%M%S")
+    fecha_compact = fecha.replace("-", "")
+    out_path = Path(data_dir) / f"zita_tennis_matches_{fecha_compact}_{ts}_merged.json"
+    Path(data_dir).mkdir(parents=True, exist_ok=True)
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(partidos_export, f, ensure_ascii=False, indent=2)
+    return str(out_path)
+
+
+def actualizar_cuotas_ledger(
+    fecha: str, kambi_matches: List[dict], data_dir: str = "data"
+) -> dict:
+    """
+    PASO 1c: refresca cuota1/cuota2 en el ledger existente con datos Kambi frescos.
+    Identifica entradas por kambi_event_id o match_id.
+    Persiste el ledger actualizado. Retorna stats.
+    """
+    ledger = load_ledger(fecha, data_dir)
+    if not ledger:
+        return {"actualizados": 0, "sin_cambio": 0, "no_encontrado": 0}
+
+    by_event = {(m.get("kambi_event_id") or m.get("event_id")): m
+                for m in kambi_matches
+                if m.get("kambi_event_id") or m.get("event_id")}
+    by_match = {m.get("match_id"): m
+                for m in kambi_matches if m.get("match_id")}
+
+    actualizados = 0
+    sin_cambio = 0
+    no_encontrado = 0
+    ts = datetime.now().isoformat()
+
+    for seccion in ("joins", "single_source_kambi"):
+        for partido in ledger.get(seccion, []):
+            eid = partido.get("kambi_event_id") or partido.get("outcome_id")
+            mid = partido.get("match_id")
+            fresco = by_event.get(eid) or by_match.get(mid)
+            if not fresco:
+                no_encontrado += 1
+                continue
+            c1_nueva, c2_nueva = fresco.get("cuota1"), fresco.get("cuota2")
+            if c1_nueva != partido.get("cuota1") or c2_nueva != partido.get("cuota2"):
+                partido["cuota1"] = c1_nueva
+                partido["cuota2"] = c2_nueva
+                partido["cuota_refresh_ts"] = ts
+                actualizados += 1
+            else:
+                sin_cambio += 1
+
+    save_ledger(ledger, fecha, data_dir)
+    return {"actualizados": actualizados, "sin_cambio": sin_cambio,
+            "no_encontrado": no_encontrado}
+
+
 def load_ledger(fecha: str, data_dir: str = "data") -> dict:
     """Carga el ledger del día dado. Retorna {} si no existe."""
     path = Path(data_dir) / LEDGER_PATTERN.format(fecha=fecha.replace("-", ""))
@@ -498,16 +595,33 @@ if __name__ == "__main__":
             return files[0] if files else None
 
         fecha_compact = args.fecha.replace("-", "")
-        pw_path = args.playwright or _latest(
-            f"{args.data_dir}/zita_tennis_matches_{fecha_compact}*.json"
-        )
-        api_path = args.api or _latest(
-            f"{args.data_dir}/zita_tennis_matches_{fecha_compact}*.json"
-        )
 
-        if not pw_path or not api_path:
-            print("ERROR: no se encontraron archivos. Usa --playwright y --api.")
+        def _tiene_cuotas_file(path: str) -> bool:
+            try:
+                with open(path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                items = data if isinstance(data, list) else [p for v in data.values() for p in (v if isinstance(v, list) else [])]
+                return any(p.get("cuota1") is not None for p in items if isinstance(p, dict))
+            except Exception:
+                return False
+
+        # Separar archivos con cuotas (API) y sin cuotas (Playwright)
+        candidatos = sorted(
+            _glob.glob(f"{args.data_dir}/zita_tennis_matches_{fecha_compact}*.json"),
+            key=lambda p: Path(p).stat().st_mtime
+        )
+        con_cuotas = [p for p in candidatos if _tiene_cuotas_file(p)]
+        sin_cuotas = [p for p in candidatos if not _tiene_cuotas_file(p)]
+
+        api_path = args.api or (con_cuotas[-1] if con_cuotas else None)
+        pw_path = args.playwright or (sin_cuotas[-1] if sin_cuotas else None)
+
+        if not api_path:
+            print("ERROR: no se encontró archivo con cuotas (API). Usa --api.")
             sys.exit(1)
+        if not pw_path:
+            print("WARN: no se encontró archivo Playwright. Usando solo API.")
+            pw_path = api_path
 
         def _leer_partidos(path: str) -> list:
             with open(path, "r", encoding="utf-8") as f:
@@ -527,4 +641,6 @@ if __name__ == "__main__":
 
         merged_path, stats = fusionar_dia(kambi, fs, args.fecha,
                                           output_dir=args.data_dir)
+        export_path = exportar_para_edge_calculator(args.fecha, data_dir=args.data_dir)
         print(f"\nMerged: {merged_path}")
+        print(f"Export: {export_path}")

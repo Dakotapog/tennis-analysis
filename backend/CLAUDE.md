@@ -1,6 +1,6 @@
 # CLAUDE.md — Tennis Prediction & Betting Engine
 
-> Last updated: 2026-07-18 (Nodo-117: auditoría scraping 4 bugs → D117-01/02/04 aplicados, D117-03 gateado. 9 tests REGLA-T53. Wikilinks Nodo-33/48/49/80/82/103 cosidos.)
+> Last updated: 2026-07-18 (Nodo-119: auditoría doctoral Desk v3 — 21 FAIL → 11 fixes. P3/P6 ciegos desde origen (bugs estructurales). MOTOR cuota split: ≤2.5 hit=48.2% vs >2.5 hit=26.7%. 10 gaps pendientes como Tasks #48-#66.)
 > Spec-Driven Development (SDD). CLAUDE.md es VISTA DERIVADA — los nodos son la fuente de verdad.
 > Leer completo antes de tocar código. Ver política de precedencia §10.
 
@@ -142,7 +142,7 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 
 | Métrica | Valor |
 |---|---|
-| Tests | **2163 passed, 1 failed** (verificado 2026-07-18). `test_nodo51_f3_02_budget_processes_itf_before_grand_slam` pre-existente. `test_prior_bajo_no_se_ve_afectado` intermitente (estado global, pasa en aislamiento). +9 tests Nodo-117 (5 file_utils + 4 ranking_only). |
+| Tests | **2163 passed, 1 failed** (verificado 2026-07-18). `test_nodo51_f3_02_budget_processes_itf_before_grand_slam` pre-existente. `test_prior_bajo_no_se_ve_afectado` intermitente. +9 tests Nodo-117. Nodo-119: 21 passed sin regressions (render-only, sin tests nuevos). |
 | Calibración | clay GS: p=0.758 (n=31) \| global: wins=2358, losses=1480 (n=3838) \| ⚠️ buckets huérfanos `?`/`?_?` con ~141 resultados de dinero real (24% hit) — ver Nodo-86 §1.1, migración en evaluación: T7 Nodo-66 decide |
 | **Auditoría Fable5** | **Sprints 1-5 EN CURSO.** S1-S4 ✅. S5: IRP ✅ (Nodo-96, 4361 perfiles, 15 tests). Pendiente S5: D90-11 N28F2/tier (gate n≥30), OddsAggregator multi-casa (gate cuentas reales) |
 | Bankroll | $125,000+ |
@@ -179,7 +179,8 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 **Nodos 107-111 (Fable Sprint 5B — implementados 2026-07-17):** 107=MOTOR_DEFENSIVE x0.5 + governor soft-veto (D107-04) exit-codes 0/1/2 en 3 builders + H107-01 ACUMULANDO. 108=B108-01(rename Nodo-100B) + B108-03(name-matching→player_registry, 3 call-sites) + B108-04(checklist H89-*/shadow_book) + B108-05(curl OddsAggregator cerrado) + C3(campeon_signal estructurado) + B108-06(weather MVP). 109=live_desk.py :7780 7 paneles P4-MANDA + 3 funciones puras + 9 tests. 110=favoritos_combo_builder.py estrategia #13 + LEG_MIN_CUOTA=1.15 (D110-01) + H110-01(n=8, ACUMULANDO). 111=dual_book_client.py funciones puras X1(best_price/divergencia/es_arb/es_middle) + 14 tests + CLI --compare + PASO 3.7 en run_daily + H111-01 ACUMULANDO.
 **Nodo-112 (C3 campeon_signal):** campos estructurados campeon_tier/torneo/days_ago en rivalry_analyzer — consumidores leen campo, no parsean strings de reasoning.
 **Nodo-113 (B108-06 Weather MVP):** core/weather_client.py → get_weather_flag() open-meteo gratuito, weather_flag en edge_report (observacional), H113-01 pre-registrada (n_stop=40).
-**Nodo-117 (Auditoría Scraping):** 4 bugs identificados 2026-07-18. D117-01 ✅: `_leer_matches_ranking_only()` prefiere ATP/WTA reales sobre CA/CB FlashScore (0→6 candidatos RANKING_ONLY). D117-02 ✅: `select_best_json_file()` prioriza `matches_with_cuotas>0` — archivo API con cuotas gana sobre Playwright sin cuotas aunque sea más grande. D117-04 ✅: comentario anti-regresión en `scraping/kambi_tennis.py` L196-199. D117-03 GATEADO: merge Playwright+API (+67% cobertura H2H) — requiere refactor PASO 1. 9 tests REGLA-T53.
+**Nodo-117 (Auditoría Scraping):** 4 bugs identificados 2026-07-18. D117-01 ✅: `_leer_matches_ranking_only()` prefiere ATP/WTA reales sobre CA/CB FlashScore (0→6 candidatos RANKING_ONLY). D117-02 ✅: `select_best_json_file()` prioriza `matches_with_cuotas>0`. D117-04 ✅: comentario anti-regresión `scraping/kambi_tennis.py` L196-199. D117-03 GATEADO: merge Playwright+API (+67% cobertura H2H). 9 tests REGLA-T53.
+**Nodo-119 (Auditoría Doctoral Desk v3):** Audit físico curl :7780 → 42 PASS / 21 FAIL. 11 fixes D119-01→D119-08 implementados en `live_desk.py` (render-only, REPORTE_SOLO). **Bugs estructurales críticos:** (1) P3 SIEMPRE VACÍO — `data.get("picks")` vs `apostar+watchlist`; (2) P6 NUNCA PARSEABA — regex single-line vs output multi-línea shadow_book. **Hallazgo operativo:** MOTOR cuota≤2.5 hit=48.2% vs cuota>2.5 hit=26.7% (gap 21.5pp — justifica H107-01). P6 ahora muestra 16 segmentos reales. 10 gaps pendientes: Tasks #48/49/50/54/59/62/63/64/65/66.
 
 ---
 

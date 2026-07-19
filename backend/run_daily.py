@@ -300,6 +300,21 @@ def main():
             cmd_paso1.append('--tomorrow')
         _run(cmd_paso1, 'PASO 1 — Extraer partidos (API)')
 
+        # ── PASO 1b — Extraer partidos Playwright (Nodo-118 D117-03) ─────────
+        cmd_paso1b = ['python3', 'extraer_URL_partidos_version2.py']
+        if args.tomorrow or _fase == 'noche':
+            cmd_paso1b.append('--tomorrow')
+        _run(cmd_paso1b, 'PASO 1b — Extraer partidos Playwright (match_ids FlashScore, Nodo-118)')
+
+        # ── PASO 1.5 — Fusión Ledger (Nodo-118) ──────────────────────────────
+        _fecha_ledger = (
+            (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d')
+            if (args.tomorrow or _fase == 'noche')
+            else datetime.now().strftime('%Y-%m-%d')
+        )
+        _run(['python3', 'scraping/match_ledger.py', '--build', '--fecha', _fecha_ledger],
+             'PASO 1.5 — Fusión Playwright+API → ledger crosswalk (Nodo-118)')
+
         # ── PASO 2 — H2H ─────────────────────────────────────────────────────
         if not args.skip_h2h:
             _run(['python3', 'extraer_historh2h.py', '--api-mode', '--all-tournaments'],
