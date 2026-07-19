@@ -179,6 +179,7 @@ def build_desk_state(fecha: Optional[str] = None) -> Dict[str, Any]:
         "p11_combo_live": _build_combo_live(fecha),    # Nodo-116 §B.5
         "p12_conformal": _build_conformal_band(),      # Nodo-115 U1 banda
         "p_data": _build_data_panel(fecha),            # Nodo-118 §5 embudo crosswalk
+        "p_games": _build_x3_games(fecha),             # Nodo-40 X3 games signal
     }
     return state
 
@@ -449,6 +450,45 @@ def _gate_barra(n_actual: int, n_stop: int) -> str:
     bar = "█" * filled + "░" * (10 - filled)
     restantes = n_stop - n_actual
     return f"{bar} {n_actual}/{n_stop} ({restantes} faltan)"
+
+
+def _build_x3_games(fecha: str) -> Dict[str, Any]:
+    """
+    X3 Games Signal — lee games_signal_report_{FECHA}*.json (Nodo-40 PASO 3.6).
+    Retorna apostar + metadata. REPORTE_SOLO.
+    """
+    gsr = _latest(str(REPORTS / f"games_signal_report_{fecha.replace('-','')}*.json"))
+    if not gsr:
+        return {"disponible": False, "fecha": fecha}
+    try:
+        data = json.loads(Path(gsr).read_text(encoding="utf-8"))
+    except Exception:
+        return {"disponible": False, "fecha": fecha}
+    meta = data.get("metadata", {})
+    apostar = data.get("apostar", [])
+    # Aplanar señales_optimas: una fila por señal accionable
+    signals: List[Dict] = []
+    for p in apostar:
+        for s in p.get("señales_optimas", []):
+            if s.get("apostar"):
+                signals.append({
+                    "partido":    p.get("partido", ""),
+                    "mercado":    s.get("mercado", ""),
+                    "direccion":  s.get("direccion", ""),
+                    "linea":      s.get("linea"),
+                    "cuota":      s.get("cuota"),
+                    "gap":        s.get("gap_juegos"),
+                    "confianza":  s.get("confianza_señal", ""),
+                    "games_range": p.get("games_range", ""),
+                })
+    return {
+        "disponible":   True,
+        "fecha":        fecha,
+        "n_partidos":   meta.get("n_partidos", 0),
+        "n_apostar":    meta.get("n_apostar", 0),
+        "signals":      signals,
+        "fuente":       Path(gsr).name,
+    }
 
 
 def _build_data_panel(fecha: str) -> Dict[str, Any]:
@@ -869,6 +909,112 @@ def render_html(state: Dict[str, Any]) -> str:
         _p9_badge, _p9_badge_col,
     )
 
+    # ── X2 STEAM-LAG ─────────────────────────────────────────────────────────
+    # Lee p8_books.picks (divergencia_pct) + p1_tape (direction). Render puro.
+    # Nodo-111 H111-01: líder mueve ≥15% → rezagada = stale price, ejecutar ahí.
+    _tape_dir: Dict[str, str] = {}
+    for _te in state.get("p1_tape", {}).get("entries", []):
+        _jl = (_te.get("jugador") or "").lower()
+        if _jl:
+            _tape_dir[_jl] = _te.get("direction", "")
+
+    X2_ALERT_PCT = 15.0   # umbral señal steam (H111-01)
+    X2_INFO_PCT  = 10.0   # umbral informativo
+
+    x2_rows: List = []
+    x2_alerts = 0
+    for _jk, _bp in _p8_picks.items():
+        _div = float(_bp.get("divergencia_pct", 0) or 0)
+        if _div < X2_INFO_PCT:
+            continue
+        _jug       = _bp.get("jugador", _jk)
+        _bp_cuota  = float(_bp.get("betplay_cuota") or 0)
+        _fs_cuota  = float(_bp.get("flashscore_cuota") or 0)
+        if not _bp_cuota or not _fs_cuota:
+            continue
+        # Leader = cuota más baja (ya se movió). Rezagada = cuota más alta (stale).
+        if _bp_cuota < _fs_cuota:
+            _leader_casa, _leader_c = "betplay",     _bp_cuota
+            _stale_casa,  _stale_c  = "flashscore",  _fs_cuota
+        else:
+            _leader_casa, _leader_c = "flashscore",  _fs_cuota
+            _stale_casa,  _stale_c  = "betplay",     _bp_cuota
+        _dir   = _tape_dir.get(_jug.lower(), "")
+        _alert = _div >= X2_ALERT_PCT
+        if _alert:
+            x2_alerts += 1
+        # Estado: STEAM OK si confirma modelo, ATN si aleja o sin dato
+        if _alert and _dir == "CONFIRMA":
+            _estado_html = (f'<span style="background:{GREEN};color:#000;padding:1px 5px;'
+                            f'border-radius:3px;font-size:0.72em;font-weight:bold;">STEAM OK</span>')
+        elif _alert:
+            _dir_label = _dir if _dir else "sin tape"
+            _estado_html = (f'<span style="background:{AMBER};color:#000;padding:1px 5px;'
+                            f'border-radius:3px;font-size:0.72em;font-weight:bold;">'
+                            f'ATN ({_dir_label})</span>')
+        else:
+            _estado_html = f'<span style="color:{GREY};font-size:0.85em;">gap info</span>'
+        _div_color = GREEN if (_alert and _dir == "CONFIRMA") else (AMBER if _alert else GREY)
+        x2_rows.append([
+            _jug,
+            f"{_leader_casa} @{_leader_c:.2f}",
+            f'<b style="color:{GREEN};">{_stale_casa} @{_stale_c:.2f}</b>',
+            f'<span style="color:{_div_color};font-weight:bold;">{_div:.1f}%</span>',
+            f'<span style="color:{GREEN if _dir=="CONFIRMA" else (RED if _dir=="ALEJA" else GREY)};">'
+            f'{_dir or "—"}</span>',
+            _estado_html,
+        ])
+    _x2_badge     = f"{x2_alerts} STEAM" if x2_alerts else (f"{len(x2_rows)} gap" if x2_rows else "sin gap ≥10%")
+    _x2_badge_col = GREEN if x2_alerts else (AMBER if x2_rows else GREY)
+    x2_panel = panel(
+        f"X2 STEAM-LAG — Divergencia entre casas (alert≥{X2_ALERT_PCT:.0f}% | info≥{X2_INFO_PCT:.0f}%) | H111-01",
+        table(
+            ["Jugador", "Leader (movida)", "Rezagada (ejecutar)", "Gap%", "Dirección", "Estado"],
+            x2_rows,
+            "Sin divergencia ≥10% entre casas (feeds sincronizados o sin datos flashscore)",
+        ),
+        _x2_badge, _x2_badge_col,
+    )
+
+    # ── X3 GAMES SIGNAL ──────────────────────────────────────────────────────
+    _gs = state.get("p_games", {})
+    x3_rows: List = []
+    if _gs.get("disponible"):
+        for _sig in _gs.get("signals", []):
+            _conf   = _sig.get("confianza", "")
+            _conf_c = GREEN if _conf == "ALTA" else (AMBER if _conf == "MEDIA" else GREY)
+            _dir    = _sig.get("direccion", "")
+            _dir_c  = GREEN if _dir == "OVER" else (AMBER if _dir == "UNDER" else GREY)
+            _gap    = _sig.get("gap")
+            x3_rows.append([
+                _sig.get("partido", ""),
+                _sig.get("mercado", ""),
+                f'<span style="color:{_dir_c};font-weight:bold;">{_dir}</span>',
+                str(_sig.get("linea", "—")),
+                f'@{_sig["cuota"]:.2f}' if _sig.get("cuota") else "—",
+                f'{_gap:+.1f}j' if _gap is not None else "—",
+                f'<span style="color:{_conf_c};">{_conf}</span>',
+                _sig.get("games_range", ""),
+            ])
+        _x3_n       = _gs["n_apostar"]
+        _x3_total   = _gs["n_partidos"]
+        _x3_badge   = f"{_x3_n} señales" if _x3_n else f"0/{_x3_total} sin señal"
+        _x3_badge_c = GREEN if _x3_n else GREY
+        x3_panel = panel(
+            f"X3 GAMES SIGNAL — Over/Under mercados Nodo-40 | {_gs['fuente']}",
+            table(
+                ["Partido", "Mercado", "Dir", "Línea", "Cuota", "Gap", "Confianza", "Rango pred."],
+                x3_rows,
+                "Sin señales accionables hoy (gap modelo-línea insuficiente)",
+            ),
+            _x3_badge, _x3_badge_c,
+        )
+    else:
+        x3_panel = panel(
+            "X3 GAMES SIGNAL — Over/Under mercados Nodo-40",
+            f'<p style="color:{GREY};font-size:0.85em;">Sin reporte (correr PASO 3.6: python3 games_signal_calculator.py)</p>',
+        )
+
     # ── P7 CLOCK ─────────────────────────────────────────────────────────────
     partidos = state.get("p7_clock", {}).get("partidos", [])
     clock_rows = []
@@ -1137,6 +1283,8 @@ def render_html(state: Dict[str, Any]) -> str:
   {p6_panel}
   {p8_panel}
   {p9_panel}
+  {x2_panel}
+  {x3_panel}
   {data_panel}
   {que_falta_panel}
   {p1_panel}
@@ -1836,10 +1984,10 @@ def _demo_state() -> Dict[str, Any]:
         },
         "p8_books": {
             "picks": {
-                "alcaraz": {"jugador": "Alcaraz", "casa": "flashscore", "cuota": 2.15, "gain_pct": 2.4, "divergencia_pct": 3.1,
+                "alcaraz": {"jugador": "Alcaraz", "casa": "flashscore", "cuota": 2.15, "gain_pct": 2.4, "divergencia_pct": 11.2,
                             "betplay_cuota": 2.10, "flashscore_cuota": 2.15, "cuota_plan": 2.10},
-                "djokovic": {"jugador": "Djokovic", "casa": "flashscore", "cuota": 1.85, "gain_pct": 5.7, "divergencia_pct": 9.2,
-                             "betplay_cuota": 1.75, "flashscore_cuota": 1.85, "cuota_plan": 1.80},
+                "djokovic": {"jugador": "Djokovic", "casa": "flashscore", "cuota": 1.85, "gain_pct": 5.7, "divergencia_pct": 18.5,
+                             "betplay_cuota": 1.57, "flashscore_cuota": 1.85, "cuota_plan": 1.80},
             },
             "feeds": ["betplay", "flashscore"],
             "cache_age_s": 45,
@@ -1863,6 +2011,19 @@ def _demo_state() -> Dict[str, Any]:
                 ],
                 "estado": "BREAK_POSIBLE", "fired": False,
             },
+        },
+        "p_games": {
+            "disponible": True, "fecha": date.today().isoformat(),
+            "n_partidos": 18, "n_apostar": 2,
+            "fuente": "games_signal_report_demo.json",
+            "signals": [
+                {"partido": "Alcaraz vs Zverev", "mercado": "Total de juegos",
+                 "direccion": "OVER", "linea": 20.5, "cuota": 1.88,
+                 "gap": 5.5, "confianza": "ALTA", "games_range": "26-32+"},
+                {"partido": "Swiatek vs Gauff", "mercado": "Total de sets",
+                 "direccion": "OVER", "linea": 2.5, "cuota": 2.10,
+                 "gap": None, "confianza": "MEDIA", "games_range": "20-24"},
+            ],
         },
         "p11_combo_live": [],
         "p12_conformal": _build_conformal_band(),
