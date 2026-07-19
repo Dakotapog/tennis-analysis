@@ -42,11 +42,65 @@ _TG_TOKEN = "8684706586:AAHv4zhjQKvxORf6bnbwCxZQPly9OA7unpY"
 _TG_CHAT  = "8520949513"
 _TG_URL   = f"https://api.telegram.org/bot{_TG_TOKEN}/sendMessage"
 
-# Output Desktop (mismo patrón betplay_combo_builder)
-_DESKTOP       = Path("/mnt/c/users/hogar/Desktop")
-_COMBOS        = _DESKTOP / "combos"
+# Chrome (abridor de .bat)
 _CHROME        = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
 _REDIRECT_BASE = "https://dakotapog.github.io/tennis-analysis/bp/?ids="
+
+# Anti-flood D116-01 — CERO Desktop, todo a reports/combos_live/
+_BASE_DIR           = Path(__file__).parent.parent
+MAX_LIVE_FIRES_DIA  = 10   # cap diario; fire #11+ solo log
+
+
+def _combos_live_dir(fecha: str) -> Path:
+    """Destino único D116-01: reports/combos_live/YYYY-MM-DD/."""
+    d = _BASE_DIR / "reports" / "combos_live" / fecha
+    d.mkdir(parents=True, exist_ok=True)
+    return d
+
+
+def _fired_path(fecha: str) -> Path:
+    return _combos_live_dir(fecha) / "_fired.json"
+
+
+def _load_fired(fecha: str) -> dict:
+    """Carga mapa {event_id: {fired_at, hora_inicio}} desde disco."""
+    p = _fired_path(fecha)
+    if p.exists():
+        try:
+            return json.load(p.open(encoding="utf-8"))
+        except Exception:
+            return {}
+    return {}
+
+
+def _save_fired(fecha: str, fired: dict) -> None:
+    _fired_path(fecha).write_text(
+        json.dumps(fired, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+
+
+def _ttl_cleanup(fecha: str, now_dt: "datetime") -> None:
+    """Borra .bat de partidos cuya hora_inicio + 15min ya pasó (D116-01)."""
+    fired = _load_fired(fecha)
+    combos_dir = _combos_live_dir(fecha)
+    for bat in list(combos_dir.glob("LiveCombo_*.bat")):
+        event_id = bat.stem.replace("LiveCombo_", "")
+        meta = fired.get(event_id, {})
+        hora_inicio_str = meta.get("hora_inicio")
+        if hora_inicio_str:
+            try:
+                h, m = map(int, hora_inicio_str.split(":"))
+                match_dt = now_dt.replace(hour=h, minute=m, second=0, microsecond=0)
+                deadline = match_dt + timedelta(minutes=15)
+                if now_dt >= deadline:
+                    bat.unlink(missing_ok=True)
+                continue  # hora_inicio presente → no usar fallback
+            except Exception:
+                pass
+        # Fallback: borrar si tiene más de 3 horas (solo cuando hora_inicio ausente/inválida)
+        age_h = (now_dt.timestamp() - bat.stat().st_mtime) / 3600
+        if age_h > 3:
+            bat.unlink(missing_ok=True)
 
 
 # ─── KambiLiveClient adapter ─────────────────────────────────────────────────
@@ -341,20 +395,25 @@ def load_picks_del_dia(reports_dir: str = 'reports') -> list[dict]:
 
 # ─── Output HTML + bat Desktop (D97-12) ──────────────────────────────────────
 
-def _generar_html_bat_live(triggers: list[dict], timestamp: str) -> Optional[str]:
+def _generar_html_bat_live(
+    triggers: list[dict], timestamp: str, output_dir: "Optional[Path]" = None
+) -> Optional[str]:
     """
-    Genera live_combo_TIMESTAMP.html en Desktop/combos y LiveCombo_TIMESTAMP.bat.
-    Reutiliza el patrón de betplay_combo_builder (D97-12 / D99-11).
+    Genera live_combo_TIMESTAMP.html + LiveCombo_TIMESTAMP.bat en output_dir.
+    D116-01: output_dir = reports/combos_live/YYYY-MM-DD/ (CERO Desktop).
     Retorna ruta del .bat generado, o None si no hay triggers.
     """
     if not triggers:
         return None
 
-    _COMBOS.mkdir(parents=True, exist_ok=True)
+    fecha = datetime.now().strftime("%Y-%m-%d")
+    out   = output_dir or _combos_live_dir(fecha)
+    out.mkdir(parents=True, exist_ok=True)
+
     html_name = f"live_combo_{timestamp}.html"
     bat_name  = f"LiveCombo_{timestamp}.bat"
-    html_path = _COMBOS / html_name
-    bat_path  = _DESKTOP / bat_name
+    html_path = out / html_name
+    bat_path  = out / bat_name
 
     lines = [
         "<html><head><meta charset='utf-8'><title>LIVE EDGE</title>",
@@ -365,7 +424,7 @@ def _generar_html_bat_live(triggers: list[dict], timestamp: str) -> Optional[str
         "font-size:15px;font-weight:bold;border-radius:6px;text-decoration:none;margin-top:8px;}",
         ".btn:hover{background:#00b8d9;} .odds{color:#fd7e14;font-size:18px;font-weight:bold;}",
         "</style></head><body>",
-        "<h2>🔴 LIVE EDGE DETECTADO</h2>",
+        "<h2>LIVE EDGE DETECTADO</h2>",
     ]
     for t in triggers:
         url = t.get('betplay_url', '')
@@ -374,15 +433,16 @@ def _generar_html_bat_live(triggers: list[dict], timestamp: str) -> Optional[str
         lines.append(
             f"<div class='pick'>"
             f"<b>{t['partido']}</b><br>"
-            f"Pre: {t['cuota_pre']:.2f} → <span class='odds'>Live: {t['cuota_live']:.2f}</span> "
-            f"(drift <b>{t['drift_pct']:+.1f}%</b>) | edge_live: {t['edge_live']:+.3f}<br>"
+            f"Pre: {t['cuota_pre']:.2f} -&gt; Live: {t['cuota_live']:.2f} "
+            f"(drift {t['drift_pct']:+.1f}%) | edge_live: {t['edge_live']:+.3f}<br>"
             f"{btn_html}"
             f"</div>"
         )
     lines.append("</body></html>")
     html_path.write_text("\n".join(lines), encoding="utf-8")
 
-    html_win = f"C:\\users\\hogar\\Desktop\\combos\\{html_name}"
+    # Windows path: /mnt/c/foo → C:\foo
+    html_win = str(html_path).replace("/mnt/c/", "C:\\").replace("/", "\\")
     bat_content = (
         f"@echo off\r\n"
         f'start "" "{_CHROME}" "file:///{html_win}"\r\n'
@@ -786,49 +846,78 @@ def detect_break_state(partido_key: str, current_drift: float,
 def _fire_break_combos(triggers_confirmados: list, reports_dir: str = 'reports') -> Optional[str]:
     """
     Dispara betplay_combo_builder.py --live cuando hay breaks confirmados.
-    Single-fire por partido: fired=True previene re-disparo (D100-03).
-    Retorna output del subprocess o None si no hay nada que disparar.
+    D116-01 anti-flood: de-dup por event_id (_fired.json), cap MAX_LIVE_FIRES_DIA,
+    TTL cleanup de .bat expirados, output a reports/combos_live/ (CERO Desktop).
     """
     if not triggers_confirmados:
         return None
 
-    # Verificar si alguno no ha sido fired aún
-    hay_nuevo = any(not t.get('_fired_prev', False) for t in triggers_confirmados)
-    if not hay_nuevo:
+    fecha   = datetime.now().strftime("%Y-%m-%d")
+    now_dt  = datetime.now()
+    out_dir = _combos_live_dir(fecha)
+
+    # TTL cleanup al inicio de cada ciclo
+    _ttl_cleanup(fecha, now_dt)
+
+    # Cargar registro de fires del día
+    fired_map = _load_fired(fecha)
+
+    # Filtrar: sólo triggers nuevos (no fired hoy Y no fired_prev en sesión)
+    nuevos = [
+        t for t in triggers_confirmados
+        if not t.get('_fired_prev', False) and t.get('partido', '') not in fired_map
+    ]
+    if not nuevos:
         return None
 
-    partidos = [t['partido'] for t in triggers_confirmados if not t.get('_fired_prev', False)]
+    # Cap diario
+    fires_hoy = len(fired_map)
+    if fires_hoy >= MAX_LIVE_FIRES_DIA:
+        msg = (f'[live_edge_monitor] CAP ALCANZADO ({fires_hoy}/{MAX_LIVE_FIRES_DIA}) — '
+               f'revisar manualmente: {", ".join(t["partido"] for t in nuevos)}')
+        print(msg)
+        return msg
+
+    partidos = [t['partido'] for t in nuevos]
     print(f'[live_edge_monitor] BREAK CONFIRMADO en: {", ".join(partidos)} — disparando combos')
 
     try:
-        _base = Path(__file__).parent.parent
         r = subprocess.run(
-            [sys.executable, str(_base / 'betplay_combo_builder.py'),
-             '--live', '--telegram'],
+            [sys.executable, str(_BASE_DIR / 'betplay_combo_builder.py'),
+             '--live', '--telegram',
+             '--output-dir', str(out_dir)],
             capture_output=True, text=True,
-            cwd=str(_base), timeout=120
+            cwd=str(_BASE_DIR), timeout=120
         )
         output = (r.stdout + r.stderr).strip()
         print(f'[live_edge_monitor] combo_builder rc={r.returncode} | {output[:200]}')
 
+        # Actualizar _fired.json con los nuevos fires
+        for t in nuevos:
+            fired_map[t['partido']] = {
+                'fired_at':    now_dt.isoformat(),
+                'hora_inicio': t.get('hora', ''),
+                'drift_pct':   t.get('drift_pct', 0),
+            }
+        _save_fired(fecha, fired_map)
+
         # D101-05: auto-log al shadow book (D99-02)
         try:
             import sys as _sys
-            _sys.path.insert(0, str(_base))
+            _sys.path.insert(0, str(_BASE_DIR))
             import shadow_book as _sb
-            for t in triggers_confirmados:
-                if not t.get('_fired_prev', False):
-                    _pick_live = {
-                        'partido':          t.get('partido', ''),
-                        'favorito_predicho': t.get('favorito', ''),
-                        'cuota_favorito':   t.get('cuota_pre', 0),
-                        'p_modelo':         t.get('p_modelo', 0),
-                        'edge':             t.get('edge_live', 0),
-                        'break_state':      'BREAK_CONFIRMADO',
-                        'drift_pct':        t.get('drift_pct', 0),
-                        'pick_type':        'live',
-                    }
-                    _sb.log_live_pick(_pick_live, cuota_trigger=t.get('cuota_live', t.get('cuota_pre', 0)))
+            for t in nuevos:
+                _pick_live = {
+                    'partido':           t.get('partido', ''),
+                    'favorito_predicho': t.get('favorito', ''),
+                    'cuota_favorito':    t.get('cuota_pre', 0),
+                    'p_modelo':          t.get('p_modelo', 0),
+                    'edge':              t.get('edge_live', 0),
+                    'break_state':       'BREAK_CONFIRMADO',
+                    'drift_pct':         t.get('drift_pct', 0),
+                    'pick_type':         'live',
+                }
+                _sb.log_live_pick(_pick_live, cuota_trigger=t.get('cuota_live', t.get('cuota_pre', 0)))
         except Exception as _e:
             print(f'[live_edge_monitor] shadow_book log_live error: {_e}')
 
@@ -850,10 +939,4 @@ if __name__ == '__main__':
     args = ap.parse_args()
     resultado = run(observe_only=args.observe, telegram=args.telegram)
     if args.dashboard:
-        try:
-            sys.path.insert(0, str(Path(__file__).parent))
-            from live_dashboard_generator import generar_dashboard_html
-            html_path = generar_dashboard_html()
-            print(f'[dashboard] generado: {html_path}')
-        except Exception as e:
-            print(f'[dashboard] WARN: {e}')
+        print('[dashboard] SUPERSEDED — usar live_desk :7780 (Nodo-109). Flag --dashboard es no-op.')

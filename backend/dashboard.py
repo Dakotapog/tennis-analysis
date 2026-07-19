@@ -204,6 +204,49 @@ def load_odometer(desde_dt=None) -> dict:
         return {}
 
 
+def load_live_edge() -> dict:
+    """Carga el último live_edge_*.json del día."""
+    try:
+        files = sorted(glob.glob("reports/live_edge_*.json"), reverse=True)
+        return json.load(open(files[0], encoding="utf-8")) if files else {}
+    except Exception:
+        return {}
+
+
+def load_live_odds_history() -> dict:
+    """Carga live_odds_history_YYYYMMDD.json del día actual."""
+    try:
+        today = datetime.now().strftime('%Y%m%d')
+        path  = f"reports/live_odds_history_{today}.json"
+        return json.load(open(path, encoding="utf-8")) if os.path.exists(path) else {}
+    except Exception:
+        return {}
+
+
+def load_meta_signal() -> dict:
+    """Carga el meta_signal_*.json más reciente (Nodo-98 PASO 3b)."""
+    try:
+        files = sorted(glob.glob("reports/meta_signal_*.json"), reverse=True)
+        return json.load(open(files[0], encoding="utf-8")) if files else {}
+    except Exception:
+        return {}
+
+
+def load_live_sessions_today() -> list:
+    """Carga todos los live_edge snapshots del día para tendencias de drift."""
+    try:
+        today = datetime.now().strftime('%Y%m%d')
+        sessions = []
+        for f in sorted(glob.glob(f"reports/live_edge_{today}_*.json")):
+            try:
+                sessions.append(json.load(open(f, encoding='utf-8')))
+            except Exception:
+                pass
+        return sessions
+    except Exception:
+        return []
+
+
 def load_apuestas_reales() -> list:
     """Carga picks CERRADO con resultado real de reports/apuestas_*.json."""
     results = []
@@ -270,7 +313,7 @@ def _clv_by_provenance(shadow: dict) -> dict:
 def _waterfall_steps(wf: dict) -> list:
     if not wf:
         return []
-    terminal = wf.get('terminal_reason', '')
+    terminal = wf.get('terminal_reason') or ''
     steps = [
         ("kelly_kl",      f"{wf.get('kelly_kl_report', 0):.4f}"),
         ("raw_stake",     f"${wf.get('raw_stake', 0):,.0f}"),
@@ -1432,6 +1475,369 @@ def panel_odometro(odo: dict) -> None:
 
 
 # ══════════════════════════════════════════════════════════════════════════════
+# PANEL 8 — LIVE · Centro de Operaciones Triple Convergencia (Nodo-100)
+# ══════════════════════════════════════════════════════════════════════════════
+
+# Colores break state
+_CLR_BREAK = {
+    'NORMAL':           _MUTED,
+    'BREAK_POSIBLE':    _ORANGE,
+    'BREAK_CONFIRMADO': _RED,
+}
+_LBL_BREAK = {
+    'NORMAL':           'NORMAL',
+    'BREAK_POSIBLE':    'QUIEBRE POSIBLE',
+    'BREAK_CONFIRMADO': 'QUIEBRE CONFIRMADO',
+}
+
+
+def _c1_score(senales_live: list, drift_pct: float) -> tuple[int, str, str]:
+    """
+    Triple Convergencia C1 (Nodo-99 D99-12):
+      - STRONG en señales live (confianza modelo alta)
+      - IRP_negativo (rival frío, vuelve de inactividad)
+      - drift >= 12% sostenido (mercado confirma)
+    Retorna (n_cumplidas, label, color).
+    """
+    has_strong  = 'STRONG' in senales_live
+    has_irp_neg = 'IRP_negativo' in senales_live
+    has_drift   = abs(drift_pct) >= 12.0
+    n = sum([has_strong, has_irp_neg, has_drift])
+    if n == 3:
+        return 3, 'C1 MAXIMO', _RED
+    if n == 2:
+        return 2, f'PARCIAL {2}/3', _ORANGE
+    if n == 1:
+        return 1, f'INICIO {1}/3', _BLUE
+    return 0, '—', _MUTED
+
+
+def panel_live() -> None:
+    st.header("Panel 8 — LIVE · Centro de Operaciones")
+    st.caption(
+        "Puente completo: edge_calculator → meta_signal (score pre-game) → "
+        "live_edge_monitor (drift) → break_machine (confirmación) → auto-combo. "
+        "Nodo-97 × Nodo-98 × Nodo-99 × Nodo-100."
+    )
+
+    # ── Cargar todas las fuentes ──────────────────────────────────────────────
+    live           = load_live_edge()
+    hist           = load_live_odds_history()
+    meta           = load_meta_signal()
+    sessions_today = load_live_sessions_today()
+
+    if not live:
+        st.warning(
+            "Sin datos live. Activar:\n\n"
+            "`python3 scripts/live_edge_monitor.py --observe --dashboard`\n\n"
+            "o verificar n8n en :5678 → workflow 'Tennis Live Check'."
+        )
+        return
+
+    ts_snap      = (live.get('ts') or '')[:19]
+    observe_only = live.get('observe_only', True)
+    stake_ok     = live.get('stake_permitido', True)
+    kgr_neg      = live.get('kgr_negativo', False)
+    n_mon        = live.get('picks_monitoreados', 0)
+    n_trig       = live.get('n_triggers', 0)
+    n_break      = live.get('break_confirmados', 0)
+    picks        = live.get('picks_chequeados_data', [])
+
+    # Índice meta_signal por partido (para unir pre-game con live)
+    meta_idx = {}
+    for p in meta.get('todos_los_picks', []):
+        key = (p.get('partido') or '').strip()
+        if key:
+            meta_idx[key] = p
+
+    # ── Barra de estado del sistema ───────────────────────────────────────────
+    modo_color   = _MUTED if observe_only else _GREEN
+    modo_txt     = 'OBSERVACION' if observe_only else 'ACTIVO'
+    stake_color  = _GREEN if stake_ok else _RED
+    stake_txt    = 'OK' if stake_ok else 'BLOQUEADO'
+    kgr_html     = f'<span style="color:{_RED};font-size:0.82rem;"><b>KGR &lt; 0</b></span>' if kgr_neg else ''
+    meta_color   = _GREEN if meta else _MUTED
+    meta_txt     = ('OK — ' + meta.get('edge_report_fuente', '?')[:18]) if meta else 'sin datos'
+    st.markdown(
+        f'<div style="background:{_CARD};border:1px solid {_ORANGE}33;border-radius:8px;'
+        f'padding:10px 18px;margin-bottom:14px;display:flex;gap:28px;flex-wrap:wrap;'
+        f'align-items:center;">'
+        f'<span style="color:{_MUTED};font-size:0.82rem;">Ciclo: '
+        f'<b style="color:{_TEAL};">{ts_snap}</b></span>'
+        f'<span style="color:{_MUTED};font-size:0.82rem;">Modo: '
+        f'<b style="color:{modo_color};">{modo_txt}</b></span>'
+        f'<span style="color:{_MUTED};font-size:0.82rem;">Stake: '
+        f'<b style="color:{stake_color};">{stake_txt}</b></span>'
+        f'{kgr_html}'
+        f'<span style="color:{_MUTED};font-size:0.82rem;">Ciclos hoy: '
+        f'<b style="color:{_BLUE};">{len(sessions_today)}</b></span>'
+        f'<span style="color:{_MUTED};font-size:0.82rem;">Meta-señal: '
+        f'<b style="color:{meta_color};">{meta_txt}</b></span>'
+        f'</div>',
+        unsafe_allow_html=True,
+    )
+
+    # ── Banner BREAK CONFIRMADO ───────────────────────────────────────────────
+    if n_break > 0:
+        st.markdown(
+            f'<div style="background:{_RED}22;border:2px solid {_RED};border-radius:8px;'
+            f'padding:14px;margin-bottom:14px;text-align:center;font-size:1.05rem;'
+            f'font-weight:700;color:{_RED};">'
+            f'BREAK CONFIRMADO &mdash; COMBOS LIVE DISPARADOS</div>',
+            unsafe_allow_html=True,
+        )
+
+    # ══ A: KPIs globales ═════════════════════════════════════════════════════
+    k1, k2, k3, k4, k5 = st.columns(5)
+    k1.metric("Picks monitoreados", n_mon)
+    k2.metric("Triggers activos", n_trig,
+              delta="alerta" if n_trig > 0 else None,
+              delta_color="inverse" if n_trig > 0 else "off")
+    k3.metric("Breaks confirmados", n_break,
+              delta="ACCION" if n_break > 0 else None,
+              delta_color="inverse" if n_break > 0 else "off")
+    n_score3 = meta.get('n_score_directo_3plus', 0)
+    k4.metric("Picks score≥3 hoy", n_score3,
+              delta="candidatos C1" if n_score3 > 0 else None)
+    n_fired = sum(1 for d in hist.values() if d.get('fired', False))
+    k5.metric("H100-01 breaks acum.", f"{n_fired}/20",
+              delta="gate≥3" if n_fired < 3 else "gate ABIERTO",
+              delta_color="inverse" if n_fired < 3 else "normal")
+
+    st.divider()
+
+    # ══ B: TRIPLE CONVERGENCIA C1 — tabla central ════════════════════════════
+    st.subheader("Triple Convergencia C1 — por partido")
+    st.caption(
+        "C1 = STRONG (confianza modelo) + IRP_negativo (rival frío) + drift≥12% (mercado confirma). "
+        "Los 3 juntos = alpha_tier MAXIMO (Nodo-99 D99-12)."
+    )
+
+    valid_picks = [pc for pc in picks if pc.get('cuota_live') not in (None, 0, '?')]
+
+    if not valid_picks:
+        st.info("Sin picks con cuota live disponible — n8n corriendo cada 2 min.")
+    else:
+        hdr = st.columns([2.8, 0.8, 2.2, 0.8, 0.9, 0.9, 2.0, 2.2])
+        for col, h in zip(hdr, ["Partido", "Score", "Señales live", "Cuota Pre",
+                                  "Cuota Live", "Drift%", "Break State", "C1 Convergencia"]):
+            col.markdown(
+                f'<span style="color:{_BLUE};font-weight:700;font-size:0.75rem;">{h}</span>',
+                unsafe_allow_html=True)
+        st.markdown(f'<hr style="margin:3px 0;border-color:#333;">', unsafe_allow_html=True)
+
+        for pc in valid_picks:
+            partido    = pc.get('partido', '?')
+            estado     = pc.get('break_state', 'NORMAL')
+            b_color    = _CLR_BREAK.get(estado, _MUTED)
+            b_label    = _LBL_BREAK.get(estado, estado)
+            drift_pct  = pc.get('drift_pct', 0.0) or 0.0
+            cuota_pre  = pc.get('cuota_pre', 0.0) or 0.0
+            cuota_live = pc.get('cuota_live', '?')
+            senales    = pc.get('senales', [])
+
+            # Score pre-game desde meta_signal
+            mp      = meta_idx.get(partido, {})
+            score_d = mp.get('score_directo')
+            score_str = f"{score_d}/5" if score_d is not None else '—'
+
+            # C1
+            n_c1, c1_label, c1_color = _c1_score(senales, drift_pct)
+            if n_c1 == 3 and estado == 'BREAK_CONFIRMADO':
+                c1_color = _RED  # máximo + confirmado
+
+            senales_str = ' '.join(f'[{s}]' for s in senales) or '—'
+            drift_color = (_RED if abs(drift_pct) >= 15
+                           else (_ORANGE if abs(drift_pct) >= 10 else _MUTED))
+
+            row = st.columns([2.8, 0.8, 2.2, 0.8, 0.9, 0.9, 2.0, 2.2])
+            row[0].markdown(
+                f'<span style="color:{b_color};font-weight:700;">{partido}</span>',
+                unsafe_allow_html=True)
+            row[1].markdown(
+                f'<span style="color:{_TEAL};font-weight:700;">{score_str}</span>',
+                unsafe_allow_html=True)
+            row[2].markdown(
+                f'<span style="color:{_MUTED};font-size:0.75rem;">{senales_str}</span>',
+                unsafe_allow_html=True)
+            row[3].markdown(
+                f'<span style="color:{_MUTED};">{cuota_pre:.2f}</span>',
+                unsafe_allow_html=True)
+            row[4].markdown(
+                f'<span style="color:{_TEXT};">{cuota_live}</span>',
+                unsafe_allow_html=True)
+            row[5].markdown(
+                f'<span style="color:{drift_color};font-weight:700;">{drift_pct:+.1f}%</span>',
+                unsafe_allow_html=True)
+            row[6].markdown(
+                f'<span style="color:{b_color};font-weight:600;font-size:0.78rem;">{b_label}</span>',
+                unsafe_allow_html=True)
+            row[7].markdown(
+                f'<span style="color:{c1_color};font-weight:700;">{c1_label}</span>',
+                unsafe_allow_html=True)
+
+    st.divider()
+
+    # ══ C: META-SEÑAL PRE-GAME (inteligencia del día) ════════════════════════
+    st.subheader("Meta-Señal Pre-Game — score_directo del día (Nodo-98)")
+    st.caption(
+        "HOT + STRONG + ELO_DOM + RFI_tier + IRP_delta = hasta 5 puntos. "
+        "Score≥3 = candidato C1. SPLIT = conflicto, NO combinar."
+    )
+
+    if not meta:
+        st.info("Sin meta_signal — correr: `python3 scripts/meta_signal_scorer.py`")
+    else:
+        n_split = meta.get('n_split', 0)
+
+        destacados = meta.get('picks_score_directo_3plus', [])
+        splits     = meta.get('picks_split', [])
+
+        if destacados:
+            with st.expander(
+                f"Picks score_directo≥3 — {len(destacados)} candidatos Triple Convergencia",
+                expanded=True,
+            ):
+                rows = []
+                for p in destacados:
+                    partido_p = p.get('partido', '?')
+                    # Enriquecer con estado live actual si existe
+                    live_pc = next(
+                        (pc for pc in picks if pc.get('partido') == partido_p), {}
+                    )
+                    drift_live = live_pc.get('drift_pct')
+                    b_state    = live_pc.get('break_state', '—')
+                    rows.append({
+                        'Partido':      partido_p,
+                        'Score':        p.get('score_directo', 0),
+                        'Dirección':    p.get('direccion', '?'),
+                        'Señales':      ', '.join(p.get('senales_activas_fav', [])),
+                        'Edge pre%':    f"{(p.get('edge') or 0)*100:+.1f}%" if p.get('edge') is not None else '—',
+                        'Cuota pre':    f"{p.get('cuota') or 0:.2f}",
+                        'Drift live':   f'{drift_live:+.1f}%' if drift_live is not None else 'sin dato',
+                        'Break state':  b_state,
+                        'Sección':      p.get('seccion', '?'),
+                    })
+                st.dataframe(rows, use_container_width=True, hide_index=True)
+        else:
+            st.info("Ningún pick con score_directo≥3 hoy.")
+
+        if splits:
+            with st.expander(
+                f"Picks SPLIT — conflicto señales ({len(splits)}) — NO apostar en combo mixto"
+            ):
+                st.warning(
+                    "SPLIT = señal pro-favorito activa Y señal pro-rival activa simultáneamente. "
+                    "No incluir en combo mixto (Nodo-99 D99-03)."
+                )
+                rows_s = []
+                for p in splits:
+                    rows_s.append({
+                        'Partido':        p.get('partido', '?'),
+                        'Score directo':  p.get('score_directo', 0),
+                        'Score rival':    p.get('score_rival_value', 0),
+                        'Señales fav':    ', '.join(p.get('senales_activas_fav', [])),
+                        'Señales rival':  ', '.join(p.get('senales_activas_rival', [])),
+                    })
+                st.dataframe(rows_s, use_container_width=True, hide_index=True)
+
+    st.divider()
+
+    # ══ D: EVOLUCIÓN DRIFT (multi-ciclo) ═════════════════════════════════════
+    if len(sessions_today) > 1:
+        st.subheader(f"Evolución drift — {len(sessions_today)} ciclos hoy")
+        st.caption(
+            "Fluctuación normal: cuota baja y RECUPERA. "
+            "Quiebre real: cuota baja y SE MANTIENE o sigue bajando."
+        )
+        trend_rows = []
+        for sess in sessions_today[-12:]:
+            ts_s = (sess.get('ts') or '')[11:16]  # HH:MM
+            for pc in sess.get('picks_chequeados_data', []):
+                dp = pc.get('drift_pct')
+                if dp is not None:
+                    trend_rows.append({
+                        'Hora':       ts_s,
+                        'Partido':    pc.get('partido', '?'),
+                        'Drift%':     f'{dp:+.1f}%',
+                        'Cuota Live': pc.get('cuota_live', '?'),
+                        'Estado':     pc.get('break_state', 'NORMAL'),
+                    })
+        if trend_rows:
+            st.dataframe(trend_rows, use_container_width=True, hide_index=True)
+
+    st.divider()
+
+    # ══ E: BREAK MACHINE HISTORY ══════════════════════════════════════════════
+    if hist:
+        with st.expander("Break State Machine — historial de lecturas por partido"):
+            for partido_key, data in hist.items():
+                estado   = data.get('estado', 'NORMAL')
+                b_color  = _CLR_BREAK.get(estado, _MUTED)
+                fired    = data.get('fired', False)
+                readings = data.get('readings', [])
+                st.markdown(
+                    f'<b style="color:{b_color};">{partido_key.replace("_", " ")}</b>'
+                    f' — <span style="color:{b_color};">{_LBL_BREAK.get(estado, estado)}</span>'
+                    + (f' <span style="color:{_GREEN};">[FIRED ✓]</span>' if fired else ''),
+                    unsafe_allow_html=True,
+                )
+                if readings:
+                    st.dataframe(
+                        [{"ts": r.get("ts", "?"),
+                          "cuota": r.get("cuota", 0),
+                          "drift%": f'{r.get("drift", 0)*100:+.1f}%'}
+                         for r in readings],
+                        use_container_width=False,
+                        hide_index=True,
+                    )
+
+    # ══ F: H100-01 — GATE Y EVIDENCIA ════════════════════════════════════════
+    st.divider()
+    st.subheader("H100-01 — Gate Triple Convergencia")
+    st.caption(
+        "Hipótesis: picks con score_directo≥2 + break confirmado producen ROI > picks normales. "
+        "n_stop=20 | Gate activación: ≥3 breaks confirmados reales."
+    )
+
+    g1, g2, g3 = st.columns(3)
+    g1.metric("Breaks fired hoy", n_fired)
+    g2.metric("Gate (≥3)", "ABIERTO" if n_fired >= 3 else f"faltan {3 - n_fired}",
+              delta=None if n_fired >= 3 else f"{3 - n_fired} más",
+              delta_color="off" if n_fired >= 3 else "inverse")
+    g3.metric("Progreso n_stop", f"{n_fired}/20")
+
+    if n_fired < 3:
+        st.info(
+            f"En observación — {3 - n_fired} break(s) confirmado(s) más para activar "
+            "acumulación formal de H100-01."
+        )
+    else:
+        st.success(
+            f"{n_fired} breaks confirmados — evidencia formal activa. "
+            f"Acumular hasta n=20 para graduación."
+        )
+
+    # ══ G: COMBOS DISPARADOS ═════════════════════════════════════════════════
+    combo_out = live.get('combo_break_output')
+    combos_hoy = [s.get('combo_break_output') for s in sessions_today
+                  if s.get('combo_break_output')]
+
+    if combo_out or combos_hoy:
+        st.divider()
+        st.subheader("Combos disparados por break confirmado")
+        if combo_out:
+            _card(
+                f'<b style="color:{_GREEN};">Último combo:</b><br>'
+                f'<code style="color:{_GREEN};">{combo_out}</code>'
+            )
+        if len(combos_hoy) > 1:
+            with st.expander(f"Historial combos hoy ({len(combos_hoy)})"):
+                for c in combos_hoy:
+                    st.markdown(f'`{c}`')
+
+
+# ══════════════════════════════════════════════════════════════════════════════
 # MAIN
 # ══════════════════════════════════════════════════════════════════════════════
 
@@ -1494,7 +1900,7 @@ def main() -> None:
     odo = _load_odo()
 
     # ── Tabs ──
-    tabs = st.tabs(["HOY", "HIPÓTESIS", "SALUD", "ATRIBUCIÓN", "RIESGO", "DECISIÓN", "MOTOR"])
+    tabs = st.tabs(["HOY", "HIPÓTESIS", "SALUD", "ATRIBUCIÓN", "RIESGO", "DECISIÓN", "MOTOR", "LIVE"])
 
     with tabs[0]:
         panel_hoy(shadow, trader, edge, calibracion)
@@ -1510,6 +1916,8 @@ def main() -> None:
         panel_decision(shadow, hypotheses_json, calibracion)
     with tabs[6]:
         panel_odometro(odo)
+    with tabs[7]:
+        panel_live()
 
 
 if __name__ == "__main__":

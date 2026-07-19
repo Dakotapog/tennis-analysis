@@ -825,6 +825,50 @@ def render_html(state: Dict[str, Any]) -> str:
         p8_badge, p8_badge_color,
     )
 
+    # ── P9 EXECUTION ROUTER ───────────────────────────────────────────────────
+    # Lee p8_books (ya computado, sin nueva llamada de red). Vista acción.
+    _p8        = state.get("p8_books", {})
+    _p8_picks  = _p8.get("picks", {})
+    p9_rows: List = []
+    _gains: List[float] = []
+    for _jug_key, _bp in _p8_picks.items():
+        _jug    = _bp.get("jugador", _jug_key)
+        _plan   = _bp.get("cuota_plan", 0)
+        _casa   = _bp.get("casa", "?")
+        _cuota  = _bp.get("cuota", 0)
+        _gain   = float(_bp.get("gain_pct", 0) or 0)
+        _arb    = _bp.get("arb_flag", False)
+        if _gain > 0:
+            _gains.append(_gain)
+        _gain_str   = f"+{_gain:.1f}%" if _gain > 0 else f"{_gain:.1f}%"
+        _gain_color = GREEN if _gain > 0 else GREY
+        _arb_html   = (
+            f'<span style="background:#00ff00;color:#000;padding:1px 4px;'
+            f'font-size:0.7em;border-radius:3px;font-weight:bold;">ARB</span> '
+            if _arb else ""
+        )
+        p9_rows.append([
+            _jug,
+            f"@{_plan:.2f}" if _plan else "—",
+            f"<b>{_casa}</b>",
+            f"@{_cuota:.2f}" if _cuota else "—",
+            f'<span style="color:{_gain_color};font-weight:bold;">{_gain_str}</span>{_arb_html}',
+        ])
+    _roi_extra_p9  = round(sum(_gains) / len(_gains), 2) if _gains else 0.0
+    _n_cubiertos   = len(_p8_picks)
+    _feeds_p9_str  = ", ".join(_p8.get("feeds", []) or [])
+    _p9_badge      = f"+{_roi_extra_p9:.1f}% ROI extra" if _roi_extra_p9 > 0 else f"{_n_cubiertos} picks"
+    _p9_badge_col  = GREEN if _roi_extra_p9 > 0 else (BLUE if _n_cubiertos else GREY)
+    p9_panel = panel(
+        f"P9 EXECUTION ROUTER — dónde ejecutar cada pick | feeds: {_feeds_p9_str or 'ninguno'}",
+        table(
+            ["Jugador", "Plan @", "Ejecutar en", "Cuota", "+% vs plan"],
+            p9_rows,
+            "Sin picks cubiertos en feeds (correr live_edge_monitor o PASO 3.7)",
+        ),
+        _p9_badge, _p9_badge_col,
+    )
+
     # ── P7 CLOCK ─────────────────────────────────────────────────────────────
     partidos = state.get("p7_clock", {}).get("partidos", [])
     clock_rows = []
@@ -1092,6 +1136,7 @@ def render_html(state: Dict[str, Any]) -> str:
   {p5_panel}
   {p6_panel}
   {p8_panel}
+  {p9_panel}
   {data_panel}
   {que_falta_panel}
   {p1_panel}

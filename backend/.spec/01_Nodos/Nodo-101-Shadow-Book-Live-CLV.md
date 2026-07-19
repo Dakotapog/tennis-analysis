@@ -1,6 +1,6 @@
 # Nodo-101 — Shadow Book Live CLV: Pick-Type Live Tracking (D99-02)
 
-> **Wikilinks:** [[Nodo-100-Triple-Convergencia-Live]] | [[Nodo-99-Auditoria-Fable-N97-N98]] | [[Nodo-52-Shadow-Book-CLV-Tracking]] | [[Nodo-97-Live-Edge-Monitor]]
+> **Wikilinks:** [[Nodo-100B-Triple-Convergencia-Live]] | [[Nodo-99-Auditoria-Fable-N97-N98]] | [[Nodo-52-Shadow-Book-CLV-Tracking]] | [[Nodo-97-Live-Edge-Monitor]]
 > **Fecha:** 2026-07-14 | **Autor:** Sonnet 4.6
 > **Contexto:** D99-02 del Nodo-99 Auditoría: el shadow book fue diseñado exclusivamente para picks
 > pre-partido. Cuando live_edge_monitor dispara un break_confirmado y se generan combos live,

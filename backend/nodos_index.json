@@ -1,8 +1,8 @@
 {
   "_meta": {
-    "generado": "2026-07-17T15:29:15",
-    "total_nodos": 110,
-    "total_py_files": 70,
+    "generado": "2026-07-18T22:55:32",
+    "total_nodos": 116,
+    "total_py_files": 71,
     "huerfanos_count": 1,
     "exclusiones_count": 19
   },
@@ -320,7 +320,8 @@
       "estado": "activo",
       "archivos_mencionados": [
         "favoritos_combo_builder.py",
-        "run_daily.py"
+        "run_daily.py",
+        "tests/test_nodo110_favoritos_builder.py"
       ]
     },
     {
@@ -354,6 +355,90 @@
         "core/weather_client.py",
         "edge_calculator.py",
         "extraer_URL_partidos_version2.py"
+      ]
+    },
+    {
+      "nodo_id": "114",
+      "nodo_archivo": "Nodo-114-Desk-Razonamiento-P8-MultiBook.md",
+      "fecha": "2026-07-17",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "favoritos_combo_builder.py",
+        "live_desk.py",
+        "scraping/dual_book_client.py"
+      ]
+    },
+    {
+      "nodo_id": "115",
+      "nodo_archivo": "Nodo-115-Desk-Interactivo-Incertidumbre-Visible.md",
+      "fecha": "2026-07-17",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "analysis/conformal_band.py",
+        "conformal_band.py",
+        "favoritos_combo_builder.py",
+        "tests/test_nodo115_u1_u4.py",
+        "tests/test_nodo115_uncertainty.py"
+      ]
+    },
+    {
+      "nodo_id": "116",
+      "nodo_archivo": "Nodo-116-Entierro-Dashboard-Vieja-AutoCombo-AntiFlood-P8-MultiCasa.md",
+      "fecha": "2026-07-18",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "close_snapshot_server.py",
+        "dual_book_client.py",
+        "extraer_URL_partidos_version2.py",
+        "live_dashboard_generator.py",
+        "scripts/live_dashboard_generator.py",
+        "scripts/live_edge_monitor.py",
+        "tests/test_nodo116_antiflood.py"
+      ]
+    },
+    {
+      "nodo_id": "117",
+      "nodo_archivo": "Nodo-117-Auditoria-Scraping-Rankings-Cobertura-H2H.md",
+      "fecha": "2026-07-18",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "extraer_URL_partidos_version2.py",
+        "extraer_historh2h.py",
+        "extraer_partidos_api.py",
+        "favoritos_combo_builder.py",
+        "run_daily.py",
+        "scraping/file_utils.py",
+        "scraping/kambi_tennis.py"
+      ]
+    },
+    {
+      "nodo_id": "118",
+      "nodo_archivo": "Nodo-118-Match-Ledger-Crosswalk-Identidad-Fusion-Definitiva.md",
+      "fecha": "2026-07-18",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "core/player_registry.py",
+        "extraer_URL_partidos_version2.py",
+        "extraer_historh2h.py",
+        "extraer_partidos_api.py",
+        "live_desk.py",
+        "match_ledger.py",
+        "player_registry.py",
+        "scripts/build_crosswalk_bootstrap.py",
+        "scripts/resolve_quarantine.py"
+      ]
+    },
+    {
+      "nodo_id": "119",
+      "nodo_archivo": "Nodo-119-Auditoria-Desk-v3-21-Gaps-11-Fixes.md",
+      "fecha": "2026-07-18",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "dual_book_client.py",
+        "live_desk.py",
+        "tests/test_nodo115_u1_u4.py",
+        "tests/test_nodo115_uncertainty.py",
+        "tests/test_nodo116_antiflood.py"
       ]
     },
     {

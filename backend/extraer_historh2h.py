@@ -280,7 +280,31 @@ async def main():
         help="F3: máximo de partidos que van al batch de Playwright por sesión (default 20). "
              "Prioriza ITF/Challenger y cuota en rango apostable [1.5-6.0]."
     )
+    parser.add_argument(
+        '--tomorrow', action='store_true',
+        help="D89-08: usar el archivo de partidos de MAÑANA (zita_tennis_matches_YYYYMMDD_*.json). "
+             "Requiere haber corrido extraer_partidos_api.py --tomorrow primero."
+    )
     args = parser.parse_args()
+
+    # ── Resolución de archivo para --tomorrow (D89-08) ────────────────────────
+    selected_file = args.file
+    if args.tomorrow and not selected_file:
+        import glob as _glob
+        from datetime import date, timedelta
+        tomorrow_str = (date.today() + timedelta(days=1)).strftime("%Y%m%d")
+        candidates = sorted(
+            _glob.glob(f"data/zita_tennis_matches_{tomorrow_str}_*.json"),
+            reverse=True  # más reciente primero (orden lexicográfico por timestamp)
+        )
+        if candidates:
+            selected_file = candidates[0]
+            logger.info(f"📅 --tomorrow: usando archivo de mañana ({tomorrow_str}) → {selected_file}")
+        else:
+            logger.warning(
+                f"⚠️  --tomorrow: no se encontró zita_tennis_matches_{tomorrow_str}_*.json — "
+                f"corre primero: python3 extraer_partidos_api.py --tomorrow"
+            )
 
     # ── API MODE: rápido, sin Playwright ──────────────────────────────────────
     if args.api_mode:
@@ -291,12 +315,14 @@ async def main():
         logger.info("⚡ ~0.5s/partido vs 2-3 min con Playwright")
         if args.all_tournaments:
             logger.info("🌍 MODO: multi-torneo (--all-tournaments)")
+        if args.tomorrow:
+            logger.info(f"📅 MODO: partidos de MAÑANA (D89-08)")
         logger.info("=" * 80)
 
         ninja = NinjaH2HExtractor()
         ninja.all_tournaments = args.all_tournaments
 
-        if not ninja.load_matches(json_file=args.file):
+        if not ninja.load_matches(json_file=selected_file):
             logger.error("❌ No se pudieron cargar los partidos desde JSON")
             return
 
@@ -323,7 +349,7 @@ async def main():
 
     try:
         # 1. Cargar partidos (filtro según modo)
-        if not extractor.load_matches(json_file=args.file):
+        if not extractor.load_matches(json_file=selected_file):
             logger.error("❌ No se pudieron cargar los partidos desde JSON")
             return
 

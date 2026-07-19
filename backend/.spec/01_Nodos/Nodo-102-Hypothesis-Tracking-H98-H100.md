@@ -1,6 +1,6 @@
 # Nodo-102 — Hypothesis Tracking: H98-01 (Meta-Señal) + H100-01 (Triple Convergencia)
 
-> **Wikilinks:** [[Nodo-98-Meta-Senal-Convergencia]] | [[Nodo-100-Triple-Convergencia-Live]] | [[Nodo-101-Shadow-Book-Live-CLV]] | [[Nodo-52-Shadow-Book-CLV-Tracking]]
+> **Wikilinks:** [[Nodo-98-Meta-Senal-Convergencia]] | [[Nodo-100B-Triple-Convergencia-Live]] | [[Nodo-101-Shadow-Book-Live-CLV]] | [[Nodo-52-Shadow-Book-CLV-Tracking]]
 > **Fecha:** 2026-07-14 | **Autor:** Sonnet 4.6
 > **Contexto:** H98-01 tenía n_actual=0 en preregistered_hypotheses.json — no se estaba
 > acumulando evidencia para la Meta-Señal Convergencia. H100-01 no estaba registrada en el

@@ -51,6 +51,12 @@ graphify-out/
 *.csv
 *.npz
 
+# ML suspendido (D104-05) — subsistema apagado, distorsiona grafo como god node
+# Pre-check 2026-07-16: cero archivos activos importan de estos módulos
+Intelligent_ml_enhancer.py
+aplicar_enhancer.py
+generar_dataset_plus.py
+
 # LOS .md DE NODOS SÍ ENTRAN (son la memoria semántica del proyecto)
 # docs/ y reports/ ya excluidos arriba — no hace falta bloquear *.md globalmente
 # Fix 2026-07-13: eliminado bloqueo *.md que impedía indexar .spec/01_Nodos/

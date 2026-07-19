@@ -161,12 +161,22 @@ def _compute_player_stats(rows: list) -> dict:
     def finalize(d):
         return {k: {**v, 'win_rate': _win_rate(v)} for k, v in d.items()}
 
+    # Dim 3 — MQI: calidad media de oponentes (weighted avg opponent_ranking)
+    opp_pairs = [(r['opponent_ranking'], r.get('opponent_weight', 1))
+                 for r in rows if r.get('opponent_ranking')]
+    if opp_pairs:
+        total_w = sum(w for _, w in opp_pairs)
+        mqi_avg = round(sum(rk * w for rk, w in opp_pairs) / total_w, 1) if total_w > 0 else None
+    else:
+        mqi_avg = None
+
     return {
         'n_total': len(rows),
         'surface_stats': finalize(surface_stats),
         'tier_stats': finalize(tier_stats),
         'ranking_gap_stats': finalize(ranking_gap_stats),
         'prs_stats': {k: {**v, 'win_rate': _win_rate(v)} for k, v in prs_stats.items()},
+        'mqi_avg_opponent_ranking': mqi_avg,
     }
 
 
@@ -354,6 +364,7 @@ def build_index(players: dict) -> dict:
             'ranking_gap_win_rates': rank_gap_wr,
             'prs_three_set_win_rate': stats.get('prs_stats', {}).get('three_set', {}).get('win_rate'),
             'prs_underdog_win_rate': stats.get('prs_stats', {}).get('underdog', {}).get('win_rate'),
+            'mqi_avg_opponent_ranking': stats.get('mqi_avg_opponent_ranking'),
         }
     return index
 

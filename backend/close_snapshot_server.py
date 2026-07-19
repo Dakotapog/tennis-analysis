@@ -220,31 +220,11 @@ class Handler(BaseHTTPRequestHandler):
             self._send_json(500, {"ok": False, "error": str(e)})
 
     def _handle_live_dashboard(self):
-        """Sirve live_dashboard.html generado por live_dashboard_generator.py (Nodo-100)."""
-        dashboard_path = BASE_DIR / "reports" / "live_dashboard.html"
-        if not dashboard_path.exists():
-            # Intentar generar uno al vuelo
-            try:
-                import sys as _sys
-                _sys.path.insert(0, str(BASE_DIR / "scripts"))
-                from live_dashboard_generator import generar_dashboard_html
-                generar_dashboard_html(str(BASE_DIR / "reports"))
-            except Exception:
-                pass
-        if dashboard_path.exists():
-            html = dashboard_path.read_bytes()
-            self.send_response(200)
-            self.send_header("Content-Type", "text/html; charset=utf-8")
-            self.send_header("Content-Length", str(len(html)))
-            self.end_headers()
-            self.wfile.write(html)
-        else:
-            fallback = b"<html><body><h2>Sin datos live_dashboard.html</h2><p>Correr: python3 scripts/live_edge_monitor.py --dashboard</p></body></html>"
-            self.send_response(200)
-            self.send_header("Content-Type", "text/html; charset=utf-8")
-            self.send_header("Content-Length", str(len(fallback)))
-            self.end_headers()
-            self.wfile.write(fallback)
+        """SUPERSEDED por Nodo-109 live_desk :7780 — redirige con 301."""
+        _log("SUPERSEDED Nodo-109 — /live-dashboard → http://localhost:7780/")
+        self.send_response(301)
+        self.send_header("Location", "http://localhost:7780/")
+        self.end_headers()
 
     def _handle_status(self):
         lines = []

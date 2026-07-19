@@ -1,6 +1,6 @@
 # Nodo-109 — Live Trading Desk: dashboard en vivo con semántica de mesa de trading
 
-> **Wikilinks:** [[Nodo-97-Live-Edge-Monitor]] | [[Nodo-100B-Triple-Convergencia-Live]] | [[Nodo-101-Shadow-Book-Live-CLV]] | [[Nodo-98-Meta-Senal-Convergencia]] | [[Nodo-107-Riesgo-Agregado-Motor-Reconciliacion]] | [[Nodo-71]] (Kyle's λ) | [[Nodo-74-Combo-Governor]]
+> **Wikilinks:** [[Nodo-97-Live-Edge-Monitor]] | [[Nodo-100B-Triple-Convergencia-Live]] | [[Nodo-101-Shadow-Book-Live-CLV]] | [[Nodo-98-Meta-Senal-Convergencia]] | [[Nodo-107-Riesgo-Agregado-Motor-Reconciliacion]] | [[Nodo-71]] (Kyle's λ) | [[Nodo-74-Combo-Governor]] | [[Nodo-118-Match-Ledger-Crosswalk-Identidad-Fusion-Definitiva]] | [[Nodo-119-Auditoria-Desk-v3-21-Gaps-11-Fixes]]
 > **Fecha:** 2026-07-17 | **Autor:** Fable 5 | **Implementa:** Sonnet
 > **Principio:** el dashboard NO calcula nada nuevo — es el puente de conocimiento que RELACIONA instrumentos ya construidos y los presenta como los paneles que alertan a un trader de bolsa. Cada panel mapea 1:1 a un concepto de mesa de trading y a un archivo/función que YA existe. Cero señales nuevas = cero hipótesis nuevas.
 

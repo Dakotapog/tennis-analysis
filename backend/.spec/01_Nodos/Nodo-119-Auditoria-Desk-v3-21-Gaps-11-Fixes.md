@@ -3,7 +3,7 @@ estado: activo
 ---
 # Nodo-119 — Auditoría Doctoral Desk v3: 21 Gaps → 11 Fixes + Hallazgos Críticos
 
-> **Wikilinks:** [[Nodo-109-Live-Trading-Desk-Dashboard]] | [[Nodo-114-Desk-Razonamiento-P8-MultiBook]] | [[Nodo-115-Desk-Interactivo-Incertidumbre-Visible]] | [[Nodo-116-Entierro-Dashboard-Vieja-AutoCombo-AntiFlood-P8-MultiCasa]] | [[Nodo-111-Dual-Book-Live-Intelligence]] | [[Nodo-98-Meta-Senal-Convergencia]] | [[Nodo-100B-Triple-Convergencia-Live]] | [[Nodo-101-Shadow-Book-Live-CLV]] | [[Nodo-110-Modo-Operador-Favoritos-Compuestos]] | [[Nodo-107-Riesgo-Agregado-Motor-Reconciliacion]] | [[Nodo-97-Live-Edge-Monitor]] | [[Nodo-86-Auditoria-Fable5]]
+> **Wikilinks:** [[Nodo-109-Live-Trading-Desk-Dashboard]] | [[Nodo-114-Desk-Razonamiento-P8-MultiBook]] | [[Nodo-115-Desk-Interactivo-Incertidumbre-Visible]] | [[Nodo-116-Entierro-Dashboard-Vieja-AutoCombo-AntiFlood-P8-MultiCasa]] | [[Nodo-111-Dual-Book-Live-Intelligence]] | [[Nodo-98-Meta-Senal-Convergencia]] | [[Nodo-100B-Triple-Convergencia-Live]] | [[Nodo-101-Shadow-Book-Live-CLV]] | [[Nodo-110-Modo-Operador-Favoritos-Compuestos]] | [[Nodo-107-Riesgo-Agregado-Motor-Reconciliacion]] | [[Nodo-97-Live-Edge-Monitor]] | [[Nodo-86-Auditoria-Fable5]] | [[Nodo-118-Match-Ledger-Crosswalk-Identidad-Fusion-Definitiva]]
 > **Fecha:** 2026-07-18 | **Autor:** Fable 5 (spec) / Sonnet 4.6 (implementación)
 > **Tesis:** Auditoría doctoral física del dashboard (curl :7780 → parse HTML → comparar vs spec) reveló 42 PASS y 21 FAIL. Esta sesión implementa 11 de los 21 gaps y documenta los 10 restantes como tasks trackables. Dos bugs estructurales descubiertos: P3 SIEMPRE VACÍO (campo erróneo) y P6 NUNCA PARSEABA (regex single-line vs output multi-línea).
 

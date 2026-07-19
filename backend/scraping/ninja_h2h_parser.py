@@ -1066,7 +1066,11 @@ class NinjaH2HExtractor:
 
         if within_budget:
             try:
-                asyncio.run(self._run_playwright_batch_async(within_budget))
+                loop = asyncio.new_event_loop()
+                try:
+                    loop.run_until_complete(self._run_playwright_batch_async(within_budget))
+                finally:
+                    loop.close()
             except Exception as e:
                 logger.error(f"   ❌ Playwright batch falló: {e} — procesando como no_data")
                 for entry in within_budget:

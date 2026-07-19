@@ -1,6 +1,6 @@
 # Nodo-86 — Auditoría Fable 5 del Proyecto Completo
 
-> **Wikilinks:** [[Nodo-51-Plan-Estrategico-Data-Layer-Torneo]] | [[Nodo-62-Signal-Bridge]] | [[Nodo-64-RFI-Return-From-Inactivity]] | [[Nodo-65-Convergencia-Multi-Senal-Patron-Combos]] | [[Nodo-72-Phantom-Identity-Guard]] | [[Nodo-74-Combo-Governor]] | [[Nodo-78-Protocolo-Auditoria]]
+> **Wikilinks:** [[Nodo-51-Plan-Estrategico-Data-Layer-Torneo]] | [[Nodo-62-Signal-Bridge]] | [[Nodo-64-RFI-Return-From-Inactivity]] | [[Nodo-65-Convergencia-Multi-Senal-Patron-Combos]] | [[Nodo-72-Phantom-Identity-Guard]] | [[Nodo-74-Combo-Governor]] | [[Nodo-78-Protocolo-Auditoria]] | [[Nodo-117-Auditoria-Scraping-Rankings-Cobertura-H2H]]
 > **Fecha:** 2026-07-11
 > **Estado:** DIAGNÓSTICO PURO — cero cambios de código aplicados. Cada fix se decide con el usuario, uno por uno.
 > **Documento completo:** `docs/auditorias/AUDITORIA_FABLE5_2026-07-11.md` (6 secciones, evidencia archivo:línea)

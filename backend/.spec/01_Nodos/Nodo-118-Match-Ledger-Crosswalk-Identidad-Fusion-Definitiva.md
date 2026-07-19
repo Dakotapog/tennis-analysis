@@ -3,7 +3,7 @@ estado: activo
 ---
 # Nodo-118 — MATCH LEDGER + CROSSWALK: la solución definitiva al problema de datos (no es scraping, es identidad)
 
-> **Wikilinks:** [[Nodo-117-Auditoria-Scraping-Rankings-Cobertura-H2H]] | [[Nodo-80-Kambi-Name-Matching]] | [[Nodo-82-Kambi-Match-ID-Structural]] | [[Nodo-51-Plan-Estrategico-Data-Layer-Torneo]] (player_registry) | [[Nodo-72-Phantom-Identity-Guard]] (phantom identity) | [[Nodo-48-FlashScore-Odds-Scraper-Testing]] | [[Nodo-110-Modo-Operador-Favoritos-Compuestos]] | [[Nodo-89-Sistema-Inteligencia-Integral]]
+> **Wikilinks:** [[Nodo-117-Auditoria-Scraping-Rankings-Cobertura-H2H]] | [[Nodo-80-Kambi-Name-Matching]] | [[Nodo-82-Kambi-Match-ID-Structural]] | [[Nodo-51-Plan-Estrategico-Data-Layer-Torneo]] | [[Nodo-72-Phantom-Identity-Guard]] | [[Nodo-48-FlashScore-Odds-Scraper-Testing]] | [[Nodo-89-Sistema-Inteligencia-Integral]] | [[Nodo-93-Sprint2-Implementado]] | [[Nodo-96-IRP-Individual-Return-Profile]] | [[Nodo-109-Live-Trading-Desk-Dashboard]] | [[Nodo-110-Modo-Operador-Favoritos-Compuestos]] | [[Nodo-119-Auditoria-Desk-v3-21-Gaps-11-Fixes]]
 > **Fecha:** 2026-07-18 | **Autor:** Fable 5 (análisis de raíz + spec) | **Implementa:** Sonnet, por fases, SIN presión de sprint
 > **Responde:** la pregunta de D117-03 (opciones 1/2/3) — la respuesta es **Opción 1, pero con la arquitectura correcta**: el merge no se hace adivinando nombres inline; se hace vía ledger + crosswalk persistente.
 
@@ -151,3 +151,39 @@ Nota D118-F3-03: 2026-07-08 con 232 cuarentena — ambos archivos son API (sin m
 ```
 
 **Criterio de éxito definitivo (medible, 7 días):** join de población con-cuotas ≥85% (día 1 post-bootstrap ≥60%); CERO partidos con cuotas invisibles (todos en ledger: unidos, cuarentena o single-source); el embudo impreso en cada run_daily; crosswalk creciendo (identidades día 7 > día 1). Cuando esto se cumpla, el problema de 3 años queda cerrado — no porque el scraping mejore, sino porque la identidad deja de perderse.
+
+---
+
+## §WIKILINKS COMPLETOS — 2026-07-18
+
+### Forward links desde Nodo-118 (12 total, 0 huérfanos)
+
+| Wikilink | Archivo .spec | Relación |
+|---|---|---|
+| [[Nodo-117-Auditoria-Scraping-Rankings-Cobertura-H2H]] | ✅ existe | D117-03 es la pregunta que responde este nodo |
+| [[Nodo-80-Kambi-Name-Matching]] | ✅ existe | Antecedente: primer intento de name-matching Kambi |
+| [[Nodo-82-Kambi-Match-ID-Structural]] | ✅ existe | Antecedente: análisis estructural de match_ids Kambi |
+| [[Nodo-51-Plan-Estrategico-Data-Layer-Torneo]] | ✅ existe | `player_registry.py` — entidad canónica que Nodo-118 extiende |
+| [[Nodo-72-Phantom-Identity-Guard]] | ✅ existe | Homónimos: regla de cuarentena cuando apellido+inicial ambiguos |
+| [[Nodo-48-FlashScore-Odds-Scraper-Testing]] | ✅ existe | FlashScore como fuente de match_ids (el shortcut score=100) |
+| [[Nodo-89-Sistema-Inteligencia-Integral]] | ✅ existe | Sprint base; pipeline arquitectura que el ledger integra |
+| [[Nodo-93-Sprint2-Implementado]] | ✅ existe | PlayerDB + Kambi integration — base del crosswalk |
+| [[Nodo-96-IRP-Individual-Return-Profile]] | ✅ existe | 4361 perfiles IRP — población canónica para bootstrap |
+| [[Nodo-109-Live-Trading-Desk-Dashboard]] | ✅ existe | Panel DATA (F5) vive en live_desk.py — dashboard consume ledger |
+| [[Nodo-110-Modo-Operador-Favoritos-Compuestos]] | ✅ existe | Operador lee ledger para RANKING_ONLY (single-source sin cuotas) |
+| [[Nodo-119-Auditoria-Desk-v3-21-Gaps-11-Fixes]] | ✅ existe | Auditoría que reveló panel DATA faltaba (gap #DATA) |
+
+### Back-links hacia Nodo-118 (nodos que referencian este)
+
+| Nodo que linkea | Relación |
+|---|---|
+| [[Nodo-117-Auditoria-Scraping-Rankings-Cobertura-H2H]] | D117-03 derivó en este nodo — forward ref en §Decisiones |
+| [[Nodo-109-Live-Trading-Desk-Dashboard]] | Panel DATA (back-link añadido 2026-07-18) |
+| [[Nodo-119-Auditoria-Desk-v3-21-Gaps-11-Fixes]] | Gap DATA → F5 implementado (back-link añadido 2026-07-18) |
+
+### Huérfanos operacionales (no son links de spec — son gates de hipótesis)
+
+- **H118-F5:** Gate join ≥85% en ≥5/7 días consecutivos — acumulando desde 2026-07-18. No es un Nodo spec; es una hipótesis en `validation/preregistered_hypotheses.json`.
+- **`data/player_crosswalk.json`:** Artefacto de datos (no spec). Crece automáticamente con cada `fusionar_dia()`.
+- **`data/join_quarantine_FECHA.json`:** Artefacto operacional — revisión humana via `scripts/resolve_quarantine.py`.
+- **`scripts/resolve_quarantine.py`:** CLI de resolución manual — pendiente implementar (bajo demanda, no urgente hasta que haya cuarentenas > 10/día).

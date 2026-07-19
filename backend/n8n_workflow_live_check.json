@@ -1,0 +1,146 @@
+{
+  "name": "Tennis Live Edge Monitor",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 2
+            }
+          ]
+        }
+      },
+      "id": "b2c3d4e5-0001-0001-0001-000000000011",
+      "name": "Cada 2 minutos",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://host.docker.internal:8765/live-check",
+        "options": {
+          "timeout": 70000,
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "b2c3d4e5-0002-0002-0002-000000000012",
+      "name": "Live Edge Check",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [460, 300],
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "cond-live-1",
+              "leftValue": "={{ $json.ok }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "b2c3d4e5-0003-0003-0003-000000000013",
+      "name": "Exito?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Rama TRUE: loguear resultado\nconst data = $input.first().json;\nconst ts = new Date().toISOString();\nconst n = data.n_triggers || 0;\nif (n > 0) {\n  console.log(`[${ts}] LIVE EDGE TRIGGER n=${n}`);\n} else {\n  console.log(`[${ts}] live-check OK — sin triggers`);\n}\nreturn $input.all();"
+      },
+      "id": "b2c3d4e5-0004-0004-0004-000000000014",
+      "name": "Log OK",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 200]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Rama FALSE / error: loguear fallo\nconst data = $input.first().json;\nconst ts = new Date().toISOString();\nconst msg = data.error || data.output || JSON.stringify(data);\nconsole.error(`[${ts}] ERROR live-check: ${msg}`);\nreturn [{ json: { ts, error: msg, workflow: 'Tennis Live Edge Monitor' } }];"
+      },
+      "id": "b2c3d4e5-0005-0005-0005-000000000015",
+      "name": "Log Error",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 420]
+    }
+  ],
+  "connections": {
+    "Cada 2 minutos": {
+      "main": [
+        [
+          {
+            "node": "Live Edge Check",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Live Edge Check": {
+      "main": [
+        [
+          {
+            "node": "Exito?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Exito?": {
+      "main": [
+        [
+          {
+            "node": "Log OK",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": ""
+  },
+  "tags": ["tennis", "live-edge", "automation", "nodo-97"]
+}

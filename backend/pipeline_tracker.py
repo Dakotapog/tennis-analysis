@@ -898,6 +898,95 @@ def seccion_27_8_shadow(out: list, desde: str = None, hasta: str = None) -> None
         out.append(f"  [S-27-8] Error al cargar shadow book: {e}")
 
 
+def seccion_convergencia(out: list) -> None:
+    """
+    S-27-9 — Meta-Señal Convergencia (Nodo-98, D99-03).
+    READ-ONLY: lee edge_reports y meta_signal files.
+    Muestra: score_directo distribution, picks>=3, direccion_meta, CLV live vs pregame.
+    """
+    _h = _header("S-27-9  META-SENAL CONVERGENCIA (Nodo-98)")
+    out.append(_h)
+
+    # ── Leer edge_reports (últimos 7 días) ───────────────────────────────────
+    files = sorted(glob.glob(str(Path("reports") / "edge_report_*.json")), reverse=True)[:7]
+
+    todos_picks = []
+    for fpath in files:
+        try:
+            with open(fpath, encoding="utf-8") as f:
+                rep = json.load(f)
+            for seg in ("apostar", "watchlist"):
+                todos_picks.extend(rep.get(seg, []))
+        except Exception:
+            continue
+
+    picks_con_score = [p for p in todos_picks if "score_directo" in p]
+
+    if not picks_con_score:
+        out.append("  Sin picks con score_directo en edge_reports recientes.")
+        out.append("  Correr run_daily.py o edge_calculator.py para generar datos.")
+        out.append("")
+        return
+
+    # ── Distribución score_directo ───────────────────────────────────────────
+    from collections import Counter
+    dist = Counter(p.get("score_directo", 0) for p in picks_con_score)
+    total = len(picks_con_score)
+
+    out.append(f"  Picks analizados (ultimos 7 edge_reports): {total}")
+    out.append("")
+    out.append("  score_directo  | n    | %")
+    out.append("  " + "-" * 34)
+    for sc in sorted(dist.keys(), reverse=True):
+        n   = dist[sc]
+        pct = n / total * 100
+        bar = "#" * int(pct / 5)
+        marker = " <-- H98-01 GATE" if sc >= 3 else ""
+        out.append(f"  {sc:>13}  | {n:>4} | {pct:5.1f}%  {bar}{marker}")
+    out.append("")
+
+    # ── Picks con score >= 3 (H98-01) ────────────────────────────────────────
+    picks_gate = [p for p in picks_con_score if (p.get("score_directo") or 0) >= 3]
+    out.append(f"  Picks score>=3 (H98-01 gate): {len(picks_gate)} / {total} "
+               f"({len(picks_gate)/total*100:.1f}%)")
+    out.append("")
+
+    # ── direccion_meta breakdown ──────────────────────────────────────────────
+    dir_dist = Counter(p.get("direccion_meta", "N/A") for p in picks_con_score)
+    out.append("  direccion_meta  | n    | %")
+    out.append("  " + "-" * 32)
+    for d in ("FAVORITO", "RIVAL", "SPLIT", "N/A"):
+        if d in dir_dist:
+            n   = dir_dist[d]
+            pct = n / total * 100
+            out.append(f"  {d:<15} | {n:>4} | {pct:5.1f}%")
+    out.append("")
+
+    # ── Rival Value flag ─────────────────────────────────────────────────────
+    n_rv = sum(1 for p in picks_con_score if p.get("rival_value_delegado_h8801"))
+    out.append(f"  Rival Value delegados (H88-01): {n_rv} picks")
+    out.append(f"  Note: Rival Value NO genera stake propio — delega a rival_value_betslip.py")
+    out.append("")
+
+    # ── Meta-signal reports recientes ─────────────────────────────────────────
+    ms_files = sorted(glob.glob(str(Path("reports") / "meta_signal_*.json")), reverse=True)[:3]
+    if ms_files:
+        out.append(f"  Meta-signal reports recientes ({len(ms_files)}):")
+        for mf in ms_files:
+            try:
+                with open(mf, encoding="utf-8") as f:
+                    ms = json.load(f)
+                ts  = ms.get("ts", "?")[:16]
+                n3  = len(ms.get("picks_score_directo_3plus", []))
+                nsp = len(ms.get("picks_split", []))
+                out.append(f"    {Path(mf).name}: ts={ts} | score>=3: {n3} | SPLIT: {nsp}")
+            except Exception:
+                out.append(f"    {Path(mf).name}: (error al leer)")
+    else:
+        out.append("  Sin meta_signal_*.json — correr: python3 scripts/meta_signal_scorer.py")
+    out.append("")
+
+
 def parse_args():
     parser = argparse.ArgumentParser(
         description="Pipeline Tracker & Observabilidad — Nodo-27 (READ-ONLY)"
@@ -913,8 +1002,9 @@ def parse_args():
     )
     parser.add_argument(
         "--section", type=str, default=None,
-        choices=["confianza", "cuotas", "tiers", "senales", "calibracion", "drift", "portfolio", "games", "shadow"],
-        help="Solo una seccion (shadow = S-27-8 Shadow Book CLV, Nodo-52)"
+        choices=["confianza", "cuotas", "tiers", "senales", "calibracion", "drift",
+                 "portfolio", "games", "shadow", "convergencia"],
+        help="Solo una seccion (shadow = S-27-8, convergencia = S-27-9 Meta-Señal Nodo-98)"
     )
     parser.add_argument(
         "--save", action="store_true",
@@ -990,6 +1080,9 @@ def main():
     if section is None or section == "shadow":
         since_str = str(since) if since else None
         seccion_27_8_shadow(out, desde=since_str)
+
+    if section is None or section == "convergencia":
+        seccion_convergencia(out)
 
     out.append("")
     out.append("=" * 72)

@@ -54,30 +54,34 @@ def _match_stake(jugador: str, trader_plan: dict) -> dict:
     Busca el stake Kelly para un jugador en trader_plan["individuales"].
     Match 3-tier: exact → surname-only → substring ≥4 chars.
     Retorna {"stake": N, "retorno_potencial": N}.
+
+    B108-03: normalización delegada a core.player_registry.normalize_player_name
+    (fuente canónica — maneja diacríticos, guiones, acentos).
     """
+    from core.player_registry import normalize_player_name as _norm
     individuales = trader_plan.get("individuales", [])
     if not individuales:
         return {"stake": 0, "retorno_potencial": 0}
 
-    jugador_lower = jugador.lower().strip()
-    jugador_parts = jugador_lower.split()
+    jugador_norm = _norm(jugador)
+    jugador_parts = jugador_norm.split()
     apellido = jugador_parts[-1] if jugador_parts else ""
 
-    # Tier 1: exact match
+    # Tier 1: exact match normalizado
     for ind in individuales:
-        if ind.get("favorito", "").lower().strip() == jugador_lower:
+        if _norm(ind.get("favorito", "")) == jugador_norm:
             return {"stake": ind.get("stake", 0), "retorno_potencial": ind.get("retorno_potencial", 0)}
 
-    # Tier 2: surname match
+    # Tier 2: surname match normalizado
     for ind in individuales:
-        fav = ind.get("favorito", "").lower()
-        if apellido and apellido in fav.split():
+        fav_norm = _norm(ind.get("favorito", ""))
+        if apellido and apellido in fav_norm.split():
             return {"stake": ind.get("stake", 0), "retorno_potencial": ind.get("retorno_potencial", 0)}
 
-    # Tier 3: substring ≥4 chars
+    # Tier 3: substring ≥4 chars normalizado
     for ind in individuales:
-        fav = ind.get("favorito", "").lower()
-        if apellido and len(apellido) >= 4 and apellido in fav:
+        fav_norm = _norm(ind.get("favorito", ""))
+        if apellido and len(apellido) >= 4 and apellido in fav_norm:
             return {"stake": ind.get("stake", 0), "retorno_potencial": ind.get("retorno_potencial", 0)}
 
     return {"stake": 0, "retorno_potencial": 0}
@@ -438,6 +442,45 @@ def registrar(bookmarklet_json: str):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
+# C4 Nodo-67: resolución match_id desde edge_reports (persistir el mapa)
+# ══════════════════════════════════════════════════════════════════════════════
+
+def _resolve_match_id_from_edge(partido: str, jugador: str) -> str:
+    """
+    C4 Nodo-67: cuando match_id está vacío en cerrar(), busca en todos los
+    edge_reports (últimos 7 días) por partido o jugador para recuperar match_id.
+    Retorna '' si no encuentra.
+    """
+    import glob as _g
+    from datetime import timedelta
+    cutoff = (datetime.now() - timedelta(days=7)).timestamp()
+    files = sorted(
+        [p for p in _g.glob(str(REPORTS_DIR / "edge_report_*.json"))
+         if Path(p).stat().st_mtime >= cutoff],
+        reverse=True,
+    )
+    partido_lower = (partido or "").lower()
+    jugador_lower = (jugador or "").lower().split()[0]  # apellido/primer token
+
+    for fpath in files:
+        try:
+            data = json.loads(Path(fpath).read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        for section in ("apostar", "watchlist", "sin_edge", "sin_datos"):
+            for pick in data.get(section, []):
+                mid = pick.get("match_id", "")
+                if not mid:
+                    continue
+                p_lower = (pick.get("partido", "")).lower()
+                if partido_lower and partido_lower in p_lower:
+                    return mid
+                if jugador_lower and jugador_lower in p_lower:
+                    return mid
+    return ""
+
+
+# ══════════════════════════════════════════════════════════════════════════════
 # MODO 2 — Cerrar sesión post-partido
 # ══════════════════════════════════════════════════════════════════════════════
 
@@ -493,6 +536,14 @@ def cerrar(archivo: Optional[str] = None):
                 continue
 
             match_id = pick.get("match_id", "")
+            # C4 Nodo-67: resolver match_id desde edge_reports si está vacío
+            if not match_id:
+                match_id = _resolve_match_id_from_edge(
+                    pick.get("partido", ""), pick.get("jugador", "")
+                )
+                if match_id:
+                    pick["match_id"] = match_id  # persistir en el pick
+                    logger.info(f"   [C4] match_id resuelto desde edge_report: {match_id}")
             resultado = _obtener_resultado(match_id)
             status = resultado.get("status")
 

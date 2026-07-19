@@ -90,3 +90,7 @@ Ciclo 3 (14:09): Boogaard drift=13.5% → ya fired=True → sin re-disparo
 3. `test_recovery_cancela_break_posible` — drift 18% → drift 8% → NORMAL
 4. `test_no_refire_si_fired_true` — CONFIRMADO + fired=True → sin combo
 5. `test_dashboard_html_contiene_campos_clave` — HTML generado tiene tabla + auto-refresh
+
+---
+
+> **ADDENDUM 2026-07-18 (Nodo-116):** Dashboard HTML SUPERSEDED por [[Nodo-109]]/[[Nodo-114]]/[[Nodo-115]] — auto-combo migrado con anti-flood en [[Nodo-116-Entierro-Dashboard-Vieja-AutoCombo-AntiFlood-P8-MultiCasa]]. `/live-dashboard` → HTTP 301 → `:7780/`. Output combo: `reports/combos_live/YYYY-MM-DD/` (CERO Desktop).

@@ -259,6 +259,40 @@ no lo tenía. Sin evidencia histórica de impacto, pero gap real en sistema desa
 
 ---
 
+## O-01 — Sobre-stake 16.7× por agregación ciega de combos (2026-06-26, registrado 2026-07-17)
+
+**Qué pasó:** 7 combos con piernas compartidas sumaron $83,500 desplegados contra un budget de sesión de $5,000 (1670%) — detectado retroactivamente por combo_governor 2026-07-13. Ninguna estrategia individual violó sus propios límites; nadie sumaba el total ni la concentración por jugador.
+
+**Causa raíz:** control de riesgo per-estrategia sin control agregado cross-estrategia (governor READ-ONLY + cobertura 10/12 + sin dimensión por-jugador).
+
+**Regla derivada:** REGLA-O1: ningún peso se despliega sin pasar por el agregado del governor (12/12 estrategias + cap 5% bankroll por jugador). Ver [[Nodo-107-Riesgo-Agregado-Motor-Reconciliacion]].
+
+---
+
+## D110-01 — LEG_MIN_CUOTA=1.15 para piernas de combo (2026-07-17, Nodo-110)
+
+**Decisión:** REGLA-HF-1 (cuota<1.50 nunca en pool) aplica exclusivamente a SINGLES en el pool del trader. Las piernas de combos tienen su propio piso `LEG_MIN_CUOTA=1.15`. No es relajación de HF-1: es codificar lo que D87-08 ya practica (piernas VARIABLE @1.18-1.35 en combos de confianza) y lo que el operador validó con $27,500 reales.
+
+**Alternativas consideradas:** (a) Mantener HF-1 para combos — rechazado: deja fuera el patrón ganador validado con 8/8 hits reales. (b) Bajar HF-1 globalmente — rechazado: KGR=-0.5085 de heavy-fav como SINGLE sigue siendo válido.
+
+**Por qué esta:** HF-1 nació del KGR de heavy-fav **como apuesta individual** (-0.5085). Una pierna @1.20 en un combo de 4 piernas es un instrumento diferente — su contribución al EV del combo puede ser positiva aunque su Kelly individual sea 0. La evidencia del operador (10 combos, 8/8 hits, cuotas pierna [1.15,2.48]) cierra el debate empíricamente.
+
+**Scope:** Solo aplica a `favoritos_combo_builder.py` (estrategia #13 FAVORITOS_COMPUESTOS). Cualquier extensión a otros builders requiere decisión nueva.
+
+**Cuándo revisitar:** Si H110-01 llega a n=30 con hit% combo < 15% (kill-switch) → auditoría inmediata. PROHIBIDO escalar stake >$650 antes de graduación.
+
+---
+
+## B108-05 — OddsAggregator Kambi: resultado curl session (2026-07-17)
+
+**Hallazgo:** Endpoints betcris/luckia/sportium/wplay/rushbet retornan HTTP 429 (Too Many Requests) desde WSL. Betplay retorna HTTP 200 con 101 eventos. Conclusión: la arquitectura Kambi es idéntica en todas las casas (mismo offering-api.kambicdn.com, mismo schema `listView/tennis.json`), pero Kambi aplica rate-limiting por IP de datacenter — solo IPs residenciales CO pasan.
+
+**Acción derivada (D89-09 archivada con evidencia):** El refactor `fetch_kambi_outcomes(offering='betplay')` es arquitecturalmente correcto. Verificación definitiva: abrir DevTools en Chrome Windows con betcris.com cargado → Network tab → filtrar `kambi` → confirmar offering key real. NO codificar el cliente multi-casa sin ese dato — la estructura de URL ya está validada, solo falta el offering key exacto.
+
+**PROHIBIDO:** hacer scraping de estos endpoints en producción sin confirmar el offering key real desde Windows DevTools.
+
+---
+
 ## Plantilla para nuevas decisiones
 
 ```

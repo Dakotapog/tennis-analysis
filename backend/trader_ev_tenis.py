@@ -52,6 +52,10 @@ CAPA2_CAP_POR_TIER = {
 }
 CAPA2_STAKE_FACTOR = 0.25  # stake = 25% del sizing normal
 
+# S107-E (D107-05): MOTOR_DEFENSIVE — stakes individuales × 0.5 mientras ROI < 0 con n<30
+# Reversible: cambiar a False cuando H107-01 gradúe (MOTOR_cuota<=2.5 ROI >= breakeven)
+MOTOR_DEFENSIVE = True
+
 # Nodo-79: MIN_BET proporcional por tier — MODO SOMBRA (no afecta stake real)
 # Activar en real solo cuando H54-01 gradúe (n≥30, hit% flattened ≥ hit% financiado)
 _MIN_BET_BY_TIER = {
@@ -523,6 +527,9 @@ def _print_individuales(senales: list, bankroll: float, budget: float,
         # D87-03 (Nodo-87): kelly=0 (EV<=0 bajo p_blend) o budget agotado => stake 0.
         # El floor anterior forzaba $MIN_BET incluso con EV negativo o sobre el budget.
         stake         = 0 if (kelly <= 0 or capped_stake <= 0) else max(MIN_BET, rounded_stake)
+        # S107-E D107-05: defensive sizing mientras MOTOR ROI < 0 (H107-01 acumulando)
+        if MOTOR_DEFENSIVE and stake > 0:
+            stake = max(MIN_BET, round(stake * 0.5 / MIN_BET) * MIN_BET)
         ev_ind  = _ev(p_b, cuota)
         retorno = round(stake * cuota, 0)
 
@@ -550,10 +557,22 @@ def _print_individuales(senales: list, bankroll: float, budget: float,
         _svi = s.get('pi_svi_surface')
         _bracket = s.get('pi_rank_gap_bracket')
         _pi_n = s.get('pi_n_total')
+        _prs3 = s.get('pi_prs_three_set')
+        _prsu = s.get('pi_prs_underdog')
+        _cfs = s.get('pi_cfs')
+        _mqi = s.get('pi_mqi')
         if _rg is not None:
             _pi_parts.append(f"RankGap({_bracket})={_rg:.0%}")
         if _svi is not None:
             _pi_parts.append(f"SVI={_svi:.0%}")
+        if _cfs is not None:
+            _pi_parts.append(f"CFS={_cfs:.0%}")
+        if _prs3 is not None:
+            _pi_parts.append(f"PRS3s={_prs3:.0%}")
+        if _prsu is not None:
+            _pi_parts.append(f"PRSund={_prsu:.0%}")
+        if _mqi is not None:
+            _pi_parts.append(f"MQI={_mqi:.0f}")
         if _pi_n is not None:
             _pi_parts.append(f"n={_pi_n}")
         _kambi = s.get('kambi_disponible')
@@ -1275,6 +1294,8 @@ def main():
         # Imprimir plan final ajustado
         print()
         print(f"  ┌─ STAKES FINALES (VaR AJUSTADO ×{fv:.2f}) " + "─" * 27)
+        if MOTOR_DEFENSIVE:
+            print(f"  │  [MOTOR_DEFENSIVE] Stakes individuales ×0.5 — H107-01 acumulando (ROI Motor <0, n<30)")
         print(f"  │")
         if senales_enriched:
             print(f"  │  INDIVIDUALES:")

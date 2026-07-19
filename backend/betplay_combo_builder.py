@@ -337,26 +337,29 @@ def build_combo_links(trader_plan: Dict, min_piernas: int = 2) -> List[Dict]:
 # CHROME .BAT — Archivos en escritorio que abren Chrome con cada combo
 # ══════════════════════════════════════════════════════════════════════════════
 
-def generar_bat_chrome(combo_links: List[Dict]) -> int:
+def generar_bat_chrome(combo_links: List[Dict], output_dir: Optional[Path] = None) -> int:
     """
-    Genera Combo1.bat ... ComboN.bat en el escritorio de Windows.
-    Cada .bat abre Chrome con un HTML de redirección que preserva los |
-    en la URL de Betplay (cmd.exe rompe | en línea de comandos).
+    Genera Combo1.bat ... ComboN.bat.
+    Si output_dir es None → escribe en DESKTOP_WIN/COMBOS_DIR (modo normal).
+    Si output_dir se provee → escribe ahí (modo --live anti-flood D116-01, CERO Desktop).
 
     Returns:
         Cantidad de .bat generados.
     """
-    COMBOS_DIR.mkdir(exist_ok=True)
+    dest_bats  = output_dir if output_dir else DESKTOP_WIN
+    dest_html  = output_dir if output_dir else COMBOS_DIR
+    dest_html.mkdir(parents=True, exist_ok=True)
 
-    # Limpiar sesión anterior: borrar Combo*.bat y combo*.html huérfanos
-    # Los .bat son efímeros — solo válidos para la sesión activa.
-    # Sin limpieza, combos de días anteriores acumulan en el escritorio
-    # y pueden abrirse accidentalmente con picks ya jugados.
-    for old_bat in DESKTOP_WIN.glob("Combo*.bat"):
-        old_bat.unlink(missing_ok=True)
-    for old_html in COMBOS_DIR.glob("combo*.html"):
-        old_html.unlink(missing_ok=True)
-    logger.info("🧹 Escritorio limpio — combos anteriores eliminados")
+    if not output_dir:
+        # Limpiar sesión anterior: borrar Combo*.bat y combo*.html huérfanos
+        # Los .bat son efímeros — solo válidos para la sesión activa.
+        # Sin limpieza, combos de días anteriores acumulan en el escritorio
+        # y pueden abrirse accidentalmente con picks ya jugados.
+        for old_bat in DESKTOP_WIN.glob("Combo*.bat"):
+            old_bat.unlink(missing_ok=True)
+        for old_html in COMBOS_DIR.glob("combo*.html"):
+            old_html.unlink(missing_ok=True)
+        logger.info("Escritorio limpio — combos anteriores eliminados")
 
     valid = [c for c in combo_links if c["url"]]
     if not valid:
@@ -375,16 +378,16 @@ def generar_bat_chrome(combo_links: List[Dict]) -> int:
             f"<p>Redirigiendo a Betplay... Combo {idx}: {legs_str}</p>\n"
             f"</body></html>"
         )
-        html_path = COMBOS_DIR / f"combo{idx}.html"
+        html_path = dest_html / f"combo{idx}.html"
         html_path.write_text(html_content, encoding="utf-8")
 
         # .bat que abre Chrome con el HTML local
-        html_win_path = f"C:\\users\\hogar\\Desktop\\combos\\combo{idx}.html"
+        html_win_path = str(html_path).replace("/mnt/c/", "C:\\").replace("/", "\\")
         bat_content = (
             f"@echo off\r\n"
             f'start "" "{CHROME_WIN}" "file:///{html_win_path}"\r\n'
         )
-        bat_path = DESKTOP_WIN / f"Combo{idx}.bat"
+        bat_path = dest_bats / f"Combo{idx}.bat"
         bat_path.write_text(bat_content, encoding="utf-8")
 
         logger.info(f"  📄 Combo{idx}.bat — {legs_str}")
@@ -1745,8 +1748,8 @@ def build_games_combos(stake_per_combo: int = 2000,
         for s in legs:
             cuota_combo *= s["cuota"]
         retorno = round(effective_stake * cuota_combo)
-        ids_str = "|".join(str(oid) for oid in outcome_ids)
-        url = f"{REDIRECT_BASE}{ids_str}"
+        ids_str = ",".join(str(oid) for oid in outcome_ids)
+        url = f"{BETPLAY_URL_BASE}{ids_str}{BETPLAY_URL_TAIL}"
         return {
             "combo_idx": idx,
             "label": label,
@@ -2010,7 +2013,8 @@ def build_live_combos(piernas_min: int = 3, piernas_max: int = 4,
                       top_n: int = 4, min_cuota: float = 1.50,
                       edge_file: Optional[str] = None,
                       strategy: str = "balanced",
-                      max_age_h: float = PLAN_MAX_AGE_H) -> tuple[List[Dict], Dict]:
+                      max_age_h: float = PLAN_MAX_AGE_H,
+                      override_stake: float = 0) -> tuple[List[Dict], Dict]:
     """
     Lee cobertura de TODOS los trader_plans del día, verifica disponibilidad
     en Kambi en tiempo real, y conserva stakes originales del trader.
@@ -2117,6 +2121,13 @@ def build_live_combos(piernas_min: int = 3, piernas_max: int = 4,
 
     # 4. Filtrar combos válidos (con URL)
     valid_combos = [c for c in combo_links if c.get("url")]
+
+    # 4b. override_stake: si picks tienen stake=0 pero están en Kambi, asignar stake manual
+    if override_stake > 0:
+        for c in valid_combos:
+            if c.get("stake", 0) == 0:
+                c["stake"] = override_stake
+                c["retorno"] = round(override_stake * c.get("cuota_combo", 1), 0)
 
     metadata = {
         "bankroll":          total_bankroll,
@@ -2919,7 +2930,40 @@ def main():
                         help="Solo mostrar, no generar archivos")
     parser.add_argument("--bankroll", type=float, default=0,
                         help="Nodo-26 M-26-2: bankroll para Circuit Breaker (default: auto desde trader_plan)")
+    parser.add_argument("--live-stake", type=float, default=0,
+                        help="Stake manual por combo cuando picks tienen stake=0 en Kambi (ITF sin verificación trader)")
+    parser.add_argument("--override-governor", action="store_true",
+                        help="Omitir bloqueo del governor (D107-04) — queda logueado en combo_governor.log")
+    parser.add_argument("--output-dir", default=None,
+                        help="D116-01: directorio destino para .bat/.html (sobrescribe Desktop). "
+                             "Uso: --live --output-dir reports/combos_live/YYYY-MM-DD/")
     args = parser.parse_args()
+
+    # ── Governor soft-veto (S107-D D107-04) ────────────────────────────────
+    _bankroll_gov = args.bankroll if args.bankroll > 0 else _find_bankroll_from_plans()
+    if _bankroll_gov > 0:
+        import subprocess as _sp
+        _gov = _sp.run(
+            [sys.executable, str(Path(__file__).parent / 'combo_governor.py'),
+             '--bankroll', str(_bankroll_gov)],
+            capture_output=True, text=True
+        )
+        if _gov.returncode != 0:
+            _nivel = 'WARN' if _gov.returncode == 1 else 'BLOCK'
+            print(_gov.stdout)
+            print(f"[betplay_combo_builder] Governor [{_nivel}] — presupuesto comprometido.")
+            if args.override_governor:
+                from datetime import datetime as _dt
+                _lp = Path(__file__).parent / 'logs' / 'combo_governor.log'
+                _lp.parent.mkdir(exist_ok=True)
+                _lp.open('a').write(
+                    f"[{_dt.now().strftime('%Y-%m-%d %H:%M')}] OVERRIDE por betplay_combo_builder nivel={_nivel}\n"
+                )
+                print("[betplay_combo_builder] --override-governor activo — continuando. Override logueado.")
+            else:
+                print("[betplay_combo_builder] Para continuar: agregar --override-governor")
+                print("[betplay_combo_builder] Para reducir: ver orden de corte arriba.")
+                sys.exit(_gov.returncode)
 
     # ── Nodo-26 M-26-2/4: Session Budget + Meta-Markov ──────────────────────
     _bankroll = args.bankroll if args.bankroll > 0 else _find_bankroll_from_plans()
@@ -2948,6 +2992,7 @@ def main():
             edge_file=args.edge_file,
             strategy=args.strategy,
             max_age_h=args.max_plan_age_h,
+            override_stake=args.live_stake,
         )
         if not combo_links:
             sys.exit(1)
@@ -2961,10 +3006,12 @@ def main():
             mostrar_consola(combo_links)
             return
 
-        n = generar_bat_chrome(combo_links)
+        _out_dir = Path(args.output_dir) if args.output_dir else None
+        n = generar_bat_chrome(combo_links, output_dir=_out_dir)
         if n:
-            print(f"\n  🎯 {n} archivos Combo*.bat en tu escritorio")
-            print("  Flujo: borra ticket (X) → doble clic .bat → Chrome → stake → apostar")
+            dest_label = str(_out_dir) if _out_dir else "escritorio"
+            print(f"\n  {n} archivos Combo*.bat en {dest_label}")
+            print("  Flujo: borra ticket (X) -> doble clic .bat -> Chrome -> stake -> apostar")
 
         if args.telegram:
             ok = enviar_combos_telegram(combo_links, metadata)

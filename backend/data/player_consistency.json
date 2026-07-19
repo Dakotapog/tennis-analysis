@@ -1,0 +1,10741 @@
+{
+  "Marilouise Van Zyl": {
+    "n": 2,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_HOT": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Niklas Waldner": {
+    "n": 2,
+    "wins": 1,
+    "hit_pct": 0.5,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      },
+      "MRK_COLD": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      },
+      "EDGE_HIGH": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      }
+    }
+  },
+  "Bryce Nakashima": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_HOT"
+    ],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Krystyna Pochtovyk": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Maria Timofeeva": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_HOT"
+    ],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Leolia Jeanjean": {
+    "n": 3,
+    "wins": 1,
+    "hit_pct": 0.333,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MID_TIER": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "clay": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 3,
+        "wins": 1,
+        "hit_pct": 0.333
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "STRONG": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      },
+      "EDGE_MED": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      }
+    }
+  },
+  "Kyrian Jacquet": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Dalila Jakupovic": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Ty Host": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Matteo Berrettini": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_HOT"
+    ],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Haruka Kaji": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Boris Butulija": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Matisse Bobichon": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_NEUTRAL"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Emma Ottavia Ghirardato": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Frances Tiafoe": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_HOT",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Kimmer Coppejans": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "A. Dudeney/Mingge Xu": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Kelly Keller": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Alex Martinez": {
+    "n": 2,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Cadence Brace": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Angela Ho": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Jacob Brumm": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Midori Castillo Meza": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Mei Yamaguchi": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Anna Kubareva": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Hugo Grenier": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Annabelle Xu": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Felipe Meligeni Rodrigues Alves": {
+    "n": 2,
+    "wins": 1,
+    "hit_pct": 0.5,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Aziz Ouakaa": {
+    "n": 3,
+    "wins": 1,
+    "hit_pct": 0.333,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 3,
+        "wins": 1,
+        "hit_pct": 0.333
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 3,
+        "wins": 1,
+        "hit_pct": 0.333
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_HOT": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Maria Sara Popa": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Claire Liu": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Michael Zheng": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Roman Safiullin": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH"
+    ],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Zozaya Menendez,": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Ruth Roura Llaverias": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Tatum Evans": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Jack Kennedy": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Amelie Smejkalova": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Esther Lopez Alcaraz": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Braden Shick": {
+    "n": 2,
+    "wins": 1,
+    "hit_pct": 0.5,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "grass": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "EDGE_MED": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      },
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Han Shi": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Matic Kriznik": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Alexandra Eala": {
+    "n": 2,
+    "wins": 2,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_NEUTRAL"
+    ],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Pieter de Lange": {
+    "n": 4,
+    "wins": 2,
+    "hit_pct": 0.5,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 4,
+        "wins": 2,
+        "hit_pct": 0.5
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 4,
+        "wins": 2,
+        "hit_pct": 0.5
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 4,
+        "wins": 2,
+        "hit_pct": 0.5
+      },
+      "EDGE_MED": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Anna Petkovic": {
+    "n": 2,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Alice Tubello": {
+    "n": 2,
+    "wins": 2,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_NEUTRAL"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Anja Stankovic": {
+    "n": 2,
+    "wins": 2,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_HOT"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Irem Kurt": {
+    "n": 2,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Flavio Cobolli": {
+    "n": 2,
+    "wins": 2,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_NEUTRAL"
+    ],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Liudmila Samsonova": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Emma Navarro": {
+    "n": 2,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Yasmine Kabbaj": {
+    "n": 2,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Carmen Andreea Herea": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Noah Zamora": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Pia Lovric": {
+    "n": 2,
+    "wins": 2,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_NEUTRAL",
+      "rival_COLD"
+    ],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      },
+      "rival_COLD": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Marie Bouzkova": {
+    "n": 2,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Boyden M.": {
+    "n": 2,
+    "wins": 2,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_COLD"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_COLD": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Nilsson L.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Andreeva E.": {
+    "n": 2,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Guillaume Dalmasso": {
+    "n": 2,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Katarzyna Kawa": {
+    "n": 2,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Carles Rojas": {
+    "n": 2,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Facundo Pereyra": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Alan Magadan": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Lea Nilsson": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Garrett Johns": {
+    "n": 3,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 3,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Hiroki Moriya": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Herman Hoeyeraal": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_HOT",
+      "rival_COLD"
+    ],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Maks Kasnikowski": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_NEUTRAL"
+    ],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Van Der Meerschen M.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Radulov I.": {
+    "n": 2,
+    "wins": 1,
+    "hit_pct": 0.5,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "rival_COLD"
+    ],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Dev S D P.": {
+    "n": 2,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Brady P.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_COLD"
+    ],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Matias Reyniak": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Nastasja Schunk": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Liam Krall": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Laura Pigossi": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Clara Burel": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_HOT"
+    ],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Michele Mecarelli": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_COLD"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Michael Savano": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Kajsa Rinaldo Persson": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_NEUTRAL",
+      "rival_COLD"
+    ],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Oleg Prihodko": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Federica Urgesi": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Stefan Horia Haita": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Tsung-Hao Huang": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Jordan Hasson": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Xiang Liu": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Jim Hendrikx": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Martins Rocens": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_NEUTRAL",
+      "rival_COLD"
+    ],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Ludovico Vaccari": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Zhibek Kulambayeva": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Marcel Kamrowski": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Nicolas Bruna": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_NEUTRAL"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Karl Lee": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Daniel Rincon": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Patrick Brady": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Pedro Martinez": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Alejandro Hernandez": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Sadjo Coulibaly": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Emilien Demanet": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Jack Loge": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_NEUTRAL"
+    ],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Sandro Kopp": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Max Schoenhaus": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Max Hans Rehberg": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_NEUTRAL"
+    ],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Yi Zhou": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_NEUTRAL"
+    ],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Clement Chidekh": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_NEUTRAL"
+    ],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Lui Maxted": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Lautaro Midon": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_NEUTRAL"
+    ],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Zsombor Piros": {
+    "n": 2,
+    "wins": 2,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_HOT",
+      "MRK_NEUTRAL"
+    ],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Michele Ribecai": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Francesco Passaro": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Mackenzie McDonald": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_NEUTRAL"
+    ],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Tristan Schoolkate": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Liam Broady": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Adrian Mannarino": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_NEUTRAL"
+    ],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Daniil Glinka": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Eduardo Ribeiro": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Matias Soto": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Juan Pablo Varillas": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Morris A.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Kadiri Hassani Y.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Spencer A.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_HOT"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Foshee I.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Kozlov S.": {
+    "n": 2,
+    "wins": 2,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_NEUTRAL",
+      "rival_COLD"
+    ],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      },
+      "rival_COLD": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Gowda T.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Frusina A.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Hayu Kinoshita": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Monika Ekstrand": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Joshua Peck": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Murray F.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Cross K.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Zantedeschi A.": {
+    "n": 2,
+    "wins": 1,
+    "hit_pct": 0.5,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED"
+    ],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Vandromme J.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_NEUTRAL"
+    ],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Makhlouf N.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Talan Lopatic L.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Bernet H.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_NEUTRAL",
+      "rival_COLD"
+    ],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Leyton Rivera": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Maria Luisa Oliveira": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Stefan Kozlov": {
+    "n": 2,
+    "wins": 1,
+    "hit_pct": 0.5,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "rival_COLD"
+    ],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Mika Petkovic": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Melisa Ercan": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_HOT",
+      "rival_COLD"
+    ],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Ann Akasha Ceuca": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Julia Konishi Camargo Silva": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Hanna Chang": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Aren Baybars": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_NEUTRAL"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Misa Malkin": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_NEUTRAL",
+      "rival_COLD"
+    ],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Benoit Torcq": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Miho Kuramochi": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Laurent Lokoli": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_HOT",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Leonardo Primucci": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Florent Bax": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_COLD",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Lea Boskovic": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Liam Draxl": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Alexander Frusina": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Mitchell Krueger": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_COLD",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "James van Herzeele": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_COLD",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Vlado Jankanj": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Novak Djokovic": {
+    "n": 2,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Teodora Vlajic": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Hanyi Liu": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Marko Milosavljevic": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_NEUTRAL",
+      "STRONG",
+      "rival_COLD"
+    ],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Francesca Curmi": {
+    "n": 2,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Yingqun Sun": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Jan Choinski": {
+    "n": 2,
+    "wins": 2,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Max Basing": {
+    "n": 2,
+    "wins": 1,
+    "hit_pct": 0.5,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      },
+      "rival_COLD": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      }
+    }
+  },
+  "Alexander Weis": {
+    "n": 2,
+    "wins": 1,
+    "hit_pct": 0.5,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "rival_COLD"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Max Wiskandt": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_HOT",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Teodora Kostovic": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Cigarran T.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_NEUTRAL"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Vukadin N.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Walton A.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Rincon D.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Guerrieri A.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_NEUTRAL"
+    ],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Shimanov O.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_HOT"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Damas M.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Zamora N.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Jeanjean L.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Kulikova A.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Soke D.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Martin Espinar A.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Tepmahc N.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Arseneault M.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_NEUTRAL",
+      "rival_COLD"
+    ],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Arifullina A.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Forger A.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Keshav Chopra": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_HOT"
+    ],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Nicolas Tepmahc": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Mikael Arseneault": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_NEUTRAL",
+      "rival_COLD"
+    ],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Aidan Kim": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Ronit Karki": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Katie Volynets": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Renta Tokuda": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Kokoro Isomura": {
+    "n": 2,
+    "wins": 1,
+    "hit_pct": 0.5,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Izan Almazan Valiente": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_NEUTRAL"
+    ],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Martha Matoula": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Takuya Kumasaka": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Elena Malygina": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Matthew Forbes": {
+    "n": 2,
+    "wins": 2,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_HOT",
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Dillon Beckles": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_COLD"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Eva Oxford": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_IRP_NEG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "IRP_rival--": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Elena Mireles": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Drew van Orderlain": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "RFI_T1": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Sakura Hosogi": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_HOT",
+      "rival_COLD"
+    ],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Gabriele Maria Noce": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "IRP_rival-",
+      "MRK_NEUTRAL",
+      "rival_COLD"
+    ],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "IRP_rival-": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Lizette Cabrera": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Aleksa Ciric": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_NEUTRAL",
+      "RFI_T2",
+      "STRONG",
+      "rival_COLD"
+    ],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "RFI_T2": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Alexander Bernard": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_COLD",
+      "RFI_T1",
+      "SD_MED",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "SD_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "RFI_T1": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Valentin Vacherot": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_NEUTRAL"
+    ],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Max Houkes": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "IRP_rival--",
+      "MRK_COLD"
+    ],
+    "by_rival_context": {
+      "RIVAL_IRP_NEG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "IRP_rival--": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Ashlyn Krueger": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Krueger A.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Fery A.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_HOT"
+    ],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Ilagan A.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Yamalapalli S.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Marvin Moeller": {
+    "n": 2,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Daniel Milavsky": {
+    "n": 2,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "grass": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Kovalchuk K.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Hemery C.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Dasha Plekhanova": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Anton Shepp": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_HOT"
+    ],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Mateo Del Pino": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "RFI_T3": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Chak Lam Coleman Wong": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_COLD",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Evan Bynoe": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Carla Markus": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Shixun Zhu": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Thijs Boogaard": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_HOT"
+    ],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Jennifer Ruggeri": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "TOP_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Matej Dodig": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Alexandre Muller": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Miriana Tona": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_NEUTRAL",
+      "rival_COLD"
+    ],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Joao Lucas Reis DA Silva": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Tudor Batin": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_COLD",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Nicola Ion": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Petros Tsitsipas": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Trevor Svajda": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Charrier A.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_HOT",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Domenc M.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_NEUTRAL",
+      "RFI_T3",
+      "STRONG",
+      "rival_COLD"
+    ],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "RFI_T3": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Jang G.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Stroemberg I.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_NEUTRAL",
+      "RFI_T3",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "RFI_T3": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Zhang M.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Torcq B.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Llinares Domingo L.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Krolitzky S.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Serban I. M.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_COLD",
+      "RFI_T3",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "RFI_T3": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Alam P.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Wu R. X.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "RFI_T2": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Jovanovic M.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Antoni R.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_COLD",
+      "RFI_T2",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "RFI_T2": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "El Sayed A.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "RFI_T2": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Zakaria F.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_COLD",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Bartel K.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Lekomtseva U.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Wiersholm K.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Schueller A.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_COLD"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Urribarrens Ramirez I.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Gureva A.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_COLD",
+      "RFI_T3",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "RFI_T3": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Jia-Jing Lu": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Aurora Zantedeschi": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "TOP_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Camilo Ugo Carabelli": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Sophie Greiner": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Rio Noguchi": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Justin Boulais": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_IRP_NEG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "IRP_rival--": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Alaa Trifi": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_IRP_NEG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "IRP_rival--": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Spencer Johnson": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "IRP_rival--",
+      "MRK_HOT",
+      "SD_MED",
+      "rival_COLD"
+    ],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "SD_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "IRP_rival--": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Pablo Perez Ramos": {
+    "n": 2,
+    "wins": 2,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "IRP_rival--",
+      "MRK_HOT"
+    ],
+    "by_rival_context": {
+      "RIVAL_IRP_NEG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "IRP_rival--": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Philip Sekulic": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_IRP_NEG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "IRP_rival--": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Mia Horvit": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "RIVAL_IRP_NEG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "IRP_rival--": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Nikolai Barsukov": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Astrid Lew Yan Foon": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_NEUTRAL"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Aspen Schuman": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Alejandro Tabilo": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_COLD",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Vera Zvonareva": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Vendula Valdmannova": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Daniele Rapagnetta": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Elizabeth Mandlik": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Barbora Krejcikova": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_HOT",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Clara Tauson": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Sergi Fita Juan": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Tessa Johanna Brockmann": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  }
+}

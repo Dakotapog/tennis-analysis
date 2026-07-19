@@ -584,11 +584,16 @@ class ZitaScraper:
         
         return unique_matches
     
-    async def save_matches_data(self, matches_data):
+    async def save_matches_data(self, matches_data, date_prefix: str = None):
         """Guardar datos en archivo JSON con formato mejorado (agrupado por torneo)"""
         try:
             os.makedirs("data", exist_ok=True)
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            now = datetime.now()
+            # D89-08: si se pasa date_prefix (ej. "20260715"), el archivo lleva la fecha
+            # de los partidos para que --tomorrow en extraer_historh2h.py lo encuentre
+            date_part = date_prefix if date_prefix else now.strftime("%Y%m%d")
+            time_part = now.strftime("%H%M%S")
+            timestamp = f"{date_part}_{time_part}"
             filename = f"data/zita_tennis_matches_{timestamp}.json"
 
             # Agrupar partidos por torneo
@@ -757,8 +762,12 @@ async def main():
         # Tomar captura final
         await scraper.take_screenshot("flashscore_final")
 
-        # Guardar datos
-        filename, grouped_data = await scraper.save_matches_data(matches_data)
+        # Guardar datos — D89-08: usar fecha de mañana si --tomorrow
+        tomorrow_prefix = None
+        if args.tomorrow:
+            from datetime import date, timedelta
+            tomorrow_prefix = (date.today() + timedelta(days=1)).strftime("%Y%m%d")
+        filename, grouped_data = await scraper.save_matches_data(matches_data, date_prefix=tomorrow_prefix)
 
         if filename:
             logger.info("✅ === EXTRACCIÓN COMPLETADA EXITOSAMENTE ===")

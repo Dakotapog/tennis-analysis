@@ -351,36 +351,26 @@ class RankingManager:
         return info
 
     def normalize_name(self, name):
-        """Normalizar nombre de jugador para búsqueda"""
-        if not name:
-            return ""
-        
-        # Normalizar a minúsculas y quitar espacios
-        normalized = name.lower().strip()
-        
-        # Reemplazar manualmente diacríticos (acentos, etc.)
-        replacements = {
-            'á': 'a', 'é': 'e', 'í': 'i', 'ó': 'o', 'ú': 'u', 'ü': 'u',
-            'à': 'a', 'è': 'e', 'ì': 'i', 'ò': 'o', 'ù': 'u',
-            'â': 'a', 'ê': 'e', 'î': 'i', 'ô': 'o', 'û': 'u',
-            'ñ': 'n', 'ç': 'c'
-        }
-        for char, replacement in replacements.items():
-            normalized = normalized.replace(char, replacement)
-        
-        # Remover sufijos como "+1", "-2", etc.
-        normalized = re.sub(r'[+\-]\d+$', '', normalized)
-
-        # Reemplazar guiones por espacios para no juntar nombres
-        normalized = normalized.replace('-', ' ')
-        
-        # Remover cualquier caracter que no sea letra, número o espacio
-        normalized = re.sub(r'[^\w\s]', '', normalized)
-        
-        # Normalizar múltiples espacios a uno solo
-        normalized = ' '.join(normalized.split())
-        
-        return normalized
+        """Normalizar nombre de jugador para búsqueda.
+        B108-03 (TODO F0-DEUDA cerrado): delega a la fuente canónica.
+        """
+        try:
+            from core.player_registry import normalize_player_name
+            return normalize_player_name(name)
+        except Exception:
+            # Fallback inline (no debe ocurrir en producción)
+            if not name:
+                return ""
+            normalized = name.lower().strip()
+            for char, rep in [('á','a'),('é','e'),('í','i'),('ó','o'),('ú','u'),('ü','u'),
+                               ('à','a'),('è','e'),('ì','i'),('ò','o'),('ù','u'),
+                               ('â','a'),('ê','e'),('î','i'),('ô','o'),('û','u'),
+                               ('ñ','n'),('ç','c')]:
+                normalized = normalized.replace(char, rep)
+            normalized = re.sub(r'[+\-]\d+$', '', normalized)
+            normalized = normalized.replace('-', ' ')
+            normalized = re.sub(r'[^\w\s]', '', normalized)
+            return ' '.join(normalized.split())
     
     def get_player_ranking(self, player_name, tour=None):
         """Obtener ranking de un jugador con manejo robusto de errores."""

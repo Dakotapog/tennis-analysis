@@ -1,6 +1,6 @@
 # Nodo-110 — MODO OPERADOR: Favoritos Compuestos (la estrategia #13 que el usuario ya validó con dinero real)
 
-> **Wikilinks:** [[Nodo-107-Riesgo-Agregado-Motor-Reconciliacion]] | [[Nodo-100-Taxonomia-Estrategias-Generacion-Combos]] | [[Nodo-90-Auditoria-Fable-Nodo89]] | [[Nodo-55-Respuesta-Fable-Funnel-Deploy]]
+> **Wikilinks:** [[Nodo-107-Riesgo-Agregado-Motor-Reconciliacion]] | [[Nodo-100-Taxonomia-Estrategias-Generacion-Combos]] | [[Nodo-90-Auditoria-Fable-Nodo89]] | [[Nodo-55-Respuesta-Fable-Funnel-Deploy]] | [[Nodo-117-Auditoria-Scraping-Rankings-Cobertura-H2H]]
 > **Fecha:** 2026-07-17 | **Autor:** Fable 5 | **Prioridad:** MÁXIMA — es el dolor persistente #1 del proyecto
 > **Evidencia de origen (dinero real, adjunta por el operador):** 8/8 combos ganados (jul-14 y jul-16), cuotas 3.84-6.51x, stakes $600-680, pago total ~$27,500. Construidos A MANO desde el output de tabla_favoritos mientras el sistema entregaba 0 picks APOSTAR (jul-17: 120+ singles → 0 apuestas, 1 games combo).
 

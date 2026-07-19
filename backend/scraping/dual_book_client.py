@@ -54,7 +54,8 @@ def fetch_kambi(offering: str = "betplay", retries: int = 2) -> dict:
     out = {}
     for ev_w in data.get("events", []):
         ev, offers = ev_w.get("event", {}), ev_w.get("betOffers", [])
-        if not offers or ev.get("state") != "NOT_STARTED":
+        # Incluir NOT_STARTED y STARTED (en vivo) — ambos tienen betOffers
+        if not offers or ev.get("state") not in ("NOT_STARTED", "STARTED"):
             continue
         home, away = ev.get("homeName", ""), ev.get("awayName", "")
         for oc in offers[0].get("outcomes", []):
