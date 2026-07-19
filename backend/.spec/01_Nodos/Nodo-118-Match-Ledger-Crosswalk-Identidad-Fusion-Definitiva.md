@@ -119,11 +119,11 @@ EMBUDO DE DATOS 2026-07-18:
 
 | Fase | Entregable | Tests T53 | Gate de avance |
 |---|---|---|---|
-| F1 | `match_ledger.py`: `fusionar_dia()` pura + score + 3 zonas + CLI --build | ~10: score por componente; apellido invertido; inicial; homónimo→cuarentena; greedy sin duplicados; single-source entra; dedupe por event_id | 6/6 componentes de score verdes |
-| F2 | Crosswalk en player_registry (`add_alias`/`resolve_crosswalk`) + persistencia | ~4: alias persiste y resuelve; VERIFIED>AUTO; no sobreescribe MANUAL | F1 verde |
-| F3 | Bootstrap retroactivo (194 zita + H2H + edge_reports) | ~3: extrae par verificado de fixture histórico real; reporte de cobertura | correr y PEGAR el reporte en este nodo |
-| F4 | Integración run_daily (PASO 1.5, noche/mañana) + adapter schema zita para edge_calculator | ~4: adapter emite schema idéntico; refresh cuotas actualiza in-place; PENDIENTE reintenta | F1-F3 verdes + baseline pytest intacto |
-| F5 | Embudo §5 en run_daily + desk :7780 (panel DATA con la fuga nominal) | ~2 | F4 verde |
+| F1 | `match_ledger.py`: `fusionar_dia()` pura + score + 3 zonas + CLI --build | 19 tests REGLA-T53 | ✅ COMPLETO 2026-07-18 commit 071b72f |
+| F2 | Crosswalk en player_registry (`add_alias`/`resolve_crosswalk`) + persistencia | 6 tests REGLA-T53 | ✅ COMPLETO 2026-07-18 commit dd2731b |
+| F3 | Bootstrap retroactivo (194 zita + H2H + edge_reports) | 3 tests REGLA-T53 | ✅ COMPLETO 2026-07-18 commit ae962b8 — 2091 ids, 57.7% cobertura |
+| F4 | Integración run_daily (PASO 1b+1.5) + `exportar_para_edge_calculator()` + `actualizar_cuotas_ledger()` | 4 tests REGLA-T53 | ✅ COMPLETO 2026-07-18 commit 3f9bba4 |
+| F5 | Panel DATA en desk :7780 (`_build_data_panel()` + embudo fuga nominal) | 3 tests REGLA-T53 | ✅ COMPLETO 2026-07-18 commits 974a945+1d7728e |
 
 **PROHIBIDO:** joins por nombre sin pasar por `fusionar_dia()`; borrar `select_best_json_file` (fallback legacy); tocar edge_calculator más allá del adapter de entrada; auto-join bajo score 75 "porque parece obvio"; resolver cuarentenas programáticamente sin el comando explícito.
 
