@@ -127,4 +127,27 @@ EMBUDO DE DATOS 2026-07-18:
 
 **PROHIBIDO:** joins por nombre sin pasar por `fusionar_dia()`; borrar `select_best_json_file` (fallback legacy); tocar edge_calculator más allá del adapter de entrada; auto-join bajo score 75 "porque parece obvio"; resolver cuarentenas programáticamente sin el comando explícito.
 
+## §F2-reporte — Bootstrap retroactivo 2026-07-18
+
+```
+Fecha bootstrap: 2026-07-18 22:07
+Archivos zita analizados: 194 (5 fechas con pares API+Playwright)
+Edge_reports analizados: 152 (2673 picks)
+Identidades canónicas: 2091 | Aliases totales: 2091 | Por confidence: VERIFIED=2091
+Cobertura estimada últimos 7 días: 57.7% (2317/4014 partidos resueltos)
+
+Detalle por fecha:
+  2026-07-03: 84 auto-joins / 2 cuarentena (score=73) | 56.0% cobertura
+  2026-07-06: 57 auto-joins / 1 cuarentena (score=73) | 77.0% cobertura
+  2026-07-08: 73 auto-joins / 232 cuarentena (score=55) | 17.6% WARN — archivos sin match_id cruzado
+  2026-07-11: 147 auto-joins / 0 cuarentena | 100.0% cobertura
+  2026-07-18: 43 auto-joins / 0 cuarentena | 78.2% cobertura
+  Joins totales: 404 | Aliases nuevos: 251
+
+Nota D118-F3-01: match_id compartido = shortcut score=100 (FlashScore ID único). Implementado.
+Nota D118-F3-02: hora_partido (campo Playwright) cubierto en _get_hora(). Implementado.
+Nota D118-F3-03: 2026-07-08 con 232 cuarentena — ambos archivos son API (sin match_id cruzado);
+  cuarentena correcta, no false negatives. Crosswalk seguirá creciendo con días nuevos.
+```
+
 **Criterio de éxito definitivo (medible, 7 días):** join de población con-cuotas ≥85% (día 1 post-bootstrap ≥60%); CERO partidos con cuotas invisibles (todos en ledger: unidos, cuarentena o single-source); el embudo impreso en cada run_daily; crosswalk creciendo (identidades día 7 > día 1). Cuando esto se cumpla, el problema de 3 años queda cerrado — no porque el scraping mejore, sino porque la identidad deja de perderse.

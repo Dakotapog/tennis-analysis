@@ -198,6 +198,12 @@ def score_par(partido_kambi: dict, partido_fs: dict,
     """
     crosswalk = crosswalk or {}
 
+    # Shortcut: match_id compartido = identidad perfecta (FlashScore ID único por partido)
+    mid_k = partido_kambi.get("match_id", "")
+    mid_f = partido_fs.get("match_id", "")
+    if mid_k and mid_f and mid_k == mid_f:
+        return 100, {"jugador1": 35, "jugador2": 35, "torneo": 15, "hora": 15, "match_id": True, "total": 100}
+
     j1k = partido_kambi.get("jugador1", "") or partido_kambi.get("player1", "")
     j2k = partido_kambi.get("jugador2", "") or partido_kambi.get("player2", "")
     j1f = partido_fs.get("jugador1", "") or partido_fs.get("player1", "")
@@ -229,12 +235,20 @@ def score_par(partido_kambi: dict, partido_fs: dict,
     else:
         sj1, sj2 = s1_inv, s2_inv
 
-    tk = partido_kambi.get("torneo", "") or partido_kambi.get("tournament", "")
-    tf = partido_fs.get("torneo", "") or partido_fs.get("torneo_fs", "")
+    # Cubrir todos los campos de torneo usados en producción (zita usa torneo_nombre/completo)
+    def _get_torneo(p):
+        return (p.get("torneo") or p.get("torneo_nombre") or p.get("torneo_completo")
+                or p.get("torneo_fs") or p.get("tournament") or "")
+
+    tk = _get_torneo(partido_kambi)
+    tf = _get_torneo(partido_fs)
     st = _score_torneo(tk, tf)
 
-    hk = partido_kambi.get("hora", "") or partido_kambi.get("time", "")
-    hf = partido_fs.get("hora", "") or partido_fs.get("time", "")
+    def _get_hora(p):
+        return (p.get("hora") or p.get("hora_partido") or p.get("hora_inicio") or p.get("time") or "")
+
+    hk = _get_hora(partido_kambi)
+    hf = _get_hora(partido_fs)
     sh = _score_hora(str(hk), str(hf))
 
     total = sj1 + sj2 + st + sh
