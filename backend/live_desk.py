@@ -178,6 +178,7 @@ def build_desk_state(fecha: Optional[str] = None) -> Dict[str, Any]:
         "p10_odds_history": _load_odds_history(fecha), # Nodo-115 U4 sparkline
         "p11_combo_live": _build_combo_live(fecha),    # Nodo-116 §B.5
         "p12_conformal": _build_conformal_band(),      # Nodo-115 U1 banda
+        "p_data": _build_data_panel(fecha),            # Nodo-118 §5 embudo crosswalk
     }
     return state
 
@@ -448,6 +449,50 @@ def _gate_barra(n_actual: int, n_stop: int) -> str:
     bar = "█" * filled + "░" * (10 - filled)
     restantes = n_stop - n_actual
     return f"{bar} {n_actual}/{n_stop} ({restantes} faltan)"
+
+
+def _build_data_panel(fecha: str) -> Dict[str, Any]:
+    """
+    Panel DATA — Embudo Nodo-118 §5: estadísticas del ledger crosswalk del día.
+    REPORTE_SOLO. Lee data/match_ledger_{YYYYMMDD}.json.
+    """
+    DATA_DIR = BASE_DIR / "data"
+    fecha_compact = fecha.replace("-", "")
+    ledger_path = DATA_DIR / f"match_ledger_{fecha_compact}.json"
+
+    if not ledger_path.exists():
+        return {"disponible": False, "fecha": fecha}
+
+    try:
+        with open(ledger_path, "r", encoding="utf-8") as f:
+            ledger = json.load(f)
+    except Exception:
+        return {"disponible": False, "fecha": fecha}
+
+    stats = ledger.get("stats", {})
+    cuarentena = ledger.get("cuarentena", [])
+
+    # Fuga nominal: primeros 10 con score
+    fuga = []
+    for c in cuarentena[:10]:
+        k = c.get("kambi", c)
+        j1 = k.get("jugador1", "?")
+        j2 = k.get("jugador2", "?")
+        score = c.get("score", c.get("score_mejor", "?"))
+        fuga.append({"partido": f"{j1} vs {j2}", "score": score})
+
+    return {
+        "disponible": True,
+        "fecha": fecha,
+        "joins": stats.get("joins_exitosos", 0),
+        "cuarentena": stats.get("cuarentena_count", 0),
+        "single_kambi": stats.get("single_source_kambi", 0),
+        "single_fs": stats.get("single_source_fs", 0),
+        "api_total": stats.get("api_total", 0),
+        "playwright_total": stats.get("playwright_total", 0),
+        "cobertura_pct": stats.get("cobertura_pct", 0.0),
+        "fuga_nominal": fuga,
+    }
 
 
 def _build_que_falta(fecha: str) -> List[Dict]:
@@ -976,6 +1021,36 @@ def render_html(state: Dict[str, Any]) -> str:
     else:
         qf_content = f'<p style="color:{GREY};font-size:0.85em;">Sin casi-accionables en watchlist (correr PASO 3)</p>'
 
+    # ── DATA — Embudo Crosswalk Nodo-118 §5 ──────────────────────────────────
+    _d = state.get("p_data", {})
+    if _d.get("disponible"):
+        _cob = _d["cobertura_pct"]
+        _cob_color = GREEN if _cob >= 85 else (ORANGE if _cob >= 60 else RED)
+        _data_badge = f"{_cob:.1f}%"
+        _fuga_rows = [[f["partido"], str(f["score"])] for f in _d.get("fuga_nominal", [])]
+        _data_content = (
+            f'<div style="margin-bottom:8px;">'
+            f'Kambi: <b>{_d["api_total"]}</b> | Playwright: <b>{_d["playwright_total"]}</b> | '
+            f'Join auto: <b>{_d["joins"]}</b> | Cuarentena: <b>{_d["cuarentena"]}</b> | '
+            f'Single-K: <b>{_d["single_kambi"]}</b> | Single-FS: <b>{_d["single_fs"]}</b>'
+            f'</div>'
+        ) + table(
+            ["Fuga (cuarentena) — partido", "score"],
+            _fuga_rows,
+            "Sin fugas — cobertura perfecta" if not _fuga_rows else "",
+        )
+        data_panel = panel(
+            f"DATA — Embudo Crosswalk Nodo-118 §5 | {_d['fecha']}",
+            _data_content,
+            badge=_data_badge,
+            badge_color=_cob_color,
+        )
+    else:
+        data_panel = panel(
+            "DATA — Embudo Crosswalk Nodo-118 §5",
+            "Sin ledger para hoy (correr PASO 1.5: python3 scraping/match_ledger.py --build)",
+        )
+
     que_falta_panel = panel(
         "QUÉ FALTA — casi-accionables (FAVORITOS_COMPUESTOS) + condición exacta",
         qf_content,
@@ -1017,6 +1092,7 @@ def render_html(state: Dict[str, Any]) -> str:
   {p5_panel}
   {p6_panel}
   {p8_panel}
+  {data_panel}
   {que_falta_panel}
   {p1_panel}
   {p7_panel}
