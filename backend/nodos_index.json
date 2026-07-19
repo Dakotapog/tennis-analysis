@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generado": "2026-07-18T22:55:32",
+    "generado": "2026-07-19T00:25:57",
     "total_nodos": 116,
     "total_py_files": 71,
     "huerfanos_count": 1,
@@ -176,6 +176,7 @@
       "archivos_mencionados": [
         "betplay_combo_builder.py",
         "close_snapshot_server.py",
+        "live_desk.py",
         "live_edge_monitor.py",
         "scripts/live_dashboard_generator.py",
         "scripts/live_edge_monitor.py",
