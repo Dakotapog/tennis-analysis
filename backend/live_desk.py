@@ -1814,19 +1814,55 @@ def _build_p8_books(fecha: str) -> Dict:
     except Exception:
         feeds["betplay"] = {}
 
+    # Fallback Book 1: si Kambi devuelve 429 (vacío), usar h2h_results_enhanced
+    # que tiene cuotas Kambi capturadas en pipeline con nombres completos
+    _h2h_path = _latest(str(REPORTS / f"h2h_results_enhanced_{fecha.replace('-','')}*.json"))
+    _h2h_rows: list = []
+    if _h2h_path:
+        _h2h_data = _load_json(_h2h_path)
+        if isinstance(_h2h_data, list):
+            _h2h_rows = _h2h_data
+        elif isinstance(_h2h_data, dict):
+            _h2h_rows = _h2h_data.get("partidos", _h2h_data.get("matches", []))
+    if not feeds.get("betplay") and _h2h_rows:
+        _bp_fb: Dict[str, Any] = {}
+        for _p in _h2h_rows:
+            if _p.get("jugador1") and _p.get("cuota1"):
+                _bp_fb[_norm(_p["jugador1"])] = {"odds": _p["cuota1"]}
+            if _p.get("jugador2") and _p.get("cuota2"):
+                _bp_fb[_norm(_p["jugador2"])] = {"odds": _p["cuota2"]}
+        if _bp_fb:
+            feeds["betplay"] = _bp_fb
+
+    # Bridge: last_name → full_name_norm (para resolver "Vasa I." → "iiro vasa")
+    _bridge: Dict[str, str] = {}
+    for _p in _h2h_rows:
+        for _jug in [_p.get("jugador1", ""), _p.get("jugador2", "")]:
+            if _jug:
+                _parts = _jug.split()
+                if _parts:
+                    _bridge[_norm(_parts[-1])] = _norm(_jug)  # "vasa" → "iiro vasa"
+
     # Book 2: zita file (FlashScore/Playwright — Nodo-48)
+    # Acepta lista plana (merged) o dict {torneo: [partidos]} (Playwright raw)
+    # Usa bridge last-name para indexar por nombre completo (resuelve Nodo-80)
     zita = _latest(str(BASE_DIR / f"data/zita_tennis_matches_{fecha.replace('-','')}*.json"))
     zita_data = _load_json(zita)
-    if zita_data and isinstance(zita_data, dict):
+    if zita_data:
         fs: Dict[str, Any] = {}
-        for partidos in zita_data.values():
-            if not isinstance(partidos, list):
-                continue
-            for m in partidos:
-                if m.get("jugador1") and m.get("cuota1"):
-                    fs[_norm(m["jugador1"])] = {"odds": m["cuota1"]}
-                if m.get("jugador2") and m.get("cuota2"):
-                    fs[_norm(m["jugador2"])] = {"odds": m["cuota2"]}
+        _rows: list = zita_data if isinstance(zita_data, list) else []
+        if isinstance(zita_data, dict):
+            for _v in zita_data.values():
+                if isinstance(_v, list):
+                    _rows.extend(_v)
+        for m in _rows:
+            for _jk, _ck in [("jugador1", "cuota1"), ("jugador2", "cuota2")]:
+                _jug, _c = m.get(_jk), m.get(_ck)
+                if _jug and _c:
+                    # "Vasa I." → last_token="Vasa" → bridge→"iiro vasa", fallback abbrev norm
+                    _last = _norm(_jug.replace(".", "").split()[0]) if _jug else ""
+                    _key  = _bridge.get(_last, _norm(_jug))
+                    fs[_key] = {"odds": _c}
         if fs:
             feeds["flashscore"] = fs
 
