@@ -1,6 +1,6 @@
 # Nodo-116 — Entierro dashboard vieja + Auto-Combo live ANTI-FLOOD + P8 multi-casa real
 
-> **Wikilinks:** [[Nodo-100B-Triple-Convergencia-Live]] (SUPERSEDED parcial: dashboard HTML) | [[Nodo-109-Live-Trading-Desk-Dashboard]] | [[Nodo-114-Desk-Razonamiento-P8-MultiBook]] | [[Nodo-111-Dual-Book-Live-Intelligence]] | [[Nodo-48-FlashScore-Odds-Scraper-Testing]] (FlashScore odds) | [[Nodo-73-n8n-CloseSnapshot-Timing]] (bridge :8765 INTOCABLE) | [[Nodo-80-Kambi-Name-Matching]] (bridge apellido→nombre) | [[Nodo-118-Match-Ledger-Crosswalk-Identidad-Fusion-Definitiva]] (h2h fuente Book 1 fallback)
+> **Wikilinks:** [[Nodo-100B-Triple-Convergencia-Live]] (SUPERSEDED parcial: dashboard HTML) | [[Nodo-109-Live-Trading-Desk-Dashboard]] | [[Nodo-114-Desk-Razonamiento-P8-MultiBook]] | [[Nodo-111-Dual-Book-Live-Intelligence]] | [[Nodo-90-Auditoria-Fable-Nodo89]] (D90-08 odds_aggregator — Book 2 REAL wplay VERIFIED) | [[Nodo-48-FlashScore-Odds-Scraper-Testing]] (datos partidos/rango, NO bookmaker) | [[Nodo-73-n8n-CloseSnapshot-Timing]] (bridge :8765 INTOCABLE) | [[Nodo-80-Kambi-Name-Matching]] (bridge apellido→nombre) | [[Nodo-118-Match-Ledger-Crosswalk-Identidad-Fusion-Definitiva]] (h2h fuente Book 1 fallback)
 > **Fecha:** 2026-07-18 | **Autor:** Fable 5 (spec) | **Implementa:** Sonnet
 > **Contexto:** :8765/live-dashboard ya está muerto de facto (404/timeout, verificado). Solo 3 archivos lo referencian (grep 2026-07-18): close_snapshot_server.py, scripts/live_dashboard_generator.py, scripts/live_edge_monitor.py. El auto-fire de combos (D100-05 `_fire_break_combos`) SÍ es valioso y se migra — pero hoy inunda el escritorio del operador con .bat sin freno. P8 muestra solo 2 columnas (betplay, flashscore) cuando FlashScore trae cuotas POR CASA (Nodo-48 es multi-casa).
 
@@ -74,37 +74,52 @@
 
 ---
 
-## ADDENDUM 2026-07-19 — P8 desbloqueado (3 bugs en `_build_p8_books()`) + X3 Middle column
+## ADDENDUM 2026-07-19 — P8 desbloqueado (3 bugs en `_build_p8_books()`) + X3 Middle column + corrección arquitectura Book 2
 
-**Commits:** `99749db` (P8 dual-book 9 picks, +5.0% ROI) | `0262d89` (X3 columna Middle)
+**Commits:** `99749db` (P8 dual-book 9 picks) | `0262d89` (X3 columna Middle)
+
+### CORRECCIÓN CRÍTICA — FlashScore NO es casa de apuestas
+
+**FlashScore** = proveedor de datos deportivos (H2H, rankings, resultados históricos). **NO es bookmaker.**
+
+El archivo zita (`data/zita_tennis_matches_*.json`) producido por `extraer_URL_partidos_version2.py` contiene cuotas de **Betplay/Kambi** que FlashScore embebe en su interfaz para usuarios colombianos. Es el mismo offering Kambi — solo capturado por Playwright en el momento del pipeline (PASO 1), no en tiempo real.
+
+**Consecuencia directa:** la "divergencia" que P8 mostraba entre "betplay" (Kambi API tiempo real) y "flashscore" (Kambi vía Playwright tiempo pipeline) refleja **diferencia de timing**, no una segunda casa de apuestas real. No es precio diferente, es precio en momentos distintos.
+
+**Book 2 REAL ya existe: `scripts/odds_aggregator.py` (D90-08, [[Nodo-90-Auditoria-Fable-Nodo89]])**
+
+| Casa | Estado | Mecanismo |
+|---|---|---|
+| betplay | VERIFIED | Kambi REST API |
+| **wplay** | **VERIFIED 2026-07-14** | **SSR HTML GET `https://m.wplay.co/es/s/TENN/Tenis` — sin auth, funciona desde WSL** |
+| betcris | PENDING_DEVTOOLS | Kambi CDN, IP bloqueada — necesita cookie sesión |
+| luckia | PENDING_DEVTOOLS | Kambi CDN, IP bloqueada — necesita cookie sesión |
+| sportium | PENDING_DEVTOOLS | Kambi CDN, IP bloqueada — necesita cookie sesión |
+| codere | PENDING_DEVTOOLS | endpoint custom pendiente |
+
+`fetch_all_odds()` + `build_comparison()` en `odds_aggregator.py` son funciones puras compatibles con `best_price()` de [[Nodo-111-Dual-Book-Live-Intelligence]]. **Este es el Book 2 que P8 debe consumir, no el archivo zita.**
+
+**Estado D116-02 (pendiente conexión):** `_build_p8_books()` en `live_desk.py` debe llamar a `fetch_all_odds(["betplay","wplay"])` en lugar de parsear el archivo zita. wplay ya es VERIFIED — no requiere cookies. Gate: conectar `odds_aggregator.fetch_all_odds()` como fuente de feeds en `_build_p8_books()`.
 
 ### D116-04 — 3 bugs silenciosos en `_build_p8_books()` (live_desk.py)
 
-D116-03 declaraba P8 "gateado por scraper Nodo-48 sin desglose por casa". Al hacer prueba física curl :7780 se descubrió que P8 mostraba "SIN DATOS" por 3 bugs anteriores al gate, independientes de D116-03:
+Bloqueaban P8 incluso con la fuente de datos incorrecta (zita). Documentados para no regresionar si se reconecta odds_aggregator:
 
-| Bug | Síntoma | Fix |
+| Bug | Síntoma | Fix aplicado |
 |---|---|---|
-| **Bug 1 — formato zita** | El archivo zita merged es una **lista plana** (131 partidos), NO un dict por torneo. `if isinstance(zita_data, dict)` nunca entraba → `feeds["flashscore"]` vacío siempre. | Parser ahora maneja ambos formatos: `_rows = zita_data if isinstance(zita_data, list) else []`; si es dict, extiende con todos los values que sean lista. |
-| **Bug 2 — formato h2h** | `h2h_results_enhanced_*.json` es `{"metadata":{...}, "partidos":[...]}` (dict con clave `partidos`), NO lista plana. `_h2h_rows = _h2h_data if isinstance(_h2h_data, list) else []` retornaba `[]` → fallback Book 1 vacío → bridge vacío. | Fix: `_h2h_rows = _h2h_data.get("partidos", _h2h_data.get("matches", []))`. |
-| **Bug 3 — Nodo-80 name mismatch** | Zita escribe "Vasa I." (apellido primero, inicial). Edge_report tiene "Iiro Vasa". `_norm("Vasa I.")` = "vasa i" ≠ "iiro vasa" → `best_price()` no encontraba ningún pick. | Bridge apellido→nombre completo: construido desde `h2h_results_enhanced` (nombres completos). Último token de "Iiro Vasa" = "Vasa" → bridge["vasa"] = "iiro vasa". Zita "Vasa I." → primer token "Vasa" → lookup bridge → "iiro vasa". [[Nodo-80-Kambi-Name-Matching]] ya documentaba este patrón. |
+| **Bug 1 — formato zita** | Archivo merged = lista plana (131 partidos), no dict por torneo. `if isinstance(zita_data, dict)` nunca entraba → feeds vacío. | Parser maneja ambos formatos: lista directa o dict con values lista. |
+| **Bug 2 — formato h2h** | `h2h_results_enhanced_*.json` = `{"partidos":[...]}` no lista plana. `_h2h_rows = data if isinstance(data, list)` → `[]`. | Fix: `data.get("partidos", data.get("matches", []))`. Fuente: [[Nodo-118-Match-Ledger-Crosswalk-Identidad-Fusion-Definitiva]]. |
+| **Bug 3 — name mismatch** | Zita: "Vasa I." → `_norm()` = "vasa i". Edge_report: "Iiro Vasa" → "iiro vasa". Sin match. | Bridge apellido→nombre completo construido desde h2h_results_enhanced. [[Nodo-80-Kambi-Name-Matching]] patrón. |
 
-**Fuente Book 1 fallback (Betplay 429 workaround):** cuando Kambi CDN devuelve 429 (sin cookie de sesión — ver §C.4), `_build_p8_books()` construye Book 1 desde `h2h_results_enhanced_YYYYMMDD*.json` que ya tiene cuotas reales capturadas en el pipeline. Fuente: [[Nodo-118-Match-Ledger-Crosswalk-Identidad-Fusion-Definitiva]] (estructura h2h). Book 2 = zita/Playwright [[Nodo-48-FlashScore-Odds-Scraper-Testing]].
-
-**Evidencia 2026-07-19 (post-fix):**
-- 9 picks con cobertura dual-book (vs 0 antes)
-- Orlov: betplay @1.77 → zita @1.88 (+6.7%)
-- Rifqi: betplay @1.81 → zita @1.95 (+7.5%)
-- ROI extra medio por routing: +5.0%
-
-**Estado D116-02/D116-03:** siguen vigentes para el caso N≥3 casas con desglose por casa desde Nodo-48. Lo desbloqueado aquí es el caso base de 2 libros (betplay + zita), que ya es operativo y produce ROI real.
+**Fallback Book 1 (Betplay 429 workaround):** cuando Kambi CDN devuelve 429, `_build_p8_books()` construye Book 1 desde `h2h_results_enhanced` (cuotas Betplay capturadas en PASO 2). Solución provisional — la definitiva es que `odds_aggregator._fetch_kambi("betplay")` ya maneja reintentos correctamente.
 
 ### D116-05 — X3 columna "Middle? (2da casa)"
 
-`es_middle()` de [[Nodo-111-Dual-Book-Live-Intelligence]] requiere dos libros con líneas distintas. Sin esperar ese segundo libro en tiempo real, X3 ahora muestra qué línea necesita la 2da casa para crear el middle:
+`es_middle()` de [[Nodo-111-Dual-Book-Live-Intelligence]] requiere dos libros con líneas Over/Under distintas. Sin esperar ese segundo libro en tiempo real, X3 muestra qué línea necesita la 2da casa para crear el middle:
 
-- Señal OVER `(lo, hi)`: necesita `UNDER ≥ hi + 0.5` en otra casa
-- Señal UNDER `(lo, hi)`: necesita `OVER ≤ lo - 0.5` en otra casa
+- Señal OVER `(lo, hi)`: otra casa necesita `UNDER ≥ hi + 0.5`
+- Señal UNDER `(lo, hi)`: otra casa necesita `OVER ≤ lo - 0.5`
 
-Columna "Middle? (2da casa)" en naranja. 21 middle-candidatos detectados en sesión 2026-07-19 con 14 señales de juegos. El operador puede verificar manualmente si wplay/bwin/betcris tienen esa línea. Implementado en `live_desk.py` render X3 (L982-1011).
+Columna "Middle? (2da casa)" en naranja. 21 middle-candidatos en sesión 2026-07-19 con 14 señales de juegos. El operador verifica manualmente si wplay/betcris tienen esa línea. Implementado en `live_desk.py` render X3 (L982-1011). [[Nodo-48-FlashScore-Odds-Scraper-Testing]] provee el rango predicho (lo, hi) — aquí sí es correcto su uso como fuente de datos de partidos, no como bookmaker.
 
-Wikilinks totales este nodo: [[Nodo-100B-Triple-Convergencia-Live]] | [[Nodo-109-Live-Trading-Desk-Dashboard]] | [[Nodo-114-Desk-Razonamiento-P8-MultiBook]] | [[Nodo-111-Dual-Book-Live-Intelligence]] | [[Nodo-48-FlashScore-Odds-Scraper-Testing]] | [[Nodo-73-n8n-CloseSnapshot-Timing]] | [[Nodo-80-Kambi-Name-Matching]] | [[Nodo-118-Match-Ledger-Crosswalk-Identidad-Fusion-Definitiva]] — **0 huérfanos** (verificado contra `nodos_index.json` 2026-07-19).
+Wikilinks totales este nodo: [[Nodo-100B-Triple-Convergencia-Live]] | [[Nodo-109-Live-Trading-Desk-Dashboard]] | [[Nodo-114-Desk-Razonamiento-P8-MultiBook]] | [[Nodo-111-Dual-Book-Live-Intelligence]] | [[Nodo-48-FlashScore-Odds-Scraper-Testing]] | [[Nodo-73-n8n-CloseSnapshot-Timing]] | [[Nodo-80-Kambi-Name-Matching]] | [[Nodo-118-Match-Ledger-Crosswalk-Identidad-Fusion-Definitiva]] | [[Nodo-90-Auditoria-Fable-Nodo89]] — **0 huérfanos** (verificado contra `nodos_index.json` 2026-07-19).

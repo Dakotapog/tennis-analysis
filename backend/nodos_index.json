@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "generado": "2026-07-19T22:42:52",
-    "total_nodos": 116,
+    "generado": "2026-07-19T23:06:40",
+    "total_nodos": 117,
     "total_py_files": 71,
     "huerfanos_count": 1,
     "exclusiones_count": 19
@@ -393,8 +393,10 @@
         "extraer_URL_partidos_version2.py",
         "live_dashboard_generator.py",
         "live_desk.py",
+        "odds_aggregator.py",
         "scripts/live_dashboard_generator.py",
         "scripts/live_edge_monitor.py",
+        "scripts/odds_aggregator.py",
         "tests/test_nodo116_antiflood.py"
       ]
     },
@@ -464,6 +466,16 @@
         "screenshots/test_extraer_historh2h.py",
         "selenium_config.py",
         "test_extraer_historh2h.py"
+      ]
+    },
+    {
+      "nodo_id": "120",
+      "nodo_archivo": "Nodo-120-FS-Single-Source-Cuotas-Qualifying-Flow.md",
+      "fecha": null,
+      "estado": "activo",
+      "archivos_mencionados": [
+        "scraping/match_ledger.py",
+        "tests/test_nodo120_fs_cuotas.py"
       ]
     },
     {
