@@ -943,17 +943,16 @@ def render_html(state: Dict[str, Any]) -> str:
         if _div < X2_INFO_PCT:
             continue
         _jug       = _bp.get("jugador", _jk)
-        _bp_cuota  = float(_bp.get("betplay_cuota") or 0)
-        _fs_cuota  = float(_bp.get("wplay_cuota") or 0)
-        if not _bp_cuota or not _fs_cuota:
+        # Dinámica N-casas: leader=mínimo (ya se movió), stale=máximo (rezagada)
+        _cuotas_raw = _bp.get("cuotas", {})
+        _cuotas_n   = {k: float(v) for k, v in _cuotas_raw.items()
+                       if isinstance(v, (int, float)) and float(v) > 0}
+        if len(_cuotas_n) < 2:
             continue
-        # Leader = cuota más baja (ya se movió). Rezagada = cuota más alta (stale).
-        if _bp_cuota < _fs_cuota:
-            _leader_casa, _leader_c = "betplay",  _bp_cuota
-            _stale_casa,  _stale_c  = "wplay",    _fs_cuota
-        else:
-            _leader_casa, _leader_c = "wplay",    _fs_cuota
-            _stale_casa,  _stale_c  = "betplay",  _bp_cuota
+        _leader_casa = min(_cuotas_n, key=_cuotas_n.__getitem__)
+        _stale_casa  = max(_cuotas_n, key=_cuotas_n.__getitem__)
+        _leader_c    = _cuotas_n[_leader_casa]
+        _stale_c     = _cuotas_n[_stale_casa]
         _dir   = _tape_dir.get(_jug.lower(), "")
         _alert = _div >= X2_ALERT_PCT
         if _alert:
