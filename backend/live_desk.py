@@ -849,6 +849,7 @@ def render_html(state: Dict[str, Any]) -> str:
         p8_rows.append([
             arb_html + bp.get("jugador", jug_key),
             str(bp.get("betplay_cuota", "—")),
+            str(bp.get("rushbet_cuota", "—")),
             str(bp.get("wplay_cuota", "—")),
             f'<span style="color:{div_color};">{div:.1f}%{div_badge}</span>',
             f'<b style="color:{GREEN};">{casa_gana} @{cuota_gana}</b> '
@@ -872,7 +873,7 @@ def render_html(state: Dict[str, Any]) -> str:
     p8_panel = panel(
         f"P8 MULTI-BOOK — Router X1 Nodo-111 | feeds: {feeds_str or 'ninguno'} | {cache_note} (TTL 10min){stale_badge}",
         f'<div style="{atenuado}">' + table(
-            ["Jugador", "betplay", "wplay", "div%", "Mejor precio"],
+            ["Jugador", "betplay", "rushbet", "wplay", "div%", "Mejor precio"],
             p8_rows,
             "Sin datos (dual_book_cache.json vacío — se genera en próximo ciclo de live_edge_monitor)"
         ) + middle_note + "</div>",
@@ -1863,7 +1864,7 @@ def _build_p8_books(fecha: str) -> Dict:
     feeds: Dict[str, Any] = {}
     if _fetch_all_odds:
         try:
-            _all_data = _fetch_all_odds(["betplay", "wplay"])
+            _all_data = _fetch_all_odds(["betplay", "rushbet", "wplay"])
             for _player_key, _books in _all_data.items():
                 for _book, _entry in _books.items():
                     if _entry and _entry.get("odds"):
@@ -1924,6 +1925,7 @@ def _build_p8_books(fecha: str) -> Dict:
             "gain_pct":          gain,
             "divergencia_pct":   div_pct,
             "betplay_cuota":     cuotas_map.get("betplay", "—"),
+            "rushbet_cuota":     cuotas_map.get("rushbet", "—"),
             "wplay_cuota":       cuotas_map.get("wplay", "—"),
             "cuota_plan":        base_cuota,
         }
@@ -2071,11 +2073,11 @@ def _demo_state() -> Dict[str, Any]:
         "p8_books": {
             "picks": {
                 "alcaraz": {"jugador": "Alcaraz", "casa": "wplay", "cuota": 2.15, "gain_pct": 2.4, "divergencia_pct": 11.2,
-                            "betplay_cuota": 2.10, "wplay_cuota": 2.15, "cuota_plan": 2.10},
+                            "betplay_cuota": 2.10, "rushbet_cuota": 2.08, "wplay_cuota": 2.15, "cuota_plan": 2.10},
                 "djokovic": {"jugador": "Djokovic", "casa": "wplay", "cuota": 1.85, "gain_pct": 5.7, "divergencia_pct": 18.5,
-                             "betplay_cuota": 1.57, "wplay_cuota": 1.85, "cuota_plan": 1.80},
+                             "betplay_cuota": 1.57, "rushbet_cuota": 1.55, "wplay_cuota": 1.85, "cuota_plan": 1.80},
             },
-            "feeds": ["betplay", "wplay"],
+            "feeds": ["betplay", "rushbet", "wplay"],
             "cache_age_s": 45,
         },
         "p10_odds_history": {
