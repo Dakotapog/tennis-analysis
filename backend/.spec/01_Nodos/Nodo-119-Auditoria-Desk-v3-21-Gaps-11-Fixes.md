@@ -256,6 +256,45 @@ El parser de P6 nunca parseó un segmento real. El operador ha estado viendo sol
 
 ---
 
+## ADDENDUM 2026-07-20 — Auditoría física de gaps + implementaciones
+
+**Diagnóstico:** Auditoría física con `curl :7780` + lectura de código reveló que varios gaps listados en §4 ya estaban implementados. Estado real verificado:
+
+### Gaps que ya estaban implementados (falsos pendientes)
+
+| Task | Descripción | Evidencia |
+|------|-------------|-----------|
+| #48 | P9 Execution Router en render | L1324 `{p9_panel}` ya en HTML de salida |
+| #54 | P4 atenuación P1-P3 BLOCK | `atenuado = "opacity:0.35..."` aplicado en L621/718/752/774 |
+| #62 | JS sort por columna | Commit `2dd2711` sesión anterior — `sortTable()` + `▲/▼` en 7 tablas |
+| #64 | H111-01 en hypotheses.json | Verificado `python3 -c` → 29 hipótesis, H111-01 existe |
+| #65 | H107-01 en hypotheses.json | Verificado → existe como "MOTOR split por cuota: tramo cuota>2.50" |
+
+### Implementado en sesión 2026-07-20
+
+| Commit | Descripción |
+|--------|-------------|
+| `f274309` | P8: rushbet como 3ra columna — `fetch_all_odds(["betplay","rushbet","wplay"])` + columna rushbet en tabla + demo state |
+| `a19b304` | fix(live_desk): `ORANGE → AMBER` en panel DATA `cobertura_pct` — `NameError` en producción |
+| `fa52236` | fix(x2): steam-lag dinámico N-casas — extrae leader/stale desde `cuotas{}` en lugar de hardcodear betplay vs wplay |
+
+**Rushbet (D116-02 extensión):** offering_key=`rsico` (Rush Street Interactive CO), VERIFIED 2026-07-19 — 474 outcomes tenis con headers `Origin: https://www.rushbet.co`. Betplay sigue siendo líder de precio (+1.18% media, 93% picks) — rushbet útil para X2 steam-lag detección.
+
+### Gaps genuinos restantes
+
+| Task | Descripción | Motivo pendiente |
+|------|-------------|-----------------|
+| #50 | X3 Games signal | Requiere `games_signal_report_*.json` del día — pipeline PASO 3.6 |
+| #63 | systemd `tennis-live-desk.service :7780` | Decisión operativa (hoy lanzado manual) |
+| #66 | D110-06 RANKING_ONLY variante FAVORITOS_COMPUESTOS | Scope mayor — candidato sesión futura |
+| Nodo-97 | Kambi LIVE endpoint H100-01/H97-01 | DevTools capture requerido del operador |
+
+### Wikilinks totales — 13 | Huérfanos — 0 (verificado contra nodos_index.json 2026-07-20)
+
+[[Nodo-109-Live-Trading-Desk-Dashboard]] | [[Nodo-114-Desk-Razonamiento-P8-MultiBook]] | [[Nodo-115-Desk-Interactivo-Incertidumbre-Visible]] | [[Nodo-116-Entierro-Dashboard-Vieja-AutoCombo-AntiFlood-P8-MultiCasa]] | [[Nodo-111-Dual-Book-Live-Intelligence]] | [[Nodo-98-Meta-Senal-Convergencia]] | [[Nodo-100B-Triple-Convergencia-Live]] | [[Nodo-101-Shadow-Book-Live-CLV]] | [[Nodo-110-Modo-Operador-Favoritos-Compuestos]] | [[Nodo-107-Riesgo-Agregado-Motor-Reconciliacion]] | [[Nodo-97-Live-Edge-Monitor]] | [[Nodo-86-Auditoria-Fable5]] | [[Nodo-118-Match-Ledger-Crosswalk-Identidad-Fusion-Definitiva]]
+
+---
+
 ## §5. TESTS REGLA-T53
 
 No se escribieron tests nuevos — todos los cambios son render-only (REPORTE_SOLO). Los 21 tests existentes de Nodo-115/116 permanecen verdes:
