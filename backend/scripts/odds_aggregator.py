@@ -50,53 +50,78 @@ logger = logging.getLogger(__name__)
 BOOKMAKERS_CO: Dict[str, Dict] = {
     "betplay": {
         "api_type":     "kambi",
-        "offering_key": "betplay",          # VERIFIED — us.offering-api.kambicdn.com
+        "offering_key": "betplay",
         "base_url":     "https://us.offering-api.kambicdn.com/offering/v2018/betplay",
         "params":       "lang=es_CO&market=CO&channel_id=1&client_id=2",
+        "extra_headers": {},
         "priority":     1,
-        "status":       "VERIFIED",
+        "status":       "VERIFIED",  # VERIFIED — us.offering-api.kambicdn.com
     },
-    "betcris": {
+    "rushbet": {
         "api_type":     "kambi",
-        "offering_key": "PENDING_DEVTOOLS",  # betcris.com.co — IP bloqueada desde WSL
-        "base_url":     None,
+        "offering_key": "rsico",     # VERIFIED 2026-07-19 — Rush Street Interactive Colombia
+        "base_url":     "https://us.offering-api.kambicdn.com/offering/v2018/rsico",
         "params":       "lang=es_CO&market=CO&channel_id=1&client_id=2",
+        "extra_headers": {           # CDN exige Origin+Referer del skin — sin ellos → 429
+            "Origin":  "https://www.rushbet.co",
+            "Referer": "https://www.rushbet.co/",
+        },
         "priority":     2,
-        "status":       "PENDING_DEVTOOLS",
-    },
-    "luckia": {
-        "api_type":     "kambi",
-        "offering_key": "PENDING_DEVTOOLS",  # luckia.co — IP bloqueada desde WSL
-        "base_url":     None,
-        "params":       "lang=es_CO&market=CO&channel_id=1&client_id=2",
-        "priority":     3,
-        "status":       "PENDING_DEVTOOLS",
-    },
-    "sportium": {
-        "api_type":     "kambi",
-        "offering_key": "PENDING_DEVTOOLS",  # sportium.co — IP bloqueada desde WSL
-        "base_url":     None,
-        "params":       "lang=es_CO&market=CO&channel_id=1&client_id=2",
-        "priority":     4,
-        "status":       "PENDING_DEVTOOLS",
+        "status":       "VERIFIED",  # VERIFIED 2026-07-19 — 127 eventos tenis
     },
     "wplay": {
         "api_type":  "wplay_ssr",
-        "ssr_url":   "https://m.wplay.co/es/s/TENN/Tenis",  # SSR HTML — VERIFIED 2026-07-14
+        "ssr_url":   "https://m.wplay.co/es/s/TENN/Tenis",
         "base_url":  None,
         "params":    None,
-        "priority":  2,
-        "status":    "VERIFIED",
-        # Arquitectura Geneity — data-view_id=1070 (client_id)
-        # WS: wss://genpush.wplay.co:8443/ (protocolo descifrado, reservado para in-play futuro)
+        "extra_headers": {},
+        "priority":  3,
+        "status":    "VERIFIED",     # VERIFIED 2026-07-14 — SSR HTML Geneity, sin auth
+        # WS in-play: wss://genpush.wplay.co:8443/ (reservado futuro)
+    },
+    "betcris": {
+        "api_type":     "kambi",
+        "offering_key": "PENDING_DEVTOOLS",
+        "base_url":     None,
+        "params":       "lang=es_CO&market=CO&channel_id=1&client_id=2",
+        "extra_headers": {},
+        "priority":     5,
+        "status":       "PENDING_DEVTOOLS",
+        # NOTA 2026-07-19: betcris NO tiene licencia Coljuegos activa (no aparece en lista oficial).
+        # 429 verificado desde WSL y Windows — CDN exige cookie de sesión del skin.
+        # Prioridad baja: sin licencia CO, perfil de usuario en riesgo.
+    },
+    "luckia": {
+        "api_type":     "custom",    # NO es Kambi — usa Luckia Tech (plataforma propia)
+        "offering_key": "PENDING_DEVTOOLS",
+        "base_url":     None,
+        "params":       None,
+        "extra_headers": {},
+        "priority":     5,
+        "status":       "PENDING_DEVTOOLS",
+        # NOTA 2026-07-19: Luckia Tech = plataforma propia (no Kambi, no SBTech).
+        # Requiere scraper SSR dedicado similar a wplay. Licencia Coljuegos: SÍ (C1xxx).
+    },
+    "sportium": {
+        "api_type":     "custom",    # plataforma Winner Group — pendiente verificar endpoint
+        "offering_key": "PENDING_DEVTOOLS",
+        "base_url":     None,
+        "params":       None,
+        "extra_headers": {},
+        "priority":     5,
+        "status":       "PENDING_DEVTOOLS",
+        # NOTA 2026-07-19: Sportium = Winner Group España. Licencia Coljuegos C1942 hasta 2028.
+        # 429 verificado desde WSL — probablemente CDN con cookie o plataforma propia.
     },
     "codere": {
         "api_type":     "custom",
         "offering_key": "PENDING_DEVTOOLS",
         "base_url":     None,
         "params":       None,
+        "extra_headers": {},
         "priority":     6,
         "status":       "PENDING_DEVTOOLS",
+        # Grupo Codere — plataforma propia. Licencia Coljuegos C1901.
     },
 }
 
@@ -128,8 +153,9 @@ def _fetch_kambi(book: str, cfg: Dict) -> Tuple[Dict[str, Dict], str]:
         return {}, f"SKIP ({cfg['status']})"
 
     url = f"{cfg['base_url']}/listView/tennis.json?{cfg['params']}"
+    headers = {**KAMBI_HEADERS, **cfg.get("extra_headers", {})}
     try:
-        resp = requests.get(url, headers=KAMBI_HEADERS, timeout=12)
+        resp = requests.get(url, headers=headers, timeout=12)
         resp.raise_for_status()
         data = resp.json()
     except Exception as e:
