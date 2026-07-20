@@ -835,7 +835,7 @@ def render_html(state: Dict[str, Any]) -> str:
         p8_rows.append([
             arb_html + bp.get("jugador", jug_key),
             str(bp.get("betplay_cuota", "—")),
-            str(bp.get("flashscore_cuota", "—")),
+            str(bp.get("wplay_cuota", "—")),
             f'<span style="color:{div_color};">{div:.1f}%{div_badge}</span>',
             f'<b style="color:{GREEN};">{casa_gana} @{cuota_gana}</b> '
             f'<span style="color:{gain_color};">({gain_str})</span>',
@@ -858,7 +858,7 @@ def render_html(state: Dict[str, Any]) -> str:
     p8_panel = panel(
         f"P8 MULTI-BOOK — Router X1 Nodo-111 | feeds: {feeds_str or 'ninguno'} | {cache_note} (TTL 10min){stale_badge}",
         f'<div style="{atenuado}">' + table(
-            ["Jugador", "betplay", "flashscore", "div%", "Mejor precio"],
+            ["Jugador", "betplay", "wplay", "div%", "Mejor precio"],
             p8_rows,
             "Sin datos (dual_book_cache.json vacío — se genera en próximo ciclo de live_edge_monitor)"
         ) + middle_note + "</div>",
@@ -929,16 +929,16 @@ def render_html(state: Dict[str, Any]) -> str:
             continue
         _jug       = _bp.get("jugador", _jk)
         _bp_cuota  = float(_bp.get("betplay_cuota") or 0)
-        _fs_cuota  = float(_bp.get("flashscore_cuota") or 0)
+        _fs_cuota  = float(_bp.get("wplay_cuota") or 0)
         if not _bp_cuota or not _fs_cuota:
             continue
         # Leader = cuota más baja (ya se movió). Rezagada = cuota más alta (stale).
         if _bp_cuota < _fs_cuota:
-            _leader_casa, _leader_c = "betplay",     _bp_cuota
-            _stale_casa,  _stale_c  = "flashscore",  _fs_cuota
+            _leader_casa, _leader_c = "betplay",  _bp_cuota
+            _stale_casa,  _stale_c  = "wplay",    _fs_cuota
         else:
-            _leader_casa, _leader_c = "flashscore",  _fs_cuota
-            _stale_casa,  _stale_c  = "betplay",     _bp_cuota
+            _leader_casa, _leader_c = "wplay",    _fs_cuota
+            _stale_casa,  _stale_c  = "betplay",  _bp_cuota
         _dir   = _tape_dir.get(_jug.lower(), "")
         _alert = _div >= X2_ALERT_PCT
         if _alert:
@@ -971,7 +971,7 @@ def render_html(state: Dict[str, Any]) -> str:
         table(
             ["Jugador", "Leader (movida)", "Rezagada (ejecutar)", "Gap%", "Dirección", "Estado"],
             x2_rows,
-            "Sin divergencia ≥10% entre casas (feeds sincronizados o sin datos flashscore)",
+            "Sin divergencia ≥10% entre casas (feeds sincronizados o wplay fuera de horario)",
         ),
         _x2_badge, _x2_badge_col,
     )
@@ -1804,18 +1804,36 @@ def _build_p8_books(fecha: str) -> Dict:
 
     # Fresh build — UNA llamada de red por ciclo
     try:
-        from scraping.dual_book_client import fetch_kambi, best_price as _best_price, _norm, es_arb as _es_arb
+        from scraping.dual_book_client import best_price as _best_price, _norm, es_arb as _es_arb
     except ImportError:
         return {"picks": {}, "feeds": [], "error": "dual_book_client no disponible", "cache_age_s": 0}
 
-    feeds: Dict[str, Any] = {}
+    # Book 1+2: odds_aggregator multi-casa (betplay Kambi REST + wplay SSR VERIFIED)
+    # Nodo-116 D116-02. fetch_all_odds → {player: {book: entry}} — invertir para best_price()
+    _fetch_all_odds = None
     try:
-        feeds["betplay"] = fetch_kambi("betplay")
-    except Exception:
-        feeds["betplay"] = {}
+        import sys as _sys
+        _scripts_dir = str(BASE_DIR / "scripts")
+        if _scripts_dir not in _sys.path:
+            _sys.path.insert(0, _scripts_dir)
+        from odds_aggregator import fetch_all_odds as _fetch_all_odds
+    except ImportError:
+        pass
 
-    # Fallback Book 1: si Kambi devuelve 429 (vacío), usar h2h_results_enhanced
-    # que tiene cuotas Kambi capturadas en pipeline con nombres completos
+    feeds: Dict[str, Any] = {}
+    if _fetch_all_odds:
+        try:
+            _all_data = _fetch_all_odds(["betplay", "wplay"])
+            for _player_key, _books in _all_data.items():
+                for _book, _entry in _books.items():
+                    if _entry and _entry.get("odds"):
+                        # Re-normalizar con dual_book _norm para consistencia con best_price()
+                        _dk = _norm(_entry.get("jugador", _player_key))
+                        feeds.setdefault(_book, {})[_dk] = _entry
+        except Exception:
+            pass
+
+    # Fallback betplay: si Kambi devuelve 429/vacío, usar h2h_results_enhanced del pipeline
     _h2h_path = _latest(str(REPORTS / f"h2h_results_enhanced_{fecha.replace('-','')}*.json"))
     _h2h_rows: list = []
     if _h2h_path:
@@ -1833,38 +1851,6 @@ def _build_p8_books(fecha: str) -> Dict:
                 _bp_fb[_norm(_p["jugador2"])] = {"odds": _p["cuota2"]}
         if _bp_fb:
             feeds["betplay"] = _bp_fb
-
-    # Bridge: last_name → full_name_norm (para resolver "Vasa I." → "iiro vasa")
-    _bridge: Dict[str, str] = {}
-    for _p in _h2h_rows:
-        for _jug in [_p.get("jugador1", ""), _p.get("jugador2", "")]:
-            if _jug:
-                _parts = _jug.split()
-                if _parts:
-                    _bridge[_norm(_parts[-1])] = _norm(_jug)  # "vasa" → "iiro vasa"
-
-    # Book 2: zita file (FlashScore/Playwright — Nodo-48)
-    # Acepta lista plana (merged) o dict {torneo: [partidos]} (Playwright raw)
-    # Usa bridge last-name para indexar por nombre completo (resuelve Nodo-80)
-    zita = _latest(str(BASE_DIR / f"data/zita_tennis_matches_{fecha.replace('-','')}*.json"))
-    zita_data = _load_json(zita)
-    if zita_data:
-        fs: Dict[str, Any] = {}
-        _rows: list = zita_data if isinstance(zita_data, list) else []
-        if isinstance(zita_data, dict):
-            for _v in zita_data.values():
-                if isinstance(_v, list):
-                    _rows.extend(_v)
-        for m in _rows:
-            for _jk, _ck in [("jugador1", "cuota1"), ("jugador2", "cuota2")]:
-                _jug, _c = m.get(_jk), m.get(_ck)
-                if _jug and _c:
-                    # "Vasa I." → last_token="Vasa" → bridge→"iiro vasa", fallback abbrev norm
-                    _last = _norm(_jug.replace(".", "").split()[0]) if _jug else ""
-                    _key  = _bridge.get(_last, _norm(_jug))
-                    fs[_key] = {"odds": _c}
-        if fs:
-            feeds["flashscore"] = fs
 
     # Read edge_report for picks to route
     er = _latest(str(REPORTS / f"edge_report_{fecha.replace('-','')}*.json"))
@@ -1898,7 +1884,7 @@ def _build_p8_books(fecha: str) -> Dict:
             "gain_pct":          gain,
             "divergencia_pct":   div_pct,
             "betplay_cuota":     cuotas_map.get("betplay", "—"),
-            "flashscore_cuota":  cuotas_map.get("flashscore", "—"),
+            "wplay_cuota":       cuotas_map.get("wplay", "—"),
             "cuota_plan":        base_cuota,
         }
 
@@ -2044,12 +2030,12 @@ def _demo_state() -> Dict[str, Any]:
         },
         "p8_books": {
             "picks": {
-                "alcaraz": {"jugador": "Alcaraz", "casa": "flashscore", "cuota": 2.15, "gain_pct": 2.4, "divergencia_pct": 11.2,
-                            "betplay_cuota": 2.10, "flashscore_cuota": 2.15, "cuota_plan": 2.10},
-                "djokovic": {"jugador": "Djokovic", "casa": "flashscore", "cuota": 1.85, "gain_pct": 5.7, "divergencia_pct": 18.5,
-                             "betplay_cuota": 1.57, "flashscore_cuota": 1.85, "cuota_plan": 1.80},
+                "alcaraz": {"jugador": "Alcaraz", "casa": "wplay", "cuota": 2.15, "gain_pct": 2.4, "divergencia_pct": 11.2,
+                            "betplay_cuota": 2.10, "wplay_cuota": 2.15, "cuota_plan": 2.10},
+                "djokovic": {"jugador": "Djokovic", "casa": "wplay", "cuota": 1.85, "gain_pct": 5.7, "divergencia_pct": 18.5,
+                             "betplay_cuota": 1.57, "wplay_cuota": 1.85, "cuota_plan": 1.80},
             },
-            "feeds": ["betplay", "flashscore"],
+            "feeds": ["betplay", "wplay"],
             "cache_age_s": 45,
         },
         "p10_odds_history": {
