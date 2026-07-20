@@ -1254,7 +1254,7 @@ def render_html(state: Dict[str, Any]) -> str:
     _d = state.get("p_data", {})
     if _d.get("disponible"):
         _cob = _d["cobertura_pct"]
-        _cob_color = GREEN if _cob >= 85 else (ORANGE if _cob >= 60 else RED)
+        _cob_color = GREEN if _cob >= 85 else (AMBER if _cob >= 60 else RED)
         _data_badge = f"{_cob:.1f}%"
         _fuga_rows = [[f["partido"], str(f["score"])] for f in _d.get("fuga_nominal", [])]
         _data_content = (
