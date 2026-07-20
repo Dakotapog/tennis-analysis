@@ -630,18 +630,32 @@ def render_html(state: Dict[str, Any]) -> str:
           {content}
         </div>"""
 
+    _tbl_n = [0]  # counter para IDs únicos de tablas sortables
+
     def row(cols, header=False):
-        color = GREY if header else WHITE
-        weight = "bold" if header else "normal"
-        cells = "".join(f'<td style="padding:4px 10px;color:{color};font-weight:{weight};">{c}</td>' for c in cols)
+        if header:
+            cells = "".join(
+                f'<th style="padding:4px 10px;color:{GREY};font-weight:bold;'
+                f'cursor:pointer;user-select:none;white-space:nowrap;" '
+                f'onclick="sortTable(this)" data-dir="">'
+                f'{c}&nbsp;<span class="si"></span></th>'
+                for c in cols
+            )
+            return f"<tr>{cells}</tr>"
+        cells = "".join(f'<td style="padding:4px 10px;color:{WHITE};">{c}</td>' for c in cols)
         return f"<tr>{cells}</tr>"
 
     def table(headers, rows_data, empty_msg="Sin datos"):
         if not rows_data:
             return f'<p style="color:{GREY};font-size:0.85em;">{empty_msg}</p>'
+        _tbl_n[0] += 1
+        tid = f"st{_tbl_n[0]}"
         hdr = row(headers, header=True)
         body = "".join(row(r) for r in rows_data)
-        return f'<table style="border-collapse:collapse;width:100%;font-size:0.85em;"><tr>{hdr}</tr>{body}</table>'
+        return (
+            f'<table id="{tid}" style="border-collapse:collapse;width:100%;font-size:0.85em;">'
+            f'<thead>{hdr}</thead><tbody>{body}</tbody></table>'
+        )
 
     # ── P4 RISK ──────────────────────────────────────────────────────────────
     gov_label = ["PASS", "WARN", "BLOCK", "BLOCK"][min(gov_code, 3)]
@@ -1354,6 +1368,32 @@ def render_html(state: Dict[str, Any]) -> str:
         if (d) d.style.display = 'table-row';
       }}
     }});
+  }}
+
+  function sortTable(th) {{
+    var tbl  = th.closest('table');
+    var tbody = tbl.querySelector('tbody');
+    var ths  = Array.from(th.parentElement.children);
+    var col  = ths.indexOf(th);
+    var asc  = th.getAttribute('data-dir') !== 'asc';
+    var dir  = asc ? 1 : -1;
+    ths.forEach(function(h) {{
+      h.setAttribute('data-dir', '');
+      var si = h.querySelector('.si');
+      if (si) si.textContent = '';
+    }});
+    th.setAttribute('data-dir', asc ? 'asc' : 'desc');
+    var si = th.querySelector('.si');
+    if (si) si.textContent = asc ? '▲' : '▼';
+    Array.from(tbody.querySelectorAll('tr'))
+      .sort(function(a, b) {{
+        var av = a.children[col] ? a.children[col].textContent.trim() : '';
+        var bv = b.children[col] ? b.children[col].textContent.trim() : '';
+        var an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir * (an - bn);
+        return dir * av.localeCompare(bv);
+      }})
+      .forEach(function(r) {{ tbody.appendChild(r); }});
   }}
 
   function autoRefresh() {{
