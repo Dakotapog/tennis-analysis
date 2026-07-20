@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generado": "2026-07-19T00:25:57",
+    "generado": "2026-07-19T22:42:52",
     "total_nodos": 116,
     "total_py_files": 71,
     "huerfanos_count": 1,
@@ -392,6 +392,7 @@
         "dual_book_client.py",
         "extraer_URL_partidos_version2.py",
         "live_dashboard_generator.py",
+        "live_desk.py",
         "scripts/live_dashboard_generator.py",
         "scripts/live_edge_monitor.py",
         "tests/test_nodo116_antiflood.py"
