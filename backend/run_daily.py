@@ -312,8 +312,8 @@ def main():
             if (args.tomorrow or _fase == 'noche')
             else datetime.now().strftime('%Y-%m-%d')
         )
-        _run(['python3', 'scraping/match_ledger.py', '--build', '--fecha', _fecha_ledger],
-             'PASO 1.5 — Fusión Playwright+API → ledger crosswalk (Nodo-118)')
+        _run(['python3', 'scraping/match_ledger.py', '--build', '--enrich', '--fecha', _fecha_ledger],
+             'PASO 1.5 — Fusión Playwright+API → ledger crosswalk + enrichment qualifying (Nodo-118+121)')
 
         # ── PASO 2 — H2H ─────────────────────────────────────────────────────
         if not args.skip_h2h:
@@ -369,8 +369,9 @@ def main():
             f'PASO 4 — Trader {tier}',
             capture=True,
         )
-        # Leer el plan más reciente para el brief
-        plan_file = _latest_report(f'{REPORTS_DIR}/trader_plan_*.json')
+        # Leer el plan del día (solo fecha hoy — evita leer plan stale de día anterior)
+        _fecha_compact = fecha_hoy.replace('-', '')
+        plan_file = _latest_report(f'{REPORTS_DIR}/trader_plan_{_fecha_compact}*.json')
         if plan_file:
             try:
                 plan = json.loads(Path(plan_file).read_text(encoding='utf-8'))

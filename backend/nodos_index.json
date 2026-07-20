@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "generado": "2026-07-19T23:06:40",
-    "total_nodos": 117,
+    "generado": "2026-07-20T10:32:46",
+    "total_nodos": 119,
     "total_py_files": 71,
     "huerfanos_count": 1,
     "exclusiones_count": 19
@@ -474,8 +474,38 @@
       "fecha": null,
       "estado": "activo",
       "archivos_mencionados": [
+        "match_ledger.py",
         "scraping/match_ledger.py",
         "tests/test_nodo120_fs_cuotas.py"
+      ]
+    },
+    {
+      "nodo_id": "121",
+      "nodo_archivo": "Nodo-121-OddsAggregator-Cuota-Enrichment-ss-fs.md",
+      "fecha": null,
+      "estado": "activo",
+      "archivos_mencionados": [
+        "edge_calculator.py",
+        "extraer_URL_partidos.py",
+        "extraer_historh2h.py",
+        "extraer_partidos_api.py",
+        "match_ledger.py",
+        "odds_aggregator.py",
+        "run_daily.py",
+        "scraping/match_ledger.py",
+        "shadow_book.py",
+        "tests/test_nodo121_aggregator_enrichment.py"
+      ]
+    },
+    {
+      "nodo_id": "122",
+      "nodo_archivo": "Nodo-122-Fix-DualBook-Lista-BriefStale.md",
+      "fecha": "2026-07-20",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "dual_book_client.py",
+        "run_daily.py",
+        "scraping/dual_book_client.py"
       ]
     },
     {

@@ -134,6 +134,15 @@ def main():
                     if m.get("jugador2") and m.get("cuota2"):
                         fs[_norm(m["jugador2"])] = {"odds": m["cuota2"]}
             feeds["flashscore"] = fs
+        elif isinstance(raw, list):
+            # formato merged: lista plana de dicts con jugador1/cuota1/jugador2/cuota2
+            fs = {}
+            for m in raw:
+                if m.get("jugador1") and m.get("cuota1"):
+                    fs[_norm(m["jugador1"])] = {"odds": m["cuota1"]}
+                if m.get("jugador2") and m.get("cuota2"):
+                    fs[_norm(m["jugador2"])] = {"odds": m["cuota2"]}
+            feeds["flashscore"] = fs
         else:
             feeds["flashscore"] = {_norm(k): v for k, v in raw.items()}
     ep = _latest("edge_report_*.json")
