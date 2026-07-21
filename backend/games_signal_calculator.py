@@ -440,6 +440,7 @@ def procesar_partidos(partidos: list, min_cuota: float, min_gap: float) -> list:
     MIN_GAP_JUEGOS = min_gap
 
     resultados = []
+    seen_outcome_ids: dict[int, str] = {}  # D126-05: outcome_id → primer partido que lo usó
     # Cache del listView para no hacer 14 llamadas
     _listview_cache = None
 
@@ -523,30 +524,23 @@ def procesar_partidos(partidos: list, min_cuota: float, min_gap: float) -> list:
             ev_id = betslip_index[match_id]
             logger.debug(f"   betslip_index hit: ev_id={ev_id}")
 
-        # Intento 2: listView por apellido (funciona para partidos futuros)
+        # Intento 2: listView — D126-01/04: _apellido() + NOT_STARTED + sin dobles
         if not ev_id:
             events = _get_listview()
-            j1_parts = j1.lower().split()
-            j2_parts = j2.lower().split()
-            apellido1 = j1_parts[-1] if j1_parts else ""
-            apellido2 = j2_parts[-1] if j2_parts else ""
-            for ev in events:
-                ev_name = ev.get("event", {}).get("name", "").lower()
-                if apellido1 in ev_name and apellido2 in ev_name:
-                    ev_id = ev.get("event", {}).get("id")
-                    break
+            ap1 = _apellido(j1)
+            ap2 = _apellido(j2)
+            if ap1 and ap2:
+                for ev in events:
+                    if ev.get("event", {}).get("state") != "NOT_STARTED":
+                        continue  # D126-04: excluir partidos en vivo
+                    ev_name = ev.get("event", {}).get("name", "").lower()
+                    if "/" in ev_name:
+                        continue  # excluir dobles (D126-02)
+                    if ap1 in ev_name and ap2 in ev_name:
+                        ev_id = ev.get("event", {}).get("id")
+                        break
 
-        # Intento 3: búsqueda amplia en listView por primer apellido
-        if not ev_id:
-            events = _get_listview()
-            j1_parts = j1.lower().split()
-            apellido1 = j1_parts[-1] if j1_parts else ""
-            for ev in events:
-                ev_name = ev.get("event", {}).get("name", "").lower()
-                if apellido1 in ev_name:
-                    ev_id = ev.get("event", {}).get("id")
-                    logger.debug(f"   apellido1 fallback: {ev_name}")
-                    break
+        # Intento 3: desactivado — un solo apellido es demasiado amplio (D126-05)
 
         if not ev_id:
             logger.info(f"   ⚠️  no encontrado en Kambi (partidos ya jugados o sin mercado)")
@@ -566,6 +560,19 @@ def procesar_partidos(partidos: list, min_cuota: float, min_gap: float) -> list:
         # 6. Analizar señales disponibles
         señales = _analizar_mercados_juegos(betoffer, pred)
         optimas = _seleccionar_señal_optima(señales)
+
+        # D126-05: descartar outcome IDs genéricos/compartidos (plantillas ITF)
+        unicas = []
+        for s in optimas:
+            oid = s.get("outcome_id")
+            if oid is None:
+                unicas.append(s)
+            elif oid in seen_outcome_ids:
+                logger.info(f"   ⚠️  outcome {oid} NO_UNICO (visto en {seen_outcome_ids[oid]}) — descartado")
+            else:
+                seen_outcome_ids[oid] = nombre
+                unicas.append(s)
+        optimas = unicas
 
         resultado_base["señales"] = señales
         resultado_base["señales_optimas"] = optimas
