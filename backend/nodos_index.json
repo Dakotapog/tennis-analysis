@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "generado": "2026-07-20T10:32:46",
-    "total_nodos": 119,
+    "generado": "2026-07-20T20:10:02",
+    "total_nodos": 121,
     "total_py_files": 71,
     "huerfanos_count": 1,
     "exclusiones_count": 19
@@ -506,6 +506,32 @@
         "dual_book_client.py",
         "run_daily.py",
         "scraping/dual_book_client.py"
+      ]
+    },
+    {
+      "nodo_id": "123",
+      "nodo_archivo": "Nodo-123-Dashboard-Integraciones-Pendientes-v2.md",
+      "fecha": null,
+      "estado": "activo",
+      "archivos_mencionados": [
+        "favoritos_combo_builder.py",
+        "games_signal_calculator.py",
+        "live_desk.py",
+        "live_edge_monitor.py"
+      ]
+    },
+    {
+      "nodo_id": "124",
+      "nodo_archivo": "Nodo-124-EvalTracker-TablaFavoritos-ShadowBook.md",
+      "fecha": "2026-07-20",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "edge_calculator.py",
+        "generar_tabla_favoritos2.py",
+        "run_daily.py",
+        "scripts/backfill_evaluar_shadow.py",
+        "shadow_book.py",
+        "tests/test_nodo124_evaluar_tracker.py"
       ]
     },
     {

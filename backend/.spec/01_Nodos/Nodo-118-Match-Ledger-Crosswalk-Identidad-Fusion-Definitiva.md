@@ -3,7 +3,7 @@ estado: activo
 ---
 # Nodo-118 — MATCH LEDGER + CROSSWALK: la solución definitiva al problema de datos (no es scraping, es identidad)
 
-> **Wikilinks:** [[Nodo-117-Auditoria-Scraping-Rankings-Cobertura-H2H]] | [[Nodo-80-Kambi-Name-Matching]] | [[Nodo-82-Kambi-Match-ID-Structural]] | [[Nodo-51-Plan-Estrategico-Data-Layer-Torneo]] | [[Nodo-72-Phantom-Identity-Guard]] | [[Nodo-48-FlashScore-Odds-Scraper-Testing]] | [[Nodo-89-Sistema-Inteligencia-Integral]] | [[Nodo-93-Sprint2-Implementado]] | [[Nodo-96-IRP-Individual-Return-Profile]] | [[Nodo-109-Live-Trading-Desk-Dashboard]] | [[Nodo-110-Modo-Operador-Favoritos-Compuestos]] | [[Nodo-119-Auditoria-Desk-v3-21-Gaps-11-Fixes]]
+> **Wikilinks:** [[Nodo-117-Auditoria-Scraping-Rankings-Cobertura-H2H]] | [[Nodo-80-Kambi-Name-Matching]] | [[Nodo-82-Kambi-Match-ID-Structural]] | [[Nodo-51-Plan-Estrategico-Data-Layer-Torneo]] | [[Nodo-72-Phantom-Identity-Guard]] | [[Nodo-48-FlashScore-Odds-Scraper-Testing]] | [[Nodo-89-Sistema-Inteligencia-Integral]] | [[Nodo-93-Sprint2-Implementado]] | [[Nodo-96-IRP-Individual-Return-Profile]] | [[Nodo-109-Live-Trading-Desk-Dashboard]] | [[Nodo-110-Modo-Operador-Favoritos-Compuestos]] | [[Nodo-119-Auditoria-Desk-v3-21-Gaps-11-Fixes]] | [[Nodo-120-FS-Single-Source-Cuotas-Qualifying-Flow]] (F6 — compuerta qualifying abierta 2026-07-19)
 > **Fecha:** 2026-07-18 | **Autor:** Fable 5 (análisis de raíz + spec) | **Implementa:** Sonnet, por fases, SIN presión de sprint
 > **Responde:** la pregunta de D117-03 (opciones 1/2/3) — la respuesta es **Opción 1, pero con la arquitectura correcta**: el merge no se hace adivinando nombres inline; se hace vía ledger + crosswalk persistente.
 
@@ -180,6 +180,8 @@ Nota D118-F3-03: 2026-07-08 con 232 cuarentena — ambos archivos son API (sin m
 | [[Nodo-117-Auditoria-Scraping-Rankings-Cobertura-H2H]] | D117-03 derivó en este nodo — forward ref en §Decisiones |
 | [[Nodo-109-Live-Trading-Desk-Dashboard]] | Panel DATA (back-link añadido 2026-07-18) |
 | [[Nodo-119-Auditoria-Desk-v3-21-Gaps-11-Fixes]] | Gap DATA → F5 implementado (back-link añadido 2026-07-18) |
+| [[Nodo-120-FS-Single-Source-Cuotas-Qualifying-Flow]] | F6 — compuerta qualifying abierta 2026-07-19 |
+| [[Nodo-121-OddsAggregator-Cuota-Enrichment-ss-fs]] | F7 addendum — enriquecimiento post-fusión via betplay/rushbet (2026-07-20) |
 
 ### Huérfanos operacionales (no son links de spec — son gates de hipótesis)
 

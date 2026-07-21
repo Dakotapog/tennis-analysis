@@ -1,6 +1,6 @@
 # CLAUDE.md — Tennis Prediction & Betting Engine
 
-> Last updated: 2026-07-18 (Nodo-119: auditoría doctoral Desk v3 — 21 FAIL → 11 fixes. P3/P6 ciegos desde origen (bugs estructurales). MOTOR cuota split: ≤2.5 hit=48.2% vs >2.5 hit=26.7%. 10 gaps pendientes como Tasks #48-#66.)
+> Last updated: 2026-07-20 (Nodo-123: Auditoría Dashboard — D122-01→D122-06 todos ya implementados por Fable. KambiLiveClientReal D97-15 operativo 2026-07-14. 2204 tests. 19 hipótesis.)
 > Spec-Driven Development (SDD). CLAUDE.md es VISTA DERIVADA — los nodos son la fuente de verdad.
 > Leer completo antes de tocar código. Ver política de precedencia §10.
 
@@ -138,11 +138,11 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 
 ---
 
-## 5. ESTADO ACTUAL — 2026-07-18
+## 5. ESTADO ACTUAL — 2026-07-19
 
 | Métrica | Valor |
 |---|---|
-| Tests | **2198 passed, 1 failed** (verificado 2026-07-18). `test_nodo51_f3_02_budget_processes_itf_before_grand_slam` pre-existente. `test_prior_bajo_no_se_ve_afectado` intermitente. +35 tests Nodo-118 (19 F1 + 6 F2 + 3 F3 + 4 F4 + 3 F5). |
+| Tests | **2204 passed, 1 failed** (verificado 2026-07-20). `test_nodo51_f3_02_budget_processes_itf_before_grand_slam` pre-existente. +3 tests Nodo-121 (`test_nodo121_aggregator_enrichment.py`). |
 | Calibración | clay GS: p=0.758 (n=31) \| global: wins=2358, losses=1480 (n=3838) \| ⚠️ buckets huérfanos `?`/`?_?` con ~141 resultados de dinero real (24% hit) — ver Nodo-86 §1.1, migración en evaluación: T7 Nodo-66 decide |
 | **Auditoría Fable5** | **Sprints 1-5 EN CURSO.** S1-S4 ✅. S5: IRP ✅ (Nodo-96, 4361 perfiles, 15 tests). Pendiente S5: D90-11 N28F2/tier (gate n≥30), OddsAggregator multi-casa (gate cuentas reales) |
 | Bankroll | $125,000+ |
@@ -163,7 +163,7 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 | F4 Estadística doctoral (Nodos 64-71) | ✅ 67 tests (43 base + 24 C1/Nodo-67) |
 | F5 Vault + session_compiler + CLAUDE.md slim | ✅ completada |
 
-**Nodos completos:** 51-63, 64-71, 72, 73, 78, 86-113, 117 — detalles en `.spec/01_Nodos/Nodo-XX.md`
+**Nodos completos:** 51-63, 64-71, 72, 73, 78, 86-113, 117-123 — detalles en `.spec/01_Nodos/Nodo-XX.md`
 **Nodo-64:** RFI Return-From-Inactivity — **implementado 2026-07-11 (D64-01)**: `rfi_tier`/`rfi_ultra`/`rfi_decay_gap` serializados en edge_report, segmentos en shadow_book --report. H76-01 acumula automático.
 **Nodo-65:** Convergencia Multi-Señal — ANCHOR(edge>0) / VARIABLE(edge≤0). D65-01→D65-07. H77-01/02/03 pre-registradas.
 **Nodos 66-68:** 66=checklist T1→T10 COMPLETOS. 67=integración herramientas **COMPLETO** (I3 governor JSON-first, I7 combo_registry→player_registry+run_daily settle, C1 DataContract v2 6 fronteras 24 tests, C4 brecha hit%_real vs shadow en dashboard). 68=H88-01 Rival Value Flip — **EVIDENCIA REAL 2026-07-14: 3/3 wins, combinada 41.25x** — n_actual=3, Wilson LB=0.526 > breakeven 0.267. D68-07 `rival_value_betslip.py` operativo (micro-Kelly shrink=5.7%, cap 0.5%). Gate: n=30 (faltan 27).
@@ -182,6 +182,9 @@ python3 scripts/rebuild_nodos_index.py              # re-indexar tras añadir No
 **Nodo-117 (Auditoría Scraping):** 4 bugs identificados 2026-07-18. D117-01 ✅: `_leer_matches_ranking_only()` prefiere ATP/WTA reales sobre CA/CB FlashScore (0→6 candidatos RANKING_ONLY). D117-02 ✅: `select_best_json_file()` prioriza `matches_with_cuotas>0`. D117-04 ✅: comentario anti-regresión `scraping/kambi_tennis.py` L196-199. D117-03 → implementado como Nodo-118. 9 tests REGLA-T53.
 **Nodo-118 (Match Ledger Crosswalk — D117-03):** F1-F5 COMPLETOS 2026-07-18. `scraping/match_ledger.py`: `fusionar_dia()` Fellegi-Sunter simplificado (score 0-100, ≥75=AUTO-JOIN, 55-74=CUARENTENA, <55=single-source) + shortcut `match_id` compartido=score 100. `core/player_registry.py`: `add_alias()` + `resolve_crosswalk()` (MANUAL>VERIFIED>AUTO). `scripts/build_crosswalk_bootstrap.py`: 2091 identidades, 57.7% cobertura (194 zita + 152 edge_reports). `run_daily.py`: PASO 1b (Playwright) + PASO 1.5 (`match_ledger --build`). `live_desk.py`: panel DATA embudo fuga nominal. 35 tests REGLA-T53. Crosswalk en `data/player_crosswalk.json`. Gate F5 en acumulación: join ≥85% en ≥5/7 días.
 **Nodo-119 (Auditoría Doctoral Desk v3):** Audit físico curl :7780 → 42 PASS / 21 FAIL. 11 fixes D119-01→D119-08 implementados en `live_desk.py` (render-only, REPORTE_SOLO). **Bugs estructurales críticos:** (1) P3 SIEMPRE VACÍO — `data.get("picks")` vs `apostar+watchlist`; (2) P6 NUNCA PARSEABA — regex single-line vs output multi-línea shadow_book. **Hallazgo operativo:** MOTOR cuota≤2.5 hit=48.2% vs cuota>2.5 hit=26.7% (gap 21.5pp — justifica H107-01). P6 ahora muestra 16 segmentos reales. 10 gaps pendientes: Tasks #48/49/50/54/59/62/63/64/65/66.
+**Nodo-120 (FS Single-Source Cuotas — F6 Nodo-118):** Compuerta qualifying abierta 2026-07-19. `exportar_para_edge_calculator()` en `scraping/match_ledger.py` ahora incluye `single_source_fs` con `cuota1>0` (qualifying rounds con cuotas FlashScore, fuera del catálogo Kambi/Betplay). Campo `_cuota_source='flashscore'` para trazabilidad. Impacto: ~67 → ~100 partidos/día exportados (+33 qualifying). NO_DATA 51.9% hit rate ahora llega al edge_calculator. H120-01 pre-registrada (n_stop=20). 3 tests REGLA-T53.
+**Nodo-121 (OddsAggregator Cuota Enrichment — F7 Nodo-118):** Hallazgo 2026-07-20: ss_fs con cuota1=None (qualifying no en PASO 1) SÍ están en betplay+rushbet via odds_aggregator (474 outcomes vs 122 de PASO 1). `enriquecer_ss_fs_con_aggregator()` en `scraping/match_ledger.py`: post-fusión, enriquece ss_fs sin cuota usando `fetch_all_odds(['betplay','rushbet'])` con match por apellido. CLI: `--build --enrich`. Resultado primer día: 5/11 enriquecidos (Aksu/Costoulas betplay=3.0, etc). `run_daily.py` PASO 1.5 actualizado con `--enrich`. H121-01 pre-registrada (n_stop=20). 3 tests REGLA-T53.
+**Nodo-123 (Auditoría Dashboard Integraciones v2):** Auditoría 2026-07-20 — todos los 6 pendientes del spec eran falsos. D122-01→D122-04: `live_desk.py` ya tenía `_fetch_all_odds()` live (L1866), badges STEAM/ATN (L927-991), mensaje X3 accionable (L1051-1054), systemd service habilitado. D122-05: `_leer_matches_ranking_only()` ya existe vía `--matches`. D122-06: `KambiLiveClientReal` (`live_edge_monitor.py` L158) operativo desde D97-15 2026-07-14 — Fable encontró endpoint público `kambicdn.com` sin DevTools. Lección: auditar código real antes de spec.
 
 ---
 
@@ -217,7 +220,7 @@ n8n_push_workflow.py              ← sube/actualiza workflow via API REST
 ── DATOS CRÍTICOS ───────────────────────────────────────────────────────────
 data/calibracion_edge.json              ← Thompson Beta priors (fuente de verdad)
 reports/shadow_book/sb_YYYY-MM-DD.jsonl ← append-only, inmutable en predicción
-validation/preregistered_hypotheses.json ← H52-01→H88-01 (17 hipótesis), NO modificar sin decisión
+validation/preregistered_hypotheses.json ← H52-01→H121-01 (19 hipótesis), NO modificar sin decisión
 validation/hypothesis_tracker.py        ← sprt_verdict() + llr_update() (Nodo-64)
 docs/DECISION-LOG.md                    ← D-01→D-10 + E-01→E-05 + C-01→C-07
 
@@ -282,7 +285,7 @@ graphify query "<pregunta>"   # orientarse primero, grep solo para líneas espec
 
 **Datos:** Predicción anidada en `ranking_analysis.prediction.favored_player`. Phantom alerta: ranking=None + n>20 + oldest>365d → LOG_PLAYWRIGHT_CANDIDATE. `_MIN_HISTORY_FOR_DECAY=8`.
 
-**Testing:** REGLA-T53 (función real, nunca hardcodear fórmula). 1827 tests: no romper.
+**Testing:** REGLA-T53 (función real, nunca hardcodear fórmula). 2204 tests: no romper.
 
 **Combo Builder:** correr trader POR TIER antes del combo builder. REGLA-KAMBI-1: `||replace` (no `||append`).
 

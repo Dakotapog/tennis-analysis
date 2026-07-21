@@ -466,8 +466,9 @@ def exportar_para_edge_calculator(fecha: str, data_dir: str = "data") -> str:
     Lee el ledger del día y exporta un archivo zita_tennis_matches_*_merged.json
     en el schema plano que edge_calculator / extraer_historh2h ya consumen.
 
-    Incluye: joins (cuotas+match_id) + single_source_kambi (cuotas sin match_id).
-    Excluye single_source_fs (sin cuotas = no usable por edge_calculator).
+    Incluye: joins (cuotas+match_id) + single_source_kambi (cuotas sin match_id)
+             + single_source_fs CON cuotas válidas (FlashScore real odds, qualifying rounds).
+    Excluye single_source_fs sin cuotas (cuota1=None o cuota1=0). D120-01.
 
     Retorna el path del archivo escrito.
     """
@@ -475,8 +476,19 @@ def exportar_para_edge_calculator(fecha: str, data_dir: str = "data") -> str:
     if not ledger:
         return ""
 
+    # D120-01: ss_fs con cuotas reales FlashScore (qualifying rounds fuera de Kambi)
+    ss_fs_con_cuotas = [
+        p for p in ledger.get("single_source_fs", [])
+        if p.get("cuota1") and p.get("cuota2")
+        and float(p.get("cuota1", 0)) > 0 and float(p.get("cuota2", 0)) > 0
+    ]
+    joins = ledger.get("joins", [])
+    ssk = ledger.get("single_source_kambi", [])
+    logger.info(f"   Exportados: {len(joins)} joins + {len(ssk)} kambi + "
+                f"{len(ss_fs_con_cuotas)} ss_fs_con_cuotas (Nodo-120)")
+
     partidos_export = []
-    for p in ledger.get("joins", []) + ledger.get("single_source_kambi", []):
+    for p in joins + ssk + ss_fs_con_cuotas:
         if not isinstance(p, dict):
             continue
         partidos_export.append({
@@ -496,6 +508,7 @@ def exportar_para_edge_calculator(fecha: str, data_dir: str = "data") -> str:
             "kambi_event_id": p.get("kambi_event_id") or p.get("outcome_id"),
             "_ledger_status": p.get("join_method", ""),
             "_join_score":    p.get("join_score"),
+            "_cuota_source":  "flashscore" if p.get("join_method") == "SINGLE_SOURCE_FS" else "kambi",
         })
 
     ts = datetime.now().strftime("%H%M%S")
@@ -505,6 +518,106 @@ def exportar_para_edge_calculator(fecha: str, data_dir: str = "data") -> str:
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(partidos_export, f, ensure_ascii=False, indent=2)
     return str(out_path)
+
+
+def _buscar_cuota_aggregator(nombre_norm: str, feeds: dict) -> tuple:
+    """
+    Busca cuota para un jugador en feeds del odds_aggregator.
+    Retorna (cuota, bookmaker) o (None, None) si no hay match único.
+    D121-03: apellido-first, homónimo = no enriquecer.
+    """
+    if not nombre_norm:
+        return None, None
+    token = nombre_norm.split()[0]
+    # Match: nombre completo exacto | token apellido exacto | token apellido + espacio
+    # Cubre: "aksu a" → "aksu" (clave apellido en aggregator) — D121-03
+    candidatos = [k for k in feeds
+                  if k == nombre_norm or k == token or k.startswith(token + " ")]
+    if len(candidatos) != 1:
+        return None, None
+    info = feeds[candidatos[0]]
+    if not isinstance(info, dict):
+        return None, None
+    mejor = max(
+        [(b, d["odds"]) for b, d in info.items()
+         if isinstance(d, dict) and d.get("odds") and float(d["odds"]) > 1.0],
+        key=lambda x: x[1],
+        default=(None, None),
+    )
+    return mejor[1], mejor[0]
+
+
+def enriquecer_ss_fs_con_aggregator(
+    fecha: str, data_dir: str = "data", libros: list = None
+) -> dict:
+    """
+    Enriquece ss_fs sin cuotas usando odds_aggregator (betplay+rushbet). D121-01.
+
+    Para cada single_source_fs con cuota1=None, busca los jugadores en el feed
+    del odds_aggregator y puebla cuota1/cuota2 con la mejor cuota disponible.
+    Guarda el ledger actualizado. Retorna stats.
+    """
+    try:
+        import sys as _sys
+        import os as _os
+        _root = _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__)))
+        if _root not in _sys.path:
+            _sys.path.insert(0, _root)
+        from scripts.odds_aggregator import fetch_all_odds
+    except ImportError:
+        logger.warning("odds_aggregator no disponible — enriquecimiento omitido")
+        return {}
+
+    libros = libros or ["betplay", "rushbet"]
+    ledger = load_ledger(fecha, data_dir)
+    if not ledger:
+        return {}
+
+    ss_fs = ledger.get("single_source_fs", [])
+    ss_sin_cuota = [p for p in ss_fs if not p.get("cuota1")]
+    if not ss_sin_cuota:
+        logger.info("   Enrichment D121-01: 0 ss_fs sin cuota — nada que enriquecer")
+        return {"enriquecidos": 0, "sin_match": 0, "homonimos": 0,
+                "total_ss_fs": len(ss_fs)}
+
+    feeds = fetch_all_odds(libros)
+
+    enriquecidos = 0
+    sin_match = 0
+    homonimos = 0
+
+    for partido in ss_sin_cuota:
+        j1 = _normalizar_nombre(partido.get("jugador1", ""))
+        j2 = _normalizar_nombre(partido.get("jugador2", ""))
+
+        cuota1, book1 = _buscar_cuota_aggregator(j1, feeds)
+        cuota2, _     = _buscar_cuota_aggregator(j2, feeds)
+
+        if cuota1 and cuota2:
+            partido["cuota1"] = cuota1
+            partido["cuota2"] = cuota2
+            partido["_cuota_source"] = book1
+            partido["_best_book"] = book1
+            partido["_enriched_by"] = "D121-01"
+            enriquecidos += 1
+        else:
+            # Distinguir sin_match de homónimo (candidatos > 1)
+            j1_norm = _normalizar_nombre(partido.get("jugador1", ""))
+            tok = j1_norm.split()[0] if j1_norm else ""
+            cands = [k for k in feeds if k == j1_norm or k.startswith(tok + " ")]
+            if len(cands) > 1:
+                homonimos += 1
+                logger.warning(f"   Homónimo D121-03: {partido.get('jugador1')} "
+                                f"→ {len(cands)} candidatos, no enriquecido")
+            else:
+                sin_match += 1
+
+    save_ledger(ledger, fecha, data_dir)
+    stats = {"enriquecidos": enriquecidos, "sin_match": sin_match,
+             "homonimos": homonimos, "total_ss_fs": len(ss_fs)}
+    logger.info(f"   Enrichment D121-01: {enriquecidos}/{len(ss_sin_cuota)} ss_fs enriquecidos "
+                f"({sin_match} sin match, {homonimos} homónimos) libros={libros}")
+    return stats
 
 
 def actualizar_cuotas_ledger(
@@ -583,6 +696,8 @@ if __name__ == "__main__":
     parser.add_argument("--playwright", help="Path archivo Playwright (zita_tennis_matches)")
     parser.add_argument("--api", help="Path archivo API (zita_tennis_matches API)")
     parser.add_argument("--data-dir", default="data", help="Directorio datos")
+    parser.add_argument("--enrich", action="store_true",
+                        help="Enriquecer ss_fs sin cuota via odds_aggregator (D121-02)")
     args = parser.parse_args()
 
     if args.build:
@@ -596,25 +711,32 @@ if __name__ == "__main__":
 
         fecha_compact = args.fecha.replace("-", "")
 
-        def _tiene_cuotas_file(path: str) -> bool:
+        def _es_archivo_kambi(path: str) -> bool:
+            """Detecta archivo Kambi API por presencia de kambi_event_id u outcome_id (D120-fix)."""
             try:
                 with open(path, "r", encoding="utf-8") as f:
                     data = json.load(f)
-                items = data if isinstance(data, list) else [p for v in data.values() for p in (v if isinstance(v, list) else [])]
-                return any(p.get("cuota1") is not None for p in items if isinstance(p, dict))
+                items = data if isinstance(data, list) else [
+                    p for v in data.values() for p in (v if isinstance(v, list) else [])
+                ]
+                return any(
+                    p.get("kambi_event_id") or p.get("outcome_id")
+                    for p in items if isinstance(p, dict)
+                )
             except Exception:
                 return False
 
-        # Separar archivos con cuotas (API) y sin cuotas (Playwright)
+        # Separar archivos Kambi API (tiene kambi_event_id) de Playwright (no tiene)
+        # Nota: AMBOS pueden tener cuotas — la distinción es kambi_event_id (Nodo-120 fix)
         candidatos = sorted(
             _glob.glob(f"{args.data_dir}/zita_tennis_matches_{fecha_compact}*.json"),
             key=lambda p: Path(p).stat().st_mtime
         )
-        con_cuotas = [p for p in candidatos if _tiene_cuotas_file(p)]
-        sin_cuotas = [p for p in candidatos if not _tiene_cuotas_file(p)]
+        archivos_kambi = [p for p in candidatos if _es_archivo_kambi(p)]
+        archivos_pw    = [p for p in candidatos if not _es_archivo_kambi(p)]
 
-        api_path = args.api or (con_cuotas[-1] if con_cuotas else None)
-        pw_path = args.playwright or (sin_cuotas[-1] if sin_cuotas else None)
+        api_path = args.api or (archivos_kambi[-1] if archivos_kambi else None)
+        pw_path = args.playwright or (archivos_pw[-1] if archivos_pw else None)
 
         if not api_path:
             print("ERROR: no se encontró archivo con cuotas (API). Usa --api.")
@@ -641,6 +763,20 @@ if __name__ == "__main__":
 
         merged_path, stats = fusionar_dia(kambi, fs, args.fecha,
                                           output_dir=args.data_dir)
+        if args.enrich:
+            enrich_stats = enriquecer_ss_fs_con_aggregator(args.fecha, data_dir=args.data_dir)
+            n_enr = enrich_stats.get("enriquecidos", 0)
+            n_tot = enrich_stats.get("total_ss_fs", 0)
+            print(f"Enriched: {n_enr}/{n_tot} ss_fs via aggregator (betplay/rushbet) [D121-01]")
         export_path = exportar_para_edge_calculator(args.fecha, data_dir=args.data_dir)
         print(f"\nMerged: {merged_path}")
+        print(f"Export: {export_path}")
+
+    elif args.enrich:
+        # --enrich sin --build: enriquecer ledger ya construido
+        enrich_stats = enriquecer_ss_fs_con_aggregator(args.fecha, data_dir=args.data_dir)
+        n_enr = enrich_stats.get("enriquecidos", 0)
+        n_tot = enrich_stats.get("total_ss_fs", 0)
+        print(f"Enriched: {n_enr}/{n_tot} ss_fs via aggregator [D121-01]")
+        export_path = exportar_para_edge_calculator(args.fecha, data_dir=args.data_dir)
         print(f"Export: {export_path}")

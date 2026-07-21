@@ -661,7 +661,10 @@
       "umbrales_congelados": {
         "cuota_corte": 2.5,
         "poblacion": "picks apostar=True del edge_report que entran al pool individuales del trader (segmento MOTOR/APROBADO del shadow book)",
-        "segmentos": ["MOTOR_cuota_baja (cuota <= 2.50)", "MOTOR_cuota_alta (cuota > 2.50)"],
+        "segmentos": [
+          "MOTOR_cuota_baja (cuota <= 2.50)",
+          "MOTOR_cuota_alta (cuota > 2.50)"
+        ],
         "excluir": "status=NO_DATA, phantom_data=true, capa2_candidate=true (población CAPA2 tiene su propia H89-01)",
         "nota": "PROHIBIDO cambiar el corte 2.50 antes de n_stop. PROHIBIDO aflojar gates del Motor mientras acumula (Nodo-55 prohibición vigente)."
       },
@@ -682,7 +685,7 @@
       "umbrales_congelados": {
         "p_modelo_min": 0.62,
         "cuota_leg_min": 1.15,
-        "cuota_leg_max": 2.10,
+        "cuota_leg_max": 2.1,
         "cuota_combinada_min": 3.5,
         "cuota_combinada_max": 7.0,
         "piernas_min": 3,
@@ -742,6 +745,48 @@
       "exito": "IC Wilson 95% superior RAIN_RISK < IC Wilson 95% inferior CLEAR con n >= 40",
       "kill_switch": "ninguno — observacional puro hasta graduacion",
       "n_stop": 40,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0
+    },
+    "H120-01": {
+      "nombre": "ss_fs_con_cuotas picks (qualifying FlashScore) superan breakeven",
+      "descripcion": "Picks exportados via single_source_fs con cuota1>0 (qualifying rounds que FlashScore lista pero Kambi/Betplay no) tienen hit% > breakeven de su cuota media. Verificacion de que el modelo funciona igual de bien en estos picks de menor visibilidad.",
+      "origen_deuda": "Nodo-120 D120-01 — 2026-07-19. El segmento NO_DATA (n=77, hit=51.9%) mixto incluia estos picks; H120-01 aísla el segmento puro _cuota_source='flashscore'.",
+      "preregistrado": "2026-07-19",
+      "umbrales_congelados": {
+        "cuota_source": "flashscore",
+        "cuota1_min": 0.0,
+        "cuota2_min": 0.0,
+        "excluir": "status=NO_DATA, phantom_data=true",
+        "nota": "PROHIBIDO cambiar umbrales antes de n_stop. Acumulacion automatica via _cuota_source='flashscore' en edge_report."
+      },
+      "metrica": "hit% de picks _cuota_source='flashscore' con IC Wilson 95% inferior > 1/cuota_media_segmento",
+      "exito": "IC Wilson 95% inferior > breakeven (estimado ~45% para cuota_media ~2.1), n >= 20",
+      "kill_switch": "hit% < 35% con n >= 15 → revisar si FlashScore cuotas para qualifying son confiables",
+      "n_stop": 20,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0
+    },
+    "H121-01": {
+      "nombre": "ss_fs enriched via odds_aggregator (betplay/rushbet) superan breakeven",
+      "descripcion": "Picks enriquecidos por odds_aggregator con _ledger_status=SINGLE_SOURCE_FS y _cuota_source en [betplay,rushbet] tienen hit% > breakeven de su cuota media. Qualifying rounds que PASO 1 no alcanzaba pero odds_aggregator sí detecta (474 outcomes vs 122 de API).",
+      "origen_deuda": "Nodo-121 D121-01 — 2026-07-20. Hallazgo: Aksu vs Costoulas cuota1=None en ledger pero betplay=3.0/rushbet=2.95 en odds_aggregator. 5/11 ss_fs enriquecidos primer día.",
+      "preregistrado": "2026-07-20",
+      "umbrales_congelados": {
+        "cuota_source": [
+          "betplay",
+          "rushbet"
+        ],
+        "ledger_status": "SINGLE_SOURCE_FS",
+        "enriched_by": "D121-01",
+        "nota": "PROHIBIDO cambiar umbrales antes de n_stop. Diferencia de H120-01: cuotas de casa real (betplay/rushbet), no FlashScore."
+      },
+      "metrica": "hit% de picks _enriched_by=D121-01 con IC Wilson 95% inferior > 1/cuota_media_segmento",
+      "exito": "IC Wilson 95% inferior > breakeven (estimado ~40% para cuota_media ~2.5-3.0), n >= 20",
+      "kill_switch": "hit% < 30% con n >= 15 → revisar cobertura qualifying en API Kambi (odds_aggregator)",
+      "n_stop": 20,
       "estado": "ACUMULANDO",
       "n_actual": 0,
       "hits": 0
