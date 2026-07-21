@@ -257,10 +257,22 @@ def _fetch_betoffer_event(ev_id: int) -> list:
         return []
 
 
+def _apellido(nombre: str) -> str:
+    """Extrae el apellido de un nombre tipo 'Choinski J.' o 'De Jong J.'
+    Toma la última palabra que NO sea una inicial (una letra + punto)."""
+    words = (nombre or "").split()
+    for w in reversed(words):
+        if not (len(w) <= 2 and w.endswith(".")):
+            return w.lower()
+    return (words[0] if words else "").lower()
+
+
 def _buscar_event_id_kambi(partido: dict) -> int | None:
     """Busca el event_id de Kambi usando el listView de tenis."""
-    j1 = partido.get("jugador1", "").split()[-1].lower()   # apellido
-    j2 = partido.get("jugador2", "").split()[-1].lower()
+    j1 = _apellido(partido.get("jugador1", ""))
+    j2 = _apellido(partido.get("jugador2", ""))
+    if not j1 or not j2:
+        return None
     try:
         url = f"{KAMBI_BASE}/listView/tennis.json?{KAMBI_PARAMS}"
         r = requests.get(url, timeout=10)
@@ -268,6 +280,8 @@ def _buscar_event_id_kambi(partido: dict) -> int | None:
         events = r.json().get("events", [])
         for ev in events:
             name = ev.get("event", {}).get("name", "").lower()
+            if "/" in name:  # excluir dobles (formato "A/B - C/D")
+                continue
             if j1 in name and j2 in name:
                 return ev.get("event", {}).get("id")
     except Exception as e:
@@ -351,8 +365,8 @@ def _analizar_mercados_juegos(betoffer: list, pred: dict) -> list:
         # ── Total de sets ────────────────────────────────────────────────────
         elif any(k in label for k in LABELS_TOTAL_SETS):
             # La línea siempre es 2.5 en tennis best-of-3
-            cuota_mas   = (o_mas["odds"]  / 1000) if o_mas   else None
-            cuota_menos = (o_menos["odds"] / 1000) if o_menos else None
+            cuota_mas   = (o_mas.get("odds", 0)   / 1000) if o_mas   and o_mas.get("odds",0)   > 0 else None
+            cuota_menos = (o_menos.get("odds", 0) / 1000) if o_menos and o_menos.get("odds",0) > 0 else None
 
             cuota_mas_sets   = (o_mas.get("odds", 0)   / 1000) if o_mas   and o_mas.get("odds",0)   > 0 else None
             cuota_menos_sets = (o_menos.get("odds", 0) / 1000) if o_menos and o_menos.get("odds",0) > 0 else None
