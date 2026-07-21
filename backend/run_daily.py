@@ -139,6 +139,60 @@ def _build_daily_brief(fecha: str, tier_results: dict, was_candidates: list,
         lines.append("")
         lines.append("  WAS: 0 candidatos (sin señal Markov o edge insuficiente).")
 
+    # ── Picks EVALUAR tabla_favoritos (Nodo-124 D124-04) ─────────────────
+    _tabla_file = Path('analisis_partidos_pandas.txt')
+    if _tabla_file.exists():
+        try:
+            import re as _re
+            _texto = _tabla_file.read_text(encoding='utf-8')
+            _evaluar_picks = []
+            for _bloque in _re.split(r'={60,}', _texto):
+                if 'ACCION: EVALUAR' not in _bloque:
+                    continue
+                _mj = _re.search(r'Jugador Favorito:\s*(.+)', _bloque)
+                _mc = _re.search(r'Confianza:\s*([\d.]+)%', _bloque)
+                if not _mj or not _mc:
+                    continue
+                _jug = _mj.group(1).strip()
+                _conf = float(_mc.group(1))
+                # Cuota del favorito desde tabla resumen del bloque
+                _fw = _re.escape(_jug.split()[0])
+                _mq = _re.search(r'\|\s*' + _fw + r'[^|]*\|\s*\d+\s*\|\s*([\d.]+)', _bloque)
+                _cuota = float(_mq.group(1)) if _mq else None
+                # Señales
+                _sig = []
+                if _re.search(r'>> RACHA CALIENTE: ' + _fw, _bloque):
+                    _sig.append('HOT')
+                if '>> SCALP TOP' in _bloque:
+                    _sig.append('SCALP')
+                _me = _re.search(r'edge_vs_mercado: ' + _fw + r'[^(]+\([\w ]+(\+[\d.]+)% \[POSITIVO\]', _bloque)
+                if _me:
+                    _sig.append(f'edge{_me.group(1)}%')
+                _evaluar_picks.append({'jugador': _jug, 'conf': _conf,
+                                       'cuota': _cuota, 'señales': _sig})
+            if _evaluar_picks:
+                _evaluar_picks.sort(key=lambda x: x.get('conf', 0), reverse=True)
+                _apuesta = [p for p in _evaluar_picks if (p.get('cuota') or 0) >= 1.30]
+                _games   = [p for p in _evaluar_picks if (p.get('cuota') or 0) < 1.30 and p.get('cuota')]
+                if _apuesta:
+                    lines.append("")
+                    lines.append("  EVALUAR HOY (conf>=54%, cuota>=1.30 — candidatos directos H124-01):")
+                    for _ep in _apuesta[:6]:
+                        _cuota_str = f"@{_ep['cuota']:<5}"
+                        _sig_str = ' '.join(_ep.get('señales', [])) or '—'
+                        lines.append(f"    {_ep['jugador']:<28} {_cuota_str} conf={_ep['conf']:.1f}%  [{_sig_str}]")
+                    lines.append("  NOTA: sin Kelly calculado — decision humana requerida.")
+                if _games:
+                    lines.append("")
+                    lines.append("  GAMES CANDIDATOS (favorito absoluto conf>=54%, cuota<1.30):")
+                    lines.append("  Ganar casi seguro → evaluar UNDER juegos o OVER sets en Betplay:")
+                    for _ep in _games[:5]:
+                        _cuota_str = f"@{_ep['cuota']:<5}"
+                        _sig_str = ' '.join(_ep.get('señales', [])) or '—'
+                        lines.append(f"    {_ep['jugador']:<28} {_cuota_str} conf={_ep['conf']:.1f}%  [{_sig_str}]")
+        except Exception:
+            pass
+
     # ── Games signal ──────────────────────────────────────────────────────
     games_file = _latest_report(f'{REPORTS_DIR}/games_signal_report_*.json')
     if games_file:
@@ -334,6 +388,10 @@ def main():
 
         # ── PASO 3.6 — Games signal ───────────────────────────────────────────
         _run(['python3', 'games_signal_calculator.py'], 'PASO 3.6 — Games signal')
+
+        # ── PASO 3.6b — EvalGames Bridge (Nodo-125) ──────────────────────────
+        # EVALUAR_GAMES (cuota<1.30) → UNDER juegos signal para X4 dashboard + combos
+        _run(['python3', 'scripts/evaluar_games_bridge.py'], 'PASO 3.6b — EvalGames Bridge', optional=True)
 
         # ── PASO 3.7 — Dual-Book Router X1 (Nodo-111) ────────────────────────
         # Compara cuotas Kambi vs zita file (FlashScore/Playwright, book2).

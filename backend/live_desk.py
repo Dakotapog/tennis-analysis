@@ -180,6 +180,7 @@ def build_desk_state(fecha: Optional[str] = None) -> Dict[str, Any]:
         "p12_conformal": _build_conformal_band(),      # Nodo-115 U1 banda
         "p_data": _build_data_panel(fecha),            # Nodo-118 §5 embudo crosswalk
         "p_games": _build_x3_games(fecha),             # Nodo-40 X3 games signal
+        "p_evaluar_games": _build_x4_evaluar_games(fecha),  # Nodo-125 X4 EVALUAR_GAMES
     }
     return state
 
@@ -488,6 +489,75 @@ def _build_x3_games(fecha: str) -> Dict[str, Any]:
         "n_apostar":    meta.get("n_apostar", 0),
         "signals":      signals,
         "fuente":       Path(gsr).name,
+    }
+
+
+def _build_x4_evaluar_games(fecha: str) -> Dict[str, Any]:
+    """
+    X4 EVALUAR_GAMES — Nodo-125 D125-04.
+    Lee picks EVAL_ (pick_type=evaluar_games) del shadow_book de hoy.
+    Enriquece con cuota UNDER de Kambi si existe evaluar_games_signal_FECHA.
+    REPORTE_SOLO — sin gates de apuesta.
+    """
+    sb_path = BASE_DIR / "reports" / "shadow_book" / f"sb_{fecha}.jsonl"
+    if not sb_path.exists():
+        return {"disponible": False, "fecha": fecha, "picks": [], "n": 0, "n_con_under": 0}
+
+    # Cargar EVAL_ records del shadow_book
+    try:
+        import shadow_book as _sb
+        records = _sb._load_jsonl(sb_path)
+    except Exception:
+        return {"disponible": False, "fecha": fecha, "picks": [], "n": 0, "n_con_under": 0}
+
+    eg_picks = []
+    for sid, rec in records.items():
+        if not sid.startswith("EVAL_"):
+            continue
+        snap = rec.get("pick_snapshot", {})
+        if snap.get("pick_type") != "evaluar_games":
+            continue
+        resol = rec.get("resolucion")
+        eg_picks.append({
+            "sb_id":    sid,
+            "partido":  snap.get("partido", ""),
+            "conf":     (lambda c: c / 100 if c and c >= 1 else (c or 0))(snap.get("confidence")),
+            "cuota_ml": snap.get("cuota_favorito") or 0,
+            "hora":     snap.get("hora"),
+            "resultado": resol.get("resultado") if resol else None,
+            "cuota_under": None,  # enriquecido abajo si existe señal
+        })
+
+    # Enriquecer con cuota UNDER si existe evaluar_games_signal del día
+    fecha_compact = fecha.replace("-", "")
+    eg_signal_files = sorted(
+        (BASE_DIR / "reports").glob(f"evaluar_games_signal_{fecha_compact}*.json"),
+        reverse=True,
+    )
+    if eg_signal_files:
+        try:
+            eg_data = json.loads(eg_signal_files[0].read_text(encoding="utf-8"))
+            # Índice partido → mejor cuota UNDER
+            under_idx: Dict[str, float] = {}
+            for p in eg_data.get("detalle_completo", []):
+                for s in p.get("señales_optimas", []):
+                    if s.get("apostar") and s.get("direccion") == "UNDER":
+                        cand = float(s.get("cuota") or 0)
+                        if cand > under_idx.get(p["partido"], 0):
+                            under_idx[p["partido"]] = cand
+            for pick in eg_picks:
+                pick["cuota_under"] = under_idx.get(pick["partido"])
+        except Exception:
+            pass
+
+    n_con_under = sum(1 for p in eg_picks if p.get("cuota_under"))
+    return {
+        "disponible":   True,
+        "fecha":        fecha,
+        "picks":        eg_picks,
+        "n":            len(eg_picks),
+        "n_con_under":  n_con_under,
+        "fuente":       eg_signal_files[0].name if eg_signal_files else "shadow_book only",
     }
 
 
@@ -1052,6 +1122,40 @@ def render_html(state: Dict[str, Any]) -> str:
             "X3 GAMES SIGNAL — Over/Under mercados Nodo-40",
             f'<p style="color:{GREY};font-size:0.85em;">Sin reporte (correr PASO 3.6: python3 games_signal_calculator.py)</p>',
         )
+
+    # ── X4 EVALUAR_GAMES — favoritos absolutos → UNDER juegos (Nodo-125) ────
+    _x4 = state.get("p_evaluar_games", {})
+    _x4_picks = _x4.get("picks", [])
+    x4_rows: List = []
+    for _p in _x4_picks:
+        _res   = _p.get("resultado")
+        _res_c = GREEN if _res == "WON" else (RED if _res == "LOST" else GREY)
+        _res_s = f'<span style="color:{_res_c};">{_res or "PEND"}</span>'
+        _under = _p.get("cuota_under")
+        _under_s = f'<span style="color:{GREEN};font-weight:bold;">@{_under:.2f}</span>' if _under else \
+                   f'<span style="color:{AMBER};">buscar</span>'
+        x4_rows.append([
+            _p.get("hora") or "?",
+            _p.get("partido", "")[:38],
+            f'{_p["conf"]:.0%}',
+            f'@{_p["cuota_ml"]:.2f}',
+            _under_s,
+            _res_s,
+        ])
+    _x4_n         = _x4.get("n", 0)
+    _x4_n_under   = _x4.get("n_con_under", 0)
+    _x4_badge     = f"{_x4_n} picks / {_x4_n_under} con UNDER Kambi"
+    _x4_badge_col = GREEN if _x4_n_under > 0 else (AMBER if _x4_n > 0 else GREY)
+    x4_panel = panel(
+        "X4 EVALUAR_GAMES — favoritos absolutos (cuota<1.30) → UNDER juegos (Nodo-125)",
+        table(
+            ["Hora", "Partido", "Conf", "CuotaML", "CuotaUNDER", "Resultado"],
+            x4_rows,
+            f'<span style="color:{GREY};font-size:0.85em;">'
+            f'Sin picks evaluar_games hoy (correr PASO 3.6b: evaluar_games_bridge.py)</span>',
+        ),
+        _x4_badge, _x4_badge_col,
+    )
 
     # ── P7 CLOCK ─────────────────────────────────────────────────────────────
     partidos = state.get("p7_clock", {}).get("partidos", [])

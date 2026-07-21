@@ -535,6 +535,21 @@
       ]
     },
     {
+      "nodo_id": "125",
+      "nodo_archivo": "Nodo-125-EvalGames-Bridge-Dashboard-X4.md",
+      "fecha": "2026-07-21",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "generar_tabla_favoritos2.py",
+        "games_signal_calculator.py",
+        "live_desk.py",
+        "run_daily.py",
+        "scripts/evaluar_games_bridge.py",
+        "tests/test_nodo125_evaluar_games_bridge.py"
+      ]
+    },
+    {
       "nodo_id": "13",
       "nodo_archivo": "Nodo-13-Trader-EV-Tenis.md",
       "fecha": null,

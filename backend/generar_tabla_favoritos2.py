@@ -983,6 +983,37 @@ def analyze_matches_with_pandas(file_path, output_filename="analisis_partidos_pa
                     f.write(f"ACCION: NO-BET — confianza {_confidence}% < 54% (umbral minimo). Coin flip.\n")
                 else:
                     f.write(f"ACCION: EVALUAR — confianza {_confidence}%\n")
+                    # Nodo-124 D124-01: auto-log al shadow_book (H124-01)
+                    try:
+                        import shadow_book as _sb_eval
+                        _fav_e   = prediction.get('favored_player', '')
+                        _rival_e = p2 if _fav_e == p1 else p1
+                        _cuota_e = match.get('cuota1') if _fav_e == p1 else match.get('cuota2')
+                        _pick_e  = {
+                            'favorito_predicho': _fav_e,
+                            'rival':             _rival_e,
+                            'partido':           f"{p1} vs {p2}",
+                            'torneo':            match.get('torneo') or match.get('tournament', 'Desconocido'),
+                            'superficie':        match.get('tipo_cancha') or match.get('superficie', 'unknown'),
+                            'pick_status':       'EVALUAR',
+                            'confidence':        float(_confidence) if _confidence else 0.0,
+                            'cuota_favorito':    float(_cuota_e) if _cuota_e else None,
+                            'score_directo':     scores.get('score_difference', 0),
+                            # D125-01: habilita Kambi lookup exacto + time-window combo grouping
+                            'match_id':          match.get('match_id') or match.get('kambi_id'),
+                            'hora':              match.get('hora') or match.get('hora_inicio') or match.get('time'),
+                        }
+                        if _edge_pick:
+                            _pick_e.update({
+                                k: _edge_pick[k] for k in (
+                                    'edge', 'p_modelo', 'p_implicita', 'kelly_kl',
+                                    'tier', 'rfi_tier', 'score_directo',
+                                    'markov_wr_rec_fav', 'elo_dominance_axis',
+                                ) if k in _edge_pick
+                            })
+                        _sb_eval.log_evaluar_pick(_pick_e)
+                    except Exception:
+                        pass
 
                 # edge_vs_mercado: reutiliza p_implicita de edge_report (no recalcula)
                 _partido_key = f"{p1} vs {p2}"

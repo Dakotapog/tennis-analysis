@@ -2869,6 +2869,193 @@ def find_latest_trader_plan() -> Optional[str]:
     return str(plans[0]) if plans else None
 
 
+# ── Nodo-125 D125-03: EvalGames combos con time-window grouping ───────────────
+
+def _hora_to_min(hora: str) -> int:
+    """Convierte 'HH:MM' a minutos desde medianoche. Retorna 0 si inválido."""
+    try:
+        h, m = hora.strip().split(":")
+        return int(h) * 60 + int(m)
+    except Exception:
+        return 0
+
+
+def _group_by_time_window(signals: list, window_min: int = 90) -> list:
+    """
+    Agrupa señales en ventanas de window_min minutos según campo 'hora' (HH:MM).
+    Algoritmo greedy: cada señal entra al primer grupo cuyo rango [min,max] hora
+    se extiende a ≤ window_min al incluirla. Señales sin hora van a grupo propio.
+    """
+    with_hora    = sorted([s for s in signals if s.get("hora")], key=lambda s: s["hora"])
+    without_hora = [s for s in signals if not s.get("hora")]
+
+    groups: list = []
+    for sig in with_hora:
+        t = _hora_to_min(sig["hora"])
+        placed = False
+        for grp in groups:
+            t_min = min(_hora_to_min(g["hora"]) for g in grp)
+            t_max = max(_hora_to_min(g["hora"]) for g in grp)
+            if t - t_min <= window_min and t_max - t <= window_min:
+                grp.append(sig)
+                placed = True
+                break
+        if not placed:
+            groups.append([sig])
+
+    # Cada pick sin hora va a su propio grupo aislado — no se combina con desconocidos
+    for s in without_hora:
+        groups.append([s])
+
+    return groups
+
+
+def _find_latest_evaluar_games_signal() -> Optional[Path]:
+    """Encuentra el evaluar_games_signal más reciente en reports/."""
+    reports = Path("reports")
+    files   = sorted(reports.glob("evaluar_games_signal_*.json"), reverse=True)
+    return files[0] if files else None
+
+
+def build_evaluar_games_combos(
+    stake_per_combo: int = 1000,
+    signal_file: Optional[str] = None,
+) -> tuple:
+    """
+    Nodo-125 D125-03: combos UNDER juegos desde EVALUAR_GAMES picks.
+
+    - Lee evaluar_games_signal_FECHA.json (output de evaluar_games_bridge.py)
+    - Filtra señales UNDER con apostar=True
+    - Agrupa por ventana horaria de 90 min (time-window grouping)
+    - Para cada grupo ≥2 legs: combina 2-3, gate cuota_combo ≥ 2.50
+    - Retorna (combos, meta) en formato compatible con _mostrar_games_combos()
+    """
+    from itertools import combinations as _combis
+
+    if signal_file:
+        path = Path(signal_file)
+    else:
+        path = _find_latest_evaluar_games_signal()
+
+    if not path or not path.exists():
+        logger.error(
+            "No se encontro evaluar_games_signal. "
+            "Ejecuta: python3 scripts/evaluar_games_bridge.py"
+        )
+        return [], {}
+
+    try:
+        data = json.load(open(path, encoding="utf-8"))
+    except Exception as exc:
+        logger.error(f"Error leyendo {path}: {exc}")
+        return [], {}
+
+    apostar = data.get("apostar", [])
+    if not apostar:
+        logger.warning("evaluar_games_signal: no hay partidos con mercado Kambi")
+        return [], {}
+
+    # ── Aplanar: una entrada por señal UNDER accionable ──────────────────────
+    all_signals: list = []
+    for p in apostar:
+        hora = p.get("hora")
+        for s in p.get("señales_optimas", []):
+            if not (s.get("apostar") and s.get("direccion") == "UNDER"):
+                continue
+            all_signals.append({
+                "partido":        p["partido"],
+                "hora":           hora,
+                "zona_diff":      p.get("zona_diff", "dominante"),
+                "diff_abs":       p.get("diff_abs", 0),
+                "mercado":        s.get("mercado", ""),
+                "linea":          s.get("linea"),
+                "direccion":      "UNDER",
+                "cuota":          float(s.get("cuota") or 0),
+                "outcome_id":     s.get("outcome_id"),
+                "gap_juegos":     s.get("gap_juegos") or 0,
+                "confianza_señal": s.get("confianza_señal", ""),
+                "razon":          s.get("razon", "evaluar_games UNDER"),
+                "games_range":    p.get("games_range", ""),
+                "cuota_ml":       p.get("cuota_ml"),
+                "confidence":     p.get("confidence"),
+            })
+
+    if not all_signals:
+        logger.warning("evaluar_games_signal: 0 señales UNDER accionables")
+        return [], {}
+
+    # ── Agrupar por ventana horaria 90 min ───────────────────────────────────
+    groups = _group_by_time_window(all_signals, window_min=90)
+
+    # ── Construir combos ──────────────────────────────────────────────────────
+    combos:   list = []
+    seen_ids: set  = set()
+    combo_idx = 0
+
+    for grp in groups:
+        if len(grp) < 2:
+            continue
+        # Intentar primero 3 piernas, luego 2
+        for n_legs in range(min(3, len(grp)), 1, -1):
+            found_in_group = False
+            for legs_tuple in _combis(grp, n_legs):
+                legs = list(legs_tuple)
+                cuota_combo = round(
+                    eval("*".join(str(l["cuota"]) for l in legs)), 2
+                )
+                if cuota_combo < 2.50:
+                    continue
+                oids = [l["outcome_id"] for l in legs if l.get("outcome_id")]
+                key  = tuple(sorted(oids))
+                if key in seen_ids:
+                    continue
+                seen_ids.add(key)
+
+                ids_str    = "|".join(str(i) for i in oids)
+                betplay_url = (
+                    f"{BETPLAY_URL_BASE}{ids_str}{BETPLAY_URL_TAIL}"
+                    if ids_str else None
+                )
+                horas = sorted(set(l["hora"] for l in legs if l.get("hora")))
+                combos.append({
+                    "combo_idx":   combo_idx,
+                    "label":       "EvalGamesA",
+                    "legs":        legs,
+                    "cuota_combo": cuota_combo,
+                    "stake":       stake_per_combo,
+                    "retorno":     int(stake_per_combo * cuota_combo),
+                    "url":         betplay_url,
+                    "outcome_ids": oids,
+                    "n_piernas":   n_legs,
+                    "hora_window": f"{horas[0]}-{horas[-1]}" if len(horas) > 1 else (horas[0] if horas else "?"),
+                })
+                combo_idx += 1
+                found_in_group = True
+            if found_in_group:
+                break  # No mezclar 3-leg y 2-leg del mismo grupo
+
+    # Ordenar: mayor n_piernas primero, luego mayor cuota_combo
+    combos.sort(key=lambda c: (-c["n_piernas"], -c["cuota_combo"]))
+
+    meta = {
+        "fuente":         path.name,
+        "n_señales":      len(all_signals),
+        "n_grupos":       len(groups),
+        "stake_per_combo": stake_per_combo,
+        "total_stake":    stake_per_combo * len(combos),
+        "n_combos":       len(combos),
+        "calibracion_n":  0,
+        "regla_g6_active": False,
+        "n_alta":         sum(1 for s in all_signals if s["confianza_señal"] == "ALTA"),
+        "n_media":        sum(1 for s in all_signals if s["confianza_señal"] == "MEDIA"),
+        "fecha":          datetime.now().isoformat(),
+    }
+
+    logger.info(
+        f"[EvalGamesCombo] {len(combos)} combos EvalGamesA "
+        f"({len(all_signals)} señales UNDER en {len(groups)} ventanas)"
+    )
+    return combos, meta
 
 
 def main():
@@ -2914,6 +3101,11 @@ def main():
     parser.add_argument("--games-stake", type=int, default=2000,
                         help="Stake por games combo (default: $2000, REGLA-G6 cap)")
     parser.add_argument("--games-file", help="games_signal_report JSON específico")
+    parser.add_argument("--evaluar", action="store_true",
+                        help="Nodo-125: EvalGames Combos — UNDER juegos desde EVALUAR_GAMES picks (cuota<1.30)")
+    parser.add_argument("--evaluar-stake", type=int, default=1000,
+                        help="Stake por evaluar-games combo (default: $1000)")
+    parser.add_argument("--evaluar-file", help="evaluar_games_signal JSON específico")
     parser.add_argument("--no-dispersion-guard", action="store_true",
                         help="Disable Dispersion Guard (Nodo-25)")
     parser.add_argument("--allow-extra", action="store_true",
@@ -3188,6 +3380,52 @@ def main():
 
         if args.telegram:
             _enviar_games_telegram(games_links, games_meta)
+        return
+
+    # ── MODO EVALUAR_GAMES STANDALONE (Nodo-125) ──────────────────────────────
+    if args.evaluar:
+        logger.info("Generando EVALUAR_GAMES COMBOS — UNDER juegos (Nodo-125)...")
+        eval_links, eval_meta = build_evaluar_games_combos(
+            stake_per_combo=args.evaluar_stake,
+            signal_file=args.evaluar_file,
+        )
+        if not eval_links:
+            logger.warning("No se generaron combos EvalGamesA. Sin señales UNDER o cuota_combo<2.50")
+            return
+
+        _mostrar_games_combos(eval_links, eval_meta)
+
+        if args.dry_run:
+            return
+
+        # Generar bat/html para cada combo EvalGamesA
+        from pathlib import Path as _P
+        combos_dir = _P("combos")
+        combos_dir.mkdir(exist_ok=True)
+        n_eval = 0
+        for combo in eval_links:
+            url = combo.get("url")
+            if not url:
+                continue
+            hora_w  = combo.get("hora_window", "?")
+            n_legs  = combo.get("n_piernas", 2)
+            cuota_c = combo.get("cuota_combo", 0)
+            label   = f"EvalGamesA_{n_eval+1}"
+            bat_path  = combos_dir / f"{label}.bat"
+            html_path = combos_dir / f"{label}.html"
+            bat_path.write_text(
+                f'@echo off\nstart "" "{url}"\n',
+                encoding="utf-8",
+            )
+            html_path.write_text(
+                f'<html><head><meta http-equiv="refresh" content="0;url={url}"></head>'
+                f'<body>Redirigiendo a {label} ({n_legs} piernas @{cuota_c:.2f} ventana {hora_w})...</body></html>',
+                encoding="utf-8",
+            )
+            n_eval += 1
+        if n_eval:
+            print(f"\n  {n_eval} archivos EvalGamesA*.bat/.html en combos/")
+            print(f"  Stake: ${args.evaluar_stake} x {n_eval} = ${args.evaluar_stake * n_eval:,}")
         return
 
     # ── MODO WAS STANDALONE (Nodo-44) ──

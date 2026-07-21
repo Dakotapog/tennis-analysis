@@ -790,6 +790,82 @@
       "estado": "ACUMULANDO",
       "n_actual": 0,
       "hits": 0
+    },
+    "H124-01": {
+      "nombre": "Picks EVALUAR (conf≥54%) de generar_tabla_favoritos2 superan breakeven",
+      "descripcion": "Los picks marcados ACCION=EVALUAR por generar_tabla_favoritos2.py (confianza≥54% en scoring multi-eje: superficie+forma+H2H+ELO+ranking) tienen hit% > breakeven implícito de su cuota. Hipótesis: el modelo de predicción multi-eje captura alpha que el edge_calculator solo no detecta porque EVALUAR no pasa el gate Kelly-KL.",
+      "origen_deuda": "Nodo-124 D124-02 — 2026-07-20. Gap crítico: ~10 picks EVALUAR/día nunca loguedados al shadow book. Ejemplo: Pridankina 66.3%, Carle 57.1%, Badosa 56.8% el 2026-07-20 — resultados reales desconocidos para el sistema.",
+      "preregistrado": "2026-07-20",
+      "umbrales_congelados": {
+        "conf_minima": 0.54,
+        "fuente": "generar_tabla_favoritos2.py ACCION=EVALUAR",
+        "nota": "PROHIBIDO bajar umbral a <54% antes de n_stop. El umbral de EVALUAR ya está en el código fuente del generador."
+      },
+      "metrica": "hit% de picks pick_type=evaluar con IC Wilson 95% inferior > 1/cuota_media_segmento",
+      "exito": "IC Wilson 95% inferior > breakeven (estimado ~45% para cuota_media ~2.0-2.5), n >= 30",
+      "kill_switch": "hit% < 35% con n >= 20 → revisar scoring multi-eje de generar_tabla_favoritos2",
+      "n_stop": 30,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0
+    },
+    "H124-02": {
+      "nombre": "Picks EVALUAR con señal HOT activa tienen hit% ≥5pp sobre base EVALUAR",
+      "descripcion": "Sub-segmento de H124-01: picks EVALUAR donde el favorito predicho tiene estado Markov HOT (markov_wr_rec ≥ 0.70 en generar_tabla_favoritos2) tienen hit% al menos 5 puntos porcentuales mayor que el segmento EVALUAR base. Señal HOT = rachas activas detectable en pre-partido.",
+      "origen_deuda": "Nodo-124 D124-02 — 2026-07-20. Evidencia anecdótica: Badosa HOT 90% el 2026-07-20 (resultado desconocido). Bouzkova HOT 80%, Vedder HOT 90%. Hipótesis: HOT es el discriminador de mayor alpha dentro de EVALUAR.",
+      "preregistrado": "2026-07-20",
+      "umbrales_congelados": {
+        "conf_minima": 0.54,
+        "hot_threshold": 0.70,
+        "señal": "markov_wr_rec_fav >= 0.70",
+        "nota": "Depende de H124-01 — solo graduable si H124-01 acumula n≥20 primero."
+      },
+      "metrica": "delta hit% entre segmento HOT+EVALUAR vs EVALUAR base con IC Wilson 95% no solapado",
+      "exito": "hit%(HOT+EVALUAR) - hit%(EVALUAR_base) >= 5pp con IC no solapado, n_hot >= 20",
+      "kill_switch": "delta < 2pp con n_hot >= 15 → HOT no discrimina dentro de EVALUAR",
+      "n_stop": 20,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0
+    },
+    "H124-03": {
+      "nombre": "EVALUAR_GAMES (favorito absoluto cuota<1.30) candidato mercado juegos/sets",
+      "descripcion": "Picks donde el modelo (conf>=54%) Y el bookmaker (cuota<1.30) coinciden en favorito absoluto. Estos NO son candidatos a apuesta directa (cuota ruinosa) sino candidatos para mercado UNDER total games / straight sets en Betplay. Hipótesis: cuando ambas fuentes convergen con tanta fuerza, el partido es corto — favorito gana directo y en pocos games. Tracking separado de H124-01 por ser mercado distinto.",
+      "origen_deuda": "Nodo-124 D124-02 — 2026-07-20. Hallazgo: 20/36 picks EVALUAR del día tenían cuota<1.30 (ej. Pridankina @1.06 conf=66.3%). Apuesta directa ruinosa (KGR<0). Pero UNDER total games / sets rapidos podría ser el alpha real.",
+      "preregistrado": "2026-07-20",
+      "umbrales_congelados": {
+        "conf_minima": 0.54,
+        "cuota_maxima": 1.30,
+        "fuente": "generar_tabla_favoritos2.py pick_type=evaluar_games",
+        "nota": "PROHIBIDO subir umbral cuota a >1.30 antes de n_stop. La segmentación <1.30 ya está en shadow_book.log_evaluar_pick()."
+      },
+      "metrica": "hit% resultado partido (favorito gana) de picks pick_type=evaluar_games, proxy para corroborar que son candidatos UNDER/sets. IC Wilson 95%.",
+      "exito": "hit% resultado > 70% con IC Wilson 95% inferior > 60%, n >= 30 (cuota<1.30 implica breakeven ~77% — se requiere hit% alto para que UNDER games sea viable)",
+      "kill_switch": "hit% < 65% con n >= 20 → modelo no discrimina con suficiente fuerza para mercado juegos (cuota muy baja = margen bookmaker nulo)",
+      "n_stop": 30,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0
+    },
+    "H125-01": {
+      "nombre": "EVALUAR_GAMES UNDER juegos supera breakeven en cuota_under de Kambi",
+      "descripcion": "Cuando un pick evaluar_games (cuota_ml<1.30, conf>=54%) tiene señal UNDER total games en Kambi (mercado analizado por evaluar_games_bridge.py), la apuesta UNDER supera el breakeven implícito en la cuota_under. Hipótesis: favorito absoluto + modelo de alta confianza → partido corto → UNDER total games viable con cuota_under ~1.80-2.10.",
+      "origen_deuda": "Nodo-125 D125-02 — 2026-07-21. Bridge EVALUAR_GAMES → games_signal implementado. Primera señal operativa vía scripts/evaluar_games_bridge.py.",
+      "preregistrado": "2026-07-21",
+      "umbrales_congelados": {
+        "cuota_ml_maxima": 1.30,
+        "conf_minima": 0.54,
+        "cuota_combo_minima": 2.50,
+        "fuente": "scripts/evaluar_games_bridge.py → reports/evaluar_games_signal_*.json",
+        "nota": "PROHIBIDO cambiar ventana time-window (90min) o gate cuota_combo (2.50) antes de n_stop."
+      },
+      "metrica": "hit% de combos EvalGamesA (UNDER total games, 2-3 legs, cuota_combo>=2.50). IC Wilson 95%.",
+      "exito": "hit% combo > 55% con IC Wilson 95% inferior > 45%, n >= 25 (breakeven combo @2.50 = 40%)",
+      "kill_switch": "hit% combo < 40% con n >= 15 → señal UNDER no confirmada para este segmento",
+      "n_stop": 25,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0
     }
   }
 }
