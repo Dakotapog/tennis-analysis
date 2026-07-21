@@ -111,12 +111,12 @@ En EvalGamesA, la línea Kambi para UNDER 21.5 (Holmgren) y UNDER 2.5 sets (Frey
 
 ## §3. Propuesta: Gate mínimo gap ≥ 4.0j en build_evaluar_games_combos()
 
-### §3.1 La regla propuesta (D129-01)
+### §3.1 La regla propuesta (D131-01)
 
 **Archivo:** `betplay_combo_builder.py` — en `build_evaluar_games_combos()`, en el bloque de aplanado de señales:
 
 ```python
-# D129-01: gate mínimo gap ≥ 4.0j para señales EvalGamesA en combo
+# D131-01: gate mínimo gap ≥ 4.0j para señales EvalGamesA en combo
 # Racional: X3 ALTA históricamente aciertan con gap ≥ 4.5j.
 # EvalGamesA usa proxy diff_abs → requiere margen extra de seguridad.
 # Señales con gap < 4.0j o gap=None (sets sin datos) = fuera del combo.
@@ -126,13 +126,13 @@ for s in p.get("señales_optimas", []):
         continue
     gap = s.get("gap_juegos") or 0
     if gap < _GAP_MIN_EVALUAR:
-        continue  # D129-01: descartar señales con margen insuficiente
+        continue  # D131-01: descartar señales con margen insuficiente
     all_signals.append({...})
 ```
 
 ### §3.2 Impacto en el combo de hoy (validación retroactiva)
 
-Con D129-01 aplicado, el combo del 2026-07-21 habría sido:
+Con D131-01 aplicado, el combo del 2026-07-21 habría sido:
 
 ```
 Señales que PASAN gap ≥ 4.0j:
@@ -160,11 +160,11 @@ Combo resultante: Bonding + Frey_juegos + Nishimura = @(2.02 × 1.88 × 2.28) = 
 
 ---
 
-## §4. Hipótesis pre-registrada (H129-01)
+## §4. Hipótesis pre-registrada (H131-01)
 
 ```json
 {
-  "id": "H129-01",
+  "id": "H131-01",
   "descripcion": "EvalGamesA combos con gap_min ≥ 4.0j tienen hit_rate > breakeven",
   "formula": "hit_rate_combo_alta_gap > 1 / cuota_combo_promedio",
   "n_stop": 20,
@@ -190,30 +190,30 @@ Combo resultante: Bonding + Frey_juegos + Nishimura = @(2.02 × 1.88 × 2.28) = 
 4. **¿El total_score=0.5 hardcodeado en el bridge es el origen real del problema?**
    Si `total_score` fuera real (desde H2H o edge_report), el predicted_games sería más preciso y el gap más confiable. ¿Es este el fix correcto a largo plazo vs. el gate de gap?
 
-5. **Coherencia con REGLA-G6 (Nodo-40):** REGLA-G6 limita stake máximo en games combos a $2,000. ¿El gate de calidad D129-01 debe ir acompañado de un ajuste de stake para combos que pasan el gate ALTA?
+5. **Coherencia con REGLA-G6 (Nodo-40):** REGLA-G6 limita stake máximo en games combos a $2,000. ¿El gate de calidad D131-01 debe ir acompañado de un ajuste de stake para combos que pasan el gate ALTA?
 
 ---
 
-## §6. Tests REGLA-T53 — `tests/test_nodo129_evaluar_games_gap_gate.py`
+## §6. Tests REGLA-T53 — `tests/test_nodo131_evaluar_games_gap_gate.py`
 
 ```python
-def test_D129_01_media_gap_25_excluded_from_combo()
+def test_D131_01_media_gap_25_excluded_from_combo()
     # señal gap=2.5j MEDIA no debe entrar al all_signals de EvalGamesA
 
-def test_D129_01_alta_gap_45_included_in_combo()
+def test_D131_01_alta_gap_45_included_in_combo()
     # señal gap=4.5j ALTA sí debe entrar
 
-def test_D129_01_sets_gap_none_excluded()
+def test_D131_01_sets_gap_none_excluded()
     # señal UNDER 2.5 sets con gap=None nunca entra al combo
 
-def test_D129_01_combo_uses_only_alta_gap_signals()
+def test_D131_01_combo_uses_only_alta_gap_signals()
     # combo resultante solo contiene señales con gap >= 4.0j
 
-def test_D129_01_retroactive_2026_07_21()
-    # con D129-01: combo del día sería Bonding+Frey_juegos+Nishimura, no Bonding+Holmgren+FreySets
+def test_D131_01_retroactive_2026_07_21()
+    # con D131-01: combo del día sería Bonding+Frey_juegos+Nishimura, no Bonding+Holmgren+FreySets
 
-def test_H129_01_hypothesis_registered()
-    # H129-01 en preregistered_hypotheses.json
+def test_H131_01_hypothesis_registered()
+    # H131-01 en preregistered_hypotheses.json
 ```
 
 ---

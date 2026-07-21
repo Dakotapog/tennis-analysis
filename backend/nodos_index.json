@@ -1680,24 +1680,24 @@
       ]
     },
     {
-      "nodo_id": "128",
-      "nodo_archivo": "Nodo-128-D126-04-Overgeneral-ITF-Filter-Fix.md",
+      "nodo_id": "130",
+      "nodo_archivo": "Nodo-130-D126-04-Overgeneral-ITF-Filter-Fix.md",
       "fecha": "2026-07-21",
       "estado": "implementacion",
       "archivos_mencionados": [
         "scripts/evaluar_games_bridge.py",
         "generar_tabla_favoritos2.py",
-        "tests/test_nodo128_itf_filter_fix.py"
+        "tests/test_nodo130_itf_filter_fix.py"
       ]
     },
     {
-      "nodo_id": "129",
-      "nodo_archivo": "Nodo-129-EvalGamesA-Gap-Gate-Quality-Control.md",
+      "nodo_id": "131",
+      "nodo_archivo": "Nodo-131-EvalGamesA-Gap-Gate-Quality-Control.md",
       "fecha": "2026-07-21",
       "estado": "propuesta",
       "archivos_mencionados": [
         "betplay_combo_builder.py",
-        "tests/test_nodo129_evaluar_games_gap_gate.py"
+        "tests/test_nodo131_evaluar_games_gap_gate.py"
       ]
     }
   ],
