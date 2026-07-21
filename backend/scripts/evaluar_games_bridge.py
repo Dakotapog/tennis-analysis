@@ -64,12 +64,56 @@ def _diff_abs_from_cuota(cuota: float) -> float:
     return round((p - 0.5) * 2, 3)
 
 
+def _build_hora_map_from_zita() -> Dict[str, str]:
+    """
+    Fallback: lee el zita_tennis_matches más reciente y construye
+    apellido_lower → hora_partido. Usado cuando pick_snapshot.hora=None
+    porque el pick fue logueado antes de D125-01 o antes de tener hora.
+    Soporta estructura dict {torneo: [match,...]} y lista plana.
+    """
+    import glob as _glob
+    files = sorted(_glob.glob(str(BACKEND_DIR / 'data' / 'zita_tennis_matches_*.json')), reverse=True)
+    hora_map: Dict[str, str] = {}
+    for f in files[:3]:
+        try:
+            data = json.load(open(f))
+            matches: list = data if isinstance(data, list) else [
+                m for ms in data.values() for m in (ms if isinstance(ms, list) else [])
+            ]
+            for m in matches:
+                hora = m.get('hora_partido') or m.get('hora') or m.get('hora_inicio')
+                if not hora:
+                    continue
+                for field in ('jugador1', 'jugador2', 'player1', 'player2'):
+                    nombre = (m.get(field) or '').strip()
+                    if nombre:
+                        apellido = nombre.lower().split()[-1]
+                        hora_map[apellido] = hora
+            if hora_map:
+                break
+        except Exception:
+            continue
+    return hora_map
+
+
+def _enrich_hora(pick: Dict, hora_map: Dict[str, str]) -> str:
+    """Devuelve la hora del pick o la busca en hora_map por apellido."""
+    if pick.get('hora'):
+        return pick['hora']
+    for nombre in (pick.get('jugador1', ''), pick.get('jugador2', '')):
+        apellido = nombre.lower().split()[-1] if nombre else ''
+        if apellido and apellido in hora_map:
+            return hora_map[apellido]
+    return None
+
+
 def _load_evaluar_games_picks(fecha: str) -> List[Dict]:
     """Carga picks EVAL_ con pick_type=evaluar_games del shadow_book de hoy."""
     path = SB_DIR / f'sb_{fecha}.jsonl'
     if not path.exists():
         return []
     records = sb._load_jsonl(path)
+    hora_map = _build_hora_map_from_zita()
     picks = []
     for sid, rec in records.items():
         if not sid.startswith('EVAL_'):
@@ -77,20 +121,24 @@ def _load_evaluar_games_picks(fecha: str) -> List[Dict]:
         snap = rec.get('pick_snapshot', {})
         if snap.get('pick_type') != 'evaluar_games':
             continue
-        picks.append({
+        pick = {
             'sb_id':             sid,
             'partido':           snap.get('partido', ''),
             'jugador1':          snap.get('partido', '').split(' vs ')[0].strip() if ' vs ' in snap.get('partido', '') else '',
             'jugador2':          snap.get('partido', '').split(' vs ')[1].strip() if ' vs ' in snap.get('partido', '') else '',
             'favorito_predicho': snap.get('favorito_predicho', ''),
             'cuota_favorito':    snap.get('cuota_favorito') or 0,
-            'confidence':        snap.get('confidence') or 0,
+            'confidence':        (lambda c: c / 100 if c and c >= 1 else (c or 0))(snap.get('confidence')),  # D126-06
             'match_id':          snap.get('match_id'),
             'hora':              snap.get('hora'),
             'torneo':            snap.get('torneo', ''),
             'superficie':        snap.get('superficie', ''),
             'tier':              snap.get('tier', ''),
-        })
+        }
+        # D125-01 fix: enriquecer hora desde zita si snapshot no la tiene
+        if not pick['hora']:
+            pick['hora'] = _enrich_hora(pick, hora_map)
+        picks.append(pick)
     return picks
 
 
@@ -106,6 +154,72 @@ def _process_pick(pick: Dict, verbose: bool = False) -> Optional[Dict]:
     diff_abs   = _diff_abs_from_cuota(cuota)
     zona       = _zona_diff(diff_abs)
     pred       = _predecir_sets_y_games(diff_abs, total_score=0.5)  # total_score neutro
+
+    # ── D128-02: solo excluir ultra-menores confirmados sin Kambi ───────────────
+    # D126-04 original era demasiado amplio: incluía 'itf', 'm25', 'w25' que SÍ
+    # están en Kambi para torneos Brisbane/Bali/Nogent/Saskatoon/SantaFe.
+    # detectar_tier() devuelve 'itf' para M25/W25/M35 indistintamente — la
+    # clasificación no es granular. El lookup de Kambi es el oráculo real.
+    # Solo pre-filtrar M10/M15/W10/W15 donde Kambi nunca tiene cobertura.
+    _TIERS_SIN_KAMBI = {'itf_minor', 'm10', 'w10', 'm15', 'w15'}
+    # REMOVIDO: 'itf', 'm25', 'w25' — pueden estar en Kambi (Nodo-128 D128-02)
+    tier_norm = (pick.get('tier') or '').lower().replace(' ', '_').replace('-', '_')
+    if any(t in tier_norm for t in _TIERS_SIN_KAMBI):
+        # Intentar wplay SSR (lazy import para no ralentizar si no hay picks ITF)
+        _wplay_seln_id = None
+        try:
+            import sys as _sys
+            _sys.path.insert(0, str(BACKEND_DIR))
+            from scripts.odds_aggregator import fetch_all_odds as _fetch_all
+            _wplay_feed = _fetch_all(['wplay'])
+            # Buscar por apellido de jugador1 o jugador2
+            for _nombre in (pick.get('jugador1', ''), pick.get('jugador2', '')):
+                _apellido = _nombre.lower().split()[-1] if _nombre else ''
+                _entry = _wplay_feed.get(_apellido, {}).get('wplay')
+                if _entry and _entry.get('seln_id'):
+                    _wplay_seln_id = _entry['seln_id']
+                    break
+        except Exception as _exc:
+            if verbose:
+                logger.info(f'  wplay SSR lookup error: {_exc}')
+
+        if _wplay_seln_id:
+            if verbose:
+                logger.info(f'  {partido}: tier ITF → wplay encontrado seln_id={_wplay_seln_id}')
+            return {
+                'partido':          partido,
+                'zona_diff':        zona,
+                'diff_abs':         diff_abs,
+                'predicted_sets':   pred['predicted_sets'],
+                'games_range':      pred['games_range'],
+                'hora':             pick.get('hora'),
+                'cuota_ml':         cuota,
+                'confidence':       pick['confidence'],
+                'señales_optimas':  [],
+                'tiene_mercados':   True,
+                '_source':          'evaluar_games',
+                '_sb_id':           pick['sb_id'],
+                '_source_casa':     'wplay',
+                '_wplay_seln_id':   _wplay_seln_id,
+            }
+        else:
+            if verbose:
+                logger.info(f'  {partido}: tier ITF → no encontrado en wplay SSR ni betplay')
+            return {
+                'partido':          partido,
+                'zona_diff':        zona,
+                'diff_abs':         diff_abs,
+                'predicted_sets':   pred['predicted_sets'],
+                'games_range':      pred['games_range'],
+                'hora':             pick.get('hora'),
+                'cuota_ml':         cuota,
+                'confidence':       pick['confidence'],
+                'señales_optimas':  [],
+                'tiene_mercados':   False,
+                '_source':          'evaluar_games',
+                '_sb_id':           pick['sb_id'],
+                '_skip_reason':     'itf_sin_mercado_co',  # no está en betplay ni wplay
+            }
 
     # Construir dict partido para Kambi lookup (mismo formato que games_signal_calculator)
     partido_dict = {
@@ -131,7 +245,7 @@ def _process_pick(pick: Dict, verbose: bool = False) -> Optional[Dict]:
     if not event_id:
         if verbose:
             logger.info(f'  {partido}: sin event_id Kambi')
-        return {
+        _res = {
             'partido':          partido,
             'zona_diff':        zona,
             'diff_abs':         diff_abs,
@@ -145,6 +259,10 @@ def _process_pick(pick: Dict, verbose: bool = False) -> Optional[Dict]:
             '_source':          'evaluar_games',
             '_sb_id':           pick['sb_id'],
         }
+        # D128-01: marcar dominantes extremos — Kambi puede publicar market 2h antes
+        if diff_abs > 0.85:
+            _res['_watchlist_dominante'] = True
+        return _res
 
     betoffer = _fetch_betoffer_event(event_id)
     señales  = _analizar_mercados_juegos(betoffer, pred)
@@ -153,7 +271,7 @@ def _process_pick(pick: Dict, verbose: bool = False) -> Optional[Dict]:
     if verbose:
         logger.info(f'  {partido}: event_id={event_id}  señales={len(señales)}  optimas={len(optimas)}')
 
-    return {
+    _res = {
         'partido':          partido,
         'zona_diff':        zona,
         'diff_abs':         diff_abs,
@@ -167,6 +285,10 @@ def _process_pick(pick: Dict, verbose: bool = False) -> Optional[Dict]:
         '_source':          'evaluar_games',
         '_sb_id':           pick['sb_id'],
     }
+    # D128-01: partido encontrado en Kambi pero sin mercado UNDER — watchlist si muy dominante
+    if not optimas and diff_abs > 0.85:
+        _res['_watchlist_dominante'] = True
+    return _res
 
 
 def _save_report(resultados: List[Dict], fecha: str) -> Path:
@@ -190,6 +312,8 @@ def _save_report(resultados: List[Dict], fecha: str) -> Path:
         },
         # Mismo campo "apostar" que games_signal_report para que build_evaluar_games_combos lo lea
         'apostar': [r for r in resultados if r.get('tiene_mercados')],
+        # D128-01: dominantes extremos sin mercado hoy — revisar 2h antes del partido
+        'watchlist_dominante': [r for r in resultados if r.get('_watchlist_dominante')],
         'detalle_completo': resultados,
     }
     out.write_text(json.dumps(payload, ensure_ascii=False, indent=2))

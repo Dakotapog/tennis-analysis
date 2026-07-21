@@ -993,7 +993,7 @@ def analyze_matches_with_pandas(file_path, output_filename="analisis_partidos_pa
                             'favorito_predicho': _fav_e,
                             'rival':             _rival_e,
                             'partido':           f"{p1} vs {p2}",
-                            'torneo':            match.get('torneo') or match.get('tournament', 'Desconocido'),
+                            'torneo':            match.get('torneo_nombre') or match.get('torneo') or match.get('tournament', 'Desconocido'),  # D128-03
                             'superficie':        match.get('tipo_cancha') or match.get('superficie', 'unknown'),
                             'pick_status':       'EVALUAR',
                             'confidence':        float(_confidence) if _confidence else 0.0,
@@ -1001,7 +1001,7 @@ def analyze_matches_with_pandas(file_path, output_filename="analisis_partidos_pa
                             'score_directo':     scores.get('score_difference', 0),
                             # D125-01: habilita Kambi lookup exacto + time-window combo grouping
                             'match_id':          match.get('match_id') or match.get('kambi_id'),
-                            'hora':              match.get('hora') or match.get('hora_inicio') or match.get('time'),
+                            'hora':              match.get('hora') or match.get('hora_partido') or match.get('hora_inicio') or match.get('time'),
                         }
                         if _edge_pick:
                             _pick_e.update({

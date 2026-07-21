@@ -2952,12 +2952,29 @@ def build_evaluar_games_combos(
 
     apostar = data.get("apostar", [])
     if not apostar:
-        logger.warning("evaluar_games_signal: no hay partidos con mercado Kambi")
+        logger.warning("evaluar_games_signal: no hay partidos con señal")
         return [], {}
+
+    # ── D126-04 rev: separar picks wplay (ITF) de picks betplay (UNDER games) ─
+    wplay_picks  = [r for r in apostar if r.get('_source_casa') == 'wplay']
+    betplay_picks = [r for r in apostar if r.get('_source_casa') != 'wplay']
+
+    if wplay_picks:
+        logger.info(f"[EvalGamesCombo] {len(wplay_picks)} picks ITF → wplay (ML favorito)")
+    if not betplay_picks:
+        logger.info("[EvalGamesCombo] 0 picks betplay UNDER — solo wplay ITF hoy")
+        meta_solo_wplay = {
+            "fuente": path.name, "n_señales": 0, "n_grupos": 0,
+            "stake_per_combo": stake_per_combo, "total_stake": 0, "n_combos": 0,
+            "calibracion_n": 0, "regla_g6_active": False,
+            "n_alta": 0, "n_media": 0, "fecha": datetime.now().isoformat(),
+            "wplay_itf_picks": wplay_picks,
+        }
+        return [], meta_solo_wplay
 
     # ── Aplanar: una entrada por señal UNDER accionable ──────────────────────
     all_signals: list = []
-    for p in apostar:
+    for p in betplay_picks:
         hora = p.get("hora")
         for s in p.get("señales_optimas", []):
             if not (s.get("apostar") and s.get("direccion") == "UNDER"):
@@ -2983,6 +3000,15 @@ def build_evaluar_games_combos(
     if not all_signals:
         logger.warning("evaluar_games_signal: 0 señales UNDER accionables")
         return [], {}
+
+    # ── D126-01: dedup same-match — máx 1 señal por partido (mayor cuota) ───
+    # Betplay rechaza combos con 2 mercados del mismo evento (correlacionados)
+    _seen_match: Dict[str, dict] = {}
+    for _s in all_signals:
+        _p = _s["partido"]
+        if _p not in _seen_match or _s["cuota"] > _seen_match[_p]["cuota"]:
+            _seen_match[_p] = _s
+    all_signals = list(_seen_match.values())
 
     # ── Agrupar por ventana horaria 90 min ───────────────────────────────────
     groups = _group_by_time_window(all_signals, window_min=90)
@@ -3011,7 +3037,7 @@ def build_evaluar_games_combos(
                     continue
                 seen_ids.add(key)
 
-                ids_str    = "|".join(str(i) for i in oids)
+                ids_str    = ",".join(str(i) for i in oids)
                 betplay_url = (
                     f"{BETPLAY_URL_BASE}{ids_str}{BETPLAY_URL_TAIL}"
                     if ids_str else None
@@ -3049,11 +3075,13 @@ def build_evaluar_games_combos(
         "n_alta":         sum(1 for s in all_signals if s["confianza_señal"] == "ALTA"),
         "n_media":        sum(1 for s in all_signals if s["confianza_señal"] == "MEDIA"),
         "fecha":          datetime.now().isoformat(),
+        "wplay_itf_picks": wplay_picks,  # D126-04 rev: ITF ML picks para wplay
     }
 
     logger.info(
         f"[EvalGamesCombo] {len(combos)} combos EvalGamesA "
-        f"({len(all_signals)} señales UNDER en {len(groups)} ventanas)"
+        f"({len(all_signals)} señales UNDER en {len(groups)} ventanas) | "
+        f"{len(wplay_picks)} picks ITF wplay"
     )
     return combos, meta
 
@@ -3389,19 +3417,29 @@ def main():
             stake_per_combo=args.evaluar_stake,
             signal_file=args.evaluar_file,
         )
-        if not eval_links:
-            logger.warning("No se generaron combos EvalGamesA. Sin señales UNDER o cuota_combo<2.50")
+        wplay_picks = eval_meta.get("wplay_itf_picks", [])
+
+        if not eval_links and not wplay_picks:
+            logger.warning("No se generaron combos EvalGamesA ni picks wplay ITF.")
             return
 
-        _mostrar_games_combos(eval_links, eval_meta)
+        if eval_links:
+            _mostrar_games_combos(eval_links, eval_meta)
 
         if args.dry_run:
+            if wplay_picks:
+                print(f"\n  [DRY-RUN] {len(wplay_picks)} picks ITF para wplay:")
+                for p in sorted(wplay_picks, key=lambda x: x.get('hora') or '99:99'):
+                    print(f"    {p.get('hora','?')} {p['partido']} @{p.get('cuota_ml',0):.2f} conf={p.get('confidence',0):.0%}")
             return
 
-        # Generar bat/html para cada combo EvalGamesA
+        # Directorio destino
         from pathlib import Path as _P
-        combos_dir = _P("combos")
-        combos_dir.mkdir(exist_ok=True)
+        DESKTOP_COMBOS = _P("/mnt/c/Users/hogar/Desktop/combos")
+        DESKTOP_COMBOS.mkdir(parents=True, exist_ok=True)
+        CHROME = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+
+        # ── Archivos EvalGamesA (betplay UNDER juegos) ────────────────────────
         n_eval = 0
         for combo in eval_links:
             url = combo.get("url")
@@ -3410,22 +3448,88 @@ def main():
             hora_w  = combo.get("hora_window", "?")
             n_legs  = combo.get("n_piernas", 2)
             cuota_c = combo.get("cuota_combo", 0)
+            legs    = combo.get("legs", [])
             label   = f"EvalGamesA_{n_eval+1}"
-            bat_path  = combos_dir / f"{label}.bat"
-            html_path = combos_dir / f"{label}.html"
-            bat_path.write_text(
-                f'@echo off\nstart "" "{url}"\n',
+            html_path = DESKTOP_COMBOS / f"{label}.html"
+            bat_path  = DESKTOP_COMBOS / f"{label}.bat"
+
+            legs_html = "".join(
+                f"<li>{l.get('partido','?')} — UNDER {l.get('linea','?')} juegos @{l.get('cuota',0):.2f} [{l.get('hora','?')}]</li>"
+                for l in legs
+            )
+            win_path = str(html_path).replace("/mnt/c/", "C:\\").replace("/", "\\")
+            html_path.write_text(
+                f'<!DOCTYPE html><html><head><meta charset="utf-8">'
+                f'<title>{label} {n_legs}p @{cuota_c:.2f}x</title>'
+                f'<script>window.location.replace("{url}");</script>'
+                f'</head><body>'
+                f'<p>{label} — {n_legs} piernas @{cuota_c:.2f}x | ventana {hora_w}</p>'
+                f'<ul>{legs_html}</ul>'
+                f'<p><a href="{url}">Click aqui si no redirige</a></p>'
+                f'</body></html>',
                 encoding="utf-8",
             )
-            html_path.write_text(
-                f'<html><head><meta http-equiv="refresh" content="0;url={url}"></head>'
-                f'<body>Redirigiendo a {label} ({n_legs} piernas @{cuota_c:.2f} ventana {hora_w})...</body></html>',
+            bat_path.write_text(
+                f'@echo off\nstart "" "{CHROME}" "file:///{win_path}"\n',
                 encoding="utf-8",
             )
             n_eval += 1
+
         if n_eval:
-            print(f"\n  {n_eval} archivos EvalGamesA*.bat/.html en combos/")
-            print(f"  Stake: ${args.evaluar_stake} x {n_eval} = ${args.evaluar_stake * n_eval:,}")
+            print(f"\n  {n_eval} archivos EvalGamesA*.bat/.html en tu escritorio (Desktop/combos/)")
+            print(f"  Doble clic .bat → Chrome → Betplay con combo cargado")
+            print(f"  Stake betplay: ${args.evaluar_stake} x {n_eval} = ${args.evaluar_stake * n_eval:,}")
+
+        # ── Archivo EvalGamesWplay (wplay ML favoritos ITF) ───────────────────
+        # D126-04 rev: wplay cubre ITF independientemente de Kambi
+        if wplay_picks:
+            WPLAY_URL  = "https://www.wplay.co/apuestas/deportivas/tenis"
+            wplay_html = DESKTOP_COMBOS / "EvalGamesWplay.html"
+            wplay_bat  = DESKTOP_COMBOS / "EvalGamesWplay.bat"
+
+            picks_sorted = sorted(wplay_picks, key=lambda x: x.get('hora') or '99:99')
+            rows_html = "".join(
+                f"<tr>"
+                f"<td>{p.get('hora','?')}</td>"
+                f"<td><b>{p['partido']}</b></td>"
+                f"<td>@{p.get('cuota_ml',0):.2f}</td>"
+                f"<td>{p.get('confidence',0):.0%}</td>"
+                f"<td>{p.get('zona_diff','?')}</td>"
+                f"<td>{p.get('games_range','?')}</td>"
+                f"</tr>"
+                for p in picks_sorted
+            )
+            win_path_wp = str(wplay_html).replace("/mnt/c/", "C:\\").replace("/", "\\")
+            wplay_html.write_text(
+                f'<!DOCTYPE html><html><head><meta charset="utf-8">'
+                f'<style>body{{font-family:Arial,sans-serif;margin:20px}}'
+                f'table{{border-collapse:collapse;width:100%}}'
+                f'th,td{{border:1px solid #ccc;padding:8px;text-align:left}}'
+                f'th{{background:#1a5276;color:white}}'
+                f'tr:nth-child(even){{background:#f2f2f2}}'
+                f'.btn{{display:inline-block;margin:10px 0;padding:12px 24px;'
+                f'background:#e74c3c;color:white;text-decoration:none;border-radius:4px;font-size:16px}}'
+                f'</style></head><body>'
+                f'<h2>EVALUAR GAMES — {len(wplay_picks)} favoritos ITF para WPLAY</h2>'
+                f'<a class="btn" href="{WPLAY_URL}" target="_blank">Abrir Wplay Tennis</a>'
+                f'<p>Apuesta el ML del favorito en wplay.co. Estrategia: favorito absoluto (cuota &lt;1.30, conf &ge;54%). '
+                f'Hit% historico: 84.6% (n=13 — H125-01).</p>'
+                f'<table>'
+                f'<tr><th>Hora</th><th>Partido</th><th>Cuota ML</th><th>Conf</th><th>Zona diff</th><th>Games predichos</th></tr>'
+                f'{rows_html}'
+                f'</table>'
+                f'<p style="color:#666;margin-top:20px">Generado por evaluar_games_bridge.py (Nodo-125/126) — D126-04 rev wplay route</p>'
+                f'</body></html>',
+                encoding="utf-8",
+            )
+            wplay_bat.write_text(
+                f'@echo off\nstart "" "{CHROME}" "file:///{win_path_wp}"\n',
+                encoding="utf-8",
+            )
+            print(f"\n  {len(wplay_picks)} picks ITF → EvalGamesWplay.bat (wplay.co/tenis)")
+            for p in picks_sorted:
+                print(f"    {p.get('hora','?')} {p['partido']} @{p.get('cuota_ml',0):.2f} conf={p.get('confidence',0):.0%}")
+            print(f"  Doble clic EvalGamesWplay.bat → tabla de favoritos + link a wplay")
         return
 
     # ── MODO WAS STANDALONE (Nodo-44) ──
