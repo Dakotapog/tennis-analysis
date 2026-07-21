@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generado": "2026-07-20T20:10:02",
-    "total_nodos": 121,
+    "total_nodos": 125,
     "total_py_files": 71,
     "huerfanos_count": 1,
     "exclusiones_count": 19
@@ -1663,6 +1663,41 @@
         "scripts/live_edge_monitor.py",
         "scripts/meta_signal_scorer.py",
         "shadow_book.py"
+      ]
+    },
+    {
+      "nodo_id": "126",
+      "nodo_archivo": "Nodo-126-Auditoria-EvalGames-Bridge-Fugas-Fixes.md",
+      "fecha": "2026-07-21",
+      "estado": "auditoria",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "scripts/evaluar_games_bridge.py",
+        "shadow_book.py",
+        "generar_tabla_favoritos2.py",
+        "run_daily.py",
+        "tests/test_nodo126_evaluar_games_audit.py"
+      ]
+    },
+    {
+      "nodo_id": "128",
+      "nodo_archivo": "Nodo-128-D126-04-Overgeneral-ITF-Filter-Fix.md",
+      "fecha": "2026-07-21",
+      "estado": "implementacion",
+      "archivos_mencionados": [
+        "scripts/evaluar_games_bridge.py",
+        "generar_tabla_favoritos2.py",
+        "tests/test_nodo128_itf_filter_fix.py"
+      ]
+    },
+    {
+      "nodo_id": "129",
+      "nodo_archivo": "Nodo-129-EvalGamesA-Gap-Gate-Quality-Control.md",
+      "fecha": "2026-07-21",
+      "estado": "propuesta",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "tests/test_nodo129_evaluar_games_gap_gate.py"
       ]
     }
   ],
