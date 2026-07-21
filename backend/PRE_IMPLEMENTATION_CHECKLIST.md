@@ -3,26 +3,34 @@
 > Nodo-51 F-Meta — Costo de cumplir: 5 minutos.
 > Costo de ignorar, ya pagado dos veces: nodos declarados BLOQUEADOS con solución existente, y edges fantasma en producción.
 
-## REGLA-GREP-FIRST — Verificar antes de implementar "pendientes" de spec
+## REGLA-GRAPHIFY-FIRST — Verificar existencia antes de implementar "pendientes"
 
 > Costo de ignorar: 3 sesiones perdidas en Nodo-119, Nodo-123 (julio 2026).
-> Cada vez que un spec dice "pendiente" → verificar en el código ANTES de escribir una línea.
+> Cada vez que un spec dice "pendiente" → verificar con graphify ANTES de escribir una línea.
 
+**graphify es el tool primario** (semántico, orientado al grafo):
 ```bash
-# Para cada item "pendiente" en un spec:
-[ ] grep -n "<función_o_concepto>" <archivo_destino_del_spec>
-    # ¿Ya existe? → FALSO PENDIENTE. Actualizar spec a "CERRADO — ya implementado en L####"
-    # ¿No existe? → Proceder con implementación.
-
-# Ejemplos de la sesión 2026-07-20:
-    grep -n "_fetch_all_odds\|fetch_all_odds" live_desk.py        # → L1866 ya existía (D122-01)
-    grep -n "STEAM\|ATN\|divergencia" live_desk.py                # → L927-991 ya existía (D122-03)
-    grep -n "games_signal\|PASO 3.6" live_desk.py                 # → L1051 ya existía (D122-02)
-    grep -n "tennis-live-desk" ~/.config/systemd/user/            # → ya existía (D122-04)
-    grep -n "KambiLiveClientReal\|liveEvents" scripts/live_edge_monitor.py  # → L158 D97-15 (D122-06)
+graphify query "<concepto del pendiente>"
+# Ejemplos que habrían evitado Nodo-123:
+graphify query "P8 fuente viva fetch_all_odds live_desk"      # → habría mostrado _build_p8_books L1866
+graphify query "X2 steam badge divergencia visual"            # → habría mostrado STEAM OK L927
+graphify query "KambiLiveClientReal live endpoint betplay"    # → habría mostrado D97-15 L158
 ```
 
-**Tiempo: 30 segundos. Ahorra 1-2 horas de sesión y ~50k tokens.**
+**grep como segundo paso** (solo para línea exacta tras graphify):
+```bash
+grep -n "<función>" <archivo_confirmado_por_graphify>
+```
+
+**Por qué el hook de graphify solo no fue suficiente:**
+El hook dice "antes de LEER archivos". Pero los agentes iban directo de spec a código
+sin leer ningún archivo — el hook nunca se disparó. Esta regla cierra ese gap:
+graphify aplica también **antes de IMPLEMENTAR**, no solo antes de leer.
+
+**Protocolo:**
+1. Spec dice "pendiente" → `graphify query "<concepto>"`
+2. Aparece en el grafo → FALSO PENDIENTE → actualizar spec con línea exacta
+3. No aparece → proceder con implementación
 
 ## Checklist Obligatorio (antes de implementar cualquier nodo con scraping/datos)
 

@@ -31,7 +31,7 @@
 6. **Playwright PRIMARIO:** PASOS 1+2. API solo si Playwright falla Y Phantom Guard activo.
 7. **5 errores históricos:** Ver `docs/DECISION-LOG.md`. No repetir.
 8. **Pre-registro:** Ninguna hipótesis sin H-XX en `validation/preregistered_hypotheses.json`.
-9. **GREP-FIRST:** Antes de implementar cualquier "pendiente" de un spec → `grep -n <concepto> <archivo>`. Si existe → FALSO PENDIENTE, actualizar spec. Costo de ignorar: 3 sesiones perdidas (Nodo-119, Nodo-123). Ver `PRE_IMPLEMENTATION_CHECKLIST.md §REGLA-GREP-FIRST`.
+9. **GRAPHIFY-FIRST:** Antes de implementar cualquier "pendiente" de un spec → `graphify query "<concepto>"`. Si aparece en el grafo → FALSO PENDIENTE, actualizar spec con L####. El hook graphify aplica ante LEER *y* ante IMPLEMENTAR. Costo de ignorar: 3 sesiones perdidas (Nodo-119, Nodo-123). Ver `PRE_IMPLEMENTATION_CHECKLIST.md §REGLA-GRAPHIFY-FIRST`.
 
 ---
 
