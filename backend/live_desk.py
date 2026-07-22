@@ -29,6 +29,9 @@ import math
 import os
 import subprocess
 import sys
+import threading
+import time
+import urllib.request
 from datetime import date, datetime, timedelta
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
@@ -165,6 +168,7 @@ def build_desk_state(fecha: Optional[str] = None) -> Dict[str, Any]:
     state: Dict[str, Any] = {
         "fecha": fecha,
         "ts": datetime.now().isoformat(),
+        "data_freshness": _data_freshness(fecha),  # D129-03: mtime real de datos
         "p0_ncal": _ncal,                    # Nodo-115 U2: evidencia por jugador
         "p4_risk": _build_p4_risk(fecha),    # P4 primero — manda
         "p1_tape": _build_p1_tape(fecha),
@@ -916,8 +920,20 @@ def render_html(state: Dict[str, Any]) -> str:
                 f'font-size:0.72em;border-radius:3px;font-weight:bold;" '
                 f'title="ARB: fav @{cuota_gana} ({casa_gana}) + rival @{rc} ({rk})">ARB</span> '
             )
+        _bp_src     = bp.get("_source", "ml")
+        _bp_partido = bp.get("_partido", "")
+        _bp_mercado = bp.get("_mercado", "")
+        if _bp_src == "games" and _bp_partido:
+            # GAMES: mostrar partido completo + señal de apuesta
+            _jug_cell = (
+                f'<span style="font-size:0.75em;color:{GREY};">GAMES</span> '
+                f'<b>{_bp_partido}</b>'
+                f'<br><span style="color:{AMBER};font-size:0.8em;">➜ {_bp_mercado}</span>'
+            )
+        else:
+            _jug_cell = bp.get("jugador", jug_key)
         p8_rows.append([
-            arb_html + bp.get("jugador", jug_key),
+            arb_html + _jug_cell,
             str(bp.get("betplay_cuota", "—")),
             str(bp.get("rushbet_cuota", "—")),
             str(bp.get("wplay_cuota", "—")),
@@ -1392,7 +1408,9 @@ def render_html(state: Dict[str, Any]) -> str:
 
     fecha = state.get("fecha", "")
     ts = state.get("ts", "")
-    refresh_note = f'<p style="color:{GREY};font-size:0.75em;text-align:right;">Auto-refresh 30s | <span id="desk-ts">{ts}</span></p>'
+    freshness = state.get("data_freshness", "")
+    freshness_note = f' | {freshness}' if freshness else ""
+    refresh_note = f'<p style="color:{GREY};font-size:0.75em;text-align:right;">Auto-refresh 12s{freshness_note} | <span id="desk-ts">{ts}</span></p>'
 
     html = f"""<!DOCTYPE html>
 <html lang="es">
@@ -1520,7 +1538,7 @@ def render_html(state: Dict[str, Any]) -> str:
         _reapplyState();
       }})
       .catch(function() {{}});  // silencioso — reintenta en 30s
-    setTimeout(autoRefresh, 30000);
+    setTimeout(autoRefresh, 12000);
   }}
   setTimeout(autoRefresh, 30000);
   </script>
@@ -1977,6 +1995,19 @@ def _build_p8_books(fecha: str) -> Dict:
         except Exception:
             pass
 
+    # D128-01: alias nombre-completo → apellido para matchear picks abreviados del edge_report/games
+    # Betplay/Wplay devuelven "Botic Van De Zandschulp"; games_report tiene "Van De Zandschulp B."
+    # best_price() usa exact-match por _norm(), así que indexamos también por apellido en todos los feeds.
+    for _feed_book, _feed_dict in feeds.items():
+        _book_aliases: Dict[str, Any] = {}
+        for _fk, _fe in _feed_dict.items():
+            _fparts = _fk.split()
+            if len(_fparts) >= 2:
+                _sn = " ".join(_fparts[1:])   # drop primer token (nombre de pila)
+                if _sn not in _feed_dict and _sn not in _book_aliases:
+                    _book_aliases[_sn] = _fe
+        _feed_dict.update(_book_aliases)
+
     # Fallback betplay: si Kambi devuelve 429/vacío, usar h2h_results_enhanced del pipeline
     _h2h_path = _latest(str(REPORTS / f"h2h_results_enhanced_{fecha.replace('-','')}*.json"))
     _h2h_rows: list = []
@@ -2001,6 +2032,43 @@ def _build_p8_books(fecha: str) -> Dict:
     er_data = _load_json(er) or {}
     all_picks_er = (er_data.get("apostar") or []) + (er_data.get("watchlist") or [])
 
+    # D128-02: incluir jugadores de combos GAMES del día en P8
+    # Busca players ATP/WTA de games_signal_report que sí están en los feeds (betplay/wplay)
+    # Útil cuando edge_report solo tiene ITF (no en books) pero games tiene ATP
+    _all_gr = sorted(glob.glob(str(REPORTS / f"games_signal_report_{fecha.replace('-','')}*.json")))
+    _games_players_seen: set = set()
+    _games_seen_oids: set = set()
+    for _gr_path in _all_gr:
+        _gr_data = _load_json(Path(_gr_path)) or {}
+        for _gs in (_gr_data.get("apostar") or []):
+            for _sig in _gs.get("señales_optimas", []):
+                _oid = _sig.get("outcome_id")
+                if _oid and _oid in _games_seen_oids:
+                    continue
+                if _oid:
+                    _games_seen_oids.add(_oid)
+                _partido = _gs.get("partido", "")
+                if " vs " not in _partido:
+                    continue
+                _p1, _p2 = _partido.split(" vs ", 1)
+                for _gp_raw in [_p1.strip(), _p2.strip()]:
+                    if not _gp_raw or _gp_raw in _games_players_seen:
+                        continue
+                    _games_players_seen.add(_gp_raw)
+                    # Limpiar inicial trailing "B." → "Van De Zandschulp B." → "Van De Zandschulp"
+                    # para que _norm() matchee el alias de apellido en feeds (D128-01)
+                    _gp_parts = _gp_raw.split()
+                    while _gp_parts and len(_gp_parts[-1].rstrip(".")) <= 1:
+                        _gp_parts.pop()
+                    _gp = " ".join(_gp_parts) if _gp_parts else _gp_raw
+                    all_picks_er.append({
+                        "favorito_predicho": _gp,
+                        "cuota_favorito": 0,
+                        "_source": "games",
+                        "_partido": _gs.get("partido", ""),
+                        "_mercado": f"{_sig.get('direccion','?')} {_sig.get('linea','?')} @{_sig.get('cuota','?')}",
+                    })
+
     picks_result: Dict[str, Any] = {}
     for p in all_picks_er:
         jug = p.get("favorito_predicho", p.get("favorito", ""))
@@ -2020,7 +2088,12 @@ def _build_p8_books(fecha: str) -> Dict:
             div_pct = round((hi / lo - 1) * 100, 2) if lo > 0 else 0.0
 
         cuotas_map = bp.get("cuotas", {})
-        picks_result[jug.lower()] = {
+        _src     = p.get("_source", "ml")
+        _partido = p.get("_partido", "")
+        _mercado = p.get("_mercado", "")
+        # Clave única: partido+jugador para GAMES (evita colisión "Smith" entre 5 partidos)
+        _key = f"{_partido}_{jug}".lower() if _src == "games" and _partido else jug.lower()
+        picks_result[_key] = {
             "jugador":           jug,
             "casa":              bp.get("casa", ""),
             "cuota":             bp.get("cuota", 0),
@@ -2031,6 +2104,9 @@ def _build_p8_books(fecha: str) -> Dict:
             "rushbet_cuota":     cuotas_map.get("rushbet", "—"),
             "wplay_cuota":       cuotas_map.get("wplay", "—"),
             "cuota_plan":        base_cuota,
+            "_source":           _src,
+            "_partido":          _partido,
+            "_mercado":          _mercado,
         }
 
     # ARB detection: mejor cuota fav (book A) vs mejor cuota rival (book B)
@@ -2223,6 +2299,62 @@ def _demo_state() -> Dict[str, Any]:
 
 _DEMO_MODE: bool = False
 
+# ══════════════════════════════════════════════════════════════════════════════
+# D129-01 — Cache en memoria TTL 20s + thread background
+# D129-02 — POST /api/refresh para invalidación explícita (n8n push)
+# D129-03 — _data_freshness() mtime real de archivos de datos
+# ══════════════════════════════════════════════════════════════════════════════
+
+_STATE_CACHE: Dict[str, Any] = {
+    "state": None,
+    "ts": None,
+    "ttl_s": 20,
+    "lock": threading.Lock(),
+}
+
+
+def _get_cached_state(fecha: str) -> dict:
+    """Retorna estado desde cache si tiene <20s. Cache miss → reconstruye y guarda."""
+    with _STATE_CACHE["lock"]:
+        now = datetime.now()
+        age = (now - _STATE_CACHE["ts"]).total_seconds() if _STATE_CACHE["ts"] else 999
+        if _STATE_CACHE["state"] is not None and age < _STATE_CACHE["ttl_s"]:
+            return _STATE_CACHE["state"]
+    state = build_desk_state(fecha)
+    with _STATE_CACHE["lock"]:
+        _STATE_CACHE["state"] = state
+        _STATE_CACHE["ts"] = datetime.now()
+    return state
+
+
+def _background_refresh(fecha_fn) -> None:
+    """Thread daemon — precalienta cache cada 15s para que el browser reciba <1s."""
+    while True:
+        try:
+            _get_cached_state(fecha_fn())
+        except Exception:
+            pass
+        time.sleep(15)
+
+
+def _data_freshness(fecha: str) -> str:
+    """Retorna antigüedad real del archivo de datos más reciente del día."""
+    fecha_compact = fecha.replace("-", "")
+    candidates = (
+        glob.glob(str(REPORTS / f"live_odds_history_{fecha_compact}*.json"))
+        + glob.glob(str(REPORTS / f"edge_report_{fecha_compact}*.json"))
+    )
+    mtimes = []
+    for c in candidates:
+        try:
+            mtimes.append(os.path.getmtime(c))
+        except OSError:
+            pass
+    if not mtimes:
+        return "datos: desconocido"
+    age_s = time.time() - max(mtimes)
+    return f"datos de hace {int(age_s // 60)}m {int(age_s % 60)}s"
+
 
 class DeskHandler(BaseHTTPRequestHandler):
     def log_message(self, fmt, *args):
@@ -2244,7 +2376,7 @@ class DeskHandler(BaseHTTPRequestHandler):
                 state = _demo_state()
             else:
                 fecha = _FECHA_OVERRIDE or date.today().isoformat()
-                state = build_desk_state(fecha)
+                state = _get_cached_state(fecha)   # D129-01: cache en memoria
             html = render_html(state)
             body = html.encode("utf-8")
             self.send_response(200)
@@ -2258,6 +2390,21 @@ class DeskHandler(BaseHTTPRequestHandler):
             self.send_header("Content-Type", "text/html")
             self.end_headers()
             self.wfile.write(err)
+
+    def do_POST(self):
+        """D129-02: POST /api/refresh — invalida cache inmediatamente (llamado por n8n via close_snapshot_server)."""
+        if self.path != "/api/refresh":
+            self.send_response(404)
+            self.end_headers()
+            return
+        with _STATE_CACHE["lock"]:
+            _STATE_CACHE["ts"] = None  # fuerza reconstrucción en próxima request
+        body = b'{"ok": true}'
+        self.send_response(200)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
 
 
 def main() -> None:
@@ -2281,9 +2428,15 @@ def main() -> None:
         print(render_html(state))
         return
 
+    # D129-01: thread daemon precalienta cache cada 15s
+    _fecha_fn = lambda: _FECHA_OVERRIDE or date.today().isoformat()
+    _t = threading.Thread(target=_background_refresh, args=(_fecha_fn,), daemon=True)
+    _t.start()
+    logger.info("Cache background thread iniciado (TTL 20s, refresh 15s)")
+
     server = HTTPServer(("0.0.0.0", args.port), DeskHandler)
     logger.info(f"Live Trading Desk en http://localhost:{args.port}/")
-    logger.info("Auto-refresh: 30s | Ctrl-C para detener")
+    logger.info("Auto-refresh JS: 12s | POST /api/refresh para push desde n8n | Ctrl-C para detener")
     try:
         server.serve_forever()
     except KeyboardInterrupt:

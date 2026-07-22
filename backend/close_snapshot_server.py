@@ -20,10 +20,21 @@ import json
 import re
 import subprocess
 import sys
+import urllib.request
 from datetime import datetime, timezone, timedelta
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 from urllib.parse import urlparse, parse_qs
+
+_LIVE_DESK_REFRESH_URL = "http://localhost:7780/api/refresh"
+
+
+def _notify_live_desk() -> None:
+    """D129-02: Notifica a live_desk que hay datos nuevos → invalida cache."""
+    try:
+        urllib.request.urlopen(_LIVE_DESK_REFRESH_URL, data=b"{}", timeout=2)
+    except Exception:
+        pass  # live_desk puede estar apagado — ignorar silenciosamente
 
 BASE_DIR  = Path(__file__).parent
 LOG_FILE  = BASE_DIR / "logs" / "n8n_snapshots.log"
@@ -177,6 +188,8 @@ class Handler(BaseHTTPRequestHandler):
                    f"{' | '.join(names)}")
         _log(log_msg, error=not ok)
 
+        _notify_live_desk()  # D129-02: invalida cache live_desk tras close-snapshot
+
         status_code = 200 if ok else 500
         self._send_json(status_code, {
             "ok": ok,
@@ -206,6 +219,7 @@ class Handler(BaseHTTPRequestHandler):
                 n_triggers = int(m.group(1))
 
             _log(f"live-check rc={r.returncode} n_triggers={n_triggers}", error=not ok)
+            _notify_live_desk()  # D129-02: invalida cache live_desk tras live-check
             self._send_json(200 if ok else 500, {
                 "ok": ok,
                 "n_triggers": n_triggers,
