@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "generado": "2026-07-21T22:09:37",
-    "total_nodos": 131,
+    "generado": "2026-07-21T23:07:31",
+    "total_nodos": 132,
     "total_py_files": 71,
     "huerfanos_count": 0,
     "exclusiones_count": 19
@@ -688,6 +688,20 @@
         "scripts/evaluar_games_bridge.py",
         "shadow_book.py",
         "tests/test_nodo126_evaluar_games_audit.py"
+      ]
+    },
+    {
+      "nodo_id": "135",
+      "nodo_archivo": "Nodo-135-EvalGames-Live-API-Fix.md",
+      "fecha": null,
+      "estado": "activo",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "close_snapshot_server.py",
+        "games_signal_calculator.py",
+        "live_desk.py",
+        "live_edge_monitor.py",
+        "tests/test_nodo135_games_live_api.py"
       ]
     },
     {

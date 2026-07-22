@@ -2429,19 +2429,37 @@ def _kambi_started_events() -> list:
         return []
 
 
-def _extract_games_cuota_live(ev_wrapper: dict, direccion: str, linea: Optional[float]) -> Optional[float]:
-    """Busca betOffer 'Total de juegos' y retorna cuota live para dirección/línea."""
-    for bo in ev_wrapper.get("betOffers", []):
-        label = (bo.get("criterion", {}).get("label") or "").lower()
-        if "juego" not in label and "game" not in label:
+def _extract_games_cuota_live(event_id: int, direccion: str, linea: Optional[float]) -> Optional[float]:
+    """
+    D135-01: busca mercado match-level 'Total de juegos' via endpoint betoffer/event/{id}.
+    El listView solo devuelve mercados destacados (vacío para ITF). Este endpoint retorna
+    todos los betOffers del evento.
+    D135-02: excluye mercados set-level ("Total de juegos - Set 3") y juego-level.
+    """
+    url = (f"{_KAMBI_BASE}/betoffer/event/{event_id}.json"
+           f"?{_KAMBI_PARAMS}")
+    try:
+        req = urllib.request.Request(url, headers=_KAMBI_HDR)
+        with urllib.request.urlopen(req, timeout=3) as r:
+            offers = json.loads(r.read().decode()).get("betOffers", [])
+    except Exception:
+        return None
+
+    dir_norm = direccion.upper()
+    for bo in offers:
+        label = bo.get("criterion", {}).get("label") or ""
+        # D135-02: solo mercado match-level, excluir "Total de juegos - Set X"
+        if not ("Total de juegos" in label
+                and " - Set " not in label
+                and "Juego" not in label):
             continue
         for oc in bo.get("outcomes", []):
             oc_label = (oc.get("label") or "").lower()
             oc_line  = oc.get("line", 0) / 1000 if oc.get("line") else None
             is_under = "menos" in oc_label or "under" in oc_label
             is_over  = "más" in oc_label or "over" in oc_label or "mas" in oc_label
-            dir_match  = (direccion == "UNDER" and is_under) or (direccion == "OVER" and is_over)
-            line_match = (oc_line is None or linea is None or abs(oc_line - linea) < 0.6)
+            dir_match  = (dir_norm == "UNDER" and is_under) or (dir_norm == "OVER" and is_over)
+            line_match = (oc_line is None or linea is None or abs(oc_line - linea) < 1.0)
             if dir_match and line_match:
                 odds_raw = oc.get("odds")
                 if odds_raw:
@@ -2524,7 +2542,7 @@ def _check_games_convergencia(fecha: str) -> None:
 
         if matched:
             sig["estado"] = "EN_VIVO"
-            cuota_live = _extract_games_cuota_live(matched, sig["direccion"], sig["linea"])
+            cuota_live = _extract_games_cuota_live(matched["event"]["id"], sig["direccion"], sig["linea"])  # D135-01
             if cuota_live and sig.get("cuota_pre"):
                 sig["cuota_live"] = cuota_live
                 sig["drift_pct"]  = round(
