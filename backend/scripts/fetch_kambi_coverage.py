@@ -134,8 +134,11 @@ def is_player_available(nombre: str, coverage: dict) -> bool:
     norm = _normalize_name(nombre)
     if norm in players:
         return True
-    # Fallback: apellido (último token)
-    apellido = norm.split()[-1] if norm.split() else ''
+    # Fallback: apellido — si último token ≤2 chars (inicial "N."), usar primer token
+    # Nuestro formato: "Arakawa N." → "arakawa n" → apellido = "arakawa" (no "n")
+    parts = norm.split()
+    last = parts[-1] if parts else ''
+    apellido = parts[0] if (len(parts) > 1 and len(last) <= 2) else last
     if len(apellido) > 3:
         return any(apellido in p for p in players)
     return False
