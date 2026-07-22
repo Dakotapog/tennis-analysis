@@ -37,17 +37,27 @@ def filter_kambi_picks(source_path: Path) -> dict:
     """
     Lee source_path (edge_report completo) y retorna dict con solo picks kambi_disponible=True.
     Preserva toda la estructura del reporte original.
+
+    El edge_report usa campos 'apostar' y 'watchlist' (no 'picks').
     """
     with open(source_path, encoding='utf-8') as f:
         full = json.load(f)
 
-    picks_all = full.get('picks', [])
-    picks_kambi = [p for p in picks_all if p.get('kambi_disponible') is True]
+    # edge_report estructura: {'apostar': [...], 'watchlist': [...], 'metadata': {...}, ...}
+    apostar_all = full.get('apostar', [])
+    watchlist_all = full.get('watchlist', [])
+    picks_all = apostar_all + watchlist_all
+
+    apostar_kambi = [p for p in apostar_all if p.get('kambi_disponible') is True]
+    watchlist_kambi = [p for p in watchlist_all if p.get('kambi_disponible') is True]
 
     kambi_report = dict(full)
-    kambi_report['picks'] = picks_kambi
+    kambi_report['apostar'] = apostar_kambi
+    kambi_report['watchlist'] = watchlist_kambi
+    # Compatibilidad con código que lea 'picks'
+    kambi_report['picks'] = apostar_kambi + watchlist_kambi
     kambi_report['_kambi_only'] = True
-    kambi_report['_n_kambi'] = len(picks_kambi)
+    kambi_report['_n_kambi'] = len(apostar_kambi) + len(watchlist_kambi)
     kambi_report['_n_total'] = len(picks_all)
     kambi_report['_source_report'] = source_path.name
     kambi_report['_generated_at'] = datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
@@ -86,10 +96,11 @@ def main():
     print(f'[D141-01] Fuente: {source_path.name}')
     print(f'  Picks totales: {n_total} | kambi_disponible=True: {n_kambi}')
 
-    # Breakdown por status
-    apostar = [p for p in kambi_report['picks'] if p.get('status') == 'APOSTAR']
-    watchlist = [p for p in kambi_report['picks'] if p.get('status') == 'WATCHLIST']
+    apostar = kambi_report.get('apostar', [])
+    watchlist = kambi_report.get('watchlist', [])
     print(f'  APOSTAR: {len(apostar)} | WATCHLIST: {len(watchlist)}')
+    for p in apostar:
+        print(f'    APOSTAR: {p.get("favorito_predicho")} @{p.get("cuota_favorito")} edge={p.get("edge_pct")}')
 
     if args.dry_run:
         print('[D141-01] --dry-run: no se escribio archivo')

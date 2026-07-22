@@ -426,7 +426,8 @@ def _leer_edge_report(path: Optional[str] = None) -> List[Dict]:
         with open(path) as f:
             data = json.load(f)
     else:
-        archivos = sorted(glob.glob("reports/edge_report_*.json"))
+        # Excluir edge_report_kambi_* — favoritos necesita el universo completo (307 picks)
+        archivos = sorted([f for f in glob.glob("reports/edge_report_*.json") if 'kambi' not in f])
         if not archivos:
             logger.error("[edge_report] No se encontró reports/edge_report_*.json")
             sys.exit(1)

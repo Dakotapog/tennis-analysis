@@ -1011,6 +1011,10 @@ def _select_core(picks_ab: list, max_size: int = CORE_MAX_SIZE,
         if len(core) >= max_size:
             break
         t = pick.get('torneo', '')
+        # D142-01 (Nodo-142): torneo='?' colapsa todos los picks en mismo bucket → solo 2 pasan.
+        # Fix: clave única por partido cuando torneo es desconocido (mismo patrón Nodo-138 D138-02).
+        if not t or t in ('?', 'Desconocido'):
+            t = f'_partido_{pick.get("favorito_predicho", pick.get("nombre", "?"))}'
         if torneo_count[t] >= max_same_tournament:
             continue
         core.append(pick)
@@ -1164,6 +1168,9 @@ def _build_portfolio_v2(picks: list, bankroll: float, fase: int = 4,
             moon_cats_filtered = []
             for p in moon_cats:
                 t = p.get('torneo', '')
+                # D142-01: clave única cuando torneo='?' (mismo fix que CORE dedup)
+                if not t or t in ('?', 'Desconocido'):
+                    t = f'_partido_{p.get("favorito_predicho", p.get("nombre", "?"))}'
                 if moon_torneos[t] < 1:  # max 1 Cat-C por torneo en moonshot
                     moon_cats_filtered.append(p)
                     moon_torneos[t] += 1
