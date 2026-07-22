@@ -1,9 +1,9 @@
 {
   "_meta": {
-    "generado": "2026-07-20T20:10:02",
-    "total_nodos": 126,
+    "generado": "2026-07-21T22:09:37",
+    "total_nodos": 131,
     "total_py_files": 71,
-    "huerfanos_count": 1,
+    "huerfanos_count": 0,
     "exclusiones_count": 19
   },
   "exclusiones": {
@@ -517,7 +517,8 @@
         "favoritos_combo_builder.py",
         "games_signal_calculator.py",
         "live_desk.py",
-        "live_edge_monitor.py"
+        "odds_aggregator.py",
+        "scripts/live_edge_monitor.py"
       ]
     },
     {
@@ -537,16 +538,69 @@
     {
       "nodo_id": "125",
       "nodo_archivo": "Nodo-125-EvalGames-Bridge-Dashboard-X4.md",
-      "fecha": "2026-07-21",
+      "fecha": null,
       "estado": "activo",
       "archivos_mencionados": [
         "betplay_combo_builder.py",
-        "generar_tabla_favoritos2.py",
         "games_signal_calculator.py",
+        "generar_tabla_favoritos2.py",
         "live_desk.py",
         "run_daily.py",
+        "scripts/backfill_evaluar_shadow.py",
         "scripts/evaluar_games_bridge.py",
         "tests/test_nodo125_evaluar_games_bridge.py"
+      ]
+    },
+    {
+      "nodo_id": "126",
+      "nodo_archivo": "Nodo-126-GamesSignal-3Bugs-Fix.md",
+      "fecha": null,
+      "estado": "activo",
+      "archivos_mencionados": [
+        "games_signal_calculator.py",
+        "tests/test_nodo126_games_signal_bugs.py"
+      ]
+    },
+    {
+      "nodo_id": "127",
+      "nodo_archivo": "Nodo-127-GamesSignal-ITF-OutcomeID-Fix.md",
+      "fecha": null,
+      "estado": "activo",
+      "archivos_mencionados": [
+        "games_signal_calculator.py",
+        "scripts/rebuild_nodos_index.py",
+        "tests/test_nodo127_games_outcome_ids.py"
+      ]
+    },
+    {
+      "nodo_id": "128",
+      "nodo_archivo": "Nodo-128-Wplay-P8-Alias.md",
+      "fecha": null,
+      "estado": "activo",
+      "archivos_mencionados": [
+        "live_desk.py",
+        "scripts/odds_aggregator.py",
+        "scripts/rebuild_nodos_index.py",
+        "tests/test_nodo128_wplay_p8_alias.py"
+      ]
+    },
+    {
+      "nodo_id": "129",
+      "nodo_archivo": "Nodo-129-LiveDesk-AutoRefresh-Fix.md",
+      "fecha": null,
+      "estado": "activo",
+      "archivos_mencionados": [
+        "_pytest/pathlib.py",
+        "close_snapshot_server.py",
+        "h2h_extractor.py",
+        "live_check_trigger.py",
+        "live_dashboard_generator.py",
+        "live_desk.py",
+        "live_edge_monitor.py",
+        "n8n_push_workflow.py",
+        "scripts/rebuild_nodos_index.py",
+        "shadow_book.py",
+        "tests/test_nodo129_live_desk_cache.py"
       ]
     },
     {
@@ -560,6 +614,80 @@
         "trader_ev.py",
         "trader_ev_tenis.py",
         "validar_con_api.py"
+      ]
+    },
+    {
+      "nodo_id": "130",
+      "nodo_archivo": "Nodo-130-D126-04-Overgeneral-ITF-Filter-Fix.md",
+      "fecha": null,
+      "estado": "activo",
+      "archivos_mencionados": [
+        "generar_tabla_favoritos2.py",
+        "scripts/evaluar_games_bridge.py",
+        "tests/test_nodo128_itf_filter_fix.py"
+      ]
+    },
+    {
+      "nodo_id": "131",
+      "nodo_archivo": "Nodo-131-EvalGamesA-Gap-Gate-Quality-Control.md",
+      "fecha": null,
+      "estado": "activo",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "evaluar_games_bridge.py",
+        "games_signal_calculator.py",
+        "tests/test_nodo131_evaluar_games_gap_gate.py"
+      ]
+    },
+    {
+      "nodo_id": "132",
+      "nodo_archivo": "Nodo-132-ComboRegistry-Activation-PnL-Tracking.md",
+      "fecha": null,
+      "estado": "activo",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "combo_confianza_builder.py",
+        "combo_governor.py",
+        "combo_registry.py",
+        "live_desk.py",
+        "pipeline_tracker.py",
+        "resultados_finales.py",
+        "run_daily.py",
+        "shadow_book.py",
+        "tests/test_nodo132_combo_registry_activation.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "133",
+      "nodo_archivo": "Nodo-133-Games-Live-Convergencia.md",
+      "fecha": null,
+      "estado": "activo",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "close_snapshot_server.py",
+        "dashboard.py",
+        "games_signal_calculator.py",
+        "live_desk.py",
+        "live_edge_monitor.py",
+        "scripts/live_edge_monitor.py",
+        "tests/test_nodo133_games_live.py"
+      ]
+    },
+    {
+      "nodo_id": "134",
+      "nodo_archivo": "Nodo-134-Auditoria-EvalGames-Bridge-Fugas-Fixes.md",
+      "fecha": null,
+      "estado": "activo",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "evaluar_games_bridge.py",
+        "generar_tabla_favoritos2.py",
+        "live_desk.py",
+        "run_daily.py",
+        "scripts/evaluar_games_bridge.py",
+        "shadow_book.py",
+        "tests/test_nodo126_evaluar_games_audit.py"
       ]
     },
     {
@@ -1664,61 +1792,7 @@
         "scripts/meta_signal_scorer.py",
         "shadow_book.py"
       ]
-    },
-    {
-      "nodo_id": "126",
-      "nodo_archivo": "Nodo-126-Auditoria-EvalGames-Bridge-Fugas-Fixes.md",
-      "fecha": "2026-07-21",
-      "estado": "auditoria",
-      "archivos_mencionados": [
-        "betplay_combo_builder.py",
-        "scripts/evaluar_games_bridge.py",
-        "shadow_book.py",
-        "generar_tabla_favoritos2.py",
-        "run_daily.py",
-        "tests/test_nodo126_evaluar_games_audit.py"
-      ]
-    },
-    {
-      "nodo_id": "130",
-      "nodo_archivo": "Nodo-130-D126-04-Overgeneral-ITF-Filter-Fix.md",
-      "fecha": "2026-07-21",
-      "estado": "implementacion",
-      "archivos_mencionados": [
-        "scripts/evaluar_games_bridge.py",
-        "generar_tabla_favoritos2.py",
-        "tests/test_nodo130_itf_filter_fix.py"
-      ]
-    },
-    {
-      "nodo_id": "131",
-      "nodo_archivo": "Nodo-131-EvalGamesA-Gap-Gate-Quality-Control.md",
-      "fecha": "2026-07-21",
-      "estado": "propuesta",
-      "archivos_mencionados": [
-        "betplay_combo_builder.py",
-        "tests/test_nodo131_evaluar_games_gap_gate.py"
-      ]
     }
   ],
-    {
-      "nodo_id": "132",
-      "nodo_archivo": "Nodo-132-ComboRegistry-Activation-PnL-Tracking.md",
-      "fecha": "2026-07-21",
-      "estado": "propuesta",
-      "archivos_mencionados": [
-        "combo_registry.py",
-        "combo_confianza_builder.py",
-        "betplay_combo_builder.py",
-        "favoritos_combo_builder.py",
-        "run_daily.py",
-        "pipeline_tracker.py",
-        "live_desk.py",
-        "tests/test_nodo132_combo_registry_activation.py"
-      ]
-    }
-  ],
-  "huerfanos": [
-    "live_check_trigger.py"
-  ]
+  "huerfanos": []
 }

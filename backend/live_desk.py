@@ -486,13 +486,32 @@ def _build_x3_games(fecha: str) -> Dict[str, Any]:
                     "confianza":  s.get("confianza_señal", ""),
                     "games_range": p.get("games_range", ""),
                 })
+    # D133-05: enriquecer con estado live si existe games_live_YYYYMMDD.json
+    gl_path = REPORTS / f"games_live_{fecha.replace('-', '')}.json"
+    gl_data: Dict = {}
+    if gl_path.exists():
+        try:
+            gl_data = json.loads(gl_path.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    live_idx: Dict[str, Dict] = {
+        s.get("partido", ""): s for s in gl_data.get("signals_alta", [])
+    }
+    for sig in signals:
+        live_s = live_idx.get(sig["partido"], {})
+        sig["estado_live"] = live_s.get("estado", "PRE_PARTIDO")
+        sig["cuota_live"]  = live_s.get("cuota_live")
+        sig["drift_pct"]   = live_s.get("drift_pct")
+
     return {
-        "disponible":   True,
-        "fecha":        fecha,
-        "n_partidos":   meta.get("n_partidos", 0),
-        "n_apostar":    meta.get("n_apostar", 0),
-        "signals":      signals,
-        "fuente":       Path(gsr).name,
+        "disponible":         True,
+        "fecha":              fecha,
+        "n_partidos":         meta.get("n_partidos", 0),
+        "n_apostar":          meta.get("n_apostar", 0),
+        "signals":            signals,
+        "fuente":             Path(gsr).name,
+        "en_vivo_count":      gl_data.get("en_vivo_count", 0),
+        "convergencia_activa": gl_data.get("convergencia_activa", False),
     }
 
 
@@ -1076,58 +1095,99 @@ def render_html(state: Dict[str, Any]) -> str:
         _x2_badge, _x2_badge_col,
     )
 
-    # ── X3 GAMES SIGNAL ──────────────────────────────────────────────────────
+    # ── X3 GAMES SIGNAL (D133-06: estado live + convergencia) ────────────────
     _gs = state.get("p_games", {})
     x3_rows: List = []
     if _gs.get("disponible"):
-        _x3_middles = 0
+        _x3_middles      = 0
+        _en_vivo_count   = _gs.get("en_vivo_count", 0)
+        _conv_activa     = _gs.get("convergencia_activa", False)
+
+        # Banner CONVERGENCIA ACTIVA (D133-06)
+        _conv_banner = ""
+        if _conv_activa:
+            _conv_banner = (
+                f'<div style="background:{RED}22;border:2px solid {RED};border-radius:8px;'
+                f'padding:10px 16px;margin-bottom:10px;text-align:center;font-size:1.0rem;'
+                f'font-weight:700;color:{RED};">'
+                f'CONVERGENCIA GAMES ACTIVA &mdash; {_en_vivo_count} ALTA EN VIVO &mdash; COMBO DISPARADO</div>'
+            )
+        elif _en_vivo_count > 0:
+            _conv_banner = (
+                f'<div style="background:{AMBER}22;border:1px solid {AMBER};border-radius:6px;'
+                f'padding:8px 14px;margin-bottom:10px;font-size:0.85rem;color:{AMBER};">'
+                f'{_en_vivo_count} señal(es) ALTA EN VIVO — esperando ≥2 para combo</div>'
+            )
+
         for _sig in _gs.get("signals", []):
             _conf   = _sig.get("confianza", "")
             _conf_c = GREEN if _conf == "ALTA" else (AMBER if _conf == "MEDIA" else GREY)
             _dir    = _sig.get("direccion", "")
             _dir_c  = GREEN if _dir == "OVER" else (AMBER if _dir == "UNDER" else GREY)
             _gap    = _sig.get("gap")
-            # ── MIDDLE CANDIDATO: qué línea necesita otra casa ──────────────────
-            _gr     = _sig.get("games_range", "")
-            _linea  = _sig.get("linea")
+
+            # Estado live (D133-05)
+            _estado = _sig.get("estado_live", "PRE_PARTIDO")
+            _est_c  = GREEN if _estado == "EN_VIVO" else (GREY if _estado == "TERMINADO" else "#8b949e")
+            _est_lbl = (
+                f'<span style="color:{GREEN};font-weight:bold;animation:blink 1s infinite;">EN VIVO</span>'
+                if _estado == "EN_VIVO" else
+                f'<span style="color:{GREY};">{_estado}</span>'
+            )
+
+            # Cuota live y drift (D133-05)
+            _cuota_live = _sig.get("cuota_live")
+            _drift      = _sig.get("drift_pct")
+            _cuota_live_html = "—"
+            if _cuota_live:
+                _drift_c   = RED if (_drift or 0) > 10 else (AMBER if (_drift or 0) > 5 else GREEN)
+                _drift_str = f' <span style="color:{_drift_c};font-size:0.8em;">({_drift:+.1f}%)</span>' if _drift else ""
+                _cuota_live_html = f'@{_cuota_live:.2f}{_drift_str}'
+
+            # Middle candidato
+            _gr    = _sig.get("games_range", "")
+            _linea = _sig.get("linea")
             _mid_html = "—"
             try:
                 _parts = _gr.replace("+", "").split("-")
                 _rlo, _rhi = float(_parts[0]), float(_parts[-1])
                 if _dir == "OVER" and _linea is not None:
-                    # Kambi tiene OVER _linea → otra casa necesita UNDER ≥ _rhi+0.5
                     _needed = _rhi + 0.5
                     if _rlo >= float(_linea) and _rhi <= _needed:
                         _mid_html = f'<span style="color:{AMBER};font-weight:bold;">UNDER ≥{_needed:.1f}</span>'
                         _x3_middles += 1
                 elif _dir == "UNDER" and _linea is not None:
-                    # Kambi tiene UNDER _linea → otra casa necesita OVER ≤ _rlo-0.5
                     _needed = _rlo - 0.5
                     if _rlo >= _needed and _rhi <= float(_linea):
                         _mid_html = f'<span style="color:{AMBER};font-weight:bold;">OVER ≤{_needed:.1f}</span>'
                         _x3_middles += 1
             except Exception:
                 pass
+
             x3_rows.append([
                 _sig.get("partido", ""),
+                _est_lbl,
                 _sig.get("mercado", ""),
                 f'<span style="color:{_dir_c};font-weight:bold;">{_dir}</span>',
                 str(_sig.get("linea", "—")),
                 f'@{_sig["cuota"]:.2f}' if _sig.get("cuota") else "—",
+                _cuota_live_html,
                 f'{_gap:+.1f}j' if _gap is not None else "—",
                 f'<span style="color:{_conf_c};">{_conf}</span>',
                 _sig.get("games_range", ""),
                 _mid_html,
             ])
+
         _x3_n       = _gs["n_apostar"]
         _x3_total   = _gs["n_partidos"]
         _mid_note   = f" | {_x3_middles} middle-candidatos" if _x3_middles else ""
-        _x3_badge   = f"{_x3_n} señales{_mid_note}" if _x3_n else f"0/{_x3_total} sin señal"
-        _x3_badge_c = GREEN if _x3_n else GREY
+        _live_note  = f" | {_en_vivo_count} en vivo" if _en_vivo_count else ""
+        _x3_badge   = f"{_x3_n} señales{_mid_note}{_live_note}" if _x3_n else f"0/{_x3_total} sin señal"
+        _x3_badge_c = (RED if _conv_activa else (AMBER if _en_vivo_count else (GREEN if _x3_n else GREY)))
         x3_panel = panel(
             f"X3 GAMES SIGNAL — Over/Under mercados Nodo-40 | {_gs['fuente']}",
-            table(
-                ["Partido", "Mercado", "Dir", "Línea", "Cuota", "Gap", "Confianza", "Rango pred.", "Middle? (2da casa)"],
+            _conv_banner + table(
+                ["Partido", "Estado", "Mercado", "Dir", "Línea", "Cuota Pre", "Cuota Live", "Gap", "Confianza", "Rango pred.", "Middle?"],
                 x3_rows,
                 "Sin señales accionables hoy (gap modelo-línea insuficiente)",
             ),
@@ -1434,6 +1494,7 @@ def render_html(state: Dict[str, Any]) -> str:
 </head>
 <body>
   <h1>LIVE TRADING DESK &nbsp;|&nbsp; {fecha} &nbsp;|&nbsp; Nodo-109</h1>
+  {refresh_note}
   {halt_banner}
   {acc_panel}
   {p4_panel}
@@ -1449,7 +1510,6 @@ def render_html(state: Dict[str, Any]) -> str:
   {que_falta_panel}
   {p1_panel}
   {p7_panel}
-  {refresh_note}
   <script>
   // Estado cliente — preservado entre refreshes (§2.5 Nodo-115)
   var _activeFilter = 'TODOS';
@@ -1537,10 +1597,10 @@ def render_html(state: Dict[str, Any]) -> str:
         // Re-aplicar estado del operador
         _reapplyState();
       }})
-      .catch(function() {{}});  // silencioso — reintenta en 30s
+      .catch(function() {{}});  // silencioso — reintenta en 12s
     setTimeout(autoRefresh, 12000);
   }}
-  setTimeout(autoRefresh, 30000);
+  setTimeout(autoRefresh, 12000);
   </script>
 </body>
 </html>"""
@@ -2327,11 +2387,223 @@ def _get_cached_state(fecha: str) -> dict:
     return state
 
 
+# ─── D133: Games Live Convergencia ───────────────────────────────────────────
+
+_KAMBI_BASE    = "https://us.offering-api.kambicdn.com/offering/v2018/betplay"
+_KAMBI_PARAMS  = "lang=es_CO&market=CO&client_id=2&channel_id=1"
+_KAMBI_HDR     = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+    "Referer":    "https://betplay.com.co/",
+    "Accept":     "application/json",
+}
+
+
+def _apellido_games(nombre: str) -> str:
+    """Último token no-inicial de un nombre: 'Alcaraz C.' → 'alcaraz'."""
+    tokens = [t for t in nombre.split() if len(t) > 2 or not t.rstrip(".").isupper()]
+    return tokens[-1].lower().rstrip(".") if tokens else nombre.lower()
+
+
+def _kambi_started_events() -> list:
+    """1 HTTP call → todos los eventos STARTED de tenis en Kambi ahora."""
+    # 1. liveEvents.json — eventos dedicados en curso
+    try:
+        url = f"{_KAMBI_BASE}/liveEvents.json?{_KAMBI_PARAMS}&sport=tennis"
+        req = urllib.request.Request(url, headers=_KAMBI_HDR)
+        with urllib.request.urlopen(req, timeout=8) as r:
+            data = json.loads(r.read())
+        events = data.get("liveEvents") or data.get("events") or []
+        if events:
+            return events
+    except Exception:
+        pass
+    # 2. Fallback: listView filtrado por state=STARTED
+    try:
+        url = f"{_KAMBI_BASE}/listView/tennis.json?{_KAMBI_PARAMS}"
+        req = urllib.request.Request(url, headers=_KAMBI_HDR)
+        with urllib.request.urlopen(req, timeout=8) as r:
+            data = json.loads(r.read())
+        return [e for e in (data.get("events") or [])
+                if e.get("event", {}).get("state") == "STARTED"]
+    except Exception:
+        return []
+
+
+def _extract_games_cuota_live(ev_wrapper: dict, direccion: str, linea: Optional[float]) -> Optional[float]:
+    """Busca betOffer 'Total de juegos' y retorna cuota live para dirección/línea."""
+    for bo in ev_wrapper.get("betOffers", []):
+        label = (bo.get("criterion", {}).get("label") or "").lower()
+        if "juego" not in label and "game" not in label:
+            continue
+        for oc in bo.get("outcomes", []):
+            oc_label = (oc.get("label") or "").lower()
+            oc_line  = oc.get("line", 0) / 1000 if oc.get("line") else None
+            is_under = "menos" in oc_label or "under" in oc_label
+            is_over  = "más" in oc_label or "over" in oc_label or "mas" in oc_label
+            dir_match  = (direccion == "UNDER" and is_under) or (direccion == "OVER" and is_over)
+            line_match = (oc_line is None or linea is None or abs(oc_line - linea) < 0.6)
+            if dir_match and line_match:
+                odds_raw = oc.get("odds")
+                if odds_raw:
+                    return round(odds_raw / 1000, 2)
+    return None
+
+
+def _check_games_convergencia(fecha: str) -> None:
+    """
+    D133-03: clasifica señales ALTA de games_signal_report como EN_VIVO/PRE/TERMINADO.
+    Escribe reports/games_live_YYYYMMDD.json.
+    Si ≥2 ALTA EN_VIVO → anti-flood → subprocess.Popen(--games) fire-and-forget.
+    """
+    fecha_compact = fecha.replace("-", "")
+    gsr_path = _latest(str(REPORTS / f"games_signal_report_{fecha_compact}*.json"))
+    if not gsr_path:
+        return
+
+    try:
+        data = json.loads(Path(gsr_path).read_text(encoding="utf-8"))
+    except Exception:
+        return
+
+    # Recoger señales ALTA
+    alta_signals: List[Dict] = []
+    for p in data.get("apostar", []):
+        for s in p.get("señales_optimas", []):
+            if s.get("confianza_señal") == "ALTA" and s.get("apostar"):
+                alta_signals.append({
+                    "partido":    p.get("partido", ""),
+                    "direccion":  s.get("direccion", ""),
+                    "linea":      s.get("linea"),
+                    "cuota_pre":  s.get("cuota"),
+                    "hora":       p.get("hora"),
+                    "event_id":   p.get("kambi_event_id"),
+                    "estado":     "PRE_PARTIDO",
+                    "cuota_live": None,
+                    "drift_pct":  None,
+                })
+
+    if not alta_signals:
+        return
+
+    # Obtener eventos STARTED de Kambi (1 HTTP call)
+    started_events = _kambi_started_events()
+
+    # Índices por event_id y apellido
+    started_by_id:      Dict[int, dict] = {}
+    started_by_apellido: Dict[str, dict] = {}
+    for ev_wr in started_events:
+        ev  = ev_wr.get("event", {}) if isinstance(ev_wr, dict) else {}
+        eid = ev.get("id")
+        if eid:
+            started_by_id[int(eid)] = ev_wr
+        for field in ("homeName", "awayName"):
+            nombre = ev.get(field, "")
+            if nombre:
+                started_by_apellido[_apellido_games(nombre)] = ev_wr
+
+    now_utc = datetime.utcnow()
+
+    # Clasificar cada señal
+    for sig in alta_signals:
+        partido  = sig["partido"]
+        eid      = sig.get("event_id")
+        matched  = None
+
+        # D133-02: lookup primario por event_id
+        if eid:
+            matched = started_by_id.get(int(eid))
+
+        # Fallback: apellido de cada jugador
+        if not matched:
+            partes = [p.strip() for p in partido.replace(" vs. ", " vs ").split(" vs ")]
+            for parte in partes:
+                ap = _apellido_games(parte)
+                if ap in started_by_apellido:
+                    matched = started_by_apellido[ap]
+                    break
+
+        if matched:
+            sig["estado"] = "EN_VIVO"
+            cuota_live = _extract_games_cuota_live(matched, sig["direccion"], sig["linea"])
+            if cuota_live and sig.get("cuota_pre"):
+                sig["cuota_live"] = cuota_live
+                sig["drift_pct"]  = round(
+                    (cuota_live - sig["cuota_pre"]) / sig["cuota_pre"] * 100, 1
+                )
+        else:
+            # Clasificar por hora como fallback temporal
+            hora_raw = sig.get("hora") or ""
+            try:
+                if "T" in str(hora_raw):
+                    hora_dt = datetime.fromisoformat(
+                        str(hora_raw).replace("Z", "+00:00")
+                    ).replace(tzinfo=None)
+                else:
+                    hm = str(hora_raw).split(":")
+                    hora_dt = now_utc.replace(
+                        hour=int(hm[0]), minute=int(hm[1]), second=0, microsecond=0
+                    )
+                diff_min = (now_utc - hora_dt).total_seconds() / 60
+                sig["estado"] = "TERMINADO" if diff_min > 130 else "PRE_PARTIDO"
+            except Exception:
+                sig["estado"] = "PRE_PARTIDO"
+
+    en_vivo_count       = sum(1 for s in alta_signals if s["estado"] == "EN_VIVO")
+    convergencia_activa = en_vivo_count >= 2
+
+    # Escribir games_live_YYYYMMDD.json (D133-05)
+    gl_path = REPORTS / f"games_live_{fecha_compact}.json"
+    try:
+        gl_path.write_text(
+            json.dumps({
+                "ts":                 datetime.now().isoformat()[:19],
+                "signals_alta":       alta_signals,
+                "en_vivo_count":      en_vivo_count,
+                "convergencia_activa": convergencia_activa,
+            }, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+    except Exception:
+        pass
+
+    # D133-04: anti-flood + Popen fire-and-forget
+    if not convergencia_activa:
+        return
+
+    fired_path = REPORTS / f"games_live_{fecha_compact}_fired.json"
+    try:
+        fired: List[List] = json.loads(fired_path.read_text(encoding="utf-8")) if fired_path.exists() else []
+    except Exception:
+        fired = []
+
+    if len(fired) >= 10:
+        return  # cap diario
+
+    combo_key = sorted(s["partido"] for s in alta_signals if s["estado"] == "EN_VIVO")
+    if combo_key in fired:
+        return  # ya disparado
+
+    try:
+        subprocess.Popen(
+            [sys.executable, str(BASE_DIR / "betplay_combo_builder.py"), "--games", "--live"],
+            cwd=str(BASE_DIR),
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        fired.append(combo_key)
+        fired_path.write_text(json.dumps(fired, ensure_ascii=False), encoding="utf-8")
+        logger.info(f"[D133] CONVERGENCIA GAMES: {en_vivo_count} ALTA EN_VIVO → combo disparado")
+    except Exception as exc:
+        logger.warning(f"[D133] Popen error: {exc}")
+
+
 def _background_refresh(fecha_fn) -> None:
     """Thread daemon — precalienta cache cada 15s para que el browser reciba <1s."""
     while True:
         try:
-            _get_cached_state(fecha_fn())
+            fecha = fecha_fn()
+            _get_cached_state(fecha)
+            _check_games_convergencia(fecha)   # D133-03: games live convergencia
         except Exception:
             pass
         time.sleep(15)
