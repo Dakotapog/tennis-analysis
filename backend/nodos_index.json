@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "generado": "2026-07-22T12:59:10",
-    "total_nodos": 136,
+    "generado": "2026-07-22T14:38:11",
+    "total_nodos": 138,
     "total_py_files": 71,
     "huerfanos_count": 0,
     "exclusiones_count": 19
@@ -763,6 +763,47 @@
         "markov_analyzer.py",
         "trader_ev_tenis.py",
         "validar_con_api.py"
+      ]
+    },
+    {
+      "nodo_id": "140",
+      "nodo_archivo": "Nodo-140-Kambi-Gate-Coverage-Fresca.md",
+      "fecha": "2026-07-22",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "combo_confianza_builder.py",
+        "combo_registry.py",
+        "core/name_normalizer.py",
+        "edge_calculator.py",
+        "extraer_historh2h.py",
+        "fetch_kambi_coverage.py",
+        "kambi_tennis.py",
+        "match_ledger.py",
+        "player_registry.py",
+        "run_daily.py",
+        "scripts/fetch_kambi_coverage.py",
+        "tests/test_nodo140_kambi_gate.py"
+      ]
+    },
+    {
+      "nodo_id": "141",
+      "nodo_archivo": "Nodo-141-Kambi-Only-Edge-Report.md",
+      "fecha": "2026-07-22",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "combo_confianza_builder.py",
+        "combo_registry.py",
+        "core/name_normalizer.py",
+        "extraer_partidos_api.py",
+        "fetch_kambi_coverage.py",
+        "kambi_tennis.py",
+        "match_ledger.py",
+        "player_registry.py",
+        "run_daily.py",
+        "scripts/filter_kambi_picks.py",
+        "tests/test_nodo141_kambi_only_report.py"
       ]
     },
     {

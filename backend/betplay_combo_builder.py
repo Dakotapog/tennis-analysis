@@ -2017,12 +2017,22 @@ def _es_coinflip_sin_h2h(p_modelo: float, n_h2h: int) -> bool:
 
 
 def _find_latest_edge_report() -> Optional[str]:
-    """Encuentra el edge_report más reciente."""
+    """D141-03 (Nodo-141): prefiere edge_report_kambi_HOY*.json (picks 100% apostables).
+    Fallback a edge_report completo si no hay kambi de hoy."""
     reports = Path("reports")
     if not reports.exists():
         return None
-    files = sorted(reports.glob("edge_report_*.json"), reverse=True)
-    return str(files[0]) if files else None
+    today = datetime.now().strftime('%Y%m%d')
+    # Prefer today's kambi-only report — all picks guaranteed kambi_disponible=True
+    kambi_today = sorted(reports.glob(f"edge_report_kambi_{today}*.json"), reverse=True)
+    if kambi_today:
+        return str(kambi_today[0])
+    # Fallback: latest full report (may include non-apostable picks, D140-02/03 gates apply)
+    full_files = sorted(
+        [f for f in reports.glob("edge_report_*.json") if 'kambi' not in f.name],
+        reverse=True,
+    )
+    return str(full_files[0]) if full_files else None
 
 
 def _validate_edge_report_gate(edge_data: dict, path: str) -> None:

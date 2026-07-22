@@ -389,6 +389,14 @@ def main():
         if _edge_reports:
             _run(['python3', 'scripts/meta_signal_scorer.py'], 'PASO 3b — Meta-Señal Convergencia (Nodo-98)')
 
+        # ── PASO 3K — Kambi-Only Report (Nodo-141) ───────────────────────────
+        # Filtra edge_report a picks kambi_disponible=True → edge_report_kambi_*.json
+        # Combo builders detectan este reporte automáticamente (mtime más reciente).
+        # Garantiza picks 100% apostables en Betplay. optional=True si sin coverage.
+        _run(['python3', 'scripts/filter_kambi_picks.py'],
+             'PASO 3K — Kambi-Only Report (Nodo-141: picks 100% apostables)',
+             optional=True)
+
         # ── PASO 3.5 — Tabla análisis ─────────────────────────────────────────
         _run(['python3', 'generar_tabla_favoritos2.py'], 'PASO 3.5 — Tabla análisis')
 
