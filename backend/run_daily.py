@@ -391,7 +391,7 @@ def main():
 
         # ── PASO 3.6b — EvalGames Bridge (Nodo-125) ──────────────────────────
         # EVALUAR_GAMES (cuota<1.30) → UNDER juegos signal para X4 dashboard + combos
-        _run(['python3', 'scripts/evaluar_games_bridge.py'], 'PASO 3.6b — EvalGames Bridge', optional=True)
+        _run(['python3', 'scripts/evaluar_games_bridge.py'], 'PASO 3.6b — EvalGames Bridge')
 
         # ── PASO 3.7 — Dual-Book Router X1 (Nodo-111) ────────────────────────
         # Compara cuotas Kambi vs zita file (FlashScore/Playwright, book2).
