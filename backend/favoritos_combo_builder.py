@@ -229,7 +229,15 @@ def armar_combos(picks: List[Dict], mega: bool = False) -> List[Dict]:
             jugador_seen = set()
             ok = True
             for p in combo_picks:
-                torneo = p.get("torneo", p.get("tournament", "UNK"))
+                # D138-02: 'Desconocido'/'UNK' NO significa "mismo torneo" —
+                # significa "torneo sin metadato". Usar partido como clave única
+                # para permitir combinación entre matches distintos.
+                _TORNEO_GENERICO = {'desconocido', 'unk', '?', '', 'unknown', 'desconocida', 'none'}
+                torneo_raw = (p.get("torneo") or p.get("tournament") or "").strip()
+                if torneo_raw.lower() in _TORNEO_GENERICO:
+                    torneo = f"_match_{p.get('partido', p.get('favorito', str(id(p))))}"
+                else:
+                    torneo = torneo_raw
                 jugador = _normalize_name(p.get("favorito", p.get("jugador", "")))
                 if jugador in jugador_seen:
                     ok = False

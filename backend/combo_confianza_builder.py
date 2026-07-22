@@ -249,17 +249,34 @@ def _apply_combo_gates(edge_data: dict, nombre: str) -> tuple[bool, str]:
     if not edge_data.get('apostar', False):
         return True, f'G1: apostar=False — trader rechazó este pick (conf={edge_data.get("confidence_flag","?")})'
 
-    # G2 — n_h2h < 1 (con excepción triple convergencia)
+    # G2 — evidence quality gate (D138-01: n_h2h NO es el único indicador válido)
+    # El MOTOR (G1 apostar=True) ya incorporó n_h2h=0 en kelly_kl/shrinkage/p_blend.
+    # G2 solo bloquea cuando la señal multi-eje es genuinamente débil sin H2H.
     n_h2h = int(edge_data.get('n_h2h') or 0)
     if n_h2h < 1:
-        # Excepción: STRONG + n_axes_active>=3 + score_directo>=3
-        conf_flag   = edge_data.get('confidence_flag', '')
-        n_axes      = int(edge_data.get('n_axes_active') or 0)
-        score_dir   = int(edge_data.get('score_directo') or 0)
+        conf_flag  = edge_data.get('confidence_flag', '')
+        n_axes     = int(edge_data.get('n_axes_active') or 0)
+        score_dir  = int(edge_data.get('score_directo') or 0)
+        edge_val   = float(edge_data.get('edge') or 0)
+        kelly_kl   = float(edge_data.get('kelly_kl') or 0)
+
+        # Regla-1 (original): Triple convergencia — sin cambios
         if conf_flag == 'STRONG' and n_axes >= 3 and score_dir >= 3:
-            pass  # triple convergencia — permitir sin H2H
+            pass
+        # Regla-2 (D138-01): STRONG + edge≥20% + Kelly positivo + ≥2 ejes
+        # El MOTOR aprobó, señal fuerte multi-eje, Kelly-KL lo valida → suficiente sin H2H
+        elif conf_flag == 'STRONG' and edge_val >= 0.20 and kelly_kl > 0 and n_axes >= 2:
+            pass
+        # Regla-3 (D138-01): edge muy alto + Kelly positivo → bookmaker obviamente equivocado
+        # Edge≥35% con kelly>0 es evidencia directa de ventaja sobre el mercado, independiente de H2H
+        elif edge_val >= 0.35 and kelly_kl > 0 and n_axes >= 2:
+            pass
         else:
-            return True, f'G2: n_h2h=0 — sin historial directo (axes={n_axes}, score_dir={score_dir})'
+            return True, (
+                f'G2: n_h2h=0 — señal insuficiente sin H2H '
+                f'(conf={conf_flag}, edge={edge_val:.1%}, kelly={kelly_kl:.3f}, '
+                f'axes={n_axes}, score_dir={score_dir})'
+            )
 
     # G3 — n_axes_active < 2 (N28F2)
     n_axes_active = int(edge_data.get('n_axes_active') or 0)
