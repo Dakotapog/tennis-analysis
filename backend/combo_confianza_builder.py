@@ -1567,9 +1567,18 @@ def _fetch_kambi_outcomes() -> dict:
 
 
 def _find_outcome(nombre: str, cuota: float, outcomes_map: dict):
-    """Busca outcome_id para un pick. Retorna dict o None."""
+    """Busca outcome_id para un pick. Retorna dict o None.
+
+    Maneja dos formatos de nombre:
+    - Kambi: "Lachlan Mcfadzean"  → apellido = último token = "mcfadzean"
+    - Nuestro: "McFadzean L."     → último token = "l" (inicial) — INCORRECTO
+    Fix: si el último token tiene ≤2 chars (inicial), usar el PRIMER token como apellido.
+    """
     norm = _normalize_name(nombre)
-    apellido = norm.split()[-1] if norm.split() else norm
+    parts = norm.split()
+    last  = parts[-1] if parts else norm
+    # Si el último token es una inicial (≤2 chars), el apellido real es el primer token
+    apellido = parts[0] if (len(parts) > 1 and len(last) <= 2) else last
 
     for key in [norm, apellido]:
         if key in outcomes_map:
