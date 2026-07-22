@@ -932,6 +932,20 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
     # ─── T17-03: Escalar λ por tier (Nodo-17) ───────────────
     torneo_completo = partido.get('torneo_completo', '') or partido.get('torneo_nombre', '') or ''
     tier = detectar_tier(torneo_completo)
+    # Si torneo vacío (H2H combinado sin torneo propagado) → inferir tier desde CTI (Nodo-29)
+    if not torneo_completo:
+        _ra = partido.get('ranking_analysis', {}) or {}
+        _pred = (_ra.get('prediction', {}) or {}) if isinstance(_ra, dict) else {}
+        _ca = (_pred.get('circuit_asymmetry', {}) or {}) if isinstance(_pred, dict) else {}
+        if _ca:
+            _cti_max = max(
+                float(_ca.get('p1_circuit_tier_index') or 0),
+                float(_ca.get('p2_circuit_tier_index') or 0),
+            )
+            if _cti_max < 0.6:
+                tier = 'itf'
+            elif _cti_max < 1.5:
+                tier = 'challenger'
     lambda_av = lambda_av * LAMBDA_TIER_MULTIPLIER.get(tier, 1.0)
 
     # ─── T18-03: PELT Recency Alpha (Nodo-18) ────────────────
