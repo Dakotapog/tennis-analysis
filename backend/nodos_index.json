@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "generado": "2026-07-22T12:04:23",
-    "total_nodos": 135,
+    "generado": "2026-07-22T12:59:10",
+    "total_nodos": 136,
     "total_py_files": 71,
     "huerfanos_count": 0,
     "exclusiones_count": 19
@@ -738,6 +738,20 @@
         "favoritos_combo_builder.py",
         "tests/test_nodo138_g2_evolution.py",
         "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "139",
+      "nodo_archivo": "Nodo-139-Kambi-First-Combo-Builder.md",
+      "fecha": "2026-07-22",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "combo_governor.py",
+        "extraer_historh2h.py",
+        "kambi_tennis.py",
+        "run_daily.py",
+        "tests/test_nodo139_kambi_first.py"
       ]
     },
     {
