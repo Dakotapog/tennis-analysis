@@ -447,6 +447,54 @@ class ComboRegistry:
 
         return "\n".join(lines)
 
+    def report_dict(self, fecha: Optional[str] = None) -> dict:
+        """
+        D132-05: Retorna reporte de P&L como dict estructurado.
+        Usado internamente por pipeline_tracker y --json flag.
+
+        Estructura:
+        {
+          "by_tipo": {
+            "CC": {"n": 0, "wins": 0, "losses": 0, "open": 0, "pnl": 0.0},
+            ...
+          },
+          "total": {"n": 0, "wins": 0, "losses": 0, "open": 0, "pnl": 0.0}
+        }
+        """
+        records = self._load_all_records(fecha)
+
+        from collections import defaultdict
+        agrupado: Dict[str, dict] = defaultdict(lambda: {
+            "n": 0, "wins": 0, "losses": 0, "open": 0, "pnl": 0.0,
+        })
+
+        for rec in records:
+            tipo = rec.get("tipo", "?")
+            g = agrupado[tipo]
+            g["n"] += 1
+            resultado = rec.get("resultado")
+            pnl = rec.get("pnl") or 0.0
+            if resultado == "WIN":
+                g["wins"] += 1
+                g["pnl"] += pnl
+            elif resultado == "LOSS":
+                g["losses"] += 1
+                g["pnl"] += pnl
+            else:
+                g["open"] += 1
+
+        total: dict = {"n": 0, "wins": 0, "losses": 0, "open": 0, "pnl": 0.0}
+        for g in agrupado.values():
+            total["n"] += g["n"]
+            total["wins"] += g["wins"]
+            total["losses"] += g["losses"]
+            total["open"] += g["open"]
+            total["pnl"] += g["pnl"]
+
+        total["pnl"] = round(total["pnl"], 2)
+        by_tipo = {k: dict(v, pnl=round(v["pnl"], 2)) for k, v in agrupado.items()}
+        return {"by_tipo": by_tipo, "total": total}
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # CLI
@@ -457,6 +505,8 @@ def main() -> None:
     parser.add_argument("--settle", metavar="FECHA", help="Settlear combos de YYYY-MM-DD")
     parser.add_argument("--report", action="store_true", help="Generar reporte P&L")
     parser.add_argument("--fecha", metavar="FECHA", help="Fecha para filtrar reporte (YYYY-MM-DD)")
+    parser.add_argument("--json", action="store_true", dest="json_output",
+                        help="D132-05: Con --report, imprimir JSON estructurado en lugar de texto")
     args = parser.parse_args()
 
     registry = ComboRegistry()
@@ -473,7 +523,11 @@ def main() -> None:
             print("  (Sin combos registrados para esta fecha — OK)")
 
     if args.report:
-        print(registry.report(args.fecha))
+        if args.json_output:
+            # D132-05: output JSON estructurado
+            print(json.dumps(registry.report_dict(args.fecha), ensure_ascii=False, indent=2))
+        else:
+            print(registry.report(args.fecha))
 
     if not args.settle and not args.report:
         parser.print_help()

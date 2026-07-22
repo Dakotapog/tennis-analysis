@@ -47,6 +47,14 @@ from typing import Dict, List, Optional
 
 from edge_calculator import GATE_VERSION as _EXPECTED_GATE_VERSION, P_MODELO_MIN_UNDERDOG as _P_MODELO_MIN_UNDERDOG
 
+# D132: ComboRegistry — lazy import para no romper si módulo no disponible
+try:
+    from combo_registry import ComboRegistry as _ComboRegistry
+    _combo_registry_available = True
+except Exception:
+    _ComboRegistry = None  # type: ignore[assignment,misc]
+    _combo_registry_available = False
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)s | %(message)s",
@@ -389,6 +397,19 @@ def generar_bat_chrome(combo_links: List[Dict], output_dir: Optional[Path] = Non
         )
         bat_path = dest_bats / f"Combo{idx}.bat"
         bat_path.write_text(bat_content, encoding="utf-8")
+
+        # D132-02a: registrar combo en ComboRegistry (best-effort)
+        try:
+            if _combo_registry_available:
+                _cr = _ComboRegistry()
+                _cr.log_combo(
+                    "Combo", "STANDARD", f"Combo{idx}",
+                    [l["jugador"] for l in c["legs"]],
+                    [l["cuota"] for l in c["legs"]],
+                    2000,
+                )
+        except Exception:
+            pass  # D132: log_combo es best-effort, nunca bloquea generación
 
         logger.info(f"  📄 Combo{idx}.bat — {legs_str}")
 
@@ -1315,6 +1336,20 @@ Abrir en Betplay</a></p>
         bat_path = DESKTOP_WIN / f"Safe{idx}.bat"
         bat_path.write_text(bat_content, encoding="utf-8")
         count += 1
+
+        # D132-02b: registrar safe combo en ComboRegistry (best-effort)
+        try:
+            if _combo_registry_available:
+                _cr = _ComboRegistry()
+                _cr.log_combo(
+                    "Safe", "SAFE", f"Safe{idx}",
+                    [leg["jugador"] for leg in sc["legs"]],
+                    [leg["cuota_kambi"] for leg in sc["legs"]],
+                    sc.get("stake", 1000),
+                )
+        except Exception:
+            pass  # D132: log_combo es best-effort, nunca bloquea generación
+
         logger.info(f"  📄 Safe{idx}.bat — [2p @{cuota:.2f} P={p_both:.1%}] {legs_desc[:80]}")
 
     return count
@@ -1640,6 +1675,20 @@ Abrir en Betplay</a></p>
         bat_path = DESKTOP_WIN / f"WAS{idx}.bat"
         bat_path.write_text(bat_content, encoding="utf-8")
         count += 1
+
+        # D132-02c: registrar WAS combo en ComboRegistry (best-effort)
+        try:
+            if _combo_registry_available:
+                _cr = _ComboRegistry()
+                _cr.log_combo(
+                    "WAS", "WAS", f"WAS{idx}",
+                    [l["jugador"] for l in wc["legs"]],
+                    [l["cuota_kambi"] for l in wc["legs"]],
+                    wc.get("stake", 5000),
+                )
+        except Exception:
+            pass  # D132: log_combo es best-effort, nunca bloquea generación
+
         logger.info(f"  WAS{idx}.bat — [2p @{cuota:.2f}] {legs_desc[:80]}")
 
     return count
@@ -1882,6 +1931,22 @@ def _generar_bat_games(games_links: List[Dict]) -> int:
         bat_path = DESKTOP_WIN / f"{label}.bat"
         bat_path.write_text(bat_content, encoding="utf-8")
         count += 1
+
+        # D132-02e: registrar Games combo en ComboRegistry (best-effort)
+        try:
+            if _combo_registry_available:
+                _cr = _ComboRegistry()
+                # subtipo: "GAMES_A", "GAMES_B", "GAMES_C" según label
+                subtipo = f"GAMES_{label[-1].upper()}" if label.startswith("Games") else "GAMES_A"
+                _cr.log_combo(
+                    "Games", subtipo, label,
+                    [f"{l['direccion']} {l['linea']} {l['mercado']}" for l in gc["legs"]],
+                    [l["cuota"] for l in gc["legs"]],
+                    gc.get("stake", 2000),
+                )
+        except Exception:
+            pass  # D132: log_combo es best-effort, nunca bloquea generación
+
         logger.info(f"  {label}.bat — [{gc['n_piernas']}p @{cuota:.2f}] {legs_desc[:80]}")
 
     return count
@@ -2827,6 +2892,20 @@ Abrir en Betplay</a></p>
         bat_path = DESKTOP_WIN / f"Mega{idx}.bat"
         bat_path.write_text(bat_content, encoding="utf-8")
         count += 1
+
+        # D132-02d: registrar Mega combo en ComboRegistry (best-effort)
+        try:
+            if _combo_registry_available:
+                _cr = _ComboRegistry()
+                _cr.log_combo(
+                    "Mega", "MEGA", f"Mega{idx}",
+                    [l["jugador"] for l in mc["legs"]],
+                    [l["cuota_kambi"] for l in mc["legs"]],
+                    mc.get("stake", 500),
+                )
+        except Exception:
+            pass  # D132: log_combo es best-effort, nunca bloquea generación
+
         logger.info(f"  📄 Mega{idx}.bat — [{piernas}p @{cuota:,.1f}] {legs_desc[:80]}")
 
     return count
@@ -3473,6 +3552,20 @@ def main():
                 f'@echo off\nstart "" "{CHROME}" "file:///{win_path}"\n',
                 encoding="utf-8",
             )
+
+            # D132-02f: registrar EvalGames combo en ComboRegistry (best-effort)
+            try:
+                if _combo_registry_available:
+                    _cr = _ComboRegistry()
+                    _cr.log_combo(
+                        "Games", "EVALUAR", label,
+                        [f"UNDER {l.get('linea','?')} {l.get('mercado','juegos')}" for l in legs],
+                        [l.get("cuota", 1.0) for l in legs],
+                        args.evaluar_stake,
+                    )
+            except Exception:
+                pass  # D132: log_combo es best-effort, nunca bloquea generación
+
             n_eval += 1
 
         if n_eval:

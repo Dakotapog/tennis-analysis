@@ -34,6 +34,14 @@ from collections import Counter
 from datetime import datetime
 from pathlib import Path
 
+# D132: ComboRegistry — lazy import para no romper si módulo no disponible
+try:
+    from combo_registry import ComboRegistry as _ComboRegistry
+    _combo_registry_available = True
+except Exception:
+    _ComboRegistry = None  # type: ignore[assignment,misc]
+    _combo_registry_available = False
+
 # ── Constantes ─────────────────────────────────────────────────────────────────
 
 REPORTS_DIR = os.path.join(os.path.dirname(__file__), 'reports')
@@ -923,6 +931,29 @@ def _generate_anchor_bats(anchor_plan: dict, outcomes_map: dict):
             encoding='utf-8',
         )
 
+        # D132-01b: registrar AC combo en ComboRegistry (best-effort)
+        try:
+            if _combo_registry_available:
+                _cr = _ComboRegistry()
+                # Determinar subtipo desde nombre: ANCHOR_1A3B / ANCHOR_2A2B / ANCHOR_3A2B
+                _ac_nombre = combo.get("nombre", "")
+                if "1A3B" in _ac_nombre:
+                    _ac_subtipo = "ANCHOR_1A3B"
+                elif "2A2B" in _ac_nombre:
+                    _ac_subtipo = "ANCHOR_2A2B"
+                elif "3A2B" in _ac_nombre:
+                    _ac_subtipo = "ANCHOR_3A2B"
+                else:
+                    _ac_subtipo = combo.get("tipo", "ANCHOR")
+                _cr.log_combo(
+                    "AC", _ac_subtipo, f"AC{idx}",
+                    list(piernas),
+                    list(cuotas_list),
+                    combo.get("stake", 1500),
+                )
+        except Exception:
+            pass  # D132: log_combo es best-effort, nunca bloquea generación
+
         print(f'  AC{idx}.bat — {combo["nombre"]}: {legs_str}')
         generated += 1
 
@@ -1592,6 +1623,31 @@ def _generar_bats(plan: dict, prefix: str = "CC") -> int:
             f"@echo off\r\nstart \"\" \"{CHROME_WIN}\" \"file:///{html_win}\"\r\n",
             encoding="utf-8"
         )
+
+        # D132-01a: registrar CC combo en ComboRegistry (best-effort)
+        try:
+            if _combo_registry_available:
+                _cr = _ComboRegistry()
+                # Determinar subtipo desde nombre del combo (CORE/SATELLITE/MOONSHOT/COBERTURA)
+                _nombre_upper = (combo.get("nombre") or "").upper()
+                if "CORE" in _nombre_upper:
+                    _subtipo = "CORE"
+                elif "SAT" in _nombre_upper:
+                    _subtipo = "SATELLITE"
+                elif "MOON" in _nombre_upper:
+                    _subtipo = "MOONSHOT"
+                elif "COB" in _nombre_upper:
+                    _subtipo = "COBERTURA"
+                else:
+                    _subtipo = combo.get("categoria", "CORE")
+                _cr.log_combo(
+                    "CC", _subtipo, f"{prefix}{idx}",
+                    list(piernas),
+                    list(cuotas_list),
+                    combo.get("stake", 2000),
+                )
+        except Exception:
+            pass  # D132: log_combo es best-effort, nunca bloquea generación
 
         print(f"  {prefix}{idx}.bat — {combo['nombre']}: {legs_str}")
         generated += 1

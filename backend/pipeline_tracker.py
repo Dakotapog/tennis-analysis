@@ -794,6 +794,54 @@ def seccion_27_6_temporal(picks, out):
     out.append("")
     out.append("  ALERTA: rolling accuracy < 55% con n>=20 → posible model drift.")
 
+    # D132-04: Combo P&L por estrategia desde ComboRegistry
+    out.append("")
+    out.append("  --- COMBO P&L POR ESTRATEGIA (D132) ---")
+    try:
+        import subprocess as _sp
+        import json as _json
+        _res = _sp.run(
+            ["python3", "combo_registry.py", "--report", "--json"],
+            capture_output=True, text=True, timeout=10,
+        )
+        if _res.returncode == 0 and _res.stdout.strip():
+            _data = _json.loads(_res.stdout.strip())
+            _by_tipo = _data.get("by_tipo", {})
+            _total = _data.get("total", {})
+            if not _by_tipo:
+                _today = __import__("datetime").datetime.now().strftime("%Y-%m-%d")
+                out.append(f"  Sin registros de combo aun — D132 activado {_today}")
+            else:
+                _cols  = ["tipo", "n", "wins", "losses", "open", "hit%", "pnl_total"]
+                _widths = [10, 6, 6, 8, 6, 7, 14]
+                _header_row = "  " + "  ".join(c.ljust(w) for c, w in zip(_cols, _widths))
+                out.append(_header_row)
+                out.append("  " + "-" * 65)
+                for _tipo in sorted(_by_tipo.keys()):
+                    _g = _by_tipo[_tipo]
+                    _n = _g.get("n", 0)
+                    _w = _g.get("wins", 0)
+                    _l = _g.get("losses", 0)
+                    _o = _g.get("open", 0)
+                    _hit = f"{_w/_n*100:.1f}%" if _n > 0 else "-"
+                    _pnl = _g.get("pnl", 0.0)
+                    _pnl_str = f"${_pnl:+,.0f}"
+                    _vals = [_tipo, str(_n), str(_w), str(_l), str(_o), _hit, _pnl_str]
+                    out.append("  " + "  ".join(v.ljust(w) for v, w in zip(_vals, _widths)))
+                out.append("  " + "-" * 65)
+                _tn = _total.get("n", 0)
+                _tw = _total.get("wins", 0)
+                _tl = _total.get("losses", 0)
+                _to = _total.get("open", 0)
+                _th = f"{_tw/_tn*100:.1f}%" if _tn > 0 else "-"
+                _tp = _total.get("pnl", 0.0)
+                _total_vals = ["TOTAL", str(_tn), str(_tw), str(_tl), str(_to), _th, f"${_tp:+,.0f}"]
+                out.append("  " + "  ".join(v.ljust(w) for v, w in zip(_total_vals, _widths)))
+        else:
+            out.append("  [combo_registry --json sin datos — posible sin combos registrados]")
+    except Exception as _e:
+        out.append(f"  [combo_registry no disponible: {_e}]")
+
 
 def seccion_27_7_portfolio(picks, combos, out):
     """S-27-7: Portfolio — Combos vs Individuales."""

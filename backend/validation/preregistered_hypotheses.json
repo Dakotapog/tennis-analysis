@@ -816,7 +816,7 @@
       "preregistrado": "2026-07-20",
       "umbrales_congelados": {
         "conf_minima": 0.54,
-        "hot_threshold": 0.70,
+        "hot_threshold": 0.7,
         "señal": "markov_wr_rec_fav >= 0.70",
         "nota": "Depende de H124-01 — solo graduable si H124-01 acumula n≥20 primero."
       },
@@ -835,7 +835,7 @@
       "preregistrado": "2026-07-20",
       "umbrales_congelados": {
         "conf_minima": 0.54,
-        "cuota_maxima": 1.30,
+        "cuota_maxima": 1.3,
         "fuente": "generar_tabla_favoritos2.py pick_type=evaluar_games",
         "nota": "PROHIBIDO subir umbral cuota a >1.30 antes de n_stop. La segmentación <1.30 ya está en shadow_book.log_evaluar_pick()."
       },
@@ -853,9 +853,9 @@
       "origen_deuda": "Nodo-125 D125-02 — 2026-07-21. Bridge EVALUAR_GAMES → games_signal implementado. Primera señal operativa vía scripts/evaluar_games_bridge.py.",
       "preregistrado": "2026-07-21",
       "umbrales_congelados": {
-        "cuota_ml_maxima": 1.30,
+        "cuota_ml_maxima": 1.3,
         "conf_minima": 0.54,
-        "cuota_combo_minima": 2.50,
+        "cuota_combo_minima": 2.5,
         "fuente": "scripts/evaluar_games_bridge.py → reports/evaluar_games_signal_*.json",
         "nota": "PROHIBIDO cambiar ventana time-window (90min) o gate cuota_combo (2.50) antes de n_stop."
       },
@@ -863,6 +863,24 @@
       "exito": "hit% combo > 55% con IC Wilson 95% inferior > 45%, n >= 25 (breakeven combo @2.50 = 40%)",
       "kill_switch": "hit% combo < 40% con n >= 15 → señal UNDER no confirmada para este segmento",
       "n_stop": 25,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0
+    },
+    "H132-01": {
+      "nombre": "ComboRegistry trazabilidad activa — 80pct+ de combos generados quedan registrados",
+      "descripcion": "Al activar D132 (log_combo en todos los builders), el porcentaje de combos que aparecen en combo_registry al final del dia supera el 80% de los BAT generados. Hipotesis operacional: la instrumentacion es completa y best-effort no bloquea ninguna generacion.",
+      "origen_deuda": "Nodo-132 D132-02a/b/c/d/e/f + D132-01a/b — 2026-07-21. log_combo anadido a betplay_combo_builder.py y combo_confianza_builder.py.",
+      "preregistrado": "2026-07-21",
+      "umbrales_congelados": {
+        "cobertura_minima": 0.8,
+        "fuente": "reports/combo_registry/cr_YYYY-MM-DD.jsonl vs Desktop/*.bat count",
+        "nota": "PROHIBIDO cambiar cobertura_minima antes de n_stop. Si <80% sistematicamente: investigar exception silenciada en log_combo."
+      },
+      "metrica": "n_registros_cr / n_bats_generados por sesion. Acumulado por tipo.",
+      "exito": "cobertura >= 80% en >= 5/7 dias consecutivos de operacion.",
+      "kill_switch": "cobertura < 50% en >= 3 dias consecutivos → revisar import _ComboRegistry en builders.",
+      "n_stop": 20,
       "estado": "ACUMULANDO",
       "n_actual": 0,
       "hits": 0
