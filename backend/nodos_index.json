@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generado": "2026-07-20T20:10:02",
-    "total_nodos": 125,
+    "total_nodos": 126,
     "total_py_files": 71,
     "huerfanos_count": 1,
     "exclusiones_count": 19
@@ -1698,6 +1698,23 @@
       "archivos_mencionados": [
         "betplay_combo_builder.py",
         "tests/test_nodo131_evaluar_games_gap_gate.py"
+      ]
+    }
+  ],
+    {
+      "nodo_id": "132",
+      "nodo_archivo": "Nodo-132-ComboRegistry-Activation-PnL-Tracking.md",
+      "fecha": "2026-07-21",
+      "estado": "propuesta",
+      "archivos_mencionados": [
+        "combo_registry.py",
+        "combo_confianza_builder.py",
+        "betplay_combo_builder.py",
+        "favoritos_combo_builder.py",
+        "run_daily.py",
+        "pipeline_tracker.py",
+        "live_desk.py",
+        "tests/test_nodo132_combo_registry_activation.py"
       ]
     }
   ],
