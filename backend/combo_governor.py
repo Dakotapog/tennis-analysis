@@ -356,8 +356,11 @@ def main() -> None:
         print("  (betplay no persiste totals — verificar manualmente si corrió --live)")
 
     # ── 4. Total cruzado 12/12 ──────────────────────────────────────────────
-    all_stakes = {**stakes_confianza, **stakes_motor, **stakes_rival, **stakes_betplay}
+    # D137-01: MOTOR excluido del gate de combos — tiene su propio Kelly-KL/VaR/CPPI.
+    # Se muestra como referencia pero NO cuenta contra el budget de combos (#2-#12).
+    all_stakes = {**stakes_confianza, **stakes_rival, **stakes_betplay}
     total = sum(all_stakes.values())
+    total_motor = sum(stakes_motor.values())
     # Budget unificado: declarado en combo_plan (Fase-N × bankroll) + betplay (4% extra)
     betplay_budget = bankroll * _BETPLAY_MAX_PCT
     budget = (declared_budget or bankroll * _BETPLAY_MAX_PCT) + (
@@ -366,6 +369,10 @@ def main() -> None:
     pct = total / budget * 100 if budget > 0 else 0
 
     print(f"\n{'─'*60}")
+    if total_motor:
+        motor_pct = total_motor / bankroll * 100
+        motor_warn = "  ⚠️ WARN >40%" if motor_pct > 40 else ""
+        print(f"MOTOR (ref, Kelly-KL):    ${total_motor:>10,}  ({motor_pct:.1f}% bankroll){motor_warn}")
     budget_label = f"confianza ${declared_budget:,} + betplay ${betplay_budget if stakes_betplay else 0:,.0f}" if declared_budget else f"betplay ${betplay_budget:,.0f}"
     print(f"Budget unificado: ${budget:,.0f}  ({budget_label})")
     print(f"TOTAL COMBINADO:  ${total:>10,}  ({pct:.1f}% del budget)")

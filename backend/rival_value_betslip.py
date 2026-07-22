@@ -364,10 +364,9 @@ def main() -> None:
     args = parser.parse_args()
 
     # ── Governor soft-veto (S107-D D107-04) ────────────────────────────────
-    import subprocess as _sp
+    import subprocess as _sp, sys
     _gov = _sp.run(
-        [sys.argv[0].replace('rival_value_betslip.py', '') + 'combo_governor.py'
-         if False else str(Path(__file__).parent / 'combo_governor.py'),
+        [sys.executable, str(Path(__file__).parent / 'combo_governor.py'),
          '--bankroll', str(args.bankroll)],
         capture_output=True, text=True
     )
