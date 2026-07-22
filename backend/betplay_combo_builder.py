@@ -190,6 +190,17 @@ def fetch_kambi_outcomes() -> tuple[Dict[str, Dict], Dict[str, str]]:
     return outcomes_map, started_map
 
 
+def _filter_kambi_available(picks: list, label: str = '') -> list:
+    """D140-02 (Nodo-140): excluye picks kambi_disponible=False antes de fetch_kambi_outcomes().
+    None = sin coverage aún = pass-through (no bloquear si PASO 1c no corrió hoy).
+    False = ITF/torneo genuinamente sin catálogo Betplay → excluir temprano."""
+    available = [p for p in picks if p.get('kambi_disponible') is not False]
+    n_excl = len(picks) - len(available)
+    if n_excl:
+        logger.info(f'[D140-02] {label}: {n_excl}/{len(picks)} excluidos (kambi_disponible=False — ITF/sin Betplay)')
+    return available
+
+
 def find_outcome(jugador: str, cuota: float, outcomes_map: Dict,
                   started_map: Optional[Dict] = None) -> tuple[Optional[Dict], str]:
     """
@@ -1101,10 +1112,11 @@ def build_safe_combos(stake_per_combo: int = 1000,
                     name = p.get("favorito_predicho", "")
                     if name:
                         edge_pick_map[name] = {
-                            "tier": p.get("tier", "unknown"),
-                            "torneo": p.get("torneo", ""),
-                            "gap": abs(p.get("p_blend", 0.5) - p.get("p_modelo", 0.5)),
-                            "n_h2h": p.get("n_h2h", 0),
+                            "tier":             p.get("tier", "unknown"),
+                            "torneo":           p.get("torneo", ""),
+                            "gap":              abs(p.get("p_blend", 0.5) - p.get("p_modelo", 0.5)),
+                            "n_h2h":            p.get("n_h2h", 0),
+                            "kambi_disponible": p.get("kambi_disponible"),  # D140-02 Nodo-140
                         }
         except Exception:
             pass
@@ -1129,6 +1141,9 @@ def build_safe_combos(stake_per_combo: int = 1000,
             if name and name not in seen_names:
                 seen_names.add(name)
                 edge_info = edge_pick_map.get(name, {})
+                # D140-02 Nodo-140: pre-filtro Kambi — excluir ITF/torneos sin Betplay
+                if edge_info.get('kambi_disponible') is False:
+                    continue
                 # Build torneo identifier: tier + superficie as fallback
                 torneo = edge_info.get("torneo", "")
                 if not torneo:
@@ -1448,6 +1463,9 @@ def build_was_combos(stake_per_combo: int = 5000,
     if not watchlist:
         logger.warning("⚠️ WAS: edge_report sin picks en watchlist")
         return [], {}
+
+    # D140-02 Nodo-140: pre-filtro Kambi antes de buscar outcomes
+    watchlist = _filter_kambi_available(watchlist, 'WAS')
 
     # Filter WAS candidates (usa _was_qualifies para testabilidad — T55-04/05)
     was_candidates = []
@@ -2278,17 +2296,19 @@ def build_mega_combos(stake_per_combo: int = 500,
                     name = p.get("favorito_predicho", "")
                     if name:
                         edge_tier_map[name] = {
-                            "tier":         p.get("tier", "unknown"),
-                            "superficie":   p.get("superficie", "unknown"),
+                            "tier":             p.get("tier", "unknown"),
+                            "superficie":       p.get("superficie", "unknown"),
                             # Nodo-24 campos
-                            "bbi":          p.get("bbi", 0.5),
-                            "gap_flag":     p.get("gap_flag", "MIXED"),
-                            "mpq":          p.get("mpq", 0.0),
-                            "golden_zone":  p.get("golden_zone", False),
-                            "n_h2h":        p.get("n_h2h", 0),
+                            "bbi":              p.get("bbi", 0.5),
+                            "gap_flag":         p.get("gap_flag", "MIXED"),
+                            "mpq":              p.get("mpq", 0.0),
+                            "golden_zone":      p.get("golden_zone", False),
+                            "n_h2h":            p.get("n_h2h", 0),
                             # Nodo-26 M-26-3: cuota original para Line Movement Signal
-                            "cuota_original": p.get("cuota_favorito"),
-                            "edge":           p.get("edge", 0),
+                            "cuota_original":   p.get("cuota_favorito"),
+                            "edge":             p.get("edge", 0),
+                            # D140-02 Nodo-140: disponibilidad Kambi/Betplay
+                            "kambi_disponible": p.get("kambi_disponible"),
                         }
         except Exception:
             pass
@@ -2312,6 +2332,9 @@ def build_mega_combos(stake_per_combo: int = 500,
             name = p.get("favorito", "")
             if name and name not in seen_names:
                 seen_names.add(name)
+                # D140-02 Nodo-140: pre-filtro Kambi — excluir ITF/torneos sin Betplay
+                if edge_tier_map.get(name, {}).get('kambi_disponible') is False:
+                    continue
                 # Tier: prefer plan metadata → edge_report → pick superficie
                 pick_tier = tier if tier != "unknown" else edge_tier_map.get(name, {}).get("tier", "unknown")
                 pick_sup = p.get("superficie", superficie)

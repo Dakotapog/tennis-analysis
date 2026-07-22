@@ -369,6 +369,12 @@ def main():
         _run(['python3', 'scraping/match_ledger.py', '--build', '--enrich', '--fecha', _fecha_ledger],
              'PASO 1.5 — Fusión Playwright+API → ledger crosswalk + enrichment qualifying (Nodo-118+121)')
 
+        # ── PASO 1c — Kambi Coverage (Nodo-140) ──────────────────────────────
+        # Fetcha catálogo Kambi/Betplay NOT_STARTED → reports/kambi_coverage_HOY.json
+        # edge_calculator lo lee en _annotate_kambi() → campo kambi_disponible por pick
+        _run(['python3', 'scripts/fetch_kambi_coverage.py'],
+             'PASO 1c — Kambi Coverage (Nodo-140: catálogo apostable fresco)')
+
         # ── PASO 2 — H2H ─────────────────────────────────────────────────────
         if not args.skip_h2h:
             _run(['python3', 'extraer_historh2h.py', '--api-mode', '--all-tournaments'],

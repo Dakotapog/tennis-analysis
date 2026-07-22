@@ -533,6 +533,14 @@ def _extract_and_categorize(partidos: list, threshold: float,
     picks = []
     # Nodo-62: Signal Bridge — cargar indice de edge_report una sola vez
     edge_index = _load_edge_report_index()
+    # D140-04 Nodo-140: Kambi gate — cargar coverage fresca una sola vez
+    # None = sin coverage (PASO 1c no corrió) = pass-through; False = excluir
+    try:
+        from scripts.fetch_kambi_coverage import load_coverage as _kc_load, \
+                                                 is_player_available as _kc_available
+        _kc_cov = _kc_load()
+    except Exception:
+        _kc_cov = None
 
     for partido in partidos:
         # Nodo-42: filtrar pool por superficie antes de evaluar confianza
@@ -551,6 +559,11 @@ def _extract_and_categorize(partidos: list, threshold: float,
         favorito = pred.get('favored_player')
         confidence = pred.get('confidence')
         if not favorito or confidence is None:
+            continue
+
+        # D140-04 Nodo-140: excluir favoritos no disponibles en Kambi/Betplay
+        # None = sin coverage hoy = pass-through; False = ITF/torneo sin Betplay
+        if _kc_cov is not None and not _kc_available(favorito, _kc_cov):
             continue
 
         conf = float(confidence)
