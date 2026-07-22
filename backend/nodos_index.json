@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "generado": "2026-07-22T10:39:45",
-    "total_nodos": 133,
+    "generado": "2026-07-22T12:04:23",
+    "total_nodos": 135,
     "total_py_files": 71,
     "huerfanos_count": 0,
     "exclusiones_count": 19
@@ -715,6 +715,29 @@
         "extraer_historh2h.py",
         "extraer_partidos_api.py",
         "tests/test_nodo136_tier_cti_fallback.py"
+      ]
+    },
+    {
+      "nodo_id": "137",
+      "nodo_archivo": "Nodo-137-Governor-Motor-Exclusion.md",
+      "fecha": "2026-07-22",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "combo_governor.py",
+        "rival_value_betslip.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "138",
+      "nodo_archivo": "Nodo-138-G2-Gate-Evolution-Multi-Signal.md",
+      "fecha": null,
+      "estado": "activo",
+      "archivos_mencionados": [
+        "combo_confianza_builder.py",
+        "favoritos_combo_builder.py",
+        "tests/test_nodo138_g2_evolution.py",
+        "trader_ev_tenis.py"
       ]
     },
     {
