@@ -3165,6 +3165,403 @@ def build_evaluar_games_combos(
     return combos, meta
 
 
+# ── Nodo-139: Kambi-First Combo Builder ──────────────────────────────────────
+# Flujo correcto: Kambi (universo apostable) → modelo (filtro de valor) → combos
+# Sin COMBO_MAX_CUOTA. Gate: EV_combo ≥ EV_MIN_COMBO por pierna con edge > 0.
+
+EV_MIN_COMBO     = 0.02   # 2% EV mínimo por combo
+MIN_P_COMBO      = {3: 0.10, 4: 0.08, 5: 0.06, 6: 0.04, 7: 0.03}
+HALF_KELLY       = 0.50   # Half-Kelly estándar
+RHO_PARLAY       = 0.15   # Correlación entre combos simultáneos
+KF_MIN_STAKE     = 500
+KF_MAX_STAKE_PCT = 0.03   # 3% bankroll máximo por combo
+KF_MIN_CUOTA     = 1.10
+KF_MAX_CUOTA     = 1.80
+KF_MIN_P         = 0.55   # p_modelo mínimo por pierna
+KF_MIN_LEGS      = 3
+KF_MAX_LEGS      = 7
+KF_TIME_WINDOW_H = 3.0    # ventana temporal en horas
+
+
+def _apellido_kambi(label: str) -> str:
+    """Extrae apellido de nombre en formato Kambi: 'Lachlan Mcfadzean' → 'mcfadzean'."""
+    norm = _normalize_name(label)
+    parts = [p for p in norm.split() if len(p) > 2]
+    if not parts:
+        return norm
+    # Apellidos compuestos: si último token es partícula corta, tomar 2 finales
+    if len(parts) >= 2 and len(parts[-1]) <= 3:
+        return ' '.join(parts[-2:])
+    return parts[-1]
+
+
+def _apellido_pick(nombre: str) -> str:
+    """Extrae apellido de nombre en formato pick: 'McFadzean L.' → 'mcfadzean'."""
+    norm = _normalize_name(nombre)
+    parts = norm.split()
+    # Quitar tokens finales que sean iniciales (≤2 chars)
+    while parts and len(parts[-1]) <= 2:
+        parts.pop()
+    return ' '.join(parts) if parts else norm
+
+
+def _match_score_names_kf(kambi_label: str, pick_nombre: str) -> float:
+    """Retorna score 0-1 de coincidencia entre nombre Kambi y nombre pick."""
+    ak = _apellido_kambi(kambi_label)
+    ap = _apellido_pick(pick_nombre)
+    if not ak or not ap:
+        return 0.0
+    if ak == ap:
+        return 1.0
+    if ap in ak or ak in ap:
+        return 0.9
+    def _bigrams(s: str) -> set:
+        return {s[i:i+2] for i in range(len(s) - 1)}
+    bg_ak, bg_ap = _bigrams(ak), _bigrams(ap)
+    if not bg_ak or not bg_ap:
+        return 0.0
+    j = len(bg_ak & bg_ap) / len(bg_ak | bg_ap)
+    return j if j >= 0.70 else 0.0
+
+
+def _fetch_kambi_betting_universe(
+    min_cuota: float = KF_MIN_CUOTA,
+    max_cuota: float = KF_MAX_CUOTA,
+) -> list:
+    """D139-01: Devuelve KambiLegs NOT_STARTED con cuota favorito en [min_cuota, max_cuota]."""
+    import requests
+    from datetime import datetime as _dt, timezone as _tz, timedelta as _td
+    LABELS_MATCH = ('Match', 'Cuotas del partido', 'Match Betting', '1X2')
+    try:
+        url = f"{KAMBI_BASE}/listView/tennis.json?{KAMBI_PARAMS}"
+        resp = requests.get(url, headers=KAMBI_HEADERS, timeout=15)
+        resp.raise_for_status()
+        events = resp.json().get('events', [])
+    except Exception as exc:
+        logger.error(f"[KF] D139-01 error Kambi: {exc}")
+        return []
+
+    legs = []
+    for ev_wrapper in events:
+        ev = ev_wrapper.get('event', {})
+        if ev.get('state') != 'NOT_STARTED':
+            continue
+        for offer in ev_wrapper.get('betOffers', []):
+            lbl = offer.get('criterion', {}).get('label', '')
+            if lbl not in LABELS_MATCH:
+                continue
+            ocs = offer.get('outcomes', [])
+            if len(ocs) < 2:
+                continue
+            o1, o2 = ocs[0], ocs[1]
+            q1 = (o1.get('odds') or 0) / 1000
+            q2 = (o2.get('odds') or 0) / 1000
+            if q1 <= 0 or q2 <= 0:
+                continue
+            fav, dog = (o1, o2) if q1 <= q2 else (o2, o1)
+            q_fav, q_dog = min(q1, q2), max(q1, q2)
+            if not (min_cuota <= q_fav <= max_cuota):
+                continue
+            # Convertir start_utc a hora Colombia (UTC-5) en formato HH:MM
+            start_utc = ev.get('start', '')
+            hora = ''
+            try:
+                dt_utc = _dt.fromisoformat(start_utc.replace('Z', '+00:00'))
+                dt_col = dt_utc - _td(hours=5)
+                hora = dt_col.strftime('%H:%M')
+            except Exception:
+                pass
+            player_fav = (fav.get('label') or fav.get('participant') or '').strip()
+            player_dog = (dog.get('label') or dog.get('participant') or '').strip()
+            if not player_fav:
+                continue
+            legs.append({
+                'event_id':       ev.get('id'),
+                'partido':        ev.get('name', ''),
+                'player_fav':     player_fav,
+                'player_dog':     player_dog,
+                'cuota_fav':      q_fav,
+                'cuota_dog':      q_dog,
+                'outcome_id_fav': str(fav.get('id', '')),
+                'outcome_id_dog': str(dog.get('id', '')),
+                'start_utc':      start_utc,
+                'hora':           hora,
+                'group_path':     '/'.join(p.get('name', '') for p in ev.get('path', [])),
+                'p_implied_fav':  round(1.0 / q_fav, 4),
+            })
+            break  # solo primera oferta match-winner por evento
+    logger.info(f"[KF] D139-01: {len(legs)} favoritos NOT_STARTED cuota [{min_cuota},{max_cuota}]")
+    return legs
+
+
+def _load_all_edge_picks() -> list:
+    """Carga apostar + watchlist + sin_edge del edge_report más reciente, con tag _section."""
+    path = _find_latest_edge_report()
+    if not path:
+        return []
+    try:
+        data = json.loads(Path(path).read_text(encoding='utf-8'))
+    except Exception:
+        return []
+    picks = []
+    for section in ('apostar', 'watchlist', 'sin_edge'):
+        for p in data.get(section, []):
+            p['_section'] = section
+            picks.append(p)
+    return picks
+
+
+def _match_to_predictions(kambi_legs: list, edge_picks: list) -> list:
+    """D139-02: Enriquece cada KambiLeg con predicción del modelo (TIER_A/B) o excluye (TIER_C)."""
+    SCORE_THRESHOLD = 0.85
+
+    # Construir índice de picks por nombre favorito
+    pick_index = []
+    for p in edge_picks:
+        favorito = (p.get('favorito_predicho') or p.get('favorito') or '').strip()
+        if not favorito:
+            partido = p.get('partido', '')
+            for sep in (' vs ', ' - '):
+                if sep in partido:
+                    favorito = partido.split(sep)[0].strip()
+                    break
+        if not favorito:
+            continue
+        pick_index.append({
+            'nombre':   favorito,
+            'pick':     p,
+            'section':  p.get('_section', 'sin_edge'),
+            'p_modelo': float(p.get('p_modelo') or 0),
+            'edge':     float(p.get('edge') or 0),
+            'kelly_kl': float(p.get('kelly_kl') or 0),
+            'conf':     p.get('confidence_flag', ''),
+            'n_axes':   int(p.get('n_axes_active') or 0),
+            'apostar':  bool(p.get('apostar', False)),
+        })
+
+    result = []
+    for leg in kambi_legs:
+        best_score, best_idx = 0.0, None
+        for idx in pick_index:
+            sc = _match_score_names_kf(leg['player_fav'], idx['nombre'])
+            if sc > best_score:
+                best_score, best_idx = sc, idx
+        if best_score < SCORE_THRESHOLD or best_idx is None:
+            continue  # TIER_C
+
+        section = best_idx['section']
+        p_modelo = best_idx['p_modelo']
+        # TIER_A: apostar/watchlist (señal fuerte)
+        if section in ('apostar', 'watchlist') or best_idx['apostar']:
+            tier = 'A'
+        else:
+            # TIER_B: sin_edge solo si p_modelo > p_implied (al menos concordancia de dirección)
+            if p_modelo > leg['p_implied_fav']:
+                tier = 'B'
+            else:
+                continue  # TIER_C
+        result.append({**leg,
+            'tier':        tier,
+            'p_modelo':    p_modelo,
+            'edge_model':  best_idx['edge'],
+            'kelly_kl':    best_idx['kelly_kl'],
+            'conf_flag':   best_idx['conf'],
+            'n_axes':      best_idx['n_axes'],
+            'match_score': best_score,
+            'pick_nombre': best_idx['nombre'],
+        })
+
+    n_a = sum(1 for r in result if r['tier'] == 'A')
+    n_b = sum(1 for r in result if r['tier'] == 'B')
+    logger.info(f"[KF] D139-02: {len(result)} matched — TIER_A={n_a} TIER_B={n_b}")
+    return result
+
+
+def _compute_leg_signal_kf(leg: dict) -> Optional[dict]:
+    """D139-03: Aplica gates y calcula señal efectiva vs cuota Kambi actual. Retorna ScoredLeg o None."""
+    p_implied     = leg['p_implied_fav']
+    p_modelo      = leg['p_modelo']
+    tier          = leg['tier']
+    kelly         = leg['kelly_kl']
+    conf          = leg['conf_flag']
+
+    edge_efectivo = p_modelo - p_implied   # edge real vs Kambi (no vs fuente original)
+
+    if edge_efectivo <= 0:
+        return None   # G_EDGE: sin ventaja sobre el mercado Kambi
+    if p_modelo < KF_MIN_P:
+        return None   # G_CONF: coinflip
+    if tier == 'B' and edge_efectivo < 0.02:
+        return None   # G_TIER_B: señal débil sin edge_report confirma
+
+    if tier == 'A':
+        conf_num = {'STRONG': 1.0, 'MODERATE': 0.7}.get(conf, 0.4)
+        score = edge_efectivo * 3 + kelly * 20 + conf_num
+    else:
+        score = edge_efectivo * 5
+
+    return {**leg,
+        'edge_efectivo': round(edge_efectivo, 4),
+        'p_efectivo':    p_modelo,
+        'score':         round(score, 4),
+        'n_legs_ok':     True,
+    }
+
+
+def _select_with_overlap_kf(combos: list, max_overlap: int = 2, top_n: int = 10) -> list:
+    """Top-N combos con solape ≤ max_overlap event_ids entre cualquier par seleccionado."""
+    selected = []
+    for combo in combos:
+        ids_new = {l['event_id'] for l in combo['legs']}
+        if all(len(ids_new & {l['event_id'] for l in s['legs']}) <= max_overlap
+               for s in selected):
+            selected.append(combo)
+        if len(selected) >= top_n:
+            break
+    return selected
+
+
+def _build_kambi_combos_kf(scored_legs: list) -> list:
+    """D139-04: Construye combos SIN tope de cuota combinada. Gate: EV ≥ EV_MIN_COMBO."""
+    import math
+    from itertools import combinations as _comb
+    if len(scored_legs) < KF_MIN_LEGS:
+        logger.warning(f"[KF] D139-04: {len(scored_legs)} legs < mínimo {KF_MIN_LEGS}")
+        return []
+    # Reusar _group_by_time_window (ventana en minutos)
+    groups = _group_by_time_window(scored_legs, window_min=int(KF_TIME_WINDOW_H * 60))
+    all_combos = []
+    for group in groups:
+        if len(group) < KF_MIN_LEGS:
+            continue
+        for n in range(KF_MIN_LEGS, min(KF_MAX_LEGS, len(group)) + 1):
+            for legs in _comb(group, n):
+                # Max 1 pierna por event_id
+                if len({l['event_id'] for l in legs}) < n:
+                    continue
+                p_combo     = math.prod(l['p_efectivo'] for l in legs)
+                cuota_combo = math.prod(l['cuota_fav']  for l in legs)
+                EV_combo    = p_combo * cuota_combo - 1
+                if EV_combo < EV_MIN_COMBO:
+                    continue
+                if p_combo < MIN_P_COMBO.get(n, 0.03):
+                    continue
+                tiers = [l['tier'] for l in legs]
+                all_combos.append({
+                    'legs':       list(legs),
+                    'p_combo':    round(p_combo, 4),
+                    'cuota_combo': round(cuota_combo, 2),
+                    'EV_combo':   round(EV_combo, 4),
+                    'n_legs':     n,
+                    'tiers':      tiers,
+                    'n_tier_a':   tiers.count('A'),
+                })
+    all_combos.sort(key=lambda c: c['EV_combo'] * c['p_combo'], reverse=True)
+    selected = _select_with_overlap_kf(all_combos)
+    logger.info(f"[KF] D139-04: {len(all_combos)} candidatos → {len(selected)} seleccionados")
+    return selected
+
+
+def _kelly_stake_kf(combo: dict, bankroll: float, n_simultaneous: int) -> int:
+    """D139-05: Half-Kelly con portfolio factor y cap [500, 3% bankroll]."""
+    EV    = combo['EV_combo']
+    q     = combo['cuota_combo']
+    f_raw = EV / (q - 1) if q > 1 else 0.0
+    pf    = 1.0 / (1.0 + RHO_PARLAY * max(0, n_simultaneous - 1))
+    stake = bankroll * f_raw * HALF_KELLY * pf
+    stake = int(round(stake / 100) * 100)
+    # Cap aplicado DESPUÉS de redondear para evitar overshoot (ej. $3750→$3800)
+    max_stake = int(bankroll * KF_MAX_STAKE_PCT)
+    return max(KF_MIN_STAKE, min(stake, max_stake))
+
+
+def _generate_kambi_first_bat(combos: list, bankroll: float, dry_run: bool = False) -> int:
+    """D139-06: Genera KB_N.bat en Desktop. outcome_ids conocidos desde D139-01."""
+    try:
+        desktop = Path.home() / 'Desktop'
+        if not desktop.exists():
+            desktop = Path('/mnt/c/Users') / Path.home().name / 'Desktop'
+    except Exception:
+        desktop = Path('.')
+    n = 0
+    for i, combo in enumerate(combos, 1):
+        ids   = ','.join(l['outcome_id_fav'] for l in combo['legs'])
+        stake = combo.get('stake', KF_MIN_STAKE)
+        url   = f"https://www.betplay.com.co/apuestas#betslip/{ids}||replace"
+        bat   = (f'@echo off\n'
+                 f'start "" "{url}"\n'
+                 f'REM KB_{i}: {combo["n_legs"]}p @{combo["cuota_combo"]:.2f}x '
+                 f'EV={combo["EV_combo"]:.1%} stake=${stake:,}\n')
+        if not dry_run:
+            (desktop / f'KB_{i}.bat').write_text(bat)
+        n += 1
+    return n
+
+
+def _print_kambi_first_report(combos: list, bankroll: float):
+    """D139-06: Imprime tabla resumen de Kambi-First combos."""
+    print()
+    print('=' * 70)
+    print(f'  KAMBI-FIRST COMBOS — Nodo-139  ({len(combos)} combos)')
+    print(f'  Universo: Kambi NOT_STARTED | Sin cap cuota | Kelly half-staking')
+    print('=' * 70)
+    total_stake = sum(c.get('stake', 0) for c in combos)
+    for i, combo in enumerate(combos, 1):
+        stake   = combo.get('stake', 0)
+        retorno = round(stake * combo['cuota_combo'])
+        tstr    = '/'.join(combo['tiers'])
+        print(f'\n  KB_{i} [{combo["n_legs"]}p] @{combo["cuota_combo"]:.2f}x  '
+              f'EV={combo["EV_combo"]:.1%}  p={combo["p_combo"]:.1%}  '
+              f'stake=${stake:,}  → ${retorno:,}  [{tstr}]')
+        for leg in combo['legs']:
+            print(f'     {leg.get("hora","?"):5s}  {leg["player_fav"]:30s}'
+                  f'  @{leg["cuota_fav"]:.2f}  [{leg["tier"]}]'
+                  f'  edge={leg["edge_efectivo"]:.1%}')
+    print()
+    print(f'  Total invertido: ${total_stake:,}  ({total_stake/bankroll:.1%} bankroll)')
+    print('=' * 70)
+
+
+def build_kambi_first_combos(bankroll: float, dry_run: bool = False) -> list:
+    """D139-07: Orquestador Kambi-First — D139-01→D139-06."""
+    # D139-01
+    legs = _fetch_kambi_betting_universe()
+    if not legs:
+        logger.error('[KF] Sin legs Kambi disponibles')
+        return []
+    # Cargar picks del modelo
+    edge_picks = _load_all_edge_picks()
+    if not edge_picks:
+        logger.warning('[KF] Sin edge_report — solo matching TIER_B imposible')
+        return []
+    # D139-02
+    matched = _match_to_predictions(legs, edge_picks)
+    if not matched:
+        logger.warning('[KF] 0 legs matched con modelo — sin combos')
+        return []
+    # D139-03
+    scored = [s for s in (_compute_leg_signal_kf(m) for m in matched) if s]
+    logger.info(f'[KF] D139-03: {len(scored)} legs válidos (edge>0, p≥{KF_MIN_P})')
+    if len(scored) < KF_MIN_LEGS:
+        logger.warning(f'[KF] {len(scored)} < {KF_MIN_LEGS} legs — sin combos')
+        return []
+    # D139-04
+    combos = _build_kambi_combos_kf(scored)
+    if not combos:
+        logger.warning('[KF] 0 combos pasan gates EV/p_combo')
+        return []
+    # D139-05
+    for combo in combos:
+        combo['stake'] = _kelly_stake_kf(combo, bankroll, len(combos))
+    # D139-06
+    _print_kambi_first_report(combos, bankroll)
+    n_bats = _generate_kambi_first_bat(combos, bankroll, dry_run=dry_run)
+    if n_bats:
+        print(f'  {n_bats} archivos KB_N.bat generados en Desktop')
+        print('  Flujo: borra ticket → doble clic KB_N.bat → Chrome → apostar')
+    return combos
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Arma combos de Betplay — genera .bat para Chrome"
@@ -3208,6 +3605,8 @@ def main():
     parser.add_argument("--games-stake", type=int, default=2000,
                         help="Stake por games combo (default: $2000, REGLA-G6 cap)")
     parser.add_argument("--games-file", help="games_signal_report JSON específico")
+    parser.add_argument("--kambi-first", action="store_true",
+                        help="Nodo-139: Kambi-First — universo Kambi NOT_STARTED → modelo → combos Kelly sin cap cuota")
     parser.add_argument("--evaluar", action="store_true",
                         help="Nodo-125: EvalGames Combos — UNDER juegos desde EVALUAR_GAMES picks (cuota<1.30)")
     parser.add_argument("--evaluar-stake", type=int, default=1000,
@@ -3280,6 +3679,15 @@ def main():
                 logger.warning(f"  ⚠️ Stakes reducidos ×{_meta_factor:.2f} por régimen del modelo ({_meta_regime})")
     except Exception:
         pass
+
+    # ── MODO KAMBI-FIRST (Nodo-139) ─────────────────────────────────────────
+    if args.kambi_first:
+        _bankroll_kf = args.bankroll if args.bankroll > 0 else _find_bankroll_from_plans()
+        if _bankroll_kf <= 0:
+            logger.error('[KF] --bankroll requerido para Kambi-First')
+            sys.exit(1)
+        build_kambi_first_combos(_bankroll_kf, dry_run=args.dry_run)
+        sys.exit(0)
 
     # ── MODO LIVE: re-armar combos con jugadores disponibles AHORA ──
     if args.live:

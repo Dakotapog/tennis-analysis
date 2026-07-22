@@ -867,6 +867,46 @@
       "n_actual": 0,
       "hits": 0
     },
+    "H139-01": {
+      "nombre": "Kambi-First genera ≥1 combo con EV_combo ≥ 10% en ≥60% de sesiones con ≥3 legs válidos",
+      "descripcion": "El flujo Kambi-First (D139-01→D139-07) invierte la dirección: parte del universo Kambi NOT_STARTED cuota [1.10,1.80] y aplica el modelo como filtro. Hipótesis: en sesiones donde ≥3 legs pasan todos los gates (G_EDGE, G_CONF), el mejor combo tiene EV_combo ≥ 10%. Justificación: cuotas [1.10,1.80] = alta p_implied, por lo que p_modelo>p_implied requiere confianza ≥0.55, que típicamente implica edge ≥10-15%.",
+      "origen_deuda": "Nodo-139 D139-07 — 2026-07-22. _build_kambi_combos_kf implementado. Sin cap de cuota — EV gate reemplaza COMBO_MAX_CUOTA=7.0 matemáticamente inválido.",
+      "preregistrado": "2026-07-22",
+      "umbrales_congelados": {
+        "ev_minimo": 0.10,
+        "n_legs_minimos": 3,
+        "cuota_rango": "[1.10, 1.80]",
+        "p_modelo_minima": 0.55,
+        "fuente": "betplay_combo_builder.py --kambi-first → KB_N.bat en Desktop",
+        "nota": "PROHIBIDO cambiar EV_MIN_COMBO (0.02) ni KF_MIN_P (0.55) antes de n_stop."
+      },
+      "metrica": "% de sesiones operativas donde el mejor KB combo tiene EV_combo ≥ 0.10. Sesión operativa = ≥3 legs válidos post-gates.",
+      "exito": "≥60% de sesiones operativas producen combo con EV_combo ≥ 10%, con n_sesiones ≥ 50.",
+      "kill_switch": "EV_combo mediano < 5% con n_sesiones ≥ 20 → señal débil o gates mal calibrados.",
+      "n_stop": 50,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0
+    },
+    "H139-02": {
+      "nombre": "Combos KB generados por Kambi-First tienen hit% > breakeven implícito en cuota_combo",
+      "descripcion": "Los combos KB generados por el flujo Kambi-First tienen hit% real > 1/cuota_combo (breakeven). La eliminación del cap COMBO_MAX_CUOTA=7.0 permite combos @8-15x con EV matemáticamente positivo. Hipótesis: si EV_combo > 0 por construcción (cada leg edge>0), el hit% supera el breakeven incluso a cuotas altas. Métricas: hit%_observado vs hit%_breakeven = 1/cuota_combo promedio.",
+      "origen_deuda": "Nodo-139 §4 — demostración matemática: EV_combo = Π(p_i×q_i)-1 > 0 ↔ cada leg edge>0. Cap en $7.0 bloqueaba McFadzean×Lewis×Angel @10.47x con EV=+274%.",
+      "preregistrado": "2026-07-22",
+      "umbrales_congelados": {
+        "hit_rate_vs_breakeven": "> 1.0x (superar breakeven)",
+        "ev_gate_por_leg": "> 0",
+        "fuente": "shadow_book.py --settle + KB_N.bat pick_type=kambi_first",
+        "nota": "PROHIBIDO comparar hit% contra hit% plano 50% — el benchmark es 1/cuota_combo que varía por combo."
+      },
+      "metrica": "Para cada KB combo settled: ratio hit_observado / hit_breakeven. Ratio > 1.0 = ganancia esperada positiva confirmada.",
+      "exito": "ratio medio > 1.0 con IC Wilson 95% inferior > 0.85, n_combos_settled ≥ 30.",
+      "kill_switch": "ratio < 0.90 con n ≥ 15 → modelo no tiene edge real en cuotas Kambi favoritas.",
+      "n_stop": 30,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0
+    },
     "H132-01": {
       "nombre": "ComboRegistry trazabilidad activa — 80pct+ de combos generados quedan registrados",
       "descripcion": "Al activar D132 (log_combo en todos los builders), el porcentaje de combos que aparecen en combo_registry al final del dia supera el 80% de los BAT generados. Hipotesis operacional: la instrumentacion es completa y best-effort no bloquea ninguna generacion.",
