@@ -45,6 +45,10 @@ from games_signal_calculator import (   # noqa: E402
 REPORTS_DIR = BACKEND_DIR / 'reports'
 SB_DIR      = REPORTS_DIR / 'shadow_book'
 
+# D128-02 (Nodo-130): tiers donde Kambi NUNCA tiene cobertura de juegos.
+# 'itf'/'m25'/'w25' removidos — pueden estar en Kambi (Brisbane/Bali/Nogent/Saskatoon).
+_TIERS_SIN_KAMBI = {'itf_minor', 'm10', 'w10', 'm15', 'w15'}
+
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -161,8 +165,7 @@ def _process_pick(pick: Dict, verbose: bool = False) -> Optional[Dict]:
     # detectar_tier() devuelve 'itf' para M25/W25/M35 indistintamente — la
     # clasificación no es granular. El lookup de Kambi es el oráculo real.
     # Solo pre-filtrar M10/M15/W10/W15 donde Kambi nunca tiene cobertura.
-    _TIERS_SIN_KAMBI = {'itf_minor', 'm10', 'w10', 'm15', 'w15'}
-    # REMOVIDO: 'itf', 'm25', 'w25' — pueden estar en Kambi (Nodo-128 D128-02)
+    # D128-02/Nodo-130: usar constante de módulo _TIERS_SIN_KAMBI (testeable REGLA-T53)
     tier_norm = (pick.get('tier') or '').lower().replace(' ', '_').replace('-', '_')
     if any(t in tier_norm for t in _TIERS_SIN_KAMBI):
         # Intentar wplay SSR (lazy import para no ralentizar si no hay picks ITF)

@@ -477,6 +477,49 @@ def log_live_pick(pick: dict, cuota_trigger: float,
         return None
 
 
+def log_evaluar_pick(pick: dict, fecha: Optional[str] = None) -> Optional[str]:
+    """
+    Nodo-124 D124-01: registra pick EVALUAR de generar_tabla_favoritos2.
+
+    pick_type='evaluar'       → cuota>=1.30 (candidato apuesta directa — H124-01)
+    pick_type='evaluar_games' → cuota<1.30  (favorito absoluto → mercado juegos/sets)
+
+    Prefijo 'EVAL_' en sb_id para distinguir de picks pre-game de edge_calculator.
+    """
+    fecha = fecha or datetime.now().strftime('%Y-%m-%d')
+    evaluar_pick = dict(pick)
+    cuota = pick.get('cuota_favorito') or 0
+    evaluar_pick['pick_type'] = 'evaluar' if float(cuota) >= 1.30 else 'evaluar_games'
+    try:
+        rec = _build_record(evaluar_pick, fecha)
+        if rec is None:
+            logger.warning("[ShadowBook] log_evaluar_pick: pick inválido (sin jugadores)")
+            return None
+        path = _jsonl_path(fecha)
+        existing = _load_jsonl(path)
+        rec['sb_id'] = 'EVAL_' + rec['sb_id']
+        if rec['sb_id'] in existing:
+            # D126-02: upsert hora/match_id si el pick ya existía sin esa info
+            ex_snap = existing[rec['sb_id']].get('pick_snapshot', {})
+            new_snap = rec.get('pick_snapshot', {})
+            if not ex_snap.get('hora') and new_snap.get('hora'):
+                ex_snap['hora'] = new_snap['hora']
+                ex_snap['match_id'] = new_snap.get('match_id')
+                existing[rec['sb_id']]['pick_snapshot'] = ex_snap
+                _save_jsonl(path, existing)
+                logger.info(f"[ShadowBook] log_evaluar_pick: {rec['sb_id']} enriquecido hora={new_snap['hora']}")
+            else:
+                logger.info(f"[ShadowBook] log_evaluar_pick: {rec['sb_id']} ya registrado")
+            return rec['sb_id']
+        existing[rec['sb_id']] = rec
+        _save_jsonl(path, existing)
+        logger.info(f"[ShadowBook] evaluar pick registrado → {rec['sb_id']}")
+        return rec['sb_id']
+    except Exception as e:
+        logger.warning(f"[ShadowBook] log_evaluar_pick error: {e}")
+        return None
+
+
 # ══════════════════════════════════════════════════════════════════════════════
 # CLV CALCULATION
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1410,6 +1453,49 @@ def report(desde: Optional[str] = None, hasta: Optional[str] = None) -> str:
     lines.append("    Accion: revisar cada lunes o cuando n cambie de 29→30.")
     lines.append("    PROHIBIDO cambiar thresholds antes de n_stop=30 (anti p-hacking).")
     lines.append("")
+
+    # ── Nodo-124 H124-01/02: EVALUAR picks de generar_tabla_favoritos2 ───────
+    _eval_recs   = [r for r in settled
+                    if r.get('pick_snapshot', {}).get('pick_type') == 'evaluar']
+    _egames_recs = [r for r in settled
+                    if r.get('pick_snapshot', {}).get('pick_type') == 'evaluar_games']
+    if _eval_recs or _egames_recs:
+        lines.append("  EVALUAR TRACKER (Nodo-124 — tabla_favoritos conf>=54%):")
+        if _eval_recs:
+            _append_segment(
+                _eval_recs, lines,
+                "pick_type=EVALUAR (cuota>=1.30 — candidato apuesta directa)",
+                lambda r: True,
+            )
+            for _lo, _hi, _lb in [(54, 57, "54-57%"), (57, 60, "57-60%"), (60, 100, ">=60%")]:
+                _sub = [r for r in _eval_recs
+                        if _lo <= (r.get('pick_snapshot', {}).get('confidence') or 0) < _hi]
+                if len(_sub) >= 5:
+                    _append_segment(_sub, lines, f"  EVALUAR conf [{_lb}]", lambda r: True)
+        if _egames_recs:
+            _append_segment(
+                _egames_recs, lines,
+                "pick_type=EVALUAR_GAMES (cuota<1.30 — favorito absoluto, mercado juegos)",
+                lambda r: True,
+            )
+        _append_hypothesis(
+            _eval_recs + _egames_recs, lines,
+            "H124-01", "EVALUAR conf>=54% superan breakeven",
+            lambda r: True, n_stop=30,
+        )
+        _append_hypothesis(
+            [r for r in _eval_recs + _egames_recs
+             if (r.get('pick_snapshot', {}).get('markov_wr_rec_fav') or 0) >= 0.70],
+            lines,
+            "H124-02", "EVALUAR+HOT (markov_fav>=70%) delta>=5pp sobre base",
+            lambda r: True, n_stop=20,
+        )
+        _append_hypothesis(
+            _egames_recs, lines,
+            "H124-03", "EVALUAR_GAMES (cuota<1.30) candidato mercado juegos/sets hit%>70%",
+            lambda r: True, n_stop=30,
+        )
+        lines.append("")
 
     lines.append(sep)
     return "\n".join(lines)

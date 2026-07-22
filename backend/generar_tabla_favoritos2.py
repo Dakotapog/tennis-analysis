@@ -1421,13 +1421,28 @@ def analyze_matches_with_pandas(file_path, output_filename="analisis_partidos_pa
 
 
 def find_latest_h2h_file():
-    """Finds the most recent h2h_results_enhanced_...json file in the reports directory."""
+    """Finds the h2h_results_enhanced file with the most partidos for today.
+    D126-03: prefer file with most matches over most recent by timestamp —
+    avoids picking an early-morning run when a fuller midday run exists.
+    """
     try:
         list_of_files = glob.glob('reports/h2h_results_enhanced_*.json')
         if not list_of_files:
             return None
-        latest_file = max(list_of_files, key=os.path.getctime)
-        return latest_file
+        today = datetime.now().strftime('%Y%m%d')
+        today_files = [f for f in list_of_files if today in f]
+        candidates = today_files if today_files else list_of_files
+
+        def _n_partidos(f):
+            try:
+                with open(f, 'r', encoding='utf-8') as fh:
+                    d = json.load(fh)
+                return len(d.get('partidos', d if isinstance(d, list) else []))
+            except Exception:
+                return 0
+
+        # D126-03: max partidos primero; os.path.getctime como desempate
+        return max(candidates, key=lambda f: (_n_partidos(f), os.path.getctime(f)))
     except Exception as e:
         print(f"Error al buscar el último archivo H2H: {e}")
         return None
