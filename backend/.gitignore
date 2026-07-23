@@ -44,3 +44,7 @@ venv/
 # Entorno
 .env
 .env.local
+reports/live_edge_*.json
+data/cuarentena_*.json
+data/match_ledger_*.json
+data/zita_merged_*.json

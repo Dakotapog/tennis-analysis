@@ -535,6 +535,52 @@ def _build_x3_games(fecha: str) -> Dict[str, Any]:
     # Filtrar TERMINADO — no accionables
     signals = [s for s in signals if s["estado_live"] != "TERMINADO"]
 
+    # D-ITF-LIVE-01: añadir señales ITF_VIVO de games_live (no están en games_signal_report)
+    for itf_s in gl_data.get("signals_alta", []):
+        if itf_s.get("estado") == "ITF_VIVO":
+            gap        = itf_s.get("gap")
+            edge_pct   = itf_s.get("edge_pct")
+            p_model    = itf_s.get("p_model")
+            conv_score = itf_s.get("convergencia_score")
+            # Etiqueta compacta para columna confianza incluyendo drift desde t0
+            cuota_drift = itf_s.get("drift_pct")
+            linea_drift = itf_s.get("linea_drift")
+            drift_tag   = ""
+            if cuota_drift is not None:
+                arrow = "↑" if cuota_drift > 0 else "↓"
+                drift_tag = f" {arrow}{abs(cuota_drift):.1f}%"
+            if linea_drift:
+                drift_tag += f" l{linea_drift:+.1f}j"
+            edge_tag = (f" [edge=+{edge_pct}% p={p_model}%{drift_tag}]" if edge_pct is not None
+                        else f" [conv={conv_score}/5]" if conv_score is not None else "")
+            signals.append({
+                "partido":    itf_s.get("partido", ""),
+                "mercado":    "Total de juegos",
+                "direccion":  itf_s.get("direccion", ""),
+                "linea":      itf_s.get("linea"),
+                "cuota":      itf_s.get("cuota_pre") or itf_s.get("cuota_live"),
+                "gap":        gap,
+                "confianza":  itf_s.get("confianza", "SIN_DATOS") + edge_tag,
+                "games_range": itf_s.get("games_range", "—"),
+                "estado_live": "ITF_VIVO",
+                "cuota_live":  itf_s.get("cuota_live"),
+                "cuota_t0":    itf_s.get("cuota_pre"),
+                "drift_pct":   cuota_drift,
+                "linea_t0":    itf_s.get("linea_t0"),
+                "linea_drift": linea_drift,
+                "ts_t0":       itf_s.get("ts_t0"),
+                "hora":        None,
+                "markov":      itf_s.get("markov"),
+                "p_model":     p_model,
+                "p_implied":   itf_s.get("p_implied"),
+                "edge_pct":    edge_pct,
+                "convergencia_breakdown": itf_s.get("convergencia_breakdown"),
+                "linea_envenenada":       itf_s.get("linea_envenenada", False),
+                "over_candidato":         itf_s.get("over_candidato", False),
+                "cuota_over_live":        itf_s.get("cuota_over_live"),
+                "edge_over":              itf_s.get("edge_over"),
+            })
+
     return {
         "disponible":         True,
         "fecha":              fecha,
@@ -1152,8 +1198,14 @@ def render_html(state: Dict[str, Any]) -> str:
             )
 
         for _sig in _gs.get("signals", []):
-            _conf   = _sig.get("confianza", "")
-            _conf_c = GREEN if _conf == "ALTA" else (AMBER if _conf == "MEDIA" else GREY)
+            _conf_raw = _sig.get("confianza", "")
+            _conf_base = _conf_raw.split("[")[0].strip()          # "ALTA" sin el sufijo
+            _conf_c = GREEN if _conf_base == "ALTA" else (AMBER if _conf_base == "MEDIA" else GREY)
+            # Mostrar conv score si existe (ITF_VIVO)
+            _conv_sc = _sig.get("convergencia_score")
+            _conv_html = (f'<span style="color:{_conf_c};font-size:0.75em;font-weight:bold;">'
+                         f'{_conv_sc}/5</span> ') if _conv_sc is not None else ""
+            _conf   = _conv_html + f'<span style="color:{_conf_c};">{_conf_raw}</span>'
             _dir    = _sig.get("direccion", "")
             _dir_c  = GREEN if _dir == "OVER" else (AMBER if _dir == "UNDER" else GREY)
             _gap    = _sig.get("gap")
@@ -1172,7 +1224,9 @@ def render_html(state: Dict[str, Any]) -> str:
             _drift      = _sig.get("drift_pct")
             _cuota_live_html = "—"
             if _cuota_live:
-                _drift_c   = RED if (_drift or 0) > 10 else (AMBER if (_drift or 0) > 5 else GREEN)
+                # Drift positivo = Kambi sube cuota en nuestra dirección = CONFIRMA (verde)
+                # Drift negativo = Kambi baja cuota = va contra nuestra señal (rojo)
+                _drift_c   = GREEN if (_drift or 0) > 5 else (RED if (_drift or 0) < -5 else AMBER)
                 _drift_str = f' <span style="color:{_drift_c};font-size:0.8em;">({_drift:+.1f}%)</span>' if _drift else ""
                 _cuota_live_html = f'@{_cuota_live:.2f}{_drift_str}'
 
@@ -1196,8 +1250,43 @@ def render_html(state: Dict[str, Any]) -> str:
             except Exception:
                 pass
 
+            # Badge envenenada / confirmación (D142-DRIFT-FILTER visual)
+            _envenenada     = _sig.get("linea_envenenada", False)
+            _over_cand      = _sig.get("over_candidato", False)
+            _cuota_ov_live  = _sig.get("cuota_over_live")
+            _edge_ov        = _sig.get("edge_over")
+            _partido_raw    = _sig.get("partido", "")
+            if _envenenada and _over_cand:
+                # Partido largo → tercer set → OVER es el trade correcto
+                _ov_tag = f" @{_cuota_ov_live:.2f} edge={_edge_ov}%" if _cuota_ov_live else ""
+                _partido_html = (
+                    f'{_partido_raw} '
+                    f'<span style="background:#1f6feb;color:#fff;padding:1px 6px;'
+                    f'border-radius:3px;font-size:0.72em;font-weight:bold;">'
+                    f'OVER — TERCER SET{_ov_tag}</span>'
+                )
+                _conf = _conv_html + f'<span style="color:#1f6feb;">{_conf_raw}</span>'
+            elif _envenenada:
+                # Envenenada sin edge OVER claro — solo advertencia
+                _partido_html = (
+                    f'{_partido_raw} '
+                    f'<span style="background:#f85149;color:#fff;padding:1px 6px;'
+                    f'border-radius:3px;font-size:0.72em;font-weight:bold;">'
+                    f'LINEA ENVENENADA</span>'
+                )
+                _conf = _conv_html + f'<span style="color:{GREY};">{_conf_raw}</span>'
+            elif _conf_base == "ALTA":
+                _partido_html = (
+                    f'{_partido_raw} '
+                    f'<span style="background:#3fb950;color:#000;padding:1px 6px;'
+                    f'border-radius:3px;font-size:0.72em;font-weight:bold;">'
+                    f'CONFIRMAR UNDER</span>'
+                )
+            else:
+                _partido_html = _partido_raw
+
             x3_rows.append([
-                _sig.get("partido", ""),
+                _partido_html,
                 _est_lbl,
                 _sig.get("mercado", ""),
                 f'<span style="color:{_dir_c};font-weight:bold;">{_dir}</span>',
@@ -1205,7 +1294,7 @@ def render_html(state: Dict[str, Any]) -> str:
                 f'@{_sig["cuota"]:.2f}' if _sig.get("cuota") else "—",
                 _cuota_live_html,
                 f'{_gap:+.1f}j' if _gap is not None else "—",
-                f'<span style="color:{_conf_c};">{_conf}</span>',
+                _conf,
                 _sig.get("games_range", ""),
                 _mid_html,
             ])
@@ -2477,7 +2566,8 @@ def _extract_games_cuota_live(event_id: int, direccion: str, linea: Optional[flo
         req = urllib.request.Request(url, headers=_KAMBI_HDR)
         with urllib.request.urlopen(req, timeout=3) as r:
             offers = json.loads(r.read().decode()).get("betOffers", [])
-    except Exception:
+    except Exception as exc:
+        logger.debug(f"[CUOTA_LIVE] event_id={event_id} fetch falló: {exc}")
         return None
 
     dir_norm = direccion.upper()
@@ -2502,11 +2592,474 @@ def _extract_games_cuota_live(event_id: int, direccion: str, linea: Optional[flo
     return None
 
 
+def _load_h2h_index_for_games(fecha: str) -> Dict[str, Dict]:
+    """
+    D142-01: carga H2H de hoy y construye índice {apellido_norm → datos}
+    con rankings, win_pct y superficie para el proxy de games range.
+    """
+    import glob as _glob
+    fecha_compact = fecha.replace("-", "")
+    files = sorted(
+        _glob.glob(str(REPORTS / f"h2h_results_enhanced_{fecha_compact}*.json")),
+        key=lambda f: Path(f).stat().st_mtime,
+    )
+    if not files:
+        return {}
+    try:
+        data = json.loads(Path(files[-1]).read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+    idx: Dict[str, Dict] = {}
+    for p in data.get("partidos", []):
+        j1_raw = p.get("jugador1", "")
+        j2_raw = p.get("jugador2", "")
+        j1 = _apellido_games(j1_raw).lower()
+        j2 = _apellido_games(j2_raw).lower()
+        ra = p.get("ranking_analysis", {})
+        fa = p.get("form_analysis", {})
+        # Rankings: claves dinámicas tipo "McFadzean_L_ranking"
+        r1 = r2 = None
+        for k, v in ra.items():
+            if not k.endswith("_ranking"):
+                continue
+            kl = k.lower()
+            if j1[:4] in kl:
+                r1 = v
+            elif j2[:4] in kl:
+                r2 = v
+        # Win percentages
+        wp1 = wp2 = None
+        for k, v in fa.items():
+            if not isinstance(v, dict):
+                continue
+            pn = _apellido_games(v.get("player_name", "")).lower()
+            wp = v.get("win_percentage")
+            if pn == j1:
+                wp1 = wp
+            elif pn == j2:
+                wp2 = wp
+        cancha = p.get("tipo_cancha") or None
+        if cancha == "N/A":
+            cancha = None
+        record = {"ranking1": r1, "ranking2": r2, "win_pct1": wp1,
+                  "win_pct2": wp2, "superficie": cancha, "j1": j1, "j2": j2}
+        idx[j1] = record
+        idx[j2] = record
+    return idx
+
+
+def _compute_itf_games_proxy(home: str, away: str, h2h_idx: Dict) -> Dict:
+    """
+    D142-01: proxy rango total juegos ITF sin historical scores.
+    Base por superficie + ajuste ranking gap + ajuste win% differential.
+    """
+    h_ap = _apellido_games(home).lower()
+    a_ap = _apellido_games(away).lower()
+    rec = h2h_idx.get(h_ap) or h2h_idx.get(a_ap) or {}
+    r1, r2   = rec.get("ranking1"), rec.get("ranking2")
+    wp1, wp2 = rec.get("win_pct1"), rec.get("win_pct2")
+    sup      = rec.get("superficie")
+
+    BASE = {"Dura": 20.5, "Arcilla": 22.5, "Hierba": 19.5, "Moqueta": 21.0}
+    base = BASE.get(sup, 20.5)  # default Hard (Brisbane julio)
+
+    ranking_gap = None
+    if r1 and r2:
+        ranking_gap = abs(r1 - r2)
+        if ranking_gap > 400:   base -= 2.5
+        elif ranking_gap > 200: base -= 1.5
+        elif ranking_gap < 50:  base += 1.5
+
+    if wp1 is not None and wp2 is not None:
+        diff_wp = abs(wp1 - wp2)
+        if diff_wp > 30:  base -= 1.5
+        elif diff_wp < 10: base += 1.0
+
+    midpoint = round(base, 1)
+    return {
+        "midpoint":    midpoint,
+        "games_range": f"{max(14, round(base - 4))}-{min(36, round(base + 4))}",
+        "low":         max(14, round(base - 4)),
+        "high":        min(36, round(base + 4)),
+        "ranking_gap": ranking_gap,
+        "from_h2h":    bool(rec),
+    }
+
+
+def _convergencia_score_itf(gap: float, cuota_live: float,
+                             markov: Optional[str], ranking_gap: Optional[int]) -> Dict:
+    """
+    D142-02: Score convergencia 0-5 para ITF live games.
+    ≥3=ALTA(combo) | 2=MEDIA(watch) | <2=BAJA(skip).
+    """
+    direction = "UNDER" if gap > 0 else "OVER" if gap < 0 else "NEUTRO"
+    abs_gap   = abs(gap)
+    score     = 0
+    parts: List[str] = []
+
+    if abs_gap >= 4.0:
+        score += 2; parts.append(f"gap={gap:+.1f}j(FUERTE)")
+    elif abs_gap >= 2.0:
+        score += 1; parts.append(f"gap={gap:+.1f}j(MOD)")
+
+    if cuota_live >= 2.00:
+        score += 1; parts.append(f"@{cuota_live}(valor)")
+
+    if markov == "COLD" and direction == "UNDER":
+        score += 1; parts.append("COLD→UNDER")
+    elif markov == "HOT" and direction == "OVER":
+        score += 1; parts.append("HOT→OVER")
+
+    if direction == "UNDER" and ranking_gap and ranking_gap > 300:
+        score += 1; parts.append(f"rank_gap={ranking_gap}(mismatch)")
+
+    return {
+        "score":     score,
+        "direction": direction,
+        "confianza": "ALTA" if score >= 3 else "MEDIA" if score >= 2 else "BAJA",
+        "breakdown": " | ".join(parts) if parts else "sin señal",
+    }
+
+
+def _get_markov_itf(home: str, away: str, er_picks: List[Dict]) -> Optional[str]:
+    """Busca Markov de jugadores en edge_report de hoy. COLD > HOT > NEUTRAL."""
+    h_ap = _apellido_games(home).lower()
+    a_ap = _apellido_games(away).lower()
+    for pick in er_picks:
+        partido = (pick.get("partido") or "").lower()
+        if h_ap in partido or a_ap in partido:
+            mf = pick.get("markov_favorito", "NEUTRAL")
+            mr = pick.get("markov_rival",   "NEUTRAL")
+            if "COLD" in (mf, mr): return "COLD"
+            if "HOT"  in (mf, mr): return "HOT"
+            return "NEUTRAL"
+    return None
+
+
+def _parse_kambi_tennis_score(event_obj: Dict) -> Dict:
+    """
+    D142-SCORE-01: extrae marcador live de tenis desde objeto event de Kambi.
+    Devuelve {score_str, sets_home, sets_away, games_played, sets_complete, current_games}.
+    Intenta liveData.scoreStr ("6:4,3:2") → liveData.setScores → score obj.
+    """
+    result = {
+        "score_str":     None,
+        "sets_home":     None,
+        "sets_away":     None,
+        "games_played":  None,
+        "sets_complete": None,
+        "current_games": None,
+    }
+    if not event_obj:
+        return result
+
+    live = event_obj.get("liveData") or {}
+
+    # Opción A: scoreStr tipo "6:4,3:2" o "6:4,6:3" (sets completados) o "6:4,3:2,0:0"
+    score_str = live.get("scoreStr") or live.get("score") or ""
+    if not score_str:
+        # Opción B: score obj directo en event
+        sc = event_obj.get("score") or {}
+        h = sc.get("homeTotalScore") or sc.get("currentHomeScore")
+        a = sc.get("awayTotalScore") or sc.get("currentAwayScore")
+        if h is not None and a is not None:
+            score_str = f"{h}:{a}"
+
+    if score_str:
+        result["score_str"] = score_str
+        try:
+            # Parsear sets — cada segmento "H:A" es un set
+            parts = [p.strip() for p in score_str.replace(",", " ").split() if ":" in p]
+            games_total = 0
+            sets_complete = 0
+            sets_home = sets_away = 0
+            current_games = 0
+            for i, part in enumerate(parts):
+                h_s, a_s = part.split(":")
+                h_g, a_g = int(h_s), int(a_s)
+                set_total = h_g + a_g
+                is_last = (i == len(parts) - 1)
+                # Set completo si alguno llegó a ≥6 (con diferencia ≥2) o tiebreak (7:6/6:7)
+                is_complete = (max(h_g, a_g) >= 6 and abs(h_g - a_g) >= 2) or (max(h_g, a_g) == 7)
+                if is_complete or not is_last:
+                    games_total += set_total
+                    sets_complete += 1
+                    if h_g > a_g:
+                        sets_home += 1
+                    else:
+                        sets_away += 1
+                else:
+                    # Set en curso — juegos actuales pero no terminado
+                    current_games = set_total
+                    games_total += set_total
+            result.update({
+                "sets_home":     sets_home,
+                "sets_away":     sets_away,
+                "games_played":  games_total,
+                "sets_complete": sets_complete,
+                "current_games": current_games,
+            })
+        except Exception:
+            pass
+
+    return result
+
+
+# Cache event_id → (timestamp, score_dict) para evitar re-scraping en ciclos de 15s
+_score_pw_cache: Dict[int, tuple] = {}
+_SCORE_PW_TTL = 30  # segundos
+
+
+def _parse_betplay_scoreboard_html(html: str) -> Dict:
+    """
+    D142-SCORE-02: parsea HTML del scoreboard KambiBC de Betplay.
+    Extrae juegos por set y calcula games_played / sets_complete.
+
+    Estructura DOM (column-major, alternando home/away):
+      KambiBC-scoreboard-grid-item (sin grid-score) + data-sport=TENNIS → juegos del set
+        [home_s1, away_s1, home_s2, away_s2, ...]
+      KambiBC-scoreboard-grid-item + KambiBC-scoreboard-grid-score → puntos actuales (15/30/AD)
+      KambiBC-scoreboard-grid-remaining → sets futuros (placeholder, ignorar)
+
+    Returns {score_str, sets_home, sets_away, games_played, sets_complete, current_games}
+    """
+    import re
+
+    result: Dict = {
+        "score_str":     None,
+        "sets_home":     None,
+        "sets_away":     None,
+        "games_played":  None,
+        "sets_complete": None,
+        "current_games": None,
+    }
+    if not html:
+        return result
+
+    try:
+        # Extraer solo grid-items que NO son grid-score (juegos de set, no puntos actuales)
+        # Patrón: class contiene "grid-item" pero NO "grid-score"; tiene data-sport=TENNIS
+        pat = re.compile(
+            r'class="(?!.*KambiBC-scoreboard-grid-score)'
+            r'[^"]*KambiBC-scoreboard-grid-item[^"]*"'
+            r'[^>]*data-sport="TENNIS"[^>]*>'
+            r'\s*<span[^>]*>(\d+)</span>',
+            re.DOTALL
+        )
+        set_vals = pat.findall(html)
+
+        if not set_vals:
+            # Fallback: cualquier grid-item con número (sin grid-score en misma clase)
+            blocks = re.findall(
+                r'class="([^"]*KambiBC-scoreboard-grid-item[^"]*)"[^>]*>\s*<span[^>]*>(\d+)</span>',
+                html
+            )
+            set_vals = [v for cls, v in blocks if "grid-score" not in cls]
+
+        if not set_vals:
+            return result
+
+        # Pares alternados: [home_s1, away_s1, home_s2, away_s2, ...]
+        home_per_set = [int(set_vals[i]) for i in range(0, len(set_vals), 2)]
+        away_per_set = [int(set_vals[i]) for i in range(1, len(set_vals), 2)]
+        n_sets = min(len(home_per_set), len(away_per_set))
+
+        games_total  = 0
+        sets_complete = 0
+        sets_home    = 0
+        sets_away    = 0
+        current_games = 0
+        score_parts  = []
+
+        for i in range(n_sets):
+            h_g = home_per_set[i]
+            a_g = away_per_set[i]
+            set_total = h_g + a_g
+            is_last   = (i == n_sets - 1)
+            is_complete = ((max(h_g, a_g) >= 6 and abs(h_g - a_g) >= 2)
+                           or max(h_g, a_g) == 7)
+
+            score_parts.append(f"{h_g}:{a_g}")
+            games_total += set_total
+
+            if is_complete or not is_last:
+                sets_complete += 1
+                if h_g > a_g:
+                    sets_home += 1
+                else:
+                    sets_away += 1
+            else:
+                current_games = set_total   # set en curso
+
+        result.update({
+            "score_str":     ",".join(score_parts),
+            "sets_home":     sets_home,
+            "sets_away":     sets_away,
+            "games_played":  games_total,
+            "sets_complete": sets_complete,
+            "current_games": current_games,
+        })
+    except Exception as exc:
+        logger.debug(f"[SCORE_HTML] parse error: {exc}")
+
+    return result
+
+
+def _fetch_betplay_score_playwright(event_id: int) -> Optional[Dict]:
+    """
+    D142-SCORE-02: obtiene marcador en vivo de Betplay via Playwright headless.
+    Usa caché de 30s por event_id para no re-scraping en cada ciclo de 15s.
+    Fallback: None → caller usa _parse_kambi_tennis_score().
+    """
+    now = time.time()
+    cached = _score_pw_cache.get(event_id)
+    if cached and (now - cached[0]) < _SCORE_PW_TTL:
+        return cached[1]
+
+    script = (
+        "import asyncio, json, sys\n"
+        "from playwright.async_api import async_playwright\n"
+        "async def main():\n"
+        "    async with async_playwright() as p:\n"
+        "        browser = await p.chromium.launch(headless=True)\n"
+        "        page = await browser.new_page()\n"
+        "        try:\n"
+        f"            await page.goto('https://betplay.com.co/apuestas#home/event/{event_id}',\n"
+        "                             wait_until='domcontentloaded', timeout=6000)\n"
+        "            await page.wait_for_selector('.KambiBC-scoreboard-grid-item', timeout=5000)\n"
+        "            sel = ('.KambiBC-event-participants-scoreboard'\n"
+        "                   ' or .sc-scoreboard or .KambiBC-scoreboard')\n"
+        "            el = (await page.query_selector('.KambiBC-event-participants-scoreboard')\n"
+        "                  or await page.query_selector('.KambiBC-scoreboard')\n"
+        "                  or await page.query_selector('.sc-scoreboard'))\n"
+        "            html = await el.inner_html() if el else ''\n"
+        "            print(json.dumps({'html': html, 'ok': True}))\n"
+        "        except Exception as e:\n"
+        "            print(json.dumps({'html': '', 'ok': False, 'error': str(e)}))\n"
+        "        finally:\n"
+        "            await browser.close()\n"
+        "asyncio.run(main())\n"
+    )
+
+    try:
+        venv_py = str(BASE_DIR / "venv" / "bin" / "python3")
+        py_bin  = venv_py if Path(venv_py).exists() else sys.executable
+        proc = subprocess.run(
+            [py_bin, "-c", script],
+            capture_output=True, text=True, timeout=12
+        )
+        if proc.returncode != 0 or not proc.stdout.strip():
+            logger.debug(f"[SCORE_PW] {event_id} err: {proc.stderr[:150]}")
+            _score_pw_cache[event_id] = (now, None)
+            return None
+        data = json.loads(proc.stdout.strip())
+        if not data.get("ok") or not data.get("html"):
+            _score_pw_cache[event_id] = (now, None)
+            return None
+        parsed = _parse_betplay_scoreboard_html(data["html"])
+        _score_pw_cache[event_id] = (now, parsed)
+        return parsed
+    except Exception as exc:
+        logger.debug(f"[SCORE_PW] {event_id} exception: {exc}")
+        _score_pw_cache[event_id] = (now, None)
+        return None
+
+
+def _fetch_live_games_all(event_id: int) -> Optional[Dict]:
+    """
+    D-ITF-LIVE-01: obtiene mercado 'Total de juegos' (match-level) para un evento vivo.
+    UNA sola llamada HTTP — devuelve mercado + score live del partido.
+    ITF solo tiene este mercado cuando el partido está STARTED (no pre-partido).
+    """
+    url = f"{_KAMBI_BASE}/betoffer/event/{event_id}.json?{_KAMBI_PARAMS}"
+    try:
+        req = urllib.request.Request(url, headers=_KAMBI_HDR)
+        with urllib.request.urlopen(req, timeout=5) as r:
+            raw = json.loads(r.read().decode())
+    except Exception as exc:
+        logger.debug(f"[LIVE_GAMES_ALL] event_id={event_id} fetch falló: {exc}")
+        return None
+
+    offers = raw.get("betOffers", [])
+    result: Dict = {
+        "linea": None, "cuota_over": None, "oc_id_over": None,
+        "cuota_under": None, "oc_id_under": None,
+    }
+    found = False
+    for bo in offers:
+        label = bo.get("criterion", {}).get("label") or ""
+        if not ("Total de juegos" in label and " - Set " not in label and "Juego" not in label):
+            continue
+        for oc in bo.get("outcomes", []):
+            oc_lbl  = (oc.get("label") or "").lower()
+            odds    = oc.get("odds")
+            oc_line = oc.get("line")
+            oc_id   = oc.get("id")
+            if oc_line and result["linea"] is None:
+                result["linea"] = oc_line / 1000 if oc_line > 100 else oc_line
+            if not odds:
+                continue
+            cuota = round(odds / 1000, 2)
+            if "menos" in oc_lbl or "under" in oc_lbl:
+                result["cuota_under"] = cuota
+                result["oc_id_under"] = oc_id
+                found = True
+            elif "más" in oc_lbl or "mas" in oc_lbl or "over" in oc_lbl:
+                result["cuota_over"] = cuota
+                result["oc_id_over"] = oc_id
+                found = True
+        if found:
+            break
+    return result if found else None
+
+
+def _fire_itf_live_games_combo(signals: List[Dict], fecha_compact: str) -> None:
+    """
+    D-ITF-LIVE-02: genera HTML + BAT en Desktop para combo ITF live games.
+    Usa outcome_ids directamente (sin pasar por games_signal_report).
+    """
+    oc_ids = [str(s["oc_id"]) for s in signals if s.get("oc_id")]
+    if not oc_ids:
+        return
+    ids_str = ",".join(oc_ids)
+    url = f"https://betplay.com.co/apuestas#home?coupon=combination|{ids_str}||replace"
+
+    from functools import reduce
+    import operator as _op
+    cuota_combo = round(reduce(_op.mul, [s["cuota_live"] for s in signals if s.get("cuota_live")], 1.0), 2)
+    desc = " + ".join(
+        f"{s['partido']} {s.get('direccion','?')} {s.get('linea','?')} @{s.get('cuota_live','?')}"
+        for s in signals
+    )
+
+    desktop  = Path("/mnt/c/users/hogar/Desktop")
+    html_dir = desktop / "combos"
+    html_dir.mkdir(exist_ok=True)
+    html_path = html_dir / "itf_live_games.html"
+    html_path.write_text(
+        f'<!DOCTYPE html><html><head><meta charset="utf-8"><title>ITF Live Games</title>\n'
+        f'<script>window.location.replace("{url}");</script>\n</head><body>\n'
+        f'<p>ITF Live Games — {desc} — @{cuota_combo}x</p>\n'
+        f'<p><a href="{url}">Click aqui si no redirige</a></p>\n</body></html>',
+        encoding="utf-8",
+    )
+    bat_path = desktop / "ITF_Live_Games.bat"
+    bat_path.write_text(
+        '@echo off\nstart "" "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"'
+        f' "file:///C:/users/hogar/Desktop/combos/itf_live_games.html"\n',
+        encoding="utf-8",
+    )
+    logger.info(f"[ITF_LIVE_GAMES] Combo disparado: {desc} | @{cuota_combo}x → Desktop/ITF_Live_Games.bat")
+
+
 def _check_games_convergencia(fecha: str) -> None:
     """
     D133-03: clasifica señales ALTA de games_signal_report como EN_VIVO/PRE/TERMINADO.
+    D-ITF-LIVE-01: también escanea TODOS los STARTED events para mercado Total de juegos
+    (ITF solo tiene este mercado en vivo, no pre-partido).
     Escribe reports/games_live_YYYYMMDD.json.
-    Si ≥2 ALTA EN_VIVO → anti-flood → subprocess.Popen(--games) fire-and-forget.
+    Si ≥2 ALTA EN_VIVO (pre-game) O ≥1 ITF_LIVE ALTA → anti-flood → combo fire.
     """
     fecha_compact = fecha.replace("-", "")
     gsr_path = _latest(str(REPORTS / f"games_signal_report_{fecha_compact}*.json"))
@@ -2535,22 +3088,7 @@ def _check_games_convergencia(fecha: str) -> None:
                     "drift_pct":  None,
                 })
 
-    if not alta_signals:
-        # Reset games_live para limpiar banner estancado (D133-06)
-        gl_path = REPORTS / f"games_live_{fecha_compact}.json"
-        try:
-            gl_path.write_text(
-                json.dumps({
-                    "ts": datetime.now().isoformat()[:19],
-                    "signals_alta": [],
-                    "en_vivo_count": 0,
-                    "convergencia_activa": False,
-                }, ensure_ascii=False),
-                encoding="utf-8",
-            )
-        except Exception:
-            pass
-        return
+    # No hay early return por falta de pre-game signals — ITF live scan siempre corre (D-ITF-LIVE-01)
 
     # Obtener eventos STARTED de Kambi (1 HTTP call)
     started_events = _kambi_started_events()
@@ -2597,6 +3135,9 @@ def _check_games_convergencia(fecha: str) -> None:
                 sig["drift_pct"]  = round(
                     (cuota_live - sig["cuota_pre"]) / sig["cuota_pre"] * 100, 1
                 )
+            else:
+                sig["confianza_display"] = "ALTA_SIN_CONFIRMAR"
+                logger.info(f"[CUOTA_LIVE] {partido}: EN_VIVO pero sin cuota_live confirmada aún")
         else:
             # Clasificar por hora como fallback temporal
             hora_raw = sig.get("hora") or ""
@@ -2623,51 +3164,300 @@ def _check_games_convergencia(fecha: str) -> None:
     en_vivo_count       = sum(1 for s in alta_signals if s["estado"] == "EN_VIVO")
     convergencia_activa = en_vivo_count >= 2
 
+    # D-ITF-LIVE-01: escanear TODOS los STARTED events buscando "Total de juegos"
+    # ITF solo abre este mercado cuando el partido está vivo (no pre-partido)
+    # D142-01: convergencia inteligente — proxy games range + gap + Markov + ranking
+    pre_game_eids = {int(s["event_id"]) for s in alta_signals if s.get("event_id")}
+
+    # Cargar índice H2H y picks edge_report UNA vez antes del loop
+    h2h_idx  = _load_h2h_index_for_games(fecha)
+
+    # D142-T0: snapshot de cuota_t0 / linea_t0 para calcular drift real por señal
+    snap_path = REPORTS / f"itf_live_snapshot_{fecha_compact}.json"
+    try:
+        t0_snap: Dict[str, Dict] = json.loads(snap_path.read_text(encoding="utf-8")) if snap_path.exists() else {}
+    except Exception:
+        t0_snap = {}
+
+    er_picks: List[Dict] = []
+    try:
+        import glob as _glob
+        er_files = sorted(
+            _glob.glob(str(REPORTS / f"edge_report_kambi_{fecha_compact}*.json"))
+            or _glob.glob(str(REPORTS / f"edge_report_{fecha_compact}*.json")),
+            key=lambda f: Path(f).stat().st_mtime,
+        )
+        if er_files:
+            er_data = json.loads(Path(er_files[-1]).read_text(encoding="utf-8"))
+            er_picks = er_data.get("picks", [])
+    except Exception:
+        pass
+
+    itf_live_signals: List[Dict] = []
+    for ev_wr in started_events:
+        ev  = ev_wr.get("event", {}) if isinstance(ev_wr, dict) else {}
+        eid = ev.get("id")
+        if not eid or int(eid) in pre_game_eids:
+            continue  # ya procesado como pre-game signal
+        # Filtrar dobles
+        home = ev.get("homeName", "")
+        away = ev.get("awayName", "")
+        if "/" in home or "/" in away:
+            continue
+        # D142-FIX-01: Excluir circuitos no calibrados (UTR Pro ≠ ITF estándar)
+        # UTR Pro usa sets cortos → 12-18 juegos vs ITF 20-25. Sin calibración = ruina.
+        path_names = " ".join(
+            p.get("name", "") for p in ev.get("path", []) if isinstance(p, dict)
+        )
+        if "UTR" in path_names or "UTR" in (home + away):
+            logger.debug(f"[ITF_LIVE] SKIP circuito UTR Pro: {home} vs {away}")
+            continue
+
+        # Fetch de mercado PRIMERO — necesario para linea y cuotas
+        market = _fetch_live_games_all(int(eid))
+        if not market:
+            continue
+
+        # D142-FIX-02: Modelo PRIMERO — dirección del gap, no de la cuota disponible
+        # Error anterior: código elegía dirección por cuota más alta → apostaba contra modelo
+        proxy        = _compute_itf_games_proxy(home, away, h2h_idx)
+        market_linea = market.get("linea") or 0
+        if not market_linea:
+            continue
+
+        gap      = round(market_linea - proxy["midpoint"], 1)
+        # gap > 0 → línea Kambi ALTA vs modelo → señal UNDER (línea sobreestimada)
+        # gap < 0 → línea Kambi BAJA vs modelo → señal OVER  (línea subestimada)
+        # gap = 0 → sin señal
+        if gap == 0:
+            continue
+        conv_dir  = "UNDER" if gap > 0 else "OVER"
+        cuota_k   = "cuota_under" if conv_dir == "UNDER" else "cuota_over"
+        oc_k      = "oc_id_under" if conv_dir == "UNDER" else "oc_id_over"
+        cuota_val = market.get(cuota_k)
+        if not cuota_val or cuota_val < 1.30 or cuota_val > 2.60:
+            continue
+
+        # D142-T0: persistir cuota_t0 y linea_t0 en primera detección; calcular drift real
+        snap_key = f"{home}|{away}|{conv_dir}"
+        now_iso  = datetime.now().isoformat()[:19]
+        if snap_key not in t0_snap:
+            t0_snap[snap_key] = {
+                "cuota_t0":  cuota_val,
+                "linea_t0":  market_linea,
+                "ts_t0":     now_iso,
+                "partido":   f"{home} vs {away}",
+            }
+        t0_entry    = t0_snap[snap_key]
+        cuota_t0    = t0_entry["cuota_t0"]
+        linea_t0    = t0_entry["linea_t0"]
+        ts_t0       = t0_entry["ts_t0"]
+        cuota_drift = round((cuota_val - cuota_t0) / cuota_t0 * 100, 1) if cuota_t0 else None
+        linea_drift = round(market_linea - linea_t0, 1) if linea_t0 else None
+
+        # D142-FIX-03: P_model via Normal(μ=midpoint, σ=3.5) → edge%
+        # σ=3.5 empírico ITF: rango total juegos ≈ midpoint ± 7 (2σ)
+        import math as _math
+        _sigma    = 3.5
+        z         = (market_linea - proxy["midpoint"]) / _sigma
+        p_cdf     = (1 + _math.erf(z / _math.sqrt(2))) / 2
+        p_model   = p_cdf if conv_dir == "UNDER" else (1 - p_cdf)
+        p_implied = 1 / cuota_val
+        edge_pct  = round((p_model - p_implied) * 100, 1)
+
+        if edge_pct < 5.0:
+            logger.debug(
+                f"[ITF_LIVE] {home} vs {away} {conv_dir} edge={edge_pct}% < 5% skip"
+            )
+            continue
+
+        # D142-DRIFT-FILTER: línea envenenada = mercado confirma partido largo.
+        # UNDER + línea sube → el trade correcto es OVER (tercer set).
+        # No eliminar del dashboard — mostrar oportunidad OVER invertida.
+        linea_envenenada  = False
+        over_candidato    = False
+        cuota_over_live   = None
+        oc_id_over_live   = None
+        edge_over         = None
+
+        if linea_drift is not None:
+            if conv_dir == "UNDER" and linea_drift > 2.0:
+                linea_envenenada = True
+                _cuota_ov = market.get("cuota_over")
+                _oc_ov    = market.get("oc_id_over")
+                if _cuota_ov and 1.30 <= _cuota_ov <= 2.80:
+                    import math as _m2
+                    _z_ov  = (market_linea - proxy["midpoint"]) / 3.5
+                    _pcdf  = (1 + _m2.erf(_z_ov / _m2.sqrt(2))) / 2
+                    _pm_ov = 1 - _pcdf
+                    _eo    = round((_pm_ov - 1 / _cuota_ov) * 100, 1)
+                    if _eo > 5.0:
+                        over_candidato  = True
+                        cuota_over_live = _cuota_ov
+                        oc_id_over_live = _oc_ov
+                        edge_over       = _eo
+                logger.info(
+                    f"[ITF_LIVE] {home} vs {away} UNDER linea_drift={linea_drift:+.1f}j "
+                    f"> +2j → ENVENENADA | over_candidato={over_candidato} "
+                    + (f"OVER @{cuota_over_live} edge={edge_over}%" if over_candidato else "sin edge OVER")
+                )
+            elif conv_dir == "OVER" and linea_drift < -3.0:
+                linea_envenenada = True
+                logger.info(
+                    f"[ITF_LIVE] {home} vs {away} OVER linea_drift={linea_drift:+.1f}j "
+                    f"< -3j → LINEA ENVENENADA (línea cae, partido corto)"
+                )
+
+        markov = _get_markov_itf(home, away, er_picks)
+
+        # D142-SCORE-02: Playwright para ITF (Kambi API no expone score ITF);
+        #                fallback a _parse_kambi_tennis_score si Playwright falla.
+        score_data = _fetch_betplay_score_playwright(int(eid))
+        if not score_data or score_data.get("games_played") is None:
+            score_data = _parse_kambi_tennis_score(ev)
+        games_played  = score_data.get("games_played")
+        sets_complete = score_data.get("sets_complete")
+        score_str     = score_data.get("score_str")
+        games_remaining = round(market_linea - games_played, 1) if games_played is not None else None
+        sets_remaining  = max(0, 2 - (sets_complete or 0))  # best-of-3 → máx 3 sets
+
+        # Juegos esperados en sets restantes: ~9j/set (6 games por set + servicio + break)
+        expected_remaining = sets_remaining * 9.0
+        # Alerta: si la línea implica más juegos restantes de lo posible
+        score_alerta = None
+        if games_remaining is not None and expected_remaining > 0:
+            ratio = games_remaining / expected_remaining
+            if conv_dir == "UNDER" and ratio < 0.4:
+                score_alerta = "UNDER_FACIL"   # pocos juegos posibles → UNDER muy probable
+            elif conv_dir == "UNDER" and ratio > 1.3:
+                score_alerta = "UNDER_DIFICIL" # línea demasiado alta, tiebreak necesario
+            elif conv_dir == "OVER" and ratio > 1.2:
+                score_alerta = "OVER_FACIL"    # línea demasiado baja → OVER casi seguro
+            elif conv_dir == "OVER" and ratio < 0.5:
+                score_alerta = "OVER_DIFICIL"  # poco margen para OVER
+
+        conv = _convergencia_score_itf(gap, cuota_val, markov, proxy.get("ranking_gap"))
+
+        # Ajustar conv score con info de score
+        conv_score_final = conv["score"]
+        if score_alerta in ("UNDER_FACIL", "OVER_FACIL"):
+            conv_score_final = min(5, conv_score_final + 1)
+        elif score_alerta in ("UNDER_DIFICIL", "OVER_DIFICIL"):
+            conv_score_final = max(0, conv_score_final - 1)
+
+        best = {
+            "partido":               f"{home} vs {away}",
+            "direccion":             conv_dir,
+            "linea":                 market_linea,
+            "cuota_live":            cuota_val,
+            "oc_id":                 market.get(oc_k),
+            "event_id":              eid,
+            "estado":                "ITF_VIVO",
+            "cuota_pre":             cuota_t0,
+            "drift_pct":             cuota_drift,
+            "linea_t0":              linea_t0,
+            "linea_drift":           linea_drift,
+            "ts_t0":                 ts_t0,
+            "hora":                  None,
+            "games_range":           proxy["games_range"],
+            "midpoint":              proxy["midpoint"],
+            "gap":                   gap,
+            "p_model":               round(p_model * 100, 1),
+            "p_implied":             round(p_implied * 100, 1),
+            "edge_pct":              edge_pct,
+            "markov":                markov,
+            "score_str":             score_str,
+            "games_played":          games_played,
+            "games_remaining":       games_remaining,
+            "sets_complete":         sets_complete,
+            "sets_remaining":        sets_remaining,
+            "score_alerta":          score_alerta,
+            "convergencia_score":    conv_score_final,
+            "convergencia_dir":      conv["direction"],
+            "convergencia_breakdown": conv["breakdown"] + (f" | score={score_str}→rem={games_remaining}j({score_alerta})" if score_alerta else f" | score={score_str}" if score_str else ""),
+            "confianza":             "ALTA" if conv_score_final >= 3 else ("MEDIA" if conv_score_final >= 2 else "BAJA"),
+            "linea_envenenada":      linea_envenenada,
+            "over_candidato":        over_candidato,
+            "cuota_over_live":       cuota_over_live,
+            "oc_id_over_live":       oc_id_over_live,
+            "edge_over":             edge_over,
+        }
+        itf_live_signals.append(best)
+        drift_tag = f" | cuota_drift={cuota_drift:+.1f}% linea_drift={linea_drift:+.1f}j" if cuota_drift is not None else ""
+        logger.info(
+            f"[ITF_LIVE] {best['partido']} {best['direccion']} {best['linea']} "
+            f"@{best['cuota_live']} t0=@{cuota_t0} | gap={gap} edge={edge_pct}%"
+            f"{drift_tag}"
+        )
+
+    # Persistir snapshot t0 para próximos ciclos
+    try:
+        snap_path.write_text(json.dumps(t0_snap, ensure_ascii=False, indent=2), encoding="utf-8")
+    except Exception:
+        pass
+
+    # Combinar en games_live: pre-game + ITF_LIVE
+    all_signals = alta_signals + itf_live_signals
+    itf_live_count = len(itf_live_signals)
+
     # Escribir games_live_YYYYMMDD.json (D133-05)
     gl_path = REPORTS / f"games_live_{fecha_compact}.json"
     try:
         gl_path.write_text(
             json.dumps({
                 "ts":                 datetime.now().isoformat()[:19],
-                "signals_alta":       alta_signals,
+                "signals_alta":       all_signals,
                 "en_vivo_count":      en_vivo_count,
-                "convergencia_activa": convergencia_activa,
+                "itf_live_count":     itf_live_count,
+                "convergencia_activa": convergencia_activa or itf_live_count >= 1,
             }, ensure_ascii=False, indent=2),
             encoding="utf-8",
         )
     except Exception:
         pass
 
-    # D133-04: anti-flood + Popen fire-and-forget
-    if not convergencia_activa:
-        return
+    # --- Fire combo pre-game (D133-04) ----------------------------------------
+    if convergencia_activa:
+        fired_path = REPORTS / f"games_live_{fecha_compact}_fired.json"
+        try:
+            fired: List[List] = json.loads(fired_path.read_text(encoding="utf-8")) if fired_path.exists() else []
+        except Exception:
+            fired = []
+        if len(fired) < 10:
+            combo_key = sorted(s["partido"] for s in alta_signals if s["estado"] == "EN_VIVO")
+            if combo_key not in fired:
+                try:
+                    subprocess.Popen(
+                        [sys.executable, str(BASE_DIR / "betplay_combo_builder.py"),
+                         "--games", "--live", "--telegram"],
+                        cwd=str(BASE_DIR),
+                        stdout=subprocess.DEVNULL,
+                        stderr=subprocess.DEVNULL,
+                    )
+                    fired.append(combo_key)
+                    fired_path.write_text(json.dumps(fired, ensure_ascii=False), encoding="utf-8")
+                    logger.info(f"[D133] CONVERGENCIA GAMES: {en_vivo_count} ALTA EN_VIVO → combo disparado")
+                except Exception as exc:
+                    logger.warning(f"[D133] Popen error: {exc}")
 
-    fired_path = REPORTS / f"games_live_{fecha_compact}_fired.json"
-    try:
-        fired: List[List] = json.loads(fired_path.read_text(encoding="utf-8")) if fired_path.exists() else []
-    except Exception:
-        fired = []
-
-    if len(fired) >= 10:
-        return  # cap diario
-
-    combo_key = sorted(s["partido"] for s in alta_signals if s["estado"] == "EN_VIVO")
-    if combo_key in fired:
-        return  # ya disparado
-
-    try:
-        subprocess.Popen(
-            [sys.executable, str(BASE_DIR / "betplay_combo_builder.py"),
-             "--games", "--live", "--telegram"],  # D133-04+: Telegram delivery
-            cwd=str(BASE_DIR),
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-        )
-        fired.append(combo_key)
-        fired_path.write_text(json.dumps(fired, ensure_ascii=False), encoding="utf-8")
-        logger.info(f"[D133] CONVERGENCIA GAMES: {en_vivo_count} ALTA EN_VIVO → combo disparado")
-    except Exception as exc:
-        logger.warning(f"[D133] Popen error: {exc}")
+    # --- Fire combo ITF live (D-ITF-LIVE-02) ---
+    # Incluye: convergencia ALTA sin envenenada OR envenenada con over_candidato (tercer set → OVER)
+    alta_itf = [s for s in itf_live_signals
+                if s.get("convergencia_score", 0) >= 3
+                and (not s.get("linea_envenenada") or s.get("over_candidato"))]
+    if alta_itf:
+        itf_fired_path = REPORTS / f"itf_live_games_{fecha_compact}_fired.json"
+        try:
+            itf_fired: List[List] = json.loads(itf_fired_path.read_text(encoding="utf-8")) if itf_fired_path.exists() else []
+        except Exception:
+            itf_fired = []
+        if len(itf_fired) < 10:
+            itf_key = sorted(s["partido"] for s in alta_itf)
+            if itf_key not in itf_fired:
+                _fire_itf_live_games_combo(alta_itf, fecha_compact)
+                itf_fired.append(itf_key)
+                itf_fired_path.write_text(json.dumps(itf_fired, ensure_ascii=False), encoding="utf-8")
+                logger.info(f"[ITF_LIVE] combo disparado: {len(alta_itf)} señales ALTA conv≥3")
 
 
 def _background_refresh(fecha_fn) -> None:
