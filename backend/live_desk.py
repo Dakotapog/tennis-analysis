@@ -497,17 +497,49 @@ def _build_x3_games(fecha: str) -> Dict[str, Any]:
     live_idx: Dict[str, Dict] = {
         s.get("partido", ""): s for s in gl_data.get("signals_alta", [])
     }
+    # Tiempo de generación del reporte (fallback cuando hora=None)
+    try:
+        report_age_min = (datetime.now() - datetime.fromtimestamp(Path(gsr).stat().st_mtime)).total_seconds() / 60
+    except Exception:
+        report_age_min = 0
+
     for sig in signals:
         live_s = live_idx.get(sig["partido"], {})
         sig["estado_live"] = live_s.get("estado", "PRE_PARTIDO")
         sig["cuota_live"]  = live_s.get("cuota_live")
         sig["drift_pct"]   = live_s.get("drift_pct")
+        # Detectar TERMINADO cuando games_live no tiene el partido (hora=None o diff>130min)
+        if sig["estado_live"] == "PRE_PARTIDO":
+            hora_raw = sig.get("hora")
+            if hora_raw is None:
+                # Sin hora: usar mtime del reporte como referencia (D-TERMINADO-01)
+                if report_age_min > 130:
+                    sig["estado_live"] = "TERMINADO"
+            else:
+                try:
+                    now_utc = datetime.utcnow()
+                    if "T" in str(hora_raw):
+                        hora_dt = datetime.fromisoformat(
+                            str(hora_raw).replace("Z", "+00:00")
+                        ).replace(tzinfo=None)
+                    else:
+                        hm = str(hora_raw).split(":")
+                        hora_dt = now_utc.replace(
+                            hour=int(hm[0]), minute=int(hm[1]), second=0, microsecond=0
+                        )
+                    if (now_utc - hora_dt).total_seconds() / 60 > 130:
+                        sig["estado_live"] = "TERMINADO"
+                except Exception:
+                    pass
+
+    # Filtrar TERMINADO — no accionables
+    signals = [s for s in signals if s["estado_live"] != "TERMINADO"]
 
     return {
         "disponible":         True,
         "fecha":              fecha,
         "n_partidos":         meta.get("n_partidos", 0),
-        "n_apostar":          meta.get("n_apostar", 0),
+        "n_apostar":          len(signals),  # post-filtro TERMINADO (D-TERMINADO-01)
         "signals":            signals,
         "fuente":             Path(gsr).name,
         "en_vivo_count":      gl_data.get("en_vivo_count", 0),
@@ -1612,8 +1644,10 @@ def render_html(state: Dict[str, Any]) -> str:
 # ══════════════════════════════════════════════════════════════════════════════
 
 def _latest(pattern: str) -> Optional[Path]:
-    files = sorted(glob.glob(pattern))
-    return Path(files[-1]) if files else None
+    files = glob.glob(pattern)
+    if not files:
+        return None
+    return Path(max(files, key=os.path.getmtime))  # mtime, no sort alfabético (D-LATEST-01)
 
 
 def _load_json(path: Optional[Path]) -> Any:
@@ -2095,7 +2129,8 @@ def _build_p8_books(fecha: str) -> Dict:
     # D128-02: incluir jugadores de combos GAMES del día en P8
     # Busca players ATP/WTA de games_signal_report que sí están en los feeds (betplay/wplay)
     # Útil cuando edge_report solo tiene ITF (no en books) pero games tiene ATP
-    _all_gr = sorted(glob.glob(str(REPORTS / f"games_signal_report_{fecha.replace('-','')}*.json")))
+    _gr_latest = _latest(str(REPORTS / f"games_signal_report_{fecha.replace('-','')}*.json"))
+    _all_gr = [str(_gr_latest)] if _gr_latest else []  # solo el más reciente (mtime) — D128-02 fix
     _games_players_seen: set = set()
     _games_seen_oids: set = set()
     for _gr_path in _all_gr:
@@ -2459,7 +2494,7 @@ def _extract_games_cuota_live(event_id: int, direccion: str, linea: Optional[flo
             is_under = "menos" in oc_label or "under" in oc_label
             is_over  = "más" in oc_label or "over" in oc_label or "mas" in oc_label
             dir_match  = (dir_norm == "UNDER" and is_under) or (dir_norm == "OVER" and is_over)
-            line_match = (oc_line is None or linea is None or abs(oc_line - linea) < 1.0)
+            line_match = (oc_line is None or linea is None or abs(oc_line - linea) < 3.5)  # live line moves up to ±3j
             if dir_match and line_match:
                 odds_raw = oc.get("odds")
                 if odds_raw:
@@ -2501,6 +2536,20 @@ def _check_games_convergencia(fecha: str) -> None:
                 })
 
     if not alta_signals:
+        # Reset games_live para limpiar banner estancado (D133-06)
+        gl_path = REPORTS / f"games_live_{fecha_compact}.json"
+        try:
+            gl_path.write_text(
+                json.dumps({
+                    "ts": datetime.now().isoformat()[:19],
+                    "signals_alta": [],
+                    "en_vivo_count": 0,
+                    "convergencia_activa": False,
+                }, ensure_ascii=False),
+                encoding="utf-8",
+            )
+        except Exception:
+            pass
         return
 
     # Obtener eventos STARTED de Kambi (1 HTTP call)
@@ -2562,6 +2611,11 @@ def _check_games_convergencia(fecha: str) -> None:
                         hour=int(hm[0]), minute=int(hm[1]), second=0, microsecond=0
                     )
                 diff_min = (now_utc - hora_dt).total_seconds() / 60
+                # Si diff_min < 0 el partido cruzó medianoche (ayer) — restar 1 día
+                if diff_min < -60:
+                    from datetime import timedelta as _td
+                    hora_dt -= _td(days=1)
+                    diff_min = (now_utc - hora_dt).total_seconds() / 60
                 sig["estado"] = "TERMINADO" if diff_min > 130 else "PRE_PARTIDO"
             except Exception:
                 sig["estado"] = "PRE_PARTIDO"
@@ -2603,7 +2657,8 @@ def _check_games_convergencia(fecha: str) -> None:
 
     try:
         subprocess.Popen(
-            [sys.executable, str(BASE_DIR / "betplay_combo_builder.py"), "--games", "--live"],
+            [sys.executable, str(BASE_DIR / "betplay_combo_builder.py"),
+             "--games", "--live", "--telegram"],  # D133-04+: Telegram delivery
             cwd=str(BASE_DIR),
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,

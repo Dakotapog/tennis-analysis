@@ -67,6 +67,11 @@ CONF_MIN        = 53.0   # confianza mínima global
 CONF_C1         = 60.0   # confianza mínima para Cat-C1 (STRONG)
 CONF_C1_PIPELINE = 57.0  # confianza mínima Cat-C1 con señal pipeline
 CONF_MOONSHOT   = 57.0   # confianza mínima para moonshot (SILVER+)
+EV_LEG_MIN      = 1.02   # D143-01: EV mínimo por pierna (p_modelo × cuota > 1.02)
+                          # Filtra picks donde bookie supera al modelo (EV negativo)
+                          # Ejemplos: Yang @1.18 conf=70% → 0.70×1.18=0.83 ❌
+                          #           McFadzean @1.20 conf=95% → 0.95×1.20=1.14 ✅
+                          #           GS pick @2.00 conf=60% → 0.60×2.00=1.20 ✅
 
 # Parejo detection
 PAREJO_CONF_MAX  = 55.0
@@ -643,11 +648,28 @@ def _extract_and_categorize(partidos: list, threshold: float,
                     'alpha_promoted': True,
                 }
 
+        # D143-01 (Nodo-143): Gate EV por pierna — solo picks donde modelo supera bookie
+        # ev_leg = p_modelo × cuota. Si < EV_LEG_MIN = la cuota ya refleja la probabilidad
+        # y apostar no da ventaja. Ejemplo: Yang @1.18 conf=70% → 0.83 ❌ (bookie paga 84%)
+        _ev_leg = (conf / 100.0) * (cuota or 0.0)
+        if cuota and cuota > 0 and _ev_leg < EV_LEG_MIN:
+            _COMBO_GATE_LOG.append({
+                'nombre':  favorito,
+                'torneo':  (partido.get('torneo_completo') or partido.get('torneo') or '?'),
+                'gate':    'G_EV',
+                'motivo':  f'G_EV: ev_leg={_ev_leg:.3f} < {EV_LEG_MIN} (conf={conf:.1f}%, cuota={cuota})',
+                'conf':    conf,
+                'cuota':   cuota,
+                'ts':      datetime.now().isoformat(),
+            })
+            continue
+
         picks.append({
             'nombre':        favorito,
             'confianza':     conf,
             'cuota':         cuota,
             'p_modelo':      conf / 100.0,
+            'ev_leg':        round(_ev_leg, 3),
             'torneo':        torneo,
             'rival':         _get_rival(partido, favorito),
             'cat':           cat,

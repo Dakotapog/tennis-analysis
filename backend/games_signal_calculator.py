@@ -232,7 +232,8 @@ def _cargar_h2h(file_path: str | None) -> tuple[list, str]:
     if file_path:
         path = file_path
     else:
-        archivos = sorted(glob.glob("reports/h2h_results_enhanced_*.json"))
+        archivos = sorted(glob.glob("reports/h2h_results_enhanced_*.json"),
+                          key=lambda f: Path(f).stat().st_mtime)  # mtime, no alfa (D-LATEST-01)
         if not archivos:
             raise FileNotFoundError("No se encontró ningún h2h_results_enhanced_*.json en reports/")
         path = archivos[-1]
