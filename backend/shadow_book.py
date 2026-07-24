@@ -586,9 +586,12 @@ def _fuzzy_name_match(candidate: str, pick_name: str) -> bool:
         toks = _name_tokens(pick_name)
         return bool(toks) and any(_token_in_kb(tok, candidate) for tok in toks)
     except Exception:
-        # Fallback si el import falla
+        # Fallback si el import falla — guardia len>=4 para evitar falsos positivos
+        # con nombres cortos (mismo criterio que _normalize_name_match, Nodo-51)
         p = pick_name.lower().strip()
         c = candidate.lower().strip()
+        if len(p) < 4 or len(c) < 4:
+            return p == c
         return p in c or c in p
 
 
@@ -962,10 +965,11 @@ def _load_resultados(fecha: str) -> Dict[str, dict]:
                         'match_id':   r.get('match_id'),
                         'p1': p1, 'p2': p2,
                     }
-                except Exception:
+                except Exception as exc:
+                    logger.info(f"[ShadowBook] Registro descartado en {fpath} (p1={p1!r}, p2={p2!r}): {exc}")
                     continue
         except Exception as e:
-            logger.debug(f"[ShadowBook] Error leyendo {fpath}: {e}")
+            logger.info(f"[ShadowBook] Error leyendo {fpath}: {e}")
 
     # 2. FlashScore odds de cierre (Nodo-48)
     try:
