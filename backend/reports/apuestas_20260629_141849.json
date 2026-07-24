@@ -31,7 +31,7 @@
       "cuota": 2.05,
       "cuota_kambi": 2.05,
       "partido": "",
-      "match_id": "",
+      "match_id": "ryHz6fm3",
       "match_url": "",
       "torneo": "",
       "superficie": "?",
@@ -71,7 +71,7 @@
       "cuota": 1.52,
       "cuota_kambi": 1.52,
       "partido": "",
-      "match_id": "",
+      "match_id": "zmsdbfXA",
       "match_url": "",
       "torneo": "",
       "superficie": "?",
@@ -81,9 +81,10 @@
       "kelly_kl": 0.0,
       "stake": 0,
       "retorno_potencial": 0,
-      "resultado_real": null,
-      "correcto": null,
-      "ganancia": null
+      "resultado_real": "",
+      "correcto": false,
+      "ganancia": 0,
+      "sets": "1-2"
     }
   ],
   "pl_sesion": 0,

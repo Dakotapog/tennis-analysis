@@ -11,7 +11,7 @@
       "cuota": 2.06,
       "cuota_kambi": 2.14,
       "partido": "",
-      "match_id": "",
+      "match_id": "jof12oCN",
       "match_url": "",
       "torneo": "",
       "superficie": "?",
@@ -21,9 +21,10 @@
       "kelly_kl": 0.0,
       "stake": 0,
       "retorno_potencial": 0,
-      "resultado_real": null,
-      "correcto": null,
-      "ganancia": null
+      "resultado_real": "",
+      "correcto": false,
+      "ganancia": 0,
+      "sets": "2-1"
     },
     {
       "outcome_id": "4248116486",

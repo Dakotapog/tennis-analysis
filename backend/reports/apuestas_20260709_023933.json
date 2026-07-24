@@ -1,7 +1,7 @@
 {
   "ts_registro": "2026-07-09T02:39:33.953652",
   "ts_bookmarklet": "2026-07-09T07:39:33.571Z",
-  "estado": "PENDIENTE",
+  "estado": "CERRADO",
   "betslip_index": "reports/betslip_index_20260709_014003.json",
   "n_picks": 4,
   "picks": [
@@ -21,9 +21,10 @@
       "kelly_kl": 0.0,
       "stake": 0,
       "retorno_potencial": 0.0,
-      "resultado_real": null,
-      "correcto": null,
-      "ganancia": null
+      "resultado_real": "Leyton Rivera",
+      "correcto": true,
+      "ganancia": 0,
+      "sets": "0-2"
     },
     {
       "outcome_id": "4251937892",
@@ -41,9 +42,10 @@
       "kelly_kl": 0.0,
       "stake": 0,
       "retorno_potencial": 0.0,
-      "resultado_real": null,
-      "correcto": null,
-      "ganancia": null
+      "resultado_real": "Isabella Barrera Aguirre",
+      "correcto": false,
+      "ganancia": 0,
+      "sets": "1-2"
     },
     {
       "outcome_id": "4251976129",
@@ -61,9 +63,10 @@
       "kelly_kl": 0.0,
       "stake": 0,
       "retorno_potencial": 0,
-      "resultado_real": null,
-      "correcto": null,
-      "ganancia": null
+      "resultado_real": "Julia Konishi Camargo Silva",
+      "correcto": true,
+      "ganancia": 0,
+      "sets": "2-0"
     },
     {
       "outcome_id": "4250930952",
@@ -81,9 +84,12 @@
       "kelly_kl": 0.0,
       "stake": 0,
       "retorno_potencial": 0,
-      "resultado_real": null,
-      "correcto": null,
-      "ganancia": null
+      "resultado_real": "Alejandro Melero Kretzer",
+      "correcto": false,
+      "ganancia": 0,
+      "sets": "1-2"
     }
-  ]
+  ],
+  "pl_sesion": 0,
+  "ts_cierre": "2026-07-14T08:10:54.590442"
 }

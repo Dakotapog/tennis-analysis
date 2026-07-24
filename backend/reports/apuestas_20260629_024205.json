@@ -31,7 +31,7 @@
       "cuota": 1.23,
       "cuota_kambi": 1.23,
       "partido": "",
-      "match_id": "",
+      "match_id": "tn9TunHq",
       "match_url": "",
       "torneo": "Wimbledon",
       "superficie": "grass",
@@ -41,9 +41,10 @@
       "kelly_kl": 0.0,
       "stake": 0,
       "retorno_potencial": 0,
-      "resultado_real": null,
-      "correcto": null,
-      "ganancia": null
+      "resultado_real": "",
+      "correcto": false,
+      "ganancia": 0,
+      "sets": "2-0"
     },
     {
       "outcome_id": "4236943687",
