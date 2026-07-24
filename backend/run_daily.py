@@ -41,7 +41,7 @@ REPORTS_DIR         = 'reports'
 DATA_DIR            = 'data'
 
 
-def _run(cmd: list, step: str, capture: bool = False) -> tuple[int, str]:
+def _run(cmd: list, step: str, capture: bool = False, optional: bool = False) -> tuple[int, str]:
     """Ejecuta un comando y retorna (returncode, output)."""
     print(f"\n{'='*70}")
     print(f"  {step}")
