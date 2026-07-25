@@ -357,6 +357,14 @@ def fusionar_dia(
                 "sources": ["kambi", "flashscore"],
                 "cuota_es_real": True,
             }
+            # D143-01 (Nodo-143): Propagar metadata torneo desde Kambi al join.
+            # Solo llena huecos (no sobrescribe) — Kambi gana para tier/torneo,
+            # FlashScore gana para match_id/H2H URLs.
+            _KAMBI_META_FIELDS = ['tier', 'torneo_nombre', 'torneo_completo',
+                                   'pais', 'ranking1', 'ranking2', 'tournament_context']
+            for _campo in _KAMBI_META_FIELDS:
+                if _campo in pk and pk[_campo] and not partido_merged.get(_campo):
+                    partido_merged[_campo] = pk[_campo]
             joins.append(partido_merged)
             fs_usado.add(mejor_idx)
             single_source_fs = [i for i in single_source_fs if i != mejor_idx]
