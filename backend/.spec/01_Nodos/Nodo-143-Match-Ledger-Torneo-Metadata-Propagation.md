@@ -1,8 +1,8 @@
 # Nodo-143 — Match Ledger: Propagación de Metadata Torneo en Joins
 
 **Fecha:** 2026-07-25
-**Estado:** IMPLEMENTADO
-**Wikilinks:** [[Nodo-118]] [[Nodo-136]] [[Nodo-141]] [[Nodo-142]] [[Nodo-67]]
+**Estado:** IMPLEMENTADO — evidencia producción verificada 2026-07-25
+**Wikilinks:** [[Nodo-118]] [[Nodo-136]] [[Nodo-141]] [[Nodo-142]] [[Nodo-67]] [[combo_confianza_builder]]
 
 ---
 
@@ -17,22 +17,36 @@ de torneo que Kambi sí tiene se descartan silenciosamente.
 - 8 single_source_kambi: 8/8 con torneo_nombre → los puros Kambi sí lo conservan
 - Campos perdidos en join: `tier | torneo_nombre | torneo_completo | pais | ranking1 | ranking2 | tournament_context`
 
-**Cadena de daño:**
+**Cadena de daño (trazada con ejecución real 2026-07-25):**
 ```
 fusionar_dia() → join sin torneo
-  → h2h_results_enhanced: torneo_nombre="" (vacío)
-  → edge_calculator: detectar_tier() → "Desconocido"
-  → Nodo-136 CTI fallback: intenta circuit_asymmetry (diseñado para H2H combinado, no este caso)
-  → Kelly-KL con tier incorrecto → calibración errónea → picks no pasan umbral APOSTAR
-  → combo_confianza_builder: 0 combos
+  → zita_tennis_matches_*_merged.json: torneo_nombre="" en 40/40 joins
+  → extraer_historh2h.py lee merged → h2h_results_enhanced: torneo_nombre="" (0/109)
+  → edge_calculator L933-934: detectar_tier(torneo_completo="") → "Desconocido"
+  → Nodo-136 CTI fallback: circuit_asymmetry → todos tier="atp500" (incorrecto)
+  → Kelly-KL lambda incorrecto (atp500=2.4× en lugar de itf=4.5×/challenger=3.6×)
+  → picks no pasan umbral APOSTAR → combo_confianza_builder: 0 combos
+  → combo_gate_log: torneo="?" para todos (ver §nota-combo-builder)
 ```
 
-**Diagnóstico comparativo (2026-07-25):**
+**Nota — combo_confianza_builder torneo='?':**
+`combo_confianza_builder.py` L658 usa `partido.get('torneo_completo') or partido.get('torneo') or '?'`
+pero NO lee `torneo_nombre`. Cuando h2h tiene `torneo_nombre=""` y no tiene clave `torneo`,
+el gate log muestra `?` en vez del nombre real. D143-04 catalogado (§10).
+
+**Diagnóstico comparativo (2026-07-25 — run mañana, 40 partidos Kambi):**
 
 | Fuente | Con torneo | Sin torneo |
 |--------|-----------|-----------|
 | single_source_kambi (8) | 8/8 | 0/8 |
 | joins AUTO_JOIN (40) | 0/40 | 40/40 ← bug |
+
+**Diagnóstico comparativo (2026-07-25 — run tarde, 24 partidos Kambi restantes):**
+
+| Fuente | Con torneo | Sin torneo |
+|--------|-----------|-----------|
+| joins AUTO_JOIN (17) | 17/17 ← fix | 0/17 |
+| single_source_fs (99) | 0/99 (sin Kambi) | 99/99 |
 
 ## 2. Root cause en código
 
@@ -104,14 +118,32 @@ para su caso de uso original (H2H multi-torneo), no como parche general.
 **Nodo-142 huérfano:** `tests/test_nodo142_itf_live_games.py` existe sin spec correspondiente.
 Deuda SDD: crear `.spec/01_Nodos/Nodo-142-ITF-Live-Games-Convergencia.md` en sesión futura.
 
-## 7. Impacto esperado
+## 7. Impacto — evidencia real 2026-07-25
 
-| Situación | Antes (Nodo-141) | Después (Nodo-143) |
-|-----------|------------------|--------------------|
-| 40 joins hoy | torneo=None 40/40 | torneo_nombre real (itf/challenger/etc) |
-| detectar_tier() en edge_calc | "Desconocido" 100% | tier correcto por join |
-| lambda_efectivo | default incorrecto | ITF=4.5× / Challenger=3.6× / ATP500=2.4× |
-| picks APOSTAR | 1 (Korpatsch, G4-bloqueado) | recalibrado con tier correcto |
+**Secuencia correcta tras aplicar el fix:**
+```
+match_ledger --build --api <archivo_kambi>   # joined: 17/17 con torneo
+extraer_historh2h.py --api-mode              # h2h_results_enhanced: 17/109 con torneo_nombre
+edge_calculator.py                           # picks: tier correcto para joins
+filter_kambi_picks.py                        # 6 kambi_disponible
+combo_confianza_builder.py --bankroll 125000 # 5 combos · $15,000
+```
+
+IMPORTANTE: el fix requiere **re-correr PASO 2** (extraer_historh2h) después del ledger.
+El h2h_results_enhanced lleva torneo_nombre del merged file — si es viejo, el bug persiste.
+
+| Situación | Antes D143-01 | Después D143-01 |
+|-----------|--------------|-----------------|
+| 17 joins tarde | torneo=None 0/17 | torneo_nombre real 17/17 |
+| detectar_tier() en edge_calc | "Desconocido" 100% | tier correcto (challenger/wta_qual/atp) |
+| lambda_efectivo | atp500=2.4× uniforme | ITF=4.5× / Challenger=3.6× / ATP500=2.4× |
+| pick Suresh D. | tier=atp500, torneo=Desconocido | tier=challenger, torneo=Bloomfield Hills |
+| combos generados | 0 ("picks no disponibles en Kambi") | **5 combos · $15k · CORE @16.44x** |
+
+**Combos producción 2026-07-25 (tarde):**
+- CORE 4p: Raina A. @1.92 + Honda N. @1.97 + Voloshchuk A. @2.12 + Teixido Garcia A. @2.05 → @16.44x $7,000
+- COBERTURA [COB1_excl_A.]: @18.66x $2,000
+- Total: 5 combos · $15,000 desplegados
 
 ## 8. Conceptos que deben dominarse antes de modificar match_ledger
 
@@ -141,3 +173,9 @@ Gate: estabilidad 5 días consecutivos con D143-01 activo (torneo presente en �
 
 **D143-03 (Nodo-142 huérfano):** Crear spec formal para Nodo-142 ITF Live Games Convergencia
 antes de que el test huérfano acumule más deuda SDD.
+
+**D143-04 (gap combo_confianza_builder L658):** Gate log G_EV usa
+`partido.get('torneo_completo') or partido.get('torneo') or '?'` — omite `torneo_nombre`.
+Cuando h2h tiene `torneo_nombre` pero no `torneo`, el log muestra `?` en vez del torneo real.
+Fix: añadir `or partido.get('torneo_nombre')` al fallback en L658.
+Impacto: cosmético (solo el gate log — el pick sí tiene torneo correcto en L585-590 que sí lee `torneo_nombre`).

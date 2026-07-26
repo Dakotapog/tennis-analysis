@@ -571,6 +571,8 @@ def _build_x3_games(fecha: str) -> Dict[str, Any]:
                 "ts_t0":       itf_s.get("ts_t0"),
                 "hora":        None,
                 "markov":      itf_s.get("markov"),
+                "contexto":    itf_s.get("contexto", "—"),
+                "score_alerta": itf_s.get("score_alerta"),
                 "p_model":     p_model,
                 "p_implied":   itf_s.get("p_implied"),
                 "edge_pct":    edge_pct,
@@ -590,6 +592,7 @@ def _build_x3_games(fecha: str) -> Dict[str, Any]:
         "fuente":             Path(gsr).name,
         "en_vivo_count":      gl_data.get("en_vivo_count", 0),
         "convergencia_activa": gl_data.get("convergencia_activa", False),
+        "watch_all":          gl_data.get("watch_all", []),
     }
 
 
@@ -1285,6 +1288,26 @@ def render_html(state: Dict[str, Any]) -> str:
             else:
                 _partido_html = _partido_raw
 
+            _contexto_val = _sig.get("contexto", "—")
+            _contexto_colors = {
+                "FAVORITO CLARO": "#3fb950",
+                "PAREJO":         "#d29922",
+                "SIN HISTORIAL":  "#f85149",
+                "MODERADO":       "#8b949e",
+            }
+            _contexto_c = _contexto_colors.get(_contexto_val, "#8b949e")
+            _contexto_html = f'<span style="color:{_contexto_c};font-weight:bold;">{_contexto_val}</span>' if _contexto_val != "—" else "—"
+
+            _alerta_val = _sig.get("score_alerta")
+            _alerta_map = {
+                "UNDER_FACIL":   ("#3fb950", "UNDER FÁCIL"),
+                "UNDER_DIFICIL": ("#d29922", "UNDER DIFÍCIL"),
+                "OVER_FACIL":    ("#3fb950", "OVER FÁCIL"),
+                "OVER_DIFICIL":  ("#d29922", "OVER DIFÍCIL"),
+            }
+            _alerta_c, _alerta_lbl = _alerta_map.get(_alerta_val, ("#8b949e", "—"))
+            _alerta_html = f'<span style="color:{_alerta_c};font-weight:bold;">{_alerta_lbl}</span>' if _alerta_val else "—"
+
             x3_rows.append([
                 _partido_html,
                 _est_lbl,
@@ -1297,6 +1320,8 @@ def render_html(state: Dict[str, Any]) -> str:
                 _conf,
                 _sig.get("games_range", ""),
                 _mid_html,
+                _contexto_html,
+                _alerta_html,
             ])
 
         _x3_n       = _gs["n_apostar"]
@@ -1308,7 +1333,7 @@ def render_html(state: Dict[str, Any]) -> str:
         x3_panel = panel(
             f"X3 GAMES SIGNAL — Over/Under mercados Nodo-40 | {_gs['fuente']}",
             _conv_banner + table(
-                ["Partido", "Estado", "Mercado", "Dir", "Línea", "Cuota Pre", "Cuota Live", "Gap", "Confianza", "Rango pred.", "Middle?"],
+                ["Partido", "Estado", "Mercado", "Dir", "Línea", "Cuota Pre", "Cuota Live", "Gap", "Confianza", "Rango pred.", "Middle?", "Contexto", "Marcador"],
                 x3_rows,
                 "Sin señales accionables hoy (gap modelo-línea insuficiente)",
             ),
@@ -1318,6 +1343,33 @@ def render_html(state: Dict[str, Any]) -> str:
         x3_panel = panel(
             "X3 GAMES SIGNAL — Over/Under mercados Nodo-40",
             f'<p style="color:{GREY};font-size:0.85em;">Sin reporte (correr PASO 3.6: python3 games_signal_calculator.py)</p>',
+        )
+    # ── WATCH ALL — seguimiento de partidos ITF en vivo SIN filtro de señal ──
+    _watch_all = _gs.get("watch_all", []) if _gs.get("disponible") else []
+    if _watch_all:
+        _watch_rows = []
+        for w in _watch_all:
+            _cu = w.get("cuota_under")
+            _co = w.get("cuota_over")
+            _watch_rows.append([
+                w.get("partido", ""),
+                str(w.get("linea", "—")),
+                f'@{_cu:.2f}' if _cu else "—",
+                f'@{_co:.2f}' if _co else "—",
+            ])
+        watch_panel = panel(
+            "SEGUIMIENTO ITF EN VIVO — todos los partidos con mercado abierto (sin filtro de señal)",
+            table(
+                ["Partido", "Línea", "Cuota Under", "Cuota Over"],
+                _watch_rows,
+                "Sin partidos en seguimiento",
+            ),
+            f"{len(_watch_all)} en seguimiento", GREY,
+        )
+    else:
+        watch_panel = panel(
+            "SEGUIMIENTO ITF EN VIVO — todos los partidos con mercado abierto (sin filtro de señal)",
+            f'<p style="color:{GREY};font-size:0.85em;">Sin partidos ITF en vivo con mercado de juegos ahora mismo</p>',
         )
 
     # ── X4 EVALUAR_GAMES — favoritos absolutos → UNDER juegos (Nodo-125) ────
@@ -1627,6 +1679,7 @@ def render_html(state: Dict[str, Any]) -> str:
   {p9_panel}
   {x2_panel}
   {x3_panel}
+  {watch_panel}
   {data_panel}
   {que_falta_panel}
   {p1_panel}
@@ -2687,6 +2740,21 @@ def _compute_itf_games_proxy(home: str, away: str, h2h_idx: Dict) -> Dict:
     }
 
 
+def _clasificar_contexto(proxy: Dict) -> str:
+    """
+    Clasifica el contexto del favorito usando ranking_gap y from_h2h
+    ya calculados por _compute_itf_games_proxy. No agrega datos nuevos.
+    """
+    if not proxy.get("from_h2h"):
+        return "SIN HISTORIAL"
+    rg = proxy.get("ranking_gap")
+    if rg is not None and rg > 300:
+        return "FAVORITO CLARO"
+    elif rg is not None and rg < 80:
+        return "PAREJO"
+    return "MODERADO"
+
+
 def _convergencia_score_itf(gap: float, cuota_live: float,
                              markov: Optional[str], ranking_gap: Optional[int]) -> Dict:
     """
@@ -3118,14 +3186,27 @@ def _check_games_convergencia(fecha: str) -> None:
         if eid:
             matched = started_by_id.get(int(eid))
 
-        # Fallback: apellido de cada jugador
+        # Fallback: apellido de AMBOS jugadores debe coincidir con el evento candidato
+        # (D-FIX-COLISION-APELLIDO: evita que "Suresh D." (partido viejo) se enganche
+        # con "Kevin Titus Suresh" (partido nuevo) por compartir un solo apellido)
         if not matched:
             partes = [p.strip() for p in partido.replace(" vs. ", " vs ").split(" vs ")]
-            for parte in partes:
-                ap = _apellido_games(parte)
-                if ap in started_by_apellido:
-                    matched = started_by_apellido[ap]
-                    break
+            if len(partes) == 2:
+                ap1 = _apellido_games(partes[0])
+                ap2 = _apellido_games(partes[1])
+                candidato = started_by_apellido.get(ap1) or started_by_apellido.get(ap2)
+                if candidato:
+                    _ev = candidato.get("event", {}) if isinstance(candidato, dict) else {}
+                    _home_ap = _apellido_games(_ev.get("homeName", ""))
+                    _away_ap = _apellido_games(_ev.get("awayName", ""))
+                    _cand_apellidos = {_home_ap, _away_ap}
+                    if ap1 in _cand_apellidos and ap2 in _cand_apellidos:
+                        matched = candidato
+                    else:
+                        logger.debug(
+                            f"[ITF_LIVE] Colisión de apellido evitada: '{partido}' "
+                            f"({ap1}/{ap2}) vs evento ({_home_ap}/{_away_ap})"
+                        )
 
         if matched:
             sig["estado"] = "EN_VIVO"
@@ -3194,6 +3275,7 @@ def _check_games_convergencia(fecha: str) -> None:
         pass
 
     itf_live_signals: List[Dict] = []
+    watch_all_signals: List[Dict] = []  # seguimiento SIN filtro, solo observación
     for ev_wr in started_events:
         ev  = ev_wr.get("event", {}) if isinstance(ev_wr, dict) else {}
         eid = ev.get("id")
@@ -3217,6 +3299,16 @@ def _check_games_convergencia(fecha: str) -> None:
         market = _fetch_live_games_all(int(eid))
         if not market:
             continue
+        # Registro de seguimiento SIN filtro — se guarda ANTES de cualquier
+        # descarte por gap/edge/cuota, para poder observar el partido en vivo
+        # aunque no genere señal accionable.
+        watch_all_signals.append({
+            "partido":     f"{home} vs {away}",
+            "linea":       market.get("linea"),
+            "cuota_under": market.get("cuota_under"),
+            "cuota_over":  market.get("cuota_over"),
+            "event_id":    eid,
+        })
 
         # D142-FIX-02: Modelo PRIMERO — dirección del gap, no de la cuota disponible
         # Error anterior: código elegía dirección por cuota más alta → apostaba contra modelo
@@ -3366,6 +3458,7 @@ def _check_games_convergencia(fecha: str) -> None:
             "p_implied":             round(p_implied * 100, 1),
             "edge_pct":              edge_pct,
             "markov":                markov,
+            "contexto":              _clasificar_contexto(proxy),
             "score_str":             score_str,
             "games_played":          games_played,
             "games_remaining":       games_remaining,
@@ -3407,6 +3500,7 @@ def _check_games_convergencia(fecha: str) -> None:
             json.dumps({
                 "ts":                 datetime.now().isoformat()[:19],
                 "signals_alta":       all_signals,
+                "watch_all":          watch_all_signals,
                 "en_vivo_count":      en_vivo_count,
                 "itf_live_count":     itf_live_count,
                 "convergencia_activa": convergencia_activa or itf_live_count >= 1,

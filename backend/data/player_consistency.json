@@ -2014,9 +2014,9 @@
     }
   },
   "Nilsson L.": {
-    "n": 2,
-    "wins": 1,
-    "hit_pct": 0.5,
+    "n": 3,
+    "wins": 2,
+    "hit_pct": 0.667,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -2029,8 +2029,8 @@
         "hit_pct": 0.0
       },
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
@@ -2041,8 +2041,8 @@
         "hit_pct": 0.0
       },
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
@@ -13773,56 +13773,6 @@
     "by_signal": {}
   },
   "Jones F.": {
-    "n": 1,
-    "wins": 1,
-    "hit_pct": 1.0,
-    "consistent": false,
-    "resilient": false,
-    "top_tier_wins": 0,
-    "best_signals": [],
-    "exclusive_win_signals": [],
-    "by_rival_context": {
-      "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
-        "hit_pct": 1.0
-      }
-    },
-    "by_surface": {
-      "clay": {
-        "n": 1,
-        "wins": 1,
-        "hit_pct": 1.0
-      }
-    },
-    "by_signal": {}
-  },
-  "Bronzetti L.": {
-    "n": 1,
-    "wins": 1,
-    "hit_pct": 1.0,
-    "consistent": false,
-    "resilient": false,
-    "top_tier_wins": 0,
-    "best_signals": [],
-    "exclusive_win_signals": [],
-    "by_rival_context": {
-      "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
-        "hit_pct": 1.0
-      }
-    },
-    "by_surface": {
-      "clay": {
-        "n": 1,
-        "wins": 1,
-        "hit_pct": 1.0
-      }
-    },
-    "by_signal": {}
-  },
-  "Burel C.": {
     "n": 2,
     "wins": 2,
     "hit_pct": 1.0,
@@ -13848,6 +13798,66 @@
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Bronzetti L.": {
+    "n": 2,
+    "wins": 1,
+    "hit_pct": 0.5,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Burel C.": {
+    "n": 3,
+    "wins": 2,
+    "hit_pct": 0.667,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 3,
+        "wins": 2,
+        "hit_pct": 0.667
+      }
+    },
+    "by_surface": {
+      "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "n/a": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
       }
     },
     "by_signal": {}
@@ -13878,7 +13888,7 @@
     "by_signal": {}
   },
   "Ryan Ziegann S.": {
-    "n": 1,
+    "n": 3,
     "wins": 0,
     "hit_pct": 0.0,
     "consistent": false,
@@ -13888,6 +13898,11 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "LOW_TIER": {
         "n": 1,
         "wins": 0,
         "hit_pct": 0.0
@@ -13898,9 +13913,30 @@
         "n": 1,
         "wins": 0,
         "hit_pct": 0.0
+      },
+      "unknown": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
       }
     },
-    "by_signal": {}
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
   },
   "Bouzige M.": {
     "n": 1,
@@ -13928,9 +13964,9 @@
     "by_signal": {}
   },
   "Mbithi M.": {
-    "n": 1,
-    "wins": 1,
-    "hit_pct": 1.0,
+    "n": 3,
+    "wins": 2,
+    "hit_pct": 0.667,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -13944,6 +13980,11 @@
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
+      },
+      "UNKNOWN": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
       }
     },
     "by_surface": {
@@ -13951,6 +13992,11 @@
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
+      },
+      "n/a": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
       }
     },
     "by_signal": {
@@ -13998,9 +14044,9 @@
     }
   },
   "Guilleme J.": {
-    "n": 1,
+    "n": 3,
     "wins": 1,
-    "hit_pct": 1.0,
+    "hit_pct": 0.333,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -14008,9 +14054,9 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
+        "n": 3,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.333
       }
     },
     "by_surface": {
@@ -14018,6 +14064,11 @@
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
+      },
+      "n/a": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
       }
     },
     "by_signal": {}
@@ -14173,9 +14224,9 @@
     "by_signal": {}
   },
   "Reco A.": {
-    "n": 1,
+    "n": 2,
     "wins": 1,
-    "hit_pct": 1.0,
+    "hit_pct": 0.5,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -14183,9 +14234,9 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_surface": {
@@ -14193,6 +14244,11 @@
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
+      },
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
       }
     },
     "by_signal": {}
@@ -14357,8 +14413,8 @@
     "by_signal": {}
   },
   "Bosio G.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -14367,13 +14423,18 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "n/a": {
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
@@ -14654,9 +14715,9 @@
     "by_signal": {}
   },
   "Zarate C. M.": {
-    "n": 1,
+    "n": 3,
     "wins": 1,
-    "hit_pct": 1.0,
+    "hit_pct": 0.333,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -14664,9 +14725,9 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
+        "n": 3,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.333
       }
     },
     "by_surface": {
@@ -14674,14 +14735,19 @@
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
+      },
+      "n/a": {
+        "n": 2,
+        "wins": 0,
+        "hit_pct": 0.0
       }
     },
     "by_signal": {}
   },
   "Cazacu D. N.": {
-    "n": 1,
-    "wins": 0,
-    "hit_pct": 0.0,
+    "n": 2,
+    "wins": 1,
+    "hit_pct": 0.5,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -14689,9 +14755,9 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 0,
-        "hit_pct": 0.0
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
       }
     },
     "by_surface": {
@@ -14699,6 +14765,11 @@
         "n": 1,
         "wins": 0,
         "hit_pct": 0.0
+      },
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
       }
     },
     "by_signal": {}
@@ -14754,8 +14825,8 @@
     "by_signal": {}
   },
   "Grabher J.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -14764,13 +14835,18 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "n/a": {
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
@@ -14779,8 +14855,8 @@
     "by_signal": {}
   },
   "Kostovic T.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -14789,13 +14865,18 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "n/a": {
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
@@ -14829,8 +14910,8 @@
     "by_signal": {}
   },
   "Fita Boluda A.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -14839,13 +14920,18 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "n/a": {
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
@@ -14945,8 +15031,8 @@
     "by_signal": {}
   },
   "Liu K.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -14960,10 +15046,20 @@
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
+      },
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
       }
     },
     "by_surface": {
       "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "n/a": {
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
@@ -15056,9 +15152,9 @@
     }
   },
   "Hrabavets U.": {
-    "n": 1,
+    "n": 2,
     "wins": 1,
-    "hit_pct": 1.0,
+    "hit_pct": 0.5,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -15066,9 +15162,9 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_surface": {
@@ -15076,6 +15172,11 @@
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
+      },
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
       }
     },
     "by_signal": {}
@@ -15156,16 +15257,24 @@
     "by_signal": {}
   },
   "Lam S.": {
-    "n": 1,
-    "wins": 1,
+    "n": 3,
+    "wins": 3,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
     "best_signals": [],
-    "exclusive_win_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_HOT"
+    ],
     "by_rival_context": {
       "UNKNOWN": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      },
+      "LOW_TIER": {
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
@@ -15176,14 +15285,35 @@
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
+      },
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "unknown": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
       }
     },
-    "by_signal": {}
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
   },
   "Teixido Garcia M.": {
-    "n": 1,
+    "n": 2,
     "wins": 1,
-    "hit_pct": 1.0,
+    "hit_pct": 0.5,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -15191,9 +15321,9 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_surface": {
@@ -15201,6 +15331,11 @@
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
+      },
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
       }
     },
     "by_signal": {}
@@ -15231,8 +15366,8 @@
     "by_signal": {}
   },
   "Novak K.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -15241,13 +15376,18 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "n/a": {
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
@@ -15331,9 +15471,9 @@
     "by_signal": {}
   },
   "Mettraux M.": {
-    "n": 1,
+    "n": 2,
     "wins": 1,
-    "hit_pct": 1.0,
+    "hit_pct": 0.5,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -15341,9 +15481,9 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_surface": {
@@ -15351,6 +15491,11 @@
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
+      },
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
       }
     },
     "by_signal": {}
@@ -15431,8 +15576,8 @@
     "by_signal": {}
   },
   "Lew Yan Foon A.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -15441,13 +15586,18 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "clay": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "n/a": {
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
@@ -15481,9 +15631,9 @@
     "by_signal": {}
   },
   "Khayrutdinova E.": {
-    "n": 1,
+    "n": 2,
     "wins": 1,
-    "hit_pct": 1.0,
+    "hit_pct": 0.5,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -15491,9 +15641,9 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_surface": {
@@ -15501,6 +15651,11 @@
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
+      },
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
       }
     },
     "by_signal": {}
@@ -15570,8 +15725,8 @@
     }
   },
   "Lu J.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -15580,13 +15735,18 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "hard": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "n/a": {
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
@@ -16081,9 +16241,9 @@
     }
   },
   "Suresh D.": {
-    "n": 3,
-    "wins": 0,
-    "hit_pct": 0.0,
+    "n": 4,
+    "wins": 1,
+    "hit_pct": 0.25,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -16096,9 +16256,9 @@
         "hit_pct": 0.0
       },
       "UNKNOWN": {
-        "n": 1,
-        "wins": 0,
-        "hit_pct": 0.0
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
       }
     },
     "by_surface": {
@@ -16108,9 +16268,9 @@
         "hit_pct": 0.0
       },
       "n/a": {
-        "n": 1,
-        "wins": 0,
-        "hit_pct": 0.0
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
       }
     },
     "by_signal": {
@@ -16595,9 +16755,9 @@
     }
   },
   "Shin S.": {
-    "n": 2,
+    "n": 3,
     "wins": 2,
-    "hit_pct": 1.0,
+    "hit_pct": 0.667,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -16605,9 +16765,9 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 2,
+        "n": 3,
         "wins": 2,
-        "hit_pct": 1.0
+        "hit_pct": 0.667
       }
     },
     "by_surface": {
@@ -16617,9 +16777,9 @@
         "hit_pct": 1.0
       },
       "n/a": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_signal": {}
@@ -16783,8 +16943,8 @@
     "by_signal": {}
   },
   "Leme Da Silva N. V.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -16793,15 +16953,15 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
@@ -16833,9 +16993,9 @@
     "by_signal": {}
   },
   "Picard M.": {
-    "n": 1,
+    "n": 2,
     "wins": 1,
-    "hit_pct": 1.0,
+    "hit_pct": 0.5,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -16843,16 +17003,16 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_signal": {}
@@ -16908,9 +17068,9 @@
     "by_signal": {}
   },
   "Maxted L.": {
-    "n": 1,
+    "n": 2,
     "wins": 1,
-    "hit_pct": 1.0,
+    "hit_pct": 0.5,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -16918,16 +17078,16 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_signal": {}
@@ -17033,8 +17193,8 @@
     "by_signal": {}
   },
   "Perez Alarcon L.": {
-    "n": 1,
-    "wins": 1,
+    "n": 3,
+    "wins": 3,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -17043,15 +17203,15 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 3,
+        "wins": 3,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 3,
+        "wins": 3,
         "hit_pct": 1.0
       }
     },
@@ -17283,8 +17443,8 @@
     "by_signal": {}
   },
   "Rodriguez L. J.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -17293,15 +17453,15 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
@@ -17383,9 +17543,9 @@
     "by_signal": {}
   },
   "Compagnucci T.": {
-    "n": 1,
+    "n": 2,
     "wins": 1,
-    "hit_pct": 1.0,
+    "hit_pct": 0.5,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -17393,16 +17553,16 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_signal": {}
@@ -17508,16 +17668,30 @@
     "by_signal": {}
   },
   "Honda N.": {
-    "n": 1,
-    "wins": 1,
+    "n": 3,
+    "wins": 3,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
     "best_signals": [],
-    "exclusive_win_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_NEUTRAL",
+      "STRONG"
+    ],
     "by_rival_context": {
       "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MID_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "LOW_TIER": {
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
@@ -17525,17 +17699,38 @@
     },
     "by_surface": {
       "n/a": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      },
+      "unknown": {
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
       }
     },
-    "by_signal": {}
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    }
   },
   "Bennani K.": {
-    "n": 1,
+    "n": 2,
     "wins": 1,
-    "hit_pct": 1.0,
+    "hit_pct": 0.5,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -17543,16 +17738,16 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_signal": {}
@@ -17713,9 +17908,9 @@
     "by_signal": {}
   },
   "Sawangkaew M.": {
-    "n": 1,
+    "n": 2,
     "wins": 1,
-    "hit_pct": 1.0,
+    "hit_pct": 0.5,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -17723,16 +17918,16 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_signal": {}
@@ -17838,8 +18033,8 @@
     "by_signal": {}
   },
   "Brown P.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -17848,15 +18043,15 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
@@ -17944,8 +18139,8 @@
     "by_signal": {}
   },
   "Vergara Rivera A.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -17956,15 +18151,15 @@
     ],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
@@ -18052,8 +18247,8 @@
     "by_signal": {}
   },
   "Guzman D.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -18062,15 +18257,15 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
@@ -18102,9 +18297,9 @@
     "by_signal": {}
   },
   "Rapolu M.": {
-    "n": 1,
+    "n": 2,
     "wins": 1,
-    "hit_pct": 1.0,
+    "hit_pct": 0.5,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -18112,16 +18307,16 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_signal": {}
@@ -18152,16 +18347,23 @@
     "by_signal": {}
   },
   "Buchnik M.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
     "best_signals": [],
-    "exclusive_win_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH"
+    ],
     "by_rival_context": {
       "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "LOW_TIER": {
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
@@ -18169,24 +18371,39 @@
     },
     "by_surface": {
       "n/a": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "EDGE_HIGH": {
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
       }
-    },
-    "by_signal": {}
+    }
   },
   "Malkin M.": {
-    "n": 1,
-    "wins": 1,
+    "n": 3,
+    "wins": 3,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
     "best_signals": [],
-    "exclusive_win_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_HOT",
+      "STRONG"
+    ],
     "by_rival_context": {
       "UNKNOWN": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      },
+      "MID_TIER": {
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
@@ -18194,12 +18411,33 @@
     },
     "by_surface": {
       "n/a": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      },
+      "unknown": {
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
       }
     },
-    "by_signal": {}
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
   },
   "Angel M.": {
     "n": 2,
@@ -18448,9 +18686,9 @@
     "by_signal": {}
   },
   "Bouzkova M.": {
-    "n": 1,
+    "n": 2,
     "wins": 1,
-    "hit_pct": 1.0,
+    "hit_pct": 0.5,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -18458,16 +18696,16 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_signal": {}
@@ -18498,9 +18736,9 @@
     "by_signal": {}
   },
   "Matusevich A.": {
-    "n": 1,
+    "n": 2,
     "wins": 1,
-    "hit_pct": 1.0,
+    "hit_pct": 0.5,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -18511,6 +18749,11 @@
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
+      },
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
       }
     },
     "by_surface": {
@@ -18518,9 +18761,25 @@
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
+      },
+      "unknown": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
       }
     },
-    "by_signal": {}
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
   },
   "Piros Z.": {
     "n": 1,
@@ -18573,9 +18832,9 @@
     "by_signal": {}
   },
   "Saitoh K.": {
-    "n": 1,
+    "n": 2,
     "wins": 1,
-    "hit_pct": 1.0,
+    "hit_pct": 0.5,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -18583,24 +18842,24 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_signal": {}
   },
   "Rifqi Fitriadi M.": {
-    "n": 1,
+    "n": 2,
     "wins": 1,
-    "hit_pct": 1.0,
+    "hit_pct": 0.5,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -18608,16 +18867,16 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_signal": {}
@@ -18848,8 +19107,8 @@
     "by_signal": {}
   },
   "Vives Marcos P.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -18858,15 +19117,15 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
@@ -18931,8 +19190,8 @@
     "by_signal": {}
   },
   "Belozertsev N.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -18941,23 +19200,23 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_signal": {}
   },
   "Martin Manzano J. C.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -18966,15 +19225,15 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
@@ -19031,9 +19290,9 @@
     "by_signal": {}
   },
   "Vanshelboim E.": {
-    "n": 1,
+    "n": 2,
     "wins": 1,
-    "hit_pct": 1.0,
+    "hit_pct": 0.5,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -19041,16 +19300,16 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_signal": {}
@@ -19131,9 +19390,9 @@
     "by_signal": {}
   },
   "Barranco Cosano J.": {
-    "n": 1,
+    "n": 2,
     "wins": 1,
-    "hit_pct": 1.0,
+    "hit_pct": 0.5,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -19141,24 +19400,24 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_signal": {}
   },
   "Bennani R.": {
-    "n": 1,
+    "n": 2,
     "wins": 1,
-    "hit_pct": 1.0,
+    "hit_pct": 0.5,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -19166,16 +19425,16 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_signal": {}
@@ -19206,8 +19465,8 @@
     "by_signal": {}
   },
   "Casanova H.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -19216,15 +19475,15 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
@@ -19356,8 +19615,8 @@
     "by_signal": {}
   },
   "Siniakov D.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -19366,15 +19625,15 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
@@ -19406,8 +19665,8 @@
     "by_signal": {}
   },
   "Houkes M.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -19416,15 +19675,15 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
@@ -19556,8 +19815,8 @@
     "by_signal": {}
   },
   "Erhard M.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -19566,23 +19825,23 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_signal": {}
   },
   "Sharipov M.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -19591,23 +19850,23 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_signal": {}
   },
   "Estevez J.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -19616,15 +19875,15 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
@@ -19656,8 +19915,8 @@
     "by_signal": {}
   },
   "Soto M.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -19668,15 +19927,15 @@
     ],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
@@ -19764,9 +20023,9 @@
     "by_signal": {}
   },
   "Turcanu R. D.": {
-    "n": 1,
+    "n": 2,
     "wins": 1,
-    "hit_pct": 1.0,
+    "hit_pct": 0.5,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -19774,16 +20033,16 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_signal": {}
@@ -19914,9 +20173,9 @@
     "by_signal": {}
   },
   "Tsao C. Y.": {
-    "n": 2,
+    "n": 3,
     "wins": 1,
-    "hit_pct": 0.5,
+    "hit_pct": 0.333,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -19924,16 +20183,16 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 2,
+        "n": 3,
         "wins": 1,
-        "hit_pct": 0.5
+        "hit_pct": 0.333
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 2,
+        "n": 3,
         "wins": 1,
-        "hit_pct": 0.5
+        "hit_pct": 0.333
       }
     },
     "by_signal": {}
@@ -19964,9 +20223,9 @@
     "by_signal": {}
   },
   "Popa G. S.": {
-    "n": 1,
+    "n": 2,
     "wins": 1,
-    "hit_pct": 1.0,
+    "hit_pct": 0.5,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -19974,16 +20233,16 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_signal": {}
@@ -20039,8 +20298,8 @@
     "by_signal": {}
   },
   "Balan S. V.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -20049,15 +20308,15 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
@@ -20264,8 +20523,8 @@
     "by_signal": {}
   },
   "Radovanovic N.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -20274,23 +20533,23 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_signal": {}
   },
   "Senic N.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -20299,23 +20558,23 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_signal": {}
   },
   "Gallardo Guevara C.": {
-    "n": 1,
-    "wins": 1,
+    "n": 3,
+    "wins": 3,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -20324,31 +20583,38 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 3,
+        "wins": 3,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 3,
+        "wins": 3,
         "hit_pct": 1.0
       }
     },
     "by_signal": {}
   },
   "Maines N.": {
-    "n": 1,
-    "wins": 1,
+    "n": 3,
+    "wins": 3,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
     "best_signals": [],
-    "exclusive_win_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED"
+    ],
     "by_rival_context": {
       "UNKNOWN": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      },
+      "MID_TIER": {
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
@@ -20356,12 +20622,18 @@
     },
     "by_surface": {
       "n/a": {
+        "n": 3,
+        "wins": 3,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "EDGE_MED": {
         "n": 1,
         "wins": 1,
         "hit_pct": 1.0
       }
-    },
-    "by_signal": {}
+    }
   },
   "Cirpanli D.": {
     "n": 1,
@@ -20389,8 +20661,8 @@
     "by_signal": {}
   },
   "Lene E.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -20399,15 +20671,15 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
@@ -20489,8 +20761,8 @@
     "by_signal": {}
   },
   "Diatlova K.": {
-    "n": 1,
-    "wins": 1,
+    "n": 3,
+    "wins": 3,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -20499,24 +20771,24 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 3,
+        "wins": 3,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 3,
+        "wins": 3,
         "hit_pct": 1.0
       }
     },
     "by_signal": {}
   },
   "Iliev S.": {
-    "n": 1,
+    "n": 2,
     "wins": 1,
-    "hit_pct": 1.0,
+    "hit_pct": 0.5,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -20524,16 +20796,16 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
+        "n": 2,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.5
       }
     },
     "by_signal": {}
@@ -20689,9 +20961,9 @@
     "by_signal": {}
   },
   "Kuramochi M.": {
-    "n": 1,
+    "n": 3,
     "wins": 1,
-    "hit_pct": 1.0,
+    "hit_pct": 0.333,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -20699,24 +20971,24 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
+        "n": 3,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.333
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
+        "n": 3,
         "wins": 1,
-        "hit_pct": 1.0
+        "hit_pct": 0.333
       }
     },
     "by_signal": {}
   },
   "Cabrera L.": {
-    "n": 1,
-    "wins": 0,
-    "hit_pct": 0.0,
+    "n": 3,
+    "wins": 2,
+    "hit_pct": 0.667,
     "consistent": false,
     "resilient": false,
     "top_tier_wins": 0,
@@ -20724,16 +20996,16 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 0,
-        "hit_pct": 0.0
+        "n": 3,
+        "wins": 2,
+        "hit_pct": 0.667
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 0,
-        "hit_pct": 0.0
+        "n": 3,
+        "wins": 2,
+        "hit_pct": 0.667
       }
     },
     "by_signal": {}
@@ -20764,8 +21036,8 @@
     "by_signal": {}
   },
   "Glushkova D.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -20774,15 +21046,15 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
@@ -20839,8 +21111,8 @@
     "by_signal": {}
   },
   "Back D.": {
-    "n": 1,
-    "wins": 1,
+    "n": 3,
+    "wins": 3,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -20849,15 +21121,15 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 3,
+        "wins": 3,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 3,
+        "wins": 3,
         "hit_pct": 1.0
       }
     },
@@ -20889,8 +21161,8 @@
     "by_signal": {}
   },
   "Riera J.": {
-    "n": 1,
-    "wins": 1,
+    "n": 2,
+    "wins": 2,
     "hit_pct": 1.0,
     "consistent": false,
     "resilient": false,
@@ -20899,15 +21171,15 @@
     "exclusive_win_signals": [],
     "by_rival_context": {
       "UNKNOWN": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
     "by_surface": {
       "n/a": {
-        "n": 1,
-        "wins": 1,
+        "n": 2,
+        "wins": 2,
         "hit_pct": 1.0
       }
     },
@@ -20993,5 +21265,1672 @@
         "hit_pct": 1.0
       }
     }
+  },
+  "Andrienko M.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Nikles J.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Perot R.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Batin T.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Badosa P.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Martin A.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Rublev A.": {
+    "n": 2,
+    "wins": 1,
+    "hit_pct": 0.5,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      }
+    },
+    "by_signal": {}
+  },
+  "Darderi L.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Seidman L.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Ibragimova A.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Allegre C.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Crossley M.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Voloshchuk A.": {
+    "n": 2,
+    "wins": 2,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Mochizuki S.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Villanueva G.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Takahashi Y.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Hulme M.": {
+    "n": 2,
+    "wins": 1,
+    "hit_pct": 0.5,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_HOT"
+    ],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "unknown": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Cooper S.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Sanders O.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Djuric B.": {
+    "n": 2,
+    "wins": 1,
+    "hit_pct": 0.5,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 2,
+        "wins": 1,
+        "hit_pct": 0.5
+      }
+    },
+    "by_signal": {}
+  },
+  "Filin N.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Angelini L.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Lopez Montagud C.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Rodenas P.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Saraiva Dos Santos P. A.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Meligeni Alves F.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Maftei M.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Todoran M.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Papoe R. M.": {
+    "n": 3,
+    "wins": 3,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 3,
+        "wins": 3,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 3,
+        "wins": 3,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Breazu M. F.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Gima S.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Pieleanu R. T.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Carteputreda D. C.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Zarazua R.": {
+    "n": 2,
+    "wins": 2,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Aiava D.": {
+    "n": 2,
+    "wins": 2,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 2,
+        "wins": 2,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Amariei I. D.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Gadient N.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Song Kwon G. H.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Geerlings Martinez A.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Argyrokastriti M.": {
+    "n": 2,
+    "wins": 1,
+    "hit_pct": 0.5,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "unknown": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Rodriguez L.": {
+    "n": 2,
+    "wins": 1,
+    "hit_pct": 0.5,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "unknown": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Bartashevich Y.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "De Stefano S.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Maquet M.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Capurro Taborda M.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Labrana F.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Goina P. G.": {
+    "n": 2,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "unknown": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "STRONG": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Sanchez Uribe M. J.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_HIGH",
+      "MRK_NEUTRAL"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "unknown": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Sheldon Mi.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_NEUTRAL"
+    ],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "unknown": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Matsuda R.": {
+    "n": 2,
+    "wins": 2,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [
+      "EDGE_MED",
+      "MRK_NEUTRAL",
+      "rival_COLD"
+    ],
+    "by_rival_context": {
+      "RIVAL_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "unknown": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {
+      "MRK_NEUTRAL": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "rival_COLD": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    }
+  },
+  "Marcondes I.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "MID_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "unknown": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "MRK_HOT": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      },
+      "EDGE_MED": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Bynoe E.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Fearnley J.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Noguchi R.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Bublik A.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Bondar A.": {
+    "n": 1,
+    "wins": 1,
+    "hit_pct": 1.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 1,
+        "hit_pct": 1.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Becroft I.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "LOW_TIER": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {
+      "EDGE_HIGH": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    }
+  },
+  "Andreev A.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Ormaechea P.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
+  },
+  "Munk Mortensen R.": {
+    "n": 1,
+    "wins": 0,
+    "hit_pct": 0.0,
+    "consistent": false,
+    "resilient": false,
+    "top_tier_wins": 0,
+    "best_signals": [],
+    "exclusive_win_signals": [],
+    "by_rival_context": {
+      "UNKNOWN": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_surface": {
+      "n/a": {
+        "n": 1,
+        "wins": 0,
+        "hit_pct": 0.0
+      }
+    },
+    "by_signal": {}
   }
 }
