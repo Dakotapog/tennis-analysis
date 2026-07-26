@@ -619,7 +619,7 @@ def _extract_and_categorize(partidos: list, threshold: float,
         if _bloqueado:
             _COMBO_GATE_LOG.append({
                 'nombre':  favorito,
-                'torneo':  (partido.get('torneo_completo') or partido.get('torneo') or '?'),
+                'torneo':  (partido.get('torneo_completo') or partido.get('torneo_nombre') or partido.get('torneo') or '?'),  # D143-04
                 'gate':    _motivo_gate.split(':')[0],
                 'motivo':  _motivo_gate,
                 'conf':    conf,
@@ -655,7 +655,7 @@ def _extract_and_categorize(partidos: list, threshold: float,
         if cuota and cuota > 0 and _ev_leg < EV_LEG_MIN:
             _COMBO_GATE_LOG.append({
                 'nombre':  favorito,
-                'torneo':  (partido.get('torneo_completo') or partido.get('torneo') or '?'),
+                'torneo':  (partido.get('torneo_completo') or partido.get('torneo_nombre') or partido.get('torneo') or '?'),  # D143-04
                 'gate':    'G_EV',
                 'motivo':  f'G_EV: ev_leg={_ev_leg:.3f} < {EV_LEG_MIN} (conf={conf:.1f}%, cuota={cuota})',
                 'conf':    conf,

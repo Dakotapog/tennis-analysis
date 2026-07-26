@@ -174,8 +174,8 @@ Gate: estabilidad 5 días consecutivos con D143-01 activo (torneo presente en �
 **D143-03 (Nodo-142 huérfano):** Crear spec formal para Nodo-142 ITF Live Games Convergencia
 antes de que el test huérfano acumule más deuda SDD.
 
-**D143-04 (gap combo_confianza_builder L658):** Gate log G_EV usa
-`partido.get('torneo_completo') or partido.get('torneo') or '?'` — omite `torneo_nombre`.
-Cuando h2h tiene `torneo_nombre` pero no `torneo`, el log muestra `?` en vez del torneo real.
-Fix: añadir `or partido.get('torneo_nombre')` al fallback en L658.
-Impacto: cosmético (solo el gate log — el pick sí tiene torneo correcto en L585-590 que sí lee `torneo_nombre`).
+**D143-04 (gap combo_confianza_builder L622+L658) — IMPLEMENTADO:** Gate log G1-G4 (L622) y G_EV (L658)
+usaban `partido.get('torneo_completo') or partido.get('torneo') or '?'` — omitían `torneo_nombre`.
+Cuando h2h tiene `torneo_nombre` pero no `torneo`, el log mostraba `?` en vez del torneo real.
+Fix: añadido `or partido.get('torneo_nombre')` al fallback en ambas líneas.
+Impacto: cosmético (solo el gate log — el pick sí tenía torneo correcto en L585-590 que ya leía `torneo_nombre`).
