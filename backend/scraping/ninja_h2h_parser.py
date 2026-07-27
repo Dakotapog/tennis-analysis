@@ -944,6 +944,9 @@ class NinjaH2HExtractor:
                                 })
                                 all_matches.append(match)
             elif isinstance(data, list):
+                for match in data:  # D145-01: normalizar tipo_cancha desde superficie (list branch)
+                    if isinstance(match, dict) and not match.get('tipo_cancha'):
+                        match['tipo_cancha'] = match.get('superficie', 'N/A')
                 all_matches = data
 
             valid_matches = [m for m in all_matches if m.get('match_url')]
@@ -1644,7 +1647,8 @@ class NinjaH2HExtractor:
             'jugador2': p2,
             'jugador2_nacionalidad': rivalry.get('player2_nationality', 'N/A'),
             'torneo_nombre': match_data.get('torneo_nombre', 'N/A'),
-            'tipo_cancha': match_data.get('tipo_cancha', 'N/A'),
+            'tipo_cancha': match_data.get('tipo_cancha') or match_data.get('superficie', 'N/A'),  # D145-01
+            'hora': match_data.get('hora'),  # D145-01: timing guard (D145-02 en edge_calculator)
             'torneo_completo': match_data.get('torneo_completo', 'N/A'),
             'cuota1': match_data.get('cuota1', 'N/A'),
             'cuota2': match_data.get('cuota2', 'N/A'),
