@@ -187,6 +187,7 @@ def _build_record(pick: dict, fecha: str) -> Optional[dict]:
         "sb_id":                  sb_id,
         "logged_at":              datetime.now().astimezone().isoformat(),
         "match_key":              mk,
+        "strategy":               pick.get('strategy', 'SIN_TAG'),  # D144-01 (Nodo-144)
         "es_qualifying":          _es_qualifying(torneo),
         "season_transition_flag": _season_transition(fecha, superficie),
         "pick_snapshot":          pick,   # Addendum B.1: dict completo, sin mutar
@@ -734,6 +735,73 @@ def update_alpha_flags(fecha: str, alpha_nombres: list[str]) -> int:
     return marcados
 
 
+def log_pick(fecha: str, jugador: str, cuota: float,
+             pick_snapshot: dict) -> Optional[str]:
+    """
+    D144-04 (Nodo-144): registra un pick individual con snapshot completo.
+    Usado por favoritos_combo_builder._registrar_shadow_book() y similares.
+    Upsert por sb_id — conserva registro original si ya existe.
+
+    Returns: sb_id del registro, o None si falla la construcción.
+    """
+    if not jugador:
+        return None
+    pick = {**pick_snapshot, 'jugador': jugador, 'cuota_favorito': float(cuota or 0)}
+    fecha_use = fecha or datetime.now().strftime('%Y-%m-%d')
+    rec = _build_record(pick, fecha_use)
+    if rec is None:
+        return None
+    path = _jsonl_path(fecha_use)
+    existing = _load_jsonl(path)
+    if rec['sb_id'] not in existing:
+        existing[rec['sb_id']] = rec
+        _save_jsonl(path, existing)
+        logger.info(f"[ShadowBook] log_pick: {jugador} → {rec['sb_id']}")
+    return rec['sb_id']
+
+
+def tag_strategy(fecha: str, player_names: list, strategy: str) -> int:
+    """
+    D144-02 (Nodo-144): propaga tag de estrategia al shadow book.
+    Escribe campo top-level 'strategy'. NO toca pick_snapshot (inmutabilidad §1).
+    Solo actualiza registros con strategy='SIN_TAG' — no sobrescribe tags ya asignados.
+
+    Args:
+        fecha: 'YYYY-MM-DD'
+        player_names: nombres de jugadores del combo (favorito_predicho o nombre)
+        strategy: valor del enum — 'CORE', 'COBERTURA', 'SATELITE', etc.
+
+    Returns: número de registros tageados.
+    """
+    if not player_names or not strategy:
+        return 0
+    path = _jsonl_path(fecha)
+    records = _load_jsonl(path)
+    if not records:
+        return 0
+
+    nombres_set = {n.strip().lower() for n in player_names if n}
+    marcados = 0
+    for sb_id, rec in records.items():
+        if rec.get('_type') == 'session_meta':
+            continue
+        if rec.get('strategy', 'SIN_TAG') != 'SIN_TAG':
+            continue  # no sobrescribir tag ya asignado
+        snap = rec.get('pick_snapshot', {})
+        nombre = (snap.get('favorito_predicho') or snap.get('nombre') or
+                  snap.get('jugador') or snap.get('player') or '').strip().lower()
+        if nombre and nombre in nombres_set:
+            rec['strategy'] = strategy
+            rec['strategy_tagged_at'] = datetime.now().isoformat()
+            marcados += 1
+
+    if marcados > 0:
+        _save_jsonl(path, records)
+        logger.info(f"[ShadowBook] {marcados} picks tageados strategy={strategy} → {path}")
+
+    return marcados
+
+
 def settle(fecha: str, resultados_map: Optional[Dict] = None) -> int:
     """
     Momento 3: settlement post-match.
@@ -1181,6 +1249,18 @@ def report(desde: Optional[str] = None, hasta: Optional[str] = None) -> str:
                     lambda r: r.get('es_qualifying', False))
     _append_segment(settled, lines, "season_transition=true",
                     lambda r: r.get('season_transition_flag', False))
+
+    # ── D144-05 (Nodo-144): Segmentos por estrategia ──
+    _strat_vals = sorted({r.get('strategy', 'SIN_TAG') for r in settled
+                          if r.get('strategy', 'SIN_TAG') not in ('SIN_TAG', 'HISTORICO_SIN_TAG')})
+    if _strat_vals:
+        lines.append("  ESTRATEGIA (D144-05):")
+        for _strat in _strat_vals:
+            _append_segment(settled, lines, f"  strategy={_strat}",
+                            lambda r, s=_strat: r.get('strategy', 'SIN_TAG') == s)
+    _n_sin_tag = sum(1 for r in settled if r.get('strategy', 'SIN_TAG') in ('SIN_TAG', 'HISTORICO_SIN_TAG'))
+    if _n_sin_tag:
+        lines.append(f"    [SIN_TAG/HISTORICO]: {_n_sin_tag} registros sin estrategia asignada")
 
     # ── D65-05: ANCHOR (edge>0) vs VARIABLE (edge≤0) — Nodo-65 §6, H77-02 ──
     # Observacional desde n=1. Nota [pre-graduacion n<30] hasta tener muestra.

@@ -2085,6 +2085,43 @@ def main():
         except Exception as _exc:
             print(f'  [H62-01] WARNING: No se pudo propagar alpha_promoted: {_exc}')
 
+    # D144-03 (Nodo-144): propagar strategy tag al shadow book para cada combo
+    try:
+        from shadow_book import tag_strategy as _tag_strategy
+        _fecha_hoy = datetime.now().strftime('%Y-%m-%d')
+        _strategy_map = [
+            ('core',               'CORE'),
+            ('moonshot',           'MOONSHOT'),
+        ]
+        _n_tagged = 0
+        for _plan_key, _strat in _strategy_map:
+            _combo = plan.get(_plan_key)
+            if _combo and isinstance(_combo, dict):
+                _nombres = [p.get('nombre', '') for p in _combo.get('picks', []) if p.get('nombre')]
+                _n_tagged += _tag_strategy(_fecha_hoy, _nombres, _strat)
+        # COBERTURA es lista de combos
+        for _cob in (plan.get('cobertura') or []):
+            if isinstance(_cob, dict):
+                _nombres = [p.get('nombre', '') for p in _cob.get('picks', []) if p.get('nombre')]
+                _n_tagged += _tag_strategy(_fecha_hoy, _nombres, 'COBERTURA')
+        # SATELITE es lista de combos
+        for _sat in (plan.get('satellites') or []):
+            if isinstance(_sat, dict):
+                _nombres = [p.get('nombre', '') for p in _sat.get('picks', []) if p.get('nombre')]
+                _n_tagged += _tag_strategy(_fecha_hoy, _nombres, 'SATELITE')
+        # ANCHOR y GCS — picks con flag específico
+        for _p in picks:
+            if _p.get('es_anchor'):
+                _tag_strategy(_fecha_hoy, [_p.get('nombre', '')], 'ANCHOR')
+                _n_tagged += 1
+            elif _p.get('gcs_active'):
+                _tag_strategy(_fecha_hoy, [_p.get('nombre', '')], 'GCS')
+                _n_tagged += 1
+        if _n_tagged:
+            print(f'  [D144-03] {_n_tagged} picks tageados con strategy en shadow book')
+    except Exception as _exc:
+        print(f'  [D144-03] WARNING: tag_strategy falló: {_exc}')
+
     # Generar .bat en escritorio
     has_combos = any([plan.get('core'), plan.get('satellites'), plan.get('moonshot'),
                       plan.get('cobertura_expanded') and plan.get('cobertura')])
