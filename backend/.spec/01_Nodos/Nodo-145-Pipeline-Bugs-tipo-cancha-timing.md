@@ -1,8 +1,8 @@
 # Nodo-145 — Pipeline Bugs: tipo_cancha + Timing Guard
 
 **Fecha:** 2026-07-27
-**Estado:** IMPLEMENTADO
-**Wikilinks:** [[Nodo-52]] [[Nodo-143]] [[Nodo-140]] [[h2h_extractor]] [[edge_calculator]]
+**Estado:** IMPLEMENTADO (commit 720adea + 8723fe6)
+**Wikilinks:** [[Nodo-52]] [[Nodo-143]] [[Nodo-140]] [[h2h_extractor]] [[edge_calculator]] [[ninja_h2h_parser]]
 
 ---
 
@@ -51,7 +51,7 @@ python3 -c "import json; d=json.load(open('reports/edge_report_20260727_103621.j
 
 ## 3. Fixes implementados
 
-### D145-01: h2h_extractor.py — tipo_cancha + hora
+### D145-01a: h2h_extractor.py — tipo_cancha + hora (modo Playwright)
 
 **scraping/h2h_extractor.py L337** (Playwright path):
 ```python
@@ -73,6 +73,44 @@ for key in ('cuota1', 'cuota2', 'torneo_nombre', 'tipo_cancha', 'torneo_completo
 ```python
 'hora': match_data.get('hora'),  # D145-01: timing guard
 ```
+
+### D145-01b: ninja_h2h_parser.py — tipo_cancha + hora (modo --api-mode)
+
+**Hallazgo post-commit (2026-07-27 sesión tarde):** El fix D145-01a solo cubría el modo
+Playwright. En `--api-mode`, el código usa `NinjaH2HExtractor` (`scraping/ninja_h2h_parser.py`)
+que tiene su propio `load_matches()` y `_consolidate_result()` — ambos con el mismo bug sin corregir.
+
+**Root cause adicional:** `load_matches()` tiene dos ramas:
+- Rama `dict` (archivos estructurados por torneo): ya tenía `match.get('superficie') or info['superficie']` ✓
+- Rama `list` (archivos merged como `zita_tennis_matches_*_merged.json`): solo hacía `all_matches = data` sin normalizar `tipo_cancha` ✗
+
+Verificado: `h2h_results_enhanced_20260727_114830.json` (109 partidos, modo API) → `tipo_cancha: {'N/A'}` incluso con fix D145-01a.
+
+**scraping/ninja_h2h_parser.py** — rama list en `load_matches()`:
+```python
+# Antes:
+elif isinstance(data, list):
+    all_matches = data
+
+# Después:
+elif isinstance(data, list):
+    for match in data:  # D145-01: normalizar tipo_cancha desde superficie (list branch)
+        if isinstance(match, dict) and not match.get('tipo_cancha'):
+            match['tipo_cancha'] = match.get('superficie', 'N/A')
+    all_matches = data
+```
+
+**scraping/ninja_h2h_parser.py** — `_consolidate_result()`:
+```python
+# Antes:
+'tipo_cancha': match_data.get('tipo_cancha', 'N/A'),
+
+# Después:
+'tipo_cancha': match_data.get('tipo_cancha') or match_data.get('superficie', 'N/A'),  # D145-01
+'hora': match_data.get('hora'),  # D145-01: timing guard (D145-02 en edge_calculator)
+```
+
+Resultado verificado: `h2h_results_enhanced_20260727_121145.json` → `tipo_cancha: {'hard', 'clay'}`, 71 partidos hard ✓, hora propagada ✓
 
 ### D145-02: edge_calculator.py — timing guard
 
@@ -117,6 +155,8 @@ python3 generar_tabla_favoritos2.py
 ## 5. Tests — REGLA-T53
 
 **Archivo:** `tests/test_nodo145_pipeline_bugs.py` — 7 tests, 7/7 PASS
+**Nota:** Los tests cubren la lógica del fix (expresión `get('tipo_cancha') or get('superficie', 'N/A')`
+y timing guard). Aplican tanto a h2h_extractor como a ninja_h2h_parser — misma lógica, mismos tests.
 
 - `test_tipo_cancha_from_superficie` — superficie='hard' sin tipo_cancha → tipo_cancha='hard'
 - `test_tipo_cancha_propio_gana` — tipo_cancha propio tiene prioridad sobre superficie
