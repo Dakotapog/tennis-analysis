@@ -57,6 +57,7 @@ MAX_LEGS_PER_TORNEO = 2
 MAX_COMBOS_TOP = 3          # top-3 combos con solape <=2 piernas
 MAX_RANKING_ONLY_PER_COMBO = 2   # D110-06: max piernas RANKING_ONLY por combo
 LEG_MAX_CUOTA_RANKING_ONLY = 1.60  # D110-06: sin modelo → favorito más claro exigido
+MAX_H2H_MODEL_PER_COMBO = 2     # D146: max piernas H2H_MODEL por combo
 
 # Rutas Windows / WSL
 DESKTOP_WIN = Path("/mnt/c/users/hogar/Desktop")
@@ -253,6 +254,11 @@ def armar_combos(picks: List[Dict], mega: bool = False) -> List[Dict]:
             # D110-06: máx MAX_RANKING_ONLY_PER_COMBO piernas RANKING_ONLY por combo
             n_ronly = sum(1 for p in combo_picks if p.get("fuente") == "RANKING_ONLY")
             if n_ronly > MAX_RANKING_ONLY_PER_COMBO:
+                continue
+
+            # D146: máx MAX_H2H_MODEL_PER_COMBO piernas H2H_MODEL por combo
+            n_h2h = sum(1 for p in combo_picks if p.get("fuente") == "H2H_MODEL")
+            if n_h2h > MAX_H2H_MODEL_PER_COMBO:
                 continue
 
             # Cuota combinada
@@ -605,6 +611,135 @@ def _leer_matches_ranking_only(matches_path: str, edge_picks_set: set) -> List[D
     return candidatos
 
 
+# ── H2H_MODEL universe (D146) ─────────────────────────────────────────────────
+
+def _find_latest_h2h() -> Optional[str]:
+    """D146: Encuentra el h2h_results_enhanced más reciente de hoy."""
+    today = date.today().strftime('%Y%m%d')
+    files = sorted(glob.glob(f"reports/h2h_results_enhanced_{today}_*.json"))
+    return files[-1] if files else None
+
+
+def _leer_h2h_favoritos(h2h_path: str, edge_picks_set: set) -> List[Dict]:
+    """
+    D146: Lee partidos de h2h_results_enhanced directamente para obtener picks
+    con cuota [1.15, 2.10] que edge_calculator descartó por REGLA-HF-1 (cuota < 1.50).
+    Usa la predicción real del modelo (ranking_analysis.prediction), no estimación por cuota.
+
+    Filtros:
+    - cuota_favorito ∈ [LEG_MIN_CUOTA, LEG_MAX_CUOTA] = [1.15, 2.10]
+    - confidence >= 0.55 (MOD+)
+    - timing guard: hora ya pasó >15min Colombia (mismo criterio D145-02)
+    - deduplicación: no duplicar picks ya en universo (edge_report + RANKING_ONLY)
+    """
+    try:
+        with open(h2h_path) as f:
+            data = json.load(f)
+    except Exception as e:
+        logger.error(f"[h2h_favoritos] Error leyendo {h2h_path}: {e}")
+        return []
+
+    partidos = data.get("partidos", [])
+    if not partidos:
+        logger.warning(f"[h2h_favoritos] Sin partidos en {h2h_path}")
+        return []
+
+    # Timing guard — Colombia UTC-5 (mismo criterio D145-02)
+    _ahora_min: Optional[int] = None
+    try:
+        import pytz
+        _col_tz = pytz.timezone("America/Bogota")
+        _ahora = datetime.now(_col_tz)
+        _ahora_min = _ahora.hour * 60 + _ahora.minute
+    except Exception:
+        pass
+
+    candidatos: List[Dict] = []
+    for p in partidos:
+        # Timing guard: skip si hora ya pasó >15min (D145-02)
+        hora = p.get("hora")
+        if hora and _ahora_min is not None:
+            try:
+                _h, _m = map(int, str(hora).split(":")[:2])
+                if _ahora_min > _h * 60 + _m + 15:
+                    continue
+            except Exception:
+                pass
+
+        # Predicción real del modelo
+        pred = (p.get("ranking_analysis") or {}).get("prediction") or {}
+        favored = pred.get("favored_player", "")
+        confidence = float(pred.get("confidence", 0.0) or 0.0)
+        if not favored or confidence < 0.55:
+            continue
+
+        j1 = p.get("jugador1", "")
+        j2 = p.get("jugador2", "")
+        c1 = p.get("cuota1")
+        c2 = p.get("cuota2")
+        if c1 is None or c2 is None:
+            continue
+        try:
+            c1, c2 = float(c1), float(c2)
+        except (TypeError, ValueError):
+            continue
+
+        # Match favorito predicho → cuota correspondiente (por apellido)
+        norm_fav = _normalize_name(favored)
+        norm_j1 = _normalize_name(j1)
+        norm_j2 = _normalize_name(j2)
+        fav_word = norm_fav.split()[0] if norm_fav else ""
+        j1_word = norm_j1.split()[0] if norm_j1 else ""
+        j2_word = norm_j2.split()[0] if norm_j2 else ""
+
+        if norm_fav == norm_j1 or (fav_word and fav_word == j1_word):
+            cuota_fav, cuota_rival, fav_name = c1, c2, j1
+        elif norm_fav == norm_j2 or (fav_word and fav_word == j2_word):
+            cuota_fav, cuota_rival, fav_name = c2, c1, j2
+        else:
+            # Fallback: menor cuota = favorito del book
+            if c1 <= c2:
+                cuota_fav, cuota_rival, fav_name = c1, c2, j1
+            else:
+                cuota_fav, cuota_rival, fav_name = c2, c1, j2
+
+        # Filtro cuota pierna [1.15, 2.10]
+        if not (LEG_MIN_CUOTA <= cuota_fav <= LEG_MAX_CUOTA):
+            continue
+
+        # Deduplicación: no añadir si ya está en el universo (edge_report o RANKING_ONLY)
+        if _normalize_name(fav_name) in edge_picks_set:
+            continue
+
+        torneo = p.get("torneo_nombre", p.get("torneo", ""))
+        tier = p.get("tier", "")
+        conf_flag = "STRONG" if confidence >= 0.60 else "MOD"
+
+        candidatos.append({
+            "favorito_predicho": fav_name,
+            "favorito": fav_name,
+            "jugador": fav_name,
+            "cuota_favorito": cuota_fav,
+            "cuota_rival": cuota_rival,
+            "p_modelo": round(confidence, 4),
+            "probabilidad_modelo": round(confidence, 4),
+            "confianza": conf_flag,
+            "confidence_flag": conf_flag,
+            "torneo": torneo,
+            "tournament": torneo,
+            "tier": tier,
+            "tipo_cancha": p.get("tipo_cancha", "N/A"),
+            "fuente": "H2H_MODEL",
+            "hora": hora,
+            "historial_incompleto": False,
+            "phantom_flag": False,
+            "no_data": False,
+        })
+
+    logger.info(f"[h2h_favoritos] {len(candidatos)} candidatos H2H_MODEL desde {h2h_path}")
+    return candidatos
+
+
 # ── main ──────────────────────────────────────────────────────────────────────
 
 def main() -> None:
@@ -642,6 +777,22 @@ def main() -> None:
             for p in ranking_only:
                 print(f"    {p['favorito']} @{p['cuota_favorito']:.2f} gap={p['ranking_gap']} ({p['torneo']})")
             picks_validos = picks_validos + ranking_only
+
+    # D146: extender con candidatos H2H_MODEL (picks cuota<1.50 descartados por REGLA-HF-1)
+    # Lee h2h_results_enhanced directamente — predicción real del modelo, no estimación.
+    h2h_path = _find_latest_h2h()
+    if h2h_path:
+        edge_picks_set_full = {
+            _normalize_name(p.get("favorito_predicho", p.get("favorito", p.get("jugador", ""))))
+            for p in picks_validos
+        }
+        h2h_picks = _leer_h2h_favoritos(h2h_path, edge_picks_set_full)
+        if h2h_picks:
+            logger.info(f"[D146] {len(h2h_picks)} piernas H2H_MODEL añadidas al universo")
+            print(f"\n  [D146] {len(h2h_picks)} piernas H2H_MODEL (cuota [{LEG_MIN_CUOTA},{LEG_MAX_CUOTA}], conf>=55%, modelo real):")
+            for p in h2h_picks:
+                print(f"    {p['favorito']} @{p['cuota_favorito']:.2f} conf={p['p_modelo']*100:.1f}% ({p['torneo']})")
+            picks_validos = picks_validos + h2h_picks
 
     if len(picks_validos) < LEGS_MIN:
         print(f"\n[FAVORITOS_COMPUESTOS] Sin combo posible hoy ({len(picks_validos)} piernas validas < {LEGS_MIN}).")
