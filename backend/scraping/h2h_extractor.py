@@ -334,7 +334,7 @@ class H2HExtractor:
             # 2. Extraer información actual del partido
             current_info = await self._extract_current_match_info()
             # Preservar valores originales si Playwright no los encontró
-            for key in ('cuota1', 'cuota2', 'torneo_nombre', 'tipo_cancha', 'torneo_completo'):
+            for key in ('cuota1', 'cuota2', 'torneo_nombre', 'tipo_cancha', 'torneo_completo', 'superficie', 'hora'):
                 if current_info.get(key) is None and match_data.get(key) is not None:
                     current_info[key] = match_data[key]
             match_data.update(current_info)
@@ -897,10 +897,11 @@ class H2HExtractor:
             'jugador2': p2,
             'jugador2_nacionalidad': rivalry_analysis.get('player2_nationality', 'N/A'),
             'torneo_nombre': match_data.get('torneo_nombre', 'N/A'),
-            'tipo_cancha': match_data.get('tipo_cancha', 'N/A'),
+            'tipo_cancha': match_data.get('tipo_cancha') or match_data.get('superficie', 'N/A'),  # D145-01
             'torneo_completo': match_data.get('torneo_completo', 'N/A'),
             'cuota1': match_data.get('cuota1', 'N/A'),
             'cuota2': match_data.get('cuota2', 'N/A'),
+            'hora': match_data.get('hora'),  # D145-01: timing guard
             'match_url': match_data.get('match_url', ''),
             f'historial_{p1_key}': p1_hist,
             f'historial_{p2_key}': p2_hist,

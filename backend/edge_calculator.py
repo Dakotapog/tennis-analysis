@@ -1471,7 +1471,26 @@ def procesar_archivo_h2h(h2h_file: str, output_file: Optional[str] = None, shado
     resultados = []
     sin_datos = []
 
+    from datetime import datetime
+    import pytz
+    _col_tz = pytz.timezone('America/Bogota')
+
     for p in partidos:
+        # D145-02 (Nodo-145): skip matches cuya hora ya pasó (> 15 min)
+        _hora_p = p.get('hora')
+        if _hora_p:
+            try:
+                _ahora = datetime.now(_col_tz)
+                _h, _m = map(int, str(_hora_p).split(':')[:2])
+                _inicio_min = _h * 60 + _m
+                _ahora_min = _ahora.hour * 60 + _ahora.minute
+                if _ahora_min > _inicio_min + 15:
+                    logger.info("[D145-02] Skip %s vs %s — hora %s ya pasó (%02d:%02d Col)",
+                                p.get('jugador1', '?'), p.get('jugador2', '?'),
+                                _hora_p, _ahora.hour, _ahora.minute)
+                    continue
+            except Exception:
+                pass  # hora mal formateada — no bloquear
         r = calcular_edge_completo(p, calibracion)
         if r is None:
             sin_datos.append({
