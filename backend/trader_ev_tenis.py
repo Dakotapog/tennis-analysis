@@ -1125,6 +1125,30 @@ def main():
                 for t in sorted(set(p.get('tier', '?') for p in _all)):
                     n = sum(1 for p in _all if p.get('tier') == t)
                     print(f"     {t}: {n} picks")
+            # D148-01: escribir plan vacío para que SAFE/WAS/MEGA no queden bloqueados
+            # build_live_combos detecta cobertura=[] → cae a _build_live_combos_legacy (edge_report)
+            os.makedirs(REPORTS_DIR, exist_ok=True)
+            _ts148 = datetime.now().strftime("%Y%m%d_%H%M%S")
+            _plan148 = os.path.join(REPORTS_DIR, f"trader_plan_{_ts148}.json")
+            _empty_plan = {
+                "metadata": {
+                    "timestamp": _ts148,
+                    "bankroll": args.bankroll,
+                    "torneo_tipo": getattr(args, 'torneo_tipo', ''),
+                    "n_apostar": 0,
+                    "d148": "plan_vacio_sin_apostar",
+                },
+                "individuales": [],
+                "senales": [],
+                "combos": [],
+                "cobertura": [],
+                "sistema": [],
+                "risk_management": {},
+                "resumen": {"n_senales_apostar": 0, "total_en_riesgo": 0, "pct_bankroll_en_riesgo": 0},
+            }
+            with open(_plan148, 'w', encoding='utf-8') as _f148:
+                json.dump(_empty_plan, _f148, indent=2, ensure_ascii=False)
+            print(f"  💾 Plan vacío guardado: {_plan148} (D148-01 — desbloquea WAS/SAFE/MEGA legacy)")
             return
 
     # ── Construir pool ──

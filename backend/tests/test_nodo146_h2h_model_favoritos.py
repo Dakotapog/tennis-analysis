@@ -88,11 +88,23 @@ class TestLeerH2HFavoritos(unittest.TestCase):
 
     def test_h2h_favoritos_basic(self):
         """Partido válido → candidato H2H_MODEL con fuente correcta."""
+        # hora="23:59" + datetime mock 09:00 → timing guard no dispara
         p = _make_partido(cuota1=1.25, cuota2=3.50, confidence=0.677,
-                          favored="Kuramochi K.")
+                          favored="Kuramochi K.", hora="23:59")
         path = _make_h2h_file([p])
         try:
-            result = _leer_h2h_favoritos(path, set())
+            import favoritos_combo_builder as fcb
+
+            class _FakeDT:
+                @staticmethod
+                def now(tz=None):
+                    class _T:
+                        hour = 9
+                        minute = 0
+                    return _T()
+
+            with patch("favoritos_combo_builder.datetime", _FakeDT):
+                result = fcb._leer_h2h_favoritos(path, set())
             self.assertEqual(len(result), 1)
             self.assertEqual(result[0]["fuente"], "H2H_MODEL")
             self.assertAlmostEqual(result[0]["cuota_favorito"], 1.25)
@@ -177,13 +189,25 @@ class TestLeerH2HFavoritos(unittest.TestCase):
 
     def test_h2h_favoritos_conf_flag(self):
         """confidence >= 0.60 → STRONG; 0.55-0.59 → MOD."""
-        p_strong = _make_partido(confidence=0.65, favored="Kuramochi K.", hora=None)
+        # hora="23:59" + datetime mock 09:00 → timing guard no dispara
+        p_strong = _make_partido(confidence=0.65, favored="Kuramochi K.", hora="23:59")
         p_mod = _make_partido(confidence=0.57, favored="Isomura K.",
                               jugador1="Isomura K.", jugador2="Rival B.",
-                              hora=None)
+                              hora="23:59")
         path = _make_h2h_file([p_strong, p_mod])
         try:
-            result = _leer_h2h_favoritos(path, set())
+            import favoritos_combo_builder as fcb
+
+            class _FakeDT:
+                @staticmethod
+                def now(tz=None):
+                    class _T:
+                        hour = 9
+                        minute = 0
+                    return _T()
+
+            with patch("favoritos_combo_builder.datetime", _FakeDT):
+                result = fcb._leer_h2h_favoritos(path, set())
             flags = {r["favorito"]: r["confidence_flag"] for r in result}
             self.assertEqual(flags.get("Kuramochi K."), "STRONG")
             self.assertEqual(flags.get("Isomura K."), "MOD")
