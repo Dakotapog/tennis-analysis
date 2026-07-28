@@ -256,11 +256,6 @@ def armar_combos(picks: List[Dict], mega: bool = False) -> List[Dict]:
             if n_ronly > MAX_RANKING_ONLY_PER_COMBO:
                 continue
 
-            # D146: máx MAX_H2H_MODEL_PER_COMBO piernas H2H_MODEL por combo
-            n_h2h = sum(1 for p in combo_picks if p.get("fuente") == "H2H_MODEL")
-            if n_h2h > MAX_H2H_MODEL_PER_COMBO:
-                continue
-
             # Cuota combinada
             cuota_total = 1.0
             for p in combo_picks:
@@ -656,8 +651,12 @@ def _leer_h2h_favoritos(h2h_path: str, edge_picks_set: set) -> List[Dict]:
 
     candidatos: List[Dict] = []
     for p in partidos:
-        # Timing guard: skip si hora ya pasó >15min (D145-02)
+        # Sin hora → partido sin fecha/hora confirmada (probablemente mañana) → skip
         hora = p.get("hora")
+        if not hora:
+            continue
+
+        # Timing guard: skip si hora ya pasó >15min (D145-02)
         if hora and _ahora_min is not None:
             try:
                 _h, _m = map(int, str(hora).split(":")[:2])
@@ -670,6 +669,9 @@ def _leer_h2h_favoritos(h2h_path: str, edge_picks_set: set) -> List[Dict]:
         pred = (p.get("ranking_analysis") or {}).get("prediction") or {}
         favored = pred.get("favored_player", "")
         confidence = float(pred.get("confidence", 0.0) or 0.0)
+        # h2h guarda confidence como porcentaje (54.8 = 54.8%), normalizar a [0,1]
+        if confidence > 1.0:
+            confidence = confidence / 100.0
         if not favored or confidence < 0.55:
             continue
 
@@ -794,6 +796,41 @@ def main() -> None:
                 print(f"    {p['favorito']} @{p['cuota_favorito']:.2f} conf={p['p_modelo']*100:.1f}% ({p['torneo']})")
             picks_validos = picks_validos + h2h_picks
 
+    # Guard: descartar picks sin nombre (edge_report picks con favorito vacío)
+    picks_validos = [p for p in picks_validos
+                     if (p.get("favorito") or p.get("jugador") or "").strip()]
+
+    # Pre-filtro Kambi: solo piernas apostables en Betplay (D146-fix)
+    _outcomes_map: Dict = {}
+    _started_map: Dict = {}
+    try:
+        from betplay_combo_builder import fetch_kambi_outcomes, find_outcome as _find_oc
+        _outcomes_map, _started_map = fetch_kambi_outcomes()
+        picks_kambi = []
+        for p in picks_validos:
+            jugador = p.get("favorito", p.get("jugador", ""))
+            cuota = float(p.get("cuota_favorito", 0))
+            oc, _ = _find_oc(jugador, cuota, _outcomes_map, _started_map)
+            if oc:
+                p["_kambi_oid"] = str(oc["outcome_id"])
+                # Actualizar cuota con valor real de Kambi (evita drift entre h2h y Betplay)
+                kambi_cuota = float(oc.get("odds", cuota))
+                if kambi_cuota >= LEG_MIN_CUOTA:
+                    p["cuota_favorito"] = kambi_cuota
+                picks_kambi.append(p)
+        n_antes = len(picks_validos)
+        if picks_kambi:
+            picks_validos = picks_kambi
+            print(f"\n  [Kambi] {len(picks_kambi)}/{n_antes} piernas confirmadas en Betplay"
+                  f" ({n_antes - len(picks_kambi)} descartadas sin cobertura):")
+            for p in picks_kambi:
+                print(f"    {p.get('favorito', '')} @{p.get('cuota_favorito', 0):.2f}"
+                      f"  ({p.get('fuente','edge')})")
+        else:
+            logger.warning("[kambi-prefilter] Ninguna pierna en Kambi — usando universo sin filtro")
+    except ImportError:
+        pass
+
     if len(picks_validos) < LEGS_MIN:
         print(f"\n[FAVORITOS_COMPUESTOS] Sin combo posible hoy ({len(picks_validos)} piernas validas < {LEGS_MIN}).")
         print("  Ver desglose arriba para accion especifica.")
@@ -814,11 +851,12 @@ def main() -> None:
         combos = combos[: TOPE_SESION // STAKE_PER_COMBO]
         stake_total = len(combos) * STAKE_PER_COMBO
 
-    # Obtener outcome IDs de Kambi
+    # Obtener outcome IDs de Kambi (reutiliza pre-filtro si ya corrió)
     combos_con_ids: List[Dict] = []
     try:
         from betplay_combo_builder import fetch_kambi_outcomes, find_outcome
-        outcomes_map, started_map = fetch_kambi_outcomes()
+        outcomes_map = _outcomes_map if _outcomes_map else fetch_kambi_outcomes()[0]
+        started_map = _started_map if _started_map else fetch_kambi_outcomes()[1]
 
         for i, combo in enumerate(combos, start=1):
             ids = []
@@ -826,11 +864,15 @@ def main() -> None:
             for pick in combo["legs"]:
                 jugador = pick.get("favorito", pick.get("jugador", ""))
                 cuota = float(pick.get("cuota_favorito", 0))
-                oc, razon = find_outcome(jugador, cuota, outcomes_map, started_map)
-                if oc:
-                    ids.append(str(oc["outcome_id"]))
+                # Reusar outcome_id del pre-filtro si está disponible (evita re-lookup con cuota drifteada)
+                if pick.get("_kambi_oid"):
+                    ids.append(pick["_kambi_oid"])
                 else:
-                    logger.warning(f"  [kambi] {jugador}@{cuota:.2f} → {razon}")
+                    oc, razon = find_outcome(jugador, cuota, outcomes_map, started_map)
+                    if oc:
+                        ids.append(str(oc["outcome_id"]))
+                    else:
+                        logger.warning(f"  [kambi] {jugador}@{cuota:.2f} → {razon}")
                 legs_display.append({"jugador": jugador, "cuota": cuota})
 
             url = _build_betplay_url(ids) if len(ids) == len(combo["legs"]) else None
