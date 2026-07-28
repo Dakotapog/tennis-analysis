@@ -463,29 +463,28 @@ def _build_x3_games(fecha: str) -> Dict[str, Any]:
     Retorna apostar + metadata. REPORTE_SOLO.
     """
     gsr = _latest(str(REPORTS / f"games_signal_report_{fecha.replace('-','')}*.json"))
-    if not gsr:
-        return {"disponible": False, "fecha": fecha}
-    try:
-        data = json.loads(Path(gsr).read_text(encoding="utf-8"))
-    except Exception:
-        return {"disponible": False, "fecha": fecha}
-    meta = data.get("metadata", {})
-    apostar = data.get("apostar", [])
+    meta: Dict = {}
     # Aplanar señales_optimas: una fila por señal accionable
     signals: List[Dict] = []
-    for p in apostar:
-        for s in p.get("señales_optimas", []):
-            if s.get("apostar"):
-                signals.append({
-                    "partido":    p.get("partido", ""),
-                    "mercado":    s.get("mercado", ""),
-                    "direccion":  s.get("direccion", ""),
-                    "linea":      s.get("linea"),
-                    "cuota":      s.get("cuota"),
-                    "gap":        s.get("gap_juegos"),
-                    "confianza":  s.get("confianza_señal", ""),
-                    "games_range": p.get("games_range", ""),
-                })
+    if gsr:
+        try:
+            data = json.loads(Path(gsr).read_text(encoding="utf-8"))
+            meta = data.get("metadata", {})
+            for p in data.get("apostar", []):
+                for s in p.get("señales_optimas", []):
+                    if s.get("apostar"):
+                        signals.append({
+                            "partido":    p.get("partido", ""),
+                            "mercado":    s.get("mercado", ""),
+                            "direccion":  s.get("direccion", ""),
+                            "linea":      s.get("linea"),
+                            "cuota":      s.get("cuota"),
+                            "gap":        s.get("gap_juegos"),
+                            "confianza":  s.get("confianza_señal", ""),
+                            "games_range": p.get("games_range", ""),
+                        })
+        except Exception:
+            pass
     # D133-05: enriquecer con estado live si existe games_live_YYYYMMDD.json
     gl_path = REPORTS / f"games_live_{fecha.replace('-', '')}.json"
     gl_data: Dict = {}
@@ -508,6 +507,12 @@ def _build_x3_games(fecha: str) -> Dict[str, Any]:
         sig["estado_live"] = live_s.get("estado", "PRE_PARTIDO")
         sig["cuota_live"]  = live_s.get("cuota_live")
         sig["drift_pct"]   = live_s.get("drift_pct")
+        # D147: propagar campos enriquecidos desde _check_games_convergencia
+        sig["score_data"]  = live_s.get("score_data")
+        sig["certeza"]     = live_s.get("certeza") or {}
+        sig["cuota_t0"]    = live_s.get("cuota_t0")
+        sig["linea_t0"]    = live_s.get("linea_t0")
+        sig["ts_t0"]       = live_s.get("ts_t0")
         # Detectar TERMINADO cuando games_live no tiene el partido (hora=None o diff>130min)
         if sig["estado_live"] == "PRE_PARTIDO":
             hora_raw = sig.get("hora")
@@ -581,6 +586,8 @@ def _build_x3_games(fecha: str) -> Dict[str, Any]:
                 "over_candidato":         itf_s.get("over_candidato", False),
                 "cuota_over_live":        itf_s.get("cuota_over_live"),
                 "edge_over":              itf_s.get("edge_over"),
+                "score_data":             itf_s.get("score_data"),
+                "certeza":                itf_s.get("certeza") or {},
             })
 
     return {
@@ -589,7 +596,7 @@ def _build_x3_games(fecha: str) -> Dict[str, Any]:
         "n_partidos":         meta.get("n_partidos", 0),
         "n_apostar":          len(signals),  # post-filtro TERMINADO (D-TERMINADO-01)
         "signals":            signals,
-        "fuente":             Path(gsr).name,
+        "fuente":             Path(gsr).name if gsr else "games_live",
         "en_vivo_count":      gl_data.get("en_vivo_count", 0),
         "convergencia_activa": gl_data.get("convergencia_activa", False),
         "watch_all":          gl_data.get("watch_all", []),
@@ -1199,6 +1206,19 @@ def render_html(state: Dict[str, Any]) -> str:
                 f'padding:8px 14px;margin-bottom:10px;font-size:0.85rem;color:{AMBER};">'
                 f'{_en_vivo_count} señal(es) ALTA EN VIVO — esperando ≥2 para combo</div>'
             )
+        # D147-06: banner CERTEZA_MATEMATICA (blink verde, encima de todo)
+        _certeza_sigs = [s for s in _gs.get("signals", [])
+                         if (s.get("certeza") or {}).get("certeza_matematica")]
+        for _cs in _certeza_sigs:
+            _gp_cs    = (_cs.get("score_data") or {}).get("games_played", "?")
+            _linea_cs = _cs.get("linea_t0") or _cs.get("linea")
+            _conv_banner = (
+                f'<div style="background:#00c851;color:white;padding:12px;margin-bottom:8px;'
+                f'border-radius:6px;font-size:15px;font-weight:bold;text-align:center;'
+                f'animation:blink 0.8s step-start infinite;">'
+                f'CERTEZA MATEMATICA | {_cs["partido"]} {_cs.get("direccion")} {_linea_cs} '
+                f'| {_gp_cs} juegos jugados</div>'
+            ) + _conv_banner
 
         for _sig in _gs.get("signals", []):
             _conf_raw = _sig.get("confianza", "")
@@ -1215,23 +1235,60 @@ def render_html(state: Dict[str, Any]) -> str:
 
             # Estado live (D133-05)
             _estado = _sig.get("estado_live", "PRE_PARTIDO")
-            _est_c  = GREEN if _estado == "EN_VIVO" else (GREY if _estado == "TERMINADO" else "#8b949e")
+            _est_c  = GREEN if _estado in ("EN_VIVO", "ITF_VIVO") else (GREY if _estado == "TERMINADO" else "#8b949e")
             _est_lbl = (
                 f'<span style="color:{GREEN};font-weight:bold;animation:blink 1s infinite;">EN VIVO</span>'
-                if _estado == "EN_VIVO" else
+                if _estado in ("EN_VIVO", "ITF_VIVO") else
                 f'<span style="color:{GREY};">{_estado}</span>'
             )
 
-            # Cuota live y drift (D133-05)
-            _cuota_live = _sig.get("cuota_live")
-            _drift      = _sig.get("drift_pct")
+            # Cuota live, drift y Base(T0) — D147-04
+            _cuota_live      = _sig.get("cuota_live")
+            _drift           = _sig.get("drift_pct")
+            _dir_sig         = _sig.get("direccion", "")
+            _cuota_t0_val    = _sig.get("cuota_t0")
             _cuota_live_html = "—"
+            _drift_html      = "—"
             if _cuota_live:
-                # Drift positivo = Kambi sube cuota en nuestra dirección = CONFIRMA (verde)
-                # Drift negativo = Kambi baja cuota = va contra nuestra señal (rojo)
-                _drift_c   = GREEN if (_drift or 0) > 5 else (RED if (_drift or 0) < -5 else AMBER)
-                _drift_str = f' <span style="color:{_drift_c};font-size:0.8em;">({_drift:+.1f}%)</span>' if _drift else ""
-                _cuota_live_html = f'@{_cuota_live:.2f}{_drift_str}'
+                _cuota_live_html = f'@{_cuota_live:.2f}'
+                if _drift is not None:
+                    # D147-04: Para UNDER drift<0 = cuota cae = mercado confirma = VERDE
+                    #           Para OVER  drift>0 = cuota sube = mercado confirma = VERDE
+                    _confirma = ((_dir_sig == "UNDER" and _drift < -3) or
+                                 (_dir_sig == "OVER"  and _drift > 3))
+                    _contra   = ((_dir_sig == "UNDER" and _drift > 3) or
+                                 (_dir_sig == "OVER"  and _drift < -3))
+                    _drift_c  = GREEN if _confirma else (RED if _contra else AMBER)
+                    _drift_html = f'<span style="color:{_drift_c};">{_drift:+.1f}%</span>'
+            # Base(T0): cuota congelada al entrar EN_VIVO; fallback a cuota pre-partido
+            _base_t0_html = (f'@{_cuota_t0_val:.2f}' if _cuota_t0_val
+                             else (f'@{_sig["cuota"]:.2f}' if _sig.get("cuota") else "—"))
+            # Progreso: marcador Kambi (D147-01)
+            _progreso_html = _fmt_progreso(_sig.get("score_data"))
+            # Certeza badge (D147-02)
+            _cert_data  = _sig.get("certeza") or {}
+            _cert_nivel = _cert_data.get("alerta_nivel", "")
+            _cert_p     = _cert_data.get("p_condicional", 0.0)
+            _cert_pct   = int(round(_cert_p * 100))
+            _CERT_BADGES = {
+                "CERTEZA": ('<span style="background:#00c851;color:white;padding:2px 8px;'
+                            'border-radius:3px;font-weight:bold;font-size:0.75em">CERTEZA</span>'),
+                "ALTA":    (f'<span style="background:#ff8800;color:white;padding:2px 8px;'
+                            f'border-radius:3px;font-size:0.75em">ALTA {_cert_pct}%</span>'),
+                "MOD":     (f'<span style="background:#33b5e5;color:white;padding:2px 8px;'
+                            f'border-radius:3px;font-size:0.75em">MOD {_cert_pct}%</span>'),
+                "BAJA":    (f'<span style="color:#8b949e;font-size:0.75em">BAJA {_cert_pct}%</span>'),
+            }
+            _cert_html = _CERT_BADGES.get(_cert_nivel, "—")
+            # Prefijo visual en Partido si certeza_matematica
+            if _cert_data.get("certeza_matematica"):
+                _partido_html_prefix = (
+                    '<span style="background:#00c851;color:white;padding:1px 5px;'
+                    'border-radius:3px;font-size:0.75em;font-weight:bold;margin-right:4px;">'
+                    'CERTEZA</span>'
+                )
+            else:
+                _partido_html_prefix = ""
 
             # Middle candidato
             _gr    = _sig.get("games_range", "")
@@ -1308,14 +1365,29 @@ def render_html(state: Dict[str, Any]) -> str:
             _alerta_c, _alerta_lbl = _alerta_map.get(_alerta_val, ("#8b949e", "—"))
             _alerta_html = f'<span style="color:{_alerta_c};font-weight:bold;">{_alerta_lbl}</span>' if _alerta_val else "—"
 
+            # Línea con trazabilidad T0 (Bug 2 — D147-03)
+            _linea_cur = _sig.get("linea")
+            _linea_t0v = _sig.get("linea_t0")
+            if _linea_cur is not None and _linea_t0v is not None and float(_linea_t0v) != float(_linea_cur):
+                _linea_html = (
+                    f'{_linea_cur}'
+                    f'<span style="color:{GREY};font-size:0.78em;margin-left:4px;">'
+                    f'(t0:{_linea_t0v})</span>'
+                )
+            else:
+                _linea_html = str(_linea_cur) if _linea_cur is not None else "—"
+
             x3_rows.append([
-                _partido_html,
+                _partido_html_prefix + _partido_html,
                 _est_lbl,
                 _sig.get("mercado", ""),
                 f'<span style="color:{_dir_c};font-weight:bold;">{_dir}</span>',
-                str(_sig.get("linea", "—")),
-                f'@{_sig["cuota"]:.2f}' if _sig.get("cuota") else "—",
+                _linea_html,
+                _base_t0_html,
                 _cuota_live_html,
+                _drift_html,
+                _progreso_html,
+                _cert_html,
                 f'{_gap:+.1f}j' if _gap is not None else "—",
                 _conf,
                 _sig.get("games_range", ""),
@@ -1333,7 +1405,7 @@ def render_html(state: Dict[str, Any]) -> str:
         x3_panel = panel(
             f"X3 GAMES SIGNAL — Over/Under mercados Nodo-40 | {_gs['fuente']}",
             _conv_banner + table(
-                ["Partido", "Estado", "Mercado", "Dir", "Línea", "Cuota Pre", "Cuota Live", "Gap", "Confianza", "Rango pred.", "Middle?", "Contexto", "Marcador"],
+                ["Partido", "Estado", "Mercado", "Dir", "Línea", "Base(T0)", "Live", "Drift", "Progreso", "Certeza", "Gap", "Confianza", "Rango pred.", "Middle?", "Contexto", "Marcador"],
                 x3_rows,
                 "Sin señales accionables hoy (gap modelo-línea insuficiente)",
             ),
@@ -2874,6 +2946,408 @@ def _parse_kambi_tennis_score(event_obj: Dict) -> Dict:
     return result
 
 
+def _fetch_kambi_livedata(event_id: int) -> Optional[Dict]:
+    """D147-01b: /event/{id}/livedata.json con client_id=200 → statistics.sets con scores reales.
+    Endpoint distinto al offering API (que devuelve liveData:{} vacío).
+    """
+    import time
+    ncid = int(time.time() * 1000)
+    url = (f"{_KAMBI_BASE}/event/{event_id}/livedata.json"
+           f"?lang=es_CO&market=CO&client_id=200&channel_id=1&ncid={ncid}")
+    try:
+        req = urllib.request.Request(url, headers=_KAMBI_HDR)
+        with urllib.request.urlopen(req, timeout=5) as r:
+            return json.loads(r.read())
+    except Exception:
+        return None
+
+
+def _parse_kambi_livedata_sets(livedata: Dict) -> Optional[Dict]:
+    """D147-01b: convierte statistics.sets.home/away → score_data.
+    Kambi usa -1 para sets no iniciados y el score real para el set en curso.
+    Detecta si un set está completo con las reglas estándar de tenis.
+    Ejemplo: home=[7,3,1], away=[6,6,2] → sets_complete=2, games_played=22, current_games=3.
+    """
+    try:
+        ld = (livedata.get("liveData") or livedata) if isinstance(livedata, dict) else {}
+        stats = ld.get("statistics") or {}
+        sets_data = stats.get("sets") or {}
+        home_arr = sets_data.get("home") or []
+        away_arr = sets_data.get("away") or []
+        if not home_arr or not away_arr:
+            return None
+
+        sets_home = sets_away = games_total = sets_complete = 0
+        current_games = 0
+        parts = []
+        for h, a in zip(home_arr, away_arr):
+            if h == -1 or a == -1:
+                continue  # set futuro no iniciado
+            # Set completo: alguien ganó ≥6 con ≥2 de diferencia, o tiebreak (7 juegos)
+            is_complete = (max(h, a) >= 6 and abs(h - a) >= 2) or (max(h, a) == 7)
+            if is_complete:
+                games_total += h + a
+                sets_complete += 1
+                if h > a:
+                    sets_home += 1
+                else:
+                    sets_away += 1
+                parts.append(f"{h}:{a}")
+            else:
+                # Set en curso
+                current_games = h + a
+                games_total += current_games
+
+        if games_total == 0:
+            return None
+
+        return {
+            "score_str":     ",".join(parts) if parts else None,
+            "sets_home":     sets_home,
+            "sets_away":     sets_away,
+            "games_played":  games_total,
+            "sets_complete": sets_complete,
+            "current_games": current_games,
+        }
+    except Exception:
+        return None
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Nodo-147: Live Score × Games Convergencia — Certeza Condicional en Tiempo Real
+# ─────────────────────────────────────────────────────────────────────────────
+
+def _calcular_certeza_condicional(
+    linea: float,
+    direccion: str,
+    games_played: int,
+    sets_complete: int,
+    current_games: int,
+    zona: str,
+    sets_home: Optional[int] = None,
+    sets_away: Optional[int] = None,
+) -> Dict[str, Any]:
+    """D147-02: Motor matemático de certeza condicional.
+
+    Returns {certeza_matematica, p_condicional, alerta_nivel, razon}.
+    Función pura — sin I/O. Best-of-3 únicamente.
+
+    sets_home/sets_away: necesarios para distinguir match 2-0 (terminado) de
+    match 1-1 (tercer set pendiente). Sin ellos, sets_complete>=2 con current_games=0
+    producía falso positivo CERTEZA cuando el tercer set aún no había comenzado.
+    """
+    import math as _m
+
+    # Máximo juegos restantes (best-of-3: máx 3 sets, cada set máx 13j con tiebreak)
+    # Determinar si el match ya fue decidido (alguien ganó 2 sets)
+    _match_decidido = (
+        sets_home is not None and sets_away is not None
+        and max(sets_home, sets_away) >= 2
+    )
+    if _match_decidido:
+        max_remaining = 0
+    elif sets_complete >= 2:
+        # 2 sets completos pero match 1-1 → tercer set en curso (posiblemente 0:0)
+        max_remaining = max(0, 13 - current_games)
+    elif not current_games:
+        # Entre sets: (3 - sets_complete) sets posibles × 13j c/u
+        max_remaining = (3 - sets_complete) * 13
+    else:
+        # Set en curso: restantes en set actual + sets adicionales posibles
+        current_set_remaining = max(0, 13 - current_games)
+        additional_sets       = max(0, 3 - sets_complete - 1)
+        max_remaining         = current_set_remaining + additional_sets * 13
+
+    certeza_matematica = False
+    razon = ""
+
+    if direccion == "UNDER":
+        if (games_played + max_remaining) < linea:
+            certeza_matematica = True
+            razon = (f"UNDER certeza: {games_played}+{max_remaining}j_max="
+                     f"{games_played + max_remaining} < {linea}")
+    elif direccion == "OVER":
+        if games_played > linea:
+            certeza_matematica = True
+            razon = f"OVER certeza: {games_played}j > {linea}"
+
+    # p_condicional (modelo Gaussiano calibrado por zona)
+    _ZONA_PARAMS: Dict[str, Dict] = {
+        "DOMINANTE": {"mu": 18.0, "sigma": 3.0},
+        "COINFLIP":  {"mu": 23.0, "sigma": 4.5},
+    }
+    _params   = _ZONA_PARAMS.get(zona, _ZONA_PARAMS["COINFLIP"])
+    mu_total  = _params["mu"]
+    sigma     = _params["sigma"]
+    mu_rest   = max(0.0, mu_total - games_played)
+
+    try:
+        x       = (linea + 0.5 - games_played - mu_rest) / sigma
+        p_under = (1.0 + _m.erf(x / _m.sqrt(2))) / 2.0
+    except Exception:
+        p_under = 0.5
+
+    p_condicional = p_under if direccion == "UNDER" else (1.0 - p_under)
+    p_condicional = max(0.0, min(1.0, p_condicional))
+
+    if certeza_matematica:
+        alerta_nivel = "CERTEZA"
+    elif p_condicional >= 0.90:
+        alerta_nivel = "ALTA"
+    elif p_condicional >= 0.70:
+        alerta_nivel = "MOD"
+    elif p_condicional >= 0.50:
+        alerta_nivel = "BAJA"
+    else:
+        alerta_nivel = ""
+
+    return {
+        "certeza_matematica": certeza_matematica,
+        "p_condicional":      round(p_condicional, 3),
+        "alerta_nivel":       alerta_nivel,
+        "razon":              razon,
+    }
+
+
+def _fmt_progreso(score_data: Optional[Dict]) -> str:
+    """Formatea score_data para display en panel X3. Ej: '1-0 (4j) | 12j'."""
+    if not score_data:
+        return "PRE"
+    sets_h = score_data.get("sets_home") or 0
+    sets_a = score_data.get("sets_away") or 0
+    gp     = score_data.get("games_played") or 0
+    cur    = score_data.get("current_games")
+    cur_str = f" ({cur}j)" if cur is not None else ""
+    return f"{sets_h}-{sets_a}{cur_str} | {gp}j"
+
+
+def _enrich_live_score(
+    signals: List[Dict],
+    live_events: List[Dict],
+) -> None:
+    """D147-01: Enriquece signals IN PLACE con score_data via _parse_kambi_tennis_score().
+
+    Intento 1: índice O(1) por event_id (cuando games_signal_calculator lo guardó).
+    Intento 2: fallback por ambos apellidos del partido — necesario cuando
+               kambi_event_id=None (PASO 3.6 corrió antes de que el partido existiera
+               en Kambi listView STARTED).
+    """
+    # Índice primario por event_id
+    live_by_id: Dict[int, Dict] = {}
+    # Índice secundario por apellido normalizado
+    live_by_apellido: Dict[str, Dict] = {}
+    for ew in live_events:
+        if not isinstance(ew, dict):
+            continue
+        ev = ew.get("event", {})
+        eid = ev.get("id")
+        if eid is not None:
+            try:
+                live_by_id[int(eid)] = ew
+            except (TypeError, ValueError):
+                pass
+        # Excluir dobles del índice por apellido
+        home = ev.get("homeName", "")
+        away = ev.get("awayName", "")
+        if "/" in home or "/" in away:
+            continue
+        for nombre in (home, away):
+            ap = _apellido_games(nombre)
+            if ap:
+                live_by_apellido[ap] = ew
+
+    for sig in signals:
+        ew = None
+
+        # Intento 1: event_id directo
+        raw_eid = sig.get("event_id")
+        if raw_eid:
+            try:
+                ew = live_by_id.get(int(raw_eid))
+            except (TypeError, ValueError):
+                pass
+
+        # Intento 2: fallback por ambos apellidos del partido
+        if not ew:
+            partido = sig.get("partido", "")
+            partes = [p.strip() for p in partido.replace(" vs. ", " vs ").split(" vs ")]
+            if len(partes) == 2:
+                ap1 = _apellido_games(partes[0])
+                ap2 = _apellido_games(partes[1])
+                cand = live_by_apellido.get(ap1) or live_by_apellido.get(ap2)
+                if cand:
+                    ev_c = cand.get("event", {})
+                    ev_names = (ev_c.get("homeName", "") + " " + ev_c.get("awayName", "")).lower()
+                    if ap1 in ev_names and ap2 in ev_names:
+                        ew = cand
+                        # Guardar el event_id encontrado para próximos ciclos
+                        sig["event_id"] = ev_c.get("id")
+                        logger.debug(f"[D147-01] apellido match: {partido} → eid={sig['event_id']}")
+
+        if not ew:
+            sig["score_data"] = None
+        else:
+            try:
+                parsed = _parse_kambi_tennis_score(ew.get("event", {}))
+                sig["score_data"] = parsed if parsed.get("games_played") is not None else None
+            except Exception as exc:
+                logger.debug(f"[D147-01] score parse error: {exc}")
+                sig["score_data"] = None
+
+        # D147-01b: offering API devuelve liveData:{} vacío → livedata endpoint directo
+        if sig["score_data"] is None and sig.get("estado") in ("EN_VIVO", "ITF_VIVO") and sig.get("event_id"):
+            try:
+                _ld_raw = _fetch_kambi_livedata(int(sig["event_id"]))
+                if _ld_raw:
+                    _ld_parsed = _parse_kambi_livedata_sets(_ld_raw)
+                    if _ld_parsed and _ld_parsed.get("games_played") is not None:
+                        sig["score_data"] = _ld_parsed
+                        logger.info(
+                            f"[D147-01b] livedata OK: {sig.get('partido')} "
+                            f"score={_ld_parsed['score_str']} gp={_ld_parsed['games_played']}"
+                        )
+            except Exception as _ld_exc:
+                logger.debug(f"[D147-01b] livedata error: {_ld_exc}")
+
+
+def _freeze_baseline_if_needed(
+    signals: List[Dict],
+    fecha_compact: str,
+) -> Dict[str, Dict]:
+    """D147-03: Lee o crea games_baseline_{fecha_compact}.json (inmutable por clave).
+
+    Solo congela si estado=='EN_VIVO' AND cuota_live is not None AND clave nueva.
+    Retorna el dict baseline actualizado.
+    """
+    baseline_path = REPORTS / f"games_baseline_{fecha_compact}.json"
+    try:
+        baseline: Dict[str, Dict] = (
+            json.loads(baseline_path.read_text(encoding="utf-8"))
+            if baseline_path.exists() else {}
+        )
+    except Exception:
+        baseline = {}
+
+    changed  = False
+    now_iso  = datetime.now().isoformat()[:19]
+    for sig in signals:
+        if sig.get("estado") not in ("EN_VIVO", "ITF_VIVO"):
+            continue
+        cuota_live = sig.get("cuota_live")
+        if cuota_live is None:
+            continue
+        pk = f"{sig['partido']}_{sig.get('direccion', '')}"
+        if pk in baseline:
+            continue  # INMUTABLE — nunca sobreescribir
+        linea_val = sig.get("linea") or 0
+        baseline[pk] = {
+            "cuota_t0":  cuota_live,
+            "linea_t0":  linea_val,
+            "ts_t0":     now_iso,
+            "direccion": sig.get("direccion", ""),
+            "zona":      "DOMINANTE" if float(linea_val) < 21.5 else "COINFLIP",
+        }
+        changed = True
+
+    if changed:
+        try:
+            baseline_path.write_text(
+                json.dumps(baseline, ensure_ascii=False, indent=2), encoding="utf-8"
+            )
+        except Exception as exc:
+            logger.warning(f"[D147-03] Error escribiendo baseline: {exc}")
+
+    return baseline
+
+
+def _write_games_odds_history(
+    signals: List[Dict],
+    fecha_compact: str,
+) -> None:
+    """D147-05: Append-only historial cuotas games market (sparkline por señal EN_VIVO)."""
+    hist_path = REPORTS / f"games_odds_history_{fecha_compact}.json"
+    try:
+        hist: Dict[str, List] = (
+            json.loads(hist_path.read_text(encoding="utf-8"))
+            if hist_path.exists() else {}
+        )
+    except Exception:
+        hist = {}
+
+    changed  = False
+    ts_now   = datetime.now().strftime("%H:%M")
+    for sig in signals:
+        if sig.get("estado") not in ("EN_VIVO", "ITF_VIVO"):
+            continue
+        cuota_live = sig.get("cuota_live")
+        if cuota_live is None:
+            continue
+        pk    = f"{sig['partido']}_{sig.get('direccion', '')}"
+        gp    = (sig.get("score_data") or {}).get("games_played") or 0
+        nuevo = {"ts": ts_now, "cuota": cuota_live, "games_played": gp}
+        lista = hist.setdefault(pk, [])
+        # Deduplicar: skip si último punto tiene mismo games_played Y misma cuota
+        if lista:
+            last = lista[-1]
+            if last.get("games_played") == gp and last.get("cuota") == cuota_live:
+                continue
+        lista.append(nuevo)
+        changed = True
+
+    if changed:
+        try:
+            hist_path.write_text(
+                json.dumps(hist, ensure_ascii=False, indent=2), encoding="utf-8"
+            )
+        except Exception as exc:
+            logger.debug(f"[D147-05] Error escribiendo history: {exc}")
+
+
+def _fire_certeza_alert(sig: Dict, fecha_compact: str) -> None:
+    """D147-06: Fire-once Telegram + log cuando certeza_matematica=True."""
+    pk         = f"{sig['partido']}_{sig.get('direccion', '')}"
+    guard_path = REPORTS / f"certeza_fired_{fecha_compact}.json"
+    try:
+        fired: Dict = (
+            json.loads(guard_path.read_text(encoding="utf-8"))
+            if guard_path.exists() else {}
+        )
+    except Exception:
+        fired = {}
+
+    if pk in fired:
+        return
+
+    fired[pk] = datetime.now().isoformat()[:19]
+    try:
+        guard_path.write_text(
+            json.dumps(fired, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
+    except Exception:
+        pass
+
+    gp_val = (sig.get("score_data") or {}).get("games_played", "?")
+    msg = (
+        f"CERTEZA MATEMATICA | {sig['partido']} "
+        f"{sig.get('direccion')} {sig.get('linea_t0') or sig.get('linea')} "
+        f"| {gp_val} juegos jugados | Resultado confirmado"
+    )
+    logger.warning(f"[D147-06] {msg}")
+
+    send_script = BASE_DIR / "scripts" / "send_telegram.py"
+    if send_script.exists():
+        try:
+            subprocess.Popen(
+                [sys.executable, str(send_script), "--msg", msg],
+                cwd=str(BASE_DIR),
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            )
+        except Exception as exc:
+            logger.warning(f"[D147-06] Telegram error: {exc}")
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Cache event_id → (timestamp, score_dict) para evitar re-scraping en ciclos de 15s
 _score_pw_cache: Dict[int, tuple] = {}
 _SCORE_PW_TTL = 30  # segundos
@@ -2884,11 +3358,15 @@ def _parse_betplay_scoreboard_html(html: str) -> Dict:
     D142-SCORE-02: parsea HTML del scoreboard KambiBC de Betplay.
     Extrae juegos por set y calcula games_played / sets_complete.
 
-    Estructura DOM (column-major, alternando home/away):
-      KambiBC-scoreboard-grid-item (sin grid-score) + data-sport=TENNIS → juegos del set
-        [home_s1, away_s1, home_s2, away_s2, ...]
-      KambiBC-scoreboard-grid-item + KambiBC-scoreboard-grid-score → puntos actuales (15/30/AD)
-      KambiBC-scoreboard-grid-remaining → sets futuros (placeholder, ignorar)
+    Estructura DOM real (ROW-MAJOR — una section por jugador):
+      <section class="KambiBC-scoreboard-row">  ← home
+        <div class="KambiBC-scoreboard-team-label"><span>Nombre</span></div>
+        <div class="KambiBC-scoreboard-grid-row">
+          <div class="KambiBC-scoreboard-grid-item" data-sport="TENNIS"><span>N</span></div>  ← juego set1
+          <div class="KambiBC-scoreboard-grid-item" data-sport="TENNIS"><span>N</span></div>  ← juego set2
+          <div class="KambiBC-scoreboard-grid-remaining" ...><span>0</span></div>              ← set futuro IGNORAR
+          <div class="KambiBC-scoreboard-grid-item KambiBC-scoreboard-grid-score" ...>         ← puntos IGNORAR
+      <section class="KambiBC-scoreboard-row">  ← away (misma estructura)
 
     Returns {score_str, sets_home, sets_away, games_played, sets_complete, current_games}
     """
@@ -2906,32 +3384,32 @@ def _parse_betplay_scoreboard_html(html: str) -> Dict:
         return result
 
     try:
-        # Extraer solo grid-items que NO son grid-score (juegos de set, no puntos actuales)
-        # Patrón: class contiene "grid-item" pero NO "grid-score"; tiene data-sport=TENNIS
-        pat = re.compile(
-            r'class="(?!.*KambiBC-scoreboard-grid-score)'
-            r'[^"]*KambiBC-scoreboard-grid-item[^"]*"'
-            r'[^>]*data-sport="TENNIS"[^>]*>'
-            r'\s*<span[^>]*>(\d+)</span>',
-            re.DOTALL
-        )
-        set_vals = pat.findall(html)
+        # 1. Split por KambiBC-scoreboard-grid-row — cada chunk es el contenido de 1 jugador
+        #    (ROW-MAJOR: todos los sets del home, luego todos los del away)
+        chunks = re.split(r'<div[^>]*class="[^"]*KambiBC-scoreboard-grid-row[^"]*"', html)
+        # chunks[0] = antes del primer grid-row (ignorar), chunks[1..] = contenido por jugador
+        row_chunks = chunks[1:]  # descarta el pre-header
 
-        if not set_vals:
-            # Fallback: cualquier grid-item con número (sin grid-score en misma clase)
-            blocks = re.findall(
-                r'class="([^"]*KambiBC-scoreboard-grid-item[^"]*)"[^>]*>\s*<span[^>]*>(\d+)</span>',
-                html
-            )
-            set_vals = [v for cls, v in blocks if "grid-score" not in cls]
-
-        if not set_vals:
+        # Necesitamos al menos 2 chunks (home + away)
+        if len(row_chunks) < 2:
             return result
 
-        # Pares alternados: [home_s1, away_s1, home_s2, away_s2, ...]
-        home_per_set = [int(set_vals[i]) for i in range(0, len(set_vals), 2)]
-        away_per_set = [int(set_vals[i]) for i in range(1, len(set_vals), 2)]
-        n_sets = min(len(home_per_set), len(away_per_set))
+        # 2. Por chunk: extraer grid-items que son juegos de set
+        #    Incluir: class con "grid-item" SIN "grid-score" Y SIN "grid-remaining"
+        game_pat = re.compile(
+            r'<div[^>]*class="(?![^"]*grid-score)(?![^"]*grid-remaining)'
+            r'[^"]*grid-item[^"]*"[^>]*data-sport="TENNIS"[^>]*>\s*<span[^>]*>(\d+)</span>',
+            re.DOTALL
+        )
+
+        # Últimos 2 chunks = home + away del último render (React puede duplicar)
+        home_sets = [int(v) for v in game_pat.findall(row_chunks[-2])]
+        away_sets = [int(v) for v in game_pat.findall(row_chunks[-1])]
+
+        if not home_sets or not away_sets:
+            return result
+
+        n_sets = min(len(home_sets), len(away_sets))
 
         games_total  = 0
         sets_complete = 0
@@ -2994,14 +3472,12 @@ def _fetch_betplay_score_playwright(event_id: int) -> Optional[Dict]:
         "        page = await browser.new_page()\n"
         "        try:\n"
         f"            await page.goto('https://betplay.com.co/apuestas#home/event/{event_id}',\n"
-        "                             wait_until='domcontentloaded', timeout=6000)\n"
-        "            await page.wait_for_selector('.KambiBC-scoreboard-grid-item', timeout=5000)\n"
-        "            sel = ('.KambiBC-event-participants-scoreboard'\n"
-        "                   ' or .sc-scoreboard or .KambiBC-scoreboard')\n"
-        "            el = (await page.query_selector('.KambiBC-event-participants-scoreboard')\n"
-        "                  or await page.query_selector('.KambiBC-scoreboard')\n"
-        "                  or await page.query_selector('.sc-scoreboard'))\n"
-        "            html = await el.inner_html() if el else ''\n"
+        "                             wait_until='domcontentloaded', timeout=15000)\n"
+        "            try:\n"
+        "                await page.wait_for_selector('.KambiBC-scoreboard-row', timeout=12000)\n"
+        "            except Exception:\n"
+        "                pass  # Si no aparece en 12s, tomamos lo que hay\n"
+        "            html = await page.content()\n"
         "            print(json.dumps({'html': html, 'ok': True}))\n"
         "        except Exception as e:\n"
         "            print(json.dumps({'html': '', 'ok': False, 'error': str(e)}))\n"
@@ -3015,7 +3491,7 @@ def _fetch_betplay_score_playwright(event_id: int) -> Optional[Dict]:
         py_bin  = venv_py if Path(venv_py).exists() else sys.executable
         proc = subprocess.run(
             [py_bin, "-c", script],
-            capture_output=True, text=True, timeout=12
+            capture_output=True, text=True, timeout=35
         )
         if proc.returncode != 0 or not proc.stdout.strip():
             logger.debug(f"[SCORE_PW] {event_id} err: {proc.stderr[:150]}")
@@ -3131,30 +3607,28 @@ def _check_games_convergencia(fecha: str) -> None:
     """
     fecha_compact = fecha.replace("-", "")
     gsr_path = _latest(str(REPORTS / f"games_signal_report_{fecha_compact}*.json"))
-    if not gsr_path:
-        return
 
-    try:
-        data = json.loads(Path(gsr_path).read_text(encoding="utf-8"))
-    except Exception:
-        return
-
-    # Recoger señales ALTA
+    # Recoger señales ALTA (vacío si no hay report — ITF live scan sigue corriendo igual)
     alta_signals: List[Dict] = []
-    for p in data.get("apostar", []):
-        for s in p.get("señales_optimas", []):
-            if s.get("confianza_señal") == "ALTA" and s.get("apostar"):
-                alta_signals.append({
-                    "partido":    p.get("partido", ""),
-                    "direccion":  s.get("direccion", ""),
-                    "linea":      s.get("linea"),
-                    "cuota_pre":  s.get("cuota"),
-                    "hora":       p.get("hora"),
-                    "event_id":   p.get("kambi_event_id"),
-                    "estado":     "PRE_PARTIDO",
-                    "cuota_live": None,
-                    "drift_pct":  None,
-                })
+    if gsr_path:
+        try:
+            data = json.loads(Path(gsr_path).read_text(encoding="utf-8"))
+            for p in data.get("apostar", []):
+                for s in p.get("señales_optimas", []):
+                    if s.get("confianza_señal") == "ALTA" and s.get("apostar"):
+                        alta_signals.append({
+                            "partido":    p.get("partido", ""),
+                            "direccion":  s.get("direccion", ""),
+                            "linea":      s.get("linea"),
+                            "cuota_pre":  s.get("cuota"),
+                            "hora":       p.get("hora"),
+                            "event_id":   p.get("kambi_event_id"),
+                            "estado":     "PRE_PARTIDO",
+                            "cuota_live": None,
+                            "drift_pct":  None,
+                        })
+        except Exception:
+            pass
 
     # No hay early return por falta de pre-game signals — ITF live scan siempre corre (D-ITF-LIVE-01)
 
@@ -3244,6 +3718,50 @@ def _check_games_convergencia(fecha: str) -> None:
 
     en_vivo_count       = sum(1 for s in alta_signals if s["estado"] == "EN_VIVO")
     convergencia_activa = en_vivo_count >= 2
+
+    # ── BLOQUE D147: score + certeza + baseline + historial ──────────────────
+    # D147-01: enriquecer alta_signals con score Kambi API
+    _enrich_live_score(alta_signals, started_events)
+
+    # D147-02: certeza condicional para señales EN_VIVO con score disponible
+    for _s147 in alta_signals:
+        if _s147.get("score_data") is not None and _s147.get("estado") in ("EN_VIVO", "ITF_VIVO"):
+            _linea147 = float(_s147.get("linea") or 0)
+            _zona147  = "DOMINANTE" if _linea147 < 21.5 else "COINFLIP"
+            _sd147    = _s147["score_data"]
+            _s147["certeza"] = _calcular_certeza_condicional(
+                linea=_linea147,
+                direccion=_s147.get("direccion", "UNDER"),
+                games_played=int(_sd147.get("games_played") or 0),
+                sets_complete=int(_sd147.get("sets_complete") or 0),
+                current_games=int(_sd147.get("current_games") or 0),
+                zona=_zona147,
+                sets_home=_sd147.get("sets_home"),
+                sets_away=_sd147.get("sets_away"),
+            )
+        else:
+            _s147["certeza"] = {
+                "certeza_matematica": False, "p_condicional": 0.0,
+                "alerta_nivel": "", "razon": "sin score",
+            }
+
+    # D147-03: congelar baseline T0 (inmutable desde primer ciclo EN_VIVO)
+    _d147_baseline = _freeze_baseline_if_needed(alta_signals, fecha_compact)
+    for _s147 in alta_signals:
+        _pk147 = f"{_s147['partido']}_{_s147.get('direccion', '')}"
+        if _pk147 in _d147_baseline:
+            _s147["cuota_t0"] = _d147_baseline[_pk147]["cuota_t0"]
+            _s147["linea_t0"] = _d147_baseline[_pk147]["linea_t0"]
+            _s147["ts_t0"]    = _d147_baseline[_pk147]["ts_t0"]
+
+    # D147-05: historial cuotas games market (sparkline)
+    _write_games_odds_history(alta_signals, fecha_compact)
+
+    # D147-06: alert certeza matematica (fire-once)
+    for _s147 in alta_signals:
+        if _s147.get("certeza", {}).get("certeza_matematica"):
+            _fire_certeza_alert(_s147, fecha_compact)
+    # ── FIN BLOQUE D147 ──────────────────────────────────────────────────────
 
     # D-ITF-LIVE-01: escanear TODOS los STARTED events buscando "Total de juegos"
     # ITF solo abre este mercado cuando el partido está vivo (no pre-partido)
@@ -3488,6 +4006,23 @@ def _check_games_convergencia(fecha: str) -> None:
         snap_path.write_text(json.dumps(t0_snap, ensure_ascii=False, indent=2), encoding="utf-8")
     except Exception:
         pass
+
+    # D147: enriquecer ITF_VIVO con score_data + certeza (mismo flujo que alta_signals)
+    _enrich_live_score(itf_live_signals, started_events)
+    for _itf147 in itf_live_signals:
+        if _itf147.get("score_data") is not None:
+            _ln = float(_itf147.get("linea") or 0)
+            _sd = _itf147["score_data"]
+            _itf147["certeza"] = _calcular_certeza_condicional(
+                linea=_ln,
+                direccion=_itf147.get("direccion", "UNDER"),
+                games_played=int(_sd.get("games_played") or 0),
+                sets_complete=int(_sd.get("sets_complete") or 0),
+                current_games=int(_sd.get("current_games") or 0),
+                zona="DOMINANTE" if _ln < 21.5 else "COINFLIP",
+                sets_home=_sd.get("sets_home"),
+                sets_away=_sd.get("sets_away"),
+            )
 
     # Combinar en games_live: pre-game + ITF_LIVE
     all_signals = alta_signals + itf_live_signals
