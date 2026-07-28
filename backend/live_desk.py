@@ -583,10 +583,13 @@ def _build_x3_games(fecha: str) -> Dict[str, Any]:
                 "edge_pct":    edge_pct,
                 "convergencia_breakdown": itf_s.get("convergencia_breakdown"),
                 "linea_envenenada":       itf_s.get("linea_envenenada", False),
+                "cuota_envenenada":       itf_s.get("cuota_envenenada", False),  # D150-05
                 "over_candidato":         itf_s.get("over_candidato", False),
                 "cuota_over_live":        itf_s.get("cuota_over_live"),
                 "edge_over":              itf_s.get("edge_over"),
                 "score_data":             itf_s.get("score_data"),
+                "games_set1":             itf_s.get("games_set1"),               # D150-02
+                "zona":                   itf_s.get("zona"),                     # D150-03
                 "certeza":                itf_s.get("certeza") or {},
             })
 
@@ -1310,12 +1313,18 @@ def render_html(state: Dict[str, Any]) -> str:
             except Exception:
                 pass
 
-            # Badge envenenada / confirmación (D142-DRIFT-FILTER visual)
-            _envenenada     = _sig.get("linea_envenenada", False)
-            _over_cand      = _sig.get("over_candidato", False)
-            _cuota_ov_live  = _sig.get("cuota_over_live")
-            _edge_ov        = _sig.get("edge_over")
-            _partido_raw    = _sig.get("partido", "")
+            # Badge envenenada / confirmación (D142-DRIFT-FILTER visual + D150-05)
+            _envenenada        = _sig.get("linea_envenenada", False)
+            _cuota_envenenada  = _sig.get("cuota_envenenada", False)
+            _over_cand         = _sig.get("over_candidato", False)
+            _cuota_ov_live     = _sig.get("cuota_over_live")
+            _edge_ov           = _sig.get("edge_over")
+            _partido_raw       = _sig.get("partido", "")
+            # D150-05: mercado compra agresivo → confirma dirección UNDER/OVER
+            _cuota_confirmada  = (
+                _drift is not None and _drift < -15.0
+                and _estado in ("EN_VIVO", "ITF_VIVO")
+            )
             if _envenenada and _over_cand:
                 # Partido largo → tercer set → OVER es el trade correcto
                 _ov_tag = f" @{_cuota_ov_live:.2f} edge={_edge_ov}%" if _cuota_ov_live else ""
@@ -1335,6 +1344,23 @@ def render_html(state: Dict[str, Any]) -> str:
                     f'LINEA ENVENENADA</span>'
                 )
                 _conf = _conv_html + f'<span style="color:{GREY};">{_conf_raw}</span>'
+            elif _cuota_envenenada:
+                # D150-05: cuota sube >15% → mercado descubrió info que el modelo no tiene
+                _partido_html = (
+                    f'{_partido_raw} '
+                    f'<span style="background:#f85149;color:#fff;padding:1px 6px;'
+                    f'border-radius:3px;font-size:0.72em;font-weight:bold;">'
+                    f'CUOTA ENVENENADA</span>'
+                )
+                _conf = _conv_html + f'<span style="color:{GREY};">{_conf_raw}</span>'
+            elif _cuota_confirmada:
+                # D150-05: cuota cae >15% → mercado compra agresivo, confirma dirección
+                _partido_html = (
+                    f'{_partido_raw} '
+                    f'<span style="background:#00c851;color:#000;padding:1px 6px;'
+                    f'border-radius:3px;font-size:0.72em;font-weight:bold;">'
+                    f'MERCADO CONFIRMA</span>'
+                )
             elif _conf_base == "ALTA":
                 _partido_html = (
                     f'{_partido_raw} '
@@ -2979,6 +3005,7 @@ def _parse_kambi_livedata_sets(livedata: Dict) -> Optional[Dict]:
 
         sets_home = sets_away = games_total = sets_complete = 0
         current_games = 0
+        games_set1 = None  # D150-02: juegos del primer set completo (tiebreak = 13)
         parts = []
         for h, a in zip(home_arr, away_arr):
             if h == -1 or a == -1:
@@ -2986,6 +3013,8 @@ def _parse_kambi_livedata_sets(livedata: Dict) -> Optional[Dict]:
             # Set completo: alguien ganó ≥6 con ≥2 de diferencia, o tiebreak (7 juegos)
             is_complete = (max(h, a) >= 6 and abs(h - a) >= 2) or (max(h, a) == 7)
             if is_complete:
+                if sets_complete == 0:
+                    games_set1 = h + a   # D150-02: capturar primer set
                 games_total += h + a
                 sets_complete += 1
                 if h > a:
@@ -3008,6 +3037,7 @@ def _parse_kambi_livedata_sets(livedata: Dict) -> Optional[Dict]:
             "games_played":  games_total,
             "sets_complete": sets_complete,
             "current_games": current_games,
+            "games_set1":    games_set1,  # D150-02
         }
     except Exception:
         return None
@@ -3026,6 +3056,7 @@ def _calcular_certeza_condicional(
     zona: str,
     sets_home: Optional[int] = None,
     sets_away: Optional[int] = None,
+    games_set1: Optional[int] = None,  # D150-04: juegos del primer set (tiebreak ≥12)
 ) -> Dict[str, Any]:
     """D147-02: Motor matemático de certeza condicional.
 
@@ -3035,8 +3066,15 @@ def _calcular_certeza_condicional(
     sets_home/sets_away: necesarios para distinguir match 2-0 (terminado) de
     match 1-1 (tercer set pendiente). Sin ellos, sets_complete>=2 con current_games=0
     producía falso positivo CERTEZA cuando el tercer set aún no había comenzado.
+
+    games_set1 (D150-04): si el primer set terminó en tiebreak (≥12j) y zona=DOMINANTE,
+    forzar COINFLIP — la clasificación pre-partido queda invalidada por la evidencia empírica.
     """
     import math as _m
+
+    # D150-04: tiebreak en set 1 invalida clasificación DOMINANTE pre-partido
+    if games_set1 is not None and int(games_set1) >= 12 and zona == "DOMINANTE":
+        zona = "COINFLIP"
 
     # Máximo juegos restantes (best-of-3: máx 3 sets, cada set máx 13j con tiebreak)
     # Determinar si el match ya fue decidido (alguien ganó 2 sets)
@@ -3208,6 +3246,10 @@ def _enrich_live_score(
                         )
             except Exception as _ld_exc:
                 logger.debug(f"[D147-01b] livedata error: {_ld_exc}")
+
+        # D150-02: propagar games_set1 al dict de la señal para gates posteriores
+        if sig.get("score_data"):
+            sig["games_set1"] = sig["score_data"].get("games_set1")
 
 
 def _freeze_baseline_if_needed(
@@ -3727,8 +3769,14 @@ def _check_games_convergencia(fecha: str) -> None:
     for _s147 in alta_signals:
         if _s147.get("score_data") is not None and _s147.get("estado") in ("EN_VIVO", "ITF_VIVO"):
             _linea147 = float(_s147.get("linea") or 0)
-            _zona147  = "DOMINANTE" if _linea147 < 21.5 else "COINFLIP"
             _sd147    = _s147["score_data"]
+            _gs1_147  = _sd147.get("games_set1")
+            _zona147  = "DOMINANTE" if _linea147 < 21.5 else "COINFLIP"
+            # D150-03: set 1 tiebreak invalida DOMINANTE → COINFLIP_FORZADO
+            if _gs1_147 is not None and int(_gs1_147) >= 12 and _zona147 == "DOMINANTE":
+                _zona147 = "COINFLIP_FORZADO"
+                logger.info(f"[ITF_LIVE] {_s147.get('partido')} set1={_gs1_147}j → zona=COINFLIP_FORZADO")
+            _s147["zona"] = _zona147
             _s147["certeza"] = _calcular_certeza_condicional(
                 linea=_linea147,
                 direccion=_s147.get("direccion", "UNDER"),
@@ -3738,6 +3786,7 @@ def _check_games_convergencia(fecha: str) -> None:
                 zona=_zona147,
                 sets_home=_sd147.get("sets_home"),
                 sets_away=_sd147.get("sets_away"),
+                games_set1=_gs1_147,
             )
         else:
             _s147["certeza"] = {
@@ -3918,6 +3967,16 @@ def _check_games_convergencia(fecha: str) -> None:
                     f"< -3j → LINEA ENVENENADA (línea cae, partido corto)"
                 )
 
+        # D150-01: cuota envenenada — mercado reprecia cuota agresivamente hacia arriba
+        CUOTA_ENVENENADA_UMBRAL = 15.0
+        cuota_envenenada = False
+        if cuota_drift is not None and cuota_drift > CUOTA_ENVENENADA_UMBRAL:
+            cuota_envenenada = True
+            logger.info(
+                f"[ITF_LIVE] {home} vs {away} UNDER cuota_drift={cuota_drift:+.1f}% "
+                f"> +{CUOTA_ENVENENADA_UMBRAL:.0f}% → CUOTA_ENVENENADA"
+            )
+
         markov = _get_markov_itf(home, away, er_picks)
 
         # D142-SCORE-02: Playwright para ITF (Kambi API no expone score ITF);
@@ -3988,6 +4047,7 @@ def _check_games_convergencia(fecha: str) -> None:
             "convergencia_breakdown": conv["breakdown"] + (f" | score={score_str}→rem={games_remaining}j({score_alerta})" if score_alerta else f" | score={score_str}" if score_str else ""),
             "confianza":             "ALTA" if conv_score_final >= 3 else ("MEDIA" if conv_score_final >= 2 else "BAJA"),
             "linea_envenenada":      linea_envenenada,
+            "cuota_envenenada":      cuota_envenenada,   # D150-01
             "over_candidato":        over_candidato,
             "cuota_over_live":       cuota_over_live,
             "oc_id_over_live":       oc_id_over_live,
@@ -4011,17 +4071,25 @@ def _check_games_convergencia(fecha: str) -> None:
     _enrich_live_score(itf_live_signals, started_events)
     for _itf147 in itf_live_signals:
         if _itf147.get("score_data") is not None:
-            _ln = float(_itf147.get("linea") or 0)
-            _sd = _itf147["score_data"]
+            _ln  = float(_itf147.get("linea") or 0)
+            _sd  = _itf147["score_data"]
+            _gs1 = _sd.get("games_set1") or _itf147.get("games_set1")
+            _zona_itf = "DOMINANTE" if _ln < 21.5 else "COINFLIP"
+            # D150-03: set 1 tiebreak invalida DOMINANTE → COINFLIP_FORZADO
+            if _gs1 is not None and int(_gs1) >= 12 and _zona_itf == "DOMINANTE":
+                _zona_itf = "COINFLIP_FORZADO"
+                logger.info(f"[ITF_LIVE] {_itf147.get('partido')} set1={_gs1}j → zona=COINFLIP_FORZADO")
+            _itf147["zona"] = _zona_itf
             _itf147["certeza"] = _calcular_certeza_condicional(
                 linea=_ln,
                 direccion=_itf147.get("direccion", "UNDER"),
                 games_played=int(_sd.get("games_played") or 0),
                 sets_complete=int(_sd.get("sets_complete") or 0),
                 current_games=int(_sd.get("current_games") or 0),
-                zona="DOMINANTE" if _ln < 21.5 else "COINFLIP",
+                zona=_zona_itf,
                 sets_home=_sd.get("sets_home"),
                 sets_away=_sd.get("sets_away"),
+                games_set1=_gs1,
             )
 
     # Combinar en games_live: pre-game + ITF_LIVE
@@ -4071,9 +4139,25 @@ def _check_games_convergencia(fecha: str) -> None:
 
     # --- Fire combo ITF live (D-ITF-LIVE-02) ---
     # Incluye: convergencia ALTA sin envenenada OR envenenada con over_candidato (tercer set → OVER)
-    alta_itf = [s for s in itf_live_signals
-                if s.get("convergencia_score", 0) >= 3
-                and (not s.get("linea_envenenada") or s.get("over_candidato"))]
+    # D150-06: filtrar piernas con set1 tiebreak (zona=COINFLIP_FORZADO) o cuota_envenenada
+    alta_itf_raw = [s for s in itf_live_signals
+                    if s.get("convergencia_score", 0) >= 3
+                    and (not s.get("linea_envenenada") or s.get("over_candidato"))]
+    alta_itf = []
+    for _s06 in alta_itf_raw:
+        _gs1_06 = (_s06.get("score_data") or {}).get("games_set1") or _s06.get("games_set1") or 0
+        if _gs1_06 >= 12:
+            logger.info(
+                f"[ITF_LIVE_GATE] {_s06.get('partido')} excluida del combo "
+                f"(set1={_gs1_06}j, tiebreak)"
+            )
+            continue
+        if _s06.get("cuota_envenenada"):
+            logger.info(
+                f"[ITF_LIVE_GATE] {_s06.get('partido')} excluida del combo (cuota_envenenada)"
+            )
+            continue
+        alta_itf.append(_s06)
     if alta_itf:
         itf_fired_path = REPORTS / f"itf_live_games_{fecha_compact}_fired.json"
         try:

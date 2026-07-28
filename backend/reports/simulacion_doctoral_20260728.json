@@ -1,0 +1,109 @@
+{
+  "tipo": "SIMULACION_DOCTORAL",
+  "fecha_hora_entrada": "2026-07-28T12:29:48.416867",
+  "estrategia": "GAMES_LIVE_COMBO",
+  "combo_cuota_estimada": 7.41,
+  "stake_simulado_COP": 50000,
+  "retorno_simulado_si_gana_COP": 370616,
+  "hipotesis_central": "Señales UNDER con set 1 completo (dominante) tienen ventaja condicional alta porque: (1) el pace del primer set predice el segundo, (2) el mercado no ajusta suficientemente rápido la línea live para ITF de menor seguimiento.",
+  "piernas": [
+    {
+      "rank": 1,
+      "partido": "Ferdinand Livet Novkirichka vs Valentin Faure",
+      "direccion": "UNDER",
+      "linea": 20.5,
+      "cuota_entrada": 1.91,
+      "cuota_t0": 1.78,
+      "edge_pct": 35.0,
+      "gap_j": 4.0,
+      "score_entrada": "6:2",
+      "gp_entrada": 11,
+      "linea_drift_j": 0.0,
+      "cuota_drift_pct": 7.3,
+      "zona": "DOMINANTE",
+      "razon": "Set 1 dominante 6:2. Set 2 arrancó con 3j. Línea estable (no movimiento). Necesita ≤9.5j más en set 2.",
+      "riesgo_principal": "Set 2 puede ser más competitivo que set 1 — cuota subió 7.3% lo sugiere.",
+      "p_estimada": 0.62,
+      "resultado": null,
+      "score_final": null
+    },
+    {
+      "rank": 2,
+      "partido": "Ekaterina Alexandrova vs Kristina Liutova",
+      "direccion": "UNDER",
+      "linea": 32.5,
+      "cuota_entrada": 1.96,
+      "cuota_t0": 1.96,
+      "edge_pct": 49.0,
+      "gap_j": 15.0,
+      "score_entrada": "sin score (WTA)",
+      "gp_entrada": 0,
+      "linea_drift_j": 0.0,
+      "cuota_drift_pct": 0.0,
+      "zona": "DOMINANTE",
+      "razon": "Gap enorme (15j). Línea 32.5 es excesiva para un partido donde Alexandrova (Top30 WTA) juega contra jugadora de circuito menor. 2 sets directos = ~18-24 juegos. Mercado completamente estable.",
+      "riesgo_principal": "Si va a 3 sets (iguales en nivel) → ~28-32 juegos → OVER. Kambi podría saber algo del circuito que nuestro modelo no calibró.",
+      "p_estimada": 0.7,
+      "resultado": null,
+      "score_final": null
+    },
+    {
+      "rank": 3,
+      "partido": "Max Dahlin vs Matteo Martineau",
+      "direccion": "UNDER",
+      "linea": 22.5,
+      "cuota_entrada": 1.98,
+      "cuota_t0": 2.0,
+      "edge_pct": 33.6,
+      "gap_j": 3.5,
+      "score_entrada": "6:4",
+      "gp_entrada": 13,
+      "linea_drift_j": 1.0,
+      "cuota_drift_pct": -1.0,
+      "zona": "COINFLIP",
+      "razon": "Set 1 fue 6:4 (competitivo, no dominante). Set 2 con 3j. Cuota levemente bajó (mercado confirma UNDER). Gap de 3.5j — margin estrecho.",
+      "riesgo_principal": "Set competitivo en set 2 → tiebreak → 22-24j total → puede cruzar la línea. Es el eslabón más débil.",
+      "p_estimada": 0.55,
+      "resultado": null,
+      "score_final": null
+    }
+  ],
+  "metricas_a_validar": [
+    "certeza_condicional: ¿el badge (BAJA/MOD/ALTA/CERTEZA) predice el resultado?",
+    "linea_drift como señal de advertencia: drift > +2j correlaciona con pérdida?",
+    "cuota_drift negativo = mercado confirma = mayor P(win)?",
+    "zona DOMINANTE vs COINFLIP: ¿los sets dominantes (6:2) ganan más que los competitivos (6:4)?",
+    "El score del set 1 como predictor del total final — hipótesis central"
+  ],
+  "checkpoints": [
+    {
+      "hora": "12:30:45",
+      "partidos": {
+        "Ferdinand Livet Novkirichka": {
+          "nombre": "Ferdinand Livet Novkirichka",
+          "logs": [
+            "12:23:24 | INFO | [D147-01b] livedata OK: Ferdinand Livet Novkirichka vs Valentin Faure score=6:2 gp=11",
+            "12:25:52 | INFO | [ITF_LIVE] Ferdinand Livet Novkirichka vs Valentin Faure UNDER 20.5 @1.91 t0=@1.78 | gap=4.0 edge=35.0% | cuota_drift=+7.3% linea_drift=+0.0j",
+            "12:29:41 | INFO | [D147-01b] livedata OK: Ferdinand Livet Novkirichka vs Valentin Faure score=6:2 gp=11"
+          ]
+        },
+        "Ekaterina Alexandrova": {
+          "nombre": "Ekaterina Alexandrova",
+          "logs": [
+            "12:24:06 | INFO | [ITF_LIVE] Ekaterina Alexandrova vs Kristina Liutova UNDER 32.5 @1.96 t0=@1.96 | gap=15.0 edge=49.0% | cuota_drift=+0.0% linea_drift=+0.0j",
+            "12:29:40 | INFO | [D147-01b] livedata OK: Ekaterina Alexandrova vs Kristina Liutova score=6:7,6:4 gp=26",
+            "12:30:22 | INFO | [ITF_LIVE] Ekaterina Alexandrova vs Kristina Liutova UNDER 31.5 @2.55 t0=@1.96 | gap=14.0 edge=60.8% | cuota_drift=+30.1% linea_drift=-1.0j"
+          ]
+        },
+        "Max Dahlin": {
+          "nombre": "Max Dahlin",
+          "logs": [
+            "12:23:25 | INFO | [D147-01b] livedata OK: Max Dahlin vs Matteo Martineau score=6:4 gp=13",
+            "12:27:17 | INFO | [ITF_LIVE] Max Dahlin vs Matteo Martineau UNDER 22.5 @1.98 t0=@2.0 | gap=3.5 edge=33.6% | cuota_drift=-1.0% linea_drift=+1.0j",
+            "12:29:41 | INFO | [D147-01b] livedata OK: Max Dahlin vs Matteo Martineau score=6:4 gp=15"
+          ]
+        }
+      }
+    }
+  ]
+}
