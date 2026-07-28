@@ -46,6 +46,10 @@ MIN_CUOTA       = 1.50   # cuota mínima para que haya EV
 # N mínimo de observaciones por zona antes de ajustar thresholds (Fase 5)
 MIN_N_CALIBRACION = 50
 
+# D149-06 (Nodo-149): P(3 sets) estimada por zona — para gap_sets en mercado SETS
+# gap_sets = p_modelo_3sets - 1/cuota; threshold >= 0.10
+_P_3SETS_POR_ZONA = {"dominante": 0.28, "coinflip": 0.60, "ajustada": 0.42}
+
 
 # ── Fase 5: Auto-calibración de thresholds ───────────────────────────────────
 def _cargar_thresholds_calibrados() -> dict:
@@ -336,6 +340,7 @@ def _analizar_mercados_juegos(betoffer: list, pred: dict) -> list:
                     confianza = "ALTA" if gap >= 4 else "MEDIA"
                     señales.append({
                         "mercado": "Total de juegos",
+                        "mercado_tipo": "JUEGOS",
                         "linea": linea,
                         "direccion": "UNDER",
                         "cuota": cuota_menos,
@@ -353,6 +358,7 @@ def _analizar_mercados_juegos(betoffer: list, pred: dict) -> list:
                     confianza = "ALTA" if gap >= 3 else "MEDIA"
                     señales.append({
                         "mercado": "Total de juegos",
+                        "mercado_tipo": "JUEGOS",
                         "linea": linea,
                         "direccion": "OVER",
                         "cuota": cuota_mas,
@@ -375,6 +381,7 @@ def _analizar_mercados_juegos(betoffer: list, pred: dict) -> list:
             if predicted_sets == 2 and cuota_menos_sets and cuota_menos_sets >= MIN_CUOTA:
                 señales.append({
                     "mercado": "Total de sets",
+                    "mercado_tipo": "SETS",
                     "linea": linea,
                     "direccion": "UNDER",
                     "cuota": cuota_menos_sets,
@@ -387,6 +394,7 @@ def _analizar_mercados_juegos(betoffer: list, pred: dict) -> list:
             elif predicted_sets == 3 and cuota_mas_sets and cuota_mas_sets >= MIN_CUOTA:
                 señales.append({
                     "mercado": "Total de sets",
+                    "mercado_tipo": "SETS",
                     "linea": linea,
                     "direccion": "OVER",
                     "cuota": cuota_mas_sets,
@@ -400,38 +408,40 @@ def _analizar_mercados_juegos(betoffer: list, pred: dict) -> list:
     return señales
 
 
-def _seleccionar_señal_optima(señales: list) -> list:
+def _seleccionar_señal_optima(señales: list) -> tuple:
     """
-    Por mercado (juegos / sets), devuelve la señal óptima:
-    - UNDER: línea más alta con mayor cuota (más margen de seguridad)
-    - OVER: línea más baja con mayor cuota (más fácil de superar)
+    D149-02 (Nodo-149): Devuelve (juegos_optimas, sets_optimas) separados.
+    - UNDER juegos: máximo gap (más margen de seguridad)
+    - OVER juegos: máximo gap (más fácil de superar)
+    - Sets: mejor cuota entre apostables
     Solo devuelve señales con apostar=True.
     """
     apostar = [s for s in señales if s["apostar"]]
+    juegos_optimas: list = []
+    sets_optimas: list = []
+
     if not apostar:
-        return []
+        return juegos_optimas, sets_optimas
 
-    optimas = []
-
-    # Total de juegos UNDER → máxima línea (más margen) entre las apostables
-    juegos_under = [s for s in apostar if s["mercado"] == "Total de juegos" and s["direccion"] == "UNDER"]
+    # Total de juegos UNDER → máximo gap entre apostables
+    juegos_under = [s for s in apostar if s.get("mercado_tipo") == "JUEGOS" and s["direccion"] == "UNDER"]
     if juegos_under:
         mejor = max(juegos_under, key=lambda s: (s["gap_juegos"] or 0, s["cuota"]))
-        optimas.append(mejor)
+        juegos_optimas.append(mejor)
 
-    # Total de juegos OVER → mínima línea (más fácil) entre las apostables
-    juegos_over = [s for s in apostar if s["mercado"] == "Total de juegos" and s["direccion"] == "OVER"]
+    # Total de juegos OVER → máximo gap entre apostables
+    juegos_over = [s for s in apostar if s.get("mercado_tipo") == "JUEGOS" and s["direccion"] == "OVER"]
     if juegos_over:
         mejor = max(juegos_over, key=lambda s: (s["gap_juegos"] or 0, s["cuota"]))
-        optimas.append(mejor)
+        juegos_optimas.append(mejor)
 
-    # Total de sets → incluir si apostable
-    sets_señales = [s for s in apostar if s["mercado"] == "Total de sets"]
+    # Total de sets → mejor cuota entre apostables
+    sets_señales = [s for s in apostar if s.get("mercado_tipo") == "SETS"]
     if sets_señales:
         mejor = max(sets_señales, key=lambda s: s["cuota"])
-        optimas.append(mejor)
+        sets_optimas.append(mejor)
 
-    return optimas
+    return juegos_optimas, sets_optimas
 
 
 # ── Procesamiento principal ───────────────────────────────────────────────────
@@ -560,27 +570,46 @@ def procesar_partidos(partidos: list, min_cuota: float, min_gap: float) -> list:
 
         # 6. Analizar señales disponibles
         señales = _analizar_mercados_juegos(betoffer, pred)
-        optimas = _seleccionar_señal_optima(señales)
+        juegos_optimas, sets_optimas = _seleccionar_señal_optima(señales)
 
         # D126-05: descartar outcome IDs genéricos/compartidos (plantillas ITF)
-        unicas = []
-        for s in optimas:
-            oid = s.get("outcome_id")
-            if oid is None:
-                unicas.append(s)
-            elif oid in seen_outcome_ids:
-                logger.info(f"   ⚠️  outcome {oid} NO_UNICO (visto en {seen_outcome_ids[oid]}) — descartado")
-            else:
-                seen_outcome_ids[oid] = nombre
-                unicas.append(s)
-        optimas = unicas
+        def _dedup(pool):
+            unicas = []
+            for s in pool:
+                oid = s.get("outcome_id")
+                if oid is None:
+                    unicas.append(s)
+                elif oid in seen_outcome_ids:
+                    logger.info(f"   ⚠️  outcome {oid} NO_UNICO (visto en {seen_outcome_ids[oid]}) — descartado")
+                else:
+                    seen_outcome_ids[oid] = nombre
+                    unicas.append(s)
+            return unicas
+
+        juegos_optimas = _dedup(juegos_optimas)
+        sets_optimas = _dedup(sets_optimas)
+
+        # D149-06: gap_sets = p_modelo_3sets − 1/cuota; solo SETS con gap >= 0.10
+        _p3sets = _P_3SETS_POR_ZONA.get(zona, 0.42)
+        sets_con_edge = []
+        for s in sets_optimas:
+            cuota_s = s.get("cuota", 0)
+            if cuota_s > 0:
+                gap_s = round(_p3sets - (1.0 / cuota_s), 4)
+                s["gap_sets"] = gap_s
+                if gap_s >= 0.10:
+                    sets_con_edge.append(s)
+                else:
+                    logger.info(f"   gap_sets={gap_s:.3f}<0.10 para SETS {s.get('direccion')} — descartado")
+        sets_optimas = sets_con_edge
 
         resultado_base["señales"] = señales
-        resultado_base["señales_optimas"] = optimas
+        resultado_base["señales_optimas"] = juegos_optimas        # D149-03: solo JUEGOS
+        resultado_base["señales_optimas_sets"] = sets_optimas     # D149-03: SETS separado
 
-        n_apostar = len(optimas)
+        n_apostar = len(juegos_optimas) + len(sets_optimas)
         if n_apostar:
-            for s in optimas:
+            for s in juegos_optimas + sets_optimas:
                 logger.info(f"   ✅ {s['mercado']} {s['direccion']} {s['linea']} @{s['cuota']:.2f} [{s['confianza_señal']}] gap={s.get('gap_juegos','N/A')}")
         else:
             logger.info(f"   — sin señales apostables ({len(señales)} candidatas descartadas)")
@@ -592,65 +621,76 @@ def procesar_partidos(partidos: list, min_cuota: float, min_gap: float) -> list:
 
 # ── Output y reporte ──────────────────────────────────────────────────────────
 def imprimir_reporte(resultados: list):
-    apostar = [r for r in resultados if r["señales_optimas"]]
-    candidatas = [r for r in resultados if r["señales"] and not r["señales_optimas"]]
+    # D149-04 (Nodo-149): separar pools JUEGOS vs SETS — nunca mezclar en mismo combo
+    apostar_juegos = [r for r in resultados if r.get("señales_optimas")]
+    apostar_sets   = [r for r in resultados if r.get("señales_optimas_sets")]
+    candidatas = [r for r in resultados if r["señales"]
+                  and not r.get("señales_optimas") and not r.get("señales_optimas_sets")]
 
     print()
     print("═" * 66)
     print("  GAMES SIGNAL CALCULATOR — Nodo-40")
     print("═" * 66)
     print(f"  Partidos analizados : {len(resultados)}")
-    print(f"  Con señales APOSTAR : {len(apostar)}")
+    print(f"  Con señales JUEGOS  : {len(apostar_juegos)}")
+    print(f"  Con señales SETS    : {len(apostar_sets)}")
     print(f"  Candidatas (no aptos): {len(candidatas)}")
     print()
 
-    if apostar:
-        print("  ✅ SEÑALES APOSTABLES:")
+    if apostar_juegos:
+        print("  SENALES JUEGOS APOSTABLES:")
         print()
-        for r in apostar:
-            print(f"  🎾 {r['partido']}")
+        for r in apostar_juegos:
+            print(f"  {r['partido']}")
             print(f"     Zona: {r['zona_diff'].upper()} | diff={r['diff_abs']:.2f} | "
                   f"Modelo: {r['predicted_sets']} sets, {r['games_range']} games")
             for s in r["señales_optimas"]:
-                print(f"     → {s['mercado']} {s['direccion']} {s['linea']} "
+                print(f"     -> {s['mercado']} {s['direccion']} {s['linea']} "
                       f"@{s['cuota']:.2f} [{s['confianza_señal']}] "
                       f"gap={s.get('gap_juegos', 'N/A')} | id={s['outcome_id']}")
                 print(f"       {s['razon']}")
             print()
 
+    if apostar_sets:
+        print("  SENALES SETS APOSTABLES:")
+        print()
+        for r in apostar_sets:
+            for s in r.get("señales_optimas_sets", []):
+                gap_s = s.get("gap_sets", "N/A")
+                print(f"  {r['partido']} -> {s['mercado']} {s['direccion']} {s['linea']} "
+                      f"@{s['cuota']:.2f} gap_sets={gap_s} | id={s.get('outcome_id')}")
+                print(f"       {s['razon']}")
+        print()
+
     if candidatas:
-        print("  👀 CANDIDATAS (sin señal suficiente):")
+        print("  CANDIDATAS (sin señal suficiente):")
         for r in candidatas:
             total = len(r["señales"])
             print(f"     {r['partido']} — {total} señal(es) bajo threshold")
     print()
 
-    # Combos sugeridos — REGLA-G4: max 1 señal por partido en el mismo combo
-    # Tomar la mejor señal por partido (mayor confianza, luego mayor cuota)
     def _ranking_señal(s):
         conf_ord = {"ALTA": 2, "MEDIA": 1}
         return (conf_ord.get(s["confianza_señal"], 0), s["cuota"])
 
-    mejores_por_partido = []
-    for r in apostar:
+    # Combos JUEGOS — REGLA-G4: max 1 señal por partido en el mismo combo
+    pool_juegos = []
+    for r in apostar_juegos:
         if r["señales_optimas"]:
             mejor = max(r["señales_optimas"], key=_ranking_señal)
-            mejores_por_partido.append((r, mejor))
+            pool_juegos.append((r, mejor))
 
-    if len(mejores_por_partido) >= 2:
-        print("  📦 COMBOS SUGERIDOS:")
-        # Combo A: 2 mejores partidos distintos
-        if len(mejores_por_partido) >= 2:
-            a, b = mejores_por_partido[0], mejores_por_partido[1]
-            cuota_combo = round(a[1]["cuota"] * b[1]["cuota"], 2)
-            ids = f"{a[1]['outcome_id']},{b[1]['outcome_id']}"
-            print(f"     Combo A (2p @{cuota_combo}x): "
-                  f"{a[0]['partido']} {a[1]['direccion']} {a[1]['linea']} + "
-                  f"{b[0]['partido']} {b[1]['direccion']} {b[1]['linea']}")
-            print(f"       IDs Kambi: {ids}")
-        # Combo B: 3 partidos distintos
-        if len(mejores_por_partido) >= 3:
-            a, b, c = mejores_por_partido[0], mejores_por_partido[1], mejores_por_partido[2]
+    if len(pool_juegos) >= 2:
+        print("  COMBOS JUEGOS:")
+        a, b = pool_juegos[0], pool_juegos[1]
+        cuota_combo = round(a[1]["cuota"] * b[1]["cuota"], 2)
+        ids = f"{a[1]['outcome_id']},{b[1]['outcome_id']}"
+        print(f"     Combo A (2p @{cuota_combo}x): "
+              f"{a[0]['partido']} {a[1]['direccion']} {a[1]['linea']} + "
+              f"{b[0]['partido']} {b[1]['direccion']} {b[1]['linea']}")
+        print(f"       IDs Kambi: {ids}")
+        if len(pool_juegos) >= 3:
+            c = pool_juegos[2]
             cuota_combo = round(a[1]["cuota"] * b[1]["cuota"] * c[1]["cuota"], 2)
             ids = f"{a[1]['outcome_id']},{b[1]['outcome_id']},{c[1]['outcome_id']}"
             print(f"     Combo B (3p @{cuota_combo}x): "
@@ -660,7 +700,26 @@ def imprimir_reporte(resultados: list):
             print(f"       IDs Kambi: {ids}")
         print()
 
-    print("  📌 REGLA-G6: stakes máx $2,000/combo hasta n≥50 observaciones")
+    # Combo C: SETS — pool separado, nunca mezclar con JUEGOS (D149-04)
+    pool_sets = []
+    for r in apostar_sets:
+        sets_opts = r.get("señales_optimas_sets", [])
+        if sets_opts:
+            mejor = max(sets_opts, key=_ranking_señal)
+            pool_sets.append((r, mejor))
+
+    if len(pool_sets) >= 2:
+        print("  COMBO SETS:")
+        a, b = pool_sets[0], pool_sets[1]
+        cuota_combo = round(a[1]["cuota"] * b[1]["cuota"], 2)
+        ids = f"{a[1].get('outcome_id')},{b[1].get('outcome_id')}"
+        print(f"     Combo C (2p sets @{cuota_combo}x): "
+              f"{a[0]['partido']} {a[1]['direccion']} {a[1]['linea']} + "
+              f"{b[0]['partido']} {b[1]['direccion']} {b[1]['linea']}")
+        print(f"       IDs Kambi: {ids}")
+        print()
+
+    print("  REGLA-G6: stakes max $2,000/combo hasta n>=50 observaciones")
     print("═" * 66)
 
 

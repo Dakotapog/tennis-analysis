@@ -1767,9 +1767,16 @@ def build_games_combos(stake_per_combo: int = 2000,
         zona = partido_data.get("zona_diff", "")
         diff_abs = partido_data.get("diff_abs", 0.0)
         señales = partido_data.get("señales_optimas", [])
+        # D149-05 (Nodo-149): solo JUEGOS — guard explícito por si el reporte viene de versión anterior
+        señales_juegos = [
+            s for s in señales
+            if s.get("mercado_tipo") == "JUEGOS" or s.get("mercado") == "Total de juegos"
+        ]
+        if not señales_juegos:
+            señales_juegos = señales  # backward compat: archivos sin mercado_tipo
         # Take best signal per partido (first = optimal from calculator)
-        if señales:
-            s = señales[0]
+        if señales_juegos:
+            s = señales_juegos[0]
             if s.get("apostar"):
                 all_signals.append({
                     "partido": partido,
