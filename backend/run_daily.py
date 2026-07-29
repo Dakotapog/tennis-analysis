@@ -32,6 +32,11 @@ import argparse
 from datetime import datetime, timedelta
 from pathlib import Path
 
+try:
+    from scraping.file_utils import select_best_h2h_file as _sbh2h  # D154-05/D154-11
+except ImportError:
+    _sbh2h = None
+
 # ── Configuración ─────────────────────────────────────────────────────────────
 
 BANKROLL_GS         = 125000
@@ -401,7 +406,15 @@ def main():
         _run(['python3', 'generar_tabla_favoritos2.py'], 'PASO 3.5 — Tabla análisis')
 
         # ── PASO 3.6 — Games signal ───────────────────────────────────────────
-        _run(['python3', 'games_signal_calculator.py'], 'PASO 3.6 — Games signal')
+        # D154-05 (B9/G5): pasar --file con el mismo h2h que usó edge_calculator
+        # games_signal_calculator.py ya tiene argparse --file (L780, confirmado)
+        _today_str = datetime.now().strftime('%Y%m%d')
+        _h2h_for_games = (_sbh2h(date_str=_today_str, directory='reports')
+                          if _sbh2h else None)
+        _games_cmd = ['python3', 'games_signal_calculator.py']
+        if _h2h_for_games:
+            _games_cmd += ['--file', _h2h_for_games]
+        _run(_games_cmd, 'PASO 3.6 — Games signal (D154-05: mismo h2h que edge_calculator)')
 
         # ── PASO 3.6b — EvalGames Bridge (Nodo-125) ──────────────────────────
         # EVALUAR_GAMES (cuota<1.30) → UNDER juegos signal para X4 dashboard + combos
@@ -419,6 +432,34 @@ def main():
     if _skip_pasos_4_plus:
         print(f"\n  FASE NOCHE completada. PASOS 4+ se ejecutarán con --fase manana")
         return
+
+    # ── PASO 3.9 — Kambi Coverage refresh pre-PASO 4 (D154-08) ──────────────
+    # G4+B3+B8+O3: kambi_disponible se fijó en PASO 1c (mañana). Re-fetchar
+    # antes de combos garantiza que filter_kambi_picks + combo_confianza_builder
+    # + betplay_combo_builder lean disponibilidad fresca (no de horas atrás).
+    _run(['python3', 'scripts/fetch_kambi_coverage.py'],
+         'PASO 3.9 — Kambi Coverage refresh pre-PASO 4 (D154-08)',
+         optional=True)
+
+    # ── PASO 3.91 — Patch cuota_favorito live en edge_report (D154-10) ───────
+    # B10/O4: cuota_favorito en edge_report es del h2h (08:32). Parchear con
+    # precios live Kambi antes de que los builders calculen EV.
+    try:
+        import glob as _glob
+        from scripts.fetch_kambi_coverage import fetch_coverage as _fc, \
+            patch_edge_report_cuotas as _patch_cuotas
+        _cov = _fc()
+        if _cov and _cov.get('odds_map'):
+            _today = __import__('datetime').datetime.now().strftime('%Y%m%d')
+            _er_files = sorted(_glob.glob(f'reports/edge_report_kambi_{_today}*.json') +
+                               _glob.glob(f'reports/edge_report_{_today}*.json'),
+                               reverse=True)
+            if _er_files:
+                _n = _patch_cuotas(_er_files[0], _cov)
+                if _n:
+                    print(f'[PASO 3.91] {_n} cuotas actualizadas en {_er_files[0]}')
+    except Exception as _e:
+        print(f'[PASO 3.91] WARN patch cuotas falló (no bloqueante): {_e}')
 
     # ── PASO 4 — Trader por tier ──────────────────────────────────────────
     tier_config = {

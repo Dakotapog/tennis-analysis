@@ -400,11 +400,10 @@ def generar_bat_chrome(combo_links: List[Dict], output_dir: Optional[Path] = Non
         html_path = dest_html / f"combo{idx}.html"
         html_path.write_text(html_content, encoding="utf-8")
 
-        # .bat que abre Chrome con el HTML local
-        html_win_path = str(html_path).replace("/mnt/c/", "C:\\").replace("/", "\\")
+        # .bat → HTML local (JS window.location.replace preserva | sin URL-encode)
         bat_content = (
             f"@echo off\r\n"
-            f'start "" "{CHROME_WIN}" "file:///{html_win_path}"\r\n'
+            f'start "" "{CHROME_WIN}" "file:///C:\\users\\hogar\\Desktop\\combos\\combo{idx}.html"\r\n'
         )
         bat_path = dest_bats / f"Combo{idx}.bat"
         bat_path.write_text(bat_content, encoding="utf-8")
@@ -3223,30 +3222,50 @@ KF_MAX_LEGS      = 7
 KF_TIME_WINDOW_H = 3.0    # ventana temporal en horas
 
 
+# D154-04 (B4): partículas nobiliarias/preposiciones que no son apellido
+_PARTICLES = frozenset({
+    'de', 'van', 'del', 'von', 'los', 'la', 'le', 'di', 'da', 'du',
+    'dos', 'das', 'den', 'der', 'des', 'ter', 'te', 'el', 'al',
+})
+
+
 def _apellido_kambi(label: str) -> str:
-    """Extrae apellido de nombre en formato Kambi: 'Lachlan Mcfadzean' → 'mcfadzean'."""
+    """D154-04: extrae apellido de nombre Kambi filtrando partículas.
+
+    'Lachlan Mcfadzean' → 'mcfadzean'
+    'Alex De Minaur'    → 'minaur'
+    'Botic Van De Zandschulp' → 'zandschulp'
+    """
     norm = _normalize_name(label)
-    parts = [p for p in norm.split() if len(p) > 2]
+    # Filtrar tokens cortos (≤2 chars) Y partículas
+    parts = [p for p in norm.split() if len(p) > 2 and p not in _PARTICLES]
     if not parts:
-        return norm
-    # Apellidos compuestos: si último token es partícula corta, tomar 2 finales
-    if len(parts) >= 2 and len(parts[-1]) <= 3:
-        return ' '.join(parts[-2:])
-    return parts[-1]
+        # Fallback: al menos tomar algo
+        parts = [p for p in norm.split() if len(p) > 2] or norm.split()
+    return parts[-1] if parts else norm
 
 
 def _apellido_pick(nombre: str) -> str:
-    """Extrae apellido de nombre en formato pick: 'McFadzean L.' → 'mcfadzean'."""
+    """D154-04: extrae apellido del pick, quitando iniciales y partículas.
+
+    'McFadzean L.'          → 'mcfadzean'
+    'De Minaur A.'          → 'minaur'
+    'Van De Zandschulp B.'  → 'zandschulp'
+    """
     norm = _normalize_name(nombre)
     parts = norm.split()
     # Quitar tokens finales que sean iniciales (≤2 chars)
     while parts and len(parts[-1]) <= 2:
         parts.pop()
-    return ' '.join(parts) if parts else norm
+    # Quitar partículas del inicio
+    while parts and parts[0] in _PARTICLES:
+        parts.pop(0)
+    # Retornar último token significativo (apellido real)
+    return parts[-1] if parts else norm
 
 
 def _match_score_names_kf(kambi_label: str, pick_nombre: str) -> float:
-    """Retorna score 0-1 de coincidencia entre nombre Kambi y nombre pick."""
+    """D154-04: score 0-1 de coincidencia nombre Kambi vs pick, con fallback token."""
     ak = _apellido_kambi(kambi_label)
     ap = _apellido_pick(pick_nombre)
     if not ak or not ap:
@@ -3261,7 +3280,14 @@ def _match_score_names_kf(kambi_label: str, pick_nombre: str) -> float:
     if not bg_ak or not bg_ap:
         return 0.0
     j = len(bg_ak & bg_ap) / len(bg_ak | bg_ap)
-    return j if j >= 0.70 else 0.0
+    if j >= 0.70:
+        return j
+    # D154-04 fallback: cualquier token significativo de Kambi coincide con apellido del pick
+    kambi_tokens = {t for t in _normalize_name(kambi_label).split()
+                    if len(t) > 2 and t not in _PARTICLES}
+    if ap in kambi_tokens:
+        return 0.85
+    return 0.0
 
 
 def _fetch_kambi_betting_universe(

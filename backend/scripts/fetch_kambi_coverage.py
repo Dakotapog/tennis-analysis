@@ -77,6 +77,7 @@ def fetch_coverage() -> dict | None:
 
     players_set = set()
     event_pairs = []
+    odds_map: dict = {}  # D154-10: player_normalized → cuota decimal live
 
     for ev in events:
         pair = []
@@ -92,6 +93,10 @@ def fetch_coverage() -> dict | None:
                 if norm:
                     players_set.add(norm)
                     pair.append(norm)
+                    # D154-10: capturar cuota live (milliodds → decimal)
+                    milli = oc.get('odds', 0)
+                    if milli > 1000:  # sanity: >1.0x
+                        odds_map[norm] = round(milli / 1000, 3)
         if len(pair) >= 2:
             event_pairs.append(pair[:2])
 
@@ -102,6 +107,7 @@ def fetch_coverage() -> dict | None:
         'n_jugadores': len(players_set),
         'players_normalized': sorted(players_set),
         'event_pairs': event_pairs,
+        'odds_map': odds_map,  # D154-10: cuotas live por jugador normalizado
     }
 
 
@@ -142,6 +148,61 @@ def is_player_available(nombre: str, coverage: dict) -> bool:
     if len(apellido) > 3:
         return any(apellido in p for p in players)
     return False
+
+
+def patch_edge_report_cuotas(edge_report_path: str, coverage: dict,
+                              umbral_pct: float = 0.02) -> int:
+    """D154-10 (B10/O4): actualiza cuota_favorito en edge_report con precios live.
+
+    Evita que los combo builders calculen EV sobre cuotas de horas atrás.
+    Solo actualiza picks donde la diferencia supere umbral_pct (default 2%)
+    para evitar micro-ruido. Modifica el archivo en disco in-place.
+
+    Args:
+        edge_report_path: Ruta al edge_report_*.json a parchear.
+        coverage: Dict retornado por fetch_coverage() (debe incluir 'odds_map').
+        umbral_pct: Diferencia mínima para actualizar (default 2%).
+
+    Returns:
+        Número de picks actualizados.
+    """
+    odds_map = coverage.get('odds_map', {})
+    if not odds_map:
+        return 0
+
+    try:
+        with open(edge_report_path, 'r', encoding='utf-8') as f:
+            report = json.load(f)
+    except Exception as e:
+        print(f'[D154-10] No se pudo leer edge_report: {e}', file=sys.stderr)
+        return 0
+
+    updated = 0
+    for seccion in ('apostar', 'watchlist'):
+        for pick in report.get(seccion, []):
+            jugador = pick.get('favorito_predicho', '')
+            cuota_vieja = pick.get('cuota_favorito', 0)
+            if not jugador or not cuota_vieja:
+                continue
+            norm = _normalize_name(jugador)
+            cuota_live = odds_map.get(norm)
+            if cuota_live is None:
+                continue
+            diff = abs(cuota_live - cuota_vieja) / max(cuota_vieja, 0.001)
+            if diff >= umbral_pct:
+                pick['cuota_favorito'] = cuota_live
+                pick['cuota_favorito_stale'] = cuota_vieja  # trazabilidad
+                pick['cuota_favorito_source'] = 'kambi_live_D154-10'
+                updated += 1
+                print(f'[D154-10] {jugador}: cuota {cuota_vieja}→{cuota_live} '
+                      f'(Δ{diff*100:.1f}%)')
+
+    if updated:
+        with open(edge_report_path, 'w', encoding='utf-8') as f:
+            json.dump(report, f, ensure_ascii=False, indent=2)
+        print(f'[D154-10] {updated} picks actualizados en {edge_report_path}')
+
+    return updated
 
 
 def main():

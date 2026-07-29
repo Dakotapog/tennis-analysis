@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "generado": "2026-07-22T14:38:11",
-    "total_nodos": 138,
+    "generado": "2026-07-29T14:12:24",
+    "total_nodos": 149,
     "total_py_files": 71,
     "huerfanos_count": 0,
     "exclusiones_count": 19
@@ -807,6 +807,107 @@
       ]
     },
     {
+      "nodo_id": "143",
+      "nodo_archivo": "Nodo-143-Match-Ledger-Torneo-Metadata-Propagation.md",
+      "fecha": "2026-07-25",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "combo_confianza_builder.py",
+        "edge_calculator.py",
+        "extraer_historh2h.py",
+        "filter_kambi_picks.py",
+        "live_desk.py",
+        "scraping/match_ledger.py",
+        "tests/test_nodo142_itf_live_games.py",
+        "tests/test_nodo143_match_ledger_torneo.py"
+      ]
+    },
+    {
+      "nodo_id": "144",
+      "nodo_archivo": "Nodo-144-Trazabilidad-Estrategia-Shadow-Book.md",
+      "fecha": "2026-07-26",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "backfill_strategy.py",
+        "betplay_combo_builder.py",
+        "combo_confianza_builder.py",
+        "edge_calculator.py",
+        "favoritos_combo_builder.py",
+        "rival_value_betslip.py",
+        "scripts/backfill_strategy.py",
+        "shadow_book.py",
+        "tests/test_nodo144_strategy_tag.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "145",
+      "nodo_archivo": "Nodo-145-Pipeline-Bugs-tipo-cancha-timing.md",
+      "fecha": "2026-07-27",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "combo_confianza_builder.py",
+        "edge_calculator.py",
+        "extraer_historh2h.py",
+        "generar_tabla_favoritos2.py",
+        "h2h_extractor.py",
+        "ninja_h2h_parser.py",
+        "scraping/h2h_extractor.py",
+        "scraping/ninja_h2h_parser.py",
+        "tests/test_nodo145_pipeline_bugs.py"
+      ]
+    },
+    {
+      "nodo_id": "146",
+      "nodo_archivo": "Nodo-146-H2H-Model-Favoritos-Gap.md",
+      "fecha": "2026-07-27",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "edge_calculator.py",
+        "favoritos_combo_builder.py",
+        "tests/test_nodo146_h2h_model_favoritos.py"
+      ]
+    },
+    {
+      "nodo_id": "147",
+      "nodo_archivo": "Nodo-147-Live-Score-Games-Certeza-Condicional.md",
+      "fecha": "2026-07-25",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "games_signal_calculator.py",
+        "live_desk.py",
+        "live_edge_monitor.py",
+        "scripts/send_telegram.py",
+        "send_telegram.py",
+        "shadow_book.py",
+        "tests/test_nodo147_live_certeza.py"
+      ]
+    },
+    {
+      "nodo_id": "148",
+      "nodo_archivo": "Nodo-148-Trader-Plan-Vacio-Sin-Apostar.md",
+      "fecha": "2026-07-28",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "tests/test_nodo148_trader_plan_vacio.py",
+        "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "149",
+      "nodo_archivo": "Nodo-149-Games-Mercado-Separacion-Juegos-Sets.md",
+      "fecha": "2026-07-28",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "evaluar_games_bridge.py",
+        "games_signal_calculator.py",
+        "live_desk.py",
+        "shadow_book.py",
+        "tests/test_nodo149_games_mercado_separacion.py"
+      ]
+    },
+    {
       "nodo_id": "15",
       "nodo_archivo": "Nodo-15-Portfolio-HedgeFund.md",
       "fecha": null,
@@ -814,6 +915,61 @@
       "archivos_mencionados": [
         "edge_calculator.py",
         "trader_ev_tenis.py"
+      ]
+    },
+    {
+      "nodo_id": "150",
+      "nodo_archivo": "Nodo-150-Live-Games-Risk-Intelligence-Simulacion-Doctoral.md",
+      "fecha": "2026-07-28",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "live_desk.py",
+        "tests/test_nodo150_live_risk_intelligence.py"
+      ]
+    },
+    {
+      "nodo_id": "151",
+      "nodo_archivo": "Nodo-151-Live-Edge-Gates.md",
+      "fecha": "2026-07-28",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "live_desk.py",
+        "tests/test_nodo151_live_edge_gates.py"
+      ]
+    },
+    {
+      "nodo_id": "152",
+      "nodo_archivo": "Nodo-152-Phantom-History-Guard.md",
+      "fecha": "2026-07-29",
+      "estado": "activo",
+      "archivos_mencionados": [
+        "edge_calculator.py",
+        "ninja_h2h_parser.py",
+        "scraping/ninja_h2h_parser.py",
+        "scripts/audit_phantom_history.py",
+        "tests/test_nodo152_phantom_history.py"
+      ]
+    },
+    {
+      "nodo_id": "154",
+      "nodo_archivo": "Nodo-154-Pipeline-Integrity-Watchlist-Phantom-H2H-Kambi.md",
+      "fecha": null,
+      "estado": "activo",
+      "archivos_mencionados": [
+        "betplay_combo_builder.py",
+        "combo_confianza_builder.py",
+        "edge_calculator.py",
+        "favoritos_combo_builder.py",
+        "filter_kambi_picks.py",
+        "games_signal_calculator.py",
+        "kambi_tennis.py",
+        "ninja_h2h_parser.py",
+        "run_daily.py",
+        "scraping/file_utils.py",
+        "scraping/h2h_extractor.py",
+        "scraping/kambi_tennis.py",
+        "scraping/ninja_h2h_parser.py",
+        "tests/test_nodo154_pipeline_integrity.py"
       ]
     },
     {

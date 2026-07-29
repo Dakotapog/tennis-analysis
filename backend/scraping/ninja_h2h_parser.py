@@ -822,6 +822,72 @@ def _lookup_player_history_temporal(
     return []
 
 
+_ELITE_TOURNAMENTS = frozenset({
+    'Finals - Turín', 'Laver Cup', 'Six Kings Slam', 'ATP Finals',
+    'Copa Davis (final)', 'Nitto ATP Finals',
+})
+_GS_TOURNAMENTS = frozenset({
+    'Wimbledon', 'Roland Garros', 'US Open',
+    'Open de Australia', 'Abierto de Francia',
+})
+_ITF_CHALLENGER_TIERS = frozenset({'itf', 'm15', 'm25', 'w15', 'w25', 'challenger'})
+
+
+def _validate_circuit_consistency(history: List[Dict], current_tier: str,
+                                  provenance: str) -> dict:
+    """
+    D152-01 (Nodo-152): Detecta historiales contaminados donde thf_cache asignó
+    partidos de un circuito muy superior al del jugador actual.
+
+    Retorna dict con 'contaminated' (bool), 'score' (int) y 'evidence' (list[str]).
+    Score ≥ 50 → CONTAMINADO (historial debe descartarse).
+
+    Reglas:
+      R1: torneos elite (ATP Finals, Laver Cup, Six Kings) + jugador ITF/Challenger → +100
+      R2: ≥2 partidos GS vs top-10 + jugador ITF/Challenger → +60 por match (cap 120)
+      R3: mediana ranking rival < 150 + jugador ITF → +50
+      R4: fuente thf_cache amplifica score × 1.5 cuando score > 0
+    """
+    score = 0
+    evidence: List[str] = []
+    tier_low = (current_tier or '').lower()
+
+    if not history or tier_low not in _ITF_CHALLENGER_TIERS:
+        return {'contaminated': False, 'score': 0, 'evidence': []}
+
+    # R1: torneos de élite absoluta — imposibles para ITF/Challenger
+    elite_matches = [m for m in history if m.get('torneo', '') in _ELITE_TOURNAMENTS]
+    if elite_matches:
+        score += 100
+        evidence.append(f"ELITE_TOURNAMENT: {elite_matches[0]['torneo']} (n={len(elite_matches)})")
+
+    # R2: múltiples rivales top-10 en Grand Slams
+    gs_top10 = [m for m in history
+                if m.get('torneo', '') in _GS_TOURNAMENTS
+                and (m.get('opponent_ranking') or 9999) <= 10]
+    if len(gs_top10) >= 2:
+        add = min(len(gs_top10) * 60, 120)
+        score += add
+        evidence.append(f"GS_TOP10x{len(gs_top10)}: rivals top-10 en Grand Slams")
+
+    # R3: mediana de ranking rival < 150 siendo jugador ITF
+    if 'itf' in tier_low or tier_low in ('m15', 'm25', 'w15', 'w25'):
+        opp_ranks = [m['opponent_ranking'] for m in history
+                     if isinstance(m.get('opponent_ranking'), (int, float))]
+        if len(opp_ranks) >= 10:
+            median_rank = sorted(opp_ranks)[len(opp_ranks) // 2]
+            if median_rank < 150:
+                score += 50
+                evidence.append(f"MEDIAN_OPP_RANK={median_rank:.0f} imposible para ITF")
+
+    # R4: thf_cache amplifica (fuente no verificada)
+    if provenance == 'thf_cache' and score > 0:
+        score = int(score * 1.5)
+        evidence.append("THF_CACHE_AMPLIFIER x1.5")
+
+    return {'contaminated': score >= 50, 'score': score, 'evidence': evidence}
+
+
 def _persist_playwright_to_thf_cache(p1: str, p1_history: List[Dict],
                                       p2: str, p2_history: List[Dict]) -> None:
     """
@@ -1184,6 +1250,31 @@ class NinjaH2HExtractor:
                 logger.warning(f"   ⚠️ Sin match_id y sin historial temporal — omitido")
                 return False
             logger.info(f"   📚 THF activo: {p1}={len(p1_history)} | {p2}={len(p2_history)}")
+            # D152-02 (Nodo-152): validar consistencia de circuito antes de usar thf_cache
+            current_tier = match_data.get('tipo_cancha', '') or match_data.get('superficie', '')
+            torneo_full = match_data.get('torneo_completo', '')
+            if not current_tier:
+                for kw, t in (('M15','itf'),('M25','itf'),('W15','itf'),('W25','itf'),
+                               ('Challenger','challenger'),('ITF','itf')):
+                    if kw in torneo_full:
+                        current_tier = t
+                        break
+            for _px, _ph, _hist in [(p1, '_contamination_p1', p1_history),
+                                    (p2, '_contamination_p2', p2_history)]:
+                if not _hist:
+                    continue
+                _val = _validate_circuit_consistency(_hist, current_tier, 'thf_cache')
+                if _val['contaminated']:
+                    logger.warning(
+                        f"   [D152] PHANTOM_HISTORY bloqueado: {_px} | "
+                        f"score={_val['score']} | {_val['evidence']}"
+                    )
+                    match_data[_ph] = True
+                    match_data[_ph.replace('_contamination_', '_contamination_score_')] = _val['score']
+                    if _px == p1:
+                        p1_history = []
+                    else:
+                        p2_history = []
             # F2: registrar procedencia — THF path
             match_data['_history_source_p1'] = PROVENANCE_THF_CACHE if p1_history else PROVENANCE_EMPTY
             match_data['_history_source_p2'] = PROVENANCE_THF_CACHE if p2_history else PROVENANCE_EMPTY
@@ -1650,6 +1741,8 @@ class NinjaH2HExtractor:
             'tipo_cancha': match_data.get('tipo_cancha') or match_data.get('superficie', 'N/A'),  # D145-01
             'hora': match_data.get('hora'),  # D145-01: timing guard (D145-02 en edge_calculator)
             'torneo_completo': match_data.get('torneo_completo', 'N/A'),
+            'tier': match_data.get('tier', ''),  # D154-02: para D152-05 gate en edge_calculator
+            'kambi_event_id': match_data.get('kambi_event_id'),  # D154-06: para outcome fetch puntual
             'cuota1': match_data.get('cuota1', 'N/A'),
             'cuota2': match_data.get('cuota2', 'N/A'),
             'cuota_es_real': match_data.get('cuota_es_real', True),
@@ -1672,6 +1765,12 @@ class NinjaH2HExtractor:
                                          PROVENANCE_NINJA_API if len(p1_hist) > 0 else PROVENANCE_EMPTY),
                     'p2': match_data.get('_history_source_p2',
                                          PROVENANCE_NINJA_API if len(p2_hist) > 0 else PROVENANCE_EMPTY),
+                },
+                'history_contamination': {  # D152-03 (Nodo-152): propagación del gate de circuito
+                    'p1_contaminated': match_data.get('_contamination_p1', False),
+                    'p2_contaminated': match_data.get('_contamination_p2', False),
+                    'p1_score':        match_data.get('_contamination_score_p1', 0),
+                    'p2_score':        match_data.get('_contamination_score_p2', 0),
                 },
             },
             'ranking_analysis': {

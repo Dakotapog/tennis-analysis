@@ -33,6 +33,11 @@ from itertools import combinations
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
+try:
+    from scraping.file_utils import select_best_h2h_file as _select_best_h2h  # D154-11
+except ImportError:
+    _select_best_h2h = None
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)s | %(message)s",
@@ -609,8 +614,15 @@ def _leer_matches_ranking_only(matches_path: str, edge_picks_set: set) -> List[D
 # ── H2H_MODEL universe (D146) ─────────────────────────────────────────────────
 
 def _find_latest_h2h() -> Optional[str]:
-    """D146: Encuentra el h2h_results_enhanced más reciente de hoy."""
+    """D146+D154-03: Encuentra el h2h_results_enhanced con más partidos de hoy.
+
+    D154-03: usa select_best_h2h_file() (max n_partidos) en vez de sort
+    alfabético — elige API 366p sobre Playwright 36p cuando ambos existen.
+    """
     today = date.today().strftime('%Y%m%d')
+    if _select_best_h2h is not None:
+        return _select_best_h2h(date_str=today, directory='reports')
+    # Fallback si import falla
     files = sorted(glob.glob(f"reports/h2h_results_enhanced_{today}_*.json"))
     return files[-1] if files else None
 

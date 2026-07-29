@@ -1025,6 +1025,7 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
         'elo_rival':            elo_rival,
         'ranking_favorito':     rank_fav,
         'ranking_rival':        rank_rival,
+        'kambi_event_id':       partido.get('kambi_event_id'),  # D154-06: fetch outcome puntual
         'match_url':            partido.get('match_url'),
         'match_id':             partido.get('match_id'),
         'cuota_es_real':        partido.get('cuota_es_real', True),
@@ -1251,6 +1252,51 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
             f'PHANTOM_IDENTITY [{_ph_type}]: historial contaminado de {_ph_player} '
             f'— predicción no confiable, bloqueada en origen'
         )
+
+    # ─── D152-04 (Nodo-152): Phantom History — circuito incorrecto vía thf_cache ──
+    # Lee data_quality.history_contamination propagado desde ninja_h2h_parser D152-03.
+    # Segunda línea de defensa: D152-05 ELO gate captura casos sin data_quality.
+    _dq_152 = partido.get('data_quality', {})
+    _hc_152 = _dq_152.get('history_contamination', {})
+    if _hc_152.get('p1_contaminated') or _hc_152.get('p2_contaminated'):
+        _hc_score = max(_hc_152.get('p1_score', 0), _hc_152.get('p2_score', 0))
+        _hc_who = partido.get('jugador1') if _hc_152.get('p1_contaminated') else partido.get('jugador2')
+        resultado['apostar'] = False
+        resultado['phantom_data'] = True
+        resultado['status'] = PICK_STATUS_NO_DATA
+        resultado['motivo_reclasificacion'] = (
+            f'PHANTOM_HISTORY [D152-04]: historial contaminado (score={_hc_score}) '
+            f'de {_hc_who} — thf_cache asignó historial de circuito incorrecto'
+        )
+        logger.warning(
+            f"[D152-04] PHANTOM_HISTORY: {_hc_who} score={_hc_score} | "
+            f"partido={partido.get('jugador1')} vs {partido.get('jugador2')}"
+        )
+
+    # ─── D152-05 (Nodo-152): ELO-ranking incoherence — segunda línea de defensa ──
+    # Captura contaminaciones que lleguen sin data_quality (e.g. registros legacy).
+    # ELO>1800 con ranking>400 o null en ITF/Challenger es físicamente imposible:
+    # para tener ELO 1800+ hay que haber ganado consistentemente a top-100.
+    if not resultado.get('phantom_data'):  # solo si no bloqueado ya
+        _elo_152 = resultado.get('elo_favorito') or 0
+        _rk_152  = resultado.get('ranking_favorito')
+        # D154-02 (B7): campo 'tier' del h2h record es más confiable que
+        # detectar_tier(torneo_completo) que puede retornar "atp500" para
+        # nombres cortos como "Sao Paulo" (sin prefijo "ITF M15").
+        _tier_152 = (resultado.get('tier') or '').lower() or (tier or '').lower()
+        if _elo_152 > 1800 and (not _rk_152 or int(_rk_152 or 0) > 400) \
+                and _tier_152 in ('itf', 'challenger'):
+            logger.warning(
+                f"[D152-05] ELO_RANK_INCOHERENCE: {resultado.get('favorito_predicho','?')} "
+                f"elo={_elo_152:.0f} ranking={_rk_152} tier={_tier_152}"
+            )
+            resultado['apostar'] = False
+            resultado['phantom_data'] = True
+            resultado['status'] = PICK_STATUS_NO_DATA
+            resultado['motivo_reclasificacion'] = (
+                f'ELO_RANK_INCOHERENCE [D152-05]: elo={_elo_152:.0f} incompatible con '
+                f'ranking={_rk_152} en tier={_tier_152} — historial contaminado probable'
+            )
 
     # ─── FIX-3 / REGLA-N28-F2-1: n_axes_active < 2 → watchlist ────────────────
     # BBI sola (1 eje activo) tiene 29% hit rate histórico — peor que random.
@@ -1530,7 +1576,7 @@ def procesar_archivo_h2h(h2h_file: str, output_file: Optional[str] = None, shado
             'gate_version':   GATE_VERSION,  # Nodo-32 Acción 3: versión del gate para validación
         },
         'apostar': apostar_lista,
-        'watchlist': no_apostar_lista[:10],   # edge positivo pero bajo threshold
+        'watchlist': no_apostar_lista[:50],   # D154-01: cap 10→50 (antes 53 picks ocultos)
         'sin_edge': edge_negativo[:5],         # sample de edge negativo
         'sin_datos': sin_datos[:5],
         'no_data': no_data_lista,              # F2: historial EMPTY — excluido de todos los pools
@@ -1583,7 +1629,7 @@ def _print_resumen(apostar: list, watchlist: list, n_total: int, n_sin_datos: in
 
     if watchlist:
         print("  👀 WATCHLIST (edge positivo, bajo threshold):")
-        for r in watchlist[:5]:
+        for r in watchlist[:10]:  # D154-01
             print(f"     {r['favorito_predicho']}: edge={r['edge_pct']} kelly={r['kelly_kl']*100:.1f}% zona={r['zona_cuota']}")
     print("═"*60 + "\n")
 

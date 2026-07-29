@@ -243,6 +243,52 @@ def select_best_json_file(directory: str = ".",
             return None
 
 
+def select_best_h2h_file(date_str: Optional[str] = None,
+                         directory: str = "reports") -> Optional[str]:
+    """D154-11 (G3/O5): selecciona h2h_results_enhanced con más partidos.
+
+    Corrige la asimetría respecto a select_best_json_file(): en vez de sort
+    alfabético (que elige por timestamp), elige el archivo con mayor cantidad
+    de partidos — API (366p) gana sobre Playwright (36p) cuando ambos existen.
+
+    Args:
+        date_str: Fecha YYYYMMDD. Si None, usa hoy.
+        directory: Directorio donde buscar los archivos.
+
+    Returns:
+        Ruta al archivo con más partidos, o None si no hay archivos.
+    """
+    import glob as _glob
+    import json as _json
+    from datetime import datetime as _dt
+
+    if date_str is None:
+        date_str = _dt.now().strftime('%Y%m%d')
+
+    pattern = f"{directory}/h2h_results_enhanced_{date_str}_*.json"
+    files = _glob.glob(pattern)
+
+    if not files:
+        logger.debug(f"[D154-11] No h2h files found for {date_str} in {directory}")
+        return None
+
+    if len(files) == 1:
+        return files[0]
+
+    def _n_partidos(path: str) -> int:
+        try:
+            with open(path, 'r', encoding='utf-8') as f:
+                data = _json.load(f)
+            return len(data) if isinstance(data, list) else 0
+        except Exception:
+            return 0
+
+    best = max(files, key=_n_partidos)
+    n = _n_partidos(best)
+    logger.info(f"[D154-11] H2H seleccionado: {best} ({n} partidos de {len(files)} archivos)")
+    return best
+
+
 def get_json_summary(json_file: Path) -> str:
     """
     📊 Obtener resumen legible de un archivo JSON.
