@@ -48,8 +48,10 @@
     return;
   }
 
-  var n = ids.split(',').length;
-  var betplayUrl = 'https://betplay.com.co/apuestas#home?coupon=combination|' + ids + '||replace';
+  var idArr = ids.split(',');
+  var n = idArr.length;
+  var couponPart = idArr.map(function(id) { return id + '|ML'; }).join('/');
+  var betplayUrl = 'https://betplay.com.co/apuestas#home?coupon=combination|' + couponPart + '||replace';
 
   document.getElementById('title').textContent = 'Combo ' + n + ' piernas';
   document.getElementById('desc').textContent  = label || ('IDs: ' + ids);
