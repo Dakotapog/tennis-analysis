@@ -146,15 +146,24 @@ def test_nodo147_07_enrich_live_score_sin_event_id():
 # ─── D147-helper: _fmt_progreso ──────────────────────────────────────────────
 
 def test_nodo147_08_fmt_progreso_con_datos():
-    """_fmt_progreso formatea correctamente score_data completo."""
+    """_fmt_progreso formatea correctamente score_data con campos D153.
+
+    D153 usa score_str (sets completos) + current_set_home/away + serving.
+    Formato esperado: "6:4, ►3:1 | 12j"
+    """
     score_data = {
-        "sets_home": 1, "sets_away": 0,
+        "score_str": "6:4",
+        "current_set_home": 3,
+        "current_set_away": 1,
+        "serving": "home",
+        "game_score": None,
         "games_played": 12,
-        "current_games": 4,
+        "break_situation": False,
     }
     result = _fmt_progreso(score_data)
-    assert "1-0" in result
-    assert "12j" in result
+    assert "6:4" in result, f"score_str debe aparecer, got '{result}'"
+    assert "12j" in result, f"games_played debe aparecer, got '{result}'"
+    assert "►3:1" in result, f"set actual con servidor debe aparecer, got '{result}'"
 
 
 def test_nodo147_09_fmt_progreso_sin_datos():

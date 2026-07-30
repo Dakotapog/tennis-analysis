@@ -1335,8 +1335,10 @@ def render_html(state: Dict[str, Any]) -> str:
                     f'OVER — TERCER SET{_ov_tag}</span>'
                 )
                 _conf = _conv_html + f'<span style="color:#1f6feb;">{_conf_raw}</span>'
-            elif _envenenada:
-                # Envenenada sin edge OVER claro — solo advertencia
+            elif _envenenada and not _cert_data.get("certeza_matematica"):  # D150-07
+                # Envenenada sin edge OVER claro — solo advertencia.
+                # Si certeza_matematica=True: evidencia matemática supera señal de mercado;
+                # el prefijo CERTEZA (L1287) ya comunica la situación. No mostrar rojo.
                 _partido_html = (
                     f'{_partido_raw} '
                     f'<span style="background:#f85149;color:#fff;padding:1px 6px;'
@@ -2643,7 +2645,7 @@ _DEMO_MODE: bool = False
 _STATE_CACHE: Dict[str, Any] = {
     "state": None,
     "ts": None,
-    "ttl_s": 20,
+    "ttl_s": 6,    # reducido de 20s → browser ve scores con ≤6s de delay
     "lock": threading.Lock(),
 }
 
@@ -2710,7 +2712,14 @@ def _extract_games_cuota_live(event_id: int, direccion: str, linea: Optional[flo
     El listView solo devuelve mercados destacados (vacío para ITF). Este endpoint retorna
     todos los betOffers del evento.
     D135-02: excluye mercados set-level ("Total de juegos - Set 3") y juego-level.
+    D153-RATELIMIT-2: caché 30s por (event_id, dir, linea) — sin caché 40 eventos × 3s = 120s por ciclo.
     """
+    _ck = (int(event_id), (direccion or "").upper(), float(linea) if linea is not None else None)
+    _now = time.time()
+    _cached = _cuota_live_cache.get(_ck)
+    if _cached and (_now - _cached[0]) < _CUOTA_LIVE_TTL:
+        return _cached[1]
+
     url = (f"{_KAMBI_BASE}/betoffer/event/{event_id}.json"
            f"?{_KAMBI_PARAMS}")
     try:
@@ -2719,6 +2728,7 @@ def _extract_games_cuota_live(event_id: int, direccion: str, linea: Optional[flo
             offers = json.loads(r.read().decode()).get("betOffers", [])
     except Exception as exc:
         logger.debug(f"[CUOTA_LIVE] event_id={event_id} fetch falló: {exc}")
+        _cuota_live_cache[_ck] = (_now, None)
         return None
 
     dir_norm = direccion.upper()
@@ -2739,7 +2749,10 @@ def _extract_games_cuota_live(event_id: int, direccion: str, linea: Optional[flo
             if dir_match and line_match:
                 odds_raw = oc.get("odds")
                 if odds_raw:
-                    return round(odds_raw / 1000, 2)
+                    result = round(odds_raw / 1000, 2)
+                    _cuota_live_cache[_ck] = (_now, result)
+                    return result
+    _cuota_live_cache[_ck] = (_now, None)
     return None
 
 
@@ -2910,12 +2923,17 @@ def _parse_kambi_tennis_score(event_obj: Dict) -> Dict:
     Intenta liveData.scoreStr ("6:4,3:2") → liveData.setScores → score obj.
     """
     result = {
-        "score_str":     None,
-        "sets_home":     None,
-        "sets_away":     None,
-        "games_played":  None,
-        "sets_complete": None,
-        "current_games": None,
+        "score_str":        None,
+        "sets_home":        None,
+        "sets_away":        None,
+        "games_played":     None,
+        "sets_complete":    None,
+        "current_games":    None,
+        "current_set_home": None,   # D153-01
+        "current_set_away": None,   # D153-01
+        "serving":          None,   # D153-02 (no disponible sin livedata endpoint)
+        "game_score":       None,   # D153-03 (no disponible sin livedata endpoint)
+        "break_situation":  False,  # D153-04
     }
     if not event_obj:
         return result
@@ -2956,9 +2974,11 @@ def _parse_kambi_tennis_score(event_obj: Dict) -> Dict:
                     else:
                         sets_away += 1
                 else:
-                    # Set en curso — juegos actuales pero no terminado
+                    # Set en curso — guardar split home:away (D153-01)
                     current_games = set_total
-                    games_total += set_total
+                    games_total  += set_total
+                    result["current_set_home"] = h_g
+                    result["current_set_away"] = a_g
             result.update({
                 "sets_home":     sets_home,
                 "sets_away":     sets_away,
@@ -2975,24 +2995,40 @@ def _parse_kambi_tennis_score(event_obj: Dict) -> Dict:
 def _fetch_kambi_livedata(event_id: int) -> Optional[Dict]:
     """D147-01b: /event/{id}/livedata.json con client_id=200 → statistics.sets con scores reales.
     Endpoint distinto al offering API (que devuelve liveData:{} vacío).
+    D153-RATELIMIT: caché 30s por event_id — background_refresh llama esto para 15+ señales
+    cada 15s → sin caché = 429 de Kambi → scores nunca se actualizan.
     """
-    import time
-    ncid = int(time.time() * 1000)
+    now = time.time()
+    cached = _livedata_cache.get(event_id)
+    if cached and (now - cached[0]) < _LIVEDATA_TTL:
+        return cached[1]
+
+    ncid = int(now * 1000)
     url = (f"{_KAMBI_BASE}/event/{event_id}/livedata.json"
            f"?lang=es_CO&market=CO&client_id=200&channel_id=1&ncid={ncid}")
     try:
         req = urllib.request.Request(url, headers=_KAMBI_HDR)
         with urllib.request.urlopen(req, timeout=5) as r:
-            return json.loads(r.read())
+            data = json.loads(r.read())
+        _livedata_cache[event_id] = (now, data)
+        return data
     except Exception:
+        _livedata_cache[event_id] = (now, None)  # cachear fallo también evita retry inmediato
         return None
 
 
 def _parse_kambi_livedata_sets(livedata: Dict) -> Optional[Dict]:
-    """D147-01b: convierte statistics.sets.home/away → score_data.
+    """D147-01b + D153: convierte statistics.sets.home/away → score_data completo.
+
     Kambi usa -1 para sets no iniciados y el score real para el set en curso.
-    Detecta si un set está completo con las reglas estándar de tenis.
-    Ejemplo: home=[7,3,1], away=[6,6,2] → sets_complete=2, games_played=22, current_games=3.
+    D153-01: extrae current_set_home/away (score dentro del set en curso).
+    D153-02: extrae serving ("home"/"away") desde statistics.sets.homeServe.
+    D153-03: extrae game_score ("30:15") desde liveData.score.home/away.
+    D153-04: break_situation = no-servidor lidera el set actual.
+
+    Ejemplo: home=[7,1,1], away=[6,6,2], homeServe=true, score={home:"30",away:"15"}
+    → set1 7:6 completo, set2 1:6 completo, set3 1:2 en curso
+    → serving="home", game_score="30:15", break_situation=True (away lidera con home sirviendo)
     """
     try:
         ld = (livedata.get("liveData") or livedata) if isinstance(livedata, dict) else {}
@@ -3005,7 +3041,9 @@ def _parse_kambi_livedata_sets(livedata: Dict) -> Optional[Dict]:
 
         sets_home = sets_away = games_total = sets_complete = 0
         current_games = 0
-        games_set1 = None  # D150-02: juegos del primer set completo (tiebreak = 13)
+        current_set_home = 0   # D153-01
+        current_set_away = 0   # D153-01
+        games_set1 = None      # D150-02: juegos del primer set completo (tiebreak = 13)
         parts = []
         for h, a in zip(home_arr, away_arr):
             if h == -1 or a == -1:
@@ -3023,21 +3061,79 @@ def _parse_kambi_livedata_sets(livedata: Dict) -> Optional[Dict]:
                     sets_away += 1
                 parts.append(f"{h}:{a}")
             else:
-                # Set en curso
-                current_games = h + a
-                games_total += current_games
+                # Set en curso — guardar split home:away (D153-01)
+                current_set_home = h
+                current_set_away = a
+                current_games    = h + a
+                games_total     += current_games
 
         if games_total == 0:
             return None
 
+        # D153-02: quién sirve ahora
+        home_serve = sets_data.get("homeServe")
+        serving: Optional[str] = None
+        if home_serve is True:
+            serving = "home"
+        elif home_serve is False:
+            serving = "away"
+
+        # D153-03: score del game actual ("30:15") desde liveData.score
+        gs_raw   = ld.get("score") or {}
+        gs_h     = gs_raw.get("home")   # "0","15","30","40","AD"
+        gs_a     = gs_raw.get("away")
+        game_score: Optional[str] = None
+        if gs_h is not None and gs_a is not None:
+            if str(gs_h) != "0" or str(gs_a) != "0":
+                game_score = f"{gs_h}:{gs_a}"
+
+        # D153-04: break_situation — paridad de servicio, no simplemente "quién lidera".
+        #
+        # REGLA FUNDAMENTAL: en tenis el servidor ALTERNA cada game, independientemente
+        # de quién gane. La paridad de N (games jugados en set actual) determina
+        # quién sirvió primero:
+        #   N par  → el servidor actual ES el mismo que sirvió el game 1
+        #   N impar → el servidor actual es el OPUESTO al que sirvió el game 1
+        #
+        # Sin quiebre, el marcador esperado es:
+        #   N par  → home:away igualados (ej: 2:2, 4:4)
+        #   N impar → primer servidor adelante por 1 (ej: 3:2 si home sirvió primero)
+        #
+        # Quiebre activo = marcador real ≠ marcador esperado.
+        #
+        # Ejemplo que corrige el bug ►0:1 | 1j:
+        #   N=1 (impar), sirve home → primer servidor = AWAY
+        #   Esperado: away adelante por 1 → home:away = 0:1 → real=0:1 → SIN quiebre ✓
+        #
+        # Ejemplo quiebre real ►2:1 | N=3:
+        #   N=3 (impar), sirve home → primer servidor = AWAY
+        #   Esperado sin quiebre: away adelante 1 → 1:2; real=2:1 → QUIEBRE ✓
+        break_situation = False
+        if serving and current_set_home is not None and current_set_away is not None:
+            _N = current_set_home + current_set_away
+            if _N > 0:
+                # Quién sirvió primero en este set (la paridad de servicio no cambia con breaks)
+                _first_srv = serving if (_N % 2 == 0) else (
+                    "away" if serving == "home" else "home"
+                )
+                # Marcador esperado sin ningún quiebre
+                _exp_lead = 0 if (_N % 2 == 0) else (1 if _first_srv == "home" else -1)
+                _act_lead = current_set_home - current_set_away
+                break_situation = (_act_lead != _exp_lead)
+
         return {
-            "score_str":     ",".join(parts) if parts else None,
-            "sets_home":     sets_home,
-            "sets_away":     sets_away,
-            "games_played":  games_total,
-            "sets_complete": sets_complete,
-            "current_games": current_games,
-            "games_set1":    games_set1,  # D150-02
+            "score_str":        ",".join(parts) if parts else None,
+            "sets_home":        sets_home,
+            "sets_away":        sets_away,
+            "games_played":     games_total,
+            "sets_complete":    sets_complete,
+            "current_games":    current_games,
+            "games_set1":       games_set1,   # D150-02
+            "current_set_home": current_set_home,  # D153-01
+            "current_set_away": current_set_away,  # D153-01
+            "serving":          serving,           # D153-02
+            "game_score":       game_score,        # D153-03
+            "break_situation":  break_situation,   # D153-04
         }
     except Exception:
         return None
@@ -3069,6 +3165,8 @@ def _calcular_certeza_condicional(
 
     games_set1 (D150-04): si el primer set terminó en tiebreak (≥12j) y zona=DOMINANTE,
     forzar COINFLIP — la clasificación pre-partido queda invalidada por la evidencia empírica.
+    games_set1 (D152-02): si el primer set fue ≤7j (6:0/6:1) y zona=DOMINANTE,
+    reducir µ por pace del set1 — µ=games_set1×2 (cap 16) en vez de µ=18.
     """
     import math as _m
 
@@ -3117,6 +3215,16 @@ def _calcular_certeza_condicional(
     _params   = _ZONA_PARAMS.get(zona, _ZONA_PARAMS["COINFLIP"])
     mu_total  = _params["mu"]
     sigma     = _params["sigma"]
+
+    # D152-02: DOMINANTE extremo — games_set1 ≤ 7 indica 6:0 o 6:1 (dominio absoluto).
+    # µ=18 sobreestima el total cuando el set1 fue muy corto.
+    # Corrección: µ_ajustado = games_set1 × 2 (pace set1 extrapolado a 2 sets), cap 16.
+    # Caso real: Allegre 6:1,6:0 = 13j total → µ=18 predecía OVER 13.5 ALTA (error).
+    # Con fix: games_set1=7 → µ=14, OVER 13.5 pasa a BAJA (correcto).
+    if (games_set1 is not None and int(games_set1) <= 7
+            and zona == "DOMINANTE" and sets_complete is not None and sets_complete >= 1):
+        mu_total = min(16.0, float(games_set1) * 2.0)  # 6j→12, 7j→14
+        sigma    = 2.5
     mu_rest   = max(0.0, mu_total - games_played)
 
     try:
@@ -3148,15 +3256,63 @@ def _calcular_certeza_condicional(
 
 
 def _fmt_progreso(score_data: Optional[Dict]) -> str:
-    """Formatea score_data para display en panel X3. Ej: '1-0 (4j) | 12j'."""
+    """Formatea score_data para display en panel X3 (D153).
+
+    Formato completo cuando hay datos de livedata:
+      "7:6,1:6, ►1:2 [30:15] | 24j QUIEBRE"
+       ↑ sets completos  ↑set actual (► = sirve home) ↑game score  ↑total  ↑break
+
+    Formato básico (solo scoreStr / sets ganados):
+      "4:6,6:2, 3:4 | 18j"   o   "1-1 (5j) | 14j"
+    """
     if not score_data:
         return "PRE"
-    sets_h = score_data.get("sets_home") or 0
-    sets_a = score_data.get("sets_away") or 0
-    gp     = score_data.get("games_played") or 0
-    cur    = score_data.get("current_games")
-    cur_str = f" ({cur}j)" if cur is not None else ""
-    return f"{sets_h}-{sets_a}{cur_str} | {gp}j"
+
+    gp           = score_data.get("games_played") or 0
+    score_str    = score_data.get("score_str")         # sets completos "7:6,1:6"
+    csh          = score_data.get("current_set_home")  # D153-01 score en set actual
+    csa          = score_data.get("current_set_away")
+    serving      = score_data.get("serving")           # D153-02 "home"/"away"/None
+    game_score   = score_data.get("game_score")        # D153-03 "30:15"
+    break_sit    = score_data.get("break_situation", False)  # D153-04
+
+    # ── Construir parte del set actual ──────────────────────────────────────
+    cur_set_str = ""
+    if csh is not None and csa is not None:
+        if serving == "home":
+            # ► antes del score de home (home sirve)
+            cur_set_str = f"►{csh}:{csa}"
+        elif serving == "away":
+            # ◄ después del score de away (away sirve)
+            cur_set_str = f"{csh}:{csa}◄"
+        else:
+            cur_set_str = f"{csh}:{csa}"
+    elif score_data.get("current_games"):
+        # Fallback: solo total de juegos en set actual
+        cur_set_str = f"({score_data['current_games']}j)"
+
+    # ── Game score del game en curso ─────────────────────────────────────────
+    gs_str = f" [{game_score}]" if game_score else ""
+
+    # ── Break indicator ───────────────────────────────────────────────────────
+    break_str = " QUIEBRE" if break_sit else ""
+
+    # ── Combinar ──────────────────────────────────────────────────────────────
+    parts = []
+    if score_str:
+        parts.append(score_str)
+    if cur_set_str:
+        parts.append(cur_set_str)
+
+    if parts:
+        score_part = ", ".join(parts)
+    else:
+        # Último fallback: sets ganados
+        sh = score_data.get("sets_home") or 0
+        sa = score_data.get("sets_away") or 0
+        score_part = f"{sh}-{sa}"
+
+    return f"{score_part}{gs_str} | {gp}j{break_str}"
 
 
 def _enrich_live_score(
@@ -3232,24 +3388,33 @@ def _enrich_live_score(
                 logger.debug(f"[D147-01] score parse error: {exc}")
                 sig["score_data"] = None
 
-        # D147-01b: offering API devuelve liveData:{} vacío → livedata endpoint directo
-        if sig["score_data"] is None and sig.get("estado") in ("EN_VIVO", "ITF_VIVO") and sig.get("event_id"):
+        # D147-01b: livedata endpoint directo — siempre para EN_VIVO/ITF_VIVO.
+        # Antes: solo como fallback cuando score_data=None.
+        # Ahora: siempre — el listView da score básico sin game_score/serving/break_situation.
+        # El endpoint /event/{id}/livedata.json tiene statistics.sets completo (D153 campos).
+        if sig.get("estado") in ("EN_VIVO", "ITF_VIVO") and sig.get("event_id"):
             try:
                 _ld_raw = _fetch_kambi_livedata(int(sig["event_id"]))
                 if _ld_raw:
                     _ld_parsed = _parse_kambi_livedata_sets(_ld_raw)
                     if _ld_parsed and _ld_parsed.get("games_played") is not None:
-                        sig["score_data"] = _ld_parsed
+                        sig["score_data"] = _ld_parsed   # upgrade completo con D153 campos
                         logger.info(
                             f"[D147-01b] livedata OK: {sig.get('partido')} "
-                            f"score={_ld_parsed['score_str']} gp={_ld_parsed['games_played']}"
+                            f"score={_ld_parsed.get('score_str')} gp={_ld_parsed.get('games_played')}"
                         )
             except Exception as _ld_exc:
                 logger.debug(f"[D147-01b] livedata error: {_ld_exc}")
 
         # D150-02: propagar games_set1 al dict de la señal para gates posteriores
+        # D152-01: propagar score_str/games_played/sets_complete al top-level para
+        #          que _calcular_certeza_condicional y el display X3 lean datos reales.
         if sig.get("score_data"):
-            sig["games_set1"] = sig["score_data"].get("games_set1")
+            sig["games_set1"]    = sig["score_data"].get("games_set1")
+            sig["score_str"]     = sig["score_data"].get("score_str")
+            sig["games_played"]  = sig["score_data"].get("games_played")
+            sig["sets_complete"] = sig["score_data"].get("sets_complete")
+            sig["current_games"] = sig["score_data"].get("current_games")
 
 
 def _freeze_baseline_if_needed(
@@ -3393,6 +3558,21 @@ def _fire_certeza_alert(sig: Dict, fecha_compact: str) -> None:
 # Cache event_id → (timestamp, score_dict) para evitar re-scraping en ciclos de 15s
 _score_pw_cache: Dict[int, tuple] = {}
 _SCORE_PW_TTL = 30  # segundos
+
+# D153-RATELIMIT: caché Kambi livedata por event_id (TTL 30s) para evitar 429
+# cuando background_refresh llama _fetch_kambi_livedata() para 15+ señales cada 15s
+_livedata_cache: Dict[int, tuple] = {}   # {event_id: (ts_float, data_or_None)}
+_LIVEDATA_TTL = 4    # segundos — fast loop corre cada 5s → siempre re-fetch (4 < 5)
+
+# D153-RATELIMIT-2: caché betoffer/event por (event_id, dir, linea) TTL 30s
+# _extract_games_cuota_live() se llama para 40 eventos STARTED → 120s secuencial sin caché
+_cuota_live_cache: Dict[tuple, tuple] = {}  # {(eid,dir,linea): (ts, cuota_or_None)}
+_CUOTA_LIVE_TTL = 120  # segundos — ciclo completo tarda ~120s (40 eventos × 3s), TTL debe cubrirlo
+
+# D153-PARALLEL: caché betoffer completo por event_id — compartido por _fetch_live_games_all
+# y pre-warm paralelo. 40 eventos × 5s secuencial = 200s → 10 workers × 5s = 20s.
+_live_games_cache: Dict[int, tuple] = {}  # {event_id: (ts, result_or_None)}
+_LIVE_GAMES_TTL = 120  # segundos
 
 
 def _parse_betplay_scoreboard_html(html: str) -> Dict:
@@ -3557,7 +3737,14 @@ def _fetch_live_games_all(event_id: int) -> Optional[Dict]:
     D-ITF-LIVE-01: obtiene mercado 'Total de juegos' (match-level) para un evento vivo.
     UNA sola llamada HTTP — devuelve mercado + score live del partido.
     ITF solo tiene este mercado cuando el partido está STARTED (no pre-partido).
+    D153-PARALLEL: caché 120s + pre-warm paralelo en _prefetch_live_games_parallel().
+    40 eventos × 5s secuencial = 200s → paralelo con 10 workers = 20s.
     """
+    _now = time.time()
+    _cached = _live_games_cache.get(int(event_id))
+    if _cached and (_now - _cached[0]) < _LIVE_GAMES_TTL:
+        return _cached[1]
+
     url = f"{_KAMBI_BASE}/betoffer/event/{event_id}.json?{_KAMBI_PARAMS}"
     try:
         req = urllib.request.Request(url, headers=_KAMBI_HDR)
@@ -3565,6 +3752,7 @@ def _fetch_live_games_all(event_id: int) -> Optional[Dict]:
             raw = json.loads(r.read().decode())
     except Exception as exc:
         logger.debug(f"[LIVE_GAMES_ALL] event_id={event_id} fetch falló: {exc}")
+        _live_games_cache[int(event_id)] = (_now, None)
         return None
 
     offers = raw.get("betOffers", [])
@@ -3597,7 +3785,58 @@ def _fetch_live_games_all(event_id: int) -> Optional[Dict]:
                 found = True
         if found:
             break
-    return result if found else None
+    final = result if found else None
+    _live_games_cache[int(event_id)] = (time.time(), final)
+    return final
+
+
+# ── Nodo-151 Gate Helpers ──────────────────────────────────────────────────
+
+
+def _edge_live_gate(certeza: Optional[Dict], cuota_live: float, umbral: float = 0.05) -> bool:
+    """D151-01: True si debe EXCLUIRSE del combo (edge_live < umbral).
+    edge_live = p_condicional - (1/cuota_live). Si el modelo live no supera
+    en >umbral a la probabilidad implícita del bookmaker, no hay ventaja real.
+    """
+    if certeza is None or cuota_live <= 0:
+        return False
+    p_cond = certeza.get("p_condicional")
+    if p_cond is None:
+        return False
+    return (p_cond - (1.0 / cuota_live)) < umbral
+
+
+def _score_null_gate(score_data: Optional[Dict], gp_min: int = 3) -> bool:
+    """D151-02: True si debe EXCLUIRSE (score_str=null con games_played > gp_min).
+    Cuando el bookmaker actualiza su cuota live con el marcador real y nosotros
+    no tenemos ese marcador, competimos en desventaja informacional.
+    """
+    if not score_data:
+        return False
+    score_str = score_data.get("score_str")
+    games_played = int(score_data.get("games_played") or 0)
+    return score_str is None and games_played > gp_min
+
+
+def _zona_direccion_gate(
+    zona: str, direccion: str, linea: float,
+    certeza: Optional[Dict], p_umbral: float = 0.40
+) -> bool:
+    """D151-03: True si debe EXCLUIRSE (zona contradice dirección + p_cond bajo).
+    DOMINANTE µ=18j: si linea>18 → zona predice UNDER; si apostamos OVER → contradicción.
+    COINFLIP µ=23j: si linea<23 → zona predice OVER; si apostamos UNDER → contradicción.
+    Solo bloquea si p_condicional < p_umbral (contradicción severa, no marginal).
+    """
+    if certeza is None:
+        return False
+    p_cond = certeza.get("p_condicional")
+    if p_cond is None:
+        return False
+    mu_zona = 18.0 if "DOMINANTE" in zona else 23.0
+    zona_predice_under = mu_zona < linea   # zona espera total < linea → UNDER
+    apuesta_under = (direccion == "UNDER")
+    contradiccion = (zona_predice_under != apuesta_under)
+    return contradiccion and p_cond < p_umbral
 
 
 def _fire_itf_live_games_combo(signals: List[Dict], fecha_compact: str) -> None:
@@ -3639,6 +3878,28 @@ def _fire_itf_live_games_combo(signals: List[Dict], fecha_compact: str) -> None:
     logger.info(f"[ITF_LIVE_GAMES] Combo disparado: {desc} | @{cuota_combo}x → Desktop/ITF_Live_Games.bat")
 
 
+def _prefetch_live_games_parallel(event_ids: List[int], max_workers: int = 10) -> None:
+    """D153-PARALLEL: pre-calienta _live_games_cache para una lista de event_ids en paralelo.
+    Reduce el cuello de botella de 40 × 5s secuencial = 200s a ~20s (10 workers).
+    Solo fetcha los que no estén en caché válida.
+    """
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    ids_to_fetch = [
+        eid for eid in event_ids
+        if not (_live_games_cache.get(eid) and (time.time() - _live_games_cache[eid][0]) < _LIVE_GAMES_TTL)
+    ]
+    if not ids_to_fetch:
+        return
+    with ThreadPoolExecutor(max_workers=max_workers) as pool:
+        futures = {pool.submit(_fetch_live_games_all, eid): eid for eid in ids_to_fetch}
+        for fut in as_completed(futures):
+            try:
+                fut.result()  # resultado ya guardado en _live_games_cache por _fetch_live_games_all
+            except Exception:
+                pass
+    logger.debug(f"[PREFETCH] pre-cargados {len(ids_to_fetch)} eventos en paralelo")
+
+
 def _check_games_convergencia(fecha: str) -> None:
     """
     D133-03: clasifica señales ALTA de games_signal_report como EN_VIVO/PRE/TERMINADO.
@@ -3676,6 +3937,15 @@ def _check_games_convergencia(fecha: str) -> None:
 
     # Obtener eventos STARTED de Kambi (1 HTTP call)
     started_events = _kambi_started_events()
+
+    # D153-PARALLEL: pre-warm betoffer cache para todos los STARTED en paralelo
+    # ANTES del loop secuencial — transforma 40×5s=200s a ~20s con 10 workers
+    _all_eids = [
+        ev_wr.get("event", {}).get("id")
+        for ev_wr in started_events
+        if isinstance(ev_wr, dict)
+    ]
+    _prefetch_live_games_parallel([int(e) for e in _all_eids if e])
 
     # Índices por event_id y apellido
     started_by_id:      Dict[int, dict] = {}
@@ -3979,11 +4249,17 @@ def _check_games_convergencia(fecha: str) -> None:
 
         markov = _get_markov_itf(home, away, er_picks)
 
-        # D142-SCORE-02: Playwright para ITF (Kambi API no expone score ITF);
-        #                fallback a _parse_kambi_tennis_score si Playwright falla.
-        score_data = _fetch_betplay_score_playwright(int(eid))
-        if not score_data or score_data.get("games_played") is None:
-            score_data = _parse_kambi_tennis_score(ev)
+        # D153-SCORE-FIX: reemplaza Playwright (35s/señal) con Kambi livedata API (cacheada, <2s).
+        # Playwright era cuello de botella principal: 10 señales × 35s = 350s por ciclo.
+        # _fetch_kambi_livedata() ya está cacheada (TTL 120s) desde _prefetch o ciclo anterior.
+        # _parse_kambi_livedata_sets() incluye D153 campos (current_set, serving, break_situation).
+        _ld_itf = _fetch_kambi_livedata(int(eid))
+        if _ld_itf:
+            score_data = _parse_kambi_livedata_sets(_ld_itf) or {}
+        else:
+            score_data = _parse_kambi_tennis_score(ev) or {}
+        if not score_data.get("games_played"):
+            score_data = {}
         games_played  = score_data.get("games_played")
         sets_complete = score_data.get("sets_complete")
         score_str     = score_data.get("score_str")
@@ -4140,11 +4416,23 @@ def _check_games_convergencia(fecha: str) -> None:
     # --- Fire combo ITF live (D-ITF-LIVE-02) ---
     # Incluye: convergencia ALTA sin envenenada OR envenenada con over_candidato (tercer set → OVER)
     # D150-06: filtrar piernas con set1 tiebreak (zona=COINFLIP_FORZADO) o cuota_envenenada
+    # D150-07: excepción — linea_envenenada se supera cuando certeza_matematica=True
+    #           (evidencia del marcador > señal de mercado en linea drift)
     alta_itf_raw = [s for s in itf_live_signals
                     if s.get("convergencia_score", 0) >= 3
-                    and (not s.get("linea_envenenada") or s.get("over_candidato"))]
+                    and (
+                        not s.get("linea_envenenada")
+                        or s.get("over_candidato")
+                        or (s.get("certeza") or {}).get("certeza_matematica")  # D150-07
+                    )]
     alta_itf = []
     for _s06 in alta_itf_raw:
+        # D150-07: log override cuando certeza_matematica rescata señal envenenada
+        if _s06.get("linea_envenenada") and ((_s06.get("certeza") or {}).get("certeza_matematica")):
+            logger.info(
+                f"[ITF_LIVE_D150-07] {_s06.get('partido')} certeza_matematica=True "
+                f"→ linea_envenenada override (incluida en combo)"
+            )
         _gs1_06 = (_s06.get("score_data") or {}).get("games_set1") or _s06.get("games_set1") or 0
         if _gs1_06 >= 12:
             logger.info(
@@ -4155,6 +4443,36 @@ def _check_games_convergencia(fecha: str) -> None:
         if _s06.get("cuota_envenenada"):
             logger.info(
                 f"[ITF_LIVE_GATE] {_s06.get('partido')} excluida del combo (cuota_envenenada)"
+            )
+            continue
+        # D151-02: score_null gate — sin score real, bookmaker tiene info superior
+        _sd_d151 = _s06.get("score_data") or {}
+        if _score_null_gate(_sd_d151, gp_min=3):
+            logger.info(
+                f"[ITF_LIVE_GATE] {_s06.get('partido')} excluida "
+                f"(D151-02: score_str=null gp={_sd_d151.get('games_played')} > 3)"
+            )
+            continue
+        # D151-01: edge_live gate — p_condicional no supera p_implied en >5%
+        _cert_d151 = _s06.get("certeza")
+        _cuota_d151 = float(_s06.get("cuota_live") or 0)
+        if _edge_live_gate(_cert_d151, _cuota_d151, umbral=0.05):
+            _p_c = (_cert_d151 or {}).get("p_condicional", 0)
+            _el  = _p_c - (1.0 / _cuota_d151) if _cuota_d151 > 0 else 0
+            logger.info(
+                f"[ITF_LIVE_GATE] {_s06.get('partido')} excluida "
+                f"(D151-01: edge_live={_el:.1%} p_cond={_p_c:.1%})"
+            )
+            continue
+        # D151-03: zona-dirección contradicción severa
+        _zona_d151  = _s06.get("zona", "COINFLIP")
+        _dir_d151   = _s06.get("direccion", "UNDER")
+        _linea_d151 = float(_s06.get("linea") or 0)
+        if _zona_direccion_gate(_zona_d151, _dir_d151, _linea_d151, _cert_d151, p_umbral=0.40):
+            _p_c3 = (_cert_d151 or {}).get("p_condicional", 0)
+            logger.info(
+                f"[ITF_LIVE_GATE] {_s06.get('partido')} excluida "
+                f"(D151-03: zona={_zona_d151} vs {_dir_d151}@{_linea_d151}j p_cond={_p_c3:.1%})"
             )
             continue
         alta_itf.append(_s06)
@@ -4174,15 +4492,81 @@ def _check_games_convergencia(fecha: str) -> None:
 
 
 def _background_refresh(fecha_fn) -> None:
-    """Thread daemon — precalienta cache cada 15s para que el browser reciba <1s."""
+    """Thread daemon — precalienta cache cada 15s para que el browser reciba <1s.
+    D153-REFRESH: _check_games_convergencia() corre PRIMERO para escribir
+    games_live_*.json actualizado ANTES de que _get_cached_state() lo lea.
+    Orden anterior era inverso → display siempre 1 ciclo (15-30s) detrás.
+    """
     while True:
         try:
             fecha = fecha_fn()
-            _get_cached_state(fecha)
-            _check_games_convergencia(fecha)   # D133-03: games live convergencia
+            _check_games_convergencia(fecha)   # D133-03 + D153: fetch livedata primero
+            _STATE_CACHE["ts"] = None          # fuerza reconstrucción con datos frescos
+            _get_cached_state(fecha)           # cache con games_live_*.json recién escrito
         except Exception:
             pass
         time.sleep(15)
+
+
+def _fast_score_refresh(fecha_fn) -> None:
+    """Thread daemon — actualiza SOLO scores D153 en games_live_*.json cada 5s.
+
+    No reprocesa cuotas ni señales completas. Solo re-fetcha livedata Kambi
+    (game_score/serving/break_situation/set_en_curso) para señales EN_VIVO.
+
+    Ventaja: el endpoint /event/{id}/livedata.json de Kambi actualiza en ~1s
+    desde el punto real. Con este loop: score en dashboard ≤7s vs 30s antes.
+
+    Rate limit: max ~15 señales × 1 call / 5s = 3 calls/s → seguro para Kambi.
+    TTL del cache de livedata = 4s < 5s ciclo → siempre re-fetch real.
+    """
+    time.sleep(12)   # esperar que el main loop inicialice games_live_*.json
+    while True:
+        try:
+            fecha         = fecha_fn()
+            fecha_compact = fecha.replace("-", "")
+            gl_path       = REPORTS / f"games_live_{fecha_compact}.json"
+
+            if not gl_path.exists():
+                time.sleep(5)
+                continue
+
+            signals = json.loads(gl_path.read_text(encoding="utf-8"))
+            if not isinstance(signals, list) or not signals:
+                time.sleep(5)
+                continue
+
+            updated = 0
+            for sig in signals:
+                eid    = sig.get("event_id")
+                estado = sig.get("estado", "")
+                if not eid or estado not in ("EN_VIVO", "ITF_VIVO"):
+                    continue
+                ld_raw = _fetch_kambi_livedata(int(eid))   # TTL=4s → fresco por diseño
+                if not ld_raw:
+                    continue
+                ld_parsed = _parse_kambi_livedata_sets(ld_raw)
+                if ld_parsed and ld_parsed.get("games_played") is not None:
+                    sig["score_data"]    = ld_parsed
+                    sig["score_str"]     = ld_parsed.get("score_str")
+                    sig["games_played"]  = ld_parsed.get("games_played")
+                    sig["sets_complete"] = ld_parsed.get("sets_complete")
+                    sig["current_games"] = ld_parsed.get("current_games")
+                    updated += 1
+
+            if updated:
+                gl_path.write_text(
+                    json.dumps(signals, ensure_ascii=False, default=str),
+                    encoding="utf-8",
+                )
+                with _STATE_CACHE["lock"]:
+                    _STATE_CACHE["ts"] = None   # browser recibe scores frescos en próximo F5
+                logger.debug(f"[FAST_SCORE] {updated} señales EN_VIVO actualizadas")
+
+        except Exception as exc:
+            logger.debug(f"[FAST_SCORE] error: {exc}")
+
+        time.sleep(5)
 
 
 def _data_freshness(fecha: str) -> str:
@@ -4276,11 +4660,14 @@ def main() -> None:
         print(render_html(state))
         return
 
-    # D129-01: thread daemon precalienta cache cada 15s
+    # D129-01: thread daemon precalienta cache cada 15s (convergencia completa)
     _fecha_fn = lambda: _FECHA_OVERRIDE or date.today().isoformat()
     _t = threading.Thread(target=_background_refresh, args=(_fecha_fn,), daemon=True)
     _t.start()
-    logger.info("Cache background thread iniciado (TTL 20s, refresh 15s)")
+    # Fast score thread: solo livedata D153 cada 5s → latencia real ≤7s
+    _tf = threading.Thread(target=_fast_score_refresh, args=(_fecha_fn,), daemon=True)
+    _tf.start()
+    logger.info("Threads iniciados: background 15s (convergencia) + fast_score 5s (livedata D153)")
 
     server = HTTPServer(("0.0.0.0", args.port), DeskHandler)
     logger.info(f"Live Trading Desk en http://localhost:{args.port}/")
