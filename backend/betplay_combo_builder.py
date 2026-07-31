@@ -2165,7 +2165,8 @@ def build_live_combos(piernas_min: int = 3, piernas_max: int = 4,
     if not merged_cobertura:
         logger.warning("⚠️ No hay trader_plans con combos hoy — armando desde edge_report (legacy)")
         return _build_live_combos_legacy(
-            piernas_min, piernas_max, top_n, min_cuota, edge_file, strategy)
+            piernas_min, piernas_max, top_n, min_cuota, edge_file, strategy,
+            override_stake=override_stake)
 
     logger.info(f"   📦 Total mergeado: {len(merged_cobertura)} combos de {len(plan_files)} planes")
 
@@ -2652,10 +2653,15 @@ def build_mega_combos(stake_per_combo: int = 500,
 def _build_live_combos_legacy(piernas_min: int = 3, piernas_max: int = 4,
                               top_n: int = 4, min_cuota: float = 1.50,
                               edge_file: Optional[str] = None,
-                              strategy: str = "balanced") -> tuple[List[Dict], Dict]:
+                              strategy: str = "balanced",
+                              override_stake: float = 0) -> tuple[List[Dict], Dict]:
     """
     Fallback: arma combos desde edge_report cuando no hay trader_plans.
     Lógica original de build_live_combos.
+
+    override_stake: sin trader_plan no hay Kelly-KL calculado — sin esto
+    los combos quedan con stake=0 (bug detectado 2026-07-31: --live-stake
+    nunca llegaba a esta rama porque el caller retornaba antes de aplicarlo).
     """
     from itertools import combinations
 
@@ -2773,9 +2779,9 @@ def _build_live_combos_legacy(piernas_min: int = 3, piernas_max: int = 4,
                 "outcome_ids": tc["outcome_ids"],
                 "url":         tc["url"],
                 "partial":     False,
-                "stake":       0,
+                "stake":       override_stake,
                 "cuota_combo": tc["cuota_combo"],
-                "retorno":     0,
+                "retorno":     round(override_stake * tc["cuota_combo"], 0) if override_stake > 0 else 0,
                 "combo_score": tc.get("combo_score", 0),
                 "combo_ev":    tc.get("combo_ev", 0),
                 "combo_hr":    tc.get("combo_hr", 0),
@@ -2972,6 +2978,261 @@ def _enviar_mega_telegram(mega_links: List[Dict], metadata: Dict):
         logger.info("📱 Mega-combos enviados a Telegram ✅")
     except Exception as e:
         logger.warning(f"⚠️ Error enviando mega a Telegram: {e}")
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SISTEMA LEAVE-ONE-OUT (Nodo-156-B) — 5-7 piernas, N combos de N-1
+# ══════════════════════════════════════════════════════════════════════════════
+
+def build_system_combos(stake_total: float = 3500,
+                         n_piernas: int = 6,
+                         ancla_cuota_min: float = 1.65,
+                         min_p_modelo: float = 0.55) -> tuple[List[Dict], Dict]:
+    """
+    Sistema Leave-One-Out: selecciona N piernas (5-7) — 1-2 anclas de cuota alta
+    validada + resto fillers de mejor p_modelo — y genera N combos de N-1 piernas,
+    cada uno excluyendo una pierna distinta.
+
+    Propiedad matemática: si 0 piernas pierden, ganan las N combos. Si EXACTAMENTE
+    1 pierna pierde, gana 1 solo combo (el que la excluyó) — no se pierde el 100%
+    del stake por 1 solo fallo, a diferencia de un combo único de N piernas. Si
+    ≥2 piernas pierden, ninguna combo gana.
+
+    Expansión autorizada explícitamente por el usuario 2026-07-31 (bajo su
+    responsabilidad) de 4-5 piernas (ANCHOR) a 5-7. Reutiliza gates existentes:
+    REGLA-HF-1 (cuota<1.50 excluida), coinflip guard (n_h2h=0+p_modelo bajo),
+    kambi_disponible (D140-02).
+    """
+    import itertools
+
+    if n_piernas < 5 or n_piernas > 7:
+        logger.warning(f"⚠️ Sistema: n_piernas={n_piernas} fuera de [5,7] — clamping")
+        n_piernas = max(5, min(7, n_piernas))
+
+    edge_path = _find_latest_edge_report()
+    if not edge_path:
+        logger.error("❌ Sistema: no hay edge_report disponible")
+        return [], {}
+
+    with open(edge_path, encoding="utf-8") as f:
+        edge_data = json.load(f)
+    _validate_edge_report_gate(edge_data, edge_path)  # Nodo-32 Acción 3
+
+    candidatos = []
+    seen = set()
+    for cat in ("apostar", "watchlist"):
+        for p in edge_data.get(cat, []):
+            name = p.get("favorito_predicho", "")
+            cuota = p.get("cuota_favorito", 0)
+            p_modelo = p.get("p_modelo", 0.5)
+            n_h2h = p.get("n_h2h", 0)
+            if not name or name in seen:
+                continue
+            if cuota < 1.50:  # REGLA-HF-1 — nunca en pool
+                continue
+            if p.get("kambi_disponible") is False:  # D140-02
+                continue
+            if _es_coinflip_sin_h2h(p_modelo, n_h2h):
+                continue
+            seen.add(name)
+            candidatos.append({
+                "jugador": name, "cuota": cuota, "p_modelo": p_modelo,
+                "p_blend": p.get("p_blend", p_modelo), "edge": p.get("edge", 0),
+                "tier": p.get("tier", "unknown"),
+            })
+
+    if len(candidatos) < n_piernas:
+        logger.warning(f"⚠️ Sistema: pool={len(candidatos)} picks < n_piernas={n_piernas}")
+        return [], {}
+
+    # Anclas = 1-2 picks de mayor cuota (los "casi seguros de cuota alta" del usuario).
+    # Fillers = resto del pool rankeado por p_modelo desc (mayor % de acierto), sin
+    # exigir un umbral absoluto — el ranking relativo ya prioriza los mejores del día.
+    n_anclas_pick = 2 if len(candidatos) >= n_piernas + 1 else 1
+    anclas_pool = [c for c in candidatos if c["cuota"] >= ancla_cuota_min] or candidatos
+    anclas = sorted(anclas_pool, key=lambda c: -c["cuota"])[:n_anclas_pick]
+    ancla_names = {a["jugador"] for a in anclas}
+    for a in anclas:
+        a["tipo"] = "ancla"
+    fillers = sorted(
+        (c for c in candidatos if c["jugador"] not in ancla_names),
+        key=lambda c: -c["p_modelo"],
+    )
+    for f in fillers:
+        f["tipo"] = "filler"
+    picks = (anclas + fillers)[:n_piernas]
+    if len(picks) < n_piernas:
+        logger.warning(f"⚠️ Sistema: solo {len(picks)} picks calificados (< {n_piernas})")
+        return [], {}
+    if any(p["p_modelo"] < min_p_modelo for p in picks if p["tipo"] == "filler"):
+        logger.info(f"  ℹ️ Sistema: algunos fillers < p_modelo={min_p_modelo} (pool del día es watchlist, no apostar)")
+
+    outcomes_map, started_map = fetch_kambi_outcomes()
+    if not outcomes_map:
+        logger.error("❌ Sistema: no se pudieron obtener outcomes de Kambi")
+        return [], {}
+
+    resolved = []
+    for p in picks:
+        oc, reason = find_outcome(p["jugador"], p["cuota"], outcomes_map, started_map)
+        if oc:
+            p["outcome_id"] = str(oc["outcome_id"])
+            p["cuota_kambi"] = oc["odds"]
+            resolved.append(p)
+        else:
+            logger.info(f"  ⏭️ Sistema: {p['jugador']} @{p['cuota']} — {reason} (excluido)")
+
+    if len(resolved) < n_piernas:
+        logger.warning(f"⚠️ Sistema: solo {len(resolved)}/{n_piernas} disponibles en Kambi")
+        return [], {}
+    resolved = resolved[:n_piernas]
+
+    stake_per_combo = max(50, round(stake_total / n_piernas / 50) * 50)
+
+    system_combos = []
+    for idx, combo_tuple in enumerate(itertools.combinations(resolved, n_piernas - 1), start=1):
+        combo_names = {p["jugador"] for p in combo_tuple}
+        excluida = next(p["jugador"] for p in resolved if p["jugador"] not in combo_names)
+        cuota_combo = 1.0
+        p_todas = 1.0
+        for p in combo_tuple:
+            cuota_combo *= p["cuota_kambi"]
+            p_todas *= p["p_modelo"]
+        outcome_ids = [p["outcome_id"] for p in combo_tuple]
+        url = f"{BETPLAY_URL_BASE}{','.join(outcome_ids)}{BETPLAY_URL_TAIL}"
+        system_combos.append({
+            "combo_idx":   idx,
+            "excluye":     excluida,
+            "piernas":     n_piernas - 1,
+            "legs":        [{
+                "jugador": p["jugador"], "cuota": p["cuota"], "cuota_kambi": p["cuota_kambi"],
+                "outcome_id": p["outcome_id"], "tier": p["tier"], "tipo": p["tipo"],
+            } for p in combo_tuple],
+            "outcome_ids": outcome_ids,
+            "url":         url,
+            "stake":       stake_per_combo,
+            "cuota_combo": round(cuota_combo, 2),
+            "retorno":     round(stake_per_combo * cuota_combo, 0),
+            "p_todas":     round(p_todas, 6),
+        })
+
+    metadata = {
+        "modo":            "SISTEMA",
+        "n_piernas_pool":  n_piernas,
+        "n_combos":        len(system_combos),
+        "stake_per_combo": stake_per_combo,
+        "total_stake":     stake_per_combo * len(system_combos),
+        "picks":           [p["jugador"] for p in resolved],
+        "n_anclas":        sum(1 for p in resolved if p["tipo"] == "ancla"),
+    }
+    return system_combos, metadata
+
+
+def _mostrar_system_combos(system_links: List[Dict], metadata: Dict):
+    """Muestra combos de sistema leave-one-out en consola."""
+    total_stake = metadata.get("total_stake", 0)
+    stake_each = metadata.get("stake_per_combo", 0)
+    n = len(system_links)
+
+    print()
+    print("=" * 70)
+    print(f"  SISTEMA LEAVE-ONE-OUT ({metadata.get('n_piernas_pool', '?')}p → {n} combos de {n-1}p)")
+    print(f"  {n} combos × ${stake_each:,} = ${total_stake:,}")
+    print(f"  Piernas pool: {', '.join(metadata.get('picks', []))}")
+    print(f"  Si 0 piernas pierden -> ganan las {n} combos.")
+    print(f"  Si EXACTAMENTE 1 pierna pierde -> gana 1 combo (el que la excluyó).")
+    print(f"  Si >=2 piernas pierden -> 0 combos ganan (stake total ${total_stake:,} en riesgo).")
+    print("=" * 70)
+
+    for sc in system_links:
+        print(f"\n  Sistema {sc['combo_idx']} [{sc['piernas']}p] @{sc['cuota_combo']:,.2f} -> "
+              f"${sc['retorno']:,.0f} | excluye: {sc['excluye']}")
+        for leg in sc["legs"]:
+            tag = "ANCLA" if leg.get("tipo") == "ancla" else "filler"
+            print(f"     [{tag:<6}] {leg['jugador']:<25} @{leg['cuota_kambi']:.2f}  [{leg['tier']}]")
+
+    print()
+    print(f"  INVERSIÓN TOTAL: ${total_stake:,}")
+    print("=" * 70)
+
+
+def _generar_bat_sistema(system_links: List[Dict]) -> int:
+    """Genera Sistema1.bat ... SistemaN.bat — cada uno excluye 1 pierna distinta."""
+    COMBOS_DIR.mkdir(exist_ok=True)
+
+    for old_bat in DESKTOP_WIN.glob("Sistema*.bat"):
+        old_bat.unlink(missing_ok=True)
+    for old_html in COMBOS_DIR.glob("sistema*.html"):
+        old_html.unlink(missing_ok=True)
+
+    count = 0
+    for sc in system_links:
+        url = sc.get("url")
+        if not url:
+            continue
+
+        idx = sc["combo_idx"]
+        piernas = sc["piernas"]
+        cuota = sc["cuota_combo"]
+        excluye = sc["excluye"]
+        legs_desc = " + ".join(f"{l['jugador']}@{l['cuota_kambi']:.2f}" for l in sc["legs"])
+
+        html_content = f"""<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Sistema {idx}</title></head>
+<body style="font-family:monospace;text-align:center;padding:40px">
+<h2>Sistema {idx} [{piernas}p] @{cuota:,.2f} — excluye {excluye}</h2>
+<p>{legs_desc}</p>
+<p><a href="{url}" target="_blank" style="font-size:24px;padding:20px;background:#0066ff;color:white;text-decoration:none;border-radius:8px">
+Abrir en Betplay</a></p>
+</body></html>"""
+
+        html_path = COMBOS_DIR / f"sistema{idx}.html"
+        html_path.write_text(html_content, encoding="utf-8")
+
+        bat_content = (
+            f'@echo off\r\n'
+            f'start "" "{CHROME_WIN}" '
+            f'"file:///C:\\users\\hogar\\Desktop\\combos\\sistema{idx}.html"\r\n'
+        )
+        bat_path = DESKTOP_WIN / f"Sistema{idx}.bat"
+        bat_path.write_text(bat_content, encoding="utf-8")
+        count += 1
+
+        try:
+            if _combo_registry_available:
+                _cr = _ComboRegistry()
+                _cr.log_combo(
+                    "Sistema", "SISTEMA", f"Sistema{idx}",
+                    [l["jugador"] for l in sc["legs"]],
+                    [l["cuota_kambi"] for l in sc["legs"]],
+                    sc.get("stake", 0),
+                )
+        except Exception:
+            pass
+
+        logger.info(f"  📄 Sistema{idx}.bat — [{piernas}p @{cuota:,.2f}] excluye {excluye} | {legs_desc[:80]}")
+
+    return count
+
+
+def _enviar_sistema_telegram(system_links: List[Dict], metadata: Dict):
+    """Envía resumen del sistema leave-one-out a Telegram."""
+    n = len(system_links)
+    lines = [f"*SISTEMA LEAVE-ONE-OUT* ({metadata.get('n_piernas_pool','?')}p -> {n} combos)"]
+    for sc in system_links:
+        names = " + ".join(l['jugador'].split()[-1] for l in sc["legs"])
+        lines.append(f"Sistema{sc['combo_idx']} [{sc['piernas']}p] @{sc['cuota_combo']:,.2f} "
+                     f"${sc['retorno']:,.0f} | excl:{sc['excluye'].split()[-1]} | {names}")
+    lines.append(f"Total: ${metadata.get('total_stake', 0):,} — 1 pierna perdida = gana 1 combo, 2+ = pierde todo")
+    text = "\n".join(lines)
+
+    try:
+        data = json.dumps({"chat_id": TG_CHAT, "text": text, "parse_mode": "Markdown"}).encode()
+        req = urllib.request.Request(TG_URL, data=data, headers={"Content-Type": "application/json"})
+        urllib.request.urlopen(req, timeout=10)
+        logger.info("📱 Sistema enviado a Telegram ✅")
+    except Exception as e:
+        logger.warning(f"⚠️ Error enviando sistema a Telegram: {e}")
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -3678,6 +3939,15 @@ def main():
     parser.add_argument("--evaluar-stake", type=int, default=1000,
                         help="Stake por evaluar-games combo (default: $1000)")
     parser.add_argument("--evaluar-file", help="evaluar_games_signal JSON específico")
+    parser.add_argument("--sistema", action="store_true",
+                        help="Sistema Leave-One-Out: N piernas (5-7) -> N combos de N-1 "
+                             "(1 pierna perdida no arrasa todo). Autorizado bajo responsabilidad del usuario.")
+    parser.add_argument("--sistema-piernas", type=int, default=6,
+                        help="Piernas totales del sistema, 5-7 (default: 6)")
+    parser.add_argument("--sistema-stake", type=float, default=3500,
+                        help="Stake TOTAL repartido entre los N combos del sistema (default: $3500)")
+    parser.add_argument("--sistema-ancla-min", type=float, default=1.65,
+                        help="Cuota mínima para calificar como ancla (default: 1.65)")
     parser.add_argument("--no-dispersion-guard", action="store_true",
                         help="Disable Dispersion Guard (Nodo-25)")
     parser.add_argument("--allow-extra", action="store_true",
@@ -3856,6 +4126,25 @@ def main():
                         print(f"  Stake: ${args.games_stake} × {n_games} = ${args.games_stake * n_games:,}")
                     if args.telegram:
                         _enviar_games_telegram(games_links, games_meta)
+
+        # ── SISTEMA LEAVE-ONE-OUT: añadir si --sistema ──
+        if args.sistema:
+            logger.info("")
+            logger.info("Generando SISTEMA LEAVE-ONE-OUT (Nodo-156-B)...")
+            system_links, system_meta = build_system_combos(
+                stake_total=args.sistema_stake,
+                n_piernas=args.sistema_piernas,
+                ancla_cuota_min=args.sistema_ancla_min,
+            )
+            if system_links:
+                _mostrar_system_combos(system_links, system_meta)
+                if not args.dry_run:
+                    n_sis = _generar_bat_sistema(system_links)
+                    if n_sis:
+                        print(f"\n  {n_sis} archivos Sistema*.bat en tu escritorio")
+                        print(f"  Stake total: ${system_meta.get('total_stake', 0):,}")
+                    if args.telegram:
+                        _enviar_sistema_telegram(system_links, system_meta)
         return
 
     # ── MODO MEGA STANDALONE (sin --live) ──
@@ -3961,6 +4250,32 @@ def main():
 
         if args.telegram:
             _enviar_games_telegram(games_links, games_meta)
+        return
+
+    # ── MODO SISTEMA STANDALONE (Nodo-156-B) — Leave-One-Out 5-7 piernas ──────
+    if args.sistema:
+        logger.info("Generando SISTEMA LEAVE-ONE-OUT (Nodo-156-B)...")
+        system_links, system_meta = build_system_combos(
+            stake_total=args.sistema_stake,
+            n_piernas=args.sistema_piernas,
+            ancla_cuota_min=args.sistema_ancla_min,
+        )
+        if not system_links:
+            logger.error("❌ No se pudo generar el sistema — revisa pool de anclas/fillers en edge_report")
+            sys.exit(1)
+
+        _mostrar_system_combos(system_links, system_meta)
+
+        if args.dry_run:
+            return
+
+        n_sis = _generar_bat_sistema(system_links)
+        if n_sis:
+            print(f"\n  {n_sis} archivos Sistema*.bat en tu escritorio")
+            print(f"  Stake total: ${system_meta.get('total_stake', 0):,}")
+
+        if args.telegram:
+            _enviar_sistema_telegram(system_links, system_meta)
         return
 
     # ── MODO EVALUAR_GAMES STANDALONE (Nodo-125) ──────────────────────────────
