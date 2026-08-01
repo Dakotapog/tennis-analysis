@@ -1724,6 +1724,113 @@ def _find_latest_games_signal() -> Optional[Path]:
     return None
 
 
+def _find_latest_games_live() -> Optional[Path]:
+    """D158-02: encuentra el games_live_YYYYMMDD.json más reciente (escrito por
+    live_desk.py._check_games_convergencia cada 15s, D133-05)."""
+    reports = Path("reports")
+    files = sorted(reports.glob("games_live_*.json"), reverse=True)
+    files = [f for f in files if not f.name.endswith("_fired.json")]
+    if files:
+        return files[0]
+    return None
+
+
+def build_games_combos_live(stake_per_combo: int = 2000,
+                             games_live_file: Optional[str] = None) -> tuple[List[Dict], Dict]:
+    """
+    D158-02 (Nodo-157/158): variante --live de GAMES combos. `build_games_combos()`
+    (Nodo-40) lee el games_signal_report ESTÁTICO pre-partido — outcome_id/línea
+    congelados en el momento de la detección, sin importar cuánto se haya movido
+    el mercado desde entonces. Root cause del bug reportado por el usuario:
+    outcome_id muerto → coupon vacío cuando la línea original (ej. 21.5) ya no
+    es tradeable y Betplay solo ofrece una línea distinta (ej. 23.5).
+
+    Esta variante lee games_live_{fecha}.json — el archivo que live_desk.py
+    reescribe cada ciclo de 15s con linea_actual/cuota_actual/oc_id_actual
+    (D158-01: línea REALMENTE tradeable ahora, vía _fetch_live_games_all —
+    no la línea congelada linea_t0, que queda solo como referencia de drift).
+    Aplica los mismos gates D150/D151 que ya filtran el combo ITF puro
+    (_fire_itf_live_games_combo) — "adaptar y recalcular": solo dispara si el
+    edge recalculado contra la línea actual sigue pasando los gates existentes.
+    """
+    if games_live_file:
+        path = Path(games_live_file)
+    else:
+        path = _find_latest_games_live()
+    if not path or not path.exists():
+        logger.warning("⚠️ No hay games_live_*.json — corre live_desk.py primero")
+        return [], {}
+
+    data = json.loads(path.read_text(encoding="utf-8"))
+    signals = data.get("signals_alta", [])
+    if not signals:
+        return [], {}
+
+    from live_desk import _edge_live_gate, _score_null_gate, _zona_direccion_gate
+
+    candidatos = []
+    for s in signals:
+        if s.get("estado") not in ("EN_VIVO", "ITF_VIVO"):
+            continue
+        linea_actual = s.get("linea_actual") if s.get("linea_actual") is not None else s.get("linea")
+        cuota_actual = s.get("cuota_actual") or s.get("cuota_live")
+        oc_id_actual = s.get("oc_id_actual") or s.get("oc_id") or s.get("outcome_id")
+        if not (linea_actual and cuota_actual and oc_id_actual):
+            continue
+        certeza = s.get("certeza")
+        if _score_null_gate(s.get("score_data"), gp_min=3):
+            continue
+        if _edge_live_gate(certeza, float(cuota_actual), umbral=0.05):
+            continue
+        zona = s.get("zona", "COINFLIP")
+        if _zona_direccion_gate(zona, s.get("direccion", "UNDER"), float(linea_actual), certeza, p_umbral=0.40):
+            continue
+        candidatos.append({
+            "partido":    s["partido"],
+            "direccion":  s.get("direccion"),
+            "linea":      linea_actual,
+            "cuota":      cuota_actual,
+            "outcome_id": str(oc_id_actual),
+            "mercado":    "Total de juegos",
+        })
+
+    if not candidatos:
+        return [], {}
+
+    legs = candidatos[:3]  # REGLA-G5: máx 3 piernas por combo
+    outcome_ids = list(dict.fromkeys(c["outcome_id"] for c in legs))
+    cuota_combo = 1.0
+    for c in legs:
+        cuota_combo *= c["cuota"]
+    ids_str = ",".join(outcome_ids)
+    url = f"{BETPLAY_URL_BASE}{ids_str}{BETPLAY_URL_TAIL}"
+    combo = {
+        "combo_idx":   1,
+        "label":       "GamesLive",
+        "legs":        legs,
+        "cuota_combo": round(cuota_combo, 2),
+        "stake":       stake_per_combo,
+        "retorno":     round(stake_per_combo * cuota_combo),
+        "url":         url,
+        "outcome_ids": outcome_ids,
+        "n_piernas":   len(legs),
+    }
+    metadata = {
+        "fuente":          str(path.name),
+        "n_señales":       len(signals),
+        "n_candidatos":    len(candidatos),
+        "stake_per_combo": stake_per_combo,
+        "total_stake":     stake_per_combo,
+        "calibracion_n":   0,
+        "regla_g6_active": False,
+        "n_alta":          len(candidatos),
+        "n_media":         0,
+        "fecha":           datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+    }
+    logger.info(f"  GamesLive: {len(legs)} piernas (línea actual, gates D150/D151 OK) de {len(candidatos)} candidatos")
+    return [combo], metadata
+
+
 def build_games_combos(stake_per_combo: int = 2000,
                        games_file: Optional[str] = None) -> tuple[List[Dict], Dict]:
     """
@@ -1961,7 +2068,12 @@ def _generar_bat_games(games_links: List[Dict]) -> int:
             if _combo_registry_available:
                 _cr = _ComboRegistry()
                 # subtipo: "GAMES_A", "GAMES_B", "GAMES_C" según label
-                subtipo = f"GAMES_{label[-1].upper()}" if label.startswith("Games") else "GAMES_A"
+                if label == "GamesLive":
+                    subtipo = "GAMES_LIVE"
+                elif label.startswith("Games"):
+                    subtipo = f"GAMES_{label[-1].upper()}"
+                else:
+                    subtipo = "GAMES_A"
                 _cr.log_combo(
                     "Games", subtipo, label,
                     [f"{l['direccion']} {l['linea']} {l['mercado']}" for l in gc["legs"]],
@@ -4112,11 +4224,16 @@ def main():
         # ── GAMES COMBOS: añadir Totales si --games ──
         if args.games:
             logger.info("")
-            logger.info("Generando GAMES COMBOS — Totales (Nodo-40)...")
-            games_links, games_meta = build_games_combos(
-                stake_per_combo=args.games_stake,
-                games_file=args.games_file,
-            )
+            logger.info("Generando GAMES COMBOS — Totales (Nodo-40/158)...")
+            # D158-02: en --live, preferir línea/oc_id REALMENTE tradeables ahora
+            # (games_live_*.json) sobre el reporte estático pre-partido — evita
+            # coupons con outcome_id muerto cuando la línea de mercado se movió.
+            games_links, games_meta = build_games_combos_live(stake_per_combo=args.games_stake)
+            if not games_links:
+                games_links, games_meta = build_games_combos(
+                    stake_per_combo=args.games_stake,
+                    games_file=args.games_file,
+                )
             if games_links:
                 _mostrar_games_combos(games_links, games_meta)
                 if not args.dry_run:

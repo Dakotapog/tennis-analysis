@@ -1417,12 +1417,29 @@ def render_html(state: Dict[str, Any]) -> str:
             else:
                 _linea_html = str(_linea_cur) if _linea_cur is not None else "—"
 
+            # Línea/Cuota ACTUAL — mercado real tradeable ahora en Betplay (D158-01)
+            # Distinto de Base(T0) (congelada) y de "Línea" (histórica de la señal):
+            # esta es la línea que Kambi está sirviendo AHORA MISMO.
+            _linea_actual = _sig.get("linea_actual")
+            _cuota_actual = _sig.get("cuota_actual")
+            _linea_drift  = _sig.get("linea_drift")
+            if _linea_actual is not None:
+                _mov_tag = (f' <span style="color:{AMBER};font-size:0.75em;">'
+                            f'({_linea_drift:+.1f}j)</span>') if _linea_drift else ""
+                _linea_actual_html = f'<b>{_linea_actual}</b>{_mov_tag}'
+                _cuota_actual_html = (f'<b>@{_cuota_actual:.2f}</b>' if _cuota_actual else "—")
+            else:
+                _linea_actual_html = "—"
+                _cuota_actual_html = "—"
+
             x3_rows.append([
                 _partido_html_prefix + _partido_html,
                 _est_lbl,
                 _sig.get("mercado", ""),
                 f'<span style="color:{_dir_c};font-weight:bold;">{_dir}</span>',
                 _linea_html,
+                _linea_actual_html,
+                _cuota_actual_html,
                 _base_t0_html,
                 _cuota_live_html,
                 _drift_html,
@@ -1445,7 +1462,7 @@ def render_html(state: Dict[str, Any]) -> str:
         x3_panel = panel(
             f"X3 GAMES SIGNAL — Over/Under mercados Nodo-40 | {_gs['fuente']}",
             _conv_banner + table(
-                ["Partido", "Estado", "Mercado", "Dir", "Línea", "Base(T0)", "Live", "Drift", "Progreso", "Certeza", "Gap", "Confianza", "Rango pred.", "Middle?", "Contexto", "Marcador"],
+                ["Partido", "Estado", "Mercado", "Dir", "Línea", "LínAct", "CuotaAct", "Base(T0)", "Live", "Drift", "Progreso", "Certeza", "Gap", "Confianza", "Rango pred.", "Middle?", "Contexto", "Marcador"],
                 x3_rows,
                 "Sin señales accionables hoy (gap modelo-línea insuficiente)",
             ),
@@ -4008,15 +4025,43 @@ def _check_games_convergencia(fecha: str) -> None:
 
         if matched:
             sig["estado"] = "EN_VIVO"
-            cuota_live = _extract_games_cuota_live(matched["event"]["id"], sig["direccion"], sig["linea"])  # D135-01
-            if cuota_live and sig.get("cuota_pre"):
-                sig["cuota_live"] = cuota_live
-                sig["drift_pct"]  = round(
-                    (cuota_live - sig["cuota_pre"]) / sig["cuota_pre"] * 100, 1
-                )
+            # D158-01: reemplaza _extract_games_cuota_live (fuzzy-match ±3.5j sobre
+            # la línea congelada, mal-etiquetaba la cuota de OTRA línea como si fuera
+            # la de sig["linea"]) por _fetch_live_games_all — 1 sola llamada que
+            # devuelve la línea REALMENTE tradeable ahora mismo + su cuota + su
+            # oc_id, sin adivinar. sig["linea"]/linea_t0 quedan intactos como base
+            # de referencia (drift); linea_actual/cuota_actual/oc_id_actual son lo
+            # que hay que usar para certeza y para disparar.
+            _mkt_now = _fetch_live_games_all(matched["event"]["id"])
+            if _mkt_now and _mkt_now.get("linea"):
+                sig["linea_actual"] = _mkt_now["linea"]
+                _dir_now = sig.get("direccion", "UNDER")
+                if _dir_now == "UNDER":
+                    sig["cuota_actual"] = _mkt_now.get("cuota_under")
+                    sig["oc_id_actual"] = _mkt_now.get("oc_id_under")
+                else:
+                    sig["cuota_actual"] = _mkt_now.get("cuota_over")
+                    sig["oc_id_actual"] = _mkt_now.get("oc_id_over")
+                _base_linea = sig.get("linea_t0") if sig.get("linea_t0") is not None else sig["linea"]
+                sig["linea_drift"] = round(sig["linea_actual"] - _base_linea, 1) if _base_linea is not None else None
+                if sig["cuota_actual"] and sig.get("cuota_pre"):
+                    sig["cuota_live"] = sig["cuota_actual"]
+                    sig["drift_pct"]  = round(
+                        (sig["cuota_actual"] - sig["cuota_pre"]) / sig["cuota_pre"] * 100, 1
+                    )
+                else:
+                    sig["confianza_display"] = "ALTA_SIN_CONFIRMAR"
+                if sig["linea_actual"] != sig["linea"]:
+                    logger.info(
+                        f"[LINEA_ACTUAL] {partido}: base={sig['linea']} → actual={sig['linea_actual']} "
+                        f"({'sube' if sig['linea_actual'] > sig['linea'] else 'baja'})"
+                    )
             else:
+                sig["linea_actual"] = None
+                sig["cuota_actual"] = None
+                sig["oc_id_actual"] = None
                 sig["confianza_display"] = "ALTA_SIN_CONFIRMAR"
-                logger.info(f"[CUOTA_LIVE] {partido}: EN_VIVO pero sin cuota_live confirmada aún")
+                logger.info(f"[CUOTA_LIVE] {partido}: EN_VIVO pero sin mercado 'Total de juegos' confirmado aún")
         else:
             # Clasificar por hora como fallback temporal
             hora_raw = sig.get("hora") or ""
@@ -4050,7 +4095,9 @@ def _check_games_convergencia(fecha: str) -> None:
     # D147-02: certeza condicional para señales EN_VIVO con score disponible
     for _s147 in alta_signals:
         if _s147.get("score_data") is not None and _s147.get("estado") in ("EN_VIVO", "ITF_VIVO"):
-            _linea147 = float(_s147.get("linea") or 0)
+            # D158-01: certeza se calcula contra la línea REALMENTE tradeable ahora
+            # (linea_actual) — no contra la línea congelada, que puede ya no existir.
+            _linea147 = float(_s147.get("linea_actual") if _s147.get("linea_actual") is not None else (_s147.get("linea") or 0))
             _sd147    = _s147["score_data"]
             _gs1_147  = _sd147.get("games_set1")
             _zona147  = "DOMINANTE" if _linea147 < 21.5 else "COINFLIP"
