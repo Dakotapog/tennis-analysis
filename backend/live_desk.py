@@ -1346,6 +1346,18 @@ def render_html(state: Dict[str, Any]) -> str:
                     f'LINEA ENVENENADA</span>'
                 )
                 _conf = _conv_html + f'<span style="color:{GREY};">{_conf_raw}</span>'
+            elif _cuota_envenenada and _over_cand:
+                # D156-C: misma lógica contrarian que la ruta linea_envenenada,
+                # aplicada aquí porque cuota_drift>+15% detectó lo mismo que
+                # linea_drift>2j pero por el lado de precio en vez de línea.
+                _ov_tag = f" @{_cuota_ov_live:.2f} edge={_edge_ov}%" if _cuota_ov_live else ""
+                _partido_html = (
+                    f'{_partido_raw} '
+                    f'<span style="background:#1f6feb;color:#fff;padding:1px 6px;'
+                    f'border-radius:3px;font-size:0.72em;font-weight:bold;">'
+                    f'OVER — TERCER SET{_ov_tag}</span>'
+                )
+                _conf = _conv_html + f'<span style="color:#1f6feb;">{_conf_raw}</span>'
             elif _cuota_envenenada:
                 # D150-05: cuota sube >15% → mercado descubrió info que el modelo no tiene
                 _partido_html = (
@@ -3641,8 +3653,8 @@ def _parse_betplay_scoreboard_html(html: str) -> Dict:
         score_parts  = []
 
         for i in range(n_sets):
-            h_g = home_per_set[i]
-            a_g = away_per_set[i]
+            h_g = home_sets[i]
+            a_g = away_sets[i]
             set_total = h_g + a_g
             is_last   = (i == n_sets - 1)
             is_complete = ((max(h_g, a_g) >= 6 and abs(h_g - a_g) >= 2)
@@ -4209,22 +4221,26 @@ def _check_games_convergencia(fecha: str) -> None:
         oc_id_over_live   = None
         edge_over         = None
 
+        def _calc_over_candidato():
+            # D156-C: candidato OVER contrarian — mismo cálculo usado por ambas
+            # rutas de envenenamiento (línea D150-02/03 y cuota D150-01) para que
+            # el override no dependa de cuál disparó primero.
+            _cuota_ov = market.get("cuota_over")
+            _oc_ov    = market.get("oc_id_over")
+            if _cuota_ov and 1.30 <= _cuota_ov <= 2.80:
+                import math as _m2
+                _z_ov  = (market_linea - proxy["midpoint"]) / 3.5
+                _pcdf  = (1 + _m2.erf(_z_ov / _m2.sqrt(2))) / 2
+                _pm_ov = 1 - _pcdf
+                _eo    = round((_pm_ov - 1 / _cuota_ov) * 100, 1)
+                if _eo > 5.0:
+                    return True, _cuota_ov, _oc_ov, _eo
+            return False, None, None, None
+
         if linea_drift is not None:
             if conv_dir == "UNDER" and linea_drift > 2.0:
                 linea_envenenada = True
-                _cuota_ov = market.get("cuota_over")
-                _oc_ov    = market.get("oc_id_over")
-                if _cuota_ov and 1.30 <= _cuota_ov <= 2.80:
-                    import math as _m2
-                    _z_ov  = (market_linea - proxy["midpoint"]) / 3.5
-                    _pcdf  = (1 + _m2.erf(_z_ov / _m2.sqrt(2))) / 2
-                    _pm_ov = 1 - _pcdf
-                    _eo    = round((_pm_ov - 1 / _cuota_ov) * 100, 1)
-                    if _eo > 5.0:
-                        over_candidato  = True
-                        cuota_over_live = _cuota_ov
-                        oc_id_over_live = _oc_ov
-                        edge_over       = _eo
+                over_candidato, cuota_over_live, oc_id_over_live, edge_over = _calc_over_candidato()
                 logger.info(
                     f"[ITF_LIVE] {home} vs {away} UNDER linea_drift={linea_drift:+.1f}j "
                     f"> +2j → ENVENENADA | over_candidato={over_candidato} "
@@ -4242,9 +4258,14 @@ def _check_games_convergencia(fecha: str) -> None:
         cuota_envenenada = False
         if cuota_drift is not None and cuota_drift > CUOTA_ENVENENADA_UMBRAL:
             cuota_envenenada = True
+            # D156-C: la ruta de cuota_envenenada no calculaba over_candidato —
+            # única gap real vs la ruta de linea_envenenada (ver Nodo-156-C).
+            if conv_dir == "UNDER" and not over_candidato:
+                over_candidato, cuota_over_live, oc_id_over_live, edge_over = _calc_over_candidato()
             logger.info(
                 f"[ITF_LIVE] {home} vs {away} UNDER cuota_drift={cuota_drift:+.1f}% "
-                f"> +{CUOTA_ENVENENADA_UMBRAL:.0f}% → CUOTA_ENVENENADA"
+                f"> +{CUOTA_ENVENENADA_UMBRAL:.0f}% → CUOTA_ENVENENADA | over_candidato={over_candidato} "
+                + (f"OVER @{cuota_over_live} edge={edge_over}%" if over_candidato else "sin edge OVER")
             )
 
         markov = _get_markov_itf(home, away, er_picks)
@@ -4477,15 +4498,22 @@ def _check_games_convergencia(fecha: str) -> None:
             continue
         alta_itf.append(_s06)
     if alta_itf:
+        # D157-02: los outcome_id de mercados EN_VIVO expiran/rotan en segundos —
+        # el .bat/.html se re-escribe con oc_id fresco en CADA ciclo (15s) mientras
+        # la señal siga ALTA. El guard itf_fired solo controla el log/notify de
+        # "nueva señal" (cap 10/día) — nunca bloquea el refresco del archivo,
+        # porque bloquearlo dejaba un coupon con id muerto (bug: bat abre Betplay
+        # sin pick cargado si el usuario no hacía click dentro de la ventana de
+        # validez del id capturado en el primer disparo).
         itf_fired_path = REPORTS / f"itf_live_games_{fecha_compact}_fired.json"
         try:
             itf_fired: List[List] = json.loads(itf_fired_path.read_text(encoding="utf-8")) if itf_fired_path.exists() else []
         except Exception:
             itf_fired = []
+        _fire_itf_live_games_combo(alta_itf, fecha_compact)
         if len(itf_fired) < 10:
             itf_key = sorted(s["partido"] for s in alta_itf)
             if itf_key not in itf_fired:
-                _fire_itf_live_games_combo(alta_itf, fecha_compact)
                 itf_fired.append(itf_key)
                 itf_fired_path.write_text(json.dumps(itf_fired, ensure_ascii=False), encoding="utf-8")
                 logger.info(f"[ITF_LIVE] combo disparado: {len(alta_itf)} señales ALTA conv≥3")

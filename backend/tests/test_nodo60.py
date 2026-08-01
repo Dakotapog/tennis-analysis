@@ -25,8 +25,12 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
 
-def _make_surface_matches(n_wins=4, n_total=6, surface='Hierba'):
-    """Genera historial mínimo de partidos en superficie para test."""
+def _make_surface_matches(n_wins=4, n_total=6, surface='Hierba', today=None):
+    """Genera historial mínimo de partidos en superficie para test.
+    today: ancla de fecha opcional (default: fecha real de ejecución) — pasar un
+    valor fijo dentro de la ventana estacional GCS (Jun1-Jul13) para tests de hierba
+    que no deben depender de cuándo se corre la suite (Nodo-61 season window)."""
+    today = today or datetime.datetime.today()
     matches = []
     for i in range(n_total):
         ganador = 'TestPlayer' if i < n_wins else 'Opponent'
@@ -36,7 +40,7 @@ def _make_surface_matches(n_wins=4, n_total=6, surface='Hierba'):
             'resultado': '2-0',
             'ganador': ganador,
             'superficie': surface,
-            'fecha': (datetime.datetime.today() - datetime.timedelta(days=30 + i * 7)).strftime('%d.%m.%Y'),
+            'fecha': (today - datetime.timedelta(days=30 + i * 7)).strftime('%d.%m.%Y'),
             'torneo': 'TestTournament',
             'oponente': 'Opponent',
         })
@@ -44,13 +48,14 @@ def _make_surface_matches(n_wins=4, n_total=6, surface='Hierba'):
 
 
 def _make_complete_tournament_matches(torneo_name, days_ago, n_wins=5, surface='Hierba',
-                                       best_opp_rank=8):
+                                       best_opp_rank=8, today=None):
     """Genera partidos de un torneo completo para activar TORNEO_COMPLETO_BONUS.
-    days_ago = días desde hoy hasta la FINAL (partido más reciente).
+    days_ago = días desde `today` hasta la FINAL (partido más reciente).
     Los partidos anteriores se espacian hacia atrás desde ahí.
-    """
+    today: ancla de fecha opcional — ver _make_surface_matches."""
     matches = []
-    final_date = datetime.datetime.today() - datetime.timedelta(days=days_ago)
+    today = today or datetime.datetime.today()
+    final_date = today - datetime.timedelta(days=days_ago)
     for i in range(n_wins):
         # i=n_wins-1 es la final (más reciente = days_ago días atrás)
         fecha = (final_date - datetime.timedelta(days=(n_wins - 1 - i))).strftime('%d.%m.%Y')
@@ -96,14 +101,18 @@ def test_T60_01_gcs_boost_active_grass_atp500_recent():
 
     analyzer = _get_analyzer()
 
+    # Ancla fija dentro de la ventana estacional GCS (Jun1-Jul13 2026) — el test no
+    # debe depender de la fecha real de ejecución (Nodo-61 season window, D61-F1).
+    _anchor = datetime.datetime(2026, 7, 1)
+
     history_with_bonus = _make_complete_tournament_matches(
-        torneo_name='Nottingham 2026', days_ago=13, n_wins=5, surface='Hierba'
+        torneo_name='Nottingham 2026', days_ago=13, n_wins=5, surface='Hierba', today=_anchor
     )
-    history_base = _make_surface_matches(n_wins=20, n_total=30, surface='Hierba')
+    history_base = _make_surface_matches(n_wins=20, n_total=30, surface='Hierba', today=_anchor)
     full_history = history_with_bonus + history_base
 
     result, log = analyzer.analyze_surface_specialization(
-        full_history, 'Hierba', 'TestPlayer'
+        full_history, 'Hierba', 'TestPlayer', fecha_partido=_anchor
     )
 
     assert result['gcs_active'] is True, "gcs_active debe ser True con torneo ATP500 en 13 días"
@@ -162,9 +171,17 @@ def test_T60_03_gcs_boost_no_fires_old_tournament():
 
 # ── T60-04: _extract_and_categorize marca gcs_active=True ────────────────────
 
-def test_T60_04_extract_marks_gcs_active():
+def test_T60_04_extract_marks_gcs_active(monkeypatch):
     """_extract_and_categorize devuelve gcs_active=True cuando surface_specialization_meta tiene torneo_completo=True + tier>=atp500."""
     from combo_confianza_builder import _extract_and_categorize
+    # D140-04 Nodo-140: _extract_and_categorize carga kambi_coverage real desde disco.
+    # Aislar el test del estado de producción — sin esto, los jugadores ficticios
+    # de este fixture quedan excluidos por el gate si hay un coverage real en reports/.
+    monkeypatch.setattr('scripts.fetch_kambi_coverage.load_coverage', lambda *a, **kw: None)
+    # El signal-bridge (Nodo-62) también lee edge_report real de reports/ — un pick
+    # de producción con apellido fuzzy-matched a este fixture (ej. G1 apostar=False)
+    # bloquearía el test vía _apply_combo_gates. Aislar igual que el coverage arriba.
+    monkeypatch.setattr('combo_confianza_builder._load_edge_report_index', lambda: {})
 
     # Partido simulado con gcs_active=True en surface_specialization_meta
     partido_gcs = {
@@ -194,7 +211,7 @@ def test_T60_04_extract_marks_gcs_active():
         'jugador2': 'Yanaki Milev',
         'torneo_nombre': 'ITF MASCULINO: M25 Skopje',
         'tipo_cancha': 'arcilla',
-        'cuota1': 1.30,
+        'cuota1': 1.85,   # D143-01: >1.02/0.577 para clear el gate EV_LEG_MIN
         'cuota2': 3.50,
         'cuota_es_real': True,
         'ranking_analysis': {
@@ -300,14 +317,17 @@ def test_T60_07_grass_boost_clay_shadow():
 
     analyzer = _get_analyzer()
 
+    # Ancla fija dentro de la ventana estacional GCS (Jun1-Jul13 2026) — ver T60-01.
+    _anchor = datetime.datetime(2026, 7, 1)
+
     # Mismo historial con torneo completo ATP500 en hierba hace 10 días
     history_gcs = _make_complete_tournament_matches(
-        torneo_name='Nottingham 2026', days_ago=10, n_wins=5, surface='Hierba'
-    ) + _make_surface_matches(n_wins=20, n_total=30, surface='Hierba')
+        torneo_name='Nottingham 2026', days_ago=10, n_wins=5, surface='Hierba', today=_anchor
+    ) + _make_surface_matches(n_wins=20, n_total=30, surface='Hierba', today=_anchor)
 
     # Análisis en hierba → boost debe aplicar
     result_grass, log_grass = analyzer.analyze_surface_specialization(
-        history_gcs, 'Hierba', 'TestPlayer'
+        history_gcs, 'Hierba', 'TestPlayer', fecha_partido=_anchor
     )
     boost_log = [l for l in log_grass if 'GCS_RECENCY_BOOST' in l and 'LOG_GCS_SHADOW' not in l]
     assert len(boost_log) >= 1, f"Hierba debe recibir GCS_RECENCY_BOOST, got: {log_grass}"
@@ -355,10 +375,16 @@ def test_T60_08_clay_tournament_grass_match_no_gcs():
 
 # ── T60-09: pick GCS + pick ITF → nunca en el mismo CORE combo ───────────────
 
-def test_T60_09_gcs_itf_not_mixed_in_core():
+def test_T60_09_gcs_itf_not_mixed_in_core(monkeypatch):
     """FABLE §S60-7: Picks con universo=GCS y universo=ITF nunca se mezclan
     en el mismo combo CORE (MAX_GCS_PER_COMBO=1 y GCS se reporta por separado)."""
     from combo_confianza_builder import _extract_and_categorize, _build_portfolio_v2
+    # D140-04: aislar del kambi_coverage real en disco — ver test_T60_04.
+    monkeypatch.setattr('scripts.fetch_kambi_coverage.load_coverage', lambda *a, **kw: None)
+    # El signal-bridge (Nodo-62) también lee edge_report real de reports/ — un pick
+    # de producción con apellido fuzzy-matched a este fixture (ej. G1 apostar=False)
+    # bloquearía el test vía _apply_combo_gates. Aislar igual que el coverage arriba.
+    monkeypatch.setattr('combo_confianza_builder._load_edge_report_index', lambda: {})
 
     picks_raw = [
         # GCS pick: ATP500 + gcs_active
@@ -380,7 +406,7 @@ def test_T60_09_gcs_itf_not_mixed_in_core():
         {
             'jugador1': 'Kalin Ivanovski', 'jugador2': 'Yanaki Milev',
             'torneo_nombre': 'ITF MASCULINO: M25 Skopje',
-            'tipo_cancha': 'arcilla', 'cuota1': 1.45, 'cuota2': 3.20,
+            'tipo_cancha': 'arcilla', 'cuota1': 1.85, 'cuota2': 3.20,  # D143-01 EV gate
             'cuota_es_real': True,
             'ranking_analysis': {'prediction': {
                 'favored_player': 'Kalin Ivanovski', 'confidence': 60.0,
