@@ -38,6 +38,24 @@ perdiendo el caso donde el mercado revalúa vía precio antes que vía línea.
   guard — ahora se reescribe con ID fresco cada ciclo (15s) mientras señal siga EN_VIVO;
   guard solo controla el log/notificación de "nueva señal" (cap 10/día). `live_desk.py` L4500-4512.
 
+- **D157-03 (Shadow Book Logging — 2026-08-01):** monitoreo en vivo confirmó que los gates
+  (D150/D151) filtran correctamente en tiempo real, pero `_fire_itf_live_games_combo()` nunca
+  registraba nada en shadow_book — H147-01/H150-01/02/03/H151-01 llevaban semanas en
+  `n_actual=0, estado=ACUMULANDO` pese a que el sistema disparaba combos reales apostables.
+  Cero mecanismo para saber si la estrategia es rentable. **Fix:** `shadow_book.log_games_live_pick()`
+  (nueva función, modelada en `log_live_pick()`) — `pick_type='games_live'` (valor ya esperado por
+  las 5 hipótesis vía campo `pick_type_sb`), `strategy='GAMES_LIVE'`, prefijo `sb_id='GLIVE_'`
+  (distinto de `LIVE_` del Live Edge Monitor genérico H100-01, y de `strategy='GAMES'` del builder
+  pre-partido `betplay_combo_builder.py --games` — nunca se mezclan). Wired en el call-site
+  `live_desk.py` L4513-4525: se loguea 1 vez por señal NUEVA (dentro del guard `itf_key not in
+  itf_fired`, no cada ciclo de 15s) para que `cuota_trigger` capture la cuota real del disparo, no
+  la del último refresh. Upsert por sb_id determinístico (partido+fecha) — reciclos repetidos del
+  mismo partido no duplican registro. `shadow_book.report()` gana nuevo segmento GAMES_LIVE
+  (paralelo al bloque LIVE PICKS H100-01) para hacer visibles los datos una vez acumulen. 3 tests
+  REGLA-T53 nuevos en `test_nodo157_contrarian_over_cuota.py` (7 totales). Settlement de picks
+  games-total (requiere conteo final de juegos, no solo ganador del partido) — pendiente, deuda
+  D157-04.
+
 ## No-Goals
 
 - No se creó una tercera categoría de señal ni se tocó el gate `_edge_live_gate`/
@@ -48,10 +66,13 @@ perdiendo el caso donde el mercado revalúa vía precio antes que vía línea.
 
 ## Tests
 
-`tests/test_nodo157_contrarian_over_cuota.py` — 4 tests REGLA-T53 (simulan la fórmula
-real con las mismas constantes de producción, siguiendo el patrón ya establecido en
+`tests/test_nodo157_contrarian_over_cuota.py` — 7 tests REGLA-T53. Tests 1-4 (D157-01) simulan la
+fórmula real con las mismas constantes de producción, siguiendo el patrón ya establecido en
 `test_nodo150_live_risk_intelligence.py` para lógica embebida en `_check_games_convergencia`,
-función monolítica no aislable sin mockear HTTP en vivo).
+función monolítica no aislable sin mockear HTTP en vivo. Tests 5-7 (D157-03) invocan
+`shadow_book.log_games_live_pick()` real con `sb.SHADOW_DIR` aislado en tempdir (patrón de
+`test_nodo101_live_clv.py`): pick_type correcto, no-duplicación en reciclos, y no-colisión con
+`log_live_pick()`.
 
 ## Wikilinks
 

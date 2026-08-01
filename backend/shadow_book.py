@@ -478,6 +478,49 @@ def log_live_pick(pick: dict, cuota_trigger: float,
         return None
 
 
+def log_games_live_pick(pick: dict, cuota_trigger: float,
+                         fecha: Optional[str] = None) -> Optional[str]:
+    """
+    Nodo-157 D157-03: registra una señal ITF live-games disparada por
+    _fire_itf_live_games_combo() (live_desk.py). Diferencia explícita vs
+    log_live_pick() (Live Edge Monitor genérico, H100-01) y vs GAMES pre-partido
+    (betplay_combo_builder.py --games, strategy='GAMES'):
+
+      - pick_type = 'games_live'   (valor ya esperado por H147-01/H150-01/02/03/H151-01
+                                     en preregistered_hypotheses.json, pick_type_sb)
+      - strategy  = 'GAMES_LIVE'   (no pisa strategy si el pick ya trae uno distinto)
+      - prefijo 'GLIVE_' en sb_id  (evita colisión con LIVE_/EVAL_)
+
+    El pick original NO se muta. Upsert por sb_id — no duplica en ciclos repetidos
+    del mismo partido (señal EN_VIVO se re-evalúa cada 15s).
+    """
+    fecha = fecha or datetime.now().strftime('%Y-%m-%d')
+    gl_pick = dict(pick)
+    gl_pick['pick_type']     = 'games_live'
+    gl_pick.setdefault('strategy', 'GAMES_LIVE')
+    gl_pick['cuota_trigger'] = cuota_trigger
+    gl_pick['trigger_ts']    = datetime.now().astimezone().isoformat()
+
+    try:
+        rec = _build_record(gl_pick, fecha)
+        if rec is None:
+            logger.warning("[ShadowBook] log_games_live_pick: pick inválido (sin jugadores)")
+            return None
+        path = _jsonl_path(fecha)
+        existing = _load_jsonl(path)
+        rec['sb_id'] = 'GLIVE_' + rec['sb_id']
+        if rec['sb_id'] in existing:
+            logger.info(f"[ShadowBook] log_games_live_pick: {rec['sb_id']} ya registrado")
+            return rec['sb_id']
+        existing[rec['sb_id']] = rec
+        _save_jsonl(path, existing)
+        logger.info(f"[ShadowBook] games_live pick registrado → {rec['sb_id']}")
+        return rec['sb_id']
+    except Exception as e:
+        logger.warning(f"[ShadowBook] log_games_live_pick error: {e}")
+        return None
+
+
 def log_evaluar_pick(pick: dict, fecha: Optional[str] = None) -> Optional[str]:
     """
     Nodo-124 D124-01: registra pick EVALUAR de generar_tabla_favoritos2.
@@ -1359,6 +1402,24 @@ def report(desde: Optional[str] = None, hasta: Optional[str] = None) -> str:
             )
             lines.append("")
 
+    # ── Nodo-157 D157-03: GAMES LIVE (H147-01/H150-01/02/03/H151-01) ────────
+    # Diferenciado de LIVE PICKS (H100-01, pick_type='live') y de GAMES pre-partido
+    # (betplay_combo_builder.py --games, strategy='GAMES') — pick_type='games_live'.
+    _gl_recs = [r for r in settled
+                if r.get('pick_snapshot', {}).get('pick_type') == 'games_live']
+    if _gl_recs:
+        _glm = _segment_metrics(_gl_recs)
+        if _glm['n'] > 0:
+            _gl_sp = '*' if _glm['sparse'] else ''
+            _gl_ic = _glm['ic']
+            _gl_gate = "  [gate: n>=15-30 segun hipotesis]" if _glm['n'] < 15 else ""
+            lines.append(f"  GAMES_LIVE H147/H150/H151 (ITF live convergencia — pick_type=games_live){_gl_sp}:")
+            lines.append(
+                f"    n={_glm['n']}  hit%={_glm['hit_pct']}  IC95=[{_gl_ic[0]},{_gl_ic[1]}]"
+                f"  ROI={_glm['roi']}%{_gl_gate}"
+            )
+            lines.append("")
+
     # ── S107-E H107-01: MOTOR por cuota (acumula mientras MOTOR_DEFENSIVE activo) ──
     _motor_recs = [
         r for r in settled
@@ -1394,6 +1455,10 @@ def report(desde: Optional[str] = None, hasta: Optional[str] = None) -> str:
     # ── D90-10: ELO_DOMINANCE axis (H89-02) — observacional ─────────────────
     _append_segment(settled, lines, "ELO_DOMINANCE (H89-02: elo_gap>50 y ranking peor que ELO sugiere)",
                     lambda r: r.get('pick_snapshot', {}).get('elo_dominance_axis', False))
+
+    # ── Nodo-155: HCUC (H152-01) — Hard Court Underdog Convergence ─────────
+    _append_segment(settled, lines, "HCUC (H152-01: hard+quality+coinflip+señal especial)",
+                    lambda r: r.get('pick_snapshot', {}).get('hcuc_convergence', False))
 
     # ── D54-02: WATCHLIST ∩ tier=grand_slam ∩ edge≥20% (Nodo-55 P54-03) ──
     # Intersección de cortes ya pre-registrados: status × tier × banda de cuota.
@@ -1498,6 +1563,7 @@ def report(desde: Optional[str] = None, hasta: Optional[str] = None) -> str:
     # Cuando n>=30 → correr SPRT. PROHIBIDO cambiar threshold antes de n_stop.
     _capa2_recs = [r for r in settled if r.get('pick_snapshot', {}).get('capa2_candidate', False)]
     _elo_recs   = [r for r in settled if r.get('pick_snapshot', {}).get('elo_dominance_axis', False)]
+    _hcuc_recs  = [r for r in settled if r.get('pick_snapshot', {}).get('hcuc_convergence', False)]
 
     def _hits(recs):
         return sum(1 for r in recs if r.get('resultado') in ('W', 'WIN', 'GANO', 1, True))
@@ -1507,6 +1573,7 @@ def report(desde: Optional[str] = None, hasta: Optional[str] = None) -> str:
     for _h_id, _h_name, _recs, _p0, _p1 in [
         ("H89-01", "CAPA2 (p>=0.60, cuota [1.50-2.80], n_h2h>=1)", _capa2_recs, 0.45, 0.55),
         ("H89-02", "ELO_DOMINANCE (elo_gap>50, ranking discordante)", _elo_recs, 0.45, 0.55),
+        ("H152-01", "HCUC (hard+quality+coinflip+señal especial)", _hcuc_recs, 0.385, 0.55),
     ]:
         _n = len(_recs)
         _h = _hits(_recs)
@@ -1876,6 +1943,9 @@ def report_dict(desde: Optional[str] = None, hasta: Optional[str] = None) -> dic
         snap = r.get('pick_snapshot', {})
         return bool(td.get('var_flattened')) and bool(snap.get('apostar'))
 
+    def _is_hcuc_d(r):
+        return bool(r.get('pick_snapshot', {}).get('hcuc_convergence', False))
+
     result['hypotheses'] = [
         _hyp("H52-01", "WAS supera breakeven", _has_was_d, 30),
         _hyp("H52-02", "n_h2h=0+ITF discrimina", _is_n_h2h_0_itf_d, 30),
@@ -1883,6 +1953,7 @@ def report_dict(desde: Optional[str] = None, hasta: Optional[str] = None) -> dic
         _hyp("H52-07", "Qualifying p[0.52-0.55) vs principal", _is_qualifying_low_p_d, 50),
         _hyp("H52-08", "Zona 2.00-2.50 trampa post-fixes", _is_zona_2_25_d, 30),
         _hyp("H54-01", "stake=0 calidad igual que financiados", _is_var_flattened_d, 30),
+        _hyp("H152-01", "HCUC hard+quality+coinflip+señal especial", _is_hcuc_d, 30),
     ]
 
     # H52-05: dos grupos (STEAM vs DRIFT)

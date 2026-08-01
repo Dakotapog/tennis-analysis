@@ -4517,6 +4517,19 @@ def _check_games_convergencia(fecha: str) -> None:
                 itf_fired.append(itf_key)
                 itf_fired_path.write_text(json.dumps(itf_fired, ensure_ascii=False), encoding="utf-8")
                 logger.info(f"[ITF_LIVE] combo disparado: {len(alta_itf)} señales ALTA conv≥3")
+                # Nodo-157 D157-03: registra cada pierna en shadow_book solo en la
+                # detección de señal NUEVA (no cada ciclo de 15s) — cuota_trigger
+                # debe ser la cuota al momento del disparo, no la del último refresh.
+                try:
+                    import shadow_book as _sb
+                    for _s_gl in alta_itf:
+                        _sb.log_games_live_pick(
+                            _s_gl,
+                            cuota_trigger=_s_gl.get("cuota_live") or _s_gl.get("cuota_pre") or 0,
+                            fecha=fecha_compact[:4] + "-" + fecha_compact[4:6] + "-" + fecha_compact[6:8],
+                        )
+                except Exception as _e_gl:
+                    logger.warning(f"[ITF_LIVE] shadow_book log_games_live_pick error: {_e_gl}")
 
 
 def _background_refresh(fecha_fn) -> None:
