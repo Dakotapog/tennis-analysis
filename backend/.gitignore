@@ -48,3 +48,11 @@ reports/live_edge_*.json
 data/cuarentena_*.json
 data/match_ledger_*.json
 data/zita_merged_*.json
+
+# player_db (D90-03, regenerable via scripts/build_player_db.py) —
+# Nodo-163: player_db.json superó el límite de blob de GitHub (100MB),
+# bloqueaba git push. Purgado del historial con git-filter-repo y
+# regenerado desde reports/h2h_results_enhanced_*.json. Nunca trackear.
+data/player_db.json
+data/player_db_index.json
+data/player_alias_table.json
