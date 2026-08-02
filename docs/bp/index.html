@@ -48,10 +48,11 @@
     return;
   }
 
-  var idArr = ids.split(',');
-  var n = idArr.length;
-  var couponPart = idArr.map(function(id) { return id + '|ML'; }).join('/');
-  var betplayUrl = 'https://betplay.com.co/apuestas#home?coupon=combination|' + couponPart + '||replace';
+  var n = ids.split(',').length;
+  // REGLA-BAT-1 (CLAUDE.md §9, INMUTABLE): IDs separados por comas, SIN sufijo |ML/.
+  // Nodo-162: revertido tras 4ae668d (2026-07-28) que introdujo formato |ML/ inválido
+  // — Betplay no podía parsear el coupon → abría la app sin piernas cargadas.
+  var betplayUrl = 'https://betplay.com.co/apuestas#home?coupon=combination|' + ids + '||replace';
 
   document.getElementById('title').textContent = 'Combo ' + n + ' piernas';
   document.getElementById('desc').textContent  = label || ('IDs: ' + ids);
