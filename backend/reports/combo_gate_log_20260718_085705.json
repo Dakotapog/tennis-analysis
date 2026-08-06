@@ -1,0 +1,38 @@
+[
+  {
+    "nombre": "Julie Struplova",
+    "torneo": "ITF FEMENINO - INDIVIDUALES: W75 Olomouc (República Checa), arcilla",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=MODERATE)",
+    "conf": 56.0,
+    "cuota": 1.3,
+    "ts": "2026-07-18T08:57:05.791405"
+  },
+  {
+    "nombre": "Martyna Kubka",
+    "torneo": "ITF FEMENINO - INDIVIDUALES: W75 Vitoria Gasteiz (España), dura",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=LOW)",
+    "conf": 54.2,
+    "cuota": 1.44,
+    "ts": "2026-07-18T08:57:05.791709"
+  },
+  {
+    "nombre": "Justina Mikulskyte",
+    "torneo": "ITF FEMENINO - INDIVIDUALES: W75 Vitoria Gasteiz (España), dura",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=LOW)",
+    "conf": 54.7,
+    "cuota": 1.38,
+    "ts": "2026-07-18T08:57:05.791759"
+  },
+  {
+    "nombre": "Alina Shcherbinina",
+    "torneo": "ITF FEMENINO - INDIVIDUALES: W35 Dallas, TX (Estados Unidos), dura (indoor)",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=LOW)",
+    "conf": 53.2,
+    "cuota": 2.33,
+    "ts": "2026-07-18T08:57:05.791925"
+  }
+]

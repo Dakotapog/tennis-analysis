@@ -24,6 +24,8 @@ def _partido(jugador1, jugador2, cuota1, cuota2, confidence, favored=None):
         'cuota1': cuota1,
         'cuota2': cuota2,
         'ranking_analysis': {
+            f'{jugador1}_ranking': 45,
+            f'{jugador2}_ranking': 210,
             'prediction': {
                 'favored_player': favored,
                 'confidence': confidence,  # 0-100

@@ -1,0 +1,288 @@
+{
+  "ts": "2026-07-31T23:59:59",
+  "signals_alta": [
+    {
+      "partido": "Inchauspe P. vs Erel Y.",
+      "direccion": "OVER",
+      "linea": 21.5,
+      "cuota_pre": 1.68,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null,
+      "score_data": null,
+      "certeza": {
+        "certeza_matematica": false,
+        "p_condicional": 0.0,
+        "alerta_nivel": "",
+        "razon": "sin score"
+      },
+      "cuota_t0": 2.1,
+      "linea_t0": 21.5,
+      "ts_t0": "2026-07-31T10:24:59"
+    },
+    {
+      "partido": "Gaubas V. vs Monteiro T.",
+      "direccion": "UNDER",
+      "linea": 23.5,
+      "cuota_pre": 1.77,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null,
+      "score_data": null,
+      "certeza": {
+        "certeza_matematica": false,
+        "p_condicional": 0.0,
+        "alerta_nivel": "",
+        "razon": "sin score"
+      },
+      "cuota_t0": 2.33,
+      "linea_t0": 23.5,
+      "ts_t0": "2026-07-31T14:16:06"
+    },
+    {
+      "partido": "Zakharova A. vs Zarazua R.",
+      "direccion": "OVER",
+      "linea": 20.5,
+      "cuota_pre": 1.67,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null,
+      "score_data": null,
+      "certeza": {
+        "certeza_matematica": false,
+        "p_condicional": 0.0,
+        "alerta_nivel": "",
+        "razon": "sin score"
+      },
+      "cuota_t0": 1.78,
+      "linea_t0": 20.5,
+      "ts_t0": "2026-07-31T18:28:00"
+    },
+    {
+      "partido": "Vidmanova D. vs Volynets K.",
+      "direccion": "OVER",
+      "linea": 19.5,
+      "cuota_pre": 1.55,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null,
+      "score_data": null,
+      "certeza": {
+        "certeza_matematica": false,
+        "p_condicional": 0.0,
+        "alerta_nivel": "",
+        "razon": "sin score"
+      },
+      "cuota_t0": 1.9,
+      "linea_t0": 19.5,
+      "ts_t0": "2026-07-31T20:07:05"
+    },
+    {
+      "partido": "Pegula J. vs Kalinskaya A.",
+      "direccion": "UNDER",
+      "linea": 23.5,
+      "cuota_pre": 1.52,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null,
+      "score_data": null,
+      "certeza": {
+        "certeza_matematica": false,
+        "p_condicional": 0.0,
+        "alerta_nivel": "",
+        "razon": "sin score"
+      },
+      "cuota_t0": 1.83,
+      "linea_t0": 23.5,
+      "ts_t0": "2026-07-31T11:07:49"
+    },
+    {
+      "partido": "Shnaider D. vs Samsonova L.",
+      "direccion": "UNDER",
+      "linea": 24.5,
+      "cuota_pre": 1.58,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null,
+      "score_data": null,
+      "certeza": {
+        "certeza_matematica": false,
+        "p_condicional": 0.0,
+        "alerta_nivel": "",
+        "razon": "sin score"
+      },
+      "cuota_t0": 1.74,
+      "linea_t0": 24.5,
+      "ts_t0": "2026-07-31T15:41:08"
+    },
+    {
+      "partido": "Eala A. vs Svitolina E.",
+      "direccion": "UNDER",
+      "linea": 24.5,
+      "cuota_pre": 1.53,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null,
+      "score_data": null,
+      "certeza": {
+        "certeza_matematica": false,
+        "p_condicional": 0.0,
+        "alerta_nivel": "",
+        "razon": "sin score"
+      },
+      "cuota_t0": 1.9,
+      "linea_t0": 24.5,
+      "ts_t0": "2026-07-31T18:15:12"
+    },
+    {
+      "partido": "Inglis M. vs Hontama M.",
+      "direccion": "OVER",
+      "linea": 20.5,
+      "cuota_pre": 1.68,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null,
+      "score_data": null,
+      "certeza": {
+        "certeza_matematica": false,
+        "p_condicional": 0.0,
+        "alerta_nivel": "",
+        "razon": "sin score"
+      },
+      "cuota_t0": 1.84,
+      "linea_t0": 20.5,
+      "ts_t0": "2026-07-31T13:07:24"
+    },
+    {
+      "partido": "Fritz T. vs Michelsen A.",
+      "direccion": "UNDER",
+      "linea": 27.5,
+      "cuota_pre": 1.5,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null,
+      "score_data": null,
+      "certeza": {
+        "certeza_matematica": false,
+        "p_condicional": 0.0,
+        "alerta_nivel": "",
+        "razon": "sin score"
+      },
+      "cuota_t0": 1.73,
+      "linea_t0": 27.5,
+      "ts_t0": "2026-07-31T15:19:49"
+    },
+    {
+      "partido": "Jodar R. vs Musetti L.",
+      "direccion": "OVER",
+      "linea": 20.5,
+      "cuota_pre": 1.5,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null,
+      "score_data": null,
+      "certeza": {
+        "certeza_matematica": false,
+        "p_condicional": 0.0,
+        "alerta_nivel": "",
+        "razon": "sin score"
+      },
+      "cuota_t0": 2.08,
+      "linea_t0": 20.5,
+      "ts_t0": "2026-07-31T17:25:20"
+    },
+    {
+      "partido": "Norrie C. vs Shapovalov D.",
+      "direccion": "OVER",
+      "linea": 21.5,
+      "cuota_pre": 1.62,
+      "hora": null,
+      "event_id": 1028586819,
+      "estado": "EN_VIVO",
+      "cuota_live": 1.3,
+      "drift_pct": -19.8,
+      "score_data": {
+        "score_str": null,
+        "sets_home": 0,
+        "sets_away": 0,
+        "games_played": 2,
+        "sets_complete": 0,
+        "current_games": 2,
+        "games_set1": null,
+        "current_set_home": 0,
+        "current_set_away": 2,
+        "serving": "away",
+        "game_score": "0:15",
+        "break_situation": true
+      },
+      "games_set1": null,
+      "score_str": null,
+      "games_played": 2,
+      "sets_complete": 0,
+      "current_games": 2,
+      "zona": "COINFLIP",
+      "certeza": {
+        "certeza_matematica": false,
+        "p_condicional": 0.588,
+        "alerta_nivel": "BAJA",
+        "razon": ""
+      },
+      "cuota_t0": 1.32,
+      "linea_t0": 21.5,
+      "ts_t0": "2026-07-31T23:48:05"
+    },
+    {
+      "partido": "Tabilo A. vs Shelton B.",
+      "direccion": "UNDER",
+      "linea": 26.5,
+      "cuota_pre": 1.5,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null,
+      "score_data": null,
+      "certeza": {
+        "certeza_matematica": false,
+        "p_condicional": 0.0,
+        "alerta_nivel": "",
+        "razon": "sin score"
+      },
+      "cuota_t0": 1.67,
+      "linea_t0": 26.5,
+      "ts_t0": "2026-07-31T20:13:29"
+    }
+  ],
+  "watch_all": [
+    {
+      "partido": "Moerani Bouzige vs Jake Delaney",
+      "linea": 20.5,
+      "cuota_under": 1.96,
+      "cuota_over": 1.71,
+      "event_id": 1028586103
+    }
+  ],
+  "en_vivo_count": 1,
+  "itf_live_count": 0,
+  "convergencia_activa": false
+}

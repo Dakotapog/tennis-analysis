@@ -1,0 +1,1113 @@
+{
+  "fecha": "2026-08-03",
+  "fetched_at": "2026-08-03T10:07:20",
+  "n_eventos": 139,
+  "n_jugadores": 276,
+  "players_normalized": [
+    "abdullah shelbayh",
+    "adam walton",
+    "adrian andreev",
+    "adrian mannarino",
+    "aidan kim",
+    "aidan mayo",
+    "alba rey garcia",
+    "alec gaudin",
+    "alejo sanchez quilez",
+    "aleksandar kovacevic",
+    "aleksandar vukic",
+    "alex michelsen",
+    "alexander vasilev",
+    "alexandra eala",
+    "alexandre muller",
+    "alexis canter",
+    "alexis galarneau",
+    "alina korneeva",
+    "alycia parks",
+    "andre ilagan",
+    "andres andrade",
+    "andres martin",
+    "aneta laboutkova",
+    "anhelina kalinina",
+    "anna blinkova",
+    "anna bondar",
+    "anna snigireva",
+    "antoine ghibaudo",
+    "antoni fabre",
+    "antonia ruzic",
+    "arthur bellegy",
+    "aryna sabalenka",
+    "bella lewis",
+    "benjamin bonzi",
+    "bianca andreescu",
+    "blake anderson",
+    "borna gojo",
+    "botic van de zandschulp",
+    "brendan loh",
+    "cadence brace",
+    "calla mcgill",
+    "cameron norrie",
+    "camila osorio",
+    "camille kiss",
+    "camilo ugo carabelli",
+    "carles cordoba",
+    "carlo alberto caniato",
+    "carol zhao",
+    "casey hoole",
+    "caty mcnally",
+    "christopher oconnell",
+    "clervie ngounoue",
+    "corentin moutet",
+    "dalayna hewitt",
+    "dan milburn",
+    "daniel altmaier",
+    "daniel merida aguilar",
+    "daria kasatkina",
+    "david duong",
+    "diane parry",
+    "donna vekic",
+    "dragos nicolae cazacu",
+    "ekaterina alexandrova",
+    "elenagabriela ruse",
+    "elias ymer",
+    "elicia kim",
+    "elina svitolina",
+    "elisabetta cocciaretto",
+    "emerson jones",
+    "emilien demanet",
+    "emma tran",
+    "eva lys",
+    "fabian marozsan",
+    "facundo mena",
+    "fajing sun",
+    "federico cina",
+    "felipe garla",
+    "felix gill",
+    "fenna steveker",
+    "franco agamenone",
+    "franco ribero",
+    "gabriel schenekenberg",
+    "gabriele pennaforti",
+    "gabriele piraino",
+    "gael monfils",
+    "george hakopian",
+    "gerard campana lee",
+    "geun jun kim",
+    "giovanni mpetshi perricard",
+    "grace cadwallader",
+    "guy den ouden",
+    "hamad medjedovic",
+    "hayden jones",
+    "henry lamchinniah",
+    "henry searle",
+    "holland snell",
+    "hong yi cody wong",
+    "honglin fu",
+    "hubert hurkacz",
+    "iga swiatek",
+    "irina fetecau",
+    "ivan ivanov",
+    "jack draper",
+    "jack loge",
+    "jacob fearnley",
+    "jakub filip",
+    "james duckworth",
+    "james van herzeele",
+    "jan sadzik",
+    "jan sebesta",
+    "janice tjen",
+    "janlennard struff",
+    "jenny lim",
+    "jenson brooksby",
+    "jeremy gschwendtner",
+    "jessica bouzas maneiro",
+    "jessica pegula",
+    "jonas hahn",
+    "jonas keck",
+    "juan manuel cerundolo",
+    "julie pastikova",
+    "juliet santitto",
+    "kacper knitter",
+    "kallista liu",
+    "kamil majchrzak",
+    "kamilla rakhimova",
+    "karolina pliskova",
+    "katarzyna kawa",
+    "kate mansfield",
+    "katerina siniakova",
+    "katherine sebov",
+    "katie boulter",
+    "kaue noatto",
+    "kayla cross",
+    "kayla day",
+    "kaylah mcphee",
+    "kotaro mochizuki",
+    "lanlana tararudee",
+    "leolia jeanjean",
+    "leonardo angeloni",
+    "leonardo borrelli",
+    "leticia solakov",
+    "liam draxl",
+    "lily fairclough",
+    "linda fruhvirtova",
+    "liudmila samsonova",
+    "lloyd harris",
+    "lois boisson",
+    "lorenzo angelini",
+    "lorenzo carboni",
+    "lorenzo sonego",
+    "luca van assche",
+    "lucie nguyen tan",
+    "magda linette",
+    "magdalena frech",
+    "marcello serafini",
+    "marcos giron",
+    "maria martinez vaquero",
+    "mariam bolkvadze",
+    "mariano navone",
+    "marin cilic",
+    "marley lambert",
+    "marta kostyuk",
+    "martin damm",
+    "martin landaluce",
+    "marton fucsovics",
+    "martyna kubka",
+    "matteo berrettini",
+    "mattia bellucci",
+    "maya joint",
+    "mccartney kessler",
+    "mees rottgering",
+    "michael zheng",
+    "mika ikemori",
+    "miles clark",
+    "millen hurrion",
+    "miomir kecmanovic",
+    "moyuka uchijima",
+    "nicolas mejia",
+    "nikola bartunkova",
+    "nischal spurling",
+    "noel larwig",
+    "nuno borges",
+    "ognjen milic",
+    "oleksandra oliynykova",
+    "olivia center",
+    "olivia dorner",
+    "olivia lincer",
+    "omar jasika",
+    "oriol roca batalla",
+    "oscar brown",
+    "pablo carreno busta",
+    "pablo roche alcaya",
+    "panna udvardy",
+    "pavel bushuev",
+    "pedro boscardin dias",
+    "peter buldorini",
+    "petr brunclik",
+    "petr nesterov",
+    "peyton stearns",
+    "polina kudermetova",
+    "rafael izquierdo luque",
+    "rafael jodar",
+    "rebecca marino",
+    "rebecca sramkova",
+    "reese brantmeier",
+    "renata zarazua",
+    "robert yang",
+    "rodrigo pacheco mendez",
+    "ruth roura llaverias",
+    "ryan colby",
+    "sae noguchi",
+    "sage bergeson",
+    "salma ewing",
+    "sam ryan ziegann",
+    "samuele pieri",
+    "sandro kopp",
+    "sara bejlek",
+    "savriyan danilov",
+    "sebastian baez",
+    "sebastian gorzny",
+    "sebastian sorger",
+    "semen pankin",
+    "shintaro mochizuki",
+    "sho shimabukuro",
+    "shuai zhang",
+    "simone kay",
+    "sklar phillips",
+    "sloane stephens",
+    "solana sierra",
+    "soonwoo kwon",
+    "spencer johnson",
+    "stefan horia haita",
+    "stefanos tsitsipas",
+    "sue yan tan",
+    "takumi katsuda",
+    "talia gibson",
+    "tallon griekspoor",
+    "tamara korpatsch",
+    "tatjana maria",
+    "taylor fritz",
+    "taylor townsend",
+    "teodora kostovic",
+    "terence atmane",
+    "tereza valentova",
+    "tilwith di girolami",
+    "timeo trufelli",
+    "titouan droguet",
+    "tobia costanzo baragiola mordini",
+    "toby martin",
+    "tomasz berkieta",
+    "trevor svajda",
+    "tuncay duran",
+    "tyler zink",
+    "valentin royer",
+    "valentina ivanov",
+    "veronika miroshnichenko",
+    "victoria jimenez kasintseva",
+    "viktorija golubic",
+    "violet apisah",
+    "vit kopriva",
+    "vitor costa goncalves",
+    "william zhang",
+    "xavier calvelo",
+    "xinyu wang",
+    "yago castellanos",
+    "yanaki milev",
+    "yannick hanfmann",
+    "yilin elim yan",
+    "yu hsiou hsu",
+    "yuga tashiro",
+    "yulia putintseva",
+    "yuliia starodubtseva",
+    "yuto miyagawa",
+    "zach stephens",
+    "zeynep sonmez"
+  ],
+  "event_pairs": [
+    [
+      "michael zheng",
+      "miomir kecmanovic"
+    ],
+    [
+      "aleksandar kovacevic",
+      "nuno borges"
+    ],
+    [
+      "jessica pegula",
+      "alexandra eala"
+    ],
+    [
+      "magdalena frech",
+      "leolia jeanjean"
+    ],
+    [
+      "lois boisson",
+      "antonia ruzic"
+    ],
+    [
+      "katarzyna kawa",
+      "linda fruhvirtova"
+    ],
+    [
+      "lucie nguyen tan",
+      "alba rey garcia"
+    ],
+    [
+      "gabriele pennaforti",
+      "peter buldorini"
+    ],
+    [
+      "gabriel schenekenberg",
+      "kaue noatto"
+    ],
+    [
+      "jan sebesta",
+      "jonas keck"
+    ],
+    [
+      "adrian andreev",
+      "carles cordoba"
+    ],
+    [
+      "maria martinez vaquero",
+      "tilwith di girolami"
+    ],
+    [
+      "soonwoo kwon",
+      "aidan kim"
+    ],
+    [
+      "rodrigo pacheco mendez",
+      "aidan mayo"
+    ],
+    [
+      "gerard campana lee",
+      "stefan horia haita"
+    ],
+    [
+      "ryan colby",
+      "spencer johnson"
+    ],
+    [
+      "irina fetecau",
+      "fenna steveker"
+    ],
+    [
+      "kallista liu",
+      "mariam bolkvadze"
+    ],
+    [
+      "olivia dorner",
+      "reese brantmeier"
+    ],
+    [
+      "aneta laboutkova",
+      "leticia solakov"
+    ],
+    [
+      "timeo trufelli",
+      "leonardo angeloni"
+    ],
+    [
+      "toby martin",
+      "alexis canter"
+    ],
+    [
+      "hong yi cody wong",
+      "dalayna hewitt"
+    ],
+    [
+      "clervie ngounoue",
+      "olivia lincer"
+    ],
+    [
+      "dragos nicolae cazacu",
+      "franco ribero"
+    ],
+    [
+      "jenny lim",
+      "valentina ivanov"
+    ],
+    [
+      "zach stephens",
+      "oscar brown"
+    ],
+    [
+      "julie pastikova",
+      "ruth roura llaverias"
+    ],
+    [
+      "tomasz berkieta",
+      "facundo mena"
+    ],
+    [
+      "vitor costa goncalves",
+      "felipe garla"
+    ],
+    [
+      "lanlana tararudee",
+      "emerson jones"
+    ],
+    [
+      "alina korneeva",
+      "polina kudermetova"
+    ],
+    [
+      "oleksandra oliynykova",
+      "karolina pliskova"
+    ],
+    [
+      "anhelina kalinina",
+      "anna bondar"
+    ],
+    [
+      "diane parry",
+      "kayla day"
+    ],
+    [
+      "guy den ouden",
+      "alexandre muller"
+    ],
+    [
+      "yanaki milev",
+      "oriol roca batalla"
+    ],
+    [
+      "teodora kostovic",
+      "martyna kubka"
+    ],
+    [
+      "fajing sun",
+      "semen pankin"
+    ],
+    [
+      "abdullah shelbayh",
+      "mees rottgering"
+    ],
+    [
+      "luca van assche",
+      "titouan droguet"
+    ],
+    [
+      "james duckworth",
+      "christopher oconnell"
+    ],
+    [
+      "vit kopriva",
+      "alexis galarneau"
+    ],
+    [
+      "nicolas mejia",
+      "martin landaluce"
+    ],
+    [
+      "matteo berrettini",
+      "mariano navone"
+    ],
+    [
+      "tuncay duran",
+      "antoine ghibaudo"
+    ],
+    [
+      "millen hurrion",
+      "tyler zink"
+    ],
+    [
+      "andres martin",
+      "trevor svajda"
+    ],
+    [
+      "peyton stearns",
+      "elenagabriela ruse"
+    ],
+    [
+      "talia gibson",
+      "elisabetta cocciaretto"
+    ],
+    [
+      "katie boulter",
+      "kayla cross"
+    ],
+    [
+      "mccartney kessler",
+      "cadence brace"
+    ],
+    [
+      "rebecca sramkova",
+      "anna blinkova"
+    ],
+    [
+      "emilien demanet",
+      "alexander vasilev"
+    ],
+    [
+      "sebastian sorger",
+      "sandro kopp"
+    ],
+    [
+      "taylor fritz",
+      "rafael jodar"
+    ],
+    [
+      "alejo sanchez quilez",
+      "rafael izquierdo luque"
+    ],
+    [
+      "benjamin bonzi",
+      "yannick hanfmann"
+    ],
+    [
+      "aleksandar vukic",
+      "daniel altmaier"
+    ],
+    [
+      "sho shimabukuro",
+      "marin cilic"
+    ],
+    [
+      "federico cina",
+      "elias ymer"
+    ],
+    [
+      "felix gill",
+      "borna gojo"
+    ],
+    [
+      "andres andrade",
+      "andre ilagan"
+    ],
+    [
+      "nikola bartunkova",
+      "bianca andreescu"
+    ],
+    [
+      "shuai zhang",
+      "yulia putintseva"
+    ],
+    [
+      "marton fucsovics",
+      "corentin moutet"
+    ],
+    [
+      "tobia costanzo baragiola mordini",
+      "marcello serafini"
+    ],
+    [
+      "jacob fearnley",
+      "adrian mannarino"
+    ],
+    [
+      "camilo ugo carabelli",
+      "cameron norrie"
+    ],
+    [
+      "alex michelsen",
+      "janlennard struff"
+    ],
+    [
+      "yuliia starodubtseva",
+      "maya joint"
+    ],
+    [
+      "magda linette",
+      "carol zhao"
+    ],
+    [
+      "victoria jimenez kasintseva",
+      "alycia parks"
+    ],
+    [
+      "janice tjen",
+      "liudmila samsonova"
+    ],
+    [
+      "jack draper",
+      "terence atmane"
+    ],
+    [
+      "hubert hurkacz",
+      "marcos giron"
+    ],
+    [
+      "pablo roche alcaya",
+      "yago castellanos"
+    ],
+    [
+      "sebastian baez",
+      "mattia bellucci"
+    ],
+    [
+      "adam walton",
+      "jenson brooksby"
+    ],
+    [
+      "tatjana maria",
+      "caty mcnally"
+    ],
+    [
+      "tereza valentova",
+      "taylor townsend"
+    ],
+    [
+      "renata zarazua",
+      "tamara korpatsch"
+    ],
+    [
+      "giovanni mpetshi perricard",
+      "botic van de zandschulp"
+    ],
+    [
+      "juan manuel cerundolo",
+      "hamad medjedovic"
+    ],
+    [
+      "shintaro mochizuki",
+      "fabian marozsan"
+    ],
+    [
+      "panna udvardy",
+      "eva lys"
+    ],
+    [
+      "lorenzo sonego",
+      "tallon griekspoor"
+    ],
+    [
+      "daniel merida aguilar",
+      "liam draxl"
+    ],
+    [
+      "solana sierra",
+      "sloane stephens"
+    ],
+    [
+      "henry searle",
+      "lloyd harris"
+    ],
+    [
+      "yu hsiou hsu",
+      "sebastian gorzny"
+    ],
+    [
+      "yilin elim yan",
+      "kaylah mcphee"
+    ],
+    [
+      "rebecca marino",
+      "zeynep sonmez"
+    ],
+    [
+      "kamil majchrzak",
+      "gael monfils"
+    ],
+    [
+      "hayden jones",
+      "brendan loh"
+    ],
+    [
+      "emma tran",
+      "lily fairclough"
+    ],
+    [
+      "pablo carreno busta",
+      "valentin royer"
+    ],
+    [
+      "camille kiss",
+      "mika ikemori"
+    ],
+    [
+      "holland snell",
+      "pavel bushuev"
+    ],
+    [
+      "xavier calvelo",
+      "george hakopian"
+    ],
+    [
+      "savriyan danilov",
+      "william zhang"
+    ],
+    [
+      "nischal spurling",
+      "sklar phillips"
+    ],
+    [
+      "honglin fu",
+      "yuga tashiro"
+    ],
+    [
+      "veronika miroshnichenko",
+      "sue yan tan"
+    ],
+    [
+      "xinyu wang",
+      "daria kasatkina"
+    ],
+    [
+      "martin damm",
+      "stefanos tsitsipas"
+    ],
+    [
+      "omar jasika",
+      "sam ryan ziegann"
+    ],
+    [
+      "alec gaudin",
+      "jonas hahn"
+    ],
+    [
+      "henry lamchinniah",
+      "casey hoole"
+    ],
+    [
+      "juliet santitto",
+      "violet apisah"
+    ],
+    [
+      "elicia kim",
+      "grace cadwallader"
+    ],
+    [
+      "takumi katsuda",
+      "kotaro mochizuki"
+    ],
+    [
+      "dan milburn",
+      "yuto miyagawa"
+    ],
+    [
+      "simone kay",
+      "bella lewis"
+    ],
+    [
+      "kate mansfield",
+      "olivia center"
+    ],
+    [
+      "david duong",
+      "blake anderson"
+    ],
+    [
+      "marley lambert",
+      "salma ewing"
+    ],
+    [
+      "sage bergeson",
+      "calla mcgill"
+    ],
+    [
+      "robert yang",
+      "miles clark"
+    ],
+    [
+      "james van herzeele",
+      "geun jun kim"
+    ],
+    [
+      "sae noguchi",
+      "anna snigireva"
+    ],
+    [
+      "jeremy gschwendtner",
+      "leonardo borrelli"
+    ],
+    [
+      "antoni fabre",
+      "jakub filip"
+    ],
+    [
+      "arthur bellegy",
+      "jan sadzik"
+    ],
+    [
+      "carlo alberto caniato",
+      "gabriele piraino"
+    ],
+    [
+      "lorenzo angelini",
+      "petr nesterov"
+    ],
+    [
+      "petr brunclik",
+      "lorenzo carboni"
+    ],
+    [
+      "jack loge",
+      "franco agamenone"
+    ],
+    [
+      "ivan ivanov",
+      "ognjen milic"
+    ],
+    [
+      "pedro boscardin dias",
+      "samuele pieri"
+    ],
+    [
+      "noel larwig",
+      "kacper knitter"
+    ],
+    [
+      "marta kostyuk",
+      "katherine sebov"
+    ],
+    [
+      "donna vekic",
+      "viktorija golubic"
+    ],
+    [
+      "katerina siniakova",
+      "kamilla rakhimova"
+    ],
+    [
+      "camila osorio",
+      "ekaterina alexandrova"
+    ],
+    [
+      "iga swiatek",
+      "sara bejlek"
+    ],
+    [
+      "elina svitolina",
+      "jessica bouzas maneiro"
+    ],
+    [
+      "aryna sabalenka",
+      "moyuka uchijima"
+    ]
+  ],
+  "odds_map": {
+    "michael zheng": 1.62,
+    "miomir kecmanovic": 2.23,
+    "aleksandar kovacevic": 4.0,
+    "nuno borges": 1.22,
+    "jessica pegula": 1.16,
+    "alexandra eala": 4.8,
+    "magdalena frech": 1.62,
+    "leolia jeanjean": 2.2,
+    "lois boisson": 1.35,
+    "antonia ruzic": 3.05,
+    "katarzyna kawa": 1.48,
+    "linda fruhvirtova": 2.5,
+    "lucie nguyen tan": 1.47,
+    "alba rey garcia": 2.45,
+    "gabriele pennaforti": 1.1,
+    "peter buldorini": 5.5,
+    "gabriel schenekenberg": 1.88,
+    "kaue noatto": 1.8,
+    "jan sebesta": 1.41,
+    "jonas keck": 2.65,
+    "adrian andreev": 1.23,
+    "carles cordoba": 3.7,
+    "maria martinez vaquero": 21.0,
+    "soonwoo kwon": 1.73,
+    "aidan kim": 1.98,
+    "rodrigo pacheco mendez": 3.7,
+    "aidan mayo": 1.23,
+    "gerard campana lee": 1.07,
+    "stefan horia haita": 6.4,
+    "ryan colby": 10.0,
+    "spencer johnson": 1.02,
+    "irina fetecau": 1.03,
+    "fenna steveker": 7.0,
+    "kallista liu": 1.91,
+    "mariam bolkvadze": 1.77,
+    "olivia dorner": 61.0,
+    "aneta laboutkova": 1.04,
+    "leticia solakov": 8.5,
+    "timeo trufelli": 1.24,
+    "leonardo angeloni": 3.55,
+    "toby martin": 2.2,
+    "alexis canter": 1.58,
+    "hong yi cody wong": 1.92,
+    "dalayna hewitt": 1.77,
+    "olivia lincer": 19.0,
+    "dragos nicolae cazacu": 3.25,
+    "franco ribero": 1.3,
+    "jenny lim": 1.11,
+    "valentina ivanov": 5.25,
+    "zach stephens": 5.6,
+    "oscar brown": 1.1,
+    "julie pastikova": 1.33,
+    "ruth roura llaverias": 3.0,
+    "tomasz berkieta": 1.19,
+    "facundo mena": 4.25,
+    "vitor costa goncalves": 2.95,
+    "felipe garla": 1.34,
+    "lanlana tararudee": 1.37,
+    "emerson jones": 2.9,
+    "alina korneeva": 1.44,
+    "polina kudermetova": 2.65,
+    "oleksandra oliynykova": 3.5,
+    "karolina pliskova": 1.28,
+    "anhelina kalinina": 1.49,
+    "anna bondar": 2.45,
+    "diane parry": 2.33,
+    "kayla day": 1.58,
+    "guy den ouden": 1.81,
+    "alexandre muller": 1.95,
+    "yanaki milev": 5.1,
+    "oriol roca batalla": 1.15,
+    "teodora kostovic": 1.67,
+    "martyna kubka": 2.15,
+    "fajing sun": 1.7,
+    "semen pankin": 2.1,
+    "abdullah shelbayh": 1.89,
+    "mees rottgering": 1.81,
+    "luca van assche": 1.88,
+    "titouan droguet": 1.92,
+    "james duckworth": 2.15,
+    "christopher oconnell": 1.68,
+    "vit kopriva": 2.0,
+    "alexis galarneau": 1.81,
+    "nicolas mejia": 3.0,
+    "martin landaluce": 1.38,
+    "matteo berrettini": 1.5,
+    "mariano navone": 2.6,
+    "tuncay duran": 2.35,
+    "antoine ghibaudo": 1.56,
+    "millen hurrion": 2.85,
+    "tyler zink": 1.37,
+    "andres martin": 2.9,
+    "trevor svajda": 1.36,
+    "peyton stearns": 1.78,
+    "elenagabriela ruse": 2.02,
+    "talia gibson": 2.2,
+    "elisabetta cocciaretto": 1.67,
+    "katie boulter": 1.3,
+    "kayla cross": 3.5,
+    "mccartney kessler": 1.15,
+    "cadence brace": 5.4,
+    "rebecca sramkova": 2.1,
+    "anna blinkova": 1.73,
+    "emilien demanet": 2.08,
+    "alexander vasilev": 1.71,
+    "sebastian sorger": 2.63,
+    "sandro kopp": 1.47,
+    "taylor fritz": 1.53,
+    "rafael jodar": 2.5,
+    "alejo sanchez quilez": 1.24,
+    "rafael izquierdo luque": 3.65,
+    "benjamin bonzi": 2.08,
+    "yannick hanfmann": 1.75,
+    "aleksandar vukic": 1.58,
+    "daniel altmaier": 2.38,
+    "sho shimabukuro": 2.12,
+    "marin cilic": 1.71,
+    "federico cina": 1.32,
+    "elias ymer": 3.25,
+    "felix gill": 2.85,
+    "borna gojo": 1.4,
+    "andres andrade": 1.91,
+    "andre ilagan": 1.85,
+    "nikola bartunkova": 1.61,
+    "bianca andreescu": 2.32,
+    "shuai zhang": 2.65,
+    "yulia putintseva": 1.48,
+    "marton fucsovics": 1.98,
+    "corentin moutet": 1.81,
+    "tobia costanzo baragiola mordini": 3.6,
+    "marcello serafini": 1.24,
+    "jacob fearnley": 1.54,
+    "adrian mannarino": 2.48,
+    "camilo ugo carabelli": 4.0,
+    "cameron norrie": 1.24,
+    "alex michelsen": 1.34,
+    "janlennard struff": 3.25,
+    "yuliia starodubtseva": 1.66,
+    "maya joint": 2.2,
+    "magda linette": 1.07,
+    "carol zhao": 8.5,
+    "victoria jimenez kasintseva": 2.25,
+    "alycia parks": 1.65,
+    "janice tjen": 2.5,
+    "liudmila samsonova": 1.53,
+    "jack draper": 1.42,
+    "terence atmane": 2.9,
+    "hubert hurkacz": 1.55,
+    "marcos giron": 2.45,
+    "pablo roche alcaya": 1.27,
+    "yago castellanos": 3.35,
+    "sebastian baez": 1.8,
+    "mattia bellucci": 2.0,
+    "adam walton": 2.12,
+    "jenson brooksby": 1.72,
+    "tatjana maria": 2.28,
+    "caty mcnally": 1.63,
+    "tereza valentova": 1.5,
+    "taylor townsend": 2.6,
+    "renata zarazua": 1.64,
+    "tamara korpatsch": 2.25,
+    "giovanni mpetshi perricard": 2.08,
+    "botic van de zandschulp": 1.75,
+    "juan manuel cerundolo": 2.38,
+    "hamad medjedovic": 1.58,
+    "shintaro mochizuki": 2.6,
+    "fabian marozsan": 1.5,
+    "panna udvardy": 2.43,
+    "eva lys": 1.55,
+    "lorenzo sonego": 1.93,
+    "tallon griekspoor": 1.87,
+    "daniel merida aguilar": 1.71,
+    "liam draxl": 2.14,
+    "solana sierra": 1.82,
+    "sloane stephens": 1.98,
+    "henry searle": 2.28,
+    "lloyd harris": 1.6,
+    "yu hsiou hsu": 1.3,
+    "sebastian gorzny": 3.35,
+    "yilin elim yan": 7.5,
+    "kaylah mcphee": 1.05,
+    "rebecca marino": 3.4,
+    "zeynep sonmez": 1.32,
+    "kamil majchrzak": 1.29,
+    "gael monfils": 3.55,
+    "hayden jones": 1.07,
+    "brendan loh": 6.75,
+    "emma tran": 4.6,
+    "lily fairclough": 1.15,
+    "pablo carreno busta": 1.48,
+    "valentin royer": 2.65,
+    "camille kiss": 1.42,
+    "mika ikemori": 2.6,
+    "holland snell": 1.58,
+    "pavel bushuev": 2.18,
+    "xavier calvelo": 1.12,
+    "george hakopian": 5.2,
+    "savriyan danilov": 1.1,
+    "william zhang": 5.4,
+    "nischal spurling": 1.64,
+    "sklar phillips": 2.08,
+    "honglin fu": 5.25,
+    "yuga tashiro": 1.11,
+    "veronika miroshnichenko": 1.01,
+    "sue yan tan": 14.0,
+    "xinyu wang": 1.96,
+    "daria kasatkina": 1.85,
+    "martin damm": 2.6,
+    "stefanos tsitsipas": 1.5,
+    "omar jasika": 1.05,
+    "sam ryan ziegann": 7.5,
+    "alec gaudin": 1.58,
+    "jonas hahn": 2.18,
+    "henry lamchinniah": 2.1,
+    "casey hoole": 1.58,
+    "juliet santitto": 7.5,
+    "violet apisah": 1.05,
+    "elicia kim": 2.06,
+    "grace cadwallader": 1.65,
+    "takumi katsuda": 2.85,
+    "kotaro mochizuki": 1.35,
+    "dan milburn": 2.45,
+    "yuto miyagawa": 1.43,
+    "simone kay": 1.26,
+    "bella lewis": 3.35,
+    "kate mansfield": 1.83,
+    "olivia center": 1.85,
+    "david duong": 1.3,
+    "blake anderson": 3.05,
+    "marley lambert": 6.4,
+    "salma ewing": 1.08,
+    "sage bergeson": 1.96,
+    "calla mcgill": 1.74,
+    "robert yang": 2.08,
+    "miles clark": 1.64,
+    "james van herzeele": 3.9,
+    "geun jun kim": 1.21,
+    "sae noguchi": 1.5,
+    "anna snigireva": 2.43,
+    "jeremy gschwendtner": 1.13,
+    "leonardo borrelli": 5.1,
+    "antoni fabre": 2.23,
+    "jakub filip": 1.58,
+    "arthur bellegy": 2.43,
+    "jan sadzik": 1.49,
+    "carlo alberto caniato": 1.5,
+    "gabriele piraino": 2.5,
+    "lorenzo angelini": 2.8,
+    "petr nesterov": 1.41,
+    "petr brunclik": 1.42,
+    "lorenzo carboni": 2.8,
+    "jack loge": 2.28,
+    "franco agamenone": 1.58,
+    "ivan ivanov": 1.75,
+    "ognjen milic": 2.04,
+    "pedro boscardin dias": 1.67,
+    "samuele pieri": 2.16,
+    "noel larwig": 1.78,
+    "kacper knitter": 1.92,
+    "marta kostyuk": 1.05,
+    "katherine sebov": 10.0,
+    "donna vekic": 1.68,
+    "viktorija golubic": 2.18,
+    "katerina siniakova": 1.48,
+    "kamilla rakhimova": 2.65,
+    "camila osorio": 1.92,
+    "ekaterina alexandrova": 1.88,
+    "iga swiatek": 1.11,
+    "sara bejlek": 6.75,
+    "elina svitolina": 1.22,
+    "jessica bouzas maneiro": 4.25,
+    "aryna sabalenka": 1.03,
+    "moyuka uchijima": 11.5
+  }
+}

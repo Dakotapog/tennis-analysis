@@ -1,0 +1,218 @@
+[
+  {
+    "nombre": "Kuzmanov D.",
+    "torneo": "CHALLENGER MASCULINO - INDIVIDUALES: Samsun (Turquía), dura",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=LOW)",
+    "conf": 54.8,
+    "cuota": 1.18,
+    "ts": "2026-07-27T16:12:51.889747"
+  },
+  {
+    "nombre": "Navarro E.",
+    "torneo": "WTA - INDIVIDUALES: Washington (Estados Unidos), dura",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=MODERATE)",
+    "conf": 54.3,
+    "cuota": 1.36,
+    "ts": "2026-07-27T16:12:51.889830"
+  },
+  {
+    "nombre": "Keys M.",
+    "torneo": "WTA - INDIVIDUALES: Washington (Estados Unidos), dura",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=LOW)",
+    "conf": 55.0,
+    "cuota": 1.28,
+    "ts": "2026-07-27T16:12:51.889959"
+  },
+  {
+    "nombre": "Fritz T.",
+    "torneo": "ATP - INDIVIDUALES: Washington (Estados Unidos), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.670 < 1.02 (conf=54.5%, cuota=1.23)",
+    "conf": 54.5,
+    "cuota": 1.23,
+    "ts": "2026-07-27T16:12:51.890091"
+  },
+  {
+    "nombre": "Tiafoe F.",
+    "torneo": "ATP - INDIVIDUALES: Washington (Estados Unidos), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.763 < 1.02 (conf=56.5%, cuota=1.35)",
+    "conf": 56.5,
+    "cuota": 1.35,
+    "ts": "2026-07-27T16:12:51.890155"
+  },
+  {
+    "nombre": "Milavsky D.",
+    "torneo": "CHALLENGER MASCULINO - INDIVIDUALES: Vancouver (Canadá) - Fase previa, dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.788 < 1.02 (conf=53.6%, cuota=1.47)",
+    "conf": 53.6,
+    "cuota": 1.47,
+    "ts": "2026-07-27T16:12:51.890216"
+  },
+  {
+    "nombre": "Tokuda R.",
+    "torneo": "CHALLENGER MASCULINO - INDIVIDUALES: Vancouver (Canadá) - Fase previa, dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.817 < 1.02 (conf=53.4%, cuota=1.53)",
+    "conf": 53.4,
+    "cuota": 1.53,
+    "ts": "2026-07-27T16:12:51.890290"
+  },
+  {
+    "nombre": "Langmo C.",
+    "torneo": "CHALLENGER MASCULINO - INDIVIDUALES: Vancouver (Canadá) - Fase previa, dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.714 < 1.02 (conf=53.7%, cuota=1.33)",
+    "conf": 53.7,
+    "cuota": 1.33,
+    "ts": "2026-07-27T16:12:51.890410"
+  },
+  {
+    "nombre": "Hara Friend J. D.",
+    "torneo": "CHALLENGER MASCULINO - INDIVIDUALES: Vancouver (Canadá) - Fase previa, dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.683 < 1.02 (conf=54.6%, cuota=1.25)",
+    "conf": 54.6,
+    "cuota": 1.25,
+    "ts": "2026-07-27T16:12:51.890548"
+  },
+  {
+    "nombre": "Matsuoka H.",
+    "torneo": "CHALLENGER MASCULINO - INDIVIDUALES: Vancouver (Canadá) - Fase previa, dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.660 < 1.02 (conf=54.1%, cuota=1.22)",
+    "conf": 54.1,
+    "cuota": 1.22,
+    "ts": "2026-07-27T16:12:51.890600"
+  },
+  {
+    "nombre": "Scott K.",
+    "torneo": "CHALLENGER FEMENINO - INDIVIDUALES: Vancouver (Canadá) - Fase previa, dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.623 < 1.02 (conf=54.2%, cuota=1.15)",
+    "conf": 54.2,
+    "cuota": 1.15,
+    "ts": "2026-07-27T16:12:51.890654"
+  },
+  {
+    "nombre": "Kuramochi M.",
+    "torneo": "CHALLENGER FEMENINO - INDIVIDUALES: Vancouver (Canadá) - Fase previa, dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.846 < 1.02 (conf=67.7%, cuota=1.25)",
+    "conf": 67.7,
+    "cuota": 1.25,
+    "ts": "2026-07-27T16:12:51.890723"
+  },
+  {
+    "nombre": "Preston T.",
+    "torneo": "CHALLENGER FEMENINO - INDIVIDUALES: Vancouver (Canadá), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.679 < 1.02 (conf=53.5%, cuota=1.27)",
+    "conf": 53.5,
+    "cuota": 1.27,
+    "ts": "2026-07-27T16:12:51.890805"
+  },
+  {
+    "nombre": "Sawangkaew M.",
+    "torneo": "CHALLENGER FEMENINO - INDIVIDUALES: Vancouver (Canadá), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.702 < 1.02 (conf=54.4%, cuota=1.29)",
+    "conf": 54.4,
+    "cuota": 1.29,
+    "ts": "2026-07-27T16:12:51.890859"
+  },
+  {
+    "nombre": "Osorio C.",
+    "torneo": "WTA - INDIVIDUALES: Memphis (Estados Unidos), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.778 < 1.02 (conf=55.2%, cuota=1.41)",
+    "conf": 55.2,
+    "cuota": 1.41,
+    "ts": "2026-07-27T16:12:51.891052"
+  },
+  {
+    "nombre": "Tomic B.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.845 < 1.02 (conf=55.2%, cuota=1.53)",
+    "conf": 55.2,
+    "cuota": 1.53,
+    "ts": "2026-07-27T16:12:51.891149"
+  },
+  {
+    "nombre": "Wong C.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.984 < 1.02 (conf=53.2%, cuota=1.85)",
+    "conf": 53.2,
+    "cuota": 1.85,
+    "ts": "2026-07-27T16:12:51.891228"
+  },
+  {
+    "nombre": "Shelton B.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.741 < 1.02 (conf=55.7%, cuota=1.33)",
+    "conf": 55.7,
+    "cuota": 1.33,
+    "ts": "2026-07-27T16:12:51.891266"
+  },
+  {
+    "nombre": "Zakharova A.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.830 < 1.02 (conf=56.1%, cuota=1.48)",
+    "conf": 56.1,
+    "cuota": 1.48,
+    "ts": "2026-07-27T16:12:51.891478"
+  },
+  {
+    "nombre": "Rodionov J.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.717 < 1.02 (conf=55.6%, cuota=1.29)",
+    "conf": 55.6,
+    "cuota": 1.29,
+    "ts": "2026-07-27T16:12:51.891607"
+  },
+  {
+    "nombre": "Martinez Gomez P.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.959 < 1.02 (conf=62.7%, cuota=1.53)",
+    "conf": 62.7,
+    "cuota": 1.53,
+    "ts": "2026-07-27T16:12:51.892328"
+  },
+  {
+    "nombre": "Burillo Escorihuela I.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.837 < 1.02 (conf=54.7%, cuota=1.53)",
+    "conf": 54.7,
+    "cuota": 1.53,
+    "ts": "2026-07-27T16:12:51.893135"
+  },
+  {
+    "nombre": "Struplova J.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.759 < 1.02 (conf=56.2%, cuota=1.35)",
+    "conf": 56.2,
+    "cuota": 1.35,
+    "ts": "2026-07-27T16:12:51.893194"
+  },
+  {
+    "nombre": "Taguchi R.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.670 < 1.02 (conf=57.3%, cuota=1.17)",
+    "conf": 57.3,
+    "cuota": 1.17,
+    "ts": "2026-07-27T16:12:51.893428"
+  }
+]

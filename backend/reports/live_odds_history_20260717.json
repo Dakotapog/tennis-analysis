@@ -1,0 +1,182 @@
+{
+  "Rikke_de_Koning_vs_Sophie_Greiner": {
+    "readings": [
+      {
+        "ts": "03:02:09",
+        "cuota": 1.49,
+        "drift": 0.4772
+      },
+      {
+        "ts": "03:03:12",
+        "cuota": 1.47,
+        "drift": 0.4842
+      },
+      {
+        "ts": "03:04:07",
+        "cuota": 1.33,
+        "drift": 0.5333
+      },
+      {
+        "ts": "03:04:14",
+        "cuota": 1.33,
+        "drift": 0.5333
+      },
+      {
+        "ts": "03:05:17",
+        "cuota": 1.46,
+        "drift": 0.4877
+      },
+      {
+        "ts": "03:06:07",
+        "cuota": 1.56,
+        "drift": 0.4526
+      },
+      {
+        "ts": "03:06:20",
+        "cuota": 1.53,
+        "drift": 0.4632
+      },
+      {
+        "ts": "03:07:23",
+        "cuota": 1.54,
+        "drift": 0.4596
+      },
+      {
+        "ts": "03:08:07",
+        "cuota": 1.54,
+        "drift": 0.4596
+      },
+      {
+        "ts": "03:08:25",
+        "cuota": 1.43,
+        "drift": 0.4982
+      }
+    ],
+    "estado": "BREAK_CONFIRMADO",
+    "fired": false,
+    "last_fav_games": null,
+    "last_opp_games": null,
+    "last_server": null,
+    "break_pending_confirm": false
+  },
+  "Philip_Sekulic_vs_Murphy_Cassone": {
+    "readings": [
+      {
+        "ts": "12:42:57",
+        "cuota": 16.0,
+        "drift": -5.4516
+      },
+      {
+        "ts": "12:43:03",
+        "cuota": 16.0,
+        "drift": -5.4516
+      },
+      {
+        "ts": "12:44:02",
+        "cuota": 17.0,
+        "drift": -5.8548
+      },
+      {
+        "ts": "12:44:57",
+        "cuota": 21.0,
+        "drift": -7.4677
+      },
+      {
+        "ts": "12:45:02",
+        "cuota": 21.0,
+        "drift": -7.4677
+      },
+      {
+        "ts": "12:46:04",
+        "cuota": 23.0,
+        "drift": -8.2742
+      },
+      {
+        "ts": "12:46:56",
+        "cuota": 29.0,
+        "drift": -10.6935
+      },
+      {
+        "ts": "12:47:02",
+        "cuota": 29.0,
+        "drift": -10.6935
+      },
+      {
+        "ts": "12:48:03",
+        "cuota": 25.0,
+        "drift": -9.0806
+      },
+      {
+        "ts": "12:48:56",
+        "cuota": 41.0,
+        "drift": -15.5323
+      }
+    ],
+    "estado": "NORMAL",
+    "fired": false,
+    "last_fav_games": null,
+    "last_opp_games": null,
+    "last_server": null,
+    "break_pending_confirm": false
+  },
+  "August_Holmgren_vs_Justin_Boulais": {
+    "readings": [
+      {
+        "ts": "15:18:09",
+        "cuota": 56.0,
+        "drift": -19.7407
+      },
+      {
+        "ts": "15:19:11",
+        "cuota": 81.0,
+        "drift": -29.0
+      },
+      {
+        "ts": "15:20:02",
+        "cuota": 51.0,
+        "drift": -17.8889
+      },
+      {
+        "ts": "15:20:08",
+        "cuota": 41.0,
+        "drift": -14.1852
+      },
+      {
+        "ts": "15:20:14",
+        "cuota": 41.0,
+        "drift": -14.1852
+      },
+      {
+        "ts": "15:21:16",
+        "cuota": 46.0,
+        "drift": -16.037
+      },
+      {
+        "ts": "15:22:03",
+        "cuota": 15.0,
+        "drift": -4.5556
+      },
+      {
+        "ts": "15:22:18",
+        "cuota": 20.0,
+        "drift": -6.4074
+      },
+      {
+        "ts": "15:23:01",
+        "cuota": 34.0,
+        "drift": -11.5926
+      },
+      {
+        "ts": "15:23:21",
+        "cuota": 71.0,
+        "drift": -25.2963
+      }
+    ],
+    "estado": "NORMAL",
+    "fired": false,
+    "last_fav_games": null,
+    "last_opp_games": null,
+    "last_server": null,
+    "break_pending_confirm": false
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "Jamie Mackenzie vs Max Dahlin_OVER": {
+    "cuota_t0": 1.89,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-01T09:56:36",
+    "direccion": "OVER",
+    "zona": "COINFLIP"
+  },
+  "Victoria Jimenez Kasintseva vs Marina Bassols Ribera_OVER": {
+    "cuota_t0": 1.54,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-01T10:06:39",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Emiliana Arango vs Lois Boisson_OVER": {
+    "cuota_t0": 1.7,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-01T10:12:49",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Alexei Popyrin vs Thanasi Kokkinakis_OVER": {
+    "cuota_t0": 1.52,
+    "linea_t0": 22.5,
+    "ts_t0": "2026-08-01T11:03:56",
+    "direccion": "OVER",
+    "zona": "COINFLIP"
+  },
+  "Mili Poljicak vs Juan Pablo Varillas_OVER": {
+    "cuota_t0": 1.92,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-08-01T11:05:25",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Jacob Fearnley vs Sebastian Ofner_OVER": {
+    "cuota_t0": 1.87,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-01T11:53:51",
+    "direccion": "OVER",
+    "zona": "COINFLIP"
+  },
+  "Aleksandar Vukic vs Marcelo Tomas Barrios Vera_UNDER": {
+    "cuota_t0": 1.62,
+    "linea_t0": 25.5,
+    "ts_t0": "2026-08-01T11:59:59",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Lanlana Tararudee vs Qinwen Zheng_OVER": {
+    "cuota_t0": 1.53,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-01T12:17:52",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Sho Shimabukuro vs Nicolai Budkov Kjaer_OVER": {
+    "cuota_t0": 1.52,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-01T12:36:13",
+    "direccion": "OVER",
+    "zona": "COINFLIP"
+  },
+  "Hugo Gaston vs Duncan Chan_UNDER": {
+    "cuota_t0": 2.14,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-08-01T12:46:42",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Alina Korneeva vs Mary Stoiana_OVER": {
+    "cuota_t0": 2.23,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-01T12:47:01",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Moyuka Uchijima vs Himeno Sakatsume_OVER": {
+    "cuota_t0": 1.53,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-01T12:50:41",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Kristina Liutova vs Elvina Kalieva_OVER": {
+    "cuota_t0": 2.14,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-01T13:08:14",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Mochizuki S. vs Sweeny D._OVER": {
+    "cuota_t0": 1.57,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-08-01T14:14:41",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Vidmanova D. vs Zarazua R._OVER": {
+    "cuota_t0": 1.81,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-08-01T15:09:09",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Svrcina D. vs Droguet T._OVER": {
+    "cuota_t0": 1.73,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-08-01T15:33:04",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Nakashima B. vs Fritz T._UNDER": {
+    "cuota_t0": 2.65,
+    "linea_t0": 27.5,
+    "ts_t0": "2026-08-01T18:48:03",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "ts": "2026-07-23T23:10:52",
+  "signals_alta": [
+    {
+      "partido": "Bublik A. vs Molcan A.",
+      "direccion": "UNDER",
+      "linea": 25.5,
+      "cuota_pre": 1.65,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Hontama M. vs Tagger L.",
+      "direccion": "OVER",
+      "linea": 19.5,
+      "cuota_pre": 1.58,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Timofeeva M. vs Bejlek S.",
+      "direccion": "OVER",
+      "linea": 19.5,
+      "cuota_pre": 1.58,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Martinez P. vs Darderi L.",
+      "direccion": "UNDER",
+      "linea": 24.5,
+      "cuota_pre": 1.5,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Mayot H. vs Brunold M.",
+      "direccion": "OVER",
+      "linea": 21.5,
+      "cuota_pre": 1.58,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Fearnley J. vs Boyer T.",
+      "direccion": "OVER",
+      "linea": 20.5,
+      "cuota_pre": 1.57,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Gojo B. vs Suresh D.",
+      "direccion": "UNDER",
+      "linea": 24.5,
+      "cuota_pre": 1.83,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Michelsen A. vs Harris L.",
+      "direccion": "OVER",
+      "linea": 20.5,
+      "cuota_pre": 1.57,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Sanchez Quilez A. vs Crawford O.",
+      "direccion": "OVER",
+      "linea": 21.5,
+      "cuota_pre": 1.56,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Hodzic M. vs Basiletti N.",
+      "direccion": "OVER",
+      "linea": 20.5,
+      "cuota_pre": 1.68,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Monday J. vs Shimizu Y.",
+      "direccion": "OVER",
+      "linea": 22.5,
+      "cuota_pre": 1.75,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Holmgren A. vs Draxl L.",
+      "direccion": "UNDER",
+      "linea": 23.5,
+      "cuota_pre": 1.75,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    }
+  ],
+  "watch_all": [],
+  "en_vivo_count": 0,
+  "itf_live_count": 0,
+  "convergencia_activa": false
+}

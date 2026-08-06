@@ -1,0 +1,164 @@
+[
+  {
+    "nombre": "Jankanj V.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=MODERATE)",
+    "conf": 59.8,
+    "cuota": 1.52,
+    "ts": "2026-07-22T10:44:30.132853"
+  },
+  {
+    "nombre": "Delage P.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=LOW)",
+    "conf": 53.8,
+    "cuota": 1.37,
+    "ts": "2026-07-22T10:44:30.132896"
+  },
+  {
+    "nombre": "Kraus S.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=LOW)",
+    "conf": 53.3,
+    "cuota": 1.54,
+    "ts": "2026-07-22T10:44:30.132917"
+  },
+  {
+    "nombre": "Huszar A.",
+    "torneo": "?",
+    "gate": "G2",
+    "motivo": "G2: n_h2h=0 — sin historial directo (axes=2, score_dir=1)",
+    "conf": 95.0,
+    "cuota": 2.48,
+    "ts": "2026-07-22T10:44:30.133220"
+  },
+  {
+    "nombre": "Mroz M.",
+    "torneo": "?",
+    "gate": "G2",
+    "motivo": "G2: n_h2h=0 — sin historial directo (axes=2, score_dir=1)",
+    "conf": 57.6,
+    "cuota": 3.35,
+    "ts": "2026-07-22T10:44:30.133347"
+  },
+  {
+    "nombre": "Suresh D.",
+    "torneo": "?",
+    "gate": "G2",
+    "motivo": "G2: n_h2h=0 — sin historial directo (axes=2, score_dir=2)",
+    "conf": 70.1,
+    "cuota": 2.55,
+    "ts": "2026-07-22T10:44:30.133481"
+  },
+  {
+    "nombre": "Voelzke G.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 71.3,
+    "cuota": 2.55,
+    "ts": "2026-07-22T10:44:30.133494"
+  },
+  {
+    "nombre": "Saiga W.",
+    "torneo": "?",
+    "gate": "G2",
+    "motivo": "G2: n_h2h=0 — sin historial directo (axes=2, score_dir=1)",
+    "conf": 62.6,
+    "cuota": 5.0,
+    "ts": "2026-07-22T10:44:30.133508"
+  },
+  {
+    "nombre": "Angel M.",
+    "torneo": "?",
+    "gate": "G2",
+    "motivo": "G2: n_h2h=0 — sin historial directo (axes=2, score_dir=1)",
+    "conf": 85.8,
+    "cuota": 3.5,
+    "ts": "2026-07-22T10:44:30.133644"
+  },
+  {
+    "nombre": "Kanumuri I. R.",
+    "torneo": "?",
+    "gate": "G2",
+    "motivo": "G2: n_h2h=0 — sin historial directo (axes=2, score_dir=1)",
+    "conf": 59.7,
+    "cuota": 5.6,
+    "ts": "2026-07-22T10:44:30.133658"
+  },
+  {
+    "nombre": "Liljekvist D.",
+    "torneo": "?",
+    "gate": "G2",
+    "motivo": "G2: n_h2h=0 — sin historial directo (axes=2, score_dir=0)",
+    "conf": 55.7,
+    "cuota": 2.85,
+    "ts": "2026-07-22T10:44:30.134077"
+  },
+  {
+    "nombre": "Pushkar S.",
+    "torneo": "?",
+    "gate": "G2",
+    "motivo": "G2: n_h2h=0 — sin historial directo (axes=2, score_dir=2)",
+    "conf": 95.0,
+    "cuota": 1.78,
+    "ts": "2026-07-22T10:44:30.134608"
+  },
+  {
+    "nombre": "Ebster A. L.",
+    "torneo": "?",
+    "gate": "G2",
+    "motivo": "G2: n_h2h=0 — sin historial directo (axes=2, score_dir=1)",
+    "conf": 95.0,
+    "cuota": 5.2,
+    "ts": "2026-07-22T10:44:30.134636"
+  },
+  {
+    "nombre": "Varela H. N.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 84.0,
+    "cuota": 3.15,
+    "ts": "2026-07-22T10:44:30.134652"
+  },
+  {
+    "nombre": "Borderia Y.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 95.0,
+    "cuota": 5.75,
+    "ts": "2026-07-22T10:44:30.134707"
+  },
+  {
+    "nombre": "Solar Donoso L.",
+    "torneo": "?",
+    "gate": "G2",
+    "motivo": "G2: n_h2h=0 — sin historial directo (axes=2, score_dir=2)",
+    "conf": 65.1,
+    "cuota": 2.52,
+    "ts": "2026-07-22T10:44:30.134720"
+  },
+  {
+    "nombre": "Bosch Armas S.",
+    "torneo": "?",
+    "gate": "G2",
+    "motivo": "G2: n_h2h=0 — sin historial directo (axes=2, score_dir=1)",
+    "conf": 65.0,
+    "cuota": 6.5,
+    "ts": "2026-07-22T10:44:30.134732"
+  },
+  {
+    "nombre": "Reguer A.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=MODERATE)",
+    "conf": 59.7,
+    "cuota": 3.05,
+    "ts": "2026-07-22T10:44:30.134769"
+  }
+]

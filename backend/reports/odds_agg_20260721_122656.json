@@ -1,0 +1,586 @@
+{
+  "ts": "2026-07-21 12:26",
+  "bookmakers": {
+    "wplay": "VERIFIED"
+  },
+  "edge_context": {
+    "Cora-Bruneton C.": 3.25,
+    "Clarke S.": 3.45,
+    "Tabunshchyk A.": 1.6,
+    "Nava Elkin A. C.": 2.05
+  },
+  "results": [
+    {
+      "jugador": "Botic Van De Zandschulp",
+      "key": "botic van de zandschulp",
+      "best_odds": 2.625,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 2.625
+      }
+    },
+    {
+      "jugador": "Botic Van De Zandschulp",
+      "key": "zandschulp",
+      "best_odds": 2.625,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 2.625
+      }
+    },
+    {
+      "jugador": "Jaime Faria",
+      "key": "jaime faria",
+      "best_odds": 1.45,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.45
+      }
+    },
+    {
+      "jugador": "Jaime Faria",
+      "key": "faria",
+      "best_odds": 1.45,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.45
+      }
+    },
+    {
+      "jugador": "Oleksandra Oliynykova",
+      "key": "oleksandra oliynykova",
+      "best_odds": 1.083,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.083
+      }
+    },
+    {
+      "jugador": "Oleksandra Oliynykova",
+      "key": "oliynykova",
+      "best_odds": 1.083,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.083
+      }
+    },
+    {
+      "jugador": "Nastasja Mariana Schunk",
+      "key": "nastasja mariana schunk",
+      "best_odds": 8.0,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 8.0
+      }
+    },
+    {
+      "jugador": "Nastasja Mariana Schunk",
+      "key": "schunk",
+      "best_odds": 8.0,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 8.0
+      }
+    },
+    {
+      "jugador": "Noemi Basiletti",
+      "key": "noemi basiletti",
+      "best_odds": 2.25,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 2.25
+      }
+    },
+    {
+      "jugador": "Noemi Basiletti",
+      "key": "basiletti",
+      "best_odds": 2.25,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 2.25
+      }
+    },
+    {
+      "jugador": "Raluca Georgiana Serban",
+      "key": "raluca georgiana serban",
+      "best_odds": 1.6,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.6
+      }
+    },
+    {
+      "jugador": "Raluca Georgiana Serban",
+      "key": "serban",
+      "best_odds": 1.6,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.6
+      }
+    },
+    {
+      "jugador": "Francesca Jones",
+      "key": "francesca jones",
+      "best_odds": 1.142,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.142
+      }
+    },
+    {
+      "jugador": "Francesca Jones",
+      "key": "jones",
+      "best_odds": 1.142,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.142
+      }
+    },
+    {
+      "jugador": "Darya Astakhova",
+      "key": "darya astakhova",
+      "best_odds": 5.5,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 5.5
+      }
+    },
+    {
+      "jugador": "Darya Astakhova",
+      "key": "astakhova",
+      "best_odds": 5.5,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 5.5
+      }
+    },
+    {
+      "jugador": "Dominic Stephan Stricker",
+      "key": "dominic stephan stricker",
+      "best_odds": 1.48,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.48
+      }
+    },
+    {
+      "jugador": "Dominic Stephan Stricker",
+      "key": "stricker",
+      "best_odds": 1.48,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.48
+      }
+    },
+    {
+      "jugador": "Francesco Passaro",
+      "key": "francesco passaro",
+      "best_odds": 2.5,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 2.5
+      }
+    },
+    {
+      "jugador": "Francesco Passaro",
+      "key": "passaro",
+      "best_odds": 2.5,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 2.5
+      }
+    },
+    {
+      "jugador": "Andres Martin",
+      "key": "andres martin",
+      "best_odds": 1.285,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.285
+      }
+    },
+    {
+      "jugador": "Andres Martin",
+      "key": "martin",
+      "best_odds": 1.285,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.285
+      }
+    },
+    {
+      "jugador": "Dane Sweeny",
+      "key": "dane sweeny",
+      "best_odds": 3.4,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 3.4
+      }
+    },
+    {
+      "jugador": "Dane Sweeny",
+      "key": "sweeny",
+      "best_odds": 3.4,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 3.4
+      }
+    },
+    {
+      "jugador": "Stefan Kozlov",
+      "key": "stefan kozlov",
+      "best_odds": 1.75,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.75
+      }
+    },
+    {
+      "jugador": "Stefan Kozlov",
+      "key": "kozlov",
+      "best_odds": 1.75,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.75
+      }
+    },
+    {
+      "jugador": "Alan Magadan",
+      "key": "alan magadan",
+      "best_odds": 1.95,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.95
+      }
+    },
+    {
+      "jugador": "Alan Magadan",
+      "key": "magadan",
+      "best_odds": 1.95,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.95
+      }
+    },
+    {
+      "jugador": "Igor Ribeiro Marcondes",
+      "key": "igor ribeiro marcondes",
+      "best_odds": 1.571,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.571
+      }
+    },
+    {
+      "jugador": "Igor Ribeiro Marcondes",
+      "key": "marcondes",
+      "best_odds": 1.571,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.571
+      }
+    },
+    {
+      "jugador": "Linus Lagerbohm",
+      "key": "linus lagerbohm",
+      "best_odds": 2.25,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 2.25
+      }
+    },
+    {
+      "jugador": "Linus Lagerbohm",
+      "key": "lagerbohm",
+      "best_odds": 2.25,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 2.25
+      }
+    },
+    {
+      "jugador": "Bruno Kuzuhara",
+      "key": "bruno kuzuhara",
+      "best_odds": 8.0,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 8.0
+      }
+    },
+    {
+      "jugador": "Bruno Kuzuhara",
+      "key": "kuzuhara",
+      "best_odds": 8.0,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 8.0
+      }
+    },
+    {
+      "jugador": "Pablo Llamas Ruiz",
+      "key": "pablo llamas ruiz",
+      "best_odds": 1.071,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.071
+      }
+    },
+    {
+      "jugador": "Pablo Llamas Ruiz",
+      "key": "ruiz",
+      "best_odds": 1.071,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.071
+      }
+    },
+    {
+      "jugador": "Alejandro Moro Canas",
+      "key": "alejandro moro canas",
+      "best_odds": 1.6,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.6
+      }
+    },
+    {
+      "jugador": "Alejandro Moro Canas",
+      "key": "canas",
+      "best_odds": 1.6,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.6
+      }
+    },
+    {
+      "jugador": "Massimo Giunta",
+      "key": "massimo giunta",
+      "best_odds": 2.2,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 2.2
+      }
+    },
+    {
+      "jugador": "Massimo Giunta",
+      "key": "giunta",
+      "best_odds": 2.2,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 2.2
+      }
+    },
+    {
+      "jugador": "Calla McGill",
+      "key": "calla mcgill",
+      "best_odds": 7.0,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 7.0
+      }
+    },
+    {
+      "jugador": "Calla McGill",
+      "key": "mcgill",
+      "best_odds": 7.0,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 7.0
+      }
+    },
+    {
+      "jugador": "Ariana Gilbert",
+      "key": "ariana gilbert",
+      "best_odds": 1.083,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.083
+      }
+    },
+    {
+      "jugador": "Ariana Gilbert",
+      "key": "gilbert",
+      "best_odds": 1.083,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.083
+      }
+    },
+    {
+      "jugador": "Gordon Callagher",
+      "key": "gordon callagher",
+      "best_odds": 2.15,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 2.15
+      }
+    },
+    {
+      "jugador": "Gordon Callagher",
+      "key": "callagher",
+      "best_odds": 2.15,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 2.15
+      }
+    },
+    {
+      "jugador": "Aditya Govila",
+      "key": "aditya govila",
+      "best_odds": 1.65,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.65
+      }
+    },
+    {
+      "jugador": "Aditya Govila",
+      "key": "govila",
+      "best_odds": 1.65,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.65
+      }
+    },
+    {
+      "jugador": "Leo Pade",
+      "key": "leo pade",
+      "best_odds": 6.5,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 6.5
+      }
+    },
+    {
+      "jugador": "Leo Pade",
+      "key": "pade",
+      "best_odds": 6.5,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 6.5
+      }
+    },
+    {
+      "jugador": "Tomas Jirousek",
+      "key": "tomas jirousek",
+      "best_odds": 1.1,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.1
+      }
+    },
+    {
+      "jugador": "Tomas Jirousek",
+      "key": "jirousek",
+      "best_odds": 1.1,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.1
+      }
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "Inchauspe P. vs Erel Y._OVER": {
+    "cuota_t0": 2.1,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-07-31T10:24:59",
+    "direccion": "OVER",
+    "zona": "COINFLIP"
+  },
+  "Pegula J. vs Kalinskaya A._UNDER": {
+    "cuota_t0": 1.83,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-07-31T11:07:49",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Inglis M. vs Hontama M._OVER": {
+    "cuota_t0": 1.84,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-07-31T13:07:24",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Gaubas V. vs Monteiro T._UNDER": {
+    "cuota_t0": 2.33,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-07-31T14:16:06",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Fritz T. vs Michelsen A._UNDER": {
+    "cuota_t0": 1.73,
+    "linea_t0": 27.5,
+    "ts_t0": "2026-07-31T15:19:49",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Shnaider D. vs Samsonova L._UNDER": {
+    "cuota_t0": 1.74,
+    "linea_t0": 24.5,
+    "ts_t0": "2026-07-31T15:41:08",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Jodar R. vs Musetti L._OVER": {
+    "cuota_t0": 2.08,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-07-31T17:25:20",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Eala A. vs Svitolina E._UNDER": {
+    "cuota_t0": 1.9,
+    "linea_t0": 24.5,
+    "ts_t0": "2026-07-31T18:15:12",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Zakharova A. vs Zarazua R._OVER": {
+    "cuota_t0": 1.78,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-07-31T18:28:00",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Vidmanova D. vs Volynets K._OVER": {
+    "cuota_t0": 1.9,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-07-31T20:07:05",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Tabilo A. vs Shelton B._UNDER": {
+    "cuota_t0": 1.67,
+    "linea_t0": 26.5,
+    "ts_t0": "2026-07-31T20:13:29",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Norrie C. vs Shapovalov D._OVER": {
+    "cuota_t0": 1.32,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-07-31T23:48:05",
+    "direccion": "OVER",
+    "zona": "COINFLIP"
+  }
+}

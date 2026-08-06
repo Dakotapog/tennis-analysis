@@ -1,0 +1,86 @@
+{
+  "Muller A. vs Cecchinato M._OVER": {
+    "cuota_t0": 1.64,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-07-29T12:10:55",
+    "direccion": "OVER",
+    "zona": "COINFLIP"
+  },
+  "Milavsky D. vs Zhou Y._OVER": {
+    "cuota_t0": 1.97,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-07-29T12:10:55",
+    "direccion": "OVER",
+    "zona": "COINFLIP"
+  },
+  "Uchijima M. vs Kinoshita H._OVER": {
+    "cuota_t0": 1.82,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-07-29T12:10:55",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Watanuki Y. vs Matsuoka H._OVER": {
+    "cuota_t0": 1.57,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-07-29T12:24:28",
+    "direccion": "OVER",
+    "zona": "COINFLIP"
+  },
+  "De Minaur A. vs Tsitsipas S._UNDER": {
+    "cuota_t0": 2.0,
+    "linea_t0": 25.5,
+    "ts_t0": "2026-07-29T12:24:28",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Navarro E. vs Cocciaretto E._OVER": {
+    "cuota_t0": 1.67,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-07-29T14:34:31",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Cerundolo F. vs Boyer T._OVER": {
+    "cuota_t0": 1.68,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-07-29T20:05:06",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Lehecka J. vs Wong C._UNDER": {
+    "cuota_t0": 2.0,
+    "linea_t0": 24.5,
+    "ts_t0": "2026-07-29T20:07:07",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Jones E. vs Brengle M._OVER": {
+    "cuota_t0": 1.84,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-07-29T21:30:28",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Gea A. vs Zheng M._OVER": {
+    "cuota_t0": 1.91,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-07-29T22:01:02",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Shapovalov D. vs Pacheco Mendez R._OVER": {
+    "cuota_t0": 1.68,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-07-29T22:17:44",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Tomic B. vs Khachanov K._UNDER": {
+    "cuota_t0": 2.1,
+    "linea_t0": 24.5,
+    "ts_t0": "2026-07-29T22:33:01",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  }
+}

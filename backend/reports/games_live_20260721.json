@@ -1,0 +1,227 @@
+{
+  "ts": "2026-07-22T02:45:52",
+  "signals_alta": [
+    {
+      "partido": "Gaston H. vs Droguet T.",
+      "direccion": "OVER",
+      "linea": 20.5,
+      "cuota_pre": 1.53,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Borges N. vs Burruchaga R. A.",
+      "direccion": "OVER",
+      "linea": 21.5,
+      "cuota_pre": 1.78,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Jacquet K. vs Blockx A.",
+      "direccion": "OVER",
+      "linea": 20.5,
+      "cuota_pre": 1.55,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Baez S. vs Rinderknech A.",
+      "direccion": "UNDER",
+      "linea": 25.5,
+      "cuota_pre": 1.68,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Halys Q. vs Vacherot V.",
+      "direccion": "UNDER",
+      "linea": 24.5,
+      "cuota_pre": 1.7,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Feldbausch K. vs Buse I.",
+      "direccion": "OVER",
+      "linea": 20.5,
+      "cuota_pre": 1.57,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Trungelliti M. vs Hanfmann Y.",
+      "direccion": "UNDER",
+      "linea": 24.5,
+      "cuota_pre": 1.66,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Etcheverry T. M. vs Rodionov J.",
+      "direccion": "UNDER",
+      "linea": 24.5,
+      "cuota_pre": 1.67,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Molcan A. vs Altmaier D.",
+      "direccion": "UNDER",
+      "linea": 24.5,
+      "cuota_pre": 1.71,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Carle M. L. vs Kalinina A.",
+      "direccion": "OVER",
+      "linea": 18.5,
+      "cuota_pre": 1.58,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Waltert S. vs Sherif M.",
+      "direccion": "UNDER",
+      "linea": 23.5,
+      "cuota_pre": 1.58,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Charaeva A. vs Kraus S.",
+      "direccion": "UNDER",
+      "linea": 23.5,
+      "cuota_pre": 1.58,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Bondar A. vs Noha Akugue N.",
+      "direccion": "OVER",
+      "linea": 18.5,
+      "cuota_pre": 1.5,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Aksu A. vs Snigur D.",
+      "direccion": "OVER",
+      "linea": 17.5,
+      "cuota_pre": 1.57,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Salkova D. vs Dodin O.",
+      "direccion": "OVER",
+      "linea": 19.5,
+      "cuota_pre": 1.58,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Zhou Y. vs Pavlovic L.",
+      "direccion": "OVER",
+      "linea": 20.5,
+      "cuota_pre": 1.57,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Santillan A. vs Alkaya M.",
+      "direccion": "OVER",
+      "linea": 21.5,
+      "cuota_pre": 1.58,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Bax F. vs Inchauspe P.",
+      "direccion": "OVER",
+      "linea": 22.5,
+      "cuota_pre": 1.75,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Piros Z. vs Rehberg M. H.",
+      "direccion": "UNDER",
+      "linea": 23.5,
+      "cuota_pre": 1.63,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    },
+    {
+      "partido": "Rincon D. vs Seyboth Wild T.",
+      "direccion": "OVER",
+      "linea": 21.5,
+      "cuota_pre": 1.68,
+      "hora": null,
+      "event_id": null,
+      "estado": "PRE_PARTIDO",
+      "cuota_live": null,
+      "drift_pct": null
+    }
+  ],
+  "en_vivo_count": 0,
+  "convergencia_activa": false
+}

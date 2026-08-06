@@ -198,7 +198,56 @@ def _filter_kambi_available(picks: list, label: str = '') -> list:
     n_excl = len(picks) - len(available)
     if n_excl:
         logger.info(f'[D140-02] {label}: {n_excl}/{len(picks)} excluidos (kambi_disponible=False — ITF/sin Betplay)')
+        # D173-10 (Nodo-173): dejar rastro consultable de lo que el gate descartó.
+        # No cambia el gate — solo lo hace auditable desde funnel_report.py.
+        _log_exclusiones_kambi(f'betplay_{label}' if label else 'betplay',
+                               [p for p in picks if p.get('kambi_disponible') is False])
     return available
+
+
+def _log_exclusiones_kambi(builder: str, excluidos: list,
+                           motivo: str = 'kambi_no_disponible') -> None:
+    """D173-10 (Nodo-173): registra exclusiones por gate Kambi. Fail-soft."""
+    try:
+        from core.combo_exclusions import registrar_exclusiones
+        registrar_exclusiones(builder, excluidos, motivo=motivo)
+    except Exception:  # noqa: BLE001 — observabilidad nunca tumba el builder
+        pass
+
+
+# D173-10: buffer en memoria para los gates que viven DENTRO de loops con
+# `continue`. Escribir por pick sería O(n) reescrituras del JSON; se acumula y
+# se vuelca una sola vez al terminar el proceso (atexit).
+_EXCL_BUFFER: dict = {}
+
+
+def _buffer_exclusion_kambi(builder: str, pick, motivo: str = 'kambi_no_disponible') -> None:
+    """D173-10 (Nodo-173): acumula una exclusión para volcado diferido. Fail-soft."""
+    try:
+        from core.combo_exclusions import exclusion_record
+        _EXCL_BUFFER.setdefault(builder, []).append(exclusion_record(pick, motivo))
+    except Exception:  # noqa: BLE001
+        pass
+
+
+def _flush_exclusiones_kambi() -> None:
+    """D173-10 (Nodo-173): vuelca el buffer a reports/combo_exclusions_*.json."""
+    if not _EXCL_BUFFER:
+        return
+    try:
+        from core.combo_exclusions import registrar_exclusiones
+        for builder, regs in list(_EXCL_BUFFER.items()):
+            registrar_exclusiones(builder, regs)
+        _EXCL_BUFFER.clear()
+    except Exception:  # noqa: BLE001
+        pass
+
+
+try:
+    import atexit as _atexit
+    _atexit.register(_flush_exclusiones_kambi)
+except Exception:  # noqa: BLE001
+    pass
 
 
 def find_outcome(jugador: str, cuota: float, outcomes_map: Dict,
@@ -1142,6 +1191,7 @@ def build_safe_combos(stake_per_combo: int = 1000,
                 edge_info = edge_pick_map.get(name, {})
                 # D140-02 Nodo-140: pre-filtro Kambi — excluir ITF/torneos sin Betplay
                 if edge_info.get('kambi_disponible') is False:
+                    _buffer_exclusion_kambi('betplay_safe', edge_info)  # D173-10
                     continue
                 # Build torneo identifier: tier + superficie as fallback
                 torneo = edge_info.get("torneo", "")
@@ -1378,7 +1428,15 @@ def _enviar_safe_telegram(safe_links: List[Dict], metadata: Dict):
         p_both = sc.get("p_both", 0)
         legs_str = " × ".join(f"{l['jugador']}@{l['cuota_kambi']:.2f}" for l in sc["legs"])
         lines.append(f"*Safe {sc['combo_idx']}* @{cuota:.2f} P={p_both:.0%} → ${retorno:,.0f}")
-        lines.append(f"  {legs_str}\n")
+        lines.append(f"  {legs_str}")
+        # D157-06: REGLA-BAT-1 — mismo fix que _enviar_games_telegram (Nodo-170)
+        outcome_ids = sc.get("outcome_ids") or []
+        if outcome_ids:
+            # D171-02: outcome_ids reales son int (Kambi), no str — coerción defensiva
+            ids_str = ",".join(str(oid) for oid in outcome_ids)
+            lines.append(f"[ABRIR Safe {sc['combo_idx']}]({REDIRECT_BASE}{ids_str})\n")
+        else:
+            lines.append("")
 
     lines.append(f"💰 Total: ${metadata.get('total_stake', 0):,}")
     text = "\n".join(lines)
@@ -1785,13 +1843,39 @@ def build_games_combos_live(stake_per_combo: int = 2000,
         zona = s.get("zona", "COINFLIP")
         if _zona_direccion_gate(zona, s.get("direccion", "UNDER"), float(linea_actual), certeza, p_umbral=0.40):
             continue
+        # D164-02 (Nodo-164): mismos 2 gates que ya excluían piernas ITF en
+        # _fire_itf_live_games_combo (D150-01 cuota_envenenada, D150-06 set1
+        # tiebreak) — antes ausentes aquí, único punto donde se arma el coupon
+        # final para EN_VIVO e ITF_VIVO por igual. Tier-agnóstico.
+        if s.get("cuota_envenenada"):
+            continue
+        _gs1 = (s.get("score_data") or {}).get("games_set1")
+        if _gs1 is not None and int(_gs1) >= 12:
+            continue
+        # zona_diff/gap_juegos/confianza_señal: _mostrar_games_combos() (usada por
+        # ambos paths, live y estático) accede estas 3 keys sin .get() — el path
+        # estático (build_games_combos) las llena desde games_signal_report; este
+        # path live las llena desde el equivalente en la señal EN_VIVO/ITF_VIVO
+        # (games_live_*.json), que usa "zona" (no "zona_diff") y no tiene concepto
+        # de gap_juegos propio, así que se deriva de games_played vs línea.
+        zona_diff_val = (zona or "COINFLIP").lower()
+        _score_data = s.get("score_data") or {}
+        _games_played = _score_data.get("games_played")
+        try:
+            gap_juegos = abs(float(_games_played) - float(linea_actual)) if _games_played is not None else 0.0
+        except (TypeError, ValueError):
+            gap_juegos = 0.0
+        confianza_señal = (certeza or {}).get("alerta_nivel", "BAJA")
         candidatos.append({
-            "partido":    s["partido"],
-            "direccion":  s.get("direccion"),
-            "linea":      linea_actual,
-            "cuota":      cuota_actual,
-            "outcome_id": str(oc_id_actual),
-            "mercado":    "Total de juegos",
+            "partido":         s["partido"],
+            "direccion":       s.get("direccion"),
+            "linea":           linea_actual,
+            "cuota":           cuota_actual,
+            "outcome_id":      str(oc_id_actual),
+            "mercado":         "Total de juegos",
+            "zona_diff":       zona_diff_val,
+            "gap_juegos":      gap_juegos,
+            "confianza_señal": confianza_señal,
         })
 
     if not candidatos:
@@ -2101,7 +2185,15 @@ def _enviar_games_telegram(games_links: List[Dict], metadata: Dict):
             f"{l['direccion']} {l['linea']} @{l['cuota']:.2f}" for l in gc["legs"]
         )
         lines.append(f"*{gc['label']}* @{cuota:.2f} → ${retorno:,.0f} (stake ${stake:,})")
-        lines.append(f"  {legs_str}\n")
+        lines.append(f"  {legs_str}")
+        # D157-06: REGLA-BAT-1 — sin este link el coupon nunca llega apostable (Nodo-170)
+        outcome_ids = gc.get("outcome_ids") or []
+        if outcome_ids:
+            # D171-02: outcome_ids reales son int (Kambi), no str — coerción defensiva
+            ids_str = ",".join(str(oid) for oid in outcome_ids)
+            lines.append(f"[ABRIR {gc['label']}]({REDIRECT_BASE}{ids_str})\n")
+        else:
+            lines.append("")
 
     lines.append(f"Cal n={cal_n} | Total: ${metadata.get('total_stake', 0):,}")
     text = "\n".join(lines)
@@ -2463,6 +2555,7 @@ def build_mega_combos(stake_per_combo: int = 500,
                 seen_names.add(name)
                 # D140-02 Nodo-140: pre-filtro Kambi — excluir ITF/torneos sin Betplay
                 if edge_tier_map.get(name, {}).get('kambi_disponible') is False:
+                    _buffer_exclusion_kambi('betplay_mega', edge_tier_map.get(name, {}))  # D173-10
                     continue
                 # Tier: prefer plan metadata → edge_report → pick superficie
                 pick_tier = tier if tier != "unknown" else edge_tier_map.get(name, {}).get("tier", "unknown")
@@ -3078,7 +3171,14 @@ def _enviar_mega_telegram(mega_links: List[Dict], metadata: Dict):
         retorno = mc["retorno"]
         # Solo jugadores sin cuotas individuales para reducir largo
         names = " + ".join(l['jugador'].split()[-1] for l in mc["legs"])
-        lines.append(f"Mega{mc['combo_idx']} [{piernas}p] @{cuota:,.0f} ${retorno:,.0f} | {names}")
+        line = f"Mega{mc['combo_idx']} [{piernas}p] @{cuota:,.0f} ${retorno:,.0f} | {names}"
+        # D157-06: REGLA-BAT-1 — mismo fix que _enviar_games_telegram (Nodo-170)
+        outcome_ids = mc.get("outcome_ids") or []
+        if outcome_ids:
+            # D171-02: outcome_ids reales son int (Kambi), no str — coerción defensiva
+            ids_str = ",".join(str(oid) for oid in outcome_ids)
+            line += f" [ABRIR]({REDIRECT_BASE}{ids_str})"
+        lines.append(line)
 
     lines.append(f"Total: ${metadata.get('total_stake', 0):,}")
     text = "\n".join(lines)
@@ -3143,6 +3243,7 @@ def build_system_combos(stake_total: float = 3500,
             if cuota < 1.50:  # REGLA-HF-1 — nunca en pool
                 continue
             if p.get("kambi_disponible") is False:  # D140-02
+                _buffer_exclusion_kambi('betplay_sistema', p)  # D173-10
                 continue
             if _es_coinflip_sin_h2h(p_modelo, n_h2h):
                 continue
@@ -3333,8 +3434,15 @@ def _enviar_sistema_telegram(system_links: List[Dict], metadata: Dict):
     lines = [f"*SISTEMA LEAVE-ONE-OUT* ({metadata.get('n_piernas_pool','?')}p -> {n} combos)"]
     for sc in system_links:
         names = " + ".join(l['jugador'].split()[-1] for l in sc["legs"])
-        lines.append(f"Sistema{sc['combo_idx']} [{sc['piernas']}p] @{sc['cuota_combo']:,.2f} "
-                     f"${sc['retorno']:,.0f} | excl:{sc['excluye'].split()[-1]} | {names}")
+        line = (f"Sistema{sc['combo_idx']} [{sc['piernas']}p] @{sc['cuota_combo']:,.2f} "
+                f"${sc['retorno']:,.0f} | excl:{sc['excluye'].split()[-1]} | {names}")
+        # D157-06: REGLA-BAT-1 — mismo fix que _enviar_games_telegram (Nodo-170)
+        outcome_ids = sc.get("outcome_ids") or []
+        if outcome_ids:
+            # D171-02: outcome_ids reales son int (Kambi), no str — coerción defensiva
+            ids_str = ",".join(str(oid) for oid in outcome_ids)
+            line += f" [ABRIR]({REDIRECT_BASE}{ids_str})"
+        lines.append(line)
     lines.append(f"Total: ${metadata.get('total_stake', 0):,} — 1 pierna perdida = gana 1 combo, 2+ = pierde todo")
     text = "\n".join(lines)
 
@@ -3345,6 +3453,241 @@ def _enviar_sistema_telegram(system_links: List[Dict], metadata: Dict):
         logger.info("📱 Sistema enviado a Telegram ✅")
     except Exception as e:
         logger.warning(f"⚠️ Error enviando sistema a Telegram: {e}")
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# ANCLA SEGURA (Nodo-172) — 1 pierna STRONG + fillers STRONG/MODERATE (nunca LOW)
+# ══════════════════════════════════════════════════════════════════════════════
+
+def build_ancla_segura_combos(stake_total: float = 3000,
+                               n_fillers: int = 3,
+                               ancla_cuota_min: float = 2.50,
+                               filler_confidence_allowed: tuple = ("STRONG", "MODERATE")) -> tuple[List[Dict], Dict]:
+    """
+    Ancla Segura: 1 pierna ancla (confidence_flag=STRONG, cuota alta) + N fillers
+    filtrados por confidence_flag in (STRONG, MODERATE) — LOW/coinflip EXCLUIDO.
+
+    Origen: combo ganador 2026-08-03 (Castellanos/Mejia/Udvardy/Ruse @49.33x)
+    auditado a pedido del usuario — solo Castellanos era confidence_flag=STRONG
+    (p_modelo=0.801); Mejia/Udvardy/Ruse eran LOW (p_modelo 0.51-0.54, casi
+    coinflip) que acertaron por varianza, no por señal (ver shadow_book: los 4
+    quedaron SIN_TAG). build_system_combos() (Nodo-156-B) ya separa anclas de
+    fillers por cuota/p_modelo pero nunca excluye LOW explícitamente — esta
+    función cierra ese hueco con un filtro duro de calidad de señal, no solo de
+    ranking relativo.
+    """
+    edge_path = _find_latest_edge_report()
+    if not edge_path:
+        logger.error("❌ AnclaSegura: no hay edge_report disponible")
+        return [], {}
+
+    with open(edge_path, encoding="utf-8") as f:
+        edge_data = json.load(f)
+    _validate_edge_report_gate(edge_data, edge_path)  # Nodo-32 Acción 3
+
+    candidatos = []
+    seen = set()
+    for cat in ("apostar", "watchlist"):
+        for p in edge_data.get(cat, []):
+            name = p.get("favorito_predicho", "")
+            cuota = p.get("cuota_favorito", 0)
+            p_modelo = p.get("p_modelo", 0.5)
+            conf_flag = p.get("confidence_flag", "LOW")
+            if not name or name in seen:
+                continue
+            if cuota < 1.50:  # REGLA-HF-1 — nunca en pool
+                continue
+            if p.get("kambi_disponible") is False:  # D140-02
+                _buffer_exclusion_kambi('betplay_ancla_segura', p)  # D173-10
+                continue
+            seen.add(name)
+            candidatos.append({
+                "jugador": name, "cuota": cuota, "p_modelo": p_modelo,
+                "confidence_flag": conf_flag, "edge": p.get("edge", 0),
+                "tier": p.get("tier", "unknown"),
+            })
+
+    anclas_pool = [c for c in candidatos
+                   if c["confidence_flag"] == "STRONG" and c["cuota"] >= ancla_cuota_min]
+    if not anclas_pool:
+        logger.warning(f"⚠️ AnclaSegura: 0 candidatos STRONG con cuota>={ancla_cuota_min}")
+        return [], {}
+    ancla = max(anclas_pool, key=lambda c: c["cuota"])
+    ancla["tipo"] = "ancla"
+
+    fillers_pool = sorted(
+        (c for c in candidatos
+         if c["jugador"] != ancla["jugador"] and c["confidence_flag"] in filler_confidence_allowed),
+        key=lambda c: -c["p_modelo"],
+    )
+    if len(fillers_pool) < n_fillers:
+        logger.warning(
+            f"⚠️ AnclaSegura: solo {len(fillers_pool)} fillers {filler_confidence_allowed} "
+            f"disponibles (< {n_fillers} requeridos) — LOW excluido por diseño, no relajado"
+        )
+        return [], {}
+    fillers = fillers_pool[:n_fillers]
+    for f in fillers:
+        f["tipo"] = "filler"
+
+    picks = [ancla] + fillers
+
+    outcomes_map, started_map = fetch_kambi_outcomes()
+    if not outcomes_map:
+        logger.error("❌ AnclaSegura: no se pudieron obtener outcomes de Kambi")
+        return [], {}
+
+    resolved = []
+    for p in picks:
+        oc, reason = find_outcome(p["jugador"], p["cuota"], outcomes_map, started_map)
+        if oc:
+            p["outcome_id"] = str(oc["outcome_id"])
+            p["cuota_kambi"] = oc["odds"]
+            resolved.append(p)
+        else:
+            logger.info(f"  ⏭️ AnclaSegura: {p['jugador']} @{p['cuota']} — {reason} (excluido)")
+
+    if not resolved or resolved[0]["tipo"] != "ancla" or len(resolved) < 2:
+        logger.warning("⚠️ AnclaSegura: ancla no disponible en Kambi o < 2 piernas resueltas")
+        return [], {}
+
+    cuota_combo = 1.0
+    p_todas = 1.0
+    for p in resolved:
+        cuota_combo *= p["cuota_kambi"]
+        p_todas *= p["p_modelo"]
+    outcome_ids = [p["outcome_id"] for p in resolved]
+    url = f"{BETPLAY_URL_BASE}{','.join(outcome_ids)}{BETPLAY_URL_TAIL}"
+
+    combo = {
+        "combo_idx":   1,
+        "piernas":     len(resolved),
+        "legs":        [{
+            "jugador": p["jugador"], "cuota": p["cuota"], "cuota_kambi": p["cuota_kambi"],
+            "outcome_id": p["outcome_id"], "tier": p["tier"], "tipo": p["tipo"],
+            "confidence_flag": p["confidence_flag"],
+        } for p in resolved],
+        "outcome_ids": outcome_ids,
+        "url":         url,
+        "stake":       stake_total,
+        "cuota_combo": round(cuota_combo, 2),
+        "retorno":     round(stake_total * cuota_combo, 0),
+        "p_todas":     round(p_todas, 6),
+    }
+
+    metadata = {
+        "modo":              "ANCLA_SEGURA",
+        "n_piernas":         len(resolved),
+        "stake_total":       stake_total,
+        "picks":             [p["jugador"] for p in resolved],
+        "ancla":             ancla["jugador"],
+        "ancla_confidence":  ancla["confidence_flag"],
+        "fillers_confidence": [p["confidence_flag"] for p in resolved if p["tipo"] == "filler"],
+    }
+    return [combo], metadata
+
+
+def _mostrar_ancla_segura(links: List[Dict], metadata: Dict):
+    """Muestra el combo Ancla Segura en consola."""
+    if not links:
+        return
+    combo = links[0]
+    print()
+    print("=" * 70)
+    print(f"  ANCLA SEGURA — 1 STRONG + {combo['piernas']-1} fillers STRONG/MODERATE (Nodo-172)")
+    print(f"  Ancla: {metadata.get('ancla')} [{metadata.get('ancla_confidence')}]")
+    print("=" * 70)
+    for leg in combo["legs"]:
+        tag = "ANCLA" if leg["tipo"] == "ancla" else "filler"
+        print(f"  [{tag:<6}] {leg['jugador']:<25} @{leg['cuota_kambi']:.2f}  "
+              f"[{leg['confidence_flag']}] [{leg['tier']}]")
+    print(f"\n  Cuota combo: @{combo['cuota_combo']:,.2f} | Stake: ${combo['stake']:,} "
+          f"| Retorno: ${combo['retorno']:,.0f}")
+    print("=" * 70)
+
+
+def _generar_bat_ancla_segura(links: List[Dict]) -> int:
+    """Genera AnclaSegura.bat + html — reemplaza el anterior si existe (1 combo/día)."""
+    COMBOS_DIR.mkdir(exist_ok=True)
+
+    for old_bat in DESKTOP_WIN.glob("AnclaSegura*.bat"):
+        old_bat.unlink(missing_ok=True)
+    for old_html in COMBOS_DIR.glob("anclasegura*.html"):
+        old_html.unlink(missing_ok=True)
+
+    if not links:
+        return 0
+    combo = links[0]
+    url = combo.get("url")
+    if not url:
+        return 0
+
+    legs_desc = " + ".join(
+        f"{l['jugador']}@{l['cuota_kambi']:.2f}[{l['confidence_flag']}]" for l in combo["legs"]
+    )
+    html_content = f"""<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Ancla Segura</title></head>
+<body style="font-family:monospace;text-align:center;padding:40px">
+<h2>Ancla Segura [{combo['piernas']}p] @{combo['cuota_combo']:,.2f}</h2>
+<p>{legs_desc}</p>
+<p><a href="{url}" target="_blank" style="font-size:24px;padding:20px;background:#0066ff;color:white;text-decoration:none;border-radius:8px">
+Abrir en Betplay</a></p>
+</body></html>"""
+
+    html_path = COMBOS_DIR / "anclasegura.html"
+    html_path.write_text(html_content, encoding="utf-8")
+
+    bat_content = (
+        f'@echo off\r\n'
+        f'start "" "{CHROME_WIN}" '
+        f'"file:///C:\\users\\hogar\\Desktop\\combos\\anclasegura.html"\r\n'
+    )
+    bat_path = DESKTOP_WIN / "AnclaSegura.bat"
+    bat_path.write_text(bat_content, encoding="utf-8")
+
+    try:
+        if _combo_registry_available:
+            _cr = _ComboRegistry()
+            _cr.log_combo(
+                "AnclaSegura", "ANCLA_SEGURA", "AnclaSegura",
+                [l["jugador"] for l in combo["legs"]],
+                [l["cuota_kambi"] for l in combo["legs"]],
+                combo.get("stake", 0),
+            )
+    except Exception:
+        pass
+
+    logger.info(f"  📄 AnclaSegura.bat — [{combo['piernas']}p @{combo['cuota_combo']:,.2f}] {legs_desc[:80]}")
+    return 1
+
+
+def _enviar_ancla_segura_telegram(links: List[Dict], metadata: Dict):
+    """Envía resumen del combo Ancla Segura a Telegram."""
+    if not links:
+        return
+    combo = links[0]
+    names = " + ".join(f"{l['jugador'].split()[-1]}[{l['confidence_flag']}]" for l in combo["legs"])
+    lines = [
+        f"*ANCLA SEGURA* (Nodo-172) — {combo['piernas']}p @{combo['cuota_combo']:,.2f} "
+        f"${combo['retorno']:,.0f}",
+        f"Ancla: {metadata.get('ancla','').split()[-1] if metadata.get('ancla') else '?'} "
+        f"[{metadata.get('ancla_confidence','')}]",
+        names,
+    ]
+    outcome_ids = combo.get("outcome_ids") or []
+    if outcome_ids:
+        ids_str = ",".join(str(oid) for oid in outcome_ids)  # D171-02: coerción int→str
+        lines.append(f"[ABRIR]({REDIRECT_BASE}{ids_str})")
+    lines.append(f"Stake: ${combo.get('stake', 0):,} — solo fillers STRONG/MODERATE, LOW excluido")
+    text = "\n".join(lines)
+
+    try:
+        data = json.dumps({"chat_id": TG_CHAT, "text": text, "parse_mode": "Markdown"}).encode()
+        req = urllib.request.Request(TG_URL, data=data, headers={"Content-Type": "application/json"})
+        urllib.request.urlopen(req, timeout=10)
+        logger.info("📱 AnclaSegura enviado a Telegram ✅")
+    except Exception as e:
+        logger.warning(f"⚠️ Error enviando ancla segura a Telegram: {e}")
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -4060,6 +4403,15 @@ def main():
                         help="Stake TOTAL repartido entre los N combos del sistema (default: $3500)")
     parser.add_argument("--sistema-ancla-min", type=float, default=1.65,
                         help="Cuota mínima para calificar como ancla (default: 1.65)")
+    parser.add_argument("--ancla-segura", action="store_true",
+                        help="Nodo-172: 1 pierna ancla STRONG + fillers STRONG/MODERATE "
+                             "(LOW/coinflip excluido explícitamente)")
+    parser.add_argument("--ancla-segura-stake", type=float, default=3000,
+                        help="Stake del combo Ancla Segura (default: $3000)")
+    parser.add_argument("--ancla-segura-fillers", type=int, default=3,
+                        help="Número de fillers STRONG/MODERATE (default: 3)")
+    parser.add_argument("--ancla-segura-cuota-min", type=float, default=2.50,
+                        help="Cuota mínima para calificar como ancla STRONG (default: 2.50)")
     parser.add_argument("--no-dispersion-guard", action="store_true",
                         help="Disable Dispersion Guard (Nodo-25)")
     parser.add_argument("--allow-extra", action="store_true",
@@ -4149,29 +4501,40 @@ def main():
             max_age_h=args.max_plan_age_h,
             override_stake=args.live_stake,
         )
-        if not combo_links:
+        # D171-01: --games/--mega/--safe/--sistema son motores independientes
+        # (no dependen de trader_plans) — antes, trader_plans viejos (>4h)
+        # mataban TODO el proceso aquí con sys.exit(1) antes de llegar a la
+        # sección GAMES (linea ~4277), aunque D166-01 dispare --games --live
+        # --telegram con una señal en vivo perfectamente válida. Ver Nodo-171.
+        if not combo_links and not (args.games or args.mega or args.safe or args.sistema or args.ancla_segura):
             sys.exit(1)
 
-        mostrar_combos(combo_links, metadata)
+        if combo_links:
+            mostrar_combos(combo_links, metadata)
 
-        if args.dry_run:
-            return
+            if args.dry_run:
+                return
 
-        if args.console:
-            mostrar_consola(combo_links)
-            return
+            if args.console:
+                mostrar_consola(combo_links)
+                return
 
-        _out_dir = Path(args.output_dir) if args.output_dir else None
-        n = generar_bat_chrome(combo_links, output_dir=_out_dir)
-        if n:
-            dest_label = str(_out_dir) if _out_dir else "escritorio"
-            print(f"\n  {n} archivos Combo*.bat en {dest_label}")
-            print("  Flujo: borra ticket (X) -> doble clic .bat -> Chrome -> stake -> apostar")
+            _out_dir = Path(args.output_dir) if args.output_dir else None
+            n = generar_bat_chrome(combo_links, output_dir=_out_dir)
+            if n:
+                dest_label = str(_out_dir) if _out_dir else "escritorio"
+                print(f"\n  {n} archivos Combo*.bat en {dest_label}")
+                print("  Flujo: borra ticket (X) -> doble clic .bat -> Chrome -> stake -> apostar")
 
-        if args.telegram:
-            ok = enviar_combos_telegram(combo_links, metadata)
-            if ok:
-                logger.info("📱 Resumen enviado a Telegram ✅")
+            if args.telegram:
+                ok = enviar_combos_telegram(combo_links, metadata)
+                if ok:
+                    logger.info("📱 Resumen enviado a Telegram ✅")
+        else:
+            logger.info(
+                "[CAPA-LIVE] Sin combos generales (trader_plans stale/vacío) — "
+                "continuando con modos independientes solicitados (D171-01)"
+            )
 
         # ── MEGA-COMBOS: añadir cross-tier si --mega ──
         if args.mega:
@@ -4229,10 +4592,17 @@ def main():
             # (games_live_*.json) sobre el reporte estático pre-partido — evita
             # coupons con outcome_id muerto cuando la línea de mercado se movió.
             games_links, games_meta = build_games_combos_live(stake_per_combo=args.games_stake)
+            # D171-03: NO caer a build_games_combos() (reporte estático, a veces
+            # de horas atrás) cuando estamos en modo --live y build_games_combos_live()
+            # no encontró candidatos válidos (mercado ya no tradeable ahora mismo).
+            # Antes este fallback silencioso mandaba combos con outcome_id de
+            # partidos de la mañana, ya cerrados en Betplay — coupon abría vacío
+            # sin relación con la señal en vivo que disparó el mensaje. Ver Nodo-171.
             if not games_links:
-                games_links, games_meta = build_games_combos(
-                    stake_per_combo=args.games_stake,
-                    games_file=args.games_file,
+                logger.info(
+                    "[CAPA-LIVE] GAMES sin candidatos con mercado tradeable ahora "
+                    "(build_games_combos_live vacío) — se omite, NO se usa el "
+                    "reporte estático stale como fallback (D171-03)."
                 )
             if games_links:
                 _mostrar_games_combos(games_links, games_meta)
@@ -4262,6 +4632,25 @@ def main():
                         print(f"  Stake total: ${system_meta.get('total_stake', 0):,}")
                     if args.telegram:
                         _enviar_sistema_telegram(system_links, system_meta)
+
+        # ── ANCLA SEGURA: añadir si --ancla-segura ──
+        if args.ancla_segura:
+            logger.info("")
+            logger.info("Generando ANCLA SEGURA (Nodo-172)...")
+            ancla_links, ancla_meta = build_ancla_segura_combos(
+                stake_total=args.ancla_segura_stake,
+                n_fillers=args.ancla_segura_fillers,
+                ancla_cuota_min=args.ancla_segura_cuota_min,
+            )
+            if ancla_links:
+                _mostrar_ancla_segura(ancla_links, ancla_meta)
+                if not args.dry_run:
+                    n_ancla = _generar_bat_ancla_segura(ancla_links)
+                    if n_ancla:
+                        print(f"\n  AnclaSegura.bat en tu escritorio")
+                        print(f"  Stake: ${ancla_meta.get('stake_total', 0):,}")
+                    if args.telegram:
+                        _enviar_ancla_segura_telegram(ancla_links, ancla_meta)
         return
 
     # ── MODO MEGA STANDALONE (sin --live) ──
@@ -4393,6 +4782,32 @@ def main():
 
         if args.telegram:
             _enviar_sistema_telegram(system_links, system_meta)
+        return
+
+    # ── MODO ANCLA SEGURA STANDALONE (Nodo-172) ────────────────────────────────
+    if args.ancla_segura:
+        logger.info("Generando ANCLA SEGURA (Nodo-172)...")
+        ancla_links, ancla_meta = build_ancla_segura_combos(
+            stake_total=args.ancla_segura_stake,
+            n_fillers=args.ancla_segura_fillers,
+            ancla_cuota_min=args.ancla_segura_cuota_min,
+        )
+        if not ancla_links:
+            logger.error("❌ No se pudo generar Ancla Segura — revisa pool STRONG/MODERATE en edge_report")
+            sys.exit(1)
+
+        _mostrar_ancla_segura(ancla_links, ancla_meta)
+
+        if args.dry_run:
+            return
+
+        n_ancla = _generar_bat_ancla_segura(ancla_links)
+        if n_ancla:
+            print(f"\n  AnclaSegura.bat en tu escritorio")
+            print(f"  Stake: ${ancla_meta.get('stake_total', 0):,}")
+
+        if args.telegram:
+            _enviar_ancla_segura_telegram(ancla_links, ancla_meta)
         return
 
     # ── MODO EVALUAR_GAMES STANDALONE (Nodo-125) ──────────────────────────────

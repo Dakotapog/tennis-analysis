@@ -1,0 +1,198 @@
+{
+  "Travaglia S. vs Dodig M._OVER": {
+    "cuota_t0": 2.04,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-04T09:26:41",
+    "direccion": "OVER",
+    "zona": "COINFLIP"
+  },
+  "McDonald N. vs Kym J._OVER": {
+    "cuota_t0": 1.81,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-08-04T09:31:36",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Chan D. vs Tirante T. A._UNDER": {
+    "cuota_t0": 2.25,
+    "linea_t0": 24.5,
+    "ts_t0": "2026-08-04T10:03:52",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Walton A. vs Brooksby J._OVER": {
+    "cuota_t0": 1.66,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-08-04T10:03:52",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "McCabe J. vs Lajovic D._OVER": {
+    "cuota_t0": 1.92,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-08-04T10:04:24",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Baez S. vs Bellucci M._OVER": {
+    "cuota_t0": 1.97,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-04T10:05:30",
+    "direccion": "OVER",
+    "zona": "COINFLIP"
+  },
+  "Damm M. vs Tsitsipas S._UNDER": {
+    "cuota_t0": 2.3,
+    "linea_t0": 27.5,
+    "ts_t0": "2026-08-04T10:07:43",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Taberner C. vs Torres J. B._OVER": {
+    "cuota_t0": 1.92,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-08-04T10:41:55",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Osorio C. vs Alexandrova E._UNDER": {
+    "cuota_t0": 1.81,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-08-04T11:34:55",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Svajda Z. vs Shapovalov D._UNDER": {
+    "cuota_t0": 1.85,
+    "linea_t0": 24.5,
+    "ts_t0": "2026-08-04T12:01:08",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Henning P. vs Kasnikowski M._OVER": {
+    "cuota_t0": 2.07,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-04T12:08:25",
+    "direccion": "OVER",
+    "zona": "COINFLIP"
+  },
+  "Wendelken H. vs Mmoh M._OVER": {
+    "cuota_t0": 2.08,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-04T12:09:03",
+    "direccion": "OVER",
+    "zona": "COINFLIP"
+  },
+  "Bolt A. vs Shelbayh A._OVER": {
+    "cuota_t0": 1.75,
+    "linea_t0": 22.5,
+    "ts_t0": "2026-08-04T12:15:27",
+    "direccion": "OVER",
+    "zona": "COINFLIP"
+  },
+  "Schoolkate T. vs Kwon S._UNDER": {
+    "cuota_t0": 2.16,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-08-04T12:38:11",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Chwalinska M. vs Gibson T._OVER": {
+    "cuota_t0": 1.82,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-04T13:36:48",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Cerundolo J. M. vs Medjedovic H._OVER": {
+    "cuota_t0": 1.87,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-08-04T13:58:29",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Hara Friend J. D. vs Smith C._UNDER": {
+    "cuota_t0": 1.77,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-08-04T14:05:55",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Atmane T. vs Draper J._UNDER": {
+    "cuota_t0": 1.94,
+    "linea_t0": 25.5,
+    "ts_t0": "2026-08-04T14:07:01",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Loge J. vs Agamenone F._OVER": {
+    "cuota_t0": 2.02,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-08-04T14:07:34",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Ruse G. vs Potapova A._OVER": {
+    "cuota_t0": 1.56,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-08-04T14:13:04",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Sonego L. vs Griekspoor T._OVER": {
+    "cuota_t0": 1.91,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-04T14:57:23",
+    "direccion": "OVER",
+    "zona": "COINFLIP"
+  },
+  "Shang J. vs Rublev A._UNDER": {
+    "cuota_t0": 1.77,
+    "linea_t0": 25.5,
+    "ts_t0": "2026-08-04T15:16:48",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Mochizuki S. vs Marozsan F._OVER": {
+    "cuota_t0": 2.2,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-08-04T15:31:21",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Hurrion M. vs Pinnington Jones J._OVER": {
+    "cuota_t0": 1.88,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-08-04T17:35:26",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Nakashima B. vs Altmaier D._UNDER": {
+    "cuota_t0": 2.04,
+    "linea_t0": 25.5,
+    "ts_t0": "2026-08-04T17:36:38",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Tiafoe F. vs Cilic M._UNDER": {
+    "cuota_t0": 1.72,
+    "linea_t0": 26.5,
+    "ts_t0": "2026-08-04T18:07:20",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Tauson C. vs Bartunkova N._OVER": {
+    "cuota_t0": 1.6,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-04T19:48:55",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Darderi L. vs Diallo G._OVER": {
+    "cuota_t0": 1.7,
+    "linea_t0": 22.5,
+    "ts_t0": "2026-08-04T20:46:03",
+    "direccion": "OVER",
+    "zona": "COINFLIP"
+  }
+}

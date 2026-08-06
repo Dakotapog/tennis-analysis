@@ -1,0 +1,203 @@
+[
+  {
+    "nombre": "Kozyreva M.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.965 < 1.02 (conf=60.3%, cuota=1.6)",
+    "conf": 60.3,
+    "cuota": 1.6,
+    "ts": "2026-07-25T23:31:29.003254"
+  },
+  {
+    "nombre": "Payne B.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.779 < 1.02 (conf=58.6%, cuota=1.33)",
+    "conf": 58.6,
+    "cuota": 1.33,
+    "ts": "2026-07-25T23:31:29.003290"
+  },
+  {
+    "nombre": "Kudermetova P.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.653 < 1.02 (conf=53.5%, cuota=1.22)",
+    "conf": 53.5,
+    "cuota": 1.22,
+    "ts": "2026-07-25T23:31:29.003326"
+  },
+  {
+    "nombre": "Sramkova R.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.659 < 1.02 (conf=54.5%, cuota=1.21)",
+    "conf": 54.5,
+    "cuota": 1.21,
+    "ts": "2026-07-25T23:31:29.003361"
+  },
+  {
+    "nombre": "Savinykh V.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.927 < 1.02 (conf=54.2%, cuota=1.71)",
+    "conf": 54.2,
+    "cuota": 1.71,
+    "ts": "2026-07-25T23:31:29.003506"
+  },
+  {
+    "nombre": "Brown P.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=MODERATE)",
+    "conf": 55.4,
+    "cuota": 2.35,
+    "ts": "2026-07-25T23:31:29.003647"
+  },
+  {
+    "nombre": "Bynoe E.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=1.010 < 1.02 (conf=60.5%, cuota=1.67)",
+    "conf": 60.5,
+    "cuota": 1.67,
+    "ts": "2026-07-25T23:31:29.003708"
+  },
+  {
+    "nombre": "Honda N.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=1.018 < 1.02 (conf=53.0%, cuota=1.92)",
+    "conf": 53.0,
+    "cuota": 1.92,
+    "ts": "2026-07-25T23:31:29.003744"
+  },
+  {
+    "nombre": "Guzman D.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.931 < 1.02 (conf=55.4%, cuota=1.68)",
+    "conf": 55.4,
+    "cuota": 1.68,
+    "ts": "2026-07-25T23:31:29.003799"
+  },
+  {
+    "nombre": "Tomic B.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.781 < 1.02 (conf=55.0%, cuota=1.42)",
+    "conf": 55.0,
+    "cuota": 1.42,
+    "ts": "2026-07-25T23:31:29.003904"
+  },
+  {
+    "nombre": "Mejia N.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.720 < 1.02 (conf=61.0%, cuota=1.18)",
+    "conf": 61.0,
+    "cuota": 1.18,
+    "ts": "2026-07-25T23:31:29.003964"
+  },
+  {
+    "nombre": "Gojo B.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.720 < 1.02 (conf=54.1%, cuota=1.33)",
+    "conf": 54.1,
+    "cuota": 1.33,
+    "ts": "2026-07-25T23:31:29.003998"
+  },
+  {
+    "nombre": "Smith C.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.667 < 1.02 (conf=55.6%, cuota=1.2)",
+    "conf": 55.6,
+    "cuota": 1.2,
+    "ts": "2026-07-25T23:31:29.004022"
+  },
+  {
+    "nombre": "Svajda Z.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.644 < 1.02 (conf=54.6%, cuota=1.18)",
+    "conf": 54.6,
+    "cuota": 1.18,
+    "ts": "2026-07-25T23:31:29.004114"
+  },
+  {
+    "nombre": "Korpatsch T.",
+    "torneo": "?",
+    "gate": "G4",
+    "motivo": "G4: NO_ALIGNMENT net=-0.482<-0.10 — señales activamente en contra del pick",
+    "conf": 56.4,
+    "cuota": 2.3,
+    "ts": "2026-07-25T23:31:29.004284"
+  },
+  {
+    "nombre": "Virtanen O.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.837 < 1.02 (conf=55.8%, cuota=1.5)",
+    "conf": 55.8,
+    "cuota": 1.5,
+    "ts": "2026-07-25T23:31:29.004387"
+  },
+  {
+    "nombre": "Dellavedova M.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.949 < 1.02 (conf=59.3%, cuota=1.6)",
+    "conf": 59.3,
+    "cuota": 1.6,
+    "ts": "2026-07-25T23:31:29.004447"
+  },
+  {
+    "nombre": "Bennani R.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.745 < 1.02 (conf=54.4%, cuota=1.37)",
+    "conf": 54.4,
+    "cuota": 1.37,
+    "ts": "2026-07-25T23:31:29.004619"
+  },
+  {
+    "nombre": "Martin A.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=LOW)",
+    "conf": 53.4,
+    "cuota": 2.3,
+    "ts": "2026-07-25T23:31:29.004676"
+  },
+  {
+    "nombre": "Back D.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.701 < 1.02 (conf=56.5%, cuota=1.24)",
+    "conf": 56.5,
+    "cuota": 1.24,
+    "ts": "2026-07-25T23:31:29.005070"
+  },
+  {
+    "nombre": "Voloshchuk A.",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_1 bloqueado",
+    "combo": "cobertura_1",
+    "ts": "2026-07-25T23:31:29.005584"
+  },
+  {
+    "nombre": "Teixido Garcia A.",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_2 bloqueado",
+    "combo": "cobertura_2",
+    "ts": "2026-07-25T23:31:29.005590"
+  },
+  {
+    "nombre": "Teixido Garcia A.",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_3 bloqueado",
+    "combo": "cobertura_3",
+    "ts": "2026-07-25T23:31:29.005592"
+  }
+]

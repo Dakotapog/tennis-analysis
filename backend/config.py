@@ -32,6 +32,16 @@ BROWSER_HEADLESS = True          # Ejecutar navegador sin interfaz gráfica (WSL
 BROWSER_SLOW_MO = 250            # Retardo entre acciones de Playwright (ms)
 
 # ──────────────────────────────────────────────────────────────────────────────
+# D173-07 (Nodo-173): umbral de p_modelo — FUENTE ÚNICA
+# Antes vivía duplicado: edge_calculator.py:82 (0.55) y
+# generar_tabla_favoritos2.py:982 (54, escala 0-100). Dos umbrales sobre la
+# misma cantidad en archivos distintos = drift garantizado (Nodo-173 §1.12).
+# Escala p_modelo (0-1). La tabla compara contra P_MODELO_MIN_UNDERDOG * 100.
+# ──────────────────────────────────────────────────────────────────────────────
+
+P_MODELO_MIN_UNDERDOG = 0.55  # alineado con confidence_flag MODERATE (T32-01/T32-03)
+
+# ──────────────────────────────────────────────────────────────────────────────
 # Clasificación de tier de torneo — fuente única de verdad (T21-02)
 # Usada por edge_calculator.py (λ), rivalry_analyzer.py (pesos), trader (ρ)
 # ──────────────────────────────────────────────────────────────────────────────

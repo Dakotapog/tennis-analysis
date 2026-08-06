@@ -1,0 +1,243 @@
+{
+  "generated_at": "2026-07-23T07:13:51.787830",
+  "edge_report_fuente": "edge_report_kambi_20260722_150545.json",
+  "fecha": "20260723",
+  "n_picks_analizados": 14,
+  "n_score_directo_3plus": 0,
+  "n_split": 0,
+  "h98_01_n_actual": 0,
+  "picks_score_directo_3plus": [],
+  "picks_split": [],
+  "todos_los_picks": [
+    {
+      "partido": "Kanumuri I. R. vs Clemens J.",
+      "favorito": "Kanumuri I. R.",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "RFI_tier3"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.4443,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "apostar"
+    },
+    {
+      "partido": "Arakawa N. vs Fairclough L.",
+      "favorito": "Arakawa N.",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "STRONG"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.3417,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "apostar"
+    },
+    {
+      "partido": "Suresh D. vs Alvarez M.",
+      "favorito": "Suresh D.",
+      "score_directo": 2,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "STRONG",
+        "RFI_tier1"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.301,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "apostar"
+    },
+    {
+      "partido": "Roberts J. vs Mroz M.",
+      "favorito": "Mroz M.",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "ELO_DOM"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.2799,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "apostar"
+    },
+    {
+      "partido": "Varela H. N. vs Hrda L.",
+      "favorito": "Varela H. N.",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "STRONG"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.5275,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Gonzalez Fitzmaurice E. vs Voelzke G.",
+      "favorito": "Voelzke G.",
+      "score_directo": 2,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "STRONG",
+        "RFI_tier3"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.3356,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Jeong B. vs Stephens S.",
+      "favorito": "Jeong B.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.2857,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Taguchi R. vs Rathi A.",
+      "favorito": "Rathi A.",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "ELO_DOM"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.28,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Stevens A. vs Wan I W.",
+      "favorito": "Stevens A.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.2798,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Burel C. vs Urgesi F.",
+      "favorito": "Burel C.",
+      "score_directo": 1,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [
+        "ELO_DOM"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.2116,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Leme Da Silva N. V. vs Souza M.",
+      "favorito": "Leme Da Silva N. V.",
+      "score_directo": 0,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.2996,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Mattioli F. vs Danilova A.",
+      "favorito": "Mattioli F.",
+      "score_directo": 1,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [
+        "STRONG"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.3239,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Urrutia M. F. vs Barrera Aguirre I.",
+      "favorito": "Urrutia M. F.",
+      "score_directo": 1,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [
+        "STRONG"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.231,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "McNally K. vs McCormick T.",
+      "favorito": "McCormick T.",
+      "score_directo": 1,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [
+        "HOT"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.377,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "sin_edge"
+    }
+  ]
+}

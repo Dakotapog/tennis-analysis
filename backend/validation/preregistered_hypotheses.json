@@ -873,7 +873,7 @@
       "origen_deuda": "Nodo-139 D139-07 — 2026-07-22. _build_kambi_combos_kf implementado. Sin cap de cuota — EV gate reemplaza COMBO_MAX_CUOTA=7.0 matemáticamente inválido.",
       "preregistrado": "2026-07-22",
       "umbrales_congelados": {
-        "ev_minimo": 0.10,
+        "ev_minimo": 0.1,
         "n_legs_minimos": 3,
         "cuota_rango": "[1.10, 1.80]",
         "p_modelo_minima": 0.55,
@@ -924,6 +924,129 @@
       "estado": "ACUMULANDO",
       "n_actual": 0,
       "hits": 0
+    },
+    "H165-01": {
+      "nombre": "Bonus de certeza D147 en convergencia_score ITF eleva señales a hit% >= breakeven",
+      "descripcion": "Señales ITF_VIVO que alcanzan el gate de disparo (convergencia_score>=3) SOLO gracias al bonus D165-01 (es decir, su score D142-02 original era <3 y el bonus +1 por certeza D147 ALTA/CERTEZA con p_condicional>=0.85 las empujó al umbral) tienen hit rate real >= 1/cuota_live (breakeven), medido en shadow_book. Hipótesis: el marcador real (D147) es una confirmación independiente y suficiente aunque falten componentes heurísticos previos (markov sin match, cuota_live<2.00).",
+      "origen_deuda": "Nodo-165 D165-01 — 2026-08-03. Investigación en vivo confirmó 2 señales reales (Zheng vs Kecmanovic p_condicional=0.94, Kovacevic vs Borges p_condicional=0.962) atascadas en convergencia_score=2 por falta de markov/cuota, pese a certeza D147 fuerte.",
+      "preregistrado": "2026-08-03",
+      "umbrales_congelados": {
+        "bonus_alerta_nivel": [
+          "ALTA",
+          "CERTEZA"
+        ],
+        "bonus_p_condicional_min": 0.85,
+        "bonus_valor": 1,
+        "score_cap": 5,
+        "fuente": "shadow_book.py --settle sobre picks log_games_live_pick con marca [ITF_LIVE_D165-01] en logs",
+        "nota": "PROHIBIDO cambiar bonus_p_condicional_min antes de n_stop. Solo cuenta como muestra una señal donde el bonus fue el factor decisivo (score_sin_bonus<3 Y score_con_bonus>=3) — señales que ya llegaban a 3 sin el bonus no son parte de esta hipótesis."
+      },
+      "metrica": "hit_observado / (1/cuota_live_promedio) sobre picks disparados exclusivamente por el bonus D165-01.",
+      "exito": "ratio >= 1.0 con IC Wilson 95% inferior > 0.80, n_actual >= 20.",
+      "kill_switch": "ratio < 0.80 con n >= 15 → el bonus está inflando falsos positivos, revertir a D142-02 sin bonus.",
+      "n_stop": 20,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0
+    },
+    "H166-01": {
+      "nombre": "Gate por pierna convergencia_score>=3 en alta_signals supera al disparo agregado en_vivo_count>=2",
+      "descripcion": "Combos GAMES disparados por alta_signals (ATP/WTA/Challenger/ATP1000/ATP500) bajo el nuevo gate por pierna D166-01 (convergencia_score>=3 individual, replicando _convergencia_score_itf + bonus D165-01) tienen hit rate real >= al hit rate histórico del disparo D133 viejo (en_vivo_count>=2 agregado, sin gate de calidad por señal). Hipótesis: exigir score>=3 por pierna filtra piernas débiles que el conteo agregado dejaba pasar (2 señales EN_VIVO sin ninguna confirmación de gap/cuota/markov/ranking/certeza).",
+      "origen_deuda": "Nodo-166 D166-01 — 2026-08-03. Usuario aprobó explícitamente ('Sí, replicar completo') construir para alta_signals la misma arquitectura convergencia_score que ya tenía itf_live_signals (D142-02 + bonus D165-01), reemplazando el disparo D133 agregado por un gate por pierna.",
+      "preregistrado": "2026-08-03",
+      "umbrales_congelados": {
+        "gate_convergencia_score_min": 3,
+        "score_cap": 5,
+        "componentes": [
+          "gap_juegos",
+          "cuota_live>=2.00",
+          "markov_er",
+          "ranking_gap_er",
+          "bonus_certeza_D147"
+        ],
+        "fuente": "shadow_book.py --settle sobre picks log_games_live_pick con marca [D166-01] en logs de live_desk.py",
+        "nota": "PROHIBIDO cambiar gate_convergencia_score_min antes de n_stop. Comparar contra el hit rate histórico D133 pre-cambio (segmento GAMES en shadow_book anterior a 2026-08-03) como baseline, no contra 50% plano."
+      },
+      "metrica": "hit_observado_post-D166-01 / hit_historico_D133_pre-cambio sobre picks GAMES de alta_signals (no-ITF).",
+      "exito": "ratio >= 1.0 con IC Wilson 95% inferior > 0.80, n_actual >= 20.",
+      "kill_switch": "ratio < 0.80 con n >= 15 → el gate por pierna no mejora sobre el conteo agregado, revisar componentes (markov/ranking_gap_er sin cobertura suficiente en alta_signals).",
+      "n_stop": 20,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0
+    },
+    "H173-01": {
+      "nombre": "p_modelo_cal alcanza Brier skill > 0 fuera de muestra",
+      "descripcion": "El calibrador ancla-mercado (D173-05) produce probabilidades con skill de Brier positivo contra la tasa base, en partición temporal holdout (train=70% más antiguo, holdout=30% más reciente, nunca aleatorio). Baseline medido pre-fix: skill=-0.0420, AUC=0.5752, n=727 (cifras de diagnóstico §1). Primera corrida real del ajuste (2026-08-05, scripts/fit_probability_calibrator.py): n_train=509, n_holdout=218, skill_calibrado=-0.0453 vs skill_mercado_crudo=-0.0449 (prácticamente indistinguibles), AUC=0.6104.",
+      "origen_deuda": "Nodo-173 — auditoría 2026-08-05. p_modelo tiene AUC 0.575 (ordena bien) pero skill -0.042 (escala rota).",
+      "preregistrado": "2026-08-05",
+      "umbrales_congelados": {
+        "metrica_primaria": "brier_skill_holdout",
+        "umbral_exito": 0.0,
+        "baseline_medido": -0.042,
+        "metrica_secundaria": "max_abs_sesgo_por_bin",
+        "umbral_secundario": 0.05,
+        "min_n_por_bin": 30,
+        "particion": "temporal_70_30",
+        "n_stop": 300
+      },
+      "metrica": "brier_skill_score(y_holdout, p_holdout_calibrado) vs 0.",
+      "exito": "skill_holdout > 0 en al menos 2 corridas consecutivas con n_holdout>=300.",
+      "kill_switch": "Si tras n>=300 holdout el skill sigue <=0, USE_CALIBRATOR permanece False y BLOQUE C no se implementa. Es un resultado válido: significa que el motor no aporta sobre el mercado.",
+      "n_stop": 300,
+      "estado": "ACUMULANDO",
+      "n_actual": 218,
+      "hits": 0,
+      "nota_puerta_3": "PUERTA 3 (D173-05, criterio de despliegue, no negociable) ya evaluó esta corrida y cerró BLOQUE C con 'NO APROBADO' — skill<=0 en la corrida disponible, independientemente de si n_holdout alcanzó n_stop=300. USE_CALIBRATOR=False, sin artefacto en data/probability_calibrator.json. Esta hipótesis queda ACUMULANDO solo para el registro histórico/futura reapertura del nodo, no bloquea ni desbloquea nada hoy."
+    },
+    "H173-02": {
+      "nombre": "rfi_layoff_fade: favorito corto volviendo de layoff 30-90d rinde bajo su cuota implícita",
+      "descripcion": "Picks con rfi_layoff_fade=True (favorito del mercado con cuota<1.50 e inactividad 30-89d) tienen hit rate inferior a su p_implicita. Motivado por el caso Laron M. vs Casari A. (2026-07-30): favorito @1.06 con 74d de inactividad, perdió. La capa de predicción aplica decay desde ~30d (Nodo-57) pero la capa de decisión no lo veía hasta 90d.",
+      "origen_deuda": "Nodo-173 D173-09 — brecha de umbral entre Nodo-57 (continuo desde 30d) y RFI (escalón en 90d).",
+      "preregistrado": "2026-08-05",
+      "umbrales_congelados": {
+        "condicion": "rfi_tier >= 0.5 AND rfi_is_bookie_fav AND cuota_inactivo < 1.50",
+        "metrica": "hit_real - p_implicita",
+        "umbral_exito": -0.05,
+        "n_stop": 40
+      },
+      "metrica": "hit_real - p_implicita sobre picks rfi_layoff_fade=True.",
+      "exito": "sesgo <= -0.05 sostenido con n_actual>=40 (confirma que el fade es real y explotable).",
+      "kill_switch": "Si con n>=25 el sesgo es >= 0, descartar la señal y cerrar la hipótesis.",
+      "n_stop": 40,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0,
+      "modo": "REPORTE_SOLO — no abre apuestas en Nodo-173. D173-09 (el gate que actuaría sobre esto) no se implementó porque BLOQUE C quedó bloqueado por PUERTA 3 (ver H173-01); esta hipótesis sigue acumulando en modo observacional puro."
+    },
+    "H173-03": {
+      "nombre": "T32-01 retirado: el volumen que bloqueaba es rentable prospectivamente",
+      "descripcion": "Picks marcados t32_01_habria_bloqueado=True tienen ROI flat >= 0 en acumulación prospectiva. Medición retrospectiva pre-fix (n=347, dominio cuota>=2.10): hit 0.380 vs 0.353 de los que pasaban, ROI +7.6% IC95 [-7.5%,+23.8%]. La retrospectiva tiene sesgo de selección; esta hipótesis lo mide limpio.",
+      "origen_deuda": "Nodo-173 D173-08 — T32-01 era umbral sobre escala no calibrada.",
+      "preregistrado": "2026-08-05",
+      "umbrales_congelados": {
+        "metrica": "roi_flat_1u",
+        "umbral_exito": 0.0,
+        "n_stop": 120
+      },
+      "metrica": "roi_flat_1u sobre picks t32_01_habria_bloqueado=True.",
+      "exito": "ROI flat >= 0 sostenido con n_actual>=120.",
+      "kill_switch": "Si con n>=60 el ROI flat es <= -10%, restaurar T32-01 sobre p_modelo_cal con umbral re-derivado del holdout.",
+      "n_stop": 120,
+      "estado": "BLOQUEADA",
+      "n_actual": 0,
+      "hits": 0,
+      "nota_bloqueo": "D173-08 (el gate reemplazo que produciría el flag t32_01_habria_bloqueado sobre p_modelo_cal) no se implementó — depende de un calibrador desplegado (H173-01/PUERTA 3), que no está disponible. El gate T32-01 original (sobre p_modelo crudo) sigue activo sin cambios. Esta hipótesis no puede acumular n hasta que BLOQUE C reabra."
     }
+  },
+  "H160-02": {
+    "id": "H160-02",
+    "description": "Monte Carlo condicional (D160-02) + Steam detector (D160-03) + IC95% CLT (D167-04): hit rate en señales EN_VIVO gateadas D151, extensión con cuantificación de error estándar e intervalo de confianza",
+    "metric": "P(cumplir linea | mc_condicionado) — simulación, no gate de disparo; convergencia LLN + IC95%",
+    "criterion": ">=40% baseline D151, IC95% tightens con n_sims; steam_confirmado precede breakpoint EN_VIVO >=2 ciclos",
+    "n_stop": 20,
+    "started": "2026-08-03",
+    "context": "D160-02/D160-03 especificadas en Nodo-160 pero nunca wireadas a producción — D167 implementa wiring + S E analítico + steam; REPORTE_SOLO",
+    "evidence": []
   }
 }

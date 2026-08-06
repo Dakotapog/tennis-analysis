@@ -1648,6 +1648,49 @@ def report(desde: Optional[str] = None, hasta: Optional[str] = None) -> str:
         )
         lines.append("")
 
+    # ── D173-12 (Nodo-173, BLOQUE E): segmentos de calibración ───────────────
+    lines.append("  NODO-173 CALIBRACION (D173-12):")
+    lines.append("    Advertencia de validez (obligatoria, spec §1.7): estos son picks que el")
+    lines.append("    sistema ya había superficializado (apostar + watchlist + muestras), no")
+    lines.append("    una muestra aleatoria. Hay selección. Los IC son anchos. El settlement")
+    lines.append("    ITF está incompleto.")
+    lines.append("")
+
+    if not os.path.exists(os.path.join('data', 'probability_calibrator.json')):
+        lines.append("    p_modelo vs p_modelo_cal: NO DISPONIBLE — PUERTA 3 (D173-05) no fue")
+        lines.append("    aprobada (holdout skill <= 0, ~-0.045 vs mercado crudo ~-0.045).")
+        lines.append("    USE_CALIBRATOR=False, sin artefacto desplegado. Cierre legítimo del")
+        lines.append("    nodo con bloques A/B/E (spec Nodo-173 BLOQUE C) — nada que mostrar.")
+    else:
+        lines.append("    p_modelo vs p_modelo_cal: artefacto presente pero este reporte no lo")
+        lines.append("    consume aún — revisar scripts/fit_probability_calibrator.py --report.")
+    lines.append("")
+
+    lines.append("    SEGMENTO POR BANDA DE CUOTA (§1.7):")
+    for _lo173, _hi173 in [(1.00, 1.35), (1.35, 1.60), (1.60, 1.90),
+                            (1.90, 2.30), (2.30, 3.00), (3.00, 20.0)]:
+        _recs173 = [
+            r for r in settled
+            if _lo173 <= (r.get('pick_snapshot', {}).get('cuota_favorito') or 0) < _hi173
+        ]
+        _m173 = _segment_metrics(_recs173)
+        _etq173 = f"[{_lo173:.2f},{_hi173:.2f})"
+        if _m173['n'] == 0:
+            lines.append(f"      {_etq173:<16} n=0")
+            continue
+        _sp173 = '*' if _m173['sparse'] else ''
+        _ic173 = _m173['ic']
+        lines.append(
+            f"      {_etq173:<16}{_sp173} n={_m173['n']}  hit%={_m173['hit_pct']}  "
+            f"IC95=[{_ic173[0]},{_ic173[1]}]  ROI={_m173['roi']}%  breakeven={_m173['breakeven']}"
+        )
+    lines.append("")
+
+    lines.append("    T32_01_HABRIA_BLOQUEADO (D173-08): NO DISPONIBLE — D173-08 no se")
+    lines.append("    implementó (bloqueado por PUERTA 3 fallida, ver arriba). El gate T32-01")
+    lines.append("    original sigue activo sin reemplazo; no hay picks liberados que segmentar.")
+    lines.append("")
+
     lines.append(sep)
     return "\n".join(lines)
 

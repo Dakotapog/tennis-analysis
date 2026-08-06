@@ -1,0 +1,46 @@
+[
+  {
+    "nombre": "Dimitar Kuzmanov",
+    "torneo": "CHALLENGER MASCULINO - INDIVIDUALES: Tampere (Finlandia) - Fase previa, arcilla",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=MODERATE)",
+    "conf": 56.6,
+    "cuota": 1.16,
+    "ts": "2026-07-19T23:09:38.177594"
+  },
+  {
+    "nombre": "Leonardo Rossi",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_1 bloqueado",
+    "combo": "cobertura_1",
+    "ts": "2026-07-19T23:09:38.178176"
+  },
+  {
+    "nombre": "Leonardo Rossi",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_2 bloqueado",
+    "combo": "cobertura_2",
+    "ts": "2026-07-19T23:09:38.178182"
+  },
+  {
+    "nombre": "Leonardo Rossi",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_3 bloqueado",
+    "combo": "cobertura_3",
+    "ts": "2026-07-19T23:09:38.178184"
+  },
+  {
+    "nombre": "Leonardo Rossi",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_4 bloqueado",
+    "combo": "cobertura_4",
+    "ts": "2026-07-19T23:09:38.178186"
+  },
+  {
+    "nombre": "Leonardo Rossi",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_5 bloqueado",
+    "combo": "cobertura_5",
+    "ts": "2026-07-19T23:09:38.178188"
+  }
+]

@@ -1,0 +1,317 @@
+{
+  "generated_at": "2026-07-17T01:10:14.782756",
+  "edge_report_fuente": "edge_report_20260717_011012.json",
+  "fecha": "20260717",
+  "n_picks_analizados": 15,
+  "n_score_directo_3plus": 2,
+  "n_split": 1,
+  "h98_01_n_actual": 1,
+  "picks_score_directo_3plus": [
+    {
+      "partido": "Chak Lam Coleman Wong vs Spencer Johnson",
+      "favorito": "Spencer Johnson",
+      "score_directo": 3,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT",
+        "ELO_DOM",
+        "IRP_delta_negativo"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1218,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Lucia Natal vs Nina Radovanovic",
+      "favorito": "Nina Radovanovic",
+      "score_directo": 3,
+      "score_rival_value": 1,
+      "direccion": "SPLIT",
+      "senales_activas_fav": [
+        "HOT",
+        "STRONG",
+        "IRP_delta_negativo"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.3264,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "sin_edge"
+    }
+  ],
+  "picks_split": [
+    {
+      "partido": "Lucia Natal vs Nina Radovanovic",
+      "favorito": "Nina Radovanovic",
+      "score_directo": 3,
+      "score_rival_value": 1,
+      "direccion": "SPLIT",
+      "senales_activas_fav": [
+        "HOT",
+        "STRONG",
+        "IRP_delta_negativo"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.3264,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "sin_edge"
+    }
+  ],
+  "todos_los_picks": [
+    {
+      "partido": "Rikke de Koning vs Sophie Greiner",
+      "favorito": "Sophie Greiner",
+      "score_directo": 2,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "STRONG",
+        "ELO_DOM"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.2551,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Mark Lajal vs Rio Noguchi",
+      "favorito": "Rio Noguchi",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1875,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "August Holmgren vs Justin Boulais",
+      "favorito": "Justin Boulais",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "IRP_delta_negativo"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1426,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Alaa Trifi vs Roan Jones",
+      "favorito": "Alaa Trifi",
+      "score_directo": 2,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "STRONG",
+        "IRP_delta_negativo"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1313,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Chak Lam Coleman Wong vs Spencer Johnson",
+      "favorito": "Spencer Johnson",
+      "score_directo": 3,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT",
+        "ELO_DOM",
+        "IRP_delta_negativo"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1218,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Rafael Izquierdo Luque vs Pablo Perez Ramos",
+      "favorito": "Pablo Perez Ramos",
+      "score_directo": 2,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT",
+        "IRP_delta_negativo"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1118,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Philip Sekulic vs Murphy Cassone",
+      "favorito": "Philip Sekulic",
+      "score_directo": 2,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "ELO_DOM",
+        "IRP_delta_negativo"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1028,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Mia Horvit vs Ruth Roura Llaverias",
+      "favorito": "Mia Horvit",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "IRP_delta_negativo"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0935,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Tomasz Berkieta vs Nikolai Barsukov",
+      "favorito": "Nikolai Barsukov",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0913,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Antonia Stoyanov vs Astrid Lew Yan Foon",
+      "favorito": "Astrid Lew Yan Foon",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0862,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Alana Subasic vs Belle Thompson",
+      "favorito": "Alana Subasic",
+      "score_directo": 1,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [
+        "HOT"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.2594,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Pierre Delage vs Timofei Derepasko",
+      "favorito": "Pierre Delage",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": -0.0819,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Guglielmo Verdese vs Sebastiano Cocola",
+      "favorito": "Sebastiano Cocola",
+      "score_directo": 0,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.1012,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Jana Bojovic vs Petra Konjikusic",
+      "favorito": "Petra Konjikusic",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "IRP_delta_negativo"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": -0.0145,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Lucia Natal vs Nina Radovanovic",
+      "favorito": "Nina Radovanovic",
+      "score_directo": 3,
+      "score_rival_value": 1,
+      "direccion": "SPLIT",
+      "senales_activas_fav": [
+        "HOT",
+        "STRONG",
+        "IRP_delta_negativo"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.3264,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "sin_edge"
+    }
+  ]
+}

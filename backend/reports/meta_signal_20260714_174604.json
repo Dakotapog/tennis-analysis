@@ -1,0 +1,131 @@
+{
+  "generated_at": "2026-07-14T17:46:04.251588",
+  "edge_report_fuente": "edge_report_20260714_153616.json",
+  "fecha": "20260714",
+  "n_picks_analizados": 6,
+  "n_score_directo_3plus": 1,
+  "n_split": 0,
+  "h98_01_n_actual": 1,
+  "picks_score_directo_3plus": [
+    {
+      "partido": "Spencer Johnson vs Remy Bertola",
+      "favorito": "Spencer Johnson",
+      "score_directo": 3,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT",
+        "ELO_DOM",
+        "IRP_delta_negativo"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": -0.0006,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "sin_edge"
+    }
+  ],
+  "picks_split": [],
+  "todos_los_picks": [
+    {
+      "partido": "Mark Lajal vs Trevor Svajda",
+      "favorito": "Trevor Svajda",
+      "score_directo": 2,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT",
+        "ELO_DOM"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.034,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Spencer Johnson vs Remy Bertola",
+      "favorito": "Spencer Johnson",
+      "score_directo": 3,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT",
+        "ELO_DOM",
+        "IRP_delta_negativo"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": -0.0006,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Christian Langmo vs Yibing Wu",
+      "favorito": "Yibing Wu",
+      "score_directo": 0,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.3326,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Masamichi Imamura vs James McCabe",
+      "favorito": "James McCabe",
+      "score_directo": 0,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.1506,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Alexander Rozin vs Keegan Rice",
+      "favorito": "Keegan Rice",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": -0.0567,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Daniel Milavsky vs Duncan Chan",
+      "favorito": "Daniel Milavsky",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": -0.0622,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "sin_edge"
+    }
+  ]
+}

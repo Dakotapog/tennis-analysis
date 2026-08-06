@@ -1,0 +1,208 @@
+{
+  "generated_at": "2026-07-27T10:36:19.417109",
+  "edge_report_fuente": "edge_report_kambi_20260726_002013.json",
+  "fecha": "20260727",
+  "n_picks_analizados": 11,
+  "n_score_directo_3plus": 0,
+  "n_split": 1,
+  "h98_01_n_actual": 0,
+  "picks_score_directo_3plus": [],
+  "picks_split": [
+    {
+      "partido": "Tajima N. vs Duran T.",
+      "favorito": "Duran T.",
+      "score_directo": 2,
+      "score_rival_value": 1,
+      "direccion": "SPLIT",
+      "senales_activas_fav": [
+        "HOT",
+        "STRONG"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.2614,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "sin_edge"
+    }
+  ],
+  "todos_los_picks": [
+    {
+      "partido": "McKennon M. vs Filiz S.",
+      "favorito": "Filiz S.",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.417,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "apostar"
+    },
+    {
+      "partido": "Kellovsky D. vs Berkieta T.",
+      "favorito": "Kellovsky D.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.206,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Oetzbach A. vs Petkovic M.",
+      "favorito": "Oetzbach A.",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1737,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Adrian Oetzbach vs Mika Petkovic",
+      "favorito": "Adrian Oetzbach",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1582,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Marti Pujolras A. vs Obradovic D.",
+      "favorito": "Obradovic D.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1362,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Nicod J. vs Campana Lee G.",
+      "favorito": "Campana Lee G.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0915,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Pascual Ferra R. vs Smith C.",
+      "favorito": "Smith C.",
+      "score_directo": 0,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.2132,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Anavatan M. vs Heck H.",
+      "favorito": "Heck H.",
+      "score_directo": 0,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.278,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Basic M. vs Ozdemir S. M.",
+      "favorito": "Basic M.",
+      "score_directo": 1,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [
+        "STRONG"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.3405,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Nakagawa S. vs Purtseladze S.",
+      "favorito": "Purtseladze S.",
+      "score_directo": 0,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.1154,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Tajima N. vs Duran T.",
+      "favorito": "Duran T.",
+      "score_directo": 2,
+      "score_rival_value": 1,
+      "direccion": "SPLIT",
+      "senales_activas_fav": [
+        "HOT",
+        "STRONG"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.2614,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "sin_edge"
+    }
+  ]
+}

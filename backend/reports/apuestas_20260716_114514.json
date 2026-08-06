@@ -1,0 +1,29 @@
+{
+  "ts_registro": "2026-07-16T11:45:14.935038",
+  "ts_bookmarklet": "2026-07-16T16:45:13.784Z",
+  "estado": "PENDIENTE",
+  "betslip_index": "reports/betslip_index_20260716_093432.json",
+  "n_picks": 1,
+  "picks": [
+    {
+      "outcome_id": "4260622943",
+      "jugador": "Filippo Mazzola",
+      "cuota": 3.4,
+      "cuota_kambi": 3.4,
+      "partido": "Daniele Rapagnetta vs Filippo Mazzola",
+      "match_id": "2BEASi7j",
+      "match_url": "https://www.flashscore.co/match/tennis/rapagnetta-daniele-mazzola-filippo/2BEASi7j/#/h2h",
+      "torneo": "M15 Gubbio (Italia)",
+      "superficie": "clay",
+      "tier": "itf",
+      "edge": "22.3%",
+      "p_modelo": 0.517,
+      "kelly_kl": 0.3225,
+      "stake": 0,
+      "retorno_potencial": 0,
+      "resultado_real": null,
+      "correcto": null,
+      "ganancia": null
+    }
+  ]
+}

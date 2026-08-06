@@ -1,0 +1,56 @@
+[
+  {
+    "nombre": "Burel C.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=LOW)",
+    "conf": 54.6,
+    "cuota": 1.32,
+    "ts": "2026-07-22T15:07:20.677801"
+  },
+  {
+    "nombre": "Leme Da Silva N. V.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=MODERATE)",
+    "conf": 57.0,
+    "cuota": 1.15,
+    "ts": "2026-07-22T15:07:20.677865"
+  },
+  {
+    "nombre": "Rathi A.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=MODERATE)",
+    "conf": 55.4,
+    "cuota": 3.65,
+    "ts": "2026-07-22T15:07:20.680505"
+  },
+  {
+    "nombre": "Voelzke G.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 71.3,
+    "cuota": 2.65,
+    "ts": "2026-07-22T15:07:20.681109"
+  },
+  {
+    "nombre": "Mroz M.",
+    "torneo": "?",
+    "gate": "G2",
+    "motivo": "G2: n_h2h=0 — señal insuficiente sin H2H (conf=MODERATE, edge=28.0%, kelly=0.131, axes=2, score_dir=1)",
+    "conf": 57.4,
+    "cuota": 3.4,
+    "ts": "2026-07-22T15:07:20.682663"
+  },
+  {
+    "nombre": "Varela H. N.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 84.0,
+    "cuota": 3.2,
+    "ts": "2026-07-22T15:07:20.686950"
+  }
+]

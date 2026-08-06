@@ -1,0 +1,964 @@
+{
+  "fecha": "2026-07-23",
+  "fetched_at": "2026-07-23T07:01:52",
+  "n_eventos": 162,
+  "n_jugadores": 318,
+  "players_normalized": [
+    "a gentilia nosei",
+    "a kadhem zormann",
+    "adam lynch",
+    "aditya vishal balsekar",
+    "adrian oetzbach",
+    "aj deem",
+    "alana boyce",
+    "alejandro moro canas",
+    "alejo sanchez quilez",
+    "aleksa oparnica",
+    "alevtina ibragimova",
+    "alex bulte",
+    "alex michelsen",
+    "alex molcan",
+    "alexander blockx",
+    "alexander bublik",
+    "alexander chang",
+    "alexander guajardo",
+    "alexander wagner",
+    "alexandre reco",
+    "alice rame",
+    "alina charaeva",
+    "alyssa ahn",
+    "amanda carolina nava elkin",
+    "amara brahmbhatt",
+    "ana candiotto",
+    "ana grubor",
+    "anastasia kulikova",
+    "andrea de marchi",
+    "andrej martin",
+    "andres martin",
+    "andrey rublev",
+    "angelina voloshchuk",
+    "anhelina kalinina",
+    "anna arkadianou",
+    "anna bondar",
+    "anna shkutova",
+    "annabelle xu",
+    "annemarie lazar",
+    "anouck vrancken peeters",
+    "antonia vergara rivera",
+    "ariana arseneault",
+    "ariana gilbert",
+    "august holmgren",
+    "aya el aouni",
+    "ayana akli",
+    "azariah rusher",
+    "barbora krejcikova",
+    "beatrise zeltina",
+    "berfu cengiz",
+    "blake hilsen",
+    "borna gojo",
+    "branko djuric",
+    "calin apostol",
+    "camille allegre",
+    "carles cordoba",
+    "carlos lopez montagud",
+    "carlos maria zarate",
+    "carlota martinez cirez",
+    "carolina alonso",
+    "caroline dolehide",
+    "carter craig",
+    "chak lam coleman wong",
+    "charlotte corabruneton",
+    "chase ferguson",
+    "chia yi tsao",
+    "clement chidekh",
+    "cooper han",
+    "dalila spiteri",
+    "dana guzman",
+    "daphnee mpetshi perricard",
+    "daria egorova",
+    "darja vidmanova",
+    "dasha plekhanova",
+    "david cristian carteputreda",
+    "david eichenseher",
+    "david wu",
+    "denislava glushkova",
+    "destanee aiava",
+    "dhakshineswar suresh",
+    "diana marcinkevica",
+    "dimitar kuzmanov",
+    "dominic stricker",
+    "dominik palan",
+    "duje markovina",
+    "duncan chan",
+    "dusan obradovic",
+    "eli nicholas stephenson",
+    "elina avanesyan",
+    "ella brownback",
+    "elvina kalieva",
+    "enzo kohlmann de freitas",
+    "erika sema",
+    "evan bynoe",
+    "evan lee",
+    "faris zakaryia",
+    "filip apltauer",
+    "fiona crawley",
+    "francesca curmi",
+    "francesca jones",
+    "francesca mattioli",
+    "francesca parcelli",
+    "franco roncadelli",
+    "gabriela ce",
+    "gala arangio",
+    "george hakopian",
+    "gloriana goreti nahum",
+    "gonzalo bueno",
+    "gray voelzke",
+    "h dartm lumsden",
+    "harold mayot",
+    "hayato matsuoka",
+    "henri squire",
+    "hugo car",
+    "hugo gaston",
+    "i martinsm ninomiya",
+    "i wen wan",
+    "ida wobker",
+    "ignacio buse",
+    "ignacio parisca",
+    "ilyas milad fahim",
+    "isaac becroft",
+    "isabella marton",
+    "ivan marrero curbelo",
+    "j delaneyc lock",
+    "j dominguest torres",
+    "j kovackovaa kovackova",
+    "j rojert winegar",
+    "jack loge",
+    "jacob fearnley",
+    "jacob lee",
+    "jaime faria",
+    "jamie mackenzie",
+    "javier barranco cosano",
+    "jeffrey john wolf",
+    "jenny lim",
+    "jiajing lu",
+    "johan nikles",
+    "johannus monday",
+    "joyee chan",
+    "juan bautista torres",
+    "juan estevez",
+    "julieta pareja",
+    "k drzewieckip matuszewski",
+    "kali supova",
+    "kallista liu",
+    "karolina kozakova",
+    "kate fakih",
+    "kateryna diatlova",
+    "kayla cross",
+    "kenna erickson",
+    "kira matushkina",
+    "krisha mahendran",
+    "l hammondr harsh",
+    "l miedlerm polmans",
+    "l romero gormazs sorribes tormo",
+    "l rothensteinera schueller",
+    "l zaark zimmermann",
+    "lani brotman",
+    "lanlana tararudee",
+    "laura pigossi",
+    "laurie barendse",
+    "lea nilsson",
+    "letizia corsini",
+    "lev seidman",
+    "leyre romero gormaz",
+    "liam draxl",
+    "lilli tagger",
+    "linea bajraliu",
+    "lloyd harris",
+    "loan lestir",
+    "loann massard",
+    "loic namigandet tenguere",
+    "lola giza",
+    "lorenzo comino",
+    "lorenzo joaquin rodriguez",
+    "louise kerstin marie ternstrom",
+    "luca van assche",
+    "lucas andrade da silva",
+    "lucas marionneau",
+    "lucciana perez alarcon",
+    "lucia bronzetti",
+    "luciano darderi",
+    "lucie havlickova",
+    "lucrezia stefanini",
+    "m bayerlovai sebestova",
+    "m kempena panova",
+    "m poncheto b poulsen",
+    "mai hontama",
+    "mara guth",
+    "marcandrea huesler",
+    "margaux maquet",
+    "margaux rouvroy",
+    "maria andrienko",
+    "maria florencia urrutia",
+    "maria timofeeva",
+    "marie bouzkova",
+    "marie mattel",
+    "marie mettraux",
+    "marie vogt",
+    "marko miladinovic",
+    "marko milosavljevic",
+    "martina trevisan",
+    "mary boyce deatherage",
+    "mary stoiana",
+    "mateus alves",
+    "mathys erhard",
+    "mathys picard",
+    "matias soto",
+    "matt hulme",
+    "matthew thomson",
+    "maxence rivet",
+    "mayu crossley",
+    "meritxell teixido garcia",
+    "mia ristic",
+    "mia soso",
+    "michiel de krom",
+    "mika brunold",
+    "milana maslenkova",
+    "mina hodzic",
+    "miriam bianca bulgaru",
+    "mitchell sheldon",
+    "moerani bouzige",
+    "n bartunkovad salkova",
+    "n borgesf cabral",
+    "n gadientd volkova",
+    "n schunkj stusek",
+    "naoya honda",
+    "natalie oliver",
+    "natsuki yoshimoto",
+    "nellie taraba wallberg",
+    "nicolas zanellato",
+    "nicole sifuentes",
+    "niels ratiu",
+    "nikola bartunkova",
+    "noemi basiletti",
+    "noemi maines",
+    "norbert gombos",
+    "nuria brancaccio",
+    "o luzr matos",
+    "oleksandra oliynykova",
+    "oliver crawford",
+    "olivia allegre",
+    "otto virtanen",
+    "pablo carreno busta",
+    "panna udvardy",
+    "patrick zahraj",
+    "paula badosa",
+    "pavel lagutin",
+    "pedro martinez",
+    "peter buldorini",
+    "preston brown",
+    "rafael tosetto",
+    "raphael perot",
+    "rebecca munk mortensen",
+    "reda bennani",
+    "reese frank",
+    "riley crowder",
+    "ritesh patil",
+    "robert guna",
+    "roger pascual ferra",
+    "roman andres burruchaga",
+    "ryotaro taguchi",
+    "ryuki matsuda",
+    "salvador price",
+    "sam ryan ziegann",
+    "samir hamza reguig",
+    "sanhui shin",
+    "sara bejlek",
+    "sarah mildren",
+    "savannah broadus",
+    "sebastian baez",
+    "sebastian sorger",
+    "shintaro mochizuki",
+    "sonja zhenikhova",
+    "sophie llewellyn",
+    "t korpatschn noha akugue",
+    "t loofk uesugi",
+    "taisei ichikawa",
+    "tamara korpatsch",
+    "tatum evans",
+    "teah chavez",
+    "teodora kostovic",
+    "tereza valentova",
+    "thanaphat boosarawongse",
+    "thara gowda",
+    "thilo behrmann",
+    "tiago torres",
+    "timofei skatov",
+    "tomas martin etcheverry",
+    "tomasz berkieta",
+    "tristan boyer",
+    "tudor batin",
+    "v kirkovb stevens",
+    "victoria gomez ohayon",
+    "vignesh gogineni",
+    "viktor durasovic",
+    "vincent dullinger",
+    "viola turini",
+    "vivian wolff",
+    "vlad cristian breazu",
+    "vlado jankanj",
+    "william jansen",
+    "xinxin yao",
+    "ya yi yang",
+    "yanaki milev",
+    "yanis ghazouani durand",
+    "yanki erel",
+    "yannick hanfmann",
+    "yannik kelm",
+    "yassine dlimi",
+    "yeon woo ku",
+    "yuki naito",
+    "yulia putintseva",
+    "yuta shimizu",
+    "z kulambayevad semenistaja",
+    "zavier augustin",
+    "zejda veljacic"
+  ],
+  "event_pairs": [
+    [
+      "nikola bartunkova",
+      "lanlana tararudee"
+    ],
+    [
+      "samir hamza reguig",
+      "robert guna"
+    ],
+    [
+      "carles cordoba",
+      "carlos lopez montagud"
+    ],
+    [
+      "j delaneyc lock",
+      "l hammondr harsh"
+    ],
+    [
+      "andrea de marchi",
+      "lorenzo comino"
+    ],
+    [
+      "yanki erel",
+      "dominik palan"
+    ],
+    [
+      "margaux maquet",
+      "francesca parcelli"
+    ],
+    [
+      "diana marcinkevica",
+      "zejda veljacic"
+    ],
+    [
+      "david cristian carteputreda",
+      "calin apostol"
+    ],
+    [
+      "peter buldorini",
+      "yanis ghazouani durand"
+    ],
+    [
+      "yannick hanfmann",
+      "sebastian baez"
+    ],
+    [
+      "oleksandra oliynykova",
+      "leyre romero gormaz"
+    ],
+    [
+      "alejandro moro canas",
+      "ivan marrero curbelo"
+    ],
+    [
+      "noemi maines",
+      "karolina kozakova"
+    ],
+    [
+      "sonja zhenikhova",
+      "marie mettraux"
+    ],
+    [
+      "tomasz berkieta",
+      "patrick zahraj"
+    ],
+    [
+      "marcandrea huesler",
+      "juan bautista torres"
+    ],
+    [
+      "luca van assche",
+      "pablo carreno busta"
+    ],
+    [
+      "anouck vrancken peeters",
+      "denislava glushkova"
+    ],
+    [
+      "sebastian sorger",
+      "faris zakaryia"
+    ],
+    [
+      "jamie mackenzie",
+      "viktor durasovic"
+    ],
+    [
+      "m poncheto b poulsen",
+      "k drzewieckip matuszewski"
+    ],
+    [
+      "anna shkutova",
+      "meritxell teixido garcia"
+    ],
+    [
+      "ignacio parisca",
+      "pavel lagutin"
+    ],
+    [
+      "n gadientd volkova",
+      "a gentilia nosei"
+    ],
+    [
+      "t loofk uesugi",
+      "a kadhem zormann"
+    ],
+    [
+      "dusan obradovic",
+      "vlado jankanj"
+    ],
+    [
+      "branko djuric",
+      "marko milosavljevic"
+    ],
+    [
+      "vivian wolff",
+      "ida wobker"
+    ],
+    [
+      "victoria gomez ohayon",
+      "aya el aouni"
+    ],
+    [
+      "marie vogt",
+      "rebecca munk mortensen"
+    ],
+    [
+      "lea nilsson",
+      "margaux rouvroy"
+    ],
+    [
+      "nellie taraba wallberg",
+      "mara guth"
+    ],
+    [
+      "m kempena panova",
+      "l zaark zimmermann"
+    ],
+    [
+      "milana maslenkova",
+      "annemarie lazar"
+    ],
+    [
+      "kateryna diatlova",
+      "marie mattel"
+    ],
+    [
+      "berfu cengiz",
+      "linea bajraliu"
+    ],
+    [
+      "l rothensteinera schueller",
+      "m bayerlovai sebestova"
+    ],
+    [
+      "i martinsm ninomiya",
+      "j kovackovaa kovackova"
+    ],
+    [
+      "viola turini",
+      "beatrise zeltina"
+    ],
+    [
+      "gabriela ce",
+      "mia ristic"
+    ],
+    [
+      "johan nikles",
+      "niels ratiu"
+    ],
+    [
+      "vlad cristian breazu",
+      "tudor batin"
+    ],
+    [
+      "vincent dullinger",
+      "raphael perot"
+    ],
+    [
+      "adrian oetzbach",
+      "jack loge"
+    ],
+    [
+      "jenny lim",
+      "daphnee mpetshi perricard"
+    ],
+    [
+      "paula badosa",
+      "panna udvardy"
+    ],
+    [
+      "yanaki milev",
+      "aleksa oparnica"
+    ],
+    [
+      "mai hontama",
+      "lilli tagger"
+    ],
+    [
+      "tomas martin etcheverry",
+      "ignacio buse"
+    ],
+    [
+      "laurie barendse",
+      "louise kerstin marie ternstrom"
+    ],
+    [
+      "franco roncadelli",
+      "henri squire"
+    ],
+    [
+      "kali supova",
+      "teodora kostovic"
+    ],
+    [
+      "t korpatschn noha akugue",
+      "z kulambayevad semenistaja"
+    ],
+    [
+      "nuria brancaccio",
+      "carlota martinez cirez"
+    ],
+    [
+      "yannik kelm",
+      "david eichenseher"
+    ],
+    [
+      "carlos maria zarate",
+      "salvador price"
+    ],
+    [
+      "h dartm lumsden",
+      "n bartunkovad salkova"
+    ],
+    [
+      "jaime faria",
+      "gonzalo bueno"
+    ],
+    [
+      "hugo car",
+      "loann massard"
+    ],
+    [
+      "maxence rivet",
+      "lucas marionneau"
+    ],
+    [
+      "charlotte corabruneton",
+      "maria andrienko"
+    ],
+    [
+      "j dominguest torres",
+      "o luzr matos"
+    ],
+    [
+      "alexander wagner",
+      "andrej martin"
+    ],
+    [
+      "maria timofeeva",
+      "sara bejlek"
+    ],
+    [
+      "alexander bublik",
+      "alex molcan"
+    ],
+    [
+      "dimitar kuzmanov",
+      "otto virtanen"
+    ],
+    [
+      "n schunkj stusek",
+      "l romero gormazs sorribes tormo"
+    ],
+    [
+      "lorenzo joaquin rodriguez",
+      "nicolas zanellato"
+    ],
+    [
+      "juan estevez",
+      "enzo kohlmann de freitas"
+    ],
+    [
+      "matias soto",
+      "rafael tosetto"
+    ],
+    [
+      "alexandre reco",
+      "loic namigandet tenguere"
+    ],
+    [
+      "thilo behrmann",
+      "mathys erhard"
+    ],
+    [
+      "cooper han",
+      "filip apltauer"
+    ],
+    [
+      "lucie havlickova",
+      "barbora krejcikova"
+    ],
+    [
+      "riley crowder",
+      "natalie oliver"
+    ],
+    [
+      "reese frank",
+      "ariana gilbert"
+    ],
+    [
+      "carter craig",
+      "jacob lee"
+    ],
+    [
+      "mika brunold",
+      "harold mayot"
+    ],
+    [
+      "kayla cross",
+      "elvina kalieva"
+    ],
+    [
+      "elina avanesyan",
+      "yulia putintseva"
+    ],
+    [
+      "vignesh gogineni",
+      "naoya honda"
+    ],
+    [
+      "mary stoiana",
+      "julieta pareja"
+    ],
+    [
+      "savannah broadus",
+      "caroline dolehide"
+    ],
+    [
+      "yeon woo ku",
+      "darja vidmanova"
+    ],
+    [
+      "jacob fearnley",
+      "tristan boyer"
+    ],
+    [
+      "eli nicholas stephenson",
+      "lev seidman"
+    ],
+    [
+      "mathys picard",
+      "loan lestir"
+    ],
+    [
+      "j rojert winegar",
+      "l miedlerm polmans"
+    ],
+    [
+      "alejo sanchez quilez",
+      "oliver crawford"
+    ],
+    [
+      "francesca mattioli",
+      "lucciana perez alarcon"
+    ],
+    [
+      "laura pigossi",
+      "maria florencia urrutia"
+    ],
+    [
+      "lucas andrade da silva",
+      "mateus alves"
+    ],
+    [
+      "mina hodzic",
+      "noemi basiletti"
+    ],
+    [
+      "lola giza",
+      "xinxin yao"
+    ],
+    [
+      "kallista liu",
+      "olivia allegre"
+    ],
+    [
+      "camille allegre",
+      "nicole sifuentes"
+    ],
+    [
+      "matthew thomson",
+      "aditya vishal balsekar"
+    ],
+    [
+      "gray voelzke",
+      "preston brown"
+    ],
+    [
+      "mary boyce deatherage",
+      "amara brahmbhatt"
+    ],
+    [
+      "zavier augustin",
+      "alex bulte"
+    ],
+    [
+      "anna arkadianou",
+      "alana boyce"
+    ],
+    [
+      "azariah rusher",
+      "blake hilsen"
+    ],
+    [
+      "william jansen",
+      "ilyas milad fahim"
+    ],
+    [
+      "lani brotman",
+      "kira matushkina"
+    ],
+    [
+      "andrey rublev",
+      "timofei skatov"
+    ],
+    [
+      "kenna erickson",
+      "letizia corsini"
+    ],
+    [
+      "javier barranco cosano",
+      "michiel de krom"
+    ],
+    [
+      "reda bennani",
+      "adam lynch"
+    ],
+    [
+      "roger pascual ferra",
+      "andres martin"
+    ],
+    [
+      "francesca jones",
+      "miriam bianca bulgaru"
+    ],
+    [
+      "ayana akli",
+      "lucrezia stefanini"
+    ],
+    [
+      "francesca curmi",
+      "martina trevisan"
+    ],
+    [
+      "alevtina ibragimova",
+      "alice rame"
+    ],
+    [
+      "carolina alonso",
+      "amanda carolina nava elkin"
+    ],
+    [
+      "yuki naito",
+      "fiona crawley"
+    ],
+    [
+      "daria egorova",
+      "ana candiotto"
+    ],
+    [
+      "mayu crossley",
+      "joyee chan"
+    ],
+    [
+      "mitchell sheldon",
+      "marko miladinovic"
+    ],
+    [
+      "kate fakih",
+      "tatum evans"
+    ],
+    [
+      "pedro martinez",
+      "luciano darderi"
+    ],
+    [
+      "ritesh patil",
+      "aj deem"
+    ],
+    [
+      "duncan chan",
+      "shintaro mochizuki"
+    ],
+    [
+      "borna gojo",
+      "dhakshineswar suresh"
+    ],
+    [
+      "jeffrey john wolf",
+      "chak lam coleman wong"
+    ],
+    [
+      "dominic stricker",
+      "norbert gombos"
+    ],
+    [
+      "dana guzman",
+      "anastasia kulikova"
+    ],
+    [
+      "evan bynoe",
+      "yassine dlimi"
+    ],
+    [
+      "erika sema",
+      "teah chavez"
+    ],
+    [
+      "sophie llewellyn",
+      "angelina voloshchuk"
+    ],
+    [
+      "antonia vergara rivera",
+      "krisha mahendran"
+    ],
+    [
+      "annabelle xu",
+      "ariana arseneault"
+    ],
+    [
+      "dalila spiteri",
+      "lucia bronzetti"
+    ],
+    [
+      "alyssa ahn",
+      "ana grubor"
+    ],
+    [
+      "alex michelsen",
+      "lloyd harris"
+    ],
+    [
+      "gloriana goreti nahum",
+      "ella brownback"
+    ],
+    [
+      "isabella marton",
+      "thara gowda"
+    ],
+    [
+      "johannus monday",
+      "yuta shimizu"
+    ],
+    [
+      "dasha plekhanova",
+      "jiajing lu"
+    ],
+    [
+      "august holmgren",
+      "liam draxl"
+    ],
+    [
+      "hayato matsuoka",
+      "clement chidekh"
+    ],
+    [
+      "gala arangio",
+      "mia soso"
+    ],
+    [
+      "david wu",
+      "evan lee"
+    ],
+    [
+      "ya yi yang",
+      "chia yi tsao"
+    ],
+    [
+      "moerani bouzige",
+      "matt hulme"
+    ],
+    [
+      "chase ferguson",
+      "duje markovina"
+    ],
+    [
+      "destanee aiava",
+      "sarah mildren"
+    ],
+    [
+      "alexander guajardo",
+      "george hakopian"
+    ],
+    [
+      "i wen wan",
+      "natsuki yoshimoto"
+    ],
+    [
+      "alexander chang",
+      "sanhui shin"
+    ],
+    [
+      "ryuki matsuda",
+      "taisei ichikawa"
+    ],
+    [
+      "ryotaro taguchi",
+      "isaac becroft"
+    ],
+    [
+      "sam ryan ziegann",
+      "thanaphat boosarawongse"
+    ],
+    [
+      "marie bouzkova",
+      "tereza valentova"
+    ],
+    [
+      "anna bondar",
+      "alina charaeva"
+    ],
+    [
+      "tamara korpatsch",
+      "anhelina kalinina"
+    ],
+    [
+      "tiago torres",
+      "hugo gaston"
+    ],
+    [
+      "roman andres burruchaga",
+      "alexander blockx"
+    ],
+    [
+      "v kirkovb stevens",
+      "n borgesf cabral"
+    ]
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "generated_at": "2026-07-22T07:25:04.358763",
+  "edge_report_fuente": "edge_report_20260722_072502.json",
+  "fecha": "20260722",
+  "n_picks_analizados": 3,
+  "n_score_directo_3plus": 0,
+  "n_split": 0,
+  "h98_01_n_actual": 0,
+  "picks_score_directo_3plus": [],
+  "picks_split": [],
+  "todos_los_picks": [
+    {
+      "partido": "Pedro Martinez vs Luciano Darderi",
+      "favorito": "Luciano Darderi",
+      "score_directo": 0,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.2066,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Luca Van Assche vs Pablo Carreno Busta",
+      "favorito": "Pablo Carreno Busta",
+      "score_directo": 1,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [
+        "IRP_delta_negativo"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.1611,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Jaime Faria vs Gonzalo Bueno",
+      "favorito": "Jaime Faria",
+      "score_directo": 0,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.2944,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "sin_edge"
+    }
+  ]
+}

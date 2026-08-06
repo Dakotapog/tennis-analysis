@@ -97,8 +97,10 @@ def _make_partido(
         ra["phantom_identity_p1"] = {"phantom": True, "type": "HOMONYM_GAP"}
     ra[f"{jugador1}_elo"] = elo_fav
     ra[f"{jugador2}_elo"] = elo_rival
-    ra[f"{jugador1}_ranking"] = 100
-    ra[f"{jugador2}_ranking"] = 80
+    _sanit1 = jugador1.replace(" ", "_").replace(".", "_").strip("_")
+    _sanit2 = jugador2.replace(" ", "_").replace(".", "_").strip("_")
+    ra[f"{_sanit1}_ranking"] = 100
+    ra[f"{_sanit2}_ranking"] = 80
 
     return {
         "jugador1": jugador1,

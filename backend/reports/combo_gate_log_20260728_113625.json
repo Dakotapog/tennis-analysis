@@ -1,0 +1,110 @@
+[
+  {
+    "nombre": "Learner Tien",
+    "torneo": "ATP - INDIVIDUALES: Washington (Estados Unidos), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.668 < 1.02 (conf=55.7%, cuota=1.2)",
+    "conf": 55.7,
+    "cuota": 1.2,
+    "ts": "2026-07-28T11:36:24.966015"
+  },
+  {
+    "nombre": "Alex Michelsen",
+    "torneo": "ATP - INDIVIDUALES: Washington (Estados Unidos), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.685 < 1.02 (conf=54.8%, cuota=1.25)",
+    "conf": 54.8,
+    "cuota": 1.25,
+    "ts": "2026-07-28T11:36:24.966077"
+  },
+  {
+    "nombre": "Polina Kudermetova",
+    "torneo": "WTA - INDIVIDUALES: Washington (Estados Unidos), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.961 < 1.02 (conf=54.9%, cuota=1.75)",
+    "conf": 54.9,
+    "cuota": 1.75,
+    "ts": "2026-07-28T11:36:24.966207"
+  },
+  {
+    "nombre": "Anastasia Potapova",
+    "torneo": "WTA - INDIVIDUALES: Washington (Estados Unidos), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.866 < 1.02 (conf=75.3%, cuota=1.15)",
+    "conf": 75.3,
+    "cuota": 1.15,
+    "ts": "2026-07-28T11:36:24.966269"
+  },
+  {
+    "nombre": "Zeynep Sonmez",
+    "torneo": "WTA - INDIVIDUALES: Memphis (Estados Unidos), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.615 < 1.02 (conf=53.5%, cuota=1.15)",
+    "conf": 53.5,
+    "cuota": 1.15,
+    "ts": "2026-07-28T11:36:24.966309"
+  },
+  {
+    "nombre": "Darja Vidmanova",
+    "torneo": "WTA - INDIVIDUALES: Memphis (Estados Unidos), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.772 < 1.02 (conf=54.0%, cuota=1.43)",
+    "conf": 54.0,
+    "cuota": 1.43,
+    "ts": "2026-07-28T11:36:24.966339"
+  },
+  {
+    "nombre": "Mccartney Kessler",
+    "torneo": "WTA - INDIVIDUALES: Memphis (Estados Unidos), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.702 < 1.02 (conf=53.2%, cuota=1.32)",
+    "conf": 53.2,
+    "cuota": 1.32,
+    "ts": "2026-07-28T11:36:24.966418"
+  },
+  {
+    "nombre": "Sara Saito",
+    "torneo": "ITF FEMENINO - INDIVIDUALES: W75 Lexington, KY (Estados Unidos), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.622 < 1.02 (conf=54.1%, cuota=1.15)",
+    "conf": 54.1,
+    "cuota": 1.15,
+    "ts": "2026-07-28T11:36:24.967634"
+  },
+  {
+    "nombre": "Juan Sebastian Osorio",
+    "torneo": "ITF MASCULINO - INDIVIDUALES: M15 Sao Paulo (Brasil), arcilla",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.891 < 1.02 (conf=62.3%, cuota=1.43)",
+    "conf": 62.3,
+    "cuota": 1.43,
+    "ts": "2026-07-28T11:36:24.967942"
+  },
+  {
+    "nombre": "Mananchaya Sawangkaew",
+    "torneo": "CHALLENGER FEMENINO - INDIVIDUALES: Vancouver (Canadá), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.702 < 1.02 (conf=54.4%, cuota=1.29)",
+    "conf": 54.4,
+    "cuota": 1.29,
+    "ts": "2026-07-28T11:36:24.968062"
+  },
+  {
+    "nombre": "Benjamin Bonzi",
+    "torneo": "CHALLENGER MASCULINO - INDIVIDUALES: Vancouver (Canadá), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.625 < 1.02 (conf=53.9%, cuota=1.16)",
+    "conf": 53.9,
+    "cuota": 1.16,
+    "ts": "2026-07-28T11:36:24.968370"
+  },
+  {
+    "nombre": "Toby Samuel",
+    "torneo": "CHALLENGER MASCULINO - INDIVIDUALES: Vancouver (Canadá), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.807 < 1.02 (conf=55.3%, cuota=1.46)",
+    "conf": 55.3,
+    "cuota": 1.46,
+    "ts": "2026-07-28T11:36:24.968401"
+  }
+]

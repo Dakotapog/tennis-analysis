@@ -1,0 +1,209 @@
+[
+  {
+    "nombre": "Smith C.",
+    "torneo": "ATP - INDIVIDUALES: Los Cabos (México) - Fase previa, dura",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=MODERATE)",
+    "conf": 55.6,
+    "cuota": 1.3,
+    "ts": "2026-07-26T00:21:12.536297"
+  },
+  {
+    "nombre": "Heck H.",
+    "torneo": "CHALLENGER MASCULINO - INDIVIDUALES: Samsun (Turquía) - Fase previa, dura",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=LOW)",
+    "conf": 53.5,
+    "cuota": 1.23,
+    "ts": "2026-07-26T00:21:12.536361"
+  },
+  {
+    "nombre": "Purtseladze S.",
+    "torneo": "CHALLENGER MASCULINO - INDIVIDUALES: Samsun (Turquía) - Fase previa, dura",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=MODERATE)",
+    "conf": 57.9,
+    "cuota": 1.44,
+    "ts": "2026-07-26T00:21:12.536437"
+  },
+  {
+    "nombre": "Bondioli F.",
+    "torneo": "CHALLENGER MASCULINO - INDIVIDUALES: San Marino (San Marino) - Fase previa, arcilla",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.728 < 1.02 (conf=62.8%, cuota=1.16)",
+    "conf": 62.8,
+    "cuota": 1.16,
+    "ts": "2026-07-26T00:21:12.537063"
+  },
+  {
+    "nombre": "Kicker N.",
+    "torneo": "CHALLENGER MASCULINO - INDIVIDUALES: Liberec (República Checa) - Fase previa, arcilla",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.660 < 1.02 (conf=56.4%, cuota=1.17)",
+    "conf": 56.4,
+    "cuota": 1.17,
+    "ts": "2026-07-26T00:21:12.537663"
+  },
+  {
+    "nombre": "Obradovic D.",
+    "torneo": "CHALLENGER MASCULINO - INDIVIDUALES: Bonn (Alemania) - Fase previa, arcilla",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=MODERATE)",
+    "conf": 57.1,
+    "cuota": 2.3,
+    "ts": "2026-07-26T00:21:12.537750"
+  },
+  {
+    "nombre": "Damas M.",
+    "torneo": "CHALLENGER MASCULINO - INDIVIDUALES: Bonn (Alemania) - Fase previa, arcilla",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.673 < 1.02 (conf=54.7%, cuota=1.23)",
+    "conf": 54.7,
+    "cuota": 1.23,
+    "ts": "2026-07-26T00:21:12.537791"
+  },
+  {
+    "nombre": "Wallin O.",
+    "torneo": "CHALLENGER MASCULINO - INDIVIDUALES: Bonn (Alemania) - Fase previa, arcilla",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.778 < 1.02 (conf=63.8%, cuota=1.22)",
+    "conf": 63.8,
+    "cuota": 1.22,
+    "ts": "2026-07-26T00:21:12.537839"
+  },
+  {
+    "nombre": "Topo M.",
+    "torneo": "CHALLENGER MASCULINO - INDIVIDUALES: Bonn (Alemania) - Fase previa, arcilla",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.683 < 1.02 (conf=55.5%, cuota=1.23)",
+    "conf": 55.5,
+    "cuota": 1.23,
+    "ts": "2026-07-26T00:21:12.537894"
+  },
+  {
+    "nombre": "Pucinelli de Almeida M.",
+    "torneo": "CHALLENGER MASCULINO - INDIVIDUALES: Bonn (Alemania) - Fase previa, arcilla",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.648 < 1.02 (conf=55.9%, cuota=1.16)",
+    "conf": 55.9,
+    "cuota": 1.16,
+    "ts": "2026-07-26T00:21:12.537921"
+  },
+  {
+    "nombre": "Kostovic T.",
+    "torneo": "ITF FEMENINO - INDIVIDUALES: W100 Amstetten (Austria), arcilla",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.726 < 1.02 (conf=56.3%, cuota=1.29)",
+    "conf": 56.3,
+    "cuota": 1.29,
+    "ts": "2026-07-26T00:21:12.537964"
+  },
+  {
+    "nombre": "Anna Bondar",
+    "torneo": "WTA - INDIVIDUALES: Hamburgo (Alemania), arcilla",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.990 < 1.02 (conf=55.3%, cuota=1.79)",
+    "conf": 55.3,
+    "cuota": 1.79,
+    "ts": "2026-07-26T00:21:12.538058"
+  },
+  {
+    "nombre": "Julia Riera",
+    "torneo": "ITF FEMENINO - INDIVIDUALES: W75 Vacaria (Brasil), arcilla (indoor)",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.693 < 1.02 (conf=55.0%, cuota=1.26)",
+    "conf": 55.0,
+    "cuota": 1.26,
+    "ts": "2026-07-26T00:21:12.538079"
+  },
+  {
+    "nombre": "Naoya Honda",
+    "torneo": "ITF MASCULINO - INDIVIDUALES: M25 Champaign, IL (Estados Unidos), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.706 < 1.02 (conf=54.3%, cuota=1.3)",
+    "conf": 54.3,
+    "cuota": 1.3,
+    "ts": "2026-07-26T00:21:12.538115"
+  },
+  {
+    "nombre": "Ariana Arseneault",
+    "torneo": "ITF FEMENINO - INDIVIDUALES: W35 Saskatoon (Canadá), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.719 < 1.02 (conf=55.3%, cuota=1.3)",
+    "conf": 55.3,
+    "cuota": 1.3,
+    "ts": "2026-07-26T00:21:12.538150"
+  },
+  {
+    "nombre": "Bondar A.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.941 < 1.02 (conf=53.8%, cuota=1.75)",
+    "conf": 53.8,
+    "cuota": 1.75,
+    "ts": "2026-07-26T00:21:12.538368"
+  },
+  {
+    "nombre": "Bittoun C.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.721 < 1.02 (conf=55.9%, cuota=1.29)",
+    "conf": 55.9,
+    "cuota": 1.29,
+    "ts": "2026-07-26T00:21:12.538695"
+  },
+  {
+    "nombre": "Martin Manzano J. C.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.682 < 1.02 (conf=55.9%, cuota=1.22)",
+    "conf": 55.9,
+    "cuota": 1.22,
+    "ts": "2026-07-26T00:21:12.538943"
+  },
+  {
+    "nombre": "Honda N.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.721 < 1.02 (conf=53.8%, cuota=1.34)",
+    "conf": 53.8,
+    "cuota": 1.34,
+    "ts": "2026-07-26T00:21:12.538975"
+  },
+  {
+    "nombre": "Arseneault A.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.716 < 1.02 (conf=55.9%, cuota=1.28)",
+    "conf": 55.9,
+    "cuota": 1.28,
+    "ts": "2026-07-26T00:21:12.539165"
+  },
+  {
+    "nombre": "Riera J.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.710 < 1.02 (conf=55.0%, cuota=1.29)",
+    "conf": 55.0,
+    "cuota": 1.29,
+    "ts": "2026-07-26T00:21:12.539204"
+  },
+  {
+    "nombre": "Julio Cesar Porras",
+    "torneo": "ITF MASCULINO - INDIVIDUALES: M15 Rognac (Francia), dura",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 80.6,
+    "cuota": 1.63,
+    "ts": "2026-07-26T00:21:12.539226"
+  },
+  {
+    "nombre": "Juan Cruz Martin Manzano",
+    "torneo": "ITF MASCULINO - INDIVIDUALES: M15 Segrate (Italia), arcilla",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 80.4,
+    "cuota": 1.16,
+    "ts": "2026-07-26T00:21:12.539246"
+  }
+]

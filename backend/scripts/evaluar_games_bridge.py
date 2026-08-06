@@ -269,7 +269,12 @@ def _process_pick(pick: Dict, verbose: bool = False) -> Optional[Dict]:
 
     betoffer = _fetch_betoffer_event(event_id)
     señales  = _analizar_mercados_juegos(betoffer, pred)
-    optimas  = _seleccionar_señal_optima(señales)
+    # D163-03 (Nodo-163): desde Nodo-149 D149-02, _seleccionar_señal_optima()
+    # retorna (juegos_optimas, sets_optimas) — este consumidor no fue migrado
+    # y asignaba la tupla completa a 'señales_optimas', rompiendo _save_report()
+    # (s.get('apostar') sobre una lista, no un dict de señal).
+    juegos_optimas, _sets_optimas = _seleccionar_señal_optima(señales)
+    optimas = juegos_optimas
 
     if verbose:
         logger.info(f'  {partido}: event_id={event_id}  señales={len(señales)}  optimas={len(optimas)}')

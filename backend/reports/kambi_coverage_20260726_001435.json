@@ -1,0 +1,448 @@
+{
+  "fecha": "2026-07-26",
+  "fetched_at": "2026-07-26T00:14:35",
+  "n_eventos": 73,
+  "n_jugadores": 146,
+  "players_normalized": [
+    "adrian oetzbach",
+    "alan fernando rubio fierros",
+    "alberto bronzetti",
+    "aleksandr braynin",
+    "alessandra mazzola",
+    "alex marti pujolras",
+    "alexander blockx",
+    "amandine monnot",
+    "amarissa kiara toth",
+    "amit vales",
+    "andreea prisacariu",
+    "anna bondar",
+    "ariana arseneault",
+    "ariana geerlings martinez",
+    "avery tallakson",
+    "baltazar wiger nordas",
+    "branko djuric",
+    "briana szabo",
+    "carmen gallardo guevara",
+    "caroline dolehide",
+    "cayden wang",
+    "christopher thies",
+    "clement lemire",
+    "colton smith",
+    "constantin bittoun kouzmine",
+    "d jakupovicn radisic",
+    "daniel elahi galan",
+    "daniel siniakov",
+    "daria snigur",
+    "david duong",
+    "dayeon back",
+    "deborah chiesa",
+    "dev javia",
+    "diana maria ilie",
+    "diego dedurapalomero",
+    "dimitris sakellaridis",
+    "dominik kellovsky",
+    "dusan obradovic",
+    "enrico baldisserri",
+    "ethan david zapp",
+    "evan bynoe",
+    "federico bondioli",
+    "filip jeff planinsek",
+    "fiona ferro",
+    "francesca jones",
+    "gabriele piraino",
+    "georgii kravchenko",
+    "gerard campana lee",
+    "gina feistel",
+    "h dartm lumsden",
+    "hunter heck",
+    "isabella shinikova",
+    "jakub nicod",
+    "jakub vrba",
+    "johan nikles",
+    "jonas kucera",
+    "joshua tran",
+    "jozef kovalik",
+    "juan cruz martin manzano",
+    "juan pablo varillas",
+    "julia riera",
+    "julio cesar porras",
+    "keerthivassan suresh",
+    "kerem yilmaz",
+    "kristina novak",
+    "l havlickoval samson",
+    "lea nilsson",
+    "leo raquillet",
+    "leonardo rossi",
+    "lilli tagger",
+    "linea bajraliu",
+    "lorenzo claverie",
+    "louis wessels",
+    "luca van assche",
+    "lucciana perez alarcon",
+    "lucia cortez llorca",
+    "lucija ciricbagaric",
+    "m kempena panova",
+    "manuel mazza",
+    "marcandrea huesler",
+    "margaux rouvroy",
+    "maria sara popa",
+    "marko topo",
+    "matheus pucinelli de almeida",
+    "mathys erhard",
+    "matthew william donald",
+    "maxwell mckennon",
+    "melih anavatan",
+    "mia soso",
+    "michael vrbensky",
+    "michiel de krom",
+    "miguel damas",
+    "mika petkovic",
+    "mili poljicak",
+    "miriana tona",
+    "mirza basic",
+    "moritz kudernatsch",
+    "naoki tajima",
+    "naoya honda",
+    "nicolas kicker",
+    "nicolas parizzia",
+    "niels visker",
+    "nina radovanovic",
+    "norbert gombos",
+    "o luzr matos",
+    "olle wallin",
+    "otto virtanen",
+    "pablo martinez gomez",
+    "patrick zahraj",
+    "pavel bushuev",
+    "pavel lagutin",
+    "pedro rodenas",
+    "pedro vives marcos",
+    "peter fajta",
+    "raphael perot",
+    "roger pascual ferra",
+    "rudolf molleker",
+    "s d prajwal dev",
+    "s mert ozdemir",
+    "saba purtseladze",
+    "samim filiz",
+    "samir hamza reguig",
+    "samuele pieri",
+    "shunsuke nakagawa",
+    "siddhant banthia",
+    "soonwoo kwon",
+    "stefan latinovic",
+    "stephane pierrejo kamendje",
+    "t droguetk jacquet",
+    "tamara korpatsch",
+    "tarun karra",
+    "teah chavez",
+    "teodora kostovic",
+    "thiago monteiro",
+    "thiago seyboth wild",
+    "tomasz berkieta",
+    "tommaso compagnucci",
+    "tristan boyer",
+    "tsehay driscoll",
+    "tuncay duran",
+    "vincent dullinger",
+    "vivian wolff",
+    "william rejchtman vinciguerra",
+    "yelyzaveta kotliar",
+    "yeon woo ku",
+    "yuya hirose"
+  ],
+  "event_pairs": [
+    [
+      "soonwoo kwon",
+      "alan fernando rubio fierros"
+    ],
+    [
+      "tristan boyer",
+      "lorenzo claverie"
+    ],
+    [
+      "ethan david zapp",
+      "yuya hirose"
+    ],
+    [
+      "joshua tran",
+      "stephane pierrejo kamendje"
+    ],
+    [
+      "dev javia",
+      "baltazar wiger nordas"
+    ],
+    [
+      "tarun karra",
+      "keerthivassan suresh"
+    ],
+    [
+      "roger pascual ferra",
+      "colton smith"
+    ],
+    [
+      "hunter heck",
+      "melih anavatan"
+    ],
+    [
+      "ariana geerlings martinez",
+      "nina radovanovic"
+    ],
+    [
+      "branko djuric",
+      "pedro vives marcos"
+    ],
+    [
+      "federico bondioli",
+      "michael vrbensky"
+    ],
+    [
+      "diego dedurapalomero",
+      "otto virtanen"
+    ],
+    [
+      "deborah chiesa",
+      "andreea prisacariu"
+    ],
+    [
+      "yelyzaveta kotliar",
+      "alessandra mazzola"
+    ],
+    [
+      "peter fajta",
+      "pablo martinez gomez"
+    ],
+    [
+      "jakub nicod",
+      "gerard campana lee"
+    ],
+    [
+      "georgii kravchenko",
+      "leo raquillet"
+    ],
+    [
+      "s mert ozdemir",
+      "mirza basic"
+    ],
+    [
+      "linea bajraliu",
+      "lucia cortez llorca"
+    ],
+    [
+      "h dartm lumsden",
+      "l havlickoval samson"
+    ],
+    [
+      "alex marti pujolras",
+      "dusan obradovic"
+    ],
+    [
+      "moritz kudernatsch",
+      "samuele pieri"
+    ],
+    [
+      "jozef kovalik",
+      "gabriele piraino"
+    ],
+    [
+      "mili poljicak",
+      "enrico baldisserri"
+    ],
+    [
+      "siddhant banthia",
+      "tommaso compagnucci"
+    ],
+    [
+      "maria sara popa",
+      "amarissa kiara toth"
+    ],
+    [
+      "isabella shinikova",
+      "miriana tona"
+    ],
+    [
+      "carmen gallardo guevara",
+      "kristina novak"
+    ],
+    [
+      "amandine monnot",
+      "lucija ciricbagaric"
+    ],
+    [
+      "norbert gombos",
+      "samir hamza reguig"
+    ],
+    [
+      "william rejchtman vinciguerra",
+      "s d prajwal dev"
+    ],
+    [
+      "rudolf molleker",
+      "jakub vrba"
+    ],
+    [
+      "vivian wolff",
+      "teodora kostovic"
+    ],
+    [
+      "shunsuke nakagawa",
+      "saba purtseladze"
+    ],
+    [
+      "naoki tajima",
+      "tuncay duran"
+    ],
+    [
+      "miguel damas",
+      "dimitris sakellaridis"
+    ],
+    [
+      "olle wallin",
+      "vincent dullinger"
+    ],
+    [
+      "christopher thies",
+      "matthew william donald"
+    ],
+    [
+      "juan pablo varillas",
+      "stefan latinovic"
+    ],
+    [
+      "alberto bronzetti",
+      "thiago monteiro"
+    ],
+    [
+      "gina feistel",
+      "briana szabo"
+    ],
+    [
+      "diana maria ilie",
+      "margaux rouvroy"
+    ],
+    [
+      "aleksandr braynin",
+      "nicolas kicker"
+    ],
+    [
+      "dominik kellovsky",
+      "tomasz berkieta"
+    ],
+    [
+      "patrick zahraj",
+      "raphael perot"
+    ],
+    [
+      "constantin bittoun kouzmine",
+      "kerem yilmaz"
+    ],
+    [
+      "samim filiz",
+      "maxwell mckennon"
+    ],
+    [
+      "daniel elahi galan",
+      "michiel de krom"
+    ],
+    [
+      "amit vales",
+      "johan nikles"
+    ],
+    [
+      "niels visker",
+      "manuel mazza"
+    ],
+    [
+      "lea nilsson",
+      "dayeon back"
+    ],
+    [
+      "daniel siniakov",
+      "jonas kucera"
+    ],
+    [
+      "daria snigur",
+      "lilli tagger"
+    ],
+    [
+      "tamara korpatsch",
+      "anna bondar"
+    ],
+    [
+      "filip jeff planinsek",
+      "mathys erhard"
+    ],
+    [
+      "marko topo",
+      "leonardo rossi"
+    ],
+    [
+      "matheus pucinelli de almeida",
+      "louis wessels"
+    ],
+    [
+      "adrian oetzbach",
+      "mika petkovic"
+    ],
+    [
+      "julia riera",
+      "lucciana perez alarcon"
+    ],
+    [
+      "m kempena panova",
+      "d jakupovicn radisic"
+    ],
+    [
+      "thiago seyboth wild",
+      "marcandrea huesler"
+    ],
+    [
+      "t droguetk jacquet",
+      "o luzr matos"
+    ],
+    [
+      "juan cruz martin manzano",
+      "nicolas parizzia"
+    ],
+    [
+      "caroline dolehide",
+      "yeon woo ku"
+    ],
+    [
+      "evan bynoe",
+      "naoya honda"
+    ],
+    [
+      "clement lemire",
+      "julio cesar porras"
+    ],
+    [
+      "pedro rodenas",
+      "pavel lagutin"
+    ],
+    [
+      "luca van assche",
+      "alexander blockx"
+    ],
+    [
+      "avery tallakson",
+      "david duong"
+    ],
+    [
+      "teah chavez",
+      "ariana arseneault"
+    ],
+    [
+      "mia soso",
+      "tsehay driscoll"
+    ],
+    [
+      "cayden wang",
+      "pavel bushuev"
+    ],
+    [
+      "fiona ferro",
+      "francesca jones"
+    ]
+  ]
+}

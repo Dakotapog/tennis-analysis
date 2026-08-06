@@ -547,6 +547,8 @@ def _extract_and_categorize(partidos: list, threshold: float,
     except Exception:
         _kc_cov = None
 
+    _excl_confianza: list = []  # D173-10 (Nodo-173): exclusiones por gate Kambi
+
     for partido in partidos:
         # Nodo-42: filtrar pool por superficie antes de evaluar confianza
         if superficie_filter is not None:
@@ -569,6 +571,13 @@ def _extract_and_categorize(partidos: list, threshold: float,
         # D140-04 Nodo-140: excluir favoritos no disponibles en Kambi/Betplay
         # None = sin coverage hoy = pass-through; False = ITF/torneo sin Betplay
         if _kc_cov is not None and not _kc_available(favorito, _kc_cov):
+            # D173-10 (Nodo-173): rastro auditable — el gate no cambia.
+            _excl_confianza.append({
+                'partido': str(partido.get('partido') or favorito)[:120],
+                'motivo': 'kambi_no_disponible',
+                'p_modelo': round(float(confidence) / 100.0, 3),
+                'torneo_nombre': partido.get('torneo_nombre') or partido.get('torneo'),
+            })
             continue
 
         conf = float(confidence)
@@ -688,6 +697,14 @@ def _extract_and_categorize(partidos: list, threshold: float,
                 'gcs':      _edge_data.get('gcs_bonus'),
             } if _edge_data else {},
         })
+
+    # D173-10 (Nodo-173): volcar exclusiones del gate Kambi. Fail-soft.
+    if _excl_confianza:
+        try:
+            from core.combo_exclusions import registrar_exclusiones
+            registrar_exclusiones('combo_confianza', _excl_confianza)
+        except Exception:  # noqa: BLE001 — observabilidad nunca tumba el builder
+            pass
 
     picks.sort(key=lambda x: x.get('combo_priority', x['confianza']), reverse=True)
     return picks

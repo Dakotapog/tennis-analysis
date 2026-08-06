@@ -1,0 +1,193 @@
+{
+  "generated_at": "2026-07-26T00:20:12.918327",
+  "edge_report_fuente": "edge_report_kambi_20260725_234332.json",
+  "fecha": "20260726",
+  "n_picks_analizados": 11,
+  "n_score_directo_3plus": 0,
+  "n_split": 0,
+  "h98_01_n_actual": 0,
+  "picks_score_directo_3plus": [],
+  "picks_split": [],
+  "todos_los_picks": [
+    {
+      "partido": "Brown P. vs Thomson M.",
+      "favorito": "Brown P.",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1295,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "apostar"
+    },
+    {
+      "partido": "Michelsen A. vs Suresh D.",
+      "favorito": "Suresh D.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.3404,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Kasatkina D. vs Bolkvadze M.",
+      "favorito": "Bolkvadze M.",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.2918,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Sherif M. vs Korpatsch T.",
+      "favorito": "Korpatsch T.",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1372,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Zahraj P. vs Kelm Y.",
+      "favorito": "Zahraj P.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1098,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Martin A. vs Erhard M.",
+      "favorito": "Martin A.",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0982,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Hozumi E. vs Kozyreva M.",
+      "favorito": "Kozyreva M.",
+      "score_directo": 2,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "STRONG",
+        "RFI_tier2"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": -0.022,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Drenser-Hagmann K. vs Payne B.",
+      "favorito": "Payne B.",
+      "score_directo": 1,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [
+        "RFI_tier1"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.1659,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Blockx A. vs Darderi L.",
+      "favorito": "Darderi L.",
+      "score_directo": 1,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [
+        "HOT"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.124,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Svajda T. vs Ymer E.",
+      "favorito": "Svajda T.",
+      "score_directo": 2,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT",
+        "ELO_DOM"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": -0.0792,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "O'Connell C. vs Martin A.",
+      "favorito": "O'Connell C.",
+      "score_directo": 1,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [
+        "HOT"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.2356,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "sin_edge"
+    }
+  ]
+}

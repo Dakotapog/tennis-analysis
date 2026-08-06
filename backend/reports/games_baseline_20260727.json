@@ -1,0 +1,72 @@
+{
+  "Tjen J. vs Sramkova R._OVER": {
+    "cuota_t0": 1.74,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-07-27T18:39:29",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Gibson T. vs Maria T._OVER": {
+    "cuota_t0": 3.15,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-07-27T18:39:29",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Sierra S. vs Prozorova T._OVER": {
+    "cuota_t0": 1.79,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-07-27T18:39:29",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Krueger A. vs Boulter K._UNDER": {
+    "cuota_t0": 1.9,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-07-27T18:54:40",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Osorio C. vs Hunter S._UNDER": {
+    "cuota_t0": 2.0,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-07-27T19:02:41",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Diallo G. vs Boyer T._OVER": {
+    "cuota_t0": 1.5,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-07-27T20:04:51",
+    "direccion": "OVER",
+    "zona": "COINFLIP"
+  },
+  "Tiafoe F. vs Atmane T._UNDER": {
+    "cuota_t0": 1.94,
+    "linea_t0": 25.5,
+    "ts_t0": "2026-07-27T20:07:38",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Hernandez A. vs Tomic B._UNDER": {
+    "cuota_t0": 1.75,
+    "linea_t0": 25.5,
+    "ts_t0": "2026-07-27T20:13:29",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Sebov K. vs Kalieva E._OVER": {
+    "cuota_t0": 1.88,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-07-27T20:54:47",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Norrie C. vs Kovacevic A._OVER": {
+    "cuota_t0": 2.0,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-07-27T21:25:11",
+    "direccion": "OVER",
+    "zona": "COINFLIP"
+  }
+}
