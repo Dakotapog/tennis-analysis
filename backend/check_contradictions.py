@@ -43,6 +43,11 @@ _PAT_BLOQUEADO = re.compile(r'🔴\s*BLOQUEADO', re.I)  # requiere emoji — evi
 # Patrones de nodo en CLAUDE.md
 _PAT_NODO_REF  = re.compile(r'Nodo-(\d+).*?(✅|⚠️|🔴|COMPLETO|PENDIENTE|BLOQUEADO)', re.I)
 
+# D174-13 (Nodo-174): filas de tabla con Estado=✅ + símbolos de código que nombran
+_PAT_TABLA_ROW_OK = re.compile(r'\|\s*✅\s*\|\s*$')
+_PAT_FUNC_CALL    = re.compile(r'\b([a-zA-Z_][a-zA-Z0-9_]*_[a-zA-Z0-9_]*)\(')
+_PAT_CAMPO_BARE   = re.compile(r'(?<![\w/`.])([a-z][a-z0-9]*(?:_[a-z0-9]+)+)(?!\.\w)(?![\w`(])')
+
 
 def _get_nodo_files(n: int) -> list[Path]:
     """Devuelve los últimos N archivos de nodo ordenados por número."""
@@ -206,6 +211,85 @@ def _check_huerfanos() -> tuple[int, list[str]]:
     return n, huerfanos, semana_anterior
 
 
+def _check_simbolos_verificables() -> tuple[int, list[str]]:
+    """
+    D174-13 (Nodo-174): para cada fila de tabla en CLAUDE.md marcada Estado=✅,
+    extrae símbolos de código que nombra (funciones `nombre(...)`, campos
+    bare_snake_case) y verifica que existan en el código de producción real.
+
+    Scope acotado a filas `| ... | ✅ |` (no a la narrativa libre) para evitar
+    ruido — mismo patrón de precisión-sobre-recall que _check_huerfanos().
+
+    Limitación conocida y aceptada: el chequeo de campo es un heurístico de
+    substring ('nombre' citado o .nombre en algún .py de producción) — no
+    prueba que el campo esté en el archivo/línea específico que CLAUDE.md
+    reclama, solo que existe en alguna parte. Confirma ausencia con certeza,
+    confirma presencia con alta probabilidad, no con prueba formal. Excluye
+    tokens que prefijan un nombre de archivo real (ej. "games_signal" de
+    "games_signal_calculator.py" mencionado sin backticks) — mención de
+    módulo en prosa, no reclamo de campo.
+
+    Retorna (n_faltantes, lista_mensajes).
+    """
+    claude_text = CLAUDE_MD.read_text(encoding='utf-8', errors='replace')
+    filas_ok = [l for l in claude_text.splitlines() if _PAT_TABLA_ROW_OK.search(l)]
+
+    _EXCLUDE_DIRS = {".spec", "graphify-out", "tests", ".git",
+                      "venv", ".venv", "env", "node_modules", "__pycache__"}
+    py_files = [
+        f for f in BASE_DIR.rglob("*.py")
+        if not _EXCLUDE_DIRS & set(f.parts)
+    ]
+
+    defs: set[str] = set()
+    stems: set[str] = set()
+    haystack_parts: list[str] = []
+    for f in py_files:
+        stems.add(f.stem)
+        try:
+            texto = f.read_text(encoding='utf-8', errors='replace')
+        except OSError:
+            continue
+        defs.update(re.findall(r'def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\(', texto))
+        haystack_parts.append(texto)
+    haystack = '\n'.join(haystack_parts)
+
+    faltantes: list[str] = []
+    vistos: set[str] = set()
+
+    for fila in filas_ok:
+        for m in _PAT_FUNC_CALL.finditer(fila):
+            nombre = m.group(1)
+            if nombre in vistos:
+                continue
+            vistos.add(nombre)
+            if nombre not in defs:
+                faltantes.append(
+                    f"función `{nombre}()` marcada ✅ en CLAUDE.md, "
+                    f"sin `def {nombre}(` en ningún .py de producción"
+                )
+        for m in _PAT_CAMPO_BARE.finditer(fila):
+            nombre = m.group(1)
+            if len(nombre) < 5 or nombre in vistos:
+                continue
+            vistos.add(nombre)
+            # Mención de módulo en prosa sin backticks/.py (ej. "edge_calculator
+            # sin --file") — no es un campo de dato reclamado, es un nombre de
+            # archivo truncado. Excluir si es o prefija un nombre de archivo real.
+            if any(stem == nombre or stem.startswith(nombre + '_') for stem in stems):
+                continue
+            patron_uso = re.compile(
+                r"['\"]" + re.escape(nombre) + r"['\"]|\." + re.escape(nombre) + r"\b"
+            )
+            if not patron_uso.search(haystack):
+                faltantes.append(
+                    f"campo `{nombre}` marcado ✅ en CLAUDE.md, "
+                    f"sin uso como key/atributo en ningún .py de producción"
+                )
+
+    return len(faltantes), faltantes
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Chequeo semanal de contradicciones CLAUDE.md vs nodos")
     parser.add_argument('--quick', action='store_true', help="Solo regex, sin LLM")
@@ -346,11 +430,28 @@ def main() -> None:
     else:
         print("      Ninguno — todos los nodos tienen al menos una cita entrante.")
 
+    # ── BLOQUE E: "✅" exige evidencia (Nodo-174 D174-13) ───────────────────
+    # NOTA: el spec original llama a esto "Bloque D" — la letra D ya la ocupa
+    # el ritual de huérfanos (D105-05, arriba). Se renombra a E aquí para no
+    # colisionar; documentado en el addendum de D174-13 en Nodo-174.
+    print(f"\n{'─'*60}")
+    print("BLOQUE E — Símbolos ✅ sin evidencia en código (Nodo-174 D174-13)")
+    print(f"{'─'*60}")
+    n_faltantes, faltantes = _check_simbolos_verificables()
+    if n_faltantes == 0:
+        print("  [PASS] Todos los símbolos marcados ✅ tienen evidencia en código.")
+    else:
+        for msg in faltantes:
+            print(f"  [SIN_EVIDENCIA] {msg}")
+        print(f"  Total sin evidencia: {n_faltantes}")
+        print("  ACCION: Marcar PENDIENTE en CLAUDE.md o implementar el símbolo faltante.")
+
     # Log a archivo
     LOG_DIR.mkdir(exist_ok=True)
     log_entry = (
         f"[{ts}] {passes}P {warns}W {contras}C — {len(nodo_files)} nodos | "
-        f"FABLE_pendientes={fable_pendientes} | huerfanos={n_huerfanos}\n"
+        f"FABLE_pendientes={fable_pendientes} | huerfanos={n_huerfanos} | "
+        f"simbolos_sin_evidencia={n_faltantes}\n"
     )
     (LOG_DIR / "contradicciones.log").open("a").write(log_entry)
 

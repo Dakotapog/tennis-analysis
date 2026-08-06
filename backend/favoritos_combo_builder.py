@@ -828,7 +828,8 @@ def main() -> None:
         for p in picks_validos:
             jugador = p.get("favorito", p.get("jugador", ""))
             cuota = float(p.get("cuota_favorito", 0))
-            oc, _ = _find_oc(jugador, cuota, _outcomes_map, _started_map)
+            oc, _ = _find_oc(jugador, cuota, _outcomes_map, _started_map,
+                              outcome_id_hint=p.get("outcome_id"))  # D174-08 Nodo-174
             if not oc:
                 _excl_favoritos.append(p)
             if oc:
@@ -896,7 +897,8 @@ def main() -> None:
                 if pick.get("_kambi_oid"):
                     ids.append(pick["_kambi_oid"])
                 else:
-                    oc, razon = find_outcome(jugador, cuota, outcomes_map, started_map)
+                    oc, razon = find_outcome(jugador, cuota, outcomes_map, started_map,
+                                              outcome_id_hint=pick.get("outcome_id"))  # D174-08 Nodo-174
                     if oc:
                         ids.append(str(oc["outcome_id"]))
                     else:

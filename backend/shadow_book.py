@@ -1570,10 +1570,25 @@ def report(desde: Optional[str] = None, hasta: Optional[str] = None) -> str:
 
     lines.append("  CHECKLIST SEMANAL (B108-04 — N28F2 por tier):")
 
+    # D174-05: H152-01 ya no hardcodea p0/p1 — los lee de preregistered_hypotheses.json
+    # (fuente de verdad). Fallback al literal histórico si el JSON o la clave faltaran.
+    _h152_p0, _h152_p1 = 0.385, 0.55
+    try:
+        _hyp_path = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)),
+            "validation", "preregistered_hypotheses.json",
+        )
+        with open(_hyp_path, encoding="utf-8") as _hf:
+            _h152_entry = json.load(_hf).get("hypotheses", {}).get("H152-01", {})
+        _h152_p0 = _h152_entry.get("p0", _h152_p0)
+        _h152_p1 = _h152_entry.get("p1", _h152_p1)
+    except Exception:
+        pass  # fallback ya asignado arriba
+
     for _h_id, _h_name, _recs, _p0, _p1 in [
         ("H89-01", "CAPA2 (p>=0.60, cuota [1.50-2.80], n_h2h>=1)", _capa2_recs, 0.45, 0.55),
         ("H89-02", "ELO_DOMINANCE (elo_gap>50, ranking discordante)", _elo_recs, 0.45, 0.55),
-        ("H152-01", "HCUC (hard+quality+coinflip+señal especial)", _hcuc_recs, 0.385, 0.55),
+        ("H152-01", "HCUC (hard+quality+coinflip+señal especial)", _hcuc_recs, _h152_p0, _h152_p1),
     ]:
         _n = len(_recs)
         _h = _hits(_recs)
@@ -1604,6 +1619,39 @@ def report(desde: Optional[str] = None, hasta: Optional[str] = None) -> str:
     lines.append("    Accion: revisar cada lunes o cuando n cambie de 29→30.")
     lines.append("    PROHIBIDO cambiar thresholds antes de n_stop=30 (anti p-hacking).")
     lines.append("")
+
+    # ── D174-07 (Nodo-174): IRP (H96-01) y Weather (H113-01) — REPORTE_SOLO ──
+    # Los predicados ya existen en validation/hypothesis_ledger.py (D174-04) —
+    # reusados aquí (Strangler Fig) en vez de duplicar la lógica de pertenencia.
+    # Ninguna de las dos tiene p0/p1 congelados (contar_hipotesis retorna
+    # sprt=None) — su métrica de éxito es comparar dos segmentos (return vs
+    # normal / RAIN_RISK vs CLEAR), no un SPRT single-segment. No añadir gates:
+    # ambas siguen REPORTE_SOLO hasta que su H-XX alcance n_stop.
+    try:
+        from validation.hypothesis_ledger import contar_hipotesis as _contar_hip
+        _conteos_d17407 = _contar_hip(settled)
+    except Exception as _e:
+        _conteos_d17407 = None
+        lines.append(f"  IRP / WEATHER (D174-07): no disponible ({_e})")
+
+    if _conteos_d17407 is not None:
+        lines.append("  IRP / WEATHER (D174-07 — Nodo-96 / Nodo-113, REPORTE_SOLO):")
+        for _h_id, _h_name, _n_stop_lbl in [
+            ("H96-01", "IRP delta_return<=-0.10 en retorno de inactividad", 30),
+            ("H113-01", "WEATHER RAIN_RISK en picks outdoor clay/grass", 40),
+        ]:
+            _c = _conteos_d17407.get(_h_id, {'n': 0, 'hits': 0})
+            _n, _h = _c['n'], _c['hits']
+            if _n == 0:
+                lines.append(f"    [{_h_id}] {_h_name}: n=0 — acumulando (gate n>={_n_stop_lbl})")
+            else:
+                _pct = round(100 * _h / _n, 1)
+                lines.append(
+                    f"    [{_h_id}] {_h_name}:"
+                    f"  n={_n}  hits={_h}  hit%={_pct}  (gate n>={_n_stop_lbl}, sin SPRT — comparar vs control)"
+                )
+        lines.append("    No aplica gate de apuesta — ambas hipotesis observacionales puras.")
+        lines.append("")
 
     # ── Nodo-124 H124-01/02: EVALUAR picks de generar_tabla_favoritos2 ───────
     _eval_recs   = [r for r in settled

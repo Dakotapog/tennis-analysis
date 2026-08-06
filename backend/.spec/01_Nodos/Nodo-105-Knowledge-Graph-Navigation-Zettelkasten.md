@@ -130,3 +130,17 @@ cat nodos_pagerank.json | python3 -c "import json,sys; d=json.load(sys.stdin); [
 # → clic de nuevo en mismo nodo → deselect
 # → MOCs en graph.html como nodos navegables
 ```
+
+---
+
+## 5. Addendum — D174-12 (2026-08-06): decisión explícita RETIRAR de huérfano
+
+`scripts/nodo_pagerank.py` (D105-03, arriba) apareció en [[Nodo-174]] como
+"módulo huérfano" — sin PASO en `run_daily.py`. No corresponde: es una
+herramienta de mantenimiento del vault `.spec/` (calcula PageRank sobre el grafo
+de wikilinks entre Nodos, igual que `graphify update .` mantiene el grafo de
+código) — se ejecuta manualmente cuando se audita la salud de la documentación,
+no forma parte del pipeline de trading diario (extracción→edge→trader→combos).
+Conectarlo a `run_daily.py` mezclaría una tarea de higiene documental con la
+orquestación de apuestas, sin beneficio. **Decisión: RETIRAR de la lista de
+huérfanos — standalone intencional, no pendiente.** Sin cambio de código.

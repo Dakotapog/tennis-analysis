@@ -995,6 +995,59 @@ def _calc_meta_score_directo(resultado: dict) -> int:
     return score
 
 
+_HCUC_QUALIFYING_TIERS = frozenset({'atp500', 'atp1000', 'gs', 'wta500'})
+_HCUC_CAMPEON_DIAS_MAX = 30
+_HCUC_RACHA_HOT_CONF_MIN = 0.60
+
+
+def _calc_hcuc_convergence(resultado: dict, surf_fav: dict, surf_dog: dict) -> dict:
+    """Nodo-155 D155-02: HCUC (Hard+Coinflip+Underdog+Convergencia), H152-01.
+
+    Gates base (todos deben cumplirse): superficie dura, quality>=16.5,
+    delta favorito-rival>=0.08, p_modelo en [0.495,0.52] (coin flip real),
+    cuota_favorito en [2.3,3.0]. Sobre esa base, colecta señales especiales
+    (RACHA_HOT / SCALP_TOP20 / CAMPEON_RECIENTE / CAMPEONATOS_EXPIRADOS) —
+    requiere al menos una para match=True.
+    OBSERVACIONAL — no modifica edge, kelly_kl, apostar ni ningún gate.
+    """
+    if (resultado.get('superficie') or '').lower() not in ('dura', 'hard'):
+        return {'match': False, 'signals': []}
+
+    quality = surf_fav.get('score', 0.0) or 0.0
+    puntaje_delta = quality - (surf_dog.get('score', 0.0) or 0.0)
+    p_modelo = resultado.get('p_modelo', 0.0) or 0.0
+    cuota_fav = resultado.get('cuota_favorito', 0.0) or 0.0
+
+    if quality < 16.5 or puntaje_delta < 0.08:
+        return {'match': False, 'signals': []}
+    if not (0.495 <= p_modelo <= 0.52):
+        return {'match': False, 'signals': []}
+    if not (2.3 <= cuota_fav <= 3.0):
+        return {'match': False, 'signals': []}
+
+    signals = []
+
+    if (resultado.get('markov_favorito') == 'HOT'
+            and (resultado.get('markov_conf_fav', 0.0) or 0.0) >= _HCUC_RACHA_HOT_CONF_MIN):
+        signals.append('RACHA_HOT')
+
+    if (surf_fav.get('top20_wins', 0) or 0) > 0:
+        signals.append('SCALP_TOP20')
+
+    _dias = surf_fav.get('campeon_days_ago')
+    _tier = surf_fav.get('campeon_tier')
+    if (_dias is not None and _dias <= _HCUC_CAMPEON_DIAS_MAX
+            and _tier in _HCUC_QUALIFYING_TIERS):
+        signals.append('CAMPEON_RECIENTE')
+
+    if (surf_fav.get('campeonatos_expirados_count', 0) or 0) > 0:
+        signals.append('CAMPEONATOS_EXPIRADOS')
+
+    if not signals:
+        return {'match': False, 'signals': []}
+    return {'match': True, 'signals': signals}
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # PIPELINE COMPLETO POR PARTIDO
 # ─────────────────────────────────────────────────────────────────────────────
@@ -1334,6 +1387,7 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
         'tier_mismatch_delta': _tier_mismatch_delta,
         'campeon_tier_nivel':  _campeon_tier_nivel,
         'campeon_tier_actual': tier if _campeon_tier_nivel else None,
+        'campeon_days_ago':    _surf_fav_65.get('campeon_days_ago') if _campeon_tier_nivel else None,
     })
 
     # ─── D64-01 (Nodo-64): RFI — Return From Inactivity. OBSERVACIONAL PURO ─────
@@ -1398,6 +1452,14 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
         pais=_pais_torneo,
         superficie=_superficie_partido,
     )
+
+    # ─── D174-08 (Nodo-174 / D154-06 real): outcome_id propagado desde el h2h ───
+    # match_ledger.py (Nodo-118/143) ya adjunta outcome_id (o kambi_event_id como
+    # fallback) al partido fusionado — nunca se propagaba al edge_report, forzando
+    # a los 3 combo builders a re-resolver por name-matching cada corrida. Solo
+    # propagación (REPORTE_SOLO): no toca apostar/edge/kelly. Los builders deben
+    # preferir este campo y caer a name-matching solo si viene None.
+    resultado['outcome_id'] = partido.get('outcome_id') or partido.get('kambi_event_id')
 
     # ─── Nodo-35 / F2: HISTORIAL_NO_EXTRAIDO — bloqueo en origen + NO_DATA status ──
     # Si la extracción de historial falló para cualquiera de los dos jugadores,
@@ -1660,6 +1722,12 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
     resultado['direccion_meta']             = _direccion_meta
     resultado['rival_value_delegado_h8801'] = bool(_score_rv >= 1)
 
+    # ─── Nodo-155 D155-02: HCUC convergencia (H152-01) — REPORTE_SOLO ──────
+    # Reutiliza _surf_fav/_surf_dog ya en scope (misma función, sin shadowing).
+    _hcuc = _calc_hcuc_convergence(resultado, _surf_fav, _surf_dog)
+    resultado['hcuc_convergence'] = _hcuc['match']
+    resultado['hcuc_signals'] = _hcuc['signals']
+
     return resultado
 
 
@@ -1782,6 +1850,19 @@ def procesar_archivo_h2h(h2h_file: str, output_file: Optional[str] = None, shado
         'n_sobrevive':  _funnel_sobrevive,
     }
 
+    # ── D174-11 (Nodo-174): telemetría del gate Kambi ────────────────────────
+    # Complementa D90-01/_annotate_kambi. El % de exclusión por falta de
+    # cobertura Betplay merece una línea en el reporte diario, no un
+    # descubrimiento por auditoría (Nodo-174 §D174-11).
+    _kambi_disp = sum(1 for _r in resultados if _r.get('kambi_disponible') is True)
+    _kambi_no_disp = sum(1 for _r in resultados if _r.get('kambi_disponible') is False)
+    _kambi_desconocido = len(resultados) - _kambi_disp - _kambi_no_disp
+    _kambi_telemetry = {
+        'n_disponibles':    _kambi_disp,
+        'n_no_disponibles': _kambi_no_disp,
+        'n_desconocido':    _kambi_desconocido,
+    }
+
     output = {
         'metadata': {
             'fecha':          datetime.now().isoformat(),
@@ -1796,6 +1877,8 @@ def procesar_archivo_h2h(h2h_file: str, output_file: Optional[str] = None, shado
             'gate_version':   GATE_VERSION,  # Nodo-32 Acción 3: versión del gate para validación
             # D173-01: telemetría de embudo — hace falsificable "hoy no hubo señales"
             'funnel':         _funnel,
+            # D174-11: telemetría del gate Kambi — {n_disponibles,n_no_disponibles,n_desconocido}
+            'kambi':          _kambi_telemetry,
             # D173-02: conteos pre-serialización. Los caps desaparecieron, pero estos
             # campos quedan para que ningún consumidor tenga que inferir totales.
             'n_watchlist_total': len(no_apostar_lista),

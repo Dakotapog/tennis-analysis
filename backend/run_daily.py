@@ -354,6 +354,7 @@ def main():
         _run(['python3', 'combo_registry.py', '--settle', fecha_ayer], 'PASO 10b — combo registry settle (I7 Nodo-67)')
         _run(['python3', 'scripts/signal_audit.py', '--rebuild'],      'PASO 10c — signal audit trazabilidad (Nodo-101)')
         _run(['python3', 'scripts/player_consistency.py', '--rebuild'], 'PASO 10d — player consistency perfiles (Nodo-101)')
+        _run(['python3', 'scripts/update_hypothesis_ledger.py'], 'PASO 10e — hypothesis ledger (Nodo-174 D174-03)')
         print(f"\n  Settle completado para {fecha_ayer}")
         return
 
@@ -454,6 +455,18 @@ def main():
         if _zita_book2:
             _dual_cmd += ['--book2', _zita_book2]
         _run(_dual_cmd, 'PASO 3.7 — Dual-Book Router X1 (Nodo-111)')
+
+        # ── PASO 3.8 — Phantom History Audit semanal (Nodo-174 D174-09) ──────
+        # Retroactivo (Nodo-152): detecta jugadores con historial contaminado
+        # (thf_cache asignó historial top-ATP a un ITF por matching de apellido
+        # sin validar circuito). Semanal (lunes, mismo día que check_contradictions.py)
+        # — no bloquea el pipeline, solo genera reports/audit_phantom_history_*.json.
+        # Corrección de data/calibracion_edge.json sigue siendo manual (ver nota
+        # _nota_d174_09_phantom_correction en el JSON, ejemplo aplicado 2026-08-06).
+        if datetime.now().weekday() == 0:  # lunes
+            _run(['python3', 'scripts/audit_phantom_history.py', '--days', '30'],
+                 'PASO 3.8 — Phantom History Audit semanal (Nodo-174 D174-09)',
+                 optional=True)
 
     if _skip_pasos_4_plus:
         print(f"\n  FASE NOCHE completada. PASOS 4+ se ejecutarán con --fase manana")
@@ -610,6 +623,7 @@ def main():
         _run(['python3', 'combo_registry.py', '--settle', fecha_ayer], 'PASO 10b — combo registry settle (I7 Nodo-67)')
         _run(['python3', 'scripts/signal_audit.py', '--rebuild'],      'PASO 10c — signal audit trazabilidad (Nodo-101)')
         _run(['python3', 'scripts/player_consistency.py', '--rebuild'], 'PASO 10d — player consistency perfiles (Nodo-101)')
+        _run(['python3', 'scripts/update_hypothesis_ledger.py'], 'PASO 10e — hypothesis ledger (Nodo-174 D174-03)')
 
     # ── DAILY BRIEF ───────────────────────────────────────────────────────
     brief = _build_daily_brief(fecha_hoy, tier_results, was_candidates, fecha_ayer)

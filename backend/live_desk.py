@@ -39,6 +39,25 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from analysis.velocity_monitor import velocity_zscore  # D167-05 (Nodo-71/D160-03 wiring)
 from core.monte_carlo_games import simular_total_juegos_condicionado, estimar_p_hold  # D167-03 (D160-02 wiring)
+from validation.hypothesis_ledger import n_actual_fresco  # D174-06 (Nodo-174)
+
+_HYPOTHESES_JSON = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                 "validation", "preregistered_hypotheses.json")
+
+
+def _n_actual_desk(h_id: str, n_stop_fallback: int) -> Tuple[Any, int]:
+    """
+    D174-06 — wrapper para el desk: intenta leer n_actual fresco (<=48h) del
+    ledger real. Si no hay dato fresco retorna ('?', n_stop_fallback) — el
+    desk NUNCA debe mostrar un n_actual viejo como si fuera vigente.
+    """
+    try:
+        fresco = n_actual_fresco(h_id, _HYPOTHESES_JSON)
+    except (OSError, json.JSONDecodeError):
+        fresco = None
+    if fresco is None:
+        return "?", n_stop_fallback
+    return fresco['n_actual'], fresco['n_stop'] or n_stop_fallback
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(levelname)s | %(message)s", datefmt="%H:%M:%S")
 logger = logging.getLogger(__name__)
@@ -127,13 +146,14 @@ def _build_combo_live(fecha: str) -> List[Dict]:
         # Usamos glob para encontrar cualquier .bat — el desk muestra el último
         bat_files = sorted(combos_dir.glob("LiveCombo_*.bat"))
         bat_link = str(bat_files[-1]) if bat_files else ""
+        _n_act, _n_stp = _n_actual_desk("H100-01", 20)
         rows.append({
             "tipo": "COMBO_LIVE",
             "jugador": event_id,
             "pick": event_id,
             "hipotesis": "H100-01",
-            "n_actual": 0,
-            "n_stop": 20,
+            "n_actual": _n_act,
+            "n_stop": _n_stp,
             "color": "amber",
             "fired_at": meta.get("fired_at", ""),
             "drift_pct": meta.get("drift_pct", 0),
@@ -245,13 +265,14 @@ def accionable_ahora(state: Dict[str, Any]) -> List[Dict]:
     # P3 RIVAL_VALUE con flag activo (H88-01 — pre-graduacion, amber)
     for pick in state.get("p3_convergence", {}).get("picks", []):
         if pick.get("rival_value_flag") and pick.get("score_directo", 0) >= 1:
+            _n_act, _n_stp = _n_actual_desk("H88-01", 30)
             accionables.append({
                 "tipo": "RIVAL_VALUE",
                 "jugador": pick.get("rival", pick.get("jugador", "")),
                 "pick": pick.get("jugador", ""),
                 "hipotesis": "H88-01",
-                "n_actual": 3,
-                "n_stop": 30,
+                "n_actual": _n_act,
+                "n_stop": _n_stp,
                 "color": "amber",
                 "governor_code": gov_code,
                 "meta_score": pick.get("score_directo", 0),
@@ -263,13 +284,14 @@ def accionable_ahora(state: Dict[str, Any]) -> List[Dict]:
     # GCS activo (H60-01 GRADUADA → verde)
     for pick in state.get("p3_convergence", {}).get("picks", []):
         if pick.get("gcs_active"):
+            _n_act, _n_stp = _n_actual_desk("H60-01", 54)
             accionables.append({
                 "tipo": "GCS",
                 "jugador": pick.get("jugador", ""),
                 "pick": pick.get("jugador", ""),
                 "hipotesis": "H60-01",
-                "n_actual": 54,
-                "n_stop": 54,
+                "n_actual": _n_act,
+                "n_stop": _n_stp,
                 "color": "green",  # GRADUADA
                 "governor_code": gov_code,
                 "meta_score": pick.get("score_directo", 0),
@@ -281,13 +303,14 @@ def accionable_ahora(state: Dict[str, Any]) -> List[Dict]:
     # §4 FAVORITOS_COMPUESTOS primera clase (Nodo-110 / Nodo-114 §4)
     fav_data = _favoritos_hoy(state.get("fecha", ""))
     if fav_data is not None:
+        _n_act, _n_stp = _n_actual_desk("H110-01", 30)
         accionables.append({
             "tipo": "FAVORITOS_COMPUESTOS",
             "jugador": f"{fav_data.get('n_combos', 0)} combos",
             "pick": "FAVORITOS_COMPUESTOS",
             "hipotesis": "H110-01",
-            "n_actual": 8,   # semilla jul-14/16
-            "n_stop": 30,
+            "n_actual": _n_act,
+            "n_stop": _n_stp,
             "color": "amber",
             "governor_code": gov_code,
             "n_combos": fav_data.get("n_combos", 0),
@@ -295,13 +318,14 @@ def accionable_ahora(state: Dict[str, Any]) -> List[Dict]:
         })
     else:
         # Zero-Null: builder no corrió hoy
+        _n_act, _n_stp = _n_actual_desk("H110-01", 30)
         accionables.append({
             "tipo": "FAVORITOS_ZERO",
             "jugador": "sin correr hoy",
             "pick": "",
             "hipotesis": "H110-01",
-            "n_actual": 8,
-            "n_stop": 30,
+            "n_actual": _n_act,
+            "n_stop": _n_stp,
             "color": "amber",
             "governor_code": gov_code,
             "señales_activas": [],
@@ -445,8 +469,15 @@ def _peso_evidencia(n_cal: int) -> Dict[str, Any]:
     return {"pct": pct, "bar": bar, "label": label, "color": color, "n": n_cal}
 
 
-def _gate_barra(n_actual: int, n_stop: int) -> str:
-    """U3: barra texto █░ hacia n_stop."""
+def _gate_barra(n_actual, n_stop: int) -> str:
+    """U3: barra texto █░ hacia n_stop.
+
+    D174-06: n_actual=="?" (sin dato fresco, ver n_actual_desk) muestra
+    "n=?" explícito en vez de tratarlo como 0 — un instrumento sin dato
+    debe decir que no tiene dato, nunca fingir un conteo.
+    """
+    if n_actual == "?":
+        return "n=?"
     n_actual = int(n_actual or 0)
     n_stop = int(n_stop or 0)
     if n_stop <= 0:
@@ -1666,11 +1697,12 @@ def render_html(state: Dict[str, Any]) -> str:
                        f'title="n={ev["n"]} → {ev["pct"]}% peso propio (shrinkage n/(n+20))">'
                        f'{ev["bar"]} {ev["label"]}</span>')
 
-            # U3 — distancia gate
-            n_act = int(a.get("n_actual", 0))
+            # U3 — distancia gate (D174-06: n_actual puede ser "?" — sin int() ciego)
+            n_act = a.get("n_actual", 0)
+            n_act = n_act if n_act == "?" else int(n_act or 0)
             n_stp = int(a.get("n_stop", 0))
             u3_txt = _gate_barra(n_act, n_stp)
-            u3_color = GREEN if "GRADUADA" in u3_txt else (AMBER if n_act > 0 else GREY)
+            u3_color = GREY if n_act == "?" else (GREEN if "GRADUADA" in u3_txt else (AMBER if n_act > 0 else GREY))
             u3_html = (f'<span style="font-family:monospace;color:{u3_color};font-size:0.82em;">'
                        f'{a["hipotesis"]}: {u3_txt}</span>')
 
@@ -2192,6 +2224,57 @@ def _build_p3_convergence(fecha: str) -> Dict:
             })
     picks.sort(key=lambda x: -(x.get("score_directo") or 0))
     return {"picks": picks}
+
+
+def _build_p_bridge(fecha_compact: str, state: Dict) -> Dict:
+    """
+    D160-05 wiring: fusiona games_live (P4-MANDA señales alta) con p2_break/
+    p3_convergence del mismo ciclo, vía reconciliar_senales_partido() (puente
+    puro, core/live_signal_bridge.py) — nunca implementado pese a documentarse
+    como completo (ver Nodo-174 D174-02). REPORTE_SOLO: reconciliaciones NEUTRO
+    se filtran del listado accionable pero quedan visibles en por_partido.
+    """
+    from core.live_signal_bridge import reconciliar_senales_partido
+
+    games_path = REPORTS / f"games_live_{fecha_compact}.json"
+    games_data = _load_json(games_path)
+    if not games_data:
+        return {"reconciliaciones": [], "por_partido": {}}
+
+    breaks_idx = {b.get("partido"): b for b in (state.get("p2_break") or {}).get("breaks", [])}
+    picks_idx = {p.get("jugador"): p for p in (state.get("p3_convergence") or {}).get("picks", [])}
+
+    reconciliaciones = []
+    por_partido = {}
+
+    for sig in games_data.get("signals_alta", []):
+        partido_key = sig.get("partido")
+        certeza = sig.get("certeza") or {}
+        score_data = sig.get("score_data") or {}
+        games_state = {
+            "zona": sig.get("zona"),
+            "certeza_matematica": certeza.get("certeza_matematica"),
+            "p_condicional": certeza.get("p_condicional"),
+            "break_situation": score_data.get("break_situation"),
+            "serving": score_data.get("serving"),
+        }
+
+        brk = breaks_idx.get(partido_key)
+        favorito = brk.get("jugador") if brk else None
+        pick = picks_idx.get(favorito) if favorito else None
+        winner_state = {
+            "drift_pct": brk.get("drift_pct") if brk else None,
+            "break_state": brk.get("estado") if brk else None,
+            "score_directo": pick.get("score_directo") if pick else None,
+        }
+
+        result = reconciliar_senales_partido(partido_key, games_state, winner_state)
+        result["favorito"] = favorito
+        por_partido[partido_key] = result
+        if result["estado"] != "NEUTRO":
+            reconciliaciones.append(result)
+
+    return {"reconciliaciones": reconciliaciones, "por_partido": por_partido}
 
 
 def _build_p5_execution(fecha: str) -> Dict:
@@ -3745,6 +3828,22 @@ def _write_games_odds_history(
             logger.debug(f"[D147-05] Error escribiendo history: {exc}")
 
 
+def _send_telegram_async(msg: str, tag: str = "") -> None:
+    """D147-07: fire-and-forget Telegram real (utils.telegram._enviar_telegram),
+    en thread daemon para no bloquear el loop de 15s. Reemplaza el subprocess a
+    scripts/send_telegram.py (D147-06), que nunca existió en el repo — el guard
+    .exists() lo saltaba en silencio y 6 alertas CERTEZA MATEMATICA reales nunca
+    llegaron a Telegram (ver Nodo-174 D174-02)."""
+    def _worker() -> None:
+        try:
+            from utils.telegram import _enviar_telegram
+            _enviar_telegram(msg)
+        except Exception as exc:
+            logger.warning(f"[{tag or 'TELEGRAM'}] Error enviando Telegram: {exc}")
+
+    threading.Thread(target=_worker, daemon=True).start()
+
+
 def _fire_certeza_alert(sig: Dict, fecha_compact: str) -> None:
     """D147-06: Fire-once Telegram + log cuando certeza_matematica=True."""
     pk         = f"{sig['partido']}_{sig.get('direccion', '')}"
@@ -3775,18 +3874,7 @@ def _fire_certeza_alert(sig: Dict, fecha_compact: str) -> None:
         f"| {gp_val} juegos jugados | Resultado confirmado"
     )
     logger.warning(f"[D147-06] {msg}")
-
-    send_script = BASE_DIR / "scripts" / "send_telegram.py"
-    if send_script.exists():
-        try:
-            subprocess.Popen(
-                [sys.executable, str(send_script), "--msg", msg],
-                cwd=str(BASE_DIR),
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-            )
-        except Exception as exc:
-            logger.warning(f"[D147-06] Telegram error: {exc}")
+    _send_telegram_async(msg, tag="D147-06")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -3967,18 +4055,21 @@ def _fetch_betplay_score_playwright(event_id: int) -> Optional[Dict]:
         return None
 
 
-def _fetch_live_games_all(event_id: int) -> Optional[Dict]:
+def _fetch_live_games_all(event_id: int, bypass_cache: bool = False) -> Optional[Dict]:
     """
     D-ITF-LIVE-01: obtiene mercado 'Total de juegos' (match-level) para un evento vivo.
     UNA sola llamada HTTP — devuelve mercado + score live del partido.
     ITF solo tiene este mercado cuando el partido está STARTED (no pre-partido).
     D153-PARALLEL: caché 120s + pre-warm paralelo en _prefetch_live_games_parallel().
     40 eventos × 5s secuencial = 200s → paralelo con 10 workers = 20s.
+    bypass_cache=True (D159-04 validate_fillability): ignora la caché de 120s
+    para leer la cuota realmente vigente justo antes de disparar el combo.
     """
     _now = time.time()
-    _cached = _live_games_cache.get(int(event_id))
-    if _cached and (_now - _cached[0]) < _LIVE_GAMES_TTL:
-        return _cached[1]
+    if not bypass_cache:
+        _cached = _live_games_cache.get(int(event_id))
+        if _cached and (_now - _cached[0]) < _LIVE_GAMES_TTL:
+            return _cached[1]
 
     url = f"{_KAMBI_BASE}/betoffer/event/{event_id}.json?{_KAMBI_PARAMS}"
     try:
@@ -4023,6 +4114,33 @@ def _fetch_live_games_all(event_id: int) -> Optional[Dict]:
     final = result if found else None
     _live_games_cache[int(event_id)] = (time.time(), final)
     return final
+
+
+def validate_fillability(sig: Dict, umbral: float = 0.05) -> Tuple[bool, str]:
+    """D159-04: última validación justo antes de disparar el combo — un solo
+    fetch con bypass_cache=True (nunca la caché de 120s) para confirmar que la
+    cuota que justificó los gates sigue vigente. Se llama una vez, sobre
+    señales ya gateadas (mismo patrón que _attach_mc_conditional, D160-02),
+    no en cada refresh de 15s. drift>umbral → aborta: la cuota validada por
+    los gates ya no existe, el coupon abriría a un precio distinto."""
+    event_id = sig.get("event_id")
+    cuota_gates = sig.get("cuota_live")
+    if not event_id or not cuota_gates:
+        return False, "sin_datos_para_validar"
+
+    fresh = _fetch_live_games_all(event_id, bypass_cache=True)
+    if not fresh:
+        return False, "sin_mercado_fresco"
+
+    campo = "cuota_under" if sig.get("direccion") == "UNDER" else "cuota_over"
+    cuota_fresca = fresh.get(campo)
+    if not cuota_fresca:
+        return False, "sin_cuota_fresca"
+
+    drift = abs(cuota_fresca - cuota_gates) / cuota_gates
+    if drift > umbral:
+        return False, f"cuota_drift_{drift:.1%}"
+    return True, "fillable"
 
 
 # ── Nodo-151 Gate Helpers ──────────────────────────────────────────────────
@@ -4883,6 +5001,17 @@ def _check_games_convergencia(fecha: str) -> None:
                 itf_fired.append(itf_key)
                 itf_fired_path.write_text(json.dumps(itf_fired, ensure_ascii=False), encoding="utf-8")
                 logger.info(f"[ITF_LIVE] combo disparado: {len(alta_itf)} señales ALTA conv≥3")
+                # D157-05: Telegram solo en señal-nueva (mismo guard que log/shadow_book,
+                # nunca en el refresco de 15s de oc_id — evitaría flood). 135 disparos
+                # reales previos sin ninguna notificación (ver Nodo-174 D174-02).
+                _itf_desc = " + ".join(
+                    f"{s['partido']} {s.get('direccion','?')} {s.get('linea','?')}"
+                    for s in alta_itf
+                )
+                _send_telegram_async(
+                    f"ITF LIVE COMBO | {len(alta_itf)} señales | {_itf_desc}",
+                    tag="D157-05",
+                )
                 # Nodo-157 D157-03: registra cada pierna en shadow_book solo en la
                 # detección de señal NUEVA (no cada ciclo de 15s) — cuota_trigger
                 # debe ser la cuota al momento del disparo, no la del último refresh.
@@ -4913,6 +5042,28 @@ def _background_refresh(fecha_fn) -> None:
         except Exception:
             pass
         time.sleep(15)
+
+
+def _winner_market_refresh(fecha_fn) -> None:
+    """D160-01: live_edge_monitor.run() estaba huérfano — ningún proceso lo
+    invocaba en producción (solo `python3 scripts/live_edge_monitor.py --observe`
+    manual/cron, ver Nodo-174 D174-02). Thread daemon que lo conecta al
+    servicio tennis-live-desk, mismo patrón que _background_refresh/
+    _fast_score_refresh. Import dinámico vía scripts/ en sys.path (mismo
+    patrón ya usado para odds_aggregator)."""
+    import sys as _sys
+    _scripts_dir = str(BASE_DIR / "scripts")
+    if _scripts_dir not in _sys.path:
+        _sys.path.insert(0, _scripts_dir)
+    import live_edge_monitor
+
+    while True:
+        try:
+            fecha_fn()
+            live_edge_monitor.run(reports_dir="reports", ahora=datetime.now())
+        except Exception:
+            pass
+        time.sleep(60)
 
 
 def _fast_score_refresh(fecha_fn) -> None:
@@ -5074,7 +5225,10 @@ def main() -> None:
     # Fast score thread: solo livedata D153 cada 5s → latencia real ≤7s
     _tf = threading.Thread(target=_fast_score_refresh, args=(_fecha_fn,), daemon=True)
     _tf.start()
-    logger.info("Threads iniciados: background 15s (convergencia) + fast_score 5s (livedata D153)")
+    # D160-01: live_edge_monitor.run() estaba huérfano — ver Nodo-174 D174-02
+    _tw = threading.Thread(target=_winner_market_refresh, args=(_fecha_fn,), daemon=True)
+    _tw.start()
+    logger.info("Threads iniciados: background 15s (convergencia) + fast_score 5s (livedata D153) + winner_market 60s (D160-01)")
 
     server = HTTPServer(("0.0.0.0", args.port), DeskHandler)
     logger.info(f"Live Trading Desk en http://localhost:{args.port}/")

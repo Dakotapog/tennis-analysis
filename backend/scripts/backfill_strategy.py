@@ -1,6 +1,13 @@
 """
 D144-06 (Nodo-144): Backfill retroactivo de campo 'strategy' en shadow_book.
 
+ONE-SHOT CUMPLIDO (Nodo-174 D174-12, 2026-08-06): ejecutado una vez sobre los
+3 días con combo_registry disponible (22/23/25-jul-2026). No es un PASO de
+run_daily.py ni corre periódicamente — reejecutarlo sobre el mismo rango es
+un no-op (registros ya tageados no se reprocesan). Si aparece nuevo backlog
+de registros SIN_TAG con combo_registry disponible, correr manualmente con
+el rango de fechas correspondiente.
+
 Lógica:
   - 3 días CON combo_registry (22/23/25-jul-2026): cruce exacto nombre+fecha+subtipo
     → alta confianza → tag CORE/SATELITE/COBERTURA según subtipo

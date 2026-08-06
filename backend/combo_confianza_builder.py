@@ -677,6 +677,7 @@ def _extract_and_categorize(partidos: list, threshold: float,
             'nombre':        favorito,
             'confianza':     conf,
             'cuota':         cuota,
+            'outcome_id':    partido.get('outcome_id'),  # D174-08: propagado desde edge_report
             'p_modelo':      conf / 100.0,
             'ev_leg':        round(_ev_leg, 3),
             'torneo':        torneo,
@@ -720,6 +721,7 @@ def _calc_combo(picks_subset: list, stake: float, nombre: str,
     confianzas = []
     cuotas = []
     categorias = []
+    outcome_ids = []  # D174-08: paralelo a nombres, entradas pueden ser None
 
     for p in picks_subset:
         odds_total *= p['cuota']
@@ -727,6 +729,7 @@ def _calc_combo(picks_subset: list, stake: float, nombre: str,
         confianzas.append(p['confianza'])
         cuotas.append(p['cuota'])
         categorias.append(p['cat']['categoria'])
+        outcome_ids.append(p.get('outcome_id'))
 
     # P(win) estimado usando probabilidad implícita del mercado (conservador)
     p_win_market = 1.0
@@ -742,6 +745,7 @@ def _calc_combo(picks_subset: list, stake: float, nombre: str,
         'n_piernas':         len(nombres),
         'confianzas':        confianzas,
         'cuotas':            cuotas,
+        'outcome_ids':       outcome_ids,  # D174-08: paralelo a piernas, entradas pueden ser None
         'categorias':        categorias,
         'p_win':             round(p_win_market, 6),
         'odds_total':        round(odds_total, 2),
@@ -964,11 +968,12 @@ def _generate_anchor_bats(anchor_plan: dict, outcomes_map: dict):
         piernas = combo['piernas']
         cuotas_list = combo['cuotas']
 
+        _hints = combo.get('outcome_ids') or [None] * len(piernas)  # D174-08
         outcome_ids = []
         legs_str_parts = []
         ok = True
-        for nombre, cuota in zip(piernas, cuotas_list):
-            oc = _find_outcome(nombre, cuota, outcomes_map)
+        for nombre, cuota, _hint in zip(piernas, cuotas_list, _hints):
+            oc = _find_outcome(nombre, cuota, outcomes_map, outcome_id_hint=_hint)
             if oc:
                 outcome_ids.append(oc['outcome_id'])
                 legs_str_parts.append(f'{nombre}@{cuota:.2f}')
@@ -1625,14 +1630,48 @@ def _fetch_kambi_outcomes() -> dict:
     return outcomes_map
 
 
-def _find_outcome(nombre: str, cuota: float, outcomes_map: dict):
+# D174-08: telemetría outcome_id_hit_rate — cuántos picks se resuelven vía
+# outcome_id directo del edge_report vs re-matching por nombre cada corrida.
+_OUTCOME_ID_STATS = {'hint_used': 0, 'name_matched': 0, 'no_match': 0}
+
+
+def _reset_outcome_id_stats():
+    """Solo para tests — reinicia el contador de telemetría D174-08."""
+    _OUTCOME_ID_STATS['hint_used'] = 0
+    _OUTCOME_ID_STATS['name_matched'] = 0
+    _OUTCOME_ID_STATS['no_match'] = 0
+
+
+def _outcome_id_hit_rate() -> float | None:
+    """D174-08: fracción de picks resueltos vía outcome_id (sin name-matching).
+    None si no se resolvió ningún pick todavía (evita división por cero)."""
+    total = sum(_OUTCOME_ID_STATS.values())
+    if total == 0:
+        return None
+    return round(_OUTCOME_ID_STATS['hint_used'] / total, 3)
+
+
+def _find_outcome(nombre: str, cuota: float, outcomes_map: dict, outcome_id_hint=None):
     """Busca outcome_id para un pick. Retorna dict o None.
+
+    D174-08: si `outcome_id_hint` viene del edge_report (D154-06 real) y sigue
+    vigente en el `outcomes_map` recién fetcheado de Kambi (los outcome_ids
+    expiran en segundos en vivo, Nodo-157 D157-02 — nunca se confía ciego en
+    un hint viejo), se usa directo y se salta el name-matching. Si no hay hint
+    o ya no está vigente, cae al comportamiento original.
 
     Maneja dos formatos de nombre:
     - Kambi: "Lachlan Mcfadzean"  → apellido = último token = "mcfadzean"
     - Nuestro: "McFadzean L."     → último token = "l" (inicial) — INCORRECTO
     Fix: si el último token tiene ≤2 chars (inicial), usar el PRIMER token como apellido.
     """
+    if outcome_id_hint:
+        _hint_str = str(outcome_id_hint)
+        for oc in outcomes_map.values():
+            if oc.get('outcome_id') == _hint_str:
+                _OUTCOME_ID_STATS['hint_used'] += 1
+                return oc
+
     norm = _normalize_name(nombre)
     parts = norm.split()
     last  = parts[-1] if parts else norm
@@ -1641,11 +1680,15 @@ def _find_outcome(nombre: str, cuota: float, outcomes_map: dict):
 
     for key in [norm, apellido]:
         if key in outcomes_map:
+            _OUTCOME_ID_STATS['name_matched'] += 1
             return outcomes_map[key]
 
     for key, oc in outcomes_map.items():
         if apellido and len(apellido) > 3 and apellido in key:
+            _OUTCOME_ID_STATS['name_matched'] += 1
             return oc
+
+    _OUTCOME_ID_STATS['no_match'] += 1
     return None
 
 
@@ -1673,11 +1716,12 @@ def _generar_bats(plan: dict, prefix: str = "CC") -> int:
         piernas = combo['piernas']
         cuotas_list = combo['cuotas']
 
+        _hints = combo.get('outcome_ids') or [None] * len(piernas)  # D174-08
         outcome_ids = []
         legs_str_parts = []
         ok = True
-        for nombre, cuota in zip(piernas, cuotas_list):
-            oc = _find_outcome(nombre, cuota, outcomes_map)
+        for nombre, cuota, _hint in zip(piernas, cuotas_list, _hints):
+            oc = _find_outcome(nombre, cuota, outcomes_map, outcome_id_hint=_hint)
             if oc:
                 outcome_ids.append(oc["outcome_id"])
                 legs_str_parts.append(f"{nombre}@{cuota:.2f}")
@@ -1743,8 +1787,9 @@ def _generar_bats(plan: dict, prefix: str = "CC") -> int:
     for combo in _all_combos(plan):
         if combo.get('pick_excluido') and not plan.get('cobertura_expanded'):
             continue
-        for nombre, cuota in zip(combo['piernas'], combo['cuotas']):
-            oc = _find_outcome(nombre, cuota, outcomes_map)
+        _hints = combo.get('outcome_ids') or [None] * len(combo['piernas'])  # D174-08
+        for nombre, cuota, _hint in zip(combo['piernas'], combo['cuotas'], _hints):
+            oc = _find_outcome(nombre, cuota, outcomes_map, outcome_id_hint=_hint)
             if oc:
                 oid = str(oc['outcome_id'])
                 if oid not in betslip_index:
@@ -1796,9 +1841,10 @@ def _enviar_telegram(plan: dict):
         cuotas_list = combo['cuotas']
         p_win = combo['p_win'] * 100
 
+        _hints = combo.get('outcome_ids') or [None] * len(piernas)  # D174-08
         outcome_ids = []
-        for nombre, cuota in zip(piernas, cuotas_list):
-            oc = _find_outcome(nombre, cuota, outcomes_map)
+        for nombre, cuota, _hint in zip(piernas, cuotas_list, _hints):
+            oc = _find_outcome(nombre, cuota, outcomes_map, outcome_id_hint=_hint)
             if oc:
                 outcome_ids.append(oc["outcome_id"])
 
@@ -2150,6 +2196,13 @@ def main():
             print(f'  {n_bat} archivos {bat_prefix}*.bat en escritorio')
         else:
             print('  Sin .bat generados (picks no disponibles en Kambi)')
+        # D174-08: outcome_id_hit_rate — meta 7 días >= 0.80 (spec Nodo-174)
+        _hr = _outcome_id_hit_rate()
+        if _hr is not None:
+            print(f'  [D174-08] outcome_id_hit_rate: {_hr*100:.1f}% '
+                  f'({_OUTCOME_ID_STATS["hint_used"]} directo / '
+                  f'{_OUTCOME_ID_STATS["name_matched"]} name-match / '
+                  f'{_OUTCOME_ID_STATS["no_match"]} sin match)')
 
     # Telegram
     if args.telegram and has_combos:

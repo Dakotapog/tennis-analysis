@@ -40,9 +40,9 @@
       "metrica": "hit% con IC Wilson 95% inferior > 1/cuota_media",
       "n_stop": 30,
       "estado": "ACUMULANDO",
-      "n_actual": 0,
-      "hits": 0,
-      "roi_flat_1u": 0.0,
+      "n_actual": 92,
+      "hits": 34,
+      "roi_flat_1u": 0.0778,
       "nota": "Carreno @3.30 + Safiullin @2.65 ganaron 2026-06-29 (n=2, case report — no actualiza calibración)"
     },
     "H52-02": {
@@ -60,9 +60,10 @@
       "metrica": "hit% documentado → decide floor James-Stein para tier ITF",
       "n_stop": 30,
       "estado": "ACUMULANDO",
-      "n_actual": 0,
-      "hits": 0,
-      "nota": "Cada pick NO_DATA/WATCHLIST de ITF debe registrarse en shadow book con history_provenance"
+      "n_actual": 248,
+      "hits": 117,
+      "nota": "Cada pick NO_DATA/WATCHLIST de ITF debe registrarse en shadow book con history_provenance",
+      "roi_flat_1u": 0.0573
     },
     "H52-03": {
       "nombre": "STRUCTURAL_ALPHA hit% > LOW confidence hit%",
@@ -71,9 +72,11 @@
       "metrica": "chi² p<0.10 → habilita M-28-6 y V-28-5",
       "n_stop": 20,
       "estado": "PENDIENTE",
-      "n_actual": 0,
+      "n_actual": 403,
       "hits_structural": 0,
-      "hits_low": 0
+      "hits_low": 0,
+      "hits": 162,
+      "roi_flat_1u": 0.0668
     },
     "H52-04": {
       "nombre": "Surface discount ON mejora Brier vs OFF",
@@ -103,7 +106,9 @@
           "superficie_torneo": "hard",
           "atribuido": true
         }
-      ]
+      ],
+      "n_actual": 0,
+      "hits": 0
     },
     "H52-05": {
       "nombre": "STEAM_IN hit% > DRIFT_OUT hit%",
@@ -112,7 +117,8 @@
       "metrica": "diferencia positiva → valida veto asimétrico futuro",
       "n_stop": 20,
       "estado": "PENDIENTE",
-      "n_actual": 0
+      "n_actual": 0,
+      "hits": 0
     },
     "H52-06": {
       "nombre": "Ranking p_modelo preservado predice en sesiones BLIND",
@@ -121,7 +127,9 @@
       "metrica": "Spearman > 0.3 → mantener AMPLIFICATION; si no → 0",
       "n_stop": 5,
       "estado": "PENDIENTE",
-      "n_sesiones": 0
+      "n_sesiones": 0,
+      "n_actual": 0,
+      "hits": 0
     },
     "H52-07": {
       "nombre": "Qualifiers GS/WTA vs cuadro principal",
@@ -139,7 +147,10 @@
       "n_stop": 50,
       "estado": "PENDIENTE",
       "n_qualifying": 0,
-      "n_main": 0
+      "n_main": 0,
+      "n_actual": 7,
+      "hits": 3,
+      "roi_flat_1u": -0.1557
     },
     "H52-08": {
       "nombre": "Zona cuota 2.00-2.50 sigue siendo trampa post-fixes 32/33",
@@ -152,10 +163,11 @@
       "metrica": "re-medir con gates actuales — si hit% < breakeven → mantener exclusión",
       "n_stop": 30,
       "estado": "ACUMULANDO",
-      "n_actual": 0,
-      "hits": 0,
+      "n_actual": 262,
+      "hits": 120,
       "hit_rate_historico": 0.214,
-      "nota": "Hit rate histórico medido pre-fixes S-27-2"
+      "nota": "Hit rate histórico medido pre-fixes S-27-2",
+      "roi_flat_1u": 0.0165
     },
     "H54-01": {
       "nombre": "APOSTAR con stake_real=0 tienen hit% y CLV iguales o mejores que APOSTAR financiados",
@@ -170,10 +182,11 @@
       "metrica": "hit% y CLV median del segmento var_flattened vs segmento financiado — misma superficie+tier",
       "n_stop": 30,
       "estado": "ACUMULANDO",
-      "n_actual": 8,
-      "hits": 3,
+      "n_actual": 26,
+      "hits": 8,
       "nota": "Si H54-01 gradua (hit% flattened >= hit% financiado): implementar floor MIN_STAKE_APOSTAR=$500 fuera del pool VaR de combos. PROHIBIDO cambiar hasta n=30.",
-      "nota_backfill": "Backfill manual 2026-07-10 desde PROPUESTA_VAR_2026-07-10.md. resultado=None en JSONL porque shadow_book --settle pendiente para Jul 3/8/9. Fuente: tabla WATCHLIST-VAR verificada en sesión. Correr shadow_book.py --settle para cada fecha para hacer JSONL autoritativo."
+      "nota_backfill": "Backfill manual 2026-07-10 desde PROPUESTA_VAR_2026-07-10.md. resultado=None en JSONL porque shadow_book --settle pendiente para Jul 3/8/9. Fuente: tabla WATCHLIST-VAR verificada en sesión. Correr shadow_book.py --settle para cada fecha para hacer JSONL autoritativo.",
+      "roi_flat_1u": -0.1431
     },
     "H60-01": {
       "nombre": "GCS Pattern (pre-torneo campeón en superficie) supera breakeven",
@@ -237,7 +250,10 @@
       "hits_alpha_promoted": 0,
       "n_organico": 0,
       "hits_organico": 0,
-      "nota": "flag alpha_promoted debe propagarse al pick_snapshot del shadow book. Si falla: apagar D62-05 con constante _ALPHA_C1_GATE_ENABLED=False."
+      "nota": "flag alpha_promoted debe propagarse al pick_snapshot del shadow book. Si falla: apagar D62-05 con constante _ALPHA_C1_GATE_ENABLED=False.",
+      "n_actual": 1,
+      "hits": 0,
+      "roi_flat_1u": -1.0
     },
     "H76-01": {
       "nombre": "RFI-ULTRA: jugador activo gana cuando inactivo >180d es favorito del bookmaker",
@@ -270,10 +286,11 @@
       "gate_implementacion": "D64-04 (escalado confidence_flag) SOLO activo post-graduación H76-01",
       "n_stop": 30,
       "estado": "ACUMULANDO",
-      "n_actual": 1,
-      "hits": 1,
+      "n_actual": 12,
+      "hits": 6,
       "perdidos": 0,
-      "nota": "D64-01 (campo rfi_signal en pick_snapshot) pendiente de implementación para acumulación automática. Hasta entonces: registro manual. PROHIBIDO activar D64-04 (boost confianza) hasta n=30 + IC graduado."
+      "nota": "D64-01 (campo rfi_signal en pick_snapshot) pendiente de implementación para acumulación automática. Hasta entonces: registro manual. PROHIBIDO activar D64-04 (boost confianza) hasta n=30 + IC graduado.",
+      "roi_flat_1u": 0.2167
     },
     "H60-02": {
       "nombre": "GCS zona extendida (22-42d, misma temporada hierba) supera breakeven",
@@ -401,7 +418,9 @@
       "hits_anchor": 6,
       "n_variable": 4,
       "hits_variable": 3,
-      "nota": "D65-01 debe añadir campo pick_tier al combo plan output para acumulación automática. Hasta entonces: registro manual por sesión. PROHIBIDO activar lógica diferencial hasta n=60 (30+30)."
+      "nota": "D65-01 debe añadir campo pick_tier al combo plan output para acumulación automática. Hasta entonces: registro manual por sesión. PROHIBIDO activar lógica diferencial hasta n=60 (30+30).",
+      "n_actual": 0,
+      "hits": 0
     },
     "H77-03": {
       "nombre": "BLOQUEADO + SCALP TOP-100/50 en superficie + edge positivo: eliminación práctica de penalidad H2H",
@@ -480,8 +499,9 @@
       "kill_switch": "hit% < 45% con n >= 20 → CAPA2_ENABLED=False",
       "n_stop": 30,
       "estado": "ACUMULANDO",
-      "n_actual": 0,
-      "hits": 0
+      "n_actual": 1,
+      "hits": 1,
+      "roi_flat_1u": 0.53
     },
     "H89-02": {
       "nombre": "ELO_DOMINANCE axis",
@@ -497,8 +517,9 @@
       "exito": "hit% > 50% con IC Wilson 95% inferior > 50%, n >= 30",
       "n_stop": 30,
       "estado": "ACUMULANDO",
-      "n_actual": 0,
-      "hits": 0
+      "n_actual": 49,
+      "hits": 27,
+      "roi_flat_1u": 0.2684
     },
     "H96-01": {
       "nombre": "IRP — jugadores con delta_return negativo rinden peor en partidos de retorno",
@@ -592,8 +613,9 @@
       "exito": "IC Wilson 95% inferior > breakeven, n >= 30 picks con score >= 3",
       "n_stop": 30,
       "estado": "ACUMULANDO",
-      "n_actual": 0,
-      "hits": 0
+      "n_actual": 15,
+      "hits": 11,
+      "roi_flat_1u": -0.1067
     },
     "H97-01": {
       "nombre": "Live Edge Monitor: picks con drift>=15% y edge_live>5% superan breakeven de cuota_live",
@@ -651,7 +673,9 @@
       "estado": "ACTIVA",
       "fecha_registro": "2026-07-16",
       "baseline": "Jul-15 sin gates: ~17% hit (5 perdidos / 6 totales)",
-      "archivo_evidencia": "reports/combo_gate_log_FECHA.json + data/signal_audit_nobets.jsonl"
+      "archivo_evidencia": "reports/combo_gate_log_FECHA.json + data/signal_audit_nobets.jsonl",
+      "n_actual": 0,
+      "hits": 0
     },
     "H107-01": {
       "nombre": "MOTOR split por cuota: el tramo cuota>2.50 es la fuente del ROI negativo",
@@ -806,8 +830,9 @@
       "kill_switch": "hit% < 35% con n >= 20 → revisar scoring multi-eje de generar_tabla_favoritos2",
       "n_stop": 30,
       "estado": "ACUMULANDO",
-      "n_actual": 0,
-      "hits": 0
+      "n_actual": 1264,
+      "hits": 877,
+      "roi_flat_1u": -0.0949
     },
     "H124-02": {
       "nombre": "Picks EVALUAR con señal HOT activa tienen hit% ≥5pp sobre base EVALUAR",
@@ -825,8 +850,9 @@
       "kill_switch": "delta < 2pp con n_hot >= 15 → HOT no discrimina dentro de EVALUAR",
       "n_stop": 20,
       "estado": "ACUMULANDO",
-      "n_actual": 0,
-      "hits": 0
+      "n_actual": 22,
+      "hits": 12,
+      "roi_flat_1u": -0.2609
     },
     "H124-03": {
       "nombre": "EVALUAR_GAMES (favorito absoluto cuota<1.30) candidato mercado juegos/sets",
@@ -844,8 +870,9 @@
       "kill_switch": "hit% < 65% con n >= 20 → modelo no discrimina con suficiente fuerza para mercado juegos (cuota muy baja = margen bookmaker nulo)",
       "n_stop": 30,
       "estado": "ACUMULANDO",
-      "n_actual": 0,
-      "hits": 0
+      "n_actual": 747,
+      "hits": 587,
+      "roi_flat_1u": -0.1126
     },
     "H125-01": {
       "nombre": "EVALUAR_GAMES UNDER juegos supera breakeven en cuota_under de Kambi",
@@ -1037,16 +1064,91 @@
       "n_actual": 0,
       "hits": 0,
       "nota_bloqueo": "D173-08 (el gate reemplazo que produciría el flag t32_01_habria_bloqueado sobre p_modelo_cal) no se implementó — depende de un calibrador desplegado (H173-01/PUERTA 3), que no está disponible. El gate T32-01 original (sobre p_modelo crudo) sigue activo sin cambios. Esta hipótesis no puede acumular n hasta que BLOQUE C reabra."
+    },
+    "H160-02": {
+      "nombre": "Monte Carlo condicional + Steam detector + IC95% CLT mejora hit rate en señales EN_VIVO gateadas D151",
+      "descripcion": "Monte Carlo condicional (D160-02) + Steam detector (D160-03) + IC95% CLT (D167-04): hit rate en señales EN_VIVO gateadas D151, extensión con cuantificación de error estándar e intervalo de confianza. P(cumplir linea | mc_condicionado) — simulación, no gate de disparo; convergencia LLN + IC95%.",
+      "origen_deuda": "Nodo-160 D160-02/D160-03 especificadas pero nunca wireadas a producción — Nodo-167 implementa wiring + SE analítico + steam. REPORTE_SOLO. Encontrada fuera del dict 'hypotheses' (bug de esquema) durante auditoría Nodo-174 D174-03 — normalizada aquí sin cambiar semántica.",
+      "preregistrado": "2026-08-03",
+      "umbrales_congelados": {
+        "criterion_original": ">=40% baseline D151, IC95% tightens con n_sims; steam_confirmado precede breakpoint EN_VIVO >=2 ciclos"
+      },
+      "metrica": "P(cumplir linea | mc_condicionado) sobre señales EN_VIVO gateadas D151.",
+      "exito": ">=40% baseline D151 con IC95% CLT estrechándose con n_sims.",
+      "kill_switch": "No definido explícitamente en Nodo-160/167 — REPORTE_SOLO, no gate de disparo.",
+      "n_stop": 20,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0
+    },
+    "H147-01": {
+      "nombre": "Certeza Condicional DOMINANTE (D147-02) predice acierto de la senal live",
+      "descripcion": "zona=='DOMINANTE' AND p_condicional>=0.70 AND games_played>linea/2 AND certeza_matematica==False -> el resultado real de la senal (UNDER/OVER) es correcto en el settle.",
+      "origen_deuda": "Nodo-147 D147-06 (banner CERTEZA_MATEMATICA) -- vivia como comentario/docstring en shadow_book.py sin entrada en preregistered_hypotheses.json. Nodo-174 D174-05 la traslada verbatim desde Nodo-147-Live-Score-Games-Certeza-Condicional.md seccion 5 (lineas 597-611).",
+      "preregistrado": "2026-08-05",
+      "umbrales_congelados": {
+        "zona": "DOMINANTE",
+        "p_condicional_min": 0.7,
+        "condicion_games_played": "games_played > linea/2",
+        "certeza_matematica": false,
+        "nota": "Transcrito verbatim de Nodo-147.md seccion 5 -- PROHIBIDO cambiar antes de n_stop."
+      },
+      "metrica": "hit% del segmento pick_type='games_live' que cumple la condicion, vs breakeven ~55.6% (cuota media ~1.80)",
+      "p0": 0.5,
+      "p1": 0.65,
+      "n_stop": 20,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0,
+      "nota": "D174-05: registrada retroactivamente -- la condicion ya gatea senales en vivo desde Nodo-147/D147-06, pero nunca tuvo entrada JSON. p0/p1/n_stop verbatim de Nodo-147.md, sin re-derivar."
+    },
+    "H150-01": {
+      "nombre": "Filtro cuota_envenenada (cuota_drift>+15%) reduce perdidas en combos ITF live",
+      "descripcion": "Comparacion de 2 cohortes: combos ITF live filtrados por cuota_envenenada (D150-01) vs combos que habrian pasado sin el filtro. No es un predicado binomial de un solo pick -- sigue el patron de comparacion de 2 grupos de H52-05 (STEAM_IN vs DRIFT_OUT), sin p0/p1 fijos.",
+      "origen_deuda": "Nodo-150 D150-01/D150-06 -- hipotesis en el spec sin entrada JSON. Nodo-174 D174-05 la traslada verbatim de Nodo-150-Live-Games-Risk-Intelligence-Simulacion-Doctoral.md seccion 7 (lineas 280-284).",
+      "preregistrado": "2026-07-28",
+      "metrica": "reduccion de perdidas en >=50% de los casos filtrados (filtrados vs no-filtrados)",
+      "n_stop": 20,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0,
+      "nota": "D174-05: sin p0/p1 -- comparacion de 2 grupos igual que H52-05, no un test binomial de una muestra. Las senales que el gate D150-01 excluye (live_desk.py:4898-4902) nunca llegan a shadow_book, por lo que el grupo 'no-filtrado' no es reconstruible retroactivamente -- predicado en hypothesis_ledger.py retorna False (mismo patron que H52-05/H77-02)."
+    },
+    "H151-01": {
+      "nombre": "Gates D151-01/02/03 (edge_live/score_null/zona_direccion) elevan hit rate de senales games live",
+      "descripcion": "hit rate >=40% en senales games_live que pasan los 3 gates D151-01/02/03, vs 20% narrativo sin gates. Las senales que fallan cualquiera de los 3 gates son excluidas con `continue` en live_desk.py (lineas 4898-4932) antes de llegar a _fire_itf_live_games_combo y nunca se loguean en shadow_book -- por construccion, todo pick pick_type='games_live' ya sobrevivio los 3 gates.",
+      "origen_deuda": "Nodo-151 -- hipotesis en la seccion 'Hipotesis pre-registrada' del spec sin entrada JSON. Nodo-174 D174-05 la traslada verbatim de Nodo-151-Live-Edge-Gates.md linea 79-81.",
+      "preregistrado": "2026-07-28",
+      "umbrales_congelados": {
+        "predicado": "pick_type=='games_live' (por construccion, todo pick games_live ya paso los 3 gates D151-01/02/03)",
+        "nota": "p0=0.20 es la tasa narrativa pre-gates citada en el spec original, no una cohorte medida en vivo -- no hay ruta para reconstruir retroactivamente el universo 'sin gates' porque esas senales nunca se loguean."
+      },
+      "metrica": "hit% de picks pick_type='games_live' vs p0=0.20 narrativo",
+      "p0": 0.2,
+      "p1": 0.4,
+      "n_stop": 20,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0,
+      "nota": "D174-05: p0=0.20 es narrativo (baseline sin gates, no medido en vivo) por diseno del spec Nodo-151.md:79-81 -- transcrito verbatim, no re-derivado."
+    },
+    "H152-01": {
+      "nombre": "HCUC (Hard Court Underdog Convergence) supera breakeven",
+      "descripcion": "Picks con hcuc_convergence=True (hard+quality+coinflip+senal especial) tienen hit% > breakeven.",
+      "origen_deuda": "Nodo-155 D155-02/03 -- p0/p1 hardcoded en shadow_book.py CHECKLIST SEMANAL (0.385, 0.55) desde su implementacion, nunca trasladados al JSON. Nodo-174 seccion A2 lo cita como ejemplo del patron 'medida sin pre-registrar'.",
+      "preregistrado": "2026-08-01",
+      "umbrales_congelados": {
+        "campo": "pick_snapshot.hcuc_convergence == True",
+        "nota": "Transcrito verbatim del literal en shadow_book.py (checklist semanal B108-04) -- PROHIBIDO cambiar antes de n_stop=30."
+      },
+      "metrica": "hit% del segmento HCUC con SPRT (p0=0.385, p1=0.55) una vez n>=30",
+      "p0": 0.385,
+      "p1": 0.55,
+      "n_stop": 30,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0,
+      "nota": "D174-05: registrada retroactivamente -- el gate SPRT ya corre en shadow_book.py con estos valores desde su implementacion (Nodo-155), pero nunca existio una entrada JSON como fuente de verdad. shadow_book.py ahora lee p0/p1/n_stop desde este registro (con fallback al literal historico si el campo faltara)."
     }
-  },
-  "H160-02": {
-    "id": "H160-02",
-    "description": "Monte Carlo condicional (D160-02) + Steam detector (D160-03) + IC95% CLT (D167-04): hit rate en señales EN_VIVO gateadas D151, extensión con cuantificación de error estándar e intervalo de confianza",
-    "metric": "P(cumplir linea | mc_condicionado) — simulación, no gate de disparo; convergencia LLN + IC95%",
-    "criterion": ">=40% baseline D151, IC95% tightens con n_sims; steam_confirmado precede breakpoint EN_VIVO >=2 ciclos",
-    "n_stop": 20,
-    "started": "2026-08-03",
-    "context": "D160-02/D160-03 especificadas en Nodo-160 pero nunca wireadas a producción — D167 implementa wiring + S E analítico + steam; REPORTE_SOLO",
-    "evidence": []
   }
 }

@@ -43,7 +43,7 @@ def _pick(name, cuota, p_modelo, confidence_flag, tier="itf"):
 def _fake_outcomes_for(names):
     """fetch_kambi_outcomes()/find_outcome() mock: cada jugador resuelve a un
     outcome_id único y misma cuota que en el edge_report."""
-    def _fake_find_outcome(jugador, cuota, outcomes_map, started_map):
+    def _fake_find_outcome(jugador, cuota, outcomes_map, started_map, **kwargs):
         if jugador in names:
             idx = names.index(jugador)
             return {"outcome_id": 1000 + idx, "odds": cuota}, "ok"

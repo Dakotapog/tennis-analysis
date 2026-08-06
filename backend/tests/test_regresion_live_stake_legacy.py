@@ -68,7 +68,7 @@ class TestLiveStakeLegacyFix(unittest.TestCase):
         started_map = {}
         return outcomes_map, started_map
 
-    def _fake_find_outcome(self, jugador, cuota, outcomes_map, started_map):
+    def _fake_find_outcome(self, jugador, cuota, outcomes_map, started_map, **kwargs):
         oc = {"outcome_id": f"id_{jugador.replace(' ', '_')}", "odds": cuota}
         return oc, None
 

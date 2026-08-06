@@ -66,13 +66,17 @@ def _make_h2h_file(partidos):
 class TestFindLatestH2H(unittest.TestCase):
 
     def test_find_latest_h2h_today(self):
-        """Con archivo de hoy disponible, retorna el más reciente."""
+        """Con archivo de hoy disponible, retorna el más reciente (rama fallback sort)."""
         today = date.today().strftime('%Y%m%d')
         fake_files = [
             f"reports/h2h_results_enhanced_{today}_100000.json",
             f"reports/h2h_results_enhanced_{today}_120000.json",
         ]
-        with patch("glob.glob", return_value=fake_files):
+        # D154-03/D154-11: rama primaria delega a _select_best_h2h() (selección real
+        # por n_partidos, lee disco). Este test cubre la rama fallback (sort alfabético),
+        # que solo corre si _select_best_h2h es None — ver Nodo-174 D174-02.
+        with patch("favoritos_combo_builder._select_best_h2h", None), \
+             patch("glob.glob", return_value=fake_files):
             result = _find_latest_h2h()
         # sorted(...) → último = 120000
         self.assertEqual(result, fake_files[-1])

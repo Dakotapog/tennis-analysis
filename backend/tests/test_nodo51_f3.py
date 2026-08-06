@@ -196,15 +196,19 @@ class TestPlaywrightBudgetPriority:
 
         extractor._analyze_and_consolidate = MagicMock(side_effect=capture_analyze)
 
+        # _run_playwright_batch usa asyncio.new_event_loop()+loop.run_until_complete()
+        # (no asyncio.run() directo — ver ninja_h2h_parser.py:1138-1142, evita el warning
+        # "no current event loop" en cleanup). Ver Nodo-174 D174-02.
+        mock_loop = MagicMock()
         with (
-            patch("scraping.ninja_h2h_parser.asyncio.run") as mock_asyncio_run,
+            patch("scraping.ninja_h2h_parser.asyncio.new_event_loop", return_value=mock_loop),
             patch("scraping.ninja_h2h_parser._parse_direct_h2h", return_value=[]),
         ):
             # Budget=1: solo 1 partido va a Playwright, el otro va a no_data
             extractor._run_playwright_batch(pw_budget=1)
-            # El asyncio.run se llama con los within_budget entries
-            args = mock_asyncio_run.call_args
-            assert args is not None, "asyncio.run debe llamarse para los within_budget"
+            # run_until_complete se llama con los within_budget entries
+            args = mock_loop.run_until_complete.call_args
+            assert args is not None, "loop.run_until_complete debe llamarse para los within_budget"
 
         # El GS queda en no_data (processed_via_analyze_and_consolidate directamente)
         assert extractor._analyze_and_consolidate.call_count >= 1

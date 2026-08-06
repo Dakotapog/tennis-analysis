@@ -391,6 +391,42 @@ name-matching solo si falta. Registrar la tasa de uso: `outcome_id_hit_rate` por
 **Impacto esperado:** elimina el impuesto diario de name-matching y su fragilidad. Métrica de
 éxito: `outcome_id_hit_rate ≥ 0.80` a los 7 días.
 
+**Estado de implementación (2026-08-06): COMPLETO en los 3 builders del texto + 1 gap adicional encontrado y cerrado.**
+
+`edge_calculator.py` propaga `outcome_id` en cada pick de salida (`apostar`/`watchlist`).
+Los 3 builders nombrados en el spec preferían `outcome_id_hint` en `find_outcome()`/`_find_outcome()`
+antes de caer a name-matching, con contador global `_OUTCOME_ID_STATS` (`hint_used`/`name_matched`/
+`no_match`) y `_outcome_id_hit_rate()` en `betplay_combo_builder.py`:
+
+- `betplay_combo_builder.py` — 8/8 call sites de `find_outcome()` con hint, 7/7 puntos de
+  propagación de `outcome_id`, telemetría en `main()`. 5 tests REGLA-T53.
+- `combo_confianza_builder.py` — 4 call sites de `_find_outcome(..., outcome_id_hint=_hint)`
+  (líneas 976, 1724, 1792, 1847), `_hint` leído de `combo.get('outcome_ids')` (campo plural del
+  combo, construido internamente desde el edge_report). Tests verificados sin regresión.
+- `favoritos_combo_builder.py` — no tiene matcher propio, reusa `find_outcome()` importado de
+  `betplay_combo_builder.py` en 2 sitios de `main()` (pre-filtro Kambi, resolución de outcome_ids
+  del combo). `seleccionar_favoritos()`/`armar_combos()` ya preservaban `outcome_id` vía spread
+  `**pick`, sin whitelisting — solo hicieron falta los 2 puntos de invocación del matcher. 2 tests
+  REGLA-T53 nuevos.
+
+**Gap encontrado durante el cierre — 4º generador fuera del texto literal ("los tres builders")
+pero con el mismo patrón exacto de fuga:** `trader_ev_tenis.py::_build_cobertura()` construye
+`all_plan` con legs whitelisteados a solo `{'jugador', 'cuota'}` (L871-872 antes del fix),
+strippeando `outcome_id` aunque cada `l` del pool ya lo trae (viene directo de
+`reporte.get('apostar', [])`, el mismo edge_report ya arreglado). `cobertura_plan` se escribe al
+`trader_plan_*.json` bajo la clave `"cobertura"` (L1415), y el consumidor real no es
+`combo_confianza_builder.py` sino `betplay_combo_builder.py::build_combo_links()` (:373-395,
+lee `trader_plan.get("cobertura", [])` y llama `find_outcome()` por cada leg) — ese call site
+nunca pasaba `outcome_id_hint`. Fix de 2 líneas: `trader_ev_tenis.py` L871-872 ahora incluye
+`'outcome_id': l.get('outcome_id')` por leg; `build_combo_links()` L392-395 ahora pasa
+`outcome_id_hint=leg.get("outcome_id")`. El contador `_OUTCOME_ID_STATS` se beneficia
+automáticamente (vive dentro de `find_outcome()`, no en el call site). 2 tests REGLA-T53 nuevos
+(`test_174_08_build_combo_links_pasa_outcome_id_hint_desde_leg`,
+`test_174_08_build_combo_links_leg_sin_outcome_id_hint_es_none`).
+
+Suite completa verificada tras cada builder cerrado — 0 regresiones (único fallo: el preexistente
+conocido `test_nodo42.py::test_t42_07_superficie_filter_excluye_clay`, sin relación).
+
 #### D174-09 — Ejecutar `audit_phantom_history.py`
 
 Correrlo sobre los 30 días de shadow book y **reportar el resultado**. Si encuentra
@@ -402,6 +438,38 @@ Si no encuentra nada, documentarlo — un negativo verificado también cierra la
 
 Luego: integrarlo como PASO semanal en `run_daily.py --fase noche` o retirarlo formalmente.
 **Un script de auditoría que nunca corre no es una defensa, es documentación.**
+
+**Estado de implementación (2026-08-06): COMPLETO.**
+
+Ejecución sobre 30 días de shadow book (`reports/audit_phantom_history_20260806_142232.json`):
+36 jugadores con historial contaminado (thf_cache asignó historial top-ATP/GS a jugadores
+ITF/Challenger por matching de apellido sin validar circuito, Nodo-152), de los cuales 3
+tienen hits reales en `reports/shadow_book/sb_*.jsonl`: 1 sin resultado aún (Antoni Kasperski),
+2 con `resolucion.resultado=LOST` y `pnl_flat_1u=-1.0` — dinero real perdido con edge calculado
+sobre historial fantasma:
+
+- **Ariana Morris** (`match_key="kha_morris"`, `sb_2026-07-08.jsonl`) — superficie=hard, tier=itf.
+- **Alexander Weis** (`match_key="ravel_weis"`, `sb_2026-07-11.jsonl`) — superficie=clay, tier=itf.
+
+Corrección aplicada a `data/calibracion_edge.json` (backup previo en
+`data/calibracion_edge.json.bak_d174_09_20260806`, nota `_nota_d174_09_phantom_correction`
+documenta el detalle): decrementados los `losses` agregados contaminados por estos 2 casos —
+`global` (-2), `por_superficie.hard`/`clay` (-1 c/u), `por_superficie_y_tier.hard_itf`/`clay_itf`
+(-1 c/u, incluyendo `era_v2_losses` porque ambos settlements ocurrieron después de
+`era_v2_start`). El caso sin resultado (Kasperski) no requiere corrección — no ha alimentado
+priors todavía.
+
+Integración semanal: PASO 3.8 en `run_daily.py`, insertado entre PASO 3.7 (Dual-Book Router,
+Nodo-111) y el `return` de fin de fase noche — corre `scripts/audit_phantom_history.py --days 30`
+con guard `datetime.now().weekday() == 0` (solo lunes, mismo día que `check_contradictions.py`
+por convención existente en el proyecto) y `optional=True` (no bloquea el pipeline nocturno si
+falla, mismo patrón que PASO 3K/D141-02 y PASO 3.9/D154-08). El reporte se genera pero la
+corrección de `calibracion_edge.json` sigue siendo **manual** — un hallazgo de contaminación
+no se auto-aplica a los priors sin revisión humana (riesgo de falso positivo en
+`_validate_circuit_consistency()` sobre casos límite). 2 tests REGLA-T53 nuevos en
+`tests/test_nodo174_hypothesis_ledger.py` (inspección de fuente, patrón D141-02):
+`test_174_09_run_daily_tiene_paso_audit_phantom_semanal`,
+`test_174_09_paso_audit_phantom_es_optional` — 2/2 PASS.
 
 ---
 
@@ -417,6 +485,37 @@ Luego: integrarlo como PASO semanal en `run_daily.py --fase noche` o retirarlo f
 - filtra por `kambi_disponible`,
 - no reutiliza `outcome_id` entre piernas.
 
+**Estado de implementación (2026-08-06): COMPLETO.**
+
+Auditoría previa al test confirmó el gap real: `build_system_combos` (Nodo-156-B)
+y `build_was_combos` (Nodo-44) ya tenían guard explícito REGLA-HF-1
+(`cuota < 1.50: continue` / gate `cuota_favorito >= 2.0` dentro de
+`_was_qualifies()`), pero **`build_safe_combos` (Nodo-25) no lo tenía** —
+única de las 3 sin defensa contra un pick heavy-fav colándose en el pool.
+Fix aplicado antes de escribir el test correspondiente (2 líneas, mismo
+patrón que `build_system_combos`, `betplay_combo_builder.py` dentro del loop
+de construcción del pool en `build_safe_combos`):
+
+```python
+if p.get("cuota", 0) < 1.50:  # REGLA-HF-1 — nunca en pool (Nodo-174 D174-10)
+    continue
+```
+
+18 tests REGLA-T53 nuevos en `tests/test_nodo174_10_combos_sin_cobertura.py`
+(6 por estrategia: pool insuficiente→`[]` sin crash, REGLA-HF-1, filtro
+`kambi_disponible`, no reutilización de `outcome_id`, formato coupon
+REGLA-BAT-1, más un guard extra por función — Leave-One-Out matemático en
+`build_system_combos`, "sin señal Markov no califica" en `build_was_combos`,
+Guard 2 torneos-distintos en `build_safe_combos`). Patrón de mock reutilizado
+de `test_nodo172_ancla_segura.py` (`patch.object` sobre `_find_latest_edge_report`/
+`fetch_kambi_outcomes`/`find_outcome`); `build_safe_combos` requirió además
+`monkeypatch.chdir(tmp_path)` porque lee `Path("reports").glob(...)` con ruta
+relativa al cwd, y un `edge_report` con `torneo` distinto por jugador — sin
+eso, todos los picks de un mismo `trader_plan` caen en el mismo fallback
+`f"{tier}_{superficie}"` y el Guard 2 (torneos distintos) excluye todos los
+pares (2 tests fallaron en el primer intento por esta razón, corregido
+ajustando el fixture, no el código de producción). 18/18 PASS.
+
 #### D174-11 — Telemetría del gate Kambi
 
 Complementa [[Nodo-173]] D173-10. Añadir a `metadata` del edge_report:
@@ -427,12 +526,94 @@ Complementa [[Nodo-173]] D173-10. Añadir a `metadata` del edge_report:
 
 63% de exclusión merece una línea en el reporte diario, no un descubrimiento por auditoría.
 
+**Estado de implementación (2026-08-06): COMPLETO.**
+
+`graphify query "metadata kambi_disponible n_disponibles telemetria edge_report"`
+confirmó el gap real (REGLA-GRAPHIFY-FIRST): el campo por-pick `kambi_disponible`
+ya existía desde D90-01 (`_annotate_kambi()`, `edge_calculator.py:917-931`), pero
+no había ningún agregado en `metadata` — el % de exclusión solo era visible
+contando manualmente sobre `resultados`, exactamente el "descubrimiento por
+auditoría" que el nodo pide evitar.
+
+Fix en `edge_calculator.py`, mismo patrón de agregación que D173-01
+(`_funnel`), insertado justo antes de construir el dict `output`:
+
+```python
+# ── D174-11 (Nodo-174): telemetría del gate Kambi ────────────────────────
+_kambi_disp = sum(1 for _r in resultados if _r.get('kambi_disponible') is True)
+_kambi_no_disp = sum(1 for _r in resultados if _r.get('kambi_disponible') is False)
+_kambi_desconocido = len(resultados) - _kambi_disp - _kambi_no_disp
+_kambi_telemetry = {
+    'n_disponibles':    _kambi_disp,
+    'n_no_disponibles': _kambi_no_disp,
+    'n_desconocido':    _kambi_desconocido,
+}
+```
+
+y añadido a `metadata` junto a `funnel`:
+
+```python
+    'funnel':         _funnel,
+    # D174-11: telemetría del gate Kambi — {n_disponibles,n_no_disponibles,n_desconocido}
+    'kambi':          _kambi_telemetry,
+```
+
+`n_desconocido` cubre el caso `_kambi_coverage_cache` vacío (sin cobertura
+Betplay cargada ese día) — `_annotate_kambi()` retorna `None` en ese caso, no
+`False`, para no confundir "sin datos" con "confirmado no disponible".
+
+4 tests REGLA-T53 nuevos en `tests/test_nodo174_11_kambi_telemetry.py`:
+`test_174_11_sin_coverage_todo_desconocido` (cache vacío → todo cae en
+`n_desconocido`), `test_174_11_disponible_y_no_disponible_se_cuentan_por_separado`
+(favorito en `players_normalized` → disponible, favorito ausente →
+no_disponible), `test_174_11_invariante_suma_igual_procesados` (suma de los 3
+contadores == `metadata.n_procesados`, mismo invariante que el funnel D173-01),
+`test_174_11_campo_kambi_disponible_en_cada_resultado_individual` (el campo
+por-pick D90-01 sigue presente sin cambios — la telemetría es un agregado
+nuevo, no un reemplazo). 4/4 PASS aislado; verificado además sin regresiones
+con suite targeted `test_edge_calculator.py` + `test_nodo92_d90_01.py` +
+`test_nodo94_sprint3.py` + `test_nodo173_calibracion.py` +
+`test_nodo174_11_kambi_telemetry.py` + `test_nodo163_tier_gap_superficie_bridge.py`
+→ 147/147 PASS.
+
 #### D174-12 — Resolver módulos huérfanos
 
 `scripts/backfill_evaluar_shadow.py` y `scripts/nodo_pagerank.py`: **decidir explícitamente** —
 conectar (con su PASO en `run_daily.py`) o retirar (con nota en el nodo correspondiente).
 No dejarlos en el limbo. `backfill_strategy.py` es one-shot cumplido: marcar como tal en su
 docstring.
+
+**Estado de implementación (2026-08-06): COMPLETO.**
+
+`graphify query "backfill_evaluar_shadow nodo_pagerank run_daily orquestador huerfano"`
+confirmó el gap real: ambos scripts existen como nodos aislados en el grafo
+(sin arista `CALLS` entrante desde `run_daily.py`), y `grep -rln` sobre todo
+el repo confirma cero referencias fuera de sí mismos. Decisión explícita para
+cada uno, documentada como addendum en su Nodo de origen (no en código, no
+son bugs):
+
+- **`scripts/backfill_evaluar_shadow.py`** (D124-05, [[Nodo-124]]) — **RETIRAR**
+  de huérfano. Su propio docstring ("Recupera picks EVALUAR históricos...
+  Uso: `--fecha YYYY-MM-DD`") ya lo declara herramienta de recuperación
+  retroactiva sobre una fecha puntual, no un PASO diario — mismo patrón que
+  `scripts/audit_phantom_history.py` ([[Nodo-152]] D152-06). Conectarlo a
+  `run_daily.py` sería trabajo redundante: `apostar`/`watchlist` ya se loguean
+  en shadow_book durante el pipeline normal, solo `sin_edge` necesita backfill,
+  y reprocesar el mismo rango de fechas cada día no aporta nada nuevo tras la
+  primera pasada. Addendum §7 insertado en `Nodo-124-EvalTracker-TablaFavoritos-ShadowBook.md`.
+- **`scripts/nodo_pagerank.py`** (D105-03, [[Nodo-105]]) — **RETIRAR** de
+  huérfano. Herramienta de mantenimiento del vault `.spec/` (PageRank sobre
+  wikilinks entre Nodos), no del pipeline de trading — se ejecuta manualmente
+  al auditar salud documental, igual que `graphify update .`. Mezclarlo con
+  `run_daily.py` confundiría higiene documental con orquestación de apuestas.
+  Addendum §5 insertado en `Nodo-105-Knowledge-Graph-Navigation-Zettelkasten.md`.
+- **`scripts/backfill_strategy.py`** (D144-06, [[Nodo-144]]) — docstring
+  actualizado con nota "ONE-SHOT CUMPLIDO (Nodo-174 D174-12)": ejecutado una
+  vez sobre los 3 días con combo_registry disponible (22/23/25-jul-2026), no
+  es un PASO recurrente, reejecutar sobre el mismo rango es no-op.
+
+Sin cambios de código en producción (solo docstrings/specs) — no requiere
+tests REGLA-T53 nuevos, no hay comportamiento nuevo que verificar.
 
 #### D174-13 — Regla anti-regresión: "✅" exige evidencia
 
@@ -442,6 +623,46 @@ código**. Reportar los que no.
 
 Esta auditoría encontró dos (`_calc_hcuc_convergence`, `outcome_id`) sin buscarlos
 específicamente. Es razonable suponer que hay más.
+
+##### Addendum — Estado de implementación (2026-08-06): COMPLETO
+
+Implementado como **Bloque E** (no Bloque D) en `check_contradictions.py` — la letra D ya
+la ocupa el ritual de huérfanos existente (D105-05). Documentado en un comentario en el
+propio código para que la colisión de nomenclatura entre el spec y el código no se repita
+como confusión en una sesión futura.
+
+Nueva función pura `_check_simbolos_verificables()`: para cada fila de tabla de CLAUDE.md
+marcada `| ... | ✅ |` (scope acotado — no la narrativa libre, mismo patrón de
+precisión-sobre-recall que `_check_huerfanos()`), extrae símbolos de código que nombra —
+funciones `nombre(...)` vía regex que exige guión bajo en el identificador (evita falsos
+positivos de `str(`/`len(`), y campos `snake_case` bare vía regex que excluye tokens
+envueltos en backticks/precedidos de punto o slash (evita capturar `edge_calculator.py:1575`
+como si fuera un campo). Verifica cada uno contra el código real: funciones vía
+`def nombre(` en algún `.py` de producción, campos vía heurístico de substring
+(`'nombre'`/`.nombre` en el código concatenado).
+
+Dos bugs encontrados y corregidos durante la implementación:
+1. **Rendimiento** — el primer intento escaneaba `venv/` completo (16,079 archivos .py,
+   timeout >90s). Fix: `_EXCLUDE_DIRS` filtra `.spec/graphify-out/tests/.git/venv/.venv/
+   env/node_modules/__pycache__`. Corrida real tras el fix: ~27-33s.
+2. **Falsos positivos de campo por mención de módulo en prosa** — filas de CLAUDE.md que
+   mencionan un archivo sin backticks ni `.py` (ej. "games_signal universo distinto al
+   edge_calculator", filas B9/G5 de la tabla D154) se capturaban como si "games_signal"/
+   "edge_calculator" fueran campos de dato reclamados. Fix: excluir cualquier token que
+   sea, o prefije con guión bajo, el `stem` de algún archivo `.py` real del repo.
+
+Verificación real contra el CLAUDE.md y código de producción del repo (no un fixture):
+`[PASS] Todos los símbolos marcados ✅ tienen evidencia en código.` — 0 símbolos sin
+evidencia, exit 0. 8 tests REGLA-T53 en `tests/test_nodo174_13_simbolos_verificables.py`
+(7 con fixtures temporales aislados vía monkeypatch de `CLAUDE_MD`/`BASE_DIR` + 1 de
+regresión de alcance completo contra el repo real) — 8/8 PASS.
+
+Limitación conocida y aceptada (documentada en el docstring de la función): el chequeo de
+campo es un heurístico de substring, no prueba que el campo esté en el archivo/línea
+específico que CLAUDE.md reclama — confirma ausencia con certeza, presencia con alta
+probabilidad, no con prueba formal. Suficiente para el objetivo del deliverable: atrapar
+casos como `_calc_hcuc_convergence`/`outcome_id` (ausencia total), no auditar precisión
+línea por línea.
 
 #### D174-14 — Rectificar CLAUDE.md
 
@@ -455,6 +676,48 @@ Corregir las entradas desmentidas por esta auditoría:
 **Esto no es cosmético.** CLAUDE.md es la vista que orienta cada sesión futura; entradas falsas
 hacen que Sonnet asuma infraestructura que no existe, que es exactamente cómo se llegó a que
 `shadow_book` lea un campo que nadie produce.
+
+##### Addendum — Estado de implementación (2026-08-06): COMPLETO (reconciliado, no "PENDIENTE")
+
+El texto original de este deliverable asumía que Nodo-155 D155-02/Nodo-154 D154-06 seguirían
+sin implementar al momento de rectificar CLAUDE.md. No fue así: **D174-01** (esta misma
+auditoría) implementó `_calc_hcuc_convergence()` de verdad en `edge_calculator.py:1003`, y
+**D174-08** implementó la propagación real de `outcome_id` en `edge_calculator.py:1462`. Por lo
+tanto la corrección correcta no es marcar esas dos entradas `PENDIENTE` — sería falso en sentido
+contrario, la misma clase de error que esta auditoría existe para prevenir — sino documentar la
+reconciliación: lo que la auditoría original encontró roto, un deliverable posterior de este
+mismo Nodo lo cerró.
+
+Cambios reales aplicados a CLAUDE.md:
+1. Header (línea 3, cifra `"2609 tests totales"`) → reemplazado por el baseline real verificado
+   en esta sesión tras cerrar el único fallo pendiente del suite completo (ver triaje abajo):
+   **2699 passed, 0 failed, 3 skipped** (`python -m pytest tests/ --no-cov -q`, corrida completa
+   324.28s, sin overlap con cambios de este Nodo — el fallo cerrado era un test pre-existente
+   no relacionado con D174-01..13).
+2. Nodo-155 D155-02 / Nodo-154 D154-06 (narrativa del header y tabla §5) — **NO se marcan
+   PENDIENTE**: ambas ya son ciertas hoy, verificadas por lectura directa del código
+   (`_calc_hcuc_convergence` línea 1003, `outcome_id` línea 1462 de `edge_calculator.py`), no
+   por confianza en el texto viejo.
+3. Se agrega esta entrada de Nodo-174 al header de CLAUDE.md documentando el cierre de los 14
+   deliverables.
+
+**Triaje D174-02 de un hallazgo adicional durante esta verificación final:** el suite completo
+tenía exactamente 1 fallo real (no "pre-existentes sin relación" sin enumerar — prohibido por
+este mismo Nodo): `tests/test_nodo42.py::test_t42_07_superficie_filter_excluye_clay`. Categoría
+(i) — test mal, no código mal. Causa: `_extract_and_categorize()` llama internamente a
+`_load_edge_report_index()`, que lee el `edge_report_*.json` real de producción del día sin
+mockear; el fixture ficticio del test usaba el apellido `"Ghetu"`, que coincidió por azar con un
+jugador real del edge_report de hoy con `apostar=False` — el gate G1 de Nodo-103
+(`_apply_combo_gates`) lo bloqueó del pool esperado por esa colisión, no por el gate EV_LEG_MIN
+de D143-01 que el comentario original del test citaba incorrectamente (cálculo real:
+`ev_leg=0.51*2.10=1.071≥1.02`, ese gate nunca bloqueaba este fixture). Fix: aislar también
+`_load_edge_report_index` vía `monkeypatch.setattr('combo_confianza_builder._load_edge_report_index',
+lambda: {})`, mismo patrón ya usado en el test para aislar `load_coverage` (gate Kambi D140-04);
+corregidos los 3 comentarios que atribuían la causa al gate equivocado. Verificado:
+`tests/test_nodo42.py` → 8 passed, 1 skipped. Riesgo estructural anotado para auditoría futura
+(fuera de alcance de este triaje puntual): cualquier otro test que dependa de
+`_extract_and_categorize()`/`_load_edge_report_index()` sin mockear tiene el mismo riesgo de
+no-determinismo por colisión de nombres con datos reales de producción.
 
 ---
 

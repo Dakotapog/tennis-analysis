@@ -250,14 +250,60 @@ except Exception:  # noqa: BLE001
     pass
 
 
+# D174-08 (Nodo-174): telemetría outcome_id_hit_rate — cuántos picks se resuelven vía
+# outcome_id directo del edge_report vs re-matching por nombre cada corrida.
+_OUTCOME_ID_STATS = {'hint_used': 0, 'name_matched': 0, 'no_match': 0}
+
+
+def _reset_outcome_id_stats() -> None:
+    """Solo para tests — reinicia el contador de telemetría D174-08."""
+    _OUTCOME_ID_STATS['hint_used'] = 0
+    _OUTCOME_ID_STATS['name_matched'] = 0
+    _OUTCOME_ID_STATS['no_match'] = 0
+
+
+def _outcome_id_hit_rate() -> Optional[float]:
+    """D174-08: fracción de picks resueltos vía outcome_id (sin name-matching).
+    None si no se resolvió ningún pick todavía (evita división por cero)."""
+    total = sum(_OUTCOME_ID_STATS.values())
+    if total == 0:
+        return None
+    return round(_OUTCOME_ID_STATS['hint_used'] / total, 3)
+
+
 def find_outcome(jugador: str, cuota: float, outcomes_map: Dict,
-                  started_map: Optional[Dict] = None) -> tuple[Optional[Dict], str]:
+                  started_map: Optional[Dict] = None,
+                  outcome_id_hint=None) -> tuple[Optional[Dict], str]:
     """
     Busca el outcome de un jugador. Matching por nombre + cuota ±15%.
+
+    D174-08 (Nodo-174): si `outcome_id_hint` viene del edge_report (D154-06 real)
+    y sigue vigente en el `outcomes_map` recién fetcheado de Kambi (los outcome_ids
+    expiran en segundos en vivo, Nodo-157 D157-02 — nunca se confía ciego en un
+    hint viejo), se usa directo y se salta el name-matching. Si no hay hint o ya
+    no está vigente, cae al comportamiento original.
 
     Returns:
         Tuple de (outcome_dict o None, razón del fallo o 'OK')
     """
+    if outcome_id_hint:
+        _hint_str = str(outcome_id_hint)
+        for oc in outcomes_map.values():
+            if str(oc.get("outcome_id")) == _hint_str:
+                _OUTCOME_ID_STATS['hint_used'] += 1
+                return oc, "OK"
+
+    oc_result, reason = _match_outcome_by_name(jugador, cuota, outcomes_map, started_map)
+    if oc_result:
+        _OUTCOME_ID_STATS['name_matched'] += 1
+    else:
+        _OUTCOME_ID_STATS['no_match'] += 1
+    return oc_result, reason
+
+
+def _match_outcome_by_name(jugador: str, cuota: float, outcomes_map: Dict,
+                            started_map: Optional[Dict] = None) -> tuple[Optional[Dict], str]:
+    """Name-matching original de `find_outcome()` (sin telemetría — la lleva el caller)."""
     norm = _normalize_name(jugador)
     parts = norm.split()
     apellido = parts[-1] if parts else norm
@@ -346,7 +392,8 @@ def build_combo_links(trader_plan: Dict, min_piernas: int = 2) -> List[Dict]:
         for leg in legs:
             jugador = leg["jugador"]
             cuota = leg["cuota"]
-            oc, reason = find_outcome(jugador, cuota, outcomes_map, started_map)
+            oc, reason = find_outcome(jugador, cuota, outcomes_map, started_map,
+                                       outcome_id_hint=leg.get("outcome_id"))  # D174-08 Nodo-174
 
             if oc:
                 outcome_ids.append(str(oc["outcome_id"]))
@@ -1165,6 +1212,7 @@ def build_safe_combos(stake_per_combo: int = 1000,
                             "gap":              abs(p.get("p_blend", 0.5) - p.get("p_modelo", 0.5)),
                             "n_h2h":            p.get("n_h2h", 0),
                             "kambi_disponible": p.get("kambi_disponible"),  # D140-02 Nodo-140
+                            "outcome_id":       p.get("outcome_id"),  # D174-08 Nodo-174
                         }
         except Exception:
             pass
@@ -1188,6 +1236,8 @@ def build_safe_combos(stake_per_combo: int = 1000,
             name = p.get("favorito", "")
             if name and name not in seen_names:
                 seen_names.add(name)
+                if p.get("cuota", 0) < 1.50:  # REGLA-HF-1 — nunca en pool (Nodo-174 D174-10)
+                    continue
                 edge_info = edge_pick_map.get(name, {})
                 # D140-02 Nodo-140: pre-filtro Kambi — excluir ITF/torneos sin Betplay
                 if edge_info.get('kambi_disponible') is False:
@@ -1209,6 +1259,7 @@ def build_safe_combos(stake_per_combo: int = 1000,
                     "n_h2h":      edge_info.get("n_h2h", 0),
                     "edge_pct":   p.get("edge_pct", "0%"),
                     "superficie": plan_sup,
+                    "outcome_id": edge_info.get("outcome_id"),  # D174-08 Nodo-174
                 })
 
     if len(pool) < 2:
@@ -1225,7 +1276,8 @@ def build_safe_combos(stake_per_combo: int = 1000,
 
     available_pool = []
     for pick in pool:
-        oc, reason = find_outcome(pick["jugador"], pick["cuota"], outcomes_map, started_map)
+        oc, reason = find_outcome(pick["jugador"], pick["cuota"], outcomes_map, started_map,
+                                   outcome_id_hint=pick.get("outcome_id"))
         if oc:
             pick["outcome_id"] = str(oc["outcome_id"])
             pick["cuota_kambi"] = oc["odds"]
@@ -1573,6 +1625,7 @@ def build_was_combos(stake_per_combo: int = 5000,
             "superficie":      pick.get("superficie", "unknown"),
             "partido":         pick.get("partido", ""),
             "match_id":        pick.get("match_id", ""),
+            "outcome_id":      pick.get("outcome_id"),  # D174-08 Nodo-174
             "markov_favorito": estado_fav,
             "markov_rival":    estado_rival,
             "conf_fav":        conf_fav,
@@ -1597,7 +1650,8 @@ def build_was_combos(stake_per_combo: int = 5000,
 
     available_picks = []
     for pick in was_candidates:
-        oc, reason = find_outcome(pick["jugador"], pick["cuota"], outcomes_map, started_map)
+        oc, reason = find_outcome(pick["jugador"], pick["cuota"], outcomes_map, started_map,
+                                   outcome_id_hint=pick.get("outcome_id"))
         if oc:
             pick["outcome_id"] = str(oc["outcome_id"])
             pick["cuota_kambi"] = oc["odds"]
@@ -2405,6 +2459,7 @@ def build_live_combos(piernas_min: int = 3, piernas_max: int = 4,
                         "torneo":      p.get("torneo", ""),
                         "superficie":  p.get("superficie", "unknown"),
                         "tier":        p.get("tier", "unknown"),
+                        "outcome_id":  p.get("outcome_id"),  # D174-08 Nodo-174
                         # D87-08: sin estos campos las apuestas reales llegaban a la
                         # calibración con p_modelo=0.5 / kelly_kl=0.0
                         "p_modelo":    p.get("p_modelo", 0.5),
@@ -2415,7 +2470,8 @@ def build_live_combos(piernas_min: int = 3, piernas_max: int = 4,
         outcomes_map, started_map = fetch_kambi_outcomes()
         available_picks = []
         for pick in all_picks:
-            oc, _ = find_outcome(pick["jugador"], pick["cuota"], outcomes_map, started_map)
+            oc, _ = find_outcome(pick["jugador"], pick["cuota"], outcomes_map, started_map,
+                                 outcome_id_hint=pick.get("outcome_id"))
             if oc:
                 pick["outcome_id"] = str(oc["outcome_id"])
                 pick["cuota_kambi"] = oc["odds"]
@@ -2530,6 +2586,7 @@ def build_mega_combos(stake_per_combo: int = 500,
                             "edge":             p.get("edge", 0),
                             # D140-02 Nodo-140: disponibilidad Kambi/Betplay
                             "kambi_disponible": p.get("kambi_disponible"),
+                            "outcome_id":       p.get("outcome_id"),  # D174-08 Nodo-174
                         }
         except Exception:
             pass
@@ -2584,6 +2641,7 @@ def build_mega_combos(stake_per_combo: int = 500,
                     "mpq":         _edge_info.get("mpq", 0.0),
                     "golden_zone": _edge_info.get("golden_zone", False),
                     "n_h2h":       _edge_info.get("n_h2h", 0),
+                    "outcome_id":  _edge_info.get("outcome_id"),  # D174-08 Nodo-174
                 })
 
         # Also grab watchlist picks from cobertura legs not in individuales
@@ -2614,6 +2672,7 @@ def build_mega_combos(stake_per_combo: int = 500,
                         "torneo":     "",
                         "zona_cuota": "slight_underdog",
                         "tipo":       "ancla" if leg.get("cuota", 99) < ancla_cuota_max else "satelite",
+                        "outcome_id": _info.get("outcome_id"),  # D174-08 Nodo-174
                     })
 
     if len(pool) < piernas_min:
@@ -2654,6 +2713,7 @@ def build_mega_combos(stake_per_combo: int = 500,
                             "torneo":     p.get("torneo", ""),
                             "zona_cuota": "slight_favorite",
                             "tipo":       "ancla",
+                            "outcome_id": p.get("outcome_id"),  # D174-08 Nodo-174
                         })
             n_anclas_pool = sum(1 for p in pool if p["tipo"] == "ancla")
             n_tiers_pool = len({p["tier"] for p in pool})
@@ -2674,7 +2734,8 @@ def build_mega_combos(stake_per_combo: int = 500,
 
     available_pool = []
     for pick in pool:
-        oc, reason = find_outcome(pick["jugador"], pick["cuota"], outcomes_map, started_map)
+        oc, reason = find_outcome(pick["jugador"], pick["cuota"], outcomes_map, started_map,
+                                   outcome_id_hint=pick.get("outcome_id"))
         if oc:
             pick["outcome_id"] = str(oc["outcome_id"])
             pick["cuota_kambi"] = oc["odds"]
@@ -2907,6 +2968,7 @@ def _build_live_combos_legacy(piernas_min: int = 3, piernas_max: int = 4,
                     "kelly_kl":          p.get("kelly_kl", 0.0),
                     "alpha_vs_elo":      p.get("alpha_vs_elo", 0.0),
                     "n_h2h":             p.get("n_h2h", 0),
+                    "outcome_id":        p.get("outcome_id"),  # D174-08 Nodo-174
                 })
 
     logger.info(f"   {len(all_picks)} picks con cuota >= {min_cuota}")
@@ -2918,7 +2980,8 @@ def _build_live_combos_legacy(piernas_min: int = 3, piernas_max: int = 4,
     available_picks = []
     for pick in all_picks:
         oc, reason = find_outcome(pick["jugador"], pick["cuota"],
-                                  outcomes_map, started_map)
+                                  outcomes_map, started_map,
+                                  outcome_id_hint=pick.get("outcome_id"))
         if oc:
             pick["outcome_id"] = str(oc["outcome_id"])
             pick["cuota_kambi"] = oc["odds"]
@@ -3252,6 +3315,7 @@ def build_system_combos(stake_total: float = 3500,
                 "jugador": name, "cuota": cuota, "p_modelo": p_modelo,
                 "p_blend": p.get("p_blend", p_modelo), "edge": p.get("edge", 0),
                 "tier": p.get("tier", "unknown"),
+                "outcome_id": p.get("outcome_id"),  # D174-08 Nodo-174
             })
 
     if len(candidatos) < n_piernas:
@@ -3287,7 +3351,8 @@ def build_system_combos(stake_total: float = 3500,
 
     resolved = []
     for p in picks:
-        oc, reason = find_outcome(p["jugador"], p["cuota"], outcomes_map, started_map)
+        oc, reason = find_outcome(p["jugador"], p["cuota"], outcomes_map, started_map,
+                                  outcome_id_hint=p.get("outcome_id"))
         if oc:
             p["outcome_id"] = str(oc["outcome_id"])
             p["cuota_kambi"] = oc["odds"]
@@ -3505,6 +3570,7 @@ def build_ancla_segura_combos(stake_total: float = 3000,
                 "jugador": name, "cuota": cuota, "p_modelo": p_modelo,
                 "confidence_flag": conf_flag, "edge": p.get("edge", 0),
                 "tier": p.get("tier", "unknown"),
+                "outcome_id": p.get("outcome_id"),  # D174-08 Nodo-174
             })
 
     anclas_pool = [c for c in candidatos
@@ -3539,7 +3605,8 @@ def build_ancla_segura_combos(stake_total: float = 3000,
 
     resolved = []
     for p in picks:
-        oc, reason = find_outcome(p["jugador"], p["cuota"], outcomes_map, started_map)
+        oc, reason = find_outcome(p["jugador"], p["cuota"], outcomes_map, started_map,
+                                  outcome_id_hint=p.get("outcome_id"))
         if oc:
             p["outcome_id"] = str(oc["outcome_id"])
             p["cuota_kambi"] = oc["odds"]
@@ -5023,6 +5090,14 @@ def main():
         ok = enviar_combos_telegram(combo_links, trader_plan.get("metadata", {}))
         if ok:
             logger.info("📱 Resumen enviado a Telegram ✅")
+
+    # D174-08 (Nodo-174): outcome_id_hit_rate — meta 7 días >= 0.80 (spec Nodo-174)
+    _hr = _outcome_id_hit_rate()
+    if _hr is not None:
+        print(f"  [D174-08] outcome_id_hit_rate: {_hr*100:.1f}% "
+              f"({_OUTCOME_ID_STATS['hint_used']} directo / "
+              f"{_OUTCOME_ID_STATS['name_matched']} name-match / "
+              f"{_OUTCOME_ID_STATS['no_match']} sin match)")
 
 
 if __name__ == "__main__":
