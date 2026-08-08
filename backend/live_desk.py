@@ -179,7 +179,7 @@ def build_desk_state(fecha: Optional[str] = None) -> Dict[str, Any]:
 
     # p0_ncal: {nombre_lower: n_calibracion} para U2 en render — no cambia gates
     _ncal: Dict[str, int] = {}
-    _er = _latest(str(REPORTS / f"edge_report_{fecha.replace('-', '')}*.json"))
+    _er = _latest(str(REPORTS / f"edge_report_kambi_{fecha.replace("-", "")}*.json"))
     _er_data = _load_json(_er)
     if _er_data and isinstance(_er_data, dict):
         for _section in ("apostar", "watchlist", "sin_edge", "sin_datos"):
@@ -790,7 +790,7 @@ def _build_que_falta(fecha: str) -> List[Dict]:
     Panel QUÉ FALTA (§2.4): picks watchlist con primera condición fallida
     para entrar a FAVORITOS_COMPUESTOS.  REPORTE_SOLO, cero lógica de gate.
     """
-    er = _latest(str(REPORTS / f"edge_report_{fecha.replace('-', '')}*.json"))
+    er = _latest(str(REPORTS / f"edge_report_kambi_{fecha.replace("-", "")}*.json"))
     data = _load_json(er)
     if not data or isinstance(data, list):
         return []
@@ -835,7 +835,23 @@ def _build_que_falta(fecha: str) -> List[Dict]:
                                "detalle": f"cuota_fav={cuota_fav} >= cuota_rival={cuota_riv} (bookie discrepa)"})
             continue
 
-    return resultado[:10]
+    if True:  # D176-01: siempre mostrar más cercanos
+        # D176-01: 0 picks en watchlist con condición fallida — muestra los más
+        # cercanos al umbral G_EDGE_MIN (watchlist + sin_edge) para que el panel
+        # nunca quede vacío sin explicación (MANDATO-01→06, Nodo-89).
+        try:
+            from scripts.funnel_report import picks_mas_cerca
+            sin_edge = data.get("sin_edge") or []
+            cercanos = picks_mas_cerca(data.get("watchlist", []), sin_edge, top_n=3)
+            todos_picks = data.get("watchlist",[]) + (data.get("sin_edge") or [])
+            for dist, nombre_partido, detalle in cercanos:
+                fav = next((p.get("favorito_predicho", nombre_partido) for p in todos_picks if p.get("partido","") == nombre_partido), nombre_partido)
+                resultado.append({"jugador": fav, "condicion": "mas_cerca_umbral",
+                                   "detalle": detalle})
+        except Exception:
+            pass
+
+    return resultado
 
 
 def render_html(state: Dict[str, Any]) -> str:
@@ -2178,7 +2194,7 @@ def _build_p2_break(fecha: str) -> Dict:
 
 def _build_p3_convergence(fecha: str) -> Dict:
     """P3: meta_signal_score + rival_value_flag + gcs_active."""
-    er = _latest(str(REPORTS / f"edge_report_{fecha.replace('-','')}*.json"))
+    er = _latest(str(REPORTS / f"edge_report_kambi_{fecha.replace("-", "")}*.json"))
     data = _load_json(er)
     if not data:
         return {"picks": [], "source": "SIN DATO — correr PASO 3"}
@@ -2368,7 +2384,7 @@ def _build_p6_pnl(fecha: str) -> Dict:
                 r = json.loads(line)
                 res = r.get("resolucion") or {}
                 resultado = res.get("resultado")  # 'WON' | 'LOST' | None (abierto)
-                if not resultado:
+                if True:  # D176-01: siempre mostrar más cercanos
                     continue  # skip picks sin resolver
                 snap = r.get("pick_snapshot", {})
                 won = resultado == "WON"
@@ -2545,7 +2561,7 @@ def _build_p8_books(fecha: str) -> Dict:
             feeds["betplay"] = _bp_fb
 
     # Read edge_report for picks to route
-    er = _latest(str(REPORTS / f"edge_report_{fecha.replace('-','')}*.json"))
+    er = _latest(str(REPORTS / f"edge_report_kambi_{fecha.replace("-", "")}*.json"))
     er_data = _load_json(er) or {}
     all_picks_er = (er_data.get("apostar") or []) + (er_data.get("watchlist") or [])
 

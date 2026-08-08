@@ -116,7 +116,7 @@ def _nombre_partido(pick: dict) -> str:
     return f'{j1} vs {j2}' if j2 else str(j1)
 
 
-def _mas_cerca(watchlist: list, sin_edge: list, top_n: int = 3) -> list:
+def picks_mas_cerca(watchlist: list, sin_edge: list, top_n: int = 3) -> list:
     """D173-11: candidatos con distancia numérica al umbral, ordenados asc.
 
     Fallback para gates sin distancia numérica (phantom/N28F2/contaminación):
@@ -145,6 +145,9 @@ def _mas_cerca(watchlist: list, sin_edge: list, top_n: int = 3) -> list:
     if len(resultado) < top_n:
         resultado += sin_distancia[:top_n - len(resultado)]
     return resultado
+
+
+_mas_cerca = picks_mas_cerca  # alias D176-01 — nombre interno preservado
 
 
 def _barra(n: int, max_n: int, ancho: int = 20) -> str:
