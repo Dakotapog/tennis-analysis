@@ -39,6 +39,9 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from analysis.velocity_monitor import velocity_zscore  # D167-05 (Nodo-71/D160-03 wiring)
 from core.monte_carlo_games import simular_total_juegos_condicionado, estimar_p_hold  # D167-03 (D160-02 wiring)
+from core.games_live_model import estimar_juegos_restantes, p_direccion_condicional, direccion_recomendada, perdida_matematica, t0_provenance, drift_indeterminado, contradiccion_modelos  # D180-02/D180-03/D180-04/D180-05
+from core.fire_ledger import registrar_disparo  # Nodo-181 D181-02
+from core.row_coherence import evaluar_coherencia_fila  # Nodo-181 D181-13
 from validation.hypothesis_ledger import n_actual_fresco  # D174-06 (Nodo-174)
 
 _HYPOTHESES_JSON = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -126,6 +129,92 @@ def _build_conformal_band() -> dict:
         return {"q_global": None, "gate_ok": False, "n_settled": 0}
 
 
+def _build_drift_monitor() -> dict:
+    """
+    Llama daily_drift_report() una vez por ciclo (Nodo-67 CUSUM+PSI).
+    REPORTE_SOLO — no cambia ningún gate, solo se muestra en el desk (D178-02).
+    """
+    try:
+        from analysis.drift_monitor import daily_drift_report
+        return daily_drift_report()
+    except Exception:
+        return {"note": "error", "n_settled": 0}
+
+
+def _build_memoria_panel() -> dict:
+    """
+    Lee data/memoria_arquetipos.json (Nodo-179 D179-02). REPORTE_SOLO — se
+    observa en el desk, no cambia ningún gate (D179-06).
+    """
+    path = BASE_DIR / "data" / "memoria_arquetipos.json"
+    if not path.exists():
+        return {"note": "sin_archivo"}
+    try:
+        with path.open(encoding="utf-8") as _f:
+            return json.load(_f)
+    except Exception:
+        return {"note": "error"}
+
+
+def _build_f8_contradiction_panel(fecha_compact: str) -> Dict[str, Any]:
+    """
+    D180-06 item 3 (spec linea 500): panel de contradiccion. Cuenta cuantas
+    alertas CERTEZA_MATEMATICA (certeza_fired_*.json, D147-06) fueron OVER
+    vs UNDER, y cuantos combos live disparados (games_combo_fired_*.json,
+    D180-06 item 3) fueron OVER vs UNDER — mismo dia. Si una direccion
+    domina >=80% en un lado y la contraria domina >=80% en el otro (con
+    n>=5 en ambos), es la senal de inversion estructural que a Nodo-180 le
+    tomo meses detectar manualmente. REPORTE_SOLO — no cambia ningun gate.
+    """
+    def _tally(path: Path) -> Dict[str, int]:
+        if not path.exists():
+            return {"OVER": 0, "UNDER": 0}
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            return {"OVER": 0, "UNDER": 0}
+        counts = {"OVER": 0, "UNDER": 0}
+        for _v in data.values():
+            _dir = _v.get("direccion", "") if isinstance(_v, dict) else ""
+            if _dir in counts:
+                counts[_dir] += 1
+        return counts
+
+    certeza = _tally(REPORTS / f"certeza_fired_{fecha_compact}.json")
+    combos = _tally(REPORTS / f"games_combo_fired_{fecha_compact}.json")
+    n_certeza = certeza["OVER"] + certeza["UNDER"]
+    n_combos = combos["OVER"] + combos["UNDER"]
+
+    def _pct_dominante(counts: Dict[str, int], total: int):
+        if total == 0:
+            return None, 0.0
+        if counts["OVER"] >= counts["UNDER"]:
+            return "OVER", counts["OVER"] / total
+        return "UNDER", counts["UNDER"] / total
+
+    certeza_dom, certeza_pct = _pct_dominante(certeza, n_certeza)
+    combos_dom, combos_pct = _pct_dominante(combos, n_combos)
+
+    inversion = (
+        n_certeza >= 5 and n_combos >= 5
+        and certeza_pct >= 0.80 and combos_pct >= 0.80
+        and certeza_dom is not None and combos_dom is not None
+        and certeza_dom != combos_dom
+    )
+
+    return {
+        "certeza": certeza,
+        "combos": combos,
+        "n_certeza": n_certeza,
+        "n_combos": n_combos,
+        "certeza_dominante": certeza_dom,
+        "certeza_pct": round(certeza_pct, 3),
+        "combos_dominante": combos_dom,
+        "combos_pct": round(combos_pct, 3),
+        "inversion_detectada": inversion,
+    }
+
+
 def _build_combo_live(fecha: str) -> List[Dict]:
     """
     Lee reports/combos_live/YYYY-MM-DD/_fired.json y retorna lista de dicts
@@ -205,6 +294,9 @@ def build_desk_state(fecha: Optional[str] = None) -> Dict[str, Any]:
         "p10_odds_history": _load_odds_history(fecha), # Nodo-115 U4 sparkline
         "p11_combo_live": _build_combo_live(fecha),    # Nodo-116 §B.5
         "p12_conformal": _build_conformal_band(),      # Nodo-115 U1 banda
+        "p_drift": _build_drift_monitor(),             # Nodo-178 D178-02 CUSUM+PSI
+        "p_memoria": _build_memoria_panel(),           # Nodo-179 D179-06 memoria arquetipos
+        "p_f8": _build_f8_contradiction_panel(fecha.replace("-", "")),  # Nodo-180 D180-06 item 3
         "p_data": _build_data_panel(fecha),            # Nodo-118 §5 embudo crosswalk
         "p_games": _build_x3_games(fecha),             # Nodo-40 X3 games signal
         "p_evaluar_games": _build_x4_evaluar_games(fecha),  # Nodo-125 X4 EVALUAR_GAMES
@@ -597,7 +689,9 @@ def _build_x3_games(fecha: str) -> Dict[str, Any]:
         if itf_s.get("estado") == "ITF_VIVO":
             gap        = itf_s.get("gap")
             edge_pct   = itf_s.get("edge_pct")
-            p_model    = itf_s.get("p_model")
+            # D180-05: clave renombrada — fallback a "p_model" solo para JSON
+            # persistidos antes del rename (backward-compat, no re-decide nada).
+            p_model    = itf_s.get("p_model_condicional", itf_s.get("p_model"))
             conv_score = itf_s.get("convergencia_score")
             # Etiqueta compacta para columna confianza incluyendo drift desde t0
             cuota_drift = itf_s.get("drift_pct")
@@ -641,6 +735,13 @@ def _build_x3_games(fecha: str) -> Dict[str, Any]:
                 "cuota_over_live":        itf_s.get("cuota_over_live"),
                 "edge_over":              itf_s.get("edge_over"),
                 "score_data":             itf_s.get("score_data"),
+                # D180-06 item 4/item 1: games_played/max_remaining/perdida_matematica
+                # se calculaban en el loop live (best dict) pero nunca llegaban aquí —
+                # sin este mapeo BLOQUEADO (item 1) nunca disparaba con datos reales.
+                "games_played":           itf_s.get("games_played"),
+                "max_remaining":          itf_s.get("max_remaining"),
+                "perdida_matematica":     itf_s.get("perdida_matematica", False),
+                "total_estimado":         itf_s.get("total_estimado"),
                 "games_set1":             itf_s.get("games_set1"),               # D150-02
                 "zona":                   itf_s.get("zona"),                     # D150-03
                 "certeza":                itf_s.get("certeza") or {},
@@ -1373,12 +1474,29 @@ def render_html(state: Dict[str, Any]) -> str:
                 "BAJA":    (f'<span style="color:#8b949e;font-size:0.75em">BAJA {_cert_pct}%</span>'),
             }
             _cert_html = _CERT_BADGES.get(_cert_nivel, "—")
-            # Prefijo visual en Partido si certeza_matematica
-            if _cert_data.get("certeza_matematica"):
+            # Prefijo visual en Partido — D180-06 item 1: 3 estados
+            # (OPORTUNIDAD/RESUELTO_GANADO/BLOQUEADO), nunca "CERTEZA" y
+            # "perdida_matematica" mezclados sin distinguir en el mismo badge.
+            _estado_pick = _clasificar_estado_pick(
+                _cert_data.get("certeza_matematica"), _sig.get("perdida_matematica")
+            )
+            if _estado_pick == "RESUELTO_GANADO":
                 _partido_html_prefix = (
                     '<span style="background:#00c851;color:white;padding:1px 5px;'
-                    'border-radius:3px;font-size:0.75em;font-weight:bold;margin-right:4px;">'
-                    'CERTEZA</span>'
+                    'border-radius:3px;font-size:0.75em;font-weight:bold;margin-right:4px;" '
+                    'title="Ya ganado matemáticamente — informativo, sin acción">'
+                    'RESUELTO</span>'
+                )
+            elif _estado_pick == "BLOQUEADO":
+                _motivo_bloq = _motivo_perdida_matematica(
+                    _sig.get("direccion"), _sig.get("linea"),
+                    (_sig.get("score_data") or {}).get("games_played"),
+                )
+                _partido_html_prefix = (
+                    '<span style="background:#f85149;color:white;padding:1px 5px;'
+                    f'border-radius:3px;font-size:0.75em;font-weight:bold;margin-right:4px;" '
+                    f'title="{_motivo_bloq}">'
+                    'BLOQUEADO</span>'
                 )
             else:
                 _partido_html_prefix = ""
@@ -1475,12 +1593,35 @@ def render_html(state: Dict[str, Any]) -> str:
             else:
                 _partido_html = _partido_raw
 
-            _contexto_val = _sig.get("contexto", "—")
+            # D181-13: gate de coherencia de fila — dirección apostada vs
+            # banner de certeza. No borra la fila (REPORTE_SOLO); reemplaza
+            # el badge de Certeza por INCOHERENTE con motivo visible cuando
+            # el banner "CONFIRMAR UNDER/OVER" contradice la dirección real
+            # (Nodo-181 §3.B.1: exactamente el caso Nally/Kessler).
+            _banner_dir_txt = (
+                "CONFIRMAR UNDER" if "CONFIRMAR UNDER" in _partido_html else
+                "CONFIRMAR OVER" if "CONFIRMAR OVER" in _partido_html else None
+            )
+            _coh_estado, _coh_motivo = evaluar_coherencia_fila(
+                direccion=_dir, banner_direccion=_banner_dir_txt,
+            )
+            if _coh_estado == "INCOHERENTE" and _coh_motivo == "direccion_contradice_banner":
+                _cert_html = (
+                    '<span style="background:#f85149;color:white;padding:2px 8px;'
+                    f'border-radius:3px;font-weight:bold;font-size:0.75em" '
+                    f'title="{_dir} contradice banner {_banner_dir_txt}">'
+                    'INCOHERENTE</span>'
+                )
+
+            # D180-06 item 5.4: reconciliar contexto (estático) vs zona (vivo)
+            _contexto_val = _reconciliar_contexto_zona(_sig.get("contexto", "—"), _sig.get("zona"))
             _contexto_colors = {
                 "FAVORITO CLARO": "#3fb950",
                 "PAREJO":         "#d29922",
                 "SIN HISTORIAL":  "#f85149",
                 "MODERADO":       "#8b949e",
+                "COINFLIP EN VIVO":          "#d29922",
+                "COINFLIP FORZADO EN VIVO":  "#d29922",
             }
             _contexto_c = _contexto_colors.get(_contexto_val, "#8b949e")
             _contexto_html = f'<span style="color:{_contexto_c};font-weight:bold;">{_contexto_val}</span>' if _contexto_val != "—" else "—"
@@ -1559,7 +1700,13 @@ def render_html(state: Dict[str, Any]) -> str:
                 _drift_html,
                 _progreso_html,
                 _cert_html,
-                f'{_gap:+.1f}j' if _gap is not None else "—",
+                _construir_explicacion_plana(
+                    _dir, _linea,
+                    _sig.get("games_played"), _sig.get("max_remaining"),
+                    _sig.get("total_estimado"),
+                    _cert_p if _cert_data.get("certeza_matematica") is not None or _cert_nivel else None,
+                    _cuota_actual or _cuota_live,
+                ),
                 _conf,
                 _sig.get("games_range", ""),
                 _mid_html,
@@ -1578,7 +1725,7 @@ def render_html(state: Dict[str, Any]) -> str:
         x3_panel = panel(
             f"X3 GAMES SIGNAL — Over/Under mercados Nodo-40 | {_gs['fuente']}",
             _conv_banner + table(
-                ["Partido", "Estado", "Mercado", "Dir", "Línea", "LínAct", "CuotaAct", "Base(T0)", "Live", "Drift", "Progreso", "Certeza", "Gap", "Confianza", "Rango pred.", "Middle?", "Contexto", "Marcador", "MC (IC95%)", "Steam"],
+                ["Partido", "Estado", "Mercado", "Dir", "Línea", "LínAct", "CuotaAct", "Base(T0)", "Live", "Drift", "Progreso", "Certeza", "Explicación", "Confianza", "Rango pred.", "Middle?", "Contexto", "Marcador", "MC (IC95%)", "Steam"],
                 x3_rows,
                 "Sin señales accionables hoy (gap modelo-línea insuficiente)",
             ),
@@ -1663,6 +1810,183 @@ def render_html(state: Dict[str, Any]) -> str:
         "P7 CLOCK — Ventanas de acción (live [-30,+45min] | snapshot -15min)",
         table(["Partido", "Inicio", "Ventana live", "Close-snapshot"], clock_rows,
               "Sin partidos (correr PASO 1 para zita file del dia)")
+    )
+
+    # ── P_DRIFT — CUSUM+PSI (Nodo-67, D178-02) ─────────────────────────────────
+    _drift = state.get("p_drift", {})
+    if _drift.get("note") == "n insuficiente":
+        drift_content = f'<p style="color:{GREY};font-size:0.85em;">n_settled={_drift.get("n_settled",0)} — insuficiente (min 10) para CUSUM/PSI.</p>'
+        drift_badge, drift_badge_color = "N INSUFICIENTE", GREY
+    elif _drift.get("note") == "error":
+        drift_content = f'<p style="color:{GREY};font-size:0.85em;">No se pudo calcular (ver logs).</p>'
+        drift_badge, drift_badge_color = "ERROR", GREY
+    else:
+        # D178-03: 'alarma_cusum' ahora refleja el ESTADO ACTUAL (¿el error del
+        # modelo sigue por encima del umbral en este momento?), no si alguna vez
+        # lo cruzó en el pasado — ver analysis/drift_monitor.py::cusum_brier().
+        _cusum = _drift.get("cusum", {})
+        _alarma_cusum = _drift.get("alarma_cusum", False)
+        _alarma_psi = _drift.get("alarma_psi", False)
+        _s_actual = _cusum.get('s_actual', 0.0)
+        _h = _cusum.get('h', 0.05) or 0.05
+        _alarm_t = _cusum.get('alarm_t')
+        _n_cusum = len(_cusum.get('cusum_series', []))
+        _brier_ref = _cusum.get('brier_ref', 0.0)
+        _brier_reciente = _drift.get('brier_reciente')
+        psi_prov = _drift.get("psi_provenance", 0.0)
+        psi_np = _drift.get("psi_n_partidos", 0.0)
+        psi_color = RED if _alarma_psi else GREEN
+
+        cusum_color = RED if _alarma_cusum else GREEN
+        cusum_label = "EMPEORANDO AHORA" if _alarma_cusum else "estable ahora"
+        # Barra visual simple: qué tan cerca está el error actual del umbral de alarma
+        _pct_barra = max(0, min(100, round((_s_actual / _h) * 100))) if _h > 0 else 0
+
+        # Nota histórica: si cruzó el umbral antes pero ya se recuperó, decirlo
+        # explícito para que no se confunda "se disparó una vez" con "sigue activo".
+        historial_note = ""
+        if _alarm_t is not None and not _alarma_cusum:
+            _hace = max(0, _n_cusum - _alarm_t)
+            historial_note = (f'<div style="color:{GREY};font-size:0.72em;margin-top:6px;">'
+                               f'Nota: llegó a superar el umbral hace {_hace} apuestas, pero ya se recuperó '
+                               f'— no está activo ahora mismo.</div>')
+
+        # Comparación simple reciente vs referencia (sin jerga técnica)
+        reciente_note = ""
+        if _brier_reciente is not None:
+            _mejora = _brier_reciente <= _brier_ref
+            _tendencia_color = GREEN if _mejora else "#e6a23c"
+            _tendencia_txt = "mejor" if _mejora else "peor"
+            reciente_note = (f'<div style="color:{GREY};font-size:0.78em;margin-top:6px;">'
+                              f'Error reciente (últimas apuestas): <span style="color:{_tendencia_color};font-weight:bold;">{_brier_reciente:.3f}</span> '
+                              f'— <span style="color:{_tendencia_color};">{_tendencia_txt}</span> que la referencia histórica ({_brier_ref:.3f}).'
+                              f'</div>')
+
+        drift_content = f"""
+      <div style="display:flex;gap:20px;flex-wrap:wrap;">
+        <div style="text-align:center;min-width:140px;">
+          <div style="color:{GREY};font-size:0.75em;">CUSUM BRIER — ¿degradando AHORA?</div>
+          <div style="color:{cusum_color};font-size:1.4em;font-weight:bold;">{cusum_label}</div>
+          <div style="background:#21262d;border-radius:4px;height:8px;width:140px;margin:6px auto 0;overflow:hidden;">
+            <div style="background:{cusum_color};height:100%;width:{_pct_barra}%;"></div>
+          </div>
+          <div style="color:{GREY};font-size:0.68em;margin-top:2px;">{_s_actual:.4f} / umbral {_h:.3f}</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="color:{GREY};font-size:0.75em;">PSI PROVENANCE</div>
+          <div style="color:{psi_color};font-size:1.4em;font-weight:bold;">{psi_prov:.3f}</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="color:{GREY};font-size:0.75em;">PSI N_PARTIDOS</div>
+          <div style="color:{WHITE};font-size:1.4em;font-weight:bold;">{psi_np:.3f}</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="color:{GREY};font-size:0.75em;">N SETTLED</div>
+          <div style="color:{WHITE};font-size:1.4em;font-weight:bold;">{_drift.get('n_settled',0)}</div>
+        </div>
+      </div>
+      {reciente_note}
+      {historial_note}
+      <p style="color:{GREY};font-size:0.72em;margin-top:8px;">REPORTE_SOLO — no cambia gates. PSI&gt;0.25 = alarma. CUSUM = estado actual, no histórico (D178-03).</p>"""
+        drift_badge = "ALARMA" if (_alarma_cusum or _alarma_psi) else "OK"
+        drift_badge_color = RED if (_alarma_cusum or _alarma_psi) else GREEN
+    p_drift_panel = panel(
+        "P_DRIFT — CUSUM Brier + PSI Provenance/N-Partidos (Nodo-67)",
+        drift_content, drift_badge, drift_badge_color
+    )
+
+    # ── P_MEM — Memoria Evolutiva de Arquetipos (Nodo-179 D179-06) ─────────────
+    _mem = state.get("p_memoria", {})
+    if _mem.get("note") == "sin_archivo":
+        mem_content = f'<p style="color:{GREY};font-size:0.85em;">Sin correr aún build_memoria_arquetipos.py (PASO 10f).</p>'
+        mem_badge, mem_badge_color = "SIN DATOS", GREY
+    elif _mem.get("note") == "error":
+        mem_content = f'<p style="color:{GREY};font-size:0.85em;">No se pudo leer memoria_arquetipos.json (ver logs).</p>'
+        mem_badge, mem_badge_color = "ERROR", GREY
+    else:
+        _mem_global = _mem.get("global", {})
+        _mem_n_full = _mem.get("n_full", 0)
+        _mem_n_deg  = _mem.get("n_degraded_excluidos", 0)
+        _mem_niveles = _mem.get("niveles", {})
+        _mem_arq = _mem_niveles.get("arquetipo", {})
+        _mem_pct_full = round(100 * _mem_n_full / (_mem_n_full + _mem_n_deg), 1) if (_mem_n_full + _mem_n_deg) else 0.0
+
+        # Top-5 arquetipos por n, mostrando delta vs global
+        _global_hit = _mem_global.get("hit", 0.0)
+        _top_arq = sorted(_mem_arq.items(), key=lambda kv: kv[1].get("n", 0), reverse=True)[:5]
+        _arq_rows = []
+        for _nombre, _dato in _top_arq:
+            _delta = round(_dato.get("hit_shrunk", 0.0) - _global_hit, 4)
+            _delta_color = GREEN if _delta > 0 else (RED if _delta < 0 else GREY)
+            _arq_rows.append([
+                _nombre, str(_dato.get("n", 0)),
+                f'{_dato.get("hit_shrunk", 0.0):.3f}',
+                f'<span style="color:{_delta_color};">{_delta:+.3f}</span>',
+            ])
+        _arq_table = table(["Arquetipo", "n", "hit_shrunk", "delta vs global"], _arq_rows,
+                            "Sin arquetipos aún")
+
+        mem_content = f"""
+      <div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:10px;">
+        <div style="text-align:center;">
+          <div style="color:{GREY};font-size:0.75em;">AS-OF</div>
+          <div style="color:{WHITE};font-size:1.1em;font-weight:bold;">{_mem.get('as_of', '')}</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="color:{GREY};font-size:0.75em;">HIT GLOBAL</div>
+          <div style="color:{WHITE};font-size:1.4em;font-weight:bold;">{_global_hit:.3f}</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="color:{GREY};font-size:0.75em;">SUSTRATO n_full / n_degraded</div>
+          <div style="color:{WHITE};font-size:1.1em;font-weight:bold;">{_mem_n_full} / {_mem_n_deg} ({_mem_pct_full}% full)</div>
+        </div>
+      </div>
+      {_arq_table}
+      <p style="color:{GREY};font-size:0.72em;margin-top:8px;">REPORTE_SOLO — esta memoria se observa, todavía no cambia ninguna decisión de apuesta (H179-01).</p>"""
+        mem_badge, mem_badge_color = "OK", GREEN if _mem_n_full > 0 else GREY
+
+    p_memoria_panel = panel(
+        "P_MEM — Memoria Evolutiva de Arquetipos (Nodo-179)",
+        mem_content, mem_badge, mem_badge_color
+    )
+
+    # ── P_F8 — Panel de Contradiccion CERTEZA vs COMBOS (Nodo-180 D180-06 item 3) ──
+    _f8 = state.get("p_f8", {})
+    _f8_certeza = _f8.get("certeza", {"OVER": 0, "UNDER": 0})
+    _f8_combos = _f8.get("combos", {"OVER": 0, "UNDER": 0})
+    f8_inversion_banner = ""
+    if _f8.get("inversion_detectada"):
+        f8_inversion_banner = f"""
+        <div style="background:{RED};color:#fff;padding:14px;text-align:center;font-size:1.15em;
+                    font-weight:bold;letter-spacing:1px;border-radius:6px;margin-bottom:12px;">
+          ⚠ POSIBLE INVERSIÓN DE SEÑAL<br>
+          <span style="font-size:0.7em;font-weight:normal;">
+            CERTEZA {_f8.get('certeza_dominante')} {_f8.get('certeza_pct', 0):.0%} (n={_f8.get('n_certeza', 0)})
+            vs COMBOS {_f8.get('combos_dominante')} {_f8.get('combos_pct', 0):.0%} (n={_f8.get('n_combos', 0)})
+          </span>
+        </div>"""
+    f8_table = table(
+        ["Fuente", "OVER", "UNDER", "n", "Dominante"],
+        [
+            ["CERTEZA_MATEMATICA (D147-06)", str(_f8_certeza.get("OVER", 0)), str(_f8_certeza.get("UNDER", 0)),
+             str(_f8.get("n_certeza", 0)), f"{_f8.get('certeza_dominante') or '—'} ({_f8.get('certeza_pct', 0):.0%})"],
+            ["COMBOS GAMES LIVE", str(_f8_combos.get("OVER", 0)), str(_f8_combos.get("UNDER", 0)),
+             str(_f8.get("n_combos", 0)), f"{_f8.get('combos_dominante') or '—'} ({_f8.get('combos_pct', 0):.0%})"],
+        ],
+        "Sin disparos hoy"
+    )
+    f8_content = f"""
+      {f8_inversion_banner}
+      {f8_table}
+      <p style="color:{GREY};font-size:0.72em;margin-top:8px;">
+        Gate: n≥5 en ambas fuentes Y una domina ≥80% en una dirección mientras la otra domina ≥80% en la contraria.
+        Es el instrumento que habría detectado Nodo-180 en 24 horas, no en meses.
+      </p>"""
+    f8_badge = "INVERSIÓN" if _f8.get("inversion_detectada") else "OK"
+    f8_badge_color = RED if _f8.get("inversion_detectada") else GREEN
+    p_f8_panel = panel(
+        "P_F8 — Contradicción CERTEZA vs COMBOS (Nodo-180)",
+        f8_content, f8_badge, f8_badge_color
     )
 
     # ── Nodo-115: n_cal lookup y QUÉ FALTA ──────────────────────────────────
@@ -1930,6 +2254,9 @@ def render_html(state: Dict[str, Any]) -> str:
   {que_falta_panel}
   {p1_panel}
   {p7_panel}
+  {p_drift_panel}
+  {p_memoria_panel}
+  {p_f8_panel}
   <script>
   // Estado cliente — preservado entre refreshes (§2.5 Nodo-115)
   var _activeFilter = 'TODOS';
@@ -3132,6 +3459,101 @@ def _clasificar_contexto(proxy: Dict) -> str:
     return "MODERADO"
 
 
+def _reconciliar_contexto_zona(contexto: Optional[str], zona: Optional[str]) -> str:
+    """
+    D180-06 item 5.4: contexto (ranking_gap, estático, se fija una vez
+    pre-partido vía _clasificar_contexto) y zona (línea del mercado de
+    juegos, se recalcula cada ciclo con el marcador real, incluye override
+    D150-03 COINFLIP_FORZADO) pueden divergir — ej. contexto="FAVORITO
+    CLARO" junto a zona="COINFLIP" en el mismo registro, ambos visibles sin
+    reconciliar (Nodo-180 F8). Se muestra SOLO el que corresponde al
+    estado vivo: zona gana cuando contradice un contexto "FAVORITO CLARO",
+    porque es el campo que se recalcula con evidencia en tiempo real —
+    contexto nunca se actualiza tras el saque inicial.
+    """
+    if contexto == "FAVORITO CLARO" and zona in ("COINFLIP", "COINFLIP_FORZADO"):
+        return "COINFLIP FORZADO EN VIVO" if zona == "COINFLIP_FORZADO" else "COINFLIP EN VIVO"
+    return contexto or "—"
+
+
+def _clasificar_estado_pick(certeza_matematica: Optional[bool], perdida_mat: Optional[bool]) -> str:
+    """
+    D180-06 item 1: unifica los 2 flags terminales — certeza_matematica (D147,
+    victoria aritmética confirmada) y perdida_matematica (D180-03, gate duro
+    "a diferencia de D150-07, aquí no hay override") — en el vocabulario de 3
+    estados del spec: OPORTUNIDAD (pick vivo, mercado abierto, condicional
+    favorable) / RESUELTO_GANADO (ya ganado, mercado muerto, informativo sin
+    CTA) / BLOQUEADO (perdida matemática, visible con motivo, jamás con link).
+    perdida_mat tiene prioridad: es el flag que nunca se anula, mientras que
+    certeza_matematica y perdida_matematica son aritméticamente excluyentes
+    (no pueden ser True a la vez en un registro sano) — si ocurriera de todos
+    modos, BLOQUEADO es la lectura más segura (nunca ofrecer CTA sobre un pick
+    ya perdido).
+    """
+    if perdida_mat:
+        return "BLOQUEADO"
+    if certeza_matematica:
+        return "RESUELTO_GANADO"
+    return "OPORTUNIDAD"
+
+
+def _motivo_perdida_matematica(direccion: Optional[str], linea: Optional[float],
+                                games_played: Optional[int]) -> str:
+    """
+    D180-06 item 1: motivo legible del estado BLOQUEADO — construido desde los
+    mismos 3 campos que evalúa perdida_matematica() (core/games_live_model.py
+    D180-03), no un texto genérico, para que el usuario vea POR QUÉ el pick
+    quedó excluido en vez de solo verlo desaparecer del cupón.
+    """
+    _dir = (direccion or "UNDER").upper()
+    _base = f'{_dir} {linea} ya no es matemáticamente posible'
+    if games_played is not None:
+        _base += f' — van {games_played} juegos'
+    return _base
+
+
+def _construir_explicacion_plana(direccion: Optional[str], linea: Optional[float],
+                                  games_played: Optional[int],
+                                  max_remaining: Optional[int],
+                                  total_estimado: Optional[float],
+                                  p_modelo: Optional[float] = None,
+                                  cuota_mercado: Optional[float] = None) -> str:
+    """
+    D180-06 item 4 + Nodo-181 D181-14: plantilla de lenguaje llano para picks
+    del mercado de juegos — retira de la vista `gap`/`midpoint`/`z`/`sigma`/
+    `convergencia_breakdown` (quedan en el JSON para auditoría, no en el
+    dashboard) y los reemplaza por una frase verificable contra el marcador
+    real, sin jerga estadística, en 3 partes obligatorias (D181-14): (1) dónde
+    está el partido — games_played; (2) qué falta aritméticamente para el
+    lado apostado — floor/ceil de la línea + max_remaining; (3) el número del
+    modelo contrastado contra el implícito del mercado (1/cuota), no solo
+    "el modelo estima X" aislado — eso reformula la apuesta sin dar contraste,
+    justo el defecto que D181-14 prohíbe. Degrada con gracia (omite cláusulas)
+    cuando faltan campos — p.ej. señales pre-vivo sin games_played/p_modelo/
+    cuota, o alta_signals que no pasa por el estimador condicionado D180-02
+    (ITF-only).
+    """
+    if not direccion or linea is None:
+        return "—"
+    _dir = direccion.upper()
+    partes = [f"{_dir} {linea} juegos"]
+    if games_played is not None:
+        partes.append(f"van {games_played}")
+    if _dir == "UNDER":
+        partes.append(f"gana si el partido termina en {math.floor(linea)} juegos o menos")
+    elif _dir == "OVER":
+        partes.append(f"gana si el partido termina en {math.ceil(linea)} juegos o más")
+    if max_remaining is not None:
+        partes.append(f"quedan como máximo {max_remaining}")
+    if total_estimado is not None:
+        partes.append(f"el modelo estima {total_estimado}")
+    if p_modelo is not None and cuota_mercado:
+        _p_impl_pct = round(100.0 / cuota_mercado, 1)
+        _p_mod_pct = round(p_modelo * 100, 1)
+        partes.append(f"modelo {_p_mod_pct}% vs mercado implica {_p_impl_pct}%")
+    return " · ".join(partes)
+
+
 def _convergencia_score_itf(gap: float, cuota_live: float,
                              markov: Optional[str], ranking_gap: Optional[int]) -> Dict:
     """
@@ -3844,6 +4266,74 @@ def _write_games_odds_history(
             logger.debug(f"[D147-05] Error escribiendo history: {exc}")
 
 
+def _snapshot_live_score(signals: List[Dict], fecha_compact: str) -> None:
+    """
+    Nodo-180 D180-01 Pieza A: snapshot rolling-overwrite del score en vivo por
+    partido → reports/games_final_score_{fecha_compact}.json.
+
+    Cierra el Ghost Fix de Nodo-159 (D159-01/D159-04 declarados IMPLEMENTADO sin
+    call site real): sin este snapshot, shadow_book.settle() no tiene forma de
+    resolver picks pick_type='games_live' contra un resultado final y los picks
+    o bien quedan abiertos para siempre o caen por error en la rama de
+    ganador-de-partido (favorito_predicho='' → LOST forzado, ver Nodo-180 §F1).
+
+    Reutiliza el score_data ya calculado por _enrich_live_score() (D147-01) en
+    el mismo ciclo de 15s — sin fetch adicional (mismo patrón D168-01/D168-02).
+
+    Clave del dict = signal['partido'] ("Home vs Away"), el MISMO string que
+    queda en pick_snapshot['partido'] vía log_games_live_pick() → _build_record()
+    (shadow_book.py) — ninguna normalización intermedia, para que la lectura en
+    settle() no pueda divergir de la escritura aquí.
+
+    Escritura atómica (.tmp + os.replace) — shadow_book.settle() puede correr
+    concurrentemente con el refresh de 15s de live_desk.
+    """
+    snap_path = REPORTS / f"games_final_score_{fecha_compact}.json"
+    try:
+        data: Dict[str, Dict] = (
+            json.loads(snap_path.read_text(encoding="utf-8"))
+            if snap_path.exists() else {}
+        )
+    except Exception:
+        data = {}
+
+    changed = False
+    updated_entries = []
+    for sig in signals:
+        partido = sig.get("partido")
+        sd = sig.get("score_data") or {}
+        games_played = sd.get("games_played")
+        if not partido or games_played is None:
+            continue
+        ts_now = datetime.now().astimezone().isoformat()
+        data[partido] = {
+            "partido":           partido,
+            "games_played":      games_played,
+            "score_str":         sd.get("score_str"),
+            "sets_complete":     sd.get("sets_complete"),
+            "current_set_home":  sd.get("current_set_home"),
+            "current_set_away":  sd.get("current_set_away"),
+            "event_id":          sig.get("event_id"),
+            "ts_ultimo_update":  ts_now,
+        }
+        updated_entries.append((partido, games_played, sd.get("score_str"), ts_now))
+        changed = True
+
+    if not changed:
+        return
+    try:
+        tmp_path = snap_path.with_suffix(".json.tmp")
+        tmp_path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+        os.replace(tmp_path, snap_path)
+        for _partido, _games, _score, _ts in updated_entries:
+            logger.info(
+                f"[SETTLE-GAMES] SNAPSHOT partido={_partido} games={_games} "
+                f"score={_score} ts={_ts}"
+            )
+    except Exception as exc:
+        logger.debug(f"[SETTLE-GAMES] Error escribiendo snapshot: {exc}")
+
+
 def _send_telegram_async(msg: str, tag: str = "") -> None:
     """D147-07: fire-and-forget Telegram real (utils.telegram._enviar_telegram),
     en thread daemon para no bloquear el loop de 15s. Reemplaza el subprocess a
@@ -3861,7 +4351,16 @@ def _send_telegram_async(msg: str, tag: str = "") -> None:
 
 
 def _fire_certeza_alert(sig: Dict, fecha_compact: str) -> None:
-    """D147-06: Fire-once Telegram + log cuando certeza_matematica=True."""
+    """D147-06: Fire-once Telegram + log cuando certeza_matematica=True.
+
+    D180-06 item 2: decisión = reformular (no retirar). El texto viejo
+    ("CERTEZA MATEMATICA | ... | Resultado confirmado") se lee como alerta
+    de oportunidad — mismo vocabulario/urgencia que un disparo de cupón real
+    — pese a que el mercado ya está muerto (D180-06 item 1: RESUELTO_GANADO,
+    sin CTA). Se conserva el canal (el usuario ya espera esta confirmación
+    fire-once) pero se reformula a lenguaje de resultado, literal del spec:
+    "RESUELTO ✔ | <partido> | <dir> <linea> | <n> juegos | ya ganado — sin acción".
+    """
     pk         = f"{sig['partido']}_{sig.get('direccion', '')}"
     guard_path = REPORTS / f"certeza_fired_{fecha_compact}.json"
     try:
@@ -3875,7 +4374,9 @@ def _fire_certeza_alert(sig: Dict, fecha_compact: str) -> None:
     if pk in fired:
         return
 
-    fired[pk] = datetime.now().isoformat()[:19]
+    # D180-06 item 3: se guarda direccion (no solo ts) para que el panel F8
+    # pueda contar CERTEZA-OVER vs CERTEZA-UNDER del día sin re-parsear pk.
+    fired[pk] = {"ts": datetime.now().isoformat()[:19], "direccion": sig.get("direccion", "")}
     try:
         guard_path.write_text(
             json.dumps(fired, ensure_ascii=False, indent=2), encoding="utf-8"
@@ -3884,10 +4385,15 @@ def _fire_certeza_alert(sig: Dict, fecha_compact: str) -> None:
         pass
 
     gp_val = (sig.get("score_data") or {}).get("games_played", "?")
+    registrar_disparo(  # Nodo-181 D181-02: ledger unificado para lead_time_report
+        fecha_compact, pk, "CERTEZA",
+        cuota_al_disparo=sig.get("cuota"),
+        contexto={"linea": sig.get("linea_t0") or sig.get("linea"), "games_played": gp_val},
+    )
     msg = (
-        f"CERTEZA MATEMATICA | {sig['partido']} "
+        f"RESUELTO ✔ | {sig['partido']} | "
         f"{sig.get('direccion')} {sig.get('linea_t0') or sig.get('linea')} "
-        f"| {gp_val} juegos jugados | Resultado confirmado"
+        f"| {gp_val} juegos | ya ganado — sin acción"
     )
     logger.warning(f"[D147-06] {msg}")
     _send_telegram_async(msg, tag="D147-06")
@@ -4208,14 +4714,88 @@ def _zona_direccion_gate(
     return contradiccion and p_cond < p_umbral
 
 
+def _calc_sets_remaining_alerta(
+    conv_dir: Optional[str], games_remaining: Optional[float],
+    sets_complete: Optional[int], match_sets: int = 3
+) -> tuple:
+    """D180-06 item 5.3: sets_remaining cuenta el set en curso como "aún no
+    completo" (base=match_sets, no match_sets-1). Antes usaba base fija "2"
+    (bo3): con sets_complete=2 (1-1, tercer set decisivo en curso) daba
+    sets_remaining=0 — inconsistente, el partido sigue vivo y aún puede
+    jugarse el set decisivo. Ahora sets_complete=2 → sets_remaining=1.
+    Retorna (sets_remaining, expected_remaining, score_alerta).
+    """
+    sets_remaining = max(0, match_sets - (sets_complete or 0))
+    expected_remaining = sets_remaining * 9.0  # ~9j/set (6 games + servicio/break)
+    score_alerta = None
+    if games_remaining is not None and expected_remaining > 0:
+        ratio = games_remaining / expected_remaining
+        if conv_dir == "UNDER" and ratio < 0.4:
+            score_alerta = "UNDER_FACIL"
+        elif conv_dir == "UNDER" and ratio > 1.3:
+            score_alerta = "UNDER_DIFICIL"
+        elif conv_dir == "OVER" and ratio > 1.2:
+            score_alerta = "OVER_FACIL"
+        elif conv_dir == "OVER" and ratio < 0.5:
+            score_alerta = "OVER_DIFICIL"
+    return sets_remaining, expected_remaining, score_alerta
+
+
 def _fire_itf_live_games_combo(signals: List[Dict], fecha_compact: str) -> None:
     """
     D-ITF-LIVE-02: genera HTML + BAT en Desktop para combo ITF live games.
     Usa outcome_ids directamente (sin pasar por games_signal_report).
+
+    D180-03 (F7): defensa en profundidad — ninguna pierna con
+    perdida_matematica=True puede reescribir el cupón, sin excepción. Si tras
+    filtrar no queda ninguna señal viva, el cupón anterior se invalida
+    (borrado) en vez de dejarse stale ofreciendo una pierna ya perdida.
     """
+    signals = [s for s in signals if not s.get("perdida_matematica")]
     oc_ids = [str(s["oc_id"]) for s in signals if s.get("oc_id")]
     if not oc_ids:
+        desktop  = Path("/mnt/c/users/hogar/Desktop")
+        html_path = desktop / "combos" / "itf_live_games.html"
+        bat_path  = desktop / "ITF_Live_Games.bat"
+        for _stale in (html_path, bat_path):
+            try:
+                _stale.unlink(missing_ok=True)
+            except Exception:
+                pass
         return
+    # D180-06 item 3: dedup diario por partido+dirección (mismo esquema pk
+    # que certeza_fired_*.json) para que el panel F8 pueda contar
+    # combos-OVER vs combos-UNDER disparados hoy sin inflar por el reescrito
+    # cada 15s (D157-02) de la misma señal viva.
+    guard_combo_path = REPORTS / f"games_combo_fired_{fecha_compact}.json"
+    try:
+        combo_fired: Dict = (
+            json.loads(guard_combo_path.read_text(encoding="utf-8"))
+            if guard_combo_path.exists() else {}
+        )
+    except Exception:
+        combo_fired = {}
+    _combo_changed = False
+    for _s in signals:
+        if not _s.get("oc_id"):
+            continue
+        _pk = f"{_s.get('partido', '')}_{_s.get('direccion', '')}"
+        if _pk not in combo_fired:
+            combo_fired[_pk] = {"ts": datetime.now().isoformat()[:19], "direccion": _s.get("direccion", "")}
+            _combo_changed = True
+            registrar_disparo(  # Nodo-181 D181-02
+                fecha_compact, _pk, "ITF_LIVE",
+                cuota_al_disparo=_s.get("cuota_live") or _s.get("cuota"),
+                contexto={"linea": _s.get("linea"), "games_played": _s.get("games_played")},
+            )
+    if _combo_changed:
+        try:
+            guard_combo_path.write_text(
+                json.dumps(combo_fired, ensure_ascii=False, indent=2), encoding="utf-8"
+            )
+        except Exception:
+            pass
+
     ids_str = ",".join(oc_ids)
     url = f"https://betplay.com.co/apuestas#home?coupon=combination|{ids_str}||replace"
 
@@ -4583,12 +5163,23 @@ def _check_games_convergencia(fecha: str) -> None:
             continue
         # D142-FIX-01: Excluir circuitos no calibrados (UTR Pro ≠ ITF estándar)
         # UTR Pro usa sets cortos → 12-18 juegos vs ITF 20-25. Sin calibración = ruina.
+        _path_ev = ev.get("path", [])
         path_names = " ".join(
-            p.get("name", "") for p in ev.get("path", []) if isinstance(p, dict)
+            p.get("name", "") for p in _path_ev if isinstance(p, dict)
         )
         if "UTR" in path_names or "UTR" in (home + away):
             logger.debug(f"[ITF_LIVE] SKIP circuito UTR Pro: {home} vs {away}")
             continue
+
+        # D180-06 item 5.2: torneo real desde el mismo path Kambi ya fetcheado
+        # arriba (mismo patrón que scraping/kambi_tennis.py:111,
+        # path[2]=nombre del torneo tras sport/categoría) — evita el literal
+        # "Desconocido" que antes quedaba fijo porque nadie asignaba esta clave.
+        torneo_kambi = (
+            _path_ev[2].get("name")
+            if len(_path_ev) > 2 and isinstance(_path_ev[2], dict)
+            else None
+        ) or None
 
         # Fetch de mercado PRIMERO — necesario para linea y cuotas
         market = _fetch_live_games_all(int(eid))
@@ -4605,20 +5196,59 @@ def _check_games_convergencia(fecha: str) -> None:
             "event_id":    eid,
         })
 
-        # D142-FIX-02: Modelo PRIMERO — dirección del gap, no de la cuota disponible
-        # Error anterior: código elegía dirección por cuota más alta → apostaba contra modelo
+        # D142-FIX-02 (comentario histórico) + D180-02: Modelo PRIMERO, ahora
+        # condicionado al estado vivo cuando hay evidencia (games_played>0) — el
+        # proxy pre-partido midpoint deja de decidir la dirección/probabilidad una
+        # vez el partido está en curso (Nodo-180 F3: la línea Kambi sube
+        # monotónicamente con la duración del partido, así que más evidencia OVER
+        # producía algebraicamente una señal UNDER más fuerte contra un prior fijo).
         proxy        = _compute_itf_games_proxy(home, away, h2h_idx)
         market_linea = market.get("linea") or 0
         if not market_linea:
             continue
 
-        gap      = round(market_linea - proxy["midpoint"], 1)
-        # gap > 0 → línea Kambi ALTA vs modelo → señal UNDER (línea sobreestimada)
-        # gap < 0 → línea Kambi BAJA vs modelo → señal OVER  (línea subestimada)
-        # gap = 0 → sin señal
-        if gap == 0:
-            continue
-        conv_dir  = "UNDER" if gap > 0 else "OVER"
+        gap = round(market_linea - proxy["midpoint"], 1)  # solo display/convergencia_score — NO decide conv_dir
+
+        # D153-SCORE-FIX: Kambi livedata API cacheada (<2s) — fetch ANTES de decidir
+        # dirección (D180-02 la necesita condicionada al estado vivo del marcador).
+        _ld_itf = _fetch_kambi_livedata(int(eid))
+        if _ld_itf:
+            score_data = _parse_kambi_livedata_sets(_ld_itf) or {}
+        else:
+            score_data = _parse_kambi_tennis_score(ev) or {}
+        if not score_data.get("games_played"):
+            score_data = {}
+        games_played  = score_data.get("games_played")
+        sets_complete = score_data.get("sets_complete")
+        score_str     = score_data.get("score_str")
+
+        # ── D180-02: guard anti-regresión F3 ────────────────────────────────
+        # games_played>0 → SIEMPRE estimador condicionado (core/games_live_model.py).
+        # proxy["midpoint"] JAMÁS decide conv_dir/p_model en este ramal — solo sirve
+        # como prior pre-partido cuando el partido aún no tiene evidencia viva.
+        restantes_live = None
+        total_estimado_itf = None
+        if games_played:
+            restantes_live = estimar_juegos_restantes(
+                sets_complete or 0,
+                score_data.get("current_set_home") or 0,
+                score_data.get("current_set_away") or 0,
+            )
+            conv_dir = direccion_recomendada(market_linea, games_played, restantes_live)
+            if conv_dir is None:
+                continue  # zona muerta condicionada al estado vivo — sin señal
+            # D180-06 item 4: total estimado por el modelo (games_played + lo que
+            # falta según el mismo estimador condicionado que decide conv_dir) —
+            # única pieza que faltaba para la frase en lenguaje llano.
+            total_estimado_itf = round(games_played + restantes_live["esperado_restantes"], 1)
+        else:
+            # gap > 0 → línea Kambi ALTA vs modelo → señal UNDER (línea sobreestimada)
+            # gap < 0 → línea Kambi BAJA vs modelo → señal OVER  (línea subestimada)
+            # gap = 0 → sin señal
+            if gap == 0:
+                continue
+            conv_dir = "UNDER" if gap > 0 else "OVER"
+
         cuota_k   = "cuota_under" if conv_dir == "UNDER" else "cuota_over"
         oc_k      = "oc_id_under" if conv_dir == "UNDER" else "oc_id_over"
         cuota_val = market.get(cuota_k)
@@ -4629,26 +5259,56 @@ def _check_games_convergencia(fecha: str) -> None:
         snap_key = f"{home}|{away}|{conv_dir}"
         now_iso  = datetime.now().isoformat()[:19]
         if snap_key not in t0_snap:
+            # D180-04: T0 honesto — registrar si el baseline se congeló pre-partido
+            # (games_played=0) o a mitad de camino (MID_FLIGHT), para que los guards
+            # de drift sepan cuándo su propia medición es ciega al drift anterior.
+            _gp_t0 = games_played or 0
             t0_snap[snap_key] = {
-                "cuota_t0":  cuota_val,
-                "linea_t0":  market_linea,
-                "ts_t0":     now_iso,
-                "partido":   f"{home} vs {away}",
+                "cuota_t0":         cuota_val,
+                "linea_t0":         market_linea,
+                "ts_t0":            now_iso,
+                "partido":          f"{home} vs {away}",
+                "games_played_t0":  _gp_t0,
+                "t0_provenance":    t0_provenance(_gp_t0),
             }
-        t0_entry    = t0_snap[snap_key]
-        cuota_t0    = t0_entry["cuota_t0"]
-        linea_t0    = t0_entry["linea_t0"]
-        ts_t0       = t0_entry["ts_t0"]
+        t0_entry         = t0_snap[snap_key]
+        cuota_t0         = t0_entry["cuota_t0"]
+        linea_t0         = t0_entry["linea_t0"]
+        ts_t0            = t0_entry["ts_t0"]
+        # .get() con default: snapshots viejos (pre-D180-04) no tienen estos campos.
+        games_played_t0  = t0_entry.get("games_played_t0", 0)
+        t0_prov          = t0_entry.get("t0_provenance", "PRE_PARTIDO")
         cuota_drift = round((cuota_val - cuota_t0) / cuota_t0 * 100, 1) if cuota_t0 else None
         linea_drift = round(market_linea - linea_t0, 1) if linea_t0 else None
 
-        # D142-FIX-03: P_model via Normal(μ=midpoint, σ=3.5) → edge%
-        # σ=3.5 empírico ITF: rango total juegos ≈ midpoint ± 7 (2σ)
+        drift_indet = drift_indeterminado(t0_prov, games_played_t0)
+        if drift_indet:
+            logger.info(
+                f"[GAMES_T0] provenance=MID_FLIGHT partido={snap_key} "
+                f"gp_t0={games_played_t0} — guards de drift indeterminados"
+            )
+
+        # D180-05: p_model incondicional (D142-FIX-03) — RETIRADA como decisor
+        # (jerarquía canónica #4, ver docstring de games_live_model.py). Se
+        # calcula SIEMPRE como prior pre-partido, solo para trazabilidad
+        # histórica — nunca para decidir edge_pct/conv_dir/disparo.
         import math as _math
-        _sigma    = 3.5
-        z         = (market_linea - proxy["midpoint"]) / _sigma
-        p_cdf     = (1 + _math.erf(z / _math.sqrt(2))) / 2
-        p_model   = p_cdf if conv_dir == "UNDER" else (1 - p_cdf)
+        _sigma_prior = 3.5
+        _z_prior     = (market_linea - proxy["midpoint"]) / _sigma_prior
+        _pcdf_prior  = (1 + _math.erf(_z_prior / _math.sqrt(2))) / 2
+        p_model_prior_pre_partido = _pcdf_prior if conv_dir == "UNDER" else (1 - _pcdf_prior)
+
+        # D180-02: único decisor real (jerarquía #1) — condicionado al estado
+        # vivo (mismo estimador que decidió conv_dir arriba). Fallback al
+        # prior pre-partido de arriba SOLO cuando aún no hay games_played
+        # (evidencia pre-live legítima, ver docstring de games_live_model.py)
+        # — no un decisor incondicional independiente.
+        if games_played and restantes_live is not None:
+            p_model_condicional = p_direccion_condicional(conv_dir, market_linea, games_played, restantes_live)
+        else:
+            p_model_condicional = p_model_prior_pre_partido
+
+        p_model   = p_model_condicional  # alias interno — resto del bloque sin cambio
         p_implied = 1 / cuota_val
         edge_pct  = round((p_model - p_implied) * 100, 1)
 
@@ -4716,39 +5376,24 @@ def _check_games_convergencia(fecha: str) -> None:
 
         markov = _get_markov_itf(home, away, er_picks)
 
-        # D153-SCORE-FIX: reemplaza Playwright (35s/señal) con Kambi livedata API (cacheada, <2s).
-        # Playwright era cuello de botella principal: 10 señales × 35s = 350s por ciclo.
-        # _fetch_kambi_livedata() ya está cacheada (TTL 120s) desde _prefetch o ciclo anterior.
-        # _parse_kambi_livedata_sets() incluye D153 campos (current_set, serving, break_situation).
-        _ld_itf = _fetch_kambi_livedata(int(eid))
-        if _ld_itf:
-            score_data = _parse_kambi_livedata_sets(_ld_itf) or {}
-        else:
-            score_data = _parse_kambi_tennis_score(ev) or {}
-        if not score_data.get("games_played"):
-            score_data = {}
-        games_played  = score_data.get("games_played")
-        sets_complete = score_data.get("sets_complete")
-        score_str     = score_data.get("score_str")
+        # D180-02: score_data/games_played/sets_complete/score_str ya se fetchearon
+        # arriba (antes de decidir conv_dir/p_model, mismo ciclo) — no refetch.
         games_remaining = round(market_linea - games_played, 1) if games_played is not None else None
-        sets_remaining  = max(0, 2 - (sets_complete or 0))  # best-of-3 → máx 3 sets
-
-        # Juegos esperados en sets restantes: ~9j/set (6 games por set + servicio + break)
-        expected_remaining = sets_remaining * 9.0
-        # Alerta: si la línea implica más juegos restantes de lo posible
-        score_alerta = None
-        if games_remaining is not None and expected_remaining > 0:
-            ratio = games_remaining / expected_remaining
-            if conv_dir == "UNDER" and ratio < 0.4:
-                score_alerta = "UNDER_FACIL"   # pocos juegos posibles → UNDER muy probable
-            elif conv_dir == "UNDER" and ratio > 1.3:
-                score_alerta = "UNDER_DIFICIL" # línea demasiado alta, tiebreak necesario
-            elif conv_dir == "OVER" and ratio > 1.2:
-                score_alerta = "OVER_FACIL"    # línea demasiado baja → OVER casi seguro
-            elif conv_dir == "OVER" and ratio < 0.5:
-                score_alerta = "OVER_DIFICIL"  # poco margen para OVER
+        # D180-06 item 5.3: _calc_sets_remaining_alerta() — sets_remaining cuenta
+        # el set en curso como "aún no completo" (base=3, no 2). Ver docstring.
+        sets_remaining, expected_remaining, score_alerta = _calc_sets_remaining_alerta(
+            conv_dir, games_remaining, sets_complete
+        )
 
         conv = _convergencia_score_itf(gap, cuota_val, markov, proxy.get("ranking_gap"))
+
+        # D180-03: gate duro perdida_matematica — verdad aritmética del marcador,
+        # sin override posible. Solo calculable con evidencia viva real (restantes_live).
+        max_remaining_live = restantes_live["max_restantes"] if (games_played and restantes_live is not None) else None
+        perdida_mat = (
+            perdida_matematica(conv_dir, market_linea, games_played, max_remaining_live)
+            if max_remaining_live is not None else False
+        )
 
         # Ajustar conv score con info de score
         conv_score_final = conv["score"]
@@ -4759,6 +5404,7 @@ def _check_games_convergencia(fecha: str) -> None:
 
         best = {
             "partido":               f"{home} vs {away}",
+            "torneo":                torneo_kambi,  # D180-06 5.2: None si no se resolvió, nunca "Desconocido"
             "direccion":             conv_dir,
             "linea":                 market_linea,
             "cuota_live":            cuota_val,
@@ -4777,12 +5423,20 @@ def _check_games_convergencia(fecha: str) -> None:
             "games_range":           proxy["games_range"],
             "midpoint":              proxy["midpoint"],
             "gap":                   gap,
-            "p_model":               round(p_model * 100, 1),
+            "total_estimado":        total_estimado_itf,  # D180-06 item 4
+            "p_model_condicional":       round(p_model_condicional * 100, 1),  # D180-05: decisor
+            "p_model_prior_pre_partido": round(p_model_prior_pre_partido * 100, 1),  # D180-05: trazabilidad, no decide
             "p_implied":             round(p_implied * 100, 1),
             "edge_pct":              edge_pct,
             "markov":                markov,
             "contexto":              _clasificar_contexto(proxy),
             "score_str":             score_str,
+            # Hallazgo colateral (no D180-06 item 4): _fmt_progreso() espera un dict
+            # score_data anidado con current_set_home/away, serving, game_score,
+            # break_situation — se calculaban en score_data local (línea ~5173) pero
+            # nunca se persistían en `best`, dejando la columna Progreso de filas
+            # ITF_VIVO en blanco/degradada pese a que el dato ya existía en memoria.
+            "score_data":            score_data,
             "games_played":          games_played,
             "games_remaining":       games_remaining,
             "sets_complete":         sets_complete,
@@ -4798,6 +5452,11 @@ def _check_games_convergencia(fecha: str) -> None:
             "cuota_over_live":       cuota_over_live,
             "oc_id_over_live":       oc_id_over_live,
             "edge_over":             edge_over,
+            "max_remaining":         max_remaining_live,   # D180-03
+            "perdida_matematica":    perdida_mat,          # D180-03
+            "games_played_t0":       games_played_t0,      # D180-04
+            "t0_provenance":         t0_prov,               # D180-04
+            "drift_indeterminado":   drift_indet,           # D180-04
         }
         itf_live_signals.append(best)
         drift_tag = f" | cuota_drift={cuota_drift:+.1f}% linea_drift={linea_drift:+.1f}j" if cuota_drift is not None else ""
@@ -4858,6 +5517,12 @@ def _check_games_convergencia(fecha: str) -> None:
                     f"(p_condicional={_itf147['certeza'].get('p_condicional', 0):.3f})"
                 )
 
+    # Nodo-180 D180-01 Pieza A: snapshot rolling del score final para que
+    # shadow_book.settle() pueda resolver pick_type='games_live' — ver
+    # _snapshot_live_score() arriba, mismo score_data que acaba de enriquecer
+    # el loop D147/D165-01.
+    _snapshot_live_score(itf_live_signals, fecha_compact)
+
     # Combinar en games_live: pre-game + ITF_LIVE
     all_signals = alta_signals + itf_live_signals
     itf_live_count = len(itf_live_signals)
@@ -4899,6 +5564,13 @@ def _check_games_convergencia(fecha: str) -> None:
             # (score>=3), no todas las EN_VIVO — mismo patrón que itf_key.
             combo_key = sorted(s["partido"] for s in alta_pregame_raw)
             if combo_key not in fired:
+                for _s_leg in alta_pregame_raw:  # Nodo-181 D181-02
+                    registrar_disparo(
+                        fecha_compact, f"{_s_leg.get('partido', '')}_{_s_leg.get('direccion', '')}",
+                        "GAMES_LIVE",
+                        cuota_al_disparo=_s_leg.get("cuota_live") or _s_leg.get("cuota"),
+                        contexto={"linea": _s_leg.get("linea"), "games_played": _s_leg.get("games_played")},
+                    )
                 try:
                     subprocess.Popen(
                         [sys.executable, str(BASE_DIR / "betplay_combo_builder.py"),
@@ -4930,6 +5602,15 @@ def _check_games_convergencia(fecha: str) -> None:
                     )]
     alta_itf = []
     for _s06 in alta_itf_raw:
+        # D180-03: gate duro perdida_matematica — sin override posible. Ningún flag
+        # (certeza_matematica, convergencia_score, alerta_nivel) puede anularlo.
+        if _s06.get("perdida_matematica"):
+            logger.info(
+                f"[GAMES_GATE] PERDIDA_MATEMATICA partido={_s06.get('partido')} "
+                f"dir={_s06.get('direccion')} linea={_s06.get('linea')} "
+                f"gp={_s06.get('games_played')} — señal descartada"
+            )
+            continue
         # D150-07: log override cuando certeza_matematica rescata señal envenenada
         if _s06.get("linea_envenenada") and ((_s06.get("certeza") or {}).get("certeza_matematica")):
             logger.info(
@@ -4976,6 +5657,18 @@ def _check_games_convergencia(fecha: str) -> None:
             logger.info(
                 f"[ITF_LIVE_GATE] {_s06.get('partido')} excluida "
                 f"(D151-03: zona={_zona_d151} vs {_dir_d151}@{_linea_d151}j p_cond={_p_c3:.1%})"
+            )
+            continue
+        # D180-05: guard de contradicción — los dos únicos estimadores que
+        # condicionan (jerarquía #1 p_direccion_condicional, #2 certeza.p_condicional)
+        # no pueden diferir en más de 25pp. Si difieren, uno de los dos está roto.
+        _pmc_d18005 = _s06.get("p_model_condicional")
+        _pcond_d18005 = (_cert_d151 or {}).get("p_condicional")
+        if _pmc_d18005 is not None and contradiccion_modelos(_pmc_d18005 / 100.0, _pcond_d18005, umbral=0.25):
+            _delta_d18005 = abs(_pmc_d18005 / 100.0 - _pcond_d18005)
+            logger.info(
+                f"[GAMES_GATE] CONTRADICCION_MODELOS p_cond={_pmc_d18005/100.0:.2f} "
+                f"p_certeza={_pcond_d18005:.2f} delta={_delta_d18005:.2f}"
             )
             continue
         alta_itf.append(_s06)
