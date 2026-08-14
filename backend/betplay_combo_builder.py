@@ -83,6 +83,51 @@ BETPLAY_URL_TAIL = "||replace"
 # Redirect page para Telegram móvil (GitHub Pages — preserva #hash)
 REDIRECT_BASE = "https://dakotapog.github.io/tennis-analysis/bp/?ids="
 
+
+# -- D181-10: stake pre-cargado en el cupon ------------------------------------
+# El formato Kambi es `combination|<ids>|<stake>|<accion>`. El tercer campo
+# (entre los dos pipes de BETPLAY_URL_TAIL) SIEMPRE se envio vacio desde el
+# primer combo -- es el slot de stake y nunca se uso.
+#
+# Por que importa (Nodo-181 §1.4): la ventana de desacuerdo del mercado dura
+# minutos, no segundos. No hace falta automatizar la apuesta; hace falta que
+# el betslip abra con el monto ya escrito para que quede a UN toque del boton
+# de confirmar. El usuario sigue confirmando siempre -- esto no apuesta solo.
+#
+# INMUTABLE: cuando stake es None el string producido es byte-identico al de
+# antes de D181-10 (`...|IDs||replace`). REGLA-BAT-1 intacta.
+_STAKE_UNIT_VERIFICADO = False  # ver Nodo-181 §5.6 -- unidad (pesos vs centavos) sin confirmar
+
+
+def build_coupon_url(outcome_ids, stake=None):
+    """URL directa de Betplay con el cupon pre-armado (D181-10).
+
+    outcome_ids: iterable de ids (int o str -- se coercionan, D171-02).
+    stake: monto entero en la unidad de la cuenta, o None para no pre-cargar.
+
+    Con stake=None el resultado es identico al formato historico REGLA-BAT-1.
+    """
+    ids_str = ",".join(str(o) for o in outcome_ids)
+    stake_field = "" if stake is None else str(int(stake))
+    return f"{BETPLAY_URL_BASE}{ids_str}|{stake_field}|replace"
+
+
+def build_redirect_url(outcome_ids, stake=None, label=None):
+    """URL de la pagina puente para Telegram movil (D181-10).
+
+    La pagina `docs/bp/index.html` reconstruye el cupon en JS; le pasamos el
+    stake como query param para que lo inyecte en el mismo slot.
+    """
+    from urllib.parse import quote
+
+    ids_str = ",".join(str(o) for o in outcome_ids)
+    url = f"{REDIRECT_BASE}{ids_str}"
+    if stake is not None:
+        url += f"&stake={int(stake)}"
+    if label:
+        url += f"&label={quote(label)}"
+    return url
+
 # Chrome path en Windows (accesible desde WSL vía /mnt/c/)
 CHROME_WIN = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
 
@@ -1884,6 +1929,12 @@ def build_games_combos_live(stake_per_combo: int = 2000,
     for s in signals:
         if s.get("estado") not in ("EN_VIVO", "ITF_VIVO"):
             continue
+        # D180-09: tripwire -- este pipeline live nunca debe recibir senales SETS
+        # (nunca las produjo hasta ahora porque viene de _check_games_convergencia,
+        # no de games_signal_calculator; guard explicito para que la garantia no
+        # dependa de que esa separacion se mantenga para siempre).
+        if s.get("mercado_tipo") == "SETS":
+            continue
         linea_actual = s.get("linea_actual") if s.get("linea_actual") is not None else s.get("linea")
         cuota_actual = s.get("cuota_actual") or s.get("cuota_live")
         oc_id_actual = s.get("oc_id_actual") or s.get("oc_id") or s.get("outcome_id")
@@ -2018,6 +2069,11 @@ def build_games_combos(stake_per_combo: int = 2000,
         ]
         if not señales_juegos:
             señales_juegos = señales  # backward compat: archivos sin mercado_tipo
+        # D180-09: el fallback backward-compat de arriba no distingue mercado --
+        # si senales_juegos quedo vacio porque TODAS las senales del partido son
+        # SETS explicitas (mercado_tipo="SETS"), el fallback las dejaria pasar
+        # sin querer. Guard duro: SETS explicito nunca pasa, sin excepcion.
+        señales_juegos = [s for s in señales_juegos if s.get("mercado_tipo") != "SETS"]
         # Take best signal per partido (first = optimal from calculator)
         if señales_juegos:
             s = señales_juegos[0]

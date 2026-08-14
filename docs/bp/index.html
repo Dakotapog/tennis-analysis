@@ -52,10 +52,25 @@
   // REGLA-BAT-1 (CLAUDE.md §9, INMUTABLE): IDs separados por comas, SIN sufijo |ML/.
   // Nodo-162: revertido tras 4ae668d (2026-07-28) que introdujo formato |ML/ inválido
   // — Betplay no podía parsear el coupon → abría la app sin piernas cargadas.
-  var betplayUrl = 'https://betplay.com.co/apuestas#home?coupon=combination|' + ids + '||replace';
+  // Nodo-181 D181-10: el TERCER campo del coupon Kambi es el STAKE — se envió
+  // vacío desde el primer combo. Con &stake=N el betslip abre con el monto ya
+  // escrito, dejando la apuesta a UN toque del botón de confirmar. Sigue siendo
+  // el usuario quien confirma: esto NO apuesta solo y NO usa credenciales.
+  // Sin &stake= se usa la rama literal histórica REGLA-BAT-1 — no una versión
+  // computada — para que los guards estáticos de Nodo-162 sigan viendo el string
+  // exacto en el fuente. Esa rama es el default y no cambia con este Nodo.
+  var stake      = params.get('stake');
+  var stakeField = (stake && /^\d+$/.test(stake)) ? stake : '';
+
+  var betplayUrl = stakeField
+    ? 'https://betplay.com.co/apuestas#home?coupon=combination|' + ids + '|' + stakeField + '|replace'
+    : 'https://betplay.com.co/apuestas#home?coupon=combination|' + ids + '||replace';
 
   document.getElementById('title').textContent = 'Combo ' + n + ' piernas';
   document.getElementById('desc').textContent  = label || ('IDs: ' + ids);
+  if (stakeField) {
+    document.getElementById('desc').textContent += ' · monto $' + Number(stakeField).toLocaleString('es-CO');
+  }
   document.getElementById('btn').href          = betplayUrl;
   // target="_blank" → nueva pestaña → Betplay limpio siempre
 })();
