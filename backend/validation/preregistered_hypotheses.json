@@ -40,10 +40,11 @@
       "metrica": "hit% con IC Wilson 95% inferior > 1/cuota_media",
       "n_stop": 30,
       "estado": "ACUMULANDO",
-      "n_actual": 92,
-      "hits": 34,
-      "roi_flat_1u": 0.0778,
-      "nota": "Carreno @3.30 + Safiullin @2.65 ganaron 2026-06-29 (n=2, case report — no actualiza calibración)"
+      "n_actual": 97,
+      "hits": 38,
+      "roi_flat_1u": 0.1341,
+      "nota": "Carreno @3.30 + Safiullin @2.65 ganaron 2026-06-29 (n=2, case report — no actualiza calibración)",
+      "fitted_at": "2026-08-13T05:34:13.290779+00:00"
     },
     "H52-02": {
       "nombre": "n_h2h=0 + tier=itf: ¿ELO/Markov/Erdős discriminan sin H2H?",
@@ -60,10 +61,11 @@
       "metrica": "hit% documentado → decide floor James-Stein para tier ITF",
       "n_stop": 30,
       "estado": "ACUMULANDO",
-      "n_actual": 248,
-      "hits": 117,
+      "n_actual": 301,
+      "hits": 137,
       "nota": "Cada pick NO_DATA/WATCHLIST de ITF debe registrarse en shadow book con history_provenance",
-      "roi_flat_1u": 0.0573
+      "roi_flat_1u": 0.0203,
+      "fitted_at": "2026-08-13T05:34:13.290799+00:00"
     },
     "H52-03": {
       "nombre": "STRUCTURAL_ALPHA hit% > LOW confidence hit%",
@@ -72,11 +74,12 @@
       "metrica": "chi² p<0.10 → habilita M-28-6 y V-28-5",
       "n_stop": 20,
       "estado": "PENDIENTE",
-      "n_actual": 403,
+      "n_actual": 481,
       "hits_structural": 0,
       "hits_low": 0,
-      "hits": 162,
-      "roi_flat_1u": 0.0668
+      "hits": 191,
+      "roi_flat_1u": 0.0424,
+      "fitted_at": "2026-08-13T05:34:13.290805+00:00"
     },
     "H52-04": {
       "nombre": "Surface discount ON mejora Brier vs OFF",
@@ -148,9 +151,10 @@
       "estado": "PENDIENTE",
       "n_qualifying": 0,
       "n_main": 0,
-      "n_actual": 7,
-      "hits": 3,
-      "roi_flat_1u": -0.1557
+      "n_actual": 12,
+      "hits": 6,
+      "roi_flat_1u": -0.0117,
+      "fitted_at": "2026-08-13T05:34:13.290813+00:00"
     },
     "H52-08": {
       "nombre": "Zona cuota 2.00-2.50 sigue siendo trampa post-fixes 32/33",
@@ -163,11 +167,12 @@
       "metrica": "re-medir con gates actuales — si hit% < breakeven → mantener exclusión",
       "n_stop": 30,
       "estado": "ACUMULANDO",
-      "n_actual": 262,
-      "hits": 120,
+      "n_actual": 311,
+      "hits": 139,
       "hit_rate_historico": 0.214,
       "nota": "Hit rate histórico medido pre-fixes S-27-2",
-      "roi_flat_1u": 0.0165
+      "roi_flat_1u": -0.0088,
+      "fitted_at": "2026-08-13T05:34:13.290817+00:00"
     },
     "H54-01": {
       "nombre": "APOSTAR con stake_real=0 tienen hit% y CLV iguales o mejores que APOSTAR financiados",
@@ -286,11 +291,12 @@
       "gate_implementacion": "D64-04 (escalado confidence_flag) SOLO activo post-graduación H76-01",
       "n_stop": 30,
       "estado": "ACUMULANDO",
-      "n_actual": 12,
+      "n_actual": 14,
       "hits": 6,
       "perdidos": 0,
       "nota": "D64-01 (campo rfi_signal en pick_snapshot) pendiente de implementación para acumulación automática. Hasta entonces: registro manual. PROHIBIDO activar D64-04 (boost confianza) hasta n=30 + IC graduado.",
-      "roi_flat_1u": 0.2167
+      "roi_flat_1u": 0.0429,
+      "fitted_at": "2026-08-13T05:34:13.290825+00:00"
     },
     "H60-02": {
       "nombre": "GCS zona extendida (22-42d, misma temporada hierba) supera breakeven",
@@ -499,9 +505,10 @@
       "kill_switch": "hit% < 45% con n >= 20 → CAPA2_ENABLED=False",
       "n_stop": 30,
       "estado": "ACUMULANDO",
-      "n_actual": 1,
+      "n_actual": 2,
       "hits": 1,
-      "roi_flat_1u": 0.53
+      "roi_flat_1u": -0.235,
+      "fitted_at": "2026-08-13T05:34:13.290854+00:00"
     },
     "H89-02": {
       "nombre": "ELO_DOMINANCE axis",
@@ -517,9 +524,10 @@
       "exito": "hit% > 50% con IC Wilson 95% inferior > 50%, n >= 30",
       "n_stop": 30,
       "estado": "ACUMULANDO",
-      "n_actual": 49,
-      "hits": 27,
-      "roi_flat_1u": 0.2684
+      "n_actual": 65,
+      "hits": 32,
+      "roi_flat_1u": 0.1412,
+      "fitted_at": "2026-08-13T05:34:13.290860+00:00"
     },
     "H96-01": {
       "nombre": "IRP — jugadores con delta_return negativo rinden peor en partidos de retorno",
@@ -537,8 +545,10 @@
       "exito": "hit%_return < win_rate_normal con IC Wilson 95% inferior separado, n >= 30 jugadores con irp_fav en edge_report",
       "n_stop": 30,
       "estado": "ACUMULANDO",
-      "n_actual": 0,
-      "hits": 0
+      "n_actual": 29,
+      "hits": 17,
+      "roi_flat_1u": 0.2648,
+      "fitted_at": "2026-08-13T05:34:13.290864+00:00"
     },
     "H88-01": {
       "nombre": "Rival Value Flip: el lado rival supera breakeven cuando edge_fav < -10%",
@@ -613,9 +623,10 @@
       "exito": "IC Wilson 95% inferior > breakeven, n >= 30 picks con score >= 3",
       "n_stop": 30,
       "estado": "ACUMULANDO",
-      "n_actual": 15,
-      "hits": 11,
-      "roi_flat_1u": -0.1067
+      "n_actual": 28,
+      "hits": 20,
+      "roi_flat_1u": -0.1779,
+      "fitted_at": "2026-08-13T05:34:13.290867+00:00"
     },
     "H97-01": {
       "nombre": "Live Edge Monitor: picks con drift>=15% y edge_live>5% superan breakeven de cuota_live",
@@ -830,9 +841,10 @@
       "kill_switch": "hit% < 35% con n >= 20 → revisar scoring multi-eje de generar_tabla_favoritos2",
       "n_stop": 30,
       "estado": "ACUMULANDO",
-      "n_actual": 1264,
-      "hits": 877,
-      "roi_flat_1u": -0.0949
+      "n_actual": 1544,
+      "hits": 1038,
+      "roi_flat_1u": -0.1266,
+      "fitted_at": "2026-08-13T05:34:13.290875+00:00"
     },
     "H124-02": {
       "nombre": "Picks EVALUAR con señal HOT activa tienen hit% ≥5pp sobre base EVALUAR",
@@ -850,9 +862,10 @@
       "kill_switch": "delta < 2pp con n_hot >= 15 → HOT no discrimina dentro de EVALUAR",
       "n_stop": 20,
       "estado": "ACUMULANDO",
-      "n_actual": 22,
+      "n_actual": 23,
       "hits": 12,
-      "roi_flat_1u": -0.2609
+      "roi_flat_1u": -0.293,
+      "fitted_at": "2026-08-13T05:34:13.290878+00:00"
     },
     "H124-03": {
       "nombre": "EVALUAR_GAMES (favorito absoluto cuota<1.30) candidato mercado juegos/sets",
@@ -870,9 +883,10 @@
       "kill_switch": "hit% < 65% con n >= 20 → modelo no discrimina con suficiente fuerza para mercado juegos (cuota muy baja = margen bookmaker nulo)",
       "n_stop": 30,
       "estado": "ACUMULANDO",
-      "n_actual": 747,
-      "hits": 587,
-      "roi_flat_1u": -0.1126
+      "n_actual": 928,
+      "hits": 705,
+      "roi_flat_1u": -0.1444,
+      "fitted_at": "2026-08-13T05:34:13.290881+00:00"
     },
     "H125-01": {
       "nombre": "EVALUAR_GAMES UNDER juegos supera breakeven en cuota_under de Kambi",
@@ -973,8 +987,10 @@
       "kill_switch": "ratio < 0.80 con n >= 15 → el bonus está inflando falsos positivos, revertir a D142-02 sin bonus.",
       "n_stop": 20,
       "estado": "ACUMULANDO",
-      "n_actual": 0,
-      "hits": 0
+      "n_actual": 1,
+      "hits": 0,
+      "roi_flat_1u": -1.0,
+      "fitted_at": "2026-08-13T05:34:13.290895+00:00"
     },
     "H166-01": {
       "nombre": "Gate por pierna convergencia_score>=3 en alta_signals supera al disparo agregado en_vivo_count>=2",
@@ -1098,9 +1114,11 @@
       "p1": 0.65,
       "n_stop": 20,
       "estado": "ACUMULANDO",
-      "n_actual": 0,
+      "n_actual": 1,
       "hits": 0,
-      "nota": "D174-05: registrada retroactivamente -- la condicion ya gatea senales en vivo desde Nodo-147/D147-06, pero nunca tuvo entrada JSON. p0/p1/n_stop verbatim de Nodo-147.md, sin re-derivar."
+      "nota": "D174-05: registrada retroactivamente -- la condicion ya gatea senales en vivo desde Nodo-147/D147-06, pero nunca tuvo entrada JSON. p0/p1/n_stop verbatim de Nodo-147.md, sin re-derivar.",
+      "roi_flat_1u": -1.0,
+      "fitted_at": "2026-08-13T05:34:13.290884+00:00"
     },
     "H150-01": {
       "nombre": "Filtro cuota_envenenada (cuota_drift>+15%) reduce perdidas en combos ITF live",
@@ -1128,9 +1146,11 @@
       "p1": 0.4,
       "n_stop": 20,
       "estado": "ACUMULANDO",
-      "n_actual": 0,
+      "n_actual": 8,
       "hits": 0,
-      "nota": "D174-05: p0=0.20 es narrativo (baseline sin gates, no medido en vivo) por diseno del spec Nodo-151.md:79-81 -- transcrito verbatim, no re-derivado."
+      "nota": "D174-05: p0=0.20 es narrativo (baseline sin gates, no medido en vivo) por diseno del spec Nodo-151.md:79-81 -- transcrito verbatim, no re-derivado.",
+      "roi_flat_1u": -1.0,
+      "fitted_at": "2026-08-13T05:34:13.290888+00:00"
     },
     "H152-01": {
       "nombre": "HCUC (Hard Court Underdog Convergence) supera breakeven",
@@ -1146,9 +1166,128 @@
       "p1": 0.55,
       "n_stop": 30,
       "estado": "ACUMULANDO",
+      "n_actual": 3,
+      "hits": 2,
+      "nota": "D174-05: registrada retroactivamente -- el gate SPRT ya corre en shadow_book.py con estos valores desde su implementacion (Nodo-155), pero nunca existio una entrada JSON como fuente de verdad. shadow_book.py ahora lee p0/p1/n_stop desde este registro (con fallback al literal historico si el campo faltara).",
+      "roi_flat_1u": 0.9333,
+      "fitted_at": "2026-08-13T05:34:13.290892+00:00"
+    },
+    "H172-01": {
+      "descripcion": "Combos ancla-segura (confidence_flag=STRONG + cuota>=2.50, fillers STRONG/MODERATE) tienen hit rate superior a combos sin filtro confidence_flag",
+      "n_stop": 15,
+      "kill_switch": "ratio < 0.80 con n >= 10",
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "fuente": "Nodo-172 D172-01",
+      "predicate": "_SIN_RUTA_IDS"
+    },
+    "H179-01": {
+      "nombre": "La memoria de arquetipos discrimina",
+      "descripcion": "Entre picks con memoria_disponible=True, los que tienen memoria_delta_vs_global >= +0.05 presentan hit rate superior a los que tienen memoria_delta_vs_global <= -0.05.",
+      "origen_deuda": "Nodo-179 D179-02/D179-03 -- 2026-08-12. Sustrato signal_audit.jsonl reparado (D179-01) revela memoria por jugador inviable (n max=4) pero por arquetipo (senal/tier/superficie) con n=53-360 y diferencias de hit rate de hasta 13pp entre arquetipos.",
+      "preregistrado": "2026-08-12",
+      "umbrales_congelados": {
+        "delta_positivo_min": 0.05,
+        "delta_negativo_max": -0.05,
+        "memoria_n_min": 50,
+        "nota": "PROHIBIDO cambiar los umbrales de delta antes de n_stop. memoria_n_min=50 es el punto donde peso(n)=n/(n+20) supera 0.71."
+      },
+      "metrica": "hit rate del grupo delta>=+0.05 vs hit rate del grupo delta<=-0.05, ambos sobre picks resueltos con memoria_disponible=True",
+      "n_stop": 60,
+      "kill_switch": "con n>=30 el grupo positivo rinde por debajo del negativo -> H179-01 REFUTADA, D179-03 permanece REPORTE_SOLO permanente",
+      "exito": "Wilson LB del grupo positivo > breakeven implicito Y n >= n_stop -> abre nodo posterior para convertir memoria en ajuste real (nunca en Nodo-179)",
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0
+    },
+    "H179-02": {
+      "nombre": "Inversion de EDGE_HIGH",
+      "descripcion": "El arquetipo EDGE_HIGH mantiene hit rate inferior a EDGE_MED de forma sostenida.",
+      "origen_deuda": "Nodo-179 SS3 -- 2026-08-12. Hallazgo generador de hipotesis sobre datos ya reparados: EDGE_HIGH hit=0.386 (n=215) vs EDGE_MED hit=0.448 (n=183). Coincide con Nodo-119 (cuota alta = hit bajo) por via independiente. Los 215 EDGE_HIGH actuales generaron la hipotesis y no cuentan -- solo observaciones prospectivas posteriores a 2026-08-12.",
+      "preregistrado": "2026-08-12",
+      "umbrales_congelados": {
+        "fecha_corte_prospectiva": "2026-08-12",
+        "nota": "Las 215 observaciones EDGE_HIGH previas a esta fecha NO cuentan para n_stop -- son las que generaron la hipotesis, medirlas seria circular (p-hacking)."
+      },
+      "metrica": "hit rate EDGE_HIGH vs hit rate EDGE_MED, solo observaciones con fecha > 2026-08-12",
+      "n_stop": 120,
+      "kill_switch": "no aplica -- hipotesis observacional, si no se confirma simplemente no se abre nodo de accion",
+      "exito": "EDGE_HIGH hit rate se mantiene por debajo de EDGE_MED con n_stop=120 observaciones prospectivas -> justifica nodo propio revisando el gate de edge",
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0
+    },
+    "H181-01": {
+      "nombre": "Existe ventana explotable en disparos ACCION (onda P)",
+      "descripcion": "En los disparos de nivel ACCION (D181-06/07), mov_despues_pct >= 5% con direccion_movimiento==A_FAVOR.",
+      "origen_deuda": "Nodo-181 D181-01: 4 de 6 disparos historicos de certeza_matematica midieron 0.0% de movimiento posterior -- D181-03/06/07 existen para capturar el onset en vez de la consumacion.",
+      "preregistrado": "2026-08-14",
+      "umbrales_congelados": {
+        "campo": "mov_despues_pct>=5.0 and direccion_movimiento==A_FAVOR",
+        "nota": "Verbatim de scripts/lead_time_report.py::procesar_disparo, reusado sin reimplementar (REGLA-T53)."
+      },
+      "metrica": "pct de disparos ACCION con mov_despues_pct>=5% A_FAVOR, medido por shadow_book.calcular_stats_ventana_h181 (D181-08)",
+      "p0": 0.35,
+      "p1": 0.6,
+      "n_stop": 40,
+      "estado": "ACUMULANDO",
       "n_actual": 0,
       "hits": 0,
-      "nota": "D174-05: registrada retroactivamente -- el gate SPRT ya corre en shadow_book.py con estos valores desde su implementacion (Nodo-155), pero nunca existio una entrada JSON como fuente de verdad. shadow_book.py ahora lee p0/p1/n_stop desde este registro (con fallback al literal historico si el campo faltara)."
+      "nota": "Gobierna D181-07 (_P_VENTANA_ACCION_ENABLED): <35% con n>=20 -> ACCION permanece apagado."
+    },
+    "H181-02": {
+      "nombre": "La onda P anticipa a la certeza",
+      "descripcion": "Para señales con ambos disparos (VENTANA y CERTEZA), ts_onda_p < ts_certeza.",
+      "origen_deuda": "Nodo-181 D181-03: la onda P existe para capturar el onset ANTES de que certeza_matematica confirme el movimiento ya consumado.",
+      "preregistrado": "2026-08-14",
+      "umbrales_congelados": {
+        "campo": "ts_onda_p < ts_certeza (mismo dia)",
+        "nota": "Comparacion directa de minutos del dia, sin rollover de medianoche (n bajo esperado, D181-08)."
+      },
+      "metrica": "pct de pares con ts_onda_p<ts_certeza, medido por shadow_book.calcular_stats_ventana_h181 (D181-08)",
+      "p0": 0.5,
+      "p1": 0.7,
+      "n_stop": 30,
+      "estado": "ACUMULANDO",
+      "n_actual": 0,
+      "hits": 0,
+      "nota": "<50% con n>=15 -> detector invalido, revisar D181-03."
+    },
+    "H181-03": {
+      "nombre": "El quorum 3/3 discrimina mejor que <=2 familias",
+      "descripcion": "Hit rate de disparos con quorum de 3 familias > hit rate de señales con <=2 familias, diferencia >=10pp.",
+      "origen_deuda": "Nodo-181 D181-04: quorum_sensores exige independencia de familia, no solo cantidad de sensores.",
+      "preregistrado": "2026-08-14",
+      "umbrales_congelados": {
+        "campo": "delta hit_rate(n_familias==3) - hit_rate(n_familias<=2) >= 10pp",
+        "nota": "Comparacion de 2 grupos, no reducible a SPRT de proporcion unica (mismo patron H150-01/H179-01)."
+      },
+      "metrica": "NO MEDIBLE con los datos actuales -- ver validation/hypothesis_ledger.py::_h181_03 y shadow_book.py D181-08",
+      "p0": null,
+      "p1": null,
+      "n_stop": 30,
+      "estado": "SIN_RUTA_DE_MEDICION",
+      "n_actual": 0,
+      "hits": 0,
+      "nota": "live_desk._registrar_disparo_ventana_once solo registra nivel ACCION (n_familias>=3 por construccion) -- no existe cohorte n_familias<=2 en el ledger. Requiere D181-04/06 registrar tambien ATENCION antes de ser medible. diferencia<=0 con n>=20 -> quorum es ruido, retirar D181-04."
+    },
+    "H181-04": {
+      "nombre": "El gate D181-13 descarta filas malas, no filas buenas",
+      "descripcion": "Las filas que el gate D181-13 marca INCOHERENTE tienen hit rate por debajo del breakeven de su cuota (1/cuota_media del mismo grupo).",
+      "origen_deuda": "Nodo-181 D181-13: coherencia visual/logica de la fila antes de mostrarla como pick.",
+      "preregistrado": "2026-08-14",
+      "umbrales_congelados": {
+        "campo": "hit_rate(INCOHERENTE) < 1/cuota_media(INCOHERENTE)",
+        "nota": "REPORTE_SOLO por construccion (spec Nodo-181 §4): D181-13 bloquea el render pero la fila debe seguir registrandose."
+      },
+      "metrica": "NO MEDIBLE con los datos actuales -- core/row_coherence.py::evaluar_coherencia_fila no registra las filas INCOHERENTE en ningun ledger/shadow_book, solo sustituye el badge HTML (live_desk.py linea ~1606). Gap explicito, no omision silenciosa.",
+      "p0": null,
+      "p1": null,
+      "n_stop": 30,
+      "estado": "SIN_RUTA_DE_MEDICION",
+      "n_actual": 0,
+      "hits": 0,
+      "nota": "hit rate>=breakeven con n>=20 -> el gate esta descartando valor y debe revisarse. Requiere registrar filas INCOHERENTE (motivo+cuota) antes de ser medible -- fuera de alcance de D181-08."
     }
   }
 }

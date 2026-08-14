@@ -295,6 +295,48 @@ def _h152_01(r: dict) -> bool:
     return bool(_snap(r).get('hcuc_convergence', False))
 
 
+def _h179_01(r: dict) -> bool:  # memoria arquetipos delta>=+0.05 vs delta<=-0.05 — 2 grupos
+    return False  # ver mismo patrón que H52-05/H77-02 arriba — comparación de 2 grupos no
+    # reducible a un solo booleano de pertenencia; requiere reporte dedicado en shadow_book.py
+    # que aún no existe (Nodo-179 D179-02/D179-03 solo consumen memoria, no la reportan por
+    # grupos). Campo memoria_delta_vs_global SÍ se serializa (edge_calculator.py::consultar_memoria)
+    # — n=0 honesto hasta que exista ese reporte, no se inventa una señal que no existe.
+
+
+def _h179_02(r: dict) -> bool:  # EDGE_HIGH vs EDGE_MED hit rate, prospectivo desde 2026-08-12 — 2 grupos
+    return False  # mismo motivo que _h179_01 — comparación de 2 arquetipos, sin reporte dedicado
+
+
+def _h181_01(r: dict) -> bool:  # ventana explotable en disparos ACCION — cruce fire_ledger x odds
+    return False  # Nodo-181 D181-08: NO reducible a un predicado single-record sobre `r` (un pick
+    # liquidado) — necesita cruzar reports/fire_ledger_*.jsonl (tipo VENTANA) con
+    # reports/games_odds_history_*.json, dos streams que contar_hipotesis(settled) no ve. La medición
+    # real vive en shadow_book.calcular_stats_ventana_h181() (D181-08), "reporte dedicado" igual que
+    # D174-07 hace para IRP/Weather — este predicado solo documenta honestamente que n=0 aquí, no que
+    # la hipótesis sea inmedible.
+
+
+def _h181_02(r: dict) -> bool:  # onda P anticipa a certeza (ts_onda_p < ts_certeza) — cruce de 2 ledgers
+    return False  # mismo motivo que _h181_01 — requiere fire_ledger x certeza_fired_*.json, no un
+    # solo registro de settled. Medido en shadow_book.calcular_stats_ventana_h181() (D181-08).
+
+
+def _h181_03(r: dict) -> bool:  # quorum 3/3 vs <=2 familias — comparación de 2 grupos, cohorte inexistente
+    return False  # Nodo-181 D181-08: por construcción, live_desk._registrar_disparo_ventana_once solo
+    # escribe al fire_ledger cuando nivel=="ACCION", que ya exige n_familias>=3 (D181-06/07) — no existe
+    # ningún disparo registrado con n_familias<=2 para comparar. Mismo patrón que H150-01/H179-01
+    # (comparación de 2 grupos no reducible a un booleano de pertenencia), agravado por la ausencia
+    # total de la cohorte de contraste. No se inventa una comparación con un solo lado.
+
+
+def _h181_04(r: dict) -> bool:  # gate D181-13 descarta filas malas — filas INCOHERENTE nunca se registran
+    return False  # Nodo-181 §4 spec: "si la fila no se registra cuando el gate la descarta, H181-04 es
+    # inmedible: dilo explícito". core/row_coherence.py::evaluar_coherencia_fila solo sustituye el
+    # badge HTML en live_desk.py (~línea 1606) — la fila INCOHERENTE nunca llega a shadow_book, no hay
+    # snapshot con cuota+motivo que auditar aquí. Gap real, no una omisión silenciosa; fuera de alcance
+    # de D181-08 (pertenece a D181-13, cerrar en un nodo futuro si se decide medir H181-04).
+
+
 def _sin_ruta(r: dict) -> bool:
     return False
 
@@ -303,7 +345,7 @@ _SIN_RUTA_IDS = (
     "H60-01", "H60-02", "H77-03", "H97-01", "H103-01",
     "H110-01", "H111-01", "H120-01", "H121-01", "H125-01",
     "H132-01", "H139-01", "H139-02", "H160-02", "H166-01",
-    "H173-01", "H173-02", "H173-03",
+    "H172-01", "H173-01", "H173-02", "H173-03",
 )
 
 PREDICADOS: dict[str, Callable[[dict], bool]] = {
@@ -327,6 +369,12 @@ PREDICADOS: dict[str, Callable[[dict], bool]] = {
     "H151-01": _h151_01,
     "H152-01": _h152_01,
     "H165-01": _h165_01,
+    "H179-01": _h179_01,
+    "H179-02": _h179_02,
+    "H181-01": _h181_01,
+    "H181-02": _h181_02,
+    "H181-03": _h181_03,
+    "H181-04": _h181_04,
     **{h_id: _sin_ruta for h_id in _SIN_RUTA_IDS},
 }
 
