@@ -150,6 +150,117 @@ def calcular_agregados(resultados):
     }
 
 
+def _leer_apuestas_registradas(fecha_compact):
+    """D181-11: lee todos los `reports/apuestas_{fecha_compact}_*.json` del dia
+    (un archivo por cada captura del bookmarklet, `betslip_registrar.py::registrar()`
+    D87-09) y devuelve `[(ts_registro_iso, partido), ...]` — solo picks con
+    `partido` no vacio son matcheables (los `fuera_de_index=True` no traen
+    partido resuelto, se descartan aqui sin inventar un valor)."""
+    out = []
+    for path in sorted(REPORTS_DIR.glob(f"apuestas_{fecha_compact}_*.json")):
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        ts_registro = data.get("ts_registro")
+        if not ts_registro:
+            continue
+        for p in data.get("picks", []):
+            partido = p.get("partido")
+            if partido:
+                out.append((ts_registro, partido))
+    return out
+
+
+def procesar_alerta_a_apuesta(fecha_compact):
+    """D181-11: mide el tiempo entre el disparo de alerta VENTANA (`fire_ledger`,
+    D181-02/08) y el momento en que el usuario registra la apuesta que
+    realmente coloco (`reports/apuestas_*.json`).
+
+    Match a nivel de PARTIDO, no de pierna/direccion: `apuestas_*.json` no
+    guarda que direccion (OVER/UNDER) se jugo, solo outcome_id+jugador+partido
+    (formato heredado de picks ganador-de-partido, D87-09). Emparejar por
+    direccion inventaria un campo que el dato de origen no tiene — se declara
+    la limitacion en vez de forzar un match falso.
+
+    REPORTE_SOLO (mismo limite D181-01): ningun gate/stake lee esta funcion.
+    """
+    ledger_path = REPORTS_DIR / f"fire_ledger_{fecha_compact}.jsonl"
+    if not ledger_path.exists():
+        return []
+
+    disparos = []
+    with ledger_path.open(encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                entrada = json.loads(line)
+            except Exception:
+                continue
+            if entrada.get("tipo") == "VENTANA":
+                disparos.append(entrada)
+
+    apuestas = _leer_apuestas_registradas(fecha_compact)
+
+    resultados = []
+    for d in disparos:
+        clave = d.get("clave", "")
+        partido = clave.rsplit("_", 1)[0] if "_" in clave else clave
+        ts_alerta_iso = d.get("ts_iso")
+        if not ts_alerta_iso:
+            continue
+        try:
+            ts_alerta = datetime.fromisoformat(ts_alerta_iso)
+        except Exception:
+            continue
+
+        candidatas = []
+        for ts_reg_iso, p_apuesta in apuestas:
+            if p_apuesta != partido:
+                continue
+            try:
+                ts_reg = datetime.fromisoformat(ts_reg_iso)
+            except Exception:
+                continue
+            if ts_reg >= ts_alerta:
+                candidatas.append(ts_reg)
+
+        if not candidatas:
+            resultados.append({
+                "clave": clave, "ts_alerta": ts_alerta_iso,
+                "categoria": "SIN_APUESTA_REGISTRADA",
+            })
+            continue
+
+        ts_apuesta = min(candidatas)
+        minutos = round((ts_apuesta - ts_alerta).total_seconds() / 60.0, 1)
+        resultados.append({
+            "clave": clave, "ts_alerta": ts_alerta_iso,
+            "ts_apuesta": ts_apuesta.isoformat(), "minutos_friccion": minutos,
+            "categoria": "MEDIDO",
+        })
+    return resultados
+
+
+def calcular_agregados_friccion(resultados):
+    medidos = [r for r in resultados if r["categoria"] == "MEDIDO"]
+    n_total, n_medidos = len(resultados), len(medidos)
+    base = {"n_total": n_total, "n_medidos": n_medidos,
+            "n_sin_apuesta_registrada": n_total - n_medidos}
+    if not medidos:
+        return {**base, "minutos_friccion_mediana": None,
+                "minutos_friccion_p25": None, "minutos_friccion_p75": None}
+    vals = sorted(r["minutos_friccion"] for r in medidos)
+    return {
+        **base,
+        "minutos_friccion_mediana": round(statistics.median(vals), 1),
+        "minutos_friccion_p25": round(_percentil(vals, 0.25), 1),
+        "minutos_friccion_p75": round(_percentil(vals, 0.75), 1),
+    }
+
+
 def _rango_fechas_compact(desde, hasta):
     d0 = datetime.strptime(desde, "%Y-%m-%d")
     d1 = datetime.strptime(hasta, "%Y-%m-%d")
@@ -176,11 +287,21 @@ def main():
         resultados.extend(procesar_dia(fecha))
 
     agregados = calcular_agregados(resultados)
+
+    resultados_friccion = []
+    for fecha in fechas:
+        resultados_friccion.extend(procesar_alerta_a_apuesta(fecha))
+    agregados_friccion = calcular_agregados_friccion(resultados_friccion)
+
     salida = {
         "generado": datetime.now().isoformat(),
         "fechas": fechas,
         "agregados": agregados,
         "disparos": resultados,
+        "alerta_a_apuesta": {  # D181-11
+            "agregados": agregados_friccion,
+            "disparos": resultados_friccion,
+        },
     }
 
     out_path = REPORTS_DIR / f"lead_time_report_{fechas[-1]}.json"
@@ -196,6 +317,14 @@ def main():
         print(f"  pct_ventana_cero (mov<1%): {agregados['pct_ventana_cero']}%")
         print(f"  direccion: A_FAVOR={agregados['n_a_favor']} "
               f"EN_CONTRA={agregados['n_en_contra']} PLANO={agregados['n_plano']}")
+
+    print(f"D181-11 alerta→apuesta: {agregados_friccion['n_total']} disparos VENTANA "
+          f"({agregados_friccion['n_medidos']} con apuesta registrada matcheada)")
+    if agregados_friccion["n_medidos"]:
+        print(f"  minutos_friccion: mediana={agregados_friccion['minutos_friccion_mediana']} "
+              f"p25={agregados_friccion['minutos_friccion_p25']} "
+              f"p75={agregados_friccion['minutos_friccion_p75']}")
+
     print(f"Guardado: {out_path}")
 
 

@@ -42,6 +42,7 @@ from core.monte_carlo_games import simular_total_juegos_condicionado, estimar_p_
 from core.games_live_model import estimar_juegos_restantes, p_direccion_condicional, direccion_recomendada, perdida_matematica, t0_provenance, drift_indeterminado, contradiccion_modelos  # D180-02/D180-03/D180-04/D180-05
 from core.fire_ledger import registrar_disparo  # Nodo-181 D181-02
 from core.row_coherence import evaluar_coherencia_fila  # Nodo-181 D181-13
+import core.p_wave as p_wave  # Nodo-181 D181-03/D181-04
 from validation.hypothesis_ledger import n_actual_fresco  # D174-06 (Nodo-174)
 
 _HYPOTHESES_JSON = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -2149,6 +2150,11 @@ def render_html(state: Dict[str, Any]) -> str:
     else:
         acc_content = f'<p style="color:{GREY};">{"DESK EN HALT — nada accionable" if halt else "Sin señales accionables ahora"}</p>'
 
+    # Nodo-181 D181-06: P_VENTANA — único panel al inicio, encima de todo lo demás
+    p_ventana_panel = _construir_panel_ventana(
+        state, panel, {"GREY": GREY, "WHITE": WHITE, "AMBER": AMBER, "RED": RED, "GREEN": GREEN},
+    )
+
     n_real = sum(1 for a in accionables if a.get("tipo") not in ("FAVORITOS_ZERO",))
     acc_panel = panel(
         "ACCIONABLE AHORA (P2∩P4∩estrategia graduada)",
@@ -2239,6 +2245,7 @@ def render_html(state: Dict[str, Any]) -> str:
   <h1>LIVE TRADING DESK &nbsp;|&nbsp; {fecha} &nbsp;|&nbsp; Nodo-109</h1>
   {refresh_note}
   {halt_banner}
+  {p_ventana_panel}
   {acc_panel}
   {p4_panel}
   {p2_panel}
@@ -3495,6 +3502,254 @@ def _clasificar_estado_pick(certeza_matematica: Optional[bool], perdida_mat: Opt
     if certeza_matematica:
         return "RESUELTO_GANADO"
     return "OPORTUNIDAD"
+
+
+def _estimar_ventana_restante(fecha_compact: Optional[str] = None) -> Optional[float]:
+    """Nodo-181 D181-05 — cuenta regresiva honesta, calibrada con la
+    distribución empírica de D181-01 (reports/lead_time_report_*.json).
+
+    Lee el JSON de salida directamente — NO importa scripts/lead_time_report
+    (REPORTE_SOLO estricto, D181-01: ese módulo no puede ser importado por
+    ningún gate/stake/combo; leer su archivo de salida no lo viola, igual
+    que otros reportes en reports/ ya se leen como JSON desde varios
+    consumidores).
+
+    Si la muestra aún no alcanza n_medidos>=20, devuelve None — la UI debe
+    mostrar "ventana: sin calibrar", nunca un número inventado.
+    """
+    fecha = fecha_compact or datetime.now().strftime("%Y%m%d")
+    report_path = REPORTS / f"lead_time_report_{fecha}.json"
+    if not report_path.exists():
+        candidatos = sorted(REPORTS.glob("lead_time_report_*.json"))
+        if not candidatos:
+            return None
+        report_path = candidatos[-1]
+    try:
+        data = json.loads(report_path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return None
+    agregados = data.get("agregados", {})
+    if agregados.get("n_medidos", 0) < 20:
+        return None
+    return agregados.get("ventana_min_mediana")
+
+
+# ─── Nodo-181 D181-07: gate de honestidad — nivel ACCIÓN nace APAGADO ─────────
+# Con el flag en False: ACCIÓN se calcula y se registra en fire_ledger, pero NO
+# envía Telegram, NO genera cupón y NO propone stake — se muestra SIMULADO.
+# Solo se enciende cuando H181-01 gradúa (patrón _GCS_GATE_ENABLED, edge_calculator.py).
+_P_VENTANA_ACCION_ENABLED = False
+
+_P_VENTANA_EDGE_MIN = 0.05          # umbral edge_live (fracción) para nivel ACCION, D181-06
+_P_VENTANA_VENTANA_MIN_MIN = 3.0    # minutos — ventana estimada > esto para ACCION, D181-06
+_P_VENTANA_MAX_ACCIONES_DIA = 3     # D181-06
+
+
+def _cargar_games_odds_history(fecha: str) -> Dict:
+    """Lee reports/games_odds_history_{fecha}.json — el mismo archivo de
+    salida que consume scripts/lead_time_report.py (D181-01). Se lee aquí
+    directamente como JSON, sin importar ese módulo (REPORTE_SOLO estricto:
+    D181-01 no puede ser importado por ningún gate/stake/combo)."""
+    p = REPORTS / f"games_odds_history_{fecha.replace('-', '')}.json"
+    if not p.exists():
+        return {}
+    try:
+        return json.loads(p.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return {}
+
+
+def _evaluar_senal_ventana(sig: Dict, odds_history: Dict,
+                            ventana_calibrada: Optional[float],
+                            memoria_no_negativa: bool) -> Optional[Dict]:
+    """Nodo-181 D181-06: evalúa una señal de juegos en vivo contra onda P
+    (D181-03) + quórum (D181-04) y decide su nivel (ATENCIÓN/ACCIÓN/ninguno).
+
+    Retorna None si no hay onda P detectada o el quórum no alcanza ≥2
+    familias — esa señal simplemente no entra al panel P_VENTANA.
+    """
+    partido = sig.get("partido", "")
+    direccion = (sig.get("direccion") or "").upper()
+    linea = sig.get("linea")
+    if not partido or not direccion or linea is None:
+        return None
+    serie = odds_history.get(f"{partido}_{direccion}")
+    if not serie:
+        return None
+
+    onda = p_wave.detectar_onda_p(serie, linea, direccion)
+    if not onda["detectada"]:
+        return None
+
+    edge_live = sig.get("edge_pct") / 100.0 if sig.get("edge_pct") is not None else None
+    senal = {
+        "p_wave_detectada": onda["detectada"],
+        "steam_confirmado": sig.get("steam_confirmado", False),
+        "drift_pct": sig.get("drift_pct"),
+        "mc_p_condicional": sig.get("mc_p_condicional"),
+        "p_condicional": (sig.get("certeza") or {}).get("p_condicional"),
+        "edge_live": edge_live,
+        "break_situation": None,  # no disponible en la señal de juegos actual
+        "serving": None,          # ídem
+        "games_set1": sig.get("games_set1"),
+        "score_data": sig.get("score_data"),
+    }
+    quorum = p_wave.quorum_sensores(senal)
+    if quorum["n_familias"] < 2:
+        return None
+
+    nivel = "ATENCION"
+    if (quorum["n_familias"] >= 3
+            and edge_live is not None and edge_live >= _P_VENTANA_EDGE_MIN
+            and ventana_calibrada is not None and ventana_calibrada > _P_VENTANA_VENTANA_MIN_MIN
+            and memoria_no_negativa):
+        nivel = "ACCION"
+
+    return {
+        "sig": sig, "onda": onda, "quorum": quorum,
+        "nivel": nivel, "edge_live": edge_live,
+        "ventana_restante": ventana_calibrada,
+    }
+
+
+def _registrar_disparo_ventana_once(fecha_compact: str, sig: Dict, onda: Dict,
+                                     quorum: Dict, edge_live: Optional[float]) -> None:
+    """Nodo-181 D181-08 (prerequisito): fire-once + registrar_disparo para
+    disparos de nivel ACCIÓN, con o sin el gate D181-07 encendido — sin este
+    registro, H181-01/02/03 son inmedibles (§4 del spec: "las cuatro
+    necesitan predicado real", pero un predicado no puede correr sobre datos
+    que nunca se escribieron). Mismo patrón fire-once por archivo JSON que
+    `certeza_fired_{fecha}.json` (línea ~4566) — no usa fire_guard.should_fire
+    porque ese es el guard anti-flood de Telegram, no de trazabilidad."""
+    pk = f"{sig.get('partido', '')}_{(sig.get('direccion') or '').upper()}"
+    guard_path = REPORTS / f"ventana_fired_{fecha_compact}.json"
+    try:
+        fired: Dict = (
+            json.loads(guard_path.read_text(encoding="utf-8"))
+            if guard_path.exists() else {}
+        )
+    except Exception:
+        fired = {}
+
+    if pk in fired:
+        return
+
+    fired[pk] = {"ts": datetime.now().isoformat()[:19]}
+    try:
+        guard_path.write_text(json.dumps(fired, ensure_ascii=False, indent=2), encoding="utf-8")
+    except Exception:
+        pass
+
+    cuota_ahora = sig.get("cuota_actual") or sig.get("cuota_live") or sig.get("cuota")
+    registrar_disparo(  # Nodo-181 D181-02/D181-08: ledger para cruzar con settled en shadow_book
+        fecha_compact, pk, "VENTANA",
+        cuota_al_disparo=cuota_ahora,
+        contexto={
+            "linea": sig.get("linea"),
+            "games_played": sig.get("games_played"),
+            "ts_onda_p": onda.get("ts_onset"),
+            "n_familias": quorum.get("n_familias"),
+            "familias_activas": quorum.get("familias_activas"),
+            "direccion": sig.get("direccion"),
+            "edge_live": edge_live,
+        },
+    )
+
+
+def _construir_panel_ventana(state: Dict[str, Any], panel_fn, colores: Dict[str, str]) -> str:
+    """Nodo-181 D181-06: arma el HTML del panel P_VENTANA — único panel al
+    inicio de la dashboard, encima de todo lo demás. Columnas: QUÉ APOSTAR
+    (vía _construir_explicacion_plana, D180-06 — reusa, no duplica) · CUOTA
+    AHORA · VENTANA RESTANTE · STAKE SUGERIDO · POR QUÉ · ESTADO.
+
+    Prohibido en este panel: gap, midpoint, z, sigma, convergencia_breakdown,
+    p_condicional crudo — esa jerga vive en los paneles de abajo.
+    """
+    GREY, WHITE, AMBER, RED, GREEN = (colores["GREY"], colores["WHITE"],
+                                       colores["AMBER"], colores["RED"], colores["GREEN"])
+    fecha = state.get("fecha", "")
+    odds_history = _cargar_games_odds_history(fecha)
+    ventana_calibrada = _estimar_ventana_restante(fecha.replace("-", ""))
+    _mem_global = (state.get("p_memoria") or {}).get("global", {})
+    # Proxy global mientras no exista atribución por arquetipo en esta señal
+    # (Nodo-179: la unidad real de memoria es el arquetipo, no el jugador/partido).
+    memoria_no_negativa = _mem_global.get("hit_shrunk", 1.0) >= 0.5 if _mem_global else True
+
+    señales = state.get("p_games", {}).get("signals", [])
+    evaluadas = []
+    for sig in señales:
+        r = _evaluar_senal_ventana(sig, odds_history, ventana_calibrada, memoria_no_negativa)
+        if r:
+            evaluadas.append(r)
+
+    n_vigilancia = len(señales)
+
+    if not evaluadas:
+        content = (f'<p style="color:{GREY};font-size:0.9em;">'
+                   f'Sin ventanas abiertas ahora mismo — {n_vigilancia} señales en vigilancia.</p>')
+        return panel_fn("P_VENTANA — Onda P + Quórum (Nodo-181)", content, "", GREY)
+
+    filas = []
+    n_accion = 0
+    for r in evaluadas:
+        sig, onda, quorum, nivel = r["sig"], r["onda"], r["quorum"], r["nivel"]
+        que_apostar = _construir_explicacion_plana(
+            sig.get("direccion"), sig.get("linea"), sig.get("games_played"),
+            sig.get("max_remaining"), sig.get("total_estimado"),
+            p_modelo=sig.get("mc_p_condicional"), cuota_mercado=sig.get("cuota_actual") or sig.get("cuota_live"),
+        )
+        cuota_ahora = sig.get("cuota_actual") or sig.get("cuota_live") or sig.get("cuota") or "—"
+        ventana_txt = f"{r['ventana_restante']:.0f} min" if r["ventana_restante"] is not None else "sin calibrar"
+        por_que_map = {
+            "MERCADO": "el precio se está moviendo", "MODELO": "el modelo coincide",
+            "ESTADO": "el marcador lo confirma",
+        }
+        por_que = ", ".join(por_que_map[f] for f in quorum["familias_activas"])
+        if nivel == "ACCION":
+            # Nodo-181 D181-11: nota operativa en el mensaje de ACCIÓN — vive en la
+            # fila ahora (SIMULADO, gate D181-07 apagado) y sigue apareciendo sin
+            # cambios cuando el gate se encienda y esta misma fila empiece a viajar
+            # por Telegram (D181-06), sin necesidad de duplicar el texto en un
+            # dispatcher que hoy no existe.
+            por_que += " — confirma que estás logueado en Betplay antes de abrir"
+
+        if nivel == "ACCION":
+            _registrar_disparo_ventana_once(fecha.replace("-", ""), sig, onda, quorum, r["edge_live"])
+
+        if nivel == "ACCION" and n_accion < _P_VENTANA_MAX_ACCIONES_DIA and _P_VENTANA_ACCION_ENABLED:
+            estado_badge, color_fila = "OPORTUNIDAD", RED
+            n_accion += 1
+        elif nivel == "ACCION":
+            estado_badge, color_fila = "SIMULADO", AMBER
+        else:
+            estado_badge, color_fila = "OPORTUNIDAD", AMBER
+
+        stake_txt = "—" if (nivel != "ACCION" or not _P_VENTANA_ACCION_ENABLED) else "por confirmar"
+        filas.append(f"""
+        <tr style="background:{color_fila}22;">
+          <td style="padding:6px;">{que_apostar}</td>
+          <td style="padding:6px;">{cuota_ahora}</td>
+          <td style="padding:6px;">{ventana_txt}</td>
+          <td style="padding:6px;">{stake_txt}</td>
+          <td style="padding:6px;color:{GREY};font-size:0.85em;">{por_que}</td>
+          <td style="padding:6px;font-weight:bold;color:{color_fila};">{estado_badge}</td>
+        </tr>""")
+
+    tabla = f"""
+    <table style="width:100%;border-collapse:collapse;font-size:0.85em;">
+      <tr style="color:{GREY};text-align:left;font-size:0.8em;">
+        <th style="padding:6px;">QUÉ APOSTAR</th><th>CUOTA AHORA</th><th>VENTANA RESTANTE</th>
+        <th>STAKE SUGERIDO</th><th>POR QUÉ</th><th>ESTADO</th>
+      </tr>
+      {''.join(filas)}
+    </table>
+    <p style="color:{GREY};font-size:0.72em;margin-top:8px;">
+      ATENCIÓN = solo dashboard. ACCIÓN = máx {_P_VENTANA_MAX_ACCIONES_DIA}/día
+      {"(activo)" if _P_VENTANA_ACCION_ENABLED else "(SIMULADO — gate D181-07 apagado hasta que H181-01 gradúe)"}.
+    </p>"""
+    badge = "ACCIÓN" if n_accion else "ATENCIÓN"
+    badge_color = RED if n_accion else AMBER
+    return panel_fn("P_VENTANA — Onda P + Quórum (Nodo-181)", tabla, badge, badge_color)
 
 
 def _motivo_perdida_matematica(direccion: Optional[str], linea: Optional[float],

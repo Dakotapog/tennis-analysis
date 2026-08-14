@@ -47,6 +47,8 @@ import statistics
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional, Tuple
 
+from core.games_settlement import settle_games_outcome
+
 logger = logging.getLogger(__name__)
 
 # Directorio de datos — monkeypatcheable en tests
@@ -169,14 +171,20 @@ def _build_record(pick: dict, fecha: str) -> Optional[dict]:
     p1, p2 = _pick_partido_parts(pick)
     if not p1 or not p2:
         return None
-    torneo = pick.get('torneo', 'Desconocido')
+    # D180-06 item 5.2: torneo puede venir presente pero None (Kambi path sin
+    # torneo resuelto, live_desk.py) — `or` cubre ese caso, no solo ausencia
+    # de clave, para no pasar None a _slug()/_build_sb_id().
+    torneo = pick.get('torneo') or 'Desconocido'
     superficie = pick.get('superficie', 'unknown')
+    # D180-06 item 5.1: picks de mercado de juegos no son ML (ganador de
+    # partido) — el sufijo _ML en su sb_id es ruido de datos engañoso.
+    mercado = 'GAMES' if pick.get('pick_type') == 'games_live' else 'ML'
 
     try:
-        sb_id = _build_sb_id(fecha, torneo, p1, p2)
+        sb_id = _build_sb_id(fecha, torneo, p1, p2, mercado)
     except Exception:
         nombres = sorted([p1[:8].lower(), p2[:8].lower()])
-        sb_id = f"{fecha}_{_slug(torneo, 12)}_{nombres[0]}-{nombres[1]}_ML"
+        sb_id = f"{fecha}_{_slug(torneo, 12)}_{nombres[0]}-{nombres[1]}_{mercado}"
 
     try:
         mk = _match_key(p1, p2)
@@ -884,6 +892,9 @@ def settle(fecha: str, resultados_map: Optional[Dict] = None) -> int:
 
     settled_at = datetime.now().astimezone().isoformat()
     count = 0
+    _gl_settled = 0
+    _gl_skipped = 0
+    _gl_orphan = 0
 
     for sb_id, rec in records.items():
         if rec.get('_type') == 'session_meta':
@@ -893,6 +904,62 @@ def settle(fecha: str, resultados_map: Optional[Dict] = None) -> int:
 
         snap = rec.get('pick_snapshot', {})
         mk = rec.get('match_key', '')
+
+        # Nodo-180 D180-01 Pieza B: pick_type='games_live' NO tiene
+        # favorito_predicho/resultado ganador-de-partido — settlearlo contra
+        # resultados_map (ramas abajo) caía silenciosamente en LOST forzado
+        # (Ghost Fix de Nodo-159, ver spec §F1). Se resuelve aparte, contra el
+        # snapshot de score final escrito por live_desk._snapshot_live_score().
+        if snap.get('pick_type') == 'games_live':
+            _partido_gl = snap.get('partido', '')
+            final_data = _load_games_final_score(fecha, _partido_gl)
+            if final_data is None:
+                _fc_gl = fecha.replace('-', '')
+                _snap_file_gl = f"reports/games_final_score_{_fc_gl}.json"
+                if os.path.exists(_snap_file_gl):
+                    # El archivo del día existe (live_desk sí está snapshoteando)
+                    # pero este partido puntual no aparece — señal de alarma de
+                    # divergencia de normalización entre escritor y lector, no
+                    # ausencia de datos. Ver _snapshot_live_score()/_load_games_final_score().
+                    try:
+                        with open(_snap_file_gl, 'r', encoding='utf-8') as _f_gl:
+                            _n_claves_gl = len(json.load(_f_gl))
+                    except Exception:
+                        _n_claves_gl = 0
+                    logger.warning(
+                        f"[SETTLE-GAMES] ORPHAN sb_id={sb_id} partido={_partido_gl} "
+                        f"claves_disponibles={_n_claves_gl}"
+                    )
+                    _gl_orphan += 1
+                else:
+                    logger.info(
+                        f"[SETTLE-GAMES] SKIP sb_id={sb_id} partido={_partido_gl} "
+                        f"motivo=sin_snapshot_final — NO se fuerza LOST"
+                    )
+                    _gl_skipped += 1
+                continue
+            win, razon = settle_games_outcome(
+                direccion=snap.get('direccion', 'UNDER'),
+                linea=snap.get('linea', 0),
+                final_games=final_data['games_played'],
+            )
+            _cuota_trigger_gl = snap.get('cuota_trigger', 1) or 1
+            rec['resolucion'] = {
+                "settled_at":              settled_at,
+                "resultado":               "WON" if win else "LOST",
+                "cuota_cierre_provenance": "games_live_snapshot",
+                "clv_pct":                 None,
+                "pnl_flat_1u":             round(_cuota_trigger_gl - 1, 4) if win else -1.0,
+                "razon":                   razon,
+            }
+            logger.info(
+                f"[SETTLE-GAMES] SETTLED sb_id={sb_id} dir={snap.get('direccion')} "
+                f"linea={snap.get('linea')} final_games={final_data['games_played']} "
+                f"resultado={rec['resolucion']['resultado']} razon={razon}"
+            )
+            count += 1
+            _gl_settled += 1
+            continue
 
         # Addendum B.2 — Join primario: match_id
         pick_match_id = snap.get('match_id')
@@ -978,11 +1045,46 @@ def settle(fecha: str, resultados_map: Optional[Dict] = None) -> int:
             }
         count += 1
 
+    if _gl_settled + _gl_skipped + _gl_orphan > 0:
+        logger.info(
+            f"[SETTLE-GAMES] RESUMEN fecha={fecha} settled={_gl_settled} "
+            f"skipped={_gl_skipped} orphan={_gl_orphan}"
+        )
+
     if count > 0:
         _save_jsonl(path, records)
         logger.info(f"[ShadowBook] settle: {count} registros settled → {path}")
 
     return count
+
+
+def _load_games_final_score(fecha: str, partido: str) -> Optional[dict]:
+    """
+    Nodo-180 D180-01 Pieza B (lectura): carga el snapshot rolling escrito por
+    live_desk._snapshot_live_score() para el partido dado.
+
+    'partido' se usa TAL CUAL como clave (string "Home vs Away"), sin
+    normalización — es exactamente pick_snapshot['partido'], y live_desk
+    escribe con esa misma clave sin transformarla (ver _snapshot_live_score()
+    en live_desk.py). Cualquier divergencia aquí sería un bug de escritura, no
+    de lectura — ver Paper Trail [SETTLE-GAMES] ORPHAN en settle().
+
+    Retorna None si no hay snapshot — el caller (settle()) debe dejar el pick
+    abierto, nunca forzar LOST (Nodo-180 §5, prohibición explícita).
+    """
+    if not partido:
+        return None
+    fecha_compact = fecha.replace('-', '')
+    path = f"reports/games_final_score_{fecha_compact}.json"
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+    except Exception:
+        return None
+    entry = data.get(partido)
+    if entry is None or entry.get('games_played') is None:
+        return None
+    return entry
 
 
 def _load_resultados(fecha: str) -> Dict[str, dict]:
@@ -1226,6 +1328,125 @@ def _pick_status_sb(rec: dict) -> str:
     return _sb_status(snap)
 
 
+# ══════════════════════════════════════════════════════════════════════════════
+# Nodo-181 D181-08 — VENTANA H181: cruza fire_ledger (tipo VENTANA) con
+# games_odds_history y certeza_fired para medir H181-01/H181-02.
+#
+# H181-01/H181-02/H181-03 NO son reducibles al predicado single-record que
+# validation.hypothesis_ledger.contar_hipotesis(settled) sabe evaluar — no
+# operan sobre un pick liquidado sino sobre el cruce de dos streams distintos
+# (fire_ledger x games_odds_history / certeza_fired). Por eso sus entradas en
+# _PREDICADOS retornan False con nota (mismo patrón que H150-01/H179-01) y la
+# medición real vive aquí, como "reporte dedicado" — igual que D174-07 hace
+# para IRP/Weather reusando contar_hipotesis en vez de duplicar la lógica.
+#
+# H181-03 (quorum 3/3 vs <=2) queda fuera de este cálculo: por construcción,
+# live_desk._registrar_disparo_ventana_once solo escribe al ledger cuando
+# nivel=="ACCION", que ya exige n_familias>=3 (D181-06/D181-07) — no existe
+# cohorte de disparos con n_familias<=2 para comparar. Ver nota en
+# validation/hypothesis_ledger.py::_h181_03.
+# ══════════════════════════════════════════════════════════════════════════════
+
+def _leer_fire_ledger_ventana(fecha_compact: str) -> List[dict]:
+    """Lee reports/fire_ledger_{fecha}.jsonl y filtra tipo=='VENTANA'."""
+    path = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)), "reports", f"fire_ledger_{fecha_compact}.jsonl",
+    )
+    if not os.path.exists(path):
+        return []
+    out = []
+    try:
+        with open(path, encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    entrada = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                if entrada.get("tipo") == "VENTANA":
+                    out.append(entrada)
+    except OSError:
+        pass
+    return out
+
+
+def calcular_stats_ventana_h181(desde: str, hasta: str) -> Dict[str, dict]:
+    """Nodo-181 D181-08. desde/hasta: 'YYYY-MM-DD'. REPORTE_SOLO — no alimenta
+    gates ni stake (mismo principio que scripts/lead_time_report.py, D181-01).
+
+    Returns: {"H181-01": {"n": int, "hits": int}, "H181-02": {"n": int, "hits": int}}
+    """
+    from scripts.lead_time_report import procesar_disparo  # REGLA-T53: reusa la formula real, D181-01
+
+    reports_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "reports")
+    d0 = datetime.strptime(desde, "%Y-%m-%d")
+    d1 = datetime.strptime(hasta, "%Y-%m-%d")
+
+    n_01 = hits_01 = 0
+    n_02 = hits_02 = 0
+    d = d0
+    while d <= d1:
+        fecha_compact = d.strftime("%Y%m%d")
+        d += timedelta(days=1)
+        disparos = _leer_fire_ledger_ventana(fecha_compact)
+        if not disparos:
+            continue
+
+        odds_path = os.path.join(reports_dir, f"games_odds_history_{fecha_compact}.json")
+        odds = {}
+        if os.path.exists(odds_path):
+            try:
+                odds = json.loads(open(odds_path, encoding="utf-8").read())
+            except (json.JSONDecodeError, OSError):
+                odds = {}
+
+        certeza_path = os.path.join(reports_dir, f"certeza_fired_{fecha_compact}.json")
+        certeza_fired = {}
+        if os.path.exists(certeza_path):
+            try:
+                certeza_fired = json.loads(open(certeza_path, encoding="utf-8").read())
+            except (json.JSONDecodeError, OSError):
+                certeza_fired = {}
+
+        fecha_base = datetime.strptime(fecha_compact, "%Y%m%d")
+        for entrada in disparos:
+            clave = entrada.get("clave", "")
+            ts_iso = entrada.get("ts_iso")
+            ctx = entrada.get("contexto") or {}
+
+            # H181-01: mov_despues_pct >= 5% con direccion A_FAVOR, en disparos ACCION.
+            serie = odds.get(clave)
+            if serie and ts_iso:
+                try:
+                    r = procesar_disparo(ts_iso, serie, fecha_base)
+                    n_01 += 1
+                    if r["mov_despues_pct"] >= 5.0 and r["direccion_movimiento"] == "A_FAVOR":
+                        hits_01 += 1
+                except Exception:
+                    pass
+
+            # H181-02: ts_onda_p < ts_certeza, solo para señales con ambos disparos.
+            ts_onda_p = ctx.get("ts_onda_p")
+            certeza_val = certeza_fired.get(clave)
+            ts_certeza = (certeza_val.get("ts") if isinstance(certeza_val, dict) else certeza_val)
+            if ts_onda_p and ts_certeza:
+                try:
+                    h_p, m_p = map(int, ts_onda_p.split(":"))
+                    h_c, m_c = map(int, str(ts_certeza)[11:16].split(":"))
+                    n_02 += 1
+                    if (h_p * 60 + m_p) < (h_c * 60 + m_c):
+                        hits_02 += 1
+                except (ValueError, IndexError):
+                    pass
+
+    return {
+        "H181-01": {"n": n_01, "hits": hits_01},
+        "H181-02": {"n": n_02, "hits": hits_02},
+    }
+
+
 def report(desde: Optional[str] = None, hasta: Optional[str] = None) -> str:
     """
     Sección S-27-8: métricas del shadow book por segmento pre-registrado.
@@ -1249,16 +1470,27 @@ def report(desde: Optional[str] = None, hasta: Optional[str] = None) -> str:
     # Separar session_meta de picks
     session_metas = [r for r in all_records if r.get('_type') == 'session_meta']
     picks = [r for r in all_records if r.get('_type') != 'session_meta']
-    settled = [r for r in picks if 'resolucion' in r]
+    settled_all = [r for r in picks if 'resolucion' in r]
+
+    # Nodo-180 D180-07: registros en cuarentena (settlements corruptos del bug
+    # F2 — LOST forzado sin evaluación real de la línea, ver
+    # scripts/quarantine_games_settlements.py) se excluyen de TODOS los
+    # agregados (hit%, ROI, CLV) de aquí en adelante — `settled` es la lista
+    # limpia que consume el resto de esta función. Se cuentan aparte, nunca
+    # se descartan silenciosamente.
+    _cuarentena_recs = [r for r in settled_all if r.get('resolucion', {}).get('quarantined')]
+    settled = [r for r in settled_all if not r.get('resolucion', {}).get('quarantined')]
 
     n_total = len(picks)
-    n_settled = len(settled)
+    n_settled = len(settled_all)
 
     sep = "═" * 62
     lines: List[str] = [sep]
     lines.append(f"  S-27-8  SHADOW BOOK — {desde} → {hasta}")
     lines.append(sep)
     lines.append(f"  Registros: {n_total}  |  Settled: {n_settled}  |  Abiertos: {n_total - n_settled}")
+    if _cuarentena_recs:
+        lines.append(f"  CUARENTENA (Nodo-180): {len(_cuarentena_recs)} registros excluidos")
     if session_metas:
         last_sm = session_metas[-1]
         lines.append(
@@ -1651,6 +1883,39 @@ def report(desde: Optional[str] = None, hasta: Optional[str] = None) -> str:
                     f"  n={_n}  hits={_h}  hit%={_pct}  (gate n>={_n_stop_lbl}, sin SPRT — comparar vs control)"
                 )
         lines.append("    No aplica gate de apuesta — ambas hipotesis observacionales puras.")
+        lines.append("")
+
+    # ── D181-08 (Nodo-181): VENTANA H181 — REPORTE_SOLO ──────────────────────
+    # Cruza fire_ledger (tipo VENTANA, D181-02) con games_odds_history y
+    # certeza_fired para medir H181-01/H181-02. H181-03 no es medible con los
+    # datos actuales (ver comentario en calcular_stats_ventana_h181) — se
+    # omite explícitamente, no se inventa un número.
+    try:
+        _stats_d18108 = calcular_stats_ventana_h181(desde, hasta)
+    except Exception as _e:
+        _stats_d18108 = None
+        lines.append(f"  VENTANA H181 (D181-08): no disponible ({_e})")
+
+    if _stats_d18108 is not None:
+        lines.append("  VENTANA H181 (D181-08 — Nodo-181, REPORTE_SOLO):")
+        for _h_id, _h_name, _n_stop_lbl in [
+            ("H181-01", "ventana explotable: mov_despues_pct>=5% A_FAVOR en disparos ACCION", 40),
+            ("H181-02", "onda P anticipa a certeza: ts_onda_p < ts_certeza", 30),
+        ]:
+            _c = _stats_d18108.get(_h_id, {'n': 0, 'hits': 0})
+            _n, _h = _c['n'], _c['hits']
+            if _n == 0:
+                lines.append(f"    [{_h_id}] {_h_name}: n=0 — acumulando (gate n>={_n_stop_lbl})")
+            else:
+                _pct = round(100 * _h / _n, 1)
+                lines.append(
+                    f"    [{_h_id}] {_h_name}:"
+                    f"  n={_n}  hits={_h}  hit%={_pct}  (gate n>={_n_stop_lbl}, sin SPRT — comparar vs control)"
+                )
+        lines.append("    [H181-03] quorum 3/3 discrimina: NO MEDIBLE — todo disparo registrado")
+        lines.append("      ya tiene n_familias=3 por construcción (D181-06 solo registra nivel")
+        lines.append("      ACCION). Requiere registrar también disparos ATENCION antes de medirse.")
+        lines.append("    No aplica gate de apuesta — H181-01 gobierna D181-07 (_P_VENTANA_ACCION_ENABLED).")
         lines.append("")
 
     # ── Nodo-124 H124-01/02: EVALUAR picks de generar_tabla_favoritos2 ───────

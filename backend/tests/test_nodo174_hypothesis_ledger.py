@@ -30,13 +30,15 @@ def test_174_01_predicados_cubren_exactamente_las_declaradas():
     assert set(hl.PREDICADOS.keys()) == _declaradas()
 
 
-def test_174_01b_json_es_valido_y_tiene_47_hipotesis():
+def test_174_01b_json_es_valido_y_tiene_54_hipotesis():
     """Guard de regresión del fix D174-03 (H160-02 estaba fuera del dict 'hypotheses')
-    + D174-05 (agrega H147-01/H150-01/H151-01/H152-01: 43+4=47)."""
+    + D174-05 (agrega H147-01/H150-01/H151-01/H152-01: 43+4=47)
+    + Nodo-172/Nodo-179 (agrega H172-01/H179-01/H179-02: 47+3=50)
+    + Nodo-181 D181-08 (agrega H181-01/02/03/04: 50+4=54)."""
     with open(_JSON_PATH, encoding='utf-8') as f:
         data = json.load(f)
     assert set(data.keys()) == {"_meta", "hypotheses"}
-    assert len(data['hypotheses']) == 47
+    assert len(data['hypotheses']) == 54
     assert "H160-02" in data['hypotheses']
 
 

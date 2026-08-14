@@ -16,7 +16,7 @@ from typing import Optional
 
 REPORTS_DIR = Path(__file__).resolve().parent.parent / "reports"
 
-TIPOS_VALIDOS = {"CERTEZA", "GAMES_LIVE", "ITF_LIVE", "COMBO"}
+TIPOS_VALIDOS = {"CERTEZA", "GAMES_LIVE", "ITF_LIVE", "COMBO", "VENTANA"}
 
 
 def registrar_disparo(
