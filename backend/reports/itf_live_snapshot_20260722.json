@@ -1,0 +1,134 @@
+{
+  "Chase Ferguson|Derek Pham|UNDER": {
+    "cuota_t0": 2.0,
+    "linea_t0": 31.5,
+    "ts_t0": "2026-07-22T21:13:33",
+    "partido": "Chase Ferguson vs Derek Pham"
+  },
+  "Jeremy Zhang|Taiki Takizawa|UNDER": {
+    "cuota_t0": 1.56,
+    "linea_t0": 25.5,
+    "ts_t0": "2026-07-22T21:13:33",
+    "partido": "Jeremy Zhang vs Taiki Takizawa"
+  },
+  "Mutsumi Uemura|Natsuki Yoshimoto|OVER": {
+    "cuota_t0": 1.57,
+    "linea_t0": 14.5,
+    "ts_t0": "2026-07-22T21:13:33",
+    "partido": "Mutsumi Uemura vs Natsuki Yoshimoto"
+  },
+  "Belle Thompson|Natsuho Arakawa|OVER": {
+    "cuota_t0": 1.53,
+    "linea_t0": 17.5,
+    "ts_t0": "2026-07-22T21:13:34",
+    "partido": "Belle Thompson vs Natsuho Arakawa"
+  },
+  "Kristina Penickova|Anastasia Kulikova|OVER": {
+    "cuota_t0": 2.15,
+    "linea_t0": 15.5,
+    "ts_t0": "2026-07-22T21:13:34",
+    "partido": "Kristina Penickova vs Anastasia Kulikova"
+  },
+  "Ya Yi Yang|Nithesa Selvaraj|OVER": {
+    "cuota_t0": 2.33,
+    "linea_t0": 15.5,
+    "ts_t0": "2026-07-22T21:13:34",
+    "partido": "Ya Yi Yang vs Nithesa Selvaraj"
+  },
+  "Matthew Dellavedova|Shinji Hazawa|UNDER": {
+    "cuota_t0": 1.74,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-07-22T21:13:34",
+    "partido": "Matthew Dellavedova vs Shinji Hazawa"
+  },
+  "Moerani Bouzige|Yuki Mochizuki|UNDER": {
+    "cuota_t0": 1.71,
+    "linea_t0": 22.5,
+    "ts_t0": "2026-07-22T21:13:35",
+    "partido": "Moerani Bouzige vs Yuki Mochizuki"
+  },
+  "Taisei Ichikawa|Mukund Sasikumar|UNDER": {
+    "cuota_t0": 1.91,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-07-22T21:13:35",
+    "partido": "Taisei Ichikawa vs Mukund Sasikumar"
+  },
+  "Amy Stevens|I Wen Wan|OVER": {
+    "cuota_t0": 1.66,
+    "linea_t0": 18.5,
+    "ts_t0": "2026-07-22T21:13:35",
+    "partido": "Amy Stevens vs I Wen Wan"
+  },
+  "Belle Thompson|Natsuho Arakawa|UNDER": {
+    "cuota_t0": 1.49,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-07-22T21:14:36",
+    "partido": "Belle Thompson vs Natsuho Arakawa"
+  },
+  "Fang An Lin|Chia Yi Tsao|UNDER": {
+    "cuota_t0": 1.96,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-07-22T21:16:25",
+    "partido": "Fang An Lin vs Chia Yi Tsao"
+  },
+  "Fang An Lin|Chia Yi Tsao|OVER": {
+    "cuota_t0": 2.48,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-07-22T21:31:13",
+    "partido": "Fang An Lin vs Chia Yi Tsao"
+  },
+  "Amy Stevens|I Wen Wan|UNDER": {
+    "cuota_t0": 2.02,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-07-22T21:37:00",
+    "partido": "Amy Stevens vs I Wen Wan"
+  },
+  "Kristina Penickova|Anastasia Kulikova|UNDER": {
+    "cuota_t0": 1.46,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-07-22T21:39:59",
+    "partido": "Kristina Penickova vs Anastasia Kulikova"
+  },
+  "Moerani Bouzige|Yuki Mochizuki|OVER": {
+    "cuota_t0": 1.61,
+    "linea_t0": 16.5,
+    "ts_t0": "2026-07-22T21:51:03",
+    "partido": "Moerani Bouzige vs Yuki Mochizuki"
+  },
+  "Isaac Becroft|Hikaru Shiraishi|UNDER": {
+    "cuota_t0": 1.64,
+    "linea_t0": 22.5,
+    "ts_t0": "2026-07-22T22:18:25",
+    "partido": "Isaac Becroft vs Hikaru Shiraishi"
+  },
+  "Nanari Katsumi|Sarah Mildren|UNDER": {
+    "cuota_t0": 1.91,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-07-22T22:34:51",
+    "partido": "Nanari Katsumi vs Sarah Mildren"
+  },
+  "Nanari Katsumi|Sarah Mildren|OVER": {
+    "cuota_t0": 2.35,
+    "linea_t0": 17.5,
+    "ts_t0": "2026-07-22T23:15:06",
+    "partido": "Nanari Katsumi vs Sarah Mildren"
+  },
+  "Ryotaro Taguchi|Arjun Rathi|UNDER": {
+    "cuota_t0": 1.65,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-07-22T23:26:01",
+    "partido": "Ryotaro Taguchi vs Arjun Rathi"
+  },
+  "Alexander Chang|Keisuke Saitoh|OVER": {
+    "cuota_t0": 1.68,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-07-22T23:33:54",
+    "partido": "Alexander Chang vs Keisuke Saitoh"
+  },
+  "Fitriadi M Rifqi|Sam Ryan Ziegann|UNDER": {
+    "cuota_t0": 2.08,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-07-22T23:36:42",
+    "partido": "Fitriadi M Rifqi vs Sam Ryan Ziegann"
+  }
+}

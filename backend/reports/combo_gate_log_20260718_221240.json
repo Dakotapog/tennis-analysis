@@ -1,0 +1,37 @@
+[
+  {
+    "nombre": "Isabella Shinikova",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_1 bloqueado",
+    "combo": "cobertura_1",
+    "ts": "2026-07-18T22:12:40.919518"
+  },
+  {
+    "nombre": "Isabella Shinikova",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_2 bloqueado",
+    "combo": "cobertura_2",
+    "ts": "2026-07-18T22:12:40.919534"
+  },
+  {
+    "nombre": "Paula Badosa",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_3 bloqueado",
+    "combo": "cobertura_3",
+    "ts": "2026-07-18T22:12:40.919537"
+  },
+  {
+    "nombre": "Paula Badosa",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_4 bloqueado",
+    "combo": "cobertura_4",
+    "ts": "2026-07-18T22:12:40.919539"
+  },
+  {
+    "nombre": "Paula Badosa",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_5 bloqueado",
+    "combo": "cobertura_5",
+    "ts": "2026-07-18T22:12:40.919540"
+  }
+]

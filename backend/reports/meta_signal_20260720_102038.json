@@ -1,0 +1,260 @@
+{
+  "generated_at": "2026-07-20T10:20:38.354173",
+  "edge_report_fuente": "edge_report_20260720_102036.json",
+  "fecha": "20260720",
+  "n_picks_analizados": 15,
+  "n_score_directo_3plus": 0,
+  "n_split": 1,
+  "h98_01_n_actual": 0,
+  "picks_score_directo_3plus": [],
+  "picks_split": [
+    {
+      "partido": "Kabbaj Y. vs Chiesa D.",
+      "favorito": "Chiesa D.",
+      "score_directo": 2,
+      "score_rival_value": 1,
+      "direccion": "SPLIT",
+      "senales_activas_fav": [
+        "HOT",
+        "ELO_DOM"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.2587,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "sin_edge"
+    }
+  ],
+  "todos_los_picks": [
+    {
+      "partido": "Trotter J. K. vs Isomura K.",
+      "favorito": "Isomura K.",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "ELO_DOM"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.2317,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Quevedo K. vs Kalinina A.",
+      "favorito": "Quevedo K.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1789,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Aksu A. vs Costoulas S.",
+      "favorito": "Aksu A.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1769,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Callejon H. S. vs Kumasaka T.",
+      "favorito": "Kumasaka T.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1687,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Dong C. vs Hazawa S.",
+      "favorito": "Dong C.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1641,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Echargui M. vs Harris L.",
+      "favorito": "Echargui M.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1548,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Mayo A. vs Magadan A.",
+      "favorito": "Magadan A.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1504,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Kudermetova P. vs Korneeva A.",
+      "favorito": "Kudermetova P.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1446,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Lepchenko V. vs Avanesyan E.",
+      "favorito": "Lepchenko V.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1416,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Kopriva V. vs Buse I.",
+      "favorito": "Kopriva V.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.121,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Suresh D. vs Kuzuhara B.",
+      "favorito": "Suresh D.",
+      "score_directo": 0,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.1713,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Kozlov S. vs Pascual Ferra R.",
+      "favorito": "Kozlov S.",
+      "score_directo": 0,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.2136,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Imamura M. vs King D.",
+      "favorito": "Imamura M.",
+      "score_directo": 1,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [
+        "RFI_tier1"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.1663,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Gribaldo M. vs Scomparin P. R.",
+      "favorito": "Scomparin P. R.",
+      "score_directo": 0,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.1326,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Kabbaj Y. vs Chiesa D.",
+      "favorito": "Chiesa D.",
+      "score_directo": 2,
+      "score_rival_value": 1,
+      "direccion": "SPLIT",
+      "senales_activas_fav": [
+        "HOT",
+        "ELO_DOM"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.2587,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "sin_edge"
+    }
+  ]
+}

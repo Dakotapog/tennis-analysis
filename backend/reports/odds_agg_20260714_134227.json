@@ -1,0 +1,8186 @@
+{
+  "ts": "2026-07-14 13:42",
+  "bookmakers": {
+    "betplay": "VERIFIED",
+    "wplay": "PARTIAL_WS"
+  },
+  "edge_context": {
+    "Niklas Waldner": 1.85,
+    "Evan Bynoe": 1.86
+  },
+  "results": [
+    {
+      "jugador": "Rachel Gailis",
+      "key": "rachel gailis",
+      "best_odds": 1.92,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.92,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.92
+      }
+    },
+    {
+      "jugador": "Rachel Gailis",
+      "key": "gailis",
+      "best_odds": 1.92,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.92,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.92
+      }
+    },
+    {
+      "jugador": "Alexis Nguyen",
+      "key": "alexis nguyen",
+      "best_odds": 1.78,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.78,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.78
+      }
+    },
+    {
+      "jugador": "Alexis Nguyen",
+      "key": "nguyen",
+      "best_odds": 1.78,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.78,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.78
+      }
+    },
+    {
+      "jugador": "Spencer Johnson",
+      "key": "spencer johnson",
+      "best_odds": 1.91,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.91,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.91
+      }
+    },
+    {
+      "jugador": "Spencer Johnson",
+      "key": "johnson",
+      "best_odds": 1.91,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.91,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.91
+      }
+    },
+    {
+      "jugador": "Remy Bertola",
+      "key": "remy bertola",
+      "best_odds": 1.85,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.85,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.85
+      }
+    },
+    {
+      "jugador": "Remy Bertola",
+      "key": "bertola",
+      "best_odds": 1.85,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.85,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.85
+      }
+    },
+    {
+      "jugador": "Catherine Rennard",
+      "key": "catherine rennard",
+      "best_odds": 1.23,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.23,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.23
+      }
+    },
+    {
+      "jugador": "Catherine Rennard",
+      "key": "rennard",
+      "best_odds": 1.23,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.23,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.23
+      }
+    },
+    {
+      "jugador": "Liam Oved",
+      "key": "liam oved",
+      "best_odds": 3.65,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.65,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.65
+      }
+    },
+    {
+      "jugador": "Liam Oved",
+      "key": "oved",
+      "best_odds": 3.65,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.65,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.65
+      }
+    },
+    {
+      "jugador": "Cassius Chinlund",
+      "key": "cassius chinlund",
+      "best_odds": 1.19,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.19,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.19
+      }
+    },
+    {
+      "jugador": "Cassius Chinlund",
+      "key": "chinlund",
+      "best_odds": 1.19,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.19,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.19
+      }
+    },
+    {
+      "jugador": "Nathan Pitts",
+      "key": "nathan pitts",
+      "best_odds": 4.1,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.1,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.1
+      }
+    },
+    {
+      "jugador": "Nathan Pitts",
+      "key": "pitts",
+      "best_odds": 4.1,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.1,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.1
+      }
+    },
+    {
+      "jugador": "Hugo Dellien",
+      "key": "hugo dellien",
+      "best_odds": 1.15,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.15,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.15
+      }
+    },
+    {
+      "jugador": "Hugo Dellien",
+      "key": "dellien",
+      "best_odds": 1.15,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.15,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.15
+      }
+    },
+    {
+      "jugador": "Ioannis Xilas",
+      "key": "ioannis xilas",
+      "best_odds": 5.1,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 5.1,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 5.1
+      }
+    },
+    {
+      "jugador": "Ioannis Xilas",
+      "key": "xilas",
+      "best_odds": 5.1,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 5.1,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 5.1
+      }
+    },
+    {
+      "jugador": "Mark Lajal",
+      "key": "mark lajal",
+      "best_odds": 1.77,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.77,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.77
+      }
+    },
+    {
+      "jugador": "Mark Lajal",
+      "key": "lajal",
+      "best_odds": 1.77,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.77,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.77
+      }
+    },
+    {
+      "jugador": "Trevor Svajda",
+      "key": "trevor svajda",
+      "best_odds": 2.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.0
+      }
+    },
+    {
+      "jugador": "Trevor Svajda",
+      "key": "svajda",
+      "best_odds": 2.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.0
+      }
+    },
+    {
+      "jugador": "Fajing Sun",
+      "key": "fajing sun",
+      "best_odds": 4.35,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.35,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.35
+      }
+    },
+    {
+      "jugador": "Yingqun Sun",
+      "key": "sun",
+      "best_odds": 1.55,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.55,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.55
+      }
+    },
+    {
+      "jugador": "Arthur Gea",
+      "key": "arthur gea",
+      "best_odds": 1.2,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.2,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.2
+      }
+    },
+    {
+      "jugador": "Arthur Gea",
+      "key": "gea",
+      "best_odds": 1.2,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.2,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.2
+      }
+    },
+    {
+      "jugador": "Murphy Cassone",
+      "key": "murphy cassone",
+      "best_odds": 2.25,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.25,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.25
+      }
+    },
+    {
+      "jugador": "Murphy Cassone",
+      "key": "cassone",
+      "best_odds": 2.25,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.25,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.25
+      }
+    },
+    {
+      "jugador": "Tristan Schoolkate",
+      "key": "tristan schoolkate",
+      "best_odds": 1.61,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.61,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.61
+      }
+    },
+    {
+      "jugador": "Tristan Schoolkate",
+      "key": "schoolkate",
+      "best_odds": 1.61,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.61,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.61
+      }
+    },
+    {
+      "jugador": "Maria Timofeeva",
+      "key": "maria timofeeva",
+      "best_odds": 2.28,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.28,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.28
+      }
+    },
+    {
+      "jugador": "Maria Timofeeva",
+      "key": "timofeeva",
+      "best_odds": 2.28,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.28,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.28
+      }
+    },
+    {
+      "jugador": "Ann Li",
+      "key": "ann li",
+      "best_odds": 1.62,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.62,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.62
+      }
+    },
+    {
+      "jugador": "Ann Li",
+      "key": "li",
+      "best_odds": 1.62,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.62,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.62
+      }
+    },
+    {
+      "jugador": "Tereza Valentova",
+      "key": "tereza valentova",
+      "best_odds": 1.18,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.18,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.18
+      }
+    },
+    {
+      "jugador": "Tereza Valentova",
+      "key": "valentova",
+      "best_odds": 1.18,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.18,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.18
+      }
+    },
+    {
+      "jugador": "Sofia Costoulas",
+      "key": "sofia costoulas",
+      "best_odds": 4.8,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.8,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.8
+      }
+    },
+    {
+      "jugador": "Sofia Costoulas",
+      "key": "costoulas",
+      "best_odds": 4.8,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.8,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.8
+      }
+    },
+    {
+      "jugador": "Titouan Droguet",
+      "key": "titouan droguet",
+      "best_odds": 2.48,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.48,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.48
+      }
+    },
+    {
+      "jugador": "Titouan Droguet",
+      "key": "droguet",
+      "best_odds": 2.48,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.48,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.48
+      }
+    },
+    {
+      "jugador": "Alexander Blockx",
+      "key": "alexander blockx",
+      "best_odds": 1.54,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.54,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.54
+      }
+    },
+    {
+      "jugador": "Alexander Blockx",
+      "key": "blockx",
+      "best_odds": 1.54,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.54,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.54
+      }
+    },
+    {
+      "jugador": "Gabriele Vulpitta",
+      "key": "gabriele vulpitta",
+      "best_odds": 3.7,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.7,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.7
+      }
+    },
+    {
+      "jugador": "Gabriele Vulpitta",
+      "key": "vulpitta",
+      "best_odds": 3.7,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.7,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.7
+      }
+    },
+    {
+      "jugador": "Pierluigi Basile",
+      "key": "pierluigi basile",
+      "best_odds": 1.24,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.24,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.24
+      }
+    },
+    {
+      "jugador": "Pierluigi Basile",
+      "key": "basile",
+      "best_odds": 1.24,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.24,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.24
+      }
+    },
+    {
+      "jugador": "Christian Langmo",
+      "key": "christian langmo",
+      "best_odds": 5.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 5.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 5.0
+      }
+    },
+    {
+      "jugador": "Christian Langmo",
+      "key": "langmo",
+      "best_odds": 5.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 5.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 5.0
+      }
+    },
+    {
+      "jugador": "Yibing Wu",
+      "key": "yibing wu",
+      "best_odds": 1.15,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.15,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.15
+      }
+    },
+    {
+      "jugador": "Yibing Wu",
+      "key": "wu",
+      "best_odds": 1.15,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.15,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.15
+      }
+    },
+    {
+      "jugador": "Evan Burnett",
+      "key": "evan burnett",
+      "best_odds": 2.17,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.17,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.17
+      }
+    },
+    {
+      "jugador": "Evan Burnett",
+      "key": "burnett",
+      "best_odds": 2.17,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.17,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.17
+      }
+    },
+    {
+      "jugador": "Aditya Govila",
+      "key": "aditya govila",
+      "best_odds": 1.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.6
+      }
+    },
+    {
+      "jugador": "Aditya Govila",
+      "key": "govila",
+      "best_odds": 1.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.6
+      }
+    },
+    {
+      "jugador": "Lillie Murphy",
+      "key": "lillie murphy",
+      "best_odds": 1.38,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.38,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.38
+      }
+    },
+    {
+      "jugador": "Lillie Murphy",
+      "key": "murphy",
+      "best_odds": 1.38,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.38,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.38
+      }
+    },
+    {
+      "jugador": "Mary Boyce Deatherage",
+      "key": "mary boyce deatherage",
+      "best_odds": 2.7,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.7,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.7
+      }
+    },
+    {
+      "jugador": "Mary Boyce Deatherage",
+      "key": "deatherage",
+      "best_odds": 2.7,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.7,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.7
+      }
+    },
+    {
+      "jugador": "Isabella Barrera Aguirre",
+      "key": "isabella barrera aguirre",
+      "best_odds": 6.75,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 6.75,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 6.75
+      }
+    },
+    {
+      "jugador": "Isabella Barrera Aguirre",
+      "key": "aguirre",
+      "best_odds": 6.75,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 6.75,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 6.75
+      }
+    },
+    {
+      "jugador": "Mell Elizabeth Reasco Gonzalez",
+      "key": "mell elizabeth reasco gonzalez",
+      "best_odds": 1.07,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.07,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.07
+      }
+    },
+    {
+      "jugador": "Mell Elizabeth Reasco Gonzalez",
+      "key": "gonzalez",
+      "best_odds": 1.07,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.07,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.07
+      }
+    },
+    {
+      "jugador": "Hao-Ching Chan/M. Kato",
+      "key": "haoching chanm kato",
+      "best_odds": 1.07,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.07,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.07
+      }
+    },
+    {
+      "jugador": "Hao-Ching Chan/M. Kato",
+      "key": "kato",
+      "best_odds": 1.07,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.07,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.07
+      }
+    },
+    {
+      "jugador": "M. Argyrokastriti/E. Nepliy",
+      "key": "m argyrokastritie nepliy",
+      "best_odds": 8.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 8.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 8.0
+      }
+    },
+    {
+      "jugador": "M. Argyrokastriti/E. Nepliy",
+      "key": "nepliy",
+      "best_odds": 8.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 8.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 8.0
+      }
+    },
+    {
+      "jugador": "Aya Manning",
+      "key": "aya manning",
+      "best_odds": 2.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.6
+      }
+    },
+    {
+      "jugador": "Aya Manning",
+      "key": "manning",
+      "best_odds": 2.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.6
+      }
+    },
+    {
+      "jugador": "Katie Spencer",
+      "key": "katie spencer",
+      "best_odds": 1.42,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.42,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.42
+      }
+    },
+    {
+      "jugador": "Katie Spencer",
+      "key": "spencer",
+      "best_odds": 1.42,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.42,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.42
+      }
+    },
+    {
+      "jugador": "Masamichi Imamura",
+      "key": "masamichi imamura",
+      "best_odds": 2.45,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.45,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.45
+      }
+    },
+    {
+      "jugador": "Masamichi Imamura",
+      "key": "imamura",
+      "best_odds": 2.45,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.45,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.45
+      }
+    },
+    {
+      "jugador": "James McCabe",
+      "key": "james mccabe",
+      "best_odds": 1.53,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.53,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.53
+      }
+    },
+    {
+      "jugador": "James McCabe",
+      "key": "mccabe",
+      "best_odds": 1.53,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.53,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.53
+      }
+    },
+    {
+      "jugador": "Chase Robinson",
+      "key": "chase robinson",
+      "best_odds": 3.2,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.2,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.2
+      }
+    },
+    {
+      "jugador": "Mia Robinson",
+      "key": "robinson",
+      "best_odds": 2.04,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.04,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.04
+      }
+    },
+    {
+      "jugador": "Ainius Sabaliauskas",
+      "key": "ainius sabaliauskas",
+      "best_odds": 1.29,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.29,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.29
+      }
+    },
+    {
+      "jugador": "Ainius Sabaliauskas",
+      "key": "sabaliauskas",
+      "best_odds": 1.29,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.29,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.29
+      }
+    },
+    {
+      "jugador": "Keegan Rice",
+      "key": "keegan rice",
+      "best_odds": 1.74,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.74,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.74
+      }
+    },
+    {
+      "jugador": "Keegan Rice",
+      "key": "rice",
+      "best_odds": 1.74,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.74,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.74
+      }
+    },
+    {
+      "jugador": "Alexander Rozin",
+      "key": "alexander rozin",
+      "best_odds": 2.05,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.05,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.05
+      }
+    },
+    {
+      "jugador": "Alexander Rozin",
+      "key": "rozin",
+      "best_odds": 2.05,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.05,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.05
+      }
+    },
+    {
+      "jugador": "Sobee Oak",
+      "key": "sobee oak",
+      "best_odds": 3.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.0
+      }
+    },
+    {
+      "jugador": "Sobee Oak",
+      "key": "oak",
+      "best_odds": 3.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.0
+      }
+    },
+    {
+      "jugador": "Thornton Maeve",
+      "key": "thornton maeve",
+      "best_odds": 1.33,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.33,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.33
+      }
+    },
+    {
+      "jugador": "Thornton Maeve",
+      "key": "maeve",
+      "best_odds": 1.33,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.33,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.33
+      }
+    },
+    {
+      "jugador": "Stiles Brockett",
+      "key": "stiles brockett",
+      "best_odds": 1.98,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.98,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.98
+      }
+    },
+    {
+      "jugador": "Stiles Brockett",
+      "key": "brockett",
+      "best_odds": 1.98,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.98,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.98
+      }
+    },
+    {
+      "jugador": "Dakotah Bobo",
+      "key": "dakotah bobo",
+      "best_odds": 1.73,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.73,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.73
+      }
+    },
+    {
+      "jugador": "Dakotah Bobo",
+      "key": "bobo",
+      "best_odds": 1.73,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.73,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.73
+      }
+    },
+    {
+      "jugador": "Kayden Colombo",
+      "key": "kayden colombo",
+      "best_odds": 1.84,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.84,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.84
+      }
+    },
+    {
+      "jugador": "Andrea Colombo",
+      "key": "colombo",
+      "best_odds": 1.73,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.73,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.73
+      }
+    },
+    {
+      "jugador": "Nicola Ion",
+      "key": "nicola ion",
+      "best_odds": 1.86,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.86,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.86
+      }
+    },
+    {
+      "jugador": "Nicola Ion",
+      "key": "ion",
+      "best_odds": 1.86,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.86,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.86
+      }
+    },
+    {
+      "jugador": "Nathan Cox",
+      "key": "nathan cox",
+      "best_odds": 1.06,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.06,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.06
+      }
+    },
+    {
+      "jugador": "Nathan Cox",
+      "key": "cox",
+      "best_odds": 1.06,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.06,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.06
+      }
+    },
+    {
+      "jugador": "Zac Hamill",
+      "key": "zac hamill",
+      "best_odds": 7.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 7.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 7.0
+      }
+    },
+    {
+      "jugador": "Zac Hamill",
+      "key": "hamill",
+      "best_odds": 7.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 7.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 7.0
+      }
+    },
+    {
+      "jugador": "Matthew Thomson",
+      "key": "matthew thomson",
+      "best_odds": 2.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.0
+      }
+    },
+    {
+      "jugador": "Matthew Thomson",
+      "key": "thomson",
+      "best_odds": 2.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.0
+      }
+    },
+    {
+      "jugador": "Axel Nefve",
+      "key": "axel nefve",
+      "best_odds": 1.72,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.72,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.72
+      }
+    },
+    {
+      "jugador": "Axel Nefve",
+      "key": "nefve",
+      "best_odds": 1.72,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.72,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.72
+      }
+    },
+    {
+      "jugador": "Mitchell Lee",
+      "key": "mitchell lee",
+      "best_odds": 1.58,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.58,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.58
+      }
+    },
+    {
+      "jugador": "Evan Lee",
+      "key": "lee",
+      "best_odds": 2.4,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.4,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.4
+      }
+    },
+    {
+      "jugador": "Justin Riley Anson",
+      "key": "justin riley anson",
+      "best_odds": 2.15,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.15,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.15
+      }
+    },
+    {
+      "jugador": "Justin Riley Anson",
+      "key": "anson",
+      "best_odds": 2.15,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.15,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.15
+      }
+    },
+    {
+      "jugador": "Mia Robinson",
+      "key": "mia robinson",
+      "best_odds": 2.04,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.04,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.04
+      }
+    },
+    {
+      "jugador": "Addison Bowman",
+      "key": "addison bowman",
+      "best_odds": 1.68,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.68,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.68
+      }
+    },
+    {
+      "jugador": "Addison Bowman",
+      "key": "bowman",
+      "best_odds": 1.68,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.68,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.68
+      }
+    },
+    {
+      "jugador": "Daniel Milavsky",
+      "key": "daniel milavsky",
+      "best_odds": 1.7,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.7,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.7
+      }
+    },
+    {
+      "jugador": "Daniel Milavsky",
+      "key": "milavsky",
+      "best_odds": 1.7,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.7,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.7
+      }
+    },
+    {
+      "jugador": "Duncan Chan",
+      "key": "duncan chan",
+      "best_odds": 2.1,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.1,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.1
+      }
+    },
+    {
+      "jugador": "Duncan Chan",
+      "key": "chan",
+      "best_odds": 2.1,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.1,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.1
+      }
+    },
+    {
+      "jugador": "Giovana Schincariol Delatorre Barbosa",
+      "key": "giovana schincariol delatorre barbosa",
+      "best_odds": 6.1,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 6.1,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 6.1
+      }
+    },
+    {
+      "jugador": "Giovana Schincariol Delatorre Barbosa",
+      "key": "barbosa",
+      "best_odds": 6.1,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 6.1,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 6.1
+      }
+    },
+    {
+      "jugador": "Marjorie Souza",
+      "key": "marjorie souza",
+      "best_odds": 1.09,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.09,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.09
+      }
+    },
+    {
+      "jugador": "Marjorie Souza",
+      "key": "souza",
+      "best_odds": 1.09,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.09,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.09
+      }
+    },
+    {
+      "jugador": "Mio Mushika",
+      "key": "mio mushika",
+      "best_odds": 4.75,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.75,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.75
+      }
+    },
+    {
+      "jugador": "Mio Mushika",
+      "key": "mushika",
+      "best_odds": 4.75,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.75,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.75
+      }
+    },
+    {
+      "jugador": "Cadence Brace",
+      "key": "cadence brace",
+      "best_odds": 1.15,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.15,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.15
+      }
+    },
+    {
+      "jugador": "Cadence Brace",
+      "key": "brace",
+      "best_odds": 1.15,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.15,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.15
+      }
+    },
+    {
+      "jugador": "Liam Draxl",
+      "key": "liam draxl",
+      "best_odds": 1.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.3
+      }
+    },
+    {
+      "jugador": "Liam Draxl",
+      "key": "draxl",
+      "best_odds": 1.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.3
+      }
+    },
+    {
+      "jugador": "James Kent Trotter",
+      "key": "james kent trotter",
+      "best_odds": 3.35,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.35,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.35
+      }
+    },
+    {
+      "jugador": "James Kent Trotter",
+      "key": "trotter",
+      "best_odds": 3.35,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.35,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.35
+      }
+    },
+    {
+      "jugador": "Ivan Savkin",
+      "key": "ivan savkin",
+      "best_odds": 1.5,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.5,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.5
+      }
+    },
+    {
+      "jugador": "Ivan Savkin",
+      "key": "savkin",
+      "best_odds": 1.5,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.5,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.5
+      }
+    },
+    {
+      "jugador": "Benjamin Berger",
+      "key": "benjamin berger",
+      "best_odds": 2.35,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.35,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.35
+      }
+    },
+    {
+      "jugador": "Benjamin Berger",
+      "key": "berger",
+      "best_odds": 2.35,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.35,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.35
+      }
+    },
+    {
+      "jugador": "Emmett Potter",
+      "key": "emmett potter",
+      "best_odds": 1.94,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.94,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.94
+      }
+    },
+    {
+      "jugador": "Emmett Potter",
+      "key": "potter",
+      "best_odds": 1.94,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.94,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.94
+      }
+    },
+    {
+      "jugador": "David Duong",
+      "key": "david duong",
+      "best_odds": 1.75,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.75,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.75
+      }
+    },
+    {
+      "jugador": "David Duong",
+      "key": "duong",
+      "best_odds": 1.75,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.75,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.75
+      }
+    },
+    {
+      "jugador": "Darwin Blanch",
+      "key": "darwin blanch",
+      "best_odds": 1.44,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.44,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.44
+      }
+    },
+    {
+      "jugador": "Darwin Blanch",
+      "key": "blanch",
+      "best_odds": 1.44,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.44,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.44
+      }
+    },
+    {
+      "jugador": "Bernard Tomic",
+      "key": "bernard tomic",
+      "best_odds": 2.7,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.7,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.7
+      }
+    },
+    {
+      "jugador": "Bernard Tomic",
+      "key": "tomic",
+      "best_odds": 2.7,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.7,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.7
+      }
+    },
+    {
+      "jugador": "Roisin Gilheany",
+      "key": "roisin gilheany",
+      "best_odds": 19.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 19.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 19.0
+      }
+    },
+    {
+      "jugador": "Roisin Gilheany",
+      "key": "gilheany",
+      "best_odds": 19.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 19.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 19.0
+      }
+    },
+    {
+      "jugador": "Destanee Aiava",
+      "key": "destanee aiava",
+      "best_odds": 1.01,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.01,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.01
+      }
+    },
+    {
+      "jugador": "Destanee Aiava",
+      "key": "aiava",
+      "best_odds": 1.01,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.01,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.01
+      }
+    },
+    {
+      "jugador": "Chia Yi Tsao",
+      "key": "chia yi tsao",
+      "best_odds": 1.06,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.06,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.06
+      }
+    },
+    {
+      "jugador": "Chia Yi Tsao",
+      "key": "tsao",
+      "best_odds": 1.06,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.06,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.06
+      }
+    },
+    {
+      "jugador": "Amy Stevens",
+      "key": "amy stevens",
+      "best_odds": 7.5,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 7.5,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 7.5
+      }
+    },
+    {
+      "jugador": "V. Kirkov/B. Stevens",
+      "key": "stevens",
+      "best_odds": 1.98,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.98,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.98
+      }
+    },
+    {
+      "jugador": "Colin Sinclair",
+      "key": "colin sinclair",
+      "best_odds": 1.07,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.07,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.07
+      }
+    },
+    {
+      "jugador": "Colin Sinclair",
+      "key": "sinclair",
+      "best_odds": 1.07,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.07,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.07
+      }
+    },
+    {
+      "jugador": "Wihan Van Der Merwe",
+      "key": "wihan van der merwe",
+      "best_odds": 6.25,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 6.25,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 6.25
+      }
+    },
+    {
+      "jugador": "Wihan Van Der Merwe",
+      "key": "merwe",
+      "best_odds": 6.25,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 6.25,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 6.25
+      }
+    },
+    {
+      "jugador": "Ava-Monet Sycamore",
+      "key": "avamonet sycamore",
+      "best_odds": 1.84,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.84,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.84
+      }
+    },
+    {
+      "jugador": "Ava-Monet Sycamore",
+      "key": "sycamore",
+      "best_odds": 1.84,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.84,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.84
+      }
+    },
+    {
+      "jugador": "Angel Warang",
+      "key": "angel warang",
+      "best_odds": 1.86,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.86,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.86
+      }
+    },
+    {
+      "jugador": "Angel Warang",
+      "key": "warang",
+      "best_odds": 1.86,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.86,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.86
+      }
+    },
+    {
+      "jugador": "Lachlan Mcfadzean",
+      "key": "lachlan mcfadzean",
+      "best_odds": 2.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.6
+      }
+    },
+    {
+      "jugador": "Lachlan Mcfadzean",
+      "key": "mcfadzean",
+      "best_odds": 2.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.6
+      }
+    },
+    {
+      "jugador": "Shinji Hazawa",
+      "key": "shinji hazawa",
+      "best_odds": 1.43,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.43,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.43
+      }
+    },
+    {
+      "jugador": "Shinji Hazawa",
+      "key": "hazawa",
+      "best_odds": 1.43,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.43,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.43
+      }
+    },
+    {
+      "jugador": "Ford McCollum",
+      "key": "ford mccollum",
+      "best_odds": 2.06,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.06,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.06
+      }
+    },
+    {
+      "jugador": "Ford McCollum",
+      "key": "mccollum",
+      "best_odds": 2.06,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.06,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.06
+      }
+    },
+    {
+      "jugador": "Gabriel Porras",
+      "key": "gabriel porras",
+      "best_odds": 1.64,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.64,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.64
+      }
+    },
+    {
+      "jugador": "Gabriel Porras",
+      "key": "porras",
+      "best_odds": 1.64,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.64,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.64
+      }
+    },
+    {
+      "jugador": "Robert Yang",
+      "key": "robert yang",
+      "best_odds": 1.83,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.83,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.83
+      }
+    },
+    {
+      "jugador": "Robert Yang",
+      "key": "yang",
+      "best_odds": 1.83,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.83,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.83
+      }
+    },
+    {
+      "jugador": "Winston Lee",
+      "key": "winston lee",
+      "best_odds": 1.85,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.85,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.85
+      }
+    },
+    {
+      "jugador": "Yuga Tashiro",
+      "key": "yuga tashiro",
+      "best_odds": 1.4,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.4,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.4
+      }
+    },
+    {
+      "jugador": "Yuga Tashiro",
+      "key": "tashiro",
+      "best_odds": 1.4,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.4,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.4
+      }
+    },
+    {
+      "jugador": "Naoto Tomizawa",
+      "key": "naoto tomizawa",
+      "best_odds": 2.65,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.65,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.65
+      }
+    },
+    {
+      "jugador": "Naoto Tomizawa",
+      "key": "tomizawa",
+      "best_odds": 2.65,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.65,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.65
+      }
+    },
+    {
+      "jugador": "Himari Sato",
+      "key": "himari sato",
+      "best_odds": 1.58,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.58,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.58
+      }
+    },
+    {
+      "jugador": "Himari Sato",
+      "key": "sato",
+      "best_odds": 1.58,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.58,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.58
+      }
+    },
+    {
+      "jugador": "Nithesa Selvaraj",
+      "key": "nithesa selvaraj",
+      "best_odds": 2.2,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.2,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.2
+      }
+    },
+    {
+      "jugador": "Nithesa Selvaraj",
+      "key": "selvaraj",
+      "best_odds": 2.2,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.2,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.2
+      }
+    },
+    {
+      "jugador": "Jake Dembo",
+      "key": "jake dembo",
+      "best_odds": 8.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 8.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 8.0
+      }
+    },
+    {
+      "jugador": "Jake Dembo",
+      "key": "dembo",
+      "best_odds": 8.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 8.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 8.0
+      }
+    },
+    {
+      "jugador": "Tai Sach",
+      "key": "tai sach",
+      "best_odds": 1.05,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.05,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.05
+      }
+    },
+    {
+      "jugador": "Tai Sach",
+      "key": "sach",
+      "best_odds": 1.05,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.05,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.05
+      }
+    },
+    {
+      "jugador": "Laquisa Khan",
+      "key": "laquisa khan",
+      "best_odds": 2.35,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.35,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.35
+      }
+    },
+    {
+      "jugador": "Laquisa Khan",
+      "key": "khan",
+      "best_odds": 2.35,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.35,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.35
+      }
+    },
+    {
+      "jugador": "Fang An Lin",
+      "key": "fang an lin",
+      "best_odds": 1.52,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.52,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.52
+      }
+    },
+    {
+      "jugador": "Fang An Lin",
+      "key": "lin",
+      "best_odds": 1.52,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.52,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.52
+      }
+    },
+    {
+      "jugador": "Moerani Bouzige",
+      "key": "moerani bouzige",
+      "best_odds": 1.66,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.66,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.66
+      }
+    },
+    {
+      "jugador": "Moerani Bouzige",
+      "key": "bouzige",
+      "best_odds": 1.66,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.66,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.66
+      }
+    },
+    {
+      "jugador": "Matt Hulme",
+      "key": "matt hulme",
+      "best_odds": 2.08,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.08,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.08
+      }
+    },
+    {
+      "jugador": "Matt Hulme",
+      "key": "hulme",
+      "best_odds": 2.08,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.08,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.08
+      }
+    },
+    {
+      "jugador": "Eva Lopez",
+      "key": "eva lopez",
+      "best_odds": 5.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 5.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 5.0
+      }
+    },
+    {
+      "jugador": "Eva Lopez",
+      "key": "lopez",
+      "best_odds": 5.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 5.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 5.0
+      }
+    },
+    {
+      "jugador": "Belle Thompson",
+      "key": "belle thompson",
+      "best_odds": 1.13,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.13,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.13
+      }
+    },
+    {
+      "jugador": "Belle Thompson",
+      "key": "thompson",
+      "best_odds": 1.13,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.13,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.13
+      }
+    },
+    {
+      "jugador": "Scott Jones",
+      "key": "scott jones",
+      "best_odds": 4.2,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.2,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.2
+      }
+    },
+    {
+      "jugador": "Francesca Jones",
+      "key": "jones",
+      "best_odds": 1.27,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.27,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.27
+      }
+    },
+    {
+      "jugador": "Omar Jasika",
+      "key": "omar jasika",
+      "best_odds": 1.18,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.18,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.18
+      }
+    },
+    {
+      "jugador": "Omar Jasika",
+      "key": "jasika",
+      "best_odds": 1.18,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.18,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.18
+      }
+    },
+    {
+      "jugador": "Jeremy Zhang",
+      "key": "jeremy zhang",
+      "best_odds": 6.75,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 6.75,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 6.75
+      }
+    },
+    {
+      "jugador": "Ruien Zhang",
+      "key": "zhang",
+      "best_odds": 2.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.6
+      }
+    },
+    {
+      "jugador": "Matthew Dellavedova",
+      "key": "matthew dellavedova",
+      "best_odds": 1.07,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.07,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.07
+      }
+    },
+    {
+      "jugador": "Matthew Dellavedova",
+      "key": "dellavedova",
+      "best_odds": 1.07,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.07,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.07
+      }
+    },
+    {
+      "jugador": "Alexander Aney",
+      "key": "alexander aney",
+      "best_odds": 2.2,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.2,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.2
+      }
+    },
+    {
+      "jugador": "Alexander Aney",
+      "key": "aney",
+      "best_odds": 2.2,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.2,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.2
+      }
+    },
+    {
+      "jugador": "Pavel Bushuev",
+      "key": "pavel bushuev",
+      "best_odds": 1.58,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.58,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.58
+      }
+    },
+    {
+      "jugador": "Pavel Bushuev",
+      "key": "bushuev",
+      "best_odds": 1.58,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.58,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.58
+      }
+    },
+    {
+      "jugador": "Jacob Brumm",
+      "key": "jacob brumm",
+      "best_odds": 1.58,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.58,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.58
+      }
+    },
+    {
+      "jugador": "Jacob Brumm",
+      "key": "brumm",
+      "best_odds": 1.58,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.58,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.58
+      }
+    },
+    {
+      "jugador": "Benjamin Sparks",
+      "key": "benjamin sparks",
+      "best_odds": 2.18,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.18,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.18
+      }
+    },
+    {
+      "jugador": "Benjamin Sparks",
+      "key": "sparks",
+      "best_odds": 2.18,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.18,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.18
+      }
+    },
+    {
+      "jugador": "Chelsea Bluestein",
+      "key": "chelsea bluestein",
+      "best_odds": 3.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.6
+      }
+    },
+    {
+      "jugador": "Chelsea Bluestein",
+      "key": "bluestein",
+      "best_odds": 3.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.6
+      }
+    },
+    {
+      "jugador": "Emily Deming",
+      "key": "emily deming",
+      "best_odds": 1.22,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.22,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.22
+      }
+    },
+    {
+      "jugador": "Emily Deming",
+      "key": "deming",
+      "best_odds": 1.22,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.22,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.22
+      }
+    },
+    {
+      "jugador": "Azuna Ichioka",
+      "key": "azuna ichioka",
+      "best_odds": 1.33,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.33,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.33
+      }
+    },
+    {
+      "jugador": "Azuna Ichioka",
+      "key": "ichioka",
+      "best_odds": 1.33,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.33,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.33
+      }
+    },
+    {
+      "jugador": "Michiru Furuya",
+      "key": "michiru furuya",
+      "best_odds": 2.95,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.95,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.95
+      }
+    },
+    {
+      "jugador": "Michiru Furuya",
+      "key": "furuya",
+      "best_odds": 2.95,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.95,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.95
+      }
+    },
+    {
+      "jugador": "Taiyo Kurata",
+      "key": "taiyo kurata",
+      "best_odds": 1.93,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.93,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.93
+      }
+    },
+    {
+      "jugador": "Taiyo Kurata",
+      "key": "kurata",
+      "best_odds": 1.93,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.93,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.93
+      }
+    },
+    {
+      "jugador": "Toshiki Karigyo",
+      "key": "toshiki karigyo",
+      "best_odds": 1.76,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.76,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.76
+      }
+    },
+    {
+      "jugador": "Toshiki Karigyo",
+      "key": "karigyo",
+      "best_odds": 1.76,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.76,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.76
+      }
+    },
+    {
+      "jugador": "Nicole Weng",
+      "key": "nicole weng",
+      "best_odds": 1.06,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.06,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.06
+      }
+    },
+    {
+      "jugador": "Nicole Weng",
+      "key": "weng",
+      "best_odds": 1.06,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.06,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.06
+      }
+    },
+    {
+      "jugador": "Tiffany Papazian",
+      "key": "tiffany papazian",
+      "best_odds": 6.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 6.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 6.0
+      }
+    },
+    {
+      "jugador": "Tiffany Papazian",
+      "key": "papazian",
+      "best_odds": 6.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 6.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 6.0
+      }
+    },
+    {
+      "jugador": "Douglas Yaffa",
+      "key": "douglas yaffa",
+      "best_odds": 1.49,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.49,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.49
+      }
+    },
+    {
+      "jugador": "Douglas Yaffa",
+      "key": "yaffa",
+      "best_odds": 1.49,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.49,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.49
+      }
+    },
+    {
+      "jugador": "Evan Lee",
+      "key": "evan lee",
+      "best_odds": 2.4,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.4,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.4
+      }
+    },
+    {
+      "jugador": "Connor Robb-Wilcox",
+      "key": "connor robbwilcox",
+      "best_odds": 1.81,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.81,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.81
+      }
+    },
+    {
+      "jugador": "Connor Robb-Wilcox",
+      "key": "robbwilcox",
+      "best_odds": 1.81,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.81,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.81
+      }
+    },
+    {
+      "jugador": "Yashwin Krishnakumar",
+      "key": "yashwin krishnakumar",
+      "best_odds": 1.84,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.84,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.84
+      }
+    },
+    {
+      "jugador": "Yashwin Krishnakumar",
+      "key": "krishnakumar",
+      "best_odds": 1.84,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.84,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.84
+      }
+    },
+    {
+      "jugador": "Vivian Gallaway",
+      "key": "vivian gallaway",
+      "best_odds": 2.9,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.9,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.9
+      }
+    },
+    {
+      "jugador": "Vivian Gallaway",
+      "key": "gallaway",
+      "best_odds": 2.9,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.9,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.9
+      }
+    },
+    {
+      "jugador": "Mila Mulready",
+      "key": "mila mulready",
+      "best_odds": 1.34,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.34,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.34
+      }
+    },
+    {
+      "jugador": "Mila Mulready",
+      "key": "mulready",
+      "best_odds": 1.34,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.34,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.34
+      }
+    },
+    {
+      "jugador": "Hiiro Sakamoto",
+      "key": "hiiro sakamoto",
+      "best_odds": 1.29,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.29,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.29
+      }
+    },
+    {
+      "jugador": "Hiiro Sakamoto",
+      "key": "sakamoto",
+      "best_odds": 1.29,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.29,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.29
+      }
+    },
+    {
+      "jugador": "Nuutti Jokinen",
+      "key": "nuutti jokinen",
+      "best_odds": 3.2,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.2,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.2
+      }
+    },
+    {
+      "jugador": "Nuutti Jokinen",
+      "key": "jokinen",
+      "best_odds": 3.2,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.2,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.2
+      }
+    },
+    {
+      "jugador": "Rio Maeda",
+      "key": "rio maeda",
+      "best_odds": 1.83,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.83,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.83
+      }
+    },
+    {
+      "jugador": "Rio Maeda",
+      "key": "maeda",
+      "best_odds": 1.83,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.83,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.83
+      }
+    },
+    {
+      "jugador": "Ran Inaba",
+      "key": "ran inaba",
+      "best_odds": 1.85,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.85,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.85
+      }
+    },
+    {
+      "jugador": "Ran Inaba",
+      "key": "inaba",
+      "best_odds": 1.85,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.85,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.85
+      }
+    },
+    {
+      "jugador": "Yui Ohwaki",
+      "key": "yui ohwaki",
+      "best_odds": 2.9,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.9,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.9
+      }
+    },
+    {
+      "jugador": "Yui Ohwaki",
+      "key": "ohwaki",
+      "best_odds": 2.9,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.9,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.9
+      }
+    },
+    {
+      "jugador": "Junri Namigata",
+      "key": "junri namigata",
+      "best_odds": 1.34,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.34,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.34
+      }
+    },
+    {
+      "jugador": "Junri Namigata",
+      "key": "namigata",
+      "best_odds": 1.34,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.34,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.34
+      }
+    },
+    {
+      "jugador": "Jeremy Beale",
+      "key": "jeremy beale",
+      "best_odds": 1.61,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.61,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.61
+      }
+    },
+    {
+      "jugador": "Jeremy Beale",
+      "key": "beale",
+      "best_odds": 1.61,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.61,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.61
+      }
+    },
+    {
+      "jugador": "Kosuke Ogura",
+      "key": "kosuke ogura",
+      "best_odds": 2.17,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.17,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.17
+      }
+    },
+    {
+      "jugador": "Kosuke Ogura",
+      "key": "ogura",
+      "best_odds": 2.17,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.17,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.17
+      }
+    },
+    {
+      "jugador": "Jake Delaney",
+      "key": "jake delaney",
+      "best_odds": 1.26,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.26,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.26
+      }
+    },
+    {
+      "jugador": "Jake Delaney",
+      "key": "delaney",
+      "best_odds": 1.26,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.26,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.26
+      }
+    },
+    {
+      "jugador": "Duje Markovina",
+      "key": "duje markovina",
+      "best_odds": 3.45,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.45,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.45
+      }
+    },
+    {
+      "jugador": "Duje Markovina",
+      "key": "markovina",
+      "best_odds": 3.45,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.45,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.45
+      }
+    },
+    {
+      "jugador": "Joshua Charlton",
+      "key": "joshua charlton",
+      "best_odds": 1.27,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.27,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.27
+      }
+    },
+    {
+      "jugador": "Joshua Charlton",
+      "key": "charlton",
+      "best_odds": 1.27,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.27,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.27
+      }
+    },
+    {
+      "jugador": "Charlie Camus",
+      "key": "charlie camus",
+      "best_odds": 3.4,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.4,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.4
+      }
+    },
+    {
+      "jugador": "Charlie Camus",
+      "key": "camus",
+      "best_odds": 3.4,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.4,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.4
+      }
+    },
+    {
+      "jugador": "Benjamin O'Connell",
+      "key": "benjamin oconnell",
+      "best_odds": 1.66,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.66,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.66
+      }
+    },
+    {
+      "jugador": "Benjamin O'Connell",
+      "key": "oconnell",
+      "best_odds": 1.66,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.66,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.66
+      }
+    },
+    {
+      "jugador": "Chen Dong",
+      "key": "chen dong",
+      "best_odds": 2.08,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.08,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.08
+      }
+    },
+    {
+      "jugador": "Chen Dong",
+      "key": "dong",
+      "best_odds": 2.08,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.08,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.08
+      }
+    },
+    {
+      "jugador": "Reda Bennani",
+      "key": "reda bennani",
+      "best_odds": 1.22,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.22,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.22
+      }
+    },
+    {
+      "jugador": "Reda Bennani",
+      "key": "bennani",
+      "best_odds": 1.22,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.22,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.22
+      }
+    },
+    {
+      "jugador": "Carles Cordoba",
+      "key": "carles cordoba",
+      "best_odds": 3.8,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.8,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.8
+      }
+    },
+    {
+      "jugador": "Carles Cordoba",
+      "key": "cordoba",
+      "best_odds": 3.8,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.8,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.8
+      }
+    },
+    {
+      "jugador": "Alvaro Peiro Serrano",
+      "key": "alvaro peiro serrano",
+      "best_odds": 2.4,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.4,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.4
+      }
+    },
+    {
+      "jugador": "Alvaro Peiro Serrano",
+      "key": "serrano",
+      "best_odds": 2.4,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.4,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.4
+      }
+    },
+    {
+      "jugador": "Matthieu Chambonniere",
+      "key": "matthieu chambonniere",
+      "best_odds": 1.5,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.5,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.5
+      }
+    },
+    {
+      "jugador": "Matthieu Chambonniere",
+      "key": "chambonniere",
+      "best_odds": 1.5,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.5,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.5
+      }
+    },
+    {
+      "jugador": "Daniel Jade",
+      "key": "daniel jade",
+      "best_odds": 1.38,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.38,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.38
+      }
+    },
+    {
+      "jugador": "Daniel Jade",
+      "key": "jade",
+      "best_odds": 1.38,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.38,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.38
+      }
+    },
+    {
+      "jugador": "Alexandre Aubriot",
+      "key": "alexandre aubriot",
+      "best_odds": 2.8,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.8,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.8
+      }
+    },
+    {
+      "jugador": "Alexandre Aubriot",
+      "key": "aubriot",
+      "best_odds": 2.8,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.8,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.8
+      }
+    },
+    {
+      "jugador": "Ustiniya Lekomtseva",
+      "key": "ustiniya lekomtseva",
+      "best_odds": 1.64,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.64,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.64
+      }
+    },
+    {
+      "jugador": "Ustiniya Lekomtseva",
+      "key": "lekomtseva",
+      "best_odds": 1.64,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.64,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.64
+      }
+    },
+    {
+      "jugador": "Sophie Luescher",
+      "key": "sophie luescher",
+      "best_odds": 2.12,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.12,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.12
+      }
+    },
+    {
+      "jugador": "Sophie Luescher",
+      "key": "luescher",
+      "best_odds": 2.12,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.12,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.12
+      }
+    },
+    {
+      "jugador": "Noemi La Cagnina",
+      "key": "noemi la cagnina",
+      "best_odds": 2.25,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.25,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.25
+      }
+    },
+    {
+      "jugador": "Noemi La Cagnina",
+      "key": "cagnina",
+      "best_odds": 2.25,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.25,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.25
+      }
+    },
+    {
+      "jugador": "Sophie Greiner",
+      "key": "sophie greiner",
+      "best_odds": 1.56,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.56,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.56
+      }
+    },
+    {
+      "jugador": "Sophie Greiner",
+      "key": "greiner",
+      "best_odds": 1.56,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.56,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.56
+      }
+    },
+    {
+      "jugador": "Carles Hernandez",
+      "key": "carles hernandez",
+      "best_odds": 2.28,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.28,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.28
+      }
+    },
+    {
+      "jugador": "Carles Hernandez",
+      "key": "hernandez",
+      "best_odds": 2.28,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.28,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.28
+      }
+    },
+    {
+      "jugador": "Albert Pedrico Kravtsov",
+      "key": "albert pedrico kravtsov",
+      "best_odds": 1.56,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.56,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.56
+      }
+    },
+    {
+      "jugador": "Albert Pedrico Kravtsov",
+      "key": "kravtsov",
+      "best_odds": 1.56,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.56,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.56
+      }
+    },
+    {
+      "jugador": "Enrique Carrascosa Diaz",
+      "key": "enrique carrascosa diaz",
+      "best_odds": 4.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.6
+      }
+    },
+    {
+      "jugador": "Enrique Carrascosa Diaz",
+      "key": "diaz",
+      "best_odds": 4.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.6
+      }
+    },
+    {
+      "jugador": "Javier Barranco Cosano",
+      "key": "javier barranco cosano",
+      "best_odds": 1.15,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.15,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.15
+      }
+    },
+    {
+      "jugador": "Javier Barranco Cosano",
+      "key": "cosano",
+      "best_odds": 1.15,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.15,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.15
+      }
+    },
+    {
+      "jugador": "Karla Bartel",
+      "key": "karla bartel",
+      "best_odds": 3.5,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.5,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.5
+      }
+    },
+    {
+      "jugador": "Karla Bartel",
+      "key": "bartel",
+      "best_odds": 3.5,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.5,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.5
+      }
+    },
+    {
+      "jugador": "Yuliya Perapekhina",
+      "key": "yuliya perapekhina",
+      "best_odds": 1.25,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.25,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.25
+      }
+    },
+    {
+      "jugador": "Yuliya Perapekhina",
+      "key": "perapekhina",
+      "best_odds": 1.25,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.25,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.25
+      }
+    },
+    {
+      "jugador": "Amelie Smejkalova",
+      "key": "amelie smejkalova",
+      "best_odds": 2.4,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.4,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.4
+      }
+    },
+    {
+      "jugador": "Amelie Smejkalova",
+      "key": "smejkalova",
+      "best_odds": 2.4,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.4,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.4
+      }
+    },
+    {
+      "jugador": "Sofia Camila Rojas",
+      "key": "sofia camila rojas",
+      "best_odds": 1.5,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.5,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.5
+      }
+    },
+    {
+      "jugador": "Sofia Camila Rojas",
+      "key": "rojas",
+      "best_odds": 1.5,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.5,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.5
+      }
+    },
+    {
+      "jugador": "Toufik Sahtali",
+      "key": "toufik sahtali",
+      "best_odds": 1.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.3
+      }
+    },
+    {
+      "jugador": "Toufik Sahtali",
+      "key": "sahtali",
+      "best_odds": 1.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.3
+      }
+    },
+    {
+      "jugador": "Younes Lalami Laaroussi",
+      "key": "younes lalami laaroussi",
+      "best_odds": 3.1,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.1,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.1
+      }
+    },
+    {
+      "jugador": "Younes Lalami Laaroussi",
+      "key": "laaroussi",
+      "best_odds": 3.1,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.1,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.1
+      }
+    },
+    {
+      "jugador": "Zach Stephens",
+      "key": "zach stephens",
+      "best_odds": 1.92,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.92,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.92
+      }
+    },
+    {
+      "jugador": "Zach Stephens",
+      "key": "stephens",
+      "best_odds": 1.92,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.92,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.92
+      }
+    },
+    {
+      "jugador": "Mohamed Nazim Makhlouf",
+      "key": "mohamed nazim makhlouf",
+      "best_odds": 1.78,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.78,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.78
+      }
+    },
+    {
+      "jugador": "Mohamed Nazim Makhlouf",
+      "key": "makhlouf",
+      "best_odds": 1.78,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.78,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.78
+      }
+    },
+    {
+      "jugador": "Saoirse Breen",
+      "key": "saoirse breen",
+      "best_odds": 1.19,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.19,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.19
+      }
+    },
+    {
+      "jugador": "Saoirse Breen",
+      "key": "breen",
+      "best_odds": 1.19,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.19,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.19
+      }
+    },
+    {
+      "jugador": "Styliani Roussopoulou",
+      "key": "styliani roussopoulou",
+      "best_odds": 4.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.0
+      }
+    },
+    {
+      "jugador": "Styliani Roussopoulou",
+      "key": "roussopoulou",
+      "best_odds": 4.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.0
+      }
+    },
+    {
+      "jugador": "Victoria Borodulina",
+      "key": "victoria borodulina",
+      "best_odds": 1.65,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.65,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.65
+      }
+    },
+    {
+      "jugador": "Victoria Borodulina",
+      "key": "borodulina",
+      "best_odds": 1.65,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.65,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.65
+      }
+    },
+    {
+      "jugador": "Melis Rasim",
+      "key": "melis rasim",
+      "best_odds": 2.08,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.08,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.08
+      }
+    },
+    {
+      "jugador": "Melis Rasim",
+      "key": "rasim",
+      "best_odds": 2.08,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.08,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.08
+      }
+    },
+    {
+      "jugador": "Onalee Wagner",
+      "key": "onalee wagner",
+      "best_odds": 5.4,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 5.4,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 5.4
+      }
+    },
+    {
+      "jugador": "Onalee Wagner",
+      "key": "wagner",
+      "best_odds": 5.4,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 5.4,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 5.4
+      }
+    },
+    {
+      "jugador": "Astrid Cirotte",
+      "key": "astrid cirotte",
+      "best_odds": 1.12,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.12,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.12
+      }
+    },
+    {
+      "jugador": "Astrid Cirotte",
+      "key": "cirotte",
+      "best_odds": 1.12,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.12,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.12
+      }
+    },
+    {
+      "jugador": "Khololwam Montsi",
+      "key": "khololwam montsi",
+      "best_odds": 1.57,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.57,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.57
+      }
+    },
+    {
+      "jugador": "Khololwam Montsi",
+      "key": "montsi",
+      "best_odds": 1.57,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.57,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.57
+      }
+    },
+    {
+      "jugador": "Devin Badenhorst",
+      "key": "devin badenhorst",
+      "best_odds": 2.23,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.23,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.23
+      }
+    },
+    {
+      "jugador": "Devin Badenhorst",
+      "key": "badenhorst",
+      "best_odds": 2.23,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.23,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.23
+      }
+    },
+    {
+      "jugador": "Ty Host",
+      "key": "ty host",
+      "best_odds": 1.9,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.9,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.9
+      }
+    },
+    {
+      "jugador": "Ty Host",
+      "key": "host",
+      "best_odds": 1.9,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.9,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.9
+      }
+    },
+    {
+      "jugador": "Chirag Duhan",
+      "key": "chirag duhan",
+      "best_odds": 1.8,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.8,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.8
+      }
+    },
+    {
+      "jugador": "Chirag Duhan",
+      "key": "duhan",
+      "best_odds": 1.8,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.8,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.8
+      }
+    },
+    {
+      "jugador": "Giulio Perego",
+      "key": "giulio perego",
+      "best_odds": 1.9,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.9,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.9
+      }
+    },
+    {
+      "jugador": "Giulio Perego",
+      "key": "perego",
+      "best_odds": 1.9,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.9,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.9
+      }
+    },
+    {
+      "jugador": "James Beaven",
+      "key": "james beaven",
+      "best_odds": 1.8,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.8,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.8
+      }
+    },
+    {
+      "jugador": "James Beaven",
+      "key": "beaven",
+      "best_odds": 1.8,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.8,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.8
+      }
+    },
+    {
+      "jugador": "John Hallquist Lithen",
+      "key": "john hallquist lithen",
+      "best_odds": 1.15,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.15,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.15
+      }
+    },
+    {
+      "jugador": "John Hallquist Lithen",
+      "key": "lithen",
+      "best_odds": 1.15,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.15,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.15
+      }
+    },
+    {
+      "jugador": "Michael Gloeckler",
+      "key": "michael gloeckler",
+      "best_odds": 4.7,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.7,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.7
+      }
+    },
+    {
+      "jugador": "Michael Gloeckler",
+      "key": "gloeckler",
+      "best_odds": 4.7,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.7,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.7
+      }
+    },
+    {
+      "jugador": "Francesco Ferrari",
+      "key": "francesco ferrari",
+      "best_odds": 1.55,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.55,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.55
+      }
+    },
+    {
+      "jugador": "Francesco Ferrari",
+      "key": "ferrari",
+      "best_odds": 1.55,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.55,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.55
+      }
+    },
+    {
+      "jugador": "Vincent Dullinger",
+      "key": "vincent dullinger",
+      "best_odds": 2.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.3
+      }
+    },
+    {
+      "jugador": "Vincent Dullinger",
+      "key": "dullinger",
+      "best_odds": 2.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.3
+      }
+    },
+    {
+      "jugador": "Luca Castagnola",
+      "key": "luca castagnola",
+      "best_odds": 1.42,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.42,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.42
+      }
+    },
+    {
+      "jugador": "Luca Castagnola",
+      "key": "castagnola",
+      "best_odds": 1.42,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.42,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.42
+      }
+    },
+    {
+      "jugador": "Edoardo Cherie Ligniere",
+      "key": "edoardo cherie ligniere",
+      "best_odds": 2.65,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.65,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.65
+      }
+    },
+    {
+      "jugador": "Edoardo Cherie Ligniere",
+      "key": "ligniere",
+      "best_odds": 2.65,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.65,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.65
+      }
+    },
+    {
+      "jugador": "Florent Bax",
+      "key": "florent bax",
+      "best_odds": 1.09,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.09,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.09
+      }
+    },
+    {
+      "jugador": "Florent Bax",
+      "key": "bax",
+      "best_odds": 1.09,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.09,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.09
+      }
+    },
+    {
+      "jugador": "Lenny Couturier",
+      "key": "lenny couturier",
+      "best_odds": 6.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 6.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 6.0
+      }
+    },
+    {
+      "jugador": "Lenny Couturier",
+      "key": "couturier",
+      "best_odds": 6.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 6.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 6.0
+      }
+    },
+    {
+      "jugador": "Arthur Bonnaud",
+      "key": "arthur bonnaud",
+      "best_odds": 2.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.3
+      }
+    },
+    {
+      "jugador": "Arthur Bonnaud",
+      "key": "bonnaud",
+      "best_odds": 2.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.3
+      }
+    },
+    {
+      "jugador": "Tristan Berard",
+      "key": "tristan berard",
+      "best_odds": 1.54,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.54,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.54
+      }
+    },
+    {
+      "jugador": "Tristan Berard",
+      "key": "berard",
+      "best_odds": 1.54,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.54,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.54
+      }
+    },
+    {
+      "jugador": "Gabriela Ce",
+      "key": "gabriela ce",
+      "best_odds": 1.33,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.33,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.33
+      }
+    },
+    {
+      "jugador": "Gabriela Ce",
+      "key": "ce",
+      "best_odds": 1.33,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.33,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.33
+      }
+    },
+    {
+      "jugador": "Camilla Zanolini",
+      "key": "camilla zanolini",
+      "best_odds": 3.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.0
+      }
+    },
+    {
+      "jugador": "Camilla Zanolini",
+      "key": "zanolini",
+      "best_odds": 3.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.0
+      }
+    },
+    {
+      "jugador": "Hugo Car",
+      "key": "hugo car",
+      "best_odds": 1.18,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.18,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.18
+      }
+    },
+    {
+      "jugador": "Hugo Car",
+      "key": "car",
+      "best_odds": 1.18,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.18,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.18
+      }
+    },
+    {
+      "jugador": "Amine Jamji",
+      "key": "amine jamji",
+      "best_odds": 4.25,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.25,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.25
+      }
+    },
+    {
+      "jugador": "Amine Jamji",
+      "key": "jamji",
+      "best_odds": 4.25,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.25,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.25
+      }
+    },
+    {
+      "jugador": "Federica Trevisan",
+      "key": "federica trevisan",
+      "best_odds": 1.35,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.35,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.35
+      }
+    },
+    {
+      "jugador": "Federica Trevisan",
+      "key": "trevisan",
+      "best_odds": 1.35,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.35,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.35
+      }
+    },
+    {
+      "jugador": "Megan Heuser",
+      "key": "megan heuser",
+      "best_odds": 2.95,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.95,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.95
+      }
+    },
+    {
+      "jugador": "Megan Heuser",
+      "key": "heuser",
+      "best_odds": 2.95,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.95,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.95
+      }
+    },
+    {
+      "jugador": "Kaja Najzer",
+      "key": "kaja najzer",
+      "best_odds": 5.5,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 5.5,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 5.5
+      }
+    },
+    {
+      "jugador": "Kaja Najzer",
+      "key": "najzer",
+      "best_odds": 5.5,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 5.5,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 5.5
+      }
+    },
+    {
+      "jugador": "Stefania Bojica",
+      "key": "stefania bojica",
+      "best_odds": 1.11,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.11,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.11
+      }
+    },
+    {
+      "jugador": "Stefania Bojica",
+      "key": "bojica",
+      "best_odds": 1.11,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.11,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.11
+      }
+    },
+    {
+      "jugador": "Yassine Smiej",
+      "key": "yassine smiej",
+      "best_odds": 3.9,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.9,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.9
+      }
+    },
+    {
+      "jugador": "Yassine Smiej",
+      "key": "smiej",
+      "best_odds": 3.9,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.9,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.9
+      }
+    },
+    {
+      "jugador": "Seydina Andre",
+      "key": "seydina andre",
+      "best_odds": 1.21,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.21,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.21
+      }
+    },
+    {
+      "jugador": "Seydina Andre",
+      "key": "andre",
+      "best_odds": 1.21,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.21,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.21
+      }
+    },
+    {
+      "jugador": "Alaa Trifi",
+      "key": "alaa trifi",
+      "best_odds": 1.45,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.45,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.45
+      }
+    },
+    {
+      "jugador": "Alaa Trifi",
+      "key": "trifi",
+      "best_odds": 1.45,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.45,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.45
+      }
+    },
+    {
+      "jugador": "Daniel Bagnolini",
+      "key": "daniel bagnolini",
+      "best_odds": 2.55,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.55,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.55
+      }
+    },
+    {
+      "jugador": "Daniel Bagnolini",
+      "key": "bagnolini",
+      "best_odds": 2.55,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.55,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.55
+      }
+    },
+    {
+      "jugador": "Lucia Llinares Domingo",
+      "key": "lucia llinares domingo",
+      "best_odds": 2.75,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.75,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.75
+      }
+    },
+    {
+      "jugador": "Lucia Llinares Domingo",
+      "key": "domingo",
+      "best_odds": 2.75,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.75,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.75
+      }
+    },
+    {
+      "jugador": "Zoe Ulrich",
+      "key": "zoe ulrich",
+      "best_odds": 1.4,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.4,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.4
+      }
+    },
+    {
+      "jugador": "Zoe Ulrich",
+      "key": "ulrich",
+      "best_odds": 1.4,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.4,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.4
+      }
+    },
+    {
+      "jugador": "Enola Chiesa",
+      "key": "enola chiesa",
+      "best_odds": 2.8,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.8,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.8
+      }
+    },
+    {
+      "jugador": "Deborah Chiesa",
+      "key": "chiesa",
+      "best_odds": 2.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.6
+      }
+    },
+    {
+      "jugador": "Astrid Lew Yan Foon",
+      "key": "astrid lew yan foon",
+      "best_odds": 1.38,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.38,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.38
+      }
+    },
+    {
+      "jugador": "Astrid Lew Yan Foon",
+      "key": "foon",
+      "best_odds": 1.38,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.38,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.38
+      }
+    },
+    {
+      "jugador": "Pia Lovric",
+      "key": "pia lovric",
+      "best_odds": 1.53,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.53,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.53
+      }
+    },
+    {
+      "jugador": "Pia Lovric",
+      "key": "lovric",
+      "best_odds": 1.53,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.53,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.53
+      }
+    },
+    {
+      "jugador": "Sofia Rocchetti",
+      "key": "sofia rocchetti",
+      "best_odds": 2.33,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.33,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.33
+      }
+    },
+    {
+      "jugador": "Sofia Rocchetti",
+      "key": "rocchetti",
+      "best_odds": 2.33,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.33,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.33
+      }
+    },
+    {
+      "jugador": "Jana Stojanova",
+      "key": "jana stojanova",
+      "best_odds": 1.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.3
+      }
+    },
+    {
+      "jugador": "Jana Stojanova",
+      "key": "stojanova",
+      "best_odds": 1.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.3
+      }
+    },
+    {
+      "jugador": "Given Roach",
+      "key": "given roach",
+      "best_odds": 3.1,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.1,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.1
+      }
+    },
+    {
+      "jugador": "Given Roach",
+      "key": "roach",
+      "best_odds": 3.1,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.1,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.1
+      }
+    },
+    {
+      "jugador": "Sara Cakarevic",
+      "key": "sara cakarevic",
+      "best_odds": 4.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.0
+      }
+    },
+    {
+      "jugador": "Sara Cakarevic",
+      "key": "cakarevic",
+      "best_odds": 4.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.0
+      }
+    },
+    {
+      "jugador": "Nina Vargova",
+      "key": "nina vargova",
+      "best_odds": 1.21,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.21,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.21
+      }
+    },
+    {
+      "jugador": "Nina Vargova",
+      "key": "vargova",
+      "best_odds": 1.21,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.21,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.21
+      }
+    },
+    {
+      "jugador": "Irina Balus",
+      "key": "irina balus",
+      "best_odds": 2.06,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.06,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.06
+      }
+    },
+    {
+      "jugador": "Irina Balus",
+      "key": "balus",
+      "best_odds": 2.06,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.06,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.06
+      }
+    },
+    {
+      "jugador": "Eva Marie Voracek",
+      "key": "eva marie voracek",
+      "best_odds": 1.68,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.68,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.68
+      }
+    },
+    {
+      "jugador": "Eva Marie Voracek",
+      "key": "voracek",
+      "best_odds": 1.68,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.68,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.68
+      }
+    },
+    {
+      "jugador": "Preston Brown",
+      "key": "preston brown",
+      "best_odds": 2.8,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.8,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.8
+      }
+    },
+    {
+      "jugador": "Preston Brown",
+      "key": "brown",
+      "best_odds": 2.8,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.8,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.8
+      }
+    },
+    {
+      "jugador": "Stefan Vujic",
+      "key": "stefan vujic",
+      "best_odds": 1.38,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.38,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.38
+      }
+    },
+    {
+      "jugador": "Stefan Vujic",
+      "key": "vujic",
+      "best_odds": 1.38,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.38,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.38
+      }
+    },
+    {
+      "jugador": "Lucas Marionneau",
+      "key": "lucas marionneau",
+      "best_odds": 1.32,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.32,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.32
+      }
+    },
+    {
+      "jugador": "Lucas Marionneau",
+      "key": "marionneau",
+      "best_odds": 1.32,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.32,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.32
+      }
+    },
+    {
+      "jugador": "Tiago Silva",
+      "key": "tiago silva",
+      "best_odds": 3.1,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.1,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.1
+      }
+    },
+    {
+      "jugador": "Joao Dinis Silva",
+      "key": "silva",
+      "best_odds": 5.5,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 5.5,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 5.5
+      }
+    },
+    {
+      "jugador": "Andrea Colombo",
+      "key": "andrea colombo",
+      "best_odds": 1.73,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.73,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.73
+      }
+    },
+    {
+      "jugador": "Noah Lopez Cherubino",
+      "key": "noah lopez cherubino",
+      "best_odds": 1.98,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.98,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.98
+      }
+    },
+    {
+      "jugador": "Noah Lopez Cherubino",
+      "key": "cherubino",
+      "best_odds": 1.98,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.98,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.98
+      }
+    },
+    {
+      "jugador": "Isabella Kruger",
+      "key": "isabella kruger",
+      "best_odds": 1.98,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.98,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.98
+      }
+    },
+    {
+      "jugador": "Isabella Kruger",
+      "key": "kruger",
+      "best_odds": 1.98,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.98,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.98
+      }
+    },
+    {
+      "jugador": "Jenny Duerst",
+      "key": "jenny duerst",
+      "best_odds": 1.73,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.73,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.73
+      }
+    },
+    {
+      "jugador": "Jenny Duerst",
+      "key": "duerst",
+      "best_odds": 1.73,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.73,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.73
+      }
+    },
+    {
+      "jugador": "Elizara Yaneva",
+      "key": "elizara yaneva",
+      "best_odds": 1.23,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.23,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.23
+      }
+    },
+    {
+      "jugador": "Elizara Yaneva",
+      "key": "yaneva",
+      "best_odds": 1.23,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.23,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.23
+      }
+    },
+    {
+      "jugador": "Sofya Lansere",
+      "key": "sofya lansere",
+      "best_odds": 3.95,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.95,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.95
+      }
+    },
+    {
+      "jugador": "Sofya Lansere",
+      "key": "lansere",
+      "best_odds": 3.95,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.95,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.95
+      }
+    },
+    {
+      "jugador": "Valentina Ryser",
+      "key": "valentina ryser",
+      "best_odds": 1.56,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.56,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.56
+      }
+    },
+    {
+      "jugador": "Valentina Ryser",
+      "key": "ryser",
+      "best_odds": 1.56,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.56,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.56
+      }
+    },
+    {
+      "jugador": "Maria Golovina",
+      "key": "maria golovina",
+      "best_odds": 2.28,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.28,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.28
+      }
+    },
+    {
+      "jugador": "Maria Golovina",
+      "key": "golovina",
+      "best_odds": 2.28,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.28,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.28
+      }
+    },
+    {
+      "jugador": "Hina Inoue",
+      "key": "hina inoue",
+      "best_odds": 1.43,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.43,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.43
+      }
+    },
+    {
+      "jugador": "Hina Inoue",
+      "key": "inoue",
+      "best_odds": 1.43,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.43,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.43
+      }
+    },
+    {
+      "jugador": "Vaishnavi Adkar",
+      "key": "vaishnavi adkar",
+      "best_odds": 2.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.6
+      }
+    },
+    {
+      "jugador": "Vaishnavi Adkar",
+      "key": "adkar",
+      "best_odds": 2.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.6
+      }
+    },
+    {
+      "jugador": "Lorenzo Sonego",
+      "key": "lorenzo sonego",
+      "best_odds": 2.7,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.7,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.7
+      }
+    },
+    {
+      "jugador": "Lorenzo Sonego",
+      "key": "sonego",
+      "best_odds": 2.7,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.7,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.7
+      }
+    },
+    {
+      "jugador": "Raphael Collignon",
+      "key": "raphael collignon",
+      "best_odds": 1.47,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.47,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.47
+      }
+    },
+    {
+      "jugador": "Raphael Collignon",
+      "key": "collignon",
+      "best_odds": 1.47,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.47,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.47
+      }
+    },
+    {
+      "jugador": "Lola Radivojevic",
+      "key": "lola radivojevic",
+      "best_odds": 1.46,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.46,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.46
+      }
+    },
+    {
+      "jugador": "Lola Radivojevic",
+      "key": "radivojevic",
+      "best_odds": 1.46,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.46,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.46
+      }
+    },
+    {
+      "jugador": "Deborah Chiesa",
+      "key": "deborah chiesa",
+      "best_odds": 2.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.6
+      }
+    },
+    {
+      "jugador": "Jeremy Schifris",
+      "key": "jeremy schifris",
+      "best_odds": 2.23,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.23,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.23
+      }
+    },
+    {
+      "jugador": "Jeremy Schifris",
+      "key": "schifris",
+      "best_odds": 2.23,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.23,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.23
+      }
+    },
+    {
+      "jugador": "Andrea M'Chich",
+      "key": "andrea mchich",
+      "best_odds": 1.58,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.58,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.58
+      }
+    },
+    {
+      "jugador": "Andrea M'Chich",
+      "key": "mchich",
+      "best_odds": 1.58,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.58,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.58
+      }
+    },
+    {
+      "jugador": "A. Behar/T. Tirante",
+      "key": "a behart tirante",
+      "best_odds": 1.36,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.36,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.36
+      }
+    },
+    {
+      "jugador": "A. Behar/T. Tirante",
+      "key": "tirante",
+      "best_odds": 1.36,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.36,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.36
+      }
+    },
+    {
+      "jugador": "O. Johansson/N. Slavic",
+      "key": "o johanssonn slavic",
+      "best_odds": 3.05,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.05,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.05
+      }
+    },
+    {
+      "jugador": "O. Johansson/N. Slavic",
+      "key": "slavic",
+      "best_odds": 3.05,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.05,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.05
+      }
+    },
+    {
+      "jugador": "Botic van de Zandschulp",
+      "key": "botic van de zandschulp",
+      "best_odds": 1.9,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.9,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.9
+      }
+    },
+    {
+      "jugador": "Botic van de Zandschulp",
+      "key": "zandschulp",
+      "best_odds": 1.9,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.9,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.9
+      }
+    },
+    {
+      "jugador": "Adolfo Daniel Vallejo",
+      "key": "adolfo daniel vallejo",
+      "best_odds": 1.9,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.9,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.9
+      }
+    },
+    {
+      "jugador": "Adolfo Daniel Vallejo",
+      "key": "vallejo",
+      "best_odds": 1.9,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.9,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.9
+      }
+    },
+    {
+      "jugador": "Aaron Funk",
+      "key": "aaron funk",
+      "best_odds": 3.05,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.05,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.05
+      }
+    },
+    {
+      "jugador": "Aaron Funk",
+      "key": "funk",
+      "best_odds": 3.05,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.05,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.05
+      }
+    },
+    {
+      "jugador": "Nikolai Barsukov",
+      "key": "nikolai barsukov",
+      "best_odds": 1.33,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.33,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.33
+      }
+    },
+    {
+      "jugador": "Nikolai Barsukov",
+      "key": "barsukov",
+      "best_odds": 1.33,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.33,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.33
+      }
+    },
+    {
+      "jugador": "Filiberto Fumagalli",
+      "key": "filiberto fumagalli",
+      "best_odds": 1.88,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.88,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.88
+      }
+    },
+    {
+      "jugador": "Filiberto Fumagalli",
+      "key": "fumagalli",
+      "best_odds": 1.88,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.88,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.88
+      }
+    },
+    {
+      "jugador": "Jeremy Gschwendtner",
+      "key": "jeremy gschwendtner",
+      "best_odds": 1.82,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.82,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.82
+      }
+    },
+    {
+      "jugador": "Jeremy Gschwendtner",
+      "key": "gschwendtner",
+      "best_odds": 1.82,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.82,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.82
+      }
+    },
+    {
+      "jugador": "Matic Dimic",
+      "key": "matic dimic",
+      "best_odds": 3.7,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.7,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.7
+      }
+    },
+    {
+      "jugador": "Matic Dimic",
+      "key": "dimic",
+      "best_odds": 3.7,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.7,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.7
+      }
+    },
+    {
+      "jugador": "Gabriele Bosio",
+      "key": "gabriele bosio",
+      "best_odds": 1.23,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.23,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.23
+      }
+    },
+    {
+      "jugador": "Gabriele Bosio",
+      "key": "bosio",
+      "best_odds": 1.23,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.23,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.23
+      }
+    },
+    {
+      "jugador": "Roan Jones",
+      "key": "roan jones",
+      "best_odds": 1.91,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.91,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.91
+      }
+    },
+    {
+      "jugador": "Digvijay Pratap Singh",
+      "key": "digvijay pratap singh",
+      "best_odds": 1.79,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.79,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.79
+      }
+    },
+    {
+      "jugador": "Digvijay Pratap Singh",
+      "key": "singh",
+      "best_odds": 1.79,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.79,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.79
+      }
+    },
+    {
+      "jugador": "O. Luz/R. Matos",
+      "key": "o luzr matos",
+      "best_odds": 1.56,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.56,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.56
+      }
+    },
+    {
+      "jugador": "O. Luz/R. Matos",
+      "key": "matos",
+      "best_odds": 1.56,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.56,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.56
+      }
+    },
+    {
+      "jugador": "S. Arends/D. Pel",
+      "key": "s arendsd pel",
+      "best_odds": 2.38,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.38,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.38
+      }
+    },
+    {
+      "jugador": "S. Arends/D. Pel",
+      "key": "pel",
+      "best_odds": 2.38,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.38,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.38
+      }
+    },
+    {
+      "jugador": "Maxence Bertimon",
+      "key": "maxence bertimon",
+      "best_odds": 2.1,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.1,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.1
+      }
+    },
+    {
+      "jugador": "Maxence Bertimon",
+      "key": "bertimon",
+      "best_odds": 2.1,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.1,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.1
+      }
+    },
+    {
+      "jugador": "Paul Barbier Gazeu",
+      "key": "paul barbier gazeu",
+      "best_odds": 1.65,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.65,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.65
+      }
+    },
+    {
+      "jugador": "Paul Barbier Gazeu",
+      "key": "gazeu",
+      "best_odds": 1.65,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.65,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.65
+      }
+    },
+    {
+      "jugador": "Aspen Schuman",
+      "key": "aspen schuman",
+      "best_odds": 1.11,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.11,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.11
+      }
+    },
+    {
+      "jugador": "Aspen Schuman",
+      "key": "schuman",
+      "best_odds": 1.11,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.11,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.11
+      }
+    },
+    {
+      "jugador": "Tanisha Kashyap",
+      "key": "tanisha kashyap",
+      "best_odds": 5.5,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 5.5,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 5.5
+      }
+    },
+    {
+      "jugador": "Tanisha Kashyap",
+      "key": "kashyap",
+      "best_odds": 5.5,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 5.5,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 5.5
+      }
+    },
+    {
+      "jugador": "Luna Vujovic",
+      "key": "luna vujovic",
+      "best_odds": 1.66,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.66,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.66
+      }
+    },
+    {
+      "jugador": "Luna Vujovic",
+      "key": "vujovic",
+      "best_odds": 1.66,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.66,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.66
+      }
+    },
+    {
+      "jugador": "Iva Primorac",
+      "key": "iva primorac",
+      "best_odds": 2.08,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.08,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.08
+      }
+    },
+    {
+      "jugador": "Iva Primorac",
+      "key": "primorac",
+      "best_odds": 2.08,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.08,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.08
+      }
+    },
+    {
+      "jugador": "Beatrise Zeltina",
+      "key": "beatrise zeltina",
+      "best_odds": 1.28,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.28,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.28
+      }
+    },
+    {
+      "jugador": "Beatrise Zeltina",
+      "key": "zeltina",
+      "best_odds": 1.28,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.28,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.28
+      }
+    },
+    {
+      "jugador": "Carolina Kuhl",
+      "key": "carolina kuhl",
+      "best_odds": 3.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.3
+      }
+    },
+    {
+      "jugador": "Carolina Kuhl",
+      "key": "kuhl",
+      "best_odds": 3.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.3
+      }
+    },
+    {
+      "jugador": "Jana Otzipka",
+      "key": "jana otzipka",
+      "best_odds": 3.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.6
+      }
+    },
+    {
+      "jugador": "Jana Otzipka",
+      "key": "otzipka",
+      "best_odds": 3.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.6
+      }
+    },
+    {
+      "jugador": "Julie Struplova",
+      "key": "julie struplova",
+      "best_odds": 1.24,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.24,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.24
+      }
+    },
+    {
+      "jugador": "Julie Struplova",
+      "key": "struplova",
+      "best_odds": 1.24,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.24,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.24
+      }
+    },
+    {
+      "jugador": "Goncalo Marques",
+      "key": "goncalo marques",
+      "best_odds": 3.2,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.2,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.2
+      }
+    },
+    {
+      "jugador": "Goncalo Marques",
+      "key": "marques",
+      "best_odds": 3.2,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.2,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.2
+      }
+    },
+    {
+      "jugador": "Joao Domingues",
+      "key": "joao domingues",
+      "best_odds": 1.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.3
+      }
+    },
+    {
+      "jugador": "Joao Domingues",
+      "key": "domingues",
+      "best_odds": 1.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.3
+      }
+    },
+    {
+      "jugador": "Henry Jefferson",
+      "key": "henry jefferson",
+      "best_odds": 2.48,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.48,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.48
+      }
+    },
+    {
+      "jugador": "Henry Jefferson",
+      "key": "jefferson",
+      "best_odds": 2.48,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.48,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.48
+      }
+    },
+    {
+      "jugador": "Charlie Robertson",
+      "key": "charlie robertson",
+      "best_odds": 1.48,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.48,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.48
+      }
+    },
+    {
+      "jugador": "Charlie Robertson",
+      "key": "robertson",
+      "best_odds": 1.48,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.48,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.48
+      }
+    },
+    {
+      "jugador": "Andreas Timini",
+      "key": "andreas timini",
+      "best_odds": 1.57,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.57,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.57
+      }
+    },
+    {
+      "jugador": "Andreas Timini",
+      "key": "timini",
+      "best_odds": 1.57,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.57,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.57
+      }
+    },
+    {
+      "jugador": "Udit Kamboj",
+      "key": "udit kamboj",
+      "best_odds": 2.25,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.25,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.25
+      }
+    },
+    {
+      "jugador": "Udit Kamboj",
+      "key": "kamboj",
+      "best_odds": 2.25,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.25,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.25
+      }
+    },
+    {
+      "jugador": "Sasha Sakura Stula",
+      "key": "sasha sakura stula",
+      "best_odds": 1.45,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.45,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.45
+      }
+    },
+    {
+      "jugador": "Sasha Sakura Stula",
+      "key": "stula",
+      "best_odds": 1.45,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.45,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.45
+      }
+    },
+    {
+      "jugador": "Andreea Diana Soare",
+      "key": "andreea diana soare",
+      "best_odds": 2.5,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.5,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.5
+      }
+    },
+    {
+      "jugador": "Andreea Diana Soare",
+      "key": "soare",
+      "best_odds": 2.5,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.5,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.5
+      }
+    },
+    {
+      "jugador": "Arthur Rinderknech",
+      "key": "arthur rinderknech",
+      "best_odds": 1.56,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.56,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.56
+      }
+    },
+    {
+      "jugador": "Arthur Rinderknech",
+      "key": "rinderknech",
+      "best_odds": 1.56,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.56,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.56
+      }
+    },
+    {
+      "jugador": "Clement Tabur",
+      "key": "clement tabur",
+      "best_odds": 2.43,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.43,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.43
+      }
+    },
+    {
+      "jugador": "Clement Tabur",
+      "key": "tabur",
+      "best_odds": 2.43,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.43,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.43
+      }
+    },
+    {
+      "jugador": "Chengyiyi Yuan",
+      "key": "chengyiyi yuan",
+      "best_odds": 2.7,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.7,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.7
+      }
+    },
+    {
+      "jugador": "Chengyiyi Yuan",
+      "key": "yuan",
+      "best_odds": 2.7,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.7,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.7
+      }
+    },
+    {
+      "jugador": "Alina Tikhonova",
+      "key": "alina tikhonova",
+      "best_odds": 1.41,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.41,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.41
+      }
+    },
+    {
+      "jugador": "Alina Tikhonova",
+      "key": "tikhonova",
+      "best_odds": 1.41,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.41,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.41
+      }
+    },
+    {
+      "jugador": "Onyu Choi",
+      "key": "onyu choi",
+      "best_odds": 2.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.3
+      }
+    },
+    {
+      "jugador": "Onyu Choi",
+      "key": "choi",
+      "best_odds": 2.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.3
+      }
+    },
+    {
+      "jugador": "Yingqun Sun",
+      "key": "yingqun sun",
+      "best_odds": 1.55,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.55,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.55
+      }
+    },
+    {
+      "jugador": "Ruben Hartig",
+      "key": "ruben hartig",
+      "best_odds": 5.2,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 5.2,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 5.2
+      }
+    },
+    {
+      "jugador": "Ruben Hartig",
+      "key": "hartig",
+      "best_odds": 5.2,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 5.2,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 5.2
+      }
+    },
+    {
+      "jugador": "Iannis Miletich",
+      "key": "iannis miletich",
+      "best_odds": 1.13,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.13,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.13
+      }
+    },
+    {
+      "jugador": "Iannis Miletich",
+      "key": "miletich",
+      "best_odds": 1.13,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.13,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.13
+      }
+    },
+    {
+      "jugador": "Justin Schlageter",
+      "key": "justin schlageter",
+      "best_odds": 1.84,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.84,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.84
+      }
+    },
+    {
+      "jugador": "Justin Schlageter",
+      "key": "schlageter",
+      "best_odds": 1.84,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.84,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.84
+      }
+    },
+    {
+      "jugador": "Johan Oscar Lien",
+      "key": "johan oscar lien",
+      "best_odds": 1.86,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.86,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.86
+      }
+    },
+    {
+      "jugador": "Johan Oscar Lien",
+      "key": "lien",
+      "best_odds": 1.86,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.86,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.86
+      }
+    },
+    {
+      "jugador": "Oleksii Krutykh",
+      "key": "oleksii krutykh",
+      "best_odds": 1.12,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.12,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.12
+      }
+    },
+    {
+      "jugador": "Oleksii Krutykh",
+      "key": "krutykh",
+      "best_odds": 1.12,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.12,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.12
+      }
+    },
+    {
+      "jugador": "Taym Al Azmeh",
+      "key": "taym al azmeh",
+      "best_odds": 5.4,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 5.4,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 5.4
+      }
+    },
+    {
+      "jugador": "Taym Al Azmeh",
+      "key": "azmeh",
+      "best_odds": 5.4,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 5.4,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 5.4
+      }
+    },
+    {
+      "jugador": "Zozaya Menendez,",
+      "key": "zozaya menendez",
+      "best_odds": 3.95,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.95,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.95
+      }
+    },
+    {
+      "jugador": "Zozaya Menendez,",
+      "key": "menendez",
+      "best_odds": 3.95,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.95,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.95
+      }
+    },
+    {
+      "jugador": "Justina Mikulskyte",
+      "key": "justina mikulskyte",
+      "best_odds": 1.21,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.21,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.21
+      }
+    },
+    {
+      "jugador": "Justina Mikulskyte",
+      "key": "mikulskyte",
+      "best_odds": 1.21,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.21,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.21
+      }
+    },
+    {
+      "jugador": "Gina Marie Dittmann",
+      "key": "gina marie dittmann",
+      "best_odds": 1.38,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.38,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.38
+      }
+    },
+    {
+      "jugador": "Gina Marie Dittmann",
+      "key": "dittmann",
+      "best_odds": 1.38,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.38,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.38
+      }
+    },
+    {
+      "jugador": "Liv Boulard",
+      "key": "liv boulard",
+      "best_odds": 2.75,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.75,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.75
+      }
+    },
+    {
+      "jugador": "Liv Boulard",
+      "key": "boulard",
+      "best_odds": 2.75,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.75,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.75
+      }
+    },
+    {
+      "jugador": "Kira Pavlova",
+      "key": "kira pavlova",
+      "best_odds": 1.36,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.36,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.36
+      }
+    },
+    {
+      "jugador": "Kira Pavlova",
+      "key": "pavlova",
+      "best_odds": 1.36,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.36,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.36
+      }
+    },
+    {
+      "jugador": "Carmen Gallardo Guevara",
+      "key": "carmen gallardo guevara",
+      "best_odds": 2.88,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.88,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.88
+      }
+    },
+    {
+      "jugador": "Carmen Gallardo Guevara",
+      "key": "guevara",
+      "best_odds": 2.88,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.88,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.88
+      }
+    },
+    {
+      "jugador": "Tea Kovacevic",
+      "key": "tea kovacevic",
+      "best_odds": 2.7,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.7,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.7
+      }
+    },
+    {
+      "jugador": "Tea Kovacevic",
+      "key": "kovacevic",
+      "best_odds": 2.7,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.7,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.7
+      }
+    },
+    {
+      "jugador": "Alja Senica",
+      "key": "alja senica",
+      "best_odds": 1.4,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.4,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.4
+      }
+    },
+    {
+      "jugador": "Alja Senica",
+      "key": "senica",
+      "best_odds": 1.4,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.4,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.4
+      }
+    },
+    {
+      "jugador": "Carlota Martinez Cirez",
+      "key": "carlota martinez cirez",
+      "best_odds": 1.29,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.29,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.29
+      }
+    },
+    {
+      "jugador": "Carlota Martinez Cirez",
+      "key": "cirez",
+      "best_odds": 1.29,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.29,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.29
+      }
+    },
+    {
+      "jugador": "Bianca Elena Barbulescu",
+      "key": "bianca elena barbulescu",
+      "best_odds": 3.25,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.25,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.25
+      }
+    },
+    {
+      "jugador": "Bianca Elena Barbulescu",
+      "key": "barbulescu",
+      "best_odds": 3.25,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.25,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.25
+      }
+    },
+    {
+      "jugador": "Briana Szabo",
+      "key": "briana szabo",
+      "best_odds": 2.63,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.63,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.63
+      }
+    },
+    {
+      "jugador": "Briana Szabo",
+      "key": "szabo",
+      "best_odds": 2.63,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.63,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.63
+      }
+    },
+    {
+      "jugador": "Beatrice Ricci",
+      "key": "beatrice ricci",
+      "best_odds": 1.43,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.43,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.43
+      }
+    },
+    {
+      "jugador": "Beatrice Ricci",
+      "key": "ricci",
+      "best_odds": 1.43,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.43,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.43
+      }
+    },
+    {
+      "jugador": "Katerina Tsygourova",
+      "key": "katerina tsygourova",
+      "best_odds": 1.24,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.24,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.24
+      }
+    },
+    {
+      "jugador": "Katerina Tsygourova",
+      "key": "tsygourova",
+      "best_odds": 1.24,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.24,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.24
+      }
+    },
+    {
+      "jugador": "Marie Weckerle",
+      "key": "marie weckerle",
+      "best_odds": 3.65,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.65,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.65
+      }
+    },
+    {
+      "jugador": "Marie Weckerle",
+      "key": "weckerle",
+      "best_odds": 3.65,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.65,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.65
+      }
+    },
+    {
+      "jugador": "Noritaka Koizumi",
+      "key": "noritaka koizumi",
+      "best_odds": 1.77,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.77,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.77
+      }
+    },
+    {
+      "jugador": "Noritaka Koizumi",
+      "key": "koizumi",
+      "best_odds": 1.77,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.77,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.77
+      }
+    },
+    {
+      "jugador": "Daniil Sarksian",
+      "key": "daniil sarksian",
+      "best_odds": 1.94,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.94,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.94
+      }
+    },
+    {
+      "jugador": "Daniil Sarksian",
+      "key": "sarksian",
+      "best_odds": 1.94,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.94,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.94
+      }
+    },
+    {
+      "jugador": "Fanming Meng",
+      "key": "fanming meng",
+      "best_odds": 5.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 5.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 5.0
+      }
+    },
+    {
+      "jugador": "Fanming Meng",
+      "key": "meng",
+      "best_odds": 5.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 5.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 5.0
+      }
+    },
+    {
+      "jugador": "Jangjun Kim",
+      "key": "jangjun kim",
+      "best_odds": 1.13,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.13,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.13
+      }
+    },
+    {
+      "jugador": "Jangjun Kim",
+      "key": "kim",
+      "best_odds": 1.13,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.13,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.13
+      }
+    },
+    {
+      "jugador": "T. Arribage/F. Cabral",
+      "key": "t arribagef cabral",
+      "best_odds": 1.41,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.41,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.41
+      }
+    },
+    {
+      "jugador": "T. Arribage/F. Cabral",
+      "key": "cabral",
+      "best_odds": 1.41,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.41,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.41
+      }
+    },
+    {
+      "jugador": "E. Grevelius/A. Heinonen",
+      "key": "e greveliusa heinonen",
+      "best_odds": 2.8,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.8,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.8
+      }
+    },
+    {
+      "jugador": "E. Grevelius/A. Heinonen",
+      "key": "heinonen",
+      "best_odds": 2.8,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.8,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.8
+      }
+    },
+    {
+      "jugador": "Grigor Dimitrov",
+      "key": "grigor dimitrov",
+      "best_odds": 2.38,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.38,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.38
+      }
+    },
+    {
+      "jugador": "Grigor Dimitrov",
+      "key": "dimitrov",
+      "best_odds": 2.38,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.38,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.38
+      }
+    },
+    {
+      "jugador": "Nuno Borges",
+      "key": "nuno borges",
+      "best_odds": 1.58,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.58,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.58
+      }
+    },
+    {
+      "jugador": "Nuno Borges",
+      "key": "borges",
+      "best_odds": 1.58,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.58,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.58
+      }
+    },
+    {
+      "jugador": "M. Kiger/R. Stalder",
+      "key": "m kigerr stalder",
+      "best_odds": 3.45,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.45,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.45
+      }
+    },
+    {
+      "jugador": "M. Kiger/R. Stalder",
+      "key": "stalder",
+      "best_odds": 3.45,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.45,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.45
+      }
+    },
+    {
+      "jugador": "S. Doumbia/F. Reboul",
+      "key": "s doumbiaf reboul",
+      "best_odds": 1.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.3
+      }
+    },
+    {
+      "jugador": "S. Doumbia/F. Reboul",
+      "key": "reboul",
+      "best_odds": 1.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.3
+      }
+    },
+    {
+      "jugador": "Valentina Steiner",
+      "key": "valentina steiner",
+      "best_odds": 1.47,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.47,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.47
+      }
+    },
+    {
+      "jugador": "Valentina Steiner",
+      "key": "steiner",
+      "best_odds": 1.47,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.47,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.47
+      }
+    },
+    {
+      "jugador": "Maria Florencia Urrutia",
+      "key": "maria florencia urrutia",
+      "best_odds": 2.5,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.5,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.5
+      }
+    },
+    {
+      "jugador": "Maria Florencia Urrutia",
+      "key": "urrutia",
+      "best_odds": 2.5,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.5,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.5
+      }
+    },
+    {
+      "jugador": "Dayeon Back",
+      "key": "dayeon back",
+      "best_odds": 1.28,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.28,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.28
+      }
+    },
+    {
+      "jugador": "Dayeon Back",
+      "key": "back",
+      "best_odds": 1.28,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.28,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.28
+      }
+    },
+    {
+      "jugador": "Sandra Samir",
+      "key": "sandra samir",
+      "best_odds": 3.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.3
+      }
+    },
+    {
+      "jugador": "Sandra Samir",
+      "key": "samir",
+      "best_odds": 3.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.3
+      }
+    },
+    {
+      "jugador": "Josy Daems",
+      "key": "josy daems",
+      "best_odds": 2.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.6
+      }
+    },
+    {
+      "jugador": "Josy Daems",
+      "key": "daems",
+      "best_odds": 2.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.6
+      }
+    },
+    {
+      "jugador": "Tessa Johanna Brockmann",
+      "key": "tessa johanna brockmann",
+      "best_odds": 1.43,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.43,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.43
+      }
+    },
+    {
+      "jugador": "Tessa Johanna Brockmann",
+      "key": "brockmann",
+      "best_odds": 1.43,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.43,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.43
+      }
+    },
+    {
+      "jugador": "Daniele Rapagnetta",
+      "key": "daniele rapagnetta",
+      "best_odds": 1.83,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.83,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.83
+      }
+    },
+    {
+      "jugador": "Daniele Rapagnetta",
+      "key": "rapagnetta",
+      "best_odds": 1.83,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.83,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.83
+      }
+    },
+    {
+      "jugador": "Lorenzo Rottoli",
+      "key": "lorenzo rottoli",
+      "best_odds": 1.87,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.87,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.87
+      }
+    },
+    {
+      "jugador": "Lorenzo Rottoli",
+      "key": "rottoli",
+      "best_odds": 1.87,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.87,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.87
+      }
+    },
+    {
+      "jugador": "Yulia Putintseva",
+      "key": "yulia putintseva",
+      "best_odds": 1.57,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.57,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.57
+      }
+    },
+    {
+      "jugador": "Yulia Putintseva",
+      "key": "putintseva",
+      "best_odds": 1.57,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.57,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.57
+      }
+    },
+    {
+      "jugador": "Alina Charaeva",
+      "key": "alina charaeva",
+      "best_odds": 2.4,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.4,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.4
+      }
+    },
+    {
+      "jugador": "Alina Charaeva",
+      "key": "charaeva",
+      "best_odds": 2.4,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.4,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.4
+      }
+    },
+    {
+      "jugador": "Nico Hipfl",
+      "key": "nico hipfl",
+      "best_odds": 2.02,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.02,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.02
+      }
+    },
+    {
+      "jugador": "Nico Hipfl",
+      "key": "hipfl",
+      "best_odds": 2.02,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.02,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.02
+      }
+    },
+    {
+      "jugador": "Vladyslav Orlov",
+      "key": "vladyslav orlov",
+      "best_odds": 1.71,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.71,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.71
+      }
+    },
+    {
+      "jugador": "Vladyslav Orlov",
+      "key": "orlov",
+      "best_odds": 1.71,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.71,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.71
+      }
+    },
+    {
+      "jugador": "H. Jebens/M. Vocel",
+      "key": "h jebensm vocel",
+      "best_odds": 1.33,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.33,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.33
+      }
+    },
+    {
+      "jugador": "H. Jebens/M. Vocel",
+      "key": "vocel",
+      "best_odds": 1.33,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.33,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.33
+      }
+    },
+    {
+      "jugador": "I. Buse/I. Cervantes",
+      "key": "i busei cervantes",
+      "best_odds": 3.2,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.2,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.2
+      }
+    },
+    {
+      "jugador": "I. Buse/I. Cervantes",
+      "key": "cervantes",
+      "best_odds": 3.2,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.2,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.2
+      }
+    },
+    {
+      "jugador": "Dora Miskovic",
+      "key": "dora miskovic",
+      "best_odds": 1.36,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.36,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.36
+      }
+    },
+    {
+      "jugador": "Dora Miskovic",
+      "key": "miskovic",
+      "best_odds": 1.36,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.36,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.36
+      }
+    },
+    {
+      "jugador": "Krystyna Pochtovyk",
+      "key": "krystyna pochtovyk",
+      "best_odds": 2.9,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.9,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.9
+      }
+    },
+    {
+      "jugador": "Krystyna Pochtovyk",
+      "key": "pochtovyk",
+      "best_odds": 2.9,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.9,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.9
+      }
+    },
+    {
+      "jugador": "Harmony Tan",
+      "key": "harmony tan",
+      "best_odds": 2.08,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.08,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.08
+      }
+    },
+    {
+      "jugador": "Harmony Tan",
+      "key": "tan",
+      "best_odds": 2.08,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.08,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.08
+      }
+    },
+    {
+      "jugador": "Anastasia Gasanova",
+      "key": "anastasia gasanova",
+      "best_odds": 1.71,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.71,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.71
+      }
+    },
+    {
+      "jugador": "Anastasia Gasanova",
+      "key": "gasanova",
+      "best_odds": 1.71,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.71,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.71
+      }
+    },
+    {
+      "jugador": "Minghui Zhang",
+      "key": "minghui zhang",
+      "best_odds": 2.35,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.35,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.35
+      }
+    },
+    {
+      "jugador": "Zhao Zhao",
+      "key": "zhao zhao",
+      "best_odds": 1.52,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.52,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.52
+      }
+    },
+    {
+      "jugador": "Zhao Zhao",
+      "key": "zhao",
+      "best_odds": 1.52,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.52,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.52
+      }
+    },
+    {
+      "jugador": "Stefano Travaglia",
+      "key": "stefano travaglia",
+      "best_odds": 4.35,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.35,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.35
+      }
+    },
+    {
+      "jugador": "Stefano Travaglia",
+      "key": "travaglia",
+      "best_odds": 4.35,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.35,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.35
+      }
+    },
+    {
+      "jugador": "Mariano Navone",
+      "key": "mariano navone",
+      "best_odds": 1.21,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.21,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.21
+      }
+    },
+    {
+      "jugador": "Mariano Navone",
+      "key": "navone",
+      "best_odds": 1.21,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.21,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.21
+      }
+    },
+    {
+      "jugador": "A. Pellegrino/A. Vavassori",
+      "key": "a pellegrinoa vavassori",
+      "best_odds": 1.79,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.79,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.79
+      }
+    },
+    {
+      "jugador": "A. Pellegrino/A. Vavassori",
+      "key": "vavassori",
+      "best_odds": 1.79,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.79,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.79
+      }
+    },
+    {
+      "jugador": "V. Kirkov/B. Stevens",
+      "key": "v kirkovb stevens",
+      "best_odds": 1.98,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.98,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.98
+      }
+    },
+    {
+      "jugador": "Valentina Ivanov",
+      "key": "valentina ivanov",
+      "best_odds": 3.1,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.1,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.1
+      }
+    },
+    {
+      "jugador": "Valentina Ivanov",
+      "key": "ivanov",
+      "best_odds": 3.1,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.1,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.1
+      }
+    },
+    {
+      "jugador": "Chloe Paquet",
+      "key": "chloe paquet",
+      "best_odds": 1.32,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.32,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.32
+      }
+    },
+    {
+      "jugador": "Chloe Paquet",
+      "key": "paquet",
+      "best_odds": 1.32,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.32,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.32
+      }
+    },
+    {
+      "jugador": "Petra Sedlackova",
+      "key": "petra sedlackova",
+      "best_odds": 1.29,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.29,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.29
+      }
+    },
+    {
+      "jugador": "Petra Sedlackova",
+      "key": "sedlackova",
+      "best_odds": 1.29,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.29,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.29
+      }
+    },
+    {
+      "jugador": "Kali Supova",
+      "key": "kali supova",
+      "best_odds": 3.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.3
+      }
+    },
+    {
+      "jugador": "Kali Supova",
+      "key": "supova",
+      "best_odds": 3.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.3
+      }
+    },
+    {
+      "jugador": "Adrienn Nagy",
+      "key": "adrienn nagy",
+      "best_odds": 4.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.3
+      }
+    },
+    {
+      "jugador": "Adrienn Nagy",
+      "key": "nagy",
+      "best_odds": 4.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.3
+      }
+    },
+    {
+      "jugador": "Anna Siskova",
+      "key": "anna siskova",
+      "best_odds": 1.18,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.18,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.18
+      }
+    },
+    {
+      "jugador": "Anna Siskova",
+      "key": "siskova",
+      "best_odds": 1.18,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.18,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.18
+      }
+    },
+    {
+      "jugador": "Lea Nilsson",
+      "key": "lea nilsson",
+      "best_odds": 1.68,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.68,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.68
+      }
+    },
+    {
+      "jugador": "Lea Nilsson",
+      "key": "nilsson",
+      "best_odds": 1.68,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.68,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.68
+      }
+    },
+    {
+      "jugador": "Alicia Herrero Linana",
+      "key": "alicia herrero linana",
+      "best_odds": 2.06,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.06,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.06
+      }
+    },
+    {
+      "jugador": "Alicia Herrero Linana",
+      "key": "linana",
+      "best_odds": 2.06,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.06,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.06
+      }
+    },
+    {
+      "jugador": "Rafael Izquierdo Luque",
+      "key": "rafael izquierdo luque",
+      "best_odds": 1.11,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.11,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.11
+      }
+    },
+    {
+      "jugador": "Rafael Izquierdo Luque",
+      "key": "luque",
+      "best_odds": 1.11,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.11,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.11
+      }
+    },
+    {
+      "jugador": "Joao Dinis Silva",
+      "key": "joao dinis silva",
+      "best_odds": 5.5,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 5.5,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 5.5
+      }
+    },
+    {
+      "jugador": "Tiphanie Lemaitre",
+      "key": "tiphanie lemaitre",
+      "best_odds": 1.43,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.43,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.43
+      }
+    },
+    {
+      "jugador": "Tiphanie Lemaitre",
+      "key": "lemaitre",
+      "best_odds": 1.43,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.43,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.43
+      }
+    },
+    {
+      "jugador": "Ruien Zhang",
+      "key": "ruien zhang",
+      "best_odds": 2.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.6
+      }
+    },
+    {
+      "jugador": "Demi Tran",
+      "key": "demi tran",
+      "best_odds": 2.28,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.28,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.28
+      }
+    },
+    {
+      "jugador": "Demi Tran",
+      "key": "tran",
+      "best_odds": 2.28,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.28,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.28
+      }
+    },
+    {
+      "jugador": "Zoziya Kardava",
+      "key": "zoziya kardava",
+      "best_odds": 1.55,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.55,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.55
+      }
+    },
+    {
+      "jugador": "Zoziya Kardava",
+      "key": "kardava",
+      "best_odds": 1.55,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.55,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.55
+      }
+    },
+    {
+      "jugador": "Ida Wobker",
+      "key": "ida wobker",
+      "best_odds": 4.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.6
+      }
+    },
+    {
+      "jugador": "Ida Wobker",
+      "key": "wobker",
+      "best_odds": 4.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.6
+      }
+    },
+    {
+      "jugador": "Han Shi",
+      "key": "han shi",
+      "best_odds": 1.16,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.16,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.16
+      }
+    },
+    {
+      "jugador": "Han Shi",
+      "key": "shi",
+      "best_odds": 1.16,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.16,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.16
+      }
+    },
+    {
+      "jugador": "Anna Bondar",
+      "key": "anna bondar",
+      "best_odds": 1.43,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.43,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.43
+      }
+    },
+    {
+      "jugador": "Anna Bondar",
+      "key": "bondar",
+      "best_odds": 1.43,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.43,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.43
+      }
+    },
+    {
+      "jugador": "Tamara Zidansek",
+      "key": "tamara zidansek",
+      "best_odds": 2.85,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.85,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.85
+      }
+    },
+    {
+      "jugador": "Tamara Zidansek",
+      "key": "zidansek",
+      "best_odds": 2.85,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.85,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.85
+      }
+    },
+    {
+      "jugador": "M. Demoliner/R. Galloway",
+      "key": "m demolinerr galloway",
+      "best_odds": 2.2,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.2,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.2
+      }
+    },
+    {
+      "jugador": "M. Demoliner/R. Galloway",
+      "key": "galloway",
+      "best_odds": 2.2,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.2,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.2
+      }
+    },
+    {
+      "jugador": "J. Schnaitter/M. Wallner",
+      "key": "j schnaitterm wallner",
+      "best_odds": 1.63,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.63,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.63
+      }
+    },
+    {
+      "jugador": "J. Schnaitter/M. Wallner",
+      "key": "wallner",
+      "best_odds": 1.63,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.63,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.63
+      }
+    },
+    {
+      "jugador": "Gabriela Knutson",
+      "key": "gabriela knutson",
+      "best_odds": 4.25,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.25,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.25
+      }
+    },
+    {
+      "jugador": "Gabriela Knutson",
+      "key": "knutson",
+      "best_odds": 4.25,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.25,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.25
+      }
+    },
+    {
+      "jugador": "Lanlana Tararudee",
+      "key": "lanlana tararudee",
+      "best_odds": 1.21,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.21,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.21
+      }
+    },
+    {
+      "jugador": "Lanlana Tararudee",
+      "key": "tararudee",
+      "best_odds": 1.21,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.21,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.21
+      }
+    },
+    {
+      "jugador": "Selena Janicijevic",
+      "key": "selena janicijevic",
+      "best_odds": 1.47,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.47,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.47
+      }
+    },
+    {
+      "jugador": "Selena Janicijevic",
+      "key": "janicijevic",
+      "best_odds": 1.47,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.47,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.47
+      }
+    },
+    {
+      "jugador": "Denislava Glushkova",
+      "key": "denislava glushkova",
+      "best_odds": 2.48,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.48,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.48
+      }
+    },
+    {
+      "jugador": "Denislava Glushkova",
+      "key": "glushkova",
+      "best_odds": 2.48,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.48,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.48
+      }
+    },
+    {
+      "jugador": "Francisco Rocha",
+      "key": "francisco rocha",
+      "best_odds": 1.58,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.58,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.58
+      }
+    },
+    {
+      "jugador": "Francisco Rocha",
+      "key": "rocha",
+      "best_odds": 1.58,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.58,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.58
+      }
+    },
+    {
+      "jugador": "Matisse Farzam",
+      "key": "matisse farzam",
+      "best_odds": 2.23,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.23,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.23
+      }
+    },
+    {
+      "jugador": "Matisse Farzam",
+      "key": "farzam",
+      "best_odds": 2.23,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.23,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.23
+      }
+    },
+    {
+      "jugador": "Vasco Leote Prata",
+      "key": "vasco leote prata",
+      "best_odds": 1.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.3
+      }
+    },
+    {
+      "jugador": "Vasco Leote Prata",
+      "key": "prata",
+      "best_odds": 1.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.3
+      }
+    },
+    {
+      "jugador": "Pavlos Tsitsipas",
+      "key": "pavlos tsitsipas",
+      "best_odds": 3.2,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.2,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.2
+      }
+    },
+    {
+      "jugador": "Pavlos Tsitsipas",
+      "key": "tsitsipas",
+      "best_odds": 3.2,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.2,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.2
+      }
+    },
+    {
+      "jugador": "Daniel Altmaier",
+      "key": "daniel altmaier",
+      "best_odds": 2.63,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.63,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.63
+      }
+    },
+    {
+      "jugador": "Daniel Altmaier",
+      "key": "altmaier",
+      "best_odds": 2.63,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.63,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.63
+      }
+    },
+    {
+      "jugador": "Luciano Darderi",
+      "key": "luciano darderi",
+      "best_odds": 1.48,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.48,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.48
+      }
+    },
+    {
+      "jugador": "Luciano Darderi",
+      "key": "darderi",
+      "best_odds": 1.48,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.48,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.48
+      }
+    },
+    {
+      "jugador": "Yannick Hanfmann",
+      "key": "yannick hanfmann",
+      "best_odds": 1.54,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.54,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.54
+      }
+    },
+    {
+      "jugador": "Yannick Hanfmann",
+      "key": "hanfmann",
+      "best_odds": 1.54,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.54,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.54
+      }
+    },
+    {
+      "jugador": "Valentin Vacherot",
+      "key": "valentin vacherot",
+      "best_odds": 2.48,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.48,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.48
+      }
+    },
+    {
+      "jugador": "Valentin Vacherot",
+      "key": "vacherot",
+      "best_odds": 2.48,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.48,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.48
+      }
+    },
+    {
+      "jugador": "Noel Larwig",
+      "key": "noel larwig",
+      "best_odds": 2.33,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.33,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.33
+      }
+    },
+    {
+      "jugador": "Noel Larwig",
+      "key": "larwig",
+      "best_odds": 2.33,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.33,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.33
+      }
+    },
+    {
+      "jugador": "Noah Schlagenhauf",
+      "key": "noah schlagenhauf",
+      "best_odds": 1.53,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.53,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.53
+      }
+    },
+    {
+      "jugador": "Noah Schlagenhauf",
+      "key": "schlagenhauf",
+      "best_odds": 1.53,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.53,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.53
+      }
+    },
+    {
+      "jugador": "Vincent Marysko",
+      "key": "vincent marysko",
+      "best_odds": 1.33,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.33,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.33
+      }
+    },
+    {
+      "jugador": "Vincent Marysko",
+      "key": "marysko",
+      "best_odds": 1.33,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.33,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.33
+      }
+    },
+    {
+      "jugador": "Tom Sickenberger",
+      "key": "tom sickenberger",
+      "best_odds": 3.05,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.05,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.05
+      }
+    },
+    {
+      "jugador": "Tom Sickenberger",
+      "key": "sickenberger",
+      "best_odds": 3.05,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.05,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.05
+      }
+    },
+    {
+      "jugador": "Anastasiya Kuparev",
+      "key": "anastasiya kuparev",
+      "best_odds": 4.4,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.4,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.4
+      }
+    },
+    {
+      "jugador": "Anastasiya Kuparev",
+      "key": "kuparev",
+      "best_odds": 4.4,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 4.4,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 4.4
+      }
+    },
+    {
+      "jugador": "Kateryna Lazarenko",
+      "key": "kateryna lazarenko",
+      "best_odds": 1.17,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.17,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.17
+      }
+    },
+    {
+      "jugador": "Kateryna Lazarenko",
+      "key": "lazarenko",
+      "best_odds": 1.17,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.17,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.17
+      }
+    },
+    {
+      "jugador": "Katarina Kuzmova",
+      "key": "katarina kuzmova",
+      "best_odds": 1.25,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.25,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.25
+      }
+    },
+    {
+      "jugador": "Katarina Kuzmova",
+      "key": "kuzmova",
+      "best_odds": 1.25,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.25,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.25
+      }
+    },
+    {
+      "jugador": "Alba Rey Garcia",
+      "key": "alba rey garcia",
+      "best_odds": 3.55,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.55,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.55
+      }
+    },
+    {
+      "jugador": "Meritxell Teixido Garcia",
+      "key": "garcia",
+      "best_odds": 2.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.6
+      }
+    },
+    {
+      "jugador": "Chloe Noel",
+      "key": "chloe noel",
+      "best_odds": 1.44,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.44,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.44
+      }
+    },
+    {
+      "jugador": "Chloe Noel",
+      "key": "noel",
+      "best_odds": 1.44,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.44,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.44
+      }
+    },
+    {
+      "jugador": "Meritxell Teixido Garcia",
+      "key": "meritxell teixido garcia",
+      "best_odds": 2.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.6
+      }
+    },
+    {
+      "jugador": "Lorenzo Bocchi",
+      "key": "lorenzo bocchi",
+      "best_odds": 1.38,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.38,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.38
+      }
+    },
+    {
+      "jugador": "Lorenzo Bocchi",
+      "key": "bocchi",
+      "best_odds": 1.38,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.38,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.38
+      }
+    },
+    {
+      "jugador": "Glib Sekachov",
+      "key": "glib sekachov",
+      "best_odds": 2.75,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.75,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.75
+      }
+    },
+    {
+      "jugador": "Glib Sekachov",
+      "key": "sekachov",
+      "best_odds": 2.75,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.75,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.75
+      }
+    },
+    {
+      "jugador": "Francesca Jones",
+      "key": "francesca jones",
+      "best_odds": 1.27,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.27,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.27
+      }
+    },
+    {
+      "jugador": "Federica Urgesi",
+      "key": "federica urgesi",
+      "best_odds": 3.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.6
+      }
+    },
+    {
+      "jugador": "Federica Urgesi",
+      "key": "urgesi",
+      "best_odds": 3.6,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.6,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.6
+      }
+    },
+    {
+      "jugador": "Kalin Ivanovski",
+      "key": "kalin ivanovski",
+      "best_odds": 1.8,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.8,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.8
+      }
+    },
+    {
+      "jugador": "Kalin Ivanovski",
+      "key": "ivanovski",
+      "best_odds": 1.8,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.8,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.8
+      }
+    },
+    {
+      "jugador": "Theo Papamalamis",
+      "key": "theo papamalamis",
+      "best_odds": 1.9,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.9,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.9
+      }
+    },
+    {
+      "jugador": "Theo Papamalamis",
+      "key": "papamalamis",
+      "best_odds": 1.9,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.9,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.9
+      }
+    },
+    {
+      "jugador": "Elena Micic",
+      "key": "elena micic",
+      "best_odds": 9.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 9.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 9.0
+      }
+    },
+    {
+      "jugador": "Elena Micic",
+      "key": "micic",
+      "best_odds": 9.0,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 9.0,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 9.0
+      }
+    },
+    {
+      "jugador": "Qinwen Zheng",
+      "key": "qinwen zheng",
+      "best_odds": 1.05,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.05,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.05
+      }
+    },
+    {
+      "jugador": "Qinwen Zheng",
+      "key": "zheng",
+      "best_odds": 1.05,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.05,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.05
+      }
+    },
+    {
+      "jugador": "Niklas Guttau",
+      "key": "niklas guttau",
+      "best_odds": 3.05,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.05,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.05
+      }
+    },
+    {
+      "jugador": "Niklas Guttau",
+      "key": "guttau",
+      "best_odds": 3.05,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.05,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.05
+      }
+    },
+    {
+      "jugador": "Aryan Shah",
+      "key": "aryan shah",
+      "best_odds": 1.32,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.32,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.32
+      }
+    },
+    {
+      "jugador": "Aryan Shah",
+      "key": "shah",
+      "best_odds": 1.32,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.32,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.32
+      }
+    },
+    {
+      "jugador": "Nastasja Schunk",
+      "key": "nastasja schunk",
+      "best_odds": 1.63,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.63,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.63
+      }
+    },
+    {
+      "jugador": "Nastasja Schunk",
+      "key": "schunk",
+      "best_odds": 1.63,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.63,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.63
+      }
+    },
+    {
+      "jugador": "Julia Stusek",
+      "key": "julia stusek",
+      "best_odds": 2.14,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.14,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.14
+      }
+    },
+    {
+      "jugador": "Julia Stusek",
+      "key": "stusek",
+      "best_odds": 2.14,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.14,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.14
+      }
+    },
+    {
+      "jugador": "Petra Marcinko",
+      "key": "petra marcinko",
+      "best_odds": 1.72,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.72,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.72
+      }
+    },
+    {
+      "jugador": "Petra Marcinko",
+      "key": "marcinko",
+      "best_odds": 1.72,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.72,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.72
+      }
+    },
+    {
+      "jugador": "Elina Avanesyan",
+      "key": "elina avanesyan",
+      "best_odds": 2.12,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.12,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.12
+      }
+    },
+    {
+      "jugador": "Elina Avanesyan",
+      "key": "avanesyan",
+      "best_odds": 2.12,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.12,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.12
+      }
+    },
+    {
+      "jugador": "Marco Trungelliti",
+      "key": "marco trungelliti",
+      "best_odds": 3.45,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.45,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.45
+      }
+    },
+    {
+      "jugador": "Marco Trungelliti",
+      "key": "trungelliti",
+      "best_odds": 3.45,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.45,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.45
+      }
+    },
+    {
+      "jugador": "Alejandro Davidovich Fokina",
+      "key": "alejandro davidovich fokina",
+      "best_odds": 1.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.3
+      }
+    },
+    {
+      "jugador": "Alejandro Davidovich Fokina",
+      "key": "fokina",
+      "best_odds": 1.3,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.3,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.3
+      }
+    },
+    {
+      "jugador": "Harriet Dart",
+      "key": "harriet dart",
+      "best_odds": 3.8,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.8,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.8
+      }
+    },
+    {
+      "jugador": "Harriet Dart",
+      "key": "dart",
+      "best_odds": 3.8,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 3.8,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 3.8
+      }
+    },
+    {
+      "jugador": "Maria Sakkari",
+      "key": "maria sakkari",
+      "best_odds": 1.27,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.27,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.27
+      }
+    },
+    {
+      "jugador": "Maria Sakkari",
+      "key": "sakkari",
+      "best_odds": 1.27,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.27,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.27
+      }
+    },
+    {
+      "jugador": "Mai Hontama",
+      "key": "mai hontama",
+      "best_odds": 2.55,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.55,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.55
+      }
+    },
+    {
+      "jugador": "Mai Hontama",
+      "key": "hontama",
+      "best_odds": 2.55,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.55,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.55
+      }
+    },
+    {
+      "jugador": "Alycia Parks",
+      "key": "alycia parks",
+      "best_odds": 1.52,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.52,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.52
+      }
+    },
+    {
+      "jugador": "Alycia Parks",
+      "key": "parks",
+      "best_odds": 1.52,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.52,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.52
+      }
+    },
+    {
+      "jugador": "Lilli Tagger",
+      "key": "lilli tagger",
+      "best_odds": 2.2,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.2,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.2
+      }
+    },
+    {
+      "jugador": "Lilli Tagger",
+      "key": "tagger",
+      "best_odds": 2.2,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 2.2,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 2.2
+      }
+    },
+    {
+      "jugador": "Sara Bejlek",
+      "key": "sara bejlek",
+      "best_odds": 1.67,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.67,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.67
+      }
+    },
+    {
+      "jugador": "Sara Bejlek",
+      "key": "bejlek",
+      "best_odds": 1.67,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.67,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.67
+      }
+    },
+    {
+      "jugador": "Sergi Fita Juan",
+      "key": "sergi fita juan",
+      "best_odds": 1.82,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.82,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.82
+      }
+    },
+    {
+      "jugador": "Sergi Fita Juan",
+      "key": "juan",
+      "best_odds": 1.82,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.82,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.82
+      }
+    },
+    {
+      "jugador": "Adam Lynch",
+      "key": "adam lynch",
+      "best_odds": 1.88,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.88,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.88
+      }
+    },
+    {
+      "jugador": "Adam Lynch",
+      "key": "lynch",
+      "best_odds": 1.88,
+      "best_bookmaker": "betplay",
+      "betplay_odds": 1.88,
+      "clv_potential": 0.0,
+      "odds_by_book": {
+        "betplay": 1.88
+      }
+    }
+  ]
+}

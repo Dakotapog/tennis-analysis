@@ -71,8 +71,15 @@ def _norm(name: str) -> str:
 
 
 def _apellido(name: str) -> str:
+    """Nodo-156 D156-03: última palabra que NO sea inicial (<=2 chars tras _norm,
+    el punto ya fue stripeado). Mismo patrón que games_signal_calculator.py D126-01."""
     parts = _norm(name).split()
-    return parts[-1] if parts else _norm(name)
+    if not parts:
+        return _norm(name)
+    for p in reversed(parts):
+        if len(p) > 2:
+            return p
+    return parts[0]
 
 
 # ─── Kambi: mapa favorito_norm → rival outcome_id ─────────────────────────────

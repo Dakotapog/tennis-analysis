@@ -1,0 +1,38 @@
+[
+  {
+    "nombre": "Zhang Z.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=MODERATE)",
+    "conf": 56.6,
+    "cuota": 1.43,
+    "ts": "2026-07-20T18:11:28.102724"
+  },
+  {
+    "nombre": "van Assche L.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=LOW)",
+    "conf": 54.5,
+    "cuota": 1.22,
+    "ts": "2026-07-20T18:11:28.102773"
+  },
+  {
+    "nombre": "Quevedo K.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=LOW)",
+    "conf": 53.6,
+    "cuota": 2.8,
+    "ts": "2026-07-20T18:11:28.102867"
+  },
+  {
+    "nombre": "Aksu A.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=LOW)",
+    "conf": 53.3,
+    "cuota": 2.8,
+    "ts": "2026-07-20T18:11:28.102956"
+  }
+]

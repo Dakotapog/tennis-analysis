@@ -328,7 +328,12 @@ def _imprimir_desglose(conteos: Dict, picks_validos: List[Dict]) -> None:
 
 
 def _build_betplay_url(outcome_ids: List[str]) -> str:
-    ids_str = "/".join(f"{oid}|ML" for oid in outcome_ids)
+    # REGLA-BAT-1 (CLAUDE.md §9, INMUTABLE): IDs separados por comas, SIN
+    # sufijo "|ML/" — ese formato hace que Betplay no parsee el coupon y
+    # abra sin piernas cargadas. Ver Nodo-162 (mismo bug en docs/bp/index.html)
+    # y Nodo-169 (este archivo nunca tuvo el formato correcto desde su
+    # creación en Nodo-146 — bug independiente, no una regresión de Nodo-162).
+    ids_str = ",".join(outcome_ids)
     return f"{BETPLAY_URL_BASE}{ids_str}{BETPLAY_URL_TAIL}"
 
 
@@ -819,10 +824,14 @@ def main() -> None:
         from betplay_combo_builder import fetch_kambi_outcomes, find_outcome as _find_oc
         _outcomes_map, _started_map = fetch_kambi_outcomes()
         picks_kambi = []
+        _excl_favoritos: list = []  # D173-10 (Nodo-173): sin outcome en Kambi
         for p in picks_validos:
             jugador = p.get("favorito", p.get("jugador", ""))
             cuota = float(p.get("cuota_favorito", 0))
-            oc, _ = _find_oc(jugador, cuota, _outcomes_map, _started_map)
+            oc, _ = _find_oc(jugador, cuota, _outcomes_map, _started_map,
+                              outcome_id_hint=p.get("outcome_id"))  # D174-08 Nodo-174
+            if not oc:
+                _excl_favoritos.append(p)
             if oc:
                 p["_kambi_oid"] = str(oc["outcome_id"])
                 # Actualizar cuota con valor real de Kambi (evita drift entre h2h y Betplay)
@@ -831,6 +840,14 @@ def main() -> None:
                     p["cuota_favorito"] = kambi_cuota
                 picks_kambi.append(p)
         n_antes = len(picks_validos)
+        # D173-10 (Nodo-173): rastro auditable de lo descartado. No cambia el gate.
+        if _excl_favoritos:
+            try:
+                from core.combo_exclusions import registrar_exclusiones
+                registrar_exclusiones('favoritos', _excl_favoritos,
+                                      motivo='sin_outcome_kambi')
+            except Exception:  # noqa: BLE001 — observabilidad nunca tumba el builder
+                pass
         if picks_kambi:
             picks_validos = picks_kambi
             print(f"\n  [Kambi] {len(picks_kambi)}/{n_antes} piernas confirmadas en Betplay"
@@ -880,7 +897,8 @@ def main() -> None:
                 if pick.get("_kambi_oid"):
                     ids.append(pick["_kambi_oid"])
                 else:
-                    oc, razon = find_outcome(jugador, cuota, outcomes_map, started_map)
+                    oc, razon = find_outcome(jugador, cuota, outcomes_map, started_map,
+                                              outcome_id_hint=pick.get("outcome_id"))  # D174-08 Nodo-174
                     if oc:
                         ids.append(str(oc["outcome_id"]))
                     else:

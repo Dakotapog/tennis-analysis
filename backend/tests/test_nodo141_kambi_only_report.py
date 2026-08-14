@@ -26,10 +26,18 @@ _find_edge = _bpb._find_latest_edge_report
 # ── Helpers ──────────────────────────────────────────────────────────────────
 
 def _make_edge_report(picks, tmp_dir, name='edge_report_20260722_143022.json'):
-    """Crea un edge_report fixture en tmp_dir."""
+    """Crea un edge_report fixture en tmp_dir.
+
+    Schema real (verificado 2026-08-05 contra edge_report de producción):
+    top-level 'apostar'/'watchlist', NUNCA 'picks' plano — filter_kambi_picks()
+    lee esas dos claves. Split por pick['status'] (D141 fix, ver Nodo-174 D174-02).
+    """
+    apostar = [p for p in picks if p.get('status', 'APOSTAR') == 'APOSTAR']
+    watchlist = [p for p in picks if p.get('status', 'APOSTAR') != 'APOSTAR']
     report = {
         'gate_version': 'v3',
-        'picks': picks,
+        'apostar': apostar,
+        'watchlist': watchlist,
         'metadata': {'fecha': '2026-07-22'},
     }
     path = Path(tmp_dir) / name

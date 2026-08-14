@@ -79,11 +79,44 @@ BANKROLL_CAP = 0.10      # máximo 10% por apuesta
 # T32-01 (Nodo-32): umbral p_modelo para underdogs — evita phantom edge
 # Un pick con p_modelo=0.503 y cuota=3.60 produce edge=22.5% matemático pero el
 # modelo expresa convicción de moneda al aire. Cuota >= 2.10 requiere MODERATE+.
-P_MODELO_MIN_UNDERDOG = 0.55  # alineado con confidence_flag MODERATE
+# D173-07 (Nodo-173): fuente única en config.py — este módulo re-exporta el nombre
+# para no romper los ~40 usos internos ni los imports externos existentes.
+from config import P_MODELO_MIN_UNDERDOG  # noqa: E402  (0.55 — ver config.py)
 # Nodo-32 Acción 3: versión del gate serializada en cada edge_report.
 # Incrementar en cada cambio de gate (P_MODELO_MIN_UNDERDOG, EDGE_MIN, KELLY_KL_MIN,
 # golden_zone conditions). betplay_combo_builder.py rechaza archivos con versión distinta.
 GATE_VERSION = "nodo32-fase2"
+
+# D173-05 (Nodo-173): calibrador ancla-mercado — OFF por defecto.
+# Solo se activa manualmente tras correr scripts/fit_probability_calibrator.py
+# --commit y que el holdout apruebe skill>0 (criterio no negociable, PUERTA 3).
+# Regla de oro: cuando USE_CALIBRATOR=True, 'p_modelo' NUNCA se sobreescribe —
+# se serializan 'p_modelo_cal'/'edge_cal' como campos NUEVOS. Los consumidores
+# migran explícitamente a *_cal; nada lee esos campos hasta que se actualicen.
+USE_CALIBRATOR = False
+CALIBRATOR_ARTIFACT_FILE = "data/probability_calibrator.json"
+_calibrator_artifact_cache: Optional[dict] = None
+
+# D173-06 (Nodo-173): guard de confianza fantasma — defensa en profundidad,
+# activa siempre (independiente de USE_CALIBRATOR). §1.8: la ausencia de
+# ranking de cualquiera de los 2 jugadores infla p_modelo (mediana 0.651 vs
+# 0.522) sin datos que lo respalden. El bin [0.85,1.01) poblado por este
+# mecanismo entregó hit real 0.625 — 0.60 es conservador respecto a eso.
+PHANTOM_CAP = 0.60
+
+
+def _cargar_calibrator_artifact() -> Optional[dict]:
+    """Carga (una vez, cacheado) el artefacto D173-05. None si no existe o es
+    inválido — nunca lanza, USE_CALIBRATOR=False debe seguir funcionando sin él."""
+    global _calibrator_artifact_cache
+    if _calibrator_artifact_cache is not None:
+        return _calibrator_artifact_cache
+    try:
+        with open(CALIBRATOR_ARTIFACT_FILE, 'r', encoding='utf-8') as fh:
+            _calibrator_artifact_cache = json.load(fh)
+    except (OSError, json.JSONDecodeError):
+        _calibrator_artifact_cache = {}
+    return _calibrator_artifact_cache or None
 
 # T17-03: λ escalado por tier (Nodo-17)
 # Grand Slam: modelo calibrado n=31, señal limpia → λ base 0.5
@@ -443,8 +476,67 @@ def actualizar_calibracion(superficie: str, zona: str, correcto: bool):
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# D173-06 (Nodo-173): guard de confianza fantasma (defensa en profundidad)
+# ─────────────────────────────────────────────────────────────────────────────
+
+def _phantom_confidence_cap(p_modelo: float, rival_ranking_missing: bool,
+                             fav_ranking_missing: bool, n_h2h: int):
+    """D173-06: la ausencia de datos no puede producir alta convicción.
+
+    Cuando falta el ranking de alguno de los dos jugadores, p_modelo se acota a
+    PHANTOM_CAP. Función pura — no muta nada, no hace I/O.
+
+    Returns:
+        (p_ajustada, motivo) — motivo es None si el cap no muerde (p_modelo ya
+        estaba <= PHANTOM_CAP, o no falta ranking de ninguno de los 2).
+    """
+    if not (rival_ranking_missing or fav_ranking_missing):
+        return p_modelo, None
+    if p_modelo <= PHANTOM_CAP:
+        return p_modelo, None
+    motivo = (
+        f'D173-06: ranking ausente (rival={rival_ranking_missing}, '
+        f'fav={fav_ranking_missing}, n_h2h={n_h2h}) — p_modelo {p_modelo:.3f} '
+        f'acotado a {PHANTOM_CAP:.2f}'
+    )
+    return PHANTOM_CAP, motivo
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # L1 — KELLY-KL CORE
 # ─────────────────────────────────────────────────────────────────────────────
+
+# ─────────────────────────────────────────────────────────────────────────────
+# D173-01 (Nodo-173): Telemetría de embudo — gate_ledger
+#
+# Problema (Nodo-173 §2): "hoy no hubo señales" era INFALSIFICABLE — no existía
+# registro de qué gate mató qué pick. Esta función es PURAMENTE OBSERVACIONAL:
+# nunca muta 'apostar' ni ninguna otra decisión. Append-only.
+# ─────────────────────────────────────────────────────────────────────────────
+
+def registrar_gate(resultado: dict, gate_id: str, motivo: str) -> None:
+    """Anota en resultado['gate_ledger'] el gate que bloqueó este pick.
+
+    Append-only. El PRIMER gate que bloquea queda en resultado['gate_bloqueante'].
+    Los subsiguientes se acumulan en la lista pero NO sobreescriben el primero.
+    NUNCA muta 'apostar' — es puramente observacional (D173-01, restricción dura).
+
+    Args:
+        resultado: dict del pick (mutado in-place).
+        gate_id:   identificador canónico del gate (ej. 'G_T32_01').
+        motivo:    texto legible del porqué.
+    """
+    if not isinstance(resultado, dict):
+        return
+    ledger = resultado.get('gate_ledger')
+    if not isinstance(ledger, list):
+        ledger = []
+        resultado['gate_ledger'] = ledger
+    ledger.append({'gate': gate_id, 'motivo': motivo})
+    # El primero que bloquea es el bloqueante — nunca se sobreescribe.
+    if not resultado.get('gate_bloqueante'):
+        resultado['gate_bloqueante'] = gate_id
+
 
 def calcular_edge(
     p_modelo: float,
@@ -514,11 +606,34 @@ def calcular_edge(
     # puede ser "fantasma" porque cuota baja acota el gap p_modelo - p_implicita.
     # T33-01 (Nodo-33): el bloqueo n_h2h=0 se aplica en calcular_edge_completo()
     # después de que _n_h2h_v = resultado['n_h2h'] esté disponible — ver línea ~800.
-    apostar = (
-        edge > EDGE_MIN
-        and kelly_kl_ajustado > KELLY_KL_MIN
-        and (p_modelo >= P_MODELO_MIN_UNDERDOG or cuota_favorito < 2.10)
-    )
+    _g_edge_ok  = edge > EDGE_MIN
+    _g_kelly_ok = kelly_kl_ajustado > KELLY_KL_MIN
+    _g_t32_ok   = (p_modelo >= P_MODELO_MIN_UNDERDOG or cuota_favorito < 2.10)
+
+    apostar = _g_edge_ok and _g_kelly_ok and _g_t32_ok
+
+    # ── D173-01 (Nodo-173): gate_ledger de los 3 gates de calcular_edge ──────
+    # Observacional puro: registra qué falló, en orden, sin tocar `apostar`.
+    # El dict retornado por esta función ES `resultado` en calcular_edge_completo,
+    # así que los gates posteriores siguen anexando al mismo ledger.
+    _ledger_ce: list = []
+    if not _g_edge_ok:
+        _ledger_ce.append({
+            'gate': 'G_EDGE_MIN',
+            'motivo': f'edge={edge:.4f} <= EDGE_MIN={EDGE_MIN}',
+        })
+    if not _g_kelly_ok:
+        _ledger_ce.append({
+            'gate': 'G_KELLY_MIN',
+            'motivo': f'kelly_kl_ajustado={kelly_kl_ajustado:.4f} <= KELLY_KL_MIN={KELLY_KL_MIN}',
+        })
+    if not _g_t32_ok:
+        _ledger_ce.append({
+            'gate': 'G_T32_01',
+            'motivo': (f'T32-01: p_modelo={p_modelo:.3f} < {P_MODELO_MIN_UNDERDOG} '
+                       f'y cuota={cuota_favorito:.2f} >= 2.10'),
+        })
+    _gate_bloqueante_ce = _ledger_ce[0]['gate'] if _ledger_ce else None
 
     # B-09: Confidence flag — classify conviction level of p_modelo
     # STRONG (p>=0.60): high conviction, full sizing
@@ -552,6 +667,9 @@ def calcular_edge(
         'confidence_flag':    confidence_flag,  # B-09: STRONG/MODERATE/LOW
         'calibration_confidence': round(calibration_confidence, 4),  # B-10
         'n_calibracion':     n_calibracion,  # B-10: transparency
+        # D173-01: telemetría de embudo (observacional, no altera decisiones)
+        'gate_ledger':       _ledger_ce,
+        'gate_bloqueante':   _gate_bloqueante_ce,
     }
 
 
@@ -877,6 +995,59 @@ def _calc_meta_score_directo(resultado: dict) -> int:
     return score
 
 
+_HCUC_QUALIFYING_TIERS = frozenset({'atp500', 'atp1000', 'gs', 'wta500'})
+_HCUC_CAMPEON_DIAS_MAX = 30
+_HCUC_RACHA_HOT_CONF_MIN = 0.60
+
+
+def _calc_hcuc_convergence(resultado: dict, surf_fav: dict, surf_dog: dict) -> dict:
+    """Nodo-155 D155-02: HCUC (Hard+Coinflip+Underdog+Convergencia), H152-01.
+
+    Gates base (todos deben cumplirse): superficie dura, quality>=16.5,
+    delta favorito-rival>=0.08, p_modelo en [0.495,0.52] (coin flip real),
+    cuota_favorito en [2.3,3.0]. Sobre esa base, colecta señales especiales
+    (RACHA_HOT / SCALP_TOP20 / CAMPEON_RECIENTE / CAMPEONATOS_EXPIRADOS) —
+    requiere al menos una para match=True.
+    OBSERVACIONAL — no modifica edge, kelly_kl, apostar ni ningún gate.
+    """
+    if (resultado.get('superficie') or '').lower() not in ('dura', 'hard'):
+        return {'match': False, 'signals': []}
+
+    quality = surf_fav.get('score', 0.0) or 0.0
+    puntaje_delta = quality - (surf_dog.get('score', 0.0) or 0.0)
+    p_modelo = resultado.get('p_modelo', 0.0) or 0.0
+    cuota_fav = resultado.get('cuota_favorito', 0.0) or 0.0
+
+    if quality < 16.5 or puntaje_delta < 0.08:
+        return {'match': False, 'signals': []}
+    if not (0.495 <= p_modelo <= 0.52):
+        return {'match': False, 'signals': []}
+    if not (2.3 <= cuota_fav <= 3.0):
+        return {'match': False, 'signals': []}
+
+    signals = []
+
+    if (resultado.get('markov_favorito') == 'HOT'
+            and (resultado.get('markov_conf_fav', 0.0) or 0.0) >= _HCUC_RACHA_HOT_CONF_MIN):
+        signals.append('RACHA_HOT')
+
+    if (surf_fav.get('top20_wins', 0) or 0) > 0:
+        signals.append('SCALP_TOP20')
+
+    _dias = surf_fav.get('campeon_days_ago')
+    _tier = surf_fav.get('campeon_tier')
+    if (_dias is not None and _dias <= _HCUC_CAMPEON_DIAS_MAX
+            and _tier in _HCUC_QUALIFYING_TIERS):
+        signals.append('CAMPEON_RECIENTE')
+
+    if (surf_fav.get('campeonatos_expirados_count', 0) or 0) > 0:
+        signals.append('CAMPEONATOS_EXPIRADOS')
+
+    if not signals:
+        return {'match': False, 'signals': []}
+    return {'match': True, 'signals': signals}
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # PIPELINE COMPLETO POR PARTIDO
 # ─────────────────────────────────────────────────────────────────────────────
@@ -905,6 +1076,31 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
     # Probabilidad del modelo (confidence viene en 0-100)
     p_modelo = confidence / 100.0
 
+    # ── D173-03 (Nodo-173): margen crudo con signo ───────────────────────────
+    # rivalry_analyzer expone score_margin_raw = final_p1 - final_p2 (signo
+    # respecto a p1). Aquí se re-orienta al FAVORITO PREDICHO, de modo que
+    # score_margin_signed > 0 significa "el modelo prefiere a quien eligió".
+    # Fallback para h2h antiguos sin los campos D173-03: se reconstruye desde
+    # scores.score_difference (redondeado a 2 dec) y, en último caso, queda None
+    # — el calibrador trata None como feature ausente, nunca como 0.
+    _score_margin_p1 = pred.get('score_margin_raw')
+    _score_sum_raw   = pred.get('score_sum_raw')
+    if _score_margin_p1 is None:
+        _sc_legacy = pred.get('scores') or {}
+        _score_margin_p1 = _sc_legacy.get('score_difference')
+        if _score_sum_raw is None:
+            _w1 = _sc_legacy.get('p1_final_weight')
+            _w2 = _sc_legacy.get('p2_final_weight')
+            if _w1 is not None and _w2 is not None:
+                _score_sum_raw = round(float(_w1) + float(_w2), 4)
+    if _score_margin_p1 is None:
+        _score_margin_signed = None
+    else:
+        # favored == jugador2 → el margen respecto a p1 es negativo para el favorito
+        _score_margin_signed = round(
+            float(_score_margin_p1) if favored == jugador1 else -float(_score_margin_p1), 4
+        )
+
     # Determinar cuota del favorito predicho
     if favored == jugador1:
         cuota_fav = cuota1
@@ -924,6 +1120,14 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
         rank_rival = _get_ranking(ra, jugador1)
     else:
         return None  # nombre no coincide exactamente — skip
+
+    # ── D173-06 (Nodo-173): guard de confianza fantasma — ANTES del edge ────
+    # Defensa independiente de USE_CALIBRATOR: la ausencia de ranking no puede
+    # producir alta convicción. Acota p_modelo antes de que alimente Kelly-KL.
+    _n_h2h_pre = len([m for m in partido.get('enfrentamientos_directos', []) if isinstance(m, dict)])
+    p_modelo, _phantom_motivo = _phantom_confidence_cap(
+        p_modelo, rank_rival is None, rank_fav is None, _n_h2h_pre
+    )
 
     # ─── L2: Volatility Smile ───────────────────────────────
     zona = zona_cuota(cuota_fav)
@@ -1025,6 +1229,17 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
         'elo_rival':            elo_rival,
         'ranking_favorito':     rank_fav,
         'ranking_rival':        rank_rival,
+        # ── D173-03 (Nodo-173): features crudas para el calibrador D173-05 ────
+        # `score_margin_signed` es POSITIVO a favor del favorito predicho: el
+        # margen crudo de rivalry_analyzer viene con signo respecto a p1, así que
+        # se voltea cuando el favorito es p2. Repara F1 (piso 0.50 por abs()) y
+        # F2 (compresión por normalización) del Nodo-173 §1.1.
+        'score_margin_signed':   _score_margin_signed,
+        'score_sum':             _score_sum_raw,
+        # §1.8: la ausencia de ranking INFLA p_modelo (mediana 0.651 vs 0.522).
+        # El calibrador les asignará coeficiente negativo por construcción.
+        'rival_ranking_missing': bool(rank_rival is None),
+        'fav_ranking_missing':   bool(rank_fav is None),
         'kambi_event_id':       partido.get('kambi_event_id'),  # D154-06: fetch outcome puntual
         'match_url':            partido.get('match_url'),
         'match_id':             partido.get('match_id'),
@@ -1054,6 +1269,32 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
             'p1': 'EMPTY', 'p2': 'EMPTY',
         }),
     })
+
+    # ── D173-06 (Nodo-173): registrar el cap de confianza fantasma ──────────
+    # p_modelo ya venía acotado desde antes de calcular_edge() — esto solo deja
+    # constancia en el ledger (D173-01) y en resultado['p_modelo'], que ya
+    # refleja el valor acotado porque calcular_edge lo usó directamente.
+    if _phantom_motivo:
+        resultado['phantom_cap_applied'] = True
+        registrar_gate(resultado, 'G_PHANTOM_CONF', _phantom_motivo)
+
+    # ── D173-05 (Nodo-173): calibrador ancla-mercado, detrás de flag ─────────
+    # OFF por defecto (holdout no aprobó skill>0 en el primer ajuste — ver
+    # scripts/fit_probability_calibrator.py --report). Cuando se active tras un
+    # ajuste aprobado, agrega SOLO campos nuevos — 'p_modelo' nunca se toca.
+    if USE_CALIBRATOR:
+        _cal_artifact = _cargar_calibrator_artifact()
+        if _cal_artifact:
+            from core.probability_calibrator import predict_calibrated
+            _p_modelo_cal = predict_calibrated(
+                _cal_artifact,
+                p_implicita=resultado['p_implicita'],
+                score_margin_signed=_score_margin_signed if _score_margin_signed is not None else 0.0,
+                rival_ranking_missing=rank_rival is None,
+                fav_ranking_missing=rank_fav is None,
+            )
+            resultado['p_modelo_cal'] = round(_p_modelo_cal, 4)
+            resultado['edge_cal'] = round(_p_modelo_cal - resultado['p_implicita'], 4)
 
     # ─── Nodo-24: Bookmaker Blindness Scoring ───────────────────────────────
     # F-24-1: BBI — cuánto NO ve el bookmaker (0=ve todo, 1=ciego total)
@@ -1146,6 +1387,7 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
         'tier_mismatch_delta': _tier_mismatch_delta,
         'campeon_tier_nivel':  _campeon_tier_nivel,
         'campeon_tier_actual': tier if _campeon_tier_nivel else None,
+        'campeon_days_ago':    _surf_fav_65.get('campeon_days_ago') if _campeon_tier_nivel else None,
     })
 
     # ─── D64-01 (Nodo-64): RFI — Return From Inactivity. OBSERVACIONAL PURO ─────
@@ -1211,6 +1453,14 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
         superficie=_superficie_partido,
     )
 
+    # ─── D174-08 (Nodo-174 / D154-06 real): outcome_id propagado desde el h2h ───
+    # match_ledger.py (Nodo-118/143) ya adjunta outcome_id (o kambi_event_id como
+    # fallback) al partido fusionado — nunca se propagaba al edge_report, forzando
+    # a los 3 combo builders a re-resolver por name-matching cada corrida. Solo
+    # propagación (REPORTE_SOLO): no toca apostar/edge/kelly. Los builders deben
+    # preferir este campo y caer a name-matching solo si viene None.
+    resultado['outcome_id'] = partido.get('outcome_id') or partido.get('kambi_event_id')
+
     # ─── Nodo-35 / F2: HISTORIAL_NO_EXTRAIDO — bloqueo en origen + NO_DATA status ──
     # Si la extracción de historial falló para cualquiera de los dos jugadores,
     # la predicción está basada en datos incompletos → status='NO_DATA', excluido
@@ -1233,6 +1483,8 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
             f'HISTORIAL_NO_EXTRAIDO: sin datos de {", ".join(_sin_datos_nombres)} '
             f'— predicción no confiable, bloqueada en origen'
         )
+        registrar_gate(resultado, 'G_SIN_DATOS',  # D173-01
+                       f'historial no extraído: {", ".join(_sin_datos_nombres)}')
 
     # ─── Nodo-72: PHANTOM_IDENTITY gate ─────────────────────────────────────────
     # Si rivalry_analyzer detectó colisión de identidad → status=NO_DATA siempre.
@@ -1252,6 +1504,8 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
             f'PHANTOM_IDENTITY [{_ph_type}]: historial contaminado de {_ph_player} '
             f'— predicción no confiable, bloqueada en origen'
         )
+        registrar_gate(resultado, 'G_PHANTOM',  # D173-01
+                       f'PHANTOM_IDENTITY [{_ph_type}] en {_ph_player}')
 
     # ─── D152-04 (Nodo-152): Phantom History — circuito incorrecto vía thf_cache ──
     # Lee data_quality.history_contamination propagado desde ninja_h2h_parser D152-03.
@@ -1268,6 +1522,8 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
             f'PHANTOM_HISTORY [D152-04]: historial contaminado (score={_hc_score}) '
             f'de {_hc_who} — thf_cache asignó historial de circuito incorrecto'
         )
+        registrar_gate(resultado, 'G_HIST_CONTAM',  # D173-01
+                       f'PHANTOM_HISTORY [D152-04] score={_hc_score} en {_hc_who}')
         logger.warning(
             f"[D152-04] PHANTOM_HISTORY: {_hc_who} score={_hc_score} | "
             f"partido={partido.get('jugador1')} vs {partido.get('jugador2')}"
@@ -1297,6 +1553,8 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
                 f'ELO_RANK_INCOHERENCE [D152-05]: elo={_elo_152:.0f} incompatible con '
                 f'ranking={_rk_152} en tier={_tier_152} — historial contaminado probable'
             )
+            registrar_gate(resultado, 'G_ELO_INCOHERENTE',  # D173-01
+                           f'elo={_elo_152:.0f} vs ranking={_rk_152} en tier={_tier_152}')
 
     # ─── FIX-3 / REGLA-N28-F2-1: n_axes_active < 2 → watchlist ────────────────
     # BBI sola (1 eje activo) tiene 29% hit rate histórico — peor que random.
@@ -1304,6 +1562,8 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
     if _tas['n_axes_active'] < 2 and resultado.get('apostar'):
         resultado['apostar'] = False
         resultado['motivo_reclasificacion'] = 'N28F2: n_axes_active < 2 (BBI sola no predice)'
+        registrar_gate(resultado, 'G_N28F2',  # D173-01
+                       f"n_axes_active={_tas['n_axes_active']} < 2")
 
     # ─── FIX-6 / Markov×BBI: HOT sin BBI alto = trampa de mercado ───────────────
     # Pipeline tracker S-27-4b: HOT = 9.1% hit (1W/10L), NEUTRAL = 40% (4W/6L).
@@ -1315,6 +1575,8 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
     if _markov_fav == 'HOT' and _bbi < 0.50 and resultado.get('apostar'):
         resultado['apostar'] = False
         resultado['motivo_reclasificacion'] = resultado.get('motivo_reclasificacion', '') or 'HOT_sin_BBI: bookmaker ya pricea momentum (BBI<0.50)'
+        registrar_gate(resultado, 'G_HOT_SIN_BBI',  # D173-01
+                       f'markov_favorito=HOT con bbi={_bbi:.2f} < 0.50')
 
     # ─── T33-01 (Nodo-33): Bloqueo coin-flip n_h2h=0 ──────────────────────────
     # BUG-33-1: James-Stein con n_cal=0 colapsa p_blend → 0.50 (solo prior).
@@ -1328,6 +1590,8 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
             resultado.get('motivo_reclasificacion', '') or
             f'T33-01: n_h2h=0 + p_modelo={p_modelo:.3f}<{P_MODELO_MIN_UNDERDOG} (coin-flip bloqueado)'
         )
+        registrar_gate(resultado, 'G_T33_01',  # D173-01
+                       f'n_h2h=0 + p_modelo={p_modelo:.3f} < {P_MODELO_MIN_UNDERDOG}')
 
     # ─── D60-06 (Nodo-60-ADDON): GCS Special Gate ─────────────────────────────────
     # FABLE-ADDENDUM: _GCS_GATE_ENABLED=False hasta que H60-01 gradúe (n≥30).
@@ -1458,6 +1722,12 @@ def calcular_edge_completo(partido: dict, calibracion: dict) -> Optional[dict]:
     resultado['direccion_meta']             = _direccion_meta
     resultado['rival_value_delegado_h8801'] = bool(_score_rv >= 1)
 
+    # ─── Nodo-155 D155-02: HCUC convergencia (H152-01) — REPORTE_SOLO ──────
+    # Reutiliza _surf_fav/_surf_dog ya en scope (misma función, sin shadowing).
+    _hcuc = _calc_hcuc_convergence(resultado, _surf_fav, _surf_dog)
+    resultado['hcuc_convergence'] = _hcuc['match']
+    resultado['hcuc_signals'] = _hcuc['signals']
+
     return resultado
 
 
@@ -1562,6 +1832,37 @@ def procesar_archivo_h2h(h2h_file: str, output_file: Optional[str] = None, shado
     edges_positivos = [r['edge'] for r in resultados if r['edge'] > 0]
     n_calibracion = calibracion['global']['wins'] + calibracion['global']['losses']
 
+    # ── D173-01 (Nodo-173): agregación del embudo ────────────────────────────
+    # Cuenta el gate BLOQUEANTE (el primero) de cada pick procesado. Los picks
+    # sin gate bloqueante son los que sobreviven todos los filtros.
+    # Invariante (test_173_04): sum(por_gate.values()) + n_sobrevive == n_procesados.
+    _funnel_por_gate: dict = {}
+    _funnel_sobrevive = 0
+    for _r in resultados:
+        _gb = _r.get('gate_bloqueante') if isinstance(_r, dict) else None
+        if _gb:
+            _funnel_por_gate[_gb] = _funnel_por_gate.get(_gb, 0) + 1
+        else:
+            _funnel_sobrevive += 1
+    _funnel = {
+        'n_procesados': len(resultados),
+        'por_gate':     dict(sorted(_funnel_por_gate.items(), key=lambda kv: -kv[1])),
+        'n_sobrevive':  _funnel_sobrevive,
+    }
+
+    # ── D174-11 (Nodo-174): telemetría del gate Kambi ────────────────────────
+    # Complementa D90-01/_annotate_kambi. El % de exclusión por falta de
+    # cobertura Betplay merece una línea en el reporte diario, no un
+    # descubrimiento por auditoría (Nodo-174 §D174-11).
+    _kambi_disp = sum(1 for _r in resultados if _r.get('kambi_disponible') is True)
+    _kambi_no_disp = sum(1 for _r in resultados if _r.get('kambi_disponible') is False)
+    _kambi_desconocido = len(resultados) - _kambi_disp - _kambi_no_disp
+    _kambi_telemetry = {
+        'n_disponibles':    _kambi_disp,
+        'n_no_disponibles': _kambi_no_disp,
+        'n_desconocido':    _kambi_desconocido,
+    }
+
     output = {
         'metadata': {
             'fecha':          datetime.now().isoformat(),
@@ -1574,11 +1875,25 @@ def procesar_archivo_h2h(h2h_file: str, output_file: Optional[str] = None, shado
             'calibracion_n':  n_calibracion,
             'calibracion_nota': 'Prior uniforme hasta n≥30' if n_calibracion < 30 else 'Calibrado',
             'gate_version':   GATE_VERSION,  # Nodo-32 Acción 3: versión del gate para validación
+            # D173-01: telemetría de embudo — hace falsificable "hoy no hubo señales"
+            'funnel':         _funnel,
+            # D174-11: telemetría del gate Kambi — {n_disponibles,n_no_disponibles,n_desconocido}
+            'kambi':          _kambi_telemetry,
+            # D173-02: conteos pre-serialización. Los caps desaparecieron, pero estos
+            # campos quedan para que ningún consumidor tenga que inferir totales.
+            'n_watchlist_total': len(no_apostar_lista),
+            'n_sin_edge_total':  len(edge_negativo),
+            'n_sin_datos_total': len(sin_datos),
         },
         'apostar': apostar_lista,
-        'watchlist': no_apostar_lista[:50],   # D154-01: cap 10→50 (antes 53 picks ocultos)
-        'sin_edge': edge_negativo[:5],         # sample de edge negativo
-        'sin_datos': sin_datos[:5],
+        # ── D173-02 (Nodo-173 §1.9): caps de serialización ELIMINADOS ────────
+        # watchlist estaba en [:50] y saturado en 48/50 (D154-01 lo había subido
+        # de 10 a 50). sin_edge estaba en [:5] sobre 214 picks reales (2.3%) —
+        # y RIVAL VALUE (H88-01), la estrategia de mayor ROI, consume ese bucket.
+        # Todo consumidor que necesite un límite debe declararlo en su propio código.
+        'watchlist': no_apostar_lista,
+        'sin_edge': edge_negativo,
+        'sin_datos': sin_datos,
         'no_data': no_data_lista,              # F2: historial EMPTY — excluido de todos los pools
     }
 

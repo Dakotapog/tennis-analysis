@@ -1,0 +1,263 @@
+{
+  "generated_at": "2026-07-17T16:44:01.495871",
+  "edge_report_fuente": "edge_report_20260717_164400.json",
+  "fecha": "20260717",
+  "n_picks_analizados": 14,
+  "n_score_directo_3plus": 0,
+  "n_split": 1,
+  "h98_01_n_actual": 0,
+  "picks_score_directo_3plus": [],
+  "picks_split": [
+    {
+      "partido": "Julie Struplova vs Aneta Kucmova",
+      "favorito": "Julie Struplova",
+      "score_directo": 2,
+      "score_rival_value": 1,
+      "direccion": "SPLIT",
+      "senales_activas_fav": [
+        "HOT",
+        "IRP_delta_negativo"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.2092,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "sin_edge"
+    }
+  ],
+  "todos_los_picks": [
+    {
+      "partido": "Adolfo Daniel Vallejo vs Luciano Darderi",
+      "favorito": "Adolfo Daniel Vallejo",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "IRP_delta_negativo"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1366,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Elizabeth Mandlik vs Kayla Cross",
+      "favorito": "Kayla Cross",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1308,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Jangjun Kim vs Fitriadi M Rifqi",
+      "favorito": "Fitriadi M Rifqi",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1138,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Dana Guzman vs Alina Shcherbinina",
+      "favorito": "Alina Shcherbinina",
+      "score_directo": 2,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT",
+        "ELO_DOM"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1028,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Maxwell Mckennon vs Pablo Perez Ramos",
+      "favorito": "Pablo Perez Ramos",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0552,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Eric Vanshelboim vs Pablo Martinez Gomez",
+      "favorito": "Pablo Martinez Gomez",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0378,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Alexander Weis vs Geoffrey Blancaneaux",
+      "favorito": "Alexander Weis",
+      "score_directo": 2,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT",
+        "ELO_DOM"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0212,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Tessa Johanna Brockmann vs Irene Burillo Escorihuela",
+      "favorito": "Tessa Johanna Brockmann",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0088,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Mayar Sherif vs Oleksandra Oliynykova",
+      "favorito": "Mayar Sherif",
+      "score_directo": 2,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT",
+        "IRP_delta_negativo"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0034,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Julie Struplova vs Aneta Kucmova",
+      "favorito": "Julie Struplova",
+      "score_directo": 2,
+      "score_rival_value": 1,
+      "direccion": "SPLIT",
+      "senales_activas_fav": [
+        "HOT",
+        "IRP_delta_negativo"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.2092,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Tiago Cacao vs Goncalo Marques",
+      "favorito": "Tiago Cacao",
+      "score_directo": 2,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT",
+        "IRP_delta_negativo"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": -0.0552,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Martyna Kubka vs Kira Pavlova",
+      "favorito": "Martyna Kubka",
+      "score_directo": 1,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [
+        "HOT"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.1524,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Valeria Savinykh vs Justina Mikulskyte",
+      "favorito": "Justina Mikulskyte",
+      "score_directo": 1,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [
+        "IRP_delta_negativo"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.1776,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Asahi Harazaki vs Hoyoung Roh",
+      "favorito": "Hoyoung Roh",
+      "score_directo": 2,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT",
+        "IRP_delta_negativo"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": -0.0944,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "sin_edge"
+    }
+  ]
+}

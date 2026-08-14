@@ -1,0 +1,172 @@
+[
+  {
+    "nombre": "Davide Tortora",
+    "torneo": "ITF MASCULINO - INDIVIDUALES: M15 Kursumlijska Banja 9 (Serbia), arcilla",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 95.0,
+    "cuota": 2.25,
+    "ts": "2026-07-17T15:41:14.170012"
+  },
+  {
+    "nombre": "Pierre Delage",
+    "torneo": "ITF MASCULINO - INDIVIDUALES: M15 Kursumlijska Banja 9 (Serbia), arcilla",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=MODERATE)",
+    "conf": 55.1,
+    "cuota": 1.58,
+    "ts": "2026-07-17T15:41:14.170058"
+  },
+  {
+    "nombre": "Sophie Greiner",
+    "torneo": "ITF FEMENINO - INDIVIDUALES: W15 Kursumlijska Banja 9 (Serbia), arcilla",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 60.6,
+    "cuota": 2.85,
+    "ts": "2026-07-17T15:41:14.170078"
+  },
+  {
+    "nombre": "Dimitra Pavlou",
+    "torneo": "ITF FEMENINO - INDIVIDUALES: W15 Kursumlijska Banja 9 (Serbia), arcilla",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 60.1,
+    "cuota": 1.27,
+    "ts": "2026-07-17T15:41:14.170094"
+  },
+  {
+    "nombre": "Alaa Trifi",
+    "torneo": "ITF MASCULINO - INDIVIDUALES: M15 Monastir 27 (Túnez), dura",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 60.3,
+    "cuota": 2.12,
+    "ts": "2026-07-17T15:41:14.170251"
+  },
+  {
+    "nombre": "Aspen Schuman",
+    "torneo": "ITF FEMENINO - INDIVIDUALES: W15 Monastir 22 (Túnez), dura",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 78.5,
+    "cuota": 1.42,
+    "ts": "2026-07-17T15:41:14.170292"
+  },
+  {
+    "nombre": "Alejandro Tabilo",
+    "torneo": "ATP - INDIVIDUALES: Bastad (Suecia), arcilla",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 83.5,
+    "cuota": 1.72,
+    "ts": "2026-07-17T15:41:14.170437"
+  },
+  {
+    "nombre": "Pablo Perez Ramos",
+    "torneo": "ITF MASCULINO - INDIVIDUALES: M15 Castelo Branco (Portugal), dura",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=LOW)",
+    "conf": 53.2,
+    "cuota": 2.38,
+    "ts": "2026-07-17T15:41:14.170448"
+  },
+  {
+    "nombre": "Vera Zvonareva",
+    "torneo": "CHALLENGER FEMENINO - INDIVIDUALES: Istanbul 2 (Turquía), dura",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 77.0,
+    "cuota": 2.8,
+    "ts": "2026-07-17T15:41:14.170688"
+  },
+  {
+    "nombre": "Vendula Valdmannova",
+    "torneo": "CHALLENGER FEMENINO - INDIVIDUALES: Istanbul 2 (Turquía), dura",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 77.9,
+    "cuota": 1.73,
+    "ts": "2026-07-17T15:41:14.170705"
+  },
+  {
+    "nombre": "Daniele Rapagnetta",
+    "torneo": "ITF MASCULINO - INDIVIDUALES: M15 Gubbio (Italia), arcilla",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 84.9,
+    "cuota": 1.62,
+    "ts": "2026-07-17T15:41:14.170751"
+  },
+  {
+    "nombre": "Elizabeth Mandlik",
+    "torneo": "ITF FEMENINO - INDIVIDUALES: W75 Granby (Canadá), dura",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 79.0,
+    "cuota": 1.5,
+    "ts": "2026-07-17T15:41:14.170765"
+  },
+  {
+    "nombre": "Barbora Krejcikova",
+    "torneo": "WTA - INDIVIDUALES: Athens (Grecia), dura",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 78.8,
+    "cuota": 1.86,
+    "ts": "2026-07-17T15:41:14.170866"
+  },
+  {
+    "nombre": "Clara Tauson",
+    "torneo": "WTA - INDIVIDUALES: Athens (Grecia), dura",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 77.6,
+    "cuota": 1.92,
+    "ts": "2026-07-17T15:41:14.170949"
+  },
+  {
+    "nombre": "Sergi Fita Juan",
+    "torneo": "ITF MASCULINO - INDIVIDUALES: M25 Gandia (España), arcilla",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 83.0,
+    "cuota": 2.75,
+    "ts": "2026-07-17T15:41:14.171113"
+  },
+  {
+    "nombre": "Adrian Oetzbach",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_1 bloqueado",
+    "combo": "cobertura_1",
+    "ts": "2026-07-17T15:41:14.171586"
+  },
+  {
+    "nombre": "Adrian Oetzbach",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_2 bloqueado",
+    "combo": "cobertura_2",
+    "ts": "2026-07-17T15:41:14.171593"
+  },
+  {
+    "nombre": "Adrian Oetzbach",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_3 bloqueado",
+    "combo": "cobertura_3",
+    "ts": "2026-07-17T15:41:14.171597"
+  },
+  {
+    "nombre": "Adrian Oetzbach",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_4 bloqueado",
+    "combo": "cobertura_4",
+    "ts": "2026-07-17T15:41:14.171599"
+  },
+  {
+    "nombre": "Adrian Oetzbach",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_5 bloqueado",
+    "combo": "cobertura_5",
+    "ts": "2026-07-17T15:41:14.171601"
+  }
+]

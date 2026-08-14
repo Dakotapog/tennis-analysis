@@ -125,7 +125,10 @@ def test_D135_01_retorna_none_si_mercado_inexistente():
         ],
     }
 
+    # event_id distinto de test_D135_01_extrae_cuota_via_betoffer_endpoint: D153-RATELIMIT-2
+    # cachea por (event_id, direccion, linea) 30s — mismo id+UNDER+31.5 leería el 1.80
+    # cacheado por ese otro test en vez de ejecutar este fetch. Ver Nodo-174 D174-02.
     with _mock_urlopen([betoffer_ml]):
-        result = ld._extract_games_cuota_live(1028465663, "UNDER", 31.5)
+        result = ld._extract_games_cuota_live(1028465664, "UNDER", 31.5)
 
     assert result is None, f"Esperaba None cuando no hay mercado Total de juegos, obtuvo {result}"

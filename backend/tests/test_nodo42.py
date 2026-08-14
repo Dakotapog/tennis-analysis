@@ -82,13 +82,21 @@ def test_t42_02_sin_grass_mode_conf_min_intacto():
     assert cat is not None
 
 
-def test_t42_02b_extract_sin_grass_usa_conf_53():
+def test_t42_02b_extract_sin_grass_usa_conf_53(monkeypatch):
     """
     _extract_and_categorize sin parámetros usa CONF_MIN=53.
+
+    Nodo-174 D174-02: sin este monkeypatch, el gate D140-04 (Nodo-140) llama
+    load_coverage() real y excluye 'C'/'D' por no estar en la cache de Kambi
+    del día — falso negativo ajeno a la lógica de threshold que este test cubre.
     """
+    monkeypatch.setattr('scripts.fetch_kambi_coverage.load_coverage', lambda: None)
     partidos = [
         _make_partido('A', 'B', 2.5, 1.5, 51.0, 'B'),  # bloqueado: conf < 53
-        _make_partido('C', 'D', 1.3, 3.5, 54.0, 'C'),  # pasa
+        # D143-01 (Nodo-143, posterior a este test): EV_LEG_MIN=1.02 exige
+        # cuota>=1.02/0.54≈1.89 para conf=54% — cuota original 1.3 daba ev=0.70,
+        # bloqueado siempre por EV real, no por threshold (lo que este test cubre).
+        _make_partido('C', 'D', 2.0, 3.5, 54.0, 'C'),  # pasa
     ]
     picks = _extract_and_categorize(partidos, threshold=53.0)
     nombres = [p['nombre'] for p in picks]
@@ -215,11 +223,21 @@ def test_t42_05_superficie_clay_no_activa_grass_mode():
 
 # ── T42-06: VaR guard grass — total invertido ≤ 1% bankroll ─────────────────
 
-def test_t42_07_superficie_filter_excluye_clay():
+def test_t42_07_superficie_filter_excluye_clay(monkeypatch):
     """
     Con superficie_filter='grass', picks de tipo_cancha='clay' no entran al pool.
     --superficie grass NO es equivalente a --threshold 50 global.
+
+    Nodo-174 D174-02 (triaje, corregido 2026-08-06): el fixture 'Ghetu' colisionaba
+    con un jugador real del mismo apellido presente en el edge_report del día en
+    disco (apostar=False -> gate G1 de Nodo-103 lo bloqueaba), no con el gate EV_LEG_MIN
+    de D143-01 como decía el comentario original más abajo (ese calculo con la cuota
+    actual del fixture da ev_leg=0.51*2.10=1.071 >= 1.02, o sea NUNCA bloqueaba por ahí).
+    Se aisla también _load_edge_report_index para que el test no dependa de qué
+    partidos reales existan en reports/edge_report_*.json el dia que corra.
     """
+    monkeypatch.setattr('scripts.fetch_kambi_coverage.load_coverage', lambda: None)
+    monkeypatch.setattr('combo_confianza_builder._load_edge_report_index', lambda: {})
     partidos = [
         # Wimbledon (grass) — debe entrar
         {
@@ -233,9 +251,11 @@ def test_t42_07_superficie_filter_excluye_clay():
             }
         },
         # Roland Garros (clay) con conf=51% — NO debe entrar aunque pase el threshold
+        # (con superficie_filter='grass'; sin filtro sí debe pasar, ver assert abajo).
+        # ev_leg=0.51*2.10=1.071>=1.02 -> el gate EV D143-01 nunca bloquea este fixture.
         {
             'jugador1': 'Ghetu', 'jugador2': 'Poljak',
-            'cuota1': 1.90, 'cuota2': 1.90,
+            'cuota1': 2.10, 'cuota2': 1.90,
             'tipo_cancha': 'clay',
             'torneo_nombre': 'Troyes',
             'torneo_completo': 'CHALLENGER - Troyes, arcilla',
@@ -244,9 +264,10 @@ def test_t42_07_superficie_filter_excluye_clay():
             }
         },
         # Clay con conf=55% — tampoco debe entrar en grass filter
+        # ev_leg=0.55*1.90=1.045>=1.02 -> el gate EV D143-01 nunca bloquea este fixture.
         {
             'jugador1': 'Dellien', 'jugador2': 'Rival',
-            'cuota1': 1.35, 'cuota2': 2.80,
+            'cuota1': 1.90, 'cuota2': 2.80,
             'tipo_cancha': 'clay',
             'torneo_nombre': 'Brasov',
             'torneo_completo': 'CHALLENGER - Brasov, arcilla',

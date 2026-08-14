@@ -1,0 +1,871 @@
+{
+  "generated_at": "2026-07-29T11:50:21.316484",
+  "days_scanned": 30,
+  "total_partidos_escaneados": 9329,
+  "total_contaminados": 51,
+  "total_picks_afectados_shadow_book": 3,
+  "contaminados": [
+    {
+      "archivo": "h2h_results_enhanced_20260630_183803.json",
+      "jugador": "De Waal Willem",
+      "rival": "Brown Preston",
+      "torneo": "ITF MASCULINO - INDIVIDUALES: M15 Hillcrest (Sudáfrica), dura",
+      "tier": "itf",
+      "provenance": "unknown",
+      "contamination_score": 170,
+      "evidence": [
+        "GS_TOP10x2: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=96 imposible para ITF"
+      ],
+      "n_history": 131,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260630_183803.json",
+      "jugador": "Van Deventer Dehan",
+      "rival": "Piatti Rocco",
+      "torneo": "ITF MASCULINO - INDIVIDUALES: M15 Hillcrest (Sudáfrica), dura",
+      "tier": "itf",
+      "provenance": "unknown",
+      "contamination_score": 170,
+      "evidence": [
+        "GS_TOP10x2: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=96 imposible para ITF"
+      ],
+      "n_history": 131,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260630_183803.json",
+      "jugador": "Marino Rebecca",
+      "rival": "Kaji Haruka",
+      "torneo": "ITF FEMENINO - INDIVIDUALES: W100 Cary, NC (Estados Unidos), dura",
+      "tier": "itf",
+      "provenance": "unknown",
+      "contamination_score": 170,
+      "evidence": [
+        "GS_TOP10x2: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=136 imposible para ITF"
+      ],
+      "n_history": 128,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260630_235610.json",
+      "jugador": "De Waal W",
+      "rival": "Brown P.",
+      "torneo": "M15 Hillcrest (Sudáfrica)",
+      "tier": "itf",
+      "provenance": "unknown",
+      "contamination_score": 170,
+      "evidence": [
+        "GS_TOP10x4: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=129 imposible para ITF"
+      ],
+      "n_history": 125,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260630_235610.json",
+      "jugador": "Jutresa H",
+      "rival": "Gnjidic J.",
+      "torneo": "M15 Umag (Croacia)",
+      "tier": "itf",
+      "provenance": "unknown",
+      "contamination_score": 50,
+      "evidence": [
+        "MEDIAN_OPP_RANK=138 imposible para ITF"
+      ],
+      "n_history": 45,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260630_235610.json",
+      "jugador": "Bredenkamp R",
+      "rival": "Peet F.",
+      "torneo": "W15 Hillcrest (Sudáfrica)",
+      "tier": "itf",
+      "provenance": "unknown",
+      "contamination_score": 50,
+      "evidence": [
+        "MEDIAN_OPP_RANK=56 imposible para ITF"
+      ],
+      "n_history": 45,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260701_005931.json",
+      "jugador": "Corentin Denolly",
+      "rival": "Drazen Petrovic",
+      "torneo": "W15 Kursumlijska Banja 7 (Serbia)",
+      "tier": "itf",
+      "provenance": "unknown",
+      "contamination_score": 170,
+      "evidence": [
+        "GS_TOP10x4: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=85 imposible para ITF"
+      ],
+      "n_history": 146,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260701_021826.json",
+      "jugador": "Kurmanaev R",
+      "rival": "Bittoun C.",
+      "torneo": "M15 Kayseri 7 (Turquía)",
+      "tier": "itf",
+      "provenance": "unknown",
+      "contamination_score": 120,
+      "evidence": [
+        "GS_TOP10x2: rivals top-10 en Grand Slams"
+      ],
+      "n_history": 150,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260701_022546.json",
+      "jugador": "Kurmanaev R",
+      "rival": "Bittoun C.",
+      "torneo": "M15 Kayseri 7 (Turquía)",
+      "tier": "itf",
+      "provenance": "unknown",
+      "contamination_score": 120,
+      "evidence": [
+        "GS_TOP10x2: rivals top-10 en Grand Slams"
+      ],
+      "n_history": 150,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260701_022546.json",
+      "jugador": "Garcia Alonso C",
+      "rival": "Ivanova B.",
+      "torneo": "W15 Kursumlijska Banja 7 (Serbia)",
+      "tier": "itf",
+      "provenance": "unknown",
+      "contamination_score": 120,
+      "evidence": [
+        "GS_TOP10x6: rivals top-10 en Grand Slams"
+      ],
+      "n_history": 139,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260701_030138.json",
+      "jugador": "Polina Kuharenko",
+      "rival": "Aran Teixido Garcia",
+      "torneo": "M15 Getxo (España)",
+      "tier": "itf",
+      "provenance": "unknown",
+      "contamination_score": 170,
+      "evidence": [
+        "GS_TOP10x2: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=145 imposible para ITF"
+      ],
+      "n_history": 121,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260701_030138.json",
+      "jugador": "Corentin Denolly",
+      "rival": "Drazen Petrovic",
+      "torneo": "W15 Kursumlijska Banja 7 (Serbia)",
+      "tier": "itf",
+      "provenance": "unknown",
+      "contamination_score": 170,
+      "evidence": [
+        "GS_TOP10x4: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=85 imposible para ITF"
+      ],
+      "n_history": 146,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260701_030138.json",
+      "jugador": "Dehan van Deventer",
+      "rival": "Rocco Piatti",
+      "torneo": "M15 Hillcrest (Sudáfrica)",
+      "tier": "itf",
+      "provenance": "unknown",
+      "contamination_score": 170,
+      "evidence": [
+        "GS_TOP10x2: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=92 imposible para ITF"
+      ],
+      "n_history": 132,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260701_030138.json",
+      "jugador": "Chloe Paquet",
+      "rival": "Julia Stusek",
+      "torneo": "W50 Stuttgart-Vaihingen (Alemania)",
+      "tier": "itf",
+      "provenance": "unknown",
+      "contamination_score": 50,
+      "evidence": [
+        "MEDIAN_OPP_RANK=146 imposible para ITF"
+      ],
+      "n_history": 115,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260701_030138.json",
+      "jugador": "Maria Lourdes Carle",
+      "rival": "Valentina Steiner",
+      "torneo": "W50 Stuttgart-Vaihingen (Alemania)",
+      "tier": "itf",
+      "provenance": "unknown",
+      "contamination_score": 120,
+      "evidence": [
+        "GS_TOP10x3: rivals top-10 en Grand Slams"
+      ],
+      "n_history": 116,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260702_020336.json",
+      "jugador": "Antonia Stoyanov",
+      "rival": "Anouck Vrancken Peeters",
+      "torneo": "W35 Amstelveen (Países Bajos)",
+      "tier": "itf",
+      "provenance": "thf_cache",
+      "contamination_score": 75,
+      "evidence": [
+        "MEDIAN_OPP_RANK=131 imposible para ITF",
+        "THF_CACHE_AMPLIFIER x1.5"
+      ],
+      "n_history": 122,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260702_020336.json",
+      "jugador": "Maria Lourdes Carle",
+      "rival": "Dalila Jakupovic",
+      "torneo": "W50 Stuttgart-Vaihingen (Alemania)",
+      "tier": "itf",
+      "provenance": "ninja_api",
+      "contamination_score": 120,
+      "evidence": [
+        "GS_TOP10x3: rivals top-10 en Grand Slams"
+      ],
+      "n_history": 115,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260703_003059.json",
+      "jugador": "Maria Lourdes Carle",
+      "rival": "Lisa Pigato",
+      "torneo": "W50 Stuttgart-Vaihingen (Alemania)",
+      "tier": "itf",
+      "provenance": "ninja_api",
+      "contamination_score": 120,
+      "evidence": [
+        "GS_TOP10x3: rivals top-10 en Grand Slams"
+      ],
+      "n_history": 115,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260707_002855.json",
+      "jugador": "Ella Seidel",
+      "rival": "Anastasia Kulikova",
+      "torneo": "W50 Corroios-Seixal (Portugal)",
+      "tier": "itf",
+      "provenance": "ninja_api",
+      "contamination_score": 50,
+      "evidence": [
+        "MEDIAN_OPP_RANK=146 imposible para ITF"
+      ],
+      "n_history": 126,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260707_002855.json",
+      "jugador": "Chloe Paquet",
+      "rival": "Justina Mikulskyte",
+      "torneo": "W75 The Hague (Países Bajos)",
+      "tier": "itf",
+      "provenance": "ninja_api",
+      "contamination_score": 50,
+      "evidence": [
+        "MEDIAN_OPP_RANK=146 imposible para ITF"
+      ],
+      "n_history": 115,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260707_002855.json",
+      "jugador": "Lucia Bronzetti",
+      "rival": "Georgina Garcia Perez",
+      "torneo": "W100 Aschaffenburg (Alemania)",
+      "tier": "itf",
+      "provenance": "ninja_api",
+      "contamination_score": 50,
+      "evidence": [
+        "MEDIAN_OPP_RANK=121 imposible para ITF"
+      ],
+      "n_history": 124,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260708_010759.json",
+      "jugador": "Antoni Kasperski",
+      "rival": "Lorenzo Balducci",
+      "torneo": "M15 Lodz (Polonia)",
+      "tier": "itf",
+      "provenance": "thf_cache",
+      "contamination_score": 75,
+      "evidence": [
+        "MEDIAN_OPP_RANK=133 imposible para ITF",
+        "THF_CACHE_AMPLIFIER x1.5"
+      ],
+      "n_history": 122,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": true
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260708_010759.json",
+      "jugador": "Jule Niemeier",
+      "rival": "Alessandra Mazzola",
+      "torneo": "W100 Aschaffenburg (Alemania)",
+      "tier": "itf",
+      "provenance": "ninja_api",
+      "contamination_score": 170,
+      "evidence": [
+        "GS_TOP10x2: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=147 imposible para ITF"
+      ],
+      "n_history": 139,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260708_011921.json",
+      "jugador": "Jule Niemeier",
+      "rival": "Alessandra Mazzola",
+      "torneo": "W100 Aschaffenburg (Alemania)",
+      "tier": "itf",
+      "provenance": "ninja_api",
+      "contamination_score": 170,
+      "evidence": [
+        "GS_TOP10x2: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=147 imposible para ITF"
+      ],
+      "n_history": 139,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260708_013446.json",
+      "jugador": "Jule Niemeier",
+      "rival": "Alessandra Mazzola",
+      "torneo": "W100 Aschaffenburg (Alemania)",
+      "tier": "itf",
+      "provenance": "ninja_api",
+      "contamination_score": 170,
+      "evidence": [
+        "GS_TOP10x2: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=147 imposible para ITF"
+      ],
+      "n_history": 139,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260708_115024.json",
+      "jugador": "Niemeier J",
+      "rival": "Mazzola A.",
+      "torneo": "W100 Aschaffenburg (Alemania)",
+      "tier": "itf",
+      "provenance": "ninja_api",
+      "contamination_score": 120,
+      "evidence": [
+        "GS_TOP10x2: rivals top-10 en Grand Slams"
+      ],
+      "n_history": 139,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260708_115024.json",
+      "jugador": "Morris A",
+      "rival": "Kha N.",
+      "torneo": "W15 Rancho Santa Fe, CA (Estados Unidos)",
+      "tier": "itf",
+      "provenance": "ninja_api",
+      "contamination_score": 270,
+      "evidence": [
+        "ELITE_TOURNAMENT: Finals - Turín (n=6)",
+        "GS_TOP10x6: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=58 imposible para ITF"
+      ],
+      "n_history": 155,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260708_115024.json",
+      "jugador": "Marino R",
+      "rival": "Matushkina K.",
+      "torneo": "W50 Columbus, OH (Estados Unidos)",
+      "tier": "itf",
+      "provenance": "ninja_api",
+      "contamination_score": 120,
+      "evidence": [
+        "GS_TOP10x2: rivals top-10 en Grand Slams"
+      ],
+      "n_history": 128,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260708_115024.json",
+      "jugador": "Spencer A",
+      "rival": "Naito Y.",
+      "torneo": "W50 Columbus, OH (Estados Unidos)",
+      "tier": "itf",
+      "provenance": "thf_cache",
+      "contamination_score": 405,
+      "evidence": [
+        "ELITE_TOURNAMENT: Finals - Turín (n=6)",
+        "GS_TOP10x6: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=70 imposible para ITF",
+        "THF_CACHE_AMPLIFIER x1.5"
+      ],
+      "n_history": 155,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260708_123014.json",
+      "jugador": "Ariana Morris",
+      "rival": "Natalie Kha",
+      "torneo": "W15 Rancho Santa Fe, CA (Estados Unidos)",
+      "tier": "itf",
+      "provenance": "thf_cache",
+      "contamination_score": 405,
+      "evidence": [
+        "ELITE_TOURNAMENT: Finals - Turín (n=6)",
+        "GS_TOP10x6: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=47 imposible para ITF",
+        "THF_CACHE_AMPLIFIER x1.5"
+      ],
+      "n_history": 155,
+      "resultado_real": "LOST",
+      "pnl_flat": -1.0,
+      "shadow_book_hit": true
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260709_005859.json",
+      "jugador": "Jule Niemeier",
+      "rival": "Teodora Kostovic",
+      "torneo": "W100 Aschaffenburg (Alemania)",
+      "tier": "itf",
+      "provenance": "ninja_api",
+      "contamination_score": 170,
+      "evidence": [
+        "GS_TOP10x2: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=147 imposible para ITF"
+      ],
+      "n_history": 138,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260709_005859.json",
+      "jugador": "Lucia Bronzetti",
+      "rival": "Anastasiia Sobolieva",
+      "torneo": "W100 Aschaffenburg (Alemania)",
+      "tier": "itf",
+      "provenance": "ninja_api",
+      "contamination_score": 50,
+      "evidence": [
+        "MEDIAN_OPP_RANK=121 imposible para ITF"
+      ],
+      "n_history": 124,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260709_005859.json",
+      "jugador": "Maria Luisa Oliveira",
+      "rival": "Isabella Barrera Aguirre",
+      "torneo": "W15 Rio Claro (Brasil)",
+      "tier": "itf",
+      "provenance": "ninja_api",
+      "contamination_score": 50,
+      "evidence": [
+        "MEDIAN_OPP_RANK=83 imposible para ITF"
+      ],
+      "n_history": 45,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260709_005859.json",
+      "jugador": "Spencer Johnson",
+      "rival": "Youssef Kadiri Hassani",
+      "torneo": "M15 Rancho Santa Fe, CA (Estados Unidos)",
+      "tier": "itf",
+      "provenance": "ninja_api",
+      "contamination_score": 270,
+      "evidence": [
+        "ELITE_TOURNAMENT: Finals - Turín (n=6)",
+        "GS_TOP10x6: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=47 imposible para ITF"
+      ],
+      "n_history": 155,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260710_011836.json",
+      "jugador": "Alexander Weis",
+      "rival": "Cosme Rolland de Ravel",
+      "torneo": "M25 Bastia-Lucciana +H (Francia)",
+      "tier": "itf",
+      "provenance": "thf_cache",
+      "contamination_score": 405,
+      "evidence": [
+        "ELITE_TOURNAMENT: Finals - Turín (n=6)",
+        "GS_TOP10x10: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=38 imposible para ITF",
+        "THF_CACHE_AMPLIFIER x1.5"
+      ],
+      "n_history": 150,
+      "resultado_real": "LOST",
+      "pnl_flat": -1.0,
+      "shadow_book_hit": true
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260715_093443.json",
+      "jugador": "Eva Oxford",
+      "rival": "Jo-Yee Chan",
+      "torneo": "W35 Dallas, TX (Estados Unidos)",
+      "tier": "itf",
+      "provenance": "thf_cache",
+      "contamination_score": 255,
+      "evidence": [
+        "GS_TOP10x3: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=100 imposible para ITF",
+        "THF_CACHE_AMPLIFIER x1.5"
+      ],
+      "n_history": 151,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260715_225410.json",
+      "jugador": "Charrier A",
+      "rival": "Dada-Mascoll S.",
+      "torneo": "W15 Monastir 22 (Tunisia)",
+      "tier": "itf",
+      "provenance": "thf_cache",
+      "contamination_score": 405,
+      "evidence": [
+        "ELITE_TOURNAMENT: Finals - Turín (n=6)",
+        "GS_TOP10x10: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=37 imposible para ITF",
+        "THF_CACHE_AMPLIFIER x1.5"
+      ],
+      "n_history": 150,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260715_225410.json",
+      "jugador": "Marino R",
+      "rival": "Yamaguchi M.",
+      "torneo": "W75 Granby (Canada)",
+      "tier": "challenger",
+      "provenance": "ninja_api",
+      "contamination_score": 120,
+      "evidence": [
+        "GS_TOP10x2: rivals top-10 en Grand Slams"
+      ],
+      "n_history": 129,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260716_091820.json",
+      "jugador": "Rebecca Marino",
+      "rival": "Kylie Collins",
+      "torneo": "W75 Granby (Canadá)",
+      "tier": "itf",
+      "provenance": "ninja_api",
+      "contamination_score": 120,
+      "evidence": [
+        "GS_TOP10x2: rivals top-10 en Grand Slams"
+      ],
+      "n_history": 128,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260716_092232.json",
+      "jugador": "Rebecca Marino",
+      "rival": "Kylie Collins",
+      "torneo": "W75 Granby (Canadá)",
+      "tier": "itf",
+      "provenance": "ninja_api",
+      "contamination_score": 120,
+      "evidence": [
+        "GS_TOP10x2: rivals top-10 en Grand Slams"
+      ],
+      "n_history": 128,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260717_011009.json",
+      "jugador": "Rebecca Marino",
+      "rival": "Kayla Cross",
+      "torneo": "W75 Granby (Canadá)",
+      "tier": "itf",
+      "provenance": "ninja_api",
+      "contamination_score": 170,
+      "evidence": [
+        "GS_TOP10x2: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=143 imposible para ITF"
+      ],
+      "n_history": 128,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260717_014805.json",
+      "jugador": "Rebecca Marino",
+      "rival": "Kayla Cross",
+      "torneo": "W75 Granby (Canadá)",
+      "tier": "itf",
+      "provenance": "ninja_api",
+      "contamination_score": 170,
+      "evidence": [
+        "GS_TOP10x2: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=143 imposible para ITF"
+      ],
+      "n_history": 128,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260717_014805.json",
+      "jugador": "Juan Estevez",
+      "rival": "Joaquin Aguilar Cardozo",
+      "torneo": "M15 Villa Constitucion (Argentina)",
+      "tier": "itf",
+      "provenance": "thf_cache",
+      "contamination_score": 255,
+      "evidence": [
+        "GS_TOP10x2: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=105 imposible para ITF",
+        "THF_CACHE_AMPLIFIER x1.5"
+      ],
+      "n_history": 110,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260721_064304.json",
+      "jugador": "Zapp E D",
+      "rival": "Zapp E. D.",
+      "torneo": "M15 Bali (Indonesia)",
+      "tier": "itf",
+      "provenance": "thf_cache",
+      "contamination_score": 75,
+      "evidence": [
+        "MEDIAN_OPP_RANK=144 imposible para ITF",
+        "THF_CACHE_AMPLIFIER x1.5"
+      ],
+      "n_history": 125,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260721_064304.json",
+      "jugador": "Tognolini A",
+      "rival": "Ravasio G.",
+      "torneo": "M15 Segrate (Italy)",
+      "tier": "itf",
+      "provenance": "ninja_api",
+      "contamination_score": 170,
+      "evidence": [
+        "GS_TOP10x5: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=71 imposible para ITF"
+      ],
+      "n_history": 112,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260721_064304.json",
+      "jugador": "Cora-Bruneton C",
+      "rival": "Longueville R.",
+      "torneo": "W15 Nogent-sur-Marne (France)",
+      "tier": "itf",
+      "provenance": "thf_cache",
+      "contamination_score": 75,
+      "evidence": [
+        "MEDIAN_OPP_RANK=86 imposible para ITF",
+        "THF_CACHE_AMPLIFIER x1.5"
+      ],
+      "n_history": 108,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260726_002008.json",
+      "jugador": "Caroline Dolehide",
+      "rival": "Yeon Woo Ku",
+      "torneo": "Evansville",
+      "tier": "itf",
+      "provenance": "thf_cache",
+      "contamination_score": 255,
+      "evidence": [
+        "GS_TOP10x2: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=118 imposible para ITF",
+        "THF_CACHE_AMPLIFIER x1.5"
+      ],
+      "n_history": 137,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260726_113908.json",
+      "jugador": "Dolehide C",
+      "rival": "Ku Y.",
+      "torneo": "W100 Evansville, IN (Estados Unidos)",
+      "tier": "itf",
+      "provenance": "ninja_api",
+      "contamination_score": 170,
+      "evidence": [
+        "GS_TOP10x2: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=114 imposible para ITF"
+      ],
+      "n_history": 137,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260726_125010.json",
+      "jugador": "Dolehide C",
+      "rival": "Ku Y.",
+      "torneo": "W100 Evansville, IN (Estados Unidos)",
+      "tier": "itf",
+      "provenance": "ninja_api",
+      "contamination_score": 170,
+      "evidence": [
+        "GS_TOP10x2: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=114 imposible para ITF"
+      ],
+      "n_history": 137,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260729_083246.json",
+      "jugador": "Niemeier J",
+      "rival": "Samir S.",
+      "torneo": "Knokke",
+      "tier": "itf",
+      "provenance": "ninja_api",
+      "contamination_score": 120,
+      "evidence": [
+        "GS_TOP10x2: rivals top-10 en Grand Slams"
+      ],
+      "n_history": 138,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    },
+    {
+      "archivo": "h2h_results_enhanced_20260729_083246.json",
+      "jugador": "Vesantera B T",
+      "rival": "Camargo Lima E.",
+      "torneo": "Sao Paulo",
+      "tier": "itf",
+      "provenance": "thf_cache",
+      "contamination_score": 405,
+      "evidence": [
+        "ELITE_TOURNAMENT: Finals - Turín (n=8)",
+        "GS_TOP10x4: rivals top-10 en Grand Slams",
+        "MEDIAN_OPP_RANK=59 imposible para ITF",
+        "THF_CACHE_AMPLIFIER x1.5"
+      ],
+      "n_history": 151,
+      "resultado_real": null,
+      "pnl_flat": null,
+      "shadow_book_hit": false
+    }
+  ]
+}

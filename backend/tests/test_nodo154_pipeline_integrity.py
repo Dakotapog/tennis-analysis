@@ -19,14 +19,16 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 # ── D154-01: Watchlist cap 10→50 ─────────────────────────────────────────────
 
 def test_watchlist_cap_50():
-    """edge_calculator output incluye hasta 50 picks en watchlist (antes cap=10)."""
+    """D154-01 (cap 10→50) fue SUPERSEDED por Nodo-173 D173-02: watchlist ya no
+    tiene cap alguno — serializa la lista completa sin truncar (metadata.funnel
+    exige sum(por_gate)+n_sobrevive==n_procesados, imposible con truncamiento).
+    Ver CLAUDE.md §10 política de precedencia: nodo más reciente gana."""
     from edge_calculator import calcular_edge_completo  # noqa: F401
     import edge_calculator as ec
-    # Verificar que el cap en el código es 50, no 10
     import inspect
     src = inspect.getsource(ec)
-    assert 'no_apostar_lista[:50]' in src, (
-        "D154-01: watchlist cap debe ser [:50], encontrado cap distinto"
+    assert 'no_apostar_lista[:50]' not in src, (
+        "D173-02: watchlist debe estar sin cap — [:50] no debe reaparecer"
     )
     assert 'no_apostar_lista[:10]' not in src, (
         "D154-01: cap viejo [:10] todavía presente en el código"

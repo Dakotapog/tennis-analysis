@@ -35,7 +35,29 @@ import urllib.request
 from datetime import date, datetime, timedelta
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
+
+from analysis.velocity_monitor import velocity_zscore  # D167-05 (Nodo-71/D160-03 wiring)
+from core.monte_carlo_games import simular_total_juegos_condicionado, estimar_p_hold  # D167-03 (D160-02 wiring)
+from validation.hypothesis_ledger import n_actual_fresco  # D174-06 (Nodo-174)
+
+_HYPOTHESES_JSON = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                 "validation", "preregistered_hypotheses.json")
+
+
+def _n_actual_desk(h_id: str, n_stop_fallback: int) -> Tuple[Any, int]:
+    """
+    D174-06 — wrapper para el desk: intenta leer n_actual fresco (<=48h) del
+    ledger real. Si no hay dato fresco retorna ('?', n_stop_fallback) — el
+    desk NUNCA debe mostrar un n_actual viejo como si fuera vigente.
+    """
+    try:
+        fresco = n_actual_fresco(h_id, _HYPOTHESES_JSON)
+    except (OSError, json.JSONDecodeError):
+        fresco = None
+    if fresco is None:
+        return "?", n_stop_fallback
+    return fresco['n_actual'], fresco['n_stop'] or n_stop_fallback
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(levelname)s | %(message)s", datefmt="%H:%M:%S")
 logger = logging.getLogger(__name__)
@@ -124,13 +146,14 @@ def _build_combo_live(fecha: str) -> List[Dict]:
         # Usamos glob para encontrar cualquier .bat — el desk muestra el último
         bat_files = sorted(combos_dir.glob("LiveCombo_*.bat"))
         bat_link = str(bat_files[-1]) if bat_files else ""
+        _n_act, _n_stp = _n_actual_desk("H100-01", 20)
         rows.append({
             "tipo": "COMBO_LIVE",
             "jugador": event_id,
             "pick": event_id,
             "hipotesis": "H100-01",
-            "n_actual": 0,
-            "n_stop": 20,
+            "n_actual": _n_act,
+            "n_stop": _n_stp,
             "color": "amber",
             "fired_at": meta.get("fired_at", ""),
             "drift_pct": meta.get("drift_pct", 0),
@@ -156,7 +179,7 @@ def build_desk_state(fecha: Optional[str] = None) -> Dict[str, Any]:
 
     # p0_ncal: {nombre_lower: n_calibracion} para U2 en render — no cambia gates
     _ncal: Dict[str, int] = {}
-    _er = _latest(str(REPORTS / f"edge_report_{fecha.replace('-', '')}*.json"))
+    _er = _latest(str(REPORTS / f"edge_report_kambi_{fecha.replace("-", "")}*.json"))
     _er_data = _load_json(_er)
     if _er_data and isinstance(_er_data, dict):
         for _section in ("apostar", "watchlist", "sin_edge", "sin_datos"):
@@ -242,13 +265,14 @@ def accionable_ahora(state: Dict[str, Any]) -> List[Dict]:
     # P3 RIVAL_VALUE con flag activo (H88-01 — pre-graduacion, amber)
     for pick in state.get("p3_convergence", {}).get("picks", []):
         if pick.get("rival_value_flag") and pick.get("score_directo", 0) >= 1:
+            _n_act, _n_stp = _n_actual_desk("H88-01", 30)
             accionables.append({
                 "tipo": "RIVAL_VALUE",
                 "jugador": pick.get("rival", pick.get("jugador", "")),
                 "pick": pick.get("jugador", ""),
                 "hipotesis": "H88-01",
-                "n_actual": 3,
-                "n_stop": 30,
+                "n_actual": _n_act,
+                "n_stop": _n_stp,
                 "color": "amber",
                 "governor_code": gov_code,
                 "meta_score": pick.get("score_directo", 0),
@@ -260,13 +284,14 @@ def accionable_ahora(state: Dict[str, Any]) -> List[Dict]:
     # GCS activo (H60-01 GRADUADA → verde)
     for pick in state.get("p3_convergence", {}).get("picks", []):
         if pick.get("gcs_active"):
+            _n_act, _n_stp = _n_actual_desk("H60-01", 54)
             accionables.append({
                 "tipo": "GCS",
                 "jugador": pick.get("jugador", ""),
                 "pick": pick.get("jugador", ""),
                 "hipotesis": "H60-01",
-                "n_actual": 54,
-                "n_stop": 54,
+                "n_actual": _n_act,
+                "n_stop": _n_stp,
                 "color": "green",  # GRADUADA
                 "governor_code": gov_code,
                 "meta_score": pick.get("score_directo", 0),
@@ -278,13 +303,14 @@ def accionable_ahora(state: Dict[str, Any]) -> List[Dict]:
     # §4 FAVORITOS_COMPUESTOS primera clase (Nodo-110 / Nodo-114 §4)
     fav_data = _favoritos_hoy(state.get("fecha", ""))
     if fav_data is not None:
+        _n_act, _n_stp = _n_actual_desk("H110-01", 30)
         accionables.append({
             "tipo": "FAVORITOS_COMPUESTOS",
             "jugador": f"{fav_data.get('n_combos', 0)} combos",
             "pick": "FAVORITOS_COMPUESTOS",
             "hipotesis": "H110-01",
-            "n_actual": 8,   # semilla jul-14/16
-            "n_stop": 30,
+            "n_actual": _n_act,
+            "n_stop": _n_stp,
             "color": "amber",
             "governor_code": gov_code,
             "n_combos": fav_data.get("n_combos", 0),
@@ -292,13 +318,14 @@ def accionable_ahora(state: Dict[str, Any]) -> List[Dict]:
         })
     else:
         # Zero-Null: builder no corrió hoy
+        _n_act, _n_stp = _n_actual_desk("H110-01", 30)
         accionables.append({
             "tipo": "FAVORITOS_ZERO",
             "jugador": "sin correr hoy",
             "pick": "",
             "hipotesis": "H110-01",
-            "n_actual": 8,
-            "n_stop": 30,
+            "n_actual": _n_act,
+            "n_stop": _n_stp,
             "color": "amber",
             "governor_code": gov_code,
             "señales_activas": [],
@@ -442,8 +469,15 @@ def _peso_evidencia(n_cal: int) -> Dict[str, Any]:
     return {"pct": pct, "bar": bar, "label": label, "color": color, "n": n_cal}
 
 
-def _gate_barra(n_actual: int, n_stop: int) -> str:
-    """U3: barra texto █░ hacia n_stop."""
+def _gate_barra(n_actual, n_stop: int) -> str:
+    """U3: barra texto █░ hacia n_stop.
+
+    D174-06: n_actual=="?" (sin dato fresco, ver n_actual_desk) muestra
+    "n=?" explícito en vez de tratarlo como 0 — un instrumento sin dato
+    debe decir que no tiene dato, nunca fingir un conteo.
+    """
+    if n_actual == "?":
+        return "n=?"
     n_actual = int(n_actual or 0)
     n_stop = int(n_stop or 0)
     if n_stop <= 0:
@@ -513,6 +547,24 @@ def _build_x3_games(fecha: str) -> Dict[str, Any]:
         sig["cuota_t0"]    = live_s.get("cuota_t0")
         sig["linea_t0"]    = live_s.get("linea_t0")
         sig["ts_t0"]       = live_s.get("ts_t0")
+        # BUG-01: propagar convergencia_score/breakdown (D166-01/D142-02) — se
+        # calculaban en games_live_*.json pero se perdían antes de llegar al render
+        sig["convergencia_score"]     = live_s.get("convergencia_score")
+        sig["convergencia_breakdown"] = live_s.get("convergencia_breakdown")
+        # D167-01: línea/cuota actual (D158-01) se calculaban pero nunca llegaban al render
+        sig["linea_actual"] = live_s.get("linea_actual")
+        sig["cuota_actual"] = live_s.get("cuota_actual")
+        sig["linea_drift"]  = live_s.get("linea_drift")
+        sig["oc_id_actual"] = live_s.get("oc_id_actual")
+        # D167-06: wiring Nodo-160 (MC condicional D160-02 + steam detector D160-03)
+        sig["mc_p_condicional"]      = live_s.get("mc_p_condicional")
+        sig["mc_media_total_juegos"] = live_s.get("mc_media_total_juegos")
+        sig["mc_se"]                 = live_s.get("mc_se")
+        sig["mc_ic95_low"]           = live_s.get("mc_ic95_low")
+        sig["mc_ic95_high"]          = live_s.get("mc_ic95_high")
+        sig["steam_z"]               = live_s.get("steam_z")
+        sig["steam_signal"]          = live_s.get("steam_signal")
+        sig["steam_confirmado"]      = live_s.get("steam_confirmado", False)
         # Detectar TERMINADO cuando games_live no tiene el partido (hora=None o diff>130min)
         if sig["estado_live"] == "PRE_PARTIDO":
             hora_raw = sig.get("hora")
@@ -581,6 +633,7 @@ def _build_x3_games(fecha: str) -> Dict[str, Any]:
                 "p_model":     p_model,
                 "p_implied":   itf_s.get("p_implied"),
                 "edge_pct":    edge_pct,
+                "convergencia_score":     conv_score,
                 "convergencia_breakdown": itf_s.get("convergencia_breakdown"),
                 "linea_envenenada":       itf_s.get("linea_envenenada", False),
                 "cuota_envenenada":       itf_s.get("cuota_envenenada", False),  # D150-05
@@ -591,6 +644,19 @@ def _build_x3_games(fecha: str) -> Dict[str, Any]:
                 "games_set1":             itf_s.get("games_set1"),               # D150-02
                 "zona":                   itf_s.get("zona"),                     # D150-03
                 "certeza":                itf_s.get("certeza") or {},
+                # D167-01: línea/cuota actual (D158-01) — mismos campos que la ruta confirmada
+                "linea_actual":           itf_s.get("linea_actual"),
+                "cuota_actual":           itf_s.get("cuota_actual"),
+                "oc_id_actual":           itf_s.get("oc_id_actual"),
+                # D167-06: wiring Nodo-160 (MC condicional D160-02 + steam detector D160-03)
+                "mc_p_condicional":       itf_s.get("mc_p_condicional"),
+                "mc_media_total_juegos":  itf_s.get("mc_media_total_juegos"),
+                "mc_se":                  itf_s.get("mc_se"),
+                "mc_ic95_low":            itf_s.get("mc_ic95_low"),
+                "mc_ic95_high":           itf_s.get("mc_ic95_high"),
+                "steam_z":                itf_s.get("steam_z"),
+                "steam_signal":           itf_s.get("steam_signal"),
+                "steam_confirmado":       itf_s.get("steam_confirmado", False),
             })
 
     return {
@@ -724,7 +790,7 @@ def _build_que_falta(fecha: str) -> List[Dict]:
     Panel QUÉ FALTA (§2.4): picks watchlist con primera condición fallida
     para entrar a FAVORITOS_COMPUESTOS.  REPORTE_SOLO, cero lógica de gate.
     """
-    er = _latest(str(REPORTS / f"edge_report_{fecha.replace('-', '')}*.json"))
+    er = _latest(str(REPORTS / f"edge_report_kambi_{fecha.replace("-", "")}*.json"))
     data = _load_json(er)
     if not data or isinstance(data, list):
         return []
@@ -769,7 +835,23 @@ def _build_que_falta(fecha: str) -> List[Dict]:
                                "detalle": f"cuota_fav={cuota_fav} >= cuota_rival={cuota_riv} (bookie discrepa)"})
             continue
 
-    return resultado[:10]
+    if True:  # D176-01: siempre mostrar más cercanos
+        # D176-01: 0 picks en watchlist con condición fallida — muestra los más
+        # cercanos al umbral G_EDGE_MIN (watchlist + sin_edge) para que el panel
+        # nunca quede vacío sin explicación (MANDATO-01→06, Nodo-89).
+        try:
+            from scripts.funnel_report import picks_mas_cerca
+            sin_edge = data.get("sin_edge") or []
+            cercanos = picks_mas_cerca(data.get("watchlist", []), sin_edge, top_n=3)
+            todos_picks = data.get("watchlist",[]) + (data.get("sin_edge") or [])
+            for dist, nombre_partido, detalle in cercanos:
+                fav = next((p.get("favorito_predicho", nombre_partido) for p in todos_picks if p.get("partido","") == nombre_partido), nombre_partido)
+                resultado.append({"jugador": fav, "condicion": "mas_cerca_umbral",
+                                   "detalle": detalle})
+        except Exception:
+            pass
+
+    return resultado
 
 
 def render_html(state: Dict[str, Any]) -> str:
@@ -1204,10 +1286,18 @@ def render_html(state: Dict[str, Any]) -> str:
                 f'CONVERGENCIA GAMES ACTIVA &mdash; {_en_vivo_count} ALTA EN VIVO &mdash; COMBO DISPARADO</div>'
             )
         elif _en_vivo_count > 0:
+            # D166-01: el gate real es por pierna (convergencia_score>=3), no
+            # un conteo agregado — el texto refleja cuántas piernas EN VIVO
+            # ya calificaron individualmente, no un umbral fijo de señales.
+            _califican_count = sum(
+                1 for s in _gs.get("signals", [])
+                if s.get("estado_live") == "EN_VIVO" and (s.get("convergencia_score") or 0) >= 3
+            )
             _conv_banner = (
                 f'<div style="background:{AMBER}22;border:1px solid {AMBER};border-radius:6px;'
                 f'padding:8px 14px;margin-bottom:10px;font-size:0.85rem;color:{AMBER};">'
-                f'{_en_vivo_count} señal(es) ALTA EN VIVO — esperando ≥2 para combo</div>'
+                f'{_en_vivo_count} señal(es) ALTA EN VIVO — {_califican_count} con convergencia_score≥3 '
+                f'(disparo por pierna, no por conteo)</div>'
             )
         # D147-06: banner CERTEZA_MATEMATICA (blink verde, encima de todo)
         _certeza_sigs = [s for s in _gs.get("signals", [])
@@ -1420,8 +1510,8 @@ def render_html(state: Dict[str, Any]) -> str:
             # Línea/Cuota ACTUAL — mercado real tradeable ahora en Betplay (D158-01)
             # Distinto de Base(T0) (congelada) y de "Línea" (histórica de la señal):
             # esta es la línea que Kambi está sirviendo AHORA MISMO.
-            _linea_actual = _sig.get("linea_actual")
-            _cuota_actual = _sig.get("cuota_actual")
+            _linea_actual = _sig.get("linea_actual") if _sig.get("linea_actual") is not None else _sig.get("linea")
+            _cuota_actual = _sig.get("cuota_actual") or _sig.get("cuota_live")
             _linea_drift  = _sig.get("linea_drift")
             if _linea_actual is not None:
                 _mov_tag = (f' <span style="color:{AMBER};font-size:0.75em;">'
@@ -1431,6 +1521,30 @@ def render_html(state: Dict[str, Any]) -> str:
             else:
                 _linea_actual_html = "—"
                 _cuota_actual_html = "—"
+
+            # D167-07: badges MC condicional (D160-02) + STEAM (D160-03) —
+            # REPORTE_SOLO, mismo patrón visual que MERCADO CONFIRMA/CUOTA
+            # ENVENENADA (D150-05), no gatea ningún disparo.
+            _mc_p = _sig.get("mc_p_condicional")
+            if _mc_p is not None:
+                _mc_lo = _sig.get("mc_ic95_low")
+                _mc_hi = _sig.get("mc_ic95_high")
+                _mc_ic = f' [{_mc_lo:.0%}–{_mc_hi:.0%}]' if _mc_lo is not None and _mc_hi is not None else ""
+                _mc_color = GREEN if _mc_p >= 0.70 else (AMBER if _mc_p >= 0.55 else GREY)
+                _mc_html = f'<span style="color:{_mc_color};font-weight:bold;">{_mc_p:.0%}</span>{_mc_ic}'
+            else:
+                _mc_html = "—"
+
+            if _sig.get("steam_confirmado"):
+                _steam_html = (
+                    f'<span style="background:#1f6feb;color:#fff;padding:1px 6px;'
+                    f'border-radius:3px;font-size:0.72em;font-weight:bold;">'
+                    f'STEAM {_sig.get("steam_signal","")}</span>'
+                )
+            elif _sig.get("steam_z") is not None:
+                _steam_html = f'<span style="color:{GREY};font-size:0.85em;">z={_sig["steam_z"]:.1f}</span>'
+            else:
+                _steam_html = "—"
 
             x3_rows.append([
                 _partido_html_prefix + _partido_html,
@@ -1451,6 +1565,8 @@ def render_html(state: Dict[str, Any]) -> str:
                 _mid_html,
                 _contexto_html,
                 _alerta_html,
+                _mc_html,
+                _steam_html,
             ])
 
         _x3_n       = _gs["n_apostar"]
@@ -1462,7 +1578,7 @@ def render_html(state: Dict[str, Any]) -> str:
         x3_panel = panel(
             f"X3 GAMES SIGNAL — Over/Under mercados Nodo-40 | {_gs['fuente']}",
             _conv_banner + table(
-                ["Partido", "Estado", "Mercado", "Dir", "Línea", "LínAct", "CuotaAct", "Base(T0)", "Live", "Drift", "Progreso", "Certeza", "Gap", "Confianza", "Rango pred.", "Middle?", "Contexto", "Marcador"],
+                ["Partido", "Estado", "Mercado", "Dir", "Línea", "LínAct", "CuotaAct", "Base(T0)", "Live", "Drift", "Progreso", "Certeza", "Gap", "Confianza", "Rango pred.", "Middle?", "Contexto", "Marcador", "MC (IC95%)", "Steam"],
                 x3_rows,
                 "Sin señales accionables hoy (gap modelo-línea insuficiente)",
             ),
@@ -1597,11 +1713,12 @@ def render_html(state: Dict[str, Any]) -> str:
                        f'title="n={ev["n"]} → {ev["pct"]}% peso propio (shrinkage n/(n+20))">'
                        f'{ev["bar"]} {ev["label"]}</span>')
 
-            # U3 — distancia gate
-            n_act = int(a.get("n_actual", 0))
+            # U3 — distancia gate (D174-06: n_actual puede ser "?" — sin int() ciego)
+            n_act = a.get("n_actual", 0)
+            n_act = n_act if n_act == "?" else int(n_act or 0)
             n_stp = int(a.get("n_stop", 0))
             u3_txt = _gate_barra(n_act, n_stp)
-            u3_color = GREEN if "GRADUADA" in u3_txt else (AMBER if n_act > 0 else GREY)
+            u3_color = GREY if n_act == "?" else (GREEN if "GRADUADA" in u3_txt else (AMBER if n_act > 0 else GREY))
             u3_html = (f'<span style="font-family:monospace;color:{u3_color};font-size:0.82em;">'
                        f'{a["hipotesis"]}: {u3_txt}</span>')
 
@@ -2077,7 +2194,7 @@ def _build_p2_break(fecha: str) -> Dict:
 
 def _build_p3_convergence(fecha: str) -> Dict:
     """P3: meta_signal_score + rival_value_flag + gcs_active."""
-    er = _latest(str(REPORTS / f"edge_report_{fecha.replace('-','')}*.json"))
+    er = _latest(str(REPORTS / f"edge_report_kambi_{fecha.replace("-", "")}*.json"))
     data = _load_json(er)
     if not data:
         return {"picks": [], "source": "SIN DATO — correr PASO 3"}
@@ -2123,6 +2240,57 @@ def _build_p3_convergence(fecha: str) -> Dict:
             })
     picks.sort(key=lambda x: -(x.get("score_directo") or 0))
     return {"picks": picks}
+
+
+def _build_p_bridge(fecha_compact: str, state: Dict) -> Dict:
+    """
+    D160-05 wiring: fusiona games_live (P4-MANDA señales alta) con p2_break/
+    p3_convergence del mismo ciclo, vía reconciliar_senales_partido() (puente
+    puro, core/live_signal_bridge.py) — nunca implementado pese a documentarse
+    como completo (ver Nodo-174 D174-02). REPORTE_SOLO: reconciliaciones NEUTRO
+    se filtran del listado accionable pero quedan visibles en por_partido.
+    """
+    from core.live_signal_bridge import reconciliar_senales_partido
+
+    games_path = REPORTS / f"games_live_{fecha_compact}.json"
+    games_data = _load_json(games_path)
+    if not games_data:
+        return {"reconciliaciones": [], "por_partido": {}}
+
+    breaks_idx = {b.get("partido"): b for b in (state.get("p2_break") or {}).get("breaks", [])}
+    picks_idx = {p.get("jugador"): p for p in (state.get("p3_convergence") or {}).get("picks", [])}
+
+    reconciliaciones = []
+    por_partido = {}
+
+    for sig in games_data.get("signals_alta", []):
+        partido_key = sig.get("partido")
+        certeza = sig.get("certeza") or {}
+        score_data = sig.get("score_data") or {}
+        games_state = {
+            "zona": sig.get("zona"),
+            "certeza_matematica": certeza.get("certeza_matematica"),
+            "p_condicional": certeza.get("p_condicional"),
+            "break_situation": score_data.get("break_situation"),
+            "serving": score_data.get("serving"),
+        }
+
+        brk = breaks_idx.get(partido_key)
+        favorito = brk.get("jugador") if brk else None
+        pick = picks_idx.get(favorito) if favorito else None
+        winner_state = {
+            "drift_pct": brk.get("drift_pct") if brk else None,
+            "break_state": brk.get("estado") if brk else None,
+            "score_directo": pick.get("score_directo") if pick else None,
+        }
+
+        result = reconciliar_senales_partido(partido_key, games_state, winner_state)
+        result["favorito"] = favorito
+        por_partido[partido_key] = result
+        if result["estado"] != "NEUTRO":
+            reconciliaciones.append(result)
+
+    return {"reconciliaciones": reconciliaciones, "por_partido": por_partido}
 
 
 def _build_p5_execution(fecha: str) -> Dict:
@@ -2216,7 +2384,7 @@ def _build_p6_pnl(fecha: str) -> Dict:
                 r = json.loads(line)
                 res = r.get("resolucion") or {}
                 resultado = res.get("resultado")  # 'WON' | 'LOST' | None (abierto)
-                if not resultado:
+                if True:  # D176-01: siempre mostrar más cercanos
                     continue  # skip picks sin resolver
                 snap = r.get("pick_snapshot", {})
                 won = resultado == "WON"
@@ -2393,7 +2561,7 @@ def _build_p8_books(fecha: str) -> Dict:
             feeds["betplay"] = _bp_fb
 
     # Read edge_report for picks to route
-    er = _latest(str(REPORTS / f"edge_report_{fecha.replace('-','')}*.json"))
+    er = _latest(str(REPORTS / f"edge_report_kambi_{fecha.replace("-", "")}*.json"))
     er_data = _load_json(er) or {}
     all_picks_er = (er_data.get("apostar") or []) + (er_data.get("watchlist") or [])
 
@@ -2842,6 +3010,75 @@ def _load_h2h_index_for_games(fecha: str) -> Dict[str, Dict]:
     return idx
 
 
+def _resolve_player_rankings(home: str, away: str, h2h_idx: Dict) -> Tuple[Optional[float], Optional[float], Optional[str]]:
+    """
+    D167-02: resuelve (ranking_home, ranking_away, superficie) desde el
+    índice de _load_h2h_index_for_games(), mismo criterio de matching por
+    apellido que _get_markov_itf (línea 2973). Sin match → (None, None, None).
+    """
+    h_ap = _apellido_games(home).lower()
+    a_ap = _apellido_games(away).lower()
+    rec = h2h_idx.get(h_ap) or h2h_idx.get(a_ap)
+    if not rec:
+        return None, None, None
+    if rec.get("j1") == h_ap:
+        return rec.get("ranking1"), rec.get("ranking2"), rec.get("superficie")
+    return rec.get("ranking2"), rec.get("ranking1"), rec.get("superficie")
+
+
+_MC_REQUIRED_SCORE_FIELDS = (
+    "serving", "current_set_home", "current_set_away",
+    "sets_home", "sets_away", "games_played",
+)
+
+
+def _attach_mc_conditional(signals: List[Dict], fecha_compact: str) -> None:
+    """
+    D167-03: wiring D160-02 — Monte Carlo condicionado a servicio
+    (simular_total_juegos_condicionado + estimar_p_hold, core/monte_carlo_games.py)
+    sobre señales ya gateadas, una vez por ciclo de refresh (mismo patrón que
+    validate_fillability D159-04, no en cada refresh de 15s salvo que el
+    refresh completo ya sea el ciclo natural). Skip silencioso si score_data
+    está ausente o incompleto — nunca fabrica datos. REPORTE_SOLO: no
+    participa en ningún gate de disparo (H160-02).
+    """
+    h2h_idx = None
+    for sig in signals:
+        sd = sig.get("score_data")
+        if not sd or any(sd.get(k) is None for k in _MC_REQUIRED_SCORE_FIELDS):
+            continue
+        partido = sig.get("partido", "")
+        if " vs " not in partido:
+            continue
+        if h2h_idx is None:
+            h2h_idx = _load_h2h_index_for_games(fecha_compact)
+        home, away = partido.split(" vs ", 1)
+        r_home, r_away, superficie = _resolve_player_rankings(home, away, h2h_idx)
+        p_hold_home = estimar_p_hold(r_home, superficie)
+        p_hold_away = estimar_p_hold(r_away, superficie)
+        try:
+            mc = simular_total_juegos_condicionado(
+                games_played=int(sd["games_played"]),
+                current_set_home=int(sd["current_set_home"]),
+                current_set_away=int(sd["current_set_away"]),
+                serving=sd["serving"],
+                sets_home=int(sd["sets_home"]),
+                sets_away=int(sd["sets_away"]),
+                p_hold_home=p_hold_home,
+                p_hold_away=p_hold_away,
+                linea=float(sig.get("linea") or 0),
+                direccion=sig.get("direccion", "UNDER"),
+            )
+        except Exception as exc:
+            logger.debug(f"[D167-03] MC condicional falló para {partido}: {exc}")
+            continue
+        sig["mc_p_condicional"]      = mc.get("p_condicional_mc")
+        sig["mc_media_total_juegos"] = mc.get("media_total_juegos")
+        sig["mc_se"]                 = mc.get("se")
+        sig["mc_ic95_low"]           = mc.get("ic95_low")
+        sig["mc_ic95_high"]          = mc.get("ic95_high")
+
+
 def _compute_itf_games_proxy(home: str, away: str, h2h_idx: Dict) -> Dict:
     """
     D142-01: proxy rango total juegos ITF sin historical scores.
@@ -2930,6 +3167,33 @@ def _convergencia_score_itf(gap: float, cuota_live: float,
     }
 
 
+def _convergencia_certeza_bonus(score_actual: int, certeza: Optional[Dict]) -> Dict:
+    """
+    D165-01: convergencia_score (D142-02, heurística gap/cuota/markov/ranking)
+    y certeza D147 (Gaussiano condicionado al marcador real) se calculan en
+    pasos separados del pipeline sin comunicarse entre sí — señales con
+    p_condicional>=0.90 (el marcador real confirma la dirección UNDER/OVER)
+    quedaban atascadas en score=2 solo por falta de markov (jugadores
+    ITF/qualy suelen no tener pick individual en edge_report) o cuota_live
+    <2.00, aunque D147 ya las marque ALTA/CERTEZA. Bonus +1 (score cap=5,
+    consistente con el máximo original de _convergencia_score_itf) solo
+    cuando D147 confirma con certeza fuerte real — aditivo, nunca resta
+    puntos ni sustituye componentes faltantes (markov/cuota/ranking).
+    """
+    certeza = certeza or {}
+    alerta = certeza.get("alerta_nivel")
+    p_cond = certeza.get("p_condicional", 0) or 0
+    aplica = alerta in ("ALTA", "CERTEZA") and p_cond >= 0.85
+    score_final = min(5, score_actual + 1) if aplica else score_actual
+    aplicado = aplica and score_final != score_actual
+    return {
+        "score":     score_final,
+        "aplicado":  aplicado,
+        "confianza": "ALTA" if score_final >= 3 else "MEDIA" if score_final >= 2 else "BAJA",
+        "detalle":   f"D147_certeza={alerta}(p={p_cond:.2f})(+1)" if aplicado else "",
+    }
+
+
 def _get_markov_itf(home: str, away: str, er_picks: List[Dict]) -> Optional[str]:
     """Busca Markov de jugadores en edge_report de hoy. COLD > HOT > NEUTRAL."""
     h_ap = _apellido_games(home).lower()
@@ -2942,6 +3206,28 @@ def _get_markov_itf(home: str, away: str, er_picks: List[Dict]) -> Optional[str]
             if "COLD" in (mf, mr): return "COLD"
             if "HOT"  in (mf, mr): return "HOT"
             return "NEUTRAL"
+    return None
+
+
+def _get_ranking_gap_er(home: str, away: str, er_picks: List[Dict]) -> Optional[int]:
+    """
+    D166-01: ranking_gap para alta_signals (ATP/WTA/Challenger/ATP1000/ATP500)
+    desde edge_report — mismo patrón de matching por apellido que
+    _get_markov_itf, reusando 'ranking_favorito'/'ranking_rival' ya
+    serializados por edge_calculator.py (líneas 1026-1027). A diferencia de
+    ITF (sin mercado pre-partido, requiere proxy games-range), alta_signals
+    ya tiene datos de mercado reales — no se reconstruye el proxy.
+    """
+    h_ap = _apellido_games(home).lower()
+    a_ap = _apellido_games(away).lower()
+    for pick in er_picks:
+        partido = (pick.get("partido") or "").lower()
+        if h_ap in partido or a_ap in partido:
+            rf = pick.get("ranking_favorito")
+            rr = pick.get("ranking_rival")
+            if rf and rr:
+                return abs(int(rf) - int(rr))
+            return None
     return None
 
 
@@ -3522,13 +3808,32 @@ def _write_games_odds_history(
         gp    = (sig.get("score_data") or {}).get("games_played") or 0
         nuevo = {"ts": ts_now, "cuota": cuota_live, "games_played": gp}
         lista = hist.setdefault(pk, [])
-        # Deduplicar: skip si último punto tiene mismo games_played Y misma cuota
+        # Deduplicar: skip solo el append si último punto tiene mismo
+        # games_played Y misma cuota — D168-01: el guard de dedup NO debe
+        # saltar el cálculo de steam de abajo (bug: la mayoría de los ciclos
+        # de 15s repiten cuota, dejando steam_z sin calcular casi siempre).
+        es_duplicado = bool(lista) and lista[-1].get("games_played") == gp and lista[-1].get("cuota") == cuota_live
+        if not es_duplicado:
+            lista.append(nuevo)
+            changed = True
+
+        # D167-05/D168-01: wiring steam detector D160-03 (velocity_zscore,
+        # Nodo-71) — corre siempre que haya historial (aunque este ciclo no
+        # haya agregado un punto nuevo). REPORTE_SOLO, no gatea nada.
         if lista:
-            last = lista[-1]
-            if last.get("games_played") == gp and last.get("cuota") == cuota_live:
-                continue
-        lista.append(nuevo)
-        changed = True
+            try:
+                odds_series = [p["cuota"] for p in lista]
+                times_minutes = []
+                for p in lista:
+                    hh, mm = p["ts"].split(":")
+                    times_minutes.append(int(hh) * 60 + int(mm))
+                vz = velocity_zscore(odds_series, times_minutes)
+                if vz.get("z_last") is not None:
+                    sig["steam_z"] = vz["z_last"]
+                    sig["steam_signal"] = vz["signal"]
+                    sig["steam_confirmado"] = vz["steam"]
+            except Exception as exc:
+                logger.debug(f"[D168-01] velocity_zscore falló: {exc}")
 
     if changed:
         try:
@@ -3537,6 +3842,22 @@ def _write_games_odds_history(
             )
         except Exception as exc:
             logger.debug(f"[D147-05] Error escribiendo history: {exc}")
+
+
+def _send_telegram_async(msg: str, tag: str = "") -> None:
+    """D147-07: fire-and-forget Telegram real (utils.telegram._enviar_telegram),
+    en thread daemon para no bloquear el loop de 15s. Reemplaza el subprocess a
+    scripts/send_telegram.py (D147-06), que nunca existió en el repo — el guard
+    .exists() lo saltaba en silencio y 6 alertas CERTEZA MATEMATICA reales nunca
+    llegaron a Telegram (ver Nodo-174 D174-02)."""
+    def _worker() -> None:
+        try:
+            from utils.telegram import _enviar_telegram
+            _enviar_telegram(msg)
+        except Exception as exc:
+            logger.warning(f"[{tag or 'TELEGRAM'}] Error enviando Telegram: {exc}")
+
+    threading.Thread(target=_worker, daemon=True).start()
 
 
 def _fire_certeza_alert(sig: Dict, fecha_compact: str) -> None:
@@ -3569,18 +3890,7 @@ def _fire_certeza_alert(sig: Dict, fecha_compact: str) -> None:
         f"| {gp_val} juegos jugados | Resultado confirmado"
     )
     logger.warning(f"[D147-06] {msg}")
-
-    send_script = BASE_DIR / "scripts" / "send_telegram.py"
-    if send_script.exists():
-        try:
-            subprocess.Popen(
-                [sys.executable, str(send_script), "--msg", msg],
-                cwd=str(BASE_DIR),
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-            )
-        except Exception as exc:
-            logger.warning(f"[D147-06] Telegram error: {exc}")
+    _send_telegram_async(msg, tag="D147-06")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -3761,18 +4071,21 @@ def _fetch_betplay_score_playwright(event_id: int) -> Optional[Dict]:
         return None
 
 
-def _fetch_live_games_all(event_id: int) -> Optional[Dict]:
+def _fetch_live_games_all(event_id: int, bypass_cache: bool = False) -> Optional[Dict]:
     """
     D-ITF-LIVE-01: obtiene mercado 'Total de juegos' (match-level) para un evento vivo.
     UNA sola llamada HTTP — devuelve mercado + score live del partido.
     ITF solo tiene este mercado cuando el partido está STARTED (no pre-partido).
     D153-PARALLEL: caché 120s + pre-warm paralelo en _prefetch_live_games_parallel().
     40 eventos × 5s secuencial = 200s → paralelo con 10 workers = 20s.
+    bypass_cache=True (D159-04 validate_fillability): ignora la caché de 120s
+    para leer la cuota realmente vigente justo antes de disparar el combo.
     """
     _now = time.time()
-    _cached = _live_games_cache.get(int(event_id))
-    if _cached and (_now - _cached[0]) < _LIVE_GAMES_TTL:
-        return _cached[1]
+    if not bypass_cache:
+        _cached = _live_games_cache.get(int(event_id))
+        if _cached and (_now - _cached[0]) < _LIVE_GAMES_TTL:
+            return _cached[1]
 
     url = f"{_KAMBI_BASE}/betoffer/event/{event_id}.json?{_KAMBI_PARAMS}"
     try:
@@ -3817,6 +4130,33 @@ def _fetch_live_games_all(event_id: int) -> Optional[Dict]:
     final = result if found else None
     _live_games_cache[int(event_id)] = (time.time(), final)
     return final
+
+
+def validate_fillability(sig: Dict, umbral: float = 0.05) -> Tuple[bool, str]:
+    """D159-04: última validación justo antes de disparar el combo — un solo
+    fetch con bypass_cache=True (nunca la caché de 120s) para confirmar que la
+    cuota que justificó los gates sigue vigente. Se llama una vez, sobre
+    señales ya gateadas (mismo patrón que _attach_mc_conditional, D160-02),
+    no en cada refresh de 15s. drift>umbral → aborta: la cuota validada por
+    los gates ya no existe, el coupon abriría a un precio distinto."""
+    event_id = sig.get("event_id")
+    cuota_gates = sig.get("cuota_live")
+    if not event_id or not cuota_gates:
+        return False, "sin_datos_para_validar"
+
+    fresh = _fetch_live_games_all(event_id, bypass_cache=True)
+    if not fresh:
+        return False, "sin_mercado_fresco"
+
+    campo = "cuota_under" if sig.get("direccion") == "UNDER" else "cuota_over"
+    cuota_fresca = fresh.get(campo)
+    if not cuota_fresca:
+        return False, "sin_cuota_fresca"
+
+    drift = abs(cuota_fresca - cuota_gates) / cuota_gates
+    if drift > umbral:
+        return False, f"cuota_drift_{drift:.1%}"
+    return True, "fillable"
 
 
 # ── Nodo-151 Gate Helpers ──────────────────────────────────────────────────
@@ -3958,6 +4298,7 @@ def _check_games_convergencia(fecha: str) -> None:
                             "estado":     "PRE_PARTIDO",
                             "cuota_live": None,
                             "drift_pct":  None,
+                            "gap_juegos": s.get("gap_juegos"),  # D166-01: ya calculado
                         })
         except Exception:
             pass
@@ -3996,6 +4337,7 @@ def _check_games_convergencia(fecha: str) -> None:
         partido  = sig["partido"]
         eid      = sig.get("event_id")
         matched  = None
+        sig["cuota_envenenada"] = False  # D164-01: default, override si drift>15% abajo
 
         # D133-02: lookup primario por event_id
         if eid:
@@ -4049,6 +4391,15 @@ def _check_games_convergencia(fecha: str) -> None:
                     sig["drift_pct"]  = round(
                         (sig["cuota_actual"] - sig["cuota_pre"]) / sig["cuota_pre"] * 100, 1
                     )
+                    # D164-01: mismo criterio D150-01 (CUOTA_ENVENENADA_UMBRAL=15.0),
+                    # antes exclusivo de itf_live_signals — ahora tier-agnóstico para
+                    # ATP/WTA/Challenger/ATP1000/ATP500 vía alta_signals.
+                    if sig["drift_pct"] > 15.0:
+                        sig["cuota_envenenada"] = True
+                        logger.info(
+                            f"[GAMES_LIVE] {partido} cuota_drift={sig['drift_pct']:+.1f}% "
+                            f"> +15% → CUOTA_ENVENENADA"
+                        )
                 else:
                     sig["confianza_display"] = "ALTA_SIN_CONFIRMAR"
                 if sig["linea_actual"] != sig["linea"]:
@@ -4085,8 +4436,9 @@ def _check_games_convergencia(fecha: str) -> None:
             except Exception:
                 sig["estado"] = "PRE_PARTIDO"
 
-    en_vivo_count       = sum(1 for s in alta_signals if s["estado"] == "EN_VIVO")
-    convergencia_activa = en_vivo_count >= 2
+    en_vivo_count = sum(1 for s in alta_signals if s["estado"] == "EN_VIVO")
+    # D166-01: convergencia_activa se recalcula más abajo (gate por pierna,
+    # requiere er_picks + convergencia_score) — reemplaza en_vivo_count>=2.
 
     # ── BLOQUE D147: score + certeza + baseline + historial ──────────────────
     # D147-01: enriquecer alta_signals con score Kambi API
@@ -4169,6 +4521,53 @@ def _check_games_convergencia(fecha: str) -> None:
             er_picks = er_data.get("picks", [])
     except Exception:
         pass
+
+    # D166-01: convergencia_score por pierna para alta_signals (ATP/WTA/
+    # Challenger/ATP1000/ATP500) — replica _convergencia_score_itf (D142-02)
+    # + bonus D165-01, ya usados por itf_live_signals más abajo. certeza
+    # (D147) ya fue calculada arriba (líneas 4133-4161); er_picks recién
+    # cargado arriba es lo único que faltaba para markov/ranking_gap.
+    for _sa in alta_signals:
+        if _sa.get("estado") != "EN_VIVO":
+            continue
+        _partes_sa = [p.strip() for p in _sa["partido"].replace(" vs. ", " vs ").split(" vs ")]
+        _home_sa = _partes_sa[0] if len(_partes_sa) == 2 else ""
+        _away_sa = _partes_sa[1] if len(_partes_sa) == 2 else ""
+        _gap_sa    = _sa.get("gap_juegos") or 0
+        _cuota_sa  = float(_sa.get("cuota_live") or 0)
+        _markov_sa = _get_markov_itf(_home_sa, _away_sa, er_picks)
+        _rank_sa   = _get_ranking_gap_er(_home_sa, _away_sa, er_picks)
+        _conv_sa = _convergencia_score_itf(_gap_sa, _cuota_sa, _markov_sa, _rank_sa)
+        _sa["convergencia_score"]     = _conv_sa["score"]
+        _sa["convergencia_breakdown"] = _conv_sa["breakdown"]
+        _sa["confianza"]              = _conv_sa["confianza"]
+        _bonus_sa = _convergencia_certeza_bonus(_sa["convergencia_score"], _sa.get("certeza"))
+        if _bonus_sa["aplicado"]:
+            _old_sc_sa = _sa["convergencia_score"]
+            _sa["convergencia_score"]     = _bonus_sa["score"]
+            _sa["confianza"]              = _bonus_sa["confianza"]
+            _sa["convergencia_breakdown"] += f" | {_bonus_sa['detalle']}"
+            logger.info(
+                f"[GAMES_LIVE_D166-01] {_sa['partido']} convergencia_score "
+                f"{_old_sc_sa}→{_bonus_sa['score']} por certeza D147 "
+                f"(p_condicional={_sa['certeza'].get('p_condicional', 0):.3f})"
+            )
+
+    # D166-01: gate por pierna (score>=3) reemplaza en_vivo_count>=2 — mismo
+    # umbral y mismos 2 gates tier-agnósticos D164 (cuota_envenenada,
+    # set1-tiebreak) que ya se aplican a itf_live_signals más abajo.
+    alta_pregame_raw = [s for s in alta_signals
+                         if s.get("convergencia_score", 0) >= 3
+                         and not s.get("cuota_envenenada")]
+    for _s_apg in list(alta_pregame_raw):
+        _gs1_apg = (_s_apg.get("score_data") or {}).get("games_set1") or 0
+        if _gs1_apg >= 12:
+            logger.info(
+                f"[GAMES_LIVE_GATE] {_s_apg.get('partido')} excluida "
+                f"(set1={_gs1_apg}j, tiebreak)"
+            )
+            alta_pregame_raw.remove(_s_apg)
+    convergencia_activa = len(alta_pregame_raw) >= 1
 
     itf_live_signals: List[Dict] = []
     watch_all_signals: List[Dict] = []  # seguimiento SIN filtro, solo observación
@@ -4364,6 +4763,9 @@ def _check_games_convergencia(fecha: str) -> None:
             "linea":                 market_linea,
             "cuota_live":            cuota_val,
             "oc_id":                 market.get(oc_k),
+            "linea_actual":          market_linea,   # D168-02: mismo valor fresco, clave que _build_x3_games() espera
+            "cuota_actual":          cuota_val,       # D168-02
+            "oc_id_actual":          market.get(oc_k),  # D168-02
             "event_id":              eid,
             "estado":                "ITF_VIVO",
             "cuota_pre":             cuota_t0,
@@ -4435,10 +4837,38 @@ def _check_games_convergencia(fecha: str) -> None:
                 sets_away=_sd.get("sets_away"),
                 games_set1=_gs1,
             )
+            # D165-01: bonus convergencia_score cuando D147 confirma con
+            # certeza fuerte real (ver _convergencia_certeza_bonus). Los
+            # gates de disparo D150/D151 (cuota_envenenada, set1-tiebreak,
+            # edge_live, score_null, zona_direccion) no cambian — siguen
+            # aplicando sobre datos crudos independientes de este score.
+            _bonus147 = _convergencia_certeza_bonus(
+                _itf147.get("convergencia_score", 0), _itf147["certeza"]
+            )
+            if _bonus147["aplicado"]:
+                _old_sc147 = _itf147.get("convergencia_score", 0)
+                _itf147["convergencia_score"] = _bonus147["score"]
+                _itf147["confianza"] = _bonus147["confianza"]
+                _itf147["convergencia_breakdown"] = (
+                    (_itf147.get("convergencia_breakdown") or "") + " | " + _bonus147["detalle"]
+                ).strip(" |")
+                logger.info(
+                    f"[ITF_LIVE_D165-01] {_itf147.get('partido')} convergencia_score "
+                    f"{_old_sc147}→{_bonus147['score']} por certeza D147 "
+                    f"(p_condicional={_itf147['certeza'].get('p_condicional', 0):.3f})"
+                )
 
     # Combinar en games_live: pre-game + ITF_LIVE
     all_signals = alta_signals + itf_live_signals
     itf_live_count = len(itf_live_signals)
+
+    # D167-05 (parte 2): itf_live_signals no tenía sparkline/steam propio —
+    # _write_games_odds_history ya se llamó arriba solo sobre alta_signals.
+    _write_games_odds_history(itf_live_signals, fecha_compact)
+
+    # D167-03: wiring D160-02 — MC condicionado, una vez por ciclo sobre
+    # señales ya gateadas (REPORTE_SOLO, no participa en ningún gate).
+    _attach_mc_conditional(all_signals, fecha_compact)
 
     # Escribir games_live_YYYYMMDD.json (D133-05)
     gl_path = REPORTS / f"games_live_{fecha_compact}.json"
@@ -4465,7 +4895,9 @@ def _check_games_convergencia(fecha: str) -> None:
         except Exception:
             fired = []
         if len(fired) < 10:
-            combo_key = sorted(s["partido"] for s in alta_signals if s["estado"] == "EN_VIVO")
+            # D166-01: combo_key ahora rastrea las piernas que SÍ calificaron
+            # (score>=3), no todas las EN_VIVO — mismo patrón que itf_key.
+            combo_key = sorted(s["partido"] for s in alta_pregame_raw)
             if combo_key not in fired:
                 try:
                     subprocess.Popen(
@@ -4477,7 +4909,10 @@ def _check_games_convergencia(fecha: str) -> None:
                     )
                     fired.append(combo_key)
                     fired_path.write_text(json.dumps(fired, ensure_ascii=False), encoding="utf-8")
-                    logger.info(f"[D133] CONVERGENCIA GAMES: {en_vivo_count} ALTA EN_VIVO → combo disparado")
+                    logger.info(
+                        f"[D166-01] CONVERGENCIA GAMES: {len(alta_pregame_raw)} señal(es) "
+                        f"convergencia_score>=3 (de {en_vivo_count} EN_VIVO) → combo disparado"
+                    )
                 except Exception as exc:
                     logger.warning(f"[D133] Popen error: {exc}")
 
@@ -4544,6 +4979,24 @@ def _check_games_convergencia(fecha: str) -> None:
             )
             continue
         alta_itf.append(_s06)
+
+    # D172-01: el campo persistido "convergencia_activa" decía True (banner
+    # rojo "COMBO DISPARADO") con solo itf_live_count>=1 — ninguna señal
+    # necesitaba pasar el gate score>=3 ni los filtros D150/D151/D164. Se
+    # corrige con el estado real de disparo: alta_pregame_raw (ya filtrado,
+    # D166-01) o alta_itf (ya filtrado arriba, D150/D151/D164) no vacíos.
+    try:
+        _real_disparo = len(alta_pregame_raw) >= 1 or len(alta_itf) >= 1
+        _gl_data172 = json.loads(gl_path.read_text(encoding="utf-8"))
+        if _gl_data172.get("convergencia_activa") != _real_disparo:
+            _gl_data172["convergencia_activa"] = _real_disparo
+            gl_path.write_text(
+                json.dumps(_gl_data172, ensure_ascii=False, indent=2),
+                encoding="utf-8",
+            )
+    except Exception:
+        pass
+
     if alta_itf:
         # D157-02: los outcome_id de mercados EN_VIVO expiran/rotan en segundos —
         # el .bat/.html se re-escribe con oc_id fresco en CADA ciclo (15s) mientras
@@ -4564,6 +5017,17 @@ def _check_games_convergencia(fecha: str) -> None:
                 itf_fired.append(itf_key)
                 itf_fired_path.write_text(json.dumps(itf_fired, ensure_ascii=False), encoding="utf-8")
                 logger.info(f"[ITF_LIVE] combo disparado: {len(alta_itf)} señales ALTA conv≥3")
+                # D157-05: Telegram solo en señal-nueva (mismo guard que log/shadow_book,
+                # nunca en el refresco de 15s de oc_id — evitaría flood). 135 disparos
+                # reales previos sin ninguna notificación (ver Nodo-174 D174-02).
+                _itf_desc = " + ".join(
+                    f"{s['partido']} {s.get('direccion','?')} {s.get('linea','?')}"
+                    for s in alta_itf
+                )
+                _send_telegram_async(
+                    f"ITF LIVE COMBO | {len(alta_itf)} señales | {_itf_desc}",
+                    tag="D157-05",
+                )
                 # Nodo-157 D157-03: registra cada pierna en shadow_book solo en la
                 # detección de señal NUEVA (no cada ciclo de 15s) — cuota_trigger
                 # debe ser la cuota al momento del disparo, no la del último refresh.
@@ -4594,6 +5058,28 @@ def _background_refresh(fecha_fn) -> None:
         except Exception:
             pass
         time.sleep(15)
+
+
+def _winner_market_refresh(fecha_fn) -> None:
+    """D160-01: live_edge_monitor.run() estaba huérfano — ningún proceso lo
+    invocaba en producción (solo `python3 scripts/live_edge_monitor.py --observe`
+    manual/cron, ver Nodo-174 D174-02). Thread daemon que lo conecta al
+    servicio tennis-live-desk, mismo patrón que _background_refresh/
+    _fast_score_refresh. Import dinámico vía scripts/ en sys.path (mismo
+    patrón ya usado para odds_aggregator)."""
+    import sys as _sys
+    _scripts_dir = str(BASE_DIR / "scripts")
+    if _scripts_dir not in _sys.path:
+        _sys.path.insert(0, _scripts_dir)
+    import live_edge_monitor
+
+    while True:
+        try:
+            fecha_fn()
+            live_edge_monitor.run(reports_dir="reports", ahora=datetime.now())
+        except Exception:
+            pass
+        time.sleep(60)
 
 
 def _fast_score_refresh(fecha_fn) -> None:
@@ -4755,7 +5241,10 @@ def main() -> None:
     # Fast score thread: solo livedata D153 cada 5s → latencia real ≤7s
     _tf = threading.Thread(target=_fast_score_refresh, args=(_fecha_fn,), daemon=True)
     _tf.start()
-    logger.info("Threads iniciados: background 15s (convergencia) + fast_score 5s (livedata D153)")
+    # D160-01: live_edge_monitor.run() estaba huérfano — ver Nodo-174 D174-02
+    _tw = threading.Thread(target=_winner_market_refresh, args=(_fecha_fn,), daemon=True)
+    _tw.start()
+    logger.info("Threads iniciados: background 15s (convergencia) + fast_score 5s (livedata D153) + winner_market 60s (D160-01)")
 
     server = HTTPServer(("0.0.0.0", args.port), DeskHandler)
     logger.info(f"Live Trading Desk en http://localhost:{args.port}/")

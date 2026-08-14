@@ -1,12 +1,12 @@
 {
   "global": {
     "wins": 2551,
-    "losses": 1654
+    "losses": 1652
   },
   "por_superficie": {
     "clay": {
       "wins": 1340,
-      "losses": 755
+      "losses": 754
     },
     "unknown": {
       "wins": 46,
@@ -18,7 +18,7 @@
     },
     "hard": {
       "wins": 685,
-      "losses": 426
+      "losses": 425
     },
     "real_money_unknown": {
       "wins": 23,
@@ -74,16 +74,16 @@
     },
     "clay_itf": {
       "wins": 48,
-      "losses": 63,
+      "losses": 62,
       "era_v2_wins": 48,
-      "era_v2_losses": 62,
+      "era_v2_losses": 61,
       "era_v2_start": "2026-06-19"
     },
     "hard_itf": {
       "wins": 33,
-      "losses": 66,
+      "losses": 65,
       "era_v2_wins": 33,
-      "era_v2_losses": 66,
+      "era_v2_losses": 65,
       "era_v2_start": "2026-06-19"
     },
     "grass_grand_slam": {
@@ -122,7 +122,8 @@
     "challenger": 0.611,
     "itf": 0.5
   },
-  "ultima_actualizacion": "2026-07-25T09:45:56.668276",
+  "ultima_actualizacion": "2026-08-06T14:25:17.776173",
   "_nota_revert_B11": "Revertidos 14W/17L de sesión Jun15-16 (modelo B-11 roto, accuracy=46.9% ruido puro)",
-  "_nota_era_v2": "FIX-5: era_v2 acumula datos post-normalización-fix desde 2026-06-19. Usar como prior cuando era_v2_n >= 10."
+  "_nota_era_v2": "FIX-5: era_v2 acumula datos post-normalización-fix desde 2026-06-19. Usar como prior cuando era_v2_n >= 10.",
+  "_nota_d174_09_phantom_correction": "2026-08-06 (Nodo-174 D174-09): scripts/audit_phantom_history.py detecto 2 LOST reales (pnl=-1.0 c/u) contaminados por Phantom History (Nodo-152) -- Ariana Morris (hard/itf, settled 2026-07-08, thf_cache score=405) y Alexander Weis (clay/itf, settled 2026-07-11, thf_cache score=405). Edge que origino ambas apuestas se calculo con historial de otro jugador (top-ATP/GS) asignado por matching de apellido sin validacion de circuito -- edge nunca fue real. -2 global.losses, -1 hard.losses, -1 clay.losses, -1 hard_itf.losses/era_v2_losses, -1 clay_itf.losses/era_v2_losses. Reporte: reports/audit_phantom_history_20260806_142232.json"
 }

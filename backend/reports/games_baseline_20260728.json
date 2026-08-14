@@ -1,0 +1,142 @@
+{
+  "Cristina Bucsa vs Polina Kudermetova_UNDER": {
+    "cuota_t0": 2.0,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-07-28T10:03:39",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Max Hans Rehberg vs Stefano Travaglia_OVER": {
+    "cuota_t0": 1.57,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-07-28T10:10:34",
+    "direccion": "OVER",
+    "zona": "COINFLIP"
+  },
+  "Julieta Pareja vs Xinyu Wang_UNDER": {
+    "cuota_t0": 1.86,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-07-28T10:10:34",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Ekaterina Alexandrova vs Kristina Liutova_OVER": {
+    "cuota_t0": 1.49,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-07-28T10:10:34",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Thiago Monteiro vs David Jorda Sanchis_OVER": {
+    "cuota_t0": 2.08,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-07-28T11:16:33",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Alex Michelsen vs Mackenzie McDonald_UNDER": {
+    "cuota_t0": 1.95,
+    "linea_t0": 24.5,
+    "ts_t0": "2026-07-28T11:50:53",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Arthur Fils vs Rafael Jodar_OVER": {
+    "cuota_t0": 2.02,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-07-28T12:29:58",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Alexandra Eala vs Qinwen Zheng_OVER": {
+    "cuota_t0": 2.14,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-07-28T12:36:57",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Adrian Mannarino vs Learner Tien_UNDER": {
+    "cuota_t0": 1.84,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-07-28T12:44:29",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Brandon Nakashima vs Tomas Martin Etcheverry_UNDER": {
+    "cuota_t0": 1.75,
+    "linea_t0": 25.5,
+    "ts_t0": "2026-07-28T14:32:49",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Trevor Svajda vs Jakub Mensik_OVER": {
+    "cuota_t0": 1.78,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-07-28T18:58:43",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Darja Vidmanova vs Marina Bassols Ribera_UNDER": {
+    "cuota_t0": 2.08,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-07-28T18:58:43",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Yuliia Starodubtseva vs Sloane Stephens_OVER": {
+    "cuota_t0": 1.32,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-07-28T18:58:43",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Dane Sweeny vs Duncan Chan_OVER": {
+    "cuota_t0": 1.93,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-07-28T18:58:43",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Philip Sekulic vs Clement Chidekh_OVER": {
+    "cuota_t0": 2.35,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-07-28T18:58:43",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Magdalena Frech vs Ann Li_UNDER": {
+    "cuota_t0": 2.25,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-07-28T19:00:48",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Shintaro Mochizuki vs Charles Broom_OVER": {
+    "cuota_t0": 1.97,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-07-28T19:58:16",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Haruka Kaji vs Taylah Preston_OVER": {
+    "cuota_t0": 1.7,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-07-28T20:49:14",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Yu Hsiou Hsu vs Michael Mmoh_OVER": {
+    "cuota_t0": 2.07,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-07-28T20:49:14",
+    "direccion": "OVER",
+    "zona": "COINFLIP"
+  },
+  "Harriet Dart vs Kayla Cross_OVER": {
+    "cuota_t0": 2.2,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-07-28T23:16:04",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  }
+}

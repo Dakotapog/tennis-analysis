@@ -1,0 +1,344 @@
+{
+  "generated_at": "2026-08-04T08:38:06.533647",
+  "edge_report_fuente": "edge_report_kambi_20260803_100626.json",
+  "fecha": "20260804",
+  "n_picks_analizados": 22,
+  "n_score_directo_3plus": 0,
+  "n_split": 0,
+  "h98_01_n_actual": 0,
+  "picks_score_directo_3plus": [],
+  "picks_split": [],
+  "todos_los_picks": [
+    {
+      "partido": "Roche Alcaya P. vs Castellanos Y.",
+      "favorito": "Castellanos Y.",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "STRONG"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.5025,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Mejia N. vs Landaluce M.",
+      "favorito": "Mejia N.",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1797,
+      "cuota": null,
+      "tier": "atp1000",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Jones E. vs Tararudee L.",
+      "favorito": "Jones E.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.162,
+      "cuota": null,
+      "tier": "atp1000",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Frech M. vs Jeanjean L.",
+      "favorito": "Jeanjean L.",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.117,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Udvardy P. vs Lys E.",
+      "favorito": "Udvardy P.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0985,
+      "cuota": null,
+      "tier": "atp1000",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Cerundolo J. M. vs Medjedovic H.",
+      "favorito": "Cerundolo J. M.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0898,
+      "cuota": null,
+      "tier": "atp1000",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Searle H. vs Harris L.",
+      "favorito": "Searle H.",
+      "score_directo": 2,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT",
+        "ELO_DOM"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0734,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Zarazua R. vs Korpatsch T.",
+      "favorito": "Korpatsch T.",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0656,
+      "cuota": null,
+      "tier": "atp1000",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Ruse G. vs Stearns P.",
+      "favorito": "Ruse G.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.046,
+      "cuota": null,
+      "tier": "atp1000",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Berkieta T. vs Mena F.",
+      "favorito": "Mena F.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0449,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Kostovic T. vs Kubka M.",
+      "favorito": "Kubka M.",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0429,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Shimabukuro S. vs Cilic M.",
+      "favorito": "Shimabukuro S.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0363,
+      "cuota": null,
+      "tier": "atp1000",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Duckworth J. vs O'Connell C.",
+      "favorito": "Duckworth J.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0359,
+      "cuota": null,
+      "tier": "atp1000",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Kawa K. vs Fruhvirtova L.",
+      "favorito": "Kawa K.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0359,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Sramkova R. vs Blinkova A.",
+      "favorito": "Sramkova R.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0338,
+      "cuota": null,
+      "tier": "atp1000",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Walton A. vs Brooksby J.",
+      "favorito": "Walton A.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0293,
+      "cuota": null,
+      "tier": "atp1000",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Fucsovics M. vs Moutet C.",
+      "favorito": "Fucsovics M.",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "ELO_DOM"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0159,
+      "cuota": null,
+      "tier": "atp1000",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Parry D. vs Day K.",
+      "favorito": "Day K.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": -0.0677,
+      "cuota": null,
+      "tier": "atp1000",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Kalinina A. vs Bondar A.",
+      "favorito": "Kalinina A.",
+      "score_directo": 0,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.1607,
+      "cuota": null,
+      "tier": "atp1000",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Oliynykova O. vs Pliskova Ka.",
+      "favorito": "Pliskova Ka.",
+      "score_directo": 1,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [
+        "ELO_DOM"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.2512,
+      "cuota": null,
+      "tier": "atp1000",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Gibson T. vs Cocciaretto E.",
+      "favorito": "Cocciaretto E.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": -0.0868,
+      "cuota": null,
+      "tier": "atp1000",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Boulter K. vs Cross K.",
+      "favorito": "Boulter K.",
+      "score_directo": 0,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.2532,
+      "cuota": null,
+      "tier": "atp1000",
+      "seccion": "sin_edge"
+    }
+  ]
+}

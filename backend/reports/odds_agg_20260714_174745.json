@@ -1,0 +1,97 @@
+{
+  "ts": "2026-07-14 17:47",
+  "bookmakers": {
+    "wplay": "VERIFIED"
+  },
+  "edge_context": {},
+  "results": [
+    {
+      "jugador": "Sasha Rozin",
+      "key": "sasha rozin",
+      "best_odds": 2.75,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 2.75
+      }
+    },
+    {
+      "jugador": "Sasha Rozin",
+      "key": "rozin",
+      "best_odds": 2.75,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 2.75
+      }
+    },
+    {
+      "jugador": "Keegan Rice",
+      "key": "keegan rice",
+      "best_odds": 1.4,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.4
+      }
+    },
+    {
+      "jugador": "Keegan Rice",
+      "key": "rice",
+      "best_odds": 1.4,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.4
+      }
+    },
+    {
+      "jugador": "Daniel Milavsky",
+      "key": "daniel milavsky",
+      "best_odds": 1.666,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.666
+      }
+    },
+    {
+      "jugador": "Daniel Milavsky",
+      "key": "milavsky",
+      "best_odds": 1.666,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 1.666
+      }
+    },
+    {
+      "jugador": "Duncan Chan",
+      "key": "duncan chan",
+      "best_odds": 2.1,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 2.1
+      }
+    },
+    {
+      "jugador": "Duncan Chan",
+      "key": "chan",
+      "best_odds": 2.1,
+      "best_bookmaker": "wplay",
+      "betplay_odds": null,
+      "clv_potential": null,
+      "odds_by_book": {
+        "wplay": 2.1
+      }
+    }
+  ]
+}

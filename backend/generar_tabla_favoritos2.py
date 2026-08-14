@@ -29,6 +29,13 @@ except ImportError:
     TIER_AVAILABLE = False
     print("⚠️ Advertencia: No se pudo importar detectar_tier desde config")
 
+# D173-07 (Nodo-173 §1.12): umbral p_modelo desde fuente única config.py.
+# Antes: 54 hardcodeado aquí vs 0.55 en edge_calculator.py — drift garantizado.
+try:
+    from config import P_MODELO_MIN_UNDERDOG as _P_MODELO_MIN_UNDERDOG
+except ImportError:
+    _P_MODELO_MIN_UNDERDOG = 0.55
+
 try:
     from analysis.player_profitability import _normalize_name as _prof_normalize_name
     PROFITABILITY_AVAILABLE = True
@@ -979,8 +986,11 @@ def analyze_matches_with_pandas(file_path, output_filename="analisis_partidos_pa
                 f.write(f"Confianza: {_confidence}%\n")
 
                 # Fase E: banda NO-BET + edge_vs_mercado (ADDENDUM-3)
-                if _confidence and float(_confidence) < 54:
-                    f.write(f"ACCION: NO-BET — confianza {_confidence}% < 54% (umbral minimo). Coin flip.\n")
+                # D173-07 (Nodo-173 §1.12): umbral desde config.py — antes 54 hardcodeado
+                # aquí vs 0.55 en edge_calculator = dos umbrales sobre la misma cantidad.
+                _umbral_tabla = _P_MODELO_MIN_UNDERDOG * 100
+                if _confidence and float(_confidence) < _umbral_tabla:
+                    f.write(f"ACCION: NO-BET — confianza {_confidence}% < {_umbral_tabla:.0f}% (umbral minimo). Coin flip.\n")
                 else:
                     f.write(f"ACCION: EVALUAR — confianza {_confidence}%\n")
                     # Nodo-124 D124-01: auto-log al shadow_book (H124-01)

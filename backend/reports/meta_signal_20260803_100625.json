@@ -1,0 +1,173 @@
+{
+  "generated_at": "2026-08-03T10:06:25.728424",
+  "edge_report_fuente": "edge_report_kambi_20260802_105156.json",
+  "fecha": "20260803",
+  "n_picks_analizados": 11,
+  "n_score_directo_3plus": 0,
+  "n_split": 0,
+  "h98_01_n_actual": 0,
+  "picks_score_directo_3plus": [],
+  "picks_split": [],
+  "todos_los_picks": [
+    {
+      "partido": "Charney P. vs Penickova A.",
+      "favorito": "Penickova A.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0735,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Quevedo K. vs Samson L.",
+      "favorito": "Samson L.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0649,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Vallejo D. vs Shang J.",
+      "favorito": "Vallejo D.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0636,
+      "cuota": null,
+      "tier": "atp1000",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Shimabukuro S. vs Cilic M.",
+      "favorito": "Shimabukuro S.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0278,
+      "cuota": null,
+      "tier": "atp1000",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Sramkova R. vs Blinkova A.",
+      "favorito": "Sramkova R.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.0232,
+      "cuota": null,
+      "tier": "atp1000",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Diallo G. vs Jacquet K.",
+      "favorito": "Jacquet K.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.014,
+      "cuota": null,
+      "tier": "atp1000",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Kovacevic A. vs Borges N.",
+      "favorito": "Borges N.",
+      "score_directo": 0,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.2023,
+      "cuota": null,
+      "tier": "atp1000",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Munar J. vs Hijikata R.",
+      "favorito": "Munar J.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": -0.0862,
+      "cuota": null,
+      "tier": "atp1000",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Zheng M. vs Kecmanovic M.",
+      "favorito": "Zheng M.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": -0.0921,
+      "cuota": null,
+      "tier": "atp1000",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Berrettini M. vs Navone M.",
+      "favorito": "Berrettini M.",
+      "score_directo": 0,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.1086,
+      "cuota": null,
+      "tier": "atp1000",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Mejia N. vs Landaluce M.",
+      "favorito": "Landaluce M.",
+      "score_directo": 0,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.2156,
+      "cuota": null,
+      "tier": "atp1000",
+      "seccion": "sin_edge"
+    }
+  ]
+}

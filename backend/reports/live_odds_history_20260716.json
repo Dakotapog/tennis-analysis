@@ -1,0 +1,826 @@
+{
+  "Hayu_Kinoshita_vs_Sakura_Hosogi": {
+    "readings": [
+      {
+        "ts": "09:12:41",
+        "cuota": 1.27,
+        "drift": 0.6265
+      },
+      {
+        "ts": "09:13:44",
+        "cuota": 1.22,
+        "drift": 0.6412
+      },
+      {
+        "ts": "09:14:03",
+        "cuota": 1.2,
+        "drift": 0.6471
+      },
+      {
+        "ts": "09:14:26",
+        "cuota": 1.25,
+        "drift": 0.6324
+      },
+      {
+        "ts": "09:14:46",
+        "cuota": 1.25,
+        "drift": 0.6324
+      },
+      {
+        "ts": "09:15:49",
+        "cuota": 1.16,
+        "drift": 0.6588
+      },
+      {
+        "ts": "09:16:03",
+        "cuota": 1.16,
+        "drift": 0.6588
+      },
+      {
+        "ts": "09:16:54",
+        "cuota": 1.16,
+        "drift": 0.6588
+      },
+      {
+        "ts": "09:17:07",
+        "cuota": 1.13,
+        "drift": 0.6676
+      },
+      {
+        "ts": "09:18:03",
+        "cuota": 1.09,
+        "drift": 0.6794
+      }
+    ],
+    "estado": "BREAK_CONFIRMADO",
+    "fired": false
+  },
+  "Yannick_Hanfmann_vs_Valentin_Vacherot": {
+    "readings": [
+      {
+        "ts": "11:43:07",
+        "cuota": 1.01,
+        "drift": 0.5792
+      },
+      {
+        "ts": "11:44:11",
+        "cuota": 1.01,
+        "drift": 0.5792
+      },
+      {
+        "ts": "11:44:44",
+        "cuota": 1.01,
+        "drift": 0.5792
+      },
+      {
+        "ts": "11:44:57",
+        "cuota": 1.01,
+        "drift": 0.5792
+      },
+      {
+        "ts": "11:45:43",
+        "cuota": 1.02,
+        "drift": 0.575
+      },
+      {
+        "ts": "11:46:03",
+        "cuota": 1.02,
+        "drift": 0.575
+      },
+      {
+        "ts": "11:46:43",
+        "cuota": 1.02,
+        "drift": 0.575
+      },
+      {
+        "ts": "11:46:47",
+        "cuota": 1.02,
+        "drift": 0.575
+      },
+      {
+        "ts": "11:46:52",
+        "cuota": 1.02,
+        "drift": 0.575
+      },
+      {
+        "ts": "11:47:43",
+        "cuota": 1.02,
+        "drift": 0.575
+      }
+    ],
+    "estado": "BREAK_CONFIRMADO",
+    "fired": false
+  },
+  "Max_Schoenhaus_vs_Max_Houkes": {
+    "readings": [
+      {
+        "ts": "12:15:05",
+        "cuota": 1.05,
+        "drift": 0.5588
+      },
+      {
+        "ts": "12:15:31",
+        "cuota": 1.06,
+        "drift": 0.5546
+      },
+      {
+        "ts": "12:16:04",
+        "cuota": 1.04,
+        "drift": 0.563
+      },
+      {
+        "ts": "12:16:32",
+        "cuota": 1.02,
+        "drift": 0.5714
+      },
+      {
+        "ts": "12:17:05",
+        "cuota": 1.02,
+        "drift": 0.5714
+      },
+      {
+        "ts": "12:17:32",
+        "cuota": 1.02,
+        "drift": 0.5714
+      },
+      {
+        "ts": "12:18:04",
+        "cuota": 1.02,
+        "drift": 0.5714
+      },
+      {
+        "ts": "12:18:32",
+        "cuota": 1.02,
+        "drift": 0.5714
+      },
+      {
+        "ts": "12:20:32",
+        "cuota": 1.02,
+        "drift": 0.5714
+      },
+      {
+        "ts": "12:21:32",
+        "cuota": 1.02,
+        "drift": 0.5714
+      }
+    ],
+    "estado": "BREAK_CONFIRMADO",
+    "fired": false
+  },
+  "Maria_Kononova_vs_Elena_Mireles": {
+    "readings": [
+      {
+        "ts": "14:24:02",
+        "cuota": 2.6,
+        "drift": -0.07
+      },
+      {
+        "ts": "14:24:20",
+        "cuota": 2.6,
+        "drift": -0.07
+      },
+      {
+        "ts": "14:24:57",
+        "cuota": 3.7,
+        "drift": -0.5226
+      },
+      {
+        "ts": "14:25:23",
+        "cuota": 3.7,
+        "drift": -0.5226
+      },
+      {
+        "ts": "14:26:03",
+        "cuota": 5.4,
+        "drift": -1.2222
+      },
+      {
+        "ts": "14:26:26",
+        "cuota": 5.4,
+        "drift": -1.2222
+      },
+      {
+        "ts": "14:26:57",
+        "cuota": 5.4,
+        "drift": -1.2222
+      },
+      {
+        "ts": "14:27:30",
+        "cuota": 5.4,
+        "drift": -1.2222
+      },
+      {
+        "ts": "14:28:02",
+        "cuota": 7.5,
+        "drift": -2.0864
+      },
+      {
+        "ts": "14:29:05",
+        "cuota": 14.0,
+        "drift": -4.7613
+      }
+    ],
+    "estado": "BREAK_CONFIRMADO",
+    "fired": false
+  },
+  "Aleksa_Ciric_vs_Nikita_Filin": {
+    "readings": [
+      {
+        "ts": "09:12:42",
+        "cuota": 1.58,
+        "drift": 0.1271
+      },
+      {
+        "ts": "09:13:44",
+        "cuota": 1.5,
+        "drift": 0.1713
+      },
+      {
+        "ts": "09:14:03",
+        "cuota": 1.5,
+        "drift": 0.1713
+      },
+      {
+        "ts": "09:14:27",
+        "cuota": 1.57,
+        "drift": 0.1326
+      },
+      {
+        "ts": "09:14:47",
+        "cuota": 1.57,
+        "drift": 0.1326
+      },
+      {
+        "ts": "09:15:50",
+        "cuota": 1.48,
+        "drift": 0.1823
+      },
+      {
+        "ts": "09:16:03",
+        "cuota": 1.46,
+        "drift": 0.1934
+      },
+      {
+        "ts": "09:16:55",
+        "cuota": 1.36,
+        "drift": 0.2486
+      },
+      {
+        "ts": "09:17:08",
+        "cuota": 1.28,
+        "drift": 0.2928
+      },
+      {
+        "ts": "09:18:03",
+        "cuota": 1.29,
+        "drift": 0.2873
+      }
+    ],
+    "estado": "BREAK_CONFIRMADO",
+    "fired": false,
+    "last_fav_games": null,
+    "last_opp_games": null,
+    "last_server": null,
+    "break_pending_confirm": false
+  },
+  "Jerrid_Gaines_Jr_vs_Andrew_Delgado": {
+    "readings": [
+      {
+        "ts": "15:07:21",
+        "cuota": 2.88,
+        "drift": -0.3091
+      },
+      {
+        "ts": "15:08:03",
+        "cuota": 3.7,
+        "drift": -0.6818
+      },
+      {
+        "ts": "15:08:24",
+        "cuota": 4.0,
+        "drift": -0.8182
+      },
+      {
+        "ts": "15:08:45",
+        "cuota": 3.95,
+        "drift": -0.7955
+      },
+      {
+        "ts": "15:09:28",
+        "cuota": 3.3,
+        "drift": -0.5
+      },
+      {
+        "ts": "15:10:06",
+        "cuota": 3.9,
+        "drift": -0.7727
+      },
+      {
+        "ts": "15:10:32",
+        "cuota": 3.9,
+        "drift": -0.7727
+      },
+      {
+        "ts": "15:10:45",
+        "cuota": 3.9,
+        "drift": -0.7727
+      },
+      {
+        "ts": "15:11:35",
+        "cuota": 3.9,
+        "drift": -0.7727
+      },
+      {
+        "ts": "15:12:04",
+        "cuota": 3.9,
+        "drift": -0.7727
+      }
+    ],
+    "estado": "BREAK_CONFIRMADO",
+    "fired": false,
+    "last_fav_games": null,
+    "last_opp_games": null,
+    "last_server": null,
+    "break_pending_confirm": false
+  },
+  "Marjorie_Souza_vs_Georgia_Pedone": {
+    "readings": [
+      {
+        "ts": "11:45:23",
+        "cuota": 14.0,
+        "drift": -1.5
+      },
+      {
+        "ts": "11:45:56",
+        "cuota": 18.0,
+        "drift": -2.2143
+      },
+      {
+        "ts": "11:46:02",
+        "cuota": 18.0,
+        "drift": -2.2143
+      },
+      {
+        "ts": "11:46:30",
+        "cuota": 18.0,
+        "drift": -2.2143
+      },
+      {
+        "ts": "11:47:37",
+        "cuota": 18.0,
+        "drift": -2.2143
+      },
+      {
+        "ts": "11:48:02",
+        "cuota": 16.0,
+        "drift": -1.8571
+      },
+      {
+        "ts": "11:48:44",
+        "cuota": 13.0,
+        "drift": -1.3214
+      },
+      {
+        "ts": "11:49:05",
+        "cuota": 13.0,
+        "drift": -1.3214
+      },
+      {
+        "ts": "11:50:02",
+        "cuota": 17.0,
+        "drift": -2.0357
+      },
+      {
+        "ts": "11:50:09",
+        "cuota": 17.0,
+        "drift": -2.0357
+      }
+    ],
+    "estado": "NORMAL",
+    "fired": false,
+    "last_fav_games": null,
+    "last_opp_games": null,
+    "last_server": null,
+    "break_pending_confirm": false
+  },
+  "Daniele_Rapagnetta_vs_Filippo_Mazzola": {
+    "readings": [
+      {
+        "ts": "13:02:03",
+        "cuota": 16.0,
+        "drift": -3.7059
+      },
+      {
+        "ts": "13:02:10",
+        "cuota": 16.0,
+        "drift": -3.7059
+      },
+      {
+        "ts": "13:03:14",
+        "cuota": 16.0,
+        "drift": -3.7059
+      },
+      {
+        "ts": "13:04:04",
+        "cuota": 16.0,
+        "drift": -3.7059
+      },
+      {
+        "ts": "13:04:18",
+        "cuota": 16.0,
+        "drift": -3.7059
+      },
+      {
+        "ts": "13:05:22",
+        "cuota": 15.0,
+        "drift": -3.4118
+      },
+      {
+        "ts": "13:07:29",
+        "cuota": 15.0,
+        "drift": -3.4118
+      },
+      {
+        "ts": "13:08:02",
+        "cuota": 8.5,
+        "drift": -1.5
+      },
+      {
+        "ts": "13:08:31",
+        "cuota": 8.5,
+        "drift": -1.5
+      },
+      {
+        "ts": "13:09:34",
+        "cuota": 14.0,
+        "drift": -3.1176
+      }
+    ],
+    "estado": "BREAK_CONFIRMADO",
+    "fired": false,
+    "last_fav_games": null,
+    "last_opp_games": null,
+    "last_server": null,
+    "break_pending_confirm": false
+  },
+  "Aurora_Zantedeschi_vs_Martina_Trevisan": {
+    "readings": [
+      {
+        "ts": "12:54:30",
+        "cuota": 4.8,
+        "drift": -1.2326
+      },
+      {
+        "ts": "12:54:48",
+        "cuota": 4.8,
+        "drift": -1.2326
+      },
+      {
+        "ts": "12:55:51",
+        "cuota": 6.1,
+        "drift": -1.8372
+      },
+      {
+        "ts": "12:56:04",
+        "cuota": 8.0,
+        "drift": -2.7209
+      },
+      {
+        "ts": "12:56:31",
+        "cuota": 12.5,
+        "drift": -4.814
+      },
+      {
+        "ts": "12:56:54",
+        "cuota": 12.5,
+        "drift": -4.814
+      },
+      {
+        "ts": "12:57:58",
+        "cuota": 46.0,
+        "drift": -20.3953
+      },
+      {
+        "ts": "12:58:03",
+        "cuota": 51.0,
+        "drift": -22.7209
+      },
+      {
+        "ts": "12:58:31",
+        "cuota": 25.0,
+        "drift": -10.6279
+      },
+      {
+        "ts": "12:59:01",
+        "cuota": 25.0,
+        "drift": -10.6279
+      }
+    ],
+    "estado": "NORMAL",
+    "fired": false,
+    "last_fav_games": null,
+    "last_opp_games": null,
+    "last_server": null,
+    "break_pending_confirm": false
+  },
+  "Roman_Andres_Burruchaga_vs_Camilo_Ugo_Carabelli": {
+    "readings": [
+      {
+        "ts": "13:27:43",
+        "cuota": 4.0,
+        "drift": -0.7937
+      },
+      {
+        "ts": "13:28:06",
+        "cuota": 4.25,
+        "drift": -0.9058
+      },
+      {
+        "ts": "13:28:29",
+        "cuota": 3.2,
+        "drift": -0.435
+      },
+      {
+        "ts": "13:29:03",
+        "cuota": 4.75,
+        "drift": -1.13
+      },
+      {
+        "ts": "13:30:05",
+        "cuota": 8.0,
+        "drift": -2.5874
+      },
+      {
+        "ts": "13:30:10",
+        "cuota": 8.0,
+        "drift": -2.5874
+      },
+      {
+        "ts": "13:31:15",
+        "cuota": 23.0,
+        "drift": -9.3139
+      },
+      {
+        "ts": "13:32:04",
+        "cuota": 18.0,
+        "drift": -7.0717
+      },
+      {
+        "ts": "13:32:19",
+        "cuota": 56.0,
+        "drift": -24.1121
+      },
+      {
+        "ts": "13:32:33",
+        "cuota": 56.0,
+        "drift": -24.1121
+      }
+    ],
+    "estado": "BREAK_CONFIRMADO",
+    "fired": false,
+    "last_fav_games": null,
+    "last_opp_games": null,
+    "last_server": null,
+    "break_pending_confirm": false
+  },
+  "Ena_Koike_vs_Miho_Kuramochi": {
+    "readings": [
+      {
+        "ts": "14:04:03",
+        "cuota": 11.5,
+        "drift": -3.1818
+      },
+      {
+        "ts": "14:04:30",
+        "cuota": 16.0,
+        "drift": -4.8182
+      },
+      {
+        "ts": "14:06:03",
+        "cuota": 15.0,
+        "drift": -4.4545
+      },
+      {
+        "ts": "14:06:09",
+        "cuota": 15.0,
+        "drift": -4.4545
+      },
+      {
+        "ts": "14:08:03",
+        "cuota": 15.0,
+        "drift": -4.4545
+      },
+      {
+        "ts": "14:08:16",
+        "cuota": 18.0,
+        "drift": -5.5455
+      },
+      {
+        "ts": "14:08:30",
+        "cuota": 18.0,
+        "drift": -5.5455
+      },
+      {
+        "ts": "14:20:55",
+        "cuota": 17.0,
+        "drift": -5.1818
+      },
+      {
+        "ts": "14:21:58",
+        "cuota": 15.0,
+        "drift": -4.4545
+      },
+      {
+        "ts": "14:22:03",
+        "cuota": 15.0,
+        "drift": -4.4545
+      }
+    ],
+    "estado": "BREAK_CONFIRMADO",
+    "fired": false,
+    "last_fav_games": null,
+    "last_opp_games": null,
+    "last_server": null,
+    "break_pending_confirm": false
+  },
+  "Drew_Fishback_vs_Jerrid_Gaines_Jr": {
+    "readings": [
+      {
+        "ts": "18:59:01",
+        "cuota": 1.26,
+        "drift": 0.2174
+      },
+      {
+        "ts": "18:59:33",
+        "cuota": 1.16,
+        "drift": 0.2795
+      },
+      {
+        "ts": "19:00:02",
+        "cuota": 1.08,
+        "drift": 0.3292
+      },
+      {
+        "ts": "19:00:18",
+        "cuota": 1.09,
+        "drift": 0.323
+      },
+      {
+        "ts": "19:00:35",
+        "cuota": 1.03,
+        "drift": 0.3602
+      },
+      {
+        "ts": "19:01:38",
+        "cuota": 1.01,
+        "drift": 0.3727
+      },
+      {
+        "ts": "19:02:01",
+        "cuota": 1.03,
+        "drift": 0.3602
+      },
+      {
+        "ts": "19:02:21",
+        "cuota": 1.05,
+        "drift": 0.3478
+      },
+      {
+        "ts": "19:02:24",
+        "cuota": 1.05,
+        "drift": 0.3478
+      },
+      {
+        "ts": "19:02:40",
+        "cuota": 1.04,
+        "drift": 0.354
+      }
+    ],
+    "estado": "BREAK_CONFIRMADO",
+    "fired": false,
+    "last_fav_games": null,
+    "last_opp_games": null,
+    "last_server": null,
+    "break_pending_confirm": false
+  },
+  "Alexander_Bernard_vs_Ilija_Palavestra": {
+    "readings": [
+      {
+        "ts": "19:04:02",
+        "cuota": 1.17,
+        "drift": 0.3276
+      },
+      {
+        "ts": "19:04:28",
+        "cuota": 1.23,
+        "drift": 0.2931
+      },
+      {
+        "ts": "19:04:47",
+        "cuota": 1.21,
+        "drift": 0.3046
+      },
+      {
+        "ts": "19:05:51",
+        "cuota": 1.11,
+        "drift": 0.3621
+      },
+      {
+        "ts": "19:06:02",
+        "cuota": 1.11,
+        "drift": 0.3621
+      },
+      {
+        "ts": "19:06:29",
+        "cuota": 1.11,
+        "drift": 0.3621
+      },
+      {
+        "ts": "19:13:11",
+        "cuota": 1.02,
+        "drift": 0.4138
+      },
+      {
+        "ts": "19:14:03",
+        "cuota": 1.01,
+        "drift": 0.4195
+      },
+      {
+        "ts": "19:14:14",
+        "cuota": 1.01,
+        "drift": 0.4195
+      },
+      {
+        "ts": "19:14:29",
+        "cuota": 1.01,
+        "drift": 0.4195
+      }
+    ],
+    "estado": "BREAK_CONFIRMADO",
+    "fired": false,
+    "last_fav_games": null,
+    "last_opp_games": null,
+    "last_server": null,
+    "break_pending_confirm": false
+  },
+  "Dakotah_Bobo_vs_Muhammad_Shoaib": {
+    "readings": [
+      {
+        "ts": "19:46:05",
+        "cuota": 10.0,
+        "drift": -3.7619
+      },
+      {
+        "ts": "19:46:33",
+        "cuota": 7.5,
+        "drift": -2.5714
+      },
+      {
+        "ts": "19:46:53",
+        "cuota": 10.0,
+        "drift": -3.7619
+      },
+      {
+        "ts": "19:47:57",
+        "cuota": 7.5,
+        "drift": -2.5714
+      },
+      {
+        "ts": "19:48:04",
+        "cuota": 7.5,
+        "drift": -2.5714
+      },
+      {
+        "ts": "19:48:33",
+        "cuota": 9.0,
+        "drift": -3.2857
+      },
+      {
+        "ts": "19:49:00",
+        "cuota": 12.0,
+        "drift": -4.7143
+      },
+      {
+        "ts": "19:50:05",
+        "cuota": 12.0,
+        "drift": -4.7143
+      },
+      {
+        "ts": "19:50:33",
+        "cuota": 12.5,
+        "drift": -4.9524
+      },
+      {
+        "ts": "19:51:08",
+        "cuota": 13.0,
+        "drift": -5.1905
+      }
+    ],
+    "estado": "NORMAL",
+    "fired": false,
+    "last_fav_games": null,
+    "last_opp_games": null,
+    "last_server": null,
+    "break_pending_confirm": false
+  }
+}

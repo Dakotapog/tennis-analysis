@@ -1,0 +1,51 @@
+{
+  "ts_registro": "2026-07-21T10:31:36.824496",
+  "ts_bookmarklet": "2026-07-21T15:31:43.255Z",
+  "estado": "PENDIENTE",
+  "betslip_index": "reports/betslip_index_20260721_064527.json",
+  "n_picks": 2,
+  "picks": [
+    {
+      "outcome_id": "4267044071",
+      "jugador": "OUTCOME_4267044071",
+      "cuota": 0.0,
+      "cuota_kambi": 0.0,
+      "partido": "",
+      "match_id": "",
+      "match_url": "",
+      "torneo": "",
+      "superficie": "unknown",
+      "tier": "unknown",
+      "edge": "0%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0,
+      "stake": 0,
+      "retorno_potencial": 0,
+      "resultado_real": null,
+      "correcto": null,
+      "ganancia": null,
+      "fuera_de_index": true
+    },
+    {
+      "outcome_id": "4265303123",
+      "jugador": "OUTCOME_4265303123",
+      "cuota": 0.0,
+      "cuota_kambi": 0.0,
+      "partido": "",
+      "match_id": "",
+      "match_url": "",
+      "torneo": "",
+      "superficie": "unknown",
+      "tier": "unknown",
+      "edge": "0%",
+      "p_modelo": 0.5,
+      "kelly_kl": 0.0,
+      "stake": 0,
+      "retorno_potencial": 0,
+      "resultado_real": null,
+      "correcto": null,
+      "ganancia": null,
+      "fuera_de_index": true
+    }
+  ]
+}

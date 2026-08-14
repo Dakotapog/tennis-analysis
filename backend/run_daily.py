@@ -29,6 +29,7 @@ import os
 import json
 import glob
 import argparse
+from collections import Counter
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -79,6 +80,31 @@ def _rankings_stale(max_days: int = 7) -> bool:
 def _latest_report(pattern: str) -> str | None:
     files = sorted(glob.glob(pattern), reverse=True)
     return files[0] if files else None
+
+
+def _superficie_dominante_tier(tier: str, fecha_compact: str, fallback: str) -> str:
+    """D163-02 (Nodo-163): superficie real del día para este tier, en vez de un
+    valor fijo por tier (atp1000/atp500 hardcodeados a 'grass' hacía que
+    _load_p_prior() usara el bucket de calibración equivocado en meses como
+    agosto, cuando Montreal/Toronto son hard). Cuenta 'superficie' de los picks
+    del edge_report de hoy para ese tier; si no hay datos, usa el fallback
+    estático de tier_config (nunca lanza ni bloquea PASO 4)."""
+    er_file = _latest_report(f'{REPORTS_DIR}/edge_report_kambi_{fecha_compact}*.json') \
+        or _latest_report(f'{REPORTS_DIR}/edge_report_{fecha_compact}*.json')
+    if not er_file:
+        return fallback
+    try:
+        er = json.loads(Path(er_file).read_text(encoding='utf-8'))
+    except Exception:
+        return fallback
+    conteo = Counter()
+    for pool in ('apostar', 'watchlist', 'sin_edge', 'picks'):
+        for p in er.get(pool, []) or []:
+            if p.get('tier') == tier and p.get('superficie'):
+                conteo[p['superficie']] += 1
+    if not conteo:
+        return fallback
+    return conteo.most_common(1)[0][0]
 
 
 def _build_daily_brief(fecha: str, tier_results: dict, was_candidates: list,
@@ -299,7 +325,7 @@ def main():
     parser.add_argument('--skip-rankings', action='store_true', help='Saltar PASO 0')
     parser.add_argument('--skip-h2h',      action='store_true', help='Saltar PASO 2')
     parser.add_argument('--tier',          nargs='+',
-                        default=['grand_slam', 'challenger', 'itf'],
+                        default=['grand_slam', 'challenger', 'itf', 'atp1000', 'atp500'],
                         help='Tiers a procesar en PASO 4')
     # S1-C (D90-07): pipeline nocturno / matutino (Nodo-91 §S1-C)
     # Cron sugerido (NO instalar sin n8n — documentado en Nodo-91 §S1-C):
@@ -328,6 +354,7 @@ def main():
         _run(['python3', 'combo_registry.py', '--settle', fecha_ayer], 'PASO 10b — combo registry settle (I7 Nodo-67)')
         _run(['python3', 'scripts/signal_audit.py', '--rebuild'],      'PASO 10c — signal audit trazabilidad (Nodo-101)')
         _run(['python3', 'scripts/player_consistency.py', '--rebuild'], 'PASO 10d — player consistency perfiles (Nodo-101)')
+        _run(['python3', 'scripts/update_hypothesis_ledger.py'], 'PASO 10e — hypothesis ledger (Nodo-174 D174-03)')
         print(f"\n  Settle completado para {fecha_ayer}")
         return
 
@@ -429,6 +456,18 @@ def main():
             _dual_cmd += ['--book2', _zita_book2]
         _run(_dual_cmd, 'PASO 3.7 — Dual-Book Router X1 (Nodo-111)')
 
+        # ── PASO 3.8 — Phantom History Audit semanal (Nodo-174 D174-09) ──────
+        # Retroactivo (Nodo-152): detecta jugadores con historial contaminado
+        # (thf_cache asignó historial top-ATP a un ITF por matching de apellido
+        # sin validar circuito). Semanal (lunes, mismo día que check_contradictions.py)
+        # — no bloquea el pipeline, solo genera reports/audit_phantom_history_*.json.
+        # Corrección de data/calibracion_edge.json sigue siendo manual (ver nota
+        # _nota_d174_09_phantom_correction en el JSON, ejemplo aplicado 2026-08-06).
+        if datetime.now().weekday() == 0:  # lunes
+            _run(['python3', 'scripts/audit_phantom_history.py', '--days', '30'],
+                 'PASO 3.8 — Phantom History Audit semanal (Nodo-174 D174-09)',
+                 optional=True)
+
     if _skip_pasos_4_plus:
         print(f"\n  FASE NOCHE completada. PASOS 4+ se ejecutarán con --fase manana")
         return
@@ -461,6 +500,15 @@ def main():
     except Exception as _e:
         print(f'[PASO 3.91] WARN patch cuotas falló (no bloqueante): {_e}')
 
+    # ── PASO 3.92 — Reporte de embudo (D173-11 Nodo-173) ─────────────────────
+    # "Hoy no hubo señales" no es una respuesta. Nunca puede romper el pipeline.
+    # Nota: el spec sugiere "PASO 3.9" pero ese slot ya lo ocupa D154-08 arriba.
+    try:
+        from scripts.funnel_report import generar_reporte as _gen_embudo
+        print(_gen_embudo())
+    except Exception as _e:
+        print(f'[PASO 3.92] WARN funnel_report falló (no bloqueante): {_e}')
+
     # ── PASO 4 — Trader por tier ──────────────────────────────────────────
     tier_config = {
         'grand_slam':  {'bankroll': args.bankroll,      'superficie': 'grass'},
@@ -470,15 +518,18 @@ def main():
         'itf':         {'bankroll': BANKROLL_ITF,        'superficie': 'clay'},
     }
 
+    _fecha_compact_paso4 = fecha_hoy.replace('-', '')
     for tier in args.tier:
         cfg = tier_config.get(tier)
         if not cfg:
             continue
+        _superficie_real = _superficie_dominante_tier(
+            tier, _fecha_compact_paso4, fallback=cfg['superficie'])
         rc, out = _run(
             ['python3', 'trader_ev_tenis.py',
              '--bankroll', str(cfg['bankroll']),
              '--torneo-tipo', tier,
-             '--superficie', cfg['superficie']],
+             '--superficie', _superficie_real],
             f'PASO 4 — Trader {tier}',
             capture=True,
         )
@@ -572,6 +623,7 @@ def main():
         _run(['python3', 'combo_registry.py', '--settle', fecha_ayer], 'PASO 10b — combo registry settle (I7 Nodo-67)')
         _run(['python3', 'scripts/signal_audit.py', '--rebuild'],      'PASO 10c — signal audit trazabilidad (Nodo-101)')
         _run(['python3', 'scripts/player_consistency.py', '--rebuild'], 'PASO 10d — player consistency perfiles (Nodo-101)')
+        _run(['python3', 'scripts/update_hypothesis_ledger.py'], 'PASO 10e — hypothesis ledger (Nodo-174 D174-03)')
 
     # ── DAILY BRIEF ───────────────────────────────────────────────────────
     brief = _build_daily_brief(fecha_hoy, tier_results, was_candidates, fecha_ayer)

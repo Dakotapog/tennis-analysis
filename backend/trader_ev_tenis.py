@@ -868,7 +868,8 @@ def _build_cobertura(pool: list, piernas_min: int, piernas_max: int,
         for c in tier:
             all_plan.append({
                 'piernas_n': k,
-                'legs': [{'jugador': l['favorito_predicho'], 'cuota': l['cuota_favorito']}
+                'legs': [{'jugador': l['favorito_predicho'], 'cuota': l['cuota_favorito'],
+                          'outcome_id': l.get('outcome_id')}  # D174-08 Nodo-174
                          for l in c['legs']],
                 'cuota_combo': c['cuota_combo'],
                 'hr_combo': c['hr_combo'],

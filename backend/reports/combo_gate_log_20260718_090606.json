@@ -1,0 +1,64 @@
+[
+  {
+    "nombre": "Paula Badosa",
+    "torneo": "WTA - INDIVIDUALES: Iasi (Rumanía), arcilla",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=MODERATE)",
+    "conf": 55.1,
+    "cuota": 1.27,
+    "ts": "2026-07-18T09:06:06.522250"
+  },
+  {
+    "nombre": "Sandro Kopp",
+    "torneo": "ATP - INDIVIDUALES: Kitzbühel (Austria) - Fase previa, arcilla",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 85.5,
+    "cuota": 1.67,
+    "ts": "2026-07-18T09:06:06.522388"
+  },
+  {
+    "nombre": "Isabella Shinikova",
+    "torneo": "CHALLENGER FEMENINO - INDIVIDUALES: Palermo (Italia) - Fase previa, arcilla",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=MODERATE)",
+    "conf": 59.8,
+    "cuota": 1.87,
+    "ts": "2026-07-18T09:06:06.522435"
+  },
+  {
+    "nombre": "Hugo Dellien",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_1 bloqueado",
+    "combo": "cobertura_1",
+    "ts": "2026-07-18T09:06:06.522843"
+  },
+  {
+    "nombre": "Hugo Dellien",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_2 bloqueado",
+    "combo": "cobertura_2",
+    "ts": "2026-07-18T09:06:06.522849"
+  },
+  {
+    "nombre": "Hugo Dellien",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_3 bloqueado",
+    "combo": "cobertura_3",
+    "ts": "2026-07-18T09:06:06.522852"
+  },
+  {
+    "nombre": "Ozan Baris",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_4 bloqueado",
+    "combo": "cobertura_4",
+    "ts": "2026-07-18T09:06:06.522855"
+  },
+  {
+    "nombre": "Ozan Baris",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_5 bloqueado",
+    "combo": "cobertura_5",
+    "ts": "2026-07-18T09:06:06.522857"
+  }
+]

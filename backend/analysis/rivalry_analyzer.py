@@ -2381,6 +2381,17 @@ class RivalryAnalyzer:
                 'p2_final_weight': round(final_p2, 2),
                 'score_difference': round(score_diff, 2)
             },
+            # ── D173-03 (Nodo-173): margen crudo con signo, SIN normalizar ────
+            # `confidence` = 50 + 50·|Δ|/Σ destruye el signo (abs) y la escala
+            # (normalización por Σ) — los defectos F1 y F2 del Nodo-173 §1.1.
+            # El calibrador (D173-05) no puede reparar lo que no está serializado,
+            # y `scores.*` está redondeado a 2 decimales (lossy). Estos campos
+            # llevan 4 decimales y conservan el signo respecto a p1.
+            # Puramente aditivo: `confidence` no se toca en este deliverable.
+            'score_margin_raw': round(score_diff, 4),      # final_p1 - final_p2, con signo
+            'score_sum_raw':    round(total_score, 4),     # Σ = final_p1 + final_p2
+            'score_fav_raw':    round(max(final_p1, final_p2), 4),
+            'score_dog_raw':    round(min(final_p1, final_p2), 4),
             'score_breakdown': {
                 'player1': breakdown_p1,
                 'player2': breakdown_p2

@@ -1,0 +1,163 @@
+[
+  {
+    "nombre": "Carreno-Busta P.",
+    "torneo": "Estoril (Portugal)",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=LOW)",
+    "conf": 53.3,
+    "cuota": 1.36,
+    "ts": "2026-07-21T22:18:23.460208"
+  },
+  {
+    "nombre": "Merida Aguilar D.",
+    "torneo": "Estoril (Portugal)",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=LOW)",
+    "conf": 53.0,
+    "cuota": 1.45,
+    "ts": "2026-07-21T22:18:23.460258"
+  },
+  {
+    "nombre": "Merida Aguilar D.",
+    "torneo": "Estoril (Portugal)",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=LOW)",
+    "conf": 54.8,
+    "cuota": 1.38,
+    "ts": "2026-07-21T22:18:23.460276"
+  },
+  {
+    "nombre": "Burruchaga R. A.",
+    "torneo": "Estoril (Portugal)",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=MODERATE)",
+    "conf": 55.6,
+    "cuota": 1.42,
+    "ts": "2026-07-21T22:18:23.460291"
+  },
+  {
+    "nombre": "Hirose Y.",
+    "torneo": "M15 Bali (Indonesia)",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 62.1,
+    "cuota": 3.1,
+    "ts": "2026-07-21T22:18:23.460811"
+  },
+  {
+    "nombre": "Gonzalez Gonzalez K. N.",
+    "torneo": "M15 Huamantla 3 (Mexico)",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 60.3,
+    "cuota": 5.0,
+    "ts": "2026-07-21T22:18:23.460842"
+  },
+  {
+    "nombre": "Catalano F.",
+    "torneo": "M15 Segrate (Italy)",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 64.0,
+    "cuota": 3.5,
+    "ts": "2026-07-21T22:18:23.460913"
+  },
+  {
+    "nombre": "Brunetti T.",
+    "torneo": "M25 Champaign, IL (USA)",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=LOW)",
+    "conf": 53.1,
+    "cuota": 6.25,
+    "ts": "2026-07-21T22:18:23.460992"
+  },
+  {
+    "nombre": "Clarke S.",
+    "torneo": "W15 Huamantla 2 (Mexico)",
+    "gate": "G2",
+    "motivo": "G2: n_h2h=0 — sin historial directo (axes=2, score_dir=2)",
+    "conf": 95.0,
+    "cuota": 3.45,
+    "ts": "2026-07-21T22:18:23.461123"
+  },
+  {
+    "nombre": "Gutierrez P. F.",
+    "torneo": "W15 Huamantla 2 (Mexico)",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=LOW)",
+    "conf": 54.1,
+    "cuota": 6.75,
+    "ts": "2026-07-21T22:18:23.461132"
+  },
+  {
+    "nombre": "Torres G. F.",
+    "torneo": "W15 Huamantla 2 (Mexico)",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 95.0,
+    "cuota": 1.55,
+    "ts": "2026-07-21T22:18:23.461142"
+  },
+  {
+    "nombre": "Nava Elkin A. C.",
+    "torneo": "W15 Huamantla 2 (Mexico)",
+    "gate": "G2",
+    "motivo": "G2: n_h2h=0 — sin historial directo (axes=2, score_dir=2)",
+    "conf": 95.0,
+    "cuota": 2.05,
+    "ts": "2026-07-21T22:18:23.461154"
+  },
+  {
+    "nombre": "Cora-Bruneton C.",
+    "torneo": "W15 Nogent-sur-Marne (France)",
+    "gate": "G2",
+    "motivo": "G2: n_h2h=0 — sin historial directo (axes=2, score_dir=1)",
+    "conf": 61.9,
+    "cuota": 3.25,
+    "ts": "2026-07-21T22:18:23.461211"
+  },
+  {
+    "nombre": "Tabunshchyk A.",
+    "torneo": "W35 Saskatoon (Canada)",
+    "gate": "G2",
+    "motivo": "G2: n_h2h=0 — sin historial directo (axes=2, score_dir=2)",
+    "conf": 79.4,
+    "cuota": 1.6,
+    "ts": "2026-07-21T22:18:23.461303"
+  },
+  {
+    "nombre": "Andre S.",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_1 bloqueado",
+    "combo": "cobertura_1",
+    "ts": "2026-07-21T22:18:23.469771"
+  },
+  {
+    "nombre": "Andre S.",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_2 bloqueado",
+    "combo": "cobertura_2",
+    "ts": "2026-07-21T22:18:23.469782"
+  },
+  {
+    "nombre": "Andre S.",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_3 bloqueado",
+    "combo": "cobertura_3",
+    "ts": "2026-07-21T22:18:23.469785"
+  },
+  {
+    "nombre": "Andre S.",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_4 bloqueado",
+    "combo": "cobertura_4",
+    "ts": "2026-07-21T22:18:23.469787"
+  },
+  {
+    "nombre": "Andre S.",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_5 bloqueado",
+    "combo": "cobertura_5",
+    "ts": "2026-07-21T22:18:23.469789"
+  }
+]

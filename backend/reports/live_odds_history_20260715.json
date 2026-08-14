@@ -1,0 +1,346 @@
+{
+  "Hayu_Kinoshita_vs_Sakura_Hosogi": {
+    "readings": [
+      {
+        "ts": "12:30:50",
+        "cuota": 1.04,
+        "drift": 0.6941
+      },
+      {
+        "ts": "12:31:02",
+        "cuota": 1.04,
+        "drift": 0.6941
+      },
+      {
+        "ts": "12:31:53",
+        "cuota": 1.02,
+        "drift": 0.7
+      },
+      {
+        "ts": "12:32:02",
+        "cuota": 1.02,
+        "drift": 0.7
+      },
+      {
+        "ts": "12:32:30",
+        "cuota": 1.01,
+        "drift": 0.7029
+      },
+      {
+        "ts": "12:35:02",
+        "cuota": 1.02,
+        "drift": 0.7
+      },
+      {
+        "ts": "12:36:52",
+        "cuota": 1.01,
+        "drift": 0.7029
+      },
+      {
+        "ts": "12:36:54",
+        "cuota": 1.01,
+        "drift": 0.7029
+      },
+      {
+        "ts": "12:38:03",
+        "cuota": 1.02,
+        "drift": 0.7
+      },
+      {
+        "ts": "12:38:09",
+        "cuota": 1.02,
+        "drift": 0.7
+      }
+    ],
+    "estado": "BREAK_CONFIRMADO",
+    "fired": false
+  },
+  "Yannick_Hanfmann_vs_Valentin_Vacherot": {
+    "readings": [
+      {
+        "ts": "11:43:07",
+        "cuota": 1.01,
+        "drift": 0.5792
+      },
+      {
+        "ts": "11:44:11",
+        "cuota": 1.01,
+        "drift": 0.5792
+      },
+      {
+        "ts": "11:44:44",
+        "cuota": 1.01,
+        "drift": 0.5792
+      },
+      {
+        "ts": "11:44:57",
+        "cuota": 1.01,
+        "drift": 0.5792
+      },
+      {
+        "ts": "11:45:43",
+        "cuota": 1.02,
+        "drift": 0.575
+      },
+      {
+        "ts": "11:46:03",
+        "cuota": 1.02,
+        "drift": 0.575
+      },
+      {
+        "ts": "11:46:43",
+        "cuota": 1.02,
+        "drift": 0.575
+      },
+      {
+        "ts": "11:46:47",
+        "cuota": 1.02,
+        "drift": 0.575
+      },
+      {
+        "ts": "11:46:52",
+        "cuota": 1.02,
+        "drift": 0.575
+      },
+      {
+        "ts": "11:47:43",
+        "cuota": 1.02,
+        "drift": 0.575
+      }
+    ],
+    "estado": "BREAK_CONFIRMADO",
+    "fired": false
+  },
+  "Max_Schoenhaus_vs_Max_Houkes": {
+    "readings": [
+      {
+        "ts": "12:15:05",
+        "cuota": 1.05,
+        "drift": 0.5588
+      },
+      {
+        "ts": "12:15:31",
+        "cuota": 1.06,
+        "drift": 0.5546
+      },
+      {
+        "ts": "12:16:04",
+        "cuota": 1.04,
+        "drift": 0.563
+      },
+      {
+        "ts": "12:16:32",
+        "cuota": 1.02,
+        "drift": 0.5714
+      },
+      {
+        "ts": "12:17:05",
+        "cuota": 1.02,
+        "drift": 0.5714
+      },
+      {
+        "ts": "12:17:32",
+        "cuota": 1.02,
+        "drift": 0.5714
+      },
+      {
+        "ts": "12:18:04",
+        "cuota": 1.02,
+        "drift": 0.5714
+      },
+      {
+        "ts": "12:18:32",
+        "cuota": 1.02,
+        "drift": 0.5714
+      },
+      {
+        "ts": "12:20:32",
+        "cuota": 1.02,
+        "drift": 0.5714
+      },
+      {
+        "ts": "12:21:32",
+        "cuota": 1.02,
+        "drift": 0.5714
+      }
+    ],
+    "estado": "BREAK_CONFIRMADO",
+    "fired": false
+  },
+  "Maria_Kononova_vs_Elena_Mireles": {
+    "readings": [
+      {
+        "ts": "14:24:02",
+        "cuota": 2.6,
+        "drift": -0.07
+      },
+      {
+        "ts": "14:24:20",
+        "cuota": 2.6,
+        "drift": -0.07
+      },
+      {
+        "ts": "14:24:57",
+        "cuota": 3.7,
+        "drift": -0.5226
+      },
+      {
+        "ts": "14:25:23",
+        "cuota": 3.7,
+        "drift": -0.5226
+      },
+      {
+        "ts": "14:26:03",
+        "cuota": 5.4,
+        "drift": -1.2222
+      },
+      {
+        "ts": "14:26:26",
+        "cuota": 5.4,
+        "drift": -1.2222
+      },
+      {
+        "ts": "14:26:57",
+        "cuota": 5.4,
+        "drift": -1.2222
+      },
+      {
+        "ts": "14:27:30",
+        "cuota": 5.4,
+        "drift": -1.2222
+      },
+      {
+        "ts": "14:28:02",
+        "cuota": 7.5,
+        "drift": -2.0864
+      },
+      {
+        "ts": "14:29:05",
+        "cuota": 14.0,
+        "drift": -4.7613
+      }
+    ],
+    "estado": "BREAK_CONFIRMADO",
+    "fired": false
+  },
+  "Aleksa_Ciric_vs_Nikita_Filin": {
+    "readings": [
+      {
+        "ts": "14:14:03",
+        "cuota": 1.06,
+        "drift": 0.4144
+      },
+      {
+        "ts": "14:14:52",
+        "cuota": 1.07,
+        "drift": 0.4088
+      },
+      {
+        "ts": "14:15:03",
+        "cuota": 1.07,
+        "drift": 0.4088
+      },
+      {
+        "ts": "14:20:03",
+        "cuota": 1.05,
+        "drift": 0.4199
+      },
+      {
+        "ts": "14:20:07",
+        "cuota": 1.05,
+        "drift": 0.4199
+      },
+      {
+        "ts": "14:20:58",
+        "cuota": 1.05,
+        "drift": 0.4199
+      },
+      {
+        "ts": "14:21:10",
+        "cuota": 1.05,
+        "drift": 0.4199
+      },
+      {
+        "ts": "14:22:03",
+        "cuota": 1.05,
+        "drift": 0.4199
+      },
+      {
+        "ts": "14:22:14",
+        "cuota": 1.05,
+        "drift": 0.4199
+      },
+      {
+        "ts": "14:22:59",
+        "cuota": 1.06,
+        "drift": 0.4144
+      }
+    ],
+    "estado": "BREAK_CONFIRMADO",
+    "fired": false,
+    "last_fav_games": null,
+    "last_opp_games": null,
+    "last_server": null,
+    "break_pending_confirm": false
+  },
+  "Jerrid_Gaines_Jr_vs_Andrew_Delgado": {
+    "readings": [
+      {
+        "ts": "15:07:21",
+        "cuota": 2.88,
+        "drift": -0.3091
+      },
+      {
+        "ts": "15:08:03",
+        "cuota": 3.7,
+        "drift": -0.6818
+      },
+      {
+        "ts": "15:08:24",
+        "cuota": 4.0,
+        "drift": -0.8182
+      },
+      {
+        "ts": "15:08:45",
+        "cuota": 3.95,
+        "drift": -0.7955
+      },
+      {
+        "ts": "15:09:28",
+        "cuota": 3.3,
+        "drift": -0.5
+      },
+      {
+        "ts": "15:10:06",
+        "cuota": 3.9,
+        "drift": -0.7727
+      },
+      {
+        "ts": "15:10:32",
+        "cuota": 3.9,
+        "drift": -0.7727
+      },
+      {
+        "ts": "15:10:45",
+        "cuota": 3.9,
+        "drift": -0.7727
+      },
+      {
+        "ts": "15:11:35",
+        "cuota": 3.9,
+        "drift": -0.7727
+      },
+      {
+        "ts": "15:12:04",
+        "cuota": 3.9,
+        "drift": -0.7727
+      }
+    ],
+    "estado": "BREAK_CONFIRMADO",
+    "fired": false,
+    "last_fav_games": null,
+    "last_opp_games": null,
+    "last_server": null,
+    "break_pending_confirm": false
+  }
+}

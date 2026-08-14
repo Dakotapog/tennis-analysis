@@ -1,0 +1,99 @@
+[
+  {
+    "nombre": "Jankanj V.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=MODERATE)",
+    "conf": 59.8,
+    "cuota": 1.52,
+    "ts": "2026-07-22T12:26:49.808165"
+  },
+  {
+    "nombre": "Delage P.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=LOW)",
+    "conf": 53.8,
+    "cuota": 1.37,
+    "ts": "2026-07-22T12:26:49.808236"
+  },
+  {
+    "nombre": "Kraus S.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=LOW)",
+    "conf": 53.3,
+    "cuota": 1.54,
+    "ts": "2026-07-22T12:26:49.808255"
+  },
+  {
+    "nombre": "Mroz M.",
+    "torneo": "?",
+    "gate": "G2",
+    "motivo": "G2: n_h2h=0 — señal insuficiente sin H2H (conf=MODERATE, edge=27.8%, kelly=0.131, axes=2, score_dir=1)",
+    "conf": 57.6,
+    "cuota": 3.35,
+    "ts": "2026-07-22T12:26:49.808627"
+  },
+  {
+    "nombre": "Voelzke G.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 71.3,
+    "cuota": 2.55,
+    "ts": "2026-07-22T12:26:49.808774"
+  },
+  {
+    "nombre": "Liljekvist D.",
+    "torneo": "?",
+    "gate": "G2",
+    "motivo": "G2: n_h2h=0 — señal insuficiente sin H2H (conf=MODERATE, edge=20.6%, kelly=0.110, axes=2, score_dir=0)",
+    "conf": 55.7,
+    "cuota": 2.85,
+    "ts": "2026-07-22T12:26:49.809267"
+  },
+  {
+    "nombre": "Varela H. N.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 84.0,
+    "cuota": 3.15,
+    "ts": "2026-07-22T12:26:49.809671"
+  },
+  {
+    "nombre": "Borderia Y.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 95.0,
+    "cuota": 5.75,
+    "ts": "2026-07-22T12:26:49.815882"
+  },
+  {
+    "nombre": "Solar Donoso L.",
+    "torneo": "?",
+    "gate": "G4",
+    "motivo": "G4: NO_ALIGNMENT net=-0.431<-0.10 — señales activamente en contra del pick",
+    "conf": 65.1,
+    "cuota": 2.52,
+    "ts": "2026-07-22T12:26:49.815920"
+  },
+  {
+    "nombre": "Reguer A.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=MODERATE)",
+    "conf": 59.7,
+    "cuota": 3.05,
+    "ts": "2026-07-22T12:26:49.815993"
+  },
+  {
+    "nombre": "McFadzean L.",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo satellite_2 bloqueado",
+    "combo": "satellite_2",
+    "ts": "2026-07-22T12:26:49.816558"
+  }
+]

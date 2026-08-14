@@ -1,0 +1,58 @@
+{
+  "Duckworth J. vs O'Connell C._OVER": {
+    "cuota_t0": 1.98,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-02T14:23:02",
+    "direccion": "OVER",
+    "zona": "COINFLIP"
+  },
+  "Liutova K. vs Vidmanova D._OVER": {
+    "cuota_t0": 1.36,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-08-02T14:23:02",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Birrell K. vs Golubic V._OVER": {
+    "cuota_t0": 1.45,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-02T14:23:02",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Ito A. vs Sebov K._OVER": {
+    "cuota_t0": 1.8,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-02T15:13:35",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Uchijima M. vs Bucsa C._OVER": {
+    "cuota_t0": 1.91,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-02T15:41:57",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Frech M. vs Jeanjean L._OVER": {
+    "cuota_t0": 1.78,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-08-02T17:16:48",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Jones E. vs Tararudee L._OVER": {
+    "cuota_t0": 2.04,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-02T18:02:20",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Bartunkova N. vs Andreescu B._UNDER": {
+    "cuota_t0": 2.1,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-08-02T18:20:17",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  }
+}

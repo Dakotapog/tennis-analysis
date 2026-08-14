@@ -1,0 +1,243 @@
+{
+  "generated_at": "2026-07-30T09:52:58.080382",
+  "edge_report_fuente": "edge_report_kambi_20260729_083303.json",
+  "fecha": "20260730",
+  "n_picks_analizados": 13,
+  "n_score_directo_3plus": 0,
+  "n_split": 1,
+  "h98_01_n_actual": 0,
+  "picks_score_directo_3plus": [],
+  "picks_split": [
+    {
+      "partido": "Adeshina E. vs Zocco Y.",
+      "favorito": "Adeshina E.",
+      "score_directo": 2,
+      "score_rival_value": 1,
+      "direccion": "SPLIT",
+      "senales_activas_fav": [
+        "STRONG",
+        "ELO_DOM"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.1544,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "sin_edge"
+    }
+  ],
+  "todos_los_picks": [
+    {
+      "partido": "Camargo Lima E. vs Vesantera B. T.",
+      "favorito": "Vesantera B. T.",
+      "score_directo": 2,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT",
+        "STRONG"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.395,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "apostar"
+    },
+    {
+      "partido": "Puiac A. L. vs Heinonen I.",
+      "favorito": "Heinonen I.",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "RFI_tier2"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.284,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "apostar"
+    },
+    {
+      "partido": "Ishii S. vs Gandolfi F.",
+      "favorito": "Gandolfi F.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1592,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "apostar"
+    },
+    {
+      "partido": "Rolland de Ravel C. vs Hohmann T.",
+      "favorito": "Hohmann T.",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "HOT"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.3771,
+      "cuota": null,
+      "tier": "atp500",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Ceban M. vs Hooper L.",
+      "favorito": "Hooper L.",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "STRONG"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.2723,
+      "cuota": null,
+      "tier": "challenger",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Siddiqui A. vs Machado M. A.",
+      "favorito": "Siddiqui A.",
+      "score_directo": 1,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "RFI_tier1"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.2703,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Watanabe Y. vs Malkin M.",
+      "favorito": "Watanabe Y.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.265,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Bennemann E. vs Daems J.",
+      "favorito": "Daems J.",
+      "score_directo": 0,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": 0.1965,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "watchlist"
+    },
+    {
+      "partido": "Adeshina E. vs Zocco Y.",
+      "favorito": "Adeshina E.",
+      "score_directo": 2,
+      "score_rival_value": 1,
+      "direccion": "SPLIT",
+      "senales_activas_fav": [
+        "STRONG",
+        "ELO_DOM"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.1544,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Pawlikowska Z. vs Visscher S. J.",
+      "favorito": "Visscher S. J.",
+      "score_directo": 0,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.1352,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Radwanska U. vs Sorska A.",
+      "favorito": "Radwanska U.",
+      "score_directo": 2,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "STRONG",
+        "RFI_tier3"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": -0.073,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Yardley S. vs Ewald W.",
+      "favorito": "Ewald W.",
+      "score_directo": 1,
+      "score_rival_value": 1,
+      "direccion": "RIVAL",
+      "senales_activas_fav": [
+        "STRONG"
+      ],
+      "senales_activas_rival": [
+        "RIVAL_VALUE"
+      ],
+      "rival_value_delegado_h8801": true,
+      "edge": -0.3404,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "sin_edge"
+    },
+    {
+      "partido": "Haavisto E. vs Biot A.",
+      "favorito": "Haavisto E.",
+      "score_directo": 2,
+      "score_rival_value": 0,
+      "direccion": "FAVORITO",
+      "senales_activas_fav": [
+        "STRONG",
+        "ELO_DOM"
+      ],
+      "senales_activas_rival": [],
+      "rival_value_delegado_h8801": false,
+      "edge": -0.0033,
+      "cuota": null,
+      "tier": "itf",
+      "seccion": "sin_edge"
+    }
+  ]
+}

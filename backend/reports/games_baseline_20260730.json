@@ -1,0 +1,86 @@
+{
+  "Nakashima B. vs Mensik J._OVER": {
+    "cuota_t0": 1.82,
+    "linea_t0": 22.5,
+    "ts_t0": "2026-07-30T10:05:51",
+    "direccion": "OVER",
+    "zona": "COINFLIP"
+  },
+  "Galan D. E. vs Rehberg M. H._UNDER": {
+    "cuota_t0": 1.64,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-07-30T11:30:01",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Maestrelli F. vs Varillas J. P._UNDER": {
+    "cuota_t0": 2.14,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-07-30T11:36:16",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Milavsky D. vs Rice K._UNDER": {
+    "cuota_t0": 2.0,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-07-30T13:37:08",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Atmane T. vs Tabilo A._OVER": {
+    "cuota_t0": 1.88,
+    "linea_t0": 22.5,
+    "ts_t0": "2026-07-30T16:56:36",
+    "direccion": "OVER",
+    "zona": "COINFLIP"
+  },
+  "Lajal M. vs Shick B._OVER": {
+    "cuota_t0": 2.75,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-07-30T16:56:36",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Humbert U. vs Shelton B._UNDER": {
+    "cuota_t0": 1.98,
+    "linea_t0": 27.5,
+    "ts_t0": "2026-07-30T17:51:10",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Bonzi B. vs Hara Friend J. D._OVER": {
+    "cuota_t0": 1.75,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-07-30T17:51:10",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Stephens S. vs Vidmanova D._UNDER": {
+    "cuota_t0": 1.64,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-07-30T18:07:12",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Shnaider D. vs Potapova A._UNDER": {
+    "cuota_t0": 1.73,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-07-30T18:37:31",
+    "direccion": "UNDER",
+    "zona": "COINFLIP"
+  },
+  "Cerundolo F. vs Gea A._OVER": {
+    "cuota_t0": 1.72,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-07-30T20:11:09",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  },
+  "Shapovalov D. vs Svrcina D._OVER": {
+    "cuota_t0": 1.98,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-07-30T23:05:41",
+    "direccion": "OVER",
+    "zona": "DOMINANTE"
+  }
+}

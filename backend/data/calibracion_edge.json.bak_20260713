@@ -1,0 +1,117 @@
+{
+  "global": {
+    "wins": 2426,
+    "losses": 1530
+  },
+  "por_superficie": {
+    "clay": {
+      "wins": 1320,
+      "losses": 732
+    },
+    "unknown": {
+      "wins": 46,
+      "losses": 29
+    },
+    "grass": {
+      "wins": 374,
+      "losses": 280
+    },
+    "hard": {
+      "wins": 663,
+      "losses": 416
+    },
+    "?": {
+      "wins": 23,
+      "losses": 73
+    }
+  },
+  "por_superficie_y_tier": {
+    "clay_grand_slam": {
+      "wins": 25,
+      "losses": 8,
+      "era_v2_wins": 0,
+      "era_v2_losses": 0,
+      "era_v2_start": "2026-06-19"
+    },
+    "clay_challenger": {
+      "wins": 33,
+      "losses": 18,
+      "era_v2_wins": 11,
+      "era_v2_losses": 3,
+      "era_v2_start": "2026-06-19"
+    },
+    "grass_challenger": {
+      "wins": 2,
+      "losses": 2,
+      "era_v2_wins": 0,
+      "era_v2_losses": 0,
+      "era_v2_start": "2026-06-19"
+    },
+    "hard_atp500": {
+      "wins": 0,
+      "losses": 0,
+      "era_v2_wins": 0,
+      "era_v2_losses": 0,
+      "era_v2_start": "2026-06-19"
+    },
+    "clay_atp1000": {
+      "wins": 0,
+      "losses": 0,
+      "era_v2_wins": 0,
+      "era_v2_losses": 0,
+      "era_v2_start": "2026-06-19"
+    },
+    "grass_atp500": {
+      "wins": 4,
+      "losses": 0,
+      "era_v2_wins": 0,
+      "era_v2_losses": 0,
+      "era_v2_start": "2026-06-19"
+    },
+    "clay_itf": {
+      "wins": 39,
+      "losses": 50,
+      "era_v2_wins": 39,
+      "era_v2_losses": 49,
+      "era_v2_start": "2026-06-19"
+    },
+    "?_?": {
+      "wins": 23,
+      "losses": 73,
+      "era_v2_wins": 11,
+      "era_v2_losses": 34,
+      "era_v2_start": "2026-06-19"
+    },
+    "hard_itf": {
+      "wins": 32,
+      "losses": 66,
+      "era_v2_wins": 32,
+      "era_v2_losses": 66,
+      "era_v2_start": "2026-06-19"
+    },
+    "grass_grand_slam": {
+      "wins": 40,
+      "losses": 41,
+      "era_v2_wins": 40,
+      "era_v2_losses": 41,
+      "era_v2_start": "2026-06-19"
+    },
+    "hard_challenger": {
+      "wins": 5,
+      "losses": 0,
+      "era_v2_wins": 5,
+      "era_v2_losses": 0,
+      "era_v2_start": "2026-06-19"
+    }
+  },
+  "fallback_por_tier": {
+    "grand_slam": 0.7576,
+    "atp1000": 0.7,
+    "atp500": 0.65,
+    "challenger": 0.611,
+    "itf": 0.5
+  },
+  "ultima_actualizacion": "2026-07-13T00:24:44.644452",
+  "_nota_revert_B11": "Revertidos 14W/17L de sesión Jun15-16 (modelo B-11 roto, accuracy=46.9% ruido puro)",
+  "_nota_era_v2": "FIX-5: era_v2 acumula datos post-normalización-fix desde 2026-06-19. Usar como prior cuando era_v2_n >= 10."
+}

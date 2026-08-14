@@ -1,0 +1,878 @@
+{
+  "Michael Zheng|Miomir Kecmanovic|UNDER": {
+    "cuota_t0": 1.96,
+    "linea_t0": 29.5,
+    "ts_t0": "2026-08-03T08:42:33",
+    "partido": "Michael Zheng vs Miomir Kecmanovic"
+  },
+  "Aleksandar Kovacevic|Nuno Borges|UNDER": {
+    "cuota_t0": 1.67,
+    "linea_t0": 30.5,
+    "ts_t0": "2026-08-03T08:42:33",
+    "partido": "Aleksandar Kovacevic vs Nuno Borges"
+  },
+  "Jessica Pegula|Alexandra Eala|UNDER": {
+    "cuota_t0": 2.2,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T08:42:34",
+    "partido": "Jessica Pegula vs Alexandra Eala"
+  },
+  "Magdalena Frech|Leolia Jeanjean|UNDER": {
+    "cuota_t0": 2.6,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T08:42:34",
+    "partido": "Magdalena Frech vs Leolia Jeanjean"
+  },
+  "Valentina Steiner|Valeriya Strakhova|UNDER": {
+    "cuota_t0": 1.77,
+    "linea_t0": 32.5,
+    "ts_t0": "2026-08-03T08:42:34",
+    "partido": "Valentina Steiner vs Valeriya Strakhova"
+  },
+  "Pierre Antoine Tailleu|Daniele Minighini|UNDER": {
+    "cuota_t0": 1.52,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-08-03T08:42:34",
+    "partido": "Pierre Antoine Tailleu vs Daniele Minighini"
+  },
+  "Sophie Greiner|Angelina Wirges|UNDER": {
+    "cuota_t0": 1.66,
+    "linea_t0": 27.5,
+    "ts_t0": "2026-08-03T08:42:34",
+    "partido": "Sophie Greiner vs Angelina Wirges"
+  },
+  "Matias Reyniak|Lefteri Apostolou|UNDER": {
+    "cuota_t0": 1.35,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T08:42:35",
+    "partido": "Matias Reyniak vs Lefteri Apostolou"
+  },
+  "Luca Castagnola|Georgi Georgiev|UNDER": {
+    "cuota_t0": 1.94,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T08:42:35",
+    "partido": "Luca Castagnola vs Georgi Georgiev"
+  },
+  "Faris Zakaryia|Daniil Glinka|UNDER": {
+    "cuota_t0": 2.04,
+    "linea_t0": 26.5,
+    "ts_t0": "2026-08-03T08:42:35",
+    "partido": "Faris Zakaryia vs Daniil Glinka"
+  },
+  "Katarzyna Kawa|Linda Fruhvirtova|UNDER": {
+    "cuota_t0": 1.82,
+    "linea_t0": 22.5,
+    "ts_t0": "2026-08-03T08:42:35",
+    "partido": "Katarzyna Kawa vs Linda Fruhvirtova"
+  },
+  "Tim Hohmann|Christian Wedel|OVER": {
+    "cuota_t0": 2.07,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T08:42:35",
+    "partido": "Tim Hohmann vs Christian Wedel"
+  },
+  "Alana Smith|Yue Yuan|OVER": {
+    "cuota_t0": 2.23,
+    "linea_t0": 18.5,
+    "ts_t0": "2026-08-03T08:42:35",
+    "partido": "Alana Smith vs Yue Yuan"
+  },
+  "Matej Dodig|Oleksii Krutykh|OVER": {
+    "cuota_t0": 1.64,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T08:42:36",
+    "partido": "Matej Dodig vs Oleksii Krutykh"
+  },
+  "Lucie Nguyen Tan|Alba Rey Garcia|OVER": {
+    "cuota_t0": 2.18,
+    "linea_t0": 17.5,
+    "ts_t0": "2026-08-03T08:42:36",
+    "partido": "Lucie Nguyen Tan vs Alba Rey Garcia"
+  },
+  "Giovanni Branchetti|Hanu Patel|OVER": {
+    "cuota_t0": 1.57,
+    "linea_t0": 13.5,
+    "ts_t0": "2026-08-03T08:42:36",
+    "partido": "Giovanni Branchetti vs Hanu Patel"
+  },
+  "Laima Vladson|Anastasiia Firman|OVER": {
+    "cuota_t0": 1.88,
+    "linea_t0": 17.5,
+    "ts_t0": "2026-08-03T08:42:36",
+    "partido": "Laima Vladson vs Anastasiia Firman"
+  },
+  "Luke Hooper|Mark Ceban|UNDER": {
+    "cuota_t0": 1.84,
+    "linea_t0": 22.5,
+    "ts_t0": "2026-08-03T08:42:36",
+    "partido": "Luke Hooper vs Mark Ceban"
+  },
+  "Gabriele Pennaforti|Peter Buldorini|UNDER": {
+    "cuota_t0": 1.75,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T08:42:36",
+    "partido": "Gabriele Pennaforti vs Peter Buldorini"
+  },
+  "Joao Vitor Scramin do Lago|Jackson Ross|OVER": {
+    "cuota_t0": 1.63,
+    "linea_t0": 18.5,
+    "ts_t0": "2026-08-03T08:42:36",
+    "partido": "Joao Vitor Scramin do Lago vs Jackson Ross"
+  },
+  "Thomas Enrique Menzel Piccioli|Tomas Jordi Leston|OVER": {
+    "cuota_t0": 2.14,
+    "linea_t0": 17.5,
+    "ts_t0": "2026-08-03T08:42:37",
+    "partido": "Thomas Enrique Menzel Piccioli vs Tomas Jordi Leston"
+  },
+  "Henrique Ortenblad Nogueira|Gabriel Augusto Carvalho|OVER": {
+    "cuota_t0": 1.77,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T08:42:37",
+    "partido": "Henrique Ortenblad Nogueira vs Gabriel Augusto Carvalho"
+  },
+  "Michele Ribecai|Iliyan Radulov|UNDER": {
+    "cuota_t0": 1.81,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T08:42:37",
+    "partido": "Michele Ribecai vs Iliyan Radulov"
+  },
+  "Gabriel Schenekenberg|Kaue Noatto|OVER": {
+    "cuota_t0": 1.53,
+    "linea_t0": 17.5,
+    "ts_t0": "2026-08-03T08:42:37",
+    "partido": "Gabriel Schenekenberg vs Kaue Noatto"
+  },
+  "Vincent Fletcher|Rhys Lawlor|OVER": {
+    "cuota_t0": 1.63,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T08:42:37",
+    "partido": "Vincent Fletcher vs Rhys Lawlor"
+  },
+  "Jan Sebesta|Jonas Keck|OVER": {
+    "cuota_t0": 2.1,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T08:42:37",
+    "partido": "Jan Sebesta vs Jonas Keck"
+  },
+  "Adrian Andreev|Carles Cordoba|UNDER": {
+    "cuota_t0": 1.79,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T08:42:37",
+    "partido": "Adrian Andreev vs Carles Cordoba"
+  },
+  "Maria Martinez Vaquero|Tilwith Di Girolami|OVER": {
+    "cuota_t0": 1.75,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T08:47:48",
+    "partido": "Maria Martinez Vaquero vs Tilwith Di Girolami"
+  },
+  "Valentin Basel|Pietro Marino|UNDER": {
+    "cuota_t0": 1.75,
+    "linea_t0": 22.5,
+    "ts_t0": "2026-08-03T08:48:37",
+    "partido": "Valentin Basel vs Pietro Marino"
+  },
+  "Lucie Nguyen Tan|Alba Rey Garcia|UNDER": {
+    "cuota_t0": 1.83,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T08:48:38",
+    "partido": "Lucie Nguyen Tan vs Alba Rey Garcia"
+  },
+  "Gioele Cerelli|Alessandro Mondazzi|UNDER": {
+    "cuota_t0": 1.79,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T08:48:40",
+    "partido": "Gioele Cerelli vs Alessandro Mondazzi"
+  },
+  "Gabriel Schenekenberg|Kaue Noatto|UNDER": {
+    "cuota_t0": 1.72,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T08:53:08",
+    "partido": "Gabriel Schenekenberg vs Kaue Noatto"
+  },
+  "Gabriele Pennaforti|Peter Buldorini|OVER": {
+    "cuota_t0": 1.71,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T08:59:39",
+    "partido": "Gabriele Pennaforti vs Peter Buldorini"
+  },
+  "Gioele Cerelli|Alessandro Mondazzi|OVER": {
+    "cuota_t0": 1.58,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T08:59:40",
+    "partido": "Gioele Cerelli vs Alessandro Mondazzi"
+  },
+  "Rodrigo Pacheco Mendez|Aidan Mayo|UNDER": {
+    "cuota_t0": 1.77,
+    "linea_t0": 22.5,
+    "ts_t0": "2026-08-03T09:02:53",
+    "partido": "Rodrigo Pacheco Mendez vs Aidan Mayo"
+  },
+  "Gerard Campana Lee|Stefan Horia Haita|UNDER": {
+    "cuota_t0": 1.79,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T09:03:37",
+    "partido": "Gerard Campana Lee vs Stefan Horia Haita"
+  },
+  "Jan Sebesta|Jonas Keck|UNDER": {
+    "cuota_t0": 1.65,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T09:06:12",
+    "partido": "Jan Sebesta vs Jonas Keck"
+  },
+  "Aneta Laboutkova|Leticia Solakov|OVER": {
+    "cuota_t0": 1.8,
+    "linea_t0": 18.5,
+    "ts_t0": "2026-08-03T09:09:19",
+    "partido": "Aneta Laboutkova vs Leticia Solakov"
+  },
+  "Toby Martin|Alexis Canter|OVER": {
+    "cuota_t0": 1.73,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T09:09:40",
+    "partido": "Toby Martin vs Alexis Canter"
+  },
+  "Soonwoo Kwon|Aidan Kim|UNDER": {
+    "cuota_t0": 1.9,
+    "linea_t0": 22.5,
+    "ts_t0": "2026-08-03T09:10:00",
+    "partido": "Soonwoo Kwon vs Aidan Kim"
+  },
+  "Timeo Trufelli|Leonardo Angeloni|OVER": {
+    "cuota_t0": 1.78,
+    "linea_t0": 18.5,
+    "ts_t0": "2026-08-03T09:10:00",
+    "partido": "Timeo Trufelli vs Leonardo Angeloni"
+  },
+  "Hong Yi Cody Wong|Dalayna Hewitt|OVER": {
+    "cuota_t0": 1.85,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T09:11:54",
+    "partido": "Hong Yi Cody Wong vs Dalayna Hewitt"
+  },
+  "Michele Ribecai|Iliyan Radulov|OVER": {
+    "cuota_t0": 2.4,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T09:12:22",
+    "partido": "Michele Ribecai vs Iliyan Radulov"
+  },
+  "Clervie Ngounoue|Olivia Lincer|OVER": {
+    "cuota_t0": 1.88,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T09:12:25",
+    "partido": "Clervie Ngounoue vs Olivia Lincer"
+  },
+  "Luke Hooper|Mark Ceban|OVER": {
+    "cuota_t0": 1.53,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T09:14:29",
+    "partido": "Luke Hooper vs Mark Ceban"
+  },
+  "Hong Yi Cody Wong|Dalayna Hewitt|UNDER": {
+    "cuota_t0": 1.78,
+    "linea_t0": 25.5,
+    "ts_t0": "2026-08-03T09:56:39",
+    "partido": "Hong Yi Cody Wong vs Dalayna Hewitt"
+  },
+  "Franco Ribero|Dragos Nicolae Cazacu|UNDER": {
+    "cuota_t0": 2.1,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T09:56:40",
+    "partido": "Franco Ribero vs Dragos Nicolae Cazacu"
+  },
+  "Jenny Lim|Valentina Ivanov|OVER": {
+    "cuota_t0": 1.77,
+    "linea_t0": 17.5,
+    "ts_t0": "2026-08-03T09:56:40",
+    "partido": "Jenny Lim vs Valentina Ivanov"
+  },
+  "Zach Stephens|Oscar Brown|OVER": {
+    "cuota_t0": 1.62,
+    "linea_t0": 17.5,
+    "ts_t0": "2026-08-03T09:56:40",
+    "partido": "Zach Stephens vs Oscar Brown"
+  },
+  "Vitor Costa Goncalves|Felipe Garla|OVER": {
+    "cuota_t0": 1.7,
+    "linea_t0": 17.5,
+    "ts_t0": "2026-08-03T09:57:11",
+    "partido": "Vitor Costa Goncalves vs Felipe Garla"
+  },
+  "Julie Pastikova|Ruth Roura Llaverias|OVER": {
+    "cuota_t0": 1.77,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T09:58:37",
+    "partido": "Julie Pastikova vs Ruth Roura Llaverias"
+  },
+  "Ryan Colby|Spencer Johnson|OVER": {
+    "cuota_t0": 2.15,
+    "linea_t0": 16.5,
+    "ts_t0": "2026-08-03T09:59:01",
+    "partido": "Ryan Colby vs Spencer Johnson"
+  },
+  "Emerson Jones|Lanlana Tararudee|UNDER": {
+    "cuota_t0": 1.68,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T10:00:07",
+    "partido": "Emerson Jones vs Lanlana Tararudee"
+  },
+  "Gerard Campana Lee|Stefan Horia Haita|OVER": {
+    "cuota_t0": 2.12,
+    "linea_t0": 18.5,
+    "ts_t0": "2026-08-03T10:01:07",
+    "partido": "Gerard Campana Lee vs Stefan Horia Haita"
+  },
+  "Aneta Laboutkova|Leticia Solakov|UNDER": {
+    "cuota_t0": 1.67,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T10:05:20",
+    "partido": "Aneta Laboutkova vs Leticia Solakov"
+  },
+  "Oleksandra Oliynykova|Karolina Pliskova|UNDER": {
+    "cuota_t0": 1.48,
+    "linea_t0": 22.5,
+    "ts_t0": "2026-08-03T10:06:03",
+    "partido": "Oleksandra Oliynykova vs Karolina Pliskova"
+  },
+  "Jessica Pegula|Alexandra Eala|OVER": {
+    "cuota_t0": 1.58,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T10:06:21",
+    "partido": "Jessica Pegula vs Alexandra Eala"
+  },
+  "Lois Boisson|Antonia Ruzic|UNDER": {
+    "cuota_t0": 2.3,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-08-03T10:06:22",
+    "partido": "Lois Boisson vs Antonia Ruzic"
+  },
+  "Tomasz Berkieta|Facundo Mena|UNDER": {
+    "cuota_t0": 1.94,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-08-03T10:06:23",
+    "partido": "Tomasz Berkieta vs Facundo Mena"
+  },
+  "Anhelina Kalinina|Anna Bondar|UNDER": {
+    "cuota_t0": 1.52,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-08-03T10:06:23",
+    "partido": "Anhelina Kalinina vs Anna Bondar"
+  },
+  "Julie Pastikova|Ruth Roura Llaverias|UNDER": {
+    "cuota_t0": 1.83,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T10:07:07",
+    "partido": "Julie Pastikova vs Ruth Roura Llaverias"
+  },
+  "Ryan Colby|Spencer Johnson|UNDER": {
+    "cuota_t0": 1.5,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T10:07:29",
+    "partido": "Ryan Colby vs Spencer Johnson"
+  },
+  "Alina Korneeva|Polina Kudermetova|OVER": {
+    "cuota_t0": 2.2,
+    "linea_t0": 22.5,
+    "ts_t0": "2026-08-03T10:08:14",
+    "partido": "Alina Korneeva vs Polina Kudermetova"
+  },
+  "Franco Ribero|Dragos Nicolae Cazacu|OVER": {
+    "cuota_t0": 1.68,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-08-03T10:09:27",
+    "partido": "Franco Ribero vs Dragos Nicolae Cazacu"
+  },
+  "Kaua Santos|Andre Souza Pinto de Camargo E Silva|OVER": {
+    "cuota_t0": 1.7,
+    "linea_t0": 18.5,
+    "ts_t0": "2026-08-03T10:09:27",
+    "partido": "Kaua Santos vs Andre Souza Pinto de Camargo E Silva"
+  },
+  "Oleksandra Oliynykova|Karolina Pliskova|OVER": {
+    "cuota_t0": 1.58,
+    "linea_t0": 18.5,
+    "ts_t0": "2026-08-03T10:10:11",
+    "partido": "Oleksandra Oliynykova vs Karolina Pliskova"
+  },
+  "Zach Stephens|Oscar Brown|UNDER": {
+    "cuota_t0": 1.76,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T10:11:25",
+    "partido": "Zach Stephens vs Oscar Brown"
+  },
+  "Anhelina Kalinina|Anna Bondar|OVER": {
+    "cuota_t0": 1.67,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T10:14:49",
+    "partido": "Anhelina Kalinina vs Anna Bondar"
+  },
+  "Breno Braga|Victor Bini|OVER": {
+    "cuota_t0": 1.73,
+    "linea_t0": 18.5,
+    "ts_t0": "2026-08-03T10:16:09",
+    "partido": "Breno Braga vs Victor Bini"
+  },
+  "Pablo Perez Ramos|Vincent Reisach|OVER": {
+    "cuota_t0": 2.07,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T10:17:57",
+    "partido": "Pablo Perez Ramos vs Vincent Reisach"
+  },
+  "Ryan Augusto Dos Santos|Ivan Dreycopp|OVER": {
+    "cuota_t0": 1.64,
+    "linea_t0": 18.5,
+    "ts_t0": "2026-08-03T10:34:05",
+    "partido": "Ryan Augusto Dos Santos vs Ivan Dreycopp"
+  },
+  "Ava Catanzarite|Martina Okalova|OVER": {
+    "cuota_t0": 1.81,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T10:41:12",
+    "partido": "Ava Catanzarite vs Martina Okalova"
+  },
+  "Tomasz Berkieta|Facundo Mena|OVER": {
+    "cuota_t0": 1.57,
+    "linea_t0": 18.5,
+    "ts_t0": "2026-08-03T10:44:06",
+    "partido": "Tomasz Berkieta vs Facundo Mena"
+  },
+  "Ava Catanzarite|Martina Okalova|UNDER": {
+    "cuota_t0": 1.77,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T10:53:58",
+    "partido": "Ava Catanzarite vs Martina Okalova"
+  },
+  "Tori Kinard|Ekaterina Ovcharenko|OVER": {
+    "cuota_t0": 1.74,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T10:54:41",
+    "partido": "Tori Kinard vs Ekaterina Ovcharenko"
+  },
+  "Kaua Santos|Andre Souza Pinto de Camargo E Silva|UNDER": {
+    "cuota_t0": 1.68,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T10:56:41",
+    "partido": "Kaua Santos vs Andre Souza Pinto de Camargo E Silva"
+  },
+  "Pablo Perez Ramos|Vincent Reisach|UNDER": {
+    "cuota_t0": 1.87,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T10:56:41",
+    "partido": "Pablo Perez Ramos vs Vincent Reisach"
+  },
+  "Andrés Martín|Trevor Svajda|OVER": {
+    "cuota_t0": 2.08,
+    "linea_t0": 22.5,
+    "ts_t0": "2026-08-03T11:06:06",
+    "partido": "Andrés Martín vs Trevor Svajda"
+  },
+  "Marie Vogt|Nellie Taraba Wallberg|UNDER": {
+    "cuota_t0": 1.77,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T11:09:47",
+    "partido": "Marie Vogt vs Nellie Taraba Wallberg"
+  },
+  "Timeo Trufelli|Leonardo Angeloni|UNDER": {
+    "cuota_t0": 1.68,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T11:12:19",
+    "partido": "Timeo Trufelli vs Leonardo Angeloni"
+  },
+  "Abdullah Shelbayh|Mees Rottgering|UNDER": {
+    "cuota_t0": 1.74,
+    "linea_t0": 22.5,
+    "ts_t0": "2026-08-03T11:17:39",
+    "partido": "Abdullah Shelbayh vs Mees Rottgering"
+  },
+  "Anuj Watane|Sean Hodkin|OVER": {
+    "cuota_t0": 1.61,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T11:20:56",
+    "partido": "Anuj Watane vs Sean Hodkin"
+  },
+  "Yanaki Milev|Oriol Roca Batalla|UNDER": {
+    "cuota_t0": 2.02,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T11:23:52",
+    "partido": "Yanaki Milev vs Oriol Roca Batalla"
+  },
+  "Diane Parry|Kayla Day|UNDER": {
+    "cuota_t0": 1.89,
+    "linea_t0": 22.5,
+    "ts_t0": "2026-08-03T11:24:55",
+    "partido": "Diane Parry vs Kayla Day"
+  },
+  "Guy Den Ouden|Alexandre Muller|UNDER": {
+    "cuota_t0": 2.02,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-08-03T11:24:56",
+    "partido": "Guy Den Ouden vs Alexandre Muller"
+  },
+  "Teodora Kostovic|Martyna Kubka|UNDER": {
+    "cuota_t0": 1.73,
+    "linea_t0": 26.5,
+    "ts_t0": "2026-08-03T11:24:56",
+    "partido": "Teodora Kostovic vs Martyna Kubka"
+  },
+  "Madison Sieg|Ankita Raina|OVER": {
+    "cuota_t0": 1.79,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T11:32:44",
+    "partido": "Madison Sieg vs Ankita Raina"
+  },
+  "Talia Gibson|Elisabetta Cocciaretto|OVER": {
+    "cuota_t0": 1.71,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-08-03T11:32:45",
+    "partido": "Talia Gibson vs Elisabetta Cocciaretto"
+  },
+  "Katie Boulter|Kayla Cross|OVER": {
+    "cuota_t0": 1.49,
+    "linea_t0": 18.5,
+    "ts_t0": "2026-08-03T11:37:28",
+    "partido": "Katie Boulter vs Kayla Cross"
+  },
+  "Andrés Martín|Trevor Svajda|UNDER": {
+    "cuota_t0": 1.87,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-08-03T11:42:21",
+    "partido": "Andrés Martín vs Trevor Svajda"
+  },
+  "Anuj Watane|Sean Hodkin|UNDER": {
+    "cuota_t0": 1.8,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T11:44:41",
+    "partido": "Anuj Watane vs Sean Hodkin"
+  },
+  "Tyler Zink|Millen Hurrion|UNDER": {
+    "cuota_t0": 2.08,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-08-03T11:45:06",
+    "partido": "Tyler Zink vs Millen Hurrion"
+  },
+  "Katie Boulter|Kayla Cross|UNDER": {
+    "cuota_t0": 1.71,
+    "linea_t0": 22.5,
+    "ts_t0": "2026-08-03T11:48:02",
+    "partido": "Katie Boulter vs Kayla Cross"
+  },
+  "Mccartney Kessler|Cadence Brace|OVER": {
+    "cuota_t0": 1.72,
+    "linea_t0": 18.5,
+    "ts_t0": "2026-08-03T11:52:22",
+    "partido": "Mccartney Kessler vs Cadence Brace"
+  },
+  "James Duckworth|Christopher O'Connell|UNDER": {
+    "cuota_t0": 1.74,
+    "linea_t0": 24.5,
+    "ts_t0": "2026-08-03T11:54:50",
+    "partido": "James Duckworth vs Christopher O'Connell"
+  },
+  "Marie Vogt|Nellie Taraba Wallberg|OVER": {
+    "cuota_t0": 1.74,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T11:56:50",
+    "partido": "Marie Vogt vs Nellie Taraba Wallberg"
+  },
+  "Ema Burgic|Maria Kozyreva|OVER": {
+    "cuota_t0": 1.93,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T12:01:08",
+    "partido": "Ema Burgic vs Maria Kozyreva"
+  },
+  "Rafael Izquierdo Luque|Alejo Sanchez Quilez|UNDER": {
+    "cuota_t0": 1.72,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-08-03T12:04:18",
+    "partido": "Rafael Izquierdo Luque vs Alejo Sanchez Quilez"
+  },
+  "Anna Sinclair Rogers|Capucine Jauffret|OVER": {
+    "cuota_t0": 1.91,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T12:10:11",
+    "partido": "Anna Sinclair Rogers vs Capucine Jauffret"
+  },
+  "Nicolas Mejia|Martin Landaluce|UNDER": {
+    "cuota_t0": 2.17,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T12:11:15",
+    "partido": "Nicolas Mejia vs Martin Landaluce"
+  },
+  "Madison Sieg|Ankita Raina|UNDER": {
+    "cuota_t0": 1.77,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T12:13:25",
+    "partido": "Madison Sieg vs Ankita Raina"
+  },
+  "Ema Burgic|Maria Kozyreva|UNDER": {
+    "cuota_t0": 1.78,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T12:14:08",
+    "partido": "Ema Burgic vs Maria Kozyreva"
+  },
+  "Mccartney Kessler|Cadence Brace|UNDER": {
+    "cuota_t0": 2.28,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-08-03T12:31:03",
+    "partido": "Mccartney Kessler vs Cadence Brace"
+  },
+  "Anna Sinclair Rogers|Capucine Jauffret|UNDER": {
+    "cuota_t0": 1.78,
+    "linea_t0": 22.5,
+    "ts_t0": "2026-08-03T13:00:18",
+    "partido": "Anna Sinclair Rogers vs Capucine Jauffret"
+  },
+  "Rafael Izquierdo Luque|Alejo Sanchez Quilez|OVER": {
+    "cuota_t0": 2.25,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T13:14:09",
+    "partido": "Rafael Izquierdo Luque vs Alejo Sanchez Quilez"
+  },
+  "Emilien Demanet|Alexander Vasilev|UNDER": {
+    "cuota_t0": 1.62,
+    "linea_t0": 22.5,
+    "ts_t0": "2026-08-03T13:20:38",
+    "partido": "Emilien Demanet vs Alexander Vasilev"
+  },
+  "Tobia Costanzo Baragiola Mordini|Marcello Serafini|OVER": {
+    "cuota_t0": 1.81,
+    "linea_t0": 22.5,
+    "ts_t0": "2026-08-03T14:50:38",
+    "partido": "Tobia Costanzo Baragiola Mordini vs Marcello Serafini"
+  },
+  "Emilien Demanet|Alexander Vasilev|OVER": {
+    "cuota_t0": 1.96,
+    "linea_t0": 18.5,
+    "ts_t0": "2026-08-03T14:56:46",
+    "partido": "Emilien Demanet vs Alexander Vasilev"
+  },
+  "Pablo Roche Alcaya|Yago Castellanos|UNDER": {
+    "cuota_t0": 1.85,
+    "linea_t0": 22.5,
+    "ts_t0": "2026-08-03T15:00:52",
+    "partido": "Pablo Roche Alcaya vs Yago Castellanos"
+  },
+  "Federico Cina|Elias Ymer|OVER": {
+    "cuota_t0": 1.76,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T15:01:35",
+    "partido": "Federico Cina vs Elias Ymer"
+  },
+  "Carol Zhao|Magda Linette|UNDER": {
+    "cuota_t0": 1.77,
+    "linea_t0": 18.5,
+    "ts_t0": "2026-08-03T15:16:33",
+    "partido": "Carol Zhao vs Magda Linette"
+  },
+  "Federico Cina|Elias Ymer|UNDER": {
+    "cuota_t0": 1.7,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-08-03T15:22:30",
+    "partido": "Federico Cina vs Elias Ymer"
+  },
+  "Tobia Costanzo Baragiola Mordini|Marcello Serafini|UNDER": {
+    "cuota_t0": 2.28,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-08-03T15:58:59",
+    "partido": "Tobia Costanzo Baragiola Mordini vs Marcello Serafini"
+  },
+  "Victoria Jimenez Kasintseva|Alycia Parks|UNDER": {
+    "cuota_t0": 2.3,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T16:34:11",
+    "partido": "Victoria Jimenez Kasintseva vs Alycia Parks"
+  },
+  "James Duckworth|Christopher O'Connell|OVER": {
+    "cuota_t0": 1.38,
+    "linea_t0": 18.5,
+    "ts_t0": "2026-08-03T17:10:05",
+    "partido": "James Duckworth vs Christopher O'Connell"
+  },
+  "Victoria Jimenez Kasintseva|Alycia Parks|OVER": {
+    "cuota_t0": 1.96,
+    "linea_t0": 18.5,
+    "ts_t0": "2026-08-03T17:12:24",
+    "partido": "Victoria Jimenez Kasintseva vs Alycia Parks"
+  },
+  "Tereza Valentova|Taylor Townsend|OVER": {
+    "cuota_t0": 2.2,
+    "linea_t0": 22.5,
+    "ts_t0": "2026-08-03T17:15:06",
+    "partido": "Tereza Valentova vs Taylor Townsend"
+  },
+  "Henry Searle|Lloyd Harris|UNDER": {
+    "cuota_t0": 1.74,
+    "linea_t0": 24.5,
+    "ts_t0": "2026-08-03T17:34:41",
+    "partido": "Henry Searle vs Lloyd Harris"
+  },
+  "Alex Michelsen|Jan-Lennard Struff|UNDER": {
+    "cuota_t0": 1.67,
+    "linea_t0": 22.5,
+    "ts_t0": "2026-08-03T18:19:21",
+    "partido": "Alex Michelsen vs Jan-Lennard Struff"
+  },
+  "Tereza Valentova|Taylor Townsend|UNDER": {
+    "cuota_t0": 2.55,
+    "linea_t0": 25.5,
+    "ts_t0": "2026-08-03T18:34:10",
+    "partido": "Tereza Valentova vs Taylor Townsend"
+  },
+  "Gabriel Diallo|Kyrian Jacquet|UNDER": {
+    "cuota_t0": 1.95,
+    "linea_t0": 22.5,
+    "ts_t0": "2026-08-03T18:45:40",
+    "partido": "Gabriel Diallo vs Kyrian Jacquet"
+  },
+  "Aleksandar Vukic|Daniel Altmaier|UNDER": {
+    "cuota_t0": 1.66,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-08-03T19:17:09",
+    "partido": "Aleksandar Vukic vs Daniel Altmaier"
+  },
+  "Xinyu Wang|Daria Kasatkina|OVER": {
+    "cuota_t0": 1.82,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T20:01:45",
+    "partido": "Xinyu Wang vs Daria Kasatkina"
+  },
+  "Marton Fucsovics|Corentin Moutet|UNDER": {
+    "cuota_t0": 1.65,
+    "linea_t0": 24.5,
+    "ts_t0": "2026-08-03T20:10:28",
+    "partido": "Marton Fucsovics vs Corentin Moutet"
+  },
+  "Yujin Kim|Anna Yang|OVER": {
+    "cuota_t0": 1.95,
+    "linea_t0": 18.5,
+    "ts_t0": "2026-08-03T20:11:32",
+    "partido": "Yujin Kim vs Anna Yang"
+  },
+  "Donghyun Hwang|Yeongseok Jeong|OVER": {
+    "cuota_t0": 1.67,
+    "linea_t0": 18.5,
+    "ts_t0": "2026-08-03T20:11:53",
+    "partido": "Donghyun Hwang vs Yeongseok Jeong"
+  },
+  "Ruochen Gao|Chin Kuan Lai|OVER": {
+    "cuota_t0": 1.68,
+    "linea_t0": 18.5,
+    "ts_t0": "2026-08-03T20:12:35",
+    "partido": "Ruochen Gao vs Chin Kuan Lai"
+  },
+  "Cuihaozhe Guo|Kazuki Nakajima|OVER": {
+    "cuota_t0": 2.04,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T20:12:35",
+    "partido": "Cuihaozhe Guo vs Kazuki Nakajima"
+  },
+  "Ching Laam Lai|JiaLi Dong|OVER": {
+    "cuota_t0": 1.74,
+    "linea_t0": 17.5,
+    "ts_t0": "2026-08-03T20:16:38",
+    "partido": "Ching Laam Lai vs JiaLi Dong"
+  },
+  "Alex Michelsen|Jan-Lennard Struff|OVER": {
+    "cuota_t0": 2.6,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T20:33:02",
+    "partido": "Alex Michelsen vs Jan-Lennard Struff"
+  },
+  "Marton Fucsovics|Corentin Moutet|OVER": {
+    "cuota_t0": 2.55,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T20:43:32",
+    "partido": "Marton Fucsovics vs Corentin Moutet"
+  },
+  "Camilo Ugo Carabelli|Cameron Norrie|UNDER": {
+    "cuota_t0": 1.41,
+    "linea_t0": 23.5,
+    "ts_t0": "2026-08-03T20:54:50",
+    "partido": "Camilo Ugo Carabelli vs Cameron Norrie"
+  },
+  "Cuihaozhe Guo|Kazuki Nakajima|UNDER": {
+    "cuota_t0": 1.73,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T21:00:31",
+    "partido": "Cuihaozhe Guo vs Kazuki Nakajima"
+  },
+  "Xinyu Wang|Daria Kasatkina|UNDER": {
+    "cuota_t0": 1.55,
+    "linea_t0": 31.5,
+    "ts_t0": "2026-08-03T22:05:09",
+    "partido": "Xinyu Wang vs Daria Kasatkina"
+  },
+  "Toshiki Karigyo|Eric Olivarez Jr.|OVER": {
+    "cuota_t0": 1.83,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T22:05:09",
+    "partido": "Toshiki Karigyo vs Eric Olivarez Jr."
+  },
+  "Bader Idrees|Charles Josshua Kinaadman|OVER": {
+    "cuota_t0": 2.06,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T22:13:05",
+    "partido": "Bader Idrees vs Charles Josshua Kinaadman"
+  },
+  "Hyunyee Lee|Jialan Cai|OVER": {
+    "cuota_t0": 1.89,
+    "linea_t0": 18.5,
+    "ts_t0": "2026-08-03T22:14:30",
+    "partido": "Hyunyee Lee vs Jialan Cai"
+  },
+  "Sera Nishimoto|Minxu Zhou|OVER": {
+    "cuota_t0": 1.85,
+    "linea_t0": 17.5,
+    "ts_t0": "2026-08-03T22:18:05",
+    "partido": "Sera Nishimoto vs Minxu Zhou"
+  },
+  "Stephane Pierre-Jo Kamendje|Suk Ann|OVER": {
+    "cuota_t0": 1.86,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T22:21:40",
+    "partido": "Stephane Pierre-Jo Kamendje vs Suk Ann"
+  },
+  "Ching Laam Lai|JiaLi Dong|UNDER": {
+    "cuota_t0": 1.48,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T22:30:37",
+    "partido": "Ching Laam Lai vs JiaLi Dong"
+  },
+  "Toshiki Karigyo|Eric Olivarez Jr.|UNDER": {
+    "cuota_t0": 1.73,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T22:41:04",
+    "partido": "Toshiki Karigyo vs Eric Olivarez Jr."
+  },
+  "Fnu Nidunjianzan|Seonyong Han|OVER": {
+    "cuota_t0": 1.95,
+    "linea_t0": 19.5,
+    "ts_t0": "2026-08-03T22:43:32",
+    "partido": "Fnu Nidunjianzan vs Seonyong Han"
+  },
+  "Hyunyee Lee|Jialan Cai|UNDER": {
+    "cuota_t0": 1.72,
+    "linea_t0": 20.5,
+    "ts_t0": "2026-08-03T22:56:54",
+    "partido": "Hyunyee Lee vs Jialan Cai"
+  },
+  "Fnu Nidunjianzan|Seonyong Han|UNDER": {
+    "cuota_t0": 1.7,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T23:19:16",
+    "partido": "Fnu Nidunjianzan vs Seonyong Han"
+  },
+  "Eva Marie Desvignes|Anastasia Efremova|OVER": {
+    "cuota_t0": 1.8,
+    "linea_t0": 18.5,
+    "ts_t0": "2026-08-03T23:20:38",
+    "partido": "Eva Marie Desvignes vs Anastasia Efremova"
+  },
+  "James van Herzeele|Geun Jun Kim|OVER": {
+    "cuota_t0": 1.83,
+    "linea_t0": 21.5,
+    "ts_t0": "2026-08-03T23:41:49",
+    "partido": "James van Herzeele vs Geun Jun Kim"
+  }
+}

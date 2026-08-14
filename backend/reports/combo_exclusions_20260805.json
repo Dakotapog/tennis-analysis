@@ -1,0 +1,2308 @@
+{
+  "entradas": [
+    {
+      "builder": "combo_confianza",
+      "timestamp": "2026-08-05T13:48:59",
+      "n": 168,
+      "excluidos": [
+        {
+          "partido": "Li A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.513,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Donski A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.504,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Glinka D.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.534,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Guerrieri A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.526,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Berkieta T.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.513,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Dedura D.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.508,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Den Ouden G.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.536,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Squire H.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.54,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Bax F.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.51,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Ghibaudo A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.508,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Simakin I.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.528,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Galan D. E.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.532,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Kawa K.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.507,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Lee C. Y.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.514,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Knutson G.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.508,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Kubka M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.533,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Yaneva E.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.512,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Orlov V.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.816,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Savano M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.569,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Marek W.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.729,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Fondriest M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.556,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Jedrzejczak J.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.57,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Guttau N.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.625,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Wagner A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.726,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Papoe C. G.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.612,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Petre S. I. B.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.563,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Murray F.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.514,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Rojas C.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.95,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Tenti F.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.68,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Guna R.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.95,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Ghetu G.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.674,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Sciahbasi M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.95,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Schlagenhauf N.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.574,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Vankan M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.535,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Torcq B.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.584,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "De Lange P.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.61,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Papamalamis T.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.599,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Rivet M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.95,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Van Der Meerschen M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.665,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Garcian A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.578,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Forger A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.682,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Chazal M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.64,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Reinhard B. J.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.533,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Poulsen Brostrom O.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.537,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Delage P.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.74,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Rocens M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.601,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Dullinger V.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.53,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Funk A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.95,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Sesko Z.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.784,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Makhlouf N.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.569,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "De Jager J.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.543,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Zavacky P.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.78,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Filar K.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.554,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Makk P.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.655,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Mochizuki Y.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.898,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Kim D. J.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.811,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Dellavedova M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.612,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Tabacco G.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.642,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Vasa I.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.561,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Overbeck C. E.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.579,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Buldorini P.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.521,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Rottoli L.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.588,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Giunta M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.568,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Arnaboldi F.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.735,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Bennani R.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.626,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Empate",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.5,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Obradovic D.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.614,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Tiukaev R.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.514,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Klok D.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.754,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Pisaric A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.649,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Krstic . V.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.551,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Comino L.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.739,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Artnak B.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.67,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Jankanj V.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.672,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Yazdani A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.679,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Ahouda W.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.574,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Schiessl J. E.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.95,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Zarate C. M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.52,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Saraiva Dos Santos P. A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.517,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Meligeni Alves F.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.629,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Ribeiro de Almeida G.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.739,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Loffhagen G.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.517,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Piatti R.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.564,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Tarvet O.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.67,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Cacao T.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.694,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Hudd E.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.698,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Matusevich A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.519,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Woestendick C.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.515,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Bennani K.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.61,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Anthrop J.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.551,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Dussault M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.95,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Hewitt C.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.552,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Ayeni A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.536,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Almazan Valiente I.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.527,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Potenza L.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.558,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Gorgodze E.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.554,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Ma L.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.509,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Ku Y.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.622,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Ovcharenko E.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.95,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Ma Y.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.513,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Gailis R.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.566,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Stagno B.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.635,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Vaissaud D.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.596,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Hageman M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.603,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Urbanova L.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.552,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Veldman K.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.596,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Giambelli C.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.64,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Pohle V.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.678,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Blomqvist C.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.609,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Hejtmanek A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.696,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Hietaranta L.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.629,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Mol I.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.503,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Dorofeeva-Rybas F.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.535,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Drame P.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.537,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "El Aouni A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.616,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Munk Mortensen R.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.626,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Krastenova G.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.55,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Paoletti M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.67,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Lin Y. J.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.521,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Naklo T.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.548,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Qu Y.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.513,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Zhu C.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.606,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Guo M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.51,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Larraya Guidi S. A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.95,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Cinalli L. M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.887,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Konishi Silva J.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.662,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Zornada E.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.585,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Chaudhari V.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.519,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Sato H.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.519,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "McDonald E.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.582,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Karunaratne A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.544,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Bains N.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.54,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Burrage J.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.504,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Xu M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.534,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Ahn A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.62,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Guzman D.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.517,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Crossley M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.508,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Cabezas Dominguez E.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.6,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Penickova A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.719,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Lu J.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.511,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Chiesa D.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.509,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Cherubini D.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.524,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Zolotareva A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.605,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Bertea E. R.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.558,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Pieri T.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.509,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Palicova B.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.557,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Rouvroy M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.574,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Mintegi Del Olmo A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.535,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Papamichail D.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.622,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Urgesi F.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.532,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Lim J.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.512,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Back D.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.503,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Hennemann C. W.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.516,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Malygina E.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.531,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Schunk N.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.536,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Zantedeschi A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.62,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Taraba Wallberg N.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.504,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Steiner V.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.577,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Yao X.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.567,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Jorge F.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.558,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Dudeney A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.573,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Kubareva A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.534,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Jorge M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.509,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Ren Y.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.518,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Shinikova I.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.513,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Minnen G.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.535,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Saigo R.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.518,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Gao X.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.644,
+          "torneo_nombre": null
+        }
+      ]
+    },
+    {
+      "builder": "betplay_TEST",
+      "timestamp": "2026-08-05T13:49:34",
+      "n": 1,
+      "excluidos": [
+        {
+          "partido": "?",
+          "motivo": "kambi_no_disponible",
+          "cuota": 1.65,
+          "edge_pct": "12%",
+          "tier": "atp500"
+        }
+      ]
+    },
+    {
+      "builder": "betplay_TEST",
+      "timestamp": "2026-08-05T13:49:34",
+      "n": 3,
+      "excluidos": [
+        {
+          "partido": "?",
+          "motivo": "kambi_no_disponible",
+          "cuota": 1.65,
+          "edge_pct": "12%",
+          "tier": "atp500"
+        },
+        {
+          "partido": "?",
+          "motivo": "kambi_no_disponible",
+          "cuota": 1.65,
+          "edge_pct": "12%",
+          "tier": "atp500"
+        },
+        {
+          "partido": "?",
+          "motivo": "kambi_no_disponible",
+          "cuota": 1.65,
+          "edge_pct": "12%",
+          "tier": "atp500"
+        }
+      ]
+    },
+    {
+      "builder": "combo_confianza",
+      "timestamp": "2026-08-05T13:49:45",
+      "n": 2,
+      "excluidos": [
+        {
+          "partido": "B",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.51,
+          "torneo_nombre": "Wimbledon (Reino Unido)"
+        },
+        {
+          "partido": "C",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.54,
+          "torneo_nombre": "Wimbledon (Reino Unido)"
+        }
+      ]
+    },
+    {
+      "builder": "combo_confianza",
+      "timestamp": "2026-08-05T13:49:46",
+      "n": 3,
+      "excluidos": [
+        {
+          "partido": "Van Assche",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.531,
+          "torneo_nombre": "Wimbledon"
+        },
+        {
+          "partido": "Ghetu",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.51,
+          "torneo_nombre": "Troyes"
+        },
+        {
+          "partido": "Dellien",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.55,
+          "torneo_nombre": "Brasov"
+        }
+      ]
+    },
+    {
+      "builder": "combo_confianza",
+      "timestamp": "2026-08-05T13:49:46",
+      "n": 2,
+      "excluidos": [
+        {
+          "partido": "VanAssche",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.531,
+          "torneo_nombre": "Wimbledon (Reino Unido)"
+        },
+        {
+          "partido": "Zheng",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.523,
+          "torneo_nombre": "Wimbledon (Reino Unido)"
+        }
+      ]
+    },
+    {
+      "builder": "combo_confianza",
+      "timestamp": "2026-08-05T18:44:13",
+      "n": 168,
+      "excluidos": [
+        {
+          "partido": "Li A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.513,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Donski A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.504,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Glinka D.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.534,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Guerrieri A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.526,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Berkieta T.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.513,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Dedura D.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.508,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Den Ouden G.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.536,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Squire H.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.54,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Bax F.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.51,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Ghibaudo A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.508,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Simakin I.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.528,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Galan D. E.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.532,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Kawa K.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.507,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Lee C. Y.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.514,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Knutson G.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.508,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Kubka M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.533,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Yaneva E.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.512,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Orlov V.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.816,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Savano M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.569,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Marek W.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.729,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Fondriest M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.556,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Jedrzejczak J.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.57,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Guttau N.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.625,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Wagner A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.726,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Papoe C. G.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.612,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Petre S. I. B.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.563,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Murray F.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.514,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Rojas C.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.95,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Tenti F.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.68,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Guna R.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.95,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Ghetu G.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.674,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Sciahbasi M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.95,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Schlagenhauf N.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.574,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Vankan M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.535,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Torcq B.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.584,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "De Lange P.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.61,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Papamalamis T.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.599,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Rivet M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.95,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Van Der Meerschen M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.665,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Garcian A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.578,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Forger A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.682,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Chazal M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.64,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Reinhard B. J.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.533,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Poulsen Brostrom O.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.537,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Delage P.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.74,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Rocens M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.601,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Dullinger V.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.53,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Funk A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.95,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Sesko Z.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.784,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Makhlouf N.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.569,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "De Jager J.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.543,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Zavacky P.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.78,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Filar K.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.554,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Makk P.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.655,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Mochizuki Y.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.898,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Kim D. J.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.811,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Dellavedova M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.612,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Tabacco G.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.642,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Vasa I.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.561,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Overbeck C. E.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.579,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Buldorini P.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.521,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Rottoli L.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.588,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Giunta M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.568,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Arnaboldi F.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.735,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Bennani R.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.626,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Empate",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.5,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Obradovic D.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.614,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Tiukaev R.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.514,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Klok D.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.754,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Pisaric A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.649,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Krstic . V.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.551,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Comino L.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.739,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Artnak B.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.67,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Jankanj V.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.672,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Yazdani A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.679,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Ahouda W.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.574,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Schiessl J. E.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.95,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Zarate C. M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.52,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Saraiva Dos Santos P. A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.517,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Meligeni Alves F.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.629,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Ribeiro de Almeida G.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.739,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Loffhagen G.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.517,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Piatti R.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.564,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Tarvet O.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.67,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Cacao T.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.694,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Hudd E.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.698,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Matusevich A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.519,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Woestendick C.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.515,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Bennani K.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.61,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Anthrop J.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.551,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Dussault M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.95,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Hewitt C.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.552,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Ayeni A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.536,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Almazan Valiente I.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.527,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Potenza L.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.558,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Gorgodze E.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.554,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Ma L.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.509,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Ku Y.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.622,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Ovcharenko E.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.95,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Ma Y.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.513,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Gailis R.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.566,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Stagno B.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.635,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Vaissaud D.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.596,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Hageman M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.603,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Urbanova L.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.552,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Veldman K.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.596,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Giambelli C.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.64,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Pohle V.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.678,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Blomqvist C.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.609,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Hejtmanek A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.696,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Hietaranta L.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.629,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Mol I.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.503,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Dorofeeva-Rybas F.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.535,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Drame P.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.537,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "El Aouni A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.616,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Munk Mortensen R.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.626,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Krastenova G.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.55,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Paoletti M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.67,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Lin Y. J.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.521,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Naklo T.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.548,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Qu Y.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.513,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Zhu C.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.606,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Guo M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.51,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Larraya Guidi S. A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.95,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Cinalli L. M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.887,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Konishi Silva J.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.662,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Zornada E.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.585,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Chaudhari V.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.519,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Sato H.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.519,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "McDonald E.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.582,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Karunaratne A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.544,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Bains N.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.54,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Burrage J.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.504,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Xu M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.534,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Ahn A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.62,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Guzman D.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.517,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Crossley M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.508,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Cabezas Dominguez E.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.6,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Penickova A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.719,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Lu J.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.511,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Chiesa D.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.509,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Cherubini D.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.524,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Zolotareva A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.605,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Bertea E. R.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.558,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Pieri T.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.509,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Palicova B.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.557,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Rouvroy M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.574,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Mintegi Del Olmo A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.535,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Papamichail D.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.622,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Urgesi F.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.532,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Lim J.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.512,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Back D.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.503,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Hennemann C. W.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.516,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Malygina E.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.531,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Schunk N.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.536,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Zantedeschi A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.62,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Taraba Wallberg N.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.504,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Steiner V.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.577,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Yao X.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.567,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Jorge F.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.558,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Dudeney A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.573,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Kubareva A.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.534,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Jorge M.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.509,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Ren Y.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.518,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Shinikova I.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.513,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Minnen G.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.535,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Saigo R.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.518,
+          "torneo_nombre": null
+        },
+        {
+          "partido": "Gao X.",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.644,
+          "torneo_nombre": null
+        }
+      ]
+    },
+    {
+      "builder": "betplay_TEST",
+      "timestamp": "2026-08-05T18:44:46",
+      "n": 1,
+      "excluidos": [
+        {
+          "partido": "?",
+          "motivo": "kambi_no_disponible",
+          "cuota": 1.65,
+          "edge_pct": "12%",
+          "tier": "atp500"
+        }
+      ]
+    },
+    {
+      "builder": "betplay_TEST",
+      "timestamp": "2026-08-05T18:44:46",
+      "n": 3,
+      "excluidos": [
+        {
+          "partido": "?",
+          "motivo": "kambi_no_disponible",
+          "cuota": 1.65,
+          "edge_pct": "12%",
+          "tier": "atp500"
+        },
+        {
+          "partido": "?",
+          "motivo": "kambi_no_disponible",
+          "cuota": 1.65,
+          "edge_pct": "12%",
+          "tier": "atp500"
+        },
+        {
+          "partido": "?",
+          "motivo": "kambi_no_disponible",
+          "cuota": 1.65,
+          "edge_pct": "12%",
+          "tier": "atp500"
+        }
+      ]
+    },
+    {
+      "builder": "combo_confianza",
+      "timestamp": "2026-08-05T18:44:58",
+      "n": 2,
+      "excluidos": [
+        {
+          "partido": "B",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.51,
+          "torneo_nombre": "Wimbledon (Reino Unido)"
+        },
+        {
+          "partido": "C",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.54,
+          "torneo_nombre": "Wimbledon (Reino Unido)"
+        }
+      ]
+    },
+    {
+      "builder": "combo_confianza",
+      "timestamp": "2026-08-05T18:44:59",
+      "n": 3,
+      "excluidos": [
+        {
+          "partido": "Van Assche",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.531,
+          "torneo_nombre": "Wimbledon"
+        },
+        {
+          "partido": "Ghetu",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.51,
+          "torneo_nombre": "Troyes"
+        },
+        {
+          "partido": "Dellien",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.55,
+          "torneo_nombre": "Brasov"
+        }
+      ]
+    },
+    {
+      "builder": "combo_confianza",
+      "timestamp": "2026-08-05T18:44:59",
+      "n": 2,
+      "excluidos": [
+        {
+          "partido": "VanAssche",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.531,
+          "torneo_nombre": "Wimbledon (Reino Unido)"
+        },
+        {
+          "partido": "Zheng",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.523,
+          "torneo_nombre": "Wimbledon (Reino Unido)"
+        }
+      ]
+    },
+    {
+      "builder": "combo_confianza",
+      "timestamp": "2026-08-05T18:49:05",
+      "n": 2,
+      "excluidos": [
+        {
+          "partido": "B",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.51,
+          "torneo_nombre": "Wimbledon (Reino Unido)"
+        },
+        {
+          "partido": "C",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.54,
+          "torneo_nombre": "Wimbledon (Reino Unido)"
+        }
+      ]
+    },
+    {
+      "builder": "combo_confianza",
+      "timestamp": "2026-08-05T18:49:05",
+      "n": 3,
+      "excluidos": [
+        {
+          "partido": "Van Assche",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.531,
+          "torneo_nombre": "Wimbledon"
+        },
+        {
+          "partido": "Ghetu",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.51,
+          "torneo_nombre": "Troyes"
+        },
+        {
+          "partido": "Dellien",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.55,
+          "torneo_nombre": "Brasov"
+        }
+      ]
+    },
+    {
+      "builder": "combo_confianza",
+      "timestamp": "2026-08-05T18:49:05",
+      "n": 2,
+      "excluidos": [
+        {
+          "partido": "VanAssche",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.531,
+          "torneo_nombre": "Wimbledon (Reino Unido)"
+        },
+        {
+          "partido": "Zheng",
+          "motivo": "kambi_no_disponible",
+          "p_modelo": 0.523,
+          "torneo_nombre": "Wimbledon (Reino Unido)"
+        }
+      ]
+    }
+  ],
+  "generado": "2026-08-05T18:49:05"
+}

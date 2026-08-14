@@ -1,0 +1,302 @@
+[
+  {
+    "nombre": "Radwanska U.",
+    "torneo": "ITF FEMENINO - INDIVIDUALES: W50 Dublin (Irlanda), dura",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 95.0,
+    "cuota": 1.25,
+    "ts": "2026-07-29T13:25:09.310137"
+  },
+  {
+    "nombre": "Haavisto E.",
+    "torneo": "ITF FEMENINO - INDIVIDUALES: W15 Savitaipale (Finlandia), arcilla",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=STRONG)",
+    "conf": 75.1,
+    "cuota": 1.2,
+    "ts": "2026-07-29T13:25:09.310561"
+  },
+  {
+    "nombre": "Heinonen I.",
+    "torneo": "ITF FEMENINO - INDIVIDUALES: W15 Savitaipale (Finlandia), arcilla",
+    "gate": "G2",
+    "motivo": "G2: n_h2h=0 — señal insuficiente sin H2H (conf=MODERATE, edge=28.4%, kelly=0.399, axes=2, score_dir=1)",
+    "conf": 53.4,
+    "cuota": 3.65,
+    "ts": "2026-07-29T13:25:09.310842"
+  },
+  {
+    "nombre": "Lutkemeyer A.",
+    "torneo": "ITF FEMENINO - INDIVIDUALES: W35 Florence, SC (Estados Unidos), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.753 < 1.02 (conf=60.7%, cuota=1.24)",
+    "conf": 60.7,
+    "cuota": 1.24,
+    "ts": "2026-07-29T13:25:09.311316"
+  },
+  {
+    "nombre": "Moller E.",
+    "torneo": "CHALLENGER MASCULINO - INDIVIDUALES: Bonn (Alemania), arcilla",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.743 < 1.02 (conf=54.6%, cuota=1.36)",
+    "conf": 54.6,
+    "cuota": 1.36,
+    "ts": "2026-07-29T13:25:09.311847"
+  },
+  {
+    "nombre": "Barrera Aguirre I.",
+    "torneo": "ITF FEMENINO - INDIVIDUALES: W35 Pergamino (Argentina), arcilla",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.791 < 1.02 (conf=62.8%, cuota=1.26)",
+    "conf": 62.8,
+    "cuota": 1.26,
+    "ts": "2026-07-29T13:25:09.312048"
+  },
+  {
+    "nombre": "Gonzalez Daniele J. M.",
+    "torneo": "ITF FEMENINO - INDIVIDUALES: W35 Pergamino (Argentina), arcilla",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.647 < 1.02 (conf=54.8%, cuota=1.18)",
+    "conf": 54.8,
+    "cuota": 1.18,
+    "ts": "2026-07-29T13:25:09.312141"
+  },
+  {
+    "nombre": "Urgesi F.",
+    "torneo": "ITF FEMENINO - INDIVIDUALES: W75 Hechingen (Alemania), arcilla",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.701 < 1.02 (conf=56.5%, cuota=1.24)",
+    "conf": 56.5,
+    "cuota": 1.24,
+    "ts": "2026-07-29T13:25:09.312475"
+  },
+  {
+    "nombre": "Stusek J.",
+    "torneo": "ITF FEMENINO - INDIVIDUALES: W75 Hechingen (Alemania), arcilla",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.653 < 1.02 (conf=54.9%, cuota=1.19)",
+    "conf": 54.9,
+    "cuota": 1.19,
+    "ts": "2026-07-29T13:25:09.312533"
+  },
+  {
+    "nombre": "Brancaccio N.",
+    "torneo": "ITF FEMENINO - INDIVIDUALES: W75 Hechingen (Alemania), arcilla",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.652 < 1.02 (conf=56.2%, cuota=1.16)",
+    "conf": 56.2,
+    "cuota": 1.16,
+    "ts": "2026-07-29T13:25:09.312614"
+  },
+  {
+    "nombre": "Rinaldo Persson K.",
+    "torneo": "ITF FEMENINO - INDIVIDUALES: W75 Hechingen (Alemania), arcilla",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.725 < 1.02 (conf=56.2%, cuota=1.29)",
+    "conf": 56.2,
+    "cuota": 1.29,
+    "ts": "2026-07-29T13:25:09.312714"
+  },
+  {
+    "nombre": "Rapolu M.",
+    "torneo": "ITF FEMENINO - INDIVIDUALES: W75 Lexington, KY (Estados Unidos), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.655 < 1.02 (conf=57.0%, cuota=1.15)",
+    "conf": 57.0,
+    "cuota": 1.15,
+    "ts": "2026-07-29T13:25:09.312915"
+  },
+  {
+    "nombre": "Sema E.",
+    "torneo": "ITF FEMENINO - INDIVIDUALES: W75 Lexington, KY (Estados Unidos), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.966 < 1.02 (conf=65.3%, cuota=1.48)",
+    "conf": 65.3,
+    "cuota": 1.48,
+    "ts": "2026-07-29T13:25:09.313017"
+  },
+  {
+    "nombre": "Inoue H.",
+    "torneo": "ITF FEMENINO - INDIVIDUALES: W75 Lexington, KY (Estados Unidos), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.781 < 1.02 (conf=55.0%, cuota=1.42)",
+    "conf": 55.0,
+    "cuota": 1.42,
+    "ts": "2026-07-29T13:25:09.313216"
+  },
+  {
+    "nombre": "Miletich I.",
+    "torneo": "ITF MASCULINO - INDIVIDUALES: M15 Wels (Austria), arcilla",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.672 < 1.02 (conf=54.2%, cuota=1.24)",
+    "conf": 54.2,
+    "cuota": 1.24,
+    "ts": "2026-07-29T13:25:09.316125"
+  },
+  {
+    "nombre": "Jilly A.",
+    "torneo": "ITF MASCULINO - INDIVIDUALES: M15 Wels (Austria), arcilla",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.715 < 1.02 (conf=56.3%, cuota=1.27)",
+    "conf": 56.3,
+    "cuota": 1.27,
+    "ts": "2026-07-29T13:25:09.316243"
+  },
+  {
+    "nombre": "Zamora N.",
+    "torneo": "ITF MASCULINO - INDIVIDUALES: M25 Edwardsville, IL (Estados Unidos), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.994 < 1.02 (conf=54.9%, cuota=1.81)",
+    "conf": 54.9,
+    "cuota": 1.81,
+    "ts": "2026-07-29T13:25:09.316649"
+  },
+  {
+    "nombre": "Gogineni V.",
+    "torneo": "ITF MASCULINO - INDIVIDUALES: M25 Edwardsville, IL (Estados Unidos), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.742 < 1.02 (conf=61.8%, cuota=1.2)",
+    "conf": 61.8,
+    "cuota": 1.2,
+    "ts": "2026-07-29T13:25:09.316721"
+  },
+  {
+    "nombre": "Bonding O.",
+    "torneo": "ITF MASCULINO - INDIVIDUALES: M25 Edwardsville, IL (Estados Unidos), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.708 < 1.02 (conf=57.6%, cuota=1.23)",
+    "conf": 57.6,
+    "cuota": 1.23,
+    "ts": "2026-07-29T13:25:09.316787"
+  },
+  {
+    "nombre": "Bennani K.",
+    "torneo": "ITF MASCULINO - INDIVIDUALES: M25 Edwardsville, IL (Estados Unidos), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.775 < 1.02 (conf=67.4%, cuota=1.15)",
+    "conf": 67.4,
+    "cuota": 1.15,
+    "ts": "2026-07-29T13:25:09.316832"
+  },
+  {
+    "nombre": "Baris O.",
+    "torneo": "ITF MASCULINO - INDIVIDUALES: M25 Edwardsville, IL (Estados Unidos), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.863 < 1.02 (conf=67.4%, cuota=1.28)",
+    "conf": 67.4,
+    "cuota": 1.28,
+    "ts": "2026-07-29T13:25:09.316890"
+  },
+  {
+    "nombre": "McCormick T.",
+    "torneo": "ITF MASCULINO - INDIVIDUALES: M25 Edwardsville, IL (Estados Unidos), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.736 < 1.02 (conf=54.9%, cuota=1.34)",
+    "conf": 54.9,
+    "cuota": 1.34,
+    "ts": "2026-07-29T13:25:09.316970"
+  },
+  {
+    "nombre": "Nakashima B.",
+    "torneo": "ITF MASCULINO - INDIVIDUALES: M25 Edwardsville, IL (Estados Unidos), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.707 < 1.02 (conf=55.2%, cuota=1.28)",
+    "conf": 55.2,
+    "cuota": 1.28,
+    "ts": "2026-07-29T13:25:09.317051"
+  },
+  {
+    "nombre": "Kuzuhara B.",
+    "torneo": "ITF MASCULINO - INDIVIDUALES: M25 Edwardsville, IL (Estados Unidos), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.854 < 1.02 (conf=60.6%, cuota=1.41)",
+    "conf": 60.6,
+    "cuota": 1.41,
+    "ts": "2026-07-29T13:25:09.317129"
+  },
+  {
+    "nombre": "Sorribes Tormo S.",
+    "torneo": "CHALLENGER FEMENINO - INDIVIDUALES: Targu Mures (Rumanía), arcilla",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.699 < 1.02 (conf=54.6%, cuota=1.28)",
+    "conf": 54.6,
+    "cuota": 1.28,
+    "ts": "2026-07-29T13:25:09.317621"
+  },
+  {
+    "nombre": "Ribeiro de Almeida G.",
+    "torneo": "ITF MASCULINO - INDIVIDUALES: M15 Sao Paulo (Brasil), arcilla",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.747 < 1.02 (conf=59.3%, cuota=1.26)",
+    "conf": 59.3,
+    "cuota": 1.26,
+    "ts": "2026-07-29T13:25:09.317953"
+  },
+  {
+    "nombre": "Villalon N.",
+    "torneo": "ITF MASCULINO - INDIVIDUALES: M15 Sao Paulo (Brasil), arcilla",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.973 < 1.02 (conf=69.5%, cuota=1.4)",
+    "conf": 69.5,
+    "cuota": 1.4,
+    "ts": "2026-07-29T13:25:09.318318"
+  },
+  {
+    "nombre": "Price S.",
+    "torneo": "ITF MASCULINO - INDIVIDUALES: M15 Sao Paulo (Brasil), arcilla",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.939 < 1.02 (conf=61.8%, cuota=1.52)",
+    "conf": 61.8,
+    "cuota": 1.52,
+    "ts": "2026-07-29T13:25:09.318540"
+  },
+  {
+    "nombre": "Diaz Acosta F.",
+    "torneo": "CHALLENGER MASCULINO - INDIVIDUALES: San Marino (San Marino), arcilla",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.627 < 1.02 (conf=54.5%, cuota=1.15)",
+    "conf": 54.5,
+    "cuota": 1.15,
+    "ts": "2026-07-29T13:25:09.319072"
+  },
+  {
+    "nombre": "Larwig N.",
+    "torneo": "ITF MASCULINO - INDIVIDUALES: M25 Koszalin (Polonia), arcilla",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.795 < 1.02 (conf=68.5%, cuota=1.16)",
+    "conf": 68.5,
+    "cuota": 1.16,
+    "ts": "2026-07-29T13:25:09.319188"
+  },
+  {
+    "nombre": "Eala A.",
+    "torneo": "WTA - INDIVIDUALES: Washington (Estados Unidos), dura",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.956 < 1.02 (conf=53.4%, cuota=1.79)",
+    "conf": 53.4,
+    "cuota": 1.79,
+    "ts": "2026-07-29T13:25:09.319435"
+  },
+  {
+    "nombre": "Murray F.",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_1 bloqueado",
+    "combo": "cobertura_1",
+    "ts": "2026-07-29T13:25:09.320275"
+  },
+  {
+    "nombre": "Malkin M.",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_2 bloqueado",
+    "combo": "cobertura_2",
+    "ts": "2026-07-29T13:25:09.320284"
+  },
+  {
+    "nombre": "Malkin M.",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_3 bloqueado",
+    "combo": "cobertura_3",
+    "ts": "2026-07-29T13:25:09.320289"
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "nombre": "Suresh D.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=MODERATE)",
+    "conf": 57.5,
+    "cuota": 1.34,
+    "ts": "2026-07-20T10:21:25.292259"
+  },
+  {
+    "nombre": "Imamura M.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=LOW)",
+    "conf": 54.8,
+    "cuota": 1.4,
+    "ts": "2026-07-20T10:21:25.292307"
+  },
+  {
+    "nombre": "Scomparin P. R.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=MODERATE)",
+    "conf": 59.2,
+    "cuota": 1.38,
+    "ts": "2026-07-20T10:21:25.292325"
+  },
+  {
+    "nombre": "Chiesa D.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=LOW)",
+    "conf": 53.5,
+    "cuota": 1.26,
+    "ts": "2026-07-20T10:21:25.292340"
+  },
+  {
+    "nombre": "Quevedo K.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=LOW)",
+    "conf": 53.6,
+    "cuota": 2.8,
+    "ts": "2026-07-20T10:21:25.292524"
+  },
+  {
+    "nombre": "Aksu A.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=LOW)",
+    "conf": 53.4,
+    "cuota": 2.8,
+    "ts": "2026-07-20T10:21:25.292585"
+  }
+]

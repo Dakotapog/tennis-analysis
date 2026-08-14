@@ -1,0 +1,42 @@
+{
+  "metadata": {
+    "fecha": "2026-07-22",
+    "generado": "2026-07-22T07:25:34.391643",
+    "fuente": "evaluar_games_bridge (Nodo-125 D125-02)",
+    "n_picks": 2,
+    "n_con_under": 0,
+    "nodo": "Nodo-125-EvalGames-Bridge-Dashboard-X4"
+  },
+  "apostar": [],
+  "watchlist_dominante": [],
+  "detalle_completo": [
+    {
+      "partido": "Fullana L. vs Rivoli P.",
+      "zona_diff": "dominante",
+      "diff_abs": 0.709,
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "hora": "03:00",
+      "cuota_ml": 1.17,
+      "confidence": 0.6629999999999999,
+      "señales_optimas": [],
+      "tiene_mercados": false,
+      "_source": "evaluar_games",
+      "_sb_id": "EVAL_2026-07-22_desconocido_fullana-rivoli_ML"
+    },
+    {
+      "partido": "Leme Da Silva N. V. vs Souza M.",
+      "zona_diff": "dominante",
+      "diff_abs": 0.587,
+      "predicted_sets": 2,
+      "games_range": "16-19",
+      "hora": "03:00",
+      "cuota_ml": 1.26,
+      "confidence": 0.57,
+      "señales_optimas": [],
+      "tiene_mercados": false,
+      "_source": "evaluar_games",
+      "_sb_id": "EVAL_2026-07-22_desconocido_silva-souza_ML"
+    }
+  ]
+}

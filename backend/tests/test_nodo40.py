@@ -234,7 +234,8 @@ class TestSeleccionOptima:
             bos.extend(_make_betoffer("Total de juegos", linea, 2000, odds_menos,
                                       id_mas=200, id_menos=id_menos))
         señales = _analizar_mercados_juegos(bos, self.PRED_2SETS)
-        optimas = _seleccionar_señal_optima(señales)
+        # D149-02 (Nodo-149): retorna tupla (juegos_optimas, sets_optimas), no lista plana.
+        optimas, _ = _seleccionar_señal_optima(señales)
         under = [s for s in optimas if s["direccion"] == "UNDER" and s["mercado"] == "Total de juegos"]
         assert len(under) == 1
         # La óptima debe ser la de mayor gap
@@ -252,7 +253,7 @@ class TestSeleccionOptima:
             bos.extend(_make_betoffer("Total de juegos", linea, odds_mas, 2000,
                                       id_mas=id_mas, id_menos=200))
         señales = _analizar_mercados_juegos(bos, self.PRED_3SETS)
-        optimas = _seleccionar_señal_optima(señales)
+        optimas, _ = _seleccionar_señal_optima(señales)
         over = [s for s in optimas if s["direccion"] == "OVER" and s["mercado"] == "Total de juegos"]
         assert len(over) == 1
         # La óptima es la de mayor gap
@@ -268,7 +269,7 @@ class TestSeleccionOptima:
             bos.extend(_make_betoffer("Total de juegos", linea, 2000, odds_menos,
                                       id_mas=200, id_menos=id_menos))
         señales = _analizar_mercados_juegos(bos, self.PRED_2SETS)
-        optimas = _seleccionar_señal_optima(señales)
+        optimas, _ = _seleccionar_señal_optima(señales)
         under = [s for s in optimas if s["direccion"] == "UNDER" and s["mercado"] == "Total de juegos"]
         assert len(under) == 1
 

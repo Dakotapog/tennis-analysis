@@ -1,0 +1,352 @@
+[
+  {
+    "nombre": "Andrienko M.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.737 < 1.02 (conf=59.4%, cuota=1.24)",
+    "conf": 59.4,
+    "cuota": 1.24,
+    "ts": "2026-07-23T07:33:38.542691"
+  },
+  {
+    "nombre": "Zeltina B.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.801 < 1.02 (conf=53.4%, cuota=1.5)",
+    "conf": 53.4,
+    "cuota": 1.5,
+    "ts": "2026-07-23T07:33:38.542900"
+  },
+  {
+    "nombre": "Nikles J.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.784 < 1.02 (conf=58.5%, cuota=1.34)",
+    "conf": 58.5,
+    "cuota": 1.34,
+    "ts": "2026-07-23T07:33:38.543179"
+  },
+  {
+    "nombre": "Badosa P.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.871 < 1.02 (conf=55.5%, cuota=1.57)",
+    "conf": 55.5,
+    "cuota": 1.57,
+    "ts": "2026-07-23T07:33:38.543464"
+  },
+  {
+    "nombre": "Erhard M.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.724 < 1.02 (conf=63.0%, cuota=1.15)",
+    "conf": 63.0,
+    "cuota": 1.15,
+    "ts": "2026-07-23T07:33:38.543907"
+  },
+  {
+    "nombre": "Estevez J.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.654 < 1.02 (conf=55.0%, cuota=1.19)",
+    "conf": 55.0,
+    "cuota": 1.19,
+    "ts": "2026-07-23T07:33:38.544074"
+  },
+  {
+    "nombre": "Darderi L.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.730 < 1.02 (conf=55.3%, cuota=1.32)",
+    "conf": 55.3,
+    "cuota": 1.32,
+    "ts": "2026-07-23T07:33:38.544321"
+  },
+  {
+    "nombre": "Reco A.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.895 < 1.02 (conf=69.4%, cuota=1.29)",
+    "conf": 69.4,
+    "cuota": 1.29,
+    "ts": "2026-07-23T07:33:38.544477"
+  },
+  {
+    "nombre": "Vidmanova D.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.778 < 1.02 (conf=54.0%, cuota=1.44)",
+    "conf": 54.0,
+    "cuota": 1.44,
+    "ts": "2026-07-23T07:33:38.544745"
+  },
+  {
+    "nombre": "Stefanini L.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.676 < 1.02 (conf=53.2%, cuota=1.27)",
+    "conf": 53.2,
+    "cuota": 1.27,
+    "ts": "2026-07-23T07:33:38.544808"
+  },
+  {
+    "nombre": "Crawley F.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.781 < 1.02 (conf=53.1%, cuota=1.47)",
+    "conf": 53.1,
+    "cuota": 1.47,
+    "ts": "2026-07-23T07:33:38.544882"
+  },
+  {
+    "nombre": "Miladinovic M.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.936 < 1.02 (conf=64.1%, cuota=1.46)",
+    "conf": 64.1,
+    "cuota": 1.46,
+    "ts": "2026-07-23T07:33:38.545098"
+  },
+  {
+    "nombre": "Dlimi Y.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.649 < 1.02 (conf=53.2%, cuota=1.22)",
+    "conf": 53.2,
+    "cuota": 1.22,
+    "ts": "2026-07-23T07:33:38.545150"
+  },
+  {
+    "nombre": "Pigossi L.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.663 < 1.02 (conf=53.9%, cuota=1.23)",
+    "conf": 53.9,
+    "cuota": 1.23,
+    "ts": "2026-07-23T07:33:38.545467"
+  },
+  {
+    "nombre": "Ibragimova A.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.699 < 1.02 (conf=54.2%, cuota=1.29)",
+    "conf": 54.2,
+    "cuota": 1.29,
+    "ts": "2026-07-23T07:33:38.545667"
+  },
+  {
+    "nombre": "Allegre C.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.765 < 1.02 (conf=59.8%, cuota=1.28)",
+    "conf": 59.8,
+    "cuota": 1.28,
+    "ts": "2026-07-23T07:33:38.545776"
+  },
+  {
+    "nombre": "Brown P.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.830 < 1.02 (conf=54.6%, cuota=1.52)",
+    "conf": 54.6,
+    "cuota": 1.52,
+    "ts": "2026-07-23T07:33:38.545917"
+  },
+  {
+    "nombre": "Barranco Cosano J.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.681 < 1.02 (conf=54.5%, cuota=1.25)",
+    "conf": 54.5,
+    "cuota": 1.25,
+    "ts": "2026-07-23T07:33:38.545978"
+  },
+  {
+    "nombre": "Crossley M.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.790 < 1.02 (conf=58.5%, cuota=1.35)",
+    "conf": 58.5,
+    "cuota": 1.35,
+    "ts": "2026-07-23T07:33:38.546064"
+  },
+  {
+    "nombre": "Vergara Rivera A.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.798 < 1.02 (conf=56.2%, cuota=1.42)",
+    "conf": 56.2,
+    "cuota": 1.42,
+    "ts": "2026-07-23T07:33:38.546279"
+  },
+  {
+    "nombre": "Mochizuki S.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.740 < 1.02 (conf=55.2%, cuota=1.34)",
+    "conf": 55.2,
+    "cuota": 1.34,
+    "ts": "2026-07-23T07:33:38.546330"
+  },
+  {
+    "nombre": "Gowda T.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.731 < 1.02 (conf=56.2%, cuota=1.3)",
+    "conf": 56.2,
+    "cuota": 1.3,
+    "ts": "2026-07-23T07:33:38.546613"
+  },
+  {
+    "nombre": "Wong C.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.992 < 1.02 (conf=60.1%, cuota=1.65)",
+    "conf": 60.1,
+    "cuota": 1.65,
+    "ts": "2026-07-23T07:33:38.546926"
+  },
+  {
+    "nombre": "Moro Canas A.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.671 < 1.02 (conf=53.7%, cuota=1.25)",
+    "conf": 53.7,
+    "cuota": 1.25,
+    "ts": "2026-07-23T07:33:38.547082"
+  },
+  {
+    "nombre": "Cooper S.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.896 < 1.02 (conf=63.1%, cuota=1.42)",
+    "conf": 63.1,
+    "cuota": 1.42,
+    "ts": "2026-07-23T07:33:38.547693"
+  },
+  {
+    "nombre": "Obradovic D.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.738 < 1.02 (conf=58.1%, cuota=1.27)",
+    "conf": 58.1,
+    "cuota": 1.27,
+    "ts": "2026-07-23T07:33:38.548247"
+  },
+  {
+    "nombre": "Ghazouani Durand Y.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.787 < 1.02 (conf=54.3%, cuota=1.45)",
+    "conf": 54.3,
+    "cuota": 1.45,
+    "ts": "2026-07-23T07:33:38.548556"
+  },
+  {
+    "nombre": "Sorger S.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.679 < 1.02 (conf=54.3%, cuota=1.25)",
+    "conf": 54.3,
+    "cuota": 1.25,
+    "ts": "2026-07-23T07:33:38.549638"
+  },
+  {
+    "nombre": "Wolff V.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.717 < 1.02 (conf=53.5%, cuota=1.34)",
+    "conf": 53.5,
+    "cuota": 1.34,
+    "ts": "2026-07-23T07:33:38.550663"
+  },
+  {
+    "nombre": "Yoshimoto N.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.704 < 1.02 (conf=60.7%, cuota=1.16)",
+    "conf": 60.7,
+    "cuota": 1.16,
+    "ts": "2026-07-23T07:33:38.550960"
+  },
+  {
+    "nombre": "Teixido Garcia M.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=1.003 < 1.02 (conf=54.8%, cuota=1.83)",
+    "conf": 54.8,
+    "cuota": 1.83,
+    "ts": "2026-07-23T07:33:38.552348"
+  },
+  {
+    "nombre": "Mettraux M.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.835 < 1.02 (conf=57.6%, cuota=1.45)",
+    "conf": 57.6,
+    "cuota": 1.45,
+    "ts": "2026-07-23T07:33:38.552599"
+  },
+  {
+    "nombre": "Cengiz B.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.772 < 1.02 (conf=54.4%, cuota=1.42)",
+    "conf": 54.4,
+    "cuota": 1.42,
+    "ts": "2026-07-23T07:33:38.552978"
+  },
+  {
+    "nombre": "Maquet M.",
+    "torneo": "?",
+    "gate": "G_EV",
+    "motivo": "G_EV: ev_leg=0.909 < 1.02 (conf=72.7%, cuota=1.25)",
+    "conf": 72.7,
+    "cuota": 1.25,
+    "ts": "2026-07-23T07:33:38.553445"
+  },
+  {
+    "nombre": "Leme Da Silva N. V.",
+    "torneo": "?",
+    "gate": "G1",
+    "motivo": "G1: apostar=False — trader rechazó este pick (conf=MODERATE)",
+    "conf": 56.1,
+    "cuota": 1.78,
+    "ts": "2026-07-23T07:33:38.553925"
+  },
+  {
+    "nombre": "Carteputreda D. C.",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo satellite_1 bloqueado",
+    "combo": "satellite_1",
+    "ts": "2026-07-23T07:33:38.554324"
+  },
+  {
+    "nombre": "Carteputreda D. C.",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo moonshot bloqueado",
+    "combo": "moonshot",
+    "ts": "2026-07-23T07:33:38.554332"
+  },
+  {
+    "nombre": "Carteputreda D. C.",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_0 bloqueado",
+    "combo": "cobertura_0",
+    "ts": "2026-07-23T07:33:38.554336"
+  },
+  {
+    "nombre": "Carteputreda D. C.",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_1 bloqueado",
+    "combo": "cobertura_1",
+    "ts": "2026-07-23T07:33:38.554339"
+  },
+  {
+    "nombre": "Carteputreda D. C.",
+    "gate": "G5",
+    "motivo": "G5: pick ya en 2 combos — combo cobertura_2 bloqueado",
+    "combo": "cobertura_2",
+    "ts": "2026-07-23T07:33:38.554341"
+  }
+]

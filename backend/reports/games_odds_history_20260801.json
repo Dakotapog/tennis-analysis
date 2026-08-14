@@ -1,0 +1,2686 @@
+{
+  "Jamie Mackenzie vs Max Dahlin_OVER": [
+    {
+      "ts": "09:56",
+      "cuota": 1.89,
+      "games_played": 0
+    },
+    {
+      "ts": "10:02",
+      "cuota": 1.89,
+      "games_played": 1
+    },
+    {
+      "ts": "10:03",
+      "cuota": 2.05,
+      "games_played": 1
+    },
+    {
+      "ts": "10:05",
+      "cuota": 2.02,
+      "games_played": 2
+    },
+    {
+      "ts": "10:07",
+      "cuota": 2.07,
+      "games_played": 3
+    },
+    {
+      "ts": "10:09",
+      "cuota": 2.0,
+      "games_played": 3
+    },
+    {
+      "ts": "10:11",
+      "cuota": 2.0,
+      "games_played": 4
+    },
+    {
+      "ts": "10:11",
+      "cuota": 2.14,
+      "games_played": 4
+    },
+    {
+      "ts": "10:14",
+      "cuota": 2.25,
+      "games_played": 4
+    },
+    {
+      "ts": "10:15",
+      "cuota": 2.25,
+      "games_played": 5
+    },
+    {
+      "ts": "10:16",
+      "cuota": 1.92,
+      "games_played": 5
+    },
+    {
+      "ts": "10:18",
+      "cuota": 2.05,
+      "games_played": 5
+    },
+    {
+      "ts": "10:19",
+      "cuota": 2.05,
+      "games_played": 6
+    },
+    {
+      "ts": "10:20",
+      "cuota": 1.98,
+      "games_played": 6
+    },
+    {
+      "ts": "10:22",
+      "cuota": 1.98,
+      "games_played": 7
+    },
+    {
+      "ts": "10:23",
+      "cuota": 2.0,
+      "games_played": 7
+    },
+    {
+      "ts": "10:25",
+      "cuota": 2.2,
+      "games_played": 8
+    },
+    {
+      "ts": "10:27",
+      "cuota": 2.3,
+      "games_played": 8
+    },
+    {
+      "ts": "10:28",
+      "cuota": 2.3,
+      "games_played": 9
+    },
+    {
+      "ts": "10:29",
+      "cuota": 2.1,
+      "games_played": 9
+    },
+    {
+      "ts": "10:31",
+      "cuota": 2.3,
+      "games_played": 9
+    },
+    {
+      "ts": "10:32",
+      "cuota": 2.3,
+      "games_played": 10
+    },
+    {
+      "ts": "10:33",
+      "cuota": 2.28,
+      "games_played": 10
+    },
+    {
+      "ts": "10:38",
+      "cuota": 2.35,
+      "games_played": 10
+    },
+    {
+      "ts": "10:39",
+      "cuota": 2.35,
+      "games_played": 11
+    },
+    {
+      "ts": "10:40",
+      "cuota": 1.79,
+      "games_played": 11
+    },
+    {
+      "ts": "10:42",
+      "cuota": 2.17,
+      "games_played": 11
+    },
+    {
+      "ts": "10:42",
+      "cuota": 2.17,
+      "games_played": 12
+    },
+    {
+      "ts": "10:44",
+      "cuota": 2.28,
+      "games_played": 12
+    },
+    {
+      "ts": "10:46",
+      "cuota": 2.28,
+      "games_played": 13
+    },
+    {
+      "ts": "10:46",
+      "cuota": 1.89,
+      "games_played": 13
+    },
+    {
+      "ts": "10:48",
+      "cuota": 2.0,
+      "games_played": 13
+    },
+    {
+      "ts": "10:49",
+      "cuota": 2.0,
+      "games_played": 14
+    },
+    {
+      "ts": "10:52",
+      "cuota": 2.25,
+      "games_played": 14
+    },
+    {
+      "ts": "10:54",
+      "cuota": 2.4,
+      "games_played": 14
+    },
+    {
+      "ts": "10:55",
+      "cuota": 2.4,
+      "games_played": 15
+    },
+    {
+      "ts": "10:57",
+      "cuota": 1.85,
+      "games_played": 15
+    },
+    {
+      "ts": "10:59",
+      "cuota": 2.08,
+      "games_played": 16
+    },
+    {
+      "ts": "11:01",
+      "cuota": 1.9,
+      "games_played": 16
+    },
+    {
+      "ts": "11:02",
+      "cuota": 1.9,
+      "games_played": 17
+    },
+    {
+      "ts": "11:03",
+      "cuota": 1.79,
+      "games_played": 17
+    },
+    {
+      "ts": "11:05",
+      "cuota": 2.17,
+      "games_played": 18
+    },
+    {
+      "ts": "11:07",
+      "cuota": 2.32,
+      "games_played": 18
+    },
+    {
+      "ts": "11:09",
+      "cuota": 2.16,
+      "games_played": 18
+    },
+    {
+      "ts": "11:10",
+      "cuota": 2.16,
+      "games_played": 19
+    },
+    {
+      "ts": "11:13",
+      "cuota": 2.23,
+      "games_played": 20
+    },
+    {
+      "ts": "11:16",
+      "cuota": 2.04,
+      "games_played": 20
+    },
+    {
+      "ts": "11:18",
+      "cuota": 2.4,
+      "games_played": 20
+    },
+    {
+      "ts": "11:18",
+      "cuota": 2.4,
+      "games_played": 21
+    }
+  ],
+  "Victoria Jimenez Kasintseva vs Marina Bassols Ribera_OVER": [
+    {
+      "ts": "10:06",
+      "cuota": 1.54,
+      "games_played": 0
+    },
+    {
+      "ts": "10:11",
+      "cuota": 1.66,
+      "games_played": 1
+    },
+    {
+      "ts": "10:14",
+      "cuota": 1.65,
+      "games_played": 1
+    },
+    {
+      "ts": "10:16",
+      "cuota": 1.64,
+      "games_played": 1
+    },
+    {
+      "ts": "10:17",
+      "cuota": 1.64,
+      "games_played": 2
+    },
+    {
+      "ts": "10:18",
+      "cuota": 1.49,
+      "games_played": 2
+    },
+    {
+      "ts": "10:20",
+      "cuota": 1.63,
+      "games_played": 3
+    },
+    {
+      "ts": "10:23",
+      "cuota": 1.64,
+      "games_played": 3
+    },
+    {
+      "ts": "10:25",
+      "cuota": 1.67,
+      "games_played": 3
+    },
+    {
+      "ts": "10:27",
+      "cuota": 1.67,
+      "games_played": 4
+    },
+    {
+      "ts": "10:27",
+      "cuota": 1.8,
+      "games_played": 4
+    },
+    {
+      "ts": "10:29",
+      "cuota": 1.68,
+      "games_played": 4
+    },
+    {
+      "ts": "10:31",
+      "cuota": 1.76,
+      "games_played": 4
+    },
+    {
+      "ts": "10:33",
+      "cuota": 1.76,
+      "games_played": 5
+    },
+    {
+      "ts": "10:33",
+      "cuota": 1.97,
+      "games_played": 5
+    },
+    {
+      "ts": "10:36",
+      "cuota": 1.87,
+      "games_played": 5
+    },
+    {
+      "ts": "10:38",
+      "cuota": 2.25,
+      "games_played": 5
+    },
+    {
+      "ts": "10:40",
+      "cuota": 1.91,
+      "games_played": 6
+    },
+    {
+      "ts": "10:42",
+      "cuota": 1.89,
+      "games_played": 6
+    },
+    {
+      "ts": "10:44",
+      "cuota": 1.75,
+      "games_played": 6
+    },
+    {
+      "ts": "10:44",
+      "cuota": 1.75,
+      "games_played": 7
+    },
+    {
+      "ts": "10:46",
+      "cuota": 1.67,
+      "games_played": 7
+    },
+    {
+      "ts": "10:48",
+      "cuota": 1.81,
+      "games_played": 8
+    },
+    {
+      "ts": "10:50",
+      "cuota": 1.75,
+      "games_played": 8
+    },
+    {
+      "ts": "10:51",
+      "cuota": 1.75,
+      "games_played": 9
+    },
+    {
+      "ts": "10:52",
+      "cuota": 1.81,
+      "games_played": 9
+    },
+    {
+      "ts": "10:54",
+      "cuota": 1.73,
+      "games_played": 9
+    },
+    {
+      "ts": "10:55",
+      "cuota": 1.73,
+      "games_played": 10
+    },
+    {
+      "ts": "10:57",
+      "cuota": 1.61,
+      "games_played": 10
+    },
+    {
+      "ts": "10:59",
+      "cuota": 1.62,
+      "games_played": 10
+    },
+    {
+      "ts": "10:59",
+      "cuota": 1.62,
+      "games_played": 11
+    },
+    {
+      "ts": "11:01",
+      "cuota": 1.65,
+      "games_played": 11
+    },
+    {
+      "ts": "11:03",
+      "cuota": 1.54,
+      "games_played": 11
+    },
+    {
+      "ts": "11:04",
+      "cuota": 1.54,
+      "games_played": 12
+    },
+    {
+      "ts": "11:22",
+      "cuota": 1.49,
+      "games_played": 14
+    },
+    {
+      "ts": "11:23",
+      "cuota": 1.49,
+      "games_played": 15
+    },
+    {
+      "ts": "11:24",
+      "cuota": 1.63,
+      "games_played": 15
+    },
+    {
+      "ts": "11:28",
+      "cuota": 1.74,
+      "games_played": 15
+    },
+    {
+      "ts": "11:30",
+      "cuota": 1.74,
+      "games_played": 16
+    }
+  ],
+  "Emiliana Arango vs Lois Boisson_OVER": [
+    {
+      "ts": "10:12",
+      "cuota": 1.7,
+      "games_played": 0
+    },
+    {
+      "ts": "10:14",
+      "cuota": 1.67,
+      "games_played": 0
+    },
+    {
+      "ts": "10:17",
+      "cuota": 1.68,
+      "games_played": 0
+    },
+    {
+      "ts": "10:19",
+      "cuota": 1.73,
+      "games_played": 0
+    },
+    {
+      "ts": "10:20",
+      "cuota": 1.73,
+      "games_played": 1
+    },
+    {
+      "ts": "10:21",
+      "cuota": 1.67,
+      "games_played": 1
+    },
+    {
+      "ts": "10:25",
+      "cuota": 1.67,
+      "games_played": 2
+    },
+    {
+      "ts": "10:26",
+      "cuota": 1.62,
+      "games_played": 2
+    },
+    {
+      "ts": "10:29",
+      "cuota": 1.62,
+      "games_played": 3
+    },
+    {
+      "ts": "10:30",
+      "cuota": 1.56,
+      "games_played": 3
+    },
+    {
+      "ts": "10:32",
+      "cuota": 1.7,
+      "games_played": 3
+    },
+    {
+      "ts": "10:34",
+      "cuota": 1.58,
+      "games_played": 3
+    },
+    {
+      "ts": "10:36",
+      "cuota": 1.58,
+      "games_played": 4
+    },
+    {
+      "ts": "10:37",
+      "cuota": 1.74,
+      "games_played": 4
+    },
+    {
+      "ts": "10:38",
+      "cuota": 1.74,
+      "games_played": 5
+    },
+    {
+      "ts": "10:39",
+      "cuota": 1.9,
+      "games_played": 5
+    },
+    {
+      "ts": "10:41",
+      "cuota": 1.78,
+      "games_played": 5
+    },
+    {
+      "ts": "10:43",
+      "cuota": 1.98,
+      "games_played": 5
+    },
+    {
+      "ts": "10:44",
+      "cuota": 1.98,
+      "games_played": 6
+    },
+    {
+      "ts": "10:45",
+      "cuota": 2.06,
+      "games_played": 6
+    },
+    {
+      "ts": "10:47",
+      "cuota": 2.06,
+      "games_played": 7
+    },
+    {
+      "ts": "10:47",
+      "cuota": 2.18,
+      "games_played": 7
+    },
+    {
+      "ts": "10:51",
+      "cuota": 2.25,
+      "games_played": 7
+    },
+    {
+      "ts": "10:52",
+      "cuota": 2.25,
+      "games_played": 8
+    },
+    {
+      "ts": "10:53",
+      "cuota": 2.08,
+      "games_played": 8
+    },
+    {
+      "ts": "10:55",
+      "cuota": 2.0,
+      "games_played": 8
+    },
+    {
+      "ts": "10:57",
+      "cuota": 2.0,
+      "games_played": 9
+    },
+    {
+      "ts": "10:58",
+      "cuota": 2.23,
+      "games_played": 9
+    },
+    {
+      "ts": "11:00",
+      "cuota": 2.14,
+      "games_played": 9
+    },
+    {
+      "ts": "11:01",
+      "cuota": 2.14,
+      "games_played": 10
+    },
+    {
+      "ts": "11:02",
+      "cuota": 1.98,
+      "games_played": 10
+    },
+    {
+      "ts": "11:04",
+      "cuota": 1.75,
+      "games_played": 10
+    },
+    {
+      "ts": "11:06",
+      "cuota": 2.14,
+      "games_played": 10
+    },
+    {
+      "ts": "11:08",
+      "cuota": 2.14,
+      "games_played": 11
+    },
+    {
+      "ts": "11:08",
+      "cuota": 2.3,
+      "games_played": 11
+    },
+    {
+      "ts": "11:10",
+      "cuota": 2.3,
+      "games_played": 12
+    },
+    {
+      "ts": "11:10",
+      "cuota": 1.74,
+      "games_played": 12
+    },
+    {
+      "ts": "11:14",
+      "cuota": 2.23,
+      "games_played": 13
+    },
+    {
+      "ts": "11:17",
+      "cuota": 2.38,
+      "games_played": 13
+    },
+    {
+      "ts": "11:19",
+      "cuota": 1.89,
+      "games_played": 13
+    },
+    {
+      "ts": "11:21",
+      "cuota": 2.12,
+      "games_played": 13
+    },
+    {
+      "ts": "11:22",
+      "cuota": 2.12,
+      "games_played": 14
+    },
+    {
+      "ts": "11:23",
+      "cuota": 1.81,
+      "games_played": 14
+    },
+    {
+      "ts": "11:25",
+      "cuota": 1.98,
+      "games_played": 14
+    },
+    {
+      "ts": "11:27",
+      "cuota": 1.98,
+      "games_played": 15
+    },
+    {
+      "ts": "11:27",
+      "cuota": 1.87,
+      "games_played": 15
+    },
+    {
+      "ts": "11:29",
+      "cuota": 2.35,
+      "games_played": 15
+    },
+    {
+      "ts": "11:31",
+      "cuota": 2.35,
+      "games_played": 16
+    },
+    {
+      "ts": "11:31",
+      "cuota": 1.7,
+      "games_played": 16
+    },
+    {
+      "ts": "11:34",
+      "cuota": 1.88,
+      "games_played": 16
+    },
+    {
+      "ts": "11:35",
+      "cuota": 1.88,
+      "games_played": 17
+    },
+    {
+      "ts": "11:36",
+      "cuota": 2.35,
+      "games_played": 17
+    },
+    {
+      "ts": "11:42",
+      "cuota": 1.77,
+      "games_played": 18
+    },
+    {
+      "ts": "11:46",
+      "cuota": 1.56,
+      "games_played": 18
+    },
+    {
+      "ts": "11:51",
+      "cuota": 1.78,
+      "games_played": 18
+    },
+    {
+      "ts": "11:53",
+      "cuota": 1.93,
+      "games_played": 18
+    },
+    {
+      "ts": "11:53",
+      "cuota": 1.93,
+      "games_played": 19
+    }
+  ],
+  "Alexei Popyrin vs Thanasi Kokkinakis_OVER": [
+    {
+      "ts": "11:03",
+      "cuota": 1.52,
+      "games_played": 0
+    },
+    {
+      "ts": "11:10",
+      "cuota": 1.91,
+      "games_played": 0
+    },
+    {
+      "ts": "11:12",
+      "cuota": 1.49,
+      "games_played": 0
+    },
+    {
+      "ts": "11:16",
+      "cuota": 1.52,
+      "games_played": 1
+    },
+    {
+      "ts": "11:23",
+      "cuota": 1.86,
+      "games_played": 1
+    },
+    {
+      "ts": "11:24",
+      "cuota": 1.86,
+      "games_played": 2
+    },
+    {
+      "ts": "11:25",
+      "cuota": 1.85,
+      "games_played": 2
+    },
+    {
+      "ts": "11:27",
+      "cuota": 1.83,
+      "games_played": 2
+    },
+    {
+      "ts": "11:29",
+      "cuota": 1.53,
+      "games_played": 3
+    },
+    {
+      "ts": "11:33",
+      "cuota": 1.5,
+      "games_played": 3
+    },
+    {
+      "ts": "11:35",
+      "cuota": 1.5,
+      "games_played": 4
+    },
+    {
+      "ts": "11:35",
+      "cuota": 1.54,
+      "games_played": 4
+    },
+    {
+      "ts": "11:37",
+      "cuota": 1.54,
+      "games_played": 5
+    },
+    {
+      "ts": "11:37",
+      "cuota": 1.5,
+      "games_played": 5
+    },
+    {
+      "ts": "11:40",
+      "cuota": 1.52,
+      "games_played": 5
+    },
+    {
+      "ts": "11:41",
+      "cuota": 1.52,
+      "games_played": 6
+    },
+    {
+      "ts": "11:42",
+      "cuota": 1.84,
+      "games_played": 6
+    },
+    {
+      "ts": "11:43",
+      "cuota": 1.84,
+      "games_played": 7
+    },
+    {
+      "ts": "11:44",
+      "cuota": 1.95,
+      "games_played": 7
+    },
+    {
+      "ts": "11:46",
+      "cuota": 2.04,
+      "games_played": 7
+    },
+    {
+      "ts": "11:47",
+      "cuota": 2.04,
+      "games_played": 8
+    },
+    {
+      "ts": "11:48",
+      "cuota": 2.0,
+      "games_played": 8
+    },
+    {
+      "ts": "11:48",
+      "cuota": 2.0,
+      "games_played": 9
+    },
+    {
+      "ts": "11:52",
+      "cuota": 1.5,
+      "games_played": 9
+    },
+    {
+      "ts": "11:53",
+      "cuota": 1.5,
+      "games_played": 10
+    },
+    {
+      "ts": "11:54",
+      "cuota": 1.52,
+      "games_played": 10
+    },
+    {
+      "ts": "11:57",
+      "cuota": 1.58,
+      "games_played": 10
+    },
+    {
+      "ts": "11:58",
+      "cuota": 1.58,
+      "games_played": 11
+    },
+    {
+      "ts": "11:59",
+      "cuota": 1.96,
+      "games_played": 11
+    },
+    {
+      "ts": "12:01",
+      "cuota": 1.96,
+      "games_played": 12
+    },
+    {
+      "ts": "12:01",
+      "cuota": 2.25,
+      "games_played": 12
+    },
+    {
+      "ts": "12:03",
+      "cuota": 1.54,
+      "games_played": 12
+    },
+    {
+      "ts": "12:04",
+      "cuota": 1.54,
+      "games_played": 13
+    },
+    {
+      "ts": "12:05",
+      "cuota": 2.04,
+      "games_played": 13
+    },
+    {
+      "ts": "12:07",
+      "cuota": 1.94,
+      "games_played": 13
+    },
+    {
+      "ts": "12:09",
+      "cuota": 2.06,
+      "games_played": 13
+    },
+    {
+      "ts": "12:10",
+      "cuota": 2.06,
+      "games_played": 14
+    },
+    {
+      "ts": "12:11",
+      "cuota": 2.1,
+      "games_played": 14
+    },
+    {
+      "ts": "12:12",
+      "cuota": 2.1,
+      "games_played": 15
+    },
+    {
+      "ts": "12:14",
+      "cuota": 1.93,
+      "games_played": 15
+    },
+    {
+      "ts": "12:16",
+      "cuota": 2.0,
+      "games_played": 15
+    }
+  ],
+  "Mili Poljicak vs Juan Pablo Varillas_OVER": [
+    {
+      "ts": "11:05",
+      "cuota": 1.92,
+      "games_played": 0
+    },
+    {
+      "ts": "11:11",
+      "cuota": 1.89,
+      "games_played": 0
+    },
+    {
+      "ts": "11:13",
+      "cuota": 1.89,
+      "games_played": 1
+    },
+    {
+      "ts": "11:13",
+      "cuota": 1.92,
+      "games_played": 1
+    },
+    {
+      "ts": "11:16",
+      "cuota": 1.98,
+      "games_played": 1
+    },
+    {
+      "ts": "11:17",
+      "cuota": 1.98,
+      "games_played": 2
+    },
+    {
+      "ts": "11:18",
+      "cuota": 1.97,
+      "games_played": 2
+    },
+    {
+      "ts": "11:20",
+      "cuota": 1.98,
+      "games_played": 2
+    },
+    {
+      "ts": "11:21",
+      "cuota": 1.98,
+      "games_played": 3
+    },
+    {
+      "ts": "11:22",
+      "cuota": 1.84,
+      "games_played": 3
+    },
+    {
+      "ts": "11:24",
+      "cuota": 1.86,
+      "games_played": 3
+    },
+    {
+      "ts": "11:26",
+      "cuota": 1.81,
+      "games_played": 3
+    },
+    {
+      "ts": "11:30",
+      "cuota": 1.81,
+      "games_played": 4
+    },
+    {
+      "ts": "11:33",
+      "cuota": 1.75,
+      "games_played": 4
+    },
+    {
+      "ts": "11:34",
+      "cuota": 1.75,
+      "games_played": 5
+    },
+    {
+      "ts": "11:35",
+      "cuota": 1.72,
+      "games_played": 5
+    },
+    {
+      "ts": "11:37",
+      "cuota": 1.71,
+      "games_played": 5
+    },
+    {
+      "ts": "11:41",
+      "cuota": 1.7,
+      "games_played": 5
+    },
+    {
+      "ts": "11:42",
+      "cuota": 1.7,
+      "games_played": 6
+    },
+    {
+      "ts": "11:43",
+      "cuota": 1.63,
+      "games_played": 6
+    },
+    {
+      "ts": "11:45",
+      "cuota": 1.63,
+      "games_played": 7
+    },
+    {
+      "ts": "11:46",
+      "cuota": 1.6,
+      "games_played": 7
+    },
+    {
+      "ts": "11:50",
+      "cuota": 1.57,
+      "games_played": 7
+    },
+    {
+      "ts": "11:51",
+      "cuota": 1.57,
+      "games_played": 8
+    },
+    {
+      "ts": "11:52",
+      "cuota": 1.61,
+      "games_played": 8
+    },
+    {
+      "ts": "11:54",
+      "cuota": 1.61,
+      "games_played": 9
+    },
+    {
+      "ts": "11:54",
+      "cuota": 1.71,
+      "games_played": 9
+    },
+    {
+      "ts": "11:56",
+      "cuota": 1.67,
+      "games_played": 9
+    },
+    {
+      "ts": "12:03",
+      "cuota": 1.68,
+      "games_played": 9
+    },
+    {
+      "ts": "12:05",
+      "cuota": 1.67,
+      "games_played": 9
+    },
+    {
+      "ts": "12:07",
+      "cuota": 1.66,
+      "games_played": 9
+    },
+    {
+      "ts": "12:08",
+      "cuota": 1.66,
+      "games_played": 10
+    },
+    {
+      "ts": "12:11",
+      "cuota": 1.79,
+      "games_played": 11
+    },
+    {
+      "ts": "12:15",
+      "cuota": 1.81,
+      "games_played": 11
+    },
+    {
+      "ts": "12:17",
+      "cuota": 1.96,
+      "games_played": 12
+    },
+    {
+      "ts": "12:19",
+      "cuota": 1.91,
+      "games_played": 12
+    },
+    {
+      "ts": "12:26",
+      "cuota": 1.83,
+      "games_played": 12
+    },
+    {
+      "ts": "12:27",
+      "cuota": 1.83,
+      "games_played": 13
+    },
+    {
+      "ts": "12:28",
+      "cuota": 1.88,
+      "games_played": 13
+    },
+    {
+      "ts": "12:29",
+      "cuota": 1.88,
+      "games_played": 14
+    },
+    {
+      "ts": "12:30",
+      "cuota": 1.63,
+      "games_played": 14
+    },
+    {
+      "ts": "12:59",
+      "cuota": 2.02,
+      "games_played": 19
+    },
+    {
+      "ts": "13:01",
+      "cuota": 1.67,
+      "games_played": 19
+    },
+    {
+      "ts": "13:02",
+      "cuota": 1.67,
+      "games_played": 20
+    },
+    {
+      "ts": "13:08",
+      "cuota": 1.8,
+      "games_played": 21
+    }
+  ],
+  "Jacob Fearnley vs Sebastian Ofner_OVER": [
+    {
+      "ts": "11:53",
+      "cuota": 1.87,
+      "games_played": 0
+    },
+    {
+      "ts": "11:58",
+      "cuota": 1.94,
+      "games_played": 0
+    },
+    {
+      "ts": "12:00",
+      "cuota": 2.02,
+      "games_played": 0
+    },
+    {
+      "ts": "12:01",
+      "cuota": 2.02,
+      "games_played": 1
+    },
+    {
+      "ts": "12:02",
+      "cuota": 2.23,
+      "games_played": 1
+    },
+    {
+      "ts": "12:04",
+      "cuota": 2.25,
+      "games_played": 1
+    },
+    {
+      "ts": "12:04",
+      "cuota": 2.25,
+      "games_played": 2
+    },
+    {
+      "ts": "12:06",
+      "cuota": 2.23,
+      "games_played": 2
+    },
+    {
+      "ts": "12:08",
+      "cuota": 2.15,
+      "games_played": 3
+    },
+    {
+      "ts": "12:10",
+      "cuota": 2.2,
+      "games_played": 3
+    },
+    {
+      "ts": "12:11",
+      "cuota": 2.2,
+      "games_played": 4
+    },
+    {
+      "ts": "12:13",
+      "cuota": 2.35,
+      "games_played": 4
+    },
+    {
+      "ts": "12:15",
+      "cuota": 2.14,
+      "games_played": 4
+    },
+    {
+      "ts": "12:15",
+      "cuota": 2.14,
+      "games_played": 5
+    },
+    {
+      "ts": "12:17",
+      "cuota": 2.18,
+      "games_played": 5
+    },
+    {
+      "ts": "12:19",
+      "cuota": 1.98,
+      "games_played": 5
+    },
+    {
+      "ts": "12:20",
+      "cuota": 1.98,
+      "games_played": 6
+    },
+    {
+      "ts": "12:21",
+      "cuota": 1.8,
+      "games_played": 6
+    },
+    {
+      "ts": "12:22",
+      "cuota": 1.8,
+      "games_played": 7
+    },
+    {
+      "ts": "12:23",
+      "cuota": 2.23,
+      "games_played": 7
+    },
+    {
+      "ts": "12:25",
+      "cuota": 1.89,
+      "games_played": 7
+    },
+    {
+      "ts": "12:27",
+      "cuota": 1.9,
+      "games_played": 7
+    },
+    {
+      "ts": "12:27",
+      "cuota": 1.9,
+      "games_played": 8
+    },
+    {
+      "ts": "12:29",
+      "cuota": 1.57,
+      "games_played": 8
+    },
+    {
+      "ts": "12:30",
+      "cuota": 1.57,
+      "games_played": 9
+    },
+    {
+      "ts": "12:31",
+      "cuota": 1.64,
+      "games_played": 9
+    },
+    {
+      "ts": "12:38",
+      "cuota": 1.65,
+      "games_played": 9
+    },
+    {
+      "ts": "12:40",
+      "cuota": 1.65,
+      "games_played": 10
+    },
+    {
+      "ts": "12:41",
+      "cuota": 1.62,
+      "games_played": 10
+    },
+    {
+      "ts": "12:43",
+      "cuota": 1.6,
+      "games_played": 10
+    },
+    {
+      "ts": "12:45",
+      "cuota": 1.6,
+      "games_played": 11
+    },
+    {
+      "ts": "12:45",
+      "cuota": 1.55,
+      "games_played": 11
+    },
+    {
+      "ts": "12:47",
+      "cuota": 1.57,
+      "games_played": 11
+    },
+    {
+      "ts": "12:49",
+      "cuota": 1.57,
+      "games_played": 12
+    },
+    {
+      "ts": "12:49",
+      "cuota": 1.58,
+      "games_played": 12
+    },
+    {
+      "ts": "12:52",
+      "cuota": 1.72,
+      "games_played": 12
+    },
+    {
+      "ts": "12:54",
+      "cuota": 1.6,
+      "games_played": 12
+    },
+    {
+      "ts": "12:55",
+      "cuota": 1.6,
+      "games_played": 13
+    },
+    {
+      "ts": "13:00",
+      "cuota": 1.62,
+      "games_played": 13
+    },
+    {
+      "ts": "13:03",
+      "cuota": 1.76,
+      "games_played": 14
+    },
+    {
+      "ts": "13:08",
+      "cuota": 1.56,
+      "games_played": 15
+    },
+    {
+      "ts": "13:08",
+      "cuota": 1.56,
+      "games_played": 16
+    },
+    {
+      "ts": "13:10",
+      "cuota": 1.62,
+      "games_played": 16
+    },
+    {
+      "ts": "13:12",
+      "cuota": 2.16,
+      "games_played": 16
+    },
+    {
+      "ts": "13:13",
+      "cuota": 2.16,
+      "games_played": 17
+    },
+    {
+      "ts": "13:14",
+      "cuota": 1.62,
+      "games_played": 17
+    },
+    {
+      "ts": "13:15",
+      "cuota": 1.62,
+      "games_played": 18
+    },
+    {
+      "ts": "13:16",
+      "cuota": 1.68,
+      "games_played": 18
+    },
+    {
+      "ts": "13:20",
+      "cuota": 1.94,
+      "games_played": 18
+    },
+    {
+      "ts": "13:22",
+      "cuota": 1.94,
+      "games_played": 19
+    }
+  ],
+  "Aleksandar Vukic vs Marcelo Tomas Barrios Vera_UNDER": [
+    {
+      "ts": "11:59",
+      "cuota": 1.62,
+      "games_played": 0
+    },
+    {
+      "ts": "12:02",
+      "cuota": 1.6,
+      "games_played": 0
+    },
+    {
+      "ts": "12:06",
+      "cuota": 1.62,
+      "games_played": 0
+    },
+    {
+      "ts": "12:07",
+      "cuota": 1.62,
+      "games_played": 1
+    },
+    {
+      "ts": "12:08",
+      "cuota": 1.67,
+      "games_played": 1
+    },
+    {
+      "ts": "12:10",
+      "cuota": 1.68,
+      "games_played": 1
+    },
+    {
+      "ts": "12:12",
+      "cuota": 1.64,
+      "games_played": 1
+    },
+    {
+      "ts": "12:14",
+      "cuota": 1.73,
+      "games_played": 2
+    },
+    {
+      "ts": "12:18",
+      "cuota": 1.73,
+      "games_played": 3
+    },
+    {
+      "ts": "12:18",
+      "cuota": 1.68,
+      "games_played": 3
+    },
+    {
+      "ts": "12:20",
+      "cuota": 1.67,
+      "games_played": 3
+    },
+    {
+      "ts": "12:22",
+      "cuota": 1.67,
+      "games_played": 4
+    },
+    {
+      "ts": "12:23",
+      "cuota": 1.56,
+      "games_played": 4
+    },
+    {
+      "ts": "12:25",
+      "cuota": 1.58,
+      "games_played": 4
+    },
+    {
+      "ts": "12:26",
+      "cuota": 1.58,
+      "games_played": 5
+    },
+    {
+      "ts": "12:27",
+      "cuota": 1.71,
+      "games_played": 5
+    },
+    {
+      "ts": "12:31",
+      "cuota": 1.76,
+      "games_played": 5
+    },
+    {
+      "ts": "12:35",
+      "cuota": 1.76,
+      "games_played": 6
+    },
+    {
+      "ts": "12:41",
+      "cuota": 1.54,
+      "games_played": 6
+    },
+    {
+      "ts": "12:43",
+      "cuota": 1.66,
+      "games_played": 6
+    },
+    {
+      "ts": "12:45",
+      "cuota": 1.54,
+      "games_played": 6
+    },
+    {
+      "ts": "12:46",
+      "cuota": 1.54,
+      "games_played": 7
+    },
+    {
+      "ts": "12:47",
+      "cuota": 1.8,
+      "games_played": 7
+    },
+    {
+      "ts": "12:49",
+      "cuota": 1.74,
+      "games_played": 7
+    },
+    {
+      "ts": "12:50",
+      "cuota": 1.74,
+      "games_played": 8
+    },
+    {
+      "ts": "12:52",
+      "cuota": 1.84,
+      "games_played": 8
+    },
+    {
+      "ts": "12:54",
+      "cuota": 1.55,
+      "games_played": 8
+    },
+    {
+      "ts": "12:56",
+      "cuota": 1.84,
+      "games_played": 8
+    },
+    {
+      "ts": "12:57",
+      "cuota": 1.84,
+      "games_played": 9
+    },
+    {
+      "ts": "12:58",
+      "cuota": 2.0,
+      "games_played": 9
+    },
+    {
+      "ts": "13:00",
+      "cuota": 1.94,
+      "games_played": 9
+    },
+    {
+      "ts": "13:01",
+      "cuota": 1.94,
+      "games_played": 10
+    },
+    {
+      "ts": "13:03",
+      "cuota": 1.84,
+      "games_played": 10
+    },
+    {
+      "ts": "13:08",
+      "cuota": 2.16,
+      "games_played": 11
+    },
+    {
+      "ts": "13:10",
+      "cuota": 2.2,
+      "games_played": 11
+    },
+    {
+      "ts": "13:11",
+      "cuota": 2.2,
+      "games_played": 12
+    },
+    {
+      "ts": "13:12",
+      "cuota": 2.17,
+      "games_played": 12
+    },
+    {
+      "ts": "13:14",
+      "cuota": 1.85,
+      "games_played": 12
+    },
+    {
+      "ts": "13:16",
+      "cuota": 1.71,
+      "games_played": 12
+    },
+    {
+      "ts": "13:17",
+      "cuota": 1.71,
+      "games_played": 13
+    },
+    {
+      "ts": "13:18",
+      "cuota": 1.68,
+      "games_played": 13
+    },
+    {
+      "ts": "13:20",
+      "cuota": 1.6,
+      "games_played": 13
+    },
+    {
+      "ts": "13:22",
+      "cuota": 1.71,
+      "games_played": 13
+    },
+    {
+      "ts": "13:27",
+      "cuota": 1.55,
+      "games_played": 14
+    }
+  ],
+  "Lanlana Tararudee vs Qinwen Zheng_OVER": [
+    {
+      "ts": "12:17",
+      "cuota": 1.53,
+      "games_played": 0
+    },
+    {
+      "ts": "12:21",
+      "cuota": 1.53,
+      "games_played": 1
+    },
+    {
+      "ts": "12:21",
+      "cuota": 1.96,
+      "games_played": 1
+    },
+    {
+      "ts": "12:23",
+      "cuota": 1.94,
+      "games_played": 1
+    },
+    {
+      "ts": "12:26",
+      "cuota": 1.96,
+      "games_played": 1
+    },
+    {
+      "ts": "12:26",
+      "cuota": 1.96,
+      "games_played": 2
+    },
+    {
+      "ts": "12:27",
+      "cuota": 1.96,
+      "games_played": 3
+    },
+    {
+      "ts": "12:28",
+      "cuota": 1.86,
+      "games_played": 3
+    },
+    {
+      "ts": "12:30",
+      "cuota": 1.87,
+      "games_played": 3
+    },
+    {
+      "ts": "12:32",
+      "cuota": 1.83,
+      "games_played": 3
+    },
+    {
+      "ts": "12:34",
+      "cuota": 1.83,
+      "games_played": 4
+    },
+    {
+      "ts": "12:37",
+      "cuota": 1.81,
+      "games_played": 4
+    },
+    {
+      "ts": "12:37",
+      "cuota": 1.81,
+      "games_played": 5
+    },
+    {
+      "ts": "12:39",
+      "cuota": 1.76,
+      "games_played": 5
+    },
+    {
+      "ts": "12:42",
+      "cuota": 1.75,
+      "games_played": 5
+    },
+    {
+      "ts": "12:43",
+      "cuota": 1.75,
+      "games_played": 6
+    },
+    {
+      "ts": "12:44",
+      "cuota": 1.73,
+      "games_played": 6
+    },
+    {
+      "ts": "12:46",
+      "cuota": 1.82,
+      "games_played": 7
+    },
+    {
+      "ts": "12:48",
+      "cuota": 1.76,
+      "games_played": 7
+    },
+    {
+      "ts": "12:50",
+      "cuota": 1.76,
+      "games_played": 8
+    },
+    {
+      "ts": "12:51",
+      "cuota": 1.7,
+      "games_played": 8
+    },
+    {
+      "ts": "12:53",
+      "cuota": 1.63,
+      "games_played": 8
+    },
+    {
+      "ts": "12:54",
+      "cuota": 1.63,
+      "games_played": 9
+    },
+    {
+      "ts": "12:55",
+      "cuota": 1.81,
+      "games_played": 9
+    },
+    {
+      "ts": "13:01",
+      "cuota": 1.84,
+      "games_played": 9
+    },
+    {
+      "ts": "13:02",
+      "cuota": 1.84,
+      "games_played": 10
+    },
+    {
+      "ts": "13:08",
+      "cuota": 1.55,
+      "games_played": 12
+    },
+    {
+      "ts": "13:10",
+      "cuota": 1.63,
+      "games_played": 12
+    },
+    {
+      "ts": "13:12",
+      "cuota": 1.63,
+      "games_played": 13
+    },
+    {
+      "ts": "13:12",
+      "cuota": 1.8,
+      "games_played": 13
+    },
+    {
+      "ts": "13:14",
+      "cuota": 2.12,
+      "games_played": 13
+    },
+    {
+      "ts": "13:16",
+      "cuota": 2.12,
+      "games_played": 14
+    },
+    {
+      "ts": "13:16",
+      "cuota": 2.38,
+      "games_played": 14
+    },
+    {
+      "ts": "13:18",
+      "cuota": 2.4,
+      "games_played": 14
+    },
+    {
+      "ts": "13:19",
+      "cuota": 2.4,
+      "games_played": 15
+    },
+    {
+      "ts": "13:20",
+      "cuota": 1.52,
+      "games_played": 15
+    }
+  ],
+  "Sho Shimabukuro vs Nicolai Budkov Kjaer_OVER": [
+    {
+      "ts": "12:36",
+      "cuota": 1.52,
+      "games_played": 0
+    },
+    {
+      "ts": "12:47",
+      "cuota": 1.54,
+      "games_played": 0
+    },
+    {
+      "ts": "12:51",
+      "cuota": 1.54,
+      "games_played": 1
+    },
+    {
+      "ts": "12:52",
+      "cuota": 1.56,
+      "games_played": 1
+    },
+    {
+      "ts": "12:54",
+      "cuota": 1.67,
+      "games_played": 1
+    },
+    {
+      "ts": "12:54",
+      "cuota": 1.67,
+      "games_played": 2
+    },
+    {
+      "ts": "12:58",
+      "cuota": 1.49,
+      "games_played": 3
+    },
+    {
+      "ts": "13:00",
+      "cuota": 1.53,
+      "games_played": 3
+    },
+    {
+      "ts": "13:02",
+      "cuota": 1.53,
+      "games_played": 4
+    },
+    {
+      "ts": "13:03",
+      "cuota": 1.81,
+      "games_played": 4
+    },
+    {
+      "ts": "13:08",
+      "cuota": 1.57,
+      "games_played": 5
+    },
+    {
+      "ts": "13:10",
+      "cuota": 1.79,
+      "games_played": 6
+    },
+    {
+      "ts": "13:12",
+      "cuota": 1.84,
+      "games_played": 6
+    },
+    {
+      "ts": "13:14",
+      "cuota": 1.6,
+      "games_played": 6
+    },
+    {
+      "ts": "13:15",
+      "cuota": 1.6,
+      "games_played": 7
+    },
+    {
+      "ts": "13:16",
+      "cuota": 1.86,
+      "games_played": 7
+    },
+    {
+      "ts": "13:18",
+      "cuota": 1.64,
+      "games_played": 7
+    },
+    {
+      "ts": "13:18",
+      "cuota": 1.64,
+      "games_played": 8
+    },
+    {
+      "ts": "13:20",
+      "cuota": 1.86,
+      "games_played": 8
+    },
+    {
+      "ts": "13:21",
+      "cuota": 1.86,
+      "games_played": 9
+    },
+    {
+      "ts": "13:22",
+      "cuota": 2.0,
+      "games_played": 9
+    },
+    {
+      "ts": "13:25",
+      "cuota": 1.7,
+      "games_played": 9
+    },
+    {
+      "ts": "13:26",
+      "cuota": 1.7,
+      "games_played": 10
+    },
+    {
+      "ts": "13:27",
+      "cuota": 1.91,
+      "games_played": 10
+    }
+  ],
+  "Hugo Gaston vs Duncan Chan_UNDER": [
+    {
+      "ts": "12:46",
+      "cuota": 2.14,
+      "games_played": 0
+    },
+    {
+      "ts": "12:53",
+      "cuota": 2.05,
+      "games_played": 0
+    },
+    {
+      "ts": "12:53",
+      "cuota": 2.05,
+      "games_played": 1
+    },
+    {
+      "ts": "12:55",
+      "cuota": 1.88,
+      "games_played": 1
+    },
+    {
+      "ts": "12:57",
+      "cuota": 2.15,
+      "games_played": 1
+    },
+    {
+      "ts": "12:57",
+      "cuota": 2.15,
+      "games_played": 2
+    },
+    {
+      "ts": "12:59",
+      "cuota": 2.23,
+      "games_played": 2
+    },
+    {
+      "ts": "13:01",
+      "cuota": 2.23,
+      "games_played": 3
+    },
+    {
+      "ts": "13:01",
+      "cuota": 2.2,
+      "games_played": 3
+    },
+    {
+      "ts": "13:08",
+      "cuota": 1.63,
+      "games_played": 4
+    },
+    {
+      "ts": "13:10",
+      "cuota": 1.57,
+      "games_played": 5
+    },
+    {
+      "ts": "13:14",
+      "cuota": 1.79,
+      "games_played": 6
+    },
+    {
+      "ts": "13:16",
+      "cuota": 1.85,
+      "games_played": 6
+    },
+    {
+      "ts": "13:18",
+      "cuota": 1.85,
+      "games_played": 7
+    },
+    {
+      "ts": "13:18",
+      "cuota": 1.68,
+      "games_played": 7
+    },
+    {
+      "ts": "13:20",
+      "cuota": 1.6,
+      "games_played": 7
+    }
+  ],
+  "Alina Korneeva vs Mary Stoiana_OVER": [
+    {
+      "ts": "12:47",
+      "cuota": 2.23,
+      "games_played": 0
+    },
+    {
+      "ts": "12:51",
+      "cuota": 2.15,
+      "games_played": 0
+    },
+    {
+      "ts": "12:53",
+      "cuota": 2.2,
+      "games_played": 0
+    },
+    {
+      "ts": "12:54",
+      "cuota": 2.2,
+      "games_played": 1
+    },
+    {
+      "ts": "12:55",
+      "cuota": 2.05,
+      "games_played": 1
+    },
+    {
+      "ts": "12:57",
+      "cuota": 2.06,
+      "games_played": 1
+    },
+    {
+      "ts": "13:01",
+      "cuota": 2.0,
+      "games_played": 1
+    },
+    {
+      "ts": "13:01",
+      "cuota": 2.0,
+      "games_played": 2
+    },
+    {
+      "ts": "13:08",
+      "cuota": 1.89,
+      "games_played": 3
+    },
+    {
+      "ts": "13:09",
+      "cuota": 1.89,
+      "games_played": 4
+    },
+    {
+      "ts": "13:10",
+      "cuota": 2.3,
+      "games_played": 4
+    },
+    {
+      "ts": "13:12",
+      "cuota": 1.94,
+      "games_played": 4
+    },
+    {
+      "ts": "13:13",
+      "cuota": 1.94,
+      "games_played": 5
+    },
+    {
+      "ts": "13:14",
+      "cuota": 1.86,
+      "games_played": 5
+    },
+    {
+      "ts": "13:16",
+      "cuota": 1.86,
+      "games_played": 6
+    },
+    {
+      "ts": "13:16",
+      "cuota": 1.75,
+      "games_played": 6
+    },
+    {
+      "ts": "13:18",
+      "cuota": 1.81,
+      "games_played": 6
+    },
+    {
+      "ts": "13:19",
+      "cuota": 1.81,
+      "games_played": 7
+    },
+    {
+      "ts": "13:20",
+      "cuota": 1.83,
+      "games_played": 7
+    },
+    {
+      "ts": "13:22",
+      "cuota": 1.95,
+      "games_played": 7
+    },
+    {
+      "ts": "13:25",
+      "cuota": 1.93,
+      "games_played": 7
+    },
+    {
+      "ts": "13:27",
+      "cuota": 1.79,
+      "games_played": 7
+    }
+  ],
+  "Moyuka Uchijima vs Himeno Sakatsume_OVER": [
+    {
+      "ts": "12:50",
+      "cuota": 1.53,
+      "games_played": 0
+    },
+    {
+      "ts": "12:56",
+      "cuota": 1.6,
+      "games_played": 0
+    },
+    {
+      "ts": "12:58",
+      "cuota": 1.57,
+      "games_played": 0
+    },
+    {
+      "ts": "12:59",
+      "cuota": 1.57,
+      "games_played": 1
+    },
+    {
+      "ts": "13:00",
+      "cuota": 1.66,
+      "games_played": 1
+    },
+    {
+      "ts": "13:02",
+      "cuota": 1.66,
+      "games_played": 2
+    },
+    {
+      "ts": "13:03",
+      "cuota": 1.67,
+      "games_played": 2
+    },
+    {
+      "ts": "13:08",
+      "cuota": 1.92,
+      "games_played": 3
+    },
+    {
+      "ts": "13:09",
+      "cuota": 1.92,
+      "games_played": 4
+    },
+    {
+      "ts": "13:10",
+      "cuota": 1.57,
+      "games_played": 4
+    },
+    {
+      "ts": "13:12",
+      "cuota": 2.06,
+      "games_played": 5
+    },
+    {
+      "ts": "13:14",
+      "cuota": 2.15,
+      "games_played": 5
+    },
+    {
+      "ts": "13:16",
+      "cuota": 2.28,
+      "games_played": 5
+    },
+    {
+      "ts": "13:16",
+      "cuota": 2.28,
+      "games_played": 6
+    },
+    {
+      "ts": "13:18",
+      "cuota": 2.2,
+      "games_played": 6
+    },
+    {
+      "ts": "13:22",
+      "cuota": 2.2,
+      "games_played": 7
+    },
+    {
+      "ts": "13:22",
+      "cuota": 1.88,
+      "games_played": 7
+    },
+    {
+      "ts": "13:25",
+      "cuota": 2.18,
+      "games_played": 7
+    },
+    {
+      "ts": "13:26",
+      "cuota": 2.18,
+      "games_played": 8
+    }
+  ],
+  "Kristina Liutova vs Elvina Kalieva_OVER": [
+    {
+      "ts": "13:08",
+      "cuota": 2.14,
+      "games_played": 0
+    },
+    {
+      "ts": "13:10",
+      "cuota": 2.12,
+      "games_played": 0
+    },
+    {
+      "ts": "13:11",
+      "cuota": 2.12,
+      "games_played": 1
+    },
+    {
+      "ts": "13:12",
+      "cuota": 2.07,
+      "games_played": 1
+    },
+    {
+      "ts": "13:14",
+      "cuota": 2.06,
+      "games_played": 1
+    },
+    {
+      "ts": "13:17",
+      "cuota": 2.06,
+      "games_played": 2
+    },
+    {
+      "ts": "13:18",
+      "cuota": 2.07,
+      "games_played": 2
+    },
+    {
+      "ts": "13:20",
+      "cuota": 2.05,
+      "games_played": 2
+    },
+    {
+      "ts": "13:25",
+      "cuota": 2.04,
+      "games_played": 2
+    },
+    {
+      "ts": "13:26",
+      "cuota": 2.04,
+      "games_played": 3
+    },
+    {
+      "ts": "13:27",
+      "cuota": 2.05,
+      "games_played": 3
+    }
+  ],
+  "Mochizuki S. vs Sweeny D._OVER": [
+    {
+      "ts": "14:14",
+      "cuota": 1.57,
+      "games_played": 0
+    },
+    {
+      "ts": "14:21",
+      "cuota": 1.55,
+      "games_played": 0
+    },
+    {
+      "ts": "14:21",
+      "cuota": 1.55,
+      "games_played": 1
+    },
+    {
+      "ts": "14:23",
+      "cuota": 1.52,
+      "games_played": 1
+    },
+    {
+      "ts": "14:25",
+      "cuota": 1.52,
+      "games_played": 2
+    },
+    {
+      "ts": "14:25",
+      "cuota": 1.56,
+      "games_played": 2
+    },
+    {
+      "ts": "14:30",
+      "cuota": 1.58,
+      "games_played": 2
+    },
+    {
+      "ts": "14:31",
+      "cuota": 1.58,
+      "games_played": 3
+    },
+    {
+      "ts": "14:32",
+      "cuota": 1.7,
+      "games_played": 3
+    },
+    {
+      "ts": "14:34",
+      "cuota": 1.8,
+      "games_played": 3
+    },
+    {
+      "ts": "14:35",
+      "cuota": 1.8,
+      "games_played": 4
+    },
+    {
+      "ts": "14:36",
+      "cuota": 1.72,
+      "games_played": 4
+    },
+    {
+      "ts": "14:37",
+      "cuota": 1.72,
+      "games_played": 5
+    },
+    {
+      "ts": "14:38",
+      "cuota": 1.66,
+      "games_played": 5
+    },
+    {
+      "ts": "14:40",
+      "cuota": 1.7,
+      "games_played": 5
+    },
+    {
+      "ts": "14:41",
+      "cuota": 1.7,
+      "games_played": 6
+    },
+    {
+      "ts": "14:42",
+      "cuota": 1.81,
+      "games_played": 6
+    },
+    {
+      "ts": "14:44",
+      "cuota": 1.95,
+      "games_played": 6
+    },
+    {
+      "ts": "14:46",
+      "cuota": 2.4,
+      "games_played": 7
+    },
+    {
+      "ts": "14:51",
+      "cuota": 2.1,
+      "games_played": 7
+    },
+    {
+      "ts": "14:53",
+      "cuota": 1.91,
+      "games_played": 7
+    },
+    {
+      "ts": "14:53",
+      "cuota": 1.91,
+      "games_played": 8
+    },
+    {
+      "ts": "14:55",
+      "cuota": 1.75,
+      "games_played": 8
+    },
+    {
+      "ts": "14:57",
+      "cuota": 1.75,
+      "games_played": 9
+    },
+    {
+      "ts": "14:57",
+      "cuota": 2.0,
+      "games_played": 9
+    },
+    {
+      "ts": "14:59",
+      "cuota": 1.55,
+      "games_played": 9
+    },
+    {
+      "ts": "15:02",
+      "cuota": 2.2,
+      "games_played": 9
+    },
+    {
+      "ts": "15:04",
+      "cuota": 1.89,
+      "games_played": 9
+    },
+    {
+      "ts": "15:05",
+      "cuota": 1.89,
+      "games_played": 10
+    },
+    {
+      "ts": "15:06",
+      "cuota": 2.38,
+      "games_played": 10
+    },
+    {
+      "ts": "15:08",
+      "cuota": 1.87,
+      "games_played": 10
+    },
+    {
+      "ts": "15:09",
+      "cuota": 1.87,
+      "games_played": 11
+    },
+    {
+      "ts": "15:10",
+      "cuota": 1.71,
+      "games_played": 11
+    },
+    {
+      "ts": "15:12",
+      "cuota": 1.62,
+      "games_played": 11
+    },
+    {
+      "ts": "15:14",
+      "cuota": 1.62,
+      "games_played": 12
+    },
+    {
+      "ts": "15:15",
+      "cuota": 2.38,
+      "games_played": 12
+    },
+    {
+      "ts": "15:17",
+      "cuota": 2.3,
+      "games_played": 12
+    },
+    {
+      "ts": "15:21",
+      "cuota": 1.9,
+      "games_played": 13
+    },
+    {
+      "ts": "15:23",
+      "cuota": 2.12,
+      "games_played": 13
+    },
+    {
+      "ts": "15:25",
+      "cuota": 2.12,
+      "games_played": 14
+    },
+    {
+      "ts": "15:25",
+      "cuota": 1.63,
+      "games_played": 14
+    },
+    {
+      "ts": "15:27",
+      "cuota": 1.95,
+      "games_played": 14
+    },
+    {
+      "ts": "15:30",
+      "cuota": 1.79,
+      "games_played": 14
+    },
+    {
+      "ts": "15:30",
+      "cuota": 1.79,
+      "games_played": 15
+    },
+    {
+      "ts": "15:32",
+      "cuota": 1.63,
+      "games_played": 15
+    },
+    {
+      "ts": "15:38",
+      "cuota": 1.72,
+      "games_played": 16
+    },
+    {
+      "ts": "15:47",
+      "cuota": 1.84,
+      "games_played": 17
+    }
+  ],
+  "Vidmanova D. vs Zarazua R._OVER": [
+    {
+      "ts": "15:09",
+      "cuota": 1.81,
+      "games_played": 0
+    },
+    {
+      "ts": "15:11",
+      "cuota": 1.87,
+      "games_played": 0
+    },
+    {
+      "ts": "15:11",
+      "cuota": 1.87,
+      "games_played": 1
+    },
+    {
+      "ts": "15:13",
+      "cuota": 1.83,
+      "games_played": 1
+    },
+    {
+      "ts": "15:15",
+      "cuota": 1.92,
+      "games_played": 1
+    },
+    {
+      "ts": "15:16",
+      "cuota": 1.92,
+      "games_played": 2
+    },
+    {
+      "ts": "15:20",
+      "cuota": 2.33,
+      "games_played": 3
+    },
+    {
+      "ts": "15:22",
+      "cuota": 2.17,
+      "games_played": 3
+    },
+    {
+      "ts": "15:22",
+      "cuota": 2.17,
+      "games_played": 4
+    },
+    {
+      "ts": "15:24",
+      "cuota": 2.2,
+      "games_played": 4
+    },
+    {
+      "ts": "15:26",
+      "cuota": 2.2,
+      "games_played": 5
+    },
+    {
+      "ts": "15:28",
+      "cuota": 2.1,
+      "games_played": 5
+    },
+    {
+      "ts": "15:30",
+      "cuota": 1.95,
+      "games_played": 6
+    },
+    {
+      "ts": "15:32",
+      "cuota": 2.12,
+      "games_played": 6
+    },
+    {
+      "ts": "15:33",
+      "cuota": 2.12,
+      "games_played": 7
+    },
+    {
+      "ts": "15:35",
+      "cuota": 2.17,
+      "games_played": 7
+    },
+    {
+      "ts": "15:37",
+      "cuota": 2.07,
+      "games_played": 7
+    },
+    {
+      "ts": "15:39",
+      "cuota": 2.23,
+      "games_played": 7
+    },
+    {
+      "ts": "15:40",
+      "cuota": 2.23,
+      "games_played": 8
+    },
+    {
+      "ts": "15:41",
+      "cuota": 2.07,
+      "games_played": 8
+    },
+    {
+      "ts": "15:44",
+      "cuota": 2.05,
+      "games_played": 8
+    },
+    {
+      "ts": "15:44",
+      "cuota": 2.05,
+      "games_played": 9
+    },
+    {
+      "ts": "15:46",
+      "cuota": 2.2,
+      "games_played": 9
+    }
+  ],
+  "Svrcina D. vs Droguet T._OVER": [
+    {
+      "ts": "15:33",
+      "cuota": 1.73,
+      "games_played": 0
+    },
+    {
+      "ts": "15:41",
+      "cuota": 1.72,
+      "games_played": 0
+    },
+    {
+      "ts": "15:43",
+      "cuota": 1.72,
+      "games_played": 1
+    },
+    {
+      "ts": "15:44",
+      "cuota": 1.76,
+      "games_played": 1
+    },
+    {
+      "ts": "15:46",
+      "cuota": 1.79,
+      "games_played": 1
+    },
+    {
+      "ts": "15:46",
+      "cuota": 1.79,
+      "games_played": 2
+    }
+  ],
+  "Nakashima B. vs Fritz T._UNDER": [
+    {
+      "ts": "18:48",
+      "cuota": 2.65,
+      "games_played": 18
+    }
+  ]
+}

@@ -1,0 +1,362 @@
+{
+  "ts": "2026-08-05T19:02:04.262659",
+  "picks": {
+    "buse i. vs norrie c._norrie": {
+      "jugador": "Norrie",
+      "casa": "betplay",
+      "cuota": 2.8,
+      "cuotas": {
+        "betplay": 2.8,
+        "rushbet": 2.75
+      },
+      "gain_pct": 0.0,
+      "divergencia_pct": 1.82,
+      "betplay_cuota": 2.8,
+      "rushbet_cuota": 2.75,
+      "wplay_cuota": "—",
+      "cuota_plan": 0.0,
+      "_source": "games",
+      "_partido": "Buse I. vs Norrie C.",
+      "_mercado": "UNDER 25.5 @1.54"
+    },
+    "marozsan f. vs arnaldi m._marozsan": {
+      "jugador": "Marozsan",
+      "casa": "wplay",
+      "cuota": 6.0,
+      "cuotas": {
+        "wplay": 6.0
+      },
+      "gain_pct": 0.0,
+      "divergencia_pct": 0.0,
+      "betplay_cuota": "—",
+      "rushbet_cuota": "—",
+      "wplay_cuota": 6.0,
+      "cuota_plan": 0.0,
+      "_source": "games",
+      "_partido": "Marozsan F. vs Arnaldi M.",
+      "_mercado": "OVER 21.5 @1.55"
+    },
+    "marozsan f. vs arnaldi m._arnaldi": {
+      "jugador": "Arnaldi",
+      "casa": "wplay",
+      "cuota": 1.125,
+      "cuotas": {
+        "wplay": 1.125
+      },
+      "gain_pct": 0.0,
+      "divergencia_pct": 0.0,
+      "betplay_cuota": "—",
+      "rushbet_cuota": "—",
+      "wplay_cuota": 1.125,
+      "cuota_plan": 0.0,
+      "_source": "games",
+      "_partido": "Marozsan F. vs Arnaldi M.",
+      "_mercado": "OVER 21.5 @1.55"
+    },
+    "fearnley j. vs mensik j._fearnley": {
+      "jugador": "Fearnley",
+      "casa": "wplay",
+      "cuota": 2.35,
+      "cuotas": {
+        "wplay": 2.35
+      },
+      "gain_pct": 0.0,
+      "divergencia_pct": 0.0,
+      "betplay_cuota": "—",
+      "rushbet_cuota": "—",
+      "wplay_cuota": 2.35,
+      "cuota_plan": 0.0,
+      "_source": "games",
+      "_partido": "Fearnley J. vs Mensik J.",
+      "_mercado": "OVER 20.5 @1.55"
+    },
+    "fearnley j. vs mensik j._mensik": {
+      "jugador": "Mensik",
+      "casa": "wplay",
+      "cuota": 1.55,
+      "cuotas": {
+        "wplay": 1.55
+      },
+      "gain_pct": 0.0,
+      "divergencia_pct": 0.0,
+      "betplay_cuota": "—",
+      "rushbet_cuota": "—",
+      "wplay_cuota": 1.55,
+      "cuota_plan": 0.0,
+      "_source": "games",
+      "_partido": "Fearnley J. vs Mensik J.",
+      "_mercado": "OVER 20.5 @1.55"
+    },
+    "humbert u. vs merida aguilar d._humbert": {
+      "jugador": "Humbert",
+      "casa": "wplay",
+      "cuota": 13.0,
+      "cuotas": {
+        "wplay": 13.0
+      },
+      "gain_pct": 0.0,
+      "divergencia_pct": 0.0,
+      "betplay_cuota": "—",
+      "rushbet_cuota": "—",
+      "wplay_cuota": 13.0,
+      "cuota_plan": 0.0,
+      "_source": "games",
+      "_partido": "Humbert U. vs Merida Aguilar D.",
+      "_mercado": "OVER 20.5 @1.63"
+    },
+    "medvedev d. vs van de zandschulp b._medvedev": {
+      "jugador": "Medvedev",
+      "casa": "wplay",
+      "cuota": 6.5,
+      "cuotas": {
+        "wplay": 6.5
+      },
+      "gain_pct": 0.0,
+      "divergencia_pct": 0.0,
+      "betplay_cuota": "—",
+      "rushbet_cuota": "—",
+      "wplay_cuota": 6.5,
+      "cuota_plan": 0.0,
+      "_source": "games",
+      "_partido": "Medvedev D. vs Van De Zandschulp B.",
+      "_mercado": "UNDER 24.5 @1.5"
+    },
+    "medvedev d. vs van de zandschulp b._van de zandschulp": {
+      "jugador": "Van De Zandschulp",
+      "casa": "wplay",
+      "cuota": 1.111,
+      "cuotas": {
+        "wplay": 1.111
+      },
+      "gain_pct": 0.0,
+      "divergencia_pct": 0.0,
+      "betplay_cuota": "—",
+      "rushbet_cuota": "—",
+      "wplay_cuota": 1.111,
+      "cuota_plan": 0.0,
+      "_source": "games",
+      "_partido": "Medvedev D. vs Van De Zandschulp B.",
+      "_mercado": "UNDER 24.5 @1.5"
+    },
+    "droguet t. vs auger-aliassime f._droguet": {
+      "jugador": "Droguet",
+      "casa": "betplay",
+      "cuota": 2.33,
+      "cuotas": {
+        "betplay": 2.33,
+        "rushbet": 2.3
+      },
+      "gain_pct": 0.0,
+      "divergencia_pct": 1.3,
+      "betplay_cuota": 2.33,
+      "rushbet_cuota": 2.3,
+      "wplay_cuota": "—",
+      "cuota_plan": 0.0,
+      "_source": "games",
+      "_partido": "Droguet T. vs Auger-Aliassime F.",
+      "_mercado": "UNDER 24.5 @1.53"
+    },
+    "royer v. vs paul t._royer": {
+      "jugador": "Royer",
+      "casa": "betplay",
+      "cuota": 5.0,
+      "cuotas": {
+        "betplay": 5.0,
+        "rushbet": 4.8
+      },
+      "gain_pct": 0.0,
+      "divergencia_pct": 4.17,
+      "betplay_cuota": 5.0,
+      "rushbet_cuota": 4.8,
+      "wplay_cuota": "—",
+      "cuota_plan": 0.0,
+      "_source": "games",
+      "_partido": "Royer V. vs Paul T.",
+      "_mercado": "UNDER 21.5 @1.79"
+    },
+    "royer v. vs paul t._paul": {
+      "jugador": "Paul",
+      "casa": "betplay",
+      "cuota": 1.17,
+      "cuotas": {
+        "betplay": 1.17,
+        "rushbet": 1.17
+      },
+      "gain_pct": 0.0,
+      "divergencia_pct": 0.0,
+      "betplay_cuota": 1.17,
+      "rushbet_cuota": 1.17,
+      "wplay_cuota": "—",
+      "cuota_plan": 0.0,
+      "_source": "games",
+      "_partido": "Royer V. vs Paul T.",
+      "_mercado": "UNDER 21.5 @1.79"
+    },
+    "tien l. vs monfils g._tien": {
+      "jugador": "Tien",
+      "casa": "betplay",
+      "cuota": 1.32,
+      "cuotas": {
+        "betplay": 1.32,
+        "rushbet": 1.32
+      },
+      "gain_pct": 0.0,
+      "divergencia_pct": 0.0,
+      "betplay_cuota": 1.32,
+      "rushbet_cuota": 1.32,
+      "wplay_cuota": "—",
+      "cuota_plan": 0.0,
+      "_source": "games",
+      "_partido": "Tien L. vs Monfils G.",
+      "_mercado": "UNDER 25.5 @1.5"
+    },
+    "tien l. vs monfils g._monfils": {
+      "jugador": "Monfils",
+      "casa": "betplay",
+      "cuota": 3.4,
+      "cuotas": {
+        "betplay": 3.4,
+        "rushbet": 3.3
+      },
+      "gain_pct": 0.0,
+      "divergencia_pct": 3.03,
+      "betplay_cuota": 3.4,
+      "rushbet_cuota": 3.3,
+      "wplay_cuota": "—",
+      "cuota_plan": 0.0,
+      "_source": "games",
+      "_partido": "Tien L. vs Monfils G.",
+      "_mercado": "UNDER 25.5 @1.5"
+    },
+    "zarazua r. vs fernandez l._zarazua": {
+      "jugador": "Zarazua",
+      "casa": "wplay",
+      "cuota": 9.0,
+      "cuotas": {
+        "wplay": 9.0
+      },
+      "gain_pct": 0.0,
+      "divergencia_pct": 0.0,
+      "betplay_cuota": "—",
+      "rushbet_cuota": "—",
+      "wplay_cuota": 9.0,
+      "cuota_plan": 0.0,
+      "_source": "games",
+      "_partido": "Zarazua R. vs Fernandez L.",
+      "_mercado": "OVER 18.5 @1.55"
+    },
+    "gorzny s. vs gojo b._gorzny": {
+      "jugador": "Gorzny",
+      "casa": "wplay",
+      "cuota": 2.5,
+      "cuotas": {
+        "wplay": 2.5
+      },
+      "gain_pct": 0.0,
+      "divergencia_pct": 0.0,
+      "betplay_cuota": "—",
+      "rushbet_cuota": "—",
+      "wplay_cuota": 2.5,
+      "cuota_plan": 0.0,
+      "_source": "games",
+      "_partido": "Gorzny S. vs Gojo B.",
+      "_mercado": "UNDER 22.5 @1.83"
+    },
+    "gorzny s. vs gojo b._gojo": {
+      "jugador": "Gojo",
+      "casa": "wplay",
+      "cuota": 1.48,
+      "cuotas": {
+        "wplay": 1.48
+      },
+      "gain_pct": 0.0,
+      "divergencia_pct": 0.0,
+      "betplay_cuota": "—",
+      "rushbet_cuota": "—",
+      "wplay_cuota": 1.48,
+      "cuota_plan": 0.0,
+      "_source": "games",
+      "_partido": "Gorzny S. vs Gojo B.",
+      "_mercado": "UNDER 22.5 @1.83"
+    },
+    "kwon s. vs ilagan a._kwon": {
+      "jugador": "Kwon",
+      "casa": "wplay",
+      "cuota": 1.062,
+      "cuotas": {
+        "wplay": 1.062
+      },
+      "gain_pct": 0.0,
+      "divergencia_pct": 0.0,
+      "betplay_cuota": "—",
+      "rushbet_cuota": "—",
+      "wplay_cuota": 1.062,
+      "cuota_plan": 0.0,
+      "_source": "games",
+      "_partido": "Kwon S. vs Ilagan A.",
+      "_mercado": "UNDER 21.5 @1.74"
+    },
+    "kwon s. vs ilagan a._ilagan": {
+      "jugador": "Ilagan",
+      "casa": "wplay",
+      "cuota": 9.0,
+      "cuotas": {
+        "wplay": 9.0
+      },
+      "gain_pct": 0.0,
+      "divergencia_pct": 0.0,
+      "betplay_cuota": "—",
+      "rushbet_cuota": "—",
+      "wplay_cuota": 9.0,
+      "cuota_plan": 0.0,
+      "_source": "games",
+      "_partido": "Kwon S. vs Ilagan A.",
+      "_mercado": "UNDER 21.5 @1.74"
+    },
+    "andreev a. vs demanet e._andreev": {
+      "jugador": "Andreev",
+      "casa": "betplay",
+      "cuota": 1.48,
+      "cuotas": {
+        "betplay": 1.48,
+        "rushbet": 1.47
+      },
+      "gain_pct": 0.0,
+      "divergencia_pct": 0.68,
+      "betplay_cuota": 1.48,
+      "rushbet_cuota": 1.47,
+      "wplay_cuota": "—",
+      "cuota_plan": 0.0,
+      "_source": "games",
+      "_partido": "Andreev A. vs Demanet E.",
+      "_mercado": "UNDER 22.5 @1.78"
+    },
+    "andreev a. vs demanet e._demanet": {
+      "jugador": "Demanet",
+      "casa": "betplay",
+      "cuota": 2.55,
+      "cuotas": {
+        "betplay": 2.55,
+        "rushbet": 2.5
+      },
+      "gain_pct": 0.0,
+      "divergencia_pct": 2.0,
+      "betplay_cuota": 2.55,
+      "rushbet_cuota": 2.5,
+      "wplay_cuota": "—",
+      "cuota_plan": 0.0,
+      "_source": "games",
+      "_partido": "Andreev A. vs Demanet E.",
+      "_mercado": "UNDER 22.5 @1.78"
+    }
+  },
+  "feeds": [
+    "betplay",
+    "rushbet",
+    "wplay"
+  ],
+  "n_picks": 20,
+  "cache_age_s": 0,
+  "from_cache": false,
+  "stale": false
+}

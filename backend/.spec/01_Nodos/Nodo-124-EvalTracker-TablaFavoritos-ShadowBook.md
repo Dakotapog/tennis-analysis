@@ -190,3 +190,22 @@ def test_D124_04_brief_includes_evaluar_section()
 **Wikilinks totales: 4 | Huérfanos: 0** (verificado contra nodos_index.json 2026-07-20)
 
 [[Nodo-109-Live-Trading-Desk-Dashboard]] | [[Nodo-100-Taxonomia-Estrategias-Generacion-Combos]] | [[Nodo-86-Auditoria-Doctoral-Hallazgos]] | [[Nodo-67-Integracion-Herramientas-DataContract]]
+
+---
+
+## §7. Addendum — D174-12 (2026-08-06): decisión explícita RETIRAR de huérfano
+
+`scripts/backfill_evaluar_shadow.py` (D124-05, arriba) apareció en [[Nodo-174]] como
+"módulo huérfano" — sin ningún PASO en `run_daily.py` que lo invoque. Auditoría del
+propio docstring del script (`Recupera picks EVALUAR históricos de edge_reports y
+los inyecta en shadow_book... Uso: python3 scripts/backfill_evaluar_shadow.py
+[--dry-run] [--fecha YYYY-MM-DD]`) confirma que **no es un gap** sino diseño
+correcto: es una herramienta de recuperación retroactiva, ejecutada manualmente
+sobre una fecha específica cuando se detecta un backlog de picks `sin_edge` sin
+tracking — mismo patrón que `scripts/audit_phantom_history.py` ([[Nodo-152]]
+D152-06), que tampoco corre en `run_daily.py`. Conectarlo a un PASO diario
+duplicaría trabajo sin sentido: `apostar`/`watchlist` ya se loguean en shadow_book
+durante el pipeline normal (el propio docstring lo aclara: "sólo se procesan
+sin_edge"), y correr el backfill todos los días sobre el mismo rango de fechas no
+aporta nada nuevo tras la primera pasada. **Decisión: RETIRAR de la lista de
+huérfanos — standalone intencional, no pendiente.** Sin cambio de código.
